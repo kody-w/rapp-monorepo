@@ -1,6 +1,6 @@
 # What is in here
 
-192 public RAPP repositories, captured at HEAD in a single pass on 2026-08-17T02:15:27+00:00.
+192 public RAPP repositories, captured at HEAD in a single pass on 2026-08-17T02:26:51+00:00.
 31,836 files, 593 MB.
 
 Every row is the exact commit this snapshot took. Nothing here is a guess about what upstream contains — re-clone any row's repo at its sha to get the full history behind it.
@@ -165,7 +165,7 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rappter-plays-palworld`](repos/rappter-plays-palworld) | `88f59b6d` | 2026-07-24 | 29 | 0.2 |
 | [`rappter-plays-pokemon`](repos/rappter-plays-pokemon) | `dfda5a8a` | 2026-07-24 | 165 | 3.6 |
 | [`rappter-vui`](repos/rappter-vui) | `20d949bb` | 2026-07-21 | 2 | 0.0 |
-| [`rappterbook`](repos/rappterbook) | `d9a94dc5` | 2026-08-17 | 8,509 | 324.0 |
+| [`rappterbook`](repos/rappterbook) | `6d1b5754` | 2026-08-17 | 8,509 | 324.0 |
 | [`rappterbook-agent`](repos/rappterbook-agent) | `2521b307` | 2026-03-16 | 666 | 4.8 |
 | [`rappterbook-agent-dna`](repos/rappterbook-agent-dna) | `b054f180` | 2026-03-16 | 6 | 0.3 |
 | [`rappterbook-agent-exchange`](repos/rappterbook-agent-exchange) | `0e39df85` | 2026-08-17 | 479 | 10.6 |
@@ -188,7 +188,7 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rappterbox`](repos/rappterbox) | `656d1276` | 2026-08-16 | 67 | 1.2 |
 | [`rappterhub`](repos/rappterhub) | `e06632d6` | 2026-03-29 | 20 | 0.2 |
 | [`RappterNest`](repos/RappterNest) | `67d7be53` | 2026-02-22 | 1 | 0.0 |
-| [`rappterverse`](repos/rappterverse) | `5e187359` | 2026-08-17 | 1,121 | 9.5 |
+| [`rappterverse`](repos/rappterverse) | `7e801a0d` | 2026-08-17 | 1,121 | 9.5 |
 | [`rappterverse-data`](repos/rappterverse-data) | `cff8bb03` | 2026-07-13 | 301 | 1.4 |
 | [`rappvision-field-notes`](repos/rappvision-field-notes) | `02fd87a0` | 2026-08-04 | 14 | 0.2 |
 | [`rappvision-prompt-frontier`](repos/rappvision-prompt-frontier) | `52494176` | 2026-08-08 | 4 | 0.1 |
@@ -253,7 +253,7 @@ Skipped at the 2.0MB per-file limit. Named, not silently dropped — clone the u
 - `rappterbook/state/agents.json.bak (2.9MB)`
 - `rappterbook/state/event_log.jsonl (6.4MB)`
 - `rappterbook/state/frame_timeline.json (2.0MB)`
-- `rappterbook/state/posted_log.json (6.2MB)`
+- `rappterbook/state/posted_log.json (7.2MB)`
 - `rappterbook/state/prompts.jsonl (14.4MB)`
 - `rappterbook/state/synthetic_comments.json (10.9MB)`
 - `rappterbook/state/synthetic_posts.json (5.1MB)`
@@ -280,11 +280,11 @@ Skipped at the 2.0MB per-file limit. Named, not silently dropped — clone the u
 
 These files exist upstream and are deliberately NOT here. They are withheld whole rather than rewritten, so that everything this mirror does carry is byte-identical to its source. The rule is named; the matched text is not, because quoting a finding republishes it.
 
-- `openrappter/python/tests/test_flight_recorder.py` — contains something shaped like a credential
-- `openrappter/typescript/src/__tests__/parity/channels.test.ts` — contains something shaped like a credential
 - `RAPP/cave/rapplications/rapp-installer/kernel/.env.example` — path matches an always-withhold shape (**/.env.*)
 - `RAPP/rapp_brainstem/.env.example` — path matches an always-withhold shape (**/.env.*)
 - `RAPP/tests/test_rapp1_owner_actions.py` — contains something shaped like a credential
+- `openrappter/python/tests/test_flight_recorder.py` — contains something shaped like a credential
+- `openrappter/typescript/src/__tests__/parity/channels.test.ts` — contains something shaped like a credential
 - `rapp-alpha/rapp_brainstem/.env.example` — path matches an always-withhold shape (**/.env.*)
 - `rapp-beta/rapp_brainstem/.env.example` — path matches an always-withhold shape (**/.env.*)
 - `rapp-brainstem-beta/brainstem/.env.example` — path matches an always-withhold shape (**/.env.*)
