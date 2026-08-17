@@ -1,7 +1,7 @@
 # What is in here
 
-193 public RAPP repositories, captured at HEAD in a single pass on 2026-08-17T02:15:27+00:00.
-44,889 files, 666 MB.
+192 public RAPP repositories, captured at HEAD in a single pass on 2026-08-17T02:15:27+00:00.
+31,836 files, 593 MB.
 
 Every row is the exact commit this snapshot took. Nothing here is a guess about what upstream contains — re-clone any row's repo at its sha to get the full history behind it.
 
@@ -86,7 +86,6 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rapp-mirror`](repos/rapp-mirror) | `99890ac5` | 2026-08-10 | 146 | 3.2 |
 | [`rapp-mirror-releases`](repos/rapp-mirror-releases) | `f10ff847` | 2026-08-09 | 1 | 0.0 |
 | [`rapp-moment`](repos/rapp-moment) | `229db186` | 2026-08-04 | 12 | 0.0 |
-| [`rapp-monorepo`](repos/rapp-monorepo) | `30fcd450` | 2026-08-16 | 13,053 | 73.5 |
 | [`rapp-moonshots`](repos/rapp-moonshots) | `789f9334` | 2026-07-12 | 177 | 2.0 |
 | [`rapp-neighborhood-protocol`](repos/rapp-neighborhood-protocol) | `44e0c6eb` | 2026-06-28 | 4 | 0.0 |
 | [`rapp-nervous-system`](repos/rapp-nervous-system) | `4068ccf7` | 2026-07-18 | 3 | 0.0 |
@@ -281,11 +280,11 @@ Skipped at the 2.0MB per-file limit. Named, not silently dropped — clone the u
 
 These files exist upstream and are deliberately NOT here. They are withheld whole rather than rewritten, so that everything this mirror does carry is byte-identical to its source. The rule is named; the matched text is not, because quoting a finding republishes it.
 
+- `openrappter/python/tests/test_flight_recorder.py` — contains something shaped like a credential
+- `openrappter/typescript/src/__tests__/parity/channels.test.ts` — contains something shaped like a credential
 - `RAPP/cave/rapplications/rapp-installer/kernel/.env.example` — path matches an always-withhold shape (**/.env.*)
 - `RAPP/rapp_brainstem/.env.example` — path matches an always-withhold shape (**/.env.*)
 - `RAPP/tests/test_rapp1_owner_actions.py` — contains something shaped like a credential
-- `openrappter/python/tests/test_flight_recorder.py` — contains something shaped like a credential
-- `openrappter/typescript/src/__tests__/parity/channels.test.ts` — contains something shaped like a credential
 - `rapp-alpha/rapp_brainstem/.env.example` — path matches an always-withhold shape (**/.env.*)
 - `rapp-beta/rapp_brainstem/.env.example` — path matches an always-withhold shape (**/.env.*)
 - `rapp-brainstem-beta/brainstem/.env.example` — path matches an always-withhold shape (**/.env.*)
@@ -295,7 +294,6 @@ These files exist upstream and are deliberately NOT here. They are withheld whol
 - `rapp-installer-canary/rapp_brainstem/.env.example` — path matches an always-withhold shape (**/.env.*)
 - `rapp-installer-dev/rapp_brainstem/.env.example` — path matches an always-withhold shape (**/.env.*)
 - `rapp-keyring/conformance.py` — contains something shaped like a credential
-- `rapp-monorepo/prove_gate.py` — contains something shaped like a credential
 - `rapp-nightly/rapp_brainstem/.env.example` — path matches an always-withhold shape (**/.env.*)
 - `rapp-sentinel/prove_diagnose.py` — contains something shaped like a credential
 - `rapp-shape-aibast/rapp_brainstem/.env.example` — path matches an always-withhold shape (**/.env.*)
