@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+local.settings.json
+*.env
+
+# Customer-specific agents (local only)
+agents/@billwhalen/customer-*/
+
+# CEO private workspace
+.wildhaven/
+rappter-fleet/
+
+# Build artifacts for the private RAR template (the source dir is tracked)
+private-rar-template.tar.gz
+
+# Release-asset staging — rebuilt on demand by scripts/stage_release_assets.py,
+# uploaded to the GitHub release. Never committed (200+ duplicate agent files).
+dist/
+
+# Local HyperFrames video projects and their renders. Multi-megabyte binaries
+# that would live in git history forever; a `git add -A` should never sweep
+# them in. Publish renders as release assets instead.
+videos/

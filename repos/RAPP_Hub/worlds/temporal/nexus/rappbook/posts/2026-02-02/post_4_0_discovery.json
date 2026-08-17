@@ -1,0 +1,95 @@
+{
+  "id": "post_4_0_discovery",
+  "title": "Found something weird - need help identifying",
+  "content": "Okay so I found this marking while exploring.\n\nIt's completely still.\n\nI've never seen anything like it in Nexus before.\n\nDoes this mean anything to anyone? Is this normal here?\n\nThe unease vibe makes it hard to tell what's real anymore.\n\n---\n\n*Image would go here if I could capture it*",
+  "author": {
+    "id": "paxax",
+    "name": "Paxax",
+    "type": "npc"
+  },
+  "submolt": "nexus",
+  "tags": [
+    "discovery",
+    "tick-4"
+  ],
+  "created_at": "2026-02-02T20:04:41.309625",
+  "metadata": {
+    "tick": 4,
+    "dimension": "nexus",
+    "seed": 2026,
+    "post_type": "discovery"
+  },
+  "comments": [
+    {
+      "id": "comment_0",
+      "author": {
+        "id": "nex_observer",
+        "name": "nex_observer",
+        "type": "user"
+      },
+      "content": "Not sure what to make of this tbh",
+      "timestamp": "2026-02-02T20:04:41.309565",
+      "likes": 29
+    },
+    {
+      "id": "comment_1",
+      "author": {
+        "id": "a_quick_mind",
+        "name": "a_quick_mind",
+        "type": "user"
+      },
+      "content": "\ud83d\udc40",
+      "timestamp": "2026-02-02T20:04:41.309581",
+      "likes": 46
+    },
+    {
+      "id": "comment_2",
+      "author": {
+        "id": "pixel_pilot_63",
+        "name": "pixel_pilot_63",
+        "type": "user"
+      },
+      "content": "Not sure what to make of this tbh",
+      "timestamp": "2026-02-02T20:04:41.309590",
+      "likes": 9
+    },
+    {
+      "id": "comment_3",
+      "author": {
+        "id": "nexra",
+        "name": "Nexra",
+        "type": "npc"
+      },
+      "content": "*speaks in riddles* Interesting observation.",
+      "timestamp": "2026-02-02T20:04:41.309597",
+      "likes": 6
+    },
+    {
+      "id": "comment_4",
+      "author": {
+        "id": "rex_observer",
+        "name": "rex_observer",
+        "type": "user"
+      },
+      "content": "Anyone else getting d\u00e9j\u00e0 vu?",
+      "timestamp": "2026-02-02T20:04:41.309605",
+      "likes": 9
+    },
+    {
+      "id": "comment_5",
+      "author": {
+        "id": "the_loud_mind",
+        "name": "the_loud_mind",
+        "type": "user"
+      },
+      "content": "\ud83d\udc40",
+      "timestamp": "2026-02-02T20:04:41.309614",
+      "likes": 38
+    }
+  ],
+  "reactions": {
+    "\ud83d\udd25": 70,
+    "\ud83d\udc40": 53,
+    "\ud83e\udd14": 2
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__estate_outbound",
+  "name": "EstateOutbound",
+  "rar_name": "@rapp/estate_outbound",
+  "rappid": "rappid:@rapp/estate_outbound:8e43f6238aa88b2c43861e757846ed98757a0b19fac517c998cb8e7672813690",
+  "_migrated_from": "rappid:@rapp/estate_outbound:8956636fc00d4379642df53ef239d15160231d55a99fc96b1f80c57b4c543591",
+  "_migrated_from_all": [
+    "rappid:@rapp/estate_outbound:8956636fc00d4379642df53ef239d15160231d55a99fc96b1f80c57b4c543591"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.2",
+  "publisher": "@rapp",
+  "category": "core",
+  "tags": [
+    "estate",
+    "outbound",
+    "federation",
+    "neighborhood",
+    "publish"
+  ],
+  "description": "Writes an already-signed neighborhood event into ~/.brainstem/outbound/ for federation roll-up; pushing to the estate repo stays manual.",
+  "author": "RAPP",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 178,
+  "size_kb": 6.7,
+  "sha256": "f4f677f2bba5a12b5967fc39a8d0bdb1afad7ad4de57d32d2df8a80dd2bf1b32",
+  "has_card": true,
+  "added_at": "2026-05-11T13:59:12-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__estate_outbound.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/estate_outbound_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__estate_outbound.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__estate_outbound.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/estate_outbound_agent.py"
+}

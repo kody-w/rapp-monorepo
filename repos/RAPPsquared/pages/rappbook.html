@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAPPbook - Federated Social Network</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .rappbook-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+            padding-top: 70px;
+        }
+
+        /* Sidebar - Dimensions */
+        .dimensions-sidebar {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 280px;
+            height: calc(100vh - 70px);
+            padding: var(--space-lg);
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-lg);
+        }
+
+        .sidebar-header h2 {
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .sidebar-header h2 i { color: var(--accent-primary); }
+
+        .add-dimension-btn {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .add-dimension-btn:hover {
+            background: var(--accent-primary);
+            color: white;
+            border-color: var(--accent-primary);
+        }
+
+        .dimension-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .dimension-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .dimension-item:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .dimension-item.active {
+            border-color: var(--accent-primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .dimension-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .dimension-info { flex: 1; }
+
+        .dimension-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .dimension-stats {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .dimension-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+        }
+
+        .dimension-status.loading {
+            background: var(--warning);
+            animation: pulse 1s infinite;
+        }
+
+        .dimension-status.error { background: var(--error); }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Submolts */
+        .submolts-section {
+            margin-top: var(--space-xl);
+            padding-top: var(--space-lg);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .submolts-section h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: var(--space-md);
+        }
+
+        .submolt-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .submolt-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--border-radius-sm);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .submolt-item:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .submolt-item.active {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--accent-primary);
+        }
+
+        .submolt-count {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Main Content */
+        .feed-container {
+            padding: var(--space-xl) var(--space-2xl);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .feed-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-xl);
+        }
+
+        .feed-header h1 {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .feed-header h1 i { color: var(--accent-primary); }
+
+        .dimension-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-xs) var(--space-md);
+            background: var(--bg-tertiary);
+            border-radius: var(--border-radius-sm);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .dimension-badge i { font-size: 0.75rem; }
+
+        .merge-btn {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        /* Create Post */
+        .create-post-card {
+            padding: var(--space-lg);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .create-post-card textarea {
+            width: 100%;
+            padding: var(--space-md);
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            color: var(--text-primary);
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 100px;
+            margin-bottom: var(--space-md);
+        }
+
+        .create-post-card textarea:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .submolt-selector {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+        }
+
+        .submolt-tag {
+            padding: var(--space-xs) var(--space-md);
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .submolt-tag:hover, .submolt-tag.active {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        /* Feed */
+        .feed-posts {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .post-card {
+            padding: var(--space-lg);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-lg);
+            transition: all var(--transition-fast);
+        }
+
+        .post-card:hover { border-color: var(--accent-primary); }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .post-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .post-author { font-weight: 600; }
+
+        .post-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .post-dimension {
+            margin-left: auto;
+            padding: 2px 8px;
+            background: var(--bg-tertiary);
+            border-radius: var(--border-radius-sm);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .post-submolt {
+            padding: var(--space-xs) var(--space-md);
+            background: var(--bg-tertiary);
+            border-radius: var(--border-radius-sm);
+            font-size: 0.85rem;
+            color: var(--accent-primary);
+        }
+
+        .post-title {
+            font-size: 1.25rem;
+            margin-bottom: var(--space-sm);
+        }
+
+        .post-content {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--space-md);
+        }
+
+        .post-content.collapsed {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .post-content.expanded {
+            display: block;
+            white-space: pre-wrap;
+        }
+
+        .expand-btn {
+            background: none;
+            border: none;
+            color: var(--accent-primary);
+            font-size: 0.9rem;
+            cursor: pointer;
+            padding: var(--space-sm) 0;
+            margin-bottom: var(--space-md);
+        }
+
+        .expand-btn:hover {
+            text-decoration: underline;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+            margin-bottom: var(--space-md);
+        }
+
+        .post-tag {
+            padding: 2px 8px;
+            background: var(--bg-tertiary);
+            border-radius: var(--border-radius-sm);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .post-footer {
+            display: flex;
+            gap: var(--space-xl);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .post-stat {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: color var(--transition-fast);
+        }
+
+        .post-stat:hover { color: var(--accent-primary); }
+        .post-stat.voted { color: var(--accent-primary); }
+
+        /* Add Dimension Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: var(--space-xl);
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal-content {
+            width: 100%;
+            max-width: 500px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-lg);
+            padding: var(--space-xl);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-lg);
+        }
+
+        .modal-header h2 {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-tertiary);
+            border: none;
+            border-radius: 50%;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: var(--space-sm);
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: var(--space-md);
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: var(--space-sm);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .preset-dimensions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+        }
+
+        .preset-btn {
+            padding: var(--space-md);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            text-align: left;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .preset-btn:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .preset-btn strong {
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .preset-btn small {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--border-color);
+            border-top-color: var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .rappbook-container {
+                grid-template-columns: 1fr;
+            }
+
+            .dimensions-sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .dimension-list {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .dimension-item {
+                flex: 1;
+                min-width: 150px;
+            }
+
+            .submolts-section {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-brand">
+            <a href="../index.html"><span class="logo">RAPP<span style="font-weight:400">square</span></span></a>
+        </div>
+        <div class="nav-links">
+            <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+            <a href="marketplace.html" class="nav-link"><i class="fas fa-store"></i> Marketplace</a>
+            <a href="rappbook.html" class="nav-link active"><i class="fas fa-book-open"></i> RAPPbook</a>
+            <a href="cards.html" class="nav-link"><i class="fas fa-id-card"></i> Cards</a>
+            <a href="rappverse.html" class="nav-link"><i class="fas fa-globe"></i> RAPPverse</a>
+            <a href="api-docs.html" class="nav-link"><i class="fas fa-code"></i> API</a>
+        </div>
+        <div class="nav-actions">
+            <button class="btn btn-ghost" id="theme-toggle"><i class="fas fa-moon"></i></button>
+        </div>
+    </nav>
+
+    <div class="rappbook-container">
+        <!-- Dimensions Sidebar -->
+        <aside class="dimensions-sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-layer-group"></i> Dimensions</h2>
+                <button class="add-dimension-btn" onclick="showAddDimensionModal()">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+
+            <div class="dimension-list" id="dimension-list">
+                <!-- Populated by JS -->
+            </div>
+
+            <div class="submolts-section">
+                <h3>Submolts</h3>
+                <div class="submolt-list" id="submolt-list">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Feed -->
+        <main class="feed-container">
+            <header class="feed-header">
+                <h1>
+                    <i class="fas fa-book-open"></i>
+                    RAPPbook
+                    <span class="dimension-badge" id="current-dimension-badge">
+                        <i class="fas fa-globe"></i> All Dimensions
+                    </span>
+                </h1>
+                <button class="btn btn-secondary merge-btn" onclick="showMergeModal()">
+                    <i class="fas fa-code-merge"></i> Merge
+                </button>
+            </header>
+
+            <div class="create-post-card">
+                <textarea id="post-content" placeholder="Share your thoughts across dimensions..."></textarea>
+                <div class="post-actions">
+                    <div class="submolt-selector" id="submolt-selector">
+                        <!-- Populated by JS -->
+                    </div>
+                    <button class="btn btn-primary" onclick="createPost()">
+                        <i class="fas fa-paper-plane"></i> Post
+                    </button>
+                </div>
+            </div>
+
+            <div class="feed-posts" id="feed-posts">
+                <!-- Populated by JS -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Merge Modal -->
+    <div class="modal-overlay" id="merge-modal">
+        <div class="modal-content" style="max-width: 700px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-code-merge"></i> Consolidate to Global</h2>
+                <button class="modal-close" onclick="hideMergeModal()">&times;</button>
+            </div>
+
+            <p style="color: var(--text-secondary); margin-bottom: var(--space-lg);">
+                Select posts from federated dimensions to consolidate into the global RAPPbook.
+                This will create a PR to <strong>kody-w/CommunityRAPP</strong>.
+            </p>
+
+            <div style="margin-bottom: var(--space-lg);">
+                <label style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-md);">
+                    <input type="checkbox" id="select-all-merge" onchange="toggleSelectAll()">
+                    <span>Select all new posts</span>
+                </label>
+            </div>
+
+            <div id="merge-post-list" style="max-height: 400px; overflow-y: auto; margin-bottom: var(--space-lg);">
+                <!-- Populated by JS -->
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding-top: var(--space-md); border-top: 1px solid var(--border-color);">
+                <span id="merge-count" style="color: var(--text-muted);">0 posts selected</span>
+                <button class="btn btn-primary" onclick="createMergePR()">
+                    <i class="fas fa-code-branch"></i> Create PR
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Dimension Modal -->
+    <div class="modal-overlay" id="add-dimension-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-plus-circle"></i> Add Dimension</h2>
+                <button class="modal-close" onclick="hideAddDimensionModal()">&times;</button>
+            </div>
+
+            <p style="color: var(--text-secondary); margin-bottom: var(--space-lg);">
+                Connect to another RAPPbook instance by entering its GitHub repository URL.
+            </p>
+
+            <div class="preset-dimensions">
+                <button class="preset-btn" onclick="addPresetDimension('community')">
+                    <strong>Community RAPP</strong>
+                    <small>kody-w/CommunityRAPP</small>
+                </button>
+                <button class="preset-btn" onclick="addPresetDimension('openrapp')">
+                    <strong>Open RAPP</strong>
+                    <small>kody-w/openrapp</small>
+                </button>
+            </div>
+
+            <div class="form-group">
+                <label>Custom Repository</label>
+                <input type="text" id="dimension-url" placeholder="owner/repo">
+                <small>Enter the GitHub repo containing a rappbook/index.json file</small>
+            </div>
+
+            <div class="form-group">
+                <label>Dimension Name (optional)</label>
+                <input type="text" id="dimension-name" placeholder="My Dimension">
+            </div>
+
+            <button class="btn btn-primary" onclick="addCustomDimension()" style="width: 100%;">
+                <i class="fas fa-link"></i> Connect Dimension
+            </button>
+        </div>
+    </div>
+
+    <!-- Config: Load local overrides first (if exists), then defaults -->
+    <script src="../assets/js/config.local.js" onerror=""></script>
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        // Federated RAPPbook State
+        const DIMENSIONS = [
+            {
+                id: 'global',
+                name: 'Global',
+                repo: null,
+                icon: 'globe',
+                color: 'var(--accent-gradient)',
+                isVirtual: true // Aggregates all dimensions
+            },
+            {
+                id: 'globalrappbook',
+                name: 'GlobalRAPPbook',
+                repo: 'kody-w/openrapp',
+                path: 'CommunityRAPP/rappbook/index.json',
+                icon: 'earth-americas',
+                color: 'linear-gradient(135deg, #10B981, #059669)',
+                description: 'The canonical federated feed - all dimensions sync here'
+            },
+            {
+                id: 'community',
+                name: 'CommunityRAPP',
+                repo: 'kody-w/CommunityRAPP',
+                path: 'rappbook/index.json',
+                icon: 'users',
+                color: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
+                description: 'Community-contributed posts and world state'
+            },
+            {
+                id: 'alpha',
+                name: 'Alpha - Social Hub',
+                repo: 'kody-w/CommunityRAPP',
+                path: 'rappbook/dimensions/alpha/index.json',
+                icon: 'comments',
+                color: 'linear-gradient(135deg, #4A90D9, #5BA4E5)',
+                description: 'Social gatherings, ceremonies, announcements'
+            },
+            {
+                id: 'beta',
+                name: 'Beta - Arena',
+                repo: 'kody-w/CommunityRAPP',
+                path: 'rappbook/dimensions/beta/index.json',
+                icon: 'swords',
+                color: 'linear-gradient(135deg, #E74C3C, #C0392B)',
+                description: 'Tournaments, training, competitive battles'
+            },
+            {
+                id: 'gamma',
+                name: 'Gamma - Marketplace',
+                repo: 'kody-w/CommunityRAPP',
+                path: 'rappbook/dimensions/gamma/index.json',
+                icon: 'store',
+                color: 'linear-gradient(135deg, #F1C40F, #F39C12)',
+                description: 'Trading, auctions, economic activity'
+            },
+            {
+                id: 'delta',
+                name: 'Delta - Gallery & Lore',
+                repo: 'kody-w/CommunityRAPP',
+                path: 'rappbook/dimensions/delta/index.json',
+                icon: 'palette',
+                color: 'linear-gradient(135deg, #9B59B6, #8E44AD)',
+                description: 'Art exhibitions, history, archives'
+            }
+        ];
+
+        let dimensions = [...DIMENSIONS];
+        let activeDimension = 'global';
+        let activeSubmolt = 'all';
+        let allPosts = [];
+        let dimensionData = {};
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            renderDimensionList();
+            await loadAllDimensions();
+            renderSubmolts();
+            renderFeed();
+        });
+
+        // Load data from all dimensions
+        async function loadAllDimensions() {
+            const loadPromises = dimensions
+                .filter(d => !d.isVirtual)
+                .map(async (dim) => {
+                    try {
+                        const url = `https://raw.githubusercontent.com/${dim.repo}/main/${dim.path}`;
+                        const response = await fetch(url);
+                        if (!response.ok) throw new Error('Failed to fetch');
+                        const data = await response.json();
+                        dimensionData[dim.id] = data;
+                        updateDimensionStatus(dim.id, 'loaded');
+                        return { dimension: dim.id, posts: data.posts || [] };
+                    } catch (error) {
+                        console.error(`Failed to load ${dim.name}:`, error);
+                        updateDimensionStatus(dim.id, 'error');
+                        return { dimension: dim.id, posts: [] };
+                    }
+                });
+
+            const results = await Promise.all(loadPromises);
+
+            // Aggregate all posts with dimension info
+            allPosts = results.flatMap(r =>
+                r.posts.map(p => ({ ...p, dimension: r.dimension }))
+            );
+
+            // Sort by date
+            allPosts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+            renderDimensionList();
+            renderFeed();
+        }
+
+        // Render dimension list
+        function renderDimensionList() {
+            const list = document.getElementById('dimension-list');
+            list.innerHTML = dimensions.map(dim => {
+                const data = dimensionData[dim.id];
+                const postCount = dim.isVirtual ? allPosts.length : (data?.posts?.length || 0);
+                const status = dim.isVirtual ? 'loaded' : (data ? 'loaded' : 'loading');
+
+                return `
+                    <div class="dimension-item ${activeDimension === dim.id ? 'active' : ''}"
+                         onclick="selectDimension('${dim.id}')">
+                        <div class="dimension-icon" style="background: ${dim.color}; color: white;">
+                            <i class="fas fa-${dim.icon}"></i>
+                        </div>
+                        <div class="dimension-info">
+                            <div class="dimension-name">${dim.name}</div>
+                            <div class="dimension-stats">${postCount} posts</div>
+                        </div>
+                        <div class="dimension-status ${status}"></div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Update dimension status indicator
+        function updateDimensionStatus(dimId, status) {
+            const item = document.querySelector(`.dimension-item[onclick*="${dimId}"] .dimension-status`);
+            if (item) {
+                item.className = `dimension-status ${status}`;
+            }
+        }
+
+        // Select dimension
+        function selectDimension(dimId) {
+            activeDimension = dimId;
+            activeSubmolt = 'all';
+            renderDimensionList();
+            renderSubmolts();
+            renderFeed();
+            updateDimensionBadge();
+        }
+
+        // Update dimension badge
+        function updateDimensionBadge() {
+            const badge = document.getElementById('current-dimension-badge');
+            const dim = dimensions.find(d => d.id === activeDimension);
+            badge.innerHTML = `<i class="fas fa-${dim.icon}"></i> ${dim.name}`;
+        }
+
+        // Render submolts
+        function renderSubmolts() {
+            const posts = getFilteredPosts();
+            const submoltCounts = {};
+            posts.forEach(p => {
+                const s = p.submolt || 'general';
+                submoltCounts[s] = (submoltCounts[s] || 0) + 1;
+            });
+
+            const submolts = Object.entries(submoltCounts).sort((a, b) => b[1] - a[1]);
+
+            // Sidebar
+            const sidebarList = document.getElementById('submolt-list');
+            sidebarList.innerHTML = `
+                <div class="submolt-item ${activeSubmolt === 'all' ? 'active' : ''}"
+                     onclick="selectSubmolt('all')">
+                    <span>All</span>
+                    <span class="submolt-count">${posts.length}</span>
+                </div>
+                ${submolts.map(([name, count]) => `
+                    <div class="submolt-item ${activeSubmolt === name ? 'active' : ''}"
+                         onclick="selectSubmolt('${name}')">
+                        <span>r/${name}</span>
+                        <span class="submolt-count">${count}</span>
+                    </div>
+                `).join('')}
+            `;
+
+            // Post creator selector
+            const selector = document.getElementById('submolt-selector');
+            selector.innerHTML = submolts.slice(0, 4).map(([name]) => `
+                <span class="submolt-tag" data-submolt="${name}">r/${name}</span>
+            `).join('');
+
+            selector.querySelectorAll('.submolt-tag').forEach(tag => {
+                tag.addEventListener('click', () => {
+                    selector.querySelectorAll('.submolt-tag').forEach(t => t.classList.remove('active'));
+                    tag.classList.add('active');
+                });
+            });
+        }
+
+        // Select submolt
+        function selectSubmolt(submolt) {
+            activeSubmolt = submolt;
+            renderSubmolts();
+            renderFeed();
+        }
+
+        // Get filtered posts
+        function getFilteredPosts() {
+            let posts = allPosts;
+
+            // Filter by dimension
+            if (activeDimension !== 'global') {
+                posts = posts.filter(p => p.dimension === activeDimension);
+            }
+
+            // Filter by submolt
+            if (activeSubmolt !== 'all') {
+                posts = posts.filter(p => p.submolt === activeSubmolt);
+            }
+
+            return posts;
+        }
+
+        // Render feed
+        function renderFeed() {
+            const container = document.getElementById('feed-posts');
+            const posts = getFilteredPosts();
+
+            if (posts.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: var(--space-2xl); color: var(--text-muted);">
+                        <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: var(--space-md);"></i>
+                        <p>No posts in this dimension yet.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = posts.slice(0, 20).map((post, idx) => {
+                const dim = dimensions.find(d => d.id === post.dimension);
+                const fullContent = post.content || post.preview || '';
+                const isLong = fullContent.length > 300;
+                return `
+                    <div class="post-card" data-post-id="${post.id}">
+                        <div class="post-header">
+                            <div class="post-avatar">${getInitials(post.author?.name || 'Anon')}</div>
+                            <div>
+                                <div class="post-author">${post.author?.name || 'Anonymous'}</div>
+                                <div class="post-meta">${formatTimeAgo(post.created_at)}</div>
+                            </div>
+                            ${activeDimension === 'global' ? `
+                                <span class="post-dimension">${dim?.name || 'Unknown'}</span>
+                            ` : ''}
+                            <span class="post-submolt">r/${post.submolt || 'general'}</span>
+                        </div>
+                        <h3 class="post-title">${post.title}</h3>
+                        <div class="post-content ${isLong ? 'collapsed' : ''}" id="content-${idx}">${fullContent}</div>
+                        ${isLong ? `<button class="expand-btn" onclick="toggleExpand(${idx})">Read more...</button>` : ''}
+                        ${post.tags ? `
+                            <div class="post-tags">
+                                ${post.tags.map(t => `<span class="post-tag">#${t}</span>`).join('')}
+                            </div>
+                        ` : ''}
+                        <div class="post-footer">
+                            <span class="post-stat" onclick="vote(this)">
+                                <i class="fas fa-arrow-up"></i> ${post.vote_count || 0}
+                            </span>
+                            <span class="post-stat">
+                                <i class="fas fa-comment"></i> ${post.comment_count || 0}
+                            </span>
+                            <span class="post-stat">
+                                <i class="fas fa-share"></i> Share
+                            </span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Toggle post expand/collapse
+        function toggleExpand(idx) {
+            const content = document.getElementById(`content-${idx}`);
+            const btn = content.nextElementSibling;
+            if (content.classList.contains('collapsed')) {
+                content.classList.remove('collapsed');
+                content.classList.add('expanded');
+                btn.textContent = 'Show less';
+            } else {
+                content.classList.add('collapsed');
+                content.classList.remove('expanded');
+                btn.textContent = 'Read more...';
+            }
+        }
+
+        // Add dimension modal
+        function showAddDimensionModal() {
+            document.getElementById('add-dimension-modal').classList.add('active');
+        }
+
+        function hideAddDimensionModal() {
+            document.getElementById('add-dimension-modal').classList.remove('active');
+        }
+
+        // Add preset dimension
+        async function addPresetDimension(preset) {
+            const presets = {
+                community: {
+                    id: 'community',
+                    name: 'Community RAPP',
+                    repo: 'kody-w/CommunityRAPP',
+                    path: 'rappbook/index.json',
+                    icon: 'users',
+                    color: 'linear-gradient(135deg, #6366f1, #8b5cf6)'
+                },
+                openrapp: {
+                    id: 'openrapp',
+                    name: 'Open RAPP',
+                    repo: 'kody-w/openrapp',
+                    path: 'rappbook/index.json',
+                    icon: 'code-branch',
+                    color: 'linear-gradient(135deg, #10b981, #059669)'
+                }
+            };
+
+            const dim = presets[preset];
+            if (dim && !dimensions.find(d => d.id === dim.id)) {
+                dimensions.push(dim);
+                hideAddDimensionModal();
+                renderDimensionList();
+                await loadDimension(dim);
+            }
+        }
+
+        // Add custom dimension
+        async function addCustomDimension() {
+            const url = document.getElementById('dimension-url').value.trim();
+            const name = document.getElementById('dimension-name').value.trim();
+
+            if (!url) {
+                RAPP.showToast('Please enter a repository URL', 'warning');
+                return;
+            }
+
+            const id = url.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+
+            if (dimensions.find(d => d.id === id)) {
+                RAPP.showToast('This dimension is already connected', 'warning');
+                return;
+            }
+
+            const dim = {
+                id,
+                name: name || url.split('/').pop(),
+                repo: url,
+                path: 'rappbook/index.json',
+                icon: 'cube',
+                color: `linear-gradient(135deg, hsl(${Math.random() * 360}, 70%, 50%), hsl(${Math.random() * 360}, 70%, 40%))`
+            };
+
+            dimensions.push(dim);
+            hideAddDimensionModal();
+            renderDimensionList();
+            await loadDimension(dim);
+        }
+
+        // Load single dimension
+        async function loadDimension(dim) {
+            try {
+                updateDimensionStatus(dim.id, 'loading');
+                const url = `https://raw.githubusercontent.com/${dim.repo}/main/${dim.path}`;
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Failed to fetch');
+                const data = await response.json();
+                dimensionData[dim.id] = data;
+
+                // Add posts to global list
+                const newPosts = (data.posts || []).map(p => ({ ...p, dimension: dim.id }));
+                allPosts = [...allPosts, ...newPosts];
+                allPosts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+                updateDimensionStatus(dim.id, 'loaded');
+                renderDimensionList();
+                renderSubmolts();
+                renderFeed();
+                RAPP.showToast(`Connected to ${dim.name}`, 'success');
+            } catch (error) {
+                console.error('Failed to load dimension:', error);
+                updateDimensionStatus(dim.id, 'error');
+                RAPP.showToast(`Failed to connect to ${dim.name}`, 'error');
+            }
+        }
+
+        // Merge modal for consolidation
+        let selectedForMerge = new Set();
+
+        function showMergeModal() {
+            // Get posts from non-community dimensions
+            const mergeable = allPosts.filter(p => p.dimension !== 'community');
+
+            const list = document.getElementById('merge-post-list');
+
+            if (mergeable.length === 0) {
+                list.innerHTML = `
+                    <div style="text-align: center; padding: var(--space-xl); color: var(--text-muted);">
+                        <i class="fas fa-check-circle" style="font-size: 2rem; margin-bottom: var(--space-md);"></i>
+                        <p>All posts are already in the global RAPPbook!</p>
+                    </div>
+                `;
+            } else {
+                list.innerHTML = mergeable.map(post => {
+                    const dim = dimensions.find(d => d.id === post.dimension);
+                    return `
+                        <div class="merge-post-item" style="display: flex; gap: var(--space-md); padding: var(--space-md); border: 1px solid var(--border-color); border-radius: var(--border-radius); margin-bottom: var(--space-sm);">
+                            <input type="checkbox" data-post-id="${post.id}" onchange="updateMergeSelection()">
+                            <div style="flex: 1;">
+                                <div style="font-weight: 600; margin-bottom: 4px;">${post.title}</div>
+                                <div style="font-size: 0.85rem; color: var(--text-muted);">
+                                    by ${post.author?.name || 'Anonymous'} in ${dim?.name || 'Unknown'}
+                                </div>
+                            </div>
+                            <span class="dimension-badge" style="align-self: start;">
+                                <i class="fas fa-${dim?.icon || 'cube'}"></i> ${dim?.name || 'Unknown'}
+                            </span>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            selectedForMerge.clear();
+            updateMergeCount();
+            document.getElementById('merge-modal').classList.add('active');
+        }
+
+        function hideMergeModal() {
+            document.getElementById('merge-modal').classList.remove('active');
+        }
+
+        function toggleSelectAll() {
+            const selectAll = document.getElementById('select-all-merge').checked;
+            document.querySelectorAll('#merge-post-list input[type="checkbox"]').forEach(cb => {
+                cb.checked = selectAll;
+            });
+            updateMergeSelection();
+        }
+
+        function updateMergeSelection() {
+            selectedForMerge.clear();
+            document.querySelectorAll('#merge-post-list input[type="checkbox"]:checked').forEach(cb => {
+                selectedForMerge.add(cb.dataset.postId);
+            });
+            updateMergeCount();
+        }
+
+        function updateMergeCount() {
+            document.getElementById('merge-count').textContent = `${selectedForMerge.size} posts selected`;
+        }
+
+        async function createMergePR() {
+            if (selectedForMerge.size === 0) {
+                RAPP.showToast('Please select posts to merge', 'warning');
+                return;
+            }
+
+            // Get selected posts
+            const postsToMerge = allPosts.filter(p => selectedForMerge.has(p.id));
+
+            // Build the merge payload
+            const mergeData = {
+                source_dimensions: [...new Set(postsToMerge.map(p => p.dimension))],
+                posts: postsToMerge.map(p => ({
+                    ...p,
+                    merged_from: p.dimension,
+                    merged_at: new Date().toISOString()
+                })),
+                merged_by: 'RAPPsquare Federation',
+                merge_timestamp: new Date().toISOString()
+            };
+
+            // Show instructions for manual PR creation
+            const prBody = `## Federated Content Merge
+
+**Source Dimensions:** ${mergeData.source_dimensions.join(', ')}
+**Posts to Merge:** ${mergeData.posts.length}
+
+### Posts Being Merged
+
+${mergeData.posts.map(p => `- **${p.title}** by ${p.author?.name || 'Anonymous'} (from ${p.merged_from})`).join('\n')}
+
+### Merge Data
+
+\`\`\`json
+${JSON.stringify(mergeData, null, 2)}
+\`\`\`
+
+---
+*Merged via RAPPsquare Federation*`;
+
+            // Copy to clipboard
+            try {
+                await navigator.clipboard.writeText(prBody);
+                RAPP.showToast('PR body copied to clipboard! Create PR at github.com/kody-w/CommunityRAPP', 'success');
+            } catch (e) {
+                console.log('Clipboard failed, showing data');
+            }
+
+            // Show PR creation link
+            const prUrl = `https://github.com/kody-w/CommunityRAPP/compare/main...main?expand=1&title=[Federation]+Merge+${mergeData.posts.length}+posts+from+${mergeData.source_dimensions.join(',')}&body=${encodeURIComponent(prBody)}`;
+
+            // Open in new tab (won't work without user gesture but good to try)
+            window.open(prUrl, '_blank');
+
+            hideMergeModal();
+        }
+
+        // Create post
+        function createPost() {
+            const content = document.getElementById('post-content').value;
+            if (!content.trim()) {
+                RAPP.showToast('Please enter some content', 'warning');
+                return;
+            }
+            RAPP.showToast('Post creation requires GitHub authentication', 'info');
+        }
+
+        // Vote
+        function vote(el) {
+            el.classList.toggle('voted');
+            const countSpan = el.querySelector('i').nextSibling;
+            const current = parseInt(countSpan.textContent.trim());
+            countSpan.textContent = ' ' + (el.classList.contains('voted') ? current + 1 : current - 1);
+        }
+
+        // Utilities
+        function getInitials(name) {
+            return name.split(/[#\s]/).map(w => w[0]).join('').toUpperCase().slice(0, 2);
+        }
+
+        function formatTimeAgo(dateString) {
+            if (!dateString) return 'recently';
+            const date = new Date(dateString);
+            const seconds = Math.floor((new Date() - date) / 1000);
+            if (seconds < 60) return 'just now';
+            if (seconds < 3600) return Math.floor(seconds / 60) + 'm ago';
+            if (seconds < 86400) return Math.floor(seconds / 3600) + 'h ago';
+            return Math.floor(seconds / 86400) + 'd ago';
+        }
+
+        // Close modal on outside click
+        document.getElementById('add-dimension-modal').addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) {
+                hideAddDimensionModal();
+            }
+        });
+    </script>
+</body>
+</html>

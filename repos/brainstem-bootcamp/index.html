@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brainstem Bootcamp — build the agent on your laptop, ship it to Copilot Studio</title>
+<meta name="description" content="Two hours. A clean laptop becomes a local, tool-using AI agent with memory you own — then you point it at Copilot Studio. The missing on-device launchpad for the Microsoft AI platform.">
+<meta property="og:title" content="Brainstem Bootcamp">
+<meta property="og:description" content="Build the agent on your laptop. Prove it. Then ship it to Copilot Studio.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kody-w.github.io/brainstem-bootcamp/">
+<style>
+:root{
+  --bg:#0b0e14; --surface:#141922; --surface2:#1c222d; --border:#2a3140; --border-hi:#3d4759;
+  --text:#e8eef7; --dim:#93a1b5; --muted:#68758a;
+  --accent:#58a6ff; --purple:#bc8cff; --green:#3fb950; --amber:#d29922; --red:#f85149;
+  --r:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code,.mono{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,monospace;font-size:.9em}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+header{position:sticky;top:0;z-index:60;background:rgba(11,14,20,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:13px 0;gap:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:750;letter-spacing:-.01em}
+.mark{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--purple));display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:850;color:#08111d}
+.nav-links{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.nlink{color:var(--dim);font-size:.82rem;font-weight:600;padding:6px 11px;border-radius:7px}
+.nlink:hover{color:var(--text);background:var(--surface2);text-decoration:none}
+.btn{display:inline-block;font-weight:700;font-size:.85rem;padding:9px 18px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:.15s}
+.btn:hover{border-color:var(--border-hi);text-decoration:none}
+.btn.p{background:linear-gradient(135deg,var(--accent),var(--purple));color:#07101c;border:none}
+.btn.p:hover{opacity:.9}
+.btn.lg{font-size:.95rem;padding:13px 26px}
+
+/* hero */
+.hero{padding:78px 0 56px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-160px;left:50%;transform:translateX(-50%);width:900px;height:420px;background:radial-gradient(ellipse,rgba(88,166,255,.15),transparent 68%);pointer-events:none}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.73rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);border:1px solid #24406b;background:rgba(88,166,255,.08);padding:5px 13px;border-radius:20px;margin-bottom:20px}
+h1{font-size:clamp(2.1rem,5.2vw,3.5rem);line-height:1.08;letter-spacing:-.035em;font-weight:830;max-width:16ch}
+h1 .g{background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{font-size:clamp(1.02rem,2vw,1.2rem);color:var(--dim);max-width:62ch;margin-top:20px}
+.cta-row{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap;align-items:center}
+.cta-note{font-size:.8rem;color:var(--muted)}
+.terminal{margin-top:38px;background:#080b11;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;max-width:660px}
+.tbar{display:flex;gap:6px;padding:10px 13px;background:var(--surface);border-bottom:1px solid var(--border)}
+.tdot{width:10px;height:10px;border-radius:50%}
+.tbody{padding:16px 18px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.83rem;line-height:1.85}
+.tbody .c{color:var(--muted)}
+.tbody .p{color:var(--green)}
+.tbody .o{color:var(--dim)}
+
+section{padding:62px 0;border-top:1px solid var(--border)}
+.kicker{font-size:.73rem;font-weight:750;letter-spacing:.11em;text-transform:uppercase;color:var(--purple);margin-bottom:12px}
+h2{font-size:clamp(1.5rem,3.2vw,2.1rem);letter-spacing:-.025em;font-weight:790;line-height:1.15}
+.lede{color:var(--dim);max-width:64ch;margin-top:14px;font-size:1.02rem}
+
+.gap{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:34px}
+.gap-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px}
+.gap-card.hole{border-color:#5a3d1a;background:linear-gradient(160deg,rgba(210,153,34,.09),var(--surface))}
+.gap-card h3{font-size:1rem;font-weight:730;margin-bottom:7px}
+.gap-card p{font-size:.88rem;color:var(--dim)}
+.tag{display:inline-block;font-size:.63rem;font-weight:780;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:20px;margin-bottom:11px}
+.tag.have{background:rgba(63,185,80,.12);color:var(--green);border:1px solid #1f5c2c}
+.tag.miss{background:rgba(210,153,34,.13);color:var(--amber);border:1px solid #5a3d1a}
+
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:34px}
+.pillar{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px;transition:.15s}
+.pillar:hover{border-color:var(--border-hi);transform:translateY(-2px)}
+.pillar .n{font-size:.7rem;font-weight:800;color:var(--muted);letter-spacing:.1em;margin-bottom:10px}
+.pillar h3{font-size:1.02rem;font-weight:740;margin-bottom:8px;letter-spacing:-.01em}
+.pillar p{font-size:.87rem;color:var(--dim)}
+.pillar p b{color:var(--text);font-weight:650}
+
+.tbl-wrap{margin-top:32px;overflow-x:auto;border:1px solid var(--border);border-radius:var(--r);background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:.87rem;min-width:680px}
+th{text-align:left;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:780;padding:13px 16px;border-bottom:1px solid var(--border);white-space:nowrap}
+th:first-child{width:230px}
+td{padding:13px 16px;border-bottom:1px solid var(--border);color:var(--dim);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td:first-child{color:var(--text);font-weight:640}
+.yes{color:var(--green);font-weight:750}
+.no{color:var(--red);font-weight:750}
+.mid{color:var(--amber);font-weight:750}
+.col-hi{background:rgba(88,166,255,.055)}
+th.col-hi{color:var(--accent)}
+
+.path{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:34px;position:relative}
+.step{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px;position:relative}
+.step.hero-step{border-color:#2c4a7a;background:linear-gradient(160deg,rgba(88,166,255,.11),var(--surface))}
+.step .tier{font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+.step.hero-step .tier{color:var(--accent)}
+.step h3{font-size:.98rem;font-weight:730;margin-bottom:6px}
+.step p{font-size:.83rem;color:var(--dim)}
+.step .arrow{position:absolute;right:-13px;top:50%;transform:translateY(-50%);color:var(--border-hi);font-size:1.1rem;z-index:2}
+
+.sessions{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:32px}
+.session{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px}
+.session .when{font-size:.7rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--purple);margin-bottom:9px}
+.session h3{font-size:1.03rem;font-weight:740;margin-bottom:9px}
+.session ul{list-style:none;font-size:.86rem;color:var(--dim)}
+.session li{padding-left:19px;position:relative;margin-bottom:5px}
+.session li::before{content:'→';position:absolute;left:0;color:var(--accent)}
+.outcome{margin-top:14px;padding-top:13px;border-top:1px solid var(--border);font-size:.82rem;color:var(--muted)}
+.outcome b{color:var(--green);font-weight:700}
+
+.proof{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:32px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px;text-align:center}
+.stat .v{font-size:1.9rem;font-weight:830;letter-spacing:-.03em;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.stat .l{font-size:.74rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;font-weight:700;margin-top:4px}
+
+.faq{margin-top:30px}
+details{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:9px;overflow:hidden}
+summary{padding:15px 18px;cursor:pointer;font-weight:680;font-size:.94rem;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'+';color:var(--muted);font-weight:800}
+details[open] summary::after{content:'−'}
+details p{padding:0 18px 16px;color:var(--dim);font-size:.89rem}
+
+.final{text-align:center;padding:76px 0}
+.final h2{max-width:20ch;margin:0 auto}
+.final .lede{margin:16px auto 0}
+footer{border-top:1px solid var(--border);padding:30px 0 46px;font-size:.8rem;color:var(--muted)}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.disc{margin-top:14px;font-size:.73rem;color:#55606f;max-width:75ch;line-height:1.65}
+
+@media(max-width:880px){
+  .gap,.pillars,.path,.sessions,.proof{grid-template-columns:1fr}
+  .step .arrow{display:none}
+  .proof{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand"><div class="mark">BS</div> Brainstem Bootcamp</div>
+    <nav class="nav-links">
+      <a class="nlink" href="#gap">The gap</a>
+      <a class="nlink" href="#why">Why Brainstem</a>
+      <a class="nlink" href="#compare">Compare</a>
+      <a class="nlink" href="#path">The path</a>
+      <a class="nlink" href="#curriculum">Curriculum</a>
+      <a class="btn p" href="#apply">Join the next cohort</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow">Next cohort forming · 2 hours · bring a laptop</div>
+    <h1>Build the agent <span class="g">on your laptop.</span> Then ship it to Copilot Studio.</h1>
+    <p class="sub">
+      The Microsoft AI platform can answer questions and it can publish agents. What it doesn't hand you
+      is the place in between — a runtime <em>you</em> own, on the machine in front of you, where an agent
+      is actually built, given memory, and proven before anyone else depends on it.
+      Brainstem is that launchpad. The bootcamp gets you through it in an afternoon.
+    </p>
+    <div class="cta-row">
+      <a class="btn p lg" href="#apply">Join the next cohort</a>
+      <a class="btn lg" href="https://kody-w.github.io/rapp-brainstem-walkthrough/" target="_blank" rel="noopener">Try the 14-step walkthrough →</a>
+      <span class="cta-note">No install required to try it. Runs in your browser.</span>
+    </div>
+
+    <div class="terminal">
+      <div class="tbar">
+        <span class="tdot" style="background:#f85149"></span>
+        <span class="tdot" style="background:#d29922"></span>
+        <span class="tdot" style="background:#3fb950"></span>
+      </div>
+      <div class="tbody">
+        <div class="c"># the whole prerequisite list</div>
+        <div><span class="p">$</span> gh auth login</div>
+        <div><span class="p">$</span> curl -fsSL https://kody-w.github.io/rapp-installer/install.sh | bash</div>
+        <div class="o">→ brainstem listening on 127.0.0.1:7071</div>
+        <div class="o">→ memory at ~/.brainstem &nbsp;· &nbsp;agents auto-discovered</div>
+        <div class="c"># no API keys. no new bill. no cloud round-trip.</div>
+      </div>
+    </div>
+  </div>
+
+  <section id="gap">
+    <div class="kicker">The honest map</div>
+    <h2>Two ends of a bridge, and a hole in the middle</h2>
+    <p class="lede">
+      This isn't a knock on Microsoft's stack — it's where the stack is today. Both ends are strong.
+      The gap is the part every real project actually dies in.
+    </p>
+    <div class="gap">
+      <div class="gap-card">
+        <span class="tag have">Solved</span>
+        <h3>The model layer</h3>
+        <p>GitHub Copilot and M365 Copilot answer, complete, and reason inside the tools you already use. Excellent at the moment of the question.</p>
+      </div>
+      <div class="gap-card hole">
+        <span class="tag miss">The gap</span>
+        <h3>The on-device loop</h3>
+        <p>Where does the agent live <em>while you're building it?</em> Where is its memory? Who can turn it off? Today the answer is a prompt file and a hope. That's the hole Brainstem fills.</p>
+      </div>
+      <div class="gap-card">
+        <span class="tag have">Solved</span>
+        <h3>The publish layer</h3>
+        <p>Copilot Studio takes a proven agent to a real audience — governance, channels, Teams, the enterprise. Excellent at the moment of delivery.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="kicker">Why Brainstem</div>
+    <h2>Six reasons a local loop beats a better prompt</h2>
+    <p class="lede">
+      Every one of these is a property you can check on your own filesystem in under a minute.
+      That's the point — none of it requires trusting a slide.
+    </p>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="n">01</div>
+        <h3>Determinism, not persuasion</h3>
+        <p>Custom instructions <b>ask</b> a model to behave. Code in the loop <b>makes</b> it behave. Memory injection isn't a suggestion — it's a step that always runs before the model reads a word.</p>
+      </div>
+      <div class="pillar">
+        <div class="n">02</div>
+        <h3>Your data has an address</h3>
+        <p>State lives at <code>~/.brainstem</code>. You can point at it, back it up, diff it, and delete it. <b>"Where is our AI's memory?"</b> gets a filesystem answer — which is the answer compliance actually wants.</p>
+      </div>
+      <div class="pillar">
+        <div class="n">03</div>
+        <h3>Nobody can turn it off</h3>
+        <p>Platform features arrive and depart by org policy and preview status. Your loop changes when <b>you</b> change it. No deprecation notice, no waiting on a tenant admin.</p>
+      </div>
+      <div class="pillar">
+        <div class="n">04</div>
+        <h3>Memory that doesn't expire</h3>
+        <p>Repo-scoped assistant memory is shared with collaborators and rolls off on a timer. Yours is <b>JSON on disk</b>. It expires when you delete the file — and it works with no repo at all.</p>
+      </div>
+      <div class="pillar">
+        <div class="n">05</div>
+        <h3>Same file, three tiers</h3>
+        <p>A storage shim means one agent file runs on your laptop, then on Azure Functions, then in Teams. <b>No rewrite between prototype and production</b> — the exact step where most AI projects die.</p>
+      </div>
+      <div class="pillar">
+        <div class="n">06</div>
+        <h3>Same engine, no new keys</h3>
+        <p>The GitHub Copilot CLI is the preferred backend, so the runtime uses the developer tooling you already signed into. <b>No API keys to provision</b>, no second vendor to onboard, no procurement cycle to start.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="compare">
+    <div class="kicker">Straight comparison</div>
+    <h2>Brainstem vs. the things you're probably using instead</h2>
+    <p class="lede">
+      The competition isn't another product. It's a prompt file, a preview feature, and a cloud framework —
+      and each one is genuinely better than Brainstem at something. Here's the honest split.
+    </p>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th class="col-hi">Brainstem</th>
+            <th>Custom instructions / prompt files</th>
+            <th>Assistant memory features</th>
+            <th>Cloud agent frameworks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Behavior guarantee</td><td class="col-hi"><span class="yes">Code in the loop</span></td><td>Asks nicely</td><td>Asks nicely</td><td><span class="yes">Code in the loop</span></td></tr>
+          <tr><td>Where the state lives</td><td class="col-hi"><span class="yes">~/.brainstem, on disk</span></td><td>In the repo</td><td>Vendor-side</td><td>Vendor cloud / your cloud</td></tr>
+          <tr><td>Memory lifetime</td><td class="col-hi"><span class="yes">Until you delete it</span></td><td>N/A</td><td><span class="mid">Rolls off on a timer</span></td><td>Whatever you build</td></tr>
+          <tr><td>Works with no repo</td><td class="col-hi"><span class="yes">Yes</span></td><td><span class="no">No</span></td><td><span class="no">No</span></td><td>Yes</td></tr>
+          <tr><td>Survives org policy change</td><td class="col-hi"><span class="yes">Yes — it's yours</span></td><td><span class="mid">Depends</span></td><td><span class="no">No</span></td><td>Yes</td></tr>
+          <tr><td>New keys / new bill</td><td class="col-hi"><span class="yes">None</span></td><td>None</td><td>None</td><td><span class="no">Usually both</span></td></tr>
+          <tr><td>Prototype → production</td><td class="col-hi"><span class="yes">Same file, 3 tiers</span></td><td><span class="no">Doesn't apply</span></td><td><span class="no">Doesn't apply</span></td><td><span class="mid">Rewrite common</span></td></tr>
+          <tr><td>Time to first agent</td><td class="col-hi"><span class="yes">Minutes</span></td><td><span class="yes">Minutes</span></td><td><span class="yes">Instant</span></td><td><span class="no">Days</span></td></tr>
+          <tr><td>Enterprise distribution</td><td class="col-hi"><span class="mid">Hand off to Copilot Studio</span></td><td><span class="no">None</span></td><td><span class="no">None</span></td><td>You build it</td></tr>
+          <tr><td>Best at</td><td class="col-hi"><span class="yes">Building &amp; proving it</span></td><td>Nudging style</td><td>Convenience recall</td><td>Running at scale</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lede" style="margin-top:20px">
+      Read the last row twice. Brainstem is not trying to be the place your agent lives forever —
+      it's the place it gets <em>born and proven</em>. Then you hand it to the platform built for distribution.
+    </p>
+  </section>
+
+  <section id="path">
+    <div class="kicker">The hand-off</div>
+    <h2>Local launchpad → Copilot Studio is the hero landing</h2>
+    <p class="lede">
+      A finished, locally-running product needs somewhere to go. For most teams that destination is
+      Copilot Studio — governed, in Teams, in front of real users. The bootcamp ends by pointing your agent there.
+    </p>
+    <div class="path">
+      <div class="step">
+        <div class="tier">Tier 1 · today</div>
+        <h3>Your laptop</h3>
+        <p>Brainstem runs locally. Agents auto-discovered, memory on disk, full speed iteration with nothing to deploy.</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="step">
+        <div class="tier">Tier 2 · when it works</div>
+        <h3>Azure Functions</h3>
+        <p>The same agent file, promoted. The storage shim swaps local JSON for cloud storage — no rewrite.</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="step hero-step">
+        <div class="tier">Tier 3 · the hero</div>
+        <h3>Copilot Studio</h3>
+        <p>Your proven agent becomes a published Copilot with governance, channels, and an audience. This is where the work was always headed.</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="step">
+        <div class="tier">Result</div>
+        <h3>Teams &amp; M365</h3>
+        <p>Colleagues use it where they already work. You never rewrote the logic you proved in hour one.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="curriculum">
+    <div class="kicker">The bootcamp</div>
+    <h2>Four sessions. You leave with a running agent, not notes.</h2>
+    <p class="lede">
+      Everyone builds. Nobody watches slides. If your laptop can run <code>gh auth login</code>, you can finish.
+      Full detail in <a href="CURRICULUM.md">CURRICULUM.md</a>.
+    </p>
+    <div class="sessions">
+      <div class="session">
+        <div class="when">Session 1 · 25 min</div>
+        <h3>Clean machine → living agent</h3>
+        <ul>
+          <li>One install line, one auth step</li>
+          <li>Brainstem boots; you meet it</li>
+          <li>Introduce yourself, clear the chat, watch it still know you</li>
+          <li>Open <code>~/.brainstem</code> and look at your own memory in a text editor</li>
+        </ul>
+        <div class="outcome"><b>Outcome:</b> memory you can point at, on your own disk.</div>
+      </div>
+      <div class="session">
+        <div class="when">Session 2 · 30 min</div>
+        <h3>Agent surgery</h3>
+        <ul>
+          <li>Export a live agent to a single file</li>
+          <li>Delete it — watch the agent honestly say it can no longer do that</li>
+          <li>Drag it back in; capability returns, hot-loaded</li>
+          <li>Install <code>@rapp/learn_new</code> from the registry, SHA-256 verified</li>
+        </ul>
+        <div class="outcome"><b>Outcome:</b> capability is a file you control, not a vendor toggle.</div>
+      </div>
+      <div class="session">
+        <div class="when">Session 3 · 35 min</div>
+        <h3>Build your own, from plain words</h3>
+        <ul>
+          <li>Describe an agent in a sentence; the file gets written and hot-loaded</li>
+          <li>Wire it to a real task from your actual job</li>
+          <li>Give it a <code>soul.md</code> identity</li>
+          <li>Break it on purpose, read the error, fix it</li>
+        </ul>
+        <div class="outcome"><b>Outcome:</b> your agent, doing your work, running on your machine.</div>
+      </div>
+      <div class="session">
+        <div class="when">Session 4 · 30 min</div>
+        <h3>Ship it: the Copilot Studio hand-off</h3>
+        <ul>
+          <li>Promote the same file to Tier 2 without a rewrite</li>
+          <li>Map your proven agent onto a Copilot Studio agent</li>
+          <li>Publish to a channel; a colleague uses it in Teams</li>
+          <li>Governance, ownership, and what to hand your admin</li>
+        </ul>
+        <div class="outcome"><b>Outcome:</b> a published agent your team can actually use.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="proof">
+    <div class="kicker">Receipts</div>
+    <h2>The ecosystem you're plugging into is public and measured</h2>
+    <p class="lede">
+      Live numbers from the RAPP Agent Registry — every one sourced from a public API, on a dashboard
+      anyone can audit. Loaded straight from the registry as this page rendered.
+    </p>
+    <div class="proof" id="stats">
+      <div class="stat"><div class="v" id="s-dl">—</div><div class="l">Downloads</div></div>
+      <div class="stat"><div class="v" id="s-ag">—</div><div class="l">Agents</div></div>
+      <div class="stat"><div class="v" id="s-rv">—</div><div class="l">Reviews</div></div>
+      <div class="stat"><div class="v" id="s-pb">—</div><div class="l">Publishers</div></div>
+    </div>
+    <p class="lede" style="margin-top:18px">
+      Audit it yourself: <a href="https://kody-w.github.io/RAR/metrics.html" target="_blank" rel="noopener">the public metrics dashboard</a>
+      · <a href="https://kody-w.github.io/RAR/" target="_blank" rel="noopener">browse the registry</a>
+    </p>
+  </section>
+
+  <section id="faq">
+    <div class="kicker">Before you ask</div>
+    <h2>Fair questions</h2>
+    <div class="faq">
+      <details open>
+        <summary>Do I need to buy anything?</summary>
+        <p>No new keys and no new vendor bill for the runtime — the GitHub Copilot CLI is the preferred backend, so it uses developer tooling you sign into with your existing GitHub account. Whatever GitHub Copilot access your account has is between you and GitHub; we make no claims about your entitlement. Tier 2 and Tier 3 involve your own Azure and Microsoft 365 subscriptions as usual.</p>
+      </details>
+      <details>
+        <summary>Is this a replacement for Copilot Studio?</summary>
+        <p>The opposite. Copilot Studio is the hero destination in Session 4. Brainstem is the on-device launchpad where the agent gets built and proven first, so that what you publish is something you've already watched work.</p>
+      </details>
+      <details>
+        <summary>What if my company blocks local installs?</summary>
+        <p>Start with the <a href="https://kody-w.github.io/rapp-brainstem-walkthrough/" target="_blank" rel="noopener">browser walkthrough</a> — no server, no Python, no install. It runs the real brainstem UI against an in-browser simulator, so you can complete the entire tour and make the internal case before anyone installs anything.</p>
+      </details>
+      <details>
+        <summary>I'm not a Python developer.</summary>
+        <p>Fine. An agent is one Python file with a docstring and one function that returns a string, and in Session 3 you describe it in plain words and the file gets written for you. People who can read a config file finish this bootcamp.</p>
+      </details>
+      <details>
+        <summary>How is this different from just writing better instructions?</summary>
+        <p>Instructions are a request the model may ignore. A loop is code that runs whether the model likes it or not. Memory injection happens before the model reads a single token, every time. That difference is the entire product.</p>
+      </details>
+      <details>
+        <summary>What does it cost to attend?</summary>
+        <p>Nothing. The material is public, the repo is open, and the sessions are run to grow the ecosystem. Bring a laptop and finish something.</p>
+      </details>
+    </div>
+  </section>
+
+  <div class="final" id="apply">
+    <h2>The next cohort is forming now</h2>
+    <p class="lede">Two hours from a clean laptop to a published agent. Open an issue and you're on the list.</p>
+    <div class="cta-row" style="justify-content:center">
+      <a class="btn p lg" href="https://github.com/kody-w/brainstem-bootcamp/issues/new?template=cohort-signup.yml" target="_blank" rel="noopener">Claim a seat</a>
+      <a class="btn lg" href="https://kody-w.github.io/rapp-brainstem-walkthrough/" target="_blank" rel="noopener">Or start the walkthrough now</a>
+    </div>
+    <p class="cta-note" style="margin-top:16px">Prefer to bring a whole team? Say so in the issue — private cohorts are how most of these run.</p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <a href="https://github.com/kody-w/brainstem-bootcamp">brainstem-bootcamp</a> ·
+      <a href="MARKETING.md">Marketing plan</a> ·
+      <a href="CURRICULUM.md">Curriculum</a> ·
+      <a href="https://github.com/kody-w/rapp-brainstem">Brainstem</a> ·
+      <a href="https://github.com/kody-w/rapp-installer">Installer</a>
+    </div>
+    <div>MIT licensed · built in the open</div>
+  </div>
+  <div class="wrap disc">
+    Independent open-source project. Not affiliated with, endorsed by, or sponsored by Microsoft Corporation or GitHub, Inc.
+    Microsoft, Microsoft 365, Copilot, Copilot Studio, Azure, and Teams are trademarks of Microsoft Corporation;
+    GitHub and GitHub Copilot are trademarks of GitHub, Inc. Named here only to describe interoperability.
+    Your access to any Microsoft or GitHub service is governed solely by your agreement with that vendor.
+    RAPP and the RAPP family of names are trademarks of the RAPP project.
+  </div>
+</footer>
+
+<script>
+// Live proof numbers from the public RAR metrics snapshot. Fails silently offline.
+(async () => {
+  const n = v => Number(v).toLocaleString();
+  try {
+    const r = await fetch('https://kody-w.github.io/RAR/state/metrics.json', { cache: 'no-store' });
+    if (!r.ok) return;
+    const t = (await r.json()).totals;
+    document.getElementById('s-dl').textContent = n(t.downloads);
+    document.getElementById('s-ag').textContent = n(t.agents);
+    document.getElementById('s-rv').textContent = n(t.reviews);
+    document.getElementById('s-pb').textContent = n(t.publishers);
+  } catch (e) { /* offline — dashes stay */ }
+})();
+</script>
+</body>
+</html>

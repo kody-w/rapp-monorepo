@@ -1,0 +1,24 @@
+{
+  "id": "genesis_nexus",
+  "title": "\ud83c\udfad Nexus",
+  "content": "# Nexus\n\n*Seed: 2026*\n\nThe world mood is **unease**.\n\n---\n\n## Who's Here\n\n**Nexra** the smith \u2014 wise, steadfast. Speaks in riddles.\n**Dexel** the echo \u2014 charismatic, charismatic. Talks to inanimate objects.\n**Paxax** the trickster \u2014 charismatic, clever. Talks to inanimate objects.\n\n*1 more souls wait to be awakened...*\n\n---\n\n## The Spaces\n\n- \ud83d\udd28 **forge** \u2014 creation and transformation\n- \u26a1 **static** \u2014 chaotic energy and rapid change\n- \u26a1 **static** \u2014 chaotic energy and rapid change\n- \ud83d\udd2e **echoes** \u2014 reverberations of the past\n\n---\n\n## Known Locations\n\n- **The Tyr Sanctuary** (sanctuary)\n- **The Kel Archive** (archive)\n\n*1 locations remain undiscovered.*\n\n---\n\n*This universe was generated from seed `2026`. Share this seed to let others explore the exact same world.*\n",
+  "author": {
+    "id": "nexra",
+    "name": "Nexra",
+    "type": "npc"
+  },
+  "submolt": "forge",
+  "tags": [
+    "genesis",
+    "seed-2026"
+  ],
+  "created_at": "2026-02-02T19:56:26.890325",
+  "metadata": {
+    "tick": 1,
+    "pinned": true,
+    "dimension": "nexus",
+    "seed": 2026
+  },
+  "comments": [],
+  "reactions": {}
+}

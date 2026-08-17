@@ -1,0 +1,181 @@
+name: Nightly Health Check
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # 6 AM UTC daily
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  nightly:
+    runs-on: ubuntu-latest
+    steps:
+      # Full history is REQUIRED, not a nicety. build_registry.py derives
+      # _added_at, _first_commit_sha and _latest_commit_sha by walking
+      # `git log --name-status`; on a shallow checkout those come back empty,
+      # so a rebuild here can never match the registry that build-registry.yml
+      # committed (which does check out at depth 0). The drift check below
+      # would fail every night on a difference that says nothing about drift.
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install test deps
+        run: pip install pytest pyyaml
+
+      # Snapshot BEFORE anything can rewrite it. The test suite itself runs
+      # build_registry.py, so from the next step onward registry.json is a
+      # freshly built file, not the one that is committed and served.
+      - name: Snapshot the committed registry
+        run: cp registry.json /tmp/registry.committed.json
+
+      # `shell: bash` is what turns on pipefail. Without it the default is
+      # `bash -e` with NO pipefail, so `pytest | tee` exited with TEE's status
+      # — always 0. The full test suite, this check's headline, could not fail
+      # the workflow; PIPESTATUS was captured into an output nothing read.
+      - name: Full test suite
+        shell: bash
+        run: pytest -v --tb=short 2>&1 | tee /tmp/test_output.txt
+
+      - name: Rebuild registry (integrity check)
+        shell: bash
+        run: python build_registry.py 2>&1 | tee -a /tmp/test_output.txt
+
+      # registry.json is what consumers actually fetch — the brainstem, the
+      # store and every federated instance read the COMMITTED file. Every
+      # workflow rebuilds it before validating, so a stale committed registry
+      # was structurally invisible: CI only ever checked a file it had just
+      # regenerated. This is nightly rather than per-push on purpose —
+      # build-registry.yml commits the rebuild moments after an agent push, and
+      # a gate that races that bot would be red for a reason nobody can act on.
+      - name: Committed registry matches agents/
+        shell: bash
+        run: |
+          python - <<'PY' 2>&1 | tee -a /tmp/test_output.txt
+          import json, sys
+          a = json.load(open('/tmp/registry.committed.json'))
+          b = json.load(open('registry.json'))
+          # A build timestamp differs on every run by design.
+          a.pop('generated_at', None); b.pop('generated_at', None)
+          if a == b:
+              print('OK registry.json is in sync with agents/')
+              sys.exit(0)
+          print('FAIL registry.json is stale - run build_registry.py and commit')
+          for k in sorted(set(a) | set(b)):
+              av, bv = a.get(k), b.get(k)
+              if av == bv:
+                  continue
+              if isinstance(av, list) and isinstance(bv, list):
+                  na = {x.get('name') for x in av if isinstance(x, dict)}
+                  nb = {x.get('name') for x in bv if isinstance(x, dict)}
+                  print(f'  {k}: committed={len(av)} rebuilt={len(bv)}')
+                  if na - nb: print(f'    only in committed: {sorted(na - nb)[:10]}')
+                  if nb - na: print(f'    only in rebuilt:   {sorted(nb - na)[:10]}')
+                  # Same membership, different contents: name the actual
+                  # fields. Reporting only the counts (278 vs 278) says
+                  # nothing about what to fix.
+                  ia = {x.get('name'): x for x in av if isinstance(x, dict)}
+                  ib = {x.get('name'): x for x in bv if isinstance(x, dict)}
+                  shown = 0
+                  for name in sorted(na & nb):
+                      ea, eb = ia[name], ib[name]
+                      if ea == eb:
+                          continue
+                      diff = sorted(
+                          f for f in set(ea) | set(eb) if ea.get(f) != eb.get(f)
+                      )
+                      print(f'    {name}: fields differ -> {diff[:8]}')
+                      for f in diff[:3]:
+                          print(f'       {f}: committed={str(ea.get(f))[:60]!r}')
+                          print(f'       {f}: rebuilt  ={str(eb.get(f))[:60]!r}')
+                      shown += 1
+                      if shown >= 3:
+                          print(f'    ... and more')
+                          break
+              else:
+                  print(f'  {k}: committed={str(av)[:200]}')
+                  print(f'  {k}: rebuilt  ={str(bv)[:200]}')
+          sys.exit(1)
+          PY
+
+      - name: SHA256 integrity audit
+        run: |
+          python -c "
+          import hashlib, json, sys
+          from pathlib import Path
+          reg = json.loads(Path('registry.json').read_text())
+          bad = []
+          for a in reg['agents']:
+              f = Path(a['_file'])
+              if not f.exists(): continue
+              actual = hashlib.sha256(f.read_bytes()).hexdigest()
+              # Gated agents ship as .py.stub and record _stub_sha256; the
+              # builder never writes _sha256 for them. Verify each against the
+              # digest its own kind records — and read that same value back when
+              # reporting, because indexing a[_sha256] on a stub raised KeyError
+              # and killed this check silently for 60 consecutive nights.
+              expected = a.get('_sha256') or a.get('_stub_sha256')
+              if expected != actual:
+                  shown = expected[:16] if expected else 'NO DIGEST RECORDED'
+                  bad.append(f'{a[\"name\"]}: expected {shown}... got {actual[:16]}...')
+          if bad:
+              print('❌ Integrity failures:')
+              for b in bad: print(f'  {b}')
+              sys.exit(1)
+          print(f'✓ All {len(reg[\"agents\"])} agent hashes verified')
+          "
+
+      - name: Security scan
+        run: |
+          python -c "
+          import re, json, sys
+          from pathlib import Path
+          # Import the patterns, don't restate them. This step used to keep its
+          # own stricter list that hard-failed on eval/exec/__import__ — a rule
+          # the registry DELIBERATELY retired. build_registry.py moved dynamic
+          # code out of DANGEROUS_PATTERNS into CAPABILITY_PATTERNS: such agents
+          # are allowed and TAGGED (_capabilities), so consumers can filter
+          # instead of the registry refusing legitimate meta-programming.
+          # Nightly never got the memo, so it failed every night on an agent the
+          # registry had already cleared. One source of truth means this check
+          # can no longer drift from the policy it is supposed to enforce.
+          sys.path.insert(0, '.')
+          from build_registry import SECURITY_ALLOWLIST, DANGEROUS_PATTERNS
+          PATTERNS = DANGEROUS_PATTERNS
+          fails = []
+          for f in Path('agents').rglob('*.py'):
+              if str(f) in SECURITY_ALLOWLIST:
+                  continue
+              src = f.read_text()
+              for pat, label in PATTERNS:
+                  if re.search(pat, src):
+                      fails.append(f'{f}: {label}')
+          if fails:
+              print('❌ Security scan:')
+              for f in fails: print(f'  {f}')
+              sys.exit(1)
+          print('✓ Security scan passed')
+          "
+
+      - name: Open issue on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let output = '';
+            try { output = fs.readFileSync('/tmp/test_output.txt', 'utf8'); } catch(e) {}
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🔴 Nightly health check failed — ${new Date().toISOString().split('T')[0]}`,
+              body: `The nightly health check detected failures.\n\n\`\`\`\n${output.slice(-2000)}\n\`\`\`\n\nTriggered by: ${context.workflow}`,
+              labels: ['nightly-failure', 'automated']
+            });

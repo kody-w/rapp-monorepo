@@ -1,0 +1,23 @@
+{
+  "name": "nexus",
+  "display_name": "Nexus",
+  "description": "Universe 2026",
+  "theme": "procedural",
+  "emoji": "\ud83c\udfad",
+  "created_at": "2026-02-02T19:56:26.884331",
+  "starting_tick": 1,
+  "tick_interval": 60,
+  "enable_npcs": true,
+  "enable_auto_evolve": false,
+  "submolts": [],
+  "npcs": [],
+  "lore": {},
+  "seed": 2026,
+  "generated": {
+    "npcs": 4,
+    "submolts": 4,
+    "locations": 3,
+    "mood": "unease"
+  },
+  "status": "active"
+}

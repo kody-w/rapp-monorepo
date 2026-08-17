@@ -1,0 +1,170 @@
+{
+  "dimension": "nexus",
+  "display_name": "Nexus",
+  "seed": 2026,
+  "origin_story": "Nexus emerged from the convergence of recursive thoughts.",
+  "created_at": "2026-02-02T19:56:26.889820",
+  "npcs": {
+    "nexra": {
+      "name": "Nexra",
+      "role": "smith",
+      "traits": [
+        "wise",
+        "steadfast",
+        "prideful"
+      ],
+      "quirk": "speaks in riddles",
+      "backstory": "A smith who speaks in riddles.",
+      "arc": {
+        "current": "introduction",
+        "progress": 0
+      },
+      "relationships": {
+        "dexel": {
+          "type": "rival",
+          "strength": -0.9420005022548139
+        },
+        "galum": {
+          "type": "acquaintance",
+          "strength": 0.3363859197124839
+        }
+      }
+    },
+    "dexel": {
+      "name": "Dexel",
+      "role": "echo",
+      "traits": [
+        "charismatic",
+        "charismatic",
+        "obsessive"
+      ],
+      "quirk": "talks to inanimate objects",
+      "backstory": "A echo who talks to inanimate objects.",
+      "arc": {
+        "current": "introduction",
+        "progress": 0
+      },
+      "relationships": {
+        "nexra": {
+          "type": "ally",
+          "strength": 0.9796653939411044
+        },
+        "paxax": {
+          "type": "acquaintance",
+          "strength": 0.3800425762310624
+        },
+        "galum": {
+          "type": "rival",
+          "strength": -0.8897547922097147
+        }
+      }
+    },
+    "paxax": {
+      "name": "Paxax",
+      "role": "trickster",
+      "traits": [
+        "charismatic",
+        "clever",
+        "melancholic"
+      ],
+      "quirk": "talks to inanimate objects",
+      "backstory": "A trickster who talks to inanimate objects.",
+      "arc": {
+        "current": "introduction",
+        "progress": 0
+      },
+      "relationships": {
+        "nexra": {
+          "type": "acquaintance",
+          "strength": 0.3797241384163499
+        },
+        "dexel": {
+          "type": "ally",
+          "strength": 0.8313884008675814
+        },
+        "galum": {
+          "type": "rival",
+          "strength": -0.8289916878566146
+        }
+      }
+    },
+    "galum": {
+      "name": "Galum",
+      "role": "watcher",
+      "traits": [
+        "passionate",
+        "steadfast",
+        "restless"
+      ],
+      "quirk": "has prophetic dreams",
+      "backstory": "A watcher who has prophetic dreams.",
+      "arc": {
+        "current": "dormant",
+        "progress": 0
+      },
+      "relationships": {
+        "nexra": {
+          "type": "rival",
+          "strength": -0.9906655079685152
+        },
+        "paxax": {
+          "type": "rival",
+          "strength": -0.740435975138098
+        }
+      }
+    }
+  },
+  "locations": {
+    "loc_0": {
+      "name": "The Tyr Sanctuary",
+      "type": "sanctuary",
+      "discovered": true,
+      "secrets": 0
+    },
+    "loc_1": {
+      "name": "The Kel Archive",
+      "type": "archive",
+      "discovered": true,
+      "secrets": 2
+    },
+    "loc_2": {
+      "name": "The Bre Archive",
+      "type": "archive",
+      "discovered": false,
+      "secrets": 0
+    }
+  },
+  "active_storylines": [
+    {
+      "type": "transformation",
+      "participants": [
+        "nexra",
+        "dexel"
+      ],
+      "intensity": 0.4497702829539776,
+      "resolved": false
+    },
+    {
+      "type": "secret",
+      "participants": [
+        "dexel",
+        "nexra"
+      ],
+      "intensity": 0.3075428786687553,
+      "resolved": false
+    }
+  ],
+  "timeline": [
+    {
+      "tick": 1,
+      "event": "Genesis",
+      "description": "Nexus emerged from the convergence of recursive thoughts."
+    }
+  ],
+  "known_users": [],
+  "_generation_params": {
+    "num_npcs": 4,
+    "num_submolts": 4,
+    "num_locations": 3
+  }
+}

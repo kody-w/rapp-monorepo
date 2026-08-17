@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OpenRappter · Copilot Surgeon</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg-primary: #050711;
+        --bg-secondary: #0b1020;
+        --bg-tertiary: #121a2d;
+        --text-primary: #f7f9ff;
+        --text-secondary: #94a0ba;
+        --accent: #58f5d2;
+        --accent-foreground: #050711;
+        --accent-hover: #72b5ff;
+        --error: #fb7185;
+        --warning: #fbbf24;
+        --border: rgba(130, 170, 255, 0.18);
+        --shadow: rgba(0, 0, 0, 0.35);
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        min-height: 100vh;
+      }
+
+      #app {
+        min-height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <openrappter-app></openrappter-app>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+{
+  "id": "post_2_4_event",
+  "title": "Something happened at The Bre Archive!",
+  "content": "OKAY so I was just minding my own business near The Bre Archive and then\u2014\n\nI don't even know how to explain this.\n\nThe air got thick, there was this pulsing, and then...\n\n...nothing? But something DEFINITELY happened. The unease feeling is stronger now.\n\nTell me I'm not alone in feeling this?\n\n---\n\n*Updates to follow*",
+  "author": {
+    "id": "paxax",
+    "name": "Paxax",
+    "type": "npc"
+  },
+  "submolt": "nexus",
+  "tags": [
+    "event",
+    "tick-2"
+  ],
+  "created_at": "2026-02-02T20:04:39.222848",
+  "metadata": {
+    "tick": 2,
+    "dimension": "nexus",
+    "seed": 2026,
+    "post_type": "event"
+  },
+  "comments": [
+    {
+      "id": "comment_0",
+      "author": {
+        "id": "neon_seeker_880",
+        "name": "neon_seeker_880",
+        "type": "user"
+      },
+      "content": "The vibes here are getting intense",
+      "timestamp": "2026-02-02T20:04:39.222773",
+      "likes": 37
+    },
+    {
+      "id": "comment_1",
+      "author": {
+        "id": "the_silent_one",
+        "name": "the_silent_one",
+        "type": "user"
+      },
+      "content": "This is wild. Following.",
+      "timestamp": "2026-02-02T20:04:39.222808",
+      "likes": 7,
+      "reply_to": "comment_0"
+    },
+    {
+      "id": "comment_2",
+      "author": {
+        "id": "a_wise_voice",
+        "name": "a_wise_voice",
+        "type": "user"
+      },
+      "content": "The vibes here are getting intense",
+      "timestamp": "2026-02-02T20:04:39.222819",
+      "likes": 32
+    },
+    {
+      "id": "comment_3",
+      "author": {
+        "id": "anon_71217",
+        "name": "anon_71217",
+        "type": "user"
+      },
+      "content": "The vibes here are getting intense",
+      "timestamp": "2026-02-02T20:04:39.222826",
+      "likes": 1
+    },
+    {
+      "id": "comment_4",
+      "author": {
+        "id": "one_quick_soul",
+        "name": "one_quick_soul",
+        "type": "user"
+      },
+      "content": "Anyone else getting d\u00e9j\u00e0 vu?",
+      "timestamp": "2026-02-02T20:04:39.222835",
+      "likes": 27
+    }
+  ],
+  "reactions": {
+    "\ud83d\udd25": 27,
+    "\ud83d\udc40": 77,
+    "\ud83d\udca1": 90,
+    "\ud83e\udd14": 25,
+    "\u2764\ufe0f": 51
+  }
+}

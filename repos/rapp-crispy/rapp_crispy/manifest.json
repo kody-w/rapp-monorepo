@@ -1,0 +1,45 @@
+{
+  "schema": "rapp-application/1.0",
+  "id": "rapp_crispy",
+  "name": "RAPP Crispy",
+  "version": "1.4.0",
+  "publisher": "@kody-w",
+  "manifest_name": "@kody-w/rapp-crispy-singleton",
+  "runtime": "twin",
+  "summary": "A local-first meeting stack. Records a meeting, removes background noise with DeepFilterNet3 (or RNNoise), transcribes it on a whisper.cpp server bound to 127.0.0.1, and writes Summary / Decisions / Action items / Open questions through a hook you own. Also puts a denoised virtual microphone in front of your meeting app. Audio, transcripts and notes are plain files under ~/.rappcrispy/meetings. Capture, denoising and transcription never leave the machine; the notes hook does whatever you point it at, and the default one calls `claude -p`, which sends the transcript to Anthropic. Denoise quality is measured, not asserted \u2014 action=bench reproduces it, including the case it handles badly.",
+  "tagline": "Record, denoise and transcribe meetings entirely on your own machine; summarise through a hook you choose.",
+  "category": "productivity",
+  "tags": [
+    "deepfilternet",
+    "denoise",
+    "has-ui",
+    "local-first",
+    "meetings",
+    "noise-cancellation",
+    "privacy",
+    "rapplication",
+    "transcription",
+    "virtual-microphone",
+    "whisper"
+  ],
+  "agent": "singleton/rapp_crispy_agent.py",
+  "ui": "ui/index.html",
+  "license": "MIT",
+  "homepage": "https://github.com/kody-w/rapp-crispy",
+  "quality_tier": "community",
+  "twin": {
+    "soul": "twin/soul.md",
+    "agents": "twin/agents",
+    "port": 7090
+  },
+  "produced_by": {
+    "method": "single-file-agent + local-first ui",
+    "engines": [
+      "ffmpeg arnndn (RNNoise)",
+      "whisper.cpp server on 127.0.0.1"
+    ],
+    "source_files_collapsed": 1,
+    "bundled_at": "2026-07-25T00:00:00Z"
+  },
+  "egg_note": "The copy of this manifest inside the .egg describes a hatch cartridge: it carries twin/ and state/ only. `agent` and `ui` are bundle-relative paths that live in the source repo, not in the egg \u2014 the twin loads twin/agents/, not singleton/."
+}

@@ -1,0 +1,445 @@
+{
+  "spec": "rapp-frame-index/1.0",
+  "stream_id": "rappid:@kody-w/rapp-body:817839d299ddfb173097c58a0434c5c1ef5cd2cd55086c46cfe728bf9bfeb657",
+  "generated": "2026-08-16T07:45:48.123Z",
+  "count": 43,
+  "head": {
+    "seq": 42,
+    "payload_hash": "f5dccd309150320295ad946f7000eb9814641fb6b1684ff2017cd2ceef27425d",
+    "frame_hash": "005f7577d9e130e00d054d6cfc4dccbfaba9d88fa1b037edf4939e772c563491",
+    "utc": "2026-08-16T07:45:48.068Z",
+    "kind": "body.pulse"
+  },
+  "frames": [
+    {
+      "seq": 0,
+      "path": "frames/0.json",
+      "utc": "2025-11-24T00:00:00.000Z",
+      "kind": "body.pulse-reconstructed",
+      "payload_hash": "46c2d6591232fa0fe4cbdcb762bb8d0783b966b8470608be9493d4e1d706104b",
+      "frame_hash": "0af3c10a6252e89e1d5f057572fd1cbce085509133d095dffa5020b9e530081f",
+      "prev": null,
+      "prev_wave": null
+    },
+    {
+      "seq": 1,
+      "path": "frames/1.json",
+      "utc": "2026-01-15T00:00:00.000Z",
+      "kind": "body.pulse-reconstructed",
+      "payload_hash": "da93cdb6d4fcfa75b0e757b0f6f8b78ac663f33a8512c7cfa688072fc2818998",
+      "frame_hash": "d5ccb7c7ec7ba3b7aa1f88824ea2b38e694ce1d04ca3087263bfb43e4e6915cf",
+      "prev": "46c2d6591232fa0fe4cbdcb762bb8d0783b966b8470608be9493d4e1d706104b",
+      "prev_wave": null
+    },
+    {
+      "seq": 2,
+      "path": "frames/2.json",
+      "utc": "2026-01-22T00:00:00.000Z",
+      "kind": "body.pulse-reconstructed",
+      "payload_hash": "b3b256a71e106661307763f2539fb08ea184d385e9ea06621c9ac577fbf0ff82",
+      "frame_hash": "0d247a13c213a93c5c850eab985b179963af20a8ecb7c17f01951bb78380c1c0",
+      "prev": "da93cdb6d4fcfa75b0e757b0f6f8b78ac663f33a8512c7cfa688072fc2818998",
+      "prev_wave": null
+    },
+    {
+      "seq": 3,
+      "path": "frames/3.json",
+      "utc": "2026-01-30T00:00:00.000Z",
+      "kind": "body.pulse-reconstructed",
+      "payload_hash": "23dd23e4ddd81df3f948b5867b25c12fe2ccb991ea2415136cbd6fe8b6c48e3b",
+      "frame_hash": "14ad3754460aa664c5e211aafd873868c33360546ed188c17ae49efd1bb5c0f6",
+      "prev": "b3b256a71e106661307763f2539fb08ea184d385e9ea06621c9ac577fbf0ff82",
+      "prev_wave": null
+    },
+    {
+      "seq": 4,
+      "path": "frames/4.json",
+      "utc": "2026-02-05T00:00:00.000Z",
+      "kind": "body.pulse-reconstructed",
+      "payload_hash": "7f447580b2808be7dd1bb2e291a85868b9ed6f5d36ec481b20235bab1c5507e1",
+      "frame_hash": "a25e3bd2d1702d0a74938a6d08804e52f8df161181e5674440f4ddeed1da70b8",
+      "prev": "23dd23e4ddd81df3f948b5867b25c12fe2ccb991ea2415136cbd6fe8b6c48e3b",
+      "prev_wave": null
+    },
+    {
+      "seq": 5,
+      "path": "frames/5.json",
+      "utc": "2026-02-13T00:00:00.000Z",
+      "kind": "body.pulse-reconstructed",
+      "payload_hash": "517552a3c94355b48e1423216b129c4f257bf5f4d4db55bbb65ac02fa766fc40",
+      "frame_hash": "939af80f935b536611fd09f284c03a6b67f447cff4221c2fa7cd9b84a5bc6846",
+      "prev": "7f447580b2808be7dd1bb2e291a85868b9ed6f5d36ec481b20235bab1c5507e1",
+      "prev_wave": null
+    },
+    {
+      "seq": 6,
+      "path": "frames/6.json",
+      "utc": "2026-04-03T00:00:00.000Z",
+      "kind": "body.pulse-reconstructed",
+      "payload_hash": "64df9a13ef1499f232e43d300f67c4f0cf768715578a35e8605f59f5d3c6d599",
+      "frame_hash": "bd199b39e23ec16e567dc8060d80897aa95592c1f9d2f2519761c2b16778bcee",
+      "prev": "517552a3c94355b48e1423216b129c4f257bf5f4d4db55bbb65ac02fa766fc40",
+      "prev_wave": null
+    },
+    {
+      "seq": 7,
+      "path": "frames/7.json",
+      "utc": "2026-04-17T00:00:00.000Z",
+      "kind": "body.pulse-reconstructed",
+      "payload_hash": "8ada3541f5607573778c2a29d3390050037bca7e758a5213ad48a04aaf4137e0",
+      "frame_hash": "e1568688c428fd80fadd30550b33ee8c8fb0ed01fe64f5ee697e87cff3c63c40",
+      "prev": "64df9a13ef1499f232e43d300f67c4f0cf768715578a35e8605f59f5d3c6d599",
+      "prev_wave": null
+    },
+    {
+      "seq": 8,
+      "path": "frames/8.json",
+      "utc": "2026-04-27T00:00:00.000Z",
+      "kind": "body.pulse-reconstructed",
+      "payload_hash": "264f4a59ed10370e1f4832a6763fd3cbdbfa8fbbaff8351d496f27583e9cdc9d",
+      "frame_hash": "33e5f5e9617c0221cffb7d58b9e6ff1e51ad6622fe0e33b7093b05a368b87c2c",
+      "prev": "8ada3541f5607573778c2a29d3390050037bca7e758a5213ad48a04aaf4137e0",
+      "prev_wave": null
+    },
+    {
+      "seq": 9,
+      "path": "frames/9.json",
+      "utc": "2026-05-06T00:00:00.000Z",
+      "kind": "body.pulse-reconstructed",
+      "payload_hash": "7e72868211d4a168eee722be6263b87ad1d6252da7294aaf90c9a328da653683",
+      "frame_hash": "63fbf08fedbb8a4f618614632e533aeccae40b86c293a37ba6a5315c76ddf98f",
+      "prev": "264f4a59ed10370e1f4832a6763fd3cbdbfa8fbbaff8351d496f27583e9cdc9d",
+      "prev_wave": null
+    },
+    {
+      "seq": 10,
+      "path": "frames/10.json",
+      "utc": "2026-05-11T00:00:00.000Z",
+      "kind": "body.pulse-reconstructed",
+      "payload_hash": "997297b8257096c8cee4425810a2fb21f8ca4d6bdf50ee2bfe643ed2c80182a2",
+      "frame_hash": "8de8e252976caa564b0ca129a7ee0cf344edf1fed1dca988442912fbfb1d1be4",
+      "prev": "7e72868211d4a168eee722be6263b87ad1d6252da7294aaf90c9a328da653683",
+      "prev_wave": null
+    },
+    {
+      "seq": 11,
+      "path": "frames/11.json",
+      "utc": "2026-05-18T00:00:00.000Z",
+      "kind": "body.pulse-reconstructed",
+      "payload_hash": "9b3b8d7061b621ecc1473199aa79a9d66016df0280687b5bad2bf2f7a4fa2f34",
+      "frame_hash": "40aebd0b2e2fb8ee50ed7961f6dfe8939884d2b55aa1290089552d5dafae53dd",
+      "prev": "997297b8257096c8cee4425810a2fb21f8ca4d6bdf50ee2bfe643ed2c80182a2",
+      "prev_wave": null
+    },
+    {
+      "seq": 12,
+      "path": "frames/12.json",
+      "utc": "2026-05-22T00:00:00.000Z",
+      "kind": "body.pulse-reconstructed",
+      "payload_hash": "fa94fb244b2508480358baf6632bc36fca031ac5319c8004184b7fc19f6de42c",
+      "frame_hash": "54c45d9b644d856d32c9d3e893c583c65bdd9175340feaf7f306b82d5ac7eea8",
+      "prev": "9b3b8d7061b621ecc1473199aa79a9d66016df0280687b5bad2bf2f7a4fa2f34",
+      "prev_wave": null
+    },
+    {
+      "seq": 13,
+      "path": "frames/13.json",
+      "utc": "2026-05-26T00:00:00.000Z",
+      "kind": "body.pulse-reconstructed",
+      "payload_hash": "42412814d20189047b1b914d3d7d9c8d1b688b7945a05df86de0e55c7b355cc0",
+      "frame_hash": "8d52cd616b8689452b755bb1baa3a0ac9ebf3c9f00c8bb8ac38653c4ec37c9fe",
+      "prev": "fa94fb244b2508480358baf6632bc36fca031ac5319c8004184b7fc19f6de42c",
+      "prev_wave": null
+    },
+    {
+      "seq": 14,
+      "path": "frames/14.json",
+      "utc": "2026-05-27T00:00:00.000Z",
+      "kind": "body.pulse-reconstructed",
+      "payload_hash": "8653faa1a69a328cf9da661500e134ef63d13edf9e7089816c288fa8b4119f55",
+      "frame_hash": "25b181bbe0c45aee95d78550a4aae5ca18b088a3d48d4a524e60c748c18fcf48",
+      "prev": "42412814d20189047b1b914d3d7d9c8d1b688b7945a05df86de0e55c7b355cc0",
+      "prev_wave": null
+    },
+    {
+      "seq": 15,
+      "path": "frames/15.json",
+      "utc": "2026-06-02T00:00:00.000Z",
+      "kind": "body.pulse-reconstructed",
+      "payload_hash": "74f06b3640ec02f83664dbfa12e0d703c583b0efd2ecdd7534671cb134849774",
+      "frame_hash": "dc018bedbf2d8c3f7f79e078015e8c23931eed86fd5157a6944978ce203875ab",
+      "prev": "8653faa1a69a328cf9da661500e134ef63d13edf9e7089816c288fa8b4119f55",
+      "prev_wave": null
+    },
+    {
+      "seq": 16,
+      "path": "frames/16.json",
+      "utc": "2026-06-03T00:00:00.000Z",
+      "kind": "body.pulse-reconstructed",
+      "payload_hash": "21359bd5afa00b526bb35deb6e4ba16cb047ee9c3aa53dddd89e7309a55f067f",
+      "frame_hash": "f748c6b0c7ebd92f7266e72b404f8bf22a9c7181eb1c66fe0e623a5e0df3aaf0",
+      "prev": "74f06b3640ec02f83664dbfa12e0d703c583b0efd2ecdd7534671cb134849774",
+      "prev_wave": null
+    },
+    {
+      "seq": 17,
+      "path": "frames/17.json",
+      "utc": "2026-06-17T00:00:00.000Z",
+      "kind": "body.pulse-reconstructed",
+      "payload_hash": "ca33c7fb106e30c986e8c7f55381bde8f445c6300b68d17d8c794807bc00941d",
+      "frame_hash": "46c3747d10c1c909d816ccd285efe8a1d81f6126c8e902783e8fc6ddcd7e862c",
+      "prev": "21359bd5afa00b526bb35deb6e4ba16cb047ee9c3aa53dddd89e7309a55f067f",
+      "prev_wave": null
+    },
+    {
+      "seq": 18,
+      "path": "frames/18.json",
+      "utc": "2026-06-22T00:00:00.000Z",
+      "kind": "body.pulse-reconstructed",
+      "payload_hash": "c96fcf05a9164096bd6f696916bf5e9f2ab278a9cdc21be713d6b9644fd53e73",
+      "frame_hash": "20fcdd723b1d4b0bb23ff2d880f9451fbc10f11b5c9f33f3885dcdcd7cf5a631",
+      "prev": "ca33c7fb106e30c986e8c7f55381bde8f445c6300b68d17d8c794807bc00941d",
+      "prev_wave": null
+    },
+    {
+      "seq": 19,
+      "path": "frames/19.json",
+      "utc": "2026-06-29T00:00:00.000Z",
+      "kind": "body.pulse-reconstructed",
+      "payload_hash": "05af90e34256fda4e2aa353c047bf438c9efb05bb223f851e18bebf4eb9de6d7",
+      "frame_hash": "8052f05c7694c5876a5a9697ed37dad4b3fc1f6fa203565e222933e3b694bbf2",
+      "prev": "c96fcf05a9164096bd6f696916bf5e9f2ab278a9cdc21be713d6b9644fd53e73",
+      "prev_wave": null
+    },
+    {
+      "seq": 20,
+      "path": "frames/20.json",
+      "utc": "2026-07-06T00:00:00.000Z",
+      "kind": "body.pulse-reconstructed",
+      "payload_hash": "d807db0eb62787df983e1a4b11f98f4092ab4763e727c3e6cad8e3a033e93359",
+      "frame_hash": "b63d783ecacf33cec00c9e3b3a050aaeface3088ae7d164361ec5bc82ab4bf46",
+      "prev": "05af90e34256fda4e2aa353c047bf438c9efb05bb223f851e18bebf4eb9de6d7",
+      "prev_wave": null
+    },
+    {
+      "seq": 21,
+      "path": "frames/21.json",
+      "utc": "2026-07-08T23:24:20.283Z",
+      "kind": "body.pulse",
+      "payload_hash": "24fe782f3fe9198fd8068c76e9023878fab0d349f5e408711676264b1a21a64b",
+      "frame_hash": "5cb851dc65f5ae55f3879d436c133b66bf325eeb21cdef7442d2ff326629d520",
+      "prev": "d807db0eb62787df983e1a4b11f98f4092ab4763e727c3e6cad8e3a033e93359",
+      "prev_wave": null
+    },
+    {
+      "seq": 22,
+      "path": "frames/22.json",
+      "utc": "2026-07-08T23:24:35.633Z",
+      "kind": "body.pulse",
+      "payload_hash": "aea322ea9a77dfa4348c53ae4e0769b6ea61cb559749ed4ca332f0758177adee",
+      "frame_hash": "1df936922c86b4254169742eec4ffef8784e43681836a81a991b272c1d846905",
+      "prev": "24fe782f3fe9198fd8068c76e9023878fab0d349f5e408711676264b1a21a64b",
+      "prev_wave": null
+    },
+    {
+      "seq": 23,
+      "path": "frames/23.json",
+      "utc": "2026-07-08T23:53:56.973Z",
+      "kind": "body.pulse",
+      "payload_hash": "059be76a6917994b0157f9daee260a94f798231129bf52cd4eb46ddb9f7aa5bf",
+      "frame_hash": "030dba7249261e2d67c1af01b826617542c44dbb27f1523c1558faef37fe64b0",
+      "prev": "aea322ea9a77dfa4348c53ae4e0769b6ea61cb559749ed4ca332f0758177adee",
+      "prev_wave": null
+    },
+    {
+      "seq": 24,
+      "path": "frames/24.json",
+      "utc": "2026-07-15T00:49:24.623Z",
+      "kind": "body.pulse",
+      "payload_hash": "c51632aae92b76b2eaea061ad969441b4dfef42100bd8e0abcc43cdd447c868a",
+      "frame_hash": "704337ba474c80f8c4979ea7b9d8b56bbdc70086b98295c33041fc1500981f5e",
+      "prev": "059be76a6917994b0157f9daee260a94f798231129bf52cd4eb46ddb9f7aa5bf",
+      "prev_wave": null
+    },
+    {
+      "seq": 25,
+      "path": "frames/25.json",
+      "utc": "2026-07-15T01:24:58.731Z",
+      "kind": "body.pulse",
+      "payload_hash": "fb54dacd1833a39e5d74c3f6546d6ddd151826ca1bdca55f6c6d1e95214c4c1a",
+      "frame_hash": "5cd6774d92a631c176b42bf06291464fb4dfc1f82d12f9233f326fdc62fdc394",
+      "prev": "c51632aae92b76b2eaea061ad969441b4dfef42100bd8e0abcc43cdd447c868a",
+      "prev_wave": null
+    },
+    {
+      "seq": 26,
+      "path": "frames/26.json",
+      "utc": "2026-07-15T01:41:53.343Z",
+      "kind": "body.pulse",
+      "payload_hash": "464e291550d37ff86fff3e181c98f306c75fbfccbfcb909ec740f23ec89e1987",
+      "frame_hash": "6da8f0033fb943dcc75d8b2418cba668f7344025011a3040db7e6af31b624285",
+      "prev": "fb54dacd1833a39e5d74c3f6546d6ddd151826ca1bdca55f6c6d1e95214c4c1a",
+      "prev_wave": null
+    },
+    {
+      "seq": 27,
+      "path": "frames/27.json",
+      "utc": "2026-07-15T02:12:32.701Z",
+      "kind": "body.pulse",
+      "payload_hash": "0e0eba2ca4d668bdbc786c6457fe8a526f74c05aa43428442b7872cdf58ad5ba",
+      "frame_hash": "4ad1143bcc254cc8a84db30948ba9762b7d18be36f80cdbad1b2ba6ecb21e2cd",
+      "prev": "464e291550d37ff86fff3e181c98f306c75fbfccbfcb909ec740f23ec89e1987",
+      "prev_wave": null
+    },
+    {
+      "seq": 28,
+      "path": "frames/28.json",
+      "utc": "2026-07-15T09:22:58.171Z",
+      "kind": "body.pulse",
+      "payload_hash": "ac1699a2c2edd905226f7b18b729a623904d74763a5568555b1c9fc49752c33a",
+      "frame_hash": "e475271f6a4c7e6ad506eb9458ea6145f4f2b1e6e2a1db8833e906acba4cbf78",
+      "prev": "0e0eba2ca4d668bdbc786c6457fe8a526f74c05aa43428442b7872cdf58ad5ba",
+      "prev_wave": null
+    },
+    {
+      "seq": 29,
+      "path": "frames/29.json",
+      "utc": "2026-08-04T09:58:37.448Z",
+      "kind": "body.pulse",
+      "payload_hash": "0f2845bc74400c3ac71b4f1d086bd8aafd7cd476060b90c78247652464281b6d",
+      "frame_hash": "60405246cab31da584028ce5c62a10d03ddb0a2513f040b08be73305f3c8188f",
+      "prev": "ac1699a2c2edd905226f7b18b729a623904d74763a5568555b1c9fc49752c33a",
+      "prev_wave": null
+    },
+    {
+      "seq": 30,
+      "path": "frames/30.json",
+      "utc": "2026-08-05T09:50:02.468Z",
+      "kind": "body.pulse",
+      "payload_hash": "fa230ebe3c961d270956d210509855fefb5e06e56c754c4e81d08048343a69dc",
+      "frame_hash": "de891ec90d99a550a1602c308aaa8234fc0cb94c87b9ca840a960bc82b952b46",
+      "prev": "0f2845bc74400c3ac71b4f1d086bd8aafd7cd476060b90c78247652464281b6d",
+      "prev_wave": null
+    },
+    {
+      "seq": 31,
+      "path": "frames/31.json",
+      "utc": "2026-08-06T09:59:04.342Z",
+      "kind": "body.pulse",
+      "payload_hash": "f55a9f411b72c972435c8283245d17a9c84a80bf3d1de03fb3784a3e56df42d7",
+      "frame_hash": "d99e95713ef9b2038aad1f4fe49b488856c63fd49601ad8ea67996e18b891137",
+      "prev": "fa230ebe3c961d270956d210509855fefb5e06e56c754c4e81d08048343a69dc",
+      "prev_wave": null
+    },
+    {
+      "seq": 32,
+      "path": "frames/32.json",
+      "utc": "2026-08-07T08:31:46.969Z",
+      "kind": "body.pulse",
+      "payload_hash": "6c48d0fb7f47a4f1b5f4216c85a7a0be7846edcce658e42629a7c24965589707",
+      "frame_hash": "b70b9f2217a0c1d26f0758a902dc8650843dc04b5a3d9df86f5a4b69ec98a395",
+      "prev": "f55a9f411b72c972435c8283245d17a9c84a80bf3d1de03fb3784a3e56df42d7",
+      "prev_wave": null
+    },
+    {
+      "seq": 33,
+      "path": "frames/33.json",
+      "utc": "2026-08-08T08:00:24.739Z",
+      "kind": "body.pulse",
+      "payload_hash": "42c8877baf5922438030dbe7f33dc16c88a7d130ea1e3a3dfbf939cbfa1227bf",
+      "frame_hash": "87d5abcb66153efd5c77cd119c70683a116a4f2455119f66226642855e598089",
+      "prev": "6c48d0fb7f47a4f1b5f4216c85a7a0be7846edcce658e42629a7c24965589707",
+      "prev_wave": null
+    },
+    {
+      "seq": 34,
+      "path": "frames/34.json",
+      "utc": "2026-08-09T08:02:11.541Z",
+      "kind": "body.pulse",
+      "payload_hash": "41019e5d37bbbcd803336942fc2e07862b84037b717f84f2eda14003fb6584b6",
+      "frame_hash": "a5eafd7361b7942118a836c4204e092dba558150fe657f85985859256194d3f9",
+      "prev": "42c8877baf5922438030dbe7f33dc16c88a7d130ea1e3a3dfbf939cbfa1227bf",
+      "prev_wave": null
+    },
+    {
+      "seq": 35,
+      "path": "frames/35.json",
+      "utc": "2026-08-10T08:51:44.720Z",
+      "kind": "body.pulse",
+      "payload_hash": "65439988053d666541c7ee3b2fc8c236d2bab0da2b2203c333e7590a5e290874",
+      "frame_hash": "080aa1e999eacba46d2bc27a2d4e42762ddea8c33fd8085c5f5e685caddb0847",
+      "prev": "41019e5d37bbbcd803336942fc2e07862b84037b717f84f2eda14003fb6584b6",
+      "prev_wave": null
+    },
+    {
+      "seq": 36,
+      "path": "frames/36.json",
+      "utc": "2026-08-10T08:54:25.568Z",
+      "kind": "body.pulse",
+      "payload_hash": "8e592215957646bc3400d1c11eda8115cb620cd533c0e52008314cedc8766d2f",
+      "frame_hash": "8a98a08a948a1b0c556ad7e55232dfe8a133ffcaa61f3f6af88de1d2b1b9f46d",
+      "prev": "65439988053d666541c7ee3b2fc8c236d2bab0da2b2203c333e7590a5e290874",
+      "prev_wave": null
+    },
+    {
+      "seq": 37,
+      "path": "frames/37.json",
+      "utc": "2026-08-11T08:15:38.886Z",
+      "kind": "body.pulse",
+      "payload_hash": "6feea22bcf5f7bb7978f65be6dbc3c0c3811d819ec44fb7e4b901bb1400a7a60",
+      "frame_hash": "de678cffd102ca36577733b77cbcf5449def12703e8407449e179c58c728b704",
+      "prev": "8e592215957646bc3400d1c11eda8115cb620cd533c0e52008314cedc8766d2f",
+      "prev_wave": null
+    },
+    {
+      "seq": 38,
+      "path": "frames/38.json",
+      "utc": "2026-08-12T08:40:10.475Z",
+      "kind": "body.pulse",
+      "payload_hash": "9020d1036f73927e1163390a86023892224006dce9d8075942d9ad13667aff89",
+      "frame_hash": "506142c6a12438f363a290df2e7dbd276d9dda2e403d318b7b125e7641cccecb",
+      "prev": "6feea22bcf5f7bb7978f65be6dbc3c0c3811d819ec44fb7e4b901bb1400a7a60",
+      "prev_wave": null
+    },
+    {
+      "seq": 39,
+      "path": "frames/39.json",
+      "utc": "2026-08-13T08:44:22.099Z",
+      "kind": "body.pulse",
+      "payload_hash": "1a567c11a1e8ebd0a73ceb499544ecbe67f226d9f14493db743aec6ae5c1a8ac",
+      "frame_hash": "924d406427cd50eee952655a894583c40409d08d892c6870305f65604d2c0a97",
+      "prev": "9020d1036f73927e1163390a86023892224006dce9d8075942d9ad13667aff89",
+      "prev_wave": null
+    },
+    {
+      "seq": 40,
+      "path": "frames/40.json",
+      "utc": "2026-08-14T08:37:48.705Z",
+      "kind": "body.pulse",
+      "payload_hash": "b568f77c34c11928b122eb1405699b3a4cc1f6e18c40940bcdad04d4fb4eaf7e",
+      "frame_hash": "42f4d9165dcd162d1c2a48d076c9e6eb60f4b71b7b38fe274e381c91351488cc",
+      "prev": "1a567c11a1e8ebd0a73ceb499544ecbe67f226d9f14493db743aec6ae5c1a8ac",
+      "prev_wave": null
+    },
+    {
+      "seq": 41,
+      "path": "frames/41.json",
+      "utc": "2026-08-15T07:44:41.234Z",
+      "kind": "body.pulse",
+      "payload_hash": "dd98fda5915df0ab92f84bc8d2a5a0470a2bf2272cc3b6138e45786b1f77c4c7",
+      "frame_hash": "9cb02b2a240c4a5b19e74fd933de4c35417ffecf052ecb30c98abe246efdfd2c",
+      "prev": "b568f77c34c11928b122eb1405699b3a4cc1f6e18c40940bcdad04d4fb4eaf7e",
+      "prev_wave": null
+    },
+    {
+      "seq": 42,
+      "path": "frames/42.json",
+      "utc": "2026-08-16T07:45:48.068Z",
+      "kind": "body.pulse",
+      "payload_hash": "f5dccd309150320295ad946f7000eb9814641fb6b1684ff2017cd2ceef27425d",
+      "frame_hash": "005f7577d9e130e00d054d6cfc4dccbfaba9d88fa1b037edf4939e772c563491",
+      "prev": "dd98fda5915df0ab92f84bc8d2a5a0470a2bf2272cc3b6138e45786b1f77c4c7",
+      "prev_wave": null
+    }
+  ]
+}

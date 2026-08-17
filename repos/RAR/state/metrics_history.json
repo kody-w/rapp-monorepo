@@ -1,0 +1,825 @@
+{
+ "cdn": {
+  "2026-07-09": 65,
+  "2026-08-01": 7
+ },
+ "clones": {
+  "2026-07-14": {
+   "count": 180,
+   "uniques": 45
+  },
+  "2026-07-15": {
+   "count": 387,
+   "uniques": 84
+  },
+  "2026-07-16": {
+   "count": 152,
+   "uniques": 31
+  },
+  "2026-07-17": {
+   "count": 177,
+   "uniques": 34
+  },
+  "2026-07-18": {
+   "count": 302,
+   "uniques": 71
+  },
+  "2026-07-19": {
+   "count": 196,
+   "uniques": 45
+  },
+  "2026-07-20": {
+   "count": 154,
+   "uniques": 37
+  },
+  "2026-07-21": {
+   "count": 167,
+   "uniques": 30
+  },
+  "2026-07-22": {
+   "count": 208,
+   "uniques": 49
+  },
+  "2026-07-23": {
+   "count": 196,
+   "uniques": 38
+  },
+  "2026-07-24": {
+   "count": 156,
+   "uniques": 29
+  },
+  "2026-07-25": {
+   "count": 138,
+   "uniques": 21
+  },
+  "2026-07-26": {
+   "count": 202,
+   "uniques": 41
+  },
+  "2026-07-27": {
+   "count": 128,
+   "uniques": 26
+  }
+ },
+ "last_known": {
+  "at": "2026-07-28T19:07:50Z",
+  "clone_uniques_14d": 387,
+  "clones_14d": 2743,
+  "paths": [
+   {
+    "count": 15,
+    "path": "/kody-w/RAR",
+    "title": "Overview",
+    "uniques": 6
+   },
+   {
+    "count": 4,
+    "path": "/kody-w/RAR/agents",
+    "title": "/agents",
+    "uniques": 1
+   },
+   {
+    "count": 3,
+    "path": "/kody-w/RAR/discussions/228",
+    "title": "/discussions/228",
+    "uniques": 2
+   },
+   {
+    "count": 2,
+    "path": "/kody-w/RAR/blob/main/agents/@howardh/tuftelove_agent.py",
+    "title": "/blob/main/agents/@howardh/tuftelove_agent.py",
+    "uniques": 2
+   },
+   {
+    "count": 2,
+    "path": "/kody-w/RAR/discussions/378",
+    "title": "/discussions/378",
+    "uniques": 2
+   },
+   {
+    "count": 2,
+    "path": "/kody-w/RAR/pulls",
+    "title": "/pulls",
+    "uniques": 2
+   },
+   {
+    "count": 2,
+    "path": "/kody-w/RAR/tree/main/agents",
+    "title": "/tree/main/agents",
+    "uniques": 2
+   },
+   {
+    "count": 2,
+    "path": "/kody-w/RAR/forks",
+    "title": "/forks",
+    "uniques": 1
+   },
+   {
+    "count": 2,
+    "path": "/kody-w/RAR/issues/174",
+    "title": "/issues/174",
+    "uniques": 1
+   },
+   {
+    "count": 2,
+    "path": "/kody-w/RAR/tree/main/agents/@aibast-agents-library/b2b_sales_stacks",
+    "title": "/tree/main/agents/@aibast-agents-library/b2b_sales_stacks",
+    "uniques": 1
+   }
+  ],
+  "referrers": [
+   {
+    "count": 57,
+    "referrer": "github.com",
+    "uniques": 15
+   },
+   {
+    "count": 2,
+    "referrer": "Bing",
+    "uniques": 1
+   }
+  ],
+  "view_uniques_14d": 20,
+  "views_14d": 75
+ },
+ "snapshots": [
+  {
+   "at": "2026-07-28T17:22:35Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-28T17:28:44Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-28T17:29:35Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-28T17:36:25Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-28T17:37:10Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-28T17:41:55Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-28T17:43:10Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-28T17:48:17Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-28T18:00:44Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-28T18:26:05Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-28T18:30:02Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-28T18:54:29Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-28T18:57:13Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-28T19:04:24Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-28T19:07:50Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-28T19:08:09Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-28T19:17:56Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-29T07:33:56Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-29T08:01:13Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-30T07:26:20Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-30T07:44:08Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-31T07:32:53Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-31T08:11:38Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-01T00:09:16Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-01T02:44:22Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-01T07:11:58Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-01T07:38:57Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-02T01:34:54Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-02T07:15:40Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-02T07:41:54Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-03T02:39:18Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-03T08:02:18Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-03T08:44:35Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-03T13:48:29Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-04T07:21:27Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-04T07:57:03Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-05T00:32:35Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-05T07:22:08Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-05T07:58:13Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-06T07:23:56Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-06T07:57:31Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-07T06:00:36Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-07T06:36:10Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-08T05:23:57Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-08T05:59:57Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-09T05:32:41Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-09T06:02:41Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-10T06:01:12Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-10T06:45:52Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-11T05:40:19Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-11T06:08:35Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-12T06:04:21Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-12T06:46:52Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-13T06:05:28Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-13T06:50:45Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-14T06:04:52Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-14T06:47:49Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-15T05:00:53Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-15T05:45:04Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-16T05:04:33Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-16T05:47:44Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-08-17T00:44:58Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  }
+ ],
+ "views": {
+  "2026-07-14": {
+   "count": 0,
+   "uniques": 0
+  },
+  "2026-07-15": {
+   "count": 2,
+   "uniques": 1
+  },
+  "2026-07-16": {
+   "count": 1,
+   "uniques": 1
+  },
+  "2026-07-17": {
+   "count": 1,
+   "uniques": 1
+  },
+  "2026-07-18": {
+   "count": 0,
+   "uniques": 0
+  },
+  "2026-07-19": {
+   "count": 1,
+   "uniques": 1
+  },
+  "2026-07-20": {
+   "count": 0,
+   "uniques": 0
+  },
+  "2026-07-21": {
+   "count": 1,
+   "uniques": 1
+  },
+  "2026-07-22": {
+   "count": 6,
+   "uniques": 3
+  },
+  "2026-07-23": {
+   "count": 10,
+   "uniques": 3
+  },
+  "2026-07-24": {
+   "count": 7,
+   "uniques": 5
+  },
+  "2026-07-25": {
+   "count": 13,
+   "uniques": 5
+  },
+  "2026-07-26": {
+   "count": 7,
+   "uniques": 5
+  },
+  "2026-07-27": {
+   "count": 26,
+   "uniques": 1
+  }
+ }
+}

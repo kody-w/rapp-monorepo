@@ -41,6 +41,13 @@ jobs:
           fi
           python3 -c "import ip_gate; ip_gate.assert_configured(); print('gate configured')"
 
+      - name: Prove the gate still fires
+        # The gate is the only thing between an upstream mistake and a second
+        # public home for it. Prove it works BEFORE using it, every run - a
+        # guard nobody has watched fail is indistinguishable from one that
+        # cannot fail.
+        run: python3 prove_gate.py
+
       - name: Capture every public RAPP repo
         env:
           RAPP_GATE_RULES: ${{ secrets.GATE_RULES }}

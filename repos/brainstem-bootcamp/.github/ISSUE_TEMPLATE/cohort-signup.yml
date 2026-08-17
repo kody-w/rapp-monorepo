@@ -1,0 +1,74 @@
+name: Cohort signup
+description: Claim a seat in the next Brainstem Bootcamp
+title: "[COHORT] "
+labels: ["cohort-signup"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Two hours, from a clean laptop to a published agent. Free.
+
+        Haven't tried it yet? The [browser walkthrough](https://kody-w.github.io/rapp-brainstem-walkthrough/)
+        needs no install and takes about ten minutes.
+
+  - type: input
+    id: name
+    attributes:
+      label: Name or handle
+      description: What should we call you?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: role
+    attributes:
+      label: Which sounds most like you?
+      options:
+        - Microsoft partner / consultant
+        - Enterprise developer
+        - Copilot Studio maker
+        - Architect (regulated industry)
+        - Local-first / indie developer
+        - Something else
+    validations:
+      required: true
+
+  - type: dropdown
+    id: cohort
+    attributes:
+      label: Cohort type
+      options:
+        - Public cohort — just me
+        - Private cohort — my team (tell us roughly how many below)
+    validations:
+      required: true
+
+  - type: textarea
+    id: task
+    attributes:
+      label: What would you want your agent to actually do?
+      description: >
+        Session 3 works best when you bring a real task — something you did twice
+        this week and would rather not do again. Rough is fine.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: laptop
+    attributes:
+      label: Can you run `gh auth login` on your laptop?
+      description: If not, no problem — we'll start you in the browser walkthrough.
+      options:
+        - "Yes"
+        - "No — my machine is locked down"
+        - "Not sure"
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else?
+      description: Timezone, scheduling constraints, accessibility needs.
+    validations:
+      required: false

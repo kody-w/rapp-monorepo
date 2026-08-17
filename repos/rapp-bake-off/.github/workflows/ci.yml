@@ -1,0 +1,59 @@
+name: bakeoff
+on:
+  push: {branches: [main]}
+  pull_request:
+  workflow_dispatch:
+jobs:
+  honesty:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      # No BAKEOFF_SEAL_KEY here on purpose: the published example is
+      # sealed keyless so any reviewer can reproduce these checks.
+      - name: the scorer must be able to declare RAPP the loser
+        run: |
+          python3 - <<'PY'
+          import json, subprocess, sys, copy
+          s = json.load(open("examples/scenario.json"))
+          out = subprocess.run([sys.executable,"bakeoff.py","score",
+                                "examples/scenario.json"],
+                               capture_output=True,text=True)
+          assert "Leader: rapp" in out.stdout, out.stdout
+          # Swap RAPP's measurements with a competitor's. If the tool still
+          # says RAPP wins, it is not a scorer, it is a brochure.
+          f = copy.deepcopy(s)
+          f["results"]["rapp"], f["results"]["champion-b"] = (
+              s["results"]["champion-b"], s["results"]["rapp"])
+          json.dump(f, open("/tmp/flipped.json","w"))
+          out = subprocess.run([sys.executable,"bakeoff.py","score",
+                                "/tmp/flipped.json","--force"],
+                               capture_output=True,text=True)
+          assert "Leader: champion-b" in out.stdout, out.stdout
+          print("honest: the leader follows the measurements, not the name")
+          PY
+      - name: an altered pre-registration must refuse to score
+        run: |
+          python3 - <<'PY'
+          import json, subprocess, sys
+          s = json.load(open("examples/scenario.json"))
+          s["metrics"] = [m for m in s["metrics"] if m["id"] != "cost_per_task"]
+          json.dump(s, open("/tmp/rigged.json","w"))
+          r = subprocess.run([sys.executable,"bakeoff.py","score","/tmp/rigged.json"],
+                             capture_output=True,text=True)
+          assert r.returncode == 2, (r.returncode, r.stdout)
+          assert "REFUSED" in r.stdout, r.stdout
+          print("dropping a metric after registration is caught and refused")
+          PY
+      - name: METRICS.md must match the tool's definitions
+        run: |
+          python3 - <<'PY'
+          import importlib.util, re
+          spec = importlib.util.spec_from_file_location("b","bakeoff.py")
+          m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+          doc = open("METRICS.md").read()
+          missing = [x["id"] for x in m.STANDARD_METRICS if f"`{x['id']}`" not in doc]
+          assert not missing, f"METRICS.md is stale, missing: {missing}"
+          print(f"all {len(m.STANDARD_METRICS)} metrics documented")
+          PY

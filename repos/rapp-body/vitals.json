@@ -1,0 +1,36 @@
+{
+  "spec": "rapp-body-vitals/1.0",
+  "stream_id": "rappid:@kody-w/rapp-body:817839d299ddfb173097c58a0434c5c1ef5cd2cd55086c46cfe728bf9bfeb657",
+  "updated": "2026-08-16T07:45:48.124Z",
+  "head": {
+    "seq": 42,
+    "payload_hash": "f5dccd309150320295ad946f7000eb9814641fb6b1684ff2017cd2ceef27425d",
+    "frame_hash": "005f7577d9e130e00d054d6cfc4dccbfaba9d88fa1b037edf4939e772c563491",
+    "utc": "2026-08-16T07:45:48.068Z",
+    "kind": "body.pulse"
+  },
+  "health": {
+    "spec_version": "1.2.0",
+    "mirrors_identical": false,
+    "repos_total": 56,
+    "repos_present": 53,
+    "transport_unreadable": 0,
+    "degraded": false,
+    "born_recent": [],
+    "vanished_recent": [],
+    "heads_advanced_recent": [
+      "openrappter",
+      "rapp-god",
+      "rapp-spine",
+      "rappterbook",
+      "RAR"
+    ],
+    "drift_sweep": {
+      "verdict": "RECONCILED",
+      "findings": 7,
+      "high": 2
+    },
+    "open_drift_issues": 6,
+    "observation_gaps": 0
+  }
+}

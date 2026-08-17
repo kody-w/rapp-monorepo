@@ -1,0 +1,117 @@
+name: Refresh Community Data
+
+# Once a day: seed any missing per-agent Discussion threads, re-count
+# positive reactions, rebuild the ecosystem federation snapshot
+# (rapplications, senses, skills), and commit ONLY when something
+# actually changed — so quiet days don't produce redundant commits.
+on:
+  schedule:
+    - cron: "0 7 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write # commit the refreshed ratings snapshot
+  discussions: write # seed threads for newly registered agents
+
+concurrency:
+  group: refresh-ratings
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # Idempotent: creates threads only for agents that don't have one
+      # yet (new registry entries). Capped per run to stay under GitHub
+      # content-creation rate limits; the daily cron drains any backlog.
+      - name: Seed missing agent threads
+        run: python scripts/discussion_ratings.py seed --limit 80
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Every thread needs its download-tally comment (clients thumbs-up it
+      # on install). Idempotent and capped like seed; the cron drains backlog.
+      - name: Ensure download-tally comments
+        run: python scripts/discussion_ratings.py tally --limit 80
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Non-fatal by design: any API problem leaves the snapshot
+      # unchanged rather than failing the run or erasing real counts.
+      - name: Fetch ratings snapshot
+        run: python scripts/discussion_ratings.py fetch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Consolidated storefront: snapshot the peer stores (RAPP_Store
+      # rapplications, RAPP_Sense_Store senses, rapp-skills catalogs)
+      # into state/federation.json. Also non-fatal per source.
+      - name: Rebuild federation snapshot
+        run: python scripts/build_federation.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # The real download number: GitHub counts release-asset fetches
+      # server-side, anonymously, with no token on either end. Assets are
+      # per-release, so a new tag restarts its counters — this sums an
+      # asset across every release it appeared in, and the git history of
+      # state/downloads.json is the resulting time series. Non-fatal:
+      # an API problem leaves the snapshot untouched rather than zeroing it.
+      # Third-party libraries RAR aggregates (sources.json). Index-only:
+      # catalog metadata and links, never copied content — which is what keeps
+      # this on the footing of a search index rather than a redistribution.
+      # Non-fatal per source: a bad day upstream leaves the catalog unchanged.
+      - name: Crawl aggregated sources
+        run: python scripts/crawl_sources.py
+
+      - name: Snapshot release download counts
+        run: python scripts/fetch_download_counts.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Close the loop. Every step above COLLECTS signal; this one reports it
+      # back to the place people actually land — each agent's own Discussion
+      # thread, rewritten with a report card built from the snapshots just
+      # refreshed. Runs last so the card reflects today's numbers, and is
+      # idempotent: threads whose numbers didn't move cost zero writes.
+      # Non-fatal, like every collection step above it. This step sits between
+      # the collectors and the commit, so an unhandled error here failed the
+      # job before "Commit snapshots if changed" ran and threw away the entire
+      # day's collected signal — to report numbers, not to gather them. Writing
+      # a card is the least important thing this workflow does; losing a day of
+      # reactions is the most expensive.
+      - name: Publish per-agent report cards
+        continue-on-error: true
+        run: python scripts/publish_reports.py --limit 60
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit snapshots if changed
+        run: |
+          # Only stage files that exist. state/downloads.json is absent
+          # until the first release with assets is cut, and an unmatched
+          # pathspec would fail `git add` for every other snapshot too.
+          FILES=""
+          for f in state/discussion_ratings.json state/federation.json \
+                   state/downloads.json api/v1/stats/downloads.json \
+                   state/aggregated.json; do
+            [ -f "$f" ] && FILES="$FILES $f"
+          done
+          if [ -z "$FILES" ] || [ -z "$(git status --porcelain $FILES)" ]; then
+            echo "No changes; nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add $FILES
+          git commit -m "chore(community): refresh ratings, federation + download snapshots [skip ci]"
+          git pull --rebase origin main
+          git push origin main

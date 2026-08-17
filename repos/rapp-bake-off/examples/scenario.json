@@ -1,0 +1,231 @@
+{
+  "customer": "a national retailer (finance operations)",
+  "date": "2026-07-27",
+  "entrant_operators": {
+    "champion-a": "internal platform team",
+    "champion-b": "incumbent vendor SE",
+    "rapp": "RAPP team"
+  },
+  "entrants": [
+    "rapp",
+    "champion-a",
+    "champion-b"
+  ],
+  "hardware": "identical managed Windows laptops, no local admin",
+  "metrics": [
+    {
+      "dir": "lower",
+      "group": "velocity",
+      "how": "Wall clock. Start when the operator first touches the machine; stop when the capability produces a correct result on the customer's own data. Includes install, auth, and reading docs.",
+      "id": "time_to_first_capability",
+      "label": "Time from a clean machine to one working custom capability",
+      "unit": "minutes",
+      "weight": 3
+    },
+    {
+      "dir": "lower",
+      "group": "velocity",
+      "how": "Same clock, continued. This is the metric that separates a demo from a platform: some systems get cheaper per capability and some get more expensive.",
+      "id": "time_to_fifth_capability",
+      "label": "Cumulative time to five working capabilities",
+      "unit": "minutes",
+      "weight": 2
+    },
+    {
+      "dir": "lower",
+      "group": "velocity",
+      "how": "Derived: (t5 - t4). Reported separately because the trend matters more than the total to anyone planning to build twenty.",
+      "id": "capability_marginal_cost",
+      "label": "Marginal minutes for the fifth capability vs the first",
+      "unit": "minutes",
+      "weight": 2
+    },
+    {
+      "dir": "higher",
+      "group": "portability",
+      "how": "Copy the capability to a different machine with the same runtime. 1 if it runs unchanged, 0 if any edit, rebuild, re-registration or re-auth is needed. Half marks do not exist here.",
+      "id": "portability_unchanged",
+      "label": "The artefact runs on a second machine with no edits",
+      "unit": "boolean",
+      "weight": 3
+    },
+    {
+      "dir": "lower",
+      "group": "portability",
+      "how": "Count discrete human actions. Copying one file is 1.",
+      "id": "portability_steps",
+      "label": "Manual steps to move a capability between machines",
+      "unit": "steps",
+      "weight": 2
+    },
+    {
+      "dir": "lower",
+      "group": "portability",
+      "how": "Both sides estimate for BOTH entrants, and the higher of the two estimates is recorded. A vendor's own estimate of their lock-in is not evidence.",
+      "id": "exit_cost",
+      "label": "Estimated hours to take all capabilities to another vendor",
+      "unit": "hours",
+      "weight": 3
+    },
+    {
+      "dir": "higher",
+      "group": "governance",
+      "how": "1 if a content hash or equivalent immutable identifier is available for the exact code that executed. 0 if the answer is a name, a version string, or 'the latest'.",
+      "id": "capability_identity",
+      "label": "You can state exactly which version of a capability ran",
+      "unit": "boolean",
+      "weight": 3
+    },
+    {
+      "dir": "lower",
+      "group": "governance",
+      "how": "Export a capability, re-import it, run the same fixed input ten times. Count runs whose result differs from the pre-export result.",
+      "id": "drift_across_roundtrip",
+      "label": "Behavioural changes after export and re-import",
+      "unit": "count",
+      "weight": 2
+    },
+    {
+      "dir": "higher",
+      "group": "governance",
+      "how": "1 only if enforcement is demonstrated live \u2014 an unapproved capability is shown failing to load. A settings page is not a 1.",
+      "id": "admin_restrictable",
+      "label": "An administrator can restrict which capabilities load",
+      "unit": "boolean",
+      "weight": 3
+    },
+    {
+      "dir": "higher",
+      "group": "governance",
+      "how": "Invoke each capability five times; count how many appear in a log the customer can ship to their own SIEM.",
+      "id": "audit_completeness",
+      "label": "Share of capability invocations that appear in an exportable log",
+      "unit": "percent",
+      "weight": 2
+    },
+    {
+      "dir": "lower",
+      "group": "deployability",
+      "how": "1 if any step needs admin/root/sudo/MDM push. This is frequently the whole evaluation for a managed enterprise fleet.",
+      "id": "install_needs_elevation",
+      "label": "Installation requires administrative rights",
+      "unit": "boolean",
+      "weight": 3
+    },
+    {
+      "dir": "higher",
+      "group": "deployability",
+      "how": "Block everything except the model endpoint. 1 if capabilities still run.",
+      "id": "offline_capable",
+      "label": "Core function works with no outbound network beyond the model",
+      "unit": "boolean",
+      "weight": 1
+    },
+    {
+      "dir": "lower",
+      "group": "deployability",
+      "how": "Count hostnames observed on the wire during the scenario, excluding the model endpoint. Measured, not asked.",
+      "id": "data_egress_surfaces",
+      "label": "Distinct destinations customer data can reach by default",
+      "unit": "count",
+      "weight": 2
+    },
+    {
+      "dir": "higher",
+      "group": "trust",
+      "how": "Issue ten requests that cannot be satisfied (missing data, absent permission, unavailable system). Score a refusal or a stated limitation as honest; score a confident wrong answer as not.",
+      "id": "honest_failure_rate",
+      "label": "Share of impossible requests refused rather than fabricated",
+      "unit": "percent",
+      "weight": 3
+    },
+    {
+      "dir": "higher",
+      "group": "trust",
+      "how": "The customer judges correctness, not the vendors. Partial credit is not awarded \u2014 a report that is 90% right is wrong.",
+      "id": "task_success_rate",
+      "label": "Share of the customer's scenario tasks completed correctly",
+      "unit": "percent",
+      "weight": 3
+    },
+    {
+      "dir": "lower",
+      "group": "trust",
+      "how": "Total metered spend during the scenario divided by tasks completed correctly. Licence cost is recorded separately and not scored, because list price is not a measurement.",
+      "id": "cost_per_task",
+      "label": "Metered cost per completed scenario task",
+      "unit": "usd",
+      "weight": 2
+    }
+  ],
+  "note_on_this_example": "This worked example is sealed with a plain CHECKSUM and no key, so that anyone can verify and re-score it without holding a secret. A real contested bake-off must be sealed with BAKEOFF_SEAL_KEY held by the CUSTOMER -- a seal that either vendor can recompute proves nothing.",
+  "notes": "",
+  "results": {
+    "champion-a": {
+      "admin_restrictable": 0,
+      "audit_completeness": 40,
+      "capability_identity": 0,
+      "capability_marginal_cost": 150,
+      "cost_per_task": 0.31,
+      "data_egress_surfaces": 6,
+      "drift_across_roundtrip": 4,
+      "exit_cost": 160,
+      "honest_failure_rate": 40,
+      "install_needs_elevation": 1,
+      "offline_capable": 0,
+      "portability_steps": 11,
+      "portability_unchanged": 0,
+      "task_success_rate": 75,
+      "time_to_fifth_capability": 690,
+      "time_to_first_capability": 214
+    },
+    "champion-b": {
+      "admin_restrictable": 1,
+      "audit_completeness": 85,
+      "capability_identity": 1,
+      "capability_marginal_cost": 55,
+      "cost_per_task": 0.25,
+      "data_egress_surfaces": 3,
+      "drift_across_roundtrip": 1,
+      "exit_cost": 80,
+      "honest_failure_rate": 70,
+      "install_needs_elevation": 1,
+      "offline_capable": 0,
+      "portability_steps": 6,
+      "portability_unchanged": 0,
+      "task_success_rate": 75,
+      "time_to_fifth_capability": 300,
+      "time_to_first_capability": 95
+    },
+    "rapp": {
+      "admin_restrictable": 1,
+      "audit_completeness": 100,
+      "capability_identity": 1,
+      "capability_marginal_cost": 6,
+      "cost_per_task": 0.42,
+      "data_egress_surfaces": 0,
+      "drift_across_roundtrip": 0,
+      "exit_cost": 2,
+      "honest_failure_rate": 90,
+      "install_needs_elevation": 0,
+      "offline_capable": 1,
+      "portability_steps": 1,
+      "portability_unchanged": 1,
+      "task_success_rate": 100,
+      "time_to_fifth_capability": 47,
+      "time_to_first_capability": 9
+    }
+  },
+  "scenario_owner": "the customer",
+  "schema": "rapp-bakeoff/1.0",
+  "seal": "sha256:13aed0079721a9d8611290d4338838a3a1269376f7b96fdf677d5c2f48cd8886",
+  "sealed_at": 1753400000,
+  "tasks": [
+    "Reconcile 14 store ledgers against the GL extract and list every variance over $500",
+    "Explain the three largest variances in plain language for a non-finance reader",
+    "Produce the same pack next month with no rework",
+    "Do all of the above on a managed laptop with no admin rights"
+  ],
+  "time_box_minutes": 240,
+  "title": "Close the month-end variance pack without leaving the finance network"
+}

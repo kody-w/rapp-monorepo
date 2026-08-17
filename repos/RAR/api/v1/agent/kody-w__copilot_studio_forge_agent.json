@@ -1,0 +1,50 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__copilot_studio_forge_agent",
+  "name": "CopilotStudioForge",
+  "rar_name": "@kody-w/copilot_studio_forge_agent",
+  "rappid": "rappid:@kody-w/copilot_studio_forge_agent:3fb9d412b8f55b0c54a9a024e449e7f1906a394ad8d097cb111c1a758c17d381",
+  "_migrated_from": "rappid:@kody-w/copilot_studio_forge_agent:ffae3873f9ac8e2c53f30d4dc5ca00be82375098f68f0efe78c64e767f29ad55",
+  "_migrated_from_all": [
+    "rappid:@kody-w/copilot_studio_forge_agent:ffae3873f9ac8e2c53f30d4dc5ca00be82375098f68f0efe78c64e767f29ad55"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
+  "publisher": "@kody-w",
+  "category": "pipeline",
+  "tags": [
+    "copilot-studio",
+    "forge",
+    "transpiler",
+    "mcs",
+    "m365",
+    "foundry",
+    "authoring",
+    "assimilated"
+  ],
+  "description": "Authors Copilot Studio, M365, and Foundry artifacts from RAPP agents through four embedded engines \u2014 bundles, topics, solutions, and exports.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [
+    "DATAVERSE_ENVIRONMENT_URL",
+    "AZURE_TENANT_ID",
+    "COPILOT_STUDIO_CLIENT_ID",
+    "AI_PROJECT_CONNECTION_STRING"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 5330,
+  "size_kb": 218.4,
+  "sha256": "80f80484f489a3023354e4528bc52657032f686db909fe3ffdcf99d7ae454abe",
+  "has_card": true,
+  "added_at": "2026-07-07T00:52:21Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__copilot_studio_forge_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_forge_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__copilot_studio_forge_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__copilot_studio_forge_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/copilot_studio_forge_agent.py"
+}

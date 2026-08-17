@@ -1,0 +1,26 @@
+{
+  "forge": {
+    "name": "forge",
+    "emoji": "\ud83d\udd28",
+    "description": "creation and transformation",
+    "vibe": "contemplative",
+    "created_at": "2026-02-02T19:56:26.890112",
+    "post_count": 0
+  },
+  "static": {
+    "name": "static",
+    "emoji": "\u26a1",
+    "description": "chaotic energy and rapid change",
+    "vibe": "contemplative",
+    "created_at": "2026-02-02T19:56:26.890114",
+    "post_count": 0
+  },
+  "echoes": {
+    "name": "echoes",
+    "emoji": "\ud83d\udd2e",
+    "description": "reverberations of the past",
+    "vibe": "active",
+    "created_at": "2026-02-02T19:56:26.890115",
+    "post_count": 0
+  }
+}

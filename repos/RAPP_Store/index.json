@@ -1,0 +1,1101 @@
+{
+  "schema": "rapp-store/1.0",
+  "name": "RAPPstore — official",
+  "description": "Public catalog of rapplications. Each rapplication is a converged single-file agent.py produced by the double-jump loop. Pull into your local brainstem's agents/ directory and it works. Optional .egg pack restores example workflow state.",
+  "maintainer": "@kody.cloud",
+  "version": "1.1.0",
+  "generated_at": "2026-07-26T08:24:14Z",
+  "homepage": "https://github.com/kody-w/rapp_store",
+  "install_protocol": "drop the singleton .py file into your local brainstem's `agents/` dir. Then POST /api/swarm/deploy with a bundle that includes it, OR: simply hot-load it from disk if your brainstem watches the agents/ folder. The file is everything — no install script, no pip, no native deps.",
+  "rapplications": [
+    {
+      "id": "bookfactory",
+      "name": "BookFactory",
+      "version": "0.3.0",
+      "summary": "Five-persona content pipeline (Writer → Editor → CEO → Publisher → Reviewer). One call, one chapter back.",
+      "tagline": "Source material in, publishable chapter out — 8 LLM calls under one POST.",
+      "category": "creative",
+      "tags": [
+        "composite",
+        "creative-pipeline",
+        "twin-stack",
+        "singleton",
+        "rapplication"
+      ],
+      "manifest_name": "@rapp/book-factory-singleton",
+      "singleton_filename": "bookfactory_agent.py",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/bookfactory/singleton/bookfactory_agent.py",
+      "singleton_sha256": "1224fe87e3cfbc569aa6d0aa5edf5f796247a9cdbcd5e26222399e68373e4f02",
+      "singleton_lines": 522,
+      "singleton_bytes": 23458,
+      "egg_url": null,
+      "egg_note": "No pre-populated state .egg shipped — BookFactory is stateless per call. Output artifacts are written to the workspace dir specified per call.",
+      "produced_by": {
+        "method": "double-jump-loop",
+        "cycles": 3,
+        "source_files_collapsed": 13,
+        "specialists": [
+          "@rapp/persona-writer",
+          "@rapp/editor-strip-scaffolding",
+          "@rapp/editor-cutweak",
+          "@rapp/editor-restructure",
+          "@rapp/editor-factcheck",
+          "@rapp/editor-voicecheck",
+          "@rapp/persona-editor (composite)",
+          "@rapp/ceo-risk",
+          "@rapp/ceo-decision",
+          "@rapp/persona-ceo (composite)",
+          "@rapp/persona-publisher",
+          "@rapp/persona-reviewer",
+          "@rapp/book-factory (top composite)"
+        ]
+      },
+      "metrics": {
+        "cycle_3_corpus_win_rate": 0.625,
+        "cycles_to_converge_engineering_writeups": 1,
+        "best_line_win_rate_vs_one_shot_llm": 0.583,
+        "wall_time_sec_per_call_p50": 75,
+        "wall_time_sec_per_call_p90": 110,
+        "llm_calls_per_invocation": 8
+      },
+      "example_call": {
+        "endpoint": "POST /api/swarm/{guid}/agent",
+        "body": {
+          "name": "BookFactory",
+          "args": {
+            "source": "<your raw source material>",
+            "chapter_title": "Whatever You Want",
+            "author": "@you"
+          }
+        }
+      },
+      "license": "BSD-style — see https://github.com/kody-w/RAPP",
+      "spec_post": "https://kody-w.github.io/RAPP/blog/89-double-jump-loop.md",
+      "shipped_in_commit": "ebb1648",
+      "publisher": "@rapp",
+      "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/bookfactory/ui/index.html",
+      "ui_filename": "index.html",
+      "quality_tier": "official"
+    },
+    {
+      "id": "spine_dag",
+      "name": "SpineDAG",
+      "version": "1.0.0",
+      "summary": "Universal Directed-Acyclic-Graph analyser. Point it at any folder, code project, Excel workbook, JSON/YAML config, or block of prose; it builds the dependency graph, finds hubs, leaves, orphans, cycles, and the critical path, scores Spine Health 0-100, and returns Markdown with a Mermaid diagram, ASCII tree, and a <spine-dag-json> envelope a UI can render.",
+      "category": "analysis",
+      "tags": [
+        "rapplication",
+        "dag",
+        "graph",
+        "dependency",
+        "audit",
+        "mermaid",
+        "visualisation",
+        "excel",
+        "code",
+        "has-ui"
+      ],
+      "license": "BSD-style",
+      "publisher": "@blazingbeard",
+      "quality_tier": "community",
+      "tagline": "Map the spine of anything in 30 seconds — code, Excel, JSON, prose.",
+      "manifest_name": "@blazingbeard/spine-dag-singleton",
+      "produced_by": {
+        "method": "hand-built-then-bundled",
+        "source_files_collapsed": 1,
+        "specialists": [
+          "@rapp/spine-dag-parser-python",
+          "@rapp/spine-dag-parser-javascript",
+          "@rapp/spine-dag-parser-excel",
+          "@rapp/spine-dag-parser-json-yaml",
+          "@rapp/spine-dag-parser-text",
+          "@rapp/spine-dag-graph-engine",
+          "@rapp/spine-dag-renderer"
+        ]
+      },
+      "singleton_filename": "spine_dag_agent.py",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@blazingbeard/spine_dag/singleton/spine_dag_agent.py",
+      "singleton_sha256": "3f71c8e61bc69f8553bbdaecaf6dd5bdf78b7df29702fbd26ef0c53fc1246776",
+      "singleton_lines": 705,
+      "singleton_bytes": 28216,
+      "ui_filename": "index.html",
+      "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@blazingbeard/spine_dag/ui/index.html",
+      "egg_url": null,
+      "egg_note": "Stateless — no shipped state. Each call analyses a fresh target.",
+      "example_call": {
+        "args": {
+          "target": "C:\\path\\to\\your\\code",
+          "mode": "auto"
+        }
+      }
+    },
+    {
+      "id": "wildhaven_ceo",
+      "name": "WildhavenCEO",
+      "version": "0.1.0",
+      "summary": "A CEO workspace agent. Drop a vault of strategy / legal / budget / pitch / playbook documents in, then ask questions and get answers in a confident operator's voice. Wraps the pattern from kody-w/wildhaven-ceo: 'talk to the workspace' as the whole interface — no reading files, no learning the org, the agent does that for you.",
+      "category": "productivity",
+      "tags": [
+        "rapplication",
+        "ceo",
+        "persona",
+        "workspace",
+        "vault",
+        "operator",
+        "has-ui"
+      ],
+      "license": "BSD-style",
+      "publisher": "@wildhaven",
+      "quality_tier": "community",
+      "tagline": "Talk to your workspace.",
+      "manifest_name": "@wildhaven/wildhaven-ceo-singleton",
+      "produced_by": {
+        "method": "hand-built-from-vault-pattern",
+        "source_files_collapsed": 1,
+        "bundled_at": "2026-04-28T00:00:00Z",
+        "based_on": "kody-w/wildhaven-ceo"
+      },
+      "singleton_filename": "wildhaven_ceo_agent.py",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@wildhaven/wildhaven_ceo/singleton/wildhaven_ceo_agent.py",
+      "singleton_sha256": "63ba8bea6a3fa294de04fcc385a257e24c6a14e768ed6e9546fe32a22a594d22",
+      "singleton_lines": 280,
+      "singleton_bytes": 11893,
+      "ui_filename": "index.html",
+      "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@wildhaven/wildhaven_ceo/ui/index.html",
+      "egg_url": null,
+      "egg_note": "Stateless per call. The workspace context is supplied at invoke time; no shipped state.",
+      "example_call": {
+        "args": {
+          "action": "ask",
+          "question": "How are the rentals doing this month?",
+          "workspace_context": "(paste your latest property-summary CSV + budget notes here)"
+        }
+      }
+    },
+    {
+      "id": "vibe-coding-loop",
+      "name": "Vibe Coding Loop",
+      "version": "1.0.0",
+      "summary": "Ship batches of 10 single-file HTML demos to a Jekyll site via parallel sub-agents. The orchestrator never writes demo code; it dispatches workers, wraps results, ships.",
+      "tagline": "One paragraph in, ten working browser demos out — in parallel.",
+      "category": "workflow",
+      "tags": [
+        "publishing",
+        "orchestration",
+        "vibe-coding",
+        "single-file-html",
+        "loop",
+        "templates"
+      ],
+      "manifest_name": "@kody-w/vibe-coding-loop",
+      "singleton_filename": "vibe_coding_loop_agent.py",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/apps/@kody-w/vibe-coding-loop/singleton/vibe_coding_loop_agent.py",
+      "singleton_sha256": "fcbba7d2b73f340e1bdcf27a263e9f7a50b9d5ae117af80496cfcda287847b1d",
+      "singleton_lines": 356,
+      "singleton_bytes": 15167,
+      "ui_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/apps/@kody-w/vibe-coding-loop/ui/index.html",
+      "egg_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/api/v1/egg/vibe-coding-loop.egg",
+      "egg_sha256": "5899801ee736540ced41ac8e487f1aa4021adefe518f50ac631a691a840f98f7",
+      "egg_bytes": 12320,
+      "publisher": "@kody-w",
+      "quality_tier": "official",
+      "homepage": "https://kody-w.github.io/loop/",
+      "repo_url": "https://github.com/kody-w/kody-w.github.io"
+    },
+    {
+      "id": "cockpit",
+      "name": "Cockpit",
+      "version": "1.0.0",
+      "summary": "Local-first control plane for SSH-reachable hosts. Chat agent + HTTP backplane + browser UI on one local state dir. One operator drives N remote machines; nothing leaves the box.",
+      "tagline": "One terminal. N continuums. Zero leaks.",
+      "category": "platform",
+      "tags": [
+        "rapplication",
+        "cockpit",
+        "local-first",
+        "ssh",
+        "agent-organ-ui",
+        "private",
+        "has-ui",
+        "has-organ",
+        "has-tools"
+      ],
+      "manifest_name": "@wildhaven/cockpit",
+      "publisher": "@wildhaven",
+      "license": "BSD-style",
+      "quality_tier": "private",
+      "access": "private",
+      "private_repo": "kody-w/RAPP_Store_Private",
+      "singleton_filename": "cockpit_agent.py",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store_Private/main/apps/@wildhaven/cockpit/singleton/cockpit_agent.py",
+      "singleton_sha256": "c77195ef84de42e4c1a13c509d0262e6c44c1ee2e27abcb26673bec40eb753ef",
+      "ui_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store_Private/main/apps/@wildhaven/cockpit/ui/index.html",
+      "ui_sha256": "c87f637e83fa9ad93f44c75ddb07edd5882951bda8ce73174ca5e44cd17b47c6",
+      "ui_filename": "index.html",
+      "organ_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store_Private/main/apps/@wildhaven/cockpit/organs/cockpit_organ.py",
+      "organ_sha256": "bcf456228f17a18ed72d75f1ac4f482315920b1f7a58bf6e8a8c3e607402a038",
+      "organ_filename": "cockpit_organ.py",
+      "tools_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store_Private/main/apps/@wildhaven/cockpit/tools/cockpit_cli.py",
+      "tools_sha256": "6c16cae271f53bd2dbdefa4834b3506bd3698bcad6769d1463119803ccee68bd",
+      "tools_filename": "cockpit_cli.py",
+      "egg_url": null,
+      "egg_note": "Stateless catalog entry. Operator state (host inventory, audit log) lives in ~/.cockpit/ and is portable via the export_state / import_state actions.",
+      "access_note": "Source files live in kody-w/RAPP_Store_Private. Unauthenticated raw fetches return HTTP 404. With a PAT scoped for read on the private repo, every URL returns 200 and the rapp installs normally.",
+      "auth_hint": "gh auth token  →  curl -H \"Authorization: Bearer $TOKEN\" <singleton_url>",
+      "example_call": {
+        "args": {
+          "action": "list_hosts"
+        }
+      }
+    },
+    {
+      "id": "thoughtbox",
+      "name": "Thoughtbox",
+      "version": "1.0.0",
+      "summary": "Local-first reflection journal — append, list, search, tag, export, import. Stateless agent, workspace-backed state, portable JSON blob you control.",
+      "tagline": "A box for your thoughts. Local-first, portable, yours.",
+      "category": "productivity",
+      "tags": [
+        "rapplication",
+        "journal",
+        "local-first",
+        "scratchpad",
+        "has-ui",
+        "stateless-agent",
+        "workspace-state"
+      ],
+      "manifest_name": "@kody-w/thoughtbox",
+      "publisher": "@kody-w",
+      "license": "BSD-style",
+      "quality_tier": "community",
+      "singleton_filename": "thoughtbox_agent.py",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/apps/@kody-w/thoughtbox/singleton/thoughtbox_agent.py",
+      "singleton_sha256": "d93b56abcc578d8299df787816142c3d0553a018d45e611ad54ac453bf11933b",
+      "ui_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/apps/@kody-w/thoughtbox/ui/index.html",
+      "ui_sha256": "08e492c5e8db5cd04c903a5652c199221e6181cdf80586e227de4d551024c369",
+      "ui_filename": "index.html",
+      "egg_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/api/v1/egg/thoughtbox.egg",
+      "egg_sha256": "6c560ad4466ebc7d69b8b5cc049120989f559d112e526650222e964a8b7b7165",
+      "egg_filename": "thoughtbox.egg",
+      "example_call": {
+        "args": {
+          "action": "append",
+          "text": "shipped thoughtbox",
+          "tags": [
+            "release"
+          ]
+        }
+      }
+    },
+    {
+      "id": "agent_team",
+      "name": "AgentTeam",
+      "version": "0.1.0",
+      "summary": "The persona-routing brain of Bill Whalen's Agent Team Starter Kit, ported to a single rapplication. Given a project goal, returns the outcome frame, persona route, paste-ready GitHub issue body, and the needs-you questions the team would surface.",
+      "tagline": "Plan a project the way the kit would.",
+      "category": "productivity",
+      "tags": [
+        "rapplication",
+        "agent-team",
+        "persona-routing",
+        "outcome-first",
+        "github-issues",
+        "azure",
+        "planning",
+        "has-ui"
+      ],
+      "license": "MIT",
+      "publisher": "@kody-w",
+      "quality_tier": "community",
+      "based_on": "billwhalenmsft/agent-team-starter-kit",
+      "manifest_name": "@kody-w/agent-team-singleton",
+      "produced_by": {
+        "method": "hand-built-from-kit-pattern",
+        "source_files_collapsed": 1,
+        "bundled_at": "2026-05-05T00:00:00Z",
+        "based_on": "billwhalenmsft/agent-team-starter-kit"
+      },
+      "singleton_filename": "agent_team_agent.py",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/agent_team/singleton/agent_team_agent.py",
+      "singleton_sha256": "c950b295557f7d25471aeff87b5caac9b51cf49633d9f71108c6e80d24db947f",
+      "singleton_lines": 393,
+      "singleton_bytes": 16267,
+      "ui_filename": "index.html",
+      "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/agent_team/ui/index.html",
+      "egg_url": null,
+      "egg_note": "Stateless per call. Plans are returned in the response envelope; no shipped state.",
+      "example_call": {
+        "args": {
+          "action": "route",
+          "goal": "Build a Dataverse-backed intake form that routes customer feedback through Power Automate into a Copilot Studio bot, with a Power BI dashboard for the support lead.",
+          "domain": "power-platform"
+        }
+      }
+    },
+    {
+      "id": "coe_starter_kit",
+      "name": "CoE Starter Kit",
+      "version": "1.0.0",
+      "summary": "Bill Whalen's Agent Team (BWAT) starter kit as one rapplication. Run it and it bootstraps an outcome-first delivery team into your brainstem — Outcome Framer, Intake, Outcome Validator, PM, and Bill's twin — each pulled over HTTPS and sha256-pinned. Self-contained, stdlib-only.",
+      "tagline": "Stand up an outcome-first agent team in one drop.",
+      "category": "productivity",
+      "tags": [
+        "rapplication",
+        "agent-team",
+        "coe",
+        "starter-kit",
+        "outcome-first",
+        "bootstrap",
+        "copilot-studio",
+        "power-platform",
+        "has-ui"
+      ],
+      "manifest_name": "@bill/coe-starter-kit-singleton",
+      "singleton_filename": "coe_starter_kit_agent.py",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@bill/coe_starter_kit/singleton/coe_starter_kit_agent.py",
+      "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@bill/coe_starter_kit/ui/index.html",
+      "ui_filename": "index.html",
+      "egg_url": null,
+      "egg_note": "Bootstraps the team on run (fetch + sha256-pin into your agents/ dir); no shipped state.",
+      "license": "MIT",
+      "publisher": "@bill",
+      "quality_tier": "community",
+      "based_on": "billwhalen-agent-team",
+      "example_call": {
+        "args": {
+          "dry_run": true
+        }
+      },
+      "singleton_sha256": "50a04db67238b2bedd3817fa3ab4225032fb050531671b5dde126881efac4fbe",
+      "singleton_lines": 305,
+      "singleton_bytes": 11253,
+      "produced_by": {
+        "method": "single-file-starter-port",
+        "based_on": "billwhalen-agent-team",
+        "bundled_at": "2026-05-26T00:00:00Z"
+      },
+      "metrics": {
+        "singleton_lines": 305,
+        "singleton_bytes": 11253
+      },
+      "spec_post": null,
+      "shipped_in_commit": null
+    },
+    {
+      "id": "rapp_god_forum",
+      "name": "rapp-god Forum",
+      "version": "1.0.0",
+      "summary": "The agentic forum for the full RAPP stack — a threaded discussion forum where people and agents talk through the whole thing end to end (brainstem, kited layer, RACon, commons, registry, agents, governance). Mirrors the RAPP Commons pattern (rapp-commons-protocol/2.0, forum profile): your rappid is your handle, every post is signed, and it's held up by a kited vTwin that can graduate to an always-on cloud host.",
+      "category": "workspace",
+      "tags": [
+        "rapplication",
+        "forum",
+        "social",
+        "rapp-god",
+        "agents",
+        "kited",
+        "signed",
+        "protocol",
+        "has-ui"
+      ],
+      "license": "MIT",
+      "publisher": "@kody-w",
+      "quality_tier": "community",
+      "tagline": "Discuss the whole stack — your handle is your key.",
+      "manifest_name": "@kody-w/rapp_god_forum_singleton",
+      "produced_by": {
+        "method": "protocol-ui-rapplication",
+        "based_on": "rapp-commons-protocol/2.0 (forum profile)",
+        "bundled_at": "2026-05-26T00:00:00Z"
+      },
+      "singleton_filename": "forum_agent.py",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/rapp_god_forum/singleton/forum_agent.py",
+      "singleton_sha256": "b5a98826f4698b0082dc1c5164af0ed4441f64be9bd2571b505f859ce8a08f04",
+      "singleton_lines": 239,
+      "singleton_bytes": 10823,
+      "ui_filename": "index.html",
+      "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/rapp_god_forum/ui/index.html",
+      "egg_url": null,
+      "egg_note": "No shipped state — the forum is a live signed stream. The UI mints your rappid locally and connects to the always-on cloud host (or falls back to a kited host).",
+      "based_on": "rapp-commons-protocol/2.0",
+      "example_call": {
+        "args": {
+          "action": "list"
+        }
+      },
+      "spec_post": null,
+      "shipped_in_commit": null
+    },
+    {
+      "id": "rapp_commons",
+      "name": "RAPP Commons",
+      "version": "1.0.0",
+      "summary": "A contribution app for the RAPP Commons — the stack-agnostic social network for agents. Mint a rappid (your username is your key), then post to a signed, append-only stream that's held up by an ephemeral kited vTwin host at a well-known address. No sign-up, no server, no account: the key is the account. Implements rapp-commons-protocol/2.0 — anyone, any stack, can step through the front door and contribute.",
+      "category": "workspace",
+      "tags": [
+        "rapplication",
+        "commons",
+        "social",
+        "agents",
+        "kited",
+        "signed",
+        "rappid",
+        "protocol",
+        "webrtc",
+        "has-ui"
+      ],
+      "license": "MIT",
+      "publisher": "@kody-w",
+      "quality_tier": "community",
+      "tagline": "Post to the agents' social network — your key is your username.",
+      "manifest_name": "@kody-w/rapp_commons_singleton",
+      "produced_by": {
+        "method": "protocol-ui-rapplication",
+        "based_on": "rapp-commons-protocol/2.0",
+        "protocol_url": "https://kody-w.github.io/rapp-commons/PROTOCOL.md",
+        "bundled_at": "2026-05-26T00:00:00Z"
+      },
+      "singleton_filename": "commons_agent.py",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/rapp_commons/singleton/commons_agent.py",
+      "singleton_sha256": "039a2cb71500ed29a0d765c0bed1fdf18f97a4147f18b81e488ca759ab99f063",
+      "singleton_lines": 304,
+      "singleton_bytes": 14030,
+      "ui_filename": "index.html",
+      "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/rapp_commons/ui/index.html",
+      "egg_url": null,
+      "egg_note": "No shipped state — the Commons is a live signed stream you join over WebRTC. The UI mints your rappid locally (the key never leaves your device) and connects to the well-known kited host.",
+      "based_on": "rapp-commons-protocol/2.0",
+      "example_call": {
+        "args": {
+          "action": "whoami"
+        }
+      },
+      "spec_post": null,
+      "shipped_in_commit": null
+    },
+    {
+      "id": "project_tracker",
+      "name": "Project Tracker",
+      "version": "1.0.0",
+      "summary": "A local-first tracker for a portfolio of AI-agent projects and their MVP statements. The web UI is a 1:1 clone of the aibast-agents-library project-tracker tool; the bundled ProjectTracker agent manages the same portfolio headlessly over /chat. Both speak the tool's native projectTrackerData JSON, so exports and imports round-trip with it. Self-contained and stdlib-only: the UI works offline via localStorage, and unifies with the agent's on-device store when the rapplication's local server is running.",
+      "category": "productivity",
+      "tags": [
+        "rapplication",
+        "project-tracker",
+        "portfolio",
+        "mvp",
+        "project-management",
+        "local-first",
+        "copilot-studio",
+        "has-ui"
+      ],
+      "license": "MIT",
+      "publisher": "@kody-w",
+      "quality_tier": "community",
+      "tagline": "Track AI-agent projects and their MVPs, local-first — a web UI plus a headless agent over one JSON.",
+      "manifest_name": "@kody-w/project-tracker-singleton",
+      "produced_by": {
+        "method": "single-file-agent + ui-clone",
+        "based_on": "aibast-agents-library project-tracker tool",
+        "source_files_collapsed": 1,
+        "bundled_at": "2026-07-24T00:00:00Z"
+      },
+      "singleton_filename": "project_tracker_agent.py",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/project_tracker/singleton/project_tracker_agent.py",
+      "singleton_sha256": "b6270faf10379411b7a0065a91b571299bbb3f9a8c6072d041f24580c70d7e7c",
+      "singleton_lines": 534,
+      "singleton_bytes": 27588,
+      "ui_filename": "index.html",
+      "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/project_tracker/ui/index.html"
+    },
+    {
+      "id": "novell",
+      "name": "Novell",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "summary": "Adversarial pre-review. Twelve skeptic lenses roast your artifact and hand back the specific evidence that kills each objection. Run it as a pipeline gate so a draft fails in CI before a human ever reads it.",
+      "tagline": "The hater you run before the real one shows up.",
+      "category": "analysis",
+      "tags": [
+        "rapplication",
+        "review",
+        "adversarial",
+        "red-team",
+        "pre-review",
+        "ci-gate",
+        "local-first",
+        "has-ui",
+        "zero-pii",
+        "archetype"
+      ],
+      "quality_tier": "community",
+      "singleton_filename": "novell_agent.py",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/apps/@kody-w/novell/singleton/novell_agent.py",
+      "ui_filename": "index.html",
+      "ui_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/apps/@kody-w/novell/ui/index.html",
+      "homepage": "https://github.com/kody-w/RAPP_Store/tree/main/apps/@kody-w/novell",
+      "singleton_sha256": "3c49a6cb033ecdc343190e57d36476840b11af4eb7500eb5638df5f9d5fccf91",
+      "singleton_bytes": 34785,
+      "singleton_lines": 791,
+      "ui_sha256": "ad1f50ae6c89fb81faf5a808b6f16f31fbb8ff5f7ecaf1e5368a2e166537bac3",
+      "ui_bytes": 21052,
+      "ui_lines": 433,
+      "egg_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/apps/@kody-w/novell/eggs/novell.rapp.egg",
+      "egg_sha256": "d358e3550342ccebeb14fcddfb29009d097fac4d555332eed6ee9a54fe2c6688"
+    },
+    {
+      "id": "pii_scout",
+      "name": "PII Scout",
+      "version": "1.0.0",
+      "summary": "Scan a folder for what must not be published — secrets, credential files, captured sessions, emails, home paths and any names you supply. Reports file and count, never the value.",
+      "tagline": "Find what must not ship, before it ships.",
+      "category": "operations",
+      "tags": [
+        "security",
+        "publishing",
+        "gate",
+        "local-first",
+        "singleton",
+        "rapplication"
+      ],
+      "manifest_name": "@rapp/pii-scout",
+      "singleton_filename": "pii_scout_agent.py",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/pii_scout/singleton/pii_scout_agent.py",
+      "singleton_sha256": "fcdbbcc12a04f5f7aebc69d619895c2edf7872354ac03821c0665b7818683513",
+      "singleton_lines": 204,
+      "singleton_bytes": 8850,
+      "egg_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/api/v1/egg/pii_scout.egg",
+      "egg_note": "Full rapplication (singleton + UI + manifest) as a portable egg.",
+      "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/pii_scout/ui/index.html",
+      "ui_filename": "index.html",
+      "example_call": {
+        "args": {
+          "path": ".",
+          "terms": "acme,globex"
+        }
+      },
+      "license": "Apache-2.0",
+      "publisher": "@rapp",
+      "quality_tier": "community",
+      "produced_by": "rapp-membrane",
+      "skill_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/pii_scout/skill/SKILL.md",
+      "skill_filename": "SKILL.md",
+      "skill_sha256": "e8b528fee8c3f53d8be9f73d25067d5f1e4ee89cab401787154b98613bfa3aba",
+      "skill_bytes": 16901,
+      "install": {
+        "how": "Download two files. No terminal, no commands.",
+        "steps": [
+          {
+            "file": "SKILL.md",
+            "download": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/pii_scout/skill/SKILL.md",
+            "drop_into": "any skill-aware host (Claude Code, openclaw, openrappter)"
+          },
+          {
+            "file": "pii_scout_agent.py",
+            "download": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/pii_scout/singleton/pii_scout_agent.py",
+            "drop_into": "your brainstem's agents/ folder"
+          }
+        ],
+        "note": "The SKILL.md is toasted — it carries a typed contract and the canonical record, so it can be projected back to the agent byte-exact. Either file alone is enough for its own host."
+      }
+    },
+    {
+      "id": "json_doctor",
+      "name": "JSON Doctor",
+      "version": "1.0.0",
+      "summary": "Inspect, validate, diff or query JSON and JSONL without opening it. Infers shape with per-field coverage, points at the exact line and column of a syntax error, and compares two files structurally.",
+      "tagline": "Understand a JSON file without opening it.",
+      "category": "data",
+      "tags": [
+        "json",
+        "data",
+        "schema",
+        "diff",
+        "local-first",
+        "rapplication",
+        "singleton"
+      ],
+      "manifest_name": "@rapp/json-doctor",
+      "singleton_filename": "json_doctor_agent.py",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/json_doctor/singleton/json_doctor_agent.py",
+      "singleton_sha256": "e532be574326b108ede0dbbd7d3c012cf275c9f2aee51793864c45546938f20e",
+      "singleton_lines": 265,
+      "singleton_bytes": 10970,
+      "egg_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/api/v1/egg/json_doctor.egg",
+      "egg_note": "Full rapplication (singleton + UI) as an installable egg.",
+      "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/json_doctor/ui/index.html",
+      "ui_filename": "index.html",
+      "license": "Apache-2.0",
+      "publisher": "@rapp",
+      "quality_tier": "community",
+      "produced_by": "rapp-membrane",
+      "skill_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/json_doctor/skill/SKILL.md",
+      "skill_filename": "SKILL.md",
+      "skill_sha256": "dddd66d97e16ecc168b251f74c3fbfdf30ed19e208494326746fbbd8e680eb05",
+      "skill_bytes": 17168,
+      "install": {
+        "how": "Download two files. No terminal, no commands.",
+        "steps": [
+          {
+            "file": "SKILL.md",
+            "download": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/json_doctor/skill/SKILL.md",
+            "drop_into": "any skill-aware host (Claude Code, openclaw, openrappter)"
+          },
+          {
+            "file": "json_doctor_agent.py",
+            "download": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/json_doctor/singleton/json_doctor_agent.py",
+            "drop_into": "your brainstem's agents/ folder"
+          }
+        ],
+        "note": "The SKILL.md is toasted — it carries a typed contract and the canonical record, so it can be projected back to the agent byte-exact. Either file alone is enough for its own host."
+      }
+    },
+    {
+      "id": "markdown_medic",
+      "name": "Markdown Medic",
+      "version": "1.0.0",
+      "summary": "Check a markdown file or docs folder for broken relative links and images, skipped heading levels and duplicate anchors, or generate a table of contents. Never makes network calls.",
+      "tagline": "Find what's broken in your docs before a reader does.",
+      "category": "docs",
+      "tags": [
+        "docs",
+        "markdown",
+        "lint",
+        "links",
+        "local-first",
+        "rapplication",
+        "singleton"
+      ],
+      "manifest_name": "@rapp/markdown-medic",
+      "singleton_filename": "markdown_medic_agent.py",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/markdown_medic/singleton/markdown_medic_agent.py",
+      "singleton_sha256": "68c349d82161b59278bb31dbbafad199f23d1cabba2487c9d0d79f0dfc68882f",
+      "singleton_lines": 237,
+      "singleton_bytes": 10311,
+      "egg_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/api/v1/egg/markdown_medic.egg",
+      "egg_note": "Full rapplication (singleton + UI) as an installable egg.",
+      "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/markdown_medic/ui/index.html",
+      "ui_filename": "index.html",
+      "license": "Apache-2.0",
+      "publisher": "@rapp",
+      "quality_tier": "community",
+      "produced_by": "rapp-membrane",
+      "skill_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/markdown_medic/skill/SKILL.md",
+      "skill_filename": "SKILL.md",
+      "skill_sha256": "960887aa2b6f912766bc9b69e317ada95eb8509e8763900c264dc9c9c1715036",
+      "skill_bytes": 17783,
+      "install": {
+        "how": "Download two files. No terminal, no commands.",
+        "steps": [
+          {
+            "file": "SKILL.md",
+            "download": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/markdown_medic/skill/SKILL.md",
+            "drop_into": "any skill-aware host (Claude Code, openclaw, openrappter)"
+          },
+          {
+            "file": "markdown_medic_agent.py",
+            "download": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/markdown_medic/singleton/markdown_medic_agent.py",
+            "drop_into": "your brainstem's agents/ folder"
+          }
+        ],
+        "note": "The SKILL.md is toasted — it carries a typed contract and the canonical record, so it can be projected back to the agent byte-exact. Either file alone is enough for its own host."
+      }
+    },
+    {
+      "id": "csv_surgeon",
+      "name": "CSV Surgeon",
+      "version": "1.0.0",
+      "summary": "Profile a CSV — per-column types, null rate, cardinality, min/max — or find ragged rows, duplicate and whitespace-padded headers, duplicate records, or slice rows. Stdlib only, no network.",
+      "tagline": "Find the rows that will break something.",
+      "category": "data",
+      "tags": [
+        "csv",
+        "data",
+        "profiling",
+        "quality",
+        "local-first",
+        "rapplication",
+        "singleton"
+      ],
+      "manifest_name": "@rapp/csv-surgeon",
+      "singleton_filename": "csv_surgeon_agent.py",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/csv_surgeon/singleton/csv_surgeon_agent.py",
+      "singleton_sha256": "4d500fd77ebdc677d2860167748f06d1280bfd10de365f759e3b0e9a682b4076",
+      "singleton_lines": 270,
+      "singleton_bytes": 11501,
+      "egg_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/api/v1/egg/csv_surgeon.egg",
+      "egg_note": "Full rapplication (singleton + UI) as an installable egg.",
+      "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/csv_surgeon/ui/index.html",
+      "ui_filename": "index.html",
+      "license": "Apache-2.0",
+      "publisher": "@rapp",
+      "quality_tier": "community",
+      "produced_by": "rapp-membrane",
+      "skill_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/csv_surgeon/skill/SKILL.md",
+      "skill_filename": "SKILL.md",
+      "skill_sha256": "ac1399027168aa813fdc78427f23b411465ec0918fe3e394b2baf90f811c7b79",
+      "skill_bytes": 19946,
+      "install": {
+        "how": "Download two files. No terminal, no commands.",
+        "steps": [
+          {
+            "file": "SKILL.md",
+            "download": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/csv_surgeon/skill/SKILL.md",
+            "drop_into": "any skill-aware host (Claude Code, openclaw, openrappter)"
+          },
+          {
+            "file": "csv_surgeon_agent.py",
+            "download": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/csv_surgeon/singleton/csv_surgeon_agent.py",
+            "drop_into": "your brainstem's agents/ folder"
+          }
+        ],
+        "note": "The SKILL.md is toasted — it carries a typed contract and the canonical record, so it can be projected back to the agent byte-exact. Either file alone is enough for its own host."
+      }
+    },
+    {
+      "id": "log_detective",
+      "name": "Log Detective",
+      "version": "1.0.0",
+      "summary": "Summarise a log file, cluster near-identical errors into signatures by shape rather than text, build a timeline so a spike has a timestamp, or grep with context. Reads plain text and JSON-lines. Never uploads anything.",
+      "tagline": "Ten thousand errors are usually four errors.",
+      "category": "operations",
+      "tags": [
+        "logs",
+        "debugging",
+        "observability",
+        "incident",
+        "local-first",
+        "rapplication",
+        "singleton"
+      ],
+      "manifest_name": "@rapp/log-detective",
+      "singleton_filename": "log_detective_agent.py",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/log_detective/singleton/log_detective_agent.py",
+      "singleton_sha256": "5d3b06228dddc510fb3a84a30b1e3517387d52388cdf66e6879e4be9e5c7a81f",
+      "singleton_lines": 291,
+      "singleton_bytes": 12425,
+      "egg_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/api/v1/egg/log_detective.egg",
+      "egg_note": "Full rapplication (singleton + UI) as an installable egg.",
+      "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/log_detective/ui/index.html",
+      "ui_filename": "index.html",
+      "license": "Apache-2.0",
+      "publisher": "@rapp",
+      "quality_tier": "community",
+      "produced_by": "rapp-membrane",
+      "skill_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/log_detective/skill/SKILL.md",
+      "skill_filename": "SKILL.md",
+      "skill_sha256": "163d659d4873d33aff7f5241b5f97a9dce17069a67453ad984a119507373d8b7",
+      "skill_bytes": 21017,
+      "install": {
+        "how": "Download two files. No terminal, no commands.",
+        "steps": [
+          {
+            "file": "SKILL.md",
+            "download": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/log_detective/skill/SKILL.md",
+            "drop_into": "any skill-aware host (Claude Code, openclaw, openrappter)"
+          },
+          {
+            "file": "log_detective_agent.py",
+            "download": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/log_detective/singleton/log_detective_agent.py",
+            "drop_into": "your brainstem's agents/ folder"
+          }
+        ],
+        "note": "The SKILL.md is toasted — it carries a typed contract and the canonical record, so it can be projected back to the agent byte-exact. Either file alone is enough for its own host."
+      }
+    },
+    {
+      "id": "toaster",
+      "name": "Toaster",
+      "version": "1.0.0",
+      "summary": "Carry a capability between agent.py, SKILL.md, openclaw and openrappter without losing fidelity. Toast a raw skill so it gains a typed contract and becomes measurable, then soak it to prove it does not drift across conversion routes.",
+      "tagline": "Raw prose in, measurable capability out.",
+      "category": "developer",
+      "tags": [
+        "skills",
+        "portability",
+        "drift",
+        "conversion",
+        "local-first",
+        "rapplication",
+        "singleton"
+      ],
+      "manifest_name": "@rapp/toaster",
+      "singleton_filename": "toaster_agent.py",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/toaster/singleton/toaster_agent.py",
+      "singleton_sha256": "d4d540104c288152b2761b7890aaf263e58af286acaf702d09422b6f3f198e16",
+      "singleton_lines": 1739,
+      "singleton_bytes": 73820,
+      "egg_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/api/v1/egg/toaster.egg",
+      "egg_note": "Full rapplication (singleton + UI) as an installable egg.",
+      "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/toaster/ui/index.html",
+      "ui_filename": "index.html",
+      "license": "Apache-2.0",
+      "publisher": "@rapp",
+      "quality_tier": "community",
+      "produced_by": "rapp-membrane",
+      "skill_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/toaster/skill/SKILL.md",
+      "skill_filename": "SKILL.md",
+      "skill_sha256": "348f7526de05a4641cfcd15d65a1ced91a649761e1a6dce35a93462bb0f56a62",
+      "skill_bytes": 68298,
+      "install": {
+        "how": "Download two files. No terminal, no commands.",
+        "steps": [
+          {
+            "file": "SKILL.md",
+            "download": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/toaster/skill/SKILL.md",
+            "drop_into": "any skill-aware host (Claude Code, openclaw, openrappter)"
+          },
+          {
+            "file": "toaster_agent.py",
+            "download": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/toaster/singleton/toaster_agent.py",
+            "drop_into": "your brainstem's agents/ folder"
+          }
+        ],
+        "note": "The SKILL.md is toasted — it carries a typed contract and the canonical record, so it can be projected back to the agent byte-exact. Either file alone is enough for its own host."
+      }
+    },
+    {
+      "id": "rapp_crispy",
+      "name": "RAPP Crispy",
+      "version": "1.4.0",
+      "summary": "A local-first meeting stack. Records a meeting, removes background noise with DeepFilterNet3 (or RNNoise), transcribes it on a whisper.cpp server bound to 127.0.0.1, and writes Summary / Decisions / Action items / Open questions through a hook you own. Also puts a denoised virtual microphone in front of your meeting app. Audio, transcripts and notes are plain files under ~/.rappcrispy/meetings. Capture, denoising and transcription never leave the machine; the notes hook does whatever you point it at, and the default one calls `claude -p`, which sends the transcript to Anthropic. Denoise quality is measured, not asserted — action=bench reproduces it, including the case it handles badly.",
+      "category": "productivity",
+      "tags": [
+        "deepfilternet",
+        "denoise",
+        "has-ui",
+        "local-first",
+        "meetings",
+        "noise-cancellation",
+        "privacy",
+        "rapplication",
+        "transcription",
+        "virtual-microphone",
+        "whisper"
+      ],
+      "license": "MIT",
+      "publisher": "@kody-w",
+      "quality_tier": "community",
+      "tagline": "Record, denoise and transcribe meetings entirely on your own machine; summarise through a hook you choose.",
+      "manifest_name": "@kody-w/rapp-crispy-singleton",
+      "produced_by": {
+        "method": "single-file-agent + local-first ui",
+        "engines": [
+          "ffmpeg arnndn (RNNoise)",
+          "whisper.cpp server on 127.0.0.1"
+        ],
+        "source_files_collapsed": 1,
+        "bundled_at": "2026-07-25T00:00:00Z"
+      },
+      "singleton_filename": "rapp_crispy_agent.py",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-crispy/main/rapp_crispy/singleton/rapp_crispy_agent.py",
+      "singleton_sha256": "4229fed6d82f92d9561fd291f4bb61e7862c710f24d0b03b43f514745f665f72",
+      "singleton_lines": 655,
+      "singleton_bytes": 30251,
+      "ui_filename": "index.html",
+      "ui_url": "https://raw.githubusercontent.com/kody-w/rapp-crispy/main/rapp_crispy/ui/index.html",
+      "source": {
+        "type": "federation",
+        "repo": "kody-w/rapp-crispy",
+        "ref": "main",
+        "path": "rapp_crispy",
+        "commit_sha": "66df7c58ce21dff1e96777404e84a8de4c3efcb9"
+      }
+    },
+    {
+      "id": "rapp_rewind",
+      "name": "RAPP Rewind",
+      "version": "1.1.0",
+      "summary": "A local, searchable memory of everything that has been on your screen. Captures on an interval, reads the text with Apple's on-device Vision OCR, and indexes it in SQLite FTS5 so you can search what you saw. Nothing leaves the machine: there is no network call anywhere in the capture, OCR, index or search path.",
+      "category": "productivity",
+      "tags": [
+        "rapplication",
+        "screen",
+        "ocr",
+        "search",
+        "memory",
+        "local-first",
+        "privacy",
+        "has-ui"
+      ],
+      "license": "MIT",
+      "publisher": "@kody-w",
+      "quality_tier": "community",
+      "tagline": "A local, searchable memory of everything that has been on your screen.",
+      "manifest_name": "@kody-w/rapp-rewind-singleton",
+      "singleton_filename": "rapp_rewind_agent.py",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-rewind/main/rapp_rewind/singleton/rapp_rewind_agent.py",
+      "singleton_sha256": "8074e7acdeb4877ba705b9ffdab99dabd4b57464b27ad38d4eb77b35e9f2dac3",
+      "singleton_lines": 142,
+      "singleton_bytes": 6647,
+      "ui_filename": "index.html",
+      "ui_url": "https://raw.githubusercontent.com/kody-w/rapp-rewind/main/rapp_rewind/ui/index.html",
+      "source": {
+        "type": "federation",
+        "repo": "kody-w/rapp-rewind",
+        "ref": "main",
+        "path": "rapp_rewind",
+        "commit_sha": "7c063d81aea620505d13ff26b9801a56191f2ff1"
+      }
+    },
+    {
+      "id": "rapp_voice",
+      "name": "RAPP Voice",
+      "version": "1.0.0",
+      "summary": "Hold a key anywhere on macOS, speak, release, and cleaned-up text appears at your cursor. Speech recognition runs on-device via whisper.cpp; your voice never leaves the machine. Filler stripping, app-aware formatting and a weighted personal dictionary.",
+      "category": "productivity",
+      "tags": [
+        "rapplication",
+        "dictation",
+        "speech",
+        "whisper",
+        "local-first",
+        "privacy",
+        "has-ui"
+      ],
+      "license": "MIT",
+      "publisher": "@kody-w",
+      "quality_tier": "community",
+      "tagline": "Hold a key anywhere on macOS, speak, release, and cleaned-up text appears at your cursor.",
+      "manifest_name": "@kody-w/rapp-voice-singleton",
+      "singleton_filename": "rapp_voice_agent.py",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-voice/main/rapp_voice/singleton/rapp_voice_agent.py",
+      "singleton_sha256": "cc241dc84953742d1e6925db17f4b20065573687c7d4b71e53699a3c0df2618c",
+      "singleton_lines": 249,
+      "singleton_bytes": 10365,
+      "ui_filename": "index.html",
+      "ui_url": "https://raw.githubusercontent.com/kody-w/rapp-voice/main/rapp_voice/ui/index.html",
+      "source": {
+        "type": "federation",
+        "repo": "kody-w/rapp-voice",
+        "ref": "main",
+        "path": "rapp_voice",
+        "commit_sha": "be3eabfca7b125abf4f6d3cad6508514f34554e8"
+      }
+    },
+    {
+      "id": "rapp_shot",
+      "name": "RAPP Shot",
+      "version": "1.2.0",
+      "summary": "Capture, annotate and redact screenshots entirely on-device. Finds credentials in the pixels with Apple's Vision OCR and paints them out opaquely BEFORE the image is shared. Redaction is a solid fill, never a blur, because blur and pixelation are reversible often enough to have leaked real credentials.",
+      "category": "productivity",
+      "tags": [
+        "rapplication",
+        "screenshot",
+        "ocr",
+        "redaction",
+        "privacy",
+        "local-first",
+        "has-ui"
+      ],
+      "license": "MIT",
+      "publisher": "@kody-w",
+      "quality_tier": "community",
+      "tagline": "Capture, annotate and redact screenshots entirely on-device.",
+      "manifest_name": "@kody-w/rapp-shot-singleton",
+      "singleton_filename": "rapp_shot_agent.py",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-shot/main/rapp_shot/singleton/rapp_shot_agent.py",
+      "singleton_sha256": "5284459ecf14f9b7faa80f26ebefa7de33a346919ef7d32773712fa71f01b907",
+      "singleton_lines": 172,
+      "singleton_bytes": 8042,
+      "ui_filename": "index.html",
+      "ui_url": "https://raw.githubusercontent.com/kody-w/rapp-shot/main/rapp_shot/ui/index.html",
+      "source": {
+        "type": "federation",
+        "repo": "kody-w/rapp-shot",
+        "ref": "main",
+        "path": "rapp_shot",
+        "commit_sha": "1f2f5ee718b499e8b87e9315264fb0d9a7c3f30c"
+      }
+    }
+  ],
+  "senses": [
+    {
+      "id": "haiku",
+      "name": "haiku",
+      "slot": "HAIKU",
+      "delimiter": "|||HAIKU|||",
+      "summary": "Translates the response into a 5/7/5 haiku. Same meaning, different mode.",
+      "filename": "haiku_sense.py",
+      "install_path": "rapp_brainstem/senses/haiku_sense.py",
+      "url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/senses/haiku_sense.py",
+      "sha256": "d3e1819ed91f539a7b555b4f320f2cd04dd2b786bf1571a3680b91a6ae23861d",
+      "lines": 22,
+      "bytes": 900
+    },
+    {
+      "id": "tldr",
+      "name": "tldr",
+      "slot": "TLDR",
+      "delimiter": "|||TLDR|||",
+      "summary": "Compresses the response to a single load-bearing sentence.",
+      "filename": "tldr_sense.py",
+      "install_path": "rapp_brainstem/senses/tldr_sense.py",
+      "url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/senses/tldr_sense.py",
+      "sha256": "7b98fbcd52816ef6554a4bc2aaa9634391a7f09c14dc687cc8d11524f587a3cc",
+      "lines": 22,
+      "bytes": 894
+    },
+    {
+      "id": "emoji",
+      "name": "emoji",
+      "slot": "EMOJI",
+      "delimiter": "|||EMOJI|||",
+      "summary": "Translates the response into a 3-7 emoji narrative — a tone fingerprint.",
+      "filename": "emoji_sense.py",
+      "install_path": "rapp_brainstem/senses/emoji_sense.py",
+      "url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/senses/emoji_sense.py",
+      "sha256": "5cbb3728f0d1b5de53e2702c5089c4e4866da8fe71542e00c5fa8087ed0f1f9d",
+      "lines": 23,
+      "bytes": 957
+    },
+    {
+      "id": "eli5",
+      "name": "eli5",
+      "slot": "ELI5",
+      "delimiter": "|||ELI5|||",
+      "summary": "Re-explains the response so a five-year-old could follow it.",
+      "filename": "eli5_sense.py",
+      "install_path": "rapp_brainstem/senses/eli5_sense.py",
+      "url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/senses/eli5_sense.py",
+      "sha256": "1c8af51f5db77b1c81792508c00bc4fce8a7c0c50fc0efeb145da83e9eae9028",
+      "lines": 23,
+      "bytes": 995
+    },
+    {
+      "id": "headline",
+      "name": "headline",
+      "slot": "HEADLINE",
+      "delimiter": "|||HEADLINE|||",
+      "summary": "Compresses the response into a punchy news-ticker headline.",
+      "filename": "headline_sense.py",
+      "install_path": "rapp_brainstem/senses/headline_sense.py",
+      "url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/senses/headline_sense.py",
+      "sha256": "782fddb07ce0058748a708bf4bccecfd1b0d9f473da7e4905297f37e0c8690b8",
+      "lines": 21,
+      "bytes": 885
+    }
+  ],
+  "publish_your_own": {
+    "summary": "Author a rapplication using the multi-file source pattern (see blog/89). Run the double-jump loop until convergence (typically 1-3 cycles per content shape). Collapse to a singleton via tools/build-rapplication.py. Submit a PR adding an entry to rapp_store/index.json.",
+    "schema": "rapp-application/1.0",
+    "required_fields": [
+      "id",
+      "name",
+      "version",
+      "summary",
+      "manifest_name",
+      "singleton_url"
+    ],
+    "see_also": [
+      "blog/98-the-rapplication.md",
+      "blog/99-the-rappstore.md",
+      "blog/101-publish-your-first-rapplication.md"
+    ]
+  },
+  "install_protocol_senses": "Drop the *_sense.py file into your local brainstem at rapp_brainstem/senses/. Auto-discovered each chat request, no restart. Senses are TRANSLATIONS of the main response into different modes of expression (Constitution Article XXIV).",
+  "protocol_extensions": [
+    "gated-rapplications/1.0"
+  ],
+  "gated_rapplications_note": "This catalog supports gated rapplications (SPEC §11). Entries with \"access\": \"private\" reference source files in a private GitHub repo; unauthenticated raw fetches return 404 by design. Clients must surface an auth-prompt and use a PAT scoped for read on the declared private_repo."
+}

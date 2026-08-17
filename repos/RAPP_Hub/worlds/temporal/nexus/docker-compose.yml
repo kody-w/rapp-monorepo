@@ -1,0 +1,15 @@
+# Nexus Dimension - Run standalone
+# Usage: docker-compose up -d
+
+services:
+  nexus:
+    build: .
+    container_name: nexus-dimension
+    ports:
+      - "8888:8888"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8888/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

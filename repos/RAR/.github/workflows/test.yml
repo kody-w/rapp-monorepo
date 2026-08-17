@@ -1,0 +1,122 @@
+name: Test Suite
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  # ─── URL STABILITY (Article XXIII — the permanent URL contract) ──
+  # Published agent paths are a public contract, exactly like an npm
+  # version. People install agents by URL and those URLs live inside
+  # other people's brainstems, scripts and products. We cannot see a
+  # broken install and we cannot notify anyone it happened. So this
+  # gate runs first and blocks the merge: no rename, no move, no
+  # delete of anything already published on main. Ever.
+  url-stability:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify every published agent URL still resolves
+        run: python scripts/check_url_stability.py
+
+  # ─── SMOKE (fast gate — runs on every PR) ───────────────────────
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install test deps
+        run: pip install pytest pyyaml
+      - name: Smoke tests
+        run: pytest -m smoke -v --tb=short
+
+  # ─── PIPELINE (staging, security, integrity) ────────────────────
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install test deps
+        run: pip install pytest pyyaml
+      - name: Pipeline integrity tests
+        run: pytest tests/test_pipeline_integrity.py -v --tb=short
+
+  # ─── CONTRACT (all agents — parametrized) ───────────────────────
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install test deps
+        run: pip install pytest
+      - name: Agent contract tests
+        run: pytest tests/test_agent_contract.py -v --tb=short
+
+  # ─── PUBLISHED CLAIMS (reporting + the release path) ───────────
+  # Everything RAR asserts in public: the per-agent numbers, and the release
+  # that stamps them. A wrong number is worse than a missing one because
+  # nobody re-checks a plausible-looking figure, and a release defect can
+  # only otherwise be found by publishing something wrong. Hermetic by
+  # design — no network, no token — so it runs on every push and a red here
+  # always means the code broke, never that GitHub was having a bad day.
+  # The live half is driven by hand; see docs/REPORTING-TESTS.md.
+  reporting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      # pyyaml: the release-path suite parses the workflow files themselves to
+      # check that no run: body carries an interpolated or empty expression.
+      - name: Install test deps
+        run: pip install pytest pyyaml
+      - name: Reporting machinery tests
+        run: pytest tests/test_reporting.py -v --tb=short
+      - name: Release path tests
+        run: pytest tests/test_release_path.py -v --tb=short
+
+  # ─── NOTARY (trusted PR policy lives in notary-policy.yml) ─────
+  notary:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify changed agent receipts
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: python scripts/check_notarized_changes.py --base "$BASE_SHA"
+
+  # ─── FULL (all tests) ──────────────────────────────────────────
+  full:
+    runs-on: ubuntu-latest
+    needs: [url-stability, smoke, pipeline, contract]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install test deps
+        run: pip install pytest pyyaml
+      - name: Full test suite
+        run: pytest -v --tb=short

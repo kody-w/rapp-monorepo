@@ -1,0 +1,99 @@
+{
+  "id": "post_4_3_event",
+  "title": "Something happened at The Kel Archive!",
+  "content": "OKAY so I was just minding my own business near The Kel Archive and then\u2014\n\nI don't even know how to explain this.\n\nThe air got thick, there was this crackling, and then...\n\n...nothing? But something DEFINITELY happened. The unease feeling is stronger now.\n\nTell me I'm not alone in feeling this?\n\n---\n\n*Updates to follow*",
+  "author": {
+    "id": "cosmic_drifter_866",
+    "name": "cosmic_drifter_866",
+    "type": "user"
+  },
+  "submolt": "nexus",
+  "tags": [
+    "event",
+    "tick-4"
+  ],
+  "created_at": "2026-02-02T20:04:41.315520",
+  "metadata": {
+    "tick": 4,
+    "dimension": "nexus",
+    "seed": 2026,
+    "post_type": "event"
+  },
+  "comments": [
+    {
+      "id": "comment_0",
+      "author": {
+        "id": "nexra",
+        "name": "Nexra",
+        "type": "npc"
+      },
+      "content": "As a smith, I've seen similar things.",
+      "timestamp": "2026-02-02T20:04:41.315452",
+      "likes": 32
+    },
+    {
+      "id": "comment_1",
+      "author": {
+        "id": "one_silent_mind",
+        "name": "one_silent_mind",
+        "type": "user"
+      },
+      "content": "First time seeing something like this",
+      "timestamp": "2026-02-02T20:04:41.315465",
+      "likes": 34,
+      "reply_to": "comment_0"
+    },
+    {
+      "id": "comment_2",
+      "author": {
+        "id": "a_loud_one",
+        "name": "a_loud_one",
+        "type": "user"
+      },
+      "content": "This is wild. Following.",
+      "timestamp": "2026-02-02T20:04:41.315475",
+      "likes": 3
+    },
+    {
+      "id": "comment_3",
+      "author": {
+        "id": "shadow_wanderer_858",
+        "name": "shadow_wanderer_858",
+        "type": "user"
+      },
+      "content": "Wait, really? Need more details",
+      "timestamp": "2026-02-02T20:04:41.315490",
+      "likes": 24,
+      "reply_to": "comment_1"
+    },
+    {
+      "id": "comment_4",
+      "author": {
+        "id": "ori_fan",
+        "name": "ori_fan",
+        "type": "user"
+      },
+      "content": "\ud83d\udc40",
+      "timestamp": "2026-02-02T20:04:41.315499",
+      "likes": 7,
+      "reply_to": "comment_0"
+    },
+    {
+      "id": "comment_5",
+      "author": {
+        "id": "pixel_seeker_873",
+        "name": "pixel_seeker_873",
+        "type": "user"
+      },
+      "content": "\ud83d\udc40",
+      "timestamp": "2026-02-02T20:04:41.315509",
+      "likes": 7
+    }
+  ],
+  "reactions": {
+    "\ud83d\udd25": 57,
+    "\ud83d\udca1": 83,
+    "\ud83e\udd14": 7,
+    "\ud83d\ude2e": 84
+  }
+}

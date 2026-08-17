@@ -1,0 +1,364 @@
+name: Seasonal Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_name:
+        description: 'Release name (e.g., "Genesis", "Spring 2026")'
+        required: true
+      release_type:
+        description: 'Release type'
+        required: true
+        default: 'seasonal'
+        type: choice
+        options:
+          - seasonal
+          - hotfix
+          - canary
+      dry_run:
+        description: 'Dry run (validate only, no tag/release)'
+        type: boolean
+        default: false
+
+# Read-only by default. Only the job that actually commits gets write.
+permissions:
+  contents: read
+
+jobs:
+  # ─── GATE: full test suite must pass ────────────────────────────
+  validate:
+    runs-on: ubuntu-latest
+    # This job IMPORTS AND EXECUTES every agent file in the repository (the
+    # contract suite instantiates each one and calls perform()). Granting it
+    # contents: write handed that code a push-capable GITHUB_TOKEN, which
+    # actions/checkout persists into .git/config — any agent could have
+    # committed to main from inside a test run. It only ever needs to read.
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install test deps
+        run: pip install pytest pyyaml
+
+      - name: Full test suite
+        run: pytest -v --tb=short
+
+      - name: Build registry
+        run: python build_registry.py
+
+      - name: Security scan
+        run: |
+          python -c "
+          import re, sys
+          from pathlib import Path
+          sys.path.insert(0, '.')
+          from build_registry import SECURITY_ALLOWLIST, DANGEROUS_PATTERNS
+          fails = []
+          for f in Path('agents').rglob('*.py'):
+              if str(f) in SECURITY_ALLOWLIST: continue
+              src = f.read_text()
+              for pat, msg in DANGEROUS_PATTERNS:
+                  if re.search(pat, src):
+                      fails.append(f'{f}: {msg}')
+          if fails:
+              for f in fails: print(f)
+              sys.exit(1)
+          print('Security scan passed')
+          "
+
+      - name: Integrity audit
+        run: |
+          python -c "
+          import hashlib, json, sys
+          from pathlib import Path
+          reg = json.loads(Path('registry.json').read_text())
+          for a in reg['agents']:
+              f = Path(a['_file'])
+              if not f.exists(): continue
+              actual = hashlib.sha256(f.read_bytes()).hexdigest()
+              # Gated agents ship as .py.stub and record _stub_sha256; the
+              # builder never writes _sha256 for them. Verify each against the
+              # digest its own kind records rather than skipping stubs — the
+              # release notes claim SHA256 verification for everything, so
+              # everything on disk has to actually be verified.
+              expected = a.get('_sha256') or a.get('_stub_sha256')
+              assert expected and expected == actual, f'{a[\"name\"]} hash mismatch'
+          print(f'All {len(reg[\"agents\"])} agents verified')
+          "
+
+      - name: No staging leftovers
+        run: |
+          # Pending submissions land in staging/@publisher/. staging/demo-assets/
+          # is permanent demo material — the n8n->RAPP transpilation showcase,
+          # documented in its own README — so it is not a submission and no
+          # approve/reject could ever clear it. Excluding it keeps this gate
+          # meaningful instead of permanently red for a reason nobody can act on.
+          STAGED=$(find staging -name '*.py' -not -path 'staging/demo-assets/*' 2>/dev/null | head -5)
+          if [ -n "$STAGED" ]; then
+            echo "❌ Agents still in staging/ — approve or reject before release:"
+            echo "$STAGED"
+            exit 1
+          fi
+          echo "✓ Staging is clean"
+
+  # ─── RELEASE: tag, generate notes, publish ──────────────────────
+  release:
+    runs-on: ubuntu-latest
+    needs: validate
+    if: ${{ !inputs.dry_run }}
+    # The only job that commits, pushes, tags and publishes.
+    permissions:
+      contents: write
+    # main receives automated pushes (the registry bot, the heartbeat fleet).
+    # Without a concurrency group two releases could interleave on the same
+    # tag line; without this the bare `git push` below is also racing them.
+    concurrency:
+      group: rar-release
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # The tag is derived FIRST so that a tag that cannot be computed aborts
+      # before anything has been written or pushed. The old order stamped and
+      # committed the registry and only then built the tag, so a tag failure
+      # left a pushed commit describing a release that was never cut.
+      - name: Compute version tag
+        id: tag
+        env:
+          RELEASE_TYPE: ${{ inputs.release_type }}
+        run: |
+          TAG=$(python scripts/next_release_tag.py --type "$RELEASE_TYPE")
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "Tag: $TAG"
+
+      # Rebuild BEFORE measuring. The metadata below seals the agent digests,
+      # and the ledger step further down also rebuilds — so measuring first
+      # sealed the OLD registry while the tag, the committed file and the
+      # uploaded assets all carried the REBUILT one. The published seal then
+      # could not be recomputed from the released registry, which is the only
+      # thing a seal is for, and latest_release.agent_count contradicted
+      # stats.total_agents inside the same file. Reachable whenever the
+      # committed registry is behind agents/ — notably for a new .py.stub,
+      # which build-registry.yml's `agents/**/*.py` filter does not match, so
+      # no rebuild is ever triggered for it.
+      - name: Rebuild registry before measuring it
+        run: python build_registry.py
+
+      - name: Generate release metadata
+        id: meta
+        # release_name is operator-supplied free text. It reaches Python through
+        # the environment, never through ${{ }} interpolation into the source —
+        # a name containing a quote would otherwise break the script, and a
+        # crafted one would execute on the runner.
+        env:
+          RELEASE_NAME: ${{ inputs.release_name }}
+          RELEASE_TYPE: ${{ inputs.release_type }}
+          RELEASE_TAG: ${{ steps.tag.outputs.tag }}
+        run: |
+          python -c "
+          import json, hashlib, os
+          from pathlib import Path
+          from datetime import datetime, timezone
+
+          reg = json.loads(Path('registry.json').read_text())
+          agents = reg['agents']
+          now = datetime.now(timezone.utc)
+
+          # Integrity seal over every agent's digest. Gated agents record
+          # _stub_sha256 rather than _sha256; falling back to '' for them would
+          # seal a constant and silently exclude them from the seal.
+          hashes = sorted((a.get('_sha256') or a.get('_stub_sha256') or '') for a in agents)
+          seal = hashlib.sha256('|'.join(hashes).encode()).hexdigest()[:16]
+
+          meta = {
+              'release_name': os.environ['RELEASE_NAME'],
+              'release_type': os.environ['RELEASE_TYPE'],
+              'tag': os.environ['RELEASE_TAG'],
+              'timestamp': now.isoformat(),
+              'agent_count': len(agents),
+              'publishers': reg['stats']['publishers'],
+              'integrity_seal': seal,
+          }
+          Path('/tmp/release_meta.json').write_text(json.dumps(meta, indent=2))
+          print('Release: ' + os.environ['RELEASE_NAME'])
+          print(f'Agents: {len(agents)}')
+          print(f'Seal: {seal}')
+          "
+
+      # state/releases.json is the DURABLE record. The stamp used to be written
+      # straight into registry.json, but build_registry.py rebuilds that file
+      # from scratch on every push to agents/**, so the whole release history
+      # was erased by the next agent submission — silently, because nothing
+      # read the field either. build_registry.py now projects this ledger into
+      # registry.json as `releases` / `latest_release`, so registry.json stays
+      # fully derived and the history actually survives.
+      - name: Append to the release ledger
+        run: |
+          python -c "
+          import json
+          from pathlib import Path
+
+          meta = json.loads(Path('/tmp/release_meta.json').read_text())
+          path = Path('state/releases.json')
+          ledger = json.loads(path.read_text()) if path.exists() else {}
+          ledger.setdefault('schema', 'rar-releases/1.0')
+          ledger.setdefault('releases', [])
+
+          # Re-running a partially-failed release must not double-count it.
+          if any(r.get('tag') == meta['tag'] for r in ledger['releases']):
+              print('Ledger already records ' + meta['tag'])
+          else:
+              ledger['releases'].append(meta)
+              path.parent.mkdir(parents=True, exist_ok=True)
+              path.write_text(json.dumps(ledger, indent=2) + '\n')
+              print('Ledger now records %d release(s)' % len(ledger['releases']))
+          "
+          # Re-project the ledger into registry.json.
+          python build_registry.py
+          # And regenerate the headless API from it. build-registry.yml always
+          # does these two together; the release job rebuilt the registry but
+          # not the API, so a release published a catalog the API disagreed
+          # with — and since nothing else rebuilds on a release commit, nothing
+          # would ever have repaired it.
+          python scripts/build_static_api.py
+
+      - name: Commit release stamp
+        id: commit
+        env:
+          RELEASE_NAME: ${{ inputs.release_name }}
+          RELEASE_TAG: ${{ steps.tag.outputs.tag }}
+        run: |
+          git config user.name "RAPP Registry Bot"
+          git config user.email "rapp-bot@users.noreply.github.com"
+          # Same file set build-registry.yml commits, plus the ledger — so a
+          # release leaves registry, API and ledger mutually consistent.
+          git add registry.json state/releases.json \
+                  manifest.json api/v1/catalog.json api/v1/taxonomy.json \
+                  api/v1/match.json api/v1/status.json api/v1/badge.json \
+                  api/v1/audience
+          # Read from env, so the name is an argv element and is never parsed
+          # as shell. Interpolating the input here would splice operator free
+          # text straight into the command line.
+          git diff --cached --quiet || git commit -m "Release $RELEASE_NAME ($RELEASE_TAG) [skip ci]"
+          # main takes automated pushes (registry bot, heartbeat fleet) while
+          # the validate gate runs for minutes. A bare `git push` aborts the
+          # release on a non-fast-forward — after the tag has been derived and
+          # the ledger written. Rebase and retry instead of dying.
+          for attempt in 1 2 3; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              break
+            fi
+            if [ "$attempt" = 3 ]; then
+              echo "::error::could not push the release stamp after 3 attempts"
+              exit 1
+            fi
+            echo "push rejected; rebasing onto the updated main and retrying"
+            git pull --rebase --autostash origin main
+          done
+          # The tag must point at the commit that RECORDS the release, not at
+          # the commit that triggered the run. Tagging context.sha meant
+          # `git checkout <tag>` produced a tree with no record of that release
+          # in it. Read AFTER the push loop so a rebase is reflected.
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      # Every agent ships as a flat release asset. This is the ONLY download
+      # path GitHub counts for us: a public release asset needs no token to
+      # fetch, and GitHub increments download_count server-side on every
+      # fetch, anonymous ones included — the same property that makes npm's
+      # public download numbers real. raw.githubusercontent.com fetches are
+      # invisible to us by comparison, which is why the reaction-based tally
+      # reads ~0. Reactions stay for upvotes; assets carry downloads.
+      - name: Stage release assets
+        run: python scripts/stage_release_assets.py
+
+      - name: Create GitHub release
+        uses: actions/github-script@v7
+        # github-script substitutes ${{ }} into the JavaScript SOURCE before it
+        # runs, so an operator-supplied release name containing a backtick or
+        # ${...} would execute on the runner. Both values come through env and
+        # are read at runtime instead.
+        env:
+          RELEASE_NAME: ${{ inputs.release_name }}
+          RELEASE_TAG: ${{ steps.tag.outputs.tag }}
+          RELEASE_SHA: ${{ steps.commit.outputs.sha }}
+        with:
+          script: |
+            const fs = require('fs');
+            const meta = JSON.parse(fs.readFileSync('/tmp/release_meta.json', 'utf8'));
+            const tag = process.env.RELEASE_TAG;
+            const releaseName = process.env.RELEASE_NAME;
+
+            // Tag the commit that records the release, not the one that
+            // triggered the run — otherwise the tagged tree has no record of
+            // the release it names.
+            await github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: `refs/tags/${tag}`,
+              sha: process.env.RELEASE_SHA || context.sha
+            });
+
+            // Create release
+            await github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: tag,
+              name: `${releaseName} (${tag})`,
+              body: [
+                `## ${releaseName}`,
+                ``,
+                `| Metric | Value |`,
+                `|--------|-------|`,
+                `| Agents | ${meta.agent_count} |`,
+                `| Publishers | ${meta.publishers} |`,
+                `| Type | ${meta.release_type} |`,
+                `| Integrity Seal | \`${meta.integrity_seal}\` |`,
+                `| Timestamp | ${meta.timestamp} |`,
+                ``,
+                `### What's in this release`,
+                `Every agent in this release has passed:`,
+                `- Contract tests (manifest, class structure, perform())`,
+                `- Security scan — no \`os.system()\`, no hardcoded secrets, no`,
+                `  suspicious file access`,
+                `- SHA256 integrity verification of every published file`,
+                `- Version immutability check`,
+                `- Staging is clean (all submissions reviewed)`,
+                ``,
+                `\`subprocess\` and dynamic code (\`eval\`/\`exec\`/dynamic import)`,
+                `are permitted — wrapping a CLI and meta-programming are ordinary`,
+                `agent patterns. They are not hidden: any agent using them carries`,
+                `the capability in its registry entry under \`_capabilities\`, so a`,
+                `consumer that wants to exclude them can filter on the tag.`,
+                ``,
+                `---`,
+                `*Released by the RAPP Agent Registry*`,
+              ].join('\n'),
+              prerelease: meta.release_type === 'canary',
+            });
+
+            console.log(`Release created: ${tag}`);
+
+      # Upload after the release exists. --clobber makes a re-run idempotent.
+      # Clients fetch these by the STABLE alias
+      #   github.com/<repo>/releases/latest/download/<asset>
+      # which 302s to the newest release's copy, so no client pins a tag.
+      - name: Upload agent assets to the release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ steps.tag.outputs.tag }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh release upload "$RELEASE_TAG" \
+            dist/release-assets/* \
+            --clobber --repo "$REPO"
+          echo "Uploaded $(ls dist/release-assets | wc -l) asset(s)."

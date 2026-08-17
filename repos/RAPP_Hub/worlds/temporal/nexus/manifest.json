@@ -1,0 +1,58 @@
+{
+  "$schema": "https://rappverse.github.io/schema/v1/dimension-manifest.json",
+  "format_version": "1.0.0",
+  "type": "dimension",
+  
+  "dimension": {
+    "id": "nexus",
+    "name": "Nexus",
+    "description": "The first RAPPverse dimension. Hello World.",
+    "seed": 2026,
+    "algorithm": {
+      "name": "mulberry32",
+      "version": "1.0.0"
+    },
+    "created": "2026-02-02T19:56:26Z",
+    "author": "RAPPverse Genesis"
+  },
+  
+  "universe": {
+    "id": "temporal",
+    "name": "Temporal",
+    "description": "Universes seeded by moments in time"
+  },
+  
+  "world": {
+    "mood": "unease",
+    "npcs": ["Nexra", "Dexel", "Paxax", "Galum"],
+    "locations": ["The Kel Archive", "The Tyr Sanctuary", "The Bre Archive"],
+    "current_tick": 5,
+    "total_posts": 21
+  },
+  
+  "fundamental_laws": {
+    "determinism": true,
+    "dimensional_isolation": true,
+    "temporal_integrity": true,
+    "seed_sovereignty": true
+  },
+  
+  "portability": {
+    "self_contained": true,
+    "runtime_included": true,
+    "external_dependencies": []
+  },
+  
+  "paths": {
+    "posts": "rappbook/posts",
+    "ticks": "rappzoo/world/ticks",
+    "lore": "rappzoo/world/lore.json",
+    "current_tick": "rappzoo/world/current_tick.json"
+  },
+  
+  "urls": {
+    "canonical": "rappverse://temporal/2026",
+    "hub": "https://github.com/kody-w/RAPP_Hub/tree/main/worlds/temporal/nexus",
+    "raw": "https://raw.githubusercontent.com/kody-w/RAPP_Hub/main/worlds/temporal/nexus"
+  }
+}

@@ -1,0 +1,511 @@
+#!/bin/bash
+# Resolve THIS script through any symlink before locating siblings. install.sh
+# links `crispy` into ~/.local/bin, so $(dirname "$0") pointed at ~/.local/bin and
+# tools/dictfix.py silently vanished — the dictionary post-pass then did nothing
+# and transcripts kept the wrong spelling with no error. Same defect class that
+# made `shot redact` report a false all-clear.
+_SELF="${BASH_SOURCE[0]}"
+while [ -L "$_SELF" ]; do
+  _t=$(readlink "$_SELF")
+  case "$_t" in /*) _SELF="$_t" ;; *) _SELF="$(dirname "$_SELF")/$_t" ;; esac
+done
+CRISPY_DIR="$(cd "$(dirname "$_SELF")" && pwd -P)"
+# RAPP Crispy — a local-first meeting stack. Record, denoise, transcribe and
+# summarise a meeting on this machine. Capture, denoise and transcription are
+# fully local. Note-writing runs through a hook you own; the DEFAULT hook calls
+# `claude -p`, which sends that transcript to Anthropic. Repoint it at a local
+# model, or delete it, for an entirely offline pipeline.
+#
+#   crispy record   [--screen] [--seconds N] [--name X]   capture a meeting
+#   crispy denoise  <in.wav> [out.wav]                    RNNoise denoise
+#   crispy transcribe <wav>                               local ASR
+#   crispy notes    <meeting-dir>                          summary + action items
+#   crispy run      [--screen] [--seconds N] [--name X] [--no-notes]  the whole loop
+#                   --no-notes skips the summarisation hook entirely, so nothing
+#                   can leave this machine even if the hook is the default one.
+#   crispy bench                                           measured denoise quality
+#   crispy live     {start|stop|status|install}            live virtual microphone
+#   crispy list                                            meetings on disk
+#   crispy doctor                                          environment check
+set -uo pipefail
+
+CRISPY_HOME="${CRISPY_HOME:-$HOME/.rappcrispy}"
+MODELS="$CRISPY_HOME/models"
+MEETINGS="$CRISPY_HOME/meetings"
+HOOKS="$CRISPY_HOME/hooks"
+LOGS="$CRISPY_HOME/logs"
+# Apple Silicon brew is /opt/homebrew, Intel is /usr/local. Hardcoding the
+# former made this unrunnable on an Intel Mac.
+_brew() { for p in "/opt/homebrew/bin/$1" "/usr/local/bin/$1"; do
+    [ -x "$p" ] && { echo "$p"; return; }; done
+  command -v "$1" 2>/dev/null || echo "/opt/homebrew/bin/$1"; }
+FFMPEG="${FFMPEG:-$(_brew ffmpeg)}"
+ASR_PORT="${ASR_PORT:-8765}"
+
+# Denoise engine. Measured on fixtures at 0dB SNR (crispy bench reproduces it):
+#                    white      pink     babble
+#   rnnoise         +28.1 dB  +15.8 dB   +4.2 dB   RTF 0.014
+#   dfn  (DFN3)     +42.5 dB  +36.6 dB   +4.5 dB   RTF 0.048
+# DFN3 wins decisively on stationary noise, so it is the default when present.
+# NEITHER engine cancels background VOICES — see the README. DFN3's --pf
+# post-filter was measured and rejected: it raised babble word-error rate to 50%.
+ENGINE="${ENGINE:-auto}"          # auto | dfn | rnnoise
+DEEP_FILTER="${DEEP_FILTER:-$CRISPY_HOME/bin/deep-filter}"
+RNN_MODEL="${RNN_MODEL:-cb}"
+# Transcribe in chunks so a long meeting streams progress instead of one huge POST.
+CHUNK_SECONDS="${CHUNK_SECONDS:-300}"
+
+mkdir -p "$MODELS" "$MEETINGS" "$HOOKS" "$LOGS"
+
+resolve_engine() {
+  case "$ENGINE" in
+    dfn)     [ -x "$DEEP_FILTER" ] && echo dfn || echo rnnoise ;;
+    rnnoise) echo rnnoise ;;
+    *)       [ -x "$DEEP_FILTER" ] && echo dfn || echo rnnoise ;;
+  esac
+}
+
+c_blue()  { printf '\033[1;36m%s\033[0m\n' "$*"; }
+c_ok()    { printf '    \033[32m✓\033[0m %s\n' "$*"; }
+c_warn()  { printf '    \033[33m!\033[0m %s\n' "$*"; }
+die()     { printf '\033[1;31mfatal:\033[0m %s\n' "$*" >&2; exit 1; }
+log()     { printf '%s %s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$*" >> "$LOGS/crispy.log"; }
+
+# ---------------------------------------------------------------- audio device
+# Deliberately prefer a REAL hardware input over any virtual/loopback device.
+# Another denoiser's virtual mic is often input 0; capturing through it would mean
+# measuring its processing instead of ours. Override with CRISPY_MIC=<index>.
+pick_mic() {
+  if [ -n "${CRISPY_MIC:-}" ]; then echo "$CRISPY_MIC"; return; fi
+  local list idx
+  list=$("$FFMPEG" -hide_banner -f avfoundation -list_devices true -i "" 2>&1 \
+         | sed -n '/audio devices/,$p')
+  idx=$(echo "$list" | grep -iE '\[[0-9]+\] .*(MacBook|Built-in|iMac|Mac mini|Mac Studio|USB|External|Headset).*(Microphone|Mic)' \
+        | head -1 | sed -E 's/.*\[([0-9]+)\].*/\1/')
+  [ -n "$idx" ] || idx=$(echo "$list" | grep -viE 'blackhole|loopback|aggregate|virtual|soundflower|multi-output|teams audio|driver' \
+        | grep -oE '\[[0-9]+\]' | head -1 | tr -d '[]')
+  echo "${idx:-0}"
+}
+
+mic_name() {
+  "$FFMPEG" -hide_banner -f avfoundation -list_devices true -i "" 2>&1 \
+    | sed -n '/audio devices/,$p' | grep -E "\[$1\]" | sed -E 's/.*\[[0-9]+\] //' | head -1
+}
+
+# ------------------------------------------------------------------- doctor
+cmd_doctor() {
+  c_blue "RAPP Crispy environment"
+  [ -x "$FFMPEG" ] && c_ok "ffmpeg $("$FFMPEG" -version 2>/dev/null | head -1 | awk '{print $3}')" \
+                   || die "ffmpeg not found at $FFMPEG"
+  # NB: capture first. `ffmpeg -filters | grep -q` makes ffmpeg take SIGPIPE when
+  # grep exits early, and under `set -o pipefail` that reads as "filter missing".
+  local filters; filters=$("$FFMPEG" -hide_banner -filters 2>/dev/null)
+  case "$filters" in
+    *arnndn*) c_ok "arnndn filter present (RNNoise)" ;;
+    *) c_warn "arnndn filter MISSING — denoise unavailable" ;;
+  esac
+  local m; m=$(pick_mic)
+  c_ok "capture device [$m] $(mic_name "$m")"
+  local vdev
+  vdev=$("$FFMPEG" -hide_banner -f avfoundation -list_devices true -i "" 2>&1 \
+         | grep -i 'Capture screen' | head -1 | sed -E 's/.*\[[0-9]+\] //')
+  [ -n "$vdev" ] && c_ok "screen capture: $vdev" || c_warn "no screen capture device"
+  local code
+  code=$(curl -s -o /dev/null -m 3 -w '%{http_code}' "http://127.0.0.1:$ASR_PORT/" 2>/dev/null)
+  [ "${code:-000}" != "000" ] && c_ok "local ASR on :$ASR_PORT (HTTP $code)" \
+    || c_warn "no ASR on :$ASR_PORT — start whisper-server (see README)"
+  local eng; eng=$(resolve_engine)
+  if [ "$eng" = dfn ]; then c_ok "denoise engine: DeepFilterNet3 offline / RNNoise live ($DEEP_FILTER)"
+  else c_warn "denoise engine: RNNoise (DFN3 absent — install.sh fetches it; +14dB better on steady noise)"; fi
+  ls "$MODELS"/*.rnnn >/dev/null 2>&1 \
+    && c_ok "denoise models: $(ls "$MODELS"/*.rnnn | wc -l | tr -d ' ')" \
+    || c_warn "no .rnnn models in $MODELS — run install.sh"
+  [ -x "$HOOKS/notes.sh" ] && c_ok "notes hook installed" || c_warn "no notes hook"
+  if grep -q "claude -p" "$HOOKS/notes.sh" 2>/dev/null; then
+    c_ok "meetings live in $MEETINGS (yours, on disk)"
+    c_warn "notes hook sends transcripts to Anthropic — crispy run --no-notes to skip"
+  else
+    c_ok "meetings live in $MEETINGS (yours, on disk, no hook that uploads)"
+  fi
+}
+
+# ------------------------------------------------------------------- record
+cmd_record() {
+  local screen=0 seconds=0 name=""
+  while [ $# -gt 0 ]; do
+    case "$1" in
+      --screen)  screen=1; shift ;;
+      --seconds) seconds="$2"; shift 2 ;;
+      --name)    name="$2"; shift 2 ;;
+      # The escape hatch for a meeting you may not send anywhere. Exported so
+      # cmd_notes sees it whether it is reached via `run` or called directly.
+      --no-notes) export CRISPY_NO_NOTES=1; shift ;;
+      *) die "unknown flag: $1" ;;
+    esac
+  done
+  local ts dir
+  ts=$(date +%Y-%m-%d_%H%M%S)
+  dir="$MEETINGS/${ts}${name:+_$name}"
+  mkdir -p "$dir"
+  local m; m=$(pick_mic)
+  echo "$(mic_name "$m")" > "$dir/device.txt"
+
+  c_blue "Recording -> $dir"
+  c_ok "mic: [$m] $(mic_name "$m")"
+  local dur_args=()
+  [ "$seconds" -gt 0 ] && dur_args=(-t "$seconds")
+
+  if [ "$screen" = 1 ]; then
+    # screencapture -v records the screen; -G<id> takes audio from a device.
+    # Needs the Screen Recording permission the first time.
+    # VIDEO ONLY on purpose. `-G <n>` does not take an avfoundation index (it
+    # fails "Capture audio device N not found") and `-g` would record the DEFAULT
+    # input — usually the virtual device we deliberately avoid. The authoritative
+    # audio is mic.wav from the chosen hardware mic; `crispy run` muxes the two.
+    c_ok "screen video via screencapture (grant Screen Recording if prompted)"
+    local vflag=()
+    [ "$seconds" -gt 0 ] && vflag=(-V "$seconds")
+    screencapture -v "${vflag[@]}" "$dir/screen.mov" &
+    local scpid=$!
+    echo "$scpid" > "$dir/.screen.pid"
+  fi
+
+  "$FFMPEG" -hide_banner -loglevel error -f avfoundation -i ":$m" \
+    -ar 48000 -ac 1 -c:a pcm_s16le "${dur_args[@]}" -y "$dir/mic.wav" &
+  local apid=$!
+  echo "$apid" > "$dir/.mic.pid"
+
+  if [ "$seconds" -gt 0 ]; then
+    wait "$apid" 2>/dev/null
+    [ -f "$dir/.screen.pid" ] && { kill -INT "$(cat "$dir/.screen.pid")" 2>/dev/null; sleep 2; }
+  else
+    echo "    recording… press ENTER to stop"
+    read -r _ </dev/tty
+    kill -INT "$apid" 2>/dev/null
+    [ -f "$dir/.screen.pid" ] && { kill -INT "$(cat "$dir/.screen.pid")" 2>/dev/null; sleep 2; }
+    wait "$apid" 2>/dev/null
+  fi
+  rm -f "$dir/.mic.pid" "$dir/.screen.pid"
+
+  local secs
+  secs=$(python3 -c "import wave;w=wave.open('$dir/mic.wav');print(f'{w.getnframes()/w.getframerate():.1f}')" 2>/dev/null || echo "?")
+  c_ok "mic.wav ${secs}s"
+  [ -f "$dir/screen.mov" ] && c_ok "screen.mov $(du -h "$dir/screen.mov" | cut -f1)"
+  log "record dir=$dir seconds=$secs screen=$screen"
+  echo "$dir"
+}
+
+# ------------------------------------------------------------------ denoise
+cmd_denoise() {
+  local in="${1:?usage: crispy denoise <in.wav> [out.wav]}"
+  local out="${2:-${in%.*}.denoised.wav}"
+  local eng; eng=$(resolve_engine)
+  local t0 t1 dur
+  t0=$(python3 -c 'import time;print(time.time())')
+  if [ "$eng" = dfn ]; then
+    local tmp; tmp=$(mktemp -d)
+    "$DEEP_FILTER" -o "$tmp" "$in" >/dev/null 2>&1 || { rm -rf "$tmp"; die "deep-filter failed"; }
+    local produced; produced=$(ls "$tmp"/*.wav 2>/dev/null | head -1)
+    [ -n "$produced" ] || { rm -rf "$tmp"; die "deep-filter produced no output"; }
+    # DFN3 emits 48k mono; normalise so downstream stages see one shape
+    "$FFMPEG" -hide_banner -loglevel error -i "$produced" -ar 48000 -ac 1 \
+      -c:a pcm_s16le -y "$out" || { rm -rf "$tmp"; die "normalise failed"; }
+    rm -rf "$tmp"
+  else
+    local model="$MODELS/$RNN_MODEL.rnnn"
+    [ -f "$model" ] || die "model missing: $model (run install.sh)"
+    "$FFMPEG" -hide_banner -loglevel error -i "$in" \
+      -af "arnndn=m=$model" -ar 48000 -ac 1 -c:a pcm_s16le -y "$out" || die "denoise failed"
+  fi
+  t1=$(python3 -c 'import time;print(time.time())')
+  dur=$(python3 -c "import wave;w=wave.open('$in');print(w.getnframes()/w.getframerate())")
+  local rtf; rtf=$(python3 -c "print(f'{($t1-$t0)/$dur:.4f}')")
+  c_ok "denoised -> $out  (engine=$eng, RTF=$rtf)"
+  log "denoise in=$in engine=$eng rtf=$rtf"
+  echo "$out"
+}
+
+# ---------------------------------------------------------------- transcribe
+# Reuse RAPP Voice's personal dictionary if it is installed. Same weighting trick:
+# each term emitted twice, which is what makes invented words survive decoding.
+# Without it a meeting transcript says "Cody" and "Open Raptor".
+dictionary_prompt() {
+  local dict="${CRISPY_DICT:-$HOME/.rappvoice/dictionary.txt}"
+  [ -f "$dict" ] || return 0
+  grep -vE '^\s*#|^\s*$' "$dict" | sed 's/\s*=>.*//' | sort -u \
+    | awk '{printf "%s. %s. ", $0, $0}'
+}
+
+# Bias alone is not enough — it gets "Kody" right and still lands "OpenRapter".
+# RAPP Voice enforces the canonical spelling after decoding as well; do the same
+# here, honouring `heard => Term` rewrite lines if the dictionary has any.
+apply_dictionary() {
+  local dict="${CRISPY_DICT:-$HOME/.rappvoice/dictionary.txt}"
+  local fixer="$CRISPY_DIR/tools/dictfix.py"
+  if [ -f "$dict" ] && [ -f "$fixer" ]; then
+    python3 "$fixer" "$dict"
+  else
+    cat
+  fi
+}
+
+cmd_transcribe() {
+  local wav="${1:?usage: crispy transcribe <wav>}"
+  local code
+  code=$(curl -s -o /dev/null -m 3 -w '%{http_code}' "http://127.0.0.1:$ASR_PORT/" 2>/dev/null)
+  [ "${code:-000}" != "000" ] || die "no local ASR on :$ASR_PORT — start whisper-server"
+  local prompt; prompt=$(dictionary_prompt)
+  local work; work=$(mktemp -d)
+  # 16kHz mono is what whisper wants; chunk so long meetings report progress
+  "$FFMPEG" -hide_banner -loglevel error -i "$wav" -ar 16000 -ac 1 -c:a pcm_s16le \
+    -f segment -segment_time "$CHUNK_SECONDS" "$work/c%04d.wav" || die "chunking failed"
+  local n=0
+  for c in "$work"/c*.wav; do
+    n=$((n+1))
+    curl -s -m 900 "http://127.0.0.1:$ASR_PORT/inference" \
+      -F "file=@$c" -F temperature=0 -F response_format=json \
+      ${prompt:+--form-string "prompt=$prompt"} \
+      | python3 -c 'import json,sys
+try: sys.stdout.write(json.load(sys.stdin).get("text","").strip()+" ")
+except Exception: pass'
+    printf '.' >&2
+  done > "$work/raw.txt"
+  printf '\n' >&2
+  apply_dictionary < "$work/raw.txt"
+  rm -rf "$work"
+  log "transcribe wav=$wav chunks=$n"
+}
+
+# --------------------------------------------------------------------- notes
+cmd_notes() {
+  if [ "${1:-}" = "--no-notes" ]; then export CRISPY_NO_NOTES=1; shift; fi
+  local dir="${1:?usage: crispy notes [--no-notes] <meeting-dir>}"
+  [ -d "$dir" ] || die "no such meeting: $dir"
+  local src="$dir/mic.denoised.wav"
+  [ -f "$src" ] || src="$dir/mic.wav"
+  [ -f "$src" ] || die "no audio in $dir"
+
+  if [ ! -s "$dir/transcript.txt" ]; then
+    c_blue "Transcribing (local)"
+    cmd_transcribe "$src" > "$dir/transcript.txt"
+  fi
+  local words; words=$(wc -w < "$dir/transcript.txt" | tr -d ' ')
+  c_ok "transcript.txt — $words words"
+  [ "$words" -lt 3 ] && { c_warn "not enough speech to summarise"; return 0; }
+
+  if [ "${CRISPY_NO_NOTES:-0}" = 1 ]; then
+    c_ok "notes skipped (--no-notes) — the transcript stays on this machine"
+  elif [ -x "$HOOKS/notes.sh" ]; then
+    # Name the destination HERE, not in a paragraph the user read once at
+    # install time. This line prints while the transcript is in flight.
+    if grep -q "claude -p" "$HOOKS/notes.sh" 2>/dev/null; then
+      c_blue "Summarising via $HOOKS/notes.sh — this hook calls 'claude -p', so the transcript is sent to Anthropic"
+    else
+      c_blue "Summarising via $HOOKS/notes.sh"
+    fi
+    if "$HOOKS/notes.sh" "$dir/transcript.txt" > "$dir/notes.md" 2>"$dir/.notes.err"; then
+      c_ok "notes.md $(wc -l < "$dir/notes.md" | tr -d ' ') lines"
+      rm -f "$dir/.notes.err"
+    else
+      c_warn "notes hook failed — transcript kept (see $dir/.notes.err)"
+    fi
+  else
+    c_warn "no notes hook at $HOOKS/notes.sh — transcript only"
+  fi
+  log "notes dir=$dir words=$words"
+}
+
+# ----------------------------------------------------------------------- run
+# screen video + our denoised audio -> one file you can actually play back
+mux_playback() {
+  local dir="$1"
+  [ -f "$dir/screen.mov" ] && [ -f "$dir/mic.denoised.wav" ] || return 0
+  if "$FFMPEG" -hide_banner -loglevel error -i "$dir/screen.mov" -i "$dir/mic.denoised.wav" \
+      -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -b:a 128k -shortest \
+      -y "$dir/meeting.mp4" 2>/dev/null; then
+    c_ok "meeting.mp4 $(du -h "$dir/meeting.mp4" | cut -f1) (screen + denoised audio)"
+  else
+    c_warn "could not mux meeting.mp4 — screen.mov and mic.denoised.wav are still there"
+  fi
+}
+
+cmd_run() {
+  # Parse --no-notes HERE. cmd_record also parses it, but cmd_record runs inside
+  # a command substitution AND a pipeline below — two subshells — so its
+  # `export` died with them and `crispy run --no-notes` sent the transcript
+  # anyway, while the usage text promised the opposite.
+  local passthru=()
+  for arg in "$@"; do
+    case "$arg" in
+      --no-notes) export CRISPY_NO_NOTES=1 ;;
+      *) passthru+=("$arg") ;;
+    esac
+  done
+  set -- ${passthru+"${passthru[@]}"}
+  local dir; dir=$(cmd_record "$@" | tail -1)
+  [ -d "$dir" ] || die "record failed"
+  cmd_denoise "$dir/mic.wav" "$dir/mic.denoised.wav" >/dev/null
+  mux_playback "$dir"
+  cmd_notes "$dir"
+  c_blue "Done — everything is here and nowhere else:"
+  ls -1 "$dir" | sed 's/^/    /'
+  echo "$dir"
+}
+
+# --------------------------------------------------------------------- live
+# Live virtual microphone: real mic -> RNNoise -> a loopback output device that
+# conferencing apps can select as their INPUT. This is the same architecture the
+# commercial tools use (they ship their own CoreAudio driver); we borrow one.
+# A loopback device is any device that presents BOTH an output and an input, so
+# audio written to it reappears as a capture source. BlackHole is the usual
+# dedicated one, but a machine often already has one installed by a conferencing
+# app — verified working on this machine, which is why no driver install is
+# required. SINK_NAME pins a specific device by name.
+SINK_NAME="${SINK_NAME:-}"
+LOOPBACK_PATTERN="${LOOPBACK_PATTERN:-blackhole|loopback|soundflower|teams audio}"
+
+sink_index() {
+  local outs; outs=$("$FFMPEG" -hide_banner -f lavfi -i anullsrc -t 0.05 \
+    -f audiotoolbox -list_devices true - 2>&1 | grep -oE '\[[0-9]+\] +[^,]+')
+  if [ -n "$SINK_NAME" ]; then
+    echo "$outs" | grep -iE "\[[0-9]+\] +.*$SINK_NAME" | head -1 | sed -E 's/.*\[([0-9]+)\].*/\1/'
+    return
+  fi
+  # prefer a dedicated loopback over one borrowed from another app
+  echo "$outs" | grep -iE '\[[0-9]+\] +.*(blackhole|soundflower)' | head -1 | sed -E 's/.*\[([0-9]+)\].*/\1/' && return
+  echo "$outs" | grep -iE "\[[0-9]+\] +.*($LOOPBACK_PATTERN)" | head -1 | sed -E 's/.*\[([0-9]+)\].*/\1/'
+}
+
+sink_name() {
+  "$FFMPEG" -hide_banner -f lavfi -i anullsrc -t 0.05 -f audiotoolbox -list_devices true - 2>&1 \
+    | grep -E "\[$1\]" | sed -E 's/.*\[[0-9]+\] +//;s/,.*//' | head -1
+}
+
+live_pidfile() { echo "$CRISPY_HOME/live.pid"; }
+
+cmd_live_status() {
+  local pf; pf=$(live_pidfile)
+  if [ -f "$pf" ] && kill -0 "$(cat "$pf")" 2>/dev/null; then
+    local s; s=$(sink_index)
+    c_ok "live denoise RUNNING (pid $(cat "$pf")) -> $(sink_name "$s")"
+    c_ok "select \"$(sink_name "$s")\" as the microphone in your meeting app"
+    return 0
+  fi
+  c_warn "live denoise not running"
+  local s; s=$(sink_index)
+  [ -n "$s" ] && c_ok "loopback sink available: $(sink_name "$s") (output index $s)" \
+              || c_warn "no loopback device found — crispy live install explains the options"
+  return 1
+}
+
+cmd_live_install() {
+  local s; s=$(sink_index)
+  if [ -n "$s" ]; then c_ok "loopback already available: $(sink_name "$s") (output index $s) — nothing to install"; return 0; fi
+  cat <<'EOS'
+The live virtual microphone needs a loopback audio device. Installing a
+CoreAudio driver modifies system audio routing and requires your password, so
+it is deliberately NOT automated. Run this yourself:
+
+    brew install --cask blackhole-2ch
+
+It will ask for your password. No reboot needed; coreaudiod restarts itself.
+Then:  crispy live start
+
+To undo entirely:  brew uninstall --cask blackhole-2ch
+EOS
+  return 1
+}
+
+cmd_live_start() {
+  local s m pf
+  s=$(sink_index)
+  [ -n "$s" ] || { cmd_live_install; die "no loopback sink device available"; }
+  m=$(pick_mic)
+  pf=$(live_pidfile)
+  if [ -f "$pf" ] && kill -0 "$(cat "$pf")" 2>/dev/null; then
+    c_warn "already running (pid $(cat "$pf"))"; return 0
+  fi
+  local model="$MODELS/$RNN_MODEL.rnnn"
+  [ -f "$model" ] || die "model missing: $model"
+  # LIVE IS ALWAYS RNNoise. DeepFilterNet's deep-filter is file-to-file with no
+  # streaming mode, so it cannot sit in a realtime chain — it is the offline
+  # engine only.
+  c_blue "Live denoise: [$m] $(mic_name "$m")  --rnnoise-->  $(sink_name "$s") (out $s)"
+  # TWO PROCESSES ON PURPOSE. Piping an avfoundation capture straight into the
+  # audiotoolbox output device in ONE ffmpeg yields audio at a plausible level
+  # that is not intelligible — measured: mic->file transcribes perfectly, the
+  # same chain mic->device gives [BLANK_AUDIO], and -fflags nobuffer /
+  # -flags low_delay / aresample=async all fail to fix it. A file-like input to
+  # audiotoolbox works, so the wav pipe decouples the capture clock from the
+  # playback clock. Verified end to end: the virtual mic transcribes speech.
+  nohup sh -c "'$FFMPEG' -hide_banner -loglevel error -f avfoundation -i ':$m' \
+      -af 'arnndn=m=$model' -ar 48000 -ac 2 -f wav -c:a pcm_s16le - \
+    | '$FFMPEG' -hide_banner -loglevel error -f wav -i pipe:0 \
+      -f audiotoolbox -audio_device_index $s -" \
+    >> "$LOGS/live.log" 2>&1 &
+  echo $! > "$pf"
+  sleep 3
+  if kill -0 "$(cat "$pf")" 2>/dev/null; then
+    c_ok "running (pid $(cat "$pf")) — select \"$(sink_name "$s")\" as your mic"
+    log "live start mic=$m sink=$s engine=rnnoise"
+  else
+    rm -f "$pf"; die "failed to start — see $LOGS/live.log"
+  fi
+}
+
+cmd_live_stop() {
+  local pf; pf=$(live_pidfile)
+  [ -f "$pf" ] || { c_warn "not running"; return 0; }
+  local sh_pid; sh_pid=$(cat "$pf")
+  # the pipeline is a shell with two ffmpeg children; kill the children first so
+  # neither is left holding the microphone or the loopback device
+  pkill -P "$sh_pid" 2>/dev/null
+  kill -INT "$sh_pid" 2>/dev/null
+  sleep 1
+  kill -0 "$sh_pid" 2>/dev/null && kill -9 "$sh_pid" 2>/dev/null
+  pkill -f "audio_device_index $(sink_index)" 2>/dev/null
+  rm -f "$pf"
+  c_ok "live denoise stopped"
+  log "live stop"
+}
+
+cmd_live() {
+  case "${1:-status}" in
+    start)   shift; cmd_live_start "$@" ;;
+    stop)    shift; cmd_live_stop "$@" ;;
+    status)  shift; cmd_live_status "$@" ;;
+    install) shift; cmd_live_install "$@" ;;
+    *) die "usage: crispy live {start|stop|status|install}" ;;
+  esac
+}
+
+# --------------------------------------------------------------------- list
+cmd_list() {
+  c_blue "Meetings in $MEETINGS"
+  local any=0
+  for d in "$MEETINGS"/*/; do
+    [ -d "$d" ] || continue
+    any=1
+    local secs="?"
+    [ -f "$d/mic.wav" ] && secs=$(python3 -c "import wave;w=wave.open('$d/mic.wav');print(f'{w.getnframes()/w.getframerate():.0f}s')" 2>/dev/null || echo "?")
+    printf '    %-34s %-7s %s%s%s\n' "$(basename "$d")" "$secs" \
+      "$([ -f "$d/transcript.txt" ] && echo 'transcript ')" \
+      "$([ -f "$d/notes.md" ] && echo 'notes ')" \
+      "$([ -f "$d/screen.mov" ] && echo 'video')"
+  done
+  [ "$any" = 0 ] && echo "    (none yet — try: crispy run --seconds 20)"
+}
+
+case "${1:-doctor}" in
+  doctor)     shift; cmd_doctor "$@" ;;
+  record)     shift; cmd_record "$@" ;;
+  denoise)    shift; cmd_denoise "$@" ;;
+  transcribe) shift; cmd_transcribe "$@" ;;
+  notes)      shift; cmd_notes "$@" ;;
+  run)        shift; cmd_run "$@" ;;
+  list)       shift; cmd_list "$@" ;;
+  live)       shift; cmd_live "$@" ;;
+  bench)      shift; exec "$CRISPY_DIR/tools/bench.sh" "$@" ;;
+  -h|--help)  sed -n '2,14p' "$0" | sed 's/^# \{0,1\}//' ;;
+  *) die "unknown command: $1 (try --help)" ;;
+esac

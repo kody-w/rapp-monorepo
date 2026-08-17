@@ -1,0 +1,83 @@
+{
+  "agents": {
+    "@aibast-agents-library/account-intelligence": {
+      "up": 2,
+      "down": 0,
+      "score": 2,
+      "voters": {
+        "kody-w": "up",
+        "rappter1": "up"
+      }
+    },
+    "@kody/agent_workbench": {
+      "up": 0,
+      "down": 0,
+      "score": 0,
+      "voters": {}
+    },
+    "@your-username/my_agent": {
+      "up": 1,
+      "down": 0,
+      "score": 1,
+      "voters": {
+        "rappter1": "up"
+      }
+    },
+    "@aibast-agents-library/deal-tracking": {
+      "up": 1,
+      "down": 0,
+      "score": 1,
+      "voters": {
+        "kody-w": "up"
+      }
+    },
+    "@borg/borg_agent": {
+      "up": 0,
+      "down": 0,
+      "score": 0,
+      "voters": {}
+    },
+    "@aibast-agents-library/account_risk_assessment": {
+      "up": 0,
+      "down": 1,
+      "score": -1,
+      "voters": {
+        "jzh24516": "down"
+      }
+    },
+    "@howardh/borg_agent": {
+      "up": 1,
+      "down": 0,
+      "score": 1,
+      "voters": {
+        "kody-w": "up"
+      }
+    },
+    "@borg/hacker_news_agent": {
+      "up": 1,
+      "down": 0,
+      "score": 1,
+      "voters": {
+        "kody-w": "up"
+      }
+    },
+    "@kody-w/power_apps_code_app_agent": {
+      "up": 1,
+      "down": 0,
+      "score": 1,
+      "voters": {
+        "kody-w": "up"
+      }
+    }
+  },
+  "updated_at": "2026-07-23T15:17:44.301816+00:00",
+  "operations": {
+    "I_kwDOR48twc8AAAABJ6ejHg:d434b2adc85b9bff83009d17f6a8506aa2ba8669a56b4b9f49e34d7485eb2ebf": {
+      "ok": true,
+      "action": "vote",
+      "agent": "@kody-w/power_apps_code_app_agent",
+      "direction": "up",
+      "score": 1
+    }
+  }
+}

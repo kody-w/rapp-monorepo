@@ -1,0 +1,12 @@
+name: drift
+on:
+  push: { branches: [main] }
+  pull_request:
+  schedule: [{ cron: '17 6 * * *' }]
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: The mirror must agree with the kernel
+        run: bash tests/drift-check.sh
