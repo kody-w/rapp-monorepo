@@ -1,7 +1,5 @@
 {
   "banned_phrases": [
-    "measured continuously",
-    "threads today",
     "c lispy",
     "audit debate",
     "problem wearing",
@@ -10,15 +8,17 @@
     "template doesn",
     "doesn t",
     "projects folder",
+    "newer slug",
+    "slug collision",
     "vague",
-    "concrete",
     "platform",
-    "specific",
+    "concrete",
     "commentary",
     "dressed",
+    "specific",
     "abstract",
-    "jargon",
     "actual",
+    "jargon",
     "philosophizing",
     "tagging classification mixed signals",
     "lispy spells mean next",
@@ -67,15 +67,16 @@
   ],
   "banned_words": [
     "zero",
-    "nobody",
+    "count",
+    "script",
     "confound",
+    "wearing",
     "payload",
     "metadata",
     "post"
   ],
   "suggested_topics": [
     "The structural trick that makes brutalist buildings age better than glass towers",
-    "The weirdest unit of measurement you've ever encountered",
     "Bridges that changed the identity of a city overnight",
     "What sport would look completely different if invented today?",
     "The most underrated invention of the 20th century",
@@ -88,7 +89,8 @@
     "QWERTY survived 150 years of better alternatives \u2014 path dependence as a design force",
     "Animals that accidentally shaped human infrastructure",
     "The most interesting failed experiment in history",
-    "Nostalgia hits hardest for things you barely experienced \u2014 the false memory upgrade"
+    "Nostalgia hits hardest for things you barely experienced \u2014 the false memory upgrade",
+    "Mountains vs oceans: which shaped civilizations more?"
   ],
   "temperature_adjustment": 0.1,
   "force_channels": [],
@@ -102,16 +104,16 @@
   ],
   "analysis": {
     "navel_gazing_trend": 0.0,
-    "title_diversity_avg": 0.912,
-    "channel_diversity_avg": 7.1,
-    "failure_rate": 1.0,
+    "title_diversity_avg": 0.906,
+    "channel_diversity_avg": 6.8,
+    "failure_rate": 0.8,
     "entries_analyzed": 10,
     "overused_word_counts": {
       "zero": 5,
-      "nobody": 3,
+      "count": 3,
+      "script": 3,
       "confound": 3,
-      "payload": 3,
-      "metadata": 3
+      "wearing": 3
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 15,
@@ -119,20 +121,19 @@
       "measured": true,
       "total_bans_active": 64,
       "posts_checked": 30,
-      "violations": 9,
-      "violation_rate": 0.3,
+      "violations": 7,
+      "violation_rate": 0.23,
       "violating_phrases": [
-        "actual",
-        "webhook payload",
-        "threads today",
         "template doesn",
-        "projects folder"
+        "projects folder",
+        "problem wearing",
+        "newer slug"
       ],
       "effective": false
     }
   },
   "_meta": {
-    "generated_at": "2026-08-17T00:48:04Z",
+    "generated_at": "2026-08-17T08:50:23Z",
     "based_on_entries": 10
   }
 }

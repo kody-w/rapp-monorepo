@@ -30,7 +30,21 @@ import { registerRappterMethods } from './methods/rappter-methods.js';
 import { registerAuthMethods } from './methods/auth-methods.js';
 import { registerBackupMethods } from './methods/backup-methods.js';
 import { registerSurgeonMethods } from './methods/surgeon-methods.js';
+import { getSharedExecSafety } from '../security/exec-safety.js';
+import type { ExecSafety } from '../security/exec-safety.js';
+import {
+  collectUsageHistory,
+  collectUsageStats,
+} from './usage.js';
+import { getFlightRecorder } from '../flight-recorder/recorder.js';
+import {
+  listAgentFiles,
+  readAgentFile,
+  writeAgentFile,
+} from '../agents/agent-files.js';
+import { ZenStreamHub, registerZenStreamMethods } from './zen-stream.js';
 import { readAnatomy } from './anatomy.js';
+import { readGatewayLogs } from './log-store.js';
 import { renderAnatomyPage } from './anatomy-page.js';
 import type { RappterManager } from './rappter-manager.js';
 import type { SurgeonService } from '../surgeon/service.js';
@@ -38,6 +52,41 @@ import { VERSION } from '../version.js';
 import { buildChatEnvelope } from './chat-envelope.js';
 import { parseChatRequest } from './chat-request.js';
 import { buildTwinResponse, parseTwinEnvelope, sayText } from './twin-chat.js';
+import type { InstalledSkill } from '../skills/registry.js';
+
+/**
+ * The part of `SkillsRegistry` the gateway needs.
+ *
+ * Structural rather than a class import so a test can substitute a registry
+ * rooted in a scratch directory, and so the gateway never grows a second
+ * install implementation. `install` returning `null` on failure is the
+ * registry's real signature — see `skills.install` for why that must not be
+ * allowed to reach a caller as success.
+ */
+export interface SkillsRegistryLike {
+  initialize(): Promise<void>;
+  install(skillId: string, version?: string): Promise<InstalledSkill | null>;
+  getInstalled(): InstalledSkill[];
+}
+
+/**
+ * One row of `skills.list`, in the shape the macOS Bar's `Skill` decodes.
+ *
+ * `source` is the Bar's `SkillSource` enum — `local | clawhub | builtin`. A
+ * value outside it fails the decode on the client, which is how this endpoint
+ * managed to return rows and still render "No skills installed".
+ */
+interface GatewaySkillRow {
+  id: string;
+  name: string;
+  description: string;
+  version: string;
+  author?: string;
+  installed: boolean;
+  enabled: boolean;
+  source: 'local' | 'clawhub' | 'builtin';
+  category: string;
+}
 import { currentInstanceDeclared, currentInstanceName } from '../infra/current-instance.js';
 import {
   GatewayMetrics,
@@ -52,8 +101,34 @@ const DEFAULT_CONNECTION_TIMEOUT = 120000;
 const DEFAULT_SHUTDOWN_TIMEOUT = 250;
 const RATE_LIMIT_WINDOW_MS = 60000;
 const RATE_LIMIT_MAX_REQUESTS = 100;
+/**
+ * `zen.publish` carries rendered terminal frames, not control-plane calls: a
+ * 30fps screen is 1800 requests a minute, which the 100/minute control budget
+ * exists to stop. Frames get their own, separately accounted budget so a
+ * stream cannot starve (or be starved by) everything else on the connection.
+ * 120 frames per 2s window sustains 60fps and still bounds a rogue publisher.
+ */
+const FRAME_RATE_LIMIT_WINDOW_MS = 2000;
+const FRAME_RATE_LIMIT_MAX_FRAMES = 120;
+const FRAME_RATE_LIMITED_METHODS = new Set(['zen.publish']);
 const PROTOCOL_VERSION = 3;
 const LOOPBACK_HOSTS = new Set(['localhost', '127.0.0.1', '::1']);
+
+/**
+ * ExecSafety's audit vocabulary → the macOS Bar's `ApprovalStatus` enum, which
+ * only knows pending/approved/denied/expired. An unmapped value would fail the
+ * Swift decode for the whole array, so every audit status is covered here and
+ * the raw one is echoed alongside as `auditStatus`.
+ */
+const EXEC_AUDIT_STATUS_TO_BAR: Record<string, 'pending' | 'approved' | 'denied' | 'expired'> = {
+  allowed: 'approved',
+  approved: 'approved',
+  used: 'approved',
+  blocked: 'denied',
+  rejected: 'denied',
+  pending: 'pending',
+  expired: 'expired',
+};
 
 /** Parse a response that may contain a |||VOICE||| delimiter into formatted + voice parts */
 function parseVoiceDelimiter(content: string): { text: string; voiceText: string } {
@@ -156,6 +231,11 @@ export class GatewayServer {
   private methods = new Map<string, { handler: RpcMethodHandler; requiresAuth: boolean }>();
   private publicHttpMethods = new Map<string, { handler: RpcMethodHandler; requiresAuth: boolean }>();
   private rateLimits = new Map<string, RateLimitEntry>();
+  private frameRateLimits = new Map<string, RateLimitEntry>();
+  /** Live zen streaming state — see gateway/zen-stream.ts. */
+  private zenStreams = new ZenStreamHub((event, payload, filter) =>
+    this.broadcastEvent(event, payload, filter),
+  );
   /**
    * Largest HTTP POST body this gateway will read, in bytes.
    *
@@ -227,6 +307,27 @@ export class GatewayServer {
   private agentList?: () => { id: string; type: string; description?: string; capabilities?: string[]; tools?: { name: string; description?: string }[]; channels?: { type: string; connected: boolean }[] }[];
   private cronStore: Record<string, unknown>[] = [];
   private surgeonService?: SurgeonService;
+  /**
+   * The approval queue `exec.pending`/`exec.respond` serve.
+   *
+   * Defaults to the process-wide engine, which is the same object ShellAgent
+   * blocks on — see `getSharedExecSafety`. Anything else would give the Bar a
+   * screen that lists nothing and approves nothing while reporting success.
+   */
+  private execSafety?: ExecSafety;
+  /**
+   * Where third-party skills are installed to, and read back from.
+   *
+   * Injectable so a test can point it at a scratch directory instead of the
+   * owner's real `~/.openrappter/skills`. Left unset it is constructed lazily
+   * against `dataDir`, so production needs no wiring — `skills.install` that
+   * only works when someone remembered to call a setter is the failure mode
+   * this whole change exists to remove.
+   */
+  private skillsRegistry?: SkillsRegistryLike;
+  private skillsRegistryReady?: Promise<SkillsRegistryLike>;
+  /** Override for the bundled `skills/` directory. Tests only. */
+  private bundledSkillsDir?: string;
 
   constructor(config?: Partial<GatewayConfig>) {
     this.config = {
@@ -388,6 +489,26 @@ export class GatewayServer {
     return path.join(this.dataDir, 'cron.json');
   }
 
+  /**
+   * The directory the agent file browser is allowed to see.
+   *
+   * The same tree `AgentRegistry` hot-loads and `/agents/import` writes into:
+   * with the default data dir this is `~/.openrappter/agents`, so what the
+   * dashboard edits is what the organism runs. A gateway pointed at another
+   * data dir (every test does this) gets that dir's `agents/` and can never
+   * reach the real user's agents by accident.
+   */
+  private get agentFilesRoot(): string {
+    return this.agentFilesRootOverride ?? path.join(this.dataDir, 'agents');
+  }
+
+  private agentFilesRootOverride?: string;
+
+  /** Point the file browser somewhere else. For embedders and tests. */
+  setAgentFilesRoot(dir: string): void {
+    this.agentFilesRootOverride = dir;
+  }
+
   private loadCronStore() {
     try {
       if (fs.existsSync(this.cronStorePath)) {
@@ -529,6 +650,57 @@ export class GatewayServer {
     this.surgeonService = service;
   }
 
+  /** Override the approval engine served by `exec.*` (tests, embedders). */
+  setExecSafety(execSafety: ExecSafety): void {
+    this.execSafety = execSafety;
+  }
+
+  getExecSafety(): ExecSafety {
+    return (this.execSafety ??= getSharedExecSafety());
+  }
+
+  /**
+   * Point `skills.install`/`skills.list` at a specific skills registry.
+   *
+   * Production does not need to call this — see `skillsRegistry()`. It exists
+   * so a test can install into a scratch directory rather than the machine's
+   * real `~/.openrappter/skills`.
+   */
+  setSkillsRegistry(registry: SkillsRegistryLike): void {
+    this.skillsRegistry = registry;
+    this.skillsRegistryReady = undefined;
+  }
+
+  /** Point the bundled-skill reader at a specific directory. Tests only. */
+  setBundledSkillsDir(dir: string | undefined): void {
+    this.bundledSkillsDir = dir;
+  }
+
+  /**
+   * The installed-skills registry, created on first use.
+   *
+   * Lazy because constructing it mkdirs the skills directory, and a gateway
+   * that never touches skills should not create one. Rooted at `dataDir` so a
+   * test with a scratch `dataDir` is automatically contained.
+   */
+  private async skillsRegistryOrCreate(): Promise<SkillsRegistryLike> {
+    if (this.skillsRegistry) {
+      this.skillsRegistryReady ??= (async () => {
+        await this.skillsRegistry!.initialize();
+        return this.skillsRegistry!;
+      })();
+      return this.skillsRegistryReady;
+    }
+    this.skillsRegistryReady ??= (async () => {
+      const { SkillsRegistry } = await import('../skills/registry.js');
+      const registry = new SkillsRegistry(path.join(this.dataDir, 'skills'));
+      await registry.initialize();
+      this.skillsRegistry = registry;
+      return registry;
+    })();
+    return this.skillsRegistryReady;
+  }
+
   setReadinessProvider(
     provider: (() => Promise<GatewayReadiness>) | undefined,
   ): void {
@@ -621,8 +793,12 @@ export class GatewayServer {
     for (const { ws } of this.connections.values()) {
       ws.close(1000, 'Server shutting down');
     }
+    for (const connId of [...this.connections.keys()]) {
+      this.zenStreams.releaseConnection(connId);
+    }
     this.connections.clear();
     this.rateLimits.clear();
+    this.frameRateLimits.clear();
 
     const wss = this.wss;
     const httpServer = this.httpServer;
@@ -1542,6 +1718,8 @@ export class GatewayServer {
       authenticated: false, // always start unauthenticated; connect handshake required
       subscriptions: new Set(['*']), // auto-subscribe to all events after auth
       lastActivity: Date.now(),
+      remoteAddress: req.socket?.remoteAddress ?? undefined,
+      remotePort: req.socket?.remotePort ?? undefined,
       metadata: {
         userAgent: req.headers['user-agent'],
         origin: req.headers['origin'],
@@ -1558,6 +1736,10 @@ export class GatewayServer {
     ws.on('close', () => {
       this.connections.delete(connId);
       this.rateLimits.delete(connId);
+      this.frameRateLimits.delete(connId);
+      // A browser that closes its tab never sends zen.unsubscribe, and a
+      // killed producer never sends zen.end. Both are released here.
+      this.zenStreams.releaseConnection(connId);
       if (info.authenticated) {
         this.broadcastEvent(GatewayEvents.PRESENCE, {
           type: 'disconnect',
@@ -1638,7 +1820,10 @@ export class GatewayServer {
     if (!this.isGenerationActive(dispatchGeneration)) return;
 
     // Rate limit
-    if (!this.checkRateLimit(connId)) {
+    const withinBudget = FRAME_RATE_LIMITED_METHODS.has(frame.method)
+      ? this.checkFrameRateLimit(connId)
+      : this.checkRateLimit(connId);
+    if (!withinBudget) {
       this.metrics.recordRequest('rate_limited');
       logGatewayRequest('gateway', 'rpc.dispatch', { transport: 'ws', outcome: 'rate_limited', durationMs: Date.now() - startedAt });
       this.sendFrame(ws, { type: 'res', id: frame.id, ok: false, error: { code: RPC_ERROR.RATE_LIMITED, message: 'Rate limit exceeded' } });
@@ -1967,6 +2152,20 @@ export class GatewayServer {
     return true;
   }
 
+  /** Budget for frame-carrying methods, accounted separately from the
+   * control-plane limit above so neither can consume the other's allowance. */
+  private checkFrameRateLimit(connId: string): boolean {
+    const now = Date.now();
+    const entry = this.frameRateLimits.get(connId);
+    if (!entry || now - entry.windowStart > FRAME_RATE_LIMIT_WINDOW_MS) {
+      this.frameRateLimits.set(connId, { count: 1, windowStart: now });
+      return true;
+    }
+    if (entry.count >= FRAME_RATE_LIMIT_MAX_FRAMES) return false;
+    entry.count++;
+    return true;
+  }
+
   // ── Built-in Methods ─────────────────────────────────────────────────
 
   /**
@@ -1974,17 +2173,18 @@ export class GatewayServer {
    *
    * This is the *single* place production method names/handlers/auth
    * requirements are wired for the live GatewayServer — chat/channels/
-   * cron/connections/config here operate on this server's real state
-   * (`sessionStore`, `channelRegistry`, `cronStore`/`cronService`) and are
+   * cron/connections/config/skills here operate on this server's real state
+   * (`sessionStore`, `channelRegistry`, `cronStore`/`cronService`, the
+   * bundled `skills/` directory and the real `SkillsRegistry`) and are
    * the authoritative implementations for those names.
    *
    * `typescript/src/gateway/methods/*.ts` (aggregated by
    * `methods/index.ts#registerAllMethods`) are standalone, independently
    * unit-tested RPC method modules. Several of them declare the *same*
    * method names as the ones below (e.g. `chat.list`, `channels.connect`,
-   * `cron.*`, `connections.list`, `config.get`/`config.set`) against their
-   * own local/disconnected dependencies. `registerAllMethods` is
-   * intentionally **not** invoked here: doing so would silently duplicate
+   * `cron.*`, `connections.list`, `config.get`/`config.set`, `skills.*`)
+   * against their own local/disconnected dependencies. `registerAllMethods`
+   * is intentionally **not** invoked here: doing so would silently duplicate
    * or override the real, wired handlers below with divergent
    * implementations (the exact failure mode this method's doc-comment
    * exists to prevent). Do not call `registerAllMethods` from
@@ -2033,6 +2233,48 @@ export class GatewayServer {
 
     // Agents
     this.registerMethod('agents.list', async () => this.agentList ? this.agentList() : []);
+
+    /**
+     * Agent file browser — the dashboard's Files tab.
+     *
+     * These names existed in `methods/agents-methods.ts`, which is never
+     * registered (see the doc comment on this method): it forwarded to an
+     * `agentRegistry.readAgentFile`/`writeAgentFile` pair that no registry in
+     * this repo implements, with no path validation and no auth. So the tab
+     * answered `Method not found`, and the module that looked like the
+     * implementation would have been an unauthenticated arbitrary-path write
+     * into the directory the loader executes.
+     *
+     * The guards live in `agents/agent-files.ts`. The two decisions made here:
+     *
+     *  - `read` and `write` require the credential. `write` because these bytes
+     *    are executed by the next registry sweep — the same reason
+     *    `/agents/import` requires it (#171) — and `read` because agent source
+     *    is where a generated agent's keys end up.
+     *  - `list` does not: it returns names, sizes and mtimes for agents that
+     *    `agents.list` already names without a credential, and the file tab
+     *    has to be able to render before anything is opened.
+     */
+    this.registerMethod('agents.files.list', async (params: { agentId?: string }) => {
+      const files = await listAgentFiles(this.agentFilesRoot, params?.agentId);
+      return { files };
+    });
+    this.registerMethod('agents.files.read', async (params: { agentId?: string; path?: string }) => {
+      const content = await readAgentFile(this.agentFilesRoot, params?.agentId, params?.path);
+      return { content };
+    }, { requiresAuth: true });
+    this.registerMethod(
+      'agents.files.write',
+      async (params: { agentId?: string; path?: string; content?: string }) => {
+        return writeAgentFile(
+          this.agentFilesRoot,
+          params?.agentId,
+          params?.path,
+          params?.content,
+        );
+      },
+      { requiresAuth: true },
+    );
 
     // What the assistant is running on, and what to do when it cannot run.
     this.registerMethod('backend.status', async () => this.backendStatus);
@@ -2178,6 +2420,62 @@ export class GatewayServer {
       const result = { deleted: !!sessionId && this.sessionStore.delete(sessionId) };
       this.saveSessions();
       return result;
+    }, { requiresAuth: true });
+
+    /**
+     * sessions.reset — empty a session without discarding it.
+     *
+     * Wired against `sessionStore`, the same map `chat.*` reads, because the
+     * reply is not the evidence: `methods/session-methods.ts` declares this
+     * same name against a `Map` it allocates itself, so it answered "Session
+     * not found" for sessions the live gateway demonstrably held, and would
+     * have cleared nothing had it found one.
+     *
+     * Aborting the in-flight run is part of the reset, not politeness. A run
+     * that survives it pushes its assistant reply into the session on
+     * completion (see `executeAgentWithEvents`), so a reset issued mid-answer
+     * would report success and then be silently undone a few seconds later.
+     */
+    this.registerMethod('sessions.reset', async (params: { sessionId?: string; sessionKey?: string }) => {
+      const sessionId = resolveSessionId(params);
+      if (!sessionId) throw new Error('sessionKey required');
+      const session = this.sessionStore.get(sessionId);
+      if (!session) throw new Error('Session not found');
+
+      const runId = this.activeRunBySession.get(sessionId);
+      const run = runId ? this.activeRunsById.get(runId) : undefined;
+      if (run) this.abortActiveRun(run);
+
+      const clearedMessages = session.messages.length;
+      session.messages = [];
+      session.updatedAt = new Date().toISOString();
+      this.saveSessions();
+
+      return {
+        reset: true,
+        sessionId,
+        sessionKey: sessionId,
+        clearedMessages,
+        messageCount: 0,
+      };
+    }, { requiresAuth: true });
+
+    /**
+     * logs.get — the daemon's own log, redacted.
+     *
+     * Reads the launchd stdout/stderr files under this server's data dir; see
+     * `log-store.ts` for why those files and not the unfed in-memory buffer in
+     * `methods/logs-methods.ts` (which also answers to `logs.tail`, a name
+     * nothing calls). Returns a bare array because that is what the Bar's
+     * `RpcClient.getLogs` decodes.
+     */
+    this.registerMethod('logs.get', async (params: { limit?: number; since?: number; level?: string }) => {
+      return readGatewayLogs({
+        dataDir: this.dataDir,
+        limit: params?.limit,
+        since: params?.since,
+        level: params?.level,
+      });
     }, { requiresAuth: true });
 
     // Channel methods
@@ -2354,7 +2652,7 @@ export class GatewayServer {
       this.saveCronStore();
       return job;
     }, { requiresAuth: true });
-    this.registerMethod('cron.logs', async (params: Record<string, unknown>) => {
+    const cronRunLogs = async (params: Record<string, unknown>) => {
       if (this.cronService) {
         const svc = this.cronService as unknown as { getRunLogs?: (jobId?: string) => unknown[] };
         if (svc.getRunLogs) {
@@ -2363,15 +2661,232 @@ export class GatewayServer {
         }
       }
       return { runs: [] };
+    };
+    this.registerMethod('cron.logs', cronRunLogs);
+    /**
+     * `cron.runs` is the dashboard's spelling of `cron.logs`, not a second
+     * feature: both mean "the run history of this job", both take `{ jobId }`,
+     * and `CronService.getRunLogs(jobId)` already answers it. It shares the
+     * handler *object* rather than re-deriving the lookup, for the reason
+     * `cron.delete` had to (#166) — an alias with its own body kept the old bug
+     * after the original was fixed, and reported success over a store nothing
+     * was running from. A test asserts the two handlers are the same reference.
+     */
+    this.registerMethod('cron.runs', cronRunLogs);
+
+
+    // ── Skills ────────────────────────────────────────────────────────
+    //
+    // `gateway/methods/skills-methods.ts` declares these names too, and is
+    // deliberately never registered (see this method's doc comment). It hangs
+    // every handler off an injected `skillRegistry` that nothing in this repo
+    // ever supplies, and its `skills.list` answers `[]` when that registry is
+    // absent — which is the shape of the two defects this replaces, not a fix
+    // for them. These handlers run on the real bundled skills directory and
+    // the real `SkillsRegistry`.
+    //
+    // The payload is the macOS Bar's `Skill` — `id`, `name`, `description`,
+    // `version`, `author`, `installed`, `enabled`, `source`. That is not
+    // cosmetic. `RpcClient.listSkills` decodes `[Skill]`, and the shape
+    // previously returned by `src/index.ts` (`{name, description, category,
+    // enabled, version}`) is missing `id`, `installed` and `source`, so the
+    // decode failed and the Bar rendered "No skills installed" — #176's
+    // `skills list` always printing `(none)`, one layer up.
+    this.registerMethod('skills.list', async () => {
+      // Imported lazily, and it matters. `skills/bundled.ts` reaches
+      // `clawhub.ts` -> `agents/index.js` -> `AgentRegistry` -> `logging/
+      // logger.ts` -> `chalk`. Statically this pulls chalk into every module
+      // graph that touches GatewayServer, including `typescript/ui`, whose CI
+      // job installs only its own dependencies and so cannot resolve it. The
+      // dashboard's gateway test went red on an import it never asked for.
+      const { readBundledSkillInfo } = await import('../skills/bundled.js');
+      const bundled = await readBundledSkillInfo(this.bundledSkillsDir);
+
+      // An install that shipped without `skills/` and an install with no
+      // skills are both "zero skills" to the loader, which is exactly how
+      // #165 went unnoticed for as long as it did. Refuse to answer rather
+      // than report the packaging fault as an empty, successful list.
+      if (!bundled.directoryPresent) {
+        throw new Error(
+          `Bundled skills directory not found at ${bundled.directory} — this install shipped without skills/. `
+          + 'Reporting an empty list here would be indistinguishable from having no skills.'
+        );
+      }
+
+      const skills: GatewaySkillRow[] = bundled.skills.map((skill) => ({
+        id: skill.name,
+        name: skill.name,
+        description: skill.description,
+        version: '1.0.0',
+        // It ships with the product; it is on disk whether or not its
+        // dependencies are met.
+        installed: true,
+        // Eligibility is the real enable/disable signal for a bundled skill:
+        // a skill whose required binary or credential is missing cannot run.
+        enabled: skill.eligibility.eligible === 'eligible',
+        source: 'builtin',
+        category: skill.category,
+      }));
+
+      const registry = await this.skillsRegistryOrCreate();
+      for (const entry of registry.getInstalled()) {
+        skills.push({
+          id: entry.manifest.id,
+          name: entry.manifest.name,
+          description: entry.manifest.description,
+          version: entry.manifest.version,
+          author: entry.manifest.author,
+          installed: true,
+          enabled: entry.enabled,
+          source: 'clawhub',
+          category: 'installed',
+        });
+      }
+
+      return skills;
     });
 
+    /**
+     * Install a skill from a public GitHub repo.
+     *
+     * `requiresAuth: true`, for the same reason `/agents/import` does (#171):
+     * this fetches a third-party manifest and `SKILL.md` off the network and
+     * writes them where the agent will later load them. That is code entering
+     * the assistant's execution surface, and every other method here that
+     * changes what the machine will run — `config.set`, `cron.add`,
+     * `cron.create` — is gated the same way. An unauthenticated caller must
+     * not be able to plant a skill.
+     */
+    this.registerMethod('skills.install', async (params: { name?: string; source?: string; version?: string }) => {
+      const id = (params?.name ?? params?.source ?? '').trim();
+      if (!id) throw new Error('skills.install requires `name`');
+
+      // `SkillsRegistry.install` addresses skills as GitHub `owner/repo`.
+      // Checking here means a bare name gets a sentence that says what is
+      // wrong, instead of a 404 laundered into `null` and then into a
+      // generic failure.
+      if (!/^[\w.-]+\/[\w.-]+$/.test(id)) {
+        throw new Error(
+          `skills.install expects a GitHub "owner/repo" identifier; got "${id}". `
+          + 'Bundled skills ship with the product and are not installed.'
+        );
+      }
+
+      const registry = await this.skillsRegistryOrCreate();
+      const installed = await registry.install(id, params?.version);
+
+      // The registry logs and returns `null` on every failure — missing repo,
+      // no skill.json, unwritable directory. #176 found the ClawHub stub
+      // reporting `Successfully installed` over a no-op that wrote nothing;
+      // returning `{installed: true}` for a `null` here would be that defect
+      // rebuilt on a real registry.
+      if (!installed) {
+        throw new Error(
+          `skills.install failed for "${id}" — no skill.json was fetched and nothing was written. `
+          + 'Check the repo exists, is public, and has skill.json at its root.'
+        );
+      }
+
+      return {
+        id: installed.manifest.id,
+        name: installed.manifest.name,
+        description: installed.manifest.description,
+        version: installed.manifest.version,
+        author: installed.manifest.author,
+        installed: true,
+        enabled: installed.enabled,
+        source: 'clawhub',
+        path: installed.path,
+        installedAt: installed.installedAt,
+      };
+    }, { requiresAuth: true });
+
     // Connection methods
+    //
+    // The payload carries the macOS Bar's `Node` fields as well as the
+    // original ConnectionInfo ones. `RpcClient.listNodes` decodes `[Node]`,
+    // which requires `name`, `host`, `port` and `status`; without them the
+    // decode failed, `listNodes` swallowed it, and the Nodes pane was
+    // permanently empty — which also meant `connections.disconnect` could
+    // never be reached, because the Bar takes the connection id it
+    // disconnects from a row in that list.
     this.registerMethod('connections.list', async () => {
       return this.getConnections().map((c) => ({
         id: c.id, connectedAt: c.connectedAt, authenticated: c.authenticated,
         subscriptions: Array.from(c.subscriptions), deviceId: c.deviceId, deviceType: c.deviceType,
+        connectionId: c.id,
+        name: c.deviceId ?? c.deviceType ?? c.id,
+        // The peer's real socket address, recorded when the socket opened.
+        // Not a guess and not a placeholder: if the transport did not report
+        // one, this says so rather than inventing 127.0.0.1.
+        host: c.remoteAddress ?? 'unknown',
+        port: c.remotePort ?? 0,
+        // It is in `this.connections`, so it is attached right now.
+        status: 'online',
+        platform: c.deviceType,
+        lastSeen: new Date(c.lastActivity).toISOString(),
       }));
     });
+
+    /**
+     * Close a live connection to this gateway.
+     *
+     * Backed by `this.connections` — the same map `connections.list` reads
+     * and the same map `handleConnection` writes — so what it reports is what
+     * happened. An unknown id is an error, not a cheerful `{disconnected:
+     * true}`: the Bar's only reason to call this is to end a session it can
+     * see, and telling it the session ended when nothing was found is the
+     * kind of false success #176 was written about.
+     *
+     * `requiresAuth: true` — it terminates other clients' sessions.
+     */
+    this.registerMethod('connections.disconnect', async (params: { connectionId?: string; id?: string }) => {
+      const connectionId = (params?.connectionId ?? params?.id ?? '').trim();
+      if (!connectionId) throw new Error('connections.disconnect requires `connectionId`');
+
+      const target = this.connections.get(connectionId);
+      if (!target) {
+        throw new Error(`No connection '${connectionId}' is attached to this gateway`);
+      }
+
+      target.ws.close(1000, 'Disconnected by request');
+      this.connections.delete(connectionId);
+      this.rateLimits.delete(connectionId);
+
+      return { disconnected: true, connectionId };
+    }, { requiresAuth: true });
+
+    /**
+     * `connections.pair` is deliberately NOT registered.
+     *
+     * `RpcClient.pairNode(host:port:)` asks this gateway to pair with an
+     * arbitrary `host` and `port`. There is nothing here that can honestly
+     * accept it:
+     *
+     *  - There is no registry of remote peers to record a pairing in. The
+     *    real neighbourhood (`infra/roster.ts`) is loopback instances, and
+     *    each rappter writes its OWN `endpoint.json` after a successful
+     *    listen. Writing one on another process's behalf would forge exactly
+     *    the record #114/#118/#132 spent three passes learning not to trust.
+     *  - `connections.list` reports INBOUND websocket connections. A peer
+     *    paired outbound could never appear in it, so a `{paired: true}`
+     *    would be followed by the Bar's own `loadNodes()` showing nothing —
+     *    success, then an empty list. That is the lie, not the fix.
+     *  - Any loopback gateway worth pairing with is already in the roster,
+     *    by itself, because it recorded itself. Pairing would add a second
+     *    way to know a peer; `agents/NeighborAgent.ts` is explicit that "a
+     *    second way to contact a peer would be the next one" in this repo's
+     *    long run of two-derivations-of-one-thing defects.
+     *  - It takes a host. `NeighborAgent` refuses URLs on purpose — "an agent
+     *    taking a URL would hand a model a general HTTP POST primitive, which
+     *    is an SSRF vector" (#84 is open on DNS rebinding here).
+     *
+     * So the Bar gets `Method not found`, which is true, instead of a
+     * pairing that records an unverified peer as though it were reachable.
+     * Registering it needs a peer registry that probes on read, and that is
+     * a design decision, not a wiring fix.
+     */
+
     this.registerMethod('connection.identify', async (params: { deviceId?: string; deviceType?: string; metadata?: Record<string, unknown> }, conn) => {
       conn.deviceId = params.deviceId;
       conn.deviceType = params.deviceType;
@@ -2418,9 +2933,144 @@ export class GatewayServer {
     this.registerMethod('config.set', writeConfig, { requiresAuth: true });
     this.registerMethod('config.apply', writeConfig, { requiresAuth: true });
 
+    // ── Execution approvals ────────────────────────────────────────────────
+    //
+    // The macOS Bar's Permissions screen (ApprovalViewModel.swift) calls
+    // `exec.pending` on appear and `exec.respond` on approve/deny. Neither was
+    // registered, so every button on the screen that gates agent commands
+    // returned "Method not found: exec.pending". `gateway/methods/exec-methods.ts`
+    // is not the fix: it declares different names (`exec.approval.request`,
+    // `exec.approvals.get`, …) against an injected `approvalManager` that no
+    // caller ever supplies, so registering it would have produced a screen that
+    // renders an empty list and reports success — strictly worse than an error.
+    //
+    // These handlers serve the engine that actually blocks commands: the
+    // ExecSafety instance ShellAgent issues approval tokens from.
+    // The Bar's approval screen listens for this event (AppViewModel
+    // handleEvent -> "approval"). Nothing ever emitted it, so a command could
+    // sit in the queue with the screen showing nothing until it was reopened.
+    // Only authenticated, subscribed connections receive it — the same
+    // audience that can already call exec.pending — so the payload carries
+    // the fields that screen reads rather than forcing a second round trip.
+    this.getExecSafety().onApprovalRequested((approval) => {
+      this.broadcastEvent(GatewayEvents.APPROVAL, {
+        id: approval.id,
+        command: approval.cmd,
+        description: approval.reason,
+        binary: approval.binary,
+        createdAt: approval.createdAt,
+      });
+    });
+
+    this.registerMethod('exec.pending', async () =>
+      this.getExecSafety().listPendingApprovals().map((approval) => ({
+        // Field names the Bar decodes into ExecutionApproval.
+        id: approval.id,
+        command: approval.cmd,
+        description: approval.reason,
+        timestamp: approval.createdAt,
+        status: 'pending',
+        // Extra context; unknown keys are ignored by the Swift decoder.
+        binary: approval.binary,
+        kind: approval.kind,
+        expiresAt: approval.expiresAt,
+      })),
+    );
+
+    this.registerMethod(
+      'exec.respond',
+      async (params: {
+        approvalId?: string;
+        id?: string;
+        requestId?: string;
+        approved?: boolean;
+        decision?: string;
+      }) => {
+        const approvalId = params?.approvalId ?? params?.id ?? params?.requestId;
+        if (typeof approvalId !== 'string' || approvalId.trim() === '') {
+          throw new Error('exec.respond requires an `approvalId`');
+        }
+
+        // Never infer the decision. A missing/garbled field defaulting to
+        // "approved" is an unaudited execution, and defaulting to "denied"
+        // silently kills a command the user approved.
+        let approved: boolean;
+        if (typeof params.approved === 'boolean') {
+          approved = params.approved;
+        } else if (params.decision === 'approve' || params.decision === 'approved') {
+          approved = true;
+        } else if (
+          params.decision === 'deny' ||
+          params.decision === 'denied' ||
+          params.decision === 'reject' ||
+          params.decision === 'rejected'
+        ) {
+          approved = false;
+        } else {
+          throw new Error('exec.respond requires a boolean `approved` (or a `decision`)');
+        }
+
+        // Refuse rather than report success: an unknown, expired, or
+        // already-resolved id means this approval cannot be granted, and the
+        // reviewer has to see that instead of a row quietly disappearing.
+        if (!this.getExecSafety().respondToApproval(approvalId, approved)) {
+          throw new Error(
+            `Unknown, expired, or already-resolved approval id: ${approvalId}`,
+          );
+        }
+
+        return { ok: true, approvalId, approved, status: approved ? 'approved' : 'denied' };
+      },
+    );
+
+    // The Bar's approval history view reads the same shape. Backed by the real
+    // audit log, mapped onto the Bar's vocabulary (it has no 'rejected'/'used').
+    this.registerMethod('exec.history', async () =>
+      this.getExecSafety().getAuditLog().map((entry) => ({
+        id: entry.id,
+        command: entry.cmd,
+        description: entry.reason,
+        timestamp: entry.timestamp,
+        status: EXEC_AUDIT_STATUS_TO_BAR[entry.status] ?? 'pending',
+        binary: entry.binary,
+        auditStatus: entry.status,
+      })),
+    );
+
+    /**
+     * Usage methods — what the Bar's usage screen calls.
+     *
+     * `UsageViewModel.loadUsage()` calls `usage.stats`; `loadRecentEntries()`
+     * calls `usage.history`. Neither name was registered here, so the screen
+     * showed "Method not found" for both. See `gateway/usage.ts` for why these
+     * read the Flight Recorder rather than reusing
+     * `methods/usage-methods.ts` (which declares different names —
+     * `usage.status`/`usage.cost` — against a `usageTracker` nothing in this
+     * repository constructs, and answers a hardcoded zero without one).
+     *
+     * Authenticated: token counts describe what the operator's account has
+     * spent. The Bar handshakes before any RPC, so `requiresAuth` costs it
+     * nothing.
+     */
+    const usageParams = (params: { since?: string | number; limit?: number } | undefined) => ({
+      ...(params?.since === undefined ? {} : { since: params.since }),
+      ...(params?.limit === undefined ? {} : { limit: params.limit }),
+    });
+    this.registerMethod(
+      'usage.stats',
+      async (params: { since?: string | number } | undefined) =>
+        collectUsageStats(getFlightRecorder(), usageParams(params)),
+      { requiresAuth: true },
+    );
+    this.registerMethod(
+      'usage.history',
+      async (params: { since?: string | number; limit?: number } | undefined) =>
+        collectUsageHistory(getFlightRecorder(), usageParams(params)),
+      { requiresAuth: true },
+    );
+
     // Showcase methods
     registerShowcaseMethods(this);
-
     if (this.surgeonService) {
       registerSurgeonMethods(this, this.surgeonService);
     }
@@ -2433,6 +3083,18 @@ export class GatewayServer {
 
     // Backup & restore methods
     registerBackupMethods(this, { dataDir: this.dataDir });
+
+    // Zen streaming (live terminal screens relayed to browsers).
+    //
+    // `methods/zen-methods.ts` declares these same names against
+    // `peer-stream.ts`'s process-local `globalPeerStream`, which no gateway
+    // ever writes to — registering it would answer the dashboard's
+    // `zen.sessions` with a list that is empty by construction. These handlers
+    // are backed by this server's own hub, fed by connected producers.
+    registerZenStreamMethods(this, {
+      hub: this.zenStreams,
+      isLiveConnection: (connectionId: string) => this.connections.has(connectionId),
+    });
 
     // Rappter multi-soul methods
     if (this.rappterManager) {

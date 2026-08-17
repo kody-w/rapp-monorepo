@@ -32,6 +32,17 @@ private func makeOkNullResponse(id: String) throws -> Data {
     return try JSONSerialization.data(withJSONObject: frame)
 }
 
+/// A refusal frame, as the gateway sends one.
+private func makeErrorResponse(id: String, code: Int = -32603, message: String) throws -> Data {
+    let frame: [String: Any] = [
+        "type": "res",
+        "id": id,
+        "ok": false,
+        "error": ["code": code, "message": message],
+    ]
+    return try JSONSerialization.data(withJSONObject: frame)
+}
+
 /// Connects a fresh mock-backed GatewayConnection (consumes request id
 /// "rpc-1" for the handshake) and returns it plus an RpcClient wrapping it,
 /// ready for a first RPC call at id "rpc-2".
@@ -702,6 +713,386 @@ func runRpcClientContractTests() async {
 
             try expectEqual(jobs.count, 1)
             try expectEqual(jobs.first?.command, "summarise my inbox")
+            await conn.disconnect()
+        }
+    }
+
+    // The Bar's approval screen was dead: `exec.pending` and `exec.respond`
+    // were never registered on the production gateway. Now that they are, these
+    // pin the wire shape the gateway emits to what RpcClient actually decodes —
+    // including the ISO-8601 `timestamp`, which the stock JSONDecoder date
+    // strategy rejects (it wants a Double), and which the old `try?` swallowed
+    // into an empty list: an approval screen that shows nothing, forever.
+    await suite("RpcClient Execution Approval Contract") {
+        await test("pending approvals decode the gateway's real payload") {
+            let (conn, mock, rpc) = try await makeConnectedClient()
+            let approvals = try await withDeferredResponse(
+                mock: mock,
+                response: try makeOkArrayResponse(id: "rpc-2", payload: [[
+                    "id": "token_1786932956639_v2wdh9c9wgs",
+                    "command": "curl https://example.com",
+                    "description": "Approval token issued for: curl https://example.com",
+                    "timestamp": "2026-08-17T02:15:56.639Z",
+                    "status": "pending",
+                    "binary": "curl",
+                    "kind": "token",
+                    "expiresAt": "2026-08-17T02:20:56.639Z",
+                ]])
+            ) {
+                try await rpc.listPendingApprovals()
+            }
+
+            try expectEqual(approvals.count, 1)
+            try expectEqual(approvals.first?.id, "token_1786932956639_v2wdh9c9wgs")
+            try expectEqual(approvals.first?.command, "curl https://example.com")
+            try expectEqual(approvals.first?.status, .pending)
+            try expectNotNil(approvals.first?.timestamp)
+            let sent = try await lastSentJSON(mock)
+            try expectEqual(sent?["method"] as? String, "exec.pending")
+            await conn.disconnect()
+        }
+
+        await test("a timestamp without fractional seconds still decodes") {
+            let (conn, mock, rpc) = try await makeConnectedClient()
+            let approvals = try await withDeferredResponse(
+                mock: mock,
+                response: try makeOkArrayResponse(id: "rpc-2", payload: [[
+                    "id": "exec_1",
+                    "command": "npm install",
+                    "timestamp": "2026-08-17T02:15:56Z",
+                    "status": "pending",
+                ]])
+            ) {
+                try await rpc.listPendingApprovals()
+            }
+
+            try expectEqual(approvals.count, 1)
+            try expectEqual(approvals.first?.command, "npm install")
+            await conn.disconnect()
+        }
+
+        await test("a payload the Bar cannot read is reported, not silently empty") {
+            let (conn, mock, rpc) = try await makeConnectedClient()
+            var threw = false
+            do {
+                _ = try await withDeferredResponse(
+                    mock: mock,
+                    response: try makeOkArrayResponse(id: "rpc-2", payload: [[
+                        "id": "exec_1",
+                        "timestamp": "2026-08-17T02:15:56.639Z",
+                        "status": "pending",
+                    ]])
+                ) {
+                    try await rpc.listPendingApprovals()
+                }
+            } catch {
+                threw = true
+            }
+
+            try expect(threw, "a malformed approval list must surface an error")
+            await conn.disconnect()
+        }
+
+        await test("responding sends the approvalId and the decision") {
+            let (conn, mock, rpc) = try await makeConnectedClient()
+            try await withDeferredResponse(
+                mock: mock,
+                response: try makeOkResponse(id: "rpc-2", payload: [
+                    "ok": true,
+                    "approvalId": "token_1",
+                    "approved": false,
+                    "status": "denied",
+                ])
+            ) {
+                try await rpc.respondToApproval(approvalId: "token_1", approved: false)
+            }
+
+            let sent = try await lastSentJSON(mock)
+            try expectEqual(sent?["method"] as? String, "exec.respond")
+            let params = sent?["params"] as? [String: Any]
+            try expectEqual(params?["approvalId"] as? String, "token_1")
+            try expectEqual(params?["approved"] as? Bool, false)
+            await conn.disconnect()
+        }
+
+        // A refused id must not look like a granted approval: the gateway
+        // answers ok:false, and the Bar has to keep the row and say so.
+        await test("a refused approval id surfaces the gateway error") {
+            let (conn, mock, rpc) = try await makeConnectedClient()
+            let frame: [String: Any] = [
+                "type": "res",
+                "id": "rpc-2",
+                "ok": false,
+                "error": ["code": -32603, "message": "Unknown, expired, or already-resolved approval id: token_x"],
+            ]
+            var threw = false
+            do {
+                try await withDeferredResponse(
+                    mock: mock,
+                    response: try JSONSerialization.data(withJSONObject: frame)
+                ) {
+                    try await rpc.respondToApproval(approvalId: "token_x", approved: true)
+                }
+            } catch {
+                threw = true
+            }
+
+            try expect(threw, "a refused approval must throw")
+            await conn.disconnect()
+        }
+    }
+
+    // MARK: - Skills and Nodes
+    //
+    // Four Bar calls resolved to methods the production gateway never
+    // registered. Probed against a real started `GatewayServer`:
+    //
+    //     skills.list              -> Method not found
+    //     skills.install           -> Method not found
+    //     connections.pair         -> Method not found
+    //     connections.disconnect   -> Method not found
+    //
+    // Registering them exposed a second defect underneath, the same shape as
+    // the one #176 found in `skills list`: the payload the gateway sent was
+    // not the payload this client decodes, and both `listSkills` and
+    // `listNodes` turned that failure into an empty array. A pane that says
+    // "No skills installed" over 52 shipped skills is not a smaller bug than
+    // a missing method, it is a quieter one.
+
+    await suite("RpcClient Skills Contract") {
+        await test("a gateway skills.list payload decodes into skills") {
+            let (conn, mock, rpc) = try await makeConnectedClient()
+            let skills = try await withDeferredResponse(
+                mock: mock,
+                // Copied from a live `skills.list` response.
+                response: try makeOkArrayResponse(id: "rpc-2", payload: [[
+                    "id": "weather",
+                    "name": "weather",
+                    "description": "Get current weather and forecasts (no API key required).",
+                    "version": "1.0.0",
+                    "installed": true,
+                    "enabled": true,
+                    "source": "builtin",
+                    "category": "weather",
+                ]])
+            ) {
+                try await rpc.listSkills()
+            }
+
+            try expectEqual(skills.count, 1)
+            try expectEqual(skills.first?.name, "weather")
+            try expectEqual(skills.first?.source, SkillSource.builtin)
+            try expect(skills.first?.installed == true)
+            await conn.disconnect()
+        }
+
+        await test("a payload this build cannot read is an error, not an empty list") {
+            let (conn, mock, rpc) = try await makeConnectedClient()
+            // The shape `src/index.ts` used to send: no `id`, no `installed`,
+            // no `source`. It decoded to nothing and the pane said "No skills
+            // installed" — indistinguishable from a machine with no skills.
+            var threw = false
+            do {
+                _ = try await withDeferredResponse(
+                    mock: mock,
+                    response: try makeOkArrayResponse(id: "rpc-2", payload: [[
+                        "name": "weather",
+                        "description": "Get current weather and forecasts.",
+                        "category": "weather",
+                        "enabled": true,
+                        "version": "1.0.0",
+                    ]])
+                ) {
+                    try await rpc.listSkills()
+                }
+            } catch {
+                threw = true
+            }
+            try expect(threw, "an undecodable skills payload must not read as zero skills")
+            await conn.disconnect()
+        }
+
+        await test("a gateway error on skills.list reaches the caller") {
+            let (conn, mock, rpc) = try await makeConnectedClient()
+            var threw = false
+            do {
+                _ = try await withDeferredResponse(
+                    mock: mock,
+                    response: try makeErrorResponse(
+                        id: "rpc-2",
+                        message: "Bundled skills directory not found — this install shipped without skills/"
+                    )
+                ) {
+                    try await rpc.listSkills()
+                }
+            } catch {
+                threw = true
+            }
+            try expect(threw, "a packaging fault must not render as an empty skills list")
+            await conn.disconnect()
+        }
+
+        await test("installSkill calls skills.install with the name") {
+            let (conn, mock, rpc) = try await makeConnectedClient()
+            try await withDeferredResponse(
+                mock: mock,
+                response: try makeOkResponse(id: "rpc-2", payload: [
+                    "id": "kody-w/rappterverse",
+                    "name": "rappterverse",
+                    "version": "2.1.0",
+                    "installed": true,
+                ])
+            ) {
+                try await rpc.installSkill(name: "kody-w/rappterverse")
+            }
+
+            let sent = try await lastSentJSON(mock)
+            try expectEqual(sent?["method"] as? String, "skills.install")
+            let params = sent?["params"] as? [String: Any]
+            try expectEqual(params?["name"] as? String, "kody-w/rappterverse")
+            await conn.disconnect()
+        }
+
+        await test("an install that installed nothing is not reported as success") {
+            let (conn, mock, rpc) = try await makeConnectedClient()
+            var threw = false
+            do {
+                try await withDeferredResponse(
+                    mock: mock,
+                    response: try makeErrorResponse(
+                        id: "rpc-2",
+                        message: "skills.install failed — nothing was written"
+                    )
+                ) {
+                    try await rpc.installSkill(name: "kody-w/rappterverse")
+                }
+            } catch {
+                threw = true
+            }
+            try expect(threw, "#176: install must not print success over a no-op")
+            await conn.disconnect()
+        }
+    }
+
+    await suite("RpcClient Nodes Contract") {
+        await test("a gateway connections.list payload decodes into nodes") {
+            let (conn, mock, rpc) = try await makeConnectedClient()
+            let nodes = try await withDeferredResponse(
+                mock: mock,
+                // Copied from a live `connections.list` response.
+                response: try makeOkArrayResponse(id: "rpc-2", payload: [[
+                    "id": "conn_ab12cd34",
+                    "connectionId": "conn_ab12cd34",
+                    "name": "openrappter-bar",
+                    "host": "127.0.0.1",
+                    "port": 54321,
+                    "status": "online",
+                    "connectedAt": "2026-08-16T22:00:00.000Z",
+                    "lastSeen": "2026-08-16T22:00:01.500Z",
+                    "authenticated": true,
+                    "subscriptions": ["*"],
+                ]])
+            ) {
+                try await rpc.listNodes()
+            }
+
+            // `connectionId` is the whole point: `disconnectNode` takes it
+            // from a row here, so a list that cannot decode also makes
+            // disconnect unreachable from the UI.
+            try expectEqual(nodes.count, 1)
+            try expectEqual(nodes.first?.connectionId, "conn_ab12cd34")
+            try expectEqual(nodes.first?.status, NodeStatus.online)
+            try expectEqual(nodes.first?.host, "127.0.0.1")
+            try expectNotNil(nodes.first?.lastSeen)
+            await conn.disconnect()
+        }
+
+        await test("a payload without the Node fields is an error, not an empty list") {
+            let (conn, mock, rpc) = try await makeConnectedClient()
+            var threw = false
+            do {
+                _ = try await withDeferredResponse(
+                    mock: mock,
+                    // The old `connections.list` shape: no name/host/port/status.
+                    response: try makeOkArrayResponse(id: "rpc-2", payload: [[
+                        "id": "conn_ab12cd34",
+                        "connectedAt": "2026-08-16T22:00:00.000Z",
+                        "authenticated": true,
+                        "subscriptions": ["*"],
+                    ]])
+                ) {
+                    try await rpc.listNodes()
+                }
+            } catch {
+                threw = true
+            }
+            try expect(threw, "an undecodable nodes payload must not read as zero nodes")
+            await conn.disconnect()
+        }
+
+        await test("disconnectNode calls connections.disconnect with the connection id") {
+            let (conn, mock, rpc) = try await makeConnectedClient()
+            try await withDeferredResponse(
+                mock: mock,
+                response: try makeOkResponse(id: "rpc-2", payload: [
+                    "disconnected": true,
+                    "connectionId": "conn_ab12cd34",
+                ])
+            ) {
+                try await rpc.disconnectNode(connectionId: "conn_ab12cd34")
+            }
+
+            let sent = try await lastSentJSON(mock)
+            try expectEqual(sent?["method"] as? String, "connections.disconnect")
+            let params = sent?["params"] as? [String: Any]
+            try expectEqual(params?["connectionId"] as? String, "conn_ab12cd34")
+            await conn.disconnect()
+        }
+
+        await test("a disconnect the gateway refused is not reported as success") {
+            let (conn, mock, rpc) = try await makeConnectedClient()
+            var threw = false
+            do {
+                try await withDeferredResponse(
+                    mock: mock,
+                    response: try makeErrorResponse(
+                        id: "rpc-2",
+                        message: "No connection 'conn_absent' is attached to this gateway"
+                    )
+                ) {
+                    try await rpc.disconnectNode(connectionId: "conn_absent")
+                }
+            } catch {
+                threw = true
+            }
+            try expect(threw)
+            await conn.disconnect()
+        }
+
+        // `connections.pair` is deliberately unregistered on the gateway —
+        // there is no registry of remote peers to record a pairing in, and
+        // `connections.list` reports inbound sockets, so a `{paired: true}`
+        // would be followed by a list that still showed nothing. What matters
+        // on this side is that the refusal reaches the owner instead of being
+        // swallowed into a silent no-op.
+        await test("pairing a peer the gateway will not pair surfaces as an error") {
+            let (conn, mock, rpc) = try await makeConnectedClient()
+            var threw = false
+            do {
+                try await withDeferredResponse(
+                    mock: mock,
+                    response: try makeErrorResponse(
+                        id: "rpc-2",
+                        code: -32601,
+                        message: "Method not found: connections.pair"
+                    )
+                ) {
+                    try await rpc.pairNode(host: "10.0.0.9", port: 18790)
+                }
+            } catch {
+                threw = true
+            }
+            try expect(threw, "an unreachable or unpairable peer must not read as paired")
             await conn.disconnect()
         }
     }

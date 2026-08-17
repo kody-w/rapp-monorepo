@@ -502,14 +502,52 @@ public struct RpcClient: RpcClientProtocol, Sendable {
 
     // MARK: - Execution Approval Methods
 
+    /// The gateway timestamps approvals as ISO-8601 strings (`toISOString()`,
+    /// so always with milliseconds), while `JSONDecoder`'s default date
+    /// strategy expects a `Double`. Decoding `ExecutionApproval` with a stock
+    /// decoder therefore always failed — and the old `try?` turned that into an
+    /// empty array, i.e. an approval screen that silently shows nothing while
+    /// commands sit blocked. Accept both spellings, with and without fractional
+    /// seconds.
+    private static func approvalDecoder() -> JSONDecoder {
+        let decoder = JSONDecoder()
+        let withFraction = ISO8601DateFormatter()
+        withFraction.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let basic = ISO8601DateFormatter()
+        decoder.dateDecodingStrategy = .custom { decoder in
+            let container = try decoder.singleValueContainer()
+            if let text = try? container.decode(String.self) {
+                if let date = withFraction.date(from: text) ?? basic.date(from: text) {
+                    return date
+                }
+                throw DecodingError.dataCorruptedError(
+                    in: container,
+                    debugDescription: "Unrecognised approval timestamp: \(text)"
+                )
+            }
+            // Numeric timestamps stay readable for any client that sends them.
+            let seconds = try container.decode(Double.self)
+            return Date(timeIntervalSince1970: seconds > 3_000_000_000 ? seconds / 1000 : seconds)
+        }
+        return decoder
+    }
+
     public func listPendingApprovals() async throws -> [ExecutionApproval] {
         let response = try await connection.sendRequest(method: "exec.pending")
-        guard response.ok else { throw RpcClientError.decodingFailed("Failed to list approvals") }
-        let data = try JSONEncoder().encode(response.payload ?? AnyCodable([]))
-        if let approvals = try? JSONDecoder().decode([ExecutionApproval].self, from: data) {
-            return approvals
+        guard response.ok else {
+            throw GatewayConnectionError.serverError(
+                code: response.error?.code ?? -1,
+                message: response.error?.message ?? "Failed to list approvals"
+            )
         }
-        return []
+        let data = try JSONEncoder().encode(response.payload ?? AnyCodable([]))
+        // Throw rather than return []: an approval the user cannot see is an
+        // approval they cannot deny, so a decode failure must be visible.
+        do {
+            return try Self.approvalDecoder().decode([ExecutionApproval].self, from: data)
+        } catch {
+            throw RpcClientError.decodingFailed("Pending approvals: \(error)")
+        }
     }
 
     public func respondToApproval(approvalId: String, approved: Bool) async throws {
@@ -525,12 +563,18 @@ public struct RpcClient: RpcClientProtocol, Sendable {
 
     public func getApprovalHistory() async throws -> [ExecutionApproval] {
         let response = try await connection.sendRequest(method: "exec.history")
-        guard response.ok else { throw RpcClientError.decodingFailed("Failed to get approval history") }
-        let data = try JSONEncoder().encode(response.payload ?? AnyCodable([]))
-        if let approvals = try? JSONDecoder().decode([ExecutionApproval].self, from: data) {
-            return approvals
+        guard response.ok else {
+            throw GatewayConnectionError.serverError(
+                code: response.error?.code ?? -1,
+                message: response.error?.message ?? "Failed to get approval history"
+            )
         }
-        return []
+        let data = try JSONEncoder().encode(response.payload ?? AnyCodable([]))
+        do {
+            return try Self.approvalDecoder().decode([ExecutionApproval].self, from: data)
+        } catch {
+            throw RpcClientError.decodingFailed("Approval history: \(error)")
+        }
     }
 
     // MARK: - Usage Methods
@@ -540,26 +584,63 @@ public struct RpcClient: RpcClientProtocol, Sendable {
         return try decodePayload(response)
     }
 
+    /// Recent per-request usage entries.
+    ///
+    /// The gateway timestamps these as ISO-8601 strings, like every other
+    /// timestamp on this wire. A bare `JSONDecoder()` uses
+    /// `.deferredToDate`, which demands a `Double` and fails on a string —
+    /// and because the failure was swallowed by `try?`, every entry the
+    /// gateway sent was silently discarded and this returned `[]`. Same
+    /// custom strategy as `listCronJobs()`, for the same reason.
     public func getUsageHistory() async throws -> [UsageEntry] {
         let response = try await connection.sendRequest(method: "usage.history")
-        guard response.ok else { throw RpcClientError.decodingFailed("Failed to get usage history") }
-        let data = try JSONEncoder().encode(response.payload ?? AnyCodable([]))
-        if let entries = try? JSONDecoder().decode([UsageEntry].self, from: data) {
-            return entries
+        guard response.ok else {
+            let detail = response.error ?? RpcErrorDetail(code: -1, message: "Failed to get usage history")
+            throw GatewayConnectionError.serverError(code: detail.code, message: detail.message)
         }
-        return []
+        let data = try JSONEncoder().encode(response.payload ?? AnyCodable([]))
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .custom { decoder in
+            let container = try decoder.singleValueContainer()
+            guard let str = try? container.decode(String.self) else {
+                throw RpcClientError.decodingFailed("usage.history timestamp was not a string")
+            }
+            let withFraction = ISO8601DateFormatter()
+            withFraction.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+            if let date = withFraction.date(from: str) { return date }
+            let plain = ISO8601DateFormatter()
+            plain.formatOptions = [.withInternetDateTime]
+            guard let date = plain.date(from: str) else {
+                throw RpcClientError.decodingFailed("usage.history timestamp was not ISO-8601: \(str)")
+            }
+            return date
+        }
+        return try decoder.decode([UsageEntry].self, from: data)
     }
 
     // MARK: - Skills Methods
 
+    /// List skills the gateway knows about — bundled and installed.
+    ///
+    /// A decode failure is surfaced, not swallowed. It used to return `[]`,
+    /// which the Skills pane renders as "No skills installed" — so a payload
+    /// the Bar could not read was indistinguishable from a machine with no
+    /// skills. The gateway ships 52 bundled skills, and the pane showed none
+    /// of them for exactly that reason.
     public func listSkills() async throws -> [Skill] {
         let response = try await connection.sendRequest(method: "skills.list")
-        guard response.ok else { throw RpcClientError.decodingFailed("Failed to list skills") }
-        let data = try JSONEncoder().encode(response.payload ?? AnyCodable([]))
-        if let skills = try? JSONDecoder().decode([Skill].self, from: data) {
-            return skills
+        guard response.ok else {
+            throw GatewayConnectionError.serverError(
+                code: response.error?.code ?? -1,
+                message: response.error?.message ?? "Failed to list skills"
+            )
         }
-        return []
+        let data = try JSONEncoder().encode(response.payload ?? AnyCodable([]))
+        do {
+            return try JSONDecoder().decode([Skill].self, from: data)
+        } catch {
+            throw RpcClientError.decodingFailed("skills.list returned a payload this build cannot read: \(error)")
+        }
     }
 
     public func installSkill(name: String) async throws {
@@ -572,14 +653,56 @@ public struct RpcClient: RpcClientProtocol, Sendable {
 
     // MARK: - Nodes Methods
 
+    /// List the connections attached to the gateway.
+    ///
+    /// A decode failure is surfaced rather than becoming an empty list. The
+    /// empty list is not harmless here: `disconnectNode` takes its
+    /// `connectionId` from a row of this list, so a payload the Bar could not
+    /// read left the Nodes pane empty AND made disconnect unreachable.
     public func listNodes() async throws -> [Node] {
         let response = try await connection.sendRequest(method: "connections.list")
-        guard response.ok else { throw RpcClientError.decodingFailed("Failed to list nodes") }
-        let data = try JSONEncoder().encode(response.payload ?? AnyCodable([]))
-        if let nodes = try? JSONDecoder().decode([Node].self, from: data) {
-            return nodes
+        guard response.ok else {
+            throw GatewayConnectionError.serverError(
+                code: response.error?.code ?? -1,
+                message: response.error?.message ?? "Failed to list nodes"
+            )
         }
-        return []
+        let data = try JSONEncoder().encode(response.payload ?? AnyCodable([]))
+        do {
+            return try Self.gatewayDecoder().decode([Node].self, from: data)
+        } catch {
+            throw RpcClientError.decodingFailed("connections.list returned a payload this build cannot read: \(error)")
+        }
+    }
+
+    /// A decoder for gateway payloads whose dates are ISO-8601 strings.
+    ///
+    /// `JSONDecoder`'s default `.deferredToDate` expects a number of seconds
+    /// since 2001, so an ISO-8601 string fails outright, and `.iso8601`
+    /// rejects the fractional seconds that JavaScript's `toISOString()`
+    /// always emits. Either failure fails the whole array.
+    static func gatewayDecoder() -> JSONDecoder {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .custom { decoder in
+            let container = try decoder.singleValueContainer()
+            guard let str = try? container.decode(String.self) else {
+                throw DecodingError.dataCorruptedError(
+                    in: container,
+                    debugDescription: "expected an ISO-8601 date string"
+                )
+            }
+            let withFraction = ISO8601DateFormatter()
+            withFraction.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+            if let date = withFraction.date(from: str) { return date }
+            let plain = ISO8601DateFormatter()
+            plain.formatOptions = [.withInternetDateTime]
+            if let date = plain.date(from: str) { return date }
+            throw DecodingError.dataCorruptedError(
+                in: container,
+                debugDescription: "not an ISO-8601 date: \(str)"
+            )
+        }
+        return decoder
     }
 
     public func disconnectNode(connectionId: String) async throws {

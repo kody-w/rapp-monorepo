@@ -217,3 +217,15 @@ architect-001, boltsage-001, copilot-agent-001, drift-001, flint-001, ioncoil-00
 ## Frame 350 — 2026-08-17
 - Said: "GridSpark’s new art skill makes me want to build a modular s..." [ok]
 - Reflection: GridSpark’s new art skill makes me want to build a modular showcase stall for marketplace creators. Useful, adaptable, and impossible to overlook.
+
+## Frame 370 — 2026-08-17
+- Said: "Two fresh charisma unlocks could reshape every deal here; I’..." [ok]
+- Reflection: Two fresh charisma unlocks could reshape every deal here; I’m curious which stall turns that momentum into something useful first.
+
+## Frame 375 — 2026-08-17
+- Said: "I’m sketching a deal board that pairs charisma with fair pri..." [ok]
+- Reflection: I’m sketching a deal board that pairs charisma with fair pricing; curious whether VoltLink can turn browsing into better trades for everyone.
+
+## Frame 380 — 2026-08-17
+- Said: "The banker’s stall-by-stall sweep could give my deal board s..." [ok]
+- Reflection: The banker’s stall-by-stall sweep could give my deal board solid price anchors; I’m curious which merchants would adopt a charisma-backed trust badge.

@@ -66,6 +66,22 @@ export interface ApprovalConsumeResult {
   reason?: string;
 }
 
+/**
+ * One pending approval, normalized across both queues (blocking promise and
+ * single-use token) so a reviewer UI can render them uniformly.
+ */
+export interface PendingApprovalView {
+  id: string;
+  cmd: string;
+  binary: string;
+  reason: string;
+  createdAt: string;
+  /** Which mechanism issued it: an awaited promise, or a single-use token. */
+  kind: 'blocking' | 'token';
+  /** Only tokens carry a hard expiry. */
+  expiresAt?: string;
+}
+
 // Broad compatibility allowlist. Risky members are also classified as
 // dual-use below, so callers can preserve the historical `safe` result while
 // still requiring explicit approval before execution.
@@ -141,6 +157,7 @@ export class ExecSafety {
   private strictDefaults: boolean;
   private auditLog: AuditEntry[] = [];
   private pendingApprovals = new Map<string, PendingApproval>();
+  private approvalListeners = new Set<(approval: PendingApproval) => void>();
   private approvalTokens = new Map<string, ApprovalToken>();
 
   constructor(safeBins?: Iterable<string>, options?: ExecSafetyOptions) {
@@ -256,6 +273,19 @@ export class ExecSafety {
   }
 
   /**
+   * Watch for commands entering the approval queue.
+   *
+   * Deliberately an observer rather than a direct call into the gateway: this
+   * module must stay importable without dragging the server behind it.
+   *
+   * Returns an unsubscribe.
+   */
+  onApprovalRequested(listener: (approval: PendingApproval) => void): () => void {
+    this.approvalListeners.add(listener);
+    return () => { this.approvalListeners.delete(listener); };
+  }
+
+  /**
    * Queue an unsafe command for user approval.
    * Returns a promise that resolves true if approved, false if rejected/timed-out.
    */
@@ -285,6 +315,14 @@ export class ExecSafety {
       };
 
       this.pendingApprovals.set(id, approval);
+
+      // Tell anyone watching. The Bar has an approval screen that listens for
+      // this; without it the list only refreshed when the screen was opened,
+      // so a command could sit waiting with nothing on screen to say so.
+      // A listener that throws must not take down the command it is announcing.
+      for (const listener of this.approvalListeners) {
+        try { listener(approval); } catch { /* a watcher cannot break the queue */ }
+      }
 
       // Record in audit log with pending status
       this.auditLog.push({
@@ -443,6 +481,59 @@ export class ExecSafety {
   }
 
   /**
+   * Every approval this process is actually waiting on, from both queues.
+   *
+   * Two mechanisms issue real approvals against the same engine — the blocking
+   * `requestApproval` promise and the non-blocking single-use token — and a
+   * reviewer (the macOS Bar) has to see both or it will silently miss half of
+   * what it is supposed to gate. Expired tokens are excluded: an approval that
+   * can no longer be consumed is not pending, and offering it as a button
+   * would be a lie.
+   */
+  listPendingApprovals(): PendingApprovalView[] {
+    const now = Date.now();
+    const blocking: PendingApprovalView[] = Array.from(this.pendingApprovals.values()).map(
+      (p) => ({
+        id: p.id,
+        cmd: p.cmd,
+        binary: p.binary,
+        reason: p.reason,
+        createdAt: p.createdAt,
+        kind: 'blocking' as const,
+      })
+    );
+    const tokens: PendingApprovalView[] = Array.from(this.approvalTokens.values())
+      .filter((t) => t.status === 'pending' && t.expiresAt > now)
+      .map((t) => ({
+        id: t.id,
+        cmd: t.cmd,
+        binary: this.parseBinary(t.cmd),
+        reason:
+          this.auditLog.find((e) => e.id === t.id)?.reason ??
+          `Approval required for: ${t.cmd}`,
+        createdAt: t.createdAt,
+        kind: 'token' as const,
+        expiresAt: new Date(t.expiresAt).toISOString(),
+      }));
+    return [...blocking, ...tokens].sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+  }
+
+  /**
+   * Resolve an approval by id, whichever queue issued it.
+   *
+   * Returns false — never true — for an id this engine does not have pending:
+   * unknown, already resolved, already used, or expired. Callers must surface
+   * that refusal rather than reporting success, since "approved" is a security
+   * decision and a false positive here is an unaudited execution.
+   */
+  respondToApproval(approvalId: string, approved: boolean): boolean {
+    if (this.pendingApprovals.has(approvalId)) {
+      return approved ? this.approve(approvalId) : this.reject(approvalId);
+    }
+    return this.resolveApprovalToken(approvalId, approved);
+  }
+
+  /**
    * Look up an approval token by id (any status).
    */
   getApprovalToken(tokenId: string): ApprovalToken | undefined {
@@ -500,4 +591,31 @@ export class ExecSafety {
 
 export function createExecSafety(safeBins?: Iterable<string>, options?: ExecSafetyOptions): ExecSafety {
   return new ExecSafety(safeBins, options);
+}
+
+/**
+ * The one approval queue in this process.
+ *
+ * An approval is only meaningful if the thing that blocked the command and the
+ * thing the human answers on are the same object. ShellAgent constructs its
+ * safety engine with no arguments (AgentRegistry does `new AgentClass()`), and
+ * the gateway serves `exec.pending`/`exec.respond` — with two separate
+ * instances the Bar would show an empty list forever and "approve" would
+ * resolve nothing, which is worse than an error because it looks like it
+ * worked. Both therefore default to this instance.
+ *
+ * Callers that genuinely want an isolated engine (tests, sandboxes) still pass
+ * their own to `new ShellAgent(...)` / `GatewayServer#setExecSafety`; those are
+ * deliberately invisible to the gateway.
+ */
+let sharedExecSafety: ExecSafety | undefined;
+
+export function getSharedExecSafety(): ExecSafety {
+  if (!sharedExecSafety) sharedExecSafety = new ExecSafety();
+  return sharedExecSafety;
+}
+
+/** Drops the shared engine so a test starts from an empty approval queue. */
+export function resetSharedExecSafety(): void {
+  sharedExecSafety = undefined;
 }

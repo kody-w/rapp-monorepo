@@ -91,6 +91,14 @@ export interface ConnectionInfo {
   deviceId?: string;
   deviceType?: string;
   metadata?: Record<string, unknown>;
+  /**
+   * The peer's socket address, as the transport reported it when the socket
+   * opened. Optional because a transport need not report one — `undefined`
+   * means "not known", and callers must say so rather than substituting a
+   * plausible-looking loopback address.
+   */
+  remoteAddress?: string;
+  remotePort?: number;
 }
 
 export type RpcStreamCallback = (response: StreamingResponse) => void;
@@ -256,6 +264,7 @@ export const GatewayEvents = {
   CRON: 'cron',
   CRON_RUN: 'cron.run',
   CRON_COMPLETE: 'cron.complete',
+  APPROVAL: 'approval',
   PRESENCE: 'presence',
   HEARTBEAT: 'heartbeat',
   RAPPTER: 'rappter',

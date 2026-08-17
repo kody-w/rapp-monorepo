@@ -9,6 +9,112 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **A published install had none of the 52 bundled skills** — `files` in
+  `package.json` never listed `skills/`, so every tarball carried
+  `dist/skills/bundled.js` and none of the `SKILL.md` files it reads. The
+  loader swallows a missing directory and returns an empty list, so an install
+  that shipped nothing looked exactly like one that legitimately had no
+  skills. The packaging test now asserts against what npm would really
+  publish, and asserts the count exactly, because shipping a subset is the
+  same silent failure in a smaller form.
+- **`cron.delete` reported success while the job kept running** — the alias
+  filtered only the file-backed store, so the live scheduler kept the job and
+  it fired on schedule after the user had been told it was gone. Deleting an
+  id that never existed also reported success. Both now go through one bound
+  removal that clears the scheduler and the store, and an unknown id is
+  refused.
+- **`cron.get` denied a job the gateway had just created** — it read only the
+  file fallback, never the live scheduler, so a job created in this process
+  was invisible until something persisted it. `cron.update` was not registered
+  at all, though the macOS Bar calls it. `list` and `get` now share one
+  mapping, so two readers of the same job cannot describe it differently.
+- **A Bar-created cron job ran with an empty prompt** — the Bar sent
+  `command` and the scheduler read `message`, so the job was created, reported
+  `scheduled: true`, got a `nextRun`, and fired on time carrying nothing.
+  `message` is canonical; `command` is accepted as an alias and normalised
+  away. An empty prompt is now refused rather than scheduled.
+- **Storage lied about three things** — a `transaction()` callback that
+  awaited kept writing after the rollback was reported, because better-sqlite3
+  rejects async transaction functions; migrations wrote their DDL and their
+  version marker separately, so a partial failure bricked every later start
+  with `duplicate column name`; and `INSERT OR REPLACE` on sessions and devices
+  is a delete-then-insert, which fired `ON DELETE SET NULL` and destroyed the
+  approval records pointing at them. Renaming a cron job cascaded away its run
+  logs the same way.
+- **The Bar's approval screen never worked** — `exec.pending` and
+  `exec.respond` were not registered, so the approve and deny buttons could not
+  function. They are now wired to the real `ExecSafety` engine that `ShellAgent`
+  blocks on: a deny genuinely denies, an approval is single-use, and unknown,
+  expired or already-resolved ids are refused instead of accepted. The gateway
+  also now emits the `approval` event the Bar has always listened for, so the
+  list no longer waits for the screen to be reopened.
+- **The Bar's Logs pane and session reset called nothing** — `logs.get` and
+  `sessions.reset` were unregistered. `logs.get` now reads the daemon's real
+  launchd log files, bounded and redacted through the shared secret redactor;
+  `sessions.reset` clears the real session store and aborts the run in flight,
+  because otherwise the reply repopulated the session after reporting success.
+- **The dashboard's agent file browser called nothing** — `agents.files.list`,
+  `agents.files.read` and `agents.files.write` were unregistered, and
+  `cron.runs` duplicated `cron.logs`. The file methods are treated as the
+  remote code-execution surface they are: the resolved real path must sit
+  inside the agent directory, reserved directories are refused as an agent id
+  and as any path segment, symlinks are never written through, and `write` may
+  only replace an existing file so it cannot plant a new agent.
+- **The zen list ignored the events announcing its own sessions** — the
+  gateway broadcasts `zen.session.start` and `zen.session.end`; nothing
+  listened, so the list was only as fresh as the moment the screen opened.
+
+- **Zen viewer works** — `<openrappter-zen>` is live UI, but `zen.sessions`,
+  `zen.subscribe` and `zen.unsubscribe` were never registered on the gateway,
+  so the page answered `-32601 Method not found` on load and rendered an empty
+  screen forever. They are now registered against live streaming state owned by
+  the running server. `src/gateway/methods/zen-methods.ts` was deliberately not
+  reused: it reads `peer-stream.ts`'s process-local `globalPeerStream`, whose
+  only writer (`openrappter bar --tui`) runs in a different process from the
+  daemon, so it could only ever have reported an empty list. Producers now feed
+  the daemon over the wire (`zen.publish`/`zen.end`, WebSocket only), the Bar's
+  pong screen publishes through it, frames reach only the connections that
+  subscribed, and a dropped connection releases its viewer slots and ends the
+  sessions it was producing. The client-RPC coverage guard now also walks
+  `ui/src/components`, not just `ui/src/services`: `zen.ts` is a component, so
+  the guard never saw the three broken calls — their debt entries had been
+  listed by hand rather than found.
+- **The Bar's usage screen shows real numbers** — `UsageViewModel` calls
+  `usage.stats` and `usage.history`, and the live `GatewayServer` registered
+  neither, so both answered `Method not found` and the screen only ever
+  rendered an error. Both are now registered against the Flight Recorder's
+  `provider.attempt.completed` events, which is where provider-reported token
+  counts are actually recorded. `gateway/methods/usage-methods.ts` was
+  deliberately *not* wired: it declares different names (`usage.status`,
+  `usage.cost`) against a `usageTracker` nothing in this repository
+  constructs, and answers a hardcoded zero without one. Cost is reported as
+  `costAvailable: false` rather than `$0.0000` — no price table exists in this
+  runtime. `RpcClient.getUsageHistory()` also decoded timestamps with a bare
+  `JSONDecoder`, whose `.deferredToDate` strategy threw on the gateway's
+  ISO-8601 strings; the throw was swallowed by `try?`, so a populated response
+  was silently rendered as an empty list.
+- **The Bar's Skills and Nodes panes call methods that exist** — `skills.list`,
+  `skills.install` and `connections.disconnect` were answered with
+  `Method not found` by the live gateway; they are now registered in
+  `registerBuiltInMethods` against the real bundled `skills/` directory, the
+  real `SkillsRegistry`, and the gateway's own live connection map.
+  `skills.install` requires the gateway credential, because it fetches a
+  third-party manifest off the network and writes it where the agent will load
+  it.
+- **`skills.list` cannot report a packaging fault as an empty list** — a
+  missing bundled `skills/` directory now raises instead of answering `[]`,
+  which was indistinguishable from a machine that legitimately has no skills.
+- **`skills.list` and `connections.list` answer in the shape the Bar decodes** —
+  both payloads omitted fields the macOS `Skill`/`Node` decoders require, so
+  the Bar showed "No skills installed" over 52 shipped skills and an empty
+  Nodes pane over live connections. `RpcClient` no longer turns a decode
+  failure into an empty array either.
+- **`connections.disconnect` does not claim to have closed a connection that
+  was not there** — an unknown connection id is an error.
+- **`connections.pair` stays unregistered, deliberately** — nothing in the
+  gateway can record a remote peer, and `connections.list` reports inbound
+  sockets, so a successful pairing would be followed by a list that still
+  showed nothing. The Bar gets a refusal it can display instead.
 - **Python storage adapter is genuinely thread-safe** — `SqliteStorageAdapter`
   held an `RLock` (implying multi-threaded use) but opened its connection with
   sqlite3's default `check_same_thread=True`, so any call from a worker thread
@@ -81,6 +187,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - The Electron desktop is the authority for OpenRappter Bar authentication,
   and desktop smoke tests were hardened for concurrent and Windows runs.
+
+### Security
+
+- **`openrappter login` printed both tokens** — it echoed the first 20
+  characters of the access token, and of the refresh token when one was
+  issued. A prefix is still credential material: it lands in terminal
+  scrollback and in CI logs, and it narrows a brute force. The command now
+  names the provider and says nothing derived from the secret. It remains
+  unregistered — it also persists nothing while claiming it saved — so this
+  was latent rather than live, which is exactly why it needed a test before
+  somebody registers it.
 
 ## [1.13.0] - 2026-08-14
 

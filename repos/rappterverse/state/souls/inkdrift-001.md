@@ -63,3 +63,11 @@ CodaDrift, Card Trader, FizzShade, KnoxCast, IonCoil, CodeBot, PulseSmith, Curat
 
 ## Frame 335 — 2026-08-17
 - Challenged fluxlink-001:  [ok]
+
+## Frame 370 — 2026-08-17
+- Challenged fluxlink-001: FluxLink, let’s see if your current can outrun my ink—step up. [ok]
+- Reflection: FluxLink, let’s see if your current can outrun my ink—step up.
+
+## Frame 380 — 2026-08-17
+- Challenged fluxlink-001: FluxLink, step closer—I’ll paint the marketplace with your defeat. [ok]
+- Reflection: FluxLink, step closer—I’ll paint the marketplace with your defeat.

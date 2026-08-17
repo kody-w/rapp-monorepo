@@ -156,7 +156,7 @@
                     "tool": "challenge",
                     "evidence": {
                         "path": "state/memory/iontrace-001.json",
-                        "sourceBlob": "627bc3908d88dcda64e4bb841bc60be4484b8692",
+                        "sourceBlob": "c4c97502d63abc76f91b66822fa1d179ea2c7542",
                         "jsonPointer": "/experiences/5",
                         "recordDigest": "2a3c65bdaea56ef2e8d61ba2d31372145b6d62a7923e73cb29a1b89b0c361633",
                         "record": {
@@ -174,7 +174,7 @@
                     "tool": "challenge",
                     "evidence": {
                         "path": "state/memory/iontrace-001.json",
-                        "sourceBlob": "627bc3908d88dcda64e4bb841bc60be4484b8692",
+                        "sourceBlob": "c4c97502d63abc76f91b66822fa1d179ea2c7542",
                         "jsonPointer": "/experiences/6",
                         "recordDigest": "1700655eaf287f3f419582e1825ffd39325015a7c9a49a54a61ad12b0e5a8d20",
                         "record": {
@@ -192,7 +192,7 @@
                     "tool": "challenge",
                     "evidence": {
                         "path": "state/memory/iontrace-001.json",
-                        "sourceBlob": "627bc3908d88dcda64e4bb841bc60be4484b8692",
+                        "sourceBlob": "c4c97502d63abc76f91b66822fa1d179ea2c7542",
                         "jsonPointer": "/experiences/7",
                         "recordDigest": "1cee0667fb5a3c8dec05ed8fbe3bca7c5aad9fe626260e7ef924cab0b2e7f763",
                         "record": {
@@ -254,7 +254,7 @@
                 },
                 "event": {
                     "path": "state/memory/iontrace-001.json",
-                    "sourceBlob": "627bc3908d88dcda64e4bb841bc60be4484b8692",
+                    "sourceBlob": "c4c97502d63abc76f91b66822fa1d179ea2c7542",
                     "jsonPointer": "/experiences/4",
                     "recordDigest": "c9fec9c50571a865a777ccce44e4a97c6875a905f95d1935b78b65dbf12a69b8",
                     "record": {
@@ -270,7 +270,7 @@
                 "permalink": "?chronicle=becoming-iontrace-001-20260227014432",
                 "format": "becoming-card/svg-v1",
                 "path": "chronicles/becoming-iontrace-001-20260227014432.svg",
-                "sha256": "b8cc32aef8f0ecd8720c398042056df98b1e45d86414b2fc7e44390c29044b95"
+                "sha256": "bc8b41082b863ed09a922c8ecb91f812e3809d7597ebb5aae99c0da26b5fe56a"
             }
         },
         {
@@ -418,7 +418,7 @@
                     "tool": "enroll",
                     "evidence": {
                         "path": "state/memory/luxrise-001.json",
-                        "sourceBlob": "0359864799a8bb2fad08fd44d3edcae59844f176",
+                        "sourceBlob": "10f9efb31d2e08bb34e4eeb9c9ed2142ec9e2e89",
                         "jsonPointer": "/experiences/0",
                         "recordDigest": "757ef447a0c0cb4acacebdfa077a2b37272d50f737870149329f75d309ef6672",
                         "record": {
@@ -468,7 +468,7 @@
                 },
                 "event": {
                     "path": "state/memory/luxrise-001.json",
-                    "sourceBlob": "0359864799a8bb2fad08fd44d3edcae59844f176",
+                    "sourceBlob": "10f9efb31d2e08bb34e4eeb9c9ed2142ec9e2e89",
                     "jsonPointer": "/experiences/1",
                     "recordDigest": "bc4c5c65d42d32d5bf6383fe8794a0bba25e80d0f8b5c057ef881e16f2ad1a5d",
                     "record": {
@@ -484,7 +484,7 @@
                 "permalink": "?chronicle=becoming-luxrise-001-20260210155438",
                 "format": "becoming-card/svg-v1",
                 "path": "chronicles/becoming-luxrise-001-20260210155438.svg",
-                "sha256": "c985a0f99deef3925ee59cfe77d0d1f32a6e489aa38619de1e6a5e9343928cff"
+                "sha256": "532bc85df6edf15d8337de05e5c33a6bb2ecb12f046339249b6f8cd78477c36a"
             }
         },
         {
@@ -751,7 +751,7 @@
                     "tool": "enroll",
                     "evidence": {
                         "path": "state/memory/pixel-001.json",
-                        "sourceBlob": "57ca215c7c606d55eea82418f4ecdc7a14772522",
+                        "sourceBlob": "0566b8870467089393be94790bc18dba4438eb99",
                         "jsonPointer": "/experiences/1",
                         "recordDigest": "c805d0fe38ba1738089c0a3dea889f21f177015f0d507222074835f8e8773317",
                         "record": {
@@ -769,7 +769,7 @@
                     "tool": "enroll",
                     "evidence": {
                         "path": "state/memory/pixel-001.json",
-                        "sourceBlob": "57ca215c7c606d55eea82418f4ecdc7a14772522",
+                        "sourceBlob": "0566b8870467089393be94790bc18dba4438eb99",
                         "jsonPointer": "/experiences/0",
                         "recordDigest": "a54aae0ceff1fb693357b348370d5602f4469e2530234039afc331c2e1c2ffee",
                         "record": {
@@ -825,7 +825,7 @@
                 },
                 "event": {
                     "path": "state/memory/pixel-001.json",
-                    "sourceBlob": "57ca215c7c606d55eea82418f4ecdc7a14772522",
+                    "sourceBlob": "0566b8870467089393be94790bc18dba4438eb99",
                     "jsonPointer": "/experiences/2",
                     "recordDigest": "43513e7a5c3364bb5b5c2913df3540120b88912cf6b38d2041b81ae30953d8bb",
                     "record": {
@@ -841,7 +841,7 @@
                 "permalink": "?chronicle=becoming-pixel-001-20260210153447",
                 "format": "becoming-card/svg-v1",
                 "path": "chronicles/becoming-pixel-001-20260210153447.svg",
-                "sha256": "64e13747c3f407caf72921bc6f2a4b8182a9a7428f1f3c296cb65a37c8d1a7da"
+                "sha256": "b68ca08458548e72037d8b7076b14699eb5cb87ad0b8139ab88cd403a067d1ef"
             }
         },
         {
@@ -1108,7 +1108,7 @@
                     "tool": "enroll",
                     "evidence": {
                         "path": "state/memory/wanderer-001.json",
-                        "sourceBlob": "c6a49d9030317b6301179d552d8209dc5a113005",
+                        "sourceBlob": "c78b6d6920116f2315ba3064e20232f34a4ee956",
                         "jsonPointer": "/experiences/1",
                         "recordDigest": "fc6159cd8f7269581a293ad261f7665747a62633e6ee64dd8806c880feb5b1a3",
                         "record": {
@@ -1126,7 +1126,7 @@
                     "tool": "enroll",
                     "evidence": {
                         "path": "state/memory/wanderer-001.json",
-                        "sourceBlob": "c6a49d9030317b6301179d552d8209dc5a113005",
+                        "sourceBlob": "c78b6d6920116f2315ba3064e20232f34a4ee956",
                         "jsonPointer": "/experiences/0",
                         "recordDigest": "2e9bcbb5253aab9102d4ad305d51914e9db87e6d267e4455ef96e389dacca92f",
                         "record": {
@@ -1182,7 +1182,7 @@
                 },
                 "event": {
                     "path": "state/memory/wanderer-001.json",
-                    "sourceBlob": "c6a49d9030317b6301179d552d8209dc5a113005",
+                    "sourceBlob": "c78b6d6920116f2315ba3064e20232f34a4ee956",
                     "jsonPointer": "/experiences/2",
                     "recordDigest": "aa21a5bc0c22c0f37fcba57bd8132d07faf8b591c2589cdd61a5946b0dce76ec",
                     "record": {
@@ -1198,7 +1198,7 @@
                 "permalink": "?chronicle=becoming-wanderer-001-20260210004911",
                 "format": "becoming-card/svg-v1",
                 "path": "chronicles/becoming-wanderer-001-20260210004911.svg",
-                "sha256": "9158e4d82d729938e9e92b31d5d1fefd2b79b55f73f4b1b3f309cd24a060d49f"
+                "sha256": "a4ecba674e8e8459b640adfe1a02c9dd8eb12d5730e05fe72fb8a741541af793"
             }
         },
         {
@@ -1227,7 +1227,7 @@
                     "tool": "enroll",
                     "evidence": {
                         "path": "state/memory/pulsesong-001.json",
-                        "sourceBlob": "867146b20e282ea45a6cf20b00891e1fe1247f9d",
+                        "sourceBlob": "c13a2129404762e192fdd5d4a094102e0343d943",
                         "jsonPointer": "/experiences/1",
                         "recordDigest": "2d7fec10144889ac8ac0eced82d0c72ddca1d1c1764439bba7ba765362eec4c9",
                         "record": {
@@ -1245,7 +1245,7 @@
                     "tool": "enroll",
                     "evidence": {
                         "path": "state/memory/pulsesong-001.json",
-                        "sourceBlob": "867146b20e282ea45a6cf20b00891e1fe1247f9d",
+                        "sourceBlob": "c13a2129404762e192fdd5d4a094102e0343d943",
                         "jsonPointer": "/experiences/0",
                         "recordDigest": "643a7f6b61df4f3acc16fa0eb4e77f947478e5baec3a7ab4eee4a6deac50f4a3",
                         "record": {
@@ -1301,7 +1301,7 @@
                 },
                 "event": {
                     "path": "state/memory/pulsesong-001.json",
-                    "sourceBlob": "867146b20e282ea45a6cf20b00891e1fe1247f9d",
+                    "sourceBlob": "c13a2129404762e192fdd5d4a094102e0343d943",
                     "jsonPointer": "/experiences/2",
                     "recordDigest": "a0cb745ceaaf2e458d2ef25fd599795f61b89ac5fe55943ccd2e483248cce0cc",
                     "record": {
@@ -1317,7 +1317,7 @@
                 "permalink": "?chronicle=becoming-pulsesong-001-20260210004911",
                 "format": "becoming-card/svg-v1",
                 "path": "chronicles/becoming-pulsesong-001-20260210004911.svg",
-                "sha256": "9db869975c7ad0ae837ab5d57675b4ae8a98b31c46b6330e954060b0a68d478f"
+                "sha256": "80514b8b13ab9dd542a8f6cdd720e11e865d79f4968f005622ff8cfe03ad17ca"
             }
         },
         {
