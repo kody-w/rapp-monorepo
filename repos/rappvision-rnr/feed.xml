@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
+<channel>
+  <title>RNR — RAR Nightly Review</title>
+  <link>https://kody-w.github.io/rappvision-rnr/</link>
+  <description>What landed on the front page of the agentic web, and what broke getting there.</description>
+  <language>en</language>
+  <lastBuildDate>Sun, 02 Aug 2026 00:00:00 +0000</lastBuildDate>
+  <item>
+    <title>RAR got a front page — and the only thing that lied all night was a green checkmark</title>
+    <link>https://kody-w.github.io/rappvision-rnr/v/front-page.html</link>
+    <guid isPermaLink="true">https://kody-w.github.io/rappvision-rnr/v/front-page.html</guid>
+    <pubDate>Sun, 02 Aug 2026 00:00:00 +0000</pubDate>
+    <description>Two asks, one message apart: make RAR the front page of the agentic web, and do not break anything with ANY future change. They pull against each other, so the second one went first.
+
+A broken agent URL is invisible to RAR. Those paths live inside other people&#x27;s brainstems, scripts and products, and a static file returns no telemetry — nobody here would ever learn it broke. So permanence stopped being a guideline and became a gate: an append-only ledger of 319 published paths, checked in CI, proven to fail on rename, on delete, and on a manifest rename.
+
+Then the surfaces. A front door with no GitHub in it, because the loudest line in the meeting transcript was that business users do not live in GitHub — driven headlessly against the deployed page with github.com blocked at the route layer, and it never needed it. Nine static endpoints off raw GitHub with no key and no server. Audience segmentation that had a real bug in BOTH directions. And 76 aggregated bookmarks toasted into agents that actually take a subject and return a procedure.
+
+Then the part worth staying awake for. The live API served 278 agents at version 1.0.0 while the registry held 279 at 2.0.0, and every workflow reported green the whole time. The rebuild was gated on `event_name == &#x27;push&#x27;`, so the one button a maintainer reaches for when the API looks stale rebuilt it and then threw it away. Same shape as episode one: the check was fine, it just could not fail.
+
+The front page itself now ranks 279 entries, each row carrying the numbers it was scored on. Its first cut said 355 — because all 76 crawled entries were already hosted agents, so it listed every one of them twice. That correction is in the episode, because a ranking you cannot audit is just an opinion with a number on it.</description>
+    <enclosure url="https://kody-w.github.io/rappvision-rnr/rappvision/media/front-page.mp4" type="video/mp4"/>
+    <media:thumbnail url="https://kody-w.github.io/rappvision-rnr/rappvision/thumbs/front-page.jpg"/>
+  </item>
+  <item>
+    <title>The release couldn&#x27;t be cut — and the health check had been dead for 82 days</title>
+    <link>https://kody-w.github.io/rappvision-rnr/v/nightly-revival.html</link>
+    <guid isPermaLink="true">https://kody-w.github.io/rappvision-rnr/v/nightly-revival.html</guid>
+    <pubDate>Sat, 01 Aug 2026 00:00:00 +0000</pubDate>
+    <description>A release was requested. Pre-flighting the gates locally first turned up two failures that had nothing to do with the release, and following them led somewhere worse: the nightly health check had failed 84 times in a row, last green on 11 May.
+
+The check was broken. Not the thing it checks.
+
+Gated agents record _stub_sha256. The integrity audit read _sha256, which is absent on those agents, then formatted its own error message with the missing key and died on a KeyError before it could print why. A second scanner was still banning exec() — a rule the registry had deliberately retired in favour of tagging it as a declared capability.
+
+Then the check itself turned out to be incapable of failing. It ran the suite as `pytest … | tee log`, so the pipeline exited with tee&#x27;s status, which is always zero. The entire suite could be red and nightly would still report green. Its registry rebuild ran on a shallow checkout, so all 279 agents came back stamped with a single commit and today&#x27;s date — provenance, fabricated.
+
+Twelve defects fixed, 14 hermetic tests added to CI, and nightly went green for the first time since May.
+
+One decision is left, and it is not a technical one.</description>
+    <enclosure url="https://kody-w.github.io/rappvision-rnr/rappvision/media/nightly-revival.mp4" type="video/mp4"/>
+    <media:thumbnail url="https://kody-w.github.io/rappvision-rnr/rappvision/thumbs/nightly-revival.jpg"/>
+  </item>
+</channel>
+</rss>

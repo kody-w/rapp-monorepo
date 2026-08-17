@@ -1,0 +1,17 @@
+.DS_Store
+__pycache__/
+*.log
+outputs/
+local-config.json
+node_modules/
+dist/
+dist-electron/
+.brainstem/
+public/vision/
+public/vendor/
+node_modules/
+dist/
+dist-electron/
+dist/
+.claude/
+.card-preview.html

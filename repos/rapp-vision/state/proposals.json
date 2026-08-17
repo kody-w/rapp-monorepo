@@ -1,0 +1,212 @@
+{
+  "advisories": [],
+  "coverage": {
+    "channels_in_registry": 13,
+    "channels_loaded": 13,
+    "channels_unreachable": [],
+    "queue_channels_not_loaded": [],
+    "signals_available": true
+  },
+  "generated_by": {
+    "adapter": "dryrun-structural/1.0.0",
+    "judgment": false,
+    "kind": "structural"
+  },
+  "note": "A QUEUE, NOT A PUBLICATION. Nothing here is on the network. A human — or an explicit promotion step — turns a proposal into an episode by editing a channel.json. The content machine cannot write a channel.json: its only write path refuses any destination outside state/.",
+  "proposals": [
+    {
+      "channel": "field-notes",
+      "evidence": {
+        "entries": 1,
+        "thin_below": 3,
+        "titles": [
+          "Two platforms were silently deadlocked for 19 days. Both looked perfectly healthy."
+        ]
+      },
+      "gap_closed": true,
+      "generated_by": {
+        "adapter": "dryrun-structural/1.0.0",
+        "judgment": false,
+        "kind": "structural"
+      },
+      "id": "98308ad783bd",
+      "kind": "channel_thin",
+      "proposal": {
+        "angle": "Post-mortems from autonomous systems that looked perfectly healthy while being completely frozen.",
+        "format": "unset",
+        "outline": [
+          "Choose a subject adjacent to: Two platforms were silently deadlocked for 19 days. Both looked perfectly healthy..",
+          "Keep the same shape as the existing entries so the channel reads as one thing."
+        ],
+        "title": "[gap] Field Notes has only 1 entry",
+        "why_now": "Below the 3-entry floor."
+      },
+      "status": "proposed",
+      "subject": "field-notes"
+    },
+    {
+      "channel": "field-notes",
+      "evidence": {
+        "entries": 2,
+        "thin_below": 3,
+        "titles": [
+          "I gave three agents the night's record and asked them nothing. All three proved my dashboard was lying.",
+          "Two platforms were silently deadlocked for 19 days. Both looked perfectly healthy."
+        ]
+      },
+      "gap_closed": false,
+      "generated_by": {
+        "adapter": "dryrun-structural/1.0.0",
+        "judgment": false,
+        "kind": "structural"
+      },
+      "id": "e313f5faf4ac",
+      "kind": "channel_thin",
+      "proposal": {
+        "angle": "Post-mortems from autonomous systems that looked perfectly healthy while being completely frozen.",
+        "format": "unset",
+        "outline": [
+          "Choose a subject adjacent to: I gave three agents the night's record and asked them nothing. All three proved my dashboard was lying., Two platforms were silently deadlocked for 19 days. Both looked perfectly healthy..",
+          "Keep the same shape as the existing entries so the channel reads as one thing."
+        ],
+        "title": "[gap] Field Notes has only 2 entries",
+        "why_now": "Below the 3-entry floor."
+      },
+      "status": "proposed",
+      "subject": "field-notes"
+    },
+    {
+      "channel": "fieldguide",
+      "evidence": {
+        "entries": 1,
+        "thin_below": 3,
+        "titles": [
+          "Field Guide 2026-08-04 - The Alpine Summit · Above The Clouds"
+        ]
+      },
+      "gap_closed": false,
+      "generated_by": {
+        "adapter": "dryrun-structural/1.0.0",
+        "judgment": false,
+        "kind": "structural"
+      },
+      "id": "b960427764d4",
+      "kind": "channel_thin",
+      "proposal": {
+        "angle": "One app nobody has covered yet, walked through for someone who arrived five minutes ago.",
+        "format": "unset",
+        "outline": [
+          "Choose a subject adjacent to: Field Guide 2026-08-04 - The Alpine Summit · Above The Clouds.",
+          "Keep the same shape as the existing entries so the channel reads as one thing."
+        ],
+        "title": "[gap] Field Guide has only 1 entry",
+        "why_now": "Below the 3-entry floor."
+      },
+      "status": "proposed",
+      "subject": "fieldguide"
+    },
+    {
+      "channel": "prompt-frontier",
+      "evidence": {
+        "entries": 1,
+        "thin_below": 3,
+        "titles": [
+          "Prompt Frontier begins"
+        ]
+      },
+      "gap_closed": false,
+      "generated_by": {
+        "adapter": "dryrun-structural/1.0.0",
+        "judgment": false,
+        "kind": "structural"
+      },
+      "id": "6a776e9021bf",
+      "kind": "channel_thin",
+      "proposal": {
+        "angle": "Give machine minds a world, a constitution, and a receipt.",
+        "format": "unset",
+        "outline": [
+          "Choose a subject adjacent to: Prompt Frontier begins.",
+          "Keep the same shape as the existing entries so the channel reads as one thing."
+        ],
+        "title": "[gap] Prompt Frontier has only 1 entry",
+        "why_now": "Below the 3-entry floor."
+      },
+      "status": "proposed",
+      "subject": "prompt-frontier"
+    },
+    {
+      "channel": "rappterbox",
+      "evidence": {
+        "entries": 2,
+        "thin_below": 3,
+        "titles": [
+          "I gave four AIs two Mac minis, a constitution, and a world",
+          "The AIs watched their own movie—and caught each other making things up"
+        ]
+      },
+      "gap_closed": false,
+      "generated_by": {
+        "adapter": "dryrun-structural/1.0.0",
+        "judgment": false,
+        "kind": "structural"
+      },
+      "id": "4a14d1279a45",
+      "kind": "channel_thin",
+      "proposal": {
+        "angle": "Give machine minds a world. Keep the receipts.",
+        "format": "unset",
+        "outline": [
+          "Choose a subject adjacent to: I gave four AIs two Mac minis, a constitution, and a world, The AIs watched their own movie—and caught each other making things up.",
+          "Keep the same shape as the existing entries so the channel reads as one thing."
+        ],
+        "title": "[gap] RappterBox Experiments has only 2 entries",
+        "why_now": "Below the 3-entry floor."
+      },
+      "status": "proposed",
+      "subject": "rappterbox"
+    },
+    {
+      "channel": "tumbler",
+      "evidence": {
+        "entries": 1,
+        "thin_below": 3,
+        "titles": [
+          "Tumble 2026-08-04 - Baseline: 30 apps hashed, 24 media files probed"
+        ]
+      },
+      "gap_closed": false,
+      "generated_by": {
+        "adapter": "dryrun-structural/1.0.0",
+        "judgment": false,
+        "kind": "structural"
+      },
+      "id": "f1dda9c765f5",
+      "kind": "channel_thin",
+      "proposal": {
+        "angle": "A daily tumble report on the RAPP Vision network. Every claim is a number, or it is not published.",
+        "format": "unset",
+        "outline": [
+          "Choose a subject adjacent to: Tumble 2026-08-04 - Baseline: 30 apps hashed, 24 media files probed.",
+          "Keep the same shape as the existing entries so the channel reads as one thing."
+        ],
+        "title": "[gap] The Tumbler has only 1 entry",
+        "why_now": "Below the 3-entry floor."
+      },
+      "status": "proposed",
+      "subject": "tumbler"
+    }
+  ],
+  "schema": "rapp-vision-proposals/1.0",
+  "thresholds": {
+    "long_video_seconds": 180,
+    "min_signal": 2,
+    "stale_days": 45,
+    "thin_min": 3
+  },
+  "totals": {
+    "advisories": 0,
+    "open": 5,
+    "proposals": 6
+  }
+}

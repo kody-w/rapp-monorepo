@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>RAPP Agent Converter</title>
+  <meta name="description" content="Byte-exact RAPP agent.py to Agent Skill conversion and restoration.">
+  <style>
+    :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+    body { margin: 0; }
+    main { max-width: 760px; margin: 0 auto; padding: 64px 24px; }
+    h1 { font-size: clamp(2.3rem, 8vw, 4.8rem); line-height: .95; }
+    p, li { font-size: 1.08rem; line-height: 1.65; }
+    code, pre { font-family: ui-monospace, monospace; }
+    pre { overflow: auto; padding: 18px; border: 1px solid #8885; border-radius: 10px; }
+    a { color: #e65f16; }
+    .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 32px 0; }
+    .pair div { padding: 18px; border: 1px solid #8885; border-radius: 10px; }
+    @media (max-width: 640px) { .pair { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<main>
+  <p>RAPP Agent Converter</p>
+  <h1>The agent travels inside the skill.</h1>
+  <p>Project a RAPP single-file agent into an Agent Skill without translating
+  it. The generated <code>SKILL.md</code> embeds the complete Python and ships a
+  byte-exact linked agent beside it. Restoring is checksum-verified, never a
+  re-render.</p>
+  <div class="pair">
+    <div><strong>agent.py</strong><br>Canonical executable cartridge.</div>
+    <div><strong>SKILL.md + agent.py</strong><br>Portable Agent Skill pair.</div>
+  </div>
+  <pre><code>python3 scripts/toast.py convert my_agent.py --to skill -o out/SKILL.md
+python3 scripts/toast.py roundtrip my_agent.py
+python3 scripts/toast.py selftest</code></pre>
+  <ul>
+    <li>Standard-library Python 3.9+</li>
+    <li>Offline and AST-only</li>
+    <li>Byte-exact linked file and restore</li>
+    <li>Copilot Studio, Cowork, Scout, and other Agent Skill hosts</li>
+  </ul>
+  <p><a href="https://github.com/kody-w/rapp-toaster">Source and skill</a> ·
+  <a href="https://github.com/microsoft/cat-agent-skills/pull/279">CAT Agent Skills submission</a></p>
+</main>
+</body>
+</html>

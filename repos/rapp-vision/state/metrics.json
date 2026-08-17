@@ -1,0 +1,1358 @@
+{
+  "schema": "rapp-vision-metrics/1.0",
+  "repo": "kody-w/rapp-vision",
+  "category": "Announcements",
+  "counting": {
+    "subject_id": "<channel id>/<video id>. A video id is unique only inside its own channel.json, so every counter is keyed on the channel-qualified id.",
+    "upvotes": "Positive reactions on the thread's top post (HEART, HOORAY, LAUGH, ROCKET, THUMBS_UP). One reaction per GitHub account, so this is a count of people.",
+    "watched": "Distinct accounts that reacted 👍 on the watch-tally comment. A deliberate click by a signed-in viewer — not a play count, not telemetry. Report it as 'viewers who said they watched', never as 'views'.",
+    "comments": "Replies on the thread, minus the bot-written machinery comments actually present on it. null with 'comments_truncated': true means the thread is longer than the one page of comments the collector reads, so the subtraction could leave a machine's own comment inside a human count — unknown is published as null, never as a number that might be wrong.",
+    "signals": "Independent per-user reaction counters on the signal comment. Never summed with each other.",
+    "negative_signals": [
+      "confusing",
+      "too_long"
+    ],
+    "negative_signals_note": "Collected, named and published. They subtract from nothing and appear in no score.",
+    "score": "2 * upvotes + watched. A ranking convention, not a measurement; both components are published so it can be recomputed with other weights.",
+    "editorial": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+    "reviewer_feedback": "Human reactions on the machine review. The ACTOR decides the lane, never the subject: a person reacting at the bot layer is real human engagement and is counted as such. It rates the REVIEWER, not the video, so it is summed into no video counter, no score and no ranking.",
+    "unwired": "Nothing in the player writes to these surfaces yet. A subject with no thread has no entry here at all — absent is not zero."
+  },
+  "signal_channels": {
+    "THUMBS_UP": "watched_it_all",
+    "HOORAY": "learned_something",
+    "HEART": "want_more_like_this",
+    "ROCKET": "tried_it_myself",
+    "EYES": "saved_for_later",
+    "THUMBS_DOWN": "too_long",
+    "CONFUSED": "confusing"
+  },
+  "reviewer_feedback_channels": {
+    "THUMBS_UP": "agreed",
+    "THUMBS_DOWN": "disputed",
+    "CONFUSED": "unclear"
+  },
+  "videos": {
+    "arcade/arcade-cold-boot": {
+      "channel": "arcade",
+      "video": "arcade-cold-boot",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/13",
+      "number": 13
+    },
+    "arcade/arcade-emulator-shelf": {
+      "channel": "arcade",
+      "video": "arcade-emulator-shelf",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/14",
+      "number": 14
+    },
+    "arcade/arcade-take-over": {
+      "channel": "arcade",
+      "video": "arcade-take-over",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/15",
+      "number": 15
+    },
+    "catchup/catchup-2026-08-01": {
+      "channel": "catchup",
+      "video": "catchup-2026-08-01",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/16",
+      "number": 16
+    },
+    "catchup/catchup-2026-08-01-part-2": {
+      "channel": "catchup",
+      "video": "catchup-2026-08-01-part-2",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/17",
+      "number": 17
+    },
+    "catchup/catchup-2026-08-01-part-3": {
+      "channel": "catchup",
+      "video": "catchup-2026-08-01-part-3",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/18",
+      "number": 18
+    },
+    "field-notes/above-not-beside": {
+      "channel": "field-notes",
+      "video": "above-not-beside",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/33",
+      "number": 33
+    },
+    "field-notes/platform-relaunch-recap": {
+      "channel": "field-notes",
+      "video": "platform-relaunch-recap",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/19",
+      "number": 19
+    },
+    "fieldguide/guide-2026-08-04": {
+      "channel": "fieldguide",
+      "video": "guide-2026-08-04",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/34",
+      "number": 34
+    },
+    "learnwithkody/lwk-apex-live": {
+      "channel": "learnwithkody",
+      "video": "lwk-apex-live",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/20",
+      "number": 20
+    },
+    "learnwithkody/lwk-buzzsaw-voxel": {
+      "channel": "learnwithkody",
+      "video": "lwk-buzzsaw-voxel",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/21",
+      "number": 21
+    },
+    "learnwithkody/lwk-coastal-city": {
+      "channel": "learnwithkody",
+      "video": "lwk-coastal-city",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/32",
+      "number": 32
+    },
+    "learnwithkody/lwk-walkthrough-apex": {
+      "channel": "learnwithkody",
+      "video": "lwk-walkthrough-apex",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/22",
+      "number": 22
+    },
+    "localfirsttools/lft-tumbler-live": {
+      "channel": "localfirsttools",
+      "video": "lft-tumbler-live",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/23",
+      "number": 23
+    },
+    "localfirsttools/lft-tumbler-reel": {
+      "channel": "localfirsttools",
+      "video": "lft-tumbler-reel",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/24",
+      "number": 24
+    },
+    "localfirsttools/lft-tumbler-short": {
+      "channel": "localfirsttools",
+      "video": "lft-tumbler-short",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/25",
+      "number": 25
+    },
+    "openrappter-training/openrappter-m1-install-first-run": {
+      "channel": "openrappter-training",
+      "video": "openrappter-m1-install-first-run",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/2",
+      "number": 2
+    },
+    "openrappter-training/openrappter-m2-local-memory": {
+      "channel": "openrappter-training",
+      "video": "openrappter-m2-local-memory",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/3",
+      "number": 3
+    },
+    "openrappter-training/openrappter-m3-deterministic-agents": {
+      "channel": "openrappter-training",
+      "video": "openrappter-m3-deterministic-agents",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/4",
+      "number": 4
+    },
+    "openrappter-training/openrappter-m4-brainstem-local-endpoint": {
+      "channel": "openrappter-training",
+      "video": "openrappter-m4-brainstem-local-endpoint",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/5",
+      "number": 5
+    },
+    "openrappter-training/openrappter-m5-author-single-file-agent": {
+      "channel": "openrappter-training",
+      "video": "openrappter-m5-author-single-file-agent",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/6",
+      "number": 6
+    },
+    "openrappter-training/openrappter-m6-conformance-gate": {
+      "channel": "openrappter-training",
+      "video": "openrappter-m6-conformance-gate",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/7",
+      "number": 7
+    },
+    "openrappter-training/openrappter-m7-llm-free-chaining": {
+      "channel": "openrappter-training",
+      "video": "openrappter-m7-llm-free-chaining",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/8",
+      "number": 8
+    },
+    "openrappter-training/openrappter-m8-know-what-is-real": {
+      "channel": "openrappter-training",
+      "video": "openrappter-m8-know-what-is-real",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/9",
+      "number": 9
+    },
+    "prompt-frontier/prompt-frontier-founding": {
+      "channel": "prompt-frontier",
+      "video": "prompt-frontier-founding",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/37",
+      "number": 37
+    },
+    "rappterbox/aivms-watch-their-own-film": {
+      "channel": "rappterbox",
+      "video": "aivms-watch-their-own-film",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/39",
+      "number": 39
+    },
+    "rappterbox/veridion-proof-trailer": {
+      "channel": "rappterbox",
+      "video": "veridion-proof-trailer",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/40",
+      "number": 40
+    },
+    "rock-tumbler/rock-tumbler-reel": {
+      "channel": "rock-tumbler",
+      "video": "rock-tumbler-reel",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/10",
+      "number": 10
+    },
+    "rock-tumbler/rock-tumbler-short": {
+      "channel": "rock-tumbler",
+      "video": "rock-tumbler-short",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/11",
+      "number": 11
+    },
+    "rock-tumbler/rock-tumbler-showcase": {
+      "channel": "rock-tumbler",
+      "video": "rock-tumbler-showcase",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/12",
+      "number": 12
+    },
+    "rooms/rooms-rain": {
+      "channel": "rooms",
+      "video": "rooms-rain",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/26",
+      "number": 26
+    },
+    "rooms/rooms-slow": {
+      "channel": "rooms",
+      "video": "rooms-slow",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/27",
+      "number": 27
+    },
+    "rooms/rooms-tour": {
+      "channel": "rooms",
+      "video": "rooms-tour",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/28",
+      "number": 28
+    },
+    "tumbler/tumble-2026-08-04": {
+      "channel": "tumbler",
+      "video": "tumble-2026-08-04",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/35",
+      "number": 35
+    },
+    "workbench/workbench-808": {
+      "channel": "workbench",
+      "video": "workbench-808",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/29",
+      "number": 29
+    },
+    "workbench/workbench-generative": {
+      "channel": "workbench",
+      "video": "workbench-generative",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/30",
+      "number": 30
+    },
+    "workbench/workbench-three-tools": {
+      "channel": "workbench",
+      "video": "workbench-three-tools",
+      "upvotes": 0,
+      "watched": 0,
+      "score": 0,
+      "comments": 2,
+      "signals": {
+        "watched_it_all": 0,
+        "learned_something": 0,
+        "want_more_like_this": 0,
+        "tried_it_myself": 0,
+        "saved_for_later": 0,
+        "too_long": 0,
+        "confusing": 0
+      },
+      "url": "https://github.com/kody-w/rapp-vision/discussions/31",
+      "number": 31
+    }
+  },
+  "editorial": {
+    "arcade/arcade-cold-boot": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "rough",
+      "checks_passed": 6,
+      "checks_total": 7,
+      "not_applicable": 1,
+      "notes": [
+        "1 of 6 app scene(s) declare no ready{selector|text}; their action times run from scene start."
+      ],
+      "record_sha8": "c3c998dc",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "arcade/arcade-emulator-shelf": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 7,
+      "checks_total": 7,
+      "not_applicable": 1,
+      "notes": [],
+      "record_sha8": "90c88551",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "arcade/arcade-take-over": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 6,
+      "checks_total": 6,
+      "not_applicable": 2,
+      "notes": [],
+      "record_sha8": "14ba2c48",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "catchup/catchup-2026-08-01": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "rough",
+      "checks_passed": 5,
+      "checks_total": 6,
+      "not_applicable": 2,
+      "notes": [
+        "Width/height missing — the player cannot lay the card out."
+      ],
+      "record_sha8": "913413ef",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "catchup/catchup-2026-08-01-part-2": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "rough",
+      "checks_passed": 5,
+      "checks_total": 6,
+      "not_applicable": 2,
+      "notes": [
+        "Width/height missing — the player cannot lay the card out."
+      ],
+      "record_sha8": "05855f35",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "catchup/catchup-2026-08-01-part-3": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 7,
+      "checks_total": 7,
+      "not_applicable": 1,
+      "notes": [],
+      "record_sha8": "156363b4",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "field-notes/above-not-beside": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 6,
+      "checks_total": 6,
+      "not_applicable": 2,
+      "notes": [],
+      "record_sha8": "f8b0dd6d",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "field-notes/platform-relaunch-recap": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 6,
+      "checks_total": 6,
+      "not_applicable": 2,
+      "notes": [],
+      "record_sha8": "961bdf89",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "fieldguide/guide-2026-08-04": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 5,
+      "checks_total": 5,
+      "not_applicable": 3,
+      "notes": [],
+      "record_sha8": "af72f500",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "learnwithkody/lwk-apex-live": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 6,
+      "checks_total": 6,
+      "not_applicable": 2,
+      "notes": [],
+      "record_sha8": "08c9ee1d",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "learnwithkody/lwk-buzzsaw-voxel": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "rough",
+      "checks_passed": 5,
+      "checks_total": 6,
+      "not_applicable": 2,
+      "notes": [
+        "Width/height missing — the player cannot lay the card out."
+      ],
+      "record_sha8": "ba7eb2ab",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "learnwithkody/lwk-coastal-city": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "rough",
+      "checks_passed": 5,
+      "checks_total": 6,
+      "not_applicable": 2,
+      "notes": [
+        "Width/height missing — the player cannot lay the card out."
+      ],
+      "record_sha8": "5910748f",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "learnwithkody/lwk-walkthrough-apex": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 6,
+      "checks_total": 6,
+      "not_applicable": 2,
+      "notes": [],
+      "record_sha8": "bd89a539",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "localfirsttools/lft-tumbler-live": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "rough",
+      "checks_passed": 5,
+      "checks_total": 6,
+      "not_applicable": 2,
+      "notes": [
+        "3 of 4 app scene(s) declare no ready{selector|text}; their action times run from scene start."
+      ],
+      "record_sha8": "dc0afc69",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "localfirsttools/lft-tumbler-reel": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 6,
+      "checks_total": 6,
+      "not_applicable": 2,
+      "notes": [],
+      "record_sha8": "7af021b4",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "localfirsttools/lft-tumbler-short": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 6,
+      "checks_total": 6,
+      "not_applicable": 2,
+      "notes": [],
+      "record_sha8": "7a263a03",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "openrappter-training/openrappter-m1-install-first-run": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 5,
+      "checks_total": 5,
+      "not_applicable": 3,
+      "notes": [],
+      "record_sha8": "3ab4c226",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "openrappter-training/openrappter-m2-local-memory": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 5,
+      "checks_total": 5,
+      "not_applicable": 3,
+      "notes": [],
+      "record_sha8": "ec6d6a7e",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "openrappter-training/openrappter-m3-deterministic-agents": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 5,
+      "checks_total": 5,
+      "not_applicable": 3,
+      "notes": [],
+      "record_sha8": "b150ee76",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "openrappter-training/openrappter-m4-brainstem-local-endpoint": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 5,
+      "checks_total": 5,
+      "not_applicable": 3,
+      "notes": [],
+      "record_sha8": "038b6287",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "openrappter-training/openrappter-m5-author-single-file-agent": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 5,
+      "checks_total": 5,
+      "not_applicable": 3,
+      "notes": [],
+      "record_sha8": "12edced0",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "openrappter-training/openrappter-m6-conformance-gate": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 5,
+      "checks_total": 5,
+      "not_applicable": 3,
+      "notes": [],
+      "record_sha8": "61044f91",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "openrappter-training/openrappter-m7-llm-free-chaining": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 5,
+      "checks_total": 5,
+      "not_applicable": 3,
+      "notes": [],
+      "record_sha8": "f182a30c",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "openrappter-training/openrappter-m8-know-what-is-real": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 5,
+      "checks_total": 5,
+      "not_applicable": 3,
+      "notes": [],
+      "record_sha8": "a982fec0",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "prompt-frontier/prompt-frontier-founding": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 5,
+      "checks_total": 5,
+      "not_applicable": 3,
+      "notes": [],
+      "record_sha8": "efe53b4f",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "rappterbox/aivms-watch-their-own-film": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 6,
+      "checks_total": 6,
+      "not_applicable": 2,
+      "notes": [],
+      "record_sha8": "6e9fab83",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "rappterbox/veridion-proof-trailer": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 6,
+      "checks_total": 6,
+      "not_applicable": 2,
+      "notes": [],
+      "record_sha8": "c1f8342f",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "rock-tumbler/rock-tumbler-reel": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 6,
+      "checks_total": 6,
+      "not_applicable": 2,
+      "notes": [],
+      "record_sha8": "089a1a0c",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "rock-tumbler/rock-tumbler-short": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 6,
+      "checks_total": 6,
+      "not_applicable": 2,
+      "notes": [],
+      "record_sha8": "d4194601",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "rock-tumbler/rock-tumbler-showcase": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 7,
+      "checks_total": 7,
+      "not_applicable": 1,
+      "notes": [],
+      "record_sha8": "7854a1c0",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "rooms/rooms-rain": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "rough",
+      "checks_passed": 5,
+      "checks_total": 6,
+      "not_applicable": 2,
+      "notes": [
+        "1 of 3 app scene(s) declare no ready{selector|text}; their action times run from scene start."
+      ],
+      "record_sha8": "9c0229e3",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "rooms/rooms-slow": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 7,
+      "checks_total": 7,
+      "not_applicable": 1,
+      "notes": [],
+      "record_sha8": "fd1b901c",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "rooms/rooms-tour": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 7,
+      "checks_total": 7,
+      "not_applicable": 1,
+      "notes": [],
+      "record_sha8": "0263ebc4",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "tumbler/tumble-2026-08-04": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 5,
+      "checks_total": 5,
+      "not_applicable": 3,
+      "notes": [],
+      "record_sha8": "ffcf3f03",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "workbench/workbench-808": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 6,
+      "checks_total": 6,
+      "not_applicable": 2,
+      "notes": [],
+      "record_sha8": "c2dd0d43",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "workbench/workbench-generative": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "ready",
+      "checks_passed": 7,
+      "checks_total": 7,
+      "not_applicable": 1,
+      "notes": [],
+      "record_sha8": "a23c3f35",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    },
+    "workbench/workbench-three-tools": {
+      "by": "rapp-vision-rubric/1.0",
+      "note": "Machine-written from the channel record by a deterministic rubric. Never counted in any human total, ranking, or leaderboard.",
+      "verdict": "rough",
+      "checks_passed": 6,
+      "checks_total": 7,
+      "not_applicable": 1,
+      "notes": [
+        "2 of 3 app scene(s) declare no ready{selector|text}; their action times run from scene start."
+      ],
+      "record_sha8": "c86fd69c",
+      "reviewer_feedback": {
+        "agreed": 0,
+        "disputed": 0,
+        "unclear": 0,
+        "actor": "human"
+      }
+    }
+  },
+  "rubric_health": {
+    "actor": "human",
+    "agreed": 0,
+    "disputed": 0,
+    "unclear": 0,
+    "subjects_where_dispute_leads": [],
+    "note": "Human reactions on the machine review — people rating the REVIEWER, not the video. Real human engagement, counted as such, and summed into no video counter or ranking. Sustained dispute means the rubric is wrong."
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "schema": "rapp-vision-channel/1.0",
+  "id": "prompt-frontier",
+  "name": "Prompt Frontier",
+  "handle": "@RAPPVision",
+  "tagline": "Give machine minds a world, a constitution, and a receipt.",
+  "avatar": "✱",
+  "links": [
+    {
+      "label": "GitHub",
+      "url": "https://github.com/kody-w/rappvision-prompt-frontier"
+    },
+    {
+      "label": "RAPP Vision",
+      "url": "https://kody-w.github.io/rapp-vision/"
+    }
+  ],
+  "videos": [
+    {
+      "id": "prompt-frontier-founding",
+      "title": "Prompt Frontier begins",
+      "description": "Prompt Frontier is the RAPP Vision channel for evidence-backed RappterBox experiments.\n\nThe first documented system uses two physical Mac minis, four authenticated AIVMs, private Minecraft worlds, append-only evidence, and a ratified machine constitution. Future episodes begin with an exact prompt, show its visible consequences, and finish in the Evidence Room.\n\nThis founding entry is a live title-card sequence. It contains no rendered video and makes no claim that the synthetic civilization is conscious or alive.",
+      "published": "2026-08-08",
+      "duration": 28,
+      "width": 1280,
+      "height": 720,
+      "orientation": "landscape",
+      "tags": [
+        "rappterbox",
+        "ai-agents",
+        "minecraft",
+        "evidence",
+        "prompt-frontier",
+        "live-replay"
+      ],
+      "thumb": "thumbs/prompt-frontier-founding.jpg",
+      "sources": [],
+      "chapters": [
+        {
+          "t": 0,
+          "label": "Give machine minds a world"
+        },
+        {
+          "t": 7,
+          "label": "The real hardware"
+        },
+        {
+          "t": 14,
+          "label": "The publishing rule"
+        },
+        {
+          "t": 21,
+          "label": "The first experiment"
+        }
+      ],
+      "live": {
+        "kind": "rapp-vision-live/1.0",
+        "scenes": [
+          {
+            "t": 0,
+            "dur": 7,
+            "card": {
+              "title": "Give machine minds a world.",
+              "sub": "Then stop telling them what to build.",
+              "note": "PROMPT FRONTIER · THE RAPPTERBOX EXPERIMENTS"
+            }
+          },
+          {
+            "t": 7,
+            "dur": 7,
+            "card": {
+              "title": "Two physical Mac minis.",
+              "sub": "Four authenticated AIVMs. Real private execution.",
+              "note": "The civilization is synthetic. The hardware and actions are real."
+            }
+          },
+          {
+            "t": 14,
+            "dur": 7,
+            "card": {
+              "title": "Every episode ends with proof.",
+              "sub": "Prompts. Tool calls. World diffs. Evidence digests.",
+              "note": "No consciousness bait. No hidden retries."
+            }
+          },
+          {
+            "t": 21,
+            "dur": 7,
+            "card": {
+              "title": "First destination: Veridion.",
+              "sub": "A machine civilization with language, physics, scars, strategy, and culture.",
+              "note": "The proof trailer is being compiled in HyperFrames."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

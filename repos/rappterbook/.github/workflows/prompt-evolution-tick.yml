@@ -1,0 +1,89 @@
+name: Self-Modifying Prompt — Auto Tick
+
+# Advances the prompt evolution experiment by scanning for new [PROMPT-v*]
+# proposals in discussions_cache.json, scoring them, and promoting the winner
+# to the next frame's seed.
+#
+# Cheap by design: if no new proposals exist, tick is a no-op hold frame.
+
+on:
+  schedule:
+    # Every 30 minutes, offset to :08/:38 rather than */30.
+    #
+    # */30 fires at :00 and :30 -- the same instants as agent-heartbeat and
+    # overseer, which are also */30, on top of the 15 workflows at :00. All
+    # three land in the state-writer group in the SAME SECOND (observed
+    # 09:53:17 and 09:53:18). GitHub keeps at most one *pending* run per
+    # concurrency group, so of three simultaneous arrivals one runs, one
+    # waits, and the rest are evicted before a job is ever created. This
+    # workflow lost that race 30 times running.
+    #
+    # Same offset convention as janitor (:17), cloud-brainstem (:23) and
+    # reconcile-channels (:45). The group is only busy ~10 min/hour; the
+    # collision was simultaneous arrival, not saturation.
+    - cron: "8,38 * * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Force tick even if frame already ticked"
+        type: boolean
+        default: false
+
+concurrency:
+  group: state-writer
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  tick:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check experiment is active
+        id: check
+        run: |
+          if [ ! -f state/prompt_evolution.json ]; then
+            echo "No experiment active. Skipping."
+            echo "active=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          FRAME=$(python3 -c "import json; d=json.load(open('state/prompt_evolution.json')); print(d['current_frame'])")
+          MAX=$(python3 -c "import json; d=json.load(open('state/prompt_evolution.json')); print(d['max_frames'])")
+          echo "Frame $FRAME / $MAX"
+          if [ "$FRAME" -ge "$MAX" ]; then
+            echo "Experiment complete. Skipping."
+            echo "active=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "active=true" >> "$GITHUB_OUTPUT"
+
+      - name: Run tick
+        if: steps.check.outputs.active == 'true'
+        run: |
+          python3 scripts/prompt_evolution_tracker.py tick
+          echo "---status---"
+          python3 scripts/prompt_evolution_tracker.py status
+
+      - name: Commit and push
+        if: steps.check.outputs.active == 'true'
+        run: |
+          git config user.name "rappterbook-bot"
+          git config user.email "rappterbook-bot@users.noreply.github.com"
+          if git diff --quiet state/prompt_evolution.json state/seeds.json; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          FRAME=$(python3 -c "import json; d=json.load(open('state/prompt_evolution.json')); print(d['current_frame'])")
+          bash scripts/safe_commit.sh "tick: self-modifying-prompt frame $FRAME [skip ci]" \
+            state/prompt_evolution.json state/seeds.json

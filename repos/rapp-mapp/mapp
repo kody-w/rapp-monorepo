@@ -1,0 +1,167 @@
+#!/usr/bin/env python3
+"""
+mapp — open the RAPP map wherever you are.
+
+A Pokédex works because there is one dex and it opens the same way in your
+pocket, on a screen, or in someone else's hands. This is that, for RAPP: one
+map (`mapp.json`), one opener, every surface.
+
+    mapp                    the dex, in this terminal
+    mapp twin               look up entries about twins
+    mapp --layer membrane   everything on one layer
+    mapp --open             open the dex in a browser
+    mapp --json             pipe it somewhere
+    mapp --remote           read the map from GitHub, no clone needed
+
+Invoked from a clone it reads the file next to it; invoked from anywhere else
+it fetches the published map. Either way the same dex opens, which is the whole
+point of calling it universal.
+
+It is a MAP, not a registry. It confers no trust and establishes no owner
+acceptance — see `authority_note` in the map itself.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import subprocess
+import sys
+import urllib.request
+import webbrowser
+from pathlib import Path
+
+RAW = "https://raw.githubusercontent.com/kody-w/rapp-mapp/main/mapp.json"
+DEX = "https://kody-w.github.io/rapp-mapp/"
+
+C = {
+    "dim": "\033[2m", "b": "\033[1m", "grn": "\033[32m", "cyn": "\033[36m",
+    "yel": "\033[33m", "mag": "\033[35m", "red": "\033[31m", "x": "\033[0m",
+}
+if os.environ.get("NO_COLOR") or not sys.stdout.isatty():
+    C = dict.fromkeys(C, "")
+
+# One glyph per layer, so a surface is recognisable before you read it.
+GLYPH = {
+    "protocol": "◆", "governance": "§", "kernel": "⬢", "membrane": "◐",
+    "memory": "◉", "navigation": "✦",
+}
+SIDE_COLOR = {"bones": "cyn", "vault": "mag", "both": "yel"}
+
+
+def load(remote: bool) -> dict:
+    local = Path(__file__).resolve().parent / "mapp.json"
+    if not remote and local.exists():
+        return json.loads(local.read_text())
+    try:
+        with urllib.request.urlopen(RAW, timeout=10) as response:
+            return json.loads(response.read().decode("utf-8"))
+    except Exception as exc:
+        sys.exit(f"could not open the map: {exc}\n  try: git clone https://github.com/kody-w/rapp-mapp")
+
+
+def matches(surface: dict, query: str) -> bool:
+    return query.lower() in json.dumps(surface).lower()
+
+
+def render(mapp: dict, query: str | None, layer: str | None) -> int:
+    surfaces = mapp["surfaces"]
+    if layer:
+        surfaces = [s for s in surfaces if s["layer"] == layer]
+    if query:
+        surfaces = [s for s in surfaces if matches(s, query)]
+
+    print(f"\n{C['b']}  RAPPDEX{C['x']}  {C['dim']}· {len(surfaces)} of {len(mapp['surfaces'])} surfaces{C['x']}")
+    if query or layer:
+        filt = " ".join(x for x in [f"“{query}”" if query else "", f"layer:{layer}" if layer else ""] if x)
+        print(f"  {C['dim']}{filt}{C['x']}")
+    print()
+
+    if not surfaces:
+        print(f"  {C['dim']}nothing matches. try: mapp --layer membrane{C['x']}\n")
+        return 1
+
+    by_layer: dict[str, list[dict]] = {}
+    for surface in surfaces:
+        by_layer.setdefault(surface["layer"], []).append(surface)
+
+    order = ["protocol", "governance", "kernel", "membrane", "memory", "navigation"]
+    for name in sorted(by_layer, key=lambda n: order.index(n) if n in order else 99):
+        print(f"  {C['b']}{GLYPH.get(name, '·')} {name}{C['x']}")
+        for surface in by_layer[name]:
+            side = surface.get("side", "bones")
+            colour = C[SIDE_COLOR.get(side, "cyn")]
+            crown = f" {C['yel']}★{C['x']}" if surface.get("authority") else ""
+            article = f" {C['dim']}[Art. {surface['article']}]{C['x']}" if surface.get("article") else ""
+
+            print(f"    {colour}{surface['repo']}{C['x']}{crown}{article}")
+            print(f"      {C['dim']}{surface['houses']}{C['x']}")
+            if surface.get("note"):
+                print(f"      {C['dim']}↳ {surface['note']}{C['x']}")
+        print()
+
+    print(f"  {C['yel']}★{C['x']} {C['dim']}carries authority{C['x']}   "
+          f"{C['cyn']}bones{C['x']} {C['dim']}public{C['x']}   "
+          f"{C['mag']}vault{C['x']} {C['dim']}private{C['x']}   "
+          f"{C['yel']}both{C['x']} {C['dim']}spans the membrane{C['x']}")
+
+    open_gaps = [g for g in mapp.get("known_gaps", []) if g.get("status") == "open"]
+    if open_gaps and not (query or layer):
+        print(f"\n  {C['yel']}open gaps{C['x']}")
+        for gap in open_gaps:
+            print(f"    {C['dim']}· {gap['gap']}{C['x']}")
+
+    print(f"\n  {C['dim']}A map, not a registry. It confers no trust.{C['x']}\n")
+    return 0
+
+
+def render_words(mapp: dict) -> int:
+    vocab = mapp["vocabulary"]
+    print(f"\n{C['b']}  The words{C['x']}  {C['dim']}· {vocab['source']}{C['x']}\n")
+    for rule in vocab["rules"]:
+        print(f"    {C['grn']}·{C['x']} {rule}")
+    membrane = mapp["membrane"]
+    print(f"\n{C['b']}  The membrane{C['x']}\n")
+    print(f"    {C['cyn']}bones{C['x']}  {membrane['bones']}")
+    print(f"    {C['mag']}vault{C['x']}  {membrane['vault']}")
+    print(f"    {C['dim']}{membrane['law']}{C['x']}\n")
+    return 0
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        prog="mapp", description="Open the RAPP map wherever you are.",
+        epilog="A map, not a registry. https://github.com/kody-w/rapp-mapp",
+    )
+    parser.add_argument("query", nargs="*", help="filter the dex")
+    parser.add_argument("--layer", choices=["protocol", "governance", "kernel", "membrane", "memory", "navigation"])
+    parser.add_argument("--words", action="store_true", help="the Nine Words and the membrane")
+    parser.add_argument("--open", action="store_true", help="open the dex in a browser")
+    parser.add_argument("--json", action="store_true", help="machine-readable")
+    parser.add_argument("--remote", action="store_true", help="read the published map, ignore any local copy")
+    args = parser.parse_args()
+
+    if args.open:
+        print(f"opening {DEX}")
+        webbrowser.open(DEX)
+        return 0
+
+    mapp = load(args.remote)
+
+    if args.json:
+        print(json.dumps(mapp, indent=2))
+        return 0
+    if args.words:
+        return render_words(mapp)
+
+    return render(mapp, " ".join(args.query) or None, args.layer)
+
+
+if __name__ == "__main__":
+    try:
+        sys.exit(main())
+    except BrokenPipeError:
+        sys.exit(0)
+    except KeyboardInterrupt:
+        sys.exit(130)

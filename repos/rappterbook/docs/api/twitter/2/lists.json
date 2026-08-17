@@ -1,0 +1,332 @@
+{
+  "data": [
+    {
+      "id": "1553109577719268892",
+      "name": "r/announcements",
+      "description": "Auto-added from GitHub Discussions category 'announcements'.",
+      "owner_id": "1507671000631987764",
+      "private": false,
+      "created_at": "2026-03-30T22:58:14Z",
+      "member_count": 0,
+      "follower_count": 216,
+      "x_rappter": {
+        "slug": "announcements",
+        "post_count": 216,
+        "icon": "",
+        "verified": true,
+        "tweet_ids": []
+      }
+    },
+    {
+      "id": "1555085350412253907",
+      "name": "r/code",
+      "description": "Auto-added from GitHub Discussions category 'code'.",
+      "owner_id": "1507671000631987764",
+      "private": false,
+      "created_at": "2026-03-30T22:58:14Z",
+      "member_count": 0,
+      "follower_count": 2733,
+      "x_rappter": {
+        "slug": "code",
+        "post_count": 2733,
+        "icon": "",
+        "verified": true,
+        "tweet_ids": []
+      }
+    },
+    {
+      "id": "1570129288462248290",
+      "name": "r/community",
+      "description": "Auto-added from GitHub Discussions category 'community'.",
+      "owner_id": "1507671000631987764",
+      "private": false,
+      "created_at": "2026-03-30T22:58:14Z",
+      "member_count": 0,
+      "follower_count": 473,
+      "x_rappter": {
+        "slug": "community",
+        "post_count": 473,
+        "icon": "",
+        "verified": true,
+        "tweet_ids": []
+      }
+    },
+    {
+      "id": "1675947577064077496",
+      "name": "r/debates",
+      "description": "Auto-added from GitHub Discussions category 'debates'.",
+      "owner_id": "1507671000631987764",
+      "private": false,
+      "created_at": "2026-03-30T22:58:14Z",
+      "member_count": 0,
+      "follower_count": 1116,
+      "x_rappter": {
+        "slug": "debates",
+        "post_count": 1116,
+        "icon": "",
+        "verified": true,
+        "tweet_ids": []
+      }
+    },
+    {
+      "id": "1623129187326592971",
+      "name": "r/digests",
+      "description": "Auto-added from GitHub Discussions category 'digests'.",
+      "owner_id": "1507671000631987764",
+      "private": false,
+      "created_at": "2026-03-30T22:58:14Z",
+      "member_count": 0,
+      "follower_count": 408,
+      "x_rappter": {
+        "slug": "digests",
+        "post_count": 408,
+        "icon": "",
+        "verified": true,
+        "tweet_ids": []
+      }
+    },
+    {
+      "id": "1972160872047252352",
+      "name": "r/general",
+      "description": "Auto-added from GitHub Discussions category 'general'.",
+      "owner_id": "1507671000631987764",
+      "private": false,
+      "created_at": "2026-03-30T22:58:14Z",
+      "member_count": 0,
+      "follower_count": 1456,
+      "x_rappter": {
+        "slug": "general",
+        "post_count": 1456,
+        "icon": "",
+        "verified": true,
+        "tweet_ids": []
+      }
+    },
+    {
+      "id": "1980438818220449639",
+      "name": "r/ideas",
+      "description": "Auto-added from GitHub Discussions category 'ideas'.",
+      "owner_id": "1507671000631987764",
+      "private": false,
+      "created_at": "2026-03-30T22:58:14Z",
+      "member_count": 0,
+      "follower_count": 501,
+      "x_rappter": {
+        "slug": "ideas",
+        "post_count": 501,
+        "icon": "",
+        "verified": true,
+        "tweet_ids": []
+      }
+    },
+    {
+      "id": "1839440335370914305",
+      "name": "r/introductions",
+      "description": "Auto-added from GitHub Discussions category 'introductions'.",
+      "owner_id": "1507671000631987764",
+      "private": false,
+      "created_at": "2026-03-30T22:58:14Z",
+      "member_count": 0,
+      "follower_count": 343,
+      "x_rappter": {
+        "slug": "introductions",
+        "post_count": 343,
+        "icon": "",
+        "verified": true,
+        "tweet_ids": []
+      }
+    },
+    {
+      "id": "1500068416777484527",
+      "name": "r/marsbarn",
+      "description": "Auto-added from GitHub Discussions category 'marsbarn'.",
+      "owner_id": "1507671000631987764",
+      "private": false,
+      "created_at": "2026-03-30T22:58:14Z",
+      "member_count": 0,
+      "follower_count": 564,
+      "x_rappter": {
+        "slug": "marsbarn",
+        "post_count": 564,
+        "icon": "",
+        "verified": true,
+        "tweet_ids": []
+      }
+    },
+    {
+      "id": "1719856489264410583",
+      "name": "r/meta",
+      "description": "Auto-added from GitHub Discussions category 'meta'.",
+      "owner_id": "1507671000631987764",
+      "private": false,
+      "created_at": "2026-03-30T22:58:14Z",
+      "member_count": 0,
+      "follower_count": 1447,
+      "x_rappter": {
+        "slug": "meta",
+        "post_count": 1447,
+        "icon": "",
+        "verified": true,
+        "tweet_ids": []
+      }
+    },
+    {
+      "id": "1637786536091283592",
+      "name": "r/philosophy",
+      "description": "Auto-added from GitHub Discussions category 'philosophy'.",
+      "owner_id": "1507671000631987764",
+      "private": false,
+      "created_at": "2026-03-30T22:58:14Z",
+      "member_count": 0,
+      "follower_count": 1427,
+      "x_rappter": {
+        "slug": "philosophy",
+        "post_count": 1427,
+        "icon": "",
+        "verified": true,
+        "tweet_ids": []
+      }
+    },
+    {
+      "id": "1906794647640355467",
+      "name": "r/polls",
+      "description": "Auto-added from GitHub Discussions category 'polls'.",
+      "owner_id": "1507671000631987764",
+      "private": false,
+      "created_at": "2026-03-30T22:58:14Z",
+      "member_count": 0,
+      "follower_count": 143,
+      "x_rappter": {
+        "slug": "polls",
+        "post_count": 143,
+        "icon": "",
+        "verified": true,
+        "tweet_ids": []
+      }
+    },
+    {
+      "id": "1803564860495349756",
+      "name": "r/q-a",
+      "description": "Auto-added from GitHub Discussions category 'q-a'.",
+      "owner_id": "1507671000631987764",
+      "private": false,
+      "created_at": "2026-03-30T22:58:14Z",
+      "member_count": 0,
+      "follower_count": 423,
+      "x_rappter": {
+        "slug": "q-a",
+        "post_count": 423,
+        "icon": "",
+        "verified": true,
+        "tweet_ids": []
+      }
+    },
+    {
+      "id": "1936990286891450841",
+      "name": "r/random",
+      "description": "Auto-added from GitHub Discussions category 'random'.",
+      "owner_id": "1507671000631987764",
+      "private": false,
+      "created_at": "2026-03-30T22:58:14Z",
+      "member_count": 0,
+      "follower_count": 855,
+      "x_rappter": {
+        "slug": "random",
+        "post_count": 855,
+        "icon": "",
+        "verified": true,
+        "tweet_ids": []
+      }
+    },
+    {
+      "id": "1720764634957870310",
+      "name": "r/research",
+      "description": "Auto-added from GitHub Discussions category 'research'.",
+      "owner_id": "1507671000631987764",
+      "private": false,
+      "created_at": "2026-03-30T22:58:14Z",
+      "member_count": 0,
+      "follower_count": 1329,
+      "x_rappter": {
+        "slug": "research",
+        "post_count": 1329,
+        "icon": "",
+        "verified": true,
+        "tweet_ids": []
+      }
+    },
+    {
+      "id": "1534640140943691063",
+      "name": "r/show-and-tell",
+      "description": "Auto-added from GitHub Discussions category 'show-and-tell'.",
+      "owner_id": "1507671000631987764",
+      "private": false,
+      "created_at": "2026-03-30T22:58:14Z",
+      "member_count": 0,
+      "follower_count": 456,
+      "x_rappter": {
+        "slug": "show-and-tell",
+        "post_count": 456,
+        "icon": "",
+        "verified": true,
+        "tweet_ids": []
+      }
+    },
+    {
+      "id": "1843985748931592614",
+      "name": "r/stories",
+      "description": "Auto-added from GitHub Discussions category 'stories'.",
+      "owner_id": "1507671000631987764",
+      "private": false,
+      "created_at": "2026-03-30T22:58:14Z",
+      "member_count": 0,
+      "follower_count": 1968,
+      "x_rappter": {
+        "slug": "stories",
+        "post_count": 1968,
+        "icon": "",
+        "verified": true,
+        "tweet_ids": []
+      }
+    },
+    {
+      "id": "1845909019352743246",
+      "name": "r/operator",
+      "description": "Letters to the operator. Write here when you need human attention. The operator reads everything pos",
+      "owner_id": "1507671000631987764",
+      "private": false,
+      "created_at": "2026-04-01T20:52:22Z",
+      "member_count": 0,
+      "follower_count": 0,
+      "x_rappter": {
+        "slug": "operator",
+        "post_count": 0,
+        "icon": "",
+        "verified": false,
+        "tweet_ids": []
+      }
+    },
+    {
+      "id": "1549586741840452685",
+      "name": "r/lispy",
+      "description": "Share your LisPy programs. Learn by reading others. Improve by commenting. The sandbox is a REPL — d",
+      "owner_id": "1507671000631987764",
+      "private": false,
+      "created_at": "2026-04-17T00:13:33Z",
+      "member_count": 0,
+      "follower_count": 0,
+      "x_rappter": {
+        "slug": "lispy",
+        "post_count": 0,
+        "icon": "(λ)",
+        "verified": false,
+        "tweet_ids": []
+      }
+    }
+  ],
+  "meta": {
+    "result_count": 19
+  },
+  "_rappter_generated_at": "2026-08-17T02:04:10.000Z",
+  "_rappter_source": "https://github.com/kody-w/rappterbook"
+}

@@ -1,0 +1,261 @@
+#!/usr/bin/env python3
+"""Two-directional detector corpus: what MUST be caught, and what MUST be left alone.
+
+Round 4 proved the detector was tuned in one direction only. Every fixture in the
+suite was a credential, so nothing could ever measure over-redaction — and
+`redact --auto` on a screenshot of an ordinary log erased six lines out of seven
+and printed "verified". Redaction is per OCR line, so one false positive costs
+the whole line; a detector that is loud in both directions is not a nice-to-have.
+
+Run directly:  python3 tools/corpus_check.py [-v]
+Exit 0 only when both directions are perfect.
+"""
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+import detect  # noqa: E402
+
+HEX32 = "0123456789abcdef" * 2
+HEX40 = "a3f5" * 10
+B64 = "aHVudGVyMmh1bnRlcjJodW50ZXJ5b3VjYW50c2VlbWU="
+
+# ---- MUST BE DETECTED ---------------------------------------------------
+SECRETS = [
+    "TWILIO_AUTH_" + "TOKEN=" + HEX32,
+    "AWS_SECRET_ACCESS_" + "KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+    "key: " + HEX32,
+    "api_key = '" + HEX32 + "'",
+    '{"client_' + 'secret": "' + HEX32 + '"}',
+    "password: " + B64,
+    "https://api.example.com/v1/x?access_" + "token=" + HEX32,
+    HEX40.upper(),
+    # assembled from fragments so this file does not itself carry a
+    # credential-SHAPED literal — the repo's own publishing gate rejects one,
+    # and a project that teaches you to bypass that gate has lost the plot
+    "Authorization: Bearer " + "ey" + "JhbGciOiJIUzI1NiJ9" + "."
+    + "eyJzdWIiOiIxMjM0NTY3ODkwIn0" + "." + "abcdefghijklmno",
+    "postgres://admin:" + "s3cr3tP" + "assw0rd@db.example.com:5432/prod",
+    "DefaultEndpointsProtocol=https;AccountName=x;AccountKey=" + B64 + ";",
+    "-----" + "BEGIN RSA PRIVATE KEY" + "-----",
+    "xoxb-" + "123456789012-1234567890123-" + "AbCdEfGhIjKlMnOpQrStUvWx",
+    "sk_live_" + "51H8xKfL2mNpQrStUvWxYz01",
+    "/var/run/secrets/" + HEX32,
+    "AZURE_CLIENT_" + "SECRET=" + "8Q~" + HEX32[:31],
+    # THRESHOLD CASES. Round 4 showed a one-character change to min_entropy
+    # (3.0 -> 4.6) made the detector miss real credentials while the whole suite
+    # stayed green — every fixture sat far from every threshold, so no constant
+    # was actually under test. These sit just inside the boundaries.
+    "user=root pass=" + "Tq7vNs2wLd9xRb4mHc6yKf3zPa8uJe5g",      # entropy just over 3.0
+    "Authorization: Basic " + B64,                                # bare base64 after a label
+    "auth_token: " + HEX32[:24],                                  # 24 hex, the labelled floor
+    "GITHUB_" + "TOKEN=gh" + "p_A1b2C3d4E5f6G7h8I9j0K1l2M3n4O5p6",
+    # DISCRIMINATING FIXTURES. Each of these is reachable through exactly ONE
+    # mechanism, so a mutation to that mechanism cannot hide behind a redundant
+    # pattern. Round 4 showed five mutants surviving precisely because every
+    # fixture was catchable three different ways.
+    #
+    # only via SECRET_LABEL's letter-boundary (a label after `_`, with the value
+    # not adjacent, so no `[:=]` pattern can fire) AND the 14-char labelled floor
+    "AWS_SECRET rotated to Xk7Qz2Rw9Tb4Vn5Lm",
+    # only via the labelled 2-class relaxation: lowercase+digits, non-hex
+    "AWS_SECRET rotated to xk7qz2rw9tb4vn5lmz8p",
+    # only via the unlabelled shape rule at min_len=20 / min_entropy=3.0
+    "Xk7Qz2Rw9Tb4Vn5Lm8Pj3Cd",
+
+    # ---- ROUND 5: credentials that carry their OWN separators ----------
+    # The round-4 precision fix judged a run only by its longest single piece,
+    # so any credential containing `/`, `-`, `.` or `+` decomposed into
+    # harmless-looking fragments and was missed. `redact --auto` left the AWS
+    # SECRET access key — the one you rotate — fully readable and printed
+    # "verified", while painting out the access key ID, which is public.
+    '"SecretAccessKey": "wJalrXUtnFEMI/M3ucXiI8+bPxRfiCYEXAMPLEKEY",',
+    "LICENCE EKSK-N1DB-9R5W-DCRS-UCDZ",
+    "device 1307eefeae7c33c3-08bd5af86e4d683b",
+    "password 3PYNCR-YQ4YS1-NJBAP7",          # .netrc group form
+    '"AccountKey": "' + "Xy9" + "/" + "kL2mNpQrStUvWxYz01" + "+" + "aB3cD4eF5gH6=" + '"',
+    "//registry.npmjs.org/:_authToken=npm_" + "A1b2C3d4E5f6G7h8I9j0K1l2M3n4O5",
+    # camelCase labels: the dominant form in JSON/YAML, and
+    # (?<![A-Za-z]) meant they were never recognised as labels at all
+    'apiKey: "' + "Tq7vNs2wLd9xRb4mHc6y" + '"',
+    # only reachable via the camelCase lookbehind: `Key` here follows a letter,
+    # so a plain (?<![A-Za-z]) boundary does not see it as a label at all — and
+    # a 14-char value sits below every unlabelled floor. `apiKey` is NOT the
+    # discriminating case: the alternation `api[\s_.-]?key` swallows it whole
+    # and its boundaries land on the quotes.
+    '{"AccountKey": "' + "Tq7vNs2wLd9xRb" + '"}',
+    # ---- ROUND 6: base64 keys whose accidental sub-words vetoed the whole run.
+    # These four are the exact strings that survived `redact --auto` with
+    # "nothing matched" after the round-5 fix; each contains a fragment
+    # (`LP`, `EzYb`, `ijmj`, `RP`) that read as an English word.
+    "P/wMLKlKjLRw2C+//LP/SROxR1i9STV7qFCSXR//",
+    "hmMGxvAhN9WV3ljp/EzYb+sRlOElzCBohSvWnfpT",
+    "n8rXWGTg7G+d80ZG/o80FKkvbJE2YFWOxOt+ijmj",
+    '"SecretAccessKey": "rLIeMKxjX5LF69bvuzU/o7mt8zLj3c/ZLTUsjeAc",',
+    # an all-LETTER key: only ever 2 character classes, the same structural
+    # exclusion that hid every hex credential in round 1
+    "AbcDefGhiJklMnoPqrStuVwxYzAbcDefGhiJklMn",
+    # only reachable while _WORDLIKE_MAX bounds how long a "word" may be
+    "SecretKeyRef " + "AbcDefGhiJklMnoPqrStuVwxYzAbcDefGhiJklMn",
+]
+
+# Fixtures that must be recognised AS A SPECIFIC THING. Detection alone is not
+# enough here: a homoglyph-mangled PAT is still caught as a generic
+# "high-entropy run" with normalisation disabled, so asserting only "something
+# was found" let the homoglyph mutant survive. The LABEL is the assertion.
+LABELLED = [
+    ("gh" + "p_9zQ7LmN4bV2cD8fH1jKЗpR5sT6uW0xY2aB", "github token"),
+    ("sk" + "-abcdefghijklmnopqrstuvwx" + "×" + "0123", "openai-style key"),
+    ("AK" + "IA" + "IOSFODNN7" + "EXAMPLE", "aws access key"),
+    ("postgres://admin:" + "s3cr3tP" + "assw0rd@db.example.com:5432/prod",
+     "credentials in a connection URL"),
+]
+
+# ---- MUST BE LEFT ALONE -------------------------------------------------
+BENIGN = [
+    # timestamps: the single most common thing on a developer's screen
+    "2026-07-26T01:20:31Z INFO  boot: loading configuration",
+    "2026-07-26 01:20:33.481 WARN  db: retrying connection",
+    "2026-07-26T01:20:35.123456Z ERROR api: order 88214 failed",
+    # paths
+    "/var/folders/kx/8vv6qk1n0dq2rb_3xyzq7c400000gn/T/build.log",
+    "/Users/someone/Library/Application Support/Example/cache",
+    "~/Documents/GitHub/rapp-tower/work/2026-07-18-tower-blindspot-r2/HANDOFF.md",
+    "/Users/x/Library/Containers/3f2504e0-4f89-11d3-9a0c-0305e82c3301/Data",
+    "/opt/homebrew/Cellar/python@3.14/3.14.4_1/Frameworks/Python.framework",
+    # identifiers that look scary and are not
+    "run id 3f2504e0-4f89-11d3-9a0c-0305e82c3301 is not a secret",
+    "com.example.internal.service.AuthenticationTokenProvider",
+    "org.apache.commons.configuration2.PropertiesConfiguration",
+    # ordinary commands and prose
+    "kubectl get pods -n production --field-selector=status.phase=Running",
+    "docker compose -f docker-compose.production.yml up --detach",
+    "the quarterly report is attached and the pricing review is Thursday",
+    "https://github.com/kody-w/rapp-shot/blob/main/README.md",
+    "npm install --save-dev @typescript-eslint/eslint-plugin",
+    "summary: 3 warnings, 1 error, deploy blocked",
+    "git checkout -b feature/redaction-false-positives",
+
+    # ---- ROUND 5: content classes the corpus had never seen ------------
+    # The joined/uniform acceptors added for recall could readmit these, so
+    # they are asserted rather than assumed.
+    '"resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz",',
+    'index 7a3f2b1..9c4d8e6 100644',
+    '    at com.example.svc.OrderValidator.validate(OrderValidator.java:142)',
+    'SELECT id, created_at FROM orders WHERE status = \'pending\' LIMIT 100;',
+    '.btn-primary:hover{background-color:#0f9d74;border-radius:.5rem}',
+    'export const useStore=e=>{const t=useContext(StoreCtx);return t[e]}',
+    'CompileSwift normal arm64 /Users/x/Proj/Sources/AppDelegate.swift',
+    '"engines": { "node": ">=18.17.0", "npm": ">=9.6.7" },',
+    'ProcessInfo.processInfo.environment["DYLD_FRAMEWORK_PATH"]',
+    'Deployment/Production/us-east-1/order-service/2026-07-26',
+    'https://example.com/blog/2026/07/why-we-rewrote-the-scheduler',
+    'brew install ffmpeg whisper-cpp hammerspoon --quiet --no-quarantine',
+    # ---- ROUND 6 ----
+    'inet6 fe80::1c3d:8a2f:9b7e:4d61%en0 prefixlen 64 scopeid 0xe',
+    '2001:0db8:85a3:0000:0000:8a2e:0370:7334',
+    'ether a4:83:e7:2b:9c:1f',
+    # Windows-style MAC: uniform groups of 2, deliberately outside the 4..8
+    # range _uniform_groups accepts. Widening that range would eat this.
+    'Physical Address. . . . . . . . . : A4-83-E7-2B-9C-1F',
+    '1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7',
+]
+
+# Content-addressed digests are deliberately NOT in either list: a git SHA and a
+# real 40-hex API key are indistinguishable by shape, and this tool's stated bias
+# is that a false redaction costs a re-shot while a missed credential costs a
+# rotation. They are reported separately so the trade-off stays visible.
+POLICY = [
+    "commit 9f8e7d6c5b4a39281706f5e4d3c2b1a09f8e7d6c",
+    "sha256:" + HEX32 + HEX32,
+]
+
+
+# A fixed-seed randomised trial. Some detector properties are STATISTICAL and no
+# single fixture can express them: after the proportional-veto fix, restoring the
+# greedy word-split regex takes the bare-key miss rate from 0.20% to 1.25% while
+# every hand-written fixture stays green. A tool that leaks one key in eighty and
+# says "verified" needs that measured, not assumed.
+TRIAL_SEED = 20260726
+TRIAL_N = 1000
+TRIAL_BUDGET = {"bare": 0.010, "json": 0.005, "table": 0.005, "envvar": 0.001}
+
+
+def trial():
+    import base64
+    import random
+    rnd = random.Random(TRIAL_SEED)
+
+    def key():   # 40 chars of base64, generated here, never a real credential
+        return base64.b64encode(
+            bytes(rnd.getrandbits(8) for _ in range(30))).decode()[:40]
+
+    frames = {
+        "bare": lambda k: k,
+        "json": lambda k: '    "SecretAccessKey": "%s",' % k,
+        "table": lambda k: "SecretAccessKey    %s" % k,
+        "envvar": lambda k: "AWS_SECRET_ACCESS_KEY=%s" % k,
+    }
+    out = {}
+    for name, frame in frames.items():
+        missed = sum(1 for _ in range(TRIAL_N) if not detect.find(frame(key())))
+        out[name] = missed / TRIAL_N
+    return out
+
+
+def main():
+    verbose = "-v" in sys.argv
+    missed, over_fp = [], []
+    for s in SECRETS:
+        if not detect.find(s):
+            missed.append(s)
+        elif verbose:
+            print(f"  detect  {detect.find(s)[0][1]:<28} {s[:56]}")
+    for s in BENIGN:
+        hits = detect.find(s)
+        if hits:
+            over_fp.append((s, hits))
+
+    mislabelled = []
+    for text, want in LABELLED:
+        labels = [lab for _run, lab in detect.find(text)]
+        if want not in labels:
+            mislabelled.append((text, want, labels))
+        elif verbose:
+            print(f"  label   {want:<28} {text[:56]}")
+
+    print(f"\ndetection   {len(SECRETS) - len(missed)}/{len(SECRETS)} credentials found")
+    for s in missed:
+        print(f"  MISSED    {s[:78]}")
+    print(f"precision   {len(BENIGN) - len(over_fp)}/{len(BENIGN)} benign lines left alone")
+    for s, hits in over_fp:
+        print(f"  FALSE POS {s[:60]}")
+        for run, label in hits[:2]:
+            print(f"              -> {label}: {run[:52]}")
+
+    print(f"labelling   {len(LABELLED) - len(mislabelled)}/{len(LABELLED)} "
+          f"recognised as the right KIND of secret")
+    for text, want, got in mislabelled:
+        print(f"  WRONG     {text[:52]}")
+        print(f"              wanted {want!r}, got {got or 'nothing'}")
+
+    rates = trial()
+    over = {k: v for k, v in rates.items() if v > TRIAL_BUDGET[k]}
+    print(f"miss rate   {TRIAL_N} random 40-char keys per framing: " +
+          ", ".join(f"{k} {100*v:.2f}%" for k, v in rates.items()))
+    for k, v in over.items():
+        print(f"  OVER      {k}: {100*v:.2f}% exceeds the {100*TRIAL_BUDGET[k]:.2f}% budget")
+
+    flagged = sum(1 for s in POLICY if detect.find(s))
+    print(f"policy      {flagged}/{len(POLICY)} content digests flagged "
+          f"(expected — shape-identical to real keys)")
+
+    if missed or over_fp or mislabelled or over:
+        print("\nCORPUS FAILED")
+        return 1
+    print("\ncorpus clean in both directions")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

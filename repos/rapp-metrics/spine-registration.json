@@ -1,0 +1,67 @@
+{
+  "_what": "PROPOSED registration of rapp-metrics/1.0 into kody-w/rapp-spine/registry.json. This file is a patch description, not a spine artifact — nothing here has been applied. `registry_entry` is the exact object to append to registry.json's top-level `registry` array; `router_entries` are the exact objects to append to its top-level `router` array. Both were shaped against the live registry.json (spec rapp-spine/1.0, generated 2026-07-11) read in a scratch clone on 2026-08-02.",
+
+  "_shape_note": "registry.json's `registry` array carries two entry shapes and both are legal: 35 entries use the 6-key protocol shape {spec_id, repo, layer, purpose, when_to_use, entry_point} and 24 use the 6-key spec-mirror shape {spec_id, repo, layer, role, raw_url, entry_point}. rapp-metrics is a protocol with its own repo, not a spec text hosted inside rapp-spine, so it takes the FIRST shape — key order below matches the order those entries are serialized in (spec_id, repo, layer, purpose, when_to_use, entry_point). Router entries use {situation, use[], why}; `use` is always an array of strings even when it holds one element.",
+
+  "_layer_choice": "distribution. rapp-metrics/1.0 profiles rapp-static-api/1.0 ('the repo IS the API'), which the distribution layer summary already names as 'the zero-server convention every catalog builds on', and RAR — the reference implementation — is registered at layer distribution as rapp-registry/1.0. The considered alternative was the map layer ('orientation + observability'), and it is wrong: that layer observes SPEC AND VERSION drift across the estate (rapp-god, rapp-map), not usage of a surface by people. Matches the layer the spec itself declares in SPEC.md §15.",
+
+  "registry_entry": {
+    "spec_id": "rapp-metrics/1.0",
+    "repo": "kody-w/rapp-metrics",
+    "layer": "distribution",
+    "purpose": "Real utilization/impact numbers for surfaces with no backend. GitHub Discussions supply per-subject identity, spam control and per-user-deduped reaction counters; a scheduled workflow folds them into one byte-stable JSON snapshot any static page reads with a plain GET. No server, no auth, no PII, no timestamps (the git history of the file IS the time series). Founding tenet: THE ACTOR DETERMINES THE LANE — an automated actor may never touch a human counter, and a human acting at the bot layer always counts. Machine reviewers are a first-class output in a structurally separate editorial lane (rapp-metrics-editorial/1.0) that can never enter the human counters; agent-authored CONTENT still earns real human numbers.",
+    "when_to_use": "When a static RAPP surface (registry, tool gallery, video channel, egg hub, store) needs defensible usage numbers and you refuse to run a server or hold user data. Also the governing spec whenever an automation is about to write to a counter — the bot-reaction prohibition is normative (SPEC.md §10.3, E11-E13). Reference impls: RAR (subject = agent, running), rapp-vision (subject = video, in flight).",
+    "entry_point": "Implement one function — enumerate() -> [{subject_id, title, url, digest}] — declare a profile, run the collector on a cron. SPEC.md in repo; §1 is the founding tenet (the law), §5 the provider interface, §9 the invariants, §10 the editorial lane, §13 the 52-item conformance checklist."
+  },
+
+  "router_entries": [
+    {
+      "situation": "How do I measure usage of my RAPP surface — real numbers I can defend in a meeting — when it is static, hydra-served, and has no server, no database and no accounts?",
+      "use": [
+        "rapp-metrics/1.0",
+        "rapp-static-api/1.0 (the substrate it profiles)"
+      ],
+      "why": "GitHub is the backend you already have: Discussions give one permanent public thread per subject, and reactions are deduped per user BY THE PLATFORM — so every count means PEOPLE, NOT CLICKS by construction, with nothing to defend. A cron folds them into one byte-stable snapshot committed only when a number actually moved, so the git log becomes the time series. The law that makes any of it trustworthy: THE ACTOR DETERMINES THE LANE, NEVER THE SUBJECT — no bot, service account, app installation or CI token may ever add a reaction (one bot upvote makes every number a lie), while a human acting at the bot layer counts fully (200 people upvoting an agent-generated video is 200 people). Machine reviews are first-class but live in a walled editorial lane, attributed to a reviewer id and rubric version and rendered as machine-authored — and human reactions to a machine review count as human signal ABOUT THE REVIEWER, which is how a wrong rubric becomes visible."
+    },
+    {
+      "situation": "I want to publish video (or any media) on a platform I OWN, served as static files from my own repo — a channel, not an upload to someone else's site — and then know whether anyone actually watched it.",
+      "use": [
+        "rapp-vision-channel/1.0 + rapp-vision-network/1.0 (kody-w/rapp-vision)",
+        "rapp-static-api/1.0",
+        "rapp-metrics/1.0 (the numbers)",
+        "rapp-hydra/1.0 (if the channel must survive a takedown)"
+      ],
+      "why": "GAP-FIX ROUTE. Publishing media you own is a STATIC-FILE concern, not a compute concern: you push a channel.json to a public repo and the single-file player streams it — no server, no account, no build step, and every src/thumb resolves relative to that file's URL so the channel plays from any host. Before this entry the router had no situation mentioning video, channel or media at all (verified: 0 occurrences of 'video', 'vision', 'media' or 'channel.json' anywhere in registry.json), so a crawler asking for 'a platform I own that hosts my videos' fell through to the nearest lexical match — the Tier-2 entry promising 'an always-on cloud body' — and was sent to CommunityRAPP on Azure Functions. That is a wrong answer twice over: it provisions cloud compute for a problem that is a GET of a JSON file, and it abandons the local-first property that made the surface worth owning. Measurement rides the same static substrate via rapp-metrics/1.0 — and note the id trap: a video id is unique only inside its own channel.json, so the metrics subject_id MUST be channel-qualified as <channel.id>/<video.id>."
+    }
+  ],
+
+  "_companion_registry_entry_optional": {
+    "_why_optional": "NOT part of the required rapp-metrics registration, and it is a separate judgment call for Kody. But without it the second router entry above routes to a repo the spine does not index at all — rapp-vision appears nowhere in registry.json. A router `use` that names an unregistered protocol is a dangling route, which is the failure mode the spine exists to prevent. Land it with the router entry, or drop the rapp-vision names from that entry's `use` and point only at rapp-static-api/1.0 + rapp-metrics/1.0.",
+    "_status_caveat": "Grounded in a scratch clone read on 2026-08-02 while a parallel session was actively writing that repo. The channel/network schema strings and the single-file-player claim are read from committed files (channel.json, channels.json, README.md, index.html). Do not treat the metrics half as shipped: rapp-vision's own README still says it has no metrics implementation, while scripts/rapp_metrics.py, .github/workflows/metrics.yml and state/metrics.json now exist in the working tree. Confirm live before publishing.",
+    "spec_id": "rapp-vision-channel/1.0 + rapp-vision-network/1.0",
+    "repo": "kody-w/rapp-vision",
+    "layer": "distribution",
+    "purpose": "A local-first video platform: one HTML file, no server, no database, no account, no build step. A channel is a channel.json published to any public repo (rapp-vision-channel/1.0); the network is just a list of channel URLs (rapp-vision-network/1.0), and anyone can run their own registry or add a channel locally without permission. Entries may be ordinary video files OR 'live replay' — a few KB of recorded interactions the player replays against the REAL application in an iframe, so a viewer can pause, take the wheel and fork the script. Viewer history, watch-later and likes stay in localStorage and export as JSON.",
+    "when_to_use": "When you want to publish media on a surface you own and can hand to anyone, instead of uploading to a platform that owns the audience — or when a product demo needs to be interruptible rather than watched. Pair with rapp-metrics/1.0 for defensible view/endorsement numbers.",
+    "entry_point": "Copy template/channel.json into any public repo, set schema/id/name and the entries, then play it at https://kody-w.github.io/rapp-vision/ — or clone rapp-vision next to the repos its live channels drive and serve the PARENT directory (python3 -m http.server 8000). Open a PR against channels.json to be listed on the default network."
+  },
+
+  "_apply": {
+    "target_file": "kody-w/rapp-spine/registry.json",
+    "steps": [
+      "1. Append `registry_entry` to the top-level `registry` array. Existing entries are grouped loosely by layer rather than sorted, so append near the other `distribution` entries (RAR / rapp-burrow sit at the tail).",
+      "2. Append both objects in `router_entries` to the top-level `router` array (currently 32 entries).",
+      "3. Add the string \"rapp-metrics/1.0\" to the `protocols` array of the layer object whose `layer` field is \"distribution (package, name, ship, install)\". Note that array is already non-exhaustive — rapp-registry/1.0 is registered at layer distribution but absent from it — so this is tidiness, not a correctness requirement.",
+      "4. If landing the companion entry, append it too and add \"rapp-vision-channel/1.0 (kody-w/rapp-vision)\" to the same `protocols` array.",
+      "5. Bump the top-level `generated` field (currently \"2026-07-11\") to the date of the change.",
+      "6. Re-run whatever rebuilds llms.txt / llms-full.txt / coverage.json / SPINE.md from registry.json in that repo (render_spine.py, verify_spine.py) so the derived surfaces do not go stale — rapp-canon/1.0 §4 requires the change-set to leave no spec stale."
+    ],
+    "not_done_here": "No commit, no push, no PR, no edit to any file in kody-w/rapp-spine. This file is the patch description only."
+  },
+
+  "_reconcile": [
+    "MUST-FIX BEFORE APPLYING — the spec's own copy of this block is not registry-shaped. rapp-metrics/SPEC.md carries a proposed registry block (§15 when first read, renumbered to §16 during this session). As of 2026-08-02 21:49 that block carries a SEVENTH key, `founding_tenet`, which appears in NO entry of the live registry.json — every one of the 59 entries uses either the 6-key protocol shape or the 6-key spec-mirror shape. Appending a 7-key object would make rapp-metrics the only non-conforming entry in the file and would break any consumer that assumes the two known shapes. `registry_entry` above therefore folds the tenet into `purpose` instead, keeping the shape exact. Reconcile in one direction before shipping: either update SPEC.md's block to match this object, or drop `founding_tenet` from it — but do not ship both as-is, or the spec and the spine disagree on day one, which is exactly the drift the estate runs four detection legs to catch.",
+    "Section numbers moved under me during this session (SPEC.md was restructured so the tenet became §1). `entry_point` above cites the NEW numbering — §4 provider is now §5, §8 invariants is now §9, §9 editorial is now §10, §12 checklist is now §13. Re-verify the section numbers in `entry_point` against SPEC.md at the moment of publish; a router entry that cites a wrong section is worse than one that cites none.",
+    "Neither the registry entry nor the router entries can be verified live: kody-w/rapp-metrics did not exist as a repo at the time of writing, so `repo` and `entry_point` describe the intended publish target, not a fetched URL. Verify both resolve before or immediately after the repo is created."
+  ]
+}

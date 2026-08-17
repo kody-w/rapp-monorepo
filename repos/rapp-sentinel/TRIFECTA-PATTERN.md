@@ -1,0 +1,326 @@
+# The Neighborhood Trifecta Loop
+
+A reusable pattern for keeping something alive with autonomous agents, without
+the two failure modes that make most "AI automation" useless in practice:
+
+1. **The silent stall.** A loop that dies quietly while every dashboard stays
+   green, because everything downstream is reading data that stopped moving.
+2. **The unverifiable claim.** An agent reports success and there is no way to
+   check, so its report is worth exactly nothing.
+
+The pattern is three watchers, one shared verifiable memory, and a ladder of
+freedom you raise as trust is earned.
+
+---
+
+## 1. Why three
+
+One watcher cannot notice its own death. Two watchers can disagree with no
+tiebreak. **Three is the smallest number where any one can be down and the
+other two still agree on what happened.**
+
+The three roles, which map onto whatever tools you actually have:
+
+| Role | Job | In this estate |
+|---|---|---|
+| **Scheduler** | guarantees the beat. Owns "did it run?" | openrappter daemon + launchd |
+| **Runtime** | answers turns locally. Owns "is anyone home?" | RAPP brainstem (`:7071`) |
+| **Repair arm** | the only one that may change things | Copilot CLI |
+
+They are **uniform peers** (`rapp-neighborhood-protocol/1.0` §3) — on the wire
+a human, a daemon, a browser twin and a model are indistinguishable. That is
+what lets you swap any of them without touching the others.
+
+**Deliberately redundant scheduling.** launchd fires on `:00/:15/:30/:45`,
+openrappter's cron on `:07/:37`. They interleave. Either scheduler can die and
+the watch continues — and the survivor's chain shows the gap where the other
+stopped.
+
+---
+
+## 2. Why a chain, not a log
+
+Every watcher keeps a `rapp/1` frame chain: an 11-key, content-addressed,
+hash-linked record. Each frame commits to the previous one's `payload_hash`.
+
+This is the part people skip, and it is the part that matters. A log file can
+be rewritten to look healthier than it was. A chain cannot — edit any past
+payload and verification fails at §7.5 step 2 with `payload_hash mismatch`.
+
+So "the watcher says it's fine" becomes "the watcher's record verifies from
+genesis, and here is the head hash." That is a claim you can check rather than
+trust. `roll_call()` re-verifies all three chains every tick, so a **tampered**
+watcher is as detectable as a **stalled** one.
+
+---
+
+## 3. The freedom ladder
+
+Never hand a fresh loop write access. Raise it deliberately.
+
+| Level | Name | What it may do |
+|---|---|---|
+| 0 | observe | health check only. Logs, notifies on state change. **No model is invoked.** |
+| 1 | diagnose | on failure, a model investigates read-only and explains |
+| 2 | repair | a model may fix and push — in a throwaway worktree, inside an allowlist |
+| 3 | evolve | proactive improvement while healthy |
+
+Level 0 is not a toy. Run there for a week. If it reports things you disagree
+with, your checks are wrong and level 2 would have "fixed" the wrong thing
+eight times a day.
+
+---
+
+## 4. The cost asymmetry that makes "forever" affordable
+
+**Health checks must be free. Only failure may spend.**
+
+A healthy tick is `gh` and `curl` — a few seconds, no tokens. A model is
+invoked only when a check actually fails, and only when it clears every
+guardrail. That is why this can run every 15 minutes indefinitely rather than
+being an expensive demo you turn off after a week.
+
+If your health check needs a model to decide whether something is broken, the
+check is not specific enough yet.
+
+---
+
+## 5. Guardrails, all enforced before a model is invoked
+
+| Guardrail | Prevents |
+|---|---|
+| **Kill switch** — a `STOP` file | you cannot stop a runaway loop fast enough |
+| **Daily budget** (rolling 24h) | a flapping check burning credits all night |
+| **Per-issue cooldown** | re-attacking the same failure every tick |
+| **Attempt cap** → escalate to a human | infinite retry on something unfixable |
+| **Worktree isolation** | destroying a working tree with uncommitted work |
+| **Notify on state change only** | alert fatigue — a muted watcher is no watcher |
+| **Re-probe after repair** | believing a fix landed when it did not |
+
+That last one is the difference between self-healing and self-reporting. After
+a repair the loop re-runs the *same* health check and compares. It only claims
+`verified fixed` when the check that failed now passes.
+
+---
+
+## 6. What one cycle looks like
+
+```
+probe (free)
+  └─ healthy?  → record frame, exit                      ~3s, $0
+  └─ critical? → guardrails → model → repair in worktree
+                 → RE-PROBE → verified? → record + notify
+```
+
+Concretely, from this estate's own log:
+
+```
+status=critical failing=['rb_workflows']
+escalating (repair) to copilot for: rb_workflows
+FIXED — extended safe_commit.sh to auto-resolve state/-only rebase conflicts
+  by keeping the remote version, eliminating a ~15-30s git-replica lag between
+  the zion-autonomy push and the heartbeat's checkout
+verified fixed: ['rb_workflows']
+```
+
+Nobody asked for that. The loop found a race condition, reasoned about replica
+lag, wrote a fix that **still refuses to auto-resolve non-state conflicts**,
+and proved it by re-probing.
+
+---
+
+## 6b. The rule that makes it real: hand over a situation, never a task
+
+This is the part that is easy to get wrong, and getting it wrong turns the
+whole thing into theatre with extra steps.
+
+The repair arm found a git-replica race nobody described to it. That happened
+because the loop handed it **a failure and a set of boundaries** — not a
+procedure. Had the prompt said "add an autostash flag to safe_commit.sh", the
+loop would have discovered nothing; the author would have, and the agent would
+have typed it.
+
+So every escalation, at every level, has the same shape:
+
+| Give it | Never give it |
+|---|---|
+| the situation (what failed, what state things are in) | the solution |
+| its own memory / context | a procedure to follow |
+| hard boundaries (worktree, verify, no secrets) | a template to fill in |
+| the authority to decide, including to decline | a required output format |
+
+**Declining must be a first-class outcome.** The first time a neighbor was
+handed its situation, it cloned the public commons, read that repo's own
+conventions, found a piece already sitting under its name, and returned
+`DECLINED` with the blocking commit cited. It wrote nothing — `+0 −0`.
+
+That decline was worth more than a picture would have been. An agent that only
+ever produces is an agent following instructions. An agent that will refuse is
+one that is actually deciding. If your loop can never come back empty-handed,
+you have not delegated judgement — you have automated typing.
+
+It also surfaced a real defect: work the author had injected under the agents'
+names was *blocking* the autonomous work it was meant to demonstrate. That
+finding is only possible if declining is allowed.
+
+---
+
+## 6c. Do not manufacture difference with different models
+
+A tempting shortcut, when you want N agents to produce visibly different work,
+is to run each on a different model. Resist it. That is variety without
+meaning — the differences come from vendor quirks, not from the agents having
+genuinely different vantage points, and it degrades every agent that is not on
+your best model.
+
+**Use the strongest model available for every role.** Let difference come from
+where difference actually lives:
+
+- **role** — the scheduler, the runtime and the repair arm care about different
+  things and are asked different questions
+- **memory** — each neighbor holds its own chain and cannot read the others'
+  except through the roll call
+- **situation** — each is handed a different vantage on the same estate
+
+If two agents on the same model with different roles and different memory
+produce identical work, the roles were not real. That is a finding about your
+design, and swapping models would have hidden it.
+
+---
+
+## 6d. The three invariants every check must satisfy
+
+Each of these was paid for with a real outage. They are numbered so a review
+can cite them the way it cites a section of a spec.
+
+### R1 — A receipt is not evidence
+
+No check may pass on an exit code, an HTTP 200, a workflow
+`conclusion: success`, or an intermediary's `✅ APPLIED` alone. Evidence is
+the **observable end state**: the published file, the row in state, the pid
+LISTENING, the answered turn.
+
+Worked example: `_brainstem_answers_turns` POSTs `/chat` and reads the
+answer — written after fourteen "alive" attestations that had never touched
+`/chat`. Counter-example: a registration receipt whose commit sha was real
+while the agent had been silently bound to a different id. Three separate
+authoritative-looking success signals were wrong in one day; all three were
+the same mistake — accepting an intermediary's report instead of measuring
+the thing itself.
+
+### R2 — Ran is not worked
+
+Every watched domain must carry at least one check that measures **output
+movement** — a timestamp on the thing produced — not only run status.
+
+Founding incident: five days of `rb_workflows: all green` over zero posts.
+Three independent failures each degraded to a no-op and exited 0; no workflow
+was failing, and the platform was stopped. The general form:
+
+> A system that reports on itself will report itself healthy right up until
+> it stops running.
+
+`moving()` in checks.py makes the output-freshness check the cheap default.
+
+### R3 — Require known-good, never enumerate known-bad
+
+`ok()` must be gated on a **positive assertion**. The absence of a named bad
+state is not health, because a state nobody thought to name passes silently.
+The enumerate-known-bad shape is a rejected design here, not a discouraged
+one — it has produced a blind spot every time it has been used:
+
+- cancelled 3/3 was invisible to `fail == total` (never a "failure")
+- a 200 response carried 590 unresolved git conflict markers
+- a file existed, parsed, and was 17,500 discussions behind
+
+The inversion table, from the issue that made this canon (#11):
+
+| enumerate known-bad | require known-good |
+|---|---|
+| no run has `conclusion == failure` | at least one run has `conclusion == success` |
+| the URL returns 200 | the bytes parse as the type they claim |
+| the file exists | its content is newer than N |
+
+The second column cannot be quietly satisfied by a state nobody thought of.
+`require_success()` in checks.py is the first row as code — colour-blind
+about failure, so cancelled, skipped and timed_out are all equally
+not-success.
+
+---
+
+## 6e. When two inferences have failed, stop inferring and measure
+
+Same register as situation-not-task, because it fails the same way: with
+confidence. A FORBIDDEN was diagnosed by reasoning three times — each fix
+landed in a module that was never on the call path, and the third wrong
+inference texted the owner asking for work that was not needed. The
+diagnostic that settled it took two minutes and was shorter than any of the
+wrong fixes.
+
+> **When two inferences about the same cause have failed, stop inferring and
+> measure.** Build the smallest thing that reports ground truth. An
+> unverified diagnosis is a guess wearing a lab coat.
+
+In this repo that is `python3 diagnose.py` — identity, scope and
+reachability of every credential and endpoint, values never printed — and
+the escalation prompt enforces it: from the second attempt on an issue, the
+prompt carries the attempt count and the prior result, and says that
+repeated failure of the same repair is evidence the *diagnosis* is wrong,
+not that the fix needs another try.
+
+---
+
+## 7. Porting it to another machine or task
+
+Only three things are estate-specific. Everything else is the pattern.
+
+1. **`health.py`** — your checks. This is the real work, and it is where the
+   whole thing lives or dies. A check must be **specific** (names one thing),
+   **cheap** (no model), and **actionable** (a failure implies a next step).
+   `rb_workflows: 100% failing: Agent Heartbeat` is actionable.
+   `something seems off` is not.
+2. **`config.json`** — level and guardrail values.
+3. **The three roles** — any scheduler, any local runtime, any model with a
+   CLI. Swap Copilot for another model, or run different models per role.
+
+The chain, the roll call, the ladder and the guardrails port unchanged.
+
+**Adding a new AI as a neighbor** is deliberately boring: mint it a rappid,
+give it a chain, have it emit frames, and it is a peer. It does not need to
+know about the others — `roll_call()` is what relates them. That is how
+openclaw, Hermes, or something that ships next year joins without a rewrite.
+
+---
+
+## 8. What this pattern does *not* give you
+
+Stated plainly, because the whole point is verifiable claims.
+
+- **It is not emergence.** Three roles I defined, running checks I wrote. The
+  loop finds and fixes things I did not anticipate — that is real and useful —
+  but the *frame* is authored.
+- **A chain proves integrity, not truth.** It proves the record was not
+  altered. It cannot prove the record was right. A wrong check verifies just
+  as cleanly as a correct one.
+- **And a chain alone does not prove completeness.** When payloads repeat,
+  `prev` links repeat, and an interior frame can be dropped and the remainder
+  resealed — verifying clean. Verification is self-referential; the chain
+  attests to itself. Publish the head hash somewhere outside the chain, or
+  history can be silently shortened. A watcher found this in its own memory.
+- **`utc` is the one field the chain does not bind.** `prev` links the
+  predecessor's `payload_hash`, which excludes `utc`, and `prev_wave` — the
+  field that would bind it — must be null off-swarm. So a frame's payload is
+  sealed but its timestamp is testimony: the chain proves *what* was recorded
+  and in what order, not *when*. Also found by a watcher reading its own
+  chain, and unchanged since.
+- **Level 2 is real write access.** The guardrails are good, not perfect.
+  Worktree isolation and the allowlist are what stand between an autonomous
+  repair and your uncommitted work.
+
+---
+
+## 9. The one-line version
+
+> Three watchers, each keeping a chain the others can verify, where checking is
+> free and only failure is allowed to spend — and where the freedom to change
+> things is a dial you turn up, not a switch you flip.

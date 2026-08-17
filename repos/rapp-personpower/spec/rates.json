@@ -1,0 +1,27 @@
+{
+  "schema": "rapp-personpower-rates/1",
+  "version": "v1",
+  "unit": "seconds per check, one attentive power user, hands-on",
+  "rates": {
+    "click_observe": 10,
+    "navigate_page": 8,
+    "form_fill_field": 20,
+    "toggle_with_dialog": 15,
+    "verify_visible": 10,
+    "verify_absent": 15,
+    "verify_text_exact": 20,
+    "url_param_inspect": 45,
+    "layout_measure_devtools": 60,
+    "download_and_inspect": 60,
+    "file_upload": 25,
+    "console_review": 30,
+    "state_persistence_reload": 30,
+    "api_response_inspect": 45,
+    "record_result": 10
+  },
+  "notes": [
+    "Rates assume the operator knows the tool and the checklist (power user).",
+    "Add record_result once per check when results are written down, which an honest pass requires.",
+    "Measured baseline for calibration: 33 mixed UI checks ~= 20 minutes hands-on."
+  ]
+}

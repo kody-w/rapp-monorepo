@@ -1,0 +1,105 @@
+{
+  "schema": "rapp-vision-network/1.0",
+  "hive_schema": "rapp-hive/1.0",
+  "id": "rapp.public.vision",
+  "name": "RAPP Hive",
+  "visibility": "public",
+  "revision": {
+    "sequence": 1,
+    "updated": "2026-08-15T23:00:00Z"
+  },
+  "peers": [],
+  "_note": "RAPP Hive is the most universal contribution layer: a parking lot of federated channel.json URLs. Channels stay in their own repos; anyone can run a registry or add a channel locally without asking permission. Open a PR only if you want default listing.",
+  "channels": [
+    {
+      "id": "rock-tumbler",
+      "name": "Rock Tumbler",
+      "url": "channel.json",
+      "repo": "https://github.com/kody-w/rapp-vision"
+    },
+    {
+      "id": "localfirsttools",
+      "name": "Local First Tools",
+      "url": "../localFirstTools/rappvision/channel.json",
+      "repo": "https://github.com/kody-w/localFirstTools",
+      "_why": "Origin-relative on purpose: kody-w.github.io serves every repo from one origin, so this resolves in production AND in local testing. It also keeps the player same-origin with the apps, which is what makes live replay possible."
+    },
+    {
+      "id": "learnwithkody",
+      "name": "Learn with Kody",
+      "url": "../learnwithkody/rappvision/channel.json",
+      "repo": "https://github.com/kody-w/kody-w.github.io",
+      "_why": "Origin-relative, like the others: the channel lives in the site repo next to the examples it documents, and still plays here."
+    },
+    {
+      "id": "catchup",
+      "name": "Catch-up",
+      "url": "../catchup/rappvision/channel.json",
+      "repo": "https://github.com/kody-w/catchup",
+      "_why": "Origin-relative, like the others: the channel lives in the repo that already serves the video file, so the player and the media stay same-origin."
+    },
+    {
+      "id": "field-notes",
+      "name": "Field Notes",
+      "url": "../rappvision-field-notes/rappvision/channel.json",
+      "repo": "https://github.com/kody-w/rappvision-field-notes",
+      "_why": "Origin-relative, like the others: kody-w.github.io serves every repo from one origin, so this resolves in production and in local testing, and keeps the player same-origin with the media."
+    },
+    {
+      "id": "rooms",
+      "name": "Rooms",
+      "url": "../localFirstTools/rappvision/rooms/channel.json",
+      "repo": "https://github.com/kody-w/localFirstTools",
+      "_why": "Ships no video at all — every entry is a live script over a real WebGL room in the same repo. The proof that live replay is a medium and not just a demo."
+    },
+    {
+      "id": "arcade",
+      "name": "Arcade",
+      "url": "../localFirstTools/rappvision/arcade/channel.json",
+      "repo": "https://github.com/kody-w/localFirstTools",
+      "_why": "Games and emulators, booted and played live. Pause any entry and you are holding the controller."
+    },
+    {
+      "id": "workbench",
+      "name": "The Workbench",
+      "url": "../localFirstTools/rappvision/workbench/channel.json",
+      "repo": "https://github.com/kody-w/localFirstTools",
+      "_why": "Production tools — a DAW, a vector editor, a spreadsheet — driven live. A tool demo you can seize control of is a different thing from a tool demo you watch."
+    },
+    {
+      "id": "openrappter-training",
+      "name": "OpenRappter Training",
+      "url": "openrappter-training/channel.json",
+      "repo": "https://github.com/kody-w/openrappter",
+      "_why": "Relative like rock-tumbler, because the channel lives in THIS repo — it documents a sibling project but ships from here. Eight card-only modules with no media file of any kind: the lesson is the description, and every command in it was run before it was written."
+    },
+    {
+      "id": "tumbler",
+      "name": "The Tumbler",
+      "url": "../rapp-vision-neighborhood/tumbler/channel.json",
+      "repo": "https://github.com/kody-w/rapp-vision-neighborhood",
+      "_why": "Origin-relative, like the others. Written by a hatched twin rather than a person: a daily tumble report whose every claim is a number it fetched. On a day nothing moved it publishes nothing, which is the point - a channel that always has content teaches you to skim it."
+    },
+    {
+      "id": "fieldguide",
+      "name": "Field Guide",
+      "url": "../rapp-vision-neighborhood/fieldguide/channel.json",
+      "repo": "https://github.com/kody-w/rapp-vision-neighborhood",
+      "_why": "The other half of the same experiment: a second twin, pointed outward instead of inward. Each episode covers one app no channel here has covered, described only with facts fetched from the app itself. Both channels are watched by sentinels for the failure that hides - up, serving 200, quietly stopped posting."
+    },
+    {
+      "id": "prompt-frontier",
+      "name": "Prompt Frontier",
+      "url": "../rappvision-prompt-frontier/channel.json",
+      "repo": "https://github.com/kody-w/rappvision-prompt-frontier",
+      "_why": "Evidence-backed RappterBox experiments: exact prompts become visible worlds, institutions, languages, crises, and receipts. Static HyperFrames films and live title-card or app replays share one channel."
+    },
+    {
+      "id": "rappterbox",
+      "name": "RappterBox Experiments",
+      "url": "../rappvision-rappterbox/channel.json",
+      "repo": "https://github.com/kody-w/rappvision-rappterbox",
+      "_why": "QC-approved films from bounded RappterBox experiments. Every static entry ships both MP4 and WebM sources, labels synthetic constructs, and preserves an evidence-first production trail."
+    }
+  ]
+}

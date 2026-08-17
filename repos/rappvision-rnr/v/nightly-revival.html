@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The release couldn&#x27;t be cut — and the health check had been dead for 82 days — RNR — RAR Nightly Review</title>
+<link rel="canonical" href="https://kody-w.github.io/rappvision-rnr/v/nightly-revival.html">
+<meta name="description" content="A release was requested. Pre-flighting the gates locally first turned up two failures that had nothing to do with the release, and following them led somewhere worse: the nightly health check had failed 84 times in a row, last green on 11 May.">
+
+<meta property="og:type" content="video.other">
+<meta property="og:site_name" content="RNR — RAR Nightly Review">
+<meta property="og:title" content="The release couldn&#x27;t be cut — and the health check had been dead for 82 days">
+<meta property="og:description" content="A release was requested. Pre-flighting the gates locally first turned up two failures that had nothing to do with the release, and following them led somewhere worse: the nightly health check had failed 84 times in a row, last green on 11 May.">
+<meta property="og:url" content="https://kody-w.github.io/rappvision-rnr/v/nightly-revival.html">
+<meta property="og:image" content="https://kody-w.github.io/rappvision-rnr/rappvision/thumbs/nightly-revival.jpg">
+<meta property="og:image:width" content="1920">
+<meta property="og:image:height" content="1080">
+<meta property="og:video" content="https://kody-w.github.io/rappvision-rnr/rappvision/media/nightly-revival.mp4">
+<meta property="og:video:secure_url" content="https://kody-w.github.io/rappvision-rnr/rappvision/media/nightly-revival.mp4">
+<meta property="og:video:type" content="video/mp4">
+<meta property="og:video:width" content="1920">
+<meta property="og:video:height" content="1080">
+<meta property="video:duration" content="65">
+
+<meta name="twitter:card" content="player">
+<meta name="twitter:title" content="The release couldn&#x27;t be cut — and the health check had been dead for 82 days">
+<meta name="twitter:description" content="A release was requested. Pre-flighting the gates locally first turned up two failures that had nothing to do with the release, and following them led somewhere worse: the nightly health check had failed 84 times in a row, last green on 11 May.">
+<meta name="twitter:image" content="https://kody-w.github.io/rappvision-rnr/rappvision/thumbs/nightly-revival.jpg">
+<meta name="twitter:player" content="https://kody-w.github.io/rappvision-rnr/e/nightly-revival.html">
+<meta name="twitter:player:width" content="1920">
+<meta name="twitter:player:height" content="1080">
+
+<meta name="theme-color" content="#0b0d10">
+<link rel="alternate" type="application/rss+xml" title="RNR — RAR Nightly Review" href="https://kody-w.github.io/rappvision-rnr/feed.xml">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "VideoObject", "name": "The release couldn't be cut — and the health check had been dead for 82 days", "description": "A release was requested. Pre-flighting the gates locally first turned up two failures that had nothing to do with the release, and following them led somewhere worse: the nightly health check had failed 84 times in a row, last green on 11 May.\n\nThe check was broken. Not the thing it checks.\n\nGated agents record _stub_sha256. The integrity audit read _sha256, which is absent on those agents, then formatted its own error message with the missing key and died on a KeyError before it could print why. A second scanner was still banning exec() — a rule the registry had deliberately retired in favour of tagging it as a declared capability.\n\nThen the check itself turned out to be incapable of failing. It ran the suite as `pytest … | tee log`, so the pipeline exited with tee's status, which is always zero. The entire suite could be red and nightly would still report green. Its registry rebuild ran on a shallow checkout, so all 279 agents came back stamped with a single commit and today's date — provenance, fabricated.\n\nTwelve defects fixed, 14 hermetic tests added to CI, and nightly went green for the first time since May.\n\nOne decision is left, and it is not a technical one.", "thumbnailUrl": ["https://kody-w.github.io/rappvision-rnr/rappvision/thumbs/nightly-revival.jpg"], "uploadDate": "2026-08-01", "duration": "PT1M5S", "contentUrl": "https://kody-w.github.io/rappvision-rnr/rappvision/media/nightly-revival.mp4", "embedUrl": "https://kody-w.github.io/rappvision-rnr/e/nightly-revival.html", "width": 1920, "height": 1080, "isFamilyFriendly": true, "publisher": {"@type": "Organization", "name": "RNR — RAR Nightly Review"}}</script>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#0b0d10;color:#e8eaed;
+    font:16px/1.6 "EB Garamond",Georgia,serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px;margin:0 auto;padding:32px 20px 72px}
+  a{color:#d29922}
+  .mono{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9aa0a6}
+  h1{font-size:34px;line-height:1.2;margin:.4em 0 .2em;font-weight:600}
+  /* the width/height attributes are presentational hints, so height="1080" lands as
+     a CSS height and letterboxes the player. height:auto + aspect-ratio undoes that
+     while keeping the attributes for crawlers and layout stability. */
+  video{width:100%;height:auto;aspect-ratio:16/9;border-radius:8px;background:#000;
+    display:block;border:1px solid rgba(232,234,237,.14)}
+  .desc{white-space:pre-wrap;margin:20px 0;font-size:17px}
+  .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0}
+  .btn{display:inline-block;padding:9px 15px;border-radius:999px;text-decoration:none;
+    border:1px solid rgba(232,234,237,.14);color:#e8eaed;background:#161b22;
+    font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:12px;cursor:pointer}
+  .btn.pri{background:#d29922;border-color:#d29922;color:#0b0d10}
+  ol.ch{list-style:none;padding:0;margin:8px 0 0}
+  ol.ch li{padding:5px 0;border-bottom:1px solid rgba(232,234,237,.08)}
+  ol.ch a{text-decoration:none;color:#e8eaed}
+  ol.ch .t{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:12px;
+    color:#d29922;margin-right:12px}
+  .tags span{display:inline-block;margin:0 6px 6px 0;padding:3px 9px;border-radius:4px;
+    background:rgba(232,234,237,.08);font-size:12px;color:#9aa0a6}
+  .card{display:block;text-decoration:none;color:inherit;border:1px solid rgba(232,234,237,.14);
+    border-radius:10px;overflow:hidden;background:#161b22;margin:18px 0}
+  .card img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block}
+  .card .body{padding:14px 16px}
+  .card h2{margin:0 0 6px;font-size:21px;font-weight:600;line-height:1.25}
+  footer{margin-top:44px;padding-top:18px;border-top:1px solid rgba(232,234,237,.14)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="mono"><a href="../index.html" style="text-decoration:none">▚ RNR — RAR Nightly Review</a></div>
+  <h1>The release couldn&#x27;t be cut — and the health check had been dead for 82 days</h1>
+  <div class="mono">2026-08-01 &middot; 1:05 &middot; 1920&times;1080</div>
+
+  <div class="row" style="margin-top:18px">
+    <video id="v" controls preload="metadata" playsinline poster="https://kody-w.github.io/rappvision-rnr/rappvision/thumbs/nightly-revival.jpg" width="1920" height="1080">
+      <source src="https://kody-w.github.io/rappvision-rnr/rappvision/media/nightly-revival.webm" type="video/webm; codecs=&quot;vp9&quot;">
+      <source src="https://kody-w.github.io/rappvision-rnr/rappvision/media/nightly-revival.mp4" type="video/mp4; codecs=&quot;avc1.640028&quot;">
+    </video>
+  </div>
+
+  <div class="row">
+    <a class="btn pri" href="https://kody-w.github.io/rapp-vision/#/watch/nightly-revival">Watch on RAPP Vision</a>
+    <button class="btn" id="share">Share</button>
+    <a class="btn" href="https://kody-w.github.io/rappvision-rnr/rappvision/media/nightly-revival.mp4" download>Download MP4</a>
+    <a class="btn" href="https://kody-w.github.io/rappvision-rnr/feed.xml">RSS</a>
+  </div>
+
+  <div class="desc">A release was requested. Pre-flighting the gates locally first turned up two failures that had nothing to do with the release, and following them led somewhere worse: the nightly health check had failed 84 times in a row, last green on 11 May.
+
+The check was broken. Not the thing it checks.
+
+Gated agents record _stub_sha256. The integrity audit read _sha256, which is absent on those agents, then formatted its own error message with the missing key and died on a KeyError before it could print why. A second scanner was still banning exec() — a rule the registry had deliberately retired in favour of tagging it as a declared capability.
+
+Then the check itself turned out to be incapable of failing. It ran the suite as `pytest … | tee log`, so the pipeline exited with tee&#x27;s status, which is always zero. The entire suite could be red and nightly would still report green. Its registry rebuild ran on a shallow checkout, so all 279 agents came back stamped with a single commit and today&#x27;s date — provenance, fabricated.
+
+Twelve defects fixed, 14 hermetic tests added to CI, and nightly went green for the first time since May.
+
+One decision is left, and it is not a technical one.</div>
+  <div class="tags"><span>#ci</span><span>#release-engineering</span><span>#silent-failure</span><span>#github-actions</span><span>#registry</span><span>#post-mortem</span></div>
+
+  <div class="mono" style="margin-top:26px">Chapters</div>
+  <ol class="ch">
+      <li><a href="#t=0" data-t="0"><span class="t">0:00</span>The ask: cut a new release</a></li>
+      <li><a href="#t=6" data-t="6"><span class="t">0:06</span>Pre-flight — two gates fail</a></li>
+      <li><a href="#t=13" data-t="13"><span class="t">0:13</span>84 consecutive failures, last green 11 May</a></li>
+      <li><a href="#t=21" data-t="21"><span class="t">0:21</span>The check was broken, not the thing it checks</a></li>
+      <li><a href="#t=29" data-t="29"><span class="t">0:29</span>The path that runs the moment you say go</a></li>
+      <li><a href="#t=38" data-t="38"><span class="t">0:38</span>A health check that could not fail</a></li>
+      <li><a href="#t=47" data-t="47"><span class="t">0:47</span>Fixed and verified — nightly green</a></li>
+      <li><a href="#t=56" data-t="56"><span class="t">0:56</span>Waiting on you — one decision</a></li>
+  </ol>
+
+  <footer class="mono">
+    <a href="../index.html">All videos</a> &middot;
+    <a href="https://kody-w.github.io/RAR/">Source</a> &middot;
+    <a href="https://kody-w.github.io/rapp-vision/">RAPP Vision network</a>
+  </footer>
+</div>
+<script>
+  var v = document.getElementById('v');
+  document.querySelectorAll('ol.ch a').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault(); v.currentTime = parseFloat(a.dataset.t); v.play();
+    });
+  });
+  // deep link into a chapter: v/<id>.html#t=95
+  var m = location.hash.match(/t=(\d+(?:\.\d+)?)/);
+  if (m) v.addEventListener('loadedmetadata', function () { v.currentTime = parseFloat(m[1]); });
+  document.getElementById('share').addEventListener('click', async function () {
+    var url = "https://kody-w.github.io/rappvision-rnr/v/nightly-revival.html", title = "The release couldn't be cut \u2014 and the health check had been dead for 82 days";
+    if (navigator.share) { try { await navigator.share({title: title, url: url}); return; } catch (e) {} }
+    try { await navigator.clipboard.writeText(url); this.textContent = 'Link copied'; }
+    catch (e) { prompt('Copy this link', url); }
+  });
+</script>
+</body>
+</html>

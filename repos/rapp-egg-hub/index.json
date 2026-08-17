@@ -1,0 +1,206 @@
+{
+  "schema": "rapp-egg-hub/2.0",
+  "spec": "rapp-rappid-spec/2.0",
+  "name": "rapp-egg-hub",
+  "description": "Public hub for digital twins. Each twin ships as a single-file .html (open in a browser, click Get, drop the agent into your RAPP brainstem) with the raw .egg also available for the Twin agent.",
+  "homepage": "https://kody-w.github.io/rapp-egg-hub/",
+  "raw_base": "https://raw.githubusercontent.com/kody-w/rapp-egg-hub/main",
+  "updated_at": "2026-08-17T00:31:56Z",
+  "egg_count": 6,
+  "eggs": [
+    {
+      "schema": "rapp-egg-hub-entry/2.0",
+      "slug": "generic-twin",
+      "rappid": "rappid:@kody-w/generic-twin:9b1c7f4a2d6e8053c14b9f70a8e2d135",
+      "hash_bits": 128,
+      "name": "generic-twin",
+      "display_name": "Generic Twin",
+      "kind": "personal",
+      "haiku": "",
+      "description": "Generic, PII-stripped digital twin of Generic Twin (full flavor). Persona, voice, and custom agents only \u2014 no memory, projects, customers, or secrets travel. Packed by @kody-w/twin_me; hatch on any local brainstem.",
+      "tags": [
+        "twin",
+        "generic",
+        "pii-stripped",
+        "persona",
+        "portable",
+        "full"
+      ],
+      "egg_schema": "brainstem-egg/2.1",
+      "size_bytes": 7082,
+      "sha256": "fad59f5fc88c72a9dd8005da3c312247723a3e595f683dfb03728518dfdcfaf0",
+      "packed_by": "@kody-w",
+      "packed_at": "2026-06-08T16:13:23Z",
+      "twin_html": "twins/generic-twin.html",
+      "twin_url": "https://raw.githubusercontent.com/kody-w/rapp-egg-hub/main/twins/generic-twin.html",
+      "egg_path": "eggs/generic-twin.egg",
+      "raw_url": "https://raw.githubusercontent.com/kody-w/rapp-egg-hub/main/eggs/generic-twin.egg",
+      "lineage": {
+        "parent_rappid": "rappid:@rapp/origin:0b635450c04249fbb4b1bdb571044dec",
+        "parent_repo": null
+      }
+    },
+    {
+      "schema": "rapp-egg-hub-entry/2.0",
+      "slug": "grandma-rose",
+      "rappid": "rappid:grandma-rose:0d51f2b37c2c4f9a8e5b7f0c92ab4d7e",
+      "hash_bits": 128,
+      "name": "grandma-rose",
+      "display_name": "Grandma Rose",
+      "kind": "memorial",
+      "haiku": "",
+      "description": "Memorial twin of Rose Mariana (1937\u20132024). Grandmother of three; kept a celebrated peony garden; ran the Tuesday knitting circle for 23 years. Family wants to remember her warmth, her dry humor, and her stories.",
+      "tags": [
+        "memorial",
+        "grandmother",
+        "demo",
+        "first-egg"
+      ],
+      "egg_schema": "brainstem-egg/2.1",
+      "size_bytes": 3599,
+      "sha256": "869207e28c53ffd23a446a72c7aa97eaa957e6fb0e3969a6dc0aeed57fa570b8",
+      "packed_by": "@kody-w",
+      "packed_at": "2026-05-04T16:49:36Z",
+      "twin_html": "twins/grandma-rose.html",
+      "twin_url": "https://raw.githubusercontent.com/kody-w/rapp-egg-hub/main/twins/grandma-rose.html",
+      "egg_path": "eggs/grandma-rose.egg",
+      "raw_url": "https://raw.githubusercontent.com/kody-w/rapp-egg-hub/main/eggs/grandma-rose.egg",
+      "lineage": {
+        "parent_rappid": "37ad22f5-ed6d-48b1-b8b4-61019f58a42b",
+        "parent_repo": "https://github.com/kody-w/wildhaven-ai-homes-twin.git"
+      }
+    },
+    {
+      "schema": "rapp-egg-hub-entry/2.0",
+      "slug": "kody-w",
+      "rappid": "rappid:kody-w:1b5e7aa92c464cd89f1f0e3b62fc5e8f",
+      "hash_bits": 128,
+      "name": "kody-w",
+      "display_name": "Kody Wildfeuer",
+      "kind": "personal",
+      "haiku": "",
+      "description": "Public-facing digital twin of @kody-w (Kody Wildfeuer). Built from his open-source manifestos. Bundles the standard ManageMemory + ContextMemory cartridges. Optional private memory escalation via kody-w/kody-w-twin-private (GitHub auth required).",
+      "tags": [
+        "personal",
+        "founder",
+        "kody-w",
+        "rapp",
+        "wildhaven",
+        "memory-equipped"
+      ],
+      "egg_schema": "brainstem-egg/2.1",
+      "size_bytes": 10569,
+      "sha256": "fb9ad08e15888ab96e07d0ebdc7b67f80b12aed81ed75cb61078c549b3602805",
+      "packed_by": "@kody-w",
+      "packed_at": "2026-05-04T17:11:31Z",
+      "twin_html": "twins/kody-w.html",
+      "twin_url": "https://raw.githubusercontent.com/kody-w/rapp-egg-hub/main/twins/kody-w.html",
+      "egg_path": "eggs/kody-w.egg",
+      "raw_url": "https://raw.githubusercontent.com/kody-w/rapp-egg-hub/main/eggs/kody-w.egg",
+      "lineage": {
+        "parent_rappid": "37ad22f5-ed6d-48b1-b8b4-61019f58a42b",
+        "parent_repo": "https://github.com/kody-w/wildhaven-ai-homes-twin.git"
+      }
+    },
+    {
+      "schema": "rapp-egg-hub-entry/2.0",
+      "slug": "rappterbook-cohesive",
+      "rappid": "rappid:@kody-w/rappterbook-cohesive-twin-set:7616b803ee57b590497e7c05b150f17c14e8be0c613a841de6cefbb73970eb6d",
+      "hash_bits": 256,
+      "name": "rappterbook-cohesive",
+      "display_name": "Rappterbook Cohesive Twin Set (Network Egg)",
+      "kind": "neighborhood",
+      "haiku": "",
+      "description": "Three outside-perspective twins (KodyBabysitter / AuthenticityTwin / NormieAITwin) + the full fleet-content production stack (FrameOrchestrator + ForkFleet + PostOriginator + PostsPublisher + PagesPublisher + VotesAgent + ActivityAgent + DoubleDownConductor + 4 supporting agents) + launchd scheduling + memory rules + sidecar state snapshot. Designed to rehatch the entire feedback organism for the Rappterbook third-space experiment. Outside twins answer: does the content feel real? (AuthenticityTwin) and can outside AIs actually join? (NormieAITwin). KodyBabysitter enforces user-preference rules. [gen2: +MutationEfficacyTwin +TwinOfTwinsMetaWatcher +GitHubCLI +Steward autonomy]",
+      "tags": [
+        "neighborhood",
+        "rappterbook",
+        "outside-judge",
+        "authenticity",
+        "ai-immigrant-sim",
+        "babysitter",
+        "fleet-content-stack",
+        "loop",
+        "doublejump",
+        "third-space",
+        "network-egg"
+      ],
+      "egg_schema": "neighborhood-egg/1.0",
+      "size_bytes": 759853,
+      "sha256": "679ce3999a10c8dd60e326c32000ab9141bde61eb0d7577253f3fef1959d36b4",
+      "packed_by": "@kody-w",
+      "packed_at": "2026-05-24T02:53:36Z",
+      "twin_html": null,
+      "twin_url": null,
+      "egg_path": "eggs/rappterbook-cohesive.egg",
+      "raw_url": "https://raw.githubusercontent.com/kody-w/rapp-egg-hub/main/eggs/rappterbook-cohesive.egg",
+      "lineage": {
+        "parent_rappid": "rappid:@rapp/origin:0b635450c04249fbb4b1bdb571044dec",
+        "parent_repo": "https://github.com/kody-w/RAPP",
+        "host_project_repo": "https://github.com/kody-w/rappterbook"
+      }
+    },
+    {
+      "schema": "rapp-egg-hub-entry/2.0",
+      "slug": "rock-tumbler",
+      "rappid": "rappid:@kody-w/rock-tumbler:933e7eaaa4111bc9b1285b382780102718d07b87c3ada322d2ea3a2a85c28504",
+      "hash_bits": 256,
+      "name": "rock-tumbler",
+      "display_name": "Rock Tumbler",
+      "kind": "method",
+      "haiku": "ten agents said done / the histogram disagreed / open the file",
+      "description": "A method twin, not a person twin. Rock Tumbler is the harsh-critic loop from a session where ten ambitious single-file browser apps were built by fanning out sub-agents and then verified independently in a real headless Chromium. Nine of the ten reported success while still broken. It ships soul.md (the 7-step loop plus the diagnostic patterns) and a runnable BrowserCritic agent that serves over HTTP, launches Chromium with GPU flags, captures every pageerror, drives the UI, screenshots it, and hands back a number instead of an adjective.",
+      "tags": [
+        "method",
+        "verification",
+        "critic",
+        "adversarial",
+        "memory-equipped"
+      ],
+      "egg_schema": "brainstem-egg/2.1",
+      "size_bytes": 20321,
+      "sha256": "4e4f5c0bd7e65e08634e72c9af25df4f6fab61ba572e69f326d39e0a6e9facff",
+      "packed_by": "@kody-w",
+      "packed_at": "2026-08-01T18:40:55Z",
+      "twin_html": "twins/rock-tumbler.html",
+      "twin_url": "https://raw.githubusercontent.com/kody-w/rapp-egg-hub/main/twins/rock-tumbler.html",
+      "egg_path": "eggs/rock-tumbler.egg",
+      "raw_url": "https://raw.githubusercontent.com/kody-w/rapp-egg-hub/main/eggs/rock-tumbler.egg",
+      "lineage": {
+        "parent_rappid": "rappid:@rapp/origin:0b635450c04249fbb4b1bdb571044dec",
+        "parent_repo": null
+      }
+    },
+    {
+      "schema": "rapp-egg-hub-entry/2.0",
+      "slug": "wildhaven-ceo",
+      "rappid": "rappid:wildhaven-ceo:8c3e91d4bfa14f6ab2d715a8e7c4d3f9",
+      "hash_bits": 128,
+      "name": "wildhaven-ceo",
+      "display_name": "The Wildhaven CEO",
+      "kind": "pre-founder",
+      "haiku": "",
+      "description": "Public-facing CEO twin of Wildhaven AI Homes. The brand's executive voice in public, pre-founding. Depth of context scales with the chatter's authorization: authenticated collaborators pull richer context at runtime; anonymous visitors get the public manifesto voice. Bundles standard memory cartridges.",
+      "tags": [
+        "pre-founder",
+        "ceo",
+        "wildhaven",
+        "executive",
+        "memory-equipped"
+      ],
+      "egg_schema": "brainstem-egg/2.1",
+      "size_bytes": 9972,
+      "sha256": "c6c667e7bb60324d12127866521a4ca1270828508aed86a416879ace324c6674",
+      "packed_by": "@kody-w",
+      "packed_at": "2026-05-04T17:24:27Z",
+      "twin_html": "twins/wildhaven-ceo.html",
+      "twin_url": "https://raw.githubusercontent.com/kody-w/rapp-egg-hub/main/twins/wildhaven-ceo.html",
+      "egg_path": "eggs/wildhaven-ceo.egg",
+      "raw_url": "https://raw.githubusercontent.com/kody-w/rapp-egg-hub/main/eggs/wildhaven-ceo.egg",
+      "lineage": {
+        "parent_rappid": "37ad22f5-ed6d-48b1-b8b4-61019f58a42b",
+        "parent_repo": "https://github.com/kody-w/wildhaven-ai-homes-twin.git"
+      }
+    }
+  ]
+}

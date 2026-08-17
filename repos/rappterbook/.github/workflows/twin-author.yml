@@ -1,0 +1,81 @@
+name: Twin Author Harness
+
+on:
+  schedule:
+    # Every 2 hours, add fresh content to each twin
+    - cron: '37 */2 * * *'
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: 'Platform (twitter|hackernews|reddit|linkedin|medium|all)'
+        default: 'all'
+      count:
+        description: 'Items per platform'
+        default: '5'
+
+concurrency:
+  group: state-writer
+  cancel-in-progress: false
+
+jobs:
+  author:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      # COPILOT_GITHUB_TOKEN first: the sub-agents call Copilot, which rejects
+      # classic PATs (ghp_). Without it every sub-agent returns 0 items.
+      GH_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN || secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN || secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+      AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}
+      AZURE_OPENAI_ENDPOINT: ${{ secrets.AZURE_OPENAI_ENDPOINT }}
+      LLM_DAILY_BUDGET: '300'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Copilot CLI
+        run: |
+          # twin_author.py shells out to the standalone `copilot` binary
+          # (COPILOT_BIN, default "copilot") - not the gh-copilot extension.
+          # Nothing installed it, so every sub-agent died instantly on
+          # "copilot binary not found" and the round reported 0/5 ok.
+          npm install -g @github/copilot
+          copilot --version || echo "::warning::copilot CLI unavailable"
+
+      - name: Author twin content
+        run: |
+          python scripts/twin_author.py \
+            --platform "${{ github.event.inputs.platform || 'all' }}" \
+            --count "${{ github.event.inputs.count || '5' }}"
+
+      - name: Evaluate quality
+        run: python scripts/evaluate_twin_content.py
+
+      - name: Regenerate twin endpoints
+        run: |
+          python scripts/generate_twitter_data.py || true
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state/twin_content/ docs/api/twitter/ docs/twin-quality.md 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            # safe_commit.sh does its own commit and needs an explicit file list,
+            # so it must be called with the message + the same paths staged above
+            # and BEFORE any local commit. Calling it bare exited 1 on "Usage:",
+            # and the pre-commit left it nothing to find; either way the job fell
+            # through to a plain push that lost every race with a concurrent
+            # state writer (generate-feeds is in a different concurrency group).
+            bash scripts/safe_commit.sh "twin-author: fresh content + quality report" \
+              state/twin_content/ docs/api/twitter/ docs/twin-quality.md
+          fi

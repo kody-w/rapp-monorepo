@@ -54,6 +54,23 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: python3 aggregate.py
 
+      - name: Refuse a snapshot nobody can download
+        # The promise is "one clone and you have everything". A mirror that
+        # quietly grows past what someone will actually download has broken
+        # that promise without anyone noticing, so the size is a gate rather
+        # than a statistic.
+        run: |
+          MB=$(du -sm repos | cut -f1)
+          echo "snapshot is ${MB}MB"
+          if [ "$MB" -gt 1500 ]; then
+            echo "::error::Snapshot is ${MB}MB, past the 1500MB ceiling."
+            echo "::error::Lower --max-file-mb or narrow membership before shipping."
+            exit 1
+          fi
+          if [ "$MB" -gt 900 ]; then
+            echo "::warning::Snapshot is ${MB}MB and heading for the ceiling."
+          fi
+
       - name: Commit the snapshot
         run: |
           git config user.name  "rapp-monorepo"

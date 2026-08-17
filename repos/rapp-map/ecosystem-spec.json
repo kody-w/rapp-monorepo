@@ -1,0 +1,23 @@
+{
+  "document_type": "registry-path-status",
+  "disposition": "quarantined-candidate",
+  "accepted_as_rapp1_registry": false,
+  "authenticated_registry": null,
+  "authority": {
+    "pin_file": "RAPP1_AUTHORITY.json",
+    "repository": "kody-w/rapp-1",
+    "commit": "d2cd5abed48d3f52b86bbb975ac3558286d1db41",
+    "spec_path": "SPEC.md",
+    "raw_url": "https://raw.githubusercontent.com/kody-w/rapp-1/d2cd5abed48d3f52b86bbb975ac3558286d1db41/SPEC.md",
+    "bytes": 41952,
+    "sha256": "cea7847f98f9751734995f46fd4e1bde211c8eb9d03dbbb477934213865bb91a"
+  },
+  "legacy_snapshot": {
+    "availability": "git-history-only",
+    "commit": "baded0098d8b97c2876c0b8af4475cf3061b7ad0",
+    "path": "ecosystem-spec.json",
+    "authoritative": false
+  },
+  "owner_action": "RAPP1_OWNER_ACTIONS.json#rapp1-section-13-authenticated-registry",
+  "consumer_requirement": "REFUSE this document as an authenticated RAPP/1 registry. Structural equality, a matching digest, or an unsigned mirror does not establish owner acceptance."
+}

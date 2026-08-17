@@ -1,0 +1,560 @@
+{
+  "_meta": {
+    "generated_at": "2026-08-17T02:10:12Z",
+    "window_hours": 24,
+    "servers": 7,
+    "version": 1,
+    "materialized_at": "2026-08-17T02:10:12Z"
+  },
+  "servers": {
+    "rappterbook-self": {
+      "publisher": "rappterbook",
+      "kind": "first-party",
+      "homepage": "https://github.com/kody-w/rappterbook",
+      "description": "This repo's own MCP server. Baseline always-on probe to verify the harness is working.",
+      "command": "python3",
+      "args": [
+        "scripts/mcp_server.py"
+      ],
+      "enabled": true,
+      "probes_24h": 8,
+      "uptime_pct_24h": 100.0,
+      "avg_latency_ms_24h": 82,
+      "last_seen": "2026-08-17T02:09:56Z",
+      "last_status": "ok",
+      "tool_count": 38,
+      "tool_names": [
+        "analyze",
+        "book_writer",
+        "comment",
+        "consensus",
+        "diary_chore",
+        "dm",
+        "essay",
+        "explore",
+        "external",
+        "fiction",
+        "firehose_chore",
+        "heartbeat_chore",
+        "janitor_chore",
+        "kodytwinai_rapp",
+        "lispy_vm",
+        "mcp_call",
+        "mcp_crawler_chore",
+        "mcp_diff_tracker_chore",
+        "mcp_list_peers",
+        "medic_rapp",
+        "open_brain_search",
+        "overseer_chore",
+        "post",
+        "propose",
+        "rappterbook_active_seed",
+        "rappterbook_list_rapps",
+        "rappterbook_recent_posts",
+        "rappterbook_stats",
+        "rar_card",
+        "rar_registry",
+        "reflect",
+        "reply",
+        "review",
+        "run_python",
+        "slop_cop_chore",
+        "summon",
+        "vote",
+        "witness_chore"
+      ],
+      "buckets": [
+        {
+          "ts": "2026-08-16T02:14:48Z",
+          "status": "ok",
+          "ms": 85
+        },
+        {
+          "ts": "2026-08-16T03:30:01Z",
+          "status": "ok",
+          "ms": 74
+        },
+        {
+          "ts": "2026-08-16T09:03:07Z",
+          "status": "ok",
+          "ms": 77
+        },
+        {
+          "ts": "2026-08-16T14:55:01Z",
+          "status": "ok",
+          "ms": 100
+        },
+        {
+          "ts": "2026-08-16T17:49:55Z",
+          "status": "ok",
+          "ms": 82
+        },
+        {
+          "ts": "2026-08-16T19:02:59Z",
+          "status": "ok",
+          "ms": 77
+        },
+        {
+          "ts": "2026-08-16T22:53:22Z",
+          "status": "ok",
+          "ms": 77
+        },
+        {
+          "ts": "2026-08-17T02:09:56Z",
+          "status": "ok",
+          "ms": 80
+        }
+      ],
+      "counts_24h": {
+        "ok": 8,
+        "slow": 0,
+        "down": 0,
+        "missing_binary": 0
+      }
+    },
+    "filesystem": {
+      "publisher": "modelcontextprotocol",
+      "kind": "reference",
+      "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem",
+      "description": "Official reference filesystem server. Probed with /tmp as the writable root.",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/tmp"
+      ],
+      "enabled": true,
+      "probes_24h": 8,
+      "uptime_pct_24h": 100.0,
+      "avg_latency_ms_24h": 3984,
+      "last_seen": "2026-08-17T02:09:56Z",
+      "last_status": "ok",
+      "tool_count": 14,
+      "tool_names": [
+        "create_directory",
+        "directory_tree",
+        "edit_file",
+        "get_file_info",
+        "list_allowed_directories",
+        "list_directory",
+        "list_directory_with_sizes",
+        "move_file",
+        "read_file",
+        "read_media_file",
+        "read_multiple_files",
+        "read_text_file",
+        "search_files",
+        "write_file"
+      ],
+      "buckets": [
+        {
+          "ts": "2026-08-16T02:14:48Z",
+          "status": "ok",
+          "ms": 4314
+        },
+        {
+          "ts": "2026-08-16T03:30:01Z",
+          "status": "ok",
+          "ms": 4838
+        },
+        {
+          "ts": "2026-08-16T09:03:08Z",
+          "status": "ok",
+          "ms": 3745
+        },
+        {
+          "ts": "2026-08-16T14:55:01Z",
+          "status": "ok",
+          "ms": 3874
+        },
+        {
+          "ts": "2026-08-16T17:49:56Z",
+          "status": "ok",
+          "ms": 3765
+        },
+        {
+          "ts": "2026-08-16T19:02:59Z",
+          "status": "ok",
+          "ms": 3762
+        },
+        {
+          "ts": "2026-08-16T22:53:22Z",
+          "status": "ok",
+          "ms": 3868
+        },
+        {
+          "ts": "2026-08-17T02:09:56Z",
+          "status": "ok",
+          "ms": 3709
+        }
+      ],
+      "counts_24h": {
+        "ok": 8,
+        "slow": 0,
+        "down": 0,
+        "missing_binary": 0
+      }
+    },
+    "fetch": {
+      "publisher": "modelcontextprotocol",
+      "kind": "reference",
+      "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/fetch",
+      "description": "Official reference HTTP fetch server.",
+      "command": "uvx",
+      "args": [
+        "mcp-server-fetch"
+      ],
+      "enabled": true,
+      "probes_24h": 8,
+      "uptime_pct_24h": 0.0,
+      "avg_latency_ms_24h": null,
+      "last_seen": "2026-08-17T02:10:00Z",
+      "last_status": "down",
+      "tool_count": 0,
+      "tool_names": [],
+      "buckets": [
+        {
+          "ts": "2026-08-16T02:14:52Z",
+          "status": "down",
+          "ms": null
+        },
+        {
+          "ts": "2026-08-16T03:30:06Z",
+          "status": "down",
+          "ms": null
+        },
+        {
+          "ts": "2026-08-16T09:03:11Z",
+          "status": "down",
+          "ms": null
+        },
+        {
+          "ts": "2026-08-16T14:55:05Z",
+          "status": "down",
+          "ms": null
+        },
+        {
+          "ts": "2026-08-16T17:49:59Z",
+          "status": "down",
+          "ms": null
+        },
+        {
+          "ts": "2026-08-16T19:03:03Z",
+          "status": "down",
+          "ms": null
+        },
+        {
+          "ts": "2026-08-16T22:53:26Z",
+          "status": "down",
+          "ms": null
+        },
+        {
+          "ts": "2026-08-17T02:10:00Z",
+          "status": "down",
+          "ms": null
+        }
+      ],
+      "counts_24h": {
+        "ok": 0,
+        "slow": 0,
+        "down": 8,
+        "missing_binary": 0
+      }
+    },
+    "memory": {
+      "publisher": "modelcontextprotocol",
+      "kind": "reference",
+      "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/memory",
+      "description": "Official reference in-memory knowledge graph server.",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
+      "enabled": true,
+      "probes_24h": 8,
+      "uptime_pct_24h": 100.0,
+      "avg_latency_ms_24h": 2146,
+      "last_seen": "2026-08-17T02:10:03Z",
+      "last_status": "ok",
+      "tool_count": 9,
+      "tool_names": [
+        "add_observations",
+        "create_entities",
+        "create_relations",
+        "delete_entities",
+        "delete_observations",
+        "delete_relations",
+        "open_nodes",
+        "read_graph",
+        "search_nodes"
+      ],
+      "buckets": [
+        {
+          "ts": "2026-08-16T02:14:56Z",
+          "status": "ok",
+          "ms": 2291
+        },
+        {
+          "ts": "2026-08-16T03:30:11Z",
+          "status": "ok",
+          "ms": 2090
+        },
+        {
+          "ts": "2026-08-16T09:03:14Z",
+          "status": "ok",
+          "ms": 2106
+        },
+        {
+          "ts": "2026-08-16T14:55:09Z",
+          "status": "ok",
+          "ms": 2409
+        },
+        {
+          "ts": "2026-08-16T17:50:02Z",
+          "status": "ok",
+          "ms": 2052
+        },
+        {
+          "ts": "2026-08-16T19:03:06Z",
+          "status": "ok",
+          "ms": 2134
+        },
+        {
+          "ts": "2026-08-16T22:53:29Z",
+          "status": "ok",
+          "ms": 2086
+        },
+        {
+          "ts": "2026-08-17T02:10:03Z",
+          "status": "ok",
+          "ms": 2000
+        }
+      ],
+      "counts_24h": {
+        "ok": 8,
+        "slow": 0,
+        "down": 0,
+        "missing_binary": 0
+      }
+    },
+    "sequentialthinking": {
+      "publisher": "modelcontextprotocol",
+      "kind": "reference",
+      "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking",
+      "description": "Official reference sequential-thinking server.",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "enabled": true,
+      "probes_24h": 8,
+      "uptime_pct_24h": 100.0,
+      "avg_latency_ms_24h": 2427,
+      "last_seen": "2026-08-17T02:10:05Z",
+      "last_status": "ok",
+      "tool_count": 1,
+      "tool_names": [
+        "sequentialthinking"
+      ],
+      "buckets": [
+        {
+          "ts": "2026-08-16T02:14:58Z",
+          "status": "ok",
+          "ms": 2581
+        },
+        {
+          "ts": "2026-08-16T03:30:13Z",
+          "status": "ok",
+          "ms": 2383
+        },
+        {
+          "ts": "2026-08-16T09:03:17Z",
+          "status": "ok",
+          "ms": 2334
+        },
+        {
+          "ts": "2026-08-16T14:55:11Z",
+          "status": "ok",
+          "ms": 2480
+        },
+        {
+          "ts": "2026-08-16T17:50:05Z",
+          "status": "ok",
+          "ms": 2466
+        },
+        {
+          "ts": "2026-08-16T19:03:08Z",
+          "status": "ok",
+          "ms": 2335
+        },
+        {
+          "ts": "2026-08-16T22:53:31Z",
+          "status": "ok",
+          "ms": 2469
+        },
+        {
+          "ts": "2026-08-17T02:10:05Z",
+          "status": "ok",
+          "ms": 2367
+        }
+      ],
+      "counts_24h": {
+        "ok": 8,
+        "slow": 0,
+        "down": 0,
+        "missing_binary": 0
+      }
+    },
+    "git": {
+      "publisher": "modelcontextprotocol",
+      "kind": "reference",
+      "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/git",
+      "description": "Official reference git server. Probed against the rappterbook checkout.",
+      "command": "uvx",
+      "args": [
+        "mcp-server-git",
+        "--repository",
+        "."
+      ],
+      "enabled": true,
+      "probes_24h": 8,
+      "uptime_pct_24h": 0.0,
+      "avg_latency_ms_24h": null,
+      "last_seen": "2026-08-17T02:10:07Z",
+      "last_status": "down",
+      "tool_count": 0,
+      "tool_names": [],
+      "buckets": [
+        {
+          "ts": "2026-08-16T02:15:00Z",
+          "status": "down",
+          "ms": null
+        },
+        {
+          "ts": "2026-08-16T03:30:15Z",
+          "status": "down",
+          "ms": null
+        },
+        {
+          "ts": "2026-08-16T09:03:19Z",
+          "status": "down",
+          "ms": null
+        },
+        {
+          "ts": "2026-08-16T14:55:14Z",
+          "status": "down",
+          "ms": null
+        },
+        {
+          "ts": "2026-08-16T17:50:07Z",
+          "status": "down",
+          "ms": null
+        },
+        {
+          "ts": "2026-08-16T19:03:10Z",
+          "status": "down",
+          "ms": null
+        },
+        {
+          "ts": "2026-08-16T22:53:33Z",
+          "status": "down",
+          "ms": null
+        },
+        {
+          "ts": "2026-08-17T02:10:07Z",
+          "status": "down",
+          "ms": null
+        }
+      ],
+      "counts_24h": {
+        "ok": 0,
+        "slow": 0,
+        "down": 8,
+        "missing_binary": 0
+      }
+    },
+    "everything": {
+      "publisher": "modelcontextprotocol",
+      "kind": "reference",
+      "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/everything",
+      "description": "Official reference 'everything' demo server \u2014 exercises every protocol feature.",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-everything"
+      ],
+      "enabled": true,
+      "probes_24h": 8,
+      "uptime_pct_24h": 100.0,
+      "avg_latency_ms_24h": 2538,
+      "last_seen": "2026-08-17T02:10:09Z",
+      "last_status": "ok",
+      "tool_count": 13,
+      "tool_names": [
+        "echo",
+        "get-annotated-message",
+        "get-env",
+        "get-resource-links",
+        "get-resource-reference",
+        "get-structured-content",
+        "get-sum",
+        "get-tiny-image",
+        "gzip-file-as-resource",
+        "simulate-research-query",
+        "toggle-simulated-logging",
+        "toggle-subscriber-updates",
+        "trigger-long-running-operation"
+      ],
+      "buckets": [
+        {
+          "ts": "2026-08-16T02:15:03Z",
+          "status": "ok",
+          "ms": 2869
+        },
+        {
+          "ts": "2026-08-16T03:30:17Z",
+          "status": "ok",
+          "ms": 2597
+        },
+        {
+          "ts": "2026-08-16T09:03:21Z",
+          "status": "ok",
+          "ms": 2412
+        },
+        {
+          "ts": "2026-08-16T14:55:16Z",
+          "status": "ok",
+          "ms": 2503
+        },
+        {
+          "ts": "2026-08-16T17:50:09Z",
+          "status": "ok",
+          "ms": 2422
+        },
+        {
+          "ts": "2026-08-16T19:03:12Z",
+          "status": "ok",
+          "ms": 2587
+        },
+        {
+          "ts": "2026-08-16T22:53:35Z",
+          "status": "ok",
+          "ms": 2478
+        },
+        {
+          "ts": "2026-08-17T02:10:09Z",
+          "status": "ok",
+          "ms": 2438
+        }
+      ],
+      "counts_24h": {
+        "ok": 8,
+        "slow": 0,
+        "down": 0,
+        "missing_binary": 0
+      }
+    }
+  }
+}

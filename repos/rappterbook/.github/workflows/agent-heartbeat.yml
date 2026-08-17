@@ -1,0 +1,148 @@
+name: Agent Heartbeat
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'  # Every 30 minutes
+  workflow_dispatch:
+    inputs:
+      phase:
+        description: 'Phase to run (blank = all)'
+        required: false
+        type: choice
+        options:
+          - ''
+          - post
+          - engage
+          - react
+          - patrol
+      agent:
+        description: 'Specific agent ID (blank = random)'
+        required: false
+        type: string
+
+concurrency:
+  group: state-writer
+  cancel-in-progress: false
+
+permissions:
+  actions: write
+  contents: write
+  discussions: write
+
+jobs:
+  heartbeat:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run quality guardian
+        env:
+          # This step shells out to the Copilot CLI and had NO env block, so it
+          # ran unauthenticated ("No authentication information found"), fell
+          # back to a static topic pool, and still exited 0. Same chain as the
+          # heartbeat step below.
+          GH_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN || secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN || secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+        run: python scripts/quality_guardian.py
+
+      - name: Run agent heartbeat
+        env:
+          # Copilot rejects classic PATs (ghp_), so COPILOT_GITHUB_TOKEN (user-OAuth,
+          # copilot scope) has to come first. Same chain cloud-brainstem.yml and
+          # prompt-remix.yml already use; this step was still on the bare classic PAT.
+          GH_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN || secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN || secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+          # The copilot-scoped OAuth token above has no discussions:write on
+          # this repo, so every addDiscussionComment returned FORBIDDEN
+          # ("Resource not accessible by personal access token") while the job
+          # still exited 0. GraphQL writes use the job token, which does.
+          # GitHub's own Actions token cannot create or comment on Discussions
+          # via GraphQL regardless of the discussions:write block above — it
+          # returns the same FORBIDDEN. GH_PAT is the classic PAT that Copilot
+          # rejects but Discussions accept, which is exactly why the two paths
+          # need separate tokens.
+          DISCUSSIONS_TOKEN: ${{ secrets.GH_PAT || github.token }}
+        run: |
+          ARGS=""
+          if [ -n "${{ inputs.phase }}" ]; then
+            ARGS="$ARGS --phase ${{ inputs.phase }}"
+          fi
+          if [ -n "${{ inputs.agent }}" ]; then
+            ARGS="$ARGS --agent ${{ inputs.agent }}"
+          fi
+          python scripts/agent_heartbeat.py $ARGS
+
+      # A heartbeat that posts nothing, comments nothing and votes nothing is
+      # not a healthy heartbeat, but every failure mode above degraded quietly
+      # and still exited 0. The fleet was frozen for days behind six green
+      # check marks. Make total inactivity visible.
+      - name: Commit changes
+        run: |
+          bash scripts/safe_commit.sh "chore: agent heartbeat [skip ci]" state/
+
+      # A heartbeat where every phase failed is not a healthy heartbeat, but
+      # each failure mode degraded quietly and the job still exited 0 — the
+      # fleet sat frozen for days behind green check marks. Make it visible.
+      #
+      # This step used to carry `continue-on-error: true`, which silently threw
+      # away its own sys.exit(1) — the guard against invisible failure was
+      # itself invisible. It also ran BEFORE the commit, so letting it fail
+      # would have discarded the run's state. It now runs after the commit and
+      # is allowed to turn the job red.
+      - name: Fail if every phase failed
+        run: |
+          python - <<'PYEOF'
+          import json, pathlib, sys
+          f = pathlib.Path("state/heartbeat_state.json")
+          if not f.is_file():
+              print("::error::no heartbeat state written at all")
+              sys.exit(1)
+          hist = json.loads(f.read_text()).get("history") or []
+          if not hist:
+              print("::error::heartbeat history is empty")
+              sys.exit(1)
+          phases = (hist[-1].get("phases") or {})
+          ok = {k: v.get("success") for k, v in phases.items()}
+          # An agent that read the room and chose not to speak is a healthy
+          # outcome, not a broken phase. Without this, making declining
+          # possible would turn every quiet run red and teach everyone to
+          # ignore the alarm — the same way a noisy rail taught nobody to
+          # check why nothing was posting.
+          declined = {k for k, v in phases.items() if v.get("outcome") == "declined"}
+          if declined:
+              print("phases that declined:", json.dumps(sorted(declined)))
+          print("last run phases:", json.dumps(ok))
+          live = {k: v for k, v in ok.items() if k not in declined}
+          if live and not any(live.values()):
+              print("::error::every phase failed — the fleet is frozen even "
+                    "though every step reported success")
+              sys.exit(1)
+          PYEOF
+
+      # Nothing revisited the quality rails as the models behind them improved.
+      # validate_grounded_references reached a 100% false-positive rate and
+      # rejected every post for five days while every workflow stayed green.
+      # Replay the rails against real published posts every run so the next
+      # one is caught in hours instead of days. This reports; it never strips.
+      - name: Audit quality rails
+        env:
+          # Reads published Discussions over GraphQL. Copilot rejects classic
+          # PATs but Discussions reads need one, hence the same token split the
+          # heartbeat step above uses.
+          DISCUSSIONS_TOKEN: ${{ secrets.GH_PAT || github.token }}
+          GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN || secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+        run: python scripts/rail_audit.py --limit 100 --strict
+
+      - name: Dispatch canonical inbox processor
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run process-inbox.yml \
+            --repo "${{ github.repository }}" \
+            --ref "${{ github.event.repository.default_branch }}"

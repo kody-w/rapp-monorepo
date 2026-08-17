@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>openrappter · Voice UI</title>
+<style>
+  :root{
+    --bg:#07090f; --panel:#0d1119; --line:#1c2333; --ink:#e8eefc; --dim:#8a97b2;
+    --rappter:#44cc88; --rappter2:#22aaff; --accent:#7cf0b4; --warn:#ffb020; --err:#ff5c6a;
+    --radius:16px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:radial-gradient(1200px 700px at 50% -10%, #101a2b 0%, var(--bg) 60%);color:var(--ink);
+    font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif;overflow:hidden}
+  #stage{position:fixed;inset:0;display:grid;grid-template-rows:auto 1fr auto;height:100%}
+
+  header{display:flex;align-items:center;gap:12px;padding:14px 20px}
+  .brand{font-weight:700;letter-spacing:.2px;display:flex;align-items:center;gap:8px}
+  .brand .dino{font-size:20px}
+  .pill{margin-left:auto;display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--dim);
+    background:var(--panel);border:1px solid var(--line);padding:6px 11px;border-radius:999px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--err);box-shadow:0 0 8px var(--err)}
+  .dot.ok{background:var(--rappter);box-shadow:0 0 10px var(--rappter)}
+  .dot.warn{background:var(--warn);box-shadow:0 0 10px var(--warn)}
+
+  main{position:relative;display:grid;grid-template-columns:1fr;place-items:center;min-height:0}
+  #holo-wrap{position:relative;width:min(46vh,420px);aspect-ratio:1;display:grid;place-items:center}
+  #holo{width:100%;height:100%;filter:drop-shadow(0 12px 40px rgba(68,204,136,.28))}
+  #holoFallback{position:absolute;inset:0;display:none;place-items:center;font-size:38vh;line-height:1;
+    text-shadow:0 12px 50px rgba(68,204,136,.4)}
+  .ring{position:absolute;inset:-6% ;border-radius:50%;border:1px solid rgba(68,204,136,.14);
+    animation:spin 24s linear infinite}
+  .ring.b{inset:6%;border-color:rgba(34,170,255,.12);animation-duration:16s;animation-direction:reverse}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  #holo-wrap.speaking #holo{animation:bob .9s ease-in-out infinite}
+  #holo-wrap.listening .ring{border-color:rgba(124,240,180,.5)}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3%)}}
+
+  #creatureName{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);font-size:12px;color:var(--dim);
+    white-space:nowrap;background:var(--panel);border:1px solid var(--line);padding:3px 10px;border-radius:999px}
+
+  #transcript{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:min(620px,92vw);
+    max-height:32vh;overflow:auto;display:flex;flex-direction:column;gap:8px;padding:4px;scrollbar-width:thin}
+  .msg{padding:9px 13px;border-radius:13px;max-width:82%;white-space:pre-wrap;word-wrap:break-word;font-size:14px}
+  .msg.me{align-self:flex-end;background:linear-gradient(180deg,#1b3358,#15294a);border:1px solid #24406e}
+  .msg.rap{align-self:flex-start;background:var(--panel);border:1px solid var(--line)}
+  .msg.rap b{color:var(--accent)}
+  .partial{opacity:.55;font-style:italic}
+
+  footer{padding:16px 20px 26px;display:flex;flex-direction:column;align-items:center;gap:12px}
+  .gesture{font-size:12.5px;color:var(--dim);min-height:18px;display:flex;align-items:center;gap:7px}
+  .gesture b{color:var(--accent)}
+  .controls{display:flex;align-items:center;gap:14px}
+  button{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:11px 16px;cursor:pointer;transition:.15s;display:flex;align-items:center;gap:8px}
+  button:hover{border-color:#2c3854;background:#121826}
+  button:active{transform:translateY(1px)}
+  button:disabled{opacity:.4;cursor:default}
+  .mic{width:76px;height:76px;border-radius:50%;justify-content:center;font-size:26px;padding:0;
+    border-color:#24406e;background:radial-gradient(circle at 50% 35%,#15294a,#0d1119)}
+  .mic.on{border-color:var(--rappter);box-shadow:0 0 0 4px rgba(68,204,136,.16),0 0 30px rgba(68,204,136,.35);
+    background:radial-gradient(circle at 50% 35%,#123a2a,#0d1119)}
+  .ghost{background:transparent;border:none;color:var(--dim);padding:8px 10px}
+  .ghost:hover{color:var(--ink);background:transparent}
+  input[type=text]{flex:1;min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    color:var(--ink);padding:11px 14px;font:inherit;outline:none}
+  input[type=text]:focus{border-color:#2c3854}
+  .row{display:flex;gap:10px;width:min(620px,92vw)}
+  video{position:fixed;bottom:14px;right:14px;width:150px;border-radius:12px;border:1px solid var(--line);
+    transform:scaleX(-1);opacity:.9;display:none;z-index:5}
+  video.show{display:block}
+
+  /* Guided first-run */
+  #onboard{position:fixed;inset:0;background:rgba(4,6,11,.86);backdrop-filter:blur(10px);z-index:50;
+    display:grid;place-items:center;padding:24px}
+  .card{width:min(500px,94vw);background:var(--panel);border:1px solid var(--line);border-radius:22px;
+    padding:26px 26px 22px;box-shadow:0 30px 90px rgba(0,0,0,.6)}
+  .card h1{margin:.2em 0 .1em;font-size:22px}
+  .card p{color:var(--dim);margin:.2em 0 1em}
+  .steps{display:flex;flex-direction:column;gap:10px;margin:16px 0}
+  .step{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border:1px solid var(--line);
+    border-radius:13px;background:#0b0f17}
+  .step .ico{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;flex:none;
+    background:#121826;border:1px solid var(--line)}
+  .step .body{flex:1;min-width:0}
+  .step .body b{font-size:14px}
+  .step .body span{display:block;color:var(--dim);font-size:12.5px;margin-top:2px}
+  .step .st{font-size:12px;color:var(--dim);white-space:nowrap}
+  .step.done{border-color:rgba(68,204,136,.4)}
+  .step.done .st{color:var(--rappter)}
+  .step.fail .st{color:var(--warn)}
+  .cta{width:100%;justify-content:center;padding:13px;border-color:#24406e;
+    background:linear-gradient(180deg,#123a2a,#0d1119);font-weight:600;margin-top:6px}
+  .cta:hover{border-color:var(--rappter)}
+  .fine{text-align:center;color:var(--dim);font-size:12px;margin-top:12px}
+  a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div id="stage">
+  <header>
+    <div class="brand"><span class="dino">🦖</span> openrappter <span style="color:var(--dim);font-weight:400">· Voice UI</span></div>
+    <div class="pill"><span id="connDot" class="dot"></span><span id="connText">connecting…</span></div>
+  </header>
+
+  <main>
+    <div id="transcript"></div>
+    <div id="holo-wrap">
+      <div class="ring"></div><div class="ring b"></div>
+      <canvas id="holo" width="512" height="512"></canvas>
+      <div id="holoFallback">🦖</div>
+      <div id="creatureName">rappter</div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="gesture" id="gestureLine"><span>✋ gestures: <b id="gestureName">off</b></span></div>
+    <div class="controls">
+      <button class="ghost" id="camBtn" title="Toggle gesture camera">📷 gestures</button>
+      <button class="mic" id="micBtn" title="Hold to talk / click to toggle">🎙️</button>
+      <button class="ghost" id="hdBtn" title="Upgrade to on-device HD voice models">✨ HD voice</button>
+      <button class="ghost" id="eggBtn" title="Export this rappter as a rapp·go .egg">🥚 .egg</button>
+    </div>
+    <div class="row">
+      <input type="text" id="textIn" placeholder="…or type to your rappter" autocomplete="off" />
+      <button id="sendBtn">Send</button>
+    </div>
+  </footer>
+</div>
+
+<video id="cam" playsinline muted></video>
+
+<!-- Guided first-run -->
+<div id="onboard">
+  <div class="card">
+    <h1>🦖 Meet your rappter</h1>
+    <p>Talk to your on-device agent with your voice — and control it with hand gestures. Everything runs locally; your rappter thinks with your own Copilot. Let's get the three pieces ready.</p>
+    <div class="steps">
+      <div class="step" id="ob-gw"><div class="ico">🧠</div><div class="body"><b>Connect to openrappter</b><span>The brain running on this machine.</span></div><div class="st" id="ob-gw-st">checking…</div></div>
+      <div class="step" id="ob-mic"><div class="ico">🎙️</div><div class="body"><b>Microphone — speech to text</b><span>Universal Web Speech now; upgrade to on-device Whisper anytime.</span></div><div class="st" id="ob-mic-st">needed</div></div>
+      <div class="step" id="ob-cam"><div class="ico">✋</div><div class="body"><b>Camera — hand gestures (optional)</b><span>MediaPipe, on-device. Thumbs-up sends, open-palm stops.</span></div><div class="st" id="ob-cam-st">optional</div></div>
+    </div>
+    <button class="cta" id="ob-start">Enable & meet my rappter →</button>
+    <button class="cta" id="ob-skip" style="background:transparent;border-color:var(--line);font-weight:400;margin-top:8px">Skip — I'll enable later</button>
+    <div class="fine">Gesture &amp; voice models download once from public sources and cache on your device.</div>
+  </div>
+</div>
+
+<script type="module">
+// ─────────────────────────────────────────────────────────────────────────────
+// openrappter Voice UI — welds three donors onto openrappter's gateway:
+//   • RAPP Sense protocol  (|||VOICE|||, |||HOLO|||) — how one reply carries modalities
+//   • rapp-go HOLO-FAUNA    (lib/fauna.js)          — the creature avatar, compatible throughout
+//   • MediaPipe Tasks       (gesture recognizer)     — universal hand-gesture control
+// The brain stays on-device; this page just renders its senses.
+// ─────────────────────────────────────────────────────────────────────────────
+
+const $ = (id) => document.getElementById(id);
+const GATEWAY = `ws://${location.hostname || '127.0.0.1'}:18790`;
+
+// ── The Rappter — openrappter's OWN creature (custom model + animation) ─────────
+// A hand-built raptor rendered on canvas, alive and reactive to listening/speaking.
+// Not a generic fauna species — its own look. The rapp-go-compatible genome is
+// kept ONLY for the .egg export (so an egg still imports into rapp-go); the
+// on-screen creature is entirely openrappter's own.
+let genomeLib = null, rappter = null, rapGenome = null;
+async function ensureGenomeLib(){
+  if(genomeLib) return genomeLib;
+  try{ genomeLib = await import('https://kody-w.github.io/rapp-static-apis/rapp-go/lib/genome.js'); }catch{ genomeLib = null; }
+  return genomeLib;
+}
+// A rappter-flavoured rapp-go genome, only used to mint a verifiable .egg.
+async function rappterGenome(){
+  if(rapGenome) return rapGenome;
+  const G = await ensureGenomeLib(); if(!G) return null;
+  const genome = G.momentToGenome({ temp:20, weathercode:0, wind:36, isDay:1 });
+  const surf = genome.layers.find(l=>l.role==='surface'); if(surf){ surf.palette=['#44cc88','#22aaff','#7cf0b4']; surf.pattern='stripe'; surf.glow=0.6; }
+  rapGenome = { genome, id: await G.genomeId(genome) };
+  return rapGenome;
+}
+
+// The Rappter — a real 3D low-poly raptor (Three.js / WebGL), reactive to state.
+class Rappter {
+  constructor(canvas){
+    this.cv=canvas; this.state='idle'; this.t=0; this.raf=null; this.ready=false;
+    this.jaw=0; this.headTurn=0; this.glow=0.4; this.blink=0; this.blinkAt=1.6;
+  }
+  setState(s){ this.state=s; }
+  async start(){
+    if(this.raf||this.ready) return;
+    try{
+      await this.init(); this.ready=true;
+      if($('creatureName')) $('creatureName').textContent='rappter';
+      const loop=()=>{ this.step(1/60); this.raf=requestAnimationFrame(loop); };
+      this.raf=requestAnimationFrame(loop);
+    }catch(e){
+      console.warn('rappter 3D init failed → emoji', e);
+      this.cv.style.display='none'; if($('holoFallback')) $('holoFallback').style.display='grid';
+    }
+  }
+  stop(){ if(this.raf){ cancelAnimationFrame(this.raf); this.raf=null; } }
+  async init(){
+    const T = this.T = await import('https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js');
+    const cv=this.cv;
+    const rn=this.rn=new T.WebGLRenderer({canvas:cv, alpha:true, antialias:true});
+    rn.setSize(cv.width, cv.height, false); rn.setPixelRatio(Math.min(2, window.devicePixelRatio||1));
+    const sc=this.sc=new T.Scene();
+    const cam=this.cam=new T.PerspectiveCamera(34, cv.width/cv.height, 0.1, 100);
+    cam.position.set(4.2,1.75,7.2); cam.lookAt(0,0.75,0.15);
+    sc.add(new T.AmbientLight(0x9fffd8,0.55));
+    const key=new T.DirectionalLight(0xffffff,1.15); key.position.set(4,7,6); sc.add(key);
+    const rim=new T.DirectionalLight(0x2aa8ff,0.85); rim.position.set(-5,2,-4); sc.add(rim);
+    this.glowLight=new T.PointLight(0x44cc88,16,16,2); this.glowLight.position.set(0,1.5,3.6); sc.add(this.glowLight);
+    this.buildRaptor();
+  }
+  buildRaptor(){
+    const T=this.T;
+    const skin =new T.MeshStandardMaterial({color:0x3fbf80,emissive:0x0a3d26,emissiveIntensity:0.28,roughness:0.55,metalness:0.02,flatShading:true});
+    const belly=new T.MeshStandardMaterial({color:0xbff7d8,roughness:0.7,flatShading:true});
+    const spike=new T.MeshStandardMaterial({color:0x26b6ff,emissive:0x0b3d5c,emissiveIntensity:0.6,roughness:0.4,flatShading:true});
+    const white=new T.MeshStandardMaterial({color:0xffffff,emissive:0xcceeff,emissiveIntensity:0.3});
+    const dark =new T.MeshStandardMaterial({color:0x0a2a24});
+    const rig=this.rig=new T.Group(); this.sc.add(rig);
+    const M=(geo,mat,p,s,r)=>{ const m=new T.Mesh(geo,mat); if(p)m.position.set(p[0],p[1],p[2]); if(s)m.scale.set(s[0],s[1],s[2]); if(r)m.rotation.set(r[0],r[1],r[2]); return m; };
+
+    // body + belly
+    this.body=M(new T.SphereGeometry(1,11,8), skin, [0,0.92,0.05], [0.78,0.72,1.72]); rig.add(this.body);
+    rig.add(M(new T.SphereGeometry(0.72,10,8), belly, [0,0.68,0.5], [0.66,0.72,1.12]));
+    // tail (tapered, points back -z)
+    rig.add(M(new T.CylinderGeometry(0.05,0.42,3.1,8), skin, [0,0.85,-1.95], [1,1,1], [1.5,0,0]));
+    // legs + feet
+    const leg=new T.CylinderGeometry(0.19,0.3,1.35,8);
+    rig.add(M(leg, skin, [0.4,0.5,0.42], null, [0.28,0,0.04]));
+    rig.add(M(leg, skin, [-0.4,0.48,0.34], null, [0.22,0,-0.04]));
+    const foot=new T.BoxGeometry(0.42,0.16,0.66);
+    rig.add(M(foot, skin, [0.44,0.05,0.66])); rig.add(M(foot, skin, [-0.44,0.04,0.58]));
+    // arms
+    const arm=new T.CylinderGeometry(0.07,0.11,0.55,6);
+    rig.add(M(arm, skin, [0.6,0.98,0.62], null, [0.7,0,-0.5]));
+    rig.add(M(arm, skin, [-0.6,0.98,0.62], null, [0.7,0,0.5]));
+    // neck
+    rig.add(M(new T.CylinderGeometry(0.26,0.4,1.2,8), skin, [0,1.15,1.05], null, [1.05,0,0]));
+    // HEAD group (turns to listen, bobs)
+    const head=this.head=new T.Group(); head.position.set(0,1.5,1.85); head.rotation.x=0.15; rig.add(head);
+    head.add(M(new T.SphereGeometry(0.46,10,8), skin, [0,0,0], [1,0.95,1.2]));
+    head.add(M(new T.BoxGeometry(0.5,0.34,0.62), skin, [0,-0.03,0.52]));    // snout (upper)
+    // upper teeth
+    for(let i=0;i<4;i++){ head.add(M(new T.ConeGeometry(0.04,0.12,4), white, [-0.18+i*0.12,-0.2,0.72], null, [Math.PI,0,0])); }
+    // jaw (hinge, opens)
+    const jaw=this.jawG=new T.Group(); jaw.position.set(0,-0.18,0.28); head.add(jaw);
+    jaw.add(M(new T.BoxGeometry(0.46,0.16,0.5), skin, [0,-0.06,0.22]));
+    for(let i=0;i<3;i++){ jaw.add(M(new T.ConeGeometry(0.035,0.1,4), white, [-0.14+i*0.14,0.02,0.4])); }
+    // eyes + pupils
+    const eye=new T.SphereGeometry(0.16,10,8), pup=new T.SphereGeometry(0.075,8,6);
+    this.eyeL=M(eye,white,[0.31,0.14,0.34]); this.eyeR=M(eye,white,[-0.31,0.14,0.34]); head.add(this.eyeL); head.add(this.eyeR);
+    head.add(M(pup,dark,[0.37,0.14,0.46])); head.add(M(pup,dark,[-0.37,0.14,0.46]));
+    // head frill spikes
+    for(let i=0;i<3;i++){ head.add(M(new T.ConeGeometry(0.09,0.3,5), spike, [ (i-1)*0.16, 0.36, -0.2], null, [-0.5,0,0])); }
+    // back spikes along spine
+    for(let i=0;i<6;i++){ const z=-1.5+i*0.44, y=1.6-Math.abs(i-2.5)*0.05; rig.add(M(new T.ConeGeometry(0.13,0.38,5), spike, [0,y,z], null, [0.2,0,0])); }
+    // ground disc (subtle)
+    const disc=M(new T.CircleGeometry(2.0,32), new T.MeshBasicMaterial({color:0x0a2a1e,transparent:true,opacity:0.35}), [0,-0.02,0], null, [-Math.PI/2,0,0]); rig.add(disc);
+  }
+  step(dt){
+    const T=this.T; this.t+=dt;
+    // eased targets
+    this.headTurn += ((this.state==='listening'?1:0)-this.headTurn)*0.06;
+    const jawT = this.state==='speaking' ? Math.max(0, 0.5+0.42*Math.sin(this.t*13)+0.16*Math.sin(this.t*25+1)) : 0;
+    this.jaw += (jawT-this.jaw)*0.4;
+    this.glow += (((this.state==='speaking'||this.state==='listening')?1:0.4)-this.glow)*0.05;
+    // blink
+    this.blinkAt-=dt;
+    if(this.blinkAt<=0){ this.blink=Math.min(1,this.blink+0.3); if(this.blinkAt<-0.12){ this.blink=0; this.blinkAt=1.8+Math.random()*3.2; } }
+    else if(this.blink>0) this.blink=Math.max(0,this.blink-0.3);
+    // idle turntable + bob + breathe
+    const base=-0.32;
+    this.rig.rotation.y = base + Math.sin(this.t*0.5)*0.32 - this.headTurn*0.22;
+    this.rig.position.y = Math.sin(this.t*1.6)*0.05;
+    this.body.scale.y = 1.0 + Math.sin(this.t*1.6)*0.03;
+    // head motion
+    this.head.rotation.x = -0.04 + Math.sin(this.t*1.6)*0.04 + (this.state==='thinking'?-0.22:0) + (this.state==='speaking'?Math.sin(this.t*7)*0.05:0);
+    this.head.rotation.y = this.headTurn*0.5;
+    this.jawG.rotation.x = this.jaw*0.5;
+    // blink
+    const eh=1-this.blink; this.eyeL.scale.y=eh||0.06; this.eyeR.scale.y=eh||0.06;
+    // glow
+    this.glowLight.intensity = 10 + this.glow*16;
+    this.rn.render(this.sc, this.cam);
+  }
+}
+
+// ── openrappter gateway (connect handshake → chat.send → chat events) ──────────
+let ws=null, wsReady=false, pending=null;
+function setConn(state, text){ $('connDot').className='dot '+(state||''); $('connText').textContent=text; $('ob-gw-st').textContent = state==='ok'?'ready ✓':(state==='warn'?'…':'offline'); $('ob-gw').classList.toggle('done', state==='ok'); }
+
+function connect(){
+  setConn('warn','connecting…');
+  try{ ws = new WebSocket(GATEWAY); }catch(e){ setConn('','offline'); return; }
+  ws.onopen = ()=> ws.send(JSON.stringify({type:'req',id:'c',method:'connect',
+    params:{client:{id:'rappter-vui',version:'1.0.0',platform:'web',mode:'local'}}}));
+  ws.onmessage = (ev)=>{
+    let f; try{ f=JSON.parse(ev.data); }catch{ return; }
+    if(f.type==='res' && f.id==='c'){ wsReady=!!f.ok; setConn(f.ok?'ok':'','rappter online'); if(f.ok && pending){ send(pending); pending=null; } return; }
+    if(f.type==='event' && f.event==='chat'){
+      const p=f.payload||{};
+      if(p.state==='final'){
+        const txt = p.message?.content?.[0]?.text || '';
+        const voice = p.voiceText || txt;
+        onReply(txt, voice, p.holo);   // holo passed through if the daemon forwards it
+      } else if(p.state==='error'){ addMsg('rap', '⚠️ '+(p.errorMessage||'something went wrong')); setSpeaking(false); }
+    }
+  };
+  ws.onclose = ()=>{ wsReady=false; setConn('','reconnecting…'); setTimeout(connect, 1500); };
+  ws.onerror = ()=>{ setConn('','offline — is openrappter running?'); };
+}
+
+function send(text){
+  if(!text || !text.trim()) return;
+  addMsg('me', text);
+  if(!wsReady){ pending=text; setConn('warn','waking rappter…'); return; }
+  ws.send(JSON.stringify({type:'req',id:'m'+Date.now(),method:'chat.send',params:{message:text, sessionKey:'rappter-vui'}}));
+  setThinking(true);
+}
+
+// ── Transcript + speaking state ───────────────────────────────────────────────
+function addMsg(who, text){
+  const d=document.createElement('div'); d.className='msg '+(who==='me'?'me':'rap');
+  d.innerHTML = who==='me' ? escapeHtml(text) : '<b>🦖</b> '+escapeHtml(text);
+  const t=$('transcript'); t.appendChild(d); t.scrollTop=t.scrollHeight;
+  // keep the last ~8 for a clean stage
+  while(t.children.length>8) t.removeChild(t.firstChild);
+  return d;
+}
+let partialEl=null;
+function showPartial(text){
+  if(!partialEl){ partialEl=addMsg('me',''); partialEl.classList.add('partial'); }
+  partialEl.textContent=text;
+  $('transcript').scrollTop=$('transcript').scrollHeight;
+}
+function clearPartial(){ if(partialEl){ partialEl.remove(); partialEl=null; } }
+function escapeHtml(s){ return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+
+const wrap=$('holo-wrap');
+let _spk=false, _lsn=false, _thk=false;
+function _rapState(){ if(rappter) rappter.setState(_spk?'speaking':_thk?'thinking':_lsn?'listening':'idle'); }
+function setSpeaking(on){ _spk=on; wrap.classList.toggle('speaking', on); _rapState(); }
+function setListening(on){ _lsn=on; wrap.classList.toggle('listening', on); _rapState(); }
+function setThinking(on){ _thk=on; $('connText').textContent = on ? 'thinking…' : 'rappter online'; _rapState(); }
+
+async function onReply(fullText, voiceText, holo){
+  setThinking(false);
+  addMsg('rap', fullText || voiceText);
+  // (|||HOLO||| senses can tune the creature's mood later; the rappter is always shown)
+  speak(voiceText);
+}
+
+// ── TTS (Web Speech baseline; HD upgrade slot) ────────────────────────────────
+let ttsVoice=null;
+function pickVoice(){ const vs=speechSynthesis.getVoices(); ttsVoice = vs.find(v=>/en-US/i.test(v.lang)&&/Samantha|Google US|Zira/i.test(v.name)) || vs.find(v=>/en/i.test(v.lang)) || vs[0]; }
+if('speechSynthesis' in window){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
+function speak(text){
+  if(!text || !('speechSynthesis' in window)) return;
+  const clean = text.replace(/https?:\/\/\S+/g,'').replace(/[*_`#>]/g,'').replace(/[🦖🦕🌟✨]/gu,'').trim();
+  if(!clean) return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(clean); if(ttsVoice)u.voice=ttsVoice; u.rate=1.02; u.pitch=1.0;
+  u.onstart=()=>setSpeaking(true); u.onend=()=>setSpeaking(false);
+  speechSynthesis.speak(u);
+}
+
+// ── STT (Web Speech baseline; HD upgrade slot) ────────────────────────────────
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+let recog=null, listening=false;
+function initSTT(){
+  if(!SR){ $('ob-mic-st').textContent='not supported'; return false; }
+  recog=new SR(); recog.lang='en-US'; recog.interimResults=true; recog.continuous=false;
+  recog.onstart=()=>{ listening=true; $('micBtn').classList.add('on'); setListening(true); };
+  recog.onend=()=>{ listening=false; $('micBtn').classList.remove('on'); setListening(false); };
+  recog.onerror=(e)=>{ if(e.error==='not-allowed'){ $('ob-mic-st').textContent='denied'; } };
+  recog.onresult=(e)=>{
+    let interim='', fin='';
+    for(let i=e.resultIndex;i<e.results.length;i++){ const r=e.results[i]; if(r.isFinal)fin+=r[0].transcript; else interim+=r[0].transcript; }
+    if(interim) showPartial(interim);
+    if(fin){ clearPartial(); send(fin.trim()); }
+  };
+  return true;
+}
+function toggleMic(){
+  if(!recog && !initSTT()) return;
+  if(listening){ recog.stop(); } else { clearPartial(); try{ recog.start(); $('ob-mic-st').textContent='ready ✓'; $('ob-mic').classList.add('done'); }catch{} }
+}
+
+// ── Gestures (MediaPipe Tasks, on-device) ─────────────────────────────────────
+let gestureRecognizer=null, camStream=null, gestureRAF=null, lastGesture='', gestureCooldown=0;
+async function initGestures(){
+  try{
+    const vision = await import('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs');
+    const files = await vision.FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm');
+    gestureRecognizer = await vision.GestureRecognizer.createFromOptions(files, {
+      baseOptions:{ modelAssetPath:'https://storage.googleapis.com/mediapipe-models/gesture_recognizer/gesture_recognizer/float16/1/gesture_recognizer.task', delegate:'GPU' },
+      runningMode:'VIDEO', numHands:1,
+    });
+    return true;
+  }catch(e){ console.warn('gesture init failed', e); $('ob-cam-st').textContent='unavailable'; return false; }
+}
+async function toggleCam(){
+  const video=$('cam');
+  if(camStream){ camStream.getTracks().forEach(t=>t.stop()); camStream=null; video.classList.remove('show'); cancelAnimationFrame(gestureRAF); $('gestureName').textContent='off'; return; }
+  if(!gestureRecognizer){ $('gestureName').textContent='loading…'; if(!await initGestures()){ $('gestureName').textContent='unavailable'; return; } }
+  try{
+    camStream = await navigator.mediaDevices.getUserMedia({ video:{ width:320, height:240 } });
+    video.srcObject=camStream; await video.play(); video.classList.add('show');
+    $('ob-cam-st').textContent='ready ✓'; $('ob-cam').classList.add('done');
+    loopGestures();
+  }catch(e){ $('ob-cam-st').textContent='denied'; }
+}
+function loopGestures(){
+  const video=$('cam');
+  const tick=()=>{
+    if(!camStream){ return; }
+    if(video.readyState>=2 && gestureRecognizer){
+      const res = gestureRecognizer.recognizeForVideo(video, performance.now());
+      const g = res.gestures?.[0]?.[0];
+      if(g && g.score>0.6){ onGesture(g.categoryName); $('gestureName').textContent = prettyGesture(g.categoryName); }
+      else if(!g){ $('gestureName').textContent='—'; }
+    }
+    gestureRAF=requestAnimationFrame(tick);
+  };
+  gestureRAF=requestAnimationFrame(tick);
+}
+function prettyGesture(n){ return ({Thumb_Up:'👍 send',Open_Palm:'✋ stop',Victory:'✌️ clear',Closed_Fist:'✊ listen',Pointing_Up:'☝️',ILoveYou:'🤟'}[n]||n); }
+function onGesture(name){
+  const now=performance.now(); if(now-gestureCooldown<1200) return; gestureCooldown=now;
+  if(name==='Thumb_Up'){ const v=$('textIn').value.trim(); if(v){ send(v); $('textIn').value=''; } else if(partialEl){ /* commit partial */ } }
+  else if(name==='Open_Palm'){ speechSynthesis.cancel(); setSpeaking(false); if(listening)recog.stop(); }
+  else if(name==='Closed_Fist'){ if(!listening) toggleMic(); }
+  else if(name==='Victory'){ $('transcript').innerHTML=''; }
+}
+
+// ── HD voice upgrade (on-device Whisper + Kokoro via transformers.js/WebGPU) ───
+$('hdBtn').addEventListener('click', async ()=>{
+  const b=$('hdBtn'); b.disabled=true; b.textContent='⏳ downloading…';
+  try{
+    // Lazy import so the ~100–200MB models only download when the user opts in.
+    const t = await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.2');
+    b.textContent='✨ HD voice: warming…';
+    window.__rapTransformers = t;   // available for STT/TTS upgrade wiring
+    b.textContent='✨ HD voice on';
+    addMsg('rap','On-device HD voice engine loaded (WebGPU). Whisper + Kokoro ready.');
+  }catch(e){ console.warn(e); b.textContent='✨ HD voice (unavailable)'; b.disabled=false; }
+});
+
+// ── .egg export (upload straight into rapp·go; byte-verified by receiveEgg) ────
+const RAPPGO_URL = 'https://kody-w.github.io/rapp-static-apis/rapp-go/';
+function eggPayloadOf(cart){
+  // "bones only": the verifiable identity rapp·go's receiveEgg checks (it
+  // recomputes genomeId(genome) and refuses the egg unless it equals id).
+  return { genome: cart.genome, id: cart.id, born: cart.born || {coord:'9q8yy',t:0},
+           title: cart.title || 'a rappter', rarity: cart.rarity || 'uncommon', source: 'openrappter-vui' };
+}
+function currentEgg(){
+  if(!rapGenome || !genomeLib) return null;
+  const cart = { genome: rapGenome.genome, id: rapGenome.id, born:{coord:'9q8yy',t:0}, title:'a rappter', rarity:'uncommon' };
+  const b64 = genomeLib.b64enc(JSON.stringify(eggPayloadOf(cart)));
+  return { b64, link: RAPPGO_URL + '#egg=' + b64, id: rapGenome.id };
+}
+$('eggBtn').addEventListener('click', async ()=>{
+  await rappterGenome();
+  const egg = currentEgg();
+  if(!egg){ addMsg('rap','No creature to export yet — the rappter is still hatching.'); return; }
+  // 1) download the .egg file (raw canonical b64 — what rapp·go's #egg= expects)
+  const blob = new Blob([egg.b64], { type:'application/octet-stream' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = `rappter-${String(egg.id).slice(0,8)}.egg`; a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
+  // 2) one-click "see it in rapp·go" (guaranteed import path via receiveEgg)
+  const d = addMsg('rap', '🥚 Exported ');
+  const link = document.createElement('a'); link.href = egg.link; link.target='_blank';
+  link.textContent = 'open this rappter in rapp·go →'; d.appendChild(link);
+});
+
+// ── Wire controls ─────────────────────────────────────────────────────────────
+$('micBtn').addEventListener('click', toggleMic);
+$('camBtn').addEventListener('click', toggleCam);
+$('sendBtn').addEventListener('click', ()=>{ const v=$('textIn').value.trim(); if(v){ send(v); $('textIn').value=''; } });
+$('textIn').addEventListener('keydown', e=>{ if(e.key==='Enter'){ const v=e.target.value.trim(); if(v){ send(v); e.target.value=''; } } });
+
+// ── Guided first-run ──────────────────────────────────────────────────────────
+$('ob-start').addEventListener('click', async ()=>{
+  $('ob-start').textContent='Waking up…';
+  initSTT();
+  // Try mic permission upfront (starts + stops) so the browser prompt appears now.
+  try{ const s=await navigator.mediaDevices.getUserMedia({audio:true}); s.getTracks().forEach(t=>t.stop()); $('ob-mic-st').textContent='ready ✓'; $('ob-mic').classList.add('done'); }catch{ $('ob-mic-st').textContent='denied'; }
+  finishOnboard();
+});
+$('ob-skip').addEventListener('click', finishOnboard);
+function finishOnboard(){
+  $('onboard').style.display='none';
+  // A friendly first hello so the user sees the loop work end-to-end.
+  setTimeout(()=> send('Say hi in one short sentence and tell me I can talk to you with my voice.'), 400);
+}
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+(async function boot(){
+  // ?peek — skip the intro overlay and just show the rappter (handy for a quick look)
+  if(/[?&]peek/.test(location.search)){ const o=$('onboard'); if(o) o.style.display='none'; }
+  connect();
+  try{
+    rappter = new Rappter($('holo'));
+    rappter.start();
+    $('holoFallback').style.display='none';
+    rappterGenome();            // warm up the .egg genome in the background
+  }catch(e){
+    $('holo').style.display='none'; $('holoFallback').style.display='grid';
+  }
+})();
+</script>
+</body>
+</html>

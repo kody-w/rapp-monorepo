@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAPP Store - Agent & Skill Marketplace</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏪</text></svg>">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --background: #0f172a;
+            --surface: #1e293b;
+            --surface-light: #334155;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: #475569;
+            --agent-color: #6366f1;
+            --skill-color: #10b981;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--surface) 0%, var(--background) 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+        }
+
+        .brand h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .brand .tagline {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Live Tick Badge */
+        .tick-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 2rem;
+            font-size: 0.875rem;
+        }
+
+        .tick-badge .pulse {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Settings Button */
+        .settings-btn {
+            padding: 0.5rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: all 0.2s;
+        }
+
+        .settings-btn:hover {
+            background: var(--surface-light);
+            color: var(--text);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Controls */
+        .controls {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.875rem 1rem 0.875rem 2.75rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            color: var(--text);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        .search-box::before {
+            content: "🔍";
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.25rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            background: var(--surface-light);
+            color: var(--text);
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .filter-btn.agents.active {
+            background: var(--agent-color);
+            border-color: var(--agent-color);
+        }
+
+        .filter-btn.skills.active {
+            background: var(--skill-color);
+            border-color: var(--skill-color);
+        }
+
+        /* Main Grid */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            line-height: 1;
+        }
+
+        .card-title-section {
+            flex: 1;
+        }
+
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .card-type {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .card-type.agent {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--agent-color);
+        }
+
+        .card-type.skill {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--skill-color);
+        }
+
+        .card-description {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            padding: 0.25rem 0.5rem;
+            background: var(--surface-light);
+            border-radius: 0.25rem;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            margin-top: auto;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            padding: 0.625rem 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            flex: 1;
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: var(--surface-light);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        /* Featured Section */
+        .featured {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .featured h2 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .featured-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .featured-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .featured-card .icon {
+            font-size: 2rem;
+        }
+
+        .featured-card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .featured-card p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* RAPPzoo Integration */
+        .rappzoo-panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .rappzoo-panel h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .npc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .npc-item {
+            background: var(--surface-light);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .npc-item .emoji {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .npc-item .name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .npc-item .mood {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            max-width: 700px;
+            width: 100%;
+            max-height: 85vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            font-size: 1.25rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: var(--text);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .modal-body label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .modal-body input {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            color: var(--text);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-body input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .modal-body .hint {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .code-block {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-height: 400px;
+        }
+
+        .modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        /* Ecosystem Links */
+        .ecosystem {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+        }
+
+        .ecosystem h3 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .ecosystem-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .ecosystem-links a {
+            padding: 0.5rem 1rem;
+            background: var(--surface-light);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+
+        .ecosystem-links a:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-muted);
+        }
+
+        .empty-state .icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 4rem;
+            color: var(--text-muted);
+        }
+
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--surface-light);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header-left {
+                flex-direction: column;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .filter-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-bar {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <span class="logo">🏪</span>
+            <div class="brand">
+                <h1>RAPP Store</h1>
+                <p class="tagline">Agent & Skill Marketplace</p>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="tick-badge">
+                <span class="pulse"></span>
+                <span>Tick #<span id="tick-number">-</span></span>
+            </div>
+            <button class="settings-btn" onclick="openSettings()" title="Settings">⚙️</button>
+        </div>
+    </header>
+
+    <div class="stats-bar">
+        <div class="stat-item">
+            <span class="stat-value" id="agent-count">-</span>
+            <span class="stat-label">Agents</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-value" id="skill-count">-</span>
+            <span class="stat-label">Skills</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-value" id="category-count">-</span>
+            <span class="stat-label">Categories</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-value" id="crowd-count">-</span>
+            <span class="stat-label">Crowd</span>
+        </div>
+    </div>
+
+    <div class="controls">
+        <div class="search-box">
+            <input type="text" id="search" placeholder="Search agents and skills...">
+        </div>
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn agents" data-filter="agent">🤖 Agents</button>
+            <button class="filter-btn skills" data-filter="skill">✨ Skills</button>
+        </div>
+    </div>
+
+    <main>
+        <!-- RAPPzoo Live Panel -->
+        <div class="rappzoo-panel" id="rappzoo-panel">
+            <h3>🦁 RAPPzoo Live</h3>
+            <div class="npc-grid" id="npc-grid">
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Loading NPCs...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured -->
+        <div class="featured">
+            <h2>⭐ Featured This Tick</h2>
+            <div class="featured-grid" id="featured-grid">
+                <div class="featured-card">
+                    <span class="icon">🧠</span>
+                    <div>
+                        <h3>Context Memory Agent</h3>
+                        <p>Persistent memory across sessions</p>
+                    </div>
+                </div>
+                <div class="featured-card">
+                    <span class="icon">🔄</span>
+                    <div>
+                        <h3>Evolve Skill</h3>
+                        <p>Run world ticks via molt pattern</p>
+                    </div>
+                </div>
+                <div class="featured-card">
+                    <span class="icon">📊</span>
+                    <div>
+                        <h3>RAPP Pipeline</h3>
+                        <p>Transcript to deployable agent</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Items Grid -->
+        <div class="section-header">
+            <h2>📦 Available Items</h2>
+        </div>
+        <div class="grid" id="items-grid">
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <p>Loading store...</p>
+            </div>
+        </div>
+
+        <!-- Ecosystem Links -->
+        <div class="ecosystem">
+            <h3>🌐 RAPP Ecosystem</h3>
+            <div class="ecosystem-links">
+                <a href="https://kody-w.github.io/RAPPsquared/" target="_blank">RAPPsquared</a>
+                <a href="https://kody-w.github.io/rappverse/" target="_blank">RAPPverse</a>
+                <a href="https://kody-w.github.io/RAPP_Hub/" target="_blank">RAPP Hub</a>
+                <a href="https://kody-w.github.io/RAPP_Desktop/" target="_blank">RAPP Desktop</a>
+                <a href="https://github.com/kody-w/CommunityRAPP" target="_blank">CommunityRAPP</a>
+                <a href="https://github.com/kody-w/openrapp" target="_blank">openrapp</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settings-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>⚙️ Store Settings</h2>
+                <button class="modal-close" onclick="closeSettings()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <label for="manifest-url">Store Manifest URL</label>
+                <input type="url" id="manifest-url" placeholder="https://raw.githubusercontent.com/.../manifest.json">
+                <p class="hint">Leave empty to use default RAPP Store manifest</p>
+
+                <label for="api-url">RAPP API Endpoint (Optional)</label>
+                <input type="url" id="api-url" placeholder="https://your-function.azurewebsites.net/api/...">
+                <p class="hint">For installing agents directly to your deployment</p>
+
+                <label for="api-key">API Key (Optional)</label>
+                <input type="password" id="api-key" placeholder="Your function key">
+                <p class="hint">Required if your API endpoint needs authentication</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeSettings()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveSettings()">💾 Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Code Modal -->
+    <div class="modal-overlay" id="code-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="code-modal-title">Download</h2>
+                <button class="modal-close" onclick="closeCodeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <pre class="code-block" id="code-content"></pre>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeCodeModal()">Close</button>
+                <button class="btn btn-primary" id="copy-btn" onclick="copyCode()">📋 Copy Code</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Config: Load local overrides first (if exists), then defaults -->
+    <script src="config.local.js" onerror=""></script>
+    <script src="config.js"></script>
+    <script>
+        // Get configuration
+        const CONFIG = window.RAPP_CONFIG || {
+            RAPPZOO_TICK: 'https://raw.githubusercontent.com/kody-w/CommunityRAPP/main/rappzoo/world/current_tick.json',
+            MANIFEST_URL: null
+        };
+
+        // Default store manifest URL
+        const DEFAULT_MANIFEST = 'https://raw.githubusercontent.com/kody-w/RAPP_Store/main/manifest.json';
+
+        // State
+        let storeData = null;
+        let tickData = null;
+        let currentFilter = 'all';
+        let searchQuery = '';
+
+        // Load settings from localStorage
+        function loadSettings() {
+            return {
+                manifestUrl: localStorage.getItem('rapp_store_manifest') || CONFIG.MANIFEST_URL || DEFAULT_MANIFEST,
+                apiUrl: localStorage.getItem('rapp_api_url') || '',
+                apiKey: localStorage.getItem('rapp_api_key') || ''
+            };
+        }
+
+        // Initialize
+        async function init() {
+            const settings = loadSettings();
+
+            // Load in parallel
+            await Promise.all([
+                loadStore(settings.manifestUrl),
+                loadTick()
+            ]);
+        }
+
+        // Load store manifest
+        async function loadStore(manifestUrl) {
+            try {
+                const response = await fetch(manifestUrl);
+                if (!response.ok) throw new Error('Failed to load manifest');
+                storeData = await response.json();
+                updateStats();
+                renderItems();
+            } catch (error) {
+                console.error('Error loading store:', error);
+                // Show built-in items
+                storeData = getBuiltInItems();
+                updateStats();
+                renderItems();
+            }
+        }
+
+        // Load RAPPzoo tick
+        async function loadTick() {
+            try {
+                const response = await fetch(CONFIG.RAPPZOO_TICK);
+                if (!response.ok) throw new Error('Failed to load tick');
+                tickData = await response.json();
+                renderTick();
+            } catch (error) {
+                console.error('Error loading tick:', error);
+                document.getElementById('rappzoo-panel').style.display = 'none';
+            }
+        }
+
+        // Built-in items when manifest unavailable
+        function getBuiltInItems() {
+            return {
+                agents: [
+                    {
+                        id: 'context-memory-agent',
+                        name: 'Context Memory Agent',
+                        description: 'Recalls conversation history with shared and user-specific memories',
+                        icon: '🧠',
+                        category: 'core',
+                        version: '1.0.0',
+                        tags: ['memory', 'context', 'core']
+                    },
+                    {
+                        id: 'manage-memory-agent',
+                        name: 'Manage Memory Agent',
+                        description: 'Stores facts, preferences, insights, and tasks to persistent memory',
+                        icon: '💾',
+                        category: 'core',
+                        version: '1.0.0',
+                        tags: ['memory', 'storage', 'core']
+                    },
+                    {
+                        id: 'scripted-demo-agent',
+                        name: 'Scripted Demo Agent',
+                        description: 'Provides interactive demos and walkthroughs of capabilities',
+                        icon: '🎭',
+                        category: 'demo',
+                        version: '1.0.0',
+                        tags: ['demo', 'walkthrough', 'interactive']
+                    }
+                ],
+                skills: [
+                    {
+                        id: 'evolve',
+                        name: 'Evolve Skill',
+                        description: 'Execute the full evolution cycle: generate content, NPCs react, state updated',
+                        icon: '🔄',
+                        category: 'rappzoo',
+                        version: '1.0.0',
+                        tags: ['evolution', 'tick', 'molt']
+                    },
+                    {
+                        id: 'rapp-pipeline',
+                        name: 'RAPP Pipeline',
+                        description: 'Generate AI agents from transcripts using the 14-step methodology',
+                        icon: '🚀',
+                        category: 'pipeline',
+                        version: '1.0.0',
+                        tags: ['agent', 'generation', 'pipeline']
+                    },
+                    {
+                        id: 'rappbook-evolver',
+                        name: 'RAPPbook Evolver',
+                        description: 'World tick agents reacting to posts in real-time via molt pattern',
+                        icon: '📚',
+                        category: 'rappzoo',
+                        version: '1.0.0',
+                        tags: ['evolution', 'posts', 'npcs']
+                    }
+                ],
+                categories: [
+                    { id: 'core', name: 'Core' },
+                    { id: 'rappzoo', name: 'RAPPzoo' },
+                    { id: 'pipeline', name: 'Pipeline' },
+                    { id: 'demo', name: 'Demo' }
+                ]
+            };
+        }
+
+        // Update stats display
+        function updateStats() {
+            document.getElementById('agent-count').textContent = storeData.agents?.length || 0;
+            document.getElementById('skill-count').textContent = storeData.skills?.length || 0;
+            document.getElementById('category-count').textContent = storeData.categories?.length || 0;
+        }
+
+        // Render tick data
+        function renderTick() {
+            if (!tickData) return;
+
+            document.getElementById('tick-number').textContent = tickData.tick_number || tickData.current_tick || '-';
+            document.getElementById('crowd-count').textContent = tickData.crowd?.count || tickData.crowd_count || '-';
+
+            // Render NPCs
+            const npcGrid = document.getElementById('npc-grid');
+            const npcs = tickData.npcs || {};
+
+            if (Object.keys(npcs).length === 0) {
+                npcGrid.innerHTML = '<p style="color: var(--text-muted); text-align: center;">No NPCs active</p>';
+                return;
+            }
+
+            npcGrid.innerHTML = Object.entries(npcs).map(([id, npc]) => `
+                <div class="npc-item">
+                    <div class="emoji">${npc.emoji || '🤖'}</div>
+                    <div class="name">${npc.name || id}</div>
+                    <div class="mood">${npc.mood || 'idle'}</div>
+                </div>
+            `).join('');
+        }
+
+        // Get all items combined
+        function getAllItems() {
+            const agents = (storeData.agents || []).map(a => ({ ...a, itemType: 'agent' }));
+            const skills = (storeData.skills || []).map(s => ({ ...s, itemType: 'skill' }));
+            return [...agents, ...skills];
+        }
+
+        // Filter and search items
+        function getFilteredItems() {
+            let items = getAllItems();
+
+            if (currentFilter !== 'all') {
+                items = items.filter(item => item.itemType === currentFilter);
+            }
+
+            if (searchQuery) {
+                const query = searchQuery.toLowerCase();
+                items = items.filter(item =>
+                    item.name.toLowerCase().includes(query) ||
+                    item.description.toLowerCase().includes(query) ||
+                    (item.tags || []).some(tag => tag.toLowerCase().includes(query))
+                );
+            }
+
+            return items;
+        }
+
+        // Render items grid
+        function renderItems() {
+            const items = getFilteredItems();
+            const grid = document.getElementById('items-grid');
+
+            if (items.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">📭</div>
+                        <p>No items found matching your criteria</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = items.map(item => `
+                <div class="card" data-id="${item.id}" data-type="${item.itemType}">
+                    <div class="card-header">
+                        <span class="card-icon">${item.icon || (item.itemType === 'agent' ? '🤖' : '✨')}</span>
+                        <div class="card-title-section">
+                            <h3 class="card-title">${item.name}</h3>
+                            <span class="card-type ${item.itemType}">${item.itemType === 'agent' ? 'RAPP Agent' : 'Claude Skill'}</span>
+                        </div>
+                    </div>
+                    <p class="card-description">${item.description}</p>
+                    <div class="card-tags">
+                        ${(item.tags || []).slice(0, 4).map(t => `<span class="tag">${t}</span>`).join('')}
+                    </div>
+                    <div class="card-meta">
+                        <span>v${item.version || '1.0.0'}</span>
+                        <span>${getCategoryName(item.category)}</span>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn btn-primary" onclick="viewCode('${item.id}', '${item.itemType}')">
+                            📥 Get Code
+                        </button>
+                        <button class="btn btn-secondary" onclick="viewDetails('${item.id}', '${item.itemType}')" title="View Details">
+                            ℹ️
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Get category name
+        function getCategoryName(categoryId) {
+            const category = (storeData.categories || []).find(c => c.id === categoryId);
+            return category ? category.name : categoryId || 'General';
+        }
+
+        // View code for an item
+        async function viewCode(itemId, itemType) {
+            const item = getAllItems().find(i => i.id === itemId);
+            if (!item) return;
+
+            let code = '';
+
+            if (itemType === 'agent') {
+                code = generateAgentCode(item);
+            } else {
+                code = generateSkillCode(item);
+            }
+
+            document.getElementById('code-modal-title').textContent = `${item.name} - ${itemType === 'agent' ? 'Agent Code' : 'Skill Code'}`;
+            document.getElementById('code-content').textContent = code;
+            document.getElementById('code-modal').classList.add('active');
+        }
+
+        // Generate agent code
+        function generateAgentCode(item) {
+            const className = item.id.split('-').map(p => p.charAt(0).toUpperCase() + p.slice(1)).join('') + 'Agent';
+
+            return `"""
+${item.name} - RAPP Agent
+
+${item.description}
+
+Generated from RAPP Store - https://kody-w.github.io/RAPP_Store/
+"""
+
+from agents.basic_agent import BasicAgent
+import logging
+
+
+class ${className}(BasicAgent):
+    """
+    ${item.description}
+
+    Tags: ${(item.tags || []).join(', ')}
+    """
+
+    def __init__(self):
+        self.name = '${item.name.replace(/'/g, "\\'")}'
+        self.metadata = {
+            "name": self.name,
+            "description": "${item.description.replace(/"/g, '\\"')}",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "action": {
+                        "type": "string",
+                        "description": "Action to perform",
+                        "enum": ["help", "execute"]
+                    },
+                    "input": {
+                        "type": "string",
+                        "description": "Input for the action"
+                    }
+                },
+                "required": ["action"]
+            }
+        }
+        super().__init__(name=self.name, metadata=self.metadata)
+
+    def perform(self, **kwargs):
+        action = kwargs.get('action', 'help')
+        input_data = kwargs.get('input', '')
+
+        try:
+            if action == 'help':
+                return self._show_help()
+            elif action == 'execute':
+                return self._execute(input_data)
+            else:
+                return f"Unknown action: {action}"
+        except Exception as e:
+            logging.error(f"Error in ${className}: {str(e)}")
+            return f"Error: {str(e)}"
+
+    def _show_help(self):
+        return """${item.icon || '🤖'} ${item.name}
+
+${item.description}
+
+**Usage:**
+- action='help' - Show this help
+- action='execute', input='...' - Run the agent
+
+**Tags:** ${(item.tags || []).join(', ')}
+"""
+
+    def _execute(self, input_data):
+        if not input_data:
+            return "Error: 'input' is required for execute action"
+
+        # TODO: Implement your logic here
+        return f"Processing: {input_data}"
+`;
+        }
+
+        // Generate skill code
+        function generateSkillCode(item) {
+            return `---
+name: ${item.id}
+description: ${item.description}
+---
+
+# ${item.name}
+
+${item.description}
+
+## Features
+
+${(item.tags || []).map(t => `- ${t}`).join('\n')}
+
+## Usage
+
+Invoke this skill when you need to ${item.description.toLowerCase()}.
+
+### Example
+
+\`\`\`
+/${item.id} [your input here]
+\`\`\`
+
+## Version
+
+- **Version:** ${item.version || '1.0.0'}
+- **Category:** ${item.category || 'general'}
+
+## Source
+
+Generated from RAPP Store - https://kody-w.github.io/RAPP_Store/
+`;
+        }
+
+        // View item details
+        function viewDetails(itemId, itemType) {
+            const item = getAllItems().find(i => i.id === itemId);
+            if (!item) return;
+
+            alert(`${item.icon || '📦'} ${item.name}\n\n${item.description}\n\nVersion: ${item.version || '1.0.0'}\nCategory: ${getCategoryName(item.category)}\nTags: ${(item.tags || []).join(', ')}`);
+        }
+
+        // Copy code to clipboard
+        async function copyCode() {
+            const code = document.getElementById('code-content').textContent;
+            try {
+                await navigator.clipboard.writeText(code);
+                const btn = document.getElementById('copy-btn');
+                btn.textContent = '✅ Copied!';
+                setTimeout(() => {
+                    btn.textContent = '📋 Copy Code';
+                }, 2000);
+            } catch (e) {
+                console.error('Failed to copy:', e);
+            }
+        }
+
+        // Close code modal
+        function closeCodeModal() {
+            document.getElementById('code-modal').classList.remove('active');
+        }
+
+        // Open settings
+        function openSettings() {
+            const settings = loadSettings();
+            document.getElementById('manifest-url').value = settings.manifestUrl === DEFAULT_MANIFEST ? '' : settings.manifestUrl;
+            document.getElementById('api-url').value = settings.apiUrl;
+            document.getElementById('api-key').value = settings.apiKey;
+            document.getElementById('settings-modal').classList.add('active');
+        }
+
+        // Close settings
+        function closeSettings() {
+            document.getElementById('settings-modal').classList.remove('active');
+        }
+
+        // Save settings
+        function saveSettings() {
+            const manifestUrl = document.getElementById('manifest-url').value.trim();
+            const apiUrl = document.getElementById('api-url').value.trim();
+            const apiKey = document.getElementById('api-key').value.trim();
+
+            if (manifestUrl) {
+                localStorage.setItem('rapp_store_manifest', manifestUrl);
+            } else {
+                localStorage.removeItem('rapp_store_manifest');
+            }
+
+            if (apiUrl) {
+                localStorage.setItem('rapp_api_url', apiUrl);
+            } else {
+                localStorage.removeItem('rapp_api_url');
+            }
+
+            if (apiKey) {
+                localStorage.setItem('rapp_api_key', apiKey);
+            } else {
+                localStorage.removeItem('rapp_api_key');
+            }
+
+            closeSettings();
+
+            // Reload with new settings
+            init();
+        }
+
+        // Event listeners
+        document.getElementById('search').addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            renderItems();
+        });
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                renderItems();
+            });
+        });
+
+        // Close modals on overlay click
+        document.getElementById('settings-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'settings-modal') closeSettings();
+        });
+
+        document.getElementById('code-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'code-modal') closeCodeModal();
+        });
+
+        // Close on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeSettings();
+                closeCodeModal();
+            }
+        });
+
+        // Initialize on load
+        init();
+    </script>
+</body>
+</html>

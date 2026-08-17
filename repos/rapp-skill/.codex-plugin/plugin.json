@@ -1,0 +1,37 @@
+{
+  "name": "rapp",
+  "version": "1.1.0",
+  "description": "Run the RAPP ecosystem end to end and convert RAPP single-file agents into Agent Skills and back with the bundled byte-exact converter.",
+  "author": {
+    "name": "Kody Wildfeuer",
+    "url": "https://github.com/kody-w",
+    "email": "wildfeuer05@gmail.com"
+  },
+  "homepage": "https://github.com/kody-w/rapp-skill",
+  "repository": "https://github.com/kody-w/rapp-skill",
+  "license": "MIT",
+  "keywords": [
+    "rapp",
+    "brainstem",
+    "local-first",
+    "ai-agents",
+    "single-file-agent",
+    "github-copilot",
+    "copilot-studio",
+    "azure-functions",
+    "agent-registry",
+    "rappstore",
+    "on-device",
+    "m365",
+    "teams",
+    "agent-runtime",
+    "agent-skills",
+    "conversion"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "rapp",
+    "shortDescription": "Install, run, and extend your local RAPP brainstem.",
+    "invocation": "rapp doctor"
+  }
+}

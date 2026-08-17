@@ -1,0 +1,52 @@
+{
+  "schema": "rapp-static-workiq-status/1.0",
+  "generated": "2026-08-01T00:00:00Z",
+  "as_of": "2026-08-01T00:00:00Z",
+  "program": "Project Phoenix",
+  "go_live": "2026-12-15",
+  "summary": {
+    "people": 52,
+    "workstreams": 8,
+    "topics": 16,
+    "sites": 13,
+    "weeks": 26,
+    "collaboration_rows": 208,
+    "trending_snapshots": 26,
+    "endpoints": 4
+  },
+  "endpoints": [
+    {
+      "name": "people",
+      "count": 52,
+      "sha8": "20489e3becfe"
+    },
+    {
+      "name": "expertise",
+      "count": 16,
+      "sha8": "5051a5fd485b"
+    },
+    {
+      "name": "collaboration",
+      "count": 208,
+      "sha8": "6ed58d0c9399"
+    },
+    {
+      "name": "topics-trending",
+      "count": 26,
+      "sha8": "d24c4fe18b93"
+    }
+  ],
+  "signals": {
+    "highest_unanswered_workstreams": [
+      "WS-DM",
+      "WS-TQ"
+    ],
+    "cutover_critical_people": [
+      "3a567f08-613c-bceb-fb7a-8e4290168299",
+      "6d198989-3ec1-c1c4-2095-eaa9b7c7563b",
+      "e0b553c0-8904-384d-d491-aa1f820284ef"
+    ],
+    "top_topic_last_week": "data-migration",
+    "fastest_rising_topic_last_week": "change-training"
+  }
+}

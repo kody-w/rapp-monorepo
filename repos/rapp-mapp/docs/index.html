@@ -1,0 +1,153 @@
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>RAPPDEX</title>
+<meta name=description content="Open the RAPP map wherever you are. Works offline.">
+<link rel=manifest href=manifest.webmanifest>
+<meta name=theme-color content="#0b0f19">
+<meta name=apple-mobile-web-app-capable content=yes>
+<meta name=mobile-web-app-capable content=yes>
+<meta name=apple-mobile-web-app-status-bar-style content=black-translucent>
+<meta name=apple-mobile-web-app-title content=RAPPDEX>
+<link rel=apple-touch-icon href=icon-180.png>
+<link rel=icon href=icon-192.png>
+<style>
+:root{--bg:#0b0f19;--fg:#e8ecf6;--mut:#8b94ad;--acc:#10b981;--cy:#00e5cc;--mg:#c084fc;--am:#ffb020;--ln:#1c2436;--card:#111726}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{overscroll-behavior-y:none}
+body{margin:0;background:var(--bg);color:var(--fg);
+font:16px/1.55 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;
+padding:0 16px calc(96px + env(safe-area-inset-bottom));max-width:720px;margin-inline:auto}
+header{padding:calc(20px + env(safe-area-inset-top)) 0 4px;text-align:center}
+.k{font-size:11px;letter-spacing:.34em;color:var(--acc);font-weight:800}
+h1{font-size:34px;margin:6px 0 2px;letter-spacing:-.03em;
+background:linear-gradient(180deg,#fff,#9fb4d6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--mut);font-size:13px;margin:0}
+.searchwrap{position:sticky;top:0;z-index:9;background:linear-gradient(180deg,var(--bg) 72%,transparent);
+padding:12px 0 10px;margin-top:8px}
+#q{width:100%;padding:13px 15px;font-size:16px;background:var(--card);color:var(--fg);
+border:1px solid var(--ln);border-radius:12px;outline:none}
+#q:focus{border-color:var(--acc)}
+.tabs{display:flex;gap:7px;overflow-x:auto;padding:9px 0 2px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;padding:7px 13px;font-size:13px;font-weight:600;background:var(--card);
+border:1px solid var(--ln);border-radius:999px;color:var(--mut);cursor:pointer;white-space:nowrap}
+.tab.on{background:var(--acc);border-color:var(--acc);color:#04120c}
+h2.L{font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--cy);margin:22px 0 9px}
+.e{display:block;padding:13px 15px;margin-bottom:8px;background:var(--card);border:1px solid var(--ln);
+border-left:3px solid var(--cy);border-radius:11px;text-decoration:none;color:inherit}
+.e.vault{border-left-color:var(--mg)}.e.both{border-left-color:var(--am)}
+.e:active{background:#151d30}
+.r{font-weight:650;font-size:15px;word-break:break-word}
+.au{color:var(--am);margin-left:6px}
+.art{font-size:10.5px;color:var(--mut);border:1px solid var(--ln);border-radius:5px;padding:1px 5px;margin-left:6px;white-space:nowrap}
+.h{color:#b8c2d8;font-size:14px;margin-top:3px}
+.note{color:var(--mut);font-size:13px;margin-top:3px}
+.box{margin:22px 0;padding:18px;background:var(--card);border:1px solid var(--ln);border-radius:13px}
+.box h3{margin:0 0 10px;font-size:17px}
+.box ul{margin:0;padding-left:19px;color:#b8c2d8;font-size:14px}.box li{margin-bottom:8px}
+.warn{border-color:#3a2a14;background:#191308}
+.why{color:var(--mut);font-size:12.5px;margin-top:2px}
+.empty{text-align:center;color:var(--mut);padding:36px 0;font-size:14.5px}
+footer{margin-top:30px;padding-top:18px;border-top:1px solid var(--ln);text-align:center;color:var(--mut);font-size:12.5px}
+a{color:var(--cy)}
+#install{position:fixed;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));
+padding:14px;background:var(--acc);color:#04120c;border:0;border-radius:13px;font-size:15px;font-weight:700;
+display:none;max-width:688px;margin-inline:auto;z-index:20;box-shadow:0 8px 28px rgba(0,0,0,.5)}
+#off{position:fixed;left:0;right:0;bottom:0;padding:9px;background:var(--am);color:#1a1205;
+font-size:12.5px;font-weight:700;text-align:center;display:none;z-index:21}
+</style></head><body>
+
+<header><div class=k>RAPPDEX</div><h1>The RAPP map</h1>
+<p class=sub id=count>loading…</p></header>
+
+<div class=searchwrap>
+  <input id=q type=search placeholder="Search surfaces, layers, articles…" autocomplete=off autocorrect=off spellcheck=false>
+  <div class=tabs id=tabs></div>
+</div>
+
+<main id=out></main>
+
+<div class=box><h3>The words</h3><ul id=words></ul></div>
+<div class="box warn"><h3>Open gaps</h3><ul id=gaps></ul></div>
+<div class=box><h3>A map, not a registry</h3><p id=auth style="color:#b8c2d8;font-size:14px;margin:0"></p></div>
+
+<footer>Supersedes <a href="https://github.com/kody-w/rapp-map">rapp-map</a> — superseding is not deleting.<br>
+<a href="https://github.com/kody-w/rapp-mapp">source</a> · <a href="https://kody-w.github.io/rapp-constitution/">Bill of Rights</a></footer>
+
+<button id=install>Add RAPPDEX to your home screen</button>
+<div id=off>offline — showing the last map you loaded</div>
+
+<script>
+const GLYPH={protocol:'\u25C6',governance:'\u00A7',kernel:'\u2B22',membrane:'\u25D0',memory:'\u25C9',navigation:'\u2726'};
+const ORDER=['protocol','governance','kernel','membrane','memory','navigation'];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let MAP=null, layer=null;
+
+function render(){
+  if(!MAP) return;
+  const q=document.getElementById('q').value.trim().toLowerCase();
+  let list=MAP.surfaces;
+  if(layer) list=list.filter(s=>s.layer===layer);
+  if(q) list=list.filter(s=>JSON.stringify(s).toLowerCase().includes(q));
+
+  document.getElementById('count').textContent=
+    list.length+' of '+MAP.surfaces.length+' surfaces'+(layer?' · '+layer:'');
+
+  const out=document.getElementById('out');
+  if(!list.length){out.innerHTML='<div class=empty>Nothing matches.<br>Try <b>twin</b>, <b>membrane</b>, or clear the search.</div>';return;}
+
+  const groups={};
+  list.forEach(s=>(groups[s.layer]=groups[s.layer]||[]).push(s));
+  out.innerHTML=Object.keys(groups)
+    .sort((a,b)=>(ORDER.indexOf(a)+99)%100-(ORDER.indexOf(b)+99)%100)
+    .map(L=>'<h2 class=L>'+(GLYPH[L]||'\u00B7')+' '+esc(L)+'</h2>'+groups[L].map(s=>
+      '<a class="e '+(s.side||'bones')+'" href="https://github.com/'+esc(s.repo)+'">'+
+      '<div class=r>'+esc(s.repo)+(s.authority?'<span class=au title="carries authority">\u2605</span>':'')+
+      (s.article?'<span class=art>Art. '+esc(s.article)+'</span>':'')+'</div>'+
+      '<div class=h>'+esc(s.houses)+'</div>'+
+      (s.note?'<div class=note>\u21B3 '+esc(s.note)+'</div>':'')+'</a>').join('')).join('');
+}
+
+function boot(map){
+  MAP=map;
+  try{localStorage.setItem('rappdex',JSON.stringify(map));}catch(e){}
+  const tabs=document.getElementById('tabs');
+  const layers=[...new Set(map.surfaces.map(s=>s.layer))]
+    .sort((a,b)=>(ORDER.indexOf(a)+99)%100-(ORDER.indexOf(b)+99)%100);
+  tabs.innerHTML='<div class="tab on" data-l="">all</div>'+
+    layers.map(L=>'<div class=tab data-l="'+L+'">'+(GLYPH[L]||'')+' '+L+'</div>').join('');
+  tabs.onclick=e=>{
+    const t=e.target.closest('.tab'); if(!t)return;
+    layer=t.dataset.l||null;
+    [...tabs.children].forEach(c=>c.classList.toggle('on',c===t));
+    render();
+  };
+  document.getElementById('words').innerHTML=map.vocabulary.rules.map(r=>'<li>'+esc(r)+'</li>').join('');
+  document.getElementById('gaps').innerHTML=(map.known_gaps||[]).filter(g=>g.status==='open')
+    .map(g=>'<li>'+esc(g.gap)+'<div class=why>'+esc(g.why_not_fixed||'')+'</div></li>').join('');
+  document.getElementById('auth').textContent=map.authority_note;
+  render();
+}
+
+document.getElementById('q').addEventListener('input',render);
+
+// Network first so the dex is current; last-known map if there is no signal.
+fetch('mapp.json',{cache:'no-cache'}).then(r=>r.json()).then(boot).catch(()=>{
+  const cached=localStorage.getItem('rappdex');
+  if(cached){document.getElementById('off').style.display='block';boot(JSON.parse(cached));}
+  else document.getElementById('out').innerHTML='<div class=empty>Could not load the map.</div>';
+});
+
+if('serviceWorker' in navigator)
+  addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+
+// Android/desktop get a real install button; iOS uses Share > Add to Home Screen.
+let prompt=null;
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();prompt=e;
+  document.getElementById('install').style.display='block';});
+document.getElementById('install').onclick=async()=>{
+  if(!prompt)return; prompt.prompt(); await prompt.userChoice;
+  prompt=null; document.getElementById('install').style.display='none';
+};
+addEventListener('appinstalled',()=>document.getElementById('install').style.display='none');
+</script></body></html>

@@ -1,0 +1,24 @@
+{
+  "name": "rapp-skill",
+  "owner": {
+    "name": "Kody Wildfeuer",
+    "url": "https://github.com/kody-w"
+  },
+  "metadata": {
+    "description": "Marketplace hosting the RAPP ecosystem and agent-converter skills."
+  },
+  "plugins": [
+    {
+      "name": "rapp",
+      "description": "Run the RAPP ecosystem and convert RAPP agents into Agent Skills and back.",
+      "version": "1.1.0",
+      "author": {
+        "name": "Kody Wildfeuer",
+        "url": "https://github.com/kody-w"
+      },
+      "source": "./",
+      "category": "productivity",
+      "homepage": "https://github.com/kody-w/rapp-skill"
+    }
+  ]
+}

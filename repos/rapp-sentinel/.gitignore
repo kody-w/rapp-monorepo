@@ -1,0 +1,14 @@
+# local runtime state — never publish
+config.json
+logs/
+state/
+dashboard/
+neighborhood/
+STOP
+__pycache__/
+*.pyc
+public/sentinel-head.json
+.claude/
+
+# local-only: the strings you are hiding must never ship
+sensitive/

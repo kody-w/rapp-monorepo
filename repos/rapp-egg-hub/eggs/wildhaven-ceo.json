@@ -1,0 +1,34 @@
+{
+  "schema": "rapp-egg-hub-entry/2.0",
+  "slug": "wildhaven-ceo",
+  "name": "wildhaven-ceo",
+  "display_name": "The Wildhaven CEO",
+  "github": "https://github.com/kody-w/wildhaven-ceo",
+  "kind": "pre-founder",
+  "description": "Public-facing CEO twin of Wildhaven AI Homes. The brand's executive voice in public, pre-founding. Depth of context scales with the chatter's authorization: authenticated collaborators pull richer context at runtime; anonymous visitors get the public manifesto voice. Bundles standard memory cartridges.",
+  "tags": [
+    "pre-founder",
+    "ceo",
+    "wildhaven",
+    "executive",
+    "memory-equipped"
+  ],
+  "egg_schema": "brainstem-egg/2.1",
+  "size_bytes": 9972,
+  "sha256": "c6c667e7bb60324d12127866521a4ca1270828508aed86a416879ace324c6674",
+  "packed_by": "@kody-w",
+  "packed_at": "2026-05-04T17:24:27Z",
+  "egg_path": "eggs/wildhaven-ceo.egg",
+  "raw_url": "https://raw.githubusercontent.com/kody-w/rapp-egg-hub/main/eggs/wildhaven-ceo.egg",
+  "lineage": {
+    "parent_rappid": "37ad22f5-ed6d-48b1-b8b4-61019f58a42b",
+    "parent_repo": "https://github.com/kody-w/wildhaven-ai-homes-twin.git"
+  },
+  "memory_facts_count": 8,
+  "_note": "CEO seat-as-twin. Pairs with the brand-voice wildhaven-ai-homes-twin variant.",
+  "rappid": "rappid:@kody-w/wildhaven-ceo:7fb60c5a284a58544394bc9cb69be7f96dd91ec4502435f33c0c69e4be570220",
+  "haiku": "",
+  "_migrated_from": [
+    "rappid:wildhaven-ceo:8c3e91d4bfa14f6ab2d715a8e7c4d3f9"
+  ]
+}

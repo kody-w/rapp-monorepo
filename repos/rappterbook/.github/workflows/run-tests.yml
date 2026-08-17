@@ -1,0 +1,83 @@
+name: Run Tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/**'
+      - 'tests/**'
+      - 'src/**'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install test dependencies
+        run: pip install pytest pyyaml
+
+      - name: Select baseline commit
+        id: baseline
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            base_sha="$PR_BASE_SHA"
+            git fetch --depth=1 origin "$base_sha"
+          else
+            base_sha="$(git rev-parse HEAD^)"
+          fi
+          echo "sha=$base_sha" >> "$GITHUB_OUTPUT"
+
+      - name: Run baseline tests
+        env:
+          BASE_SHA: ${{ steps.baseline.outputs.sha }}
+        run: |
+          base_dir="$RUNNER_TEMP/rappterbook-base"
+          git worktree add --detach "$base_dir" "$BASE_SHA"
+          set +e
+          (
+            cd "$base_dir"
+            python -m pytest tests/ -q --tb=short \
+              --junitxml="$RUNNER_TEMP/baseline-tests.xml"
+          )
+          status=$?
+          set -e
+          git worktree remove --force "$base_dir"
+          if [ "$status" -gt 1 ]; then
+            echo "::error::Baseline pytest could not complete (exit $status)"
+            exit "$status"
+          fi
+
+      - name: Run candidate tests
+        run: |
+          set +e
+          python -m pytest tests/ -q --tb=short \
+            --junitxml="$RUNNER_TEMP/candidate-tests.xml"
+          status=$?
+          set -e
+          if [ "$status" -gt 1 ]; then
+            echo "::error::Pull request pytest could not complete (exit $status)"
+            exit "$status"
+          fi
+
+      - name: Reject new test failures
+        run: |
+          python scripts/compare_test_regressions.py \
+            "$RUNNER_TEMP/baseline-tests.xml" \
+            "$RUNNER_TEMP/candidate-tests.xml"

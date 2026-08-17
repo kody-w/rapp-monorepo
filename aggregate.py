@@ -70,6 +70,22 @@ def run(cmd, timeout=120, **kw):
                           timeout=timeout, **kw)
 
 
+def self_name() -> str:
+    """This repository's own name, from its remote — NOT its directory name.
+
+    The first version compared against the directory name, which is whatever
+    the checkout happens to be called, so the mirror matched the membership
+    pattern and cloned ITSELF: repos/rapp-monorepo/repos/... Every run would
+    have nested another copy inside the last one and doubled the snapshot.
+    The remote is the only name that is actually this repo's identity.
+    """
+    r = run(["git", "-C", str(HERE), "remote", "get-url", "origin"], timeout=30)
+    url = (r.stdout or "").strip()
+    if url:
+        return url.rstrip("/").removesuffix(".git").rsplit("/", 1)[-1]
+    return os.environ.get("RAPP_SELF_NAME", "rapp-monorepo")
+
+
 def members(owner: str) -> list[str]:
     import re
     r = run(["gh", "repo", "list", owner, "--limit", "1000", "--json",
@@ -77,10 +93,11 @@ def members(owner: str) -> list[str]:
     if r.returncode != 0:
         raise RuntimeError(f"gh repo list failed: {(r.stderr or '')[:160]}")
     pat = re.compile(MEMBER)
+    me = self_name()
     return sorted(
         x["name"] for x in json.loads(r.stdout)
         if x["visibility"] == "PUBLIC" and not x["isArchived"]
-        and pat.search(x["name"]) and x["name"] != HERE.name
+        and pat.search(x["name"]) and x["name"] != me
     )
 
 

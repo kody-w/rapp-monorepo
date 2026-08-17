@@ -1,0 +1,482 @@
+#!/usr/bin/env python3
+"""
+dog — the public face of a twin.
+
+A twin has two faces of one truth:
+
+    GOD   everything. Lives in your vault, on your device, and never leaves.
+    DOG   what the world may know. Public-by-construction, append-only, signed.
+
+This is the DOG side. It holds no vault, no profile, no accounts — there is
+nothing here to leak, because the private half was never built into it.
+
+Two laws, taken from the ecosystem's canon and enforced in code below:
+
+  1. DOG is public-by-construction. Privacy means DON'T EMIT — take an
+     observation gap, or generalize ("a national retailer"). It never means
+     "emit it, but redacted".
+
+  2. Never encrypt a DOG frame. Encryption on a public chain destroys
+     verify-anywhere, which is the chain's entire value. A frame that arrives
+     encrypted is a category error and is refused.
+
+    dog init
+    dog gate frame.json        # would this be admitted? (no writes)
+    dog admit frame.json       # append it to the public chain
+    dog verify                 # anyone, anywhere, no keys, no network
+
+Docs: https://github.com/kody-w/rapp-dog-hub
+"""
+
+from __future__ import annotations
+
+__version__ = "1.0.0"
+SPEC = "rapp-dog/1.0"
+
+import argparse
+import datetime as _dt
+import hashlib
+import json
+import os
+import re
+import sys
+from pathlib import Path
+from typing import Any, Iterator
+
+GENESIS = "sha256:" + "0" * 64
+
+# The kinds a DOG frame may declare. Each is public-by-construction: none of
+# them has a field that could carry a person.
+FRAME_KINDS = {
+    "twin.shape": "counts and field names of a twin — never a value",
+    "twin.pulse": "a heartbeat: this twin exists and is being worked on",
+    "capability": "something the twin can do, named but not described in detail",
+    "artifact": "a public thing produced — a repo, a release, a spec",
+    "attestation": "a claim the emitter is willing to be held to publicly",
+}
+
+
+class DogError(Exception):
+    """User-facing error — printed without a traceback."""
+
+
+class Refused(DogError):
+    """The gate refused a frame. The reason is always specific."""
+
+
+# --------------------------------------------------------------------------
+# primitives — same canonical encoding and chain as the rest of the ecosystem
+# --------------------------------------------------------------------------
+
+
+def now_iso() -> str:
+    return _dt.datetime.now(_dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def canon(obj: Any) -> str:
+    return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+
+
+def sha(text: str) -> str:
+    return "sha256:" + hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+# --------------------------------------------------------------------------
+# the gate
+#
+# This is the whole reason the hub is a separate repo. "Public-by-construction"
+# is a claim; this function is what makes it true. Everything below runs before
+# a frame can reach the chain, and the chain is append-only — so a frame that
+# gets through is public forever.
+# --------------------------------------------------------------------------
+
+# Shapes that are never safe in public. Deliberately broad: a false positive
+# costs one rewrite, a false negative is permanent.
+LEAK_PATTERNS: list[tuple[str, str]] = [
+    (r"[\w.+-]+@[\w-]+\.[\w.]{2,}", "an email address"),
+    (r"(?:\+\d[\d\s().-]{8,}\d)", "a phone number"),
+    (r"\b\d{1,5}\s+[A-Z][a-z]+\s+(?:Street|St|Road|Rd|Avenue|Ave|Lane|Ln|Drive|Dr|Boulevard|Blvd|Way|Court|Ct)\b", "a street address"),
+    (r"\b\d{3}-\d{2}-\d{4}\b", "a national ID number"),
+    (r"\b(?:\d[ -]*?){13,16}\b", "a payment card number"),
+    (r"\b[A-Z]{2}\d{2}[ ]?[A-Z0-9]{4}[ ]?\d{4}\b", "a bank account (IBAN)"),
+    (r"(?:ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9]{20,}", "a GitHub token"),
+    (r"\b(?:sk|pk)-[A-Za-z0-9]{20,}", "an API key"),
+    (r"AKIA[0-9A-Z]{16}", "an AWS key"),
+    (r"-----BEGIN [A-Z ]*PRIVATE KEY-----", "a private key"),
+    (r"\bhttps?://(?:www\.)?(?:facebook|instagram|linkedin)\.com/[\w.-]+", "a personal social profile"),
+    (r"\b/(?:Users|home)/[\w.-]+", "a home directory path, which names the account"),
+]
+
+# Field names that belong to the GOD side. Their presence means someone is
+# trying to publish the private half, whatever the values happen to be.
+GOD_FIELDS = {
+    "accounts",
+    "people",
+    "facts",
+    "identity",
+    "profile",
+    "vault",
+    "boundaries",
+    "email",
+    "phone",
+    "address",
+    "handle",
+    "password",
+    "secret",
+    "token",
+    "credential",
+    "apikey",
+    "api_key",
+    "private",
+    "pii",
+}
+
+# Encryption is not privacy here — see law 2 in the module docstring.
+CRYPTO_FIELDS = {"encrypted", "ciphertext", "cipher", "nonce", "iv", "sealed", "wrapped_key", "enc"}
+
+
+def walk(value: Any, path: str = "") -> Iterator[tuple[str, Any]]:
+    """Every (path, value) pair in a nested structure."""
+    if isinstance(value, dict):
+        for key, child in value.items():
+            here = f"{path}.{key}" if path else str(key)
+            yield here, key
+            yield from walk(child, here)
+    elif isinstance(value, list):
+        for index, child in enumerate(value):
+            yield from walk(child, f"{path}[{index}]")
+    else:
+        yield path, value
+
+
+def inspect(frame: dict) -> list[str]:
+    """
+    Every reason this frame may not be published. Empty means admissible.
+
+    Returns all findings rather than the first, so a rewrite fixes everything
+    at once instead of playing whack-a-mole against the gate.
+    """
+    problems: list[str] = []
+
+    kind = frame.get("kind")
+    if kind not in FRAME_KINDS:
+        problems.append(
+            f"kind must be one of {', '.join(sorted(FRAME_KINDS))} — got {kind!r}"
+        )
+
+    if not frame.get("emitter"):
+        problems.append("emitter is required — a public claim needs someone standing behind it")
+
+    # -- law 2: encryption is a category error, not a privacy feature --------
+    for path, value in walk(frame):
+        if isinstance(value, str) and value.lower() in CRYPTO_FIELDS:
+            problems.append(
+                f"field {path!r} looks encrypted. DOG is public-by-construction: "
+                "encryption destroys verify-anywhere. Don't emit it instead."
+            )
+            break
+
+    # -- the GOD half must not be here at all -------------------------------
+    for path, value in walk(frame):
+        if isinstance(value, str) and value.lower().replace("-", "_") in GOD_FIELDS:
+            problems.append(
+                f"field {path!r} belongs to the GOD side. Keep it vault-side, "
+                "or emit a count instead of the content."
+            )
+
+    # -- and nothing that looks like a person -------------------------------
+    body = canon(frame)
+    for pattern, description in LEAK_PATTERNS:
+        match = re.search(pattern, body)
+        if match:
+            excerpt = match.group(0)
+            if len(excerpt) > 24:
+                excerpt = excerpt[:21] + "..."
+            problems.append(f"contains what looks like {description}: {excerpt!r}")
+
+    # -- shape frames carry counts, never values ----------------------------
+    if kind == "twin.shape":
+        for path, value in walk(frame.get("body") or {}):
+            if isinstance(value, str) and path.startswith("present"):
+                problems.append(
+                    f"a twin.shape body must hold counts, not strings — {path!r} is text"
+                )
+                break
+
+    return problems
+
+
+def gate(frame: dict) -> None:
+    """Raise Refused unless the frame is admissible."""
+    problems = inspect(frame)
+    if problems:
+        raise Refused(
+            "refused — this frame is not public-by-construction:\n"
+            + "\n".join(f"  - {problem}" for problem in problems)
+            + "\n\nPrivacy here means DON'T EMIT. Take an observation gap, or generalize\n"
+            "  (\"a national retailer\" rather than the customer's name)."
+        )
+
+
+# --------------------------------------------------------------------------
+# the chain
+# --------------------------------------------------------------------------
+
+
+class Hub:
+    """An append-only, hash-chained log of public frames."""
+
+    def __init__(self, root: Path):
+        self.root = root
+        self.chain_path = root / "frames" / "chain.jsonl"
+
+    def exists(self) -> bool:
+        return self.chain_path.exists()
+
+    def require(self) -> None:
+        if not self.exists():
+            raise DogError(f"no hub at {self.root} — run `dog init` first")
+
+    def init(self) -> None:
+        (self.root / "frames").mkdir(parents=True, exist_ok=True)
+        if not self.chain_path.exists():
+            self.chain_path.touch()
+
+    def read(self) -> Iterator[dict]:
+        if not self.chain_path.exists():
+            return
+        with self.chain_path.open("r", encoding="utf-8") as handle:
+            for lineno, line in enumerate(handle, 1):
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    yield json.loads(line)
+                except json.JSONDecodeError as exc:
+                    raise DogError(f"corrupt chain at line {lineno}: {exc}") from exc
+
+    def admit(self, frame: dict) -> dict:
+        """Gate, then append. The gate runs first, always."""
+        gate(frame)
+
+        entries = list(self.read())
+        record = {
+            "seq": entries[-1]["seq"] + 1 if entries else 1,
+            "ts": now_iso(),
+            "spec": SPEC,
+            "kind": frame["kind"],
+            "emitter": frame["emitter"],
+            "body": frame.get("body") or {},
+            "prev": entries[-1]["hash"] if entries else GENESIS,
+        }
+        record["hash"] = sha(canon(record))
+
+        self.init()
+        with self.chain_path.open("a", encoding="utf-8") as handle:
+            handle.write(canon(record) + "\n")
+        return record
+
+    def verify(self) -> tuple[bool, list[str]]:
+        """
+        Verify-anywhere: no keys, no network, no trust in this machine.
+
+        Re-runs the gate over every admitted frame as well as checking the
+        chain, because a frame that should never have been admitted is a
+        problem even if the hashes line up.
+        """
+        problems: list[str] = []
+        prev, expected = GENESIS, 1
+
+        for record in self.read():
+            if record.get("prev") != prev:
+                problems.append(f"seq {record.get('seq')}: broken chain")
+            if record.get("seq") != expected:
+                problems.append(f"expected seq {expected}, found {record.get('seq')}")
+
+            body = {k: v for k, v in record.items() if k != "hash"}
+            if sha(canon(body)) != record.get("hash"):
+                problems.append(f"seq {record.get('seq')}: hash mismatch (frame was edited)")
+
+            for problem in inspect(record):
+                problems.append(f"seq {record.get('seq')}: admitted frame violates the gate — {problem}")
+
+            prev = record.get("hash", prev)
+            expected = (record.get("seq") or expected) + 1
+
+        return (not problems), problems
+
+
+# --------------------------------------------------------------------------
+# commands
+# --------------------------------------------------------------------------
+
+
+def load_frame(path: str) -> dict:
+    if path == "-":
+        raw = sys.stdin.read()
+    else:
+        file = Path(os.path.expanduser(path))
+        if not file.exists():
+            raise DogError(f"no such file: {path}")
+        raw = file.read_text(encoding="utf-8")
+
+    try:
+        frame = json.loads(raw)
+    except json.JSONDecodeError as exc:
+        raise DogError(f"frame is not valid JSON: {exc}") from exc
+
+    if not isinstance(frame, dict):
+        raise DogError("a frame must be a JSON object")
+    return frame
+
+
+def cmd_init(hub: Hub, args, out) -> int:
+    hub.init()
+    out({"ok": True, "root": str(hub.root), "spec": SPEC}, f"Hub ready at {hub.root}")
+    return 0
+
+
+def cmd_gate(hub: Hub, args, out) -> int:
+    """Ask the gate without writing anything. Safe to run on a draft."""
+    frame = load_frame(args.frame)
+    problems = inspect(frame)
+
+    out(
+        {"ok": not problems, "admissible": not problems, "problems": problems},
+        "Admissible — this frame is safe to publish."
+        if not problems
+        else "REFUSED:\n" + "\n".join(f"  - {p}" for p in problems),
+    )
+    return 0 if not problems else 1
+
+
+def cmd_admit(hub: Hub, args, out) -> int:
+    hub.require()
+    record = hub.admit(load_frame(args.frame))
+    out(
+        {"ok": True, "seq": record["seq"], "hash": record["hash"], "kind": record["kind"]},
+        f"Admitted frame {record['seq']} ({record['kind']}) — {record['hash'][:19]}...",
+    )
+    return 0
+
+
+def cmd_verify(hub: Hub, args, out) -> int:
+    hub.require()
+    ok, problems = hub.verify()
+    count = len(list(hub.read()))
+    out(
+        {"ok": ok, "frames": count, "problems": problems},
+        f"Chain intact — {count} frame{'' if count == 1 else 's'} verified, all still admissible."
+        if ok
+        else "PROBLEMS FOUND\n" + "\n".join(f"  {p}" for p in problems),
+    )
+    return 0 if ok else 2
+
+
+def cmd_list(hub: Hub, args, out) -> int:
+    hub.require()
+    records = list(hub.read())
+    if args.kind:
+        records = [r for r in records if r.get("kind") == args.kind]
+    records = records[-args.limit :]
+
+    out(
+        {"ok": True, "count": len(records), "frames": records},
+        "\n".join(f"  {r['seq']:>4}  {r['ts']}  {r['kind']:<12} {r['emitter']}" for r in records)
+        or "  (no frames yet)",
+    )
+    return 0
+
+
+def cmd_show(hub: Hub, args, out) -> int:
+    hub.require()
+    for record in hub.read():
+        if str(record.get("seq")) == str(args.seq):
+            out({"ok": True, "frame": record}, json.dumps(record, indent=2))
+            return 0
+    raise DogError(f"no frame with seq {args.seq}")
+
+
+def cmd_kinds(hub: Hub, args, out) -> int:
+    out(
+        {"ok": True, "kinds": FRAME_KINDS},
+        "\n".join(f"  {kind:<12} {description}" for kind, description in sorted(FRAME_KINDS.items())),
+    )
+    return 0
+
+
+# --------------------------------------------------------------------------
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="dog",
+        description="The public face of a twin — public-by-construction, append-only, verifiable by anyone.",
+        epilog="Docs: https://github.com/kody-w/rapp-dog-hub",
+    )
+    parser.add_argument("--hub", help="hub directory (default: the repo root)")
+    parser.add_argument("--json", action="store_true", help="machine-readable output")
+    parser.add_argument("--version", action="version", version=f"dog {__version__} ({SPEC})")
+    subs = parser.add_subparsers(dest="command", required=True)
+
+    subs.add_parser("init", help="create the chain").set_defaults(func=cmd_init)
+
+    node = subs.add_parser("gate", help="would this frame be admitted? (writes nothing)")
+    node.add_argument("frame", help="path to a frame, or - for stdin")
+    node.set_defaults(func=cmd_gate)
+
+    node = subs.add_parser("admit", help="gate a frame, then append it")
+    node.add_argument("frame", help="path to a frame, or - for stdin")
+    node.set_defaults(func=cmd_admit)
+
+    subs.add_parser("verify", help="prove the chain, and that every frame is still admissible").set_defaults(
+        func=cmd_verify
+    )
+
+    node = subs.add_parser("list", help="what has been published")
+    node.add_argument("--kind")
+    node.add_argument("--limit", type=int, default=30)
+    node.set_defaults(func=cmd_list)
+
+    node = subs.add_parser("show", help="one frame in full")
+    node.add_argument("seq")
+    node.set_defaults(func=cmd_show)
+
+    subs.add_parser("kinds", help="what a frame may be").set_defaults(func=cmd_kinds)
+
+    return parser
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = build_parser().parse_args(argv)
+    root = Path(os.path.expanduser(args.hub)) if args.hub else Path(__file__).resolve().parent
+    hub = Hub(root)
+
+    def out(payload: dict, text: str = "") -> None:
+        if args.json:
+            print(json.dumps(payload, indent=2, ensure_ascii=False))
+        elif text:
+            print(text)
+
+    try:
+        return args.func(hub, args, out)
+    except Refused as exc:
+        if args.json:
+            print(json.dumps({"ok": False, "refused": True, "error": str(exc)}, indent=2))
+        else:
+            print(f"\n{exc}\n", file=sys.stderr)
+        return 1
+    except DogError as exc:
+        if args.json:
+            print(json.dumps({"ok": False, "error": str(exc)}, indent=2))
+        else:
+            print(f"error: {exc}", file=sys.stderr)
+        return 1
+    except BrokenPipeError:
+        return 0
+    except KeyboardInterrupt:
+        return 130
+
+
+if __name__ == "__main__":
+    sys.exit(main())

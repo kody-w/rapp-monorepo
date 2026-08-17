@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "package": "peerjs",
+      "version": "1.5.5",
+      "source": "https://registry.npmjs.org/peerjs/-/peerjs-1.5.5.tgz",
+      "npm_integrity": "sha512-viMUCPDL6CSfOu0ZqVcFqbWRXNHIbv2lPqNbrBIjbFYrflebOjItJ4hPfhjnuUCstqciHVu9vVJ7jFqqKi/EuQ==",
+      "metadata_file": "peerjs-1.5.5.package.json",
+      "metadata_sha256": "971f9e0e66fea49c8d495ae3b614b1209d22662861ab02de572f960362506635",
+      "file": "peerjs-1.5.5.min.js",
+      "sha256": "7604d8c31bec4f134b0d15c2d80b1d095ea18af005354f439f14291fcd7b4168",
+      "license": "MIT",
+      "license_file": "peerjs-1.5.5.LICENSE",
+      "license_sha256": "9407807dba7f47a79bfb3ac55759d63d77c9371ebd0616d5a093e97d3e810397"
+    },
+    {
+      "package": "qrious",
+      "version": "4.0.2",
+      "source": "https://registry.npmjs.org/qrious/-/qrious-4.0.2.tgz",
+      "npm_integrity": "sha512-xWPJIrK1zu5Ypn898fBp8RHkT/9ibquV2Kv24S/JY9VYEhMBMKur1gHVsOiNUh7PHP9uCgejjpZUHUIXXKoU/g==",
+      "metadata_file": "qrious-4.0.2.package.json",
+      "metadata_sha256": "cb5c535446f79a9b9e234736a2c588e38041973069cdacf81bafce6a22806267",
+      "file": "qrious-4.0.2.min.js",
+      "sha256": "db99dcaf40a926181bce4522477c2efc5924f6c4b29111b6a97faea477c9528b",
+      "source_file": "qrious-4.0.2.js",
+      "source_sha256": "d1e65c661e659f51c226de9be64feff66052549ed881959aa7ebb960adfb8158",
+      "license": "GPL-3.0-or-later",
+      "license_file": "qrious-4.0.2.LICENSE.md",
+      "license_sha256": "573aa60568eb0d6829453b85a9bcae84763de76638bc16e6a198a9535871191a",
+      "license_terms_file": "GPL-3.0.txt",
+      "license_terms_sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    }
+  ],
+  "trystero_bundle": {
+    "package": "@trystero-p2p/nostr",
+    "version": "0.25.3",
+    "upstream_commit": "f76eb4fca528a3253e2bdfd6d41b54c8131ca11e",
+    "source": "https://registry.npmjs.org/@trystero-p2p/nostr/-/nostr-0.25.3.tgz",
+    "npm_integrity": "sha512-nZV9Fl/GXuhIkJSQ+wIkdMoRLO1oSTUL/+vZorukaojeAdOpT/61e8b9Vzbt8L1ktMTaGPEJHw2BG/B5BCwBuw==",
+    "archive_file": "sources/trystero-p2p-nostr-0.25.3.tgz",
+    "archive_sha256": "9b2e277ca830e61901cbb906c3e82e564d181b346d3caa197772e70bcd5782ee",
+    "metadata_file": "trystero-nostr-0.25.3.package.json",
+    "metadata_sha256": "e8e622a991d59d47afd3d446eebfcc87dae3409da2ca502cc3df70a6468aef74",
+    "source_file": "trystero-nostr-0.25.3.source.ts",
+    "source_sha256": "1acf1519aa27fdc9fb69c3329f43b9b7cc6d0287275fe1c7ef4f74fb6702fedf",
+    "file": "trystero-nostr-0.25.3.iife.min.js",
+    "sha256": "3a4f689e5cc156f92d118a1860bc0cd77a60db220b6521b9f60b3b6fb36b2b9d",
+    "derivative": "Minimal reviewed MIT-licensed adapter and core leave-finally patches; exact files and hashes are pinned by TRYSTERO_BUILD.json.",
+    "license": "MIT",
+    "license_file": "trystero-nostr-0.25.3.LICENSE",
+    "license_sha256": "bbf91fd979faac0def9551c570e2e9f92b4e02d22f38ca5d98860b6284e1ea25",
+    "build_file": "TRYSTERO_BUILD.json",
+    "build_sha256": "489ca4fad767ed268ff8eeaaa64f79f91c28e8d223f25694561c23ae37deaf17",
+    "relay_policy_file": "NOSTR_RELAYS.json",
+    "relay_policy_sha256": "0b768e2f308c0debabc434704ae1311d066fcea72e4860addb107ebd6957265a"
+  },
+  "trystero_bundled_dependencies": [
+    {
+      "package": "@trystero-p2p/core",
+      "version": "0.25.3",
+      "archive_file": "sources/trystero-p2p-core-0.25.3.tgz",
+      "archive_sha256": "119534b002447f97dbf4d2de020aac3934a12ce7bac344bc0fe0bcb28107db4f",
+      "metadata_file": "trystero-core-0.25.3.package.json",
+      "metadata_sha256": "85064f7657ad826d2eed6e07bd7ace4b474fa967c19461f85dabfb0f6e0914fd",
+      "license": "MIT",
+      "license_file": "trystero-core-0.25.3.LICENSE",
+      "license_sha256": "bbf91fd979faac0def9551c570e2e9f92b4e02d22f38ca5d98860b6284e1ea25"
+    },
+    {
+      "package": "@noble/secp256k1",
+      "version": "3.1.0",
+      "archive_file": "sources/noble-secp256k1-3.1.0.tgz",
+      "archive_sha256": "f5d5f57083b71143291b3bc9aa9ea48a03313337c93d41a31d70b90224b57f74",
+      "metadata_file": "noble-secp256k1-3.1.0.package.json",
+      "metadata_sha256": "8a51915ce154543d6ade3b38d14ea31a887eb29d9b7ff603f8fbe80f976495ad",
+      "license": "MIT",
+      "license_file": "noble-secp256k1-3.1.0.LICENSE",
+      "license_sha256": "394c2e6e5552e5dba202bee6390b9d6aa2754d657f5b9869e83b3d265a315501"
+    }
+  ],
+  "peerjs_bundle_lock": "https://raw.githubusercontent.com/peers/peerjs/v1.5.5/package-lock.json",
+  "peerjs_bundled_dependencies": [
+    {
+      "package": "eventemitter3",
+      "version": "4.0.7",
+      "npm_integrity": "sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==",
+      "license": "MIT",
+      "license_file": "eventemitter3-4.0.7.LICENSE",
+      "license_sha256": "3aecc12b1cb28832b5f65ab64291de96568c3f236a74d646281b4491f7bcadbf"
+    },
+    {
+      "package": "peerjs-js-binarypack",
+      "version": "2.1.0",
+      "npm_integrity": "sha512-YIwCC+pTzp3Bi8jPI9UFKO0t0SLo6xALnHkiNt/iUFmUUZG0fEEmEyFKvjsDKweiFitzHRyhuh6NvyJZ4nNxMg==",
+      "license": "MIT",
+      "license_file": "peerjs-js-binarypack-2.1.0.LICENSE",
+      "license_sha256": "9517e6f46b30231a62407f94a8c7adf8b4d14038c01807cd769f1d4de5911ba4"
+    },
+    {
+      "package": "webrtc-adapter",
+      "version": "9.0.1",
+      "npm_integrity": "sha512-1AQO+d4ElfVSXyzNVTOewgGT/tAomwwztX/6e3totvyyzXPvXIIuUUjAmyZGbKBKbZOXauuJooZm3g6IuFuiNQ==",
+      "license": "BSD-3-Clause",
+      "license_file": "webrtc-adapter-9.0.1.LICENSE.md",
+      "license_sha256": "00a46c6cfc219593b97586398b477e188391556e70487225d3ff9d60ccda6dce"
+    },
+    {
+      "package": "sdp",
+      "version": "3.2.0",
+      "npm_integrity": "sha512-d7wDPgDV3DDiqulJjKiV2865wKsJ34YI+NDREbm+FySq6WuKOikwyNQcm+doLAZ1O6ltdO0SeKle2xMpN3Brgw==",
+      "license": "MIT",
+      "license_file": "sdp-3.2.0.LICENSE",
+      "license_sha256": "798e82590af6a84bfbde3d6bb0fb9162c519edf16122404fea00acefdc55cbd9"
+    }
+  ]
+}

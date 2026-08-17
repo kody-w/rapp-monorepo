@@ -1,0 +1,145 @@
+/* The consent moment: someone handed you an agent. Calm, legible, and honest
+   about what it can touch — never a rushed "Allow?" dialog. */
+
+.arrival-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+  background: rgb(6 8 12 / 0.62);
+  backdrop-filter: blur(14px);
+  animation: arrival-in 180ms ease-out;
+}
+
+@keyframes arrival-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.arrival {
+  width: min(880px, 100%);
+  max-height: 88vh;
+  overflow: auto;
+  padding: 26px 28px 24px;
+  border-radius: 20px;
+  background: #fbfbfd;
+  color: #14161d;
+  box-shadow: 0 40px 90px -30px rgb(0 0 0 / 0.7);
+}
+
+.arrival-head { margin-bottom: 18px; }
+.arrival-kicker {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+.arrival h2 { margin: 4px 0 6px; font-size: 24px; letter-spacing: -0.02em; }
+.arrival-desc { margin: 0; font-size: 14px; line-height: 1.5; opacity: 0.75; }
+
+.arrival-body {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 26px;
+  align-items: start;
+}
+@media (max-width: 760px) {
+  .arrival-body { grid-template-columns: 1fr; justify-items: center; }
+}
+
+.arrival-detail section { margin-bottom: 18px; }
+.arrival-detail h3 {
+  margin: 0 0 8px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+.arrival-steps {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.arrival-steps li { margin-bottom: 3px; }
+
+.arrival-clean {
+  margin: 0;
+  font-size: 13.5px;
+  color: #17703f;
+  background: #eaf7ef;
+  border-radius: 9px;
+  padding: 10px 12px;
+}
+
+.arrival-findings { margin: 0; padding: 0; list-style: none; font-size: 13.5px; }
+.arrival-findings li {
+  display: flex;
+  gap: 9px;
+  align-items: baseline;
+  padding: 7px 11px;
+  border-radius: 9px;
+  margin-bottom: 5px;
+  line-height: 1.45;
+}
+.arrival-findings code {
+  margin-left: 7px;
+  font-size: 11px;
+  opacity: 0.55;
+}
+.finding-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex: none;
+  transform: translateY(-1px);
+}
+.finding-critical { background: #fdeceb; color: #8c1d17; }
+.finding-critical .finding-dot { background: #d93025; }
+.finding-warn { background: #fff6e5; color: #7a4d05; }
+.finding-warn .finding-dot { background: #e0952b; }
+
+.arrival-note,
+.arrival-parked {
+  margin: 12px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  opacity: 0.6;
+}
+.arrival-parked code { font-size: 11px; }
+.arrival-error { color: #8c1d17; font-size: 13.5px; }
+
+.arrival-outcome {
+  margin: 14px 0 0;
+  padding: 11px 13px;
+  border-radius: 9px;
+  background: #eef2fb;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.arrival-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+.arrival-btn {
+  padding: 10px 17px;
+  border: 0;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #1f6feb;
+  color: #fff;
+  transition: filter 140ms ease;
+}
+.arrival-btn:hover:not(:disabled) { filter: brightness(1.08); }
+.arrival-btn:disabled { opacity: 0.55; cursor: default; }
+.arrival-btn.ghost { background: #e9e9ef; color: #2a2a33; }
+/* A dangerous agent never gets the friendly blue button. */
+.arrival-btn.danger { background: #b3261e; }

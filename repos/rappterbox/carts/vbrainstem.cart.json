@@ -1,0 +1,19 @@
+{
+  "schema": "rappterbox-cart/0.1",
+  "name": "vbrainstem-DEPRECATED",
+  "description": "This file moved to vbrainstem.egg as part of the egg-unification (2026-05-10). Old extension kept for one release as a redirect; load vbrainstem.egg instead.",
+  "_redirect_to": "carts/vbrainstem.egg",
+  "runtime": {
+    "type": "html",
+    "sha256": "f485a7ceacdbf4b4ef0beef4941042be69ee6f3659bc67335283a47a0d28f425",
+    "payload": "<!doctype html><body><script>location.href=\"vbrainstem.egg\";</script></body>"
+  },
+  "transcript": [],
+  "participants": [],
+  "minted_at": "2026-05-11T03:01:42.280384+00:00",
+  "minted_by": "redirect-shim",
+  "parent_rappid": null,
+  "branch_at_event": null,
+  "rappid": "rappid:v2:cart:@kody-w/rappterbox#vbrainstem-deprecated:0@github.com/kody-w/rappterbox",
+  "title": "DEPRECATED \u2014 see vbrainstem.egg"
+}

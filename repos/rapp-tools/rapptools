@@ -1,0 +1,643 @@
+#!/usr/bin/env python3
+"""RAPP Tools — one catalogue and one command for the local-first RAPP tools.
+
+Every tool in the catalogue is a hatchable rapplication: it boots into its own
+brainstem on its own port carrying only its own agent, and is driven **headlessly**
+over `/chat`. A UI is optional — each tool ships one, but nothing requires it.
+
+    rapptools list                     what exists
+    rapptools hatch rapp_shot          boot it on its own port
+    rapptools call rapp_shot doctor    drive it headlessly
+    rapptools ask rapp_rewind "..."    natural language into the same agent
+    rapptools status                   the whole fleet
+    rapptools stop rapp_shot
+
+Nothing here is vendored: catalogue entries point at each tool's own repository,
+so the tool's repo stays the source of truth. The only thing centralised is
+*discovery and operation*, which is the part that was scattered.
+"""
+
+import argparse
+import hashlib
+import json
+import os
+import shutil
+import signal
+import subprocess
+import sys
+import time
+import urllib.error
+import urllib.request
+import zipfile
+
+HOME = os.path.expanduser("~")
+ROOT = os.environ.get("RAPPTOOLS_HOME", os.path.join(HOME, ".rappfleet"))
+# realpath, not abspath — install.sh symlinks this into ~/.local/bin, and abspath
+# left CATALOG pointing at ~/.local/bin/catalog/catalog.json. Same defect that
+# made shot report a false all-clear; fixed in two tools and missed here.
+HERE = os.path.dirname(os.path.realpath(__file__))
+CATALOG = os.environ.get("RAPPTOOLS_CATALOG", os.path.join(HERE, "catalog", "catalog.json"))
+BRAINSTEM = os.environ.get("BRAINSTEM_SRC", os.path.join(HOME, ".brainstem", "src", "rapp_brainstem"))
+# The estate's cubby contract, as defined by rapp_pipeline_agent.py's tree
+# resolution — this is an existing convention, not one invented here:
+#   batcave   rapplications/<slug>/cubby-<slug>.egg
+#   cache     ~/.brainstem/eggs/cubby-<slug>.egg
+#   hatched   ~/.brainstem/cubbies/<slug>/hatched
+BATCAVE = os.environ.get("RAPP_BATCAVE", "kody-w/rapp-batcave")
+CUBBY_ROOT = os.path.join(HOME, ".brainstem", "cubbies")
+EGG_CACHE = os.path.join(HOME, ".brainstem", "eggs")
+
+
+def slug_of(t):
+    return t["id"].replace("_", "-")
+
+
+def cubby_paths(t):
+    s = slug_of(t)
+    return (os.path.join(CUBBY_ROOT, s, "hatched"),
+            os.path.join(EGG_CACHE, f"cubby-{s}.egg"),
+            f"rapplications/{s}/cubby-{s}.egg")
+
+
+def pull_cubby(t, log):
+    """Pull the egg out of the private batcave with gh. Mirrors the resolution
+    order the estate already uses, so a cubbied rapplication travels alone."""
+    _, cache, remote = cubby_paths(t)
+    os.makedirs(EGG_CACHE, exist_ok=True)
+    p = subprocess.run(["gh", "api", f"repos/{BATCAVE}/contents/{remote}",
+                        "--jq", ".content"], capture_output=True, text=True)
+    if p.returncode != 0 or not (p.stdout or "").strip():
+        log.append(f"batcave pull failed: {(p.stderr or '').strip()[:160]}")
+        return None
+    import base64
+    try:
+        blob = base64.b64decode("".join((p.stdout or "").split()))
+    except Exception as exc:
+        log.append(f"batcave payload undecodable: {exc}")
+        return None
+    with open(cache, "wb") as fh:
+        fh.write(blob)
+    log.append(f"pulled {remote} from {BATCAVE} ({len(blob)} bytes)")
+    return cache
+VENV = os.environ.get("BRAINSTEM_PYTHON", os.path.join(HOME, ".brainstem", "venv", "bin", "python"))
+
+
+def catalog():
+    with open(CATALOG) as fh:
+        return json.load(fh)
+
+
+def tool(tid):
+    for t in catalog()["tools"]:
+        if t["id"] == tid or t["id"].replace("_", "-") == tid:
+            return t
+    return None
+
+
+def http_ok(port, timeout=3):
+    """Port open. NOT the same as hatched — see hatched_ok."""
+    try:
+        with urllib.request.urlopen(f"http://127.0.0.1:{port}/", timeout=timeout) as r:
+            return 200 <= r.status < 500
+    except urllib.error.HTTPError:
+        return True
+    except Exception:
+        return False
+
+
+def hatched_ok(t, timeout=6):
+    """Is THIS tool's agent actually loaded on that port?
+
+    port-open != hatched. A brainstem with an empty AGENTS_PATH answers HTTP 200
+    and chats happily as a generic assistant, so an HTTP-only check reported the
+    fleet green while one twin had no soul and no agent at all. Ask /agents."""
+    if not http_ok(t["port"], timeout=3):
+        return False, "not listening"
+    try:
+        with urllib.request.urlopen(
+                f"http://127.0.0.1:{t['port']}/agents", timeout=timeout) as r:
+            body = r.read().decode("utf-8", "replace")
+    except Exception as exc:
+        return False, f"no /agents ({type(exc).__name__})"
+    if t["agent"].lower() in body.lower():
+        return True, "ok"
+    return False, f"listening but {t['agent']} is not loaded"
+
+
+def launchd_label(t):
+    """A twin may be owned by a launchd agent with KeepAlive. Killing it just
+    makes launchd respawn it, so re-hatching silently hits the old process."""
+    for cand in (f"com.rapp.{t['id'].replace('_', '-')}-twin",
+                 f"com.rapp.{t['id'].split('_')[-1]}-twin"):
+        p = subprocess.run(["launchctl", "list"], capture_output=True, text=True)
+        if cand in (p.stdout or ""):
+            return cand
+    return None
+
+
+def chat(port, message, timeout=300):
+    req = urllib.request.Request(
+        f"http://127.0.0.1:{port}/chat",
+        data=json.dumps({"user_input": message}).encode(),
+        headers={"Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return json.loads(r.read().decode("utf-8", "replace"))
+
+
+def fetch(url, dest):
+    with urllib.request.urlopen(url, timeout=120) as r, open(dest, "wb") as fh:
+        shutil.copyfileobj(r, fh)
+
+
+# ------------------------------------------------------------------- commands
+def cmd_list(a):
+    c = catalog()
+    print(f"{c['name']} — {c['count']} tool(s), genre '{c['genre']}'\n")
+    for t in c["tools"]:
+        live = "running" if http_ok(t["port"]) else "-"
+        print(f"  \033[1m{t['id']:<12}\033[0m :{t['port']}  {live:<8} {t['one']}")
+        if a.verbose:
+            print(f"      actions   {', '.join(t['actions'])}")
+            print(f"      engines   {', '.join(t['engines'])}")
+            print(f"      headless  {t['headless']}")
+            print(f"      needs     {'; '.join(t['needs'])}")
+            print(f"      source    {t['homepage']}")
+    print("\nEvery tool is driven headlessly:  rapptools call <id> <action>")
+    return 0
+
+
+def sha256_of(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as fh:
+        for chunk in iter(lambda: fh.read(1 << 16), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def verify_egg(t, egg, source_desc):
+    """An egg is unpacked and its agents are then executed by the brainstem. If
+    the catalog publishes a digest, the bytes must match it before we extract —
+    otherwise `hatch` is a remote-code-execution path with no integrity check at
+    all. A catalog with no digest is reported, not silently trusted."""
+    want = (t.get("egg_sha256") or "").strip().lower()
+    got = sha256_of(egg)
+    if not want:
+        print(f"  sha256   {got[:16]}… (catalog publishes no digest — unverified)")
+        return True
+    if want != got:
+        print(f"egg digest mismatch for {t['id']} — refusing to extract\n"
+              f"  source   {source_desc}\n"
+              f"  expected {want}\n"
+              f"  actual   {got}", file=sys.stderr)
+        return False
+    print(f"  sha256   {got[:16]}… verified against the catalog")
+    return True
+
+
+def restore_launchd(label):
+    """Bring a parked launchd agent back. Idempotent and never fatal: this runs
+    from a `finally`, so it must not mask the error that sent us there."""
+    if not label:
+        return
+    plist = os.path.expanduser(f"~/Library/LaunchAgents/{label}.plist")
+    if not os.path.exists(plist):
+        print(f"  WARNING: cannot restore {label} — {plist} is gone",
+              file=sys.stderr)
+        return
+    p = subprocess.run(["launchctl", "bootstrap", f"gui/{os.getuid()}", plist],
+                       capture_output=True, text=True)
+    # 37 (already booted) / 5 (input in use) mean it is loaded; that is success.
+    if p.returncode in (0, 5, 37):
+        print(f"  restored launchd agent {label}")
+        return
+    print(f"  WARNING: `launchctl bootstrap {label}` exited {p.returncode} — the "
+          f"agent is NOT loaded. Re-enable it with:\n"
+          f"    launchctl bootstrap gui/{os.getuid()} {plist}", file=sys.stderr)
+
+
+def resolve_egg(a, t):
+    """Find the egg and prove its digest. PURE: no process is killed, no launchd
+    agent is parked and nothing is extracted until this has succeeded.
+
+    It used to run after the port had already been cleared, so `hatch` on a
+    tampered egg printed "refusing to extract" — which reads as a safe no-op —
+    having already killed the healthy twin that was serving. A safety check that
+    causes the outage it is protecting against is worse than no check.
+    """
+    hatched, cache, remote = cubby_paths(t)
+    log = []
+    source = getattr(a, "source", "auto")
+
+    # Resolution order mirrors the estate's own: cached cubby egg -> batcave ->
+    # the public repo -> a local checkout. Each CANDIDATE is verified, and a
+    # failure falls through to the next rather than aborting.
+    #
+    # It used to verify once, against whichever source produced a file first.
+    # A version bump then left every local cache stale and `hatch` dead for
+    # three of four tools with an error naming no remedy — while a good egg sat
+    # one source down the list.
+    def _cached():
+        return cache if os.path.isfile(cache) else None
+
+    def _batcave():
+        return pull_cubby(t, log)
+
+    def _repo():
+        try:
+            os.makedirs(EGG_CACHE, exist_ok=True)
+            fetch(t["egg_url"], cache)
+            return cache
+        except Exception as exc:
+            log.append(f"repo fetch failed: {exc}")
+            return None
+
+    def _local():
+        p = os.path.join(HOME, "Documents", "Fable5", t["repo"], t["id"],
+                         "eggs", f"{t['id']}.egg")
+        if not os.path.exists(p):
+            return None
+        shutil.copy(p, cache)
+        return cache
+
+    candidates = []
+    if source in ("auto", "cubby"):
+        candidates.append((_cached, f"cached cubby egg ({cache})"))
+    if source in ("auto", "cubby", "batcave"):
+        candidates.append((_batcave, f"{BATCAVE}:{remote}"))
+    if source in ("auto", "repo"):
+        candidates.append((_repo, t["egg_url"]))
+    if source == "auto":
+        candidates.append((_local, "local checkout"))
+
+    for get, desc in candidates:
+        egg = get()
+        if not egg:
+            continue
+        if verify_egg(t, egg, desc):
+            return egg, desc, log
+        log.append(f"digest mismatch from {desc} — trying the next source")
+        if egg == cache and os.path.isfile(cache):
+            # a stale cache must not shadow a good egg on the next run either
+            os.unlink(cache)
+            log.append(f"discarded the stale cache at {cache}")
+
+    for line in log:
+        print(f"  {line}", file=sys.stderr)
+    print(f"no egg for {t['id']} passed verification from any source "
+          f"({', '.join(d for _g, d in candidates) or 'none tried'})",
+          file=sys.stderr)
+    return None, None, log
+
+
+def cmd_hatch(a):
+    t = tool(a.id)
+    if not t:
+        print(f"no such tool: {a.id}", file=sys.stderr)
+        return 1
+    ready, why_ready = hatched_ok(t)
+    if ready and not a.force:
+        print(f"{t['id']} already hatched and serving {t['agent']} on :{t['port']}")
+        return 0
+
+    # 1. Obtain and VERIFY the egg before touching anything that is running.
+    egg, why, log = resolve_egg(a, t)
+    if egg is None:
+        return 1
+
+    if http_ok(t["port"]) and not ready:
+        print(f"  :{t['port']} is occupied but {why_ready} — replacing it")
+
+    # 2. Park the launchd owner, if any, so KeepAlive cannot respawn mid-hatch.
+    label = launchd_label(t)
+    took_the_port = False
+
+    # Arm the signal handlers BEFORE parking, not after. Installing them after
+    # the bootout (and its 2s settle) left a window in which a SIGTERM killed
+    # the process outright — rc 143, no `finally`, agent permanently booted out.
+    # That window was exactly where a `timeout` or an impatient ^C lands.
+    spawned = []
+    # Arm for EVERY tool, not just launchd-owned ones. This used to sit inside
+    # `if label:`, so for the three tools with no launchd agent a SIGTERM killed
+    # the process outright: the old twin already dead, the cubby half-extracted,
+    # and not one word printed. `timeout` and a `kill` in a wrapper both do this.
+    prev = {}
+
+    def _bail(signum, _frame):
+        raise KeyboardInterrupt(f"signal {signum}")
+
+    for sig in (signal.SIGTERM, signal.SIGHUP):
+        try:
+            prev[sig] = signal.signal(sig, _bail)
+        except (ValueError, OSError):
+            pass
+    rc, interrupted = 1, False
+    try:
+        if label:
+            print(f"  parking launchd agent {label} so it cannot respawn mid-hatch")
+            subprocess.run(["launchctl", "bootout", f"gui/{os.getuid()}/{label}"],
+                           capture_output=True)
+            time.sleep(2)
+        rc = _hatch_locked(a, t, egg, why, log, spawned)
+        return rc
+    except KeyboardInterrupt as exc:
+        interrupted = True
+        rc = 130
+        print(f"\ninterrupted ({exc}) — rolling back", file=sys.stderr)
+        # Be explicit: the port was cleared before the interrupt arrived, so the
+        # previous twin is gone and nothing is serving. Silence here reads as
+        # "nothing happened", which is the opposite of the truth.
+        print(f"  {t['id']} is NOT serving on :{t['port']} — the old twin was "
+              f"stopped before the interrupt. Bring it back with:\n"
+              f"    rapptools hatch {t['id']} --force", file=sys.stderr)
+        return rc
+    finally:
+        for sig, handler in prev.items():
+            try:
+                signal.signal(sig, handler)
+            except (ValueError, OSError):
+                pass
+        # A failed or interrupted hatch leaves its spawned brainstem running as
+        # an orphan holding the port. Restoring launchd on top of that is the
+        # crash loop this block exists to prevent — the previous version keyed
+        # off `rc == 0`, which is not the same question. Reap the child first,
+        # then ask the port who owns it.
+        if rc != 0 or interrupted:
+            for c in spawned:
+                try:
+                    c.terminate()
+                    c.wait(timeout=5)
+                except Exception:
+                    try:
+                        c.kill()
+                    except Exception:
+                        pass
+            if spawned:
+                print("  stopped the brainstem this hatch started", file=sys.stderr)
+                # Wait for the socket to actually drain. Restoring immediately
+                # bootstrapped launchd into "Address already in use" twice
+                # before KeepAlive recovered — self-healing, but it writes real
+                # errors to the user's log for a rollback that supposedly
+                # succeeded.
+                for _ in range(20):
+                    if not subprocess.run(["lsof", "-ti", f"tcp:{t['port']}"],
+                                          capture_output=True,
+                                          text=True).stdout.strip():
+                        break
+                    time.sleep(0.5)
+        took_the_port = (rc == 0) and http_ok(t["port"], timeout=3)
+        if label and http_ok(t["port"], timeout=3) and not took_the_port:
+            print(f"  WARNING: :{t['port']} is still held by something else, so "
+                  f"{label} was NOT restored — it would fail to bind. Free the "
+                  f"port, then:\n    launchctl bootstrap gui/{os.getuid()} "
+                  f"~/Library/LaunchAgents/{label}.plist", file=sys.stderr)
+        elif label and took_the_port:
+            # DO NOT restore. The freshly hatched twin now owns the port, so
+            # bootstrapping a KeepAlive agent that binds the same port puts it
+            # into a silent permanent crash loop ("Address already in use"),
+            # printed to the user as "restored launchd agent" — good news for a
+            # service that is now failing every few seconds.
+            print(f"  launchd agent {label} left parked — the hatched twin owns "
+                  f":{t['port']} now.")
+            print(f"    hand the port back with:  rapptools stop {t['id']} && "
+                  f"launchctl bootstrap gui/{os.getuid()} "
+                  f"~/Library/LaunchAgents/{label}.plist")
+        else:
+            restore_launchd(label)
+
+
+def _hatch_locked(a, t, egg, why, log, spawned):
+    for _ in range(3):
+        pids = subprocess.run(["lsof", "-ti", f"tcp:{t['port']}"],
+                              capture_output=True, text=True).stdout.split()
+        if not pids:
+            break
+        for pid in pids:
+            subprocess.run(["kill", pid], capture_output=True)
+        time.sleep(1.5)
+    if not os.path.isdir(BRAINSTEM):
+        print(f"no brainstem at {BRAINSTEM} — set BRAINSTEM_SRC", file=sys.stderr)
+        return 1
+
+    root, _cache, _remote = cubby_paths(t)
+
+    # A twin accumulates memory in .brainstem_data. `--force` is the documented
+    # way to re-hatch, and it used to rmtree that without a word. Carry it over.
+    state = os.path.join(root, ".brainstem_data")
+    carried = None
+    if os.path.isdir(state) and os.listdir(state):
+        carried = os.path.join(ROOT, f".carry-{t['id']}")
+        shutil.rmtree(carried, ignore_errors=True)
+        os.makedirs(os.path.dirname(carried), exist_ok=True)
+        shutil.copytree(state, carried)
+        # NOTE: today's brainstem hardcodes its data dir next to itself rather
+        # than under the cubby, so this only ever carries files someone put here
+        # by hand. Kept because --force is documented as the way to re-hatch and
+        # silently rmtree-ing a state directory is not something to leave armed.
+        print(f"  preserving {len(os.listdir(state))} item(s) of twin state "
+              f"(anything placed under the cubby by hand)")
+
+    shutil.rmtree(root, ignore_errors=True)
+    os.makedirs(root, exist_ok=True)
+    with zipfile.ZipFile(egg) as z:
+        z.extractall(root)
+    # SPEC §13.3: materialise an isolated twin root
+    shutil.move(os.path.join(root, "twin", "soul.md"), os.path.join(root, "soul.md"))
+    shutil.move(os.path.join(root, "twin", "agents"), os.path.join(root, "agents"))
+    base = os.path.join(BRAINSTEM, "agents", "basic_agent.py")
+    if os.path.exists(base):
+        shutil.copy(base, os.path.join(root, "agents"))
+    os.makedirs(state, exist_ok=True)
+    if carried:
+        for name in os.listdir(carried):
+            src = os.path.join(carried, name)
+            dst = os.path.join(state, name)
+            (shutil.copytree if os.path.isdir(src) else shutil.copy)(src, dst)
+        shutil.rmtree(carried, ignore_errors=True)
+        print("  twin state restored into the new cubby")
+
+    env = dict(os.environ, PORT=str(t["port"]),
+               SOUL_PATH=os.path.join(root, "soul.md"),
+               AGENTS_PATH=os.path.join(root, "agents"))
+    os.makedirs(ROOT, exist_ok=True)
+    logf = open(os.path.join(ROOT, f"{t['id']}.log"), "a")
+    child = subprocess.Popen([VENV, "brainstem.py"], cwd=BRAINSTEM, env=env,
+                             stdout=logf, stderr=subprocess.STDOUT,
+                             start_new_session=True)
+    spawned.append(child)
+    for _ in range(60):
+        time.sleep(0.5)
+        ok, _why = hatched_ok(t, timeout=3)
+        if ok:
+            print(f"{t['id']} hatched on :{t['port']}")
+            print(f"  egg      {why}")
+            print(f"  cubby    {root}")
+            print(f"  drive it rapptools call {t['id']} doctor")
+            return 0
+    for line in log:
+        print(f"  {line}", file=sys.stderr)
+    print(f"{t['id']} did not answer on :{t['port']} — see {ROOT}/{t['id']}.log",
+          file=sys.stderr)
+    return 1
+
+
+def cmd_call(a):
+    """Headless invocation: an action name plus key=value pairs, no prose."""
+    t = tool(a.id)
+    if not t:
+        print(f"no such tool: {a.id}", file=sys.stderr)
+        return 1
+    if a.action not in t["actions"]:
+        print(f"{t['id']} has no action '{a.action}'. Try: {', '.join(t['actions'])}",
+              file=sys.stderr)
+        return 2
+    if not http_ok(t["port"]):
+        print(f"{t['id']} is not running — rapptools hatch {t['id']}", file=sys.stderr)
+        return 1
+    args = {"action": a.action}
+    for kv in (a.arg or []):
+        if "=" not in kv:
+            print(f"bad argument {kv!r}, expected key=value", file=sys.stderr)
+            return 2
+        k, v = kv.split("=", 1)
+        if v.lower() in ("true", "false"):
+            args[k] = v.lower() == "true"
+        elif v.lstrip("-").isdigit():
+            args[k] = int(v)
+        else:
+            args[k] = v
+    # The agent is reached through the same /chat contract a human uses — there is
+    # no second, privileged path. Passing the args as JSON keeps it unambiguous.
+    msg = f"{t['agent']} {json.dumps(args)}"
+    try:
+        d = chat(t["port"], msg, timeout=a.timeout)
+    except Exception as exc:
+        print(f"call failed: {exc}", file=sys.stderr)
+        return 1
+    print((d.get("response") or "").strip())
+    return 0
+
+
+def cmd_ask(a):
+    t = tool(a.id)
+    if not t:
+        print(f"no such tool: {a.id}", file=sys.stderr)
+        return 1
+    if not http_ok(t["port"]):
+        print(f"{t['id']} is not running — rapptools hatch {t['id']}", file=sys.stderr)
+        return 1
+    try:
+        d = chat(t["port"], " ".join(a.text), timeout=a.timeout)
+    except Exception as exc:
+        print(f"ask failed: {exc}", file=sys.stderr)
+        return 1
+    print((d.get("response") or "").strip())
+    return 0
+
+
+def cmd_status(a):
+    c = catalog()
+    print(f"{'TOOL':<13} {'PORT':<6} {'STATE':<12} DETAIL")
+    up = 0
+    for t in c["tools"]:
+        ok, why = hatched_ok(t)
+        up += 1 if ok else 0
+        state = "serving" if ok else ("DEGRADED" if http_ok(t["port"]) else "stopped")
+        print(f"{t['id']:<13} {t['port']:<6} {state:<12} "
+              f"{t['agent'] + ' loaded' if ok else why}")
+    print(f"\n{up}/{len(c['tools'])} serving their agent.")
+    if up < len(c["tools"]):
+        print("DEGRADED means a process is listening on the port but this tool's "
+              "agent is not loaded — port-open is not hatched.")
+    if up:
+        print("All of them answer the same /chat contract, so anything that can POST "
+              "JSON can drive them — no UI required.")
+    return 0
+
+
+def cmd_stop(a):
+    t = tool(a.id)
+    if not t:
+        print(f"no such tool: {a.id}", file=sys.stderr)
+        return 1
+    label = launchd_label(t)
+    if label:
+        subprocess.run(["launchctl", "bootout", f"gui/{os.getuid()}/{label}"],
+                       capture_output=True)
+        print(f"booted out launchd agent {label}")
+        time.sleep(2)
+    p = subprocess.run(["lsof", "-ti", f"tcp:{t['port']}"], capture_output=True, text=True)
+    pids = [x for x in (p.stdout or "").split() if x.isdigit()]
+    for pid in pids:
+        subprocess.run(["kill", pid], capture_output=True)
+    time.sleep(1.5)
+    # tell the truth about whether it actually stopped
+    if http_ok(t["port"], timeout=2):
+        print(f"{t['id']}: something is STILL listening on :{t['port']} — "
+              f"if it is launchd-managed, its plist may need removing")
+        return 1
+    print(f"stopped {t['id']}" + (f" (pid {', '.join(pids)})" if pids else ""))
+    return 0
+
+
+def cmd_hatch_all(a):
+    rc = 0
+    for t in catalog()["tools"]:
+        ns = argparse.Namespace(id=t["id"], force=a.force, source=a.source)
+        rc |= cmd_hatch(ns)
+    print()
+    return cmd_status(a)
+
+
+def main():
+    p = argparse.ArgumentParser(prog="rapptools", description=__doc__.split("\n")[0])
+    sub = p.add_subparsers(dest="cmd")
+
+    s = sub.add_parser("list", help="what is in the catalogue")
+    s.add_argument("-v", "--verbose", action="store_true")
+    s.set_defaults(fn=cmd_list)
+
+    s = sub.add_parser("hatch", help="boot a tool into its own brainstem")
+    s.add_argument("id")
+    s.add_argument("--force", action="store_true")
+    s.add_argument("--source", choices=["auto", "cubby", "batcave", "repo"],
+                   default="auto",
+                   help="where the egg comes from; auto tries cached cubby, then "
+                        "the batcave, then the public repo, then a local checkout")
+    s.set_defaults(fn=cmd_hatch)
+
+    s = sub.add_parser("hatch-all", help="boot every tool in the catalogue")
+    s.add_argument("--force", action="store_true")
+    s.add_argument("--source", choices=["auto", "cubby", "batcave", "repo"], default="auto")
+    s.add_argument("--verbose", action="store_true")
+    s.set_defaults(fn=cmd_hatch_all)
+
+    s = sub.add_parser("call", help="headless: action plus key=value arguments")
+    s.add_argument("id")
+    s.add_argument("action")
+    s.add_argument("arg", nargs="*")
+    s.add_argument("--timeout", type=int, default=300)
+    s.set_defaults(fn=cmd_call)
+
+    s = sub.add_parser("ask", help="natural language to the same agent")
+    s.add_argument("id")
+    s.add_argument("text", nargs="+")
+    s.add_argument("--timeout", type=int, default=300)
+    s.set_defaults(fn=cmd_ask)
+
+    s = sub.add_parser("status", help="the fleet")
+    s.add_argument("--verbose", action="store_true")
+    s.set_defaults(fn=cmd_status)
+
+    s = sub.add_parser("stop", help="stop a tool")
+    s.add_argument("id")
+    s.set_defaults(fn=cmd_stop)
+
+    a = p.parse_args()
+    if not getattr(a, "fn", None):
+        p.print_help()
+        return 0
+    return a.fn(a)
+
+
+if __name__ == "__main__":
+    sys.exit(main())

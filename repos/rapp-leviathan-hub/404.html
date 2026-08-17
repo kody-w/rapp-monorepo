@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAPP Leviathan Hub</title>
+<meta name="description" content="A public registry of portable .leviathan.egg files — hatch multicellular Wrapped-Organism digital beings into any local brainstem.">
+<meta property="og:title" content="RAPP Leviathan Hub">
+<meta property="og:description" content="Portable .leviathan.egg distribution — multicellular digital beings you can hatch into any local brainstem.">
+<style>
+  :root {
+    --bg:        #0a0612;
+    --bg-card:   #14092a;
+    --bg-card-2: #1f1530;
+    --border:    #3a2a08;
+    --border-hover: #6b4d1a;
+    --text:      #e0d8c8;
+    --text-dim:  #9886a6;
+    --text-mute: #6b5a7a;
+    --gold:      #d9a657;
+    --gold-soft: #fff2c4;
+    --purple:    #c9a4ff;
+    --blue:      #aae0fa;
+    --green:     #9bd3ae;
+    --red:       #f9aa8f;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Iowan Old Style", Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  body::before {
+    content: "";
+    position: fixed; inset: 0; z-index: -1;
+    background: radial-gradient(ellipse at top, #1f1530 0%, #0a0612 60%, #040208 100%);
+    pointer-events: none;
+  }
+  .container { max-width: 1080px; margin: 0 auto; padding: 48px 24px; }
+
+  header {
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+  }
+  h1 {
+    font-size: 36px;
+    margin: 0 0 8px;
+    color: var(--gold-soft);
+    letter-spacing: 0.5px;
+  }
+  .tagline {
+    color: var(--text-dim);
+    font-size: 15px;
+    max-width: 680px;
+    line-height: 1.55;
+  }
+  .meta-row {
+    margin-top: 16px;
+    display: flex; flex-wrap: wrap; gap: 16px;
+    font-size: 13px; color: var(--text-mute);
+    font-family: "SF Mono", Menlo, monospace;
+  }
+  .meta-row a {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--border-hover);
+  }
+  .meta-row a:hover { color: var(--gold-soft); }
+
+  h2 {
+    color: var(--gold-soft);
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 40px 0 16px;
+    font-weight: 600;
+  }
+
+  .eggs { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  @media (min-width: 720px) {
+    .eggs { grid-template-columns: 1fr 1fr; }
+  }
+
+  .egg-card {
+    background: linear-gradient(160deg, var(--bg-card) 0%, var(--bg) 70%, var(--bg-card-2) 100%);
+    border: 1.5px solid var(--gold);
+    border-radius: 12px;
+    padding: 22px 24px;
+    box-shadow: 0 0 32px rgba(217,166,87,0.18), inset 0 0 24px rgba(201,164,255,0.10);
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    position: relative;
+  }
+  .egg-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--gold-soft);
+    box-shadow: 0 4px 40px rgba(217,166,87,0.32), inset 0 0 24px rgba(201,164,255,0.18);
+  }
+  .egg-name {
+    font-size: 22px;
+    color: var(--gold-soft);
+    margin: 0 0 4px;
+    font-weight: 700;
+  }
+  .egg-display {
+    font-size: 12px; color: var(--text-mute);
+    font-family: "SF Mono", Menlo, monospace;
+    margin-bottom: 12px;
+  }
+  .egg-desc {
+    font-size: 14px;
+    color: var(--text-dim);
+    margin: 0 0 16px;
+    line-height: 1.5;
+  }
+  .egg-stats {
+    display: flex; flex-wrap: wrap; gap: 14px;
+    margin: 16px 0 14px;
+    padding: 12px 14px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 6px;
+    border: 1px solid #2a1f3a;
+    font-family: "SF Mono", Menlo, monospace;
+    font-size: 12px;
+  }
+  .egg-stats .pair {
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .egg-stats .label { color: var(--text-mute); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
+  .egg-stats .value { color: var(--gold-soft); font-size: 16px; font-weight: 600; }
+  .egg-tags { margin-top: 8px; }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    background: #1a0a26;
+    color: var(--purple);
+    border: 1px solid #3a2548;
+    margin: 2px 4px 2px 0;
+    font-family: "SF Mono", Menlo, monospace;
+  }
+
+  .empty {
+    padding: 40px;
+    text-align: center;
+    color: var(--text-mute);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+  }
+
+  /* DETAIL VIEW */
+  .detail {
+    background: var(--bg-card);
+    border: 1.5px solid var(--gold);
+    border-radius: 12px;
+    padding: 32px;
+    margin-top: 24px;
+  }
+  .back { color: var(--gold); text-decoration: none; font-size: 13px; }
+  .back:hover { color: var(--gold-soft); }
+  .detail h1 { font-size: 30px; margin-top: 12px; }
+  .detail-meta {
+    color: var(--text-mute);
+    font-family: "SF Mono", Menlo, monospace;
+    font-size: 12px;
+    margin-bottom: 24px;
+  }
+  pre.cmd {
+    background: #050310;
+    border: 1px solid #2a1f3a;
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-family: "SF Mono", Menlo, monospace;
+    font-size: 13px;
+    color: var(--gold-soft);
+    line-height: 1.5;
+    position: relative;
+  }
+  pre.cmd code { color: inherit; }
+  .copy-btn {
+    position: absolute; top: 8px; right: 8px;
+    background: rgba(217,166,87,0.15);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "SF Mono", Menlo, monospace;
+  }
+  .copy-btn:hover { background: rgba(217,166,87,0.3); }
+
+  .estate-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    margin: 18px 0;
+  }
+  .estate {
+    background: rgba(0,0,0,0.3);
+    border-radius: 6px;
+    padding: 12px;
+    border: 1px solid;
+    font-size: 13px;
+  }
+  .estate.sanctum  { border-color: var(--gold-soft); color: var(--gold-soft); }
+  .estate.polity   { border-color: var(--blue);      color: var(--blue); }
+  .estate.works    { border-color: var(--red);       color: var(--red); }
+  .estate.press    { border-color: var(--green);     color: var(--green); }
+  .estate.commons  { border-color: var(--purple);    color: var(--purple); }
+  .estate-name { font-weight: 600; font-size: 14px; margin-bottom: 4px; text-transform: capitalize; }
+  .estate-organ { font-size: 11px; opacity: 0.7; font-family: "SF Mono", Menlo, monospace; margin-bottom: 8px; }
+  .estate-count { color: var(--text-mute); font-size: 11px; font-family: "SF Mono", Menlo, monospace; }
+
+  .tree-wrap { margin-top: 24px; }
+  .tree-loading { color: var(--text-mute); font-style: italic; }
+  details {
+    background: rgba(0,0,0,0.25);
+    border-radius: 4px;
+    margin: 4px 0;
+    padding: 4px 0;
+  }
+  details > summary {
+    cursor: pointer;
+    padding: 6px 12px;
+    font-family: "SF Mono", Menlo, monospace;
+    font-size: 13px;
+    list-style: none;
+  }
+  details > summary::-webkit-details-marker { display: none; }
+  details > summary::before { content: "▸ "; color: var(--gold); }
+  details[open] > summary::before { content: "▾ "; }
+  details.estate-tree summary { color: var(--gold-soft); }
+  details.industry-tree summary { color: var(--blue); padding-left: 24px; }
+  details.neighborhood-tree summary { color: var(--green); padding-left: 40px; }
+  .factory {
+    color: var(--purple); padding: 4px 12px 4px 56px;
+    font-family: "SF Mono", Menlo, monospace; font-size: 12px;
+  }
+  .factory .souls { color: var(--text-mute); font-size: 10px; margin-left: 8px; }
+
+  footer {
+    margin-top: 80px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-mute);
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.7;
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+  footer a:hover { color: var(--gold-soft); }
+</style>
+</head>
+<body>
+<div class="container" id="app">
+  <header>
+    <h1>🥚 RAPP Leviathan Hub</h1>
+    <div class="tagline">A public registry of <strong>portable digital beings</strong>, distributed as <code style="color:var(--gold)">.leviathan.egg</code> files. Each egg packs the entire on-disk state of a multicellular Wrapped Organism — every estate, every persona, every soul prompt — into one JSON file you can hatch on any machine.</div>
+    <div class="meta-row">
+      <span>📜 <a href="https://github.com/kody-w/rappter/blob/main/WRAPPED_ORGANISM_SPEC.md">Spec</a></span>
+      <span>🔌 <a href="https://github.com/kody-w/rappterbook/tree/main/scripts/wrapped_organism">Reference impl</a></span>
+      <span>🌱 <a href="https://github.com/kody-w/RAR">Factory in RAR</a></span>
+      <span>🃏 <a href="https://kody-w.github.io/RAR/grail.html#@kody-w/rapp_leviathan_factory">Holo card</a></span>
+      <span>🐙 <a href="https://github.com/kody-w/rapp-leviathan-hub">Repo</a></span>
+    </div>
+  </header>
+
+  <div id="view"></div>
+
+  <footer>
+    Built on the <a href="https://github.com/kody-w/rappter/blob/main/WRAPPED_ORGANISM_SPEC.md">Wrapped Organism pattern</a>: one stateless brainstem, one cell protocol, hierarchical transcript routing, infinite depth.<br>
+    Same engine, same protocol — a 1-cell daemon and a 10,000-cell empire are the same system at different depths.
+  </footer>
+</div>
+
+<script>
+const HUB_BASE = "https://raw.githubusercontent.com/kody-w/rapp-leviathan-hub/main";
+const REPO_URL = "https://github.com/kody-w/rapp-leviathan-hub";
+
+const view = document.getElementById("view");
+let INDEX = null;
+
+function esc(s) {
+  const d = document.createElement("div");
+  d.textContent = String(s ?? "");
+  return d.innerHTML;
+}
+
+async function loadIndex() {
+  if (INDEX) return INDEX;
+  const r = await fetch(HUB_BASE + "/index.json?ts=" + Date.now());
+  INDEX = await r.json();
+  return INDEX;
+}
+
+function renderCatalog() {
+  loadIndex().then(idx => {
+    const cards = idx.eggs.map(e => `
+      <div class="egg-card" onclick="window.location.hash='egg/${esc(e.name)}'">
+        <div class="egg-name">${esc(e.display_name || e.name)}</div>
+        <div class="egg-display">.${esc(e.filename)}</div>
+        <div class="egg-desc">${esc(e.description || "")}</div>
+        <div class="egg-stats">
+          <div class="pair"><span class="label">Cells</span><span class="value">${e.total_cells || "?"}</span></div>
+          <div class="pair"><span class="label">Estates</span><span class="value">${e.stats?.estates ?? "?"}</span></div>
+          <div class="pair"><span class="label">Industries</span><span class="value">${e.stats?.industries ?? "?"}</span></div>
+          <div class="pair"><span class="label">Neighborhoods</span><span class="value">${e.stats?.neighborhoods ?? "?"}</span></div>
+          <div class="pair"><span class="label">Factories</span><span class="value">${e.stats?.factories ?? "?"}</span></div>
+          <div class="pair"><span class="label">Souls</span><span class="value">${e.stats?.souls ?? "?"}</span></div>
+          <div class="pair"><span class="label">Size</span><span class="value">${e.size_kb} KB</span></div>
+        </div>
+        <div class="egg-tags">
+          ${(e.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join("")}
+        </div>
+      </div>
+    `).join("");
+
+    view.innerHTML = `
+      <h2>Available eggs (${idx.eggs.length})</h2>
+      <div class="eggs">${cards}</div>
+
+      <h2 style="margin-top:48px">Quick start</h2>
+      <p style="color:var(--text-dim)">Drop the hub agent into your brainstem, then hatch any egg:</p>
+      <pre class="cmd"><button class="copy-btn" onclick="copyCmd(this)">copy</button><code>curl -sSfL ${HUB_BASE}/leviathan_hub_agent.py \\
+  &gt; ~/.brainstem/src/rapp_brainstem/agents/leviathan_hub_agent.py
+
+curl -X POST http://localhost:7071/chat -H 'Content-Type: application/json' \\
+  -d '{"user_input": "Use LeviathanHub with action=hatch, egg=kody"}'</code></pre>
+
+      <h2 style="margin-top:48px">The pipeline</h2>
+      <pre class="cmd"><code>intent  ──→  @kody-w/rapp_leviathan_factory  ──→  inert tree on disk
+                                                          │
+                                                          ▼
+            @kody-w/wrap_leviathan          ──→  live cells in brainstem
+                                                          │
+                                                          ▼
+            @kody-w/leviathan_hub  (freeze) ──→  portable .leviathan.egg
+                                                          │
+                                                          ▼ shipped anywhere
+            @kody-w/leviathan_hub  (hatch)  ──→  live cells on NEW brainstem</code></pre>
+    `;
+  }).catch(e => {
+    view.innerHTML = `<div class="empty">Failed to load index.json: ${esc(e.message)}</div>`;
+  });
+}
+
+async function renderEgg(name) {
+  view.innerHTML = `<a class="back" href="#">← all eggs</a><div class="detail tree-loading">Loading ${esc(name)}…</div>`;
+  try {
+    const idx = await loadIndex();
+    const entry = idx.eggs.find(e => e.name === name);
+    if (!entry) {
+      view.innerHTML = `<a class="back" href="#">← all eggs</a><div class="empty">Egg "${esc(name)}" not found in the hub.</div>`;
+      return;
+    }
+
+    // Fetch the egg itself to render the tree
+    const eggResp = await fetch(HUB_BASE + "/eggs/" + entry.filename + "?ts=" + Date.now());
+    const egg = await eggResp.json();
+
+    const estateColors = {
+      sanctum:  {organ: "soul",  q: "Who am I?"},
+      polity:   {organ: "will",  q: "What shall I do?"},
+      works:    {organ: "hands", q: "What shall I make?"},
+      press:    {organ: "eyes",  q: "What is true?"},
+      commons:  {organ: "mouth", q: "Who shall I speak to?"},
+    };
+
+    const estateCards = Object.entries(egg.estates).map(([slug, e]) => {
+      const meta = estateColors[slug] || {organ: "?", q: "?"};
+      const nInd = (e.estate_json.industries || []).length;
+      const nNbh = (e.estate_json.industries || []).reduce((s,i) => s + (i.neighborhoods||[]).length, 0);
+      const nFac = (e.estate_json.industries || []).reduce((s,i) =>
+        s + (i.neighborhoods||[]).reduce((s2,n) => s2 + (n.factories||[]).length, 0), 0);
+      const nSouls = Object.keys(e.souls || {}).length;
+      return `
+        <div class="estate ${esc(slug)}">
+          <div class="estate-name">${esc(slug)}</div>
+          <div class="estate-organ">${meta.organ} · "${meta.q}"</div>
+          <div class="estate-count">${nInd} ind · ${nNbh} nbh · ${nFac} fac · ${nSouls} souls</div>
+        </div>
+      `;
+    }).join("");
+
+    const treeHTML = Object.entries(egg.estates).map(([slug, e]) => {
+      const industries = (e.estate_json.industries || []).map(ind => {
+        const nbhs = (ind.neighborhoods || []).map(nbh => {
+          const facs = (nbh.factories || []).map(fac => {
+            const souls = (fac.souls || []).join(", ");
+            return `<div class="factory">📍 ${esc(fac.id)} ${souls ? `<span class="souls">(${esc(souls)})</span>` : ""}</div>`;
+          }).join("");
+          return `<details class="neighborhood-tree"><summary>${esc(nbh.id)} <span style="color:var(--text-mute)">(${(nbh.factories||[]).length} factories)</span></summary>${facs}</details>`;
+        }).join("");
+        return `<details class="industry-tree"><summary>${esc(ind.id)} <span style="color:var(--text-mute)">(${(ind.neighborhoods||[]).length} neighborhoods)</span></summary>${nbhs}</details>`;
+      }).join("");
+      return `<details class="estate-tree"><summary>${esc(slug)} estate <span style="color:var(--text-mute)">(${(e.estate_json.industries||[]).length} industries)</span></summary>${industries}</details>`;
+    }).join("");
+
+    view.innerHTML = `
+      <a class="back" href="#">← all eggs</a>
+      <div class="detail">
+        <h1>${esc(entry.display_name || entry.name)}</h1>
+        <div class="detail-meta">
+          rappid: <strong>${esc(egg.rappid || "?")}</strong> · frozen ${esc(egg._meta?.frozen_at || "?")}<br>
+          ${entry.stats.estates} estates · ${entry.stats.industries} industries · ${entry.stats.neighborhoods} neighborhoods · ${entry.stats.factories} factories · ${entry.stats.souls} souls · ${entry.size_kb} KB
+        </div>
+
+        <p style="color:var(--text-dim);max-width:680px">${esc(entry.description || "")}</p>
+
+        <h2 style="margin-top:32px">The five organs</h2>
+        <div class="estate-grid">${estateCards}</div>
+
+        <h2 style="margin-top:32px">Hatch this egg</h2>
+        <pre class="cmd"><button class="copy-btn" onclick="copyCmd(this)">copy</button><code>curl -sSfL ${HUB_BASE}/leviathan_hub_agent.py \\
+  &gt; ~/.brainstem/src/rapp_brainstem/agents/leviathan_hub_agent.py
+
+curl -X POST http://localhost:7071/chat -H 'Content-Type: application/json' \\
+  -d '{"user_input": "Use LeviathanHub with action=hatch, egg=${esc(entry.name)}"}'
+
+# then talk to it:
+curl -X POST http://localhost:7071/chat -H 'Content-Type: application/json' \\
+  -d '{"user_input": "Use Ask${esc(entry.name.charAt(0).toUpperCase() + entry.name.slice(1))} with query=\\"Hello, who are you?\\""}'</code></pre>
+
+        <h2 style="margin-top:32px">Direct downloads</h2>
+        <pre class="cmd"><button class="copy-btn" onclick="copyCmd(this)">copy</button><code># grab just the egg:
+curl -O ${HUB_BASE}/eggs/${esc(entry.filename)}</code></pre>
+
+        <h2 style="margin-top:32px">Browse the tree</h2>
+        <div class="tree-wrap">${treeHTML}</div>
+      </div>
+    `;
+  } catch (e) {
+    view.innerHTML = `<a class="back" href="#">← all eggs</a><div class="empty">Failed to load egg: ${esc(e.message)}</div>`;
+  }
+}
+
+function copyCmd(btn) {
+  const text = btn.parentElement.querySelector("code").innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = "copied ✓";
+    setTimeout(() => { btn.textContent = orig; }, 1500);
+  });
+}
+
+function route() {
+  const h = decodeURIComponent(location.hash.slice(1));
+  if (h.startsWith("egg/")) {
+    renderEgg(h.slice(4));
+  } else {
+    renderCatalog();
+  }
+}
+
+window.addEventListener("hashchange", route);
+route();
+</script>
+</body>
+</html>

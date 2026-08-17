@@ -1,0 +1,8 @@
+src/ocr
+src/annotate
+src/clip
+src/context
+*.o
+.DS_Store
+__pycache__/
+*.pyc

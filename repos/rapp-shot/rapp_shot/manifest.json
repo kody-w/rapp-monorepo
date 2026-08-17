@@ -1,0 +1,32 @@
+{
+  "schema": "rapp-application/1.0",
+  "id": "rapp_shot",
+  "name": "RAPP Shot",
+  "version": "1.2.0",
+  "publisher": "@kody-w",
+  "manifest_name": "@kody-w/rapp-shot-singleton",
+  "runtime": "twin",
+  "summary": "Capture, annotate and redact screenshots entirely on-device. Finds credentials in the pixels with Apple's Vision OCR and paints them out opaquely BEFORE the image is shared. Redaction is a solid fill, never a blur, because blur and pixelation are reversible often enough to have leaked real credentials.",
+  "tagline": "Capture, annotate and redact screenshots entirely on-device.",
+  "category": "productivity",
+  "tags": [
+    "rapplication",
+    "screenshot",
+    "ocr",
+    "redaction",
+    "privacy",
+    "local-first",
+    "has-ui"
+  ],
+  "agent": "singleton/rapp_shot_agent.py",
+  "ui": "ui/index.html",
+  "license": "MIT",
+  "homepage": "https://github.com/kody-w/rapp-shot",
+  "quality_tier": "community",
+  "twin": {
+    "soul": "twin/soul.md",
+    "agents": "twin/agents",
+    "port": 7093
+  },
+  "egg_note": "The copy of this manifest inside the .egg describes a hatch cartridge: it carries twin/ and state/ only. `agent` and `ui` are bundle-relative paths that live in the source repo, not in the egg \u2014 the twin loads twin/agents/, not singleton/."
+}

@@ -1,0 +1,159 @@
+{
+  "schema": "rapp-vision-channel/1.0",
+  "id": "rnr",
+  "name": "RNR — RAR Nightly Review",
+  "handle": "@kody-w",
+  "tagline": "What landed on the front page of the agentic web, and what broke getting there.",
+  "avatar": "▚",
+  "links": [
+    {
+      "label": "RAR — the registry",
+      "url": "https://kody-w.github.io/RAR/"
+    },
+    {
+      "label": "Source repo",
+      "url": "https://github.com/kody-w/rappvision-rnr"
+    },
+    {
+      "label": "RAPP Vision",
+      "url": "https://kody-w.github.io/rapp-vision/"
+    }
+  ],
+  "_note": "Sources and thumbs resolve RELATIVE TO THIS FILE'S URL, so this channel plays from any host or mirror. Adding an episode means one entry in this array plus `python3 build.py` — the landing page, per-episode share and embed pages, and the RSS feed are all generated from here. On numbers: every figure on screen is checked against the live repo before an episode ships. A figure that later turns out to have been WRONG when it rendered gets a recut with the correction stated in the commit — episode one was recut for exactly that reason. A figure that was right and has simply moved on since is left alone; episodes are dated.",
+  "videos": [
+    {
+      "id": "front-page",
+      "title": "RAR got a front page — and the only thing that lied all night was a green checkmark",
+      "description": "Two asks, one message apart: make RAR the front page of the agentic web, and do not break anything with ANY future change. They pull against each other, so the second one went first.\n\nA broken agent URL is invisible to RAR. Those paths live inside other people's brainstems, scripts and products, and a static file returns no telemetry — nobody here would ever learn it broke. So permanence stopped being a guideline and became a gate: an append-only ledger of 319 published paths, checked in CI, proven to fail on rename, on delete, and on a manifest rename.\n\nThen the surfaces. A front door with no GitHub in it, because the loudest line in the meeting transcript was that business users do not live in GitHub — driven headlessly against the deployed page with github.com blocked at the route layer, and it never needed it. Nine static endpoints off raw GitHub with no key and no server. Audience segmentation that had a real bug in BOTH directions. And 76 aggregated bookmarks toasted into agents that actually take a subject and return a procedure.\n\nThen the part worth staying awake for. The live API served 278 agents at version 1.0.0 while the registry held 279 at 2.0.0, and every workflow reported green the whole time. The rebuild was gated on `event_name == 'push'`, so the one button a maintainer reaches for when the API looks stale rebuilt it and then threw it away. Same shape as episode one: the check was fine, it just could not fail.\n\nThe front page itself now ranks 279 entries, each row carrying the numbers it was scored on. Its first cut said 355 — because all 76 crawled entries were already hosted agents, so it listed every one of them twice. That correction is in the episode, because a ranking you cannot audit is just an opinion with a number on it.",
+      "published": "2026-08-02",
+      "duration": 92.0,
+      "width": 1920,
+      "height": 1080,
+      "orientation": "landscape",
+      "tags": [
+        "registry",
+        "ranking",
+        "aggregation",
+        "static-api",
+        "silent-failure",
+        "github-pages"
+      ],
+      "thumb": "thumbs/front-page.jpg",
+      "sources": [
+        {
+          "src": "media/front-page.webm",
+          "type": "video/webm; codecs=\"vp9\""
+        },
+        {
+          "src": "media/front-page.mp4",
+          "type": "video/mp4; codecs=\"avc1.640028\""
+        }
+      ],
+      "chapters": [
+        {
+          "t": 0,
+          "label": "Two asks that pull against each other"
+        },
+        {
+          "t": 8,
+          "label": "A broken agent URL is invisible to RAR"
+        },
+        {
+          "t": 18,
+          "label": "Business users don't live in GitHub"
+        },
+        {
+          "t": 27,
+          "label": "Nine endpoints, no key, no server"
+        },
+        {
+          "t": 36,
+          "label": "Audience filtering was wrong both ways"
+        },
+        {
+          "t": 45,
+          "label": "76 bookmarks became callable agents"
+        },
+        {
+          "t": 54,
+          "label": "278 served, 279 held, everything green"
+        },
+        {
+          "t": 65,
+          "label": "The front page — 279 entries, ranked"
+        },
+        {
+          "t": 75,
+          "label": "Verified live at record time"
+        },
+        {
+          "t": 83,
+          "label": "Waiting on you — the same decision"
+        }
+      ]
+    },
+    {
+      "id": "nightly-revival",
+      "title": "The release couldn't be cut — and the health check had been dead for 82 days",
+      "description": "A release was requested. Pre-flighting the gates locally first turned up two failures that had nothing to do with the release, and following them led somewhere worse: the nightly health check had failed 84 times in a row, last green on 11 May.\n\nThe check was broken. Not the thing it checks.\n\nGated agents record _stub_sha256. The integrity audit read _sha256, which is absent on those agents, then formatted its own error message with the missing key and died on a KeyError before it could print why. A second scanner was still banning exec() — a rule the registry had deliberately retired in favour of tagging it as a declared capability.\n\nThen the check itself turned out to be incapable of failing. It ran the suite as `pytest … | tee log`, so the pipeline exited with tee's status, which is always zero. The entire suite could be red and nightly would still report green. Its registry rebuild ran on a shallow checkout, so all 279 agents came back stamped with a single commit and today's date — provenance, fabricated.\n\nTwelve defects fixed, 14 hermetic tests added to CI, and nightly went green for the first time since May.\n\nOne decision is left, and it is not a technical one.",
+      "published": "2026-08-01",
+      "duration": 65.0,
+      "width": 1920,
+      "height": 1080,
+      "orientation": "landscape",
+      "tags": [
+        "ci",
+        "release-engineering",
+        "silent-failure",
+        "github-actions",
+        "registry",
+        "post-mortem"
+      ],
+      "thumb": "thumbs/nightly-revival.jpg",
+      "sources": [
+        {
+          "src": "media/nightly-revival.webm",
+          "type": "video/webm; codecs=\"vp9\""
+        },
+        {
+          "src": "media/nightly-revival.mp4",
+          "type": "video/mp4; codecs=\"avc1.640028\""
+        }
+      ],
+      "chapters": [
+        {
+          "t": 0,
+          "label": "The ask: cut a new release"
+        },
+        {
+          "t": 6,
+          "label": "Pre-flight — two gates fail"
+        },
+        {
+          "t": 13,
+          "label": "84 consecutive failures, last green 11 May"
+        },
+        {
+          "t": 21,
+          "label": "The check was broken, not the thing it checks"
+        },
+        {
+          "t": 29,
+          "label": "The path that runs the moment you say go"
+        },
+        {
+          "t": 38,
+          "label": "A health check that could not fail"
+        },
+        {
+          "t": 47,
+          "label": "Fixed and verified — nightly green"
+        },
+        {
+          "t": 56,
+          "label": "Waiting on you — one decision"
+        }
+      ]
+    }
+  ]
+}
