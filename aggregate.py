@@ -42,6 +42,7 @@ import subprocess
 import sys
 import tempfile
 from datetime import datetime, timezone
+import re
 from pathlib import Path
 
 import ip_gate
@@ -56,6 +57,14 @@ OWNER = os.environ.get("RAPP_OWNER", "kody-w")
 # MEMBERSHIP — what counts as "a RAPP repo". Deliberately a name pattern, so
 # a new repo joins the estate by being named like one; nothing to update here.
 MEMBER = r"(?i)^(rapp|rappter|openrappter|RAR$|twin|brainstem|wildhaven)"
+
+# Named exclusions, applied after MEMBER. A repo can match the estate's naming
+# convention and still not belong in a single "here is everything RAPP"
+# download: staging repos that rehearse deliveries into a third party's layout
+# carry that third party's packaged artifacts, and "one clone, everything" is a
+# very different distribution posture for those than a staging repo is. They
+# stay public where they are; they do not get amplified from here.
+NOT_MEMBERS = re.compile(r"(?i)aibast")
 
 CLONE_TIMEOUT = int(os.environ.get("RAPP_CLONE_TIMEOUT", "600"))
 SKIP_DIRS = {".git", "node_modules", "__pycache__", ".venv", "venv", ".next"}
@@ -87,7 +96,6 @@ def self_name() -> str:
 
 
 def members(owner: str) -> list[str]:
-    import re
     r = run(["gh", "repo", "list", owner, "--limit", "1000", "--json",
              "name,visibility,isArchived"], timeout=180)
     if r.returncode != 0:
@@ -97,7 +105,8 @@ def members(owner: str) -> list[str]:
     return sorted(
         x["name"] for x in json.loads(r.stdout)
         if x["visibility"] == "PUBLIC" and not x["isArchived"]
-        and pat.search(x["name"]) and x["name"] != me
+        and pat.search(x["name"]) and not NOT_MEMBERS.search(x["name"])
+        and x["name"] != me
     )
 
 

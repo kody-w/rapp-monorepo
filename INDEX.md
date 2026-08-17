@@ -1,7 +1,7 @@
 # What is in here
 
-193 public RAPP repositories, captured at HEAD in a single pass on 2026-08-17T09:03:16+00:00.
-31,947 files, 597 MB.
+192 public RAPP repositories, captured at HEAD in a single pass on 2026-08-17T09:03:16+00:00.
+31,698 files, 594 MB.
 
 Every row is the exact commit this snapshot took. Nothing here is a guess about what upstream contains — re-clone any row's repo at its sha to get the full history behind it.
 
@@ -117,7 +117,6 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rapp-second-brain`](repos/rapp-second-brain) | `c71de71f` | 2026-07-18 | 357 | 0.4 |
 | [`rapp-secondbrain`](repos/rapp-secondbrain) | `7846dfdd` | 2026-08-01 | 13 | 0.2 |
 | [`rapp-sentinel`](repos/rapp-sentinel) | `ac1ad525` | 2026-08-16 | 89 | 0.8 |
-| [`rapp-shape-aibast`](repos/rapp-shape-aibast) | `e8a66b05` | 2026-07-24 | 249 | 3.7 |
 | [`rapp-shot`](repos/rapp-shot) | `1f2f5ee7` | 2026-07-26 | 23 | 0.1 |
 | [`rapp-skill`](repos/rapp-skill) | `ff36d917` | 2026-08-10 | 27 | 0.2 |
 | [`rapp-skills`](repos/rapp-skills) | `7657c753` | 2026-08-16 | 496 | 10.6 |
@@ -281,10 +280,10 @@ Skipped at the 2.0MB per-file limit. Named, not silently dropped — clone the u
 
 These files exist upstream and are deliberately NOT here. They are withheld whole rather than rewritten, so that everything this mirror does carry is byte-identical to its source. The rule is named; the matched text is not, because quoting a finding republishes it.
 
+- `openrappter/python/tests/test_flight_recorder.py` — contains something shaped like a credential
 - `RAPP/cave/rapplications/rapp-installer/kernel/.env.example` — path matches an always-withhold shape (**/.env.*)
 - `RAPP/rapp_brainstem/.env.example` — path matches an always-withhold shape (**/.env.*)
 - `RAPP/tests/test_rapp1_owner_actions.py` — contains something shaped like a credential
-- `openrappter/python/tests/test_flight_recorder.py` — contains something shaped like a credential
 - `rapp-alpha/rapp_brainstem/.env.example` — path matches an always-withhold shape (**/.env.*)
 - `rapp-beta/rapp_brainstem/.env.example` — path matches an always-withhold shape (**/.env.*)
 - `rapp-brainstem-beta/brainstem/.env.example` — path matches an always-withhold shape (**/.env.*)
@@ -296,7 +295,6 @@ These files exist upstream and are deliberately NOT here. They are withheld whol
 - `rapp-keyring/conformance.py` — contains something shaped like a credential
 - `rapp-nightly/rapp_brainstem/.env.example` — path matches an always-withhold shape (**/.env.*)
 - `rapp-sentinel/prove_diagnose.py` — contains something shaped like a credential
-- `rapp-shape-aibast/rapp_brainstem/.env.example` — path matches an always-withhold shape (**/.env.*)
 - `rapp-stack-cubby/cubbies/kody-w/agents/rapp_stack_cubby_agent.py` — contains something shaped like a credential
 - `rapp-stack-cubby/cubbies/kody-w/rapplications/rapp-stack/singleton/rapp_stack_cubby_agent.py` — contains something shaped like a credential
 - `rapp-stack-cubby/src/rapp_stack_cubby/protocols/crypto.py` — contains something shaped like a credential

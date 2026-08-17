@@ -1204,21 +1204,6 @@
       ]
     },
     {
-      "repo": "rapp-shape-aibast",
-      "commit": "e8a66b055d20ec27141ea7d4e6095c6f338d6a8b",
-      "committed_at": "2026-07-24T22:34:22-04:00",
-      "captured_at": "2026-08-17T09:01:10+00:00",
-      "files": 249,
-      "bytes": 3866046,
-      "skipped_large": [],
-      "withheld": [
-        {
-          "file": "rapp_brainstem/.env.example",
-          "reason": "path matches an always-withhold shape (**/.env.*)"
-        }
-      ]
-    },
-    {
       "repo": "rapp-shot",
       "commit": "1f2f5ee718b499e8b87e9315264fb0d9a7c3f30c",
       "committed_at": "2026-07-26T04:19:30-04:00",
