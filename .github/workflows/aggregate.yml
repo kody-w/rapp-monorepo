@@ -1,0 +1,62 @@
+name: Aggregate the estate
+
+# Daily, plus on demand. The snapshot's whole value is that its pieces were
+# taken together, so this never runs partially: either the pass completes and
+# the commit lands, or nothing changes and the previous snapshot stands.
+on:
+  schedule:
+    - cron: "17 8 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: aggregate
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  aggregate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Refuse without the gate rules
+        env:
+          RAPP_GATE_RULES: ${{ secrets.GATE_RULES }}
+        # The gate fails closed on its own, but say so here too: a missing
+        # secret should read as a deliberate stop in the log, not as a
+        # traceback someone has to interpret at 2am.
+        # Set with: gh secret set GATE_RULES -R kody-w/rapp-monorepo
+        run: |
+          if [ -z "${RAPP_GATE_RULES}" ]; then
+            echo "::error::GATE_RULES secret is not set. Refusing to aggregate"
+            echo "::error::unscreened content into a public mirror."
+            exit 1
+          fi
+          python3 -c "import ip_gate; ip_gate.assert_configured(); print('gate configured')"
+
+      - name: Capture every public RAPP repo
+        env:
+          RAPP_GATE_RULES: ${{ secrets.GATE_RULES }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 aggregate.py
+
+      - name: Commit the snapshot
+        run: |
+          git config user.name  "rapp-monorepo"
+          git config user.email "noreply@github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "estate unchanged since the last snapshot"
+            exit 0
+          fi
+          CAPTURED=$(python3 -c "import json;d=json.load(open('MANIFEST.json'));print(len(d['repos']))")
+          MISSED=$(python3 -c "import json;d=json.load(open('MANIFEST.json'));print(len(d['not_captured']))")
+          git commit -m "Snapshot: ${CAPTURED} repos captured, ${MISSED} not captured"
+          git push
