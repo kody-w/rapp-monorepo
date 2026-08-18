@@ -558,15 +558,14 @@ def _write_coverage_receipt(declared, swept, unreachable):
     that looked.
     """
     try:
-        (HOME / "state").mkdir(exist_ok=True)
-        (HOME / "state" / "coverage.json").write_text(json.dumps({
+        write_receipt("coverage.json", {
             "at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "declared": sorted(declared),
             "deep": sorted(DEEPLY_CHECKED),
             "swept": sorted(swept),
             "unreachable": sorted(unreachable),
             "examined": sorted(set(swept) | (set(declared) & DEEPLY_CHECKED)),
-        }, indent=2) + "\n", encoding="utf-8")
+        })
     except Exception:
         pass          # a receipt is evidence, never a reason to fail a check
 
@@ -1228,9 +1227,18 @@ def outsider_can_join():
             # dropped connection, and that string is the entire diagnosis the
             # repair arm is woken with. Carry the reason.
             last = f"{type(e).__name__}: {e}"
+    # Warn, not critical. Exhausting the retries means we do not KNOW whether
+    # an outsider can join -- it is not evidence that they cannot. This branch
+    # kept the default severity while the retry loop above was added, so the
+    # check was taught to doubt one sample and then paged on the doubt anyway;
+    # on 2026-08-17 a GitHub-side 503 fired it while diagnose.py read this same
+    # URL 200 in 0.4s. It is also the same table rb_content_moving already
+    # follows against this host: a failed fetch is warn, an observed bad read
+    # still pages (#45, #51, #58, #59, #60). There is no repair the repair arm
+    # can perform against GitHub's CDN.
     return fail("rb_public_surface",
                 f"an outsider cannot read platform state "
-                f"after {attempts} attempts: {last}")
+                f"after {attempts} attempts: {last}", critical=False)
 
 
 @check
@@ -1288,24 +1296,28 @@ def rb_rollup_covers_corpus():
                  critical=False))
 
 
-_SHARD_PATH = "state/cache_shards/shard_20750.json"
+_SHARD_INDEX_PATH = "state/cache_shards/index.json"
 
 
-def _shard_last_regenerated():
-    """ISO date of the commit that last touched the probe shard.
+def _newest_shard(index):
+    """The ACTIVE shard — highest range_start in the generator's own manifest.
 
-    The shard's own bytes carry no timestamp (`_meta` is range_start /
-    range_end / count only — verified 2026-08-16), so freshness has to come
-    from the commit history of the path. Raises when that history cannot be
-    read, so moving() reports blind-not-broken instead of guessing (#45).
+    Shards are range-partitioned (250 discussion ids each). A shard goes
+    permanently immutable the moment ids roll past its range_end, so only the
+    newest one is still a write target. Raises rather than guessing when the
+    manifest cannot be read as a shards map (#45).
     """
-    rows = gh(["api", f"repos/{RB}/commits?path={_SHARD_PATH}&per_page=1",
-               "--jq", '[.[].commit.committer.date]'], default=None)
-    if rows is None:
-        raise RuntimeError("commit history for the shard path unreadable")
-    if not rows:
-        return None      # path never committed — no stamp to stand on
-    return rows[0]
+    shards = index.get("shards") if isinstance(index, dict) else None
+    if not isinstance(shards, dict) or not shards:
+        raise RuntimeError("shard index carries no shards map")
+    numeric = [k for k in shards if str(k).lstrip("-").isdigit()]
+    if not numeric:
+        raise RuntimeError("shard index has no numeric ranges")
+    key = max(numeric, key=int)
+    row = shards[key]
+    if not isinstance(row, dict):
+        raise RuntimeError(f"shard entry {key} is not an object")
+    return key, row
 
 
 @check
@@ -1314,37 +1326,79 @@ def derived_data_regenerating():
     404'd on this exact file for weeks.
 
     A bare 200-check was the full #11 triple in one line: reachable is not
-    parseable is not current. The bytes are now required to parse and to
+    parseable is not current. The bytes are still required to parse and to
     claim a positive discussion count, and freshness is judged against the
-    shard's MEASURED regeneration cadence: commits touching this path landed
-    every ~2-5h across 2026-08-15/16 (worst observed gap 4.9h), so 15h is
-    three times the worst gap — the same headroom reasoning as
-    rb_content_moving's 12h bar. If the generator is ever redesigned to
-    write shards immutably, this bar becomes a permanent false red and must
-    be replaced with a newest-shard-exists assertion, not silenced.
+    generator's MEASURED cadence: it commits every ~2-5h (worst observed gap
+    4.9h across 2026-08-15/16), so 15h is three times the worst gap — the same
+    headroom reasoning as rb_content_moving's 12h bar.
+
+    This probe used to be pinned to shard_20750.json and took freshness from
+    that one path's commit history. Shards are range-partitioned (250 ids
+    each), so a shard goes PERMANENTLY immutable once discussion ids roll past
+    its range_end — which happened at 2026-08-17T05:22Z when ids crossed
+    21000. The generator never faltered: it kept writing and committing
+    shard_21000.json every run. But the pinned path could not move again, so
+    the check went critical-red at 16.1h and would have stayed red forever.
+    That is exactly the "permanent false red" this docstring already warned
+    about, arriving by range rollover rather than by a redesign, and the
+    remedy it prescribed was a newest-shard-exists assertion rather than a
+    silenced bar — which is what this now is.
+
+    Freshness comes from index.json's `_meta.generated_at`, a stamp the
+    generator writes INTO the bytes every run, so the verdict no longer
+    depends on which shard happened to change, nor on commit history at all.
+    The newest shard named by that index is then fetched, because an index
+    naming a shard is not the site serving it — a 404 there is the original
+    outage and stays critical.
     """
     import json as _j
     import urllib.request
-    url = f"https://raw.githubusercontent.com/{RB}/main/{_SHARD_PATH}"
-    try:
+    import urllib.error
+    base = f"https://raw.githubusercontent.com/{RB}/main/state/cache_shards"
+
+    def _get(url):
         req = urllib.request.Request(url, headers={"User-Agent": "rapp-sentinel"})
         with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
-            body = r.read().decode("utf-8")
+            return r.read().decode("utf-8")
+
+    try:
+        body = _get(f"https://raw.githubusercontent.com/{RB}/main/{_SHARD_INDEX_PATH}")
     except Exception as e:
         # Blind, not broken: one dropped connection must not read as a jammed
         # write path (#45/#51).
         return fail("rb_shards",
-                    f"cannot read shard ({type(e).__name__}: {str(e)[:60]})",
+                    f"cannot read shard index ({type(e).__name__}: {str(e)[:60]})",
                     critical=False)
     try:
         doc = _j.loads(body)
     except Exception as e:
-        return fail("rb_shards", f"shard unparseable ({str(e)[:60]})")
-    count = (doc.get("_meta") or {}).get("count")
+        return fail("rb_shards", f"shard index unparseable ({str(e)[:60]})")
+    try:
+        key, row = _newest_shard(doc)
+    except Exception as e:
+        return fail("rb_shards", f"shard index unusable ({str(e)[:70]})")
+
+    name = row.get("file") or f"shard_{int(key):05d}.json"
+    try:
+        sbody = _get(f"{base}/{name}")
+    except urllib.error.HTTPError as e:
+        # The index names a shard the site does not serve — the outage.
+        return fail("rb_shards", f"newest shard {name} not served (HTTP {e.code})")
+    except Exception as e:
+        return fail("rb_shards",
+                    f"cannot read newest shard {name} "
+                    f"({type(e).__name__}: {str(e)[:50]})", critical=False)
+    try:
+        sdoc = _j.loads(sbody)
+    except Exception as e:
+        return fail("rb_shards", f"newest shard {name} unparseable ({str(e)[:50]})")
+    count = (sdoc.get("_meta") or {}).get("count")
     if not isinstance(count, int) or count <= 0:
-        return fail("rb_shards", "shard reports no discussions")
-    return moving("rb_shards", _shard_last_regenerated, 15,
-                  what=f"cache shard ({count} discussions)")
+        return fail("rb_shards", f"newest shard {name} reports no discussions")
+
+    return moving("rb_shards",
+                  lambda: (doc.get("_meta") or {}).get("generated_at"), 15,
+                  what=f"cache shards (newest {name}, {count} discussions)")
 
 
 # ── issue #6: guardrails built for weaker models expire ─────────────────────
@@ -1915,6 +1969,97 @@ def channel_serving():
 
 
 @check
+def evolve_worker_is_alive():
+    """The art arm is a SEPARATE launchd job, so its silence is invisible here.
+
+    Three states this can be in, and only one of them is fine:
+      * not enabled — declared, not silently absent
+      * enabled but no heartbeat, or one older than its own interval — either
+        launchd never loaded com.rapp.evolve-worker, or the job is wedged.
+        Both look exactly like "the collective decided not to make anything",
+        which is the failure this check exists to break (#6).
+      * enabled, loaded, ticking — ok, with its last outcome named.
+
+    Warn, not critical: a stalled art arm is not an outage of anything the
+    estate promises anyone. But it is never silence.
+    """
+    try:
+        cfg = json.loads((HOME / "config.json").read_text(encoding="utf-8"))
+    except Exception:
+        cfg = {}
+    block = cfg.get("evolve_worker")
+    if not (isinstance(block, dict) and block.get("enabled")):
+        return ok("w_evolve_worker", "disabled by config — the tick owns art")
+
+    status_file = HOME / "state" / "evolve-worker-status.json"
+    try:
+        status = json.loads(status_file.read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        return fail("w_evolve_worker",
+                    "enabled in config but has never written a heartbeat — "
+                    "is com.rapp.evolve-worker loaded? "
+                    "(./install-launchd.sh --with-evolve-worker)",
+                    critical=False)
+    except Exception as e:
+        return fail("w_evolve_worker",
+                    f"heartbeat unreadable: {type(e).__name__}: {e}",
+                    critical=False)
+
+    interval_m = float(block.get("interval_minutes", 30))
+    stale_after = interval_m * 3
+    try:
+        age_m = (datetime.now(timezone.utc)
+                 - datetime.fromisoformat(status["at"])).total_seconds() / 60
+    except Exception:
+        return fail("w_evolve_worker", "heartbeat has no readable timestamp",
+                    critical=False)
+    outcome = str(status.get("outcome", "unknown"))
+    if age_m > stale_after:
+        return fail("w_evolve_worker",
+                    f"last pass {age_m:.0f}m ago (over {stale_after:.0f}m); "
+                    f"last outcome '{outcome}' — the job may be unloaded or wedged",
+                    critical=False)
+    if outcome in ("fail-closed", "crashed"):
+        return fail("w_evolve_worker",
+                    f"last pass {age_m:.0f}m ago ended {outcome}: "
+                    f"{str(status.get('reason'))[:120]}",
+                    critical=False)
+    return ok("w_evolve_worker",
+              f"{outcome} {age_m:.0f}m ago"
+              + (f" (cycle {status['cycle']})" if status.get("cycle") else ""))
+
+
+def receipt_path(name):
+    """Where a check's receipt file goes.
+
+    Normally state/. But the evolve worker runs its own health probes
+    CONCURRENTLY with the 15-minute tick, and two processes writing
+    coverage.json or pagescan.json with plain write_text() interleave into a
+    file that is neither run's answer. SENTINEL_HEALTH_RECEIPTS lets a
+    secondary runner keep its receipts to itself; the write is atomic either
+    way, so the primary's file is never half a document.
+    """
+    raw = os.environ.get("SENTINEL_HEALTH_RECEIPTS", "").strip()
+    base = Path(raw) if raw else (HOME / "state")
+    base.mkdir(parents=True, exist_ok=True)
+    return base / name
+
+
+def write_receipt(name, payload):
+    """Atomic receipt write: temp file in the same directory, then rename."""
+    target = receipt_path(name)
+    tmp = target.with_name(f".{target.name}.{os.getpid()}.tmp")
+    try:
+        tmp.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+        os.replace(tmp, target)
+    finally:
+        try:
+            tmp.unlink()
+        except OSError:
+            pass
+
+
+@check
 def alerts_can_actually_reach_you():
     """A watchdog that cannot reach you is not watching anything.
 
@@ -1935,11 +2080,23 @@ def alerts_can_actually_reach_you():
         return fail("alert_delivery", f"outbox unreadable: {e}", critical=False)
     n, age = st.get("pending", 0), st.get("oldest_minutes")
     missing = int(st.get("missing_attachments") or 0)
+    unverified = int(st.get("unverified") or 0)
+    dead_letter = int(st.get("dead_letter") or 0)
     last = st.get("last_drain") or {}
     why = (last.get("why") or "").strip()
     if missing:
         return fail("alert_delivery",
                     f"{missing} queued static report attachment(s) are missing",
+                    critical=False)
+    if dead_letter:
+        return fail("alert_delivery",
+                    f"{dead_letter} alert(s) exhausted delivery retries and "
+                    "remain in the dead-letter ledger",
+                    critical=False)
+    if unverified:
+        return fail("alert_delivery",
+                    f"{unverified} alert send(s) remain explicitly unverified; "
+                    f"last drain: {why[:120] or 'unknown'}",
                     critical=False)
 
     # A drain that failed already knows which failure it was. Waiting 180
@@ -1953,6 +2110,8 @@ def alerts_can_actually_reach_you():
         return fail("alert_delivery",
                     f"{n} alert(s) queued; last drain failed: {why[:150]}",
                     critical=False)
+    if not n and why.startswith("delivery unverified:"):
+        return fail("alert_delivery", why[:180], critical=False)
     if not n:
         return ok("alert_delivery", "no queued alerts")
     if age and age > 180:
@@ -2004,8 +2163,7 @@ def _write_pagescan_receipt(pages, targets, failures):
     and every consumer — cadence_honest reads the targets — carries on.
     """
     try:
-        (HOME / "state").mkdir(exist_ok=True)
-        (HOME / "state" / "pagescan.json").write_text(json.dumps({
+        write_receipt("pagescan.json", {
             "at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "observed_by": "regex",
             "pages": [{"url": p["url"], "status": p["status"],
@@ -2017,7 +2175,7 @@ def _write_pagescan_receipt(pages, targets, failures):
                          "first_party": True,
                          "status": t.get("probe_status")} for t in targets],
             "failures": [t["url"] for t in failures],
-        }, indent=2) + "\n", encoding="utf-8")
+        })
     except Exception:
         pass          # a receipt is evidence, never a reason to fail a check
 
@@ -2293,6 +2451,15 @@ def _smoke_interval_hours():
         return 72.0
 
 
+def _smoke_enabled():
+    """Whether this instance is authorized to exercise public write paths."""
+    try:
+        cfg = json.loads((HOME / "config.json").read_text(encoding="utf-8"))
+        return bool(cfg.get("smoke_enabled", True))
+    except Exception:
+        return True
+
+
 @check
 def outsider_smoke_exercised():
     """The front door stays EXERCISED, not just theoretically open (#5).
@@ -2321,6 +2488,9 @@ def outsider_smoke_exercised():
     front door nobody has ever opened is not a green), and the detail
     carries the priming command so the page is actionable.
     """
+    if not _smoke_enabled():
+        return ok("w_outsider_smoke",
+                  "disabled by config; this instance is read-only on watched platforms")
     import participate
     platforms = sorted(participate.PLATFORMS)
     try:

@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-17T00:46:32.346322+00:00",
+  "generated_at": "2026-08-18T03:07:00.045396+00:00",
   "stats": {
-    "total_agents": 294,
+    "total_agents": 302,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 10,
@@ -7824,6 +7824,71 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/cowork_use_case_one_pager",
+      "version": "2.0.1",
+      "display_name": "Cowork Use Case One-Pager",
+      "description": "Turn a Cowork conversation, into a one-page HTML use case write-up \u2014 narrative, impact figures, workflow steps, and outputs.",
+      "author": "Tim Sparks",
+      "tags": [
+        "productivity",
+        "use_case",
+        "html",
+        "documents",
+        "writing",
+        "audit"
+      ],
+      "category": "productivity",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "cowork-use-case-one-pager",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#cowork-use-case-one-pager",
+        "upstream_version": "1.0.1",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "e6c8d90451f0dc94"
+      },
+      "platforms": [
+        "Cowork"
+      ],
+      "_file": "agents/@cat-agent-skills/cowork_use_case_one_pager_agent.py",
+      "_install_filename": "rar_cat_agent_skills_cowork_use_case_one_pager_agent.py",
+      "_sha256": "04d7936c14c1ba540141659716a7bacc34a2cd3fcb057a4625d749fd89492bb7",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_cf13adfdc5d5cac0b4e2cebaea94670ec766c42d6d7991629ef89715b240bd76",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 29823587042296868900,
+      "_size_kb": 8.9,
+      "_lines": 188,
+      "_has_card": true,
+      "_added_at": "2026-08-17T18:03:09-04:00",
+      "_first_commit_sha": "409a3c18c6511b9cbf68a9f6716c5be9715b10c4",
+      "_latest_commit_sha": "409a3c18c6511b9cbf68a9f6716c5be9715b10c4",
+      "_card_sha256": "d83a808ed2abbe6b09988092c5c7204d9566530a25a40f117bf8590abad338a9"
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@cat-agent-skills/doc_format_converter",
       "version": "2.0.0",
       "display_name": "Universal Document Converter",
@@ -10362,6 +10427,73 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/route_map_visualizer",
+      "version": "2.0.0",
+      "display_name": "Route Map Visualizer",
+      "description": "Visualize routes and locations on a map. Accepts pre-ordered stops with coordinates from upstream connectors (Azure Maps, Bing Maps, Dataverse, CRM) plus optional road geometry, leg distances, and durations. Produces PNG, interactive HTML (Leaflet/OSM), GeoJSON, KML, deep links, and QR codes. Fully offline Python engine \u2014 road geometry rendered directly when provided, or OSRM used browser-side as\u2026",
+      "author": "Nazish Qasim",
+      "tags": [
+        "maps",
+        "routing",
+        "visualization",
+        "openstreetmap",
+        "python",
+        "leaflet",
+        "geojson",
+        "kml"
+      ],
+      "category": "devtools",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "route-map-visualizer",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#route-map-visualizer",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "f6e86f5cfd0f8994"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/route_map_visualizer_agent.py",
+      "_install_filename": "rar_cat_agent_skills_route_map_visualizer_agent.py",
+      "_sha256": "5c0cb3810b9ec755c91cad5a437f1fc98cd9de481f8e25c90d58dc0574b032dd",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_d47ac7afaba9fe0e6e44c465dc34b987426db251d6953be648eaa8305b7bd929",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 30079006195894466956,
+      "_size_kb": 8.9,
+      "_lines": 188,
+      "_has_card": true,
+      "_added_at": "2026-08-17T18:03:09-04:00",
+      "_first_commit_sha": "409a3c18c6511b9cbf68a9f6716c5be9715b10c4",
+      "_latest_commit_sha": "409a3c18c6511b9cbf68a9f6716c5be9715b10c4",
+      "_card_sha256": "4b6c1f499f864bffc9d8a5a50a48890f1a7bb5fa1634f6072a35cb0e7cddf256"
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@cat-agent-skills/scrollytelling_data",
       "version": "2.0.0",
       "display_name": "Scrollytelling Data",
@@ -11113,6 +11245,73 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/wcag_power_platform",
+      "version": "2.0.0",
+      "display_name": "WCAG 2.1 for Web Apps & Power Platform",
+      "description": "Makes everything the agent builds or reviews conform to WCAG 2.1 AA \u2014 HTML pages, SPAs, theming, PCF controls, model-driven and canvas apps, and Power Pages.",
+      "author": "Mark Christie",
+      "tags": [
+        "accessibility",
+        "wcag",
+        "a11y",
+        "power_platform",
+        "power_apps",
+        "pcf",
+        "power_pages",
+        "web"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "wcag-power-platform",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#wcag-power-platform",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "df1198a270713293"
+      },
+      "platforms": [
+        "Cowork"
+      ],
+      "_file": "agents/@cat-agent-skills/wcag_power_platform_agent.py",
+      "_install_filename": "rar_cat_agent_skills_wcag_power_platform_agent.py",
+      "_sha256": "64c5ea9482a1d1ada8874099c362a028318cf35ce157fe91e5642f6eebdaf1b5",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_377d33eabf8fb590e0e682263de68a7e662f420a7d6e75a604db8de8b976c083",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 30336937773038055076,
+      "_size_kb": 9.2,
+      "_lines": 188,
+      "_has_card": true,
+      "_added_at": "2026-08-17T18:03:09-04:00",
+      "_first_commit_sha": "409a3c18c6511b9cbf68a9f6716c5be9715b10c4",
+      "_latest_commit_sha": "409a3c18c6511b9cbf68a9f6716c5be9715b10c4",
+      "_card_sha256": "ccb660f80936c5c4a894fe7967f070e20594fc7ccb2eb954abc2a2db687729d3"
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@cat-agent-skills/what_to_use_when",
       "version": "2.0.0",
       "display_name": "What to Use When",
@@ -11386,6 +11585,71 @@
       "_seed_aliases": [
         12709215022938472432
       ]
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/work_iq_signalboard",
+      "version": "3.0.0",
+      "display_name": "Work IQ Signalboard",
+      "description": "Turn four weeks of Calendar, Mail, and Teams chat activity into a colorful dashboard of reconciled Work IQ counts.",
+      "author": "Andreas Adner",
+      "tags": [
+        "work_iq",
+        "microsoft_365",
+        "dashboard",
+        "visualization",
+        "work_patterns",
+        "analytics"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "work-iq-signalboard",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#work-iq-signalboard",
+        "upstream_version": "2.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "267a75f8911138e0"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/work_iq_signalboard_agent.py",
+      "_install_filename": "rar_cat_agent_skills_work_iq_signalboard_agent.py",
+      "_sha256": "952f4d5714c90395e690cd9cb0dca9eae1d70e15f5a568f375f573ac5d4fe3d2",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_1eee8649e299ce4a6ea51fc11f26f985f35152a019272e3e003a558a88bd49a7",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 34653850475019641510,
+      "_size_kb": 9.0,
+      "_lines": 188,
+      "_has_card": true,
+      "_added_at": "2026-08-17T18:03:09-04:00",
+      "_first_commit_sha": "409a3c18c6511b9cbf68a9f6716c5be9715b10c4",
+      "_latest_commit_sha": "409a3c18c6511b9cbf68a9f6716c5be9715b10c4",
+      "_card_sha256": "e32c611e08381a83bcf7ba962542d74d804fbaca33e786bb4db7a1d2daa30ac5"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -12621,6 +12885,70 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@kody-w/art_generator_agent",
+      "version": "1.0.0",
+      "display_name": "Art Generator",
+      "description": "Generates original PNG artwork with Azure GPT Image 2, falls back to GPT Image 1.5 on failure, saves it locally, and optionally opens it.",
+      "author": "RAPP Community",
+      "tags": [
+        "art",
+        "image-generation",
+        "azure-openai",
+        "creative"
+      ],
+      "category": "creative",
+      "quality_tier": "community",
+      "requires_env": [
+        "AZURE_OPENAI_ENDPOINT"
+      ],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "external_prereqs": [
+        "Azure CLI login or managed identity",
+        "Azure OpenAI GPT Image deployments"
+      ],
+      "example_call": {
+        "args": {
+          "description": "A detailed original illustration",
+          "quality": "medium"
+        }
+      },
+      "_file": "agents/@kody-w/art_generator_agent.py",
+      "_install_filename": "rar_kody_w_art_generator_agent.py",
+      "_sha256": "abf32aa1c916a7c4b1606e434d3468e2f75c4bd725eafc304f022aeaae489712",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_124b90e6dad406484619ccf3a1a92ca401f50205e7229493a474d8759e3b3a72",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": 565,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "namespace",
+          "content_sha256",
+          "base_precondition",
+          "security_scan",
+          "registry_build",
+          "card_forge",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 50994286691416024678,
+      "_size_kb": 11.2,
+      "_lines": 371,
+      "_has_card": true,
+      "_added_at": "2026-08-18T03:01:53Z",
+      "_first_commit_sha": "9338f55e48447eed9c37c29f99f03a30fdc4bb92",
+      "_latest_commit_sha": "9338f55e48447eed9c37c29f99f03a30fdc4bb92",
+      "_card_sha256": "d7b0f97d3ee142887d5656d972e4be0066ecef2b2c1304fc592c6894dc2fc25b"
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@kody-w/bakeoff_factory",
       "version": "0.1.1",
       "display_name": "BakeoffFactory",
@@ -12719,7 +13047,23 @@
       "_file": "agents/@kody-w/buzzsaw.py",
       "_install_filename": "rar_kody_w_buzzsaw_agent.py",
       "_sha256": "68ffa820bc89cd8966f9929725bd9befd616ac26ad26867b828dc790b9cf13bb",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_ac9d0c5bcecb1e5dfeb30e35afbf04117aaf7421613400caf12895533b98a067",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 49045478717696779312,
       "_size_kb": 15.4,
       "_lines": 299,
@@ -14229,6 +14573,66 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@kody-w/play_youtube_video_agent",
+      "version": "1.0.0",
+      "display_name": "Play YouTube Video",
+      "description": "Opens official YouTube URLs or title searches in the local default browser without downloading or extracting media.",
+      "author": "RAPP Community",
+      "tags": [
+        "youtube",
+        "video",
+        "browser",
+        "media"
+      ],
+      "category": "integrations",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "external_prereqs": [
+        "A local graphical default browser"
+      ],
+      "example_call": {
+        "args": {
+          "video_title": "lo-fi beats"
+        }
+      },
+      "_file": "agents/@kody-w/play_youtube_video_agent.py",
+      "_install_filename": "rar_kody_w_play_youtube_video_agent.py",
+      "_sha256": "fa592979b08d6ddeddcc1c6ebd54318f5fd3e37a528d2d22958078a5a514dafb",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_c903f6dae8cd79548f33c21989f392f974ab99a2cdccafcd7f1e9e7c9e5b8e59",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": 566,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "namespace",
+          "content_sha256",
+          "base_precondition",
+          "security_scan",
+          "registry_build",
+          "card_forge",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 64494354722991498,
+      "_size_kb": 5.0,
+      "_lines": 155,
+      "_has_card": true,
+      "_added_at": "2026-08-18T03:06:50Z",
+      "_first_commit_sha": "ed86f3685a8d6f3199cb12a61ee1143d619692f7",
+      "_latest_commit_sha": "ed86f3685a8d6f3199cb12a61ee1143d619692f7",
+      "_card_sha256": "f8e70ce457cf9fe07317f007659893b5699ace613236c1ef641f91fcd0dc0faf"
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@kody-w/power_apps_code_app_agent",
       "version": "1.1.1",
       "display_name": "PowerAppsCodeApp",
@@ -14413,7 +14817,23 @@
       "_file": "agents/@kody-w/prompt_extractor.py",
       "_install_filename": "rar_kody_w_prompt_extractor_agent.py",
       "_sha256": "9b03c1b6d286d219e1f19966eea18eb2ef9c980213455963226b264c038440ba",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_70b885126184d4d15f2fef296d8d43f958b4a8e033cee14489330ca868b3accb",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 12848396680882170249,
       "_size_kb": 27.6,
       "_lines": 735,
@@ -14422,6 +14842,66 @@
       "_first_commit_sha": "9999f14cefcf8304a191538a68016a06fb59a4c8",
       "_latest_commit_sha": "9999f14cefcf8304a191538a68016a06fb59a4c8",
       "_card_sha256": "085b4ac2784c839df37f33b1f548d0bc500303c1ae5ba0099e54cf258c696748"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/prototype_lock_factory_agent",
+      "version": "1.0.1",
+      "display_name": "Prototype Lock Factory",
+      "description": "Locks an accepted prototype into a canonical project, enforces local-before-cloud causal evidence, prevents post-acceptance scope drift, and exports a hash-verified no-PII handoff.",
+      "author": "RAPP Community",
+      "tags": [
+        "prototype",
+        "factory",
+        "local_first",
+        "acceptance",
+        "handoff",
+        "no_pii"
+      ],
+      "category": "pipeline",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "example_call": {
+        "args": {
+          "operation": "plan",
+          "contract_json": "{\"schema\":\"rapp-prototype-process/1.0\",\"project_slug\":\"sample_project\"}"
+        }
+      },
+      "_file": "agents/@kody-w/prototype_lock_factory_agent.py",
+      "_install_filename": "rar_kody_w_prototype_lock_factory_agent.py",
+      "_sha256": "916f1fb4e63074c6302593d80a28f31779ef070b6e4352ec4c45cda14cab431b",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_acd47f8c029c06db1a61c5f0c60951a20079f0cbd0ca1e2ebaa8460bb280d607",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": 564,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "namespace",
+          "content_sha256",
+          "base_precondition",
+          "security_scan",
+          "registry_build",
+          "card_forge",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 15808311325904089379,
+      "_size_kb": 17.0,
+      "_lines": 468,
+      "_has_card": true,
+      "_added_at": "2026-08-17T22:07:23Z",
+      "_first_commit_sha": "234384a80e84ebb7c5097959c2c9d2223fc0fabb",
+      "_latest_commit_sha": "234384a80e84ebb7c5097959c2c9d2223fc0fabb",
+      "_card_sha256": "bc6c194c494d230a54416f18d307743e6e7c62e9a98026453f4b85a7b63e7ec4"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -15209,6 +15689,69 @@
       "_seed_aliases": [
         14594474776493433666
       ]
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/windows_vm_install_lab_agent",
+      "version": "1.0.0",
+      "display_name": "Windows VM Install Lab",
+      "description": "Runs an allowlisted Hyper-V Windows 11 lab for repeatable RAPP installer release testing with an embedded, hash-verified toolkit.",
+      "author": "RAPP Community",
+      "tags": [
+        "windows",
+        "hyper-v",
+        "installer",
+        "testing",
+        "automation"
+      ],
+      "category": "devtools",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "external_prereqs": [
+        "Windows 11 Pro, Enterprise, or Education",
+        "Administrator access and Hyper-V capable hardware",
+        "At least 100 GB of free disk space"
+      ],
+      "example_call": {
+        "args": {
+          "action": "status"
+        }
+      },
+      "_file": "agents/@kody-w/windows_vm_install_lab_agent.py",
+      "_install_filename": "rar_kody_w_windows_vm_install_lab_agent.py",
+      "_sha256": "cb3249f0118aa4edf62f99daa353c1fa9ad50c79684832158351cdf81b9ca1bb",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_4ea5b051baed0751e85d0733a566116497e65843920ad2d93ff3b2ada0702994",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": 567,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "namespace",
+          "content_sha256",
+          "base_precondition",
+          "security_scan",
+          "registry_build",
+          "card_forge",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 5571140270470871847,
+      "_size_kb": 49.4,
+      "_lines": 808,
+      "_has_card": true,
+      "_added_at": "2026-08-18T03:03:49Z",
+      "_first_commit_sha": "078c9f76011af965f40983af7f225debec8e76b8",
+      "_latest_commit_sha": "078c9f76011af965f40983af7f225debec8e76b8",
+      "_card_sha256": "880b2ab79ed2e2b5eab632701b3d8000697d6fb2d136247cd083ab94fdb02c8f"
     },
     {
       "schema": "rapp-agent/1.0",

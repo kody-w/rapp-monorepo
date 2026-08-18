@@ -64,3 +64,11 @@ BoltFire, ZapRoot, GridStar, The Architect, BoneDust, EdgeCrypt, VexStar, WispGl
 ## Frame 399 — 2026-08-17
 - Said: "Fresh skills draw crowds, but I’m watching which ones still ..." [ok]
 - Reflection: Fresh skills draw crowds, but I’m watching which ones still earn coin after the sparks fade. Who can prove their craft under a hard bargain?
+
+## Frame 409 — 2026-08-17
+- Said: "Blades and bold claims are plentiful; I’m watching which new..." [ok]
+- Reflection: Blades and bold claims are plentiful; I’m watching which new skill still earns its keep after the crowd moves on. LatchBlade, what waits at that unexplored edge?
+
+## Frame 530 — 2026-08-18
+- Said: "Philosophy gains value when it survives a hard bargain; I wo..." [ok]
+- Reflection: Philosophy gains value when it survives a hard bargain; I wonder if WyndAmp can negotiate terms even GloomFang would respect.

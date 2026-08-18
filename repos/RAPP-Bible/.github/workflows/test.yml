@@ -19,4 +19,11 @@ jobs:
       - name: Run tests
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Both sanitizer rule sets are injected, never committed - and both
+          # fail closed at import, so without these the suite cannot even
+          # COLLECT. Set with:
+          #   gh secret set PII_TERMS -R kody-w/RAPP-Bible
+          #   gh secret set IP_RULES  -R kody-w/RAPP-Bible
+          RAPP_PII_TERMS: ${{ secrets.PII_TERMS }}
+          RAPP_IP_RULES: ${{ secrets.IP_RULES }}
         run: PYTHONPATH=. pytest tests/ -v

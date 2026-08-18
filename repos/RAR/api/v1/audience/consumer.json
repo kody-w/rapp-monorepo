@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "consumer",
   "description": "Agents appropriate for an individual audience. Enterprise-only agents are excluded.",
-  "generated": "2026-08-17T00:46:32Z",
-  "count": 188,
+  "generated": "2026-08-18T03:07:01Z",
+  "count": 196,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/consumer.json",
   "agents": [
     {
@@ -1802,6 +1802,41 @@
       }
     },
     {
+      "id": "cat-agent-skills__cowork_use_case_one_pager",
+      "name": "@cat-agent-skills/cowork_use_case_one_pager",
+      "display_name": "Cowork Use Case One-Pager",
+      "description": "Turn a Cowork conversation, into a one-page HTML use case write-up — narrative, impact figures, workflow steps, and outputs.",
+      "version": "2.0.1",
+      "publisher": "@cat-agent-skills",
+      "author": "Tim Sparks",
+      "category": "productivity",
+      "tags": [
+        "productivity",
+        "use_case",
+        "html",
+        "documents",
+        "writing",
+        "audit"
+      ],
+      "quality_tier": "frontier",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@cat-agent-skills/cowork_use_case_one_pager_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/cowork_use_case_one_pager_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/cowork_use_case_one_pager_agent.py",
+        "sha256": "04d7936c14c1ba540141659716a7bacc34a2cd3fcb057a4625d749fd89492bb7"
+      },
+      "stats": {
+        "lines": 188,
+        "size_kb": 8.9,
+        "added_at": "2026-08-17T18:03:09-04:00"
+      }
+    },
+    {
       "id": "cat-agent-skills__doc_format_converter",
       "name": "@cat-agent-skills/doc_format_converter",
       "display_name": "Universal Document Converter",
@@ -2771,6 +2806,43 @@
       }
     },
     {
+      "id": "cat-agent-skills__route_map_visualizer",
+      "name": "@cat-agent-skills/route_map_visualizer",
+      "display_name": "Route Map Visualizer",
+      "description": "Visualize routes and locations on a map. Accepts pre-ordered stops with coordinates from upstream connectors (Azure Maps, Bing Maps, Dataverse, CRM) plus optional road geometry, leg distances, and durations. Produces PNG, interactive HTML (Leaflet/OSM), GeoJSON, KML, deep links, and QR codes. Fully offline Python engine — road geometry rendered directly when provided, or OSRM used browser-side as…",
+      "version": "2.0.0",
+      "publisher": "@cat-agent-skills",
+      "author": "Nazish Qasim",
+      "category": "devtools",
+      "tags": [
+        "maps",
+        "routing",
+        "visualization",
+        "openstreetmap",
+        "python",
+        "leaflet",
+        "geojson",
+        "kml"
+      ],
+      "quality_tier": "frontier",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@cat-agent-skills/route_map_visualizer_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/route_map_visualizer_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/route_map_visualizer_agent.py",
+        "sha256": "5c0cb3810b9ec755c91cad5a437f1fc98cd9de481f8e25c90d58dc0574b032dd"
+      },
+      "stats": {
+        "lines": 188,
+        "size_kb": 8.9,
+        "added_at": "2026-08-17T18:03:09-04:00"
+      }
+    },
+    {
       "id": "cat-agent-skills__scrollytelling_data",
       "name": "@cat-agent-skills/scrollytelling_data",
       "display_name": "Scrollytelling Data",
@@ -3048,6 +3120,43 @@
       }
     },
     {
+      "id": "cat-agent-skills__wcag_power_platform",
+      "name": "@cat-agent-skills/wcag_power_platform",
+      "display_name": "WCAG 2.1 for Web Apps & Power Platform",
+      "description": "Makes everything the agent builds or reviews conform to WCAG 2.1 AA — HTML pages, SPAs, theming, PCF controls, model-driven and canvas apps, and Power Pages.",
+      "version": "2.0.0",
+      "publisher": "@cat-agent-skills",
+      "author": "Mark Christie",
+      "category": "general",
+      "tags": [
+        "accessibility",
+        "wcag",
+        "a11y",
+        "power_platform",
+        "power_apps",
+        "pcf",
+        "power_pages",
+        "web"
+      ],
+      "quality_tier": "frontier",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@cat-agent-skills/wcag_power_platform_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/wcag_power_platform_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/wcag_power_platform_agent.py",
+        "sha256": "64c5ea9482a1d1ada8874099c362a028318cf35ce157fe91e5642f6eebdaf1b5"
+      },
+      "stats": {
+        "lines": 188,
+        "size_kb": 9.2,
+        "added_at": "2026-08-17T18:03:09-04:00"
+      }
+    },
+    {
       "id": "cat-agent-skills__what_to_use_when",
       "name": "@cat-agent-skills/what_to_use_when",
       "display_name": "What to Use When",
@@ -3186,6 +3295,41 @@
         "lines": 188,
         "size_kb": 8.8,
         "added_at": "2026-07-31T22:43:16-04:00"
+      }
+    },
+    {
+      "id": "cat-agent-skills__work_iq_signalboard",
+      "name": "@cat-agent-skills/work_iq_signalboard",
+      "display_name": "Work IQ Signalboard",
+      "description": "Turn four weeks of Calendar, Mail, and Teams chat activity into a colorful dashboard of reconciled Work IQ counts.",
+      "version": "3.0.0",
+      "publisher": "@cat-agent-skills",
+      "author": "Andreas Adner",
+      "category": "general",
+      "tags": [
+        "work_iq",
+        "microsoft_365",
+        "dashboard",
+        "visualization",
+        "work_patterns",
+        "analytics"
+      ],
+      "quality_tier": "frontier",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@cat-agent-skills/work_iq_signalboard_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/work_iq_signalboard_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/work_iq_signalboard_agent.py",
+        "sha256": "952f4d5714c90395e690cd9cb0dca9eae1d70e15f5a568f375f573ac5d4fe3d2"
+      },
+      "stats": {
+        "lines": 188,
+        "size_kb": 9.0,
+        "added_at": "2026-08-17T18:03:09-04:00"
       }
     },
     {
@@ -3932,6 +4076,41 @@
         "lines": 227,
         "size_kb": 13.3,
         "added_at": "2026-06-20T19:39:59-04:00"
+      }
+    },
+    {
+      "id": "kody-w__art_generator_agent",
+      "name": "@kody-w/art_generator_agent",
+      "display_name": "Art Generator",
+      "description": "Generates original PNG artwork with Azure GPT Image 2, falls back to GPT Image 1.5 on failure, saves it locally, and optionally opens it.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "RAPP Community",
+      "category": "creative",
+      "tags": [
+        "art",
+        "image-generation",
+        "azure-openai",
+        "creative"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [
+        "AZURE_OPENAI_ENDPOINT"
+      ],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/art_generator_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/art_generator_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/art_generator_agent.py",
+        "sha256": "abf32aa1c916a7c4b1606e434d3468e2f75c4bd725eafc304f022aeaae489712"
+      },
+      "stats": {
+        "lines": 371,
+        "size_kb": 11.2,
+        "added_at": "2026-08-18T03:01:53Z"
       }
     },
     {
@@ -5032,6 +5211,39 @@
       }
     },
     {
+      "id": "kody-w__play_youtube_video_agent",
+      "name": "@kody-w/play_youtube_video_agent",
+      "display_name": "Play YouTube Video",
+      "description": "Opens official YouTube URLs or title searches in the local default browser without downloading or extracting media.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "RAPP Community",
+      "category": "integrations",
+      "tags": [
+        "youtube",
+        "video",
+        "browser",
+        "media"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/play_youtube_video_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/play_youtube_video_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/play_youtube_video_agent.py",
+        "sha256": "fa592979b08d6ddeddcc1c6ebd54318f5fd3e37a528d2d22958078a5a514dafb"
+      },
+      "stats": {
+        "lines": 155,
+        "size_kb": 5.0,
+        "added_at": "2026-08-18T03:06:50Z"
+      }
+    },
+    {
       "id": "kody-w__power_apps_code_app_agent",
       "name": "@kody-w/power_apps_code_app_agent",
       "display_name": "PowerAppsCodeApp",
@@ -5138,6 +5350,41 @@
         "lines": 735,
         "size_kb": 27.6,
         "added_at": "2026-08-03T09:47:21-04:00"
+      }
+    },
+    {
+      "id": "kody-w__prototype_lock_factory_agent",
+      "name": "@kody-w/prototype_lock_factory_agent",
+      "display_name": "Prototype Lock Factory",
+      "description": "Locks an accepted prototype into a canonical project, enforces local-before-cloud causal evidence, prevents post-acceptance scope drift, and exports a hash-verified no-PII handoff.",
+      "version": "1.0.1",
+      "publisher": "@kody-w",
+      "author": "RAPP Community",
+      "category": "pipeline",
+      "tags": [
+        "prototype",
+        "factory",
+        "local_first",
+        "acceptance",
+        "handoff",
+        "no_pii"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/prototype_lock_factory_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/prototype_lock_factory_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/prototype_lock_factory_agent.py",
+        "sha256": "916f1fb4e63074c6302593d80a28f31779ef070b6e4352ec4c45cda14cab431b"
+      },
+      "stats": {
+        "lines": 468,
+        "size_kb": 17.0,
+        "added_at": "2026-08-17T22:07:23Z"
       }
     },
     {
@@ -5628,6 +5875,40 @@
         "lines": 355,
         "size_kb": 14.7,
         "added_at": "2026-05-03T14:51:56-04:00"
+      }
+    },
+    {
+      "id": "kody-w__windows_vm_install_lab_agent",
+      "name": "@kody-w/windows_vm_install_lab_agent",
+      "display_name": "Windows VM Install Lab",
+      "description": "Runs an allowlisted Hyper-V Windows 11 lab for repeatable RAPP installer release testing with an embedded, hash-verified toolkit.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "RAPP Community",
+      "category": "devtools",
+      "tags": [
+        "windows",
+        "hyper-v",
+        "installer",
+        "testing",
+        "automation"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/windows_vm_install_lab_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/windows_vm_install_lab_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/windows_vm_install_lab_agent.py",
+        "sha256": "cb3249f0118aa4edf62f99daa353c1fa9ad50c79684832158351cdf81b9ca1bb"
+      },
+      "stats": {
+        "lines": 808,
+        "size_kb": 49.4,
+        "added_at": "2026-08-18T03:03:49Z"
       }
     },
     {

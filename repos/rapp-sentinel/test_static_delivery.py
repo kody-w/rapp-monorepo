@@ -1,15 +1,18 @@
 import http.client
+import io
 import json
 import os
 import plistlib
 import re
 import socketserver
+import sqlite3
 import subprocess
 import sys
 import tempfile
 import threading
 import unittest
 import zipfile
+from contextlib import redirect_stdout
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from unittest import mock
@@ -25,6 +28,8 @@ import retro
 import sentinel
 import serve
 import standup
+import verify_outbox
+import watcher_outbox
 
 
 class PortableReportTests(unittest.TestCase):
@@ -268,18 +273,22 @@ class OutboxAttachmentTests(unittest.TestCase):
         root = Path(self.temp.name)
         self.old = (
             outbox.QUEUE, outbox.SENT, outbox.LAST_DRAIN, outbox.REPORTS,
-            outbox.LOCK, outbox.DRAIN_LOCK)
+            outbox.LOCK, outbox.DRAIN_LOCK, outbox.UNVERIFIED,
+            outbox.DEAD_LETTER)
         outbox.QUEUE = root / "outbox.jsonl"
         outbox.SENT = root / "sent.jsonl"
         outbox.LAST_DRAIN = root / "last.json"
         outbox.REPORTS = root / "reports"
         outbox.LOCK = root / "outbox.lock"
         outbox.DRAIN_LOCK = root / "outbox-drain.lock"
+        outbox.UNVERIFIED = root / "outbox-unverified.jsonl"
+        outbox.DEAD_LETTER = root / "outbox-dead-letter.jsonl"
         outbox.REPORTS.mkdir()
 
     def tearDown(self):
         (outbox.QUEUE, outbox.SENT, outbox.LAST_DRAIN, outbox.REPORTS,
-         outbox.LOCK, outbox.DRAIN_LOCK) = self.old
+         outbox.LOCK, outbox.DRAIN_LOCK, outbox.UNVERIFIED,
+         outbox.DEAD_LETTER) = self.old
         self.temp.cleanup()
 
     def test_drain_passes_attachment_and_cleans_generated_snapshot(self):
@@ -374,6 +383,14 @@ class OutboxAttachmentTests(unittest.TestCase):
             script.index('tell application "Messages"', script.index("repeat with")),
         )
 
+    def test_unreadable_delivery_ledger_never_becomes_success(self):
+        completed = subprocess.CompletedProcess([], 0, stdout="", stderr="")
+        with mock.patch.object(outbox, "_delivered_count", return_value=None), \
+                mock.patch.object(outbox.subprocess, "run", return_value=completed):
+            ok, reason = outbox._send("alert", "recipient")
+        self.assertFalse(ok)
+        self.assertIn("unverifiable", reason)
+
     def test_drain_keeps_enqueue_from_another_process(self):
         outbox.enqueue("first", "recipient")
         cmd = "\n".join([
@@ -406,6 +423,293 @@ class OutboxAttachmentTests(unittest.TestCase):
         self.assertEqual((1, 1, ""), (sent, kept, why))
         pending = outbox._pending()
         self.assertEqual(["late"], [m["text"] for m in pending])
+
+
+class WatcherOutboxTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        root = Path(self.temp.name)
+        self.old = (
+            outbox.QUEUE, outbox.SENT, outbox.LAST_DRAIN, outbox.REPORTS,
+            outbox.LOCK, outbox.DRAIN_LOCK, outbox.UNVERIFIED,
+            outbox.DEAD_LETTER, watcher_outbox.CLAIMS,
+            watcher_outbox.ATTEMPTS)
+        outbox.QUEUE = root / "outbox.jsonl"
+        outbox.SENT = root / "sent.jsonl"
+        outbox.LAST_DRAIN = root / "last.json"
+        outbox.REPORTS = root / "reports"
+        outbox.LOCK = root / "outbox.lock"
+        outbox.DRAIN_LOCK = root / "outbox-drain.lock"
+        outbox.UNVERIFIED = root / "outbox-unverified.jsonl"
+        outbox.DEAD_LETTER = root / "outbox-dead-letter.jsonl"
+        watcher_outbox.CLAIMS = root / "watcher-claims"
+        watcher_outbox.ATTEMPTS = root / "outbox-attempts.json"
+        outbox.REPORTS.mkdir()
+
+    def tearDown(self):
+        (outbox.QUEUE, outbox.SENT, outbox.LAST_DRAIN, outbox.REPORTS,
+         outbox.LOCK, outbox.DRAIN_LOCK, outbox.UNVERIFIED,
+         outbox.DEAD_LETTER, watcher_outbox.CLAIMS,
+         watcher_outbox.ATTEMPTS) = self.old
+        self.temp.cleanup()
+
+    def _claim(self):
+        output = io.StringIO()
+        with redirect_stdout(output):
+            self.assertEqual(0, watcher_outbox.claim())
+        return Path(output.getvalue().strip())
+
+    def test_acknowledge_removes_only_the_claimed_head(self):
+        outbox.enqueue("first", "recipient")
+        claim = self._claim()
+        outbox.enqueue("second", "recipient")
+
+        watcher_outbox.acknowledge(claim, "sent by authorized watcher")
+
+        self.assertEqual(["second"], [row["text"] for row in outbox._pending()])
+        sent = [json.loads(line) for line in outbox.SENT.read_text().splitlines()]
+        self.assertEqual(["first"], [row["text"] for row in sent])
+        self.assertEqual("sent by authorized watcher",
+                         outbox.last_drain()["why"])
+
+    def test_changed_head_is_never_acknowledged(self):
+        outbox.enqueue("first", "recipient")
+        claim = self._claim()
+        with outbox._locked(outbox.LOCK):
+            outbox._rewrite_queue_unlocked([
+                json.dumps({
+                    "at": outbox.now(), "to": "recipient",
+                    "text": "replacement", "attachments": [],
+                }),
+            ])
+
+        with self.assertRaises(RuntimeError):
+            watcher_outbox.acknowledge(claim)
+
+        self.assertEqual(["replacement"],
+                         [row["text"] for row in outbox._pending()])
+        self.assertFalse(outbox.SENT.exists())
+
+    def test_uncertain_send_leaves_a_durable_unverified_record(self):
+        outbox.enqueue("uncertain", "recipient")
+        claim = self._claim()
+
+        watcher_outbox.uncertain(claim, "chat.db unreadable")
+
+        self.assertEqual([], outbox._pending())
+        self.assertFalse(outbox.SENT.exists())
+        record = json.loads(outbox.UNVERIFIED.read_text().splitlines()[0])
+        self.assertEqual("uncertain", record["text"])
+        self.assertIn("chat.db unreadable", record["reason"])
+        self.assertEqual(1, outbox.status()["unverified"])
+
+    def test_failed_send_backs_off_instead_of_immediate_resend(self):
+        outbox.enqueue("retry", "recipient")
+        claim = self._claim()
+
+        watcher_outbox.fail(claim, "Messages unavailable")
+
+        self.assertEqual(5, watcher_outbox.claim())
+        attempts = json.loads(watcher_outbox.ATTEMPTS.read_text())
+        self.assertEqual(1, next(iter(attempts.values()))["count"])
+        self.assertEqual(["retry"], [row["text"] for row in outbox._pending()])
+
+    def test_third_failed_send_moves_to_dead_letter(self):
+        outbox.enqueue("dead", "recipient")
+        raw_line = outbox._queue_lines_unlocked()[0]
+        digest = watcher_outbox._digest(raw_line)
+        watcher_outbox.ATTEMPTS.write_text(json.dumps({
+            digest: {"count": 2, "reason": "prior failures"},
+        }))
+        claim = self._claim()
+
+        watcher_outbox.fail(claim, "still unavailable")
+
+        self.assertEqual([], outbox._pending())
+        record = json.loads(outbox.DEAD_LETTER.read_text().splitlines()[0])
+        self.assertEqual(3, record["attempts"])
+        self.assertEqual("dead", record["text"])
+        self.assertEqual(1, outbox.status()["dead_letter"])
+
+    def test_corrupt_attempt_ledger_fails_closed(self):
+        outbox.enqueue("do not send", "recipient")
+        watcher_outbox.ATTEMPTS.write_text("{broken", encoding="utf-8")
+
+        with self.assertRaises(RuntimeError):
+            watcher_outbox.claim()
+
+        self.assertEqual(["do not send"],
+                         [row["text"] for row in outbox._pending()])
+
+
+class VerifyOutboxTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        root = Path(self.temp.name)
+        self.old = (
+            outbox.QUEUE, outbox.SENT, outbox.LAST_DRAIN, outbox.REPORTS,
+            outbox.LOCK, outbox.DRAIN_LOCK, outbox.UNVERIFIED,
+            outbox.DEAD_LETTER, verify_outbox.CHAT_DB)
+        outbox.QUEUE = root / "outbox.jsonl"
+        outbox.SENT = root / "sent.jsonl"
+        outbox.LAST_DRAIN = root / "last.json"
+        outbox.REPORTS = root / "reports"
+        outbox.LOCK = root / "outbox.lock"
+        outbox.DRAIN_LOCK = root / "outbox-drain.lock"
+        outbox.UNVERIFIED = root / "outbox-unverified.jsonl"
+        outbox.DEAD_LETTER = root / "outbox-dead-letter.jsonl"
+        outbox.REPORTS.mkdir()
+        verify_outbox.CHAT_DB = root / "chat.db"
+        self.connection = sqlite3.connect(verify_outbox.CHAT_DB)
+        self.connection.executescript("""
+            CREATE TABLE handle (ROWID INTEGER PRIMARY KEY, id TEXT);
+            CREATE TABLE message (
+              ROWID INTEGER PRIMARY KEY,
+              handle_id INTEGER,
+              is_from_me INTEGER,
+              is_sent INTEGER,
+              is_delivered INTEGER,
+              error INTEGER,
+              date INTEGER,
+              text TEXT,
+              attributedBody BLOB
+            );
+            INSERT INTO handle (ROWID, id) VALUES (1, 'recipient');
+        """)
+        self.attempted = datetime(
+            2026, 8, 17, 22, 0, tzinfo=timezone.utc)
+
+    def tearDown(self):
+        self.connection.close()
+        (outbox.QUEUE, outbox.SENT, outbox.LAST_DRAIN, outbox.REPORTS,
+         outbox.LOCK, outbox.DRAIN_LOCK, outbox.UNVERIFIED,
+         outbox.DEAD_LETTER, verify_outbox.CHAT_DB) = self.old
+        self.temp.cleanup()
+
+    @staticmethod
+    def _archive(text):
+        encoded = text.encode("utf-8")
+        if len(encoded) < 0x81:
+            prefix = bytes([len(encoded)])
+        else:
+            prefix = b"\x82" + len(encoded).to_bytes(2, "little")
+        return b"archive NSString fields +" + prefix + encoded + b" tail"
+
+    def _queue_uncertain(self, text="art link"):
+        outbox.UNVERIFIED.write_text(json.dumps({
+            "at": self.attempted.isoformat(),
+            "attempted_at": self.attempted.isoformat(),
+            "to": "recipient",
+            "text": text,
+            "attachments": [],
+            "reason": "chat.db unreadable",
+        }) + "\n", encoding="utf-8")
+
+    def _insert_delivery(self, text="art link", offset_seconds=1):
+        apple = int((
+            self.attempted.timestamp()
+            - verify_outbox.APPLE_EPOCH_OFFSET
+            + offset_seconds
+        ) * 1_000_000_000)
+        self.connection.execute(
+            "INSERT INTO message VALUES (1,1,1,1,1,0,?,NULL,?)",
+            (apple, self._archive(text)),
+        )
+        self.connection.commit()
+
+    def test_delivered_attributed_body_verifies_uncertain_send(self):
+        self._queue_uncertain()
+        self._insert_delivery()
+
+        verified, remaining = verify_outbox.verify()
+
+        self.assertEqual((1, 0), (verified, remaining))
+        self.assertEqual("", outbox.UNVERIFIED.read_text())
+        sent = json.loads(outbox.SENT.read_text().splitlines()[0])
+        self.assertEqual("Messages/chat.db",
+                         sent["delivery_evidence"]["source"])
+        self.assertEqual(1.0, sent["delivery_evidence"]["delta_seconds"])
+
+    def test_content_mismatch_remains_unverified(self):
+        self._queue_uncertain()
+        self._insert_delivery("different")
+
+        verified, remaining = verify_outbox.verify()
+
+        self.assertEqual((0, 1), (verified, remaining))
+        self.assertFalse(outbox.SENT.exists())
+
+    def test_duplicate_matching_rows_fail_closed(self):
+        self._queue_uncertain()
+        self._insert_delivery(offset_seconds=1)
+        apple = int((
+            self.attempted.timestamp()
+            - verify_outbox.APPLE_EPOCH_OFFSET
+            + 2
+        ) * 1_000_000_000)
+        self.connection.execute(
+            "INSERT INTO message VALUES (2,1,1,1,1,0,?,NULL,?)",
+            (apple, self._archive("art link")),
+        )
+        self.connection.commit()
+
+        verified, remaining = verify_outbox.verify()
+
+        self.assertEqual((0, 1), (verified, remaining))
+
+    def test_unreadable_database_never_mutates_ledger(self):
+        self._queue_uncertain()
+        self.connection.close()
+        verify_outbox.CHAT_DB = Path(self.temp.name) / "missing.db"
+        with self.assertRaises(RuntimeError):
+            verify_outbox.verify()
+        self.assertTrue(outbox.UNVERIFIED.read_text().strip())
+        self.connection = sqlite3.connect(":memory:")
+
+
+class SmokePolicyTests(unittest.TestCase):
+    def test_read_only_instance_declares_smoke_disabled(self):
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            (root / "config.json").write_text(
+                '{"smoke_enabled": false}\n', encoding="utf-8")
+            old_home = checks.HOME
+            checks.HOME = root
+            try:
+                result = checks.outsider_smoke_exercised()
+            finally:
+                checks.HOME = old_home
+
+        self.assertTrue(result["ok"])
+        self.assertIn("read-only", result["detail"])
+
+
+class AlertDeliveryTests(unittest.TestCase):
+    def test_unverified_send_is_not_reported_healthy(self):
+        with mock.patch.object(outbox, "status", return_value={
+            "pending": 0,
+            "oldest_minutes": None,
+            "missing_attachments": 0,
+            "unverified": 1,
+            "dead_letter": 0,
+            "last_drain": {"why": "delivery unverified: chat.db unreadable"},
+        }):
+            result = checks.alerts_can_actually_reach_you()
+        self.assertFalse(result["ok"])
+        self.assertIn("explicitly unverified", result["detail"])
+
+    def test_dead_letter_is_not_reported_healthy(self):
+        with mock.patch.object(outbox, "status", return_value={
+            "pending": 0,
+            "oldest_minutes": None,
+            "missing_attachments": 0,
+            "unverified": 0,
+            "dead_letter": 1,
+            "last_drain": {"why": "dead-lettered"},
+        }):
+            result = checks.alerts_can_actually_reach_you()
+        self.assertFalse(result["ok"])
+        self.assertIn("dead-letter", result["detail"])
 
 
 class MeaningfulActivityTests(unittest.TestCase):

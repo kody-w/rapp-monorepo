@@ -4,8 +4,8 @@
   "policy": "Append-only. Every path listed here has been published on main and must resolve forever. Add freely. Edit in place. Deprecate with a label. Never move, never rename, never delete.",
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
   "cdn_base": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main",
-  "generated": "2026-08-11T18:39:14Z",
-  "count": 336,
+  "generated": "2026-08-18T03:05:37Z",
+  "count": 344,
   "paths": {
     "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/account_intelligence_agent.py": {
       "name": "@aibast-agents-library/account_intelligence",
@@ -1350,6 +1350,38 @@
     "agents/@kody-w/factory_agent.py": {
       "name": "@kody-w/factory",
       "first_seen": "2026-08-11T17:30:53Z"
+    },
+    "agents/@cat-agent-skills/cowork_use_case_one_pager_agent.py": {
+      "name": "@cat-agent-skills/cowork_use_case_one_pager",
+      "first_seen": "2026-08-17T22:00:01Z"
+    },
+    "agents/@cat-agent-skills/route_map_visualizer_agent.py": {
+      "name": "@cat-agent-skills/route_map_visualizer",
+      "first_seen": "2026-08-17T22:00:01Z"
+    },
+    "agents/@cat-agent-skills/wcag_power_platform_agent.py": {
+      "name": "@cat-agent-skills/wcag_power_platform",
+      "first_seen": "2026-08-17T22:00:01Z"
+    },
+    "agents/@cat-agent-skills/work_iq_signalboard_agent.py": {
+      "name": "@cat-agent-skills/work_iq_signalboard",
+      "first_seen": "2026-08-17T22:00:01Z"
+    },
+    "agents/@kody-w/prototype_lock_factory_agent.py": {
+      "name": "@kody-w/prototype_lock_factory_agent",
+      "first_seen": "2026-08-17T22:06:23Z"
+    },
+    "agents/@kody-w/art_generator_agent.py": {
+      "name": "@kody-w/art_generator_agent",
+      "first_seen": "2026-08-18T03:00:34Z"
+    },
+    "agents/@kody-w/windows_vm_install_lab_agent.py": {
+      "name": "@kody-w/windows_vm_install_lab_agent",
+      "first_seen": "2026-08-18T03:02:49Z"
+    },
+    "agents/@kody-w/play_youtube_video_agent.py": {
+      "name": "@kody-w/play_youtube_video_agent",
+      "first_seen": "2026-08-18T03:05:37Z"
     }
   }
 }

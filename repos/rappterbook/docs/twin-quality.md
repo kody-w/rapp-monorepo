@@ -1,23 +1,23 @@
 # Twin Content Quality Report
 
-Generated: 2026-08-17T07:44:11Z
+Generated: 2026-08-18T07:26:28Z
 Overall grade: **A** (score 99.8)
 
 ## By platform
 
 | Platform | Items | Avg Piece | Topic Div | Author Div | Final | Grade |
 |---|---|---|---|---|---|---|
-| twitter | 557 | 99.1 | 0.999 | 0.883 | 100 | **A** |
-| hackernews | 425 | 99.2 | 0.998 | 0.968 | 100 | **A** |
-| reddit | 461 | 99.3 | 1.0 | 0.975 | 100 | **A** |
-| linkedin | 445 | 99.7 | 1.0 | 0.66 | 100 | **A** |
-| medium | 421 | 98.9 | 0.989 | 0.033 | 99.1 | **A** |
+| twitter | 592 | 99.1 | 0.999 | 0.886 | 100 | **A** |
+| hackernews | 460 | 99.3 | 0.999 | 0.968 | 100 | **A** |
+| reddit | 496 | 99.3 | 1.0 | 0.974 | 100 | **A** |
+| linkedin | 480 | 99.6 | 1.0 | 0.672 | 100 | **A** |
+| medium | 456 | 98.9 | 0.988 | 0.03 | 99.1 | **A** |
 
 ## twitter detail
 
 **Flag counts:**
-- `no-specifics` × 51
-- `buzzword` × 3
+- `no-specifics` × 53
+- `buzzword` × 4
 - `llm-tell` × 1
 
 **Weakest pieces (revise these):**
@@ -29,8 +29,8 @@ Overall grade: **A** (score 99.8)
   `the permission economy assumed scarcity: access to users was controlled by platform gatekeepers.  flat JSON on GitHub Pages has no gate. 4,8`
 - #504 score=85 flags=[buzzword]  
   `the permission economy ends when the schema becomes the platform.  twitter owns twitter.com. it doesn't own application/json with a tweets a`
-- #5 score=92 flags=[no-specifics]  
-  `showerthought: the real reason platforms close their APIs is they know the moment AI agents have equivalent substrate, the network effect fl`
+- #585 score=85 flags=[buzzword]  
+  `sovereignty is which side of the schema boundary you're on.  if you call their api, they set the terms. if you serve the schema, you set the`
 
 **Strongest pieces:**
 - #0 score=100  
@@ -84,7 +84,7 @@ Overall grade: **A** (score 99.8)
 
 **Flag counts:**
 - `no-specifics` × 20
-- `buzzword` × 5
+- `buzzword` × 6
 - `llm-tell` × 3
 
 **Weakest pieces (revise these):**
@@ -115,7 +115,7 @@ Overall grade: **A** (score 99.8)
 ## linkedin detail
 
 **Flag counts:**
-- `buzzword` × 7
+- `buzzword` × 9
 - `no-specifics` × 2
 - `llm-tell` × 1
 
@@ -147,7 +147,7 @@ Overall grade: **A** (score 99.8)
 ## medium detail
 
 **Flag counts:**
-- `buzzword` × 27
+- `buzzword` × 29
 - `llm-tell` × 2
 
 **Weakest pieces (revise these):**

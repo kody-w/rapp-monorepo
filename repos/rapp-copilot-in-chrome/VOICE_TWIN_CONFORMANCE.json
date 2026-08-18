@@ -25,11 +25,33 @@
     "implemented": [
       "hashed transport and conversation identifiers",
       "curated tools selected before model execution",
+      "audience-scoped conversation history",
       "durable inbox and outbox state",
       "single transport process lease",
       "ambiguous sends are not retried automatically"
     ],
-    "profile_gap": "No ratified Google Voice transport profile exists."
+    "transports": {
+      "google-voice-web": "live owner-private adapter",
+      "imessage": "macOS-only, disabled until explicit enrollment and permissions",
+      "discord": "disabled until official bot installation and credentials",
+      "whatsapp-cloud": "disabled until official webhook and Cloud API setup"
+    },
+    "profile_gaps": [
+      "No ratified Google Voice transport profile exists.",
+      "No ratified Discord transport profile exists.",
+      "No ratified WhatsApp Cloud API transport profile exists."
+    ],
+    "profile_issue": "https://github.com/kody-w/rapp-messaging/issues/2"
+  },
+  "digital_understudy": {
+    "duration_days": 30,
+    "scope": "owner-private technical workflow only",
+    "pulse_kind": "body.twin-pulse",
+    "analysis_tools": [],
+    "prepared_action_execution": null,
+    "sensitive_personal_inference": "refused",
+    "raw_transport_identifiers": "redacted before persistence",
+    "completion": "final report with evidence citations and limitations"
   },
   "open_question": "https://github.com/kody-w/rapp-1/issues/4"
 }

@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll } from 'vitest';
-import { readFileSync, existsSync } from 'fs';
+import { readFileSync, existsSync, readdirSync } from 'fs';
 import { resolve } from 'path';
 import { JSDOM } from 'jsdom';
 
@@ -221,6 +221,40 @@ describe('Current release identity', () => {
     }
   });
 
+  it('no published page advertises a release that has not shipped', () => {
+    // The existing check above covers index.html only, which is where I was
+    // looking when it was written. docs.html carries a "Releases" archive, and
+    // it listed `v1.14.0 Notes` at the top alongside shipped versions while
+    // 1.14.0 had no tag, nothing on npm, and no released section in
+    // CHANGELOG.md. Anything merged into docs/ is served by Pages immediately,
+    // so it was live and reachable.
+    //
+    // Preparing the page ahead of a release is fine and this does not forbid
+    // it. Linking to it from a list of things that shipped is what misleads.
+    const [major, minor, patch] = CURRENT_VERSION.split('.').map(Number);
+    const offenders: string[] = [];
+
+    for (const file of readdirSync(DOCS_DIR).filter((f) => f.endsWith('.html'))) {
+      const doc = parseHTML(file);
+      for (const link of Array.from(doc.querySelectorAll('a[href*="release-notes-"]'))) {
+        const href = link.getAttribute('href') ?? '';
+        const version = /release-notes-(\d+)\.(\d+)\.(\d+)-/.exec(href);
+        if (!version) continue;
+        const [, hMajor, hMinor, hPatch] = version.map(Number);
+        const ahead =
+          hMajor > major
+          || (hMajor === major && hMinor > minor)
+          || (hMajor === major && hMinor === minor && hPatch > patch);
+        if (ahead) offenders.push(`${file} -> ${href}`);
+      }
+    }
+
+    expect(
+      offenders,
+      `these pages link release notes newer than package.json's ${CURRENT_VERSION}`,
+    ).toEqual([]);
+  });
+
   it('current release page identifies the package version and has valid local links', () => {
     const doc = parseHTML(CURRENT_RELEASE_FILE);
     expect(doc.title).toContain(CURRENT_VERSION);
@@ -237,8 +271,13 @@ describe('Current release identity', () => {
     }
   });
 
-  it('presents Show-and-Tell as consent-bound reusable learning', () => {
-    const doc = parseHTML(CURRENT_RELEASE_FILE);
+  it("pins 1.13.0's own copy to 1.13.0's page", () => {
+    // These are one release's headline and marketing copy. Asserted against
+    // CURRENT_RELEASE_FILE they failed on every future release, because no
+    // release note about anything other than Show-and-Tell could satisfy them
+    // however good it was. Pinned to the file they were actually written about,
+    // they keep protecting that page and stop expiring.
+    const doc = parseHTML('release-notes-1.13.0-evolution.html');
     expect(doc.title).toContain('Show-and-Tell');
     const text = doc.body.textContent || '';
     expect(text).toContain('Show it once.');
@@ -246,6 +285,21 @@ describe('Current release identity', () => {
     expect(text).toContain('Screenshots are explicit-only');
     expect(text).toContain('one-use local token');
     expect(text).toContain('Native tools over pixel replay');
+  });
+
+  it('every release page states what it is and what it changed', () => {
+    // The generic half of what the pinned test above was doing: a release note
+    // has a subject in its title and a body substantial enough to describe the
+    // release. This is the part that should follow CURRENT_RELEASE_FILE, and it
+    // is satisfiable by any honest release note rather than by one subject.
+    const doc = parseHTML(CURRENT_RELEASE_FILE);
+    const title = doc.title || '';
+    expect(title).toMatch(/openrappter/i);
+    expect(title).toMatch(new RegExp(CURRENT_VERSION.replace(/\./g, '\\.')));
+
+    const text = doc.body.textContent || '';
+    expect(text.length).toBeGreaterThan(2000);
+    expect(doc.querySelectorAll('h2, h3').length).toBeGreaterThan(2);
   });
 
   it('uses durable Bar release links instead of versioned DMG URLs', () => {

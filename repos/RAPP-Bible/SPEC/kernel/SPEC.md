@@ -2,10 +2,20 @@
 
 # RAPP v1 — Specification
 
+> **SUPERSEDED PROTOCOL DOCUMENT — historical product/agent contract only.**
+> For canonicalization, identity, frames, wire, eggs, registry, trust, and
+> protocol evolution, the current authority is RAPP/1 rev-5 via
+> [`RAPP1_AUTHORITY.json`](../../RAPP1_AUTHORITY.json) and
+> [`RAPP1_STATUS.md`](../../RAPP1_STATUS.md). Nothing below is current
+> instruction for emitting or accepting protocol artifacts. Preserve these
+> dated examples as migration history; RAPP/1 §12 requires total migration and
+> retirement rather than perpetual backwards compatibility.
+>
 > **Scope:** the **single-file agent contract**. What `perform()` takes, what it returns, how metadata travels, the delimited slots (`|||VOICE|||`, `|||TWIN|||`). The agent API. **Not** the network protocol — for that read [`specs/SPEC.md`](../../specs/SPEC.md). See [`specs/README.md`](../../specs/README.md) for the spec-directory map.
 >
 > **Memorialized:** 2026-04-17
-> **Status:** Frozen. v1 is the canonical reference. All future versions must remain backwards-compatible with the v1 agent contract.
+> **Historical status:** Frozen on 2026-04-17; superseded for protocol matters
+> by RAPP/1 rev-5.
 > **Companion doctrine:** [Single File Agents — rappterhub](https://kody-w.github.io/rappterhub/single-file-agents.html)
 > **Live at:** [kody-w.github.io/RAPP](https://kody-w.github.io/RAPP/)
 
@@ -1100,7 +1110,7 @@ SPEC.md was frozen 2026-04-17. The Constitution kept moving. Articles XL–XLIX 
 |---|---|---|
 | XL | Secure-First Plant, Operator-Curated Promotion Later | Plant defaults to private; operator promotes to public via deliberate action. |
 | XLI | The Operator's Experience Is Conversation | Never a token, never a terminal. The brainstem speaks plain English. |
-| XLII | The Virtual Brainstem Is For Mobile Users | Doorman page (`rapp_brainstem/utils/web/index.html`) carries Tier 1 to mobile via GitHub Raw + Issues + PeerJS, no install. |
+| XLII | The Virtual Brainstem Is For Mobile Users | Historical doorman design; the former `rapp_brainstem/utils/web/` implementation is retired and is not a current path. |
 | XLIII | Voice In, Voice Out | TTS+STT is a hard requirement at Tier 1, not a feature. The `\|\|\|VOICE\|\|\|` slot is sacred. |
 | XLIV | Neighborhood Collaboration Is Local-First, Cross-Device-Transparent | The "Doorbell" pattern — one operator's organism notifies another's without a server in between. |
 | XLV | The Sphere Is The Front Door | `pages/sphere.html` — implicit doorman summon via 3D sphere tap. Voice-first. |

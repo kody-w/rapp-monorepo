@@ -7,7 +7,155 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **A slow machine can start the desktop app** — the app waits for the gateway
+  it spawned to report ready and then kills it. That budget only ever runs out
+  when the gateway is alive and merely slow (a genuine startup failure is
+  reported immediately by its exit), which is a cold first run, an antivirus
+  scan or a loaded machine. `OPENRAPPTER_GATEWAY_READY_TIMEOUT_MS` now sets it;
+  the 30-second default is unchanged. A malformed value is ignored rather than
+  fatal, and the accepted maximum is ten minutes.
+
+- **One chat, both brains** — the brainstem runs as its own process speaking
+  `POST /chat` while the OpenRappter runtime answers `chat.send`, so holding a
+  conversation across both used to mean two chat windows. `chat.send` now takes
+  an optional `target` (`openrappter` by default, or `brainstem`), and the web
+  dashboard and the macOS Bar each carry a selector that remembers the choice.
+  This works because both runtimes already return the same
+  `rapp-runtime-parity/1.0` §2.4 envelope, so a reply from either renders
+  identically. An unrecognised target is refused rather than defaulted: the two
+  brains know different things and their replies are the same shape, so a typo
+  that quietly answered from the wrong one would be indistinguishable.
+  `OPENRAPPTER_BRAINSTEM_URL` overrides the address; otherwise both the
+  documented port and the RAPP drop-in slot are probed.
+
+- **A `Brainstem` agent in both runtimes** — the selector lets a person switch
+  brains, which still leaves them relaying answers by hand. The agent gives the
+  assistant the same reach, dispatched like any other tool through the ordinary
+  chat endpoint, so "ask the brainstem what it knows about this and compare it
+  to your own view" works in one turn. Declares exactly the `network`
+  capability its syntax tree can reach, per the RAPP agent contract.
+
 ### Fixed
+
+- **A non-numeric Pokemon setting crashed the agent instead of being refused** —
+  `port`, `max_clips`, `max_states`, `max_storage_gb`, `min_free_gb` and
+  `startup_timeout` are chosen by a model, so they arrive as whatever it
+  produced, and each was passed straight to `int()` or `float()`. `int("abc")`
+  raises `ValueError`, nothing above it caught `ValueError`, and one odd
+  argument took the agent down rather than coming back as an error.
+  `startup_timeout` was worse than the rest: it was read *after* the supervisor
+  had been spawned, so a bad value left a live process behind with nothing
+  tracking it. All six are now coerced before anything is started, and a bad
+  one names the setting that was wrong.
+- **Two conformance checks could not fail** — R8 asserts the RAPP substrate is
+  attributed, which its own docstring calls the licence condition, but it
+  tested for `rapp` as a plain substring, and open**rapp**ter contains it; the
+  check passed on a README with every mention of the substrate deleted (`mit`
+  was the same shape, satisfied by "commit"). R6 asserts the brainstem keeps
+  wire parity, but tested for the bare word `response`, which survives in
+  `send_response`; renaming every `"response":` key in the `/chat` envelope —
+  the exact breakage R6 exists to prevent — left it reporting parity. Both now
+  match the token rather than the substring.
+- **Three agents held capabilities they cannot reach** — `DocScannerAgent`,
+  `NotesIntakeAgent` and `WebAgent` declared `process-exec` while importing no
+  `child_process` at all; what they contain is regular-expression `.exec()`
+  calls. The two scanners additionally declared `filesystem-write` while
+  importing only `readdir`, `stat` and `readFile`. Read-only scanners therefore
+  held the two most dangerous capabilities in the vocabulary, so a policy
+  denying either would have refused agents that only match text. `conformance.py`
+  enforces this as R5, but R5 reads Python agents only; TypeScript now has an
+  equivalent check, and R4, R5 and R7 say which runtime they cover.
+- **The conformance gate accepted a manifest that wasn't one** — R2 passed any
+  non-Python agent whose file merely *contained* the substrings `__manifest__`
+  and `rapp-agent/1.0`, and R3 checked required fields for Python agents only.
+  Both were satisfied by `ComputerUseAgent.ts` at a point when it exported no
+  manifest at all, so the gate reported a clean run over a broken contract.
+  Both checks now read the declaration itself, which also surfaced
+  `morning_brief_agent.js` carrying a name that is not `@scope/slug`; it is now
+  `@openrappter/morning-brief`.
+- **`read_screen` never worked, and Computer Use declared no capabilities** — a
+  generated manifest block had been inserted at a byte offset that fell inside
+  the Python source string `ComputerUseAgent` uses for OCR. The agent therefore
+  exported no `__manifest__` at all, leaving its `filesystem-write` and
+  `process-exec` declarations invisible to anything that reads manifests, and
+  the OCR script was a syntax error so screen reading could only ever fail. The
+  capability check did not notice because it matches source text rather than
+  the runtime export; it now verifies both, and that the two agree.
+- **A cron job created without an agent fired on time and then found no agent**
+  — `addJob` defaulted the agent to `main` while the daemon executor resolved
+  only `Assistant` and the runtime's own name, so every job created without an
+  explicit agent was accepted, persisted, scheduled and fired exactly on time
+  before failing with `Agent not found: main`. Both sides now share one
+  constant and one resolver.
+
+- **The channels screen went stale after the first load** — it listened for
+  `channel.status` and nothing ever emitted it, so connecting or disconnecting
+  a channel left the previous state on screen until reload. Connecting and
+  disconnecting now notify subscribers with the changed channel, in the same
+  shape `channels.list` returns.
+
+- **`config validate` called a security policy valid while nothing enforced it**
+  — a config setting `approvalPolicy: deny` was told `Configuration is valid.`,
+  and the ignored-key report stayed silent too because the section really is in
+  the schema. Validation now names sections that are valid but enforced by
+  nothing, and says what does the enforcing instead.
+
+- **The agent that places phone calls declared a capability that does not exist**
+  — `PhoneAgent` declared `network-access`, which is not in the vocabulary; the
+  word is `network`, used by every other networked agent. Any filter selecting
+  on `network` skipped the one agent that dials real people. Declared
+  capabilities are now checked against the list `conformance.py` defines.
+
+- **The published agent counts described a developer's laptop, not the product**
+  — `architecture.html`, the README and two other pages advertised 37 TypeScript
+  agents. That number came from running `--list-agents` on a machine that also
+  loads the operator's own agents from `~/.openrappter/agents`, so it counted
+  three that no one else has. A fresh install ships **34 TypeScript and 20
+  Python agents**; the pages now say so, and a guard per runtime re-derives the
+  figure with `HOME` isolated so the published number cannot drift back to
+  whatever the author happens to have installed.
+
+- **Stop did not stop the brainstem** — `chat.abort` marked the run aborted and
+  the interface went quiet, while the request carried on, produced a full reply,
+  and had it discarded. Stop looked like it worked from every angle a person can
+  see, and a hosted model kept generating billed output nobody would read. A run
+  now carries an `AbortController` whose signal reaches the request itself.
+
+- **GoogleVoiceAgent never loaded in the Python runtime** — every
+  `--list-agents` printed `Failed to load … No module named 'agents'` and listed
+  18 agents where TypeScript listed 19. The agent was not at fault: it is
+  written to the portability contract, which permits `agents.basic_agent` and
+  little else so the same file runs in the grail brainstem. The loader built
+  that synthetic namespace and skipped the one module a portable agent is
+  allowed to import.
+
+- **PythonAgent failed to load on every single run** — built-in discovery calls
+  `new` on every exported `BasicAgent` subclass, and `PythonAgent` is a wrapper
+  built per descriptor that needs constructor arguments. It threw, was recorded
+  as a broken agent file, and printed a warning above every `--list-agents`.
+
+- **The Bones window told a fresh install it had no agents** — the agents
+  section reads only the user's own directory, and the built-ins live inside the
+  installed package. On a fresh machine it said "No agents installed yet" while
+  37 agents were working; measured here, it counted 5 against a runtime that
+  reported 37.
+
+- **A slow PowerShell start aborted Windows ACL hardening** —
+  `hardenPrivatePath` spawns a fresh `powershell.exe` for every private path and
+  capped it at 15 seconds, which a cold start on a loaded machine can exceed.
+  Every caller that asks for a private path takes the throw, so Show-and-Tell
+  simply failed to start. Raised to 60s and retried once, but only for a process
+  that never got off the ground — a refused or unverifiable ACL still fails
+  closed on the first attempt.
+
+- **`config validate` called a mostly-inert config file valid** — Zod strips
+  unknown keys rather than rejecting them, so a file could parse cleanly while
+  almost nothing in it was read. Validation still passes, since these are not
+  errors, but it now lists the keys that will be ignored. This is why the
+  published config documentation drifted so far: the tool whose job is to check
+  the file agreed with it.
 
 - **A published install had none of the 52 bundled skills** — `files` in
   `package.json` never listed `skills/`, so every tarball carried
@@ -189,6 +337,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   and desktop smoke tests were hardened for concurrent and Windows runs.
 
 ### Security
+
+- **The installer's checksum check could pass having verified nothing** — the
+  one-line install downloads a `gum` release tarball and verifies it against
+  the project's published `checksums.txt` using `sha256sum --ignore-missing`.
+  That flag is necessary, since the file lists every platform and only one
+  asset is downloaded, but GNU `sha256sum` exits 0 when it is left with nothing
+  to verify at all. An asset simply absent from the list therefore read as a
+  pass, so anyone able to serve the release could omit a line rather than forge
+  a hash. macOS `shasum` exits 1 in the same case, so whether the installer was
+  safe depended on which tool was installed — and `sha256sum` is tried first.
+  The downloaded file must now be named in the checksums before any verdict is
+  believed.
+- **Agents no longer build shell command lines by interpolation** — every
+  remaining site in `ComputerUseAgent`, `DailyTipAgent`, `DemoRecorderAgent`,
+  `HackerNewsAgent`, `OuroborosAgent` and `UpdateAgent` now passes an argument
+  vector. None was reachable with attacker-controlled input, so this is
+  hardening rather than a fix, but it removes the shape that produced three
+  real injections. Notification text is escaped for AppleScript, which is what
+  it was always for, and the demo listing uses the filesystem instead of `ls`.
+- **Learning a new agent could run arbitrary commands** — `learn_new_agent`
+  asks a model to write agent code, scans that code for imports, and installs
+  them, so an import specifier is model-authored untrusted input. It was
+  interpolated into a shell command line, and the import pattern permits both
+  spaces and semicolons, so generated code containing
+  `import x from 'lodash; touch pwned'` executed the second command. Installs
+  now use an argument vector, and package names are checked against npm's own
+  grammar before use.
+- **Turning authentication on no longer severs the neighborhood** — a rappter
+  contacting a peer sent no credential at all, while `/twin` and `/chat` both
+  authenticate before parsing. Those were compatible only because
+  authentication was off by default; a peer with a token refused every sender,
+  including one whose environment held the credential. Both wires now present
+  `Authorization: Bearer` when `OPENRAPPTER_TOKEN` is set, and send no
+  authorization header at all when there is none rather than a malformed one.
+
+- **The published container ran everything as root** — the root `Dockerfile`
+  declared no `USER`, and `docker-compose.yml` mounted the config volume at
+  `/root/.openrappter` to match. Anything that gets code execution inside that
+  container — and this process runs a shell agent by design — was root in it,
+  with the credential directory mounted in. Now runs as the unprivileged `node`
+  account, with `HOME` and the compose mount moved to match.
 
 - **`openrappter login` printed both tokens** — it echoed the first 20
   characters of the access token, and of the refresh token when one was

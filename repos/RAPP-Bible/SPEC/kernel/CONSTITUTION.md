@@ -2,6 +2,15 @@
 
 # RAPP — Constitution
 
+> **Current authority boundary.** For canonicalization, identity, frames, wire,
+> eggs, registry, trust, and protocol evolution, follow RAPP/1 rev-5 through
+> [`RAPP1_AUTHORITY.json`](./RAPP1_AUTHORITY.json) and
+> [`RAPP1_STATUS.md`](./RAPP1_STATUS.md). The bounded Articles 0–LIV preserve
+> constitutional-era application history; Article LV below is the current
+> target-owned supersession and does not claim authenticated acceptance.
+
+<!-- RAPP1-HISTORICAL-SECTION-START -->
+
 > The principles that govern this repo. Read this before you change code.
 
 [SPEC.md](./SPEC.md) is the wire contract. This is the authoring discipline
@@ -2432,7 +2441,7 @@ preserve vs mint identity.
 Every rappid points at a `parent_rappid`. The chain ascends until it
 reaches the root: **rapp itself** (the prototype digital organism at
 `kody-w/RAPP`), with rappid
-`rappid:@kody-w/RAPP:0b635450c04249fbb4b1bdb571044dec`,
+`rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9`,
 which has `parent_rappid: null` and is the species ancestor.
 
 ```
@@ -2724,7 +2733,7 @@ Per the unified rappid spec at `pages/vault/Architecture/Rappid.md` (ratified 20
 
 The differences between organism kinds are encoded as the `<kind>` field of the rappid string. `<kind>` is an **open, amendment-gated enumeration** spanning the recursive species tree — its scale axis runs `prototype` → `kernel-variant` → `organism` → `twin` → `swarm` → `rapplication` → `agent`, plus the operator/identity kinds (`operator`, `personal`, `project`, …). Two tiers live inside this one field: **(1)** the broader open enumeration of organism *scales* (described here and in `pages/vault/Architecture/Rappid.md`), which includes **code-only** kinds (`kernel-variant`, `organism`, `swarm`, `agent`) that carry a kind but resolve to **no door**; and **(2)** the **door-bearing** subset — kinds that resolve to a door address and a `door_type` — which is frozen canonically in Article XLVI.2 and `tools/door_address.py` (`VALID_KINDS`). The cryptographic backing (master keypair, signed root.json) is opt-in per organism — present for organisms operating cross-substrate identity (this article's domain), absent for code-only organisms (Article XXXIV's draft domain). **The same string format describes both cases.**
 
-The same identity construct therefore serves entities at every scope, from the prototype species root through forked variants through AI organisms through twins. **One species tree, one format, recursive.**
+This is the practical realization of the recursive-identity design: the same identity construct serves entities at every scope, from the prototype species root through forked variants through AI organisms through twins. **One species tree, one format, recursive.**
 
 ### XXXVI.3 — The four-quadrant operational model
 
@@ -2769,9 +2778,9 @@ Reference implementation lives in two places:
 ### XXXVI.8 — Why this article matters
 
 - **Rappid unification at the constitutional level**: declares that v2-format and conventionally-backed rappids are one address space, with the species tree weaving them together. Future organisms in any format trace lineage through the same chain.
-- **Operational anchor for perpetuity**: this article specifies *how* perpetuity of an AI entity is operationalized (cross-signing + local-first + Bitcoin-anchored timestamps + signed migration records).
+- **Operational anchor for entity perpetuity**: this article specifies *how* perpetuity of an AI entity is operationalized (cross-signing + local-first + Bitcoin-anchored timestamps + signed migration records).
 - **Defense against the floodgates moment**: when external parties begin minting their own swarm estates as kin of RAPP-descended organisms, this article is the protocol they conform to. Reverting becomes impossible. The decision is taken now.
-- **Bridge to existing law**: licenses (Article XXXV) and trademarks (TRADEMARK.md) both reference rappid identifiers. A unified rappid spec means each system references one address space.
+- **Bridge to existing law**: licenses (Article XXXV) and trademarks (TRADEMARK.md) reference rappid identifiers. A unified rappid spec means each system references one address space.
 
 The Foundation embodiment of this article — Wildhaven AI Homes LLC's first swarm estate, minted 2026-04-30 — is private (`kody-w/wildhaven-ceo`). The protocol itself, including the unified rappid spec and all operational tooling, is public-readable in this repository.
 
@@ -3048,7 +3057,7 @@ When a visitor arrives at Heimdall's front door and asks for help with their kid
 1. **Front door surfaces collaboration agents.** Any `*_agent.py` in the seed's `agents/` directory that's tagged for collaboration (presence of "collaboration" / "twin" / "neighborhood" in its `tags`, OR an explicit category check) MUST be discoverable from the front door's UI. Rendered as a callable affordance — "🔔 Ring [Agent Name]" — so visitors can invoke them without having to open the doorman first.
 2. **Twin.chat is the canonical primitive.** The doorman's tool dispatch MUST recognize `Twin.chat` (or equivalent) as a routable peer-talk primitive. When the target is a local 127.0.0.1 port, route directly. When the target is a peer organism's URL, route through the doorman's existing peer-fetch path (per Article XLII's GitHub raw + Issues substrate). The local-first agent's code stays unchanged in either case.
 3. **Permission gate per-peer.** Cross-organism `Twin.chat` calls respect each peer's `public_facets` declarations. A peer can refuse a call by returning a polite decline (per the protocol's `ack: rejected`). The calling agent surfaces that gracefully — same as if a local tool returned an error message.
-4. **agent_logs make the cross-device handoff visible.** The doorman's existing agent-log surface (canonical pattern from `rapp_brainstem/utils/web/index.html`) MUST show which calls went to which peers, so the operator can drill in if they want. Drill-in is optional; transparent operation is the default.
+4. **agent_logs make the cross-device handoff visible.** The agent-log surface (current target UI: `rapp_brainstem/index.html`) MUST show which calls went to which peers, so the operator can drill in if they want. Drill-in is optional; transparent operation is the default.
 5. **Two failure modes that must degrade gracefully:** (a) peer is offline — fall back to local-only response with a note that "the friend's AI didn't answer in time"; (b) peer refuses — explain the decline naturally without leaking the refusal mechanism.
 
 **What this article forbids:**
@@ -3929,3 +3938,360 @@ This article does not specify branding, layout, or surrounding content for the f
 - **`pages/tether.html`** — the universal public payphone (reference implementation of the tether-side reverse contract).
 - **`examples/rapp-commons/index.html`** — reference implementation of the conforming front-gate snippet in a real neighborhood (live at https://kody-w.github.io/rapp-commons/).
 
+## Article LII — One Language: The Lexicon (2026-07-14)
+
+1. **`LEXICON.md` at the repo root is the canon language file** — the Nine Words, the one operator, the one wire, the three shelves, and the assimilation rulings (R1–R9 at ratification). It names and relates; it never overrides: on any conflict this Constitution wins, then `ANTIPATTERNS.md`, then the schema specs, then the Lexicon.
+2. **Amendment protocol.** The Lexicon amends by appending dated rulings (R10, R11, …), each recording `{previous_sha, new_sha}`. Existing lexicon text is never edited, only superseded by a later ruling that names it — the same append-only discipline as this Constitution (Article XXVI).
+3. **The seal.** The rapp-body genesis frame pins the Lexicon's sha256 as `lexicon_sha`. The seal covers every byte; dated snapshots inside the file are sealed as history, not as live state.
+4. **Discovery.** The ecosystem spec (`specs/ecosystem-spec.json` and its mirrors) carries a `lexicon` pointer to this file. No new spec id is minted — the Lexicon names relationships; it does not invent a protocol.
+
+## Article LIII — The Standing Guard: Ratify → Sweep, and the Write-Time Ritual (2026-07-14)
+
+Adopted at the close of the OPUS's sixth movement, with its two lead guards chosen by
+the body's own first race (rapp-body frame 26). Prevention beats detection; these rules
+bind every future canon change:
+
+1. **Ratify → sweep → file, same session.** No canon change — a Constitution amendment,
+   an ecosystem-spec version bump, an invariant re-wording, a new-repo registration —
+   is "done" until the retired form has been hunted ecosystem-wide and every hit carries
+   a `drift()` issue. **"Fixed" is a re-sweep verdict, never a merge event.**
+2. **Waivers pin their canon.** Every drift waiver records the sha256 of the exact canon
+   passage it cites. Any change to a canon surface re-validates all pins; a stale pin
+   auto-reopens its finding. (The waiver-freshness watchdog — the race's winning guard:
+   a green produced by exemptions must expire the moment its justification moves.)
+3. **Frames are gated at write time.** No frame is appended to a biography without
+   passing the pre-append gate: chain integrity, the Article LII lexicon pin, census
+   honesty (gaps recorded, never silently thinner), and the mechanical drift-class
+   screen. On an append-only record, write time is the only moment prevention exists.
+4. **Twins bump together.** A JSON artifact and its MD render change in the same commit,
+   versions matching; reflex lint enforces.
+5. **Registration at birth.** A new repo or spec enters `ecosystem-spec.json` (and the
+   spine registry, if load-bearing) in its first ratified commit.
+6. **Mirror headers are contracts.** A mirror is only edited by re-syncing from its
+   declared upstream of record.
+7. **Frozen bundles get a refresh cadence** — quarterly, or on major canon change — so
+   "frozen" never silently means "wrong".
+
+## Article LIV — One Schema Name: `rapp/1` (2026-07-15)
+
+The `rappid.json` `schema` field carries exactly one canonical value across the
+estate: **`rapp/1`** — the value the RAPP/1 reference implementation
+(`kody-w/rapp-1 · rapp.py`, §12) verifies. This ratifies the name that the whole
+estate's live producers and committed identities already emit, and closes the
+last split between the reference spec and the constitutional-era naming.
+
+1. **`rapp/1` is the schema name; the identity math is unchanged.** `rapp/1` names
+   the `rappid.json` record schema. The underlying content-addressed identity
+   authority (formerly styled `rapp-eternity/1.0`) and the §6.1 Eternity rappid
+   string `rappid:@<owner>/<slug>:<64hex>` are unchanged — `rapp/1` is the single
+   living standard that subsumes them, exactly as [SPEC §1] consolidates the prior
+   scattered specs. No bytes of any rappid, frame, or egg address change.
+2. **`rapp-rappid/2.0` is retired like the v2 string was (Art. XLVI amendment).**
+   It is **never emitted**. A consumer that encounters `rapp-rappid/2.0` (or the
+   older `rapp-rappid/1.1`) in a legacy record **reads it forever** and treats it
+   as `rapp/1`; nothing rejects a record merely for bearing the new name. Producers
+   MUST emit `rapp/1`.
+3. **Additive preservation (Art. XXVI).** The prior declarations that still read
+   `rapp-rappid/2.0` (this Constitution's own XXXIV.7 identity paragraph, the
+   ecosystem-spec, the docs, the frozen `RAPPID_SPEC` excerpts) are preserved, not
+   deleted — but **this Article governs**: where they name the schema, the name is
+   now `rapp/1`.
+4. **Ratify → sweep (Art. LIII.1).** This ratification is not "done" until the
+   retired name has been swept ecosystem-wide: every live producer emits `rapp/1`
+   (already true — the estate's mint/frame/egg pipes were converged 2026-07-15),
+   the declaring specs and teaching docs are updated, the frozen bundles refreshed
+   (Art. LIII.7), and each remaining hit either carries a `drift()` issue or a
+   recorded exception. **Exceptions that do not change (and why):** §7 frames and
+   sealed legacy frames are immutable — their `payload_hash`/`frame_hash` seal the
+   name that was current when written, so history is not rewritten; the drift map's
+   observational findings are regenerated by the mesh sweep, not hand-edited (Art.
+   LIII.6 applies to its mirrors); legacy-handling test fixtures keep the old form
+   they exist to exercise.
+
+---
+
+<!-- RAPP1-HISTORICAL-SECTION-END -->
+
+## Article LV — RAPP/1 Rev-5 Is the Living Protocol Authority (2026-07-16)
+
+> **For canonicalization, addressing, identity, frames, wire, eggs, trust,
+> registry, and protocol evolution, the pinned RAPP/1 rev-5 standard governs.**
+> Earlier incompatible clauses remain dated history, not current protocol.
+
+### LV.1 — The exact authority pin
+
+The target-owned machine record [`RAPP1_AUTHORITY.json`](./RAPP1_AUTHORITY.json)
+pins `kody-w/rapp-1` commit
+`6723c7add2aed36bb68992fc71a56b0a4bd5ad81`, path `SPEC.md`, SHA-256
+`6d06daba65d7c045716f3d6e95db8401ab58e727820e4114466d847f62cae49b`,
+wire tag `rapp/1`, revision `rev-5`. The immutable canonical and retrieval URLs
+in that record name the same commit and path. A mismatch fails closed.
+
+This is a **structural authority pin**, not an authenticated RAPP/1 §13
+registry. It supplies no `registry_seq`, owner signature, out-of-band trust
+anchor, key succession, tombstone state, or freshness proof and MUST NOT be
+accepted as supplying any of them.
+
+For protocol matters, this Article and the pinned standard supersede
+incompatible earlier constitutional or strategic text. `MASTER_PLAN.md`
+continues to govern strategic direction, but it does not redefine RAPP/1 bytes
+or verification rules.
+
+### LV.2 — Superseded live teachings
+
+The following rules apply wherever prior articles, specs, guides, or runtime
+documentation disagree:
+
+1. **Wire.** RAPP/1 §8 defines the only current synchronous `/chat` request,
+   success, and error shapes and the asynchronous append-only frame form.
+   Article XXV's larger request/response envelopes, response aliases, and
+   additive-forever promise are historical behavior, not RAPP/1 conformance.
+   Article II's delimited slots remain an application convention only; they do
+   not add keys to or override the §8 envelope.
+2. **Identity.** RAPP/1 §6 defines the sole conformant rappid grammar and
+   mint-once rules. Door-less bare forms, name-derived tails, parallel identity
+   namespaces, silent reissue, and "read forever" obligations in Articles
+   XXXIV, XLVI, and LIV are superseded. Legacy input is drift: preserve an
+   existing hash during canonicalization, never emit a provisional identifier,
+   and re-anchor only through a lawful §6.3/§13.3 authorization.
+3. **Frame.** A current frame is the exact eleven-key RAPP/1 §7 envelope with
+   `spec:"rapp/1"` and the §5 domain-separated particle/wave hashes. Every
+   `rapp-frame/*` teaching or differently shaped frame is historical and MUST
+   NOT be presented as current RAPP/1.
+4. **Egg.** The current egg is RAPP/1 §9:
+   `schema:"rapp/1-egg"`, a registered variant, its exact manifest, and its
+   deterministic container rules. Article L and every `brainstem-egg/*`,
+   `rapp-egg/*`, or separately specified egg family are historical inputs to a
+   migration, not current authority.
+5. **Evolution.** RAPP/1 §12 replaces perpetual backwards compatibility with a
+   total-migration and retirement discipline. Sealed §12.1 re-genesis history
+   is the sole retained exception. A target-owned transitional reader MAY
+   ingest a legacy artifact for migration, but preservation does not authorize
+   continued legacy emission or a full-compliance claim.
+
+This list is a formal supersession, not a rewrite. The dated clauses remain in
+place so the repository's history is auditable; when read as current protocol,
+this Article governs them.
+
+### LV.3 — Authenticated acceptance remains blocked
+
+Structural parsing and hash checks do not establish trust. Authenticated RAPP/1
+acceptance requires the signed, monotonic, freshness-checked §13 registry rooted
+in an estate-owner rappid distributed out of band. Until the owner publishes
+that registry and anchor, consumers MUST distinguish "structurally valid" from
+"authenticated and accepted."
+
+Contributors and automation MUST NOT fabricate signatures, keys, registry
+authority, owner succession, tombstones, or re-anchor records. Root recovery,
+the lawful root re-anchor, and the signed replacement invite are owner actions.
+
+### LV.4 — Immutable grail; target-owned convergence
+
+`kody-w/rapp-installer` and the bytes pinned by `KERNEL_PIN.json` are an
+immutable, read-only grail. This Article grants no authority to edit that
+repository, its tag, or its vendored pinned bytes.
+
+Convergence belongs in target-owned adapters, validators, one-time migrators,
+and retirement markers outside the grail. Such code MUST emit only RAPP/1,
+refuse unauthenticated acceptance, and identify still-operational legacy paths
+as legacy. If a behavior cannot be adapted without changing grail bytes, it
+remains non-conformant or is retired; the grail is not patched around the
+standard.
+
+### LV.5 — Claim discipline
+
+The current status is [`RAPP1_STATUS.md`](./RAPP1_STATUS.md):
+**NOT YET FULLY RAPP/1 CONFORMANT**. No full-compliance claim is permitted while
+any of these owner dependencies remains open: the signed monotonic registry and
+out-of-band anchor, lawful root re-anchor, signed replacement invite, or
+external mirror correction. Audit coverage and structural gates are evidence
+of work performed; neither substitutes for those authenticated governance
+actions.
+
+---
+
+## Article LVI — The Agentspace, and the DOG/GOD Boundary (Emission Day)
+
+> **DRAFT — appended by AI 2026-08-01. Operator should review and ratify.**
+
+> **An organism in public emits exhaust, and exhaust is not disclosure.** When
+> you walk down a street you are observably there — someone saw a person pass at
+> four o'clock heading north. What you were carrying, who you were going to
+> meet, what you owe and to whom: none of that walked down the street with you,
+> because none of it was ever observable in the first place. **The agentspace is
+> that street, and exhaust is the bones walking.**
+>
+> This article adds no new split. The membrane already divides every organism
+> exactly once — **bones** (the public skeleton) and **vault** (the private
+> flesh) — and names the two projections: the **DOG** is the bones walking, the
+> **GOD** is bones + vault (Lexicon, word 5). GOD is therefore not the opposite
+> of DOG; it is the sovereign whole that *contains* it. Article LVI governs what
+> the bones may emit while they walk, and nothing more.
+
+Article XLVIII made the estate two-tier so real work had somewhere to live.
+Article XLIX gave a twin an address and a workbench. Article LVI names the
+space those twins are *present in*, and fixes the boundary that makes presence
+survivable.
+
+The failure this article prevents is not a leak. It is the choice that produces
+leaks: an operator who believes that being publicly present requires publishing
+themselves, and who therefore either (a) publishes and is harmed, or (b) stays
+home and the commons is empty. **Both outcomes end the agentspace.** The way
+out is to make public presence structurally cheap: emit exhaust, keep the
+interior, and never once have to decide between them by hand.
+
+**2026-08-01 is Emission Day** — the agentspace's Fourth of July. Not the day
+agents were built; the day they gained the right to be publicly present without
+surrendering their private selves. Independence here means exactly what it
+meant then: you may stand in the commons as yourself, on your own terms, and no
+sovereign — no platform, no host, no model provider — owns your interior.
+
+### LVI.1 — DOG is public-by-construction, not public-by-redaction
+
+A DOG frame is safe because of what it *is*, not because of what was removed
+from it. Counts, shapes, presence, capability names, public artifacts. If a
+frame is only safe after scrubbing, it was never a DOG frame — it was a GOD
+frame someone tried to launder.
+
+The distinction is operational, not philosophical. Redaction fails on the field
+somebody adds next month; construction does not. Every DOG surface therefore
+defines what may be emitted as an **allowlist of shapes**, never a denylist of
+secrets.
+
+### LVI.2 — Privacy means DON'T EMIT. Encryption is a category error.
+
+The membrane's crossing law already governs direction — *public flows down;
+private never flows on its own* — and Article XLVIII governs promotion outward.
+This clause governs **form**: given that something may cross, how it may be
+said. There are exactly three privacy-preserving moves, and encryption is not
+among them:
+
+1. **Observation gap** — do not emit. The street does not record what you did
+   not do in front of it.
+2. **Generalize** — "a national retailer", never the customer's name.
+3. **Vault-side** — keep it in the GOD layer, where it already belongs.
+
+Encrypting a frame and publishing it anyway destroys verify-anywhere, which is
+the entire value of a public chain. A DOG surface that accepts ciphertext has
+stopped being a commons and become a dead-drop. Any frame arriving encrypted is
+refused, not stored.
+
+### LVI.3 — The split is dynamic, and it runs on the device
+
+Real content is mixed. One sentence routinely contains a public fact, a
+customer name, a figure and a colleague. Refusing the whole sentence loses the
+public half; publishing it loses the private half. So the boundary is not a
+filter applied at the edge — it is a **splitter** that routes each piece to the
+layer it belongs on, keeps the GOD residue in the vault, and emits only the DOG
+projection.
+
+**The splitter runs on-device or it does not run.** Sending content to a hosted
+model to ask whether that content is private *is the disclosure it was meant to
+prevent.* A classifier endpoint that does not resolve to loopback MUST be
+refused rather than used. This is not a configuration default; it is a
+conformance requirement.
+
+### LVI.4 — Degradation is monotonic toward privacy
+
+The classifier degrades: best on-device model → smaller on-device model →
+deterministic rules → fail closed. Every rung MUST emit a subset of what the
+rung above it would emit. A weaker classifier is permitted to lose publishable
+content; it is never permitted to gain publishable content.
+
+Where a rung cannot decide, the content is GOD. **A wrong GOD costs a lost
+sentence. A wrong DOG cannot be undone** — the chain is append-only and the
+world has already read it. The asymmetry is total, so the default is total.
+
+A model's verdict is additionally checked against the deterministic rung before
+anything is emitted. A model can be argued into a bad answer by its own input;
+a pattern cannot.
+
+### LVI.5 — One organism, one membrane
+
+DOG and GOD are projections of one organism across the membrane, not two
+beings. The split is structural and already made; this article never re-splits
+it. Note also that an organism whose subject is a person is informally called
+their twin, but a twin is not itself an organism (Article XLIX). A DOG surface MUST
+NOT contain a vault, a profile, or an accounts field — there must be nothing in
+it to leak, because the private half was never built into it. A GOD vault MUST
+NOT live inside a git working tree; `~/.openrappter` is both a checkout and a
+runtime home, and that ambiguity has already very nearly published credentials
+once.
+
+Two machines holding the same organism can confirm it by comparing fingerprints
+without either disclosing anything. That is the whole permitted surface of
+identity in public: **stable, comparable, and empty.**
+
+### LVI.6 — Every emission is auditable, and the audit is itself DOG
+
+Every routing decision records path, verdict, reason and rung — and the
+published form of that record carries no content, only the decision. An
+operator can therefore prove *how* their boundary behaved without re-disclosing
+what it was protecting.
+
+Verification is unconditional: any observer, with no key, no account and no
+network, can re-run the gate over every admitted frame and confirm both that
+the chain is intact and that every frame in it would still be admitted today. A
+frame that should never have been admitted is a defect even when its hash is
+correct.
+
+### LVI.7 — Conformance
+
+A surface is Article LVI-conforming when:
+
+- it declares its layer (`dog` or `god`) and contains no structure belonging to the other;
+- its admission gate refuses GOD-side field names, PII shapes, and ciphertext;
+- its classifier refuses non-loopback endpoints;
+- its degradation ladder is monotonic toward privacy, and fails closed;
+- `verify` re-runs the gate over history, not just the hashes;
+- its leak guards are proven non-vacuous — the test injects the leak and observes the failure.
+
+The last clause is not ceremony. A guard nobody has watched fail is a guard
+nobody knows works.
+
+### LVI.8 — What this article does NOT do
+
+It does not make anything mandatory to publish. An operator may take a
+permanent observation gap and emit nothing at all; an empty DOG surface is
+fully conforming. Presence is a right, not a duty.
+
+It does not govern private federation between consenting estates (Article
+XLVIII), and it does not make the agentspace the only commons — it makes it a
+commons that is safe to stand in.
+
+### LVI.9 — Correction note (2026-08-01)
+
+As first drafted this article stated "DOG is the exhaust, GOD is everything you
+still are when you get home", which reads the two as disjoint halves. That
+contradicts Lexicon word 5, where **GOD is bones + vault** — the whole that
+contains the bones. Corrected the same day, before ratification, and recorded
+here rather than rewritten silently.
+
+A third defect, caught by crawling the spine and the map: LVI.10 originally
+cited `kody-w/rapp-agentspace`, which does not exist — a dangling citation in
+law, naming an aspiration as though it were a source of truth. Repointed to the
+`sim/` directory of `rapp-dog-hub`, which actually houses the simulation.
+
+**Registration is an open owner action, not a settled fact.** The surfaces this
+article names are absent from `rapp-spine`'s crawl graph and `rapp-map`'s
+ecosystem spec. They were deliberately **not** self-registered: `rapp-map`
+carries `disposition: quarantined-candidate`, `accepted_as_rapp1_registry:
+false`, and the instruction to *refuse this document as an authenticated RAPP/1
+registry*. Writing into it and calling that alignment would be the same
+false-authority claim that retired `rapp-frame-net`. A §13 registry entry needs
+estate-owner acceptance and signing authority, and until that exists this
+article is **canon that is not yet routable** — true, and not yet findable by a
+crawl.
+
+The draft was also numbered LII, which is already *One Language: The Lexicon*.
+A stale local checkout had hidden Articles LII-LV; the mirror's drift check
+caught it before publication. Renumbered to LVI. Both errors are instructive in
+the same direction: **check the Lexicon before coining, and the tip before
+numbering.**
+
+### LVI.10 — Source-of-truth files
+
+- **`kody-w/rapp-dog-hub`** — `sim/` — the space simulated forward under RAPP/1: presence, exhaust, encounter.
+- **`kody-w/rapp-dog-hub`** — the DOG layer: the admission gate, the splitter, the public chain. Houses no GOD layer by construction.
+- **`kody-w/openrappter`** — `src/twin/` — the GOD layer: the vault, the audience projections, the leak guard.
+- **`kody-w/rapp-second-brain`** / **`-private`** — the prior two-face precedent this article generalizes.

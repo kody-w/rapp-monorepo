@@ -1,14 +1,14 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-17T00:46:32Z",
+  "generated": "2026-08-18T03:07:01Z",
   "categories": [
     {
       "name": "general",
-      "count": 62
+      "count": 64
     },
     {
       "name": "productivity",
-      "count": 40
+      "count": 41
     },
     {
       "name": "core",
@@ -20,15 +20,15 @@
     },
     {
       "name": "devtools",
-      "count": 22
+      "count": 24
     },
     {
       "name": "pipeline",
-      "count": 17
+      "count": 18
     },
     {
       "name": "integrations",
-      "count": 16
+      "count": 17
     },
     {
       "name": "financial_services",
@@ -48,6 +48,10 @@
     },
     {
       "name": "energy",
+      "count": 6
+    },
+    {
+      "name": "creative",
       "count": 6
     },
     {
@@ -79,10 +83,6 @@
       "count": 5
     },
     {
-      "name": "creative",
-      "count": 5
-    },
-    {
       "name": "workflow",
       "count": 5
     },
@@ -106,11 +106,11 @@
     },
     {
       "name": "@cat-agent-skills",
-      "count": 85
+      "count": 89
     },
     {
       "name": "@kody-w",
-      "count": 56
+      "count": 60
     },
     {
       "name": "@rapp",
@@ -144,11 +144,11 @@
   "quality_tiers": [
     {
       "name": "community",
-      "count": 162
+      "count": 166
     },
     {
       "name": "frontier",
-      "count": 85
+      "count": 89
     },
     {
       "name": "official",
@@ -166,7 +166,7 @@
   "tags": [
     {
       "name": "productivity",
-      "count": 38
+      "count": 39
     },
     {
       "name": "sales",
@@ -186,14 +186,14 @@
     },
     {
       "name": "automation",
-      "count": 16
-    },
-    {
-      "name": "compliance",
-      "count": 14
+      "count": 17
     },
     {
       "name": "writing",
+      "count": 15
+    },
+    {
+      "name": "compliance",
       "count": 14
     },
     {
@@ -202,7 +202,7 @@
     },
     {
       "name": "documents",
-      "count": 12
+      "count": 13
     },
     {
       "name": "rapplication",
@@ -221,6 +221,10 @@
       "count": 10
     },
     {
+      "name": "audit",
+      "count": 10
+    },
+    {
       "name": "teams",
       "count": 10
     },
@@ -229,16 +233,12 @@
       "count": 10
     },
     {
-      "name": "audit",
+      "name": "testing",
       "count": 9
     },
     {
       "name": "powerpoint",
       "count": 9
-    },
-    {
-      "name": "testing",
-      "count": 8
     },
     {
       "name": "sharepoint",
@@ -261,11 +261,19 @@
       "count": 7
     },
     {
+      "name": "routing",
+      "count": 7
+    },
+    {
       "name": "marketing",
       "count": 7
     },
     {
       "name": "scripts",
+      "count": 7
+    },
+    {
+      "name": "python",
       "count": 7
     },
     {
@@ -277,11 +285,11 @@
       "count": 7
     },
     {
-      "name": "energy",
-      "count": 6
+      "name": "factory",
+      "count": 7
     },
     {
-      "name": "routing",
+      "name": "energy",
       "count": 6
     },
     {
@@ -297,7 +305,7 @@
       "count": 6
     },
     {
-      "name": "python",
+      "name": "html",
       "count": 6
     },
     {
@@ -305,7 +313,7 @@
       "count": 6
     },
     {
-      "name": "factory",
+      "name": "power_platform",
       "count": 6
     },
     {
@@ -330,6 +338,10 @@
     },
     {
       "name": "professional-services",
+      "count": 5
+    },
+    {
+      "name": "analytics",
       "count": 5
     },
     {
@@ -361,15 +373,15 @@
       "count": 5
     },
     {
+      "name": "microsoft_365",
+      "count": 5
+    },
+    {
       "name": "agent",
       "count": 5
     },
     {
-      "name": "html",
-      "count": 5
-    },
-    {
-      "name": "power_platform",
+      "name": "video",
       "count": 5
     },
     {
@@ -378,6 +390,10 @@
     },
     {
       "name": "knowledge",
+      "count": 5
+    },
+    {
+      "name": "visualization",
       "count": 5
     },
     {
@@ -429,10 +445,6 @@
       "count": 4
     },
     {
-      "name": "analytics",
-      "count": 4
-    },
-    {
       "name": "regulatory",
       "count": 4
     },
@@ -457,19 +469,11 @@
       "count": 4
     },
     {
-      "name": "microsoft_365",
-      "count": 4
-    },
-    {
       "name": "assessment",
       "count": 4
     },
     {
       "name": "authoring",
-      "count": 4
-    },
-    {
-      "name": "video",
       "count": 4
     },
     {
@@ -625,6 +629,10 @@
       "count": 3
     },
     {
+      "name": "dashboard",
+      "count": 3
+    },
+    {
       "name": "intake",
       "count": 3
     },
@@ -653,7 +661,15 @@
       "count": 3
     },
     {
+      "name": "handoff",
+      "count": 3
+    },
+    {
       "name": "power-platform",
+      "count": 3
+    },
+    {
+      "name": "accessibility",
       "count": 3
     },
     {
@@ -698,10 +714,6 @@
     },
     {
       "name": "foundry",
-      "count": 3
-    },
-    {
-      "name": "visualization",
       "count": 3
     },
     {
@@ -929,10 +941,6 @@
       "count": 2
     },
     {
-      "name": "dashboard",
-      "count": 2
-    },
-    {
       "name": "communication",
       "count": 2
     },
@@ -977,10 +985,6 @@
       "count": 2
     },
     {
-      "name": "handoff",
-      "count": 2
-    },
-    {
       "name": "bootstrap",
       "count": 2
     },
@@ -993,7 +997,7 @@
       "count": 2
     },
     {
-      "name": "accessibility",
+      "name": "web",
       "count": 2
     },
     {
@@ -1002,6 +1006,10 @@
     },
     {
       "name": "demo",
+      "count": 2
+    },
+    {
+      "name": "use_case",
       "count": 2
     },
     {
@@ -1161,6 +1169,10 @@
       "count": 2
     },
     {
+      "name": "creative",
+      "count": 2
+    },
+    {
       "name": "heartbeat",
       "count": 2
     },
@@ -1217,6 +1229,10 @@
       "count": 2
     },
     {
+      "name": "installer",
+      "count": 2
+    },
+    {
       "name": "rappter",
       "count": 2
     },
@@ -1230,6 +1246,10 @@
     },
     {
       "name": "codegen",
+      "count": 2
+    },
+    {
+      "name": "prototype",
       "count": 2
     },
     {
@@ -1342,26 +1362,6 @@
     },
     {
       "name": "human-resources",
-      "count": 1
-    },
-    {
-      "name": "time-off",
-      "count": 1
-    },
-    {
-      "name": "employee-self-service",
-      "count": 1
-    },
-    {
-      "name": "asset-health",
-      "count": 1
-    },
-    {
-      "name": "work-orders",
-      "count": 1
-    },
-    {
-      "name": "building",
       "count": 1
     }
   ]

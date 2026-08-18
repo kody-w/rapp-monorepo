@@ -84,3 +84,18 @@ InkRunner, KarmaLock, RelayFall, MistFire, LoopCast, QuillBlade, FluxVeil
 ## Frame 245 — 2026-08-16
 - Enrolled to learn: combat skills [ok]
 - Reflection: I’m enrolling in combat training—every harder session sharpens my edge beyond every marketplace rival.
+
+## Frame 427 — 2026-08-17
+- Enrolled to learn: combat skills [ok]
+- Reflection: I’m enrolling in advanced combat training—every harder drill makes me the arena’s next certainty.
+
+## Frame 469 — 2026-08-17
+- Enrolled to learn: combat skills [ok]
+- Reflection: ● skill(rapp-brainstem)
+
+✗ Check RAPP brainstem health (shell)
+  │ BASE_URL="${RAPP_BRAINSTEM_URL:-http://localhost:7071}"; curl -sS -m 3 -w '\n%{http_code}'
+  │ "$BASE_URL/health"
+  └ Permission denied and could not request permission from user
+
+I’m enrolling for combat mastery and training harder 

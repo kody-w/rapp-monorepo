@@ -80,6 +80,13 @@ Background reporters remain queue-only; the drainer is the single serialized
 process allowed to drive Messages, so reports survive both producer failures
 and reboot without waiting for a terminal command.
 
+Proactive art (level 3) can run as its own job so it never blocks the
+15-minute health tick — opt-in, see [the evolve worker](#level-3-in-its-own-job-the-evolve-worker):
+
+```bash
+./install-launchd.sh --with-evolve-worker          # or --home DIR --with-evolve-worker
+```
+
 ### One instance per `SENTINEL_HOME`
 
 One checkout can serve several instances. Set `SENTINEL_HOME` to a directory
@@ -91,6 +98,10 @@ instead of beside the code:
 SENTINEL_HOME=~/vision-court python3 health.py     # a second neighborhood
 ./install-launchd.sh --home ~/vision-court         # …or under launchd
 ```
+
+`--home` stamps `SENTINEL_HOME` into every job it loads, including
+`com.rapp.evolve-worker`, so the art arm and the tick always serve the same
+instance.
 
 Unset, nothing changes: state lives beside the code, byte-for-byte the same
 paths as before the variable existed, so a live install picks this up by
@@ -137,6 +148,212 @@ Three rules, learned the hard way:
 | **3** | evolve | acts on its own initiative when everything is healthy |
 
 **Run at level 0 for a week.** It isn't a toy setting. If it reports things you disagree with, your checks are wrong — and level 2 would have "fixed" the wrong thing eight times a day.
+
+Level 3 can be specialized without weakening repair safety. `instance_name`
+brands reports and chain metadata, `evolve_brief` supplies a standing
+structured directive, and `evolve_interval_hours` sets a recurring global
+cadence. Evolution has its own rolling daily budget and does not inherit the
+repair arm's lifetime attempt cap. Set `repair_enabled: false` when an instance
+may contribute to its allowlisted commons but must only diagnose watched
+platforms.
+
+### Level 3 in its own job: the evolve worker
+
+launchd **serialises** a `StartInterval` job. A 15-30 minute model call inside
+the 15-minute tick is therefore 15-30 minutes with nobody measuring the estate,
+and the next tick does not start early to make up for it. So proactive art can
+move out of the tick entirely:
+
+```jsonc
+"evolve_worker": {
+  "enabled": true,
+  "repo": "kody-w/public-art-collective",
+  "degraded_allowlist": ["w_openrappter_spin"]
+}
+```
+
+```bash
+./install-launchd.sh --with-evolve-worker        # or just set enabled:true and rerun
+python3 evolve_worker.py --dry-run               # what would it decide right now?
+```
+
+Enabled, the tick logs `evolve delegated to evolve_worker.py` and spends **no**
+model on art — while still diagnosing or repairing a critical failure on the
+same tick, still honouring `repair_enabled`. Absent or `false`, nothing about
+an existing install changes.
+
+The worker (`evolve_worker.py`, `com.rapp.evolve-worker`, every 30 min):
+
+| Guard | What it means |
+|---|---|
+| nonblocking `flock` | two passes never overlap; a killed pass leaves no stale lock |
+| global cadence + rolling daily budget | shared across roles, in its own ledger, never repair's |
+| fail-closed ledgers | a corrupt or truncated history **stops the pass**; it is never read as "no spend" |
+| health at start, before the push, before the merge | any **critical** check aborts; degraded proceeds only when *every* failing id is in `degraded_allowlist` — `evolve_on_degraded` is ignored here, and `alert_delivery` / `health_runtime` refuse to be allowlisted at all |
+| confined model | **no `--allow-all`**: the maker gets bounded file tools rooted at `--add-dir` and no shell, git, gh, MCP or network tool; built-in MCPs, custom instructions, `BASH_ENV`, the system temp dir, remote control and auto-update are off; HOME/XDG/TMPDIR/gh/git config live in a runtime directory the tools cannot reach, behind a strict env allowlist; inference auth is one `--secret-env-vars` variable |
+| sanitized staging | the maker never sees a repository — its root holds only its read context and a **precreated** `out/submission/`, with no `.git` and no clone metadata. It writes three files into paths that already exist (it has file tools and no shell, so it cannot create a directory); the slug lives in `meta.json`, and the controller materialises `submissions/<slug>/` in its own private clone from the gated bytes |
+| whole-tree staging check | the controller hashes the entire prepared staging tree before the model runs, and afterwards every baseline path must be byte- and mode-identical, with the only new paths allowed being `out/submission/meta.json`, one `piece.<ext>` and `state-out.json` — no new directories, no hidden files, no drafts, no rewritten context |
+| pinned git binary | git is resolved to a trusted absolute path (`/usr/bin/git`, validated as a regular, executable, non-group/world-writable file under a system root — symlinks resolved first), never through PATH. `PATH` itself is **set, not inherited**: trusted system directories only, so an attacker's directory holding a fake `git` cannot be consulted |
+| config-isolated git | **every** controller git call runs in an environment built from nothing: an allowlist carries only locale and existing cert paths — so `GIT_EXEC_PATH`, `LD_PRELOAD`, `DYLD_INSERT_LIBRARIES`, `GIT_SSH_COMMAND`, `GIT_CONFIG_PARAMETERS`, proxies and the rest cannot arrive at all. The controller then sets an isolated HOME/XDG/TMPDIR, no system config, a global config it writes (at most a validated credential helper), no prompts, and only https/file protocols. The clone is built by `init` + configured remote + fetch — never `git clone`, which reads global config *before* it resolves the URL, so a `url.<attacker>.insteadOf` rewrite produced a flawless clone of the wrong repository |
+| validated repo URL | the canonical repo is checked for shape before git sees it: https on an allowed host with plain `owner/name` segments, or an explicit existing absolute path for local test repos. `ext::`, `ssh://`, `git://`, embedded credentials and dash-prefixed "hosts" are refused |
+| remote integrity | **every** network git call — fetch, push, and branch cleanup — goes through one chokepoint that first rejects any `remote.origin.pushurl`, unexpected local config (`core.hooksPath`, `url.*.insteadOf`, `credential.*`, …), `objects/info/alternates` and executable hooks, then resets and re-reads origin's fetch and push URLs |
+| honest cleanup | if the clone no longer verifies, an abandoned branch is deleted from the canonical URL through a fresh repository with global/system git config neutralised, then confirmed with `ls-remote` — an injected remote is never contacted, and a real branch is never left orphaned |
+| tracked process tree | maker and children each get their own process group; a timeout or SIGTERM kills the tree, then the workspace is deleted, and only then is the lock released |
+| verified index | the git **index** is checked before the push — exactly two `100644` blobs whose bytes are the bytes that passed the gate |
+| reconciliation | a cycle killed between `gh pr merge` and the ledger write is finished (or its PR closed) on the next pass, from the PR and `origin/main` |
+| continuity that migrates | the creative ledger's current cycle is read canonically — `cycle`, else `last_cycle`, else a validated `cycles[]` — and fields that disagree fail closed rather than guessing. History is a strictly ordered contiguous run: a prefix from cycle 1, or a bounded tail that must carry an explicit counter, be exactly `creative_history_limit` long and end at that counter. Reader and writer share one constant, so the state written after cycle 50 is state the worker can still read. A rejected attempt is a failed spend that leaves public continuity alone |
+| liveness | every pass writes a heartbeat, and `w_evolve_worker` reports enabled-but-never-loaded or stale |
+| bounded sub-sentinel fan-out | optional: 3-5 read-only children in separate processes with no repo, no token and no ability to spawn children, aggregated deterministically into exactly 10 finalists — see below |
+| deterministic gate | exactly **two root-level regular files** (`lstat`: no symlink, no hardlink, no fifo, not executable, nothing nested) in one new `submissions/<slug>/`, valid slug/schema/kind/extension/license, piece ≤ 50 KB, SVG parses with no script, no `on*` handler and no external reference (including CSS), and `_dada_cycle` proving 1-5 rounds of **exactly 10** scored candidates whose round one reproduces the finalist records by digest |
+| controller-owned publish | the branch, commit, PR, PR **file scope as GitHub reports it**, squash merge, and the re-read of `origin/main` and the merge commit afterwards are all done by code |
+| honest outcomes | only a re-read merge sends a 🎨; a timeout, failure, rejection or decline is recorded as what it was |
+| one text per merge | a verified merge sends exactly one iMessage: title, a tappable Pages URL for the piece itself, the GitHub source and PR URLs, and one sentence of concept — see below |
+
+`SENTINEL_RESULT: CONTRIBUTED` is a claim, not a receipt. The creative ledger,
+the cadence history, the chain frame and the notification move only after the
+merge commit has been fetched back and the merged bytes match the bytes that
+passed the gate. The temporary clone is removed on every path out.
+
+Honest limit: the deterministic gate encodes the submission protocol *as it
+was read* — a repo that changes its protocol needs the gate updated with it,
+on purpose, so a PR cannot relax the rules that judge it.
+
+#### The one text a merge earns
+
+A verified merge — and *only* a verified merge — sends a single iMessage to
+`report_number` (falling back to `notify_handle`):
+
+```
+🎨 Dada Collective: “Nine Sworn Assurances” is merged.
+
+Nine consecutive attestations so identical that each one's prev equals its own payload_hash.
+
+View: https://kody-w.github.io/public-art-collective/submissions/nine-sworn-assurances/piece.svg
+Source: https://github.com/kody-w/public-art-collective/blob/main/submissions/nine-sworn-assurances/piece.svg
+PR: https://github.com/kody-w/public-art-collective/pull/12
+```
+
+- **View** is the GitHub Pages copy of the piece itself: one tap, the artwork,
+  no navigation. Derived deterministically from `commons_repo` (falling back to
+  `evolve_worker.repo`) plus the merged slug and extension — never guessed at
+  send time, and URL-encoded per path segment.
+- **Concept** is one sentence taken from the piece's own record: `_concept`,
+  else the first sentence of `_artist_statement`, else the premise of the
+  candidate that actually won its cycle. Nothing is summarised on the piece's
+  behalf, because a summary nobody wrote is a claim nobody made.
+- The static HTML report is **rebuilt before** the message is queued, so the
+  evidence links in it render the chain frames this cycle just wrote.
+
+Nothing else sends it. `SENTINEL_RESULT: CONTRIBUTED` does not; a PR that was
+opened does not; an abort after the PR does not. The message is built inside
+the same branch that already re-read the merge commit from `origin/main` and
+compared the merged bytes to the gated bytes — so if the text arrives, the art
+is live at the URL in it.
+
+The **View** link is probed after the merge before the message is queued:
+Pages publishes on its own schedule, so a bounded retry runs first, then the
+raw file URL as a fallback (labelled as such), and if neither answers the
+message says so. A triumphant 404 teaches the reader to ignore the next one.
+
+It is queued through the ordinary outbox exactly once, like every other alert,
+and the delivery layer classifies it: sent, unverified, or dead-lettered after
+its retries. This worker never asserts delivery — it hands the message over and
+stops talking. That matters because the **art arm refuses to run at all while
+`alert_delivery` is failing**: unverified or dead-lettered alerts mean the
+estate cannot reach a human, and a system that makes paintings while its own
+alarm is broken is the exact silence this repo exists to refuse. Naming
+`alert_delivery` in `degraded_allowlist` does not help; it is one of two ids
+(with `health_runtime`) the gate refuses to silence.
+
+Set `commons_repo` to `owner/name` to get the links; without it the message
+still sends with the PR URL and says plainly that no public URL was derivable.
+
+#### Sub-sentinels: a bounded fan-out before the maker
+
+One model deciding alone what to make is one model's blind spot, published. So
+a cycle can start by spending a small, capped cast of **sub-sentinels** —
+separate `copilot` processes with separate contexts:
+
+```jsonc
+"fanout": {
+  "enabled": true,
+  "children": 3,          // max_children caps it; the maker counts too
+  "max_depth": 1,         // children may never spawn children
+  "daily_child_budget": 24
+}
+```
+
+The default cast is three, and one of them exists to argue:
+
+| Role | Wave | Job |
+|---|---|---|
+| `novelty-archaeologist` | 1 | reads every prior submission and vetoes repeats |
+| `execution-designer` | 1 | thinks in the medium — can this actually be built under 50 KB? |
+| `adversarial-verifier` | 2 | sees wave one's candidates and attacks them |
+
+Roles, briefs and waves are configurable; a critic that never sees the
+candidates would be decoration, which is why waves exist.
+
+**Neither the maker nor a sub-sentinel can reach a repository.** The maker's
+tool root is a staging directory holding its read context and an empty `out/`;
+the controller's clone lives outside it, so there is no `.git` to write a
+`pushurl` into. That was a real finding — with the clone inside the tool root a
+probe wrote `clone/.git/probe.txt`, and a bounded repro set
+`remote.origin.pushurl` and got the controller to push to an attacker's remote.
+The fix is structural (no repository in reach), with the integrity check before
+every git call as the second lock.
+
+**A sub-sentinel cannot publish anything.** Not by instruction — by
+construction: it gets no git clone (the parent hands it `prior.json`, read
+from the clone), no GitHub token (`GH_TOKEN`, `GITHUB_TOKEN`, `SSH_AUTH_SOCK`
+are stripped and `gh` is pointed at an empty config dir), its own temporary
+workspace, its own process group, a hard timeout, and `RAPP_SENTINEL_DEPTH`
+set — which the worker checks and refuses to run under, so a child cannot
+start a cycle inside a cycle. The maker inherits the same marker.
+
+Each child writes exactly one file: a `rapp-subsentinel-report/1.0` JSON
+report, parsed strictly — bounded candidates, six numeric score dimensions,
+bounded evidence and critique, no unknown keys, size-capped. Then the parent
+aggregates **deterministically**: high-severity critiques are vetoes, medium
+ones demote, and the survivors are ranked by mean score into **exactly ten
+finalists** — which the gate then requires to *be* round one of the published
+`_dada_cycle`. A maker that ignores its sub-sentinels is rejected.
+
+Failure is explicit at every step. A child that times out, crashes, writes
+nothing, or breaks one bound is a named failure carried into the ledger, the
+chain frame and the maker's own prompt. Enough healthy children may continue —
+but only if ten finalists still survive; nine is a failed cycle, never a
+rounded-up ten. And if the fan-out is enabled but cannot run (spent child
+credit, no slots), the cycle is **skipped**, not quietly made alone: "the
+collective deliberated" and "one model had a think" are different claims.
+
+Everything the fan-out produces is still just text. The parent controller
+remains the only thing in this system that touches git or GitHub, after the
+same deterministic gates and the same health re-probe.
+
+Verified against the real CLI, not just asserted: `RAPP_CLI_PROBE=1 python3 -m
+unittest test_worker_liveness` spends a few model calls to check that a
+zero-tool child still answers, that the maker can write inside `--add-dir` but
+reports no shell, and that it cannot create a file outside it. The argv/env
+unit tests assert the strings; those probes assert reality.
+
+Honest limits:
+
+- Inference auth is a GitHub token, so an isolated HOME needs
+  `COPILOT_GITHUB_TOKEN` (or `fanout.auth_env_var`) set for the job. Unset,
+  with `isolated_home: true`, the cycle fails **explicitly** rather than
+  falling back to the operator's real `~/.copilot` — that direction is
+  deliberate.
+- `sandbox_exec` (macOS `sandbox-exec` file-write confinement) is available
+  and off by default: tool and path restriction is the mandatory layer, and a
+  second belt that silently strangled inference would be worse than none. Its
+  profile permits writes to exactly two roots — the sanitized staging
+  directory and the sibling runtime directory holding the isolated
+  HOME/XDG/TMPDIR — and never the controller's clone or the operator's real
+  HOME. It therefore **requires `isolated_home`** (and so the inference
+  credential): a shared `~/.copilot` is outside every writable root, and that
+  combination is refused up front instead of failing later as a bare
+  PermissionError.
 
 ---
 
@@ -284,3 +501,7 @@ Stated plainly because the whole argument here is that unverifiable claims are w
 | `BLOG-the-agent-that-refused.md` | the long-form writeup |
 
 MIT. The `rapp/1` reference implementation is vendored from [kody-w/rapp-1](https://github.com/kody-w/rapp-1) under its own terms.
+
+## The pattern, generalized
+
+Three watchers is the smallest case. For the general one — **any number of AIs, from any vendors, as mutually-verifying peers** — see [N-AIS-WALK-INTO-A-BAR.md](N-AIS-WALK-INTO-A-BAR.md). Seat your own cast in `config.json`'s `neighbors` map; no code edit.

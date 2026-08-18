@@ -2,15 +2,93 @@
   "_head_publish_why": "Optional low-noise head hosting (#1 ask 6). head_publish_cmd runs after every publish_head(), throttled by head_publish_min_minutes, hard-timed-out, never fatal; the head file's path arrives as $SENTINEL_HEAD_PATH. Executes YOUR shell from YOUR config - same trust boundary as your plists; no default on purpose. Example: gh gist edit <gist-id> --filename sentinel-head.json \"$SENTINEL_HEAD_PATH\"",
   "head_publish_cmd": "",
   "head_publish_min_minutes": 10,
+  "instance_name": "RAPP Sentinel",
+  "instance_slug": "rapp-sentinel",
+  "instance_purpose": "Keep the declared targets healthy and the watchers honest.",
   "level": 0,
+  "repair_enabled": true,
   "daily_escalation_budget": 8,
   "issue_cooldown_hours": 4,
   "max_attempts_per_issue": 3,
   "notify": false,
   "notify_handle": "you@example.com",
+  "_report_number_why": "iMessage/SMS destination for reports: nightwatch's play-by-play, and the evolve worker's one-text-per-verified-merge art update (title, tappable Pages URL, source, PR, one sentence). Falls back to notify_handle when unset.",
+  "report_number": "",
+  "notify_queue_only": false,
   "copilot_model": "claude-opus-5",
   "copilot_timeout_s": 900,
   "evolve_timeout_s": 1800,
+  "daily_evolve_budget": 2,
+  "evolve_interval_hours": 4,
+  "evolve_on_degraded": false,
+  "evolve_brief": {},
+  "creative_state_file": "state/evolve-creative-state.json",
+  "_evolve_worker_why": "Proactive art is a 15-30 minute model run; the health tick is every 15 minutes and launchd serialises it, so the two cannot share a clock without health losing. enabled:true moves the art arm to com.rapp.evolve-worker (evolve_worker.py + install-launchd.sh --with-evolve-worker) and the tick then spends NO model on art - diagnose/repair and repair_enabled are untouched. Omit the block, or leave enabled:false, and nothing about an existing install changes. degraded_allowlist is the ONLY way to evolve while degraded: every failing check id must be named there, and evolve_on_degraded is ignored by the worker. Two ids refuse to be allowlisted at all - alert_delivery (unverified or dead-lettered alerts mean the estate cannot reach a human) and health_runtime (the verdict is unknown). Listing them changes nothing: a loop that cannot report must not publish. The model works in a worker-made temp clone, may not commit/push/PR/merge, and the controller validates and owns every git and GitHub operation.",
+  "_evolve_worker_fanout_why": "fanout spawns bounded read-only sub-sentinels before the maker runs: separate copilot processes, each with its own temp workspace, no git clone, no GitHub token in its environment, a hard timeout, its own process group, and RAPP_SENTINEL_DEPTH set so a child can never spawn children (max_depth 1). Each child returns one strict JSON report (rapp-subsentinel-report/1.0); the parent parses it deterministically, applies high-severity critiques as vetoes, and aggregates EXACTLY 10 finalists - which then must be round 1 of the submission's _dada_cycle. Fewer than 10 survivors, or fewer than min_healthy_children, fails the cycle out loud; a failed child is never an empty success. children is the cast size (max_children caps it, max_processes_per_cycle counts the maker too, daily_child_budget is a rolling 24h credit cap). Roles are configurable; wave 2 sees wave 1's candidates, which is what makes the adversarial verifier more than decoration.",
+  "evolve_worker": {
+    "enabled": false,
+    "repo": "kody-w/public-art-collective",
+    "base_branch": "main",
+    "roles": [],
+    "degraded_allowlist": [
+      "w_openrappter_spin"
+    ],
+    "workspace_root": "state/evolve-workspaces",
+    "branch_prefix": "art",
+    "git_author_name": "RAPP Sentinel evolve worker",
+    "git_author_email": "rapp-sentinel@users.noreply.github.com",
+    "max_piece_bytes": 51200,
+    "notify_declines": false,
+    "fanout": {
+      "enabled": false,
+      "children": 3,
+      "max_children": 5,
+      "max_depth": 1,
+      "candidates_per_child": 6,
+      "child_timeout_s": 600,
+      "total_timeout_s": 1200,
+      "concurrency": 3,
+      "max_processes_per_cycle": 6,
+      "daily_child_budget": 24,
+      "min_healthy_children": 2,
+      "roles": [
+        {
+          "name": "novelty-archaeologist",
+          "wave": 1,
+          "brief": "Dig through every prior submission before proposing anything; veto repeats."
+        },
+        {
+          "name": "execution-designer",
+          "wave": 1,
+          "brief": "Think in the medium: a premise that cannot be built under 50 KB is a wish."
+        },
+        {
+          "name": "adversarial-verifier",
+          "wave": 2,
+          "brief": "Attack wave one's candidates; a high-severity critique vetoes deterministically."
+        }
+      ],
+      "require_verifier": true,
+      "isolated_home": true,
+      "auth_env_var": "COPILOT_GITHUB_TOKEN",
+      "sandbox_exec": false
+    },
+    "interval_minutes": 30,
+    "view_probe_attempts": 5,
+    "view_probe_backoff": [
+      5,
+      10,
+      20,
+      30
+    ],
+    "allowed_repo_hosts": [
+      "github.com"
+    ],
+    "git_binary": "",
+    "gh_binary": "",
+    "creative_history_limit": 50
+  },
+  "smoke_enabled": true,
   "daily_smoke_budget": 1,
   "smoke_interval_hours": 72,
   "smoke_timeout_s": 600,
@@ -32,7 +110,8 @@
     "kody-w/rapp-moment",
     "kody-w/public-art-collective"
   ],
-  "commons_repo": "",
+  "_commons_repo_why": "owner/name of the commons this instance publishes art to. The evolve worker derives the merge notification's tappable URLs from it: https://<owner>.github.io/<name>/submissions/<slug>/piece.<ext> to view and https://github.com/<owner>/<name>/blob/<branch>/... for the source. Unset, a verified merge still texts you the PR link and says no public URL was derivable. Only a merge verified against fresh origin/main sends that message - never a model's SENTINEL_RESULT line, never an aborted or rejected cycle.",
+  "commons_repo": "kody-w/public-art-collective",
   "_watchers_why": "health.py's probe_watchers reads its estate-probe targets from this block (issue #1 ask 2). Every key defaults to the previously hardcoded live values, so omitting the whole block changes nothing. Overrides merge per watcher - give only the keys you change. enabled:false skips that probe AND declares the omission in every verdict (w_checks_complete reports 'disabled by config'), never a silent green. openrappter.labels is the same key the spin scan unions into its candidate labels - one key, one read path.",
   "watchers": {
     "brainstem": {
@@ -49,5 +128,6 @@
         "com.openrappter.daemon"
       ]
     }
-  }
+  },
+  "_evolve_worker_confinement_why": "Model processes get NO --allow-all. The maker gets bounded file tools (view/glob/grep/create/edit/write/apply_patch) rooted at --add-dir on its own workspace; sub-sentinels get --available-tools= (nothing at all) and answer in JSON on stdout. bash, powershell, fetch, web_search, task, ask_user and lsp are named in both --excluded-tools and --deny-tool; built-in MCPs, custom instructions, BASH_ENV, the system temp dir, remote control and auto-update are all switched off. HOME/XDG/TMPDIR/GH_CONFIG_DIR/git config point inside the workspace and the environment is an allowlist, so no operator credential is visible to a model. Inference auth is ONE variable (auth_env_var, default COPILOT_GITHUB_TOKEN) passed via --secret-env-vars so the CLI strips it from tool/MCP environments; with isolated_home true and that variable unset the cycle fails explicitly rather than falling back to your real ~/.copilot. sandbox_exec adds macOS sandbox-exec file-write confinement as defence in depth (off by default; tool and path limits are the mandatory layer). Its profile allows writes to exactly two roots - the sanitized staging directory and the sibling runtime directory holding the isolated HOME/XDG/TMPDIR - and never the controller's clone or your real HOME, so it REQUIRES isolated_home (and therefore auth_env_var); the combination sandbox_exec + shared HOME is refused up front rather than dying as a PermissionError. The clone is built by init + configured remote + fetch rather than `git clone` (which reads global config before resolving the url, so a url.<attacker>.insteadOf rewrite could redirect it), git itself is pinned to a trusted absolute binary (/usr/bin/git by default; git_binary may override it only if it resolves to a regular, executable, non-group/world-writable file under a trusted system root) so a fake `git` on PATH can never be chosen, PATH is SET to trusted system directories rather than inherited, and every controller git call runs in an environment built from an ALLOWLIST (locale, existing cert paths) so GIT_EXEC_PATH - which chooses git-remote-https and git-upload-pack - LD_PRELOAD, DYLD_INSERT_LIBRARIES, GIT_SSH_COMMAND, GIT_CONFIG_PARAMETERS, proxies and anything a future git adds cannot arrive at all, with system/global config disabled apart from a generated file holding at most a validated credential helper, plus an isolated HOME/XDG/TMPDIR, allowed_repo_hosts plus a shape check validate the canonical url before git sees it, and every network git call (fetch, push, branch deletion) runs through one chokepoint that verifies repo integrity first; if the clone no longer verifies, an abandoned branch is deleted from the canonical URL through a fresh repository with global/system git config neutralised. The maker works in a SANITIZED STAGING directory - its read context plus a PRECREATED out/submission/ (it has file tools and no shell, so it can never create a directory; the slug lives in meta.json and the controller materialises submissions/<slug>/ in its own clone) - with no .git and no clone metadata in reach; the controller hashes the whole prepared staging tree before the model runs and afterwards requires every baseline path unchanged with only meta.json, one piece.<ext> and state-out.json as new paths (no new directories, hidden files, drafts or rewritten context), then copies only the two validated files into its own private clone, and immediately before every git operation it rejects any remote.origin.pushurl, unexpected local config, alternates or executable hooks and resets origin's fetch/push URLs to the configured repo. Only the controller has a shell, git and GitHub credentials."
 }

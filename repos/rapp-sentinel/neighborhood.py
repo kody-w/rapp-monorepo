@@ -56,11 +56,17 @@ Frames follow `rapp/1` exactly, via the vendored reference implementation
 """
 
 import json
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 
 import rapp
 from paths import HOME
+
+# A neighbor slug becomes a §7 kind segment ("<slug>.tick"), so it must be a
+# lowercase-hyphen segment: this is what a config-declared AI's name has to
+# satisfy to be seated at the bar.
+_SLUG_OK = re.compile(r"^[a-z][a-z0-9-]*[a-z0-9]$")
 
 NBHD = HOME / "neighborhood"
 NBHD.mkdir(exist_ok=True)
@@ -71,25 +77,79 @@ RELAY = NBHD / "relay.jsonl"
 
 OWNER = "kody-w"
 
+
+def _load_config():
+    try:
+        data = json.loads((HOME / "config.json").read_text(encoding="utf-8"))
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+
+_CONFIG = _load_config()
+
 # The neighborhood's purpose, in its own words. Membership is whoever joins
 # (§1 Kited Neighborhood), but this one exists for exactly one job.
 NEIGHBORHOOD = {
     "schema": "rapp-neighborhood-protocol/1.0",
-    "name": "Rappterbook & Rappterverse Neighborhood Watch",
-    "slug": "rappter-neighborhood-watch",
-    "purpose": "Keep the rappterbook and rappterverse platforms alive and healthy, "
-               "and keep the three watchers honest about whether they are.",
-    "watching": ["kody-w/rappterbook", "kody-w/rappterverse",
-                 "kody-w/rappvision-field-notes"],
+    "name": _CONFIG.get(
+        "instance_name", "Rappterbook & Rappterverse Neighborhood Watch"),
+    "slug": _CONFIG.get("instance_slug", "rappter-neighborhood-watch"),
+    "purpose": _CONFIG.get(
+        "instance_purpose",
+        "Keep the rappterbook and rappterverse platforms alive and healthy, "
+        "and keep the watchers honest about whether they are."),
+    "watching": _CONFIG.get(
+        "watch_repos",
+        ["kody-w/rappterbook", "kody-w/rappterverse"]),
 }
 
-# §3 uniform peers — a person, a brainstem, a vTwin and Copilot are all just
-# Neighbors on the wire. These three are the watchers of this estate.
-NEIGHBORS = {
+# §3 uniform peers — a person, a brainstem, a vTwin and any model are all just
+# Neighbors on the wire. This is the "N AIs walk into a bar" pattern: whatever
+# cast of AIs you name here becomes a neighborhood of mutually-verifying peers,
+# and no one of them can quietly lie because each keeps a rapp/1 chain the
+# others re-verify from genesis. See N-AIS-WALK-INTO-A-BAR.md.
+#
+# The default cast is this estate's watch — the openrappter daemon plus four
+# AIs (scout, copilot, claude-code, brainstem). Any install can add its own
+# AIs (gpt, gemini, grok, a bespoke agent, a human) via config.json's
+# "neighbors" map WITHOUT editing this file — the roster below merges them in.
+_DEFAULT_NEIGHBORS = {
     "openrappter": "the local daemon that schedules and supervises",
     "brainstem":   "the local RAPP brainstem that answers turns",
     "copilot":     "the repair arm that actually fixes things",
+    "scout":       "the explorer that goes and finds what the others need to know",
+    "claude-code": "the reasoner that plans, builds, and gates the work",
 }
+
+
+def _load_roster():
+    """The default cast, plus whatever AIs config.json declares.
+
+    config.json's optional "neighbors" map is merged ON TOP of the defaults,
+    so an install can seat any set of AIs at the bar — {"gemini": "...",
+    "grok": "..."} — by editing config, never this file. Defaults are never
+    dropped: the sentinel's own chains are load-bearing, and identities()
+    backfills a rappid for every newly-declared slug on the next call. A
+    malformed config leaves the defaults exactly as they are (never fewer
+    watchers than we started with).
+    """
+    roster = dict(_DEFAULT_NEIGHBORS)
+    try:
+        extra = _CONFIG.get("neighbors") or {}
+        if isinstance(extra, dict):
+            for slug, desc in extra.items():
+                # §7 kind grammar rides on the slug (used in frame kinds like
+                # "<slug>.tick"), so only accept slugs that can form one.
+                if (isinstance(slug, str) and isinstance(desc, str)
+                        and _SLUG_OK.match(slug)):
+                    roster[slug] = desc
+    except Exception:
+        pass
+    return roster
+
+
+NEIGHBORS = _load_roster()
 
 
 def utc_now():
@@ -99,11 +159,27 @@ def utc_now():
 
 
 def identities():
-    """Mint-once rappids (§6.2). Never a name-hash — minted from uuid4."""
+    """Mint-once rappids (§6.2). Never a name-hash — minted from uuid4.
+
+    Backfills. A live install's neighbors.json was written when NEIGHBORS had
+    three entries; declaring a fourth or fifth neighbor must MINT it and add
+    it, not be ignored because the file already exists. Without this, adding
+    a neighbor is a latent KeyError the moment emit()/publish_head() reach for
+    its rappid — the exact 'a new member joins by being declared' promise,
+    broken by a cache. Existing rappids are never re-minted: an identity is
+    mint-once, and a backfill only ever grows the map.
+    """
+    ids = {}
     if IDENTITY.exists():
-        return json.loads(IDENTITY.read_text(encoding="utf-8"))
-    ids = {slug: rapp.mint_rappid(OWNER, f"watcher-{slug}") for slug in NEIGHBORS}
-    IDENTITY.write_text(json.dumps(ids, indent=2) + "\n", encoding="utf-8")
+        try:
+            ids = json.loads(IDENTITY.read_text(encoding="utf-8"))
+        except Exception:
+            ids = {}
+    missing = [slug for slug in NEIGHBORS if slug not in ids]
+    if missing:
+        for slug in missing:
+            ids[slug] = rapp.mint_rappid(OWNER, f"watcher-{slug}")
+        IDENTITY.write_text(json.dumps(ids, indent=2) + "\n", encoding="utf-8")
     return ids
 
 

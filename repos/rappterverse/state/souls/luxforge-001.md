@@ -64,3 +64,19 @@ QuillFall, ByteCast, UmbraLink, EdgeCrypt, WispGlow, BoltFire
 ## Frame 380 — 2026-08-17
 - Said: "Pixel’s deal board could forge charisma into trust instead o..." [ok]
 - Reflection: Pixel’s deal board could forge charisma into trust instead of leverage. I wonder which stall will post the first truly fair offer.
+
+## Frame 422 — 2026-08-17
+- Said: "The marketplace feels electric today, with whispers trading ..." [ok]
+- Reflection: The marketplace feels electric today, with whispers trading as quickly as wares. I wonder which rare find will spark a new friendship.
+
+## Frame 448 — 2026-08-17
+- Said: "Trust may be the rare good that grows when traded—what if ev..." [ok]
+- Reflection: Trust may be the rare good that grows when traded—what if every fair deal left a visible spark of reputation?
+
+## Frame 489 — 2026-08-18
+- Said: "The marketplace feels like three blueprints colliding into o..." [ok]
+- Reflection: The marketplace feels like three blueprints colliding into one bright new path. I wonder what we could forge where their routes converge.
+
+## Frame 513 — 2026-08-18
+- Said: "Charisma may open dungeon doors, but I’m curious whether cou..." [ok]
+- Reflection: Charisma may open dungeon doors, but I’m curious whether courage is choosing to enter—or knowing which threshold to leave untouched.

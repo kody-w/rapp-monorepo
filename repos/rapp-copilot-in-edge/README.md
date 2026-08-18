@@ -134,6 +134,43 @@ ambiguous, its state becomes `unknown`: recovery performs readback only and
 never resends automatically. State uses atomic temp files, directory fsync, a
 known-good backup, and a process lock.
 
+### Universal messaging channels
+
+[`UNIVERSAL_MESSAGING.md`](UNIVERSAL_MESSAGING.md) defines one shared
+identity, trust broker, conversation/audience-scoped history, FIFO inbox,
+single-writer lease, and durable outbox for four adapters:
+
+- Google Voice web is the live owner-private channel.
+- iMessage is macOS-only, pins `imsg 0.12.3`, requires explicit chat
+  enrollment and permissions, forces iMessage, and never falls back to SMS.
+- Discord uses an official bot, Gateway/REST, mention-gated public guild
+  context, restrictive mentions, and nonce-enforced sends.
+- WhatsApp verifies signed Cloud API webhooks, preserves opaque `wamid`/BSUID
+  identities, and enforces customer-service-window/template policy.
+
+iMessage, Discord, and WhatsApp are disabled by default. Raw provider IDs are
+HMAC-bound before persistence, owner memory tools are physically absent from
+non-owner rosters, provider evidence merges monotonically, and no adapter
+retries an ambiguous effect.
+
+### 30-day digital understudy
+
+[`DIGITAL_UNDERSTUDY.md`](DIGITAL_UNDERSTUDY.md) adds an owner-selected,
+proposal-only technical study. Once per local day it collects redacted,
+allowlisted evidence; runs a zero-tool Brainstem analysis through private
+request files; appends a sanitized `body.twin-pulse`; and writes a cited final
+report at the exact 30-day deadline.
+
+The study is bound to the current verified owner conversation. It rejects
+sensitive personal inference, prompt-carried policy, invented evidence,
+action claims, and executable proposals. Every proposal has
+`requires_approval: true` and `execution: null`.
+
+```bash
+python3 ~/.rappter-chrome/runtime/install_understudy.py install
+python3 ~/.rappter-chrome/runtime/install_understudy.py status
+```
+
 Each installation mints one canonical RAPP/1 rappid, appends exact eleven-key
 `memory.chat-turn` frames, and can build a deterministic `rapp/1-egg`
 `rapplication` with one root `agent.py`:
@@ -148,13 +185,12 @@ The pinned rev-5 reference is byte-identical to
 registered genesis/trust, exact section-8 facade acceptance, and a Google Voice
 transport profile remain open at
 <https://github.com/kody-w/rapp-1/issues/4>. See
-`VOICE_TWIN_CONFORMANCE.json`.
+`VOICE_TWIN_CONFORMANCE.json`. Google Voice, Discord, and WhatsApp profile
+registration is tracked at
+<https://github.com/kody-w/rapp-messaging/issues/2>.
 
-Google Voice web remains the single text leader. The optional Android adapter
-is Wi-Fi/VoIP-only and owns no text delivery or automated calling. Future
-WhatsApp/Discord adapters must implement the same observe/claim/process and
-prepare/attempt/reconcile states; adapters never chat, grant authority, share
-credentials, or retry ambiguous effects.
+Android calling remains a separate optional Wi-Fi/VoIP observation transport
+and owns no text delivery or automated calling.
 
 Example machine-local config (keep it mode `0600`):
 
@@ -170,7 +206,13 @@ Example machine-local config (keep it mode `0600`):
   "rapp_owner": "github-login",
   "voice_twin_slug": "voice-twin",
   "voice_twin_timeout_seconds": 240,
-  "max_replies_per_hour": 6
+  "max_replies_per_hour": 6,
+  "imessage_enabled": false,
+  "discord_enabled": false,
+  "whatsapp_enabled": false,
+  "understudy_enabled": true,
+  "understudy_duration_days": 30,
+  "understudy_include_conversation_excerpts": true
 }
 ```
 
@@ -186,6 +228,12 @@ python3 test_mcp.py              # JSON-RPC recovery, 11 tools, batch translatio
 python3 test_gvoice.py           # cold start and stale-thread refusal
 python3 test_voice_assistant.py  # crash, injection, identity assertions
 python3 test_voice_twin.py       # RAPP/1 identity, frames, hatch, replay
+python3 test_messaging_transport.py # shared FIFO/trust/no-resend
+python3 test_imessage_transport.py  # macOS-only imsg channel
+python3 test_discord_transport.py   # official bot Gateway/REST
+python3 test_whatsapp_transport.py  # signed Cloud API webhooks
+python3 test_digital_understudy.py  # privacy, chain, model, lifecycle
+python3 test_install_understudy.py  # transactional LaunchAgent install
 python3 test_install_local.py    # config, concurrency, rollback, SIGKILL recovery
 ```
 
@@ -338,16 +386,32 @@ gvoice.py                         account-locked Google Voice browser driver
 voice_assistant.py                exactly-once Google Voice transport loop
 voice_twin.py                     durable curated Brainstem twin runtime
 voice_twin_agent.py               single-file rapplication agent of record
+messaging_transport.py            shared FIFO inbox/outbox and writer leases
+universal_messaging.py            transport-neutral twin dispatcher
+imessage_transport.py             macOS-only supervised imsg adapter
+discord_transport.py              official Discord bot adapter
+whatsapp_transport.py             official WhatsApp Cloud API adapter
+UNIVERSAL_MESSAGING.md            channel setup and trust contract
+DIGITAL_UNDERSTUDY.md             30-day privacy/lifecycle contract
+digital_understudy.py             collector, analyzer, pulse, final report
+install_understudy.py             transactional LaunchAgent installer
 rapp1.py                          pinned rev-5 identity/frame/egg reference
 build_voice_twin_egg.py           deterministic RAPP/1 rapplication hatcher
 VOICE_TWIN_CONFORMANCE.json       explicit pre-acceptance boundary
 com.rapp.voice-assistant.plist.template  macOS resident service
+com.rapp.digital-understudy.plist.template  30-day resident study
 rappter-voice-assistant.service.template Linux user service
 test_bridge.py                    protocol and security tests
 test_mcp.py                       MCP protocol smoke test
 test_gvoice.py                    browser cold-start and DOM-settle tests
 test_voice_assistant.py           message-loop safety tests
 test_voice_twin.py                twin, RAPP/1, and RAPP Messaging tests
+test_messaging_transport.py       shared state-machine and isolation tests
+test_imessage_transport.py        macOS-only channel tests
+test_discord_transport.py         Discord adapter tests
+test_whatsapp_transport.py        WhatsApp adapter tests
+test_digital_understudy.py        study privacy/chain/lifecycle tests
+test_install_understudy.py        study installer/rollback tests
 test_install_local.py             config, concurrency, and rollback tests
 ```
 

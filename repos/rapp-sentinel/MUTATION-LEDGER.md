@@ -26,6 +26,7 @@ controls. 1 MISSED class found.**
 | `w_checks_complete` | removed an @check decorator | DETECTED |
 | `w_anchor_ledger` | dropped 6 frames from a witnessed chain | DETECTED |
 | `alert_delivery` | queued an alert to an unroutable handle | DETECTED |
+| `w_evolve_worker` | heartbeat aged past 3 intervals with the job enabled | DETECTED |
 | `rv_world_merging` | no state merges; then the real 19-day freeze | DETECTED |
 | `sites` | both 404; then a SINGLE platform 503 | DETECTED |
 | `rb_json_parses` | git conflict markers in served state | DETECTED |
@@ -159,7 +160,9 @@ check keeps its history.*
 | `w_brainstem` | ledger row (503 / unreachable / responds-but-blank) | proven |
 | `w_checks_complete` | ledger row; `CompletenessRegressionTests` in `test_static_delivery.py` | proven |
 | `w_openrappter` | ledger row (nothing LISTENING on :18790) | proven |
+| `w_sentinel_current` | `prove_sentinel_current.py` (ships with the check) | proven |
 | `w_sentinel_fresh` | ledger row (last_run.json moved 9h into the past) | proven |
+| `w_evolve_worker` | ledger row (stale heartbeat with evolve_worker.enabled true) | proven |
 | `w_openrappter_spin` | `prove_spinning_job.py` | landed in #76 |
 | `w_freshness_paired` | `prove_freshness_pairing.py` | landed in #76 |
 | `w_outsider_coverage` | `prove_outsider_coverage.py` | proven |
@@ -167,6 +170,7 @@ check keeps its history.*
 | `cadence_honest` | `prove_cadence_honest.py` (ships with the check, #12) | proven |
 | `w_test_baseline` | `prove_test_baseline.py` (ships with the check, #13) | proven |
 | `ip_hygiene` | `prove_publication_hygiene.py` (ships with the check) | proven |
+| *(evolve situation)* | `prove_critique_situation.py` (prompt guarantees, not a check) | proven |
 | `w_outsider_smoke` | `prove_outsider_smoke.py` | proven |
 
 The two UNPROVEN rows are the honest debt: both ids landed in #62 with unit

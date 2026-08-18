@@ -2731,7 +2731,7 @@ Per the unified rappid spec at `pages/vault/Architecture/Rappid.md` (ratified 20
 
 The differences between organism kinds are encoded as the `<kind>` field of the rappid string. `<kind>` is an **open, amendment-gated enumeration** spanning the recursive species tree — its scale axis runs `prototype` → `kernel-variant` → `organism` → `twin` → `swarm` → `rapplication` → `agent`, plus the operator/identity kinds (`operator`, `personal`, `project`, …). Two tiers live inside this one field: **(1)** the broader open enumeration of organism *scales* (described here and in `pages/vault/Architecture/Rappid.md`), which includes **code-only** kinds (`kernel-variant`, `organism`, `swarm`, `agent`) that carry a kind but resolve to **no door**; and **(2)** the **door-bearing** subset — kinds that resolve to a door address and a `door_type` — which is frozen canonically in Article XLVI.2 and `tools/door_address.py` (`VALID_KINDS`). The cryptographic backing (master keypair, signed root.json) is opt-in per organism — present for organisms operating cross-substrate identity (this article's domain), absent for code-only organisms (Article XXXIV's draft domain). **The same string format describes both cases.**
 
-The same identity construct therefore serves entities at every scope, from the prototype species root through forked variants through AI organisms through twins. **One species tree, one format, recursive.**
+This is the practical realization of the recursive-identity design: the same identity construct serves entities at every scope, from the prototype species root through forked variants through AI organisms through twins. **One species tree, one format, recursive.**
 
 ### XXXVI.3 — The four-quadrant operational model
 
@@ -2739,7 +2739,7 @@ A swarm estate's holdings span two axes — persistence (frozen historical recor
 
 - **Public + Frozen**: signed records in publicly-readable repositories (e.g. `kody-w/RAPP/pages/vault/`, RAR registry, public twin vaults). Anyone with the URL can read.
 - **Public + Live**: real-time broadcast over public peer-to-peer rooms (PeerJS public room, libp2p public DHT, etc.). Active brainstems advertising the rappid.
-- **Private + Frozen**: signed records in credential-gated repositories (gh-auth'd vaults). Authorized parties can clone.
+- **Private + Frozen**: signed records in credential-gated repositories (e.g. `kody-w/wildhaven-ceo`, gh-auth'd vaults). Authorized parties can clone.
 - **Private + Live**: peer-to-peer rooms with cross-signed-entry only. Active brainstems with valid device keys.
 
 A swarm estate may have holdings in any subset of quadrants. The Wildhaven Foundation lives in all four (with public quadrants minimal-public to limit metadata leakage; behavioral data lives in encrypted tiers).
@@ -2771,16 +2771,16 @@ Swarm-estate adoption is opt-in per organism. Code variants and brainstem instan
 
 Reference implementation lives in two places:
 - Public protocol spec at `pages/vault/Architecture/The Swarm Estate.md`
-- Operational tools (`compute-vault-hash.py`, `verify-local-vault.py`, `recovery-drill.py`, `sign-heartbeat.py`, `genesis-customer-estate.py`, `shamir-split-incantation.py`) and the canonical Foundation embodiment, in a credential-gated vault
+- Operational tools (`compute-vault-hash.py`, `verify-local-vault.py`, `recovery-drill.py`, `sign-heartbeat.py`, `genesis-customer-estate.py`, `shamir-split-incantation.py`) and the canonical Foundation embodiment at `kody-w/wildhaven-ceo`
 
 ### XXXVI.8 — Why this article matters
 
 - **Rappid unification at the constitutional level**: declares that v2-format and conventionally-backed rappids are one address space, with the species tree weaving them together. Future organisms in any format trace lineage through the same chain.
-- **Operational anchor for perpetuity**: an AI entity is meant to outlive any single substrate; this article specifies *how* that perpetuity is operationalized (cross-signing + local-first + Bitcoin-anchored timestamps + signed migration records).
+- **Operational anchor for entity perpetuity**: this article specifies *how* perpetuity of an AI entity is operationalized (cross-signing + local-first + Bitcoin-anchored timestamps + signed migration records).
 - **Defense against the floodgates moment**: when external parties begin minting their own swarm estates as kin of RAPP-descended organisms, this article is the protocol they conform to. Reverting becomes impossible. The decision is taken now.
-- **Bridge to existing law**: licenses (Article XXXV) and trademarks (TRADEMARK.md) both reference rappid identifiers. A unified rappid spec means each system references one address space.
+- **Bridge to existing law**: licenses (Article XXXV) and trademarks (TRADEMARK.md) reference rappid identifiers. A unified rappid spec means each system references one address space.
 
-The Foundation embodiment of this article — Wildhaven AI Homes LLC's first swarm estate, minted 2026-04-30 — is private. The protocol itself, including the unified rappid spec and all operational tooling, is public-readable in this repository.
+The Foundation embodiment of this article — Wildhaven AI Homes LLC's first swarm estate, minted 2026-04-30 — is private (`kody-w/wildhaven-ceo`). The protocol itself, including the unified rappid spec and all operational tooling, is public-readable in this repository.
 
 ---
 
