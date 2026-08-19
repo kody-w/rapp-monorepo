@@ -8,7 +8,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `openrappter service status` reports whether launchd actually supervises the gateway that is answering. The two can disagree permanently and nothing said so: on the machine that prompted this, a gateway started outside launchd had held the port for 13 days, so all 29 supervised starts exited 1 with `EADDRINUSE` while `/health` returned 200 and `doctor` reported the same message it reports when supervision is correct.
+- `openrappter audit` runs the security auditor and exits non-zero on high or critical findings. `SecurityAuditor` had five checks and was constructed by nothing but its own test.
+- The gateway now emits `agent.tool` as each tool call finishes, so tool use appears in chat. The chat UI has registered a listener for it since it was written and the event had no emit site anywhere, so the feature had never worked. The payload carries the tool's name, outcome and duration -- never its arguments, which can hold secrets.
 
+- **`openrappter memory`** — search, record and forget what a rappter remembers.
+  The module was complete and had never been registered, so `openrappter memory`
+  fell through to the `[message]` positional and went to the model as a chat
+  prompt. It was left unregistered deliberately, because it built a
+  `MemoryManager` that holds everything in `Map`s and performs no file I/O: `add`
+  printed an id and discarded it on exit, and `list` reported nothing afterwards.
+  It now drives `MemoryAgent`, which is the memory the product actually keeps in
+  `~/.openrappter/memory.json` — the same file `anatomy` reads and `doctor`
+  inspects — so what one invocation records, the next one finds. There is no
+  `clear`: `MemoryAgent` forgets by query, and a command that said "delete all"
+  while doing nothing of the sort is the mistake this module already made once.
+
+- **`openrappter backup`** — create, list, restore and delete snapshots of
+  `~/.openrappter/` from the terminal. The gateway has served all four
+  operations since the feature landed and the code behind them does real work,
+  but nothing shipped ever called them: an update could snapshot before it ran
+  and the user still had no way to reach that snapshot afterwards. A backup you
+  cannot restore is not a backup. `restore` overwrites the live files in place
+  and keeps no copy of what it replaced, so it requires an explicit `--yes`.
+- **`openrappter approvals`** — list, approve and deny commands the safety
+  policy has gated, from the terminal. The gateway has served `exec.pending`
+  and `exec.respond` for some time and the only client calling them was the
+  macOS menu bar app, so on Linux and Windows a gated command could be
+  requested and never granted: the agent hands back an approval id and there
+  was nowhere to take it. `approvals list` shows the command *and why it needs
+  a person*, since `LD_PRELOAD=… ls` reads as an ordinary `ls` otherwise.
 - **A slow machine can start the desktop app** — the app waits for the gateway
   it spawned to report ready and then kills it. That budget only ever runs out
   when the gateway is alive and merely slow (a genuine startup failure is
@@ -39,6 +68,243 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `openrappter audit` printed a blocking-finding count that ignored
+  `--fail-on`. The exit code honoured the flag while the summary counted
+  against a fixed `critical|high` set, so `--fail-on critical` could report
+  "1 at high or critical" and still exit 0, and `--fail-on low` could report
+  "0 at high or critical" while exiting 1. The count now uses the threshold in
+  effect and names it.
+- `agent.tool` omitted `toolCallId`, the field the chat list keys its rows on. Two tools finishing in the same millisecond therefore resolved to the same key, and the second *updated* the first's row instead of adding one -- so a tool vanished from the transcript.
+- The Flight Recorder ledger ignored `OPENRAPPTER_HOME` in **both** runtimes, so relocating an installation moved everything except the database recording it. TypeScript spelled the path across three lines, which is how it escaped the migration that moved the other 46 sites -- and the guard meant to catch stragglers, whose pattern could not match its own formatting.
+- `agent.tool` reported every **successful** tool call as a failure in chat. The event added in the previous change sent `status: 'ok'`, and the chat UI -- which has read this event since before it was emitted -- renders `status === 'success' ? '✓' : '✗'`, so `'ok'` fell to the cross. Emitter and consumer are now pinned to one vocabulary.
+- The dormant `send` CLI sent `{ channel, message, target }` where `channels.send` reads `{ channelId, conversationId, content }`, so every field arrived `undefined` at the channel registry. `--metadata` is removed (no such field exists, so it was accepted and discarded) and `--all` now refuses instead of calling `channels.broadcast`, which no gateway registers. The command remains unregistered.
+- `LearnNewAgent` reported `status: 'success'` and "Created and loaded agent" even when the agent it generated failed to load. The failure was recorded only as `hot_loaded: false` further down the same payload, under the field `agentResultIsError` classifies on -- so every composition layer treated a broken agent as a working one, and the only other symptom was a warning on each gateway start.
+- The Electron desktop killed a gateway that was merely slow to start. `waitForGatewayReady` reports a gateway that crashes via `onExit` in milliseconds, so its 30s timer only ever fired on a process that was alive and still starting -- a cold first run, an antivirus scan, a loaded machine -- and the response was `SIGTERM` and quitting the app. The budget is now 120s, the value already proven in the Windows smoke step.
+- `OpenRappterConfig` was hand-written and declared **6** sections while the schema validating it declared **21**, so fifteen sections -- including `security`, `network`, `voice` and `plugins` -- were parsed and then invisible to every consumer: reading them was a compile error. The type is now derived from the schema, so the two cannot diverge.
+- The security auditor read `~/.openrappter/config.yml`, a file the product does not write (it writes `config.json5`), and its missing-file branch returns no findings -- so a check that reports "Gateway exposed without authentication" at critical severity had never examined anything. It now parses the real config through the loader.
+- Removed two auditor checks for settings this product does not have (`cdp`, `dmOnly`). The CDP one used an unparenthesised alternation, `/cdp.*host:\s*['\"]?0\.0\.0\.0|all['\"]?/i`, so the bare substring `all` matched anywhere -- pointed at the real config it reported remote DevTools exposure at critical on a machine with no such setting.
+- `getConfigPath()` and five other paths captured the data directory at import time, so `OPENRAPPTER_HOME` was ignored once a module had loaded.
+- The Python runtime read `message` in preference to `user_input`, so `{"user_input":"A","message":"B"}` sent the model **B** while the TypeScript runtime and the grail brainstem sent **A** -- both answering 200, so the divergence was a silently different prompt rather than an error. It also had no `user_input must be a string` rejection, answering 200 where the grail returns 400.
+- The parity harness rebuilt each request from three whitelisted keys, so any other field a vector declared was dropped before reaching the runtime. A vector could name a field, look like it tested it, and test nothing.
+- `openrappter channels` now works and is registered. `connect`/`disconnect` sent `{ channel }` where every gateway handler reads `params.type`, so both passed `undefined` to the registry. `connect --config` was a silent no-op -- `channels.connect` ignores everything but `type` -- and now performs the `channels.configure` call it implied. Adds `configure`, `probe` and `config`, which reach gateway methods no client called; `config` output is redacted.
+- `OPENRAPPTER_HOME` was honoured by 4 places and ignored by 46, so setting it did not relocate an installation -- it split one. The invocation journal, hubs and the iMessage proxy followed it while sessions, config, backups, the gateway lock, audit config and pairing stayed in `~/.openrappter`; a backup taken in that state silently omitted whatever had moved. All paths now resolve through a single `openrappterHome()` helper.
+- `openrappter sessions` now works and is registered. All four subcommands failed before: `sessions.list`/`get`/`delete` are not gateway methods at all (the real ones are `chat.*`), and `sessions.reset` reads `sessionId`/`sessionKey` while the CLI sent `{ id }`, so it threw `sessionKey required`. `sessions delete` also reports when it deleted nothing instead of claiming success.
+- `openrappter login <provider>` printed "Credentials have been saved to your config." while saving nothing: `initiateOAuthFlow` returns the token and `auth/oauth.ts` performs no filesystem writes at all. It now states plainly that the token is discarded and that persistent credential storage is not implemented. (The command remains unregistered.)
+- RPC-backed CLI commands printed a raw Node stack trace, naming internal `ws` frames, whenever the gateway was unreachable, refused the token, or did not know a method. Commander does not await an async action handler, so the rejection escaped as an unhandled promise rejection. Failures now print one actionable line and exit non-zero.
+- Consolidated six byte-identical private copies of `withClient` (`approvals`, `backup`, `channels`, `cron`, `send`, `sessions`) into `cli/with-client.ts`. The duplication is why the missing error handling existed in six places at once.
+- Every RPC-backed CLI command (`backup`, `approvals`, `cron`, `memory`, `flight`, ...) printed its output instantly and then hung for 30 seconds before exiting. `RpcClient.call()` armed a 30s timeout and never cleared it once the response arrived; a pending timer keeps Node's event loop alive. `openrappter backup list` went from 30.1s to 0.1s.
+- `openrappter channel status` threw `ReferenceError: __dirname is not defined` on every invocation. `infra/channel.ts` is ESM but used a bare `__dirname`, which type-checks (`@types/node` declares it) and only fails when the statement runs -- so `channel promote`, which never reaches that line, worked. Four other files already defined the `fileURLToPath(import.meta.url)` shim; this one was missed.
+- Removed `src/cli/channel.ts`, an unregistered duplicate of the live inline `channel` command. Two copies of the same logic means a fix can land in the unreachable one.
+
+- **The two runtimes defaulted to different OpenAI models.** `providers/openai.ts`
+  used `gpt-4o` and `providers/openai_compatible.py` used `gpt-4o-mini` for the
+  same provider against the same endpoint, so an identical call answered from a
+  different model — and a different cost and capability — depending on which
+  runtime made it. Neither value was written down and nothing compared them. The
+  grail brainstem settles it: its default and its safety net are both `gpt-4o`,
+  which TypeScript already matched. Python now does too, and a test reads the
+  constant out of the TypeScript source so neither side can move alone.
+
+- **The two runtimes disagreed on which `/chat` requests are valid.** The grail
+  brainstem rejects a `conversation_history` entry whose role is not `user`,
+  `assistant` or `tool` — including a caller-supplied `system` turn — with an
+  indexed 400, and openrappter's TypeScript transliterates that. This runtime
+  accepted anything: a non-list became `[]` and unknown roles were dropped later
+  when the prompt was assembled, so it answered 200 where the other two answer
+  400. Both behaviours stop the injection the check exists for; only one of them
+  matches the reference, and PARITY §0 is that a peer must not be able to tell
+  two RAPP runtimes apart. Python now validates history exactly as the grail
+  does, in the same order — history before the empty-input check — with the same
+  sentences, measured against the live brainstem rather than assumed.
+
+- **Onboarding started the daemon from the data directory, not the code.**
+  `startDaemon` hardcoded `~/.openrappter/typescript/dist/index.js`, which is the
+  runtime data directory. On a machine where that path happened to hold an old
+  checkout it started a build that had stopped updating; on one where it does
+  not — most installs — the spawn throws and onboarding reports "Could not start
+  daemon" on a perfectly good installation. `installLaunchAgent` had already been
+  corrected to ask `ProcessManager.resolveProjectPath()`; `startDaemon`, twenty
+  lines above it in the same file, had not. It also passed this app's own
+  environment to the daemon, so a Finder-launched Bar handed down launchd's
+  session `PATH` — the one with no node and no copilot in it, which the plist
+  beneath it already explains — leaving the daemon's own children unable to find
+  the tools they shell out to.
+
+- **Onboarding and Settings installed two different launch agents.** Onboarding
+  wrote its own `com.openrappter.daemon.plist` while `LaunchAgentManager` — which
+  the Settings "Start at login" toggle reads and writes — manages
+  `com.openrappter.gateway.plist`. So the toggle showed off immediately after
+  onboarding had installed auto-start, turning it on added a second launchd job
+  starting the same gateway on the same port, and turning it off could never
+  remove the one onboarding made. Onboarding now installs through the shared
+  manager, which also brings the better plist it always had — restart only on
+  crash rather than on every clean exit, a throttle interval, background process
+  type, `Umask 0o077` and separate stdout/stderr logs. A stale
+  `com.openrappter.daemon` agent from an earlier onboarding is unloaded and
+  removed.
+
+- **Pressing Stop in the Bar could do nothing, silently.** `abortChat` caught
+  its failure and discarded it, and `chatState` is only set to `.idle` on the
+  success path — so a refused or undelivered abort left the UI streaming, with
+  a Stop button that renders only while streaming and did nothing however many
+  times it was pressed. The failure is now reported, which also restores the
+  input, since `.error` is not `.streaming`.
+
+- **The Bar claimed auto-start was installed when it was not.** Writing the
+  launchd plist and loading it were both discarded failures, with
+  `autoStartInstalled = true` set immediately after regardless, so the completion
+  screen showed "Auto-start ✓" whether or not anything had been installed — and
+  the daemon simply did not come back after a reboot, with nothing to explain
+  why. `launchctl` reports refusal through its exit status, which the Bar's shell
+  helper discards along with stderr, so a status-aware helper was added. The CLI
+  path has always reported this honestly.
+
+- **The Bar showed a setup step it never performed.** "Scheduling daily tips" was
+  marked complete from `daemonStarted`, which is unrelated, and nothing in the
+  Bar schedules tips — that happens in `openrappter onboard`, in the CLI. The row
+  is gone rather than tied to a different unrelated signal.
+
+- **The Bar could wipe your other credentials while saving one.** Onboarding
+  wrote `~/.openrappter/.env` by reading it, dropping the key being replaced, and
+  writing the result — but the read was `(try? String(contentsOfFile:)) ?? ""`,
+  so a file that exists and cannot be decoded became an empty string and the
+  rewrite replaced everything in it with the single variable being saved. That
+  file is shared with the CLI, which keeps `OPENRAPPTER_MODEL` there, so the
+  blast radius was not limited to onboarding's own keys. The write was `try?`
+  too, and `saveManualToken` reported success immediately after it, so a token
+  that never reached disk looked exactly like one that did. The read now
+  distinguishes absent from unreadable and refuses to overwrite what it could not
+  read, the write is verified by reading it back — as the TypeScript `saveEnv`
+  has done since #159 — and a failure is surfaced instead of reported as success.
+
+- **A config valid in one runtime was rejected by the other.** TypeScript's
+  schema declares 21 top-level sections; Python's validator required one of six
+  and refused anything else, so a file holding only `logging` or only `security`
+  was accepted by one runtime and rejected by the other with "Config must contain
+  at least one recognized section". Python now recognises the same 21, and
+  `contracts/config-sections.json` pins the vocabulary with a test on each side,
+  so adding a section to one runtime fails the other until it is added to both.
+  The validators still differ in kind — Zod strips unknown keys, Python returns
+  the data untouched — which is deliberate and unchanged.
+
+- **The config schema did not know settings the runtime reads.** `channels.*`
+  accepted only `enabled`, `allowFrom` and `mentionGating`, while
+  `readIMessageConfig` reads `mode`, `pollInterval` and `staleAfterMs` off the
+  raw config. Unknown keys are stripped rather than rejected, so a config running
+  iMessage over BlueBubbles came back out of the schema without its transport,
+  and re-reading it selected the `applescript` default — a working setup quietly
+  reconfigured. Nothing routes channels through the schema today, which is the
+  only reason this was latent rather than live. The schema now declares all
+  three, and a test asserts that what the reader understands survives it.
+
+- **The tutorial's agent returned the wrong type too.** `GreeterAgent`, the
+  worked example a reader builds and tests, returned a bare object from
+  `perform` in both runtimes — the same defect corrected in the Agents Reference,
+  and the same one that makes the TypeScript version fail to compile. Both now
+  return `JSON.stringify(...)` / `json.dumps(...)`, the Python example imports
+  `json` to do it, and the accompanying test parses the string before asserting
+  on it. The architecture page's reference to `python/openrappter/config.py` was
+  also updated; that module is now a package.
+
+- **The agent-authoring example could not work.** The page that teaches the
+  framework's main extension point opened with
+  `import { BasicAgent, AgentMetadata } from 'openrappter'`. The package entry
+  point is the CLI, not a library — it exports one unrelated function, and
+  importing it starts the interactive prompt. Both examples also returned a bare
+  object from `perform`, which is declared `Promise<string>` and is
+  `json.dumps(...)` in all 240 returns across the Python agents. The examples are
+  corrected, and the contract for an agent you add yourself — a
+  `createAgent(BasicAgent)` factory in `~/.openrappter/agents/`, which exists
+  precisely because that import cannot work — is documented for the first time.
+
+- **The Security page promised two protections that do not exist.** It
+  described a prompt-injection detector in the slosh pipeline, matching phrases
+  like "ignore previous instructions" and adding a `suspicious_input: true`
+  signal — no such detector, phrase list or signal exists in either runtime.
+  (ExecSafety's injection detection is *shell* injection in a command string, a
+  different problem.) It also promised per-channel rate limits and limits on
+  outbound LLM calls "protecting against runaway loops"; neither exists. The
+  gateway's real limit — 100 requests per minute per connection, error `-32001`
+  — was already documented accurately elsewhere and is unchanged. Both sections
+  now describe what is actually enforced, and the injection section points at
+  the mitigations that do the work: ExecSafety refusing commands, approval for
+  dual-use ones, and prompts that label third-party content as data.
+
+- **Five documented environment variables did nothing.** `OPENRAPPTER_CONFIG`,
+  `OPENRAPPTER_LOG_LEVEL`, `OPENRAPPTER_PROVIDER` and `GATEWAY_SECRET` were
+  listed in the reference tables and read by nothing anywhere in either runtime.
+  So was `OPENRAPPTER_NO_TELEMETRY`, described as disabling anonymous usage
+  stats — there are none, and none are collected or sent, so the sentence
+  described a product that does not exist while quietly contradicting the
+  local-first promise. The page now says so. A new guard requires every
+  documented variable in the project's own namespace to be read by the source,
+  or explicitly marked as unimplemented.
+
+- **The documented configuration file was one neither runtime reads.** The docs
+  site showed `~/.openrappter/config.yaml` throughout, in YAML. The loader is
+  `JSON5.parse` in TypeScript and a comment-stripping `json.loads` in Python,
+  and it looks only for `config.json5`. A file written from those examples was
+  never read and raised no error, because an absent config file is a supported
+  state. Every example on the page is now JSON5 under the real filename, and a
+  new guard parses each one the way the loader does.
+
+- **Five more documented config keys configured nothing.** Unknown keys are
+  stripped rather than rejected, so each of these validated cleanly and did
+  nothing: the whole `provider:` section, which was the headline example for
+  choosing an LLM and supplying API keys; per-channel credentials such as
+  `bot_token`; and `memory.embedding_provider`. Providers are configured by
+  environment variable and the active model by `openrappter models set`, which
+  is what the page now says. The same guard fails on any documented key the
+  schema discards.
+
+- **`${VAR:-default}` in config did nothing.** The documented fallback form —
+  `api_key: ${ANTHROPIC_API_KEY:-sk-placeholder}` on the docs site — was matched
+  by neither runtime's substitution pattern, since `\w` covers neither `:` nor
+  `-`. The value survived into the config as that literal string and surfaced
+  much later as a rejected credential rather than as a config error. Both
+  runtimes now support it, and agree that a set-but-empty variable stays empty
+  while only an unset one falls back. A second, fuller implementation existed in
+  `config/env-expand.ts` with tests proving the fallback worked; nothing outside
+  those tests ever called it, so the tests passed for years while the feature
+  did not exist.
+
+- **`openrappter update` now says how to be able to go back.** `backup.create`
+  was documented as auto-running before updates. It never did: nothing in
+  either runtime called it, and updating is a manual
+  `npm install -g openrappter@latest`, so there was no in-product step it could
+  have hung off. The claim was removed, and the moment the CLI tells you a new
+  version exists — the one moment it knows you are about to change the
+  installation — it now points at `openrappter backup create`.
+
+- **The approval queue told the reviewer what, not why** — the safety policy
+  works out precisely why a command needs a person (dual-use binary,
+  environment assignment, plantable path) and sent that explanation to the
+  *caller* in the agent's error message. The queue a human reads recorded
+  `Approval token issued for: <command>`, so the reviewer saw the command
+  restated back at them and had to re-derive the danger themselves. The
+  policy's reason now reaches the queue. On the Python side the reviewer saw
+  nothing at all — its approval token carries no reason field — so it gains the
+  same merged `list_pending_approvals` view TypeScript has.
+- **`git log` silently omitted commits whose subject contains a quote** — both
+  runtimes asked git to build JSON directly, with
+  `--pretty=format:{"hash":"%H",…,"subject":"%s"}`. A subject containing a
+  double quote or a backslash produced an unparseable line, and the parse error
+  was discarded, so those commits vanished from the result *and* from the
+  reported `count` with nothing to indicate it. Commit subjects quote things
+  routinely. Fields are now separated by a control character git cannot collide
+  with, and parsed positionally.
+- **`openrappter update` could restore a stash it never made** — the updater
+  stashes local changes, pulls, rebuilds, then pops. But `git stash` on a clean
+  tree prints "No local changes to save" and exits 0 *without creating an
+  entry*, while the pop ran unconditionally. Updating a clean checkout that had
+  an older stash therefore restored that older work into the tree and dropped
+  the entry. The pop was also written `git stash pop 2>/dev/null || true`, so a
+  pop that conflicted with the pulled version left conflict markers in the
+  working tree and reported the update as a success; and any failure between
+  the stash and the pop said only "Update failed", sending you to look for
+  changes that were sitting in a stash entry you never made. The updater now
+  pops only what it saved, reports a failed restore as a failure, and names the
+  stash entry when it cannot finish.
 - **A non-numeric Pokemon setting crashed the agent instead of being refused** —
   `port`, `max_clips`, `max_states`, `max_storage_gb`, `min_free_gb` and
   `startup_timeout` are chosen by a model, so they arrive as whatever it
@@ -333,11 +599,83 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `openrappter service status` now derives its report from the same
+  `getIMessageServiceStatus()` used by `openrappter imessage service-status`,
+  instead of re-reading launchd through a parallel implementation. Both
+  commands describe one launchd job (`com.openrappter.gateway`), so they now
+  describe it with one vocabulary; `service status` adds only `lastExit`.
+
 - The Electron desktop is the authority for OpenRappter Bar authentication,
   and desktop smoke tests were hardened for concurrent and Windows runs.
 
 ### Security
+- The Python flight recorder wrote four kinds of credential to the ledger verbatim that the TypeScript one redacts: a `?key=` query parameter (the shape the shipped Gemini provider builds), Slack `xox*-` tokens, `sk-` OpenAI/Anthropic keys, and JWTs. The two `SECRET_VALUE_PATTERNS` lists had drifted, in one direction only. Both now read a shared corpus at `contracts/value-redaction-corpus.json`.
 
+- **A client that stopped reading was buffered without limit.** The handshake
+  advertised `policy.maxBufferedBytes: 10000000` and `sendFrame` was
+  `ws.send(...)` with nothing consulting `bufferedAmount`, so the limit was
+  announced and never applied. `zen.publish` carries frames of up to 256 KB at
+  up to 30fps, so a stalled subscriber could accumulate megabytes a second in a
+  process meant to run for weeks. A connection past the limit is now closed with
+  1013 rather than fed, and the advertised number and the enforced one are one
+  constant.
+
+- **The gateway advertised a payload limit it did not enforce.** The handshake
+  has always reported `policy.maxPayload: 5000000`, while `WebSocketServer` was
+  constructed without a `maxPayload` option — so `ws` applied its own 100 MB
+  default and the gateway accepted twenty times what it told every client its
+  limit was. The number is now one constant, read both by the server that
+  enforces it and the handshake that reports it. Nothing legitimate is affected:
+  `zen.publish` frames are capped at 256 KB and the HTTP body limit is 2 MB.
+
+- **`backup.restore` replaced your data without authentication** — the gateway
+  required auth to *delete* a backup but not to restore one, though restoring
+  overwrites every file in `~/.openrappter/` in place and keeps no copy of what
+  it replaced. The more destructive of the two was the unguarded one. Restore
+  now requires auth, like delete.
+- **An environment assignment or a plantable path reached a safe-listed name** —
+  the binary parser skips leading `VAR=value` assignments and takes the
+  basename, both of which are right for classifying a command and neither of
+  which was treated as a risk. So `LD_PRELOAD=/tmp/x.so ls` was judged an
+  ordinary `ls` while the loader read the assignment after exec, and `./ls` was
+  judged the system tool while running whatever sits in the working directory.
+  The `env LD_PRELOAD=… ls` spelling already required approval, because `env`
+  is dual-use; the shell's own assignment syntax did not. Both now require
+  approval rather than being blocked, and `/bin` and `/usr/bin` stay ungated
+  since they are not writable without root.
+- **`git` is now treated as dual-use, because its configuration executes
+  commands** — `git -c alias.x='!cmd' x` runs `cmd`, and `-c core.pager=` does
+  the same wherever a pager is used. There is no separator and no substitution
+  for the injection patterns to catch, and `git` was on the safe list, so the
+  shell agent ran it without asking. It stays on the safe list but now requires
+  approval, alongside `find`, `awk`, `sed` and `tar` — which were already
+  listed for exactly this reason.
+- **A single `&` chained commands past the safety policy** — the injection
+  patterns covered `&&` but not `&`, and `ls & touch /tmp/x` runs both: the
+  first goes to the background and the second executes immediately. Since `ls`
+  is a safe binary the policy judged the pair safe, so neither command was
+  reviewed and no approval was requested. This is the same shape as the newline
+  bypass below — a separator the policy did not know about, hidden behind a
+  harmless-looking binary.
+- **The shell agent checked one command and executed another** — it normalized
+  the command, ran the safety policy against the normalized form, and then
+  executed the *raw* input. `normalizeCommand` collapses all whitespace,
+  newlines included, so the injection rule written specifically for `[\r\n]`
+  never saw one: `ls\ntouch /tmp/x` flattens to a single line that the policy
+  calls safe, and the original then ran with the newline intact — two commands,
+  neither approved, no approval prompt. Both runtimes were affected, including
+  the Python `shell_agent.py` that is exempted from the
+  no-shell-command-building guard on the grounds that exec safety gates it.
+  Commands containing a newline are now refused outright, because collapsing
+  one would execute something the caller did not write.
+- **A credential in a `?key=` parameter was recorded verbatim** — the flight
+  recorder scans recorded values for embedded secrets and already caught
+  `?token=`, `?api_key=`, `?access_token=` and `https://user:pass@host`. It did
+  not catch `?key=`, which is the parameter name Google uses, and which the
+  shipped Gemini provider builds into every request URL — so any recorded value
+  carrying that URL wrote the API key into the ledger in the clear. `?sig=`,
+  used to sign Azure blob URLs, had the same hole. Both are redacted now, with
+  a value-length guard so an ordinary `?key=name` is left readable.
 - **The installer's checksum check could pass having verified nothing** — the
   one-line install downloads a `gum` release tarball and verifies it against
   the project's published `checksums.txt` using `sha256sum --ignore-missing`.

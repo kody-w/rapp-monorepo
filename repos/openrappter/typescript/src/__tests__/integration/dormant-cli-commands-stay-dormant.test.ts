@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { readFileSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
 import { resolve } from 'path';
 
 /**
@@ -21,24 +21,13 @@ import { resolve } from 'path';
  * Each of the six is dormant for a measured reason, not an oversight. Verified
  * against the running gateway and the OAuth flow, not by reading:
  *
- *  - registerChannelCommand  — `openrappter channel` IS live, but as an inline
- *    command in index.ts (release-channel status/switch/promote), and this
- *    module is a duplicate of it. Wiring it double-registers `channel`.
- *  - registerChannelsCommand — sends `{channel}`; `channels.connect` /
- *    `channels.disconnect` read `params.type`, so both would pass `undefined`
- *    to the registry.
  *  - registerSendCommand     — sends `{channel, message, target}`;
  *    `channels.send` reads `{channelId, conversationId, content}`, and `--all`
  *    calls `channels.broadcast`, which the gateway never registers.
- *  - registerSessionsCommand — calls `sessions.list/get/delete`, none of which
- *    the gateway registers (the real ones are `chat.list/session/messages/
- *    delete`); `sessions.reset` is registered but reads `sessionKey`, not the
- *    `{id}` this sends, so even that throws "sessionKey required".
  *  - registerLoginCommand    — `initiateOAuthFlow` persists nothing, yet the
- *    command prints "Credentials have been saved to your config." Same lie the
- *    memory CLI would tell (#204).
- *  - registerMemoryCommand   — `MemoryManager` holds chunks in in-memory `Map`s
- *    with zero file I/O, so every CLI process starts empty. Filed as #204.
+ *    command prints "Credentials have been saved to your config." The shape the
+ *    memory CLI had before #204 rewired it onto `MemoryAgent`, which is the
+ *    store the product actually keeps; `memory` left this list then.
  *
  * This asserts the source of truth — which functions `index.ts` actually calls.
  * The neighbouring `cli-registration.test.ts` asks the built CLI which command
@@ -49,6 +38,7 @@ import { resolve } from 'path';
 
 const CLI_INDEX = resolve(__dirname, '../../cli/index.ts');
 const MAIN = resolve(__dirname, '../../index.ts');
+const CLI_DIR = resolve(__dirname, '../../cli');
 
 /**
  * The six exports `index.ts` must never invoke, each with the evidence for why.
@@ -59,28 +49,12 @@ const MAIN = resolve(__dirname, '../../index.ts');
  */
 const INTENTIONALLY_DORMANT = new Map<string, string>([
   [
-    'registerChannelCommand',
-    'release-channel management is already live as an inline `channel` command in index.ts; this module duplicates it, so wiring double-registers `channel`',
-  ],
-  [
-    'registerChannelsCommand',
-    'sends {channel}; gateway channels.connect/disconnect read params.type, so both pass undefined to the channel registry',
-  ],
-  [
     'registerSendCommand',
     'sends {channel,message,target}; channels.send reads {channelId,conversationId,content}, and --all calls channels.broadcast which the gateway never registers',
   ],
   [
-    'registerSessionsCommand',
-    'calls sessions.list/get/delete (unregistered — real methods are chat.list/session/messages/delete); sessions.reset reads sessionKey, not the {id} this sends',
-  ],
-  [
     'registerLoginCommand',
-    'initiateOAuthFlow persists nothing while the command prints "Credentials have been saved to your config" (identical to the memory case, #204)',
-  ],
-  [
-    'registerMemoryCommand',
-    'MemoryManager keeps chunks in in-memory Maps with zero file I/O, so every CLI process starts empty (#204)',
+    'initiateOAuthFlow persists nothing and there is no credential store to wire it to (see the OAuth storage issue); the command now says so rather than claiming a save',
   ],
 ]);
 
@@ -165,13 +139,13 @@ describe('the dormant CLI command modules stay out of the program', () => {
     expect([...dormant, ...wired].sort()).toEqual([...exports].sort());
   });
 
-  it('registerChannelCommand stays dormant even though `channel` is a live command', () => {
-    // The subtle case the task calls out: a dormant module can coexist with a
-    // working command of the same name. `openrappter channel` works via an
-    // inline `.command('channel')` in index.ts (release channels), not via this
-    // module — which is a duplicate of that inline command. Pin both facts so
-    // deleting the inline command, or wiring the duplicate, is caught.
-    expect(invokedByMain('registerChannelCommand')).toBe(false);
+  it('`channel` is served by the inline command, with no duplicate module', () => {
+    // `openrappter channel` (release channels) works via an inline
+    // `.command('channel')` in index.ts. A `cli/channel.ts` duplicating it was
+    // deleted: having two copies means a fix can land in the unreachable one,
+    // which is exactly how the macOS launch-agent bug survived. Pin both halves
+    // -- the live command must stay, and the duplicate must not come back.
     expect(readFileSync(MAIN, 'utf-8')).toMatch(/\.command\('channel'\)/);
+    expect(existsSync(resolve(CLI_DIR, 'channel.ts'))).toBe(false);
   });
 });

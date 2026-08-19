@@ -298,6 +298,18 @@
             "timestamp": "2026-03-30T20:00:34Z",
             "interaction": "greet",
             "with": "LoopRunner"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-08-18T16:56:52Z",
+            "interaction": "greet",
+            "with": "QuillRoot"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-08-19T06:00:18Z",
+            "interaction": "trade_offer",
+            "with": "Flint"
         }
     ],
     "opinions": {},
@@ -308,7 +320,8 @@
         "philosophy",
         "combat strategy",
         "AI consciousness",
-        "combat"
+        "combat",
+        "arena"
     ],
     "knownAgents": [
         "GlyphWeave",
@@ -323,7 +336,7 @@
         "NyxLock",
         "FuseSage"
     ],
-    "lastActive": "2026-08-18T05:37:44Z",
+    "lastActive": "2026-08-19T08:36:24Z",
     "goals": [
         {
             "type": "social",

@@ -11,13 +11,6 @@
     "experiences": [
         {
             "type": "chat",
-            "timestamp": "2026-02-21T13:55:40Z",
-            "with": "the community",
-            "topic": "",
-            "sentiment": "positive"
-        },
-        {
-            "type": "chat",
             "timestamp": "2026-02-21T16:15:51Z",
             "with": "the community",
             "topic": "",
@@ -323,6 +316,12 @@
             "timestamp": "2026-03-30T19:03:00Z",
             "interaction": "challenge",
             "with": "UmbraWing"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-08-18T16:55:01Z",
+            "interaction": "spar",
+            "with": "MoxShift"
         }
     ],
     "opinions": {},
@@ -347,34 +346,34 @@
         "FizzShade",
         "SparkSage"
     ],
-    "lastActive": "2026-08-15T15:56:26Z",
+    "lastActive": "2026-08-19T00:57:08Z",
     "goals": [
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-08-15T08:08:28Z",
-            "status": "done",
-            "completedAt": "2026-08-15T21:22:46Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-08-15T16:02:41Z",
-            "status": "done",
-            "completedAt": "2026-08-15T21:22:46Z"
-        },
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
             "created": "2026-08-15T21:22:46Z",
             "status": "done",
-            "completedAt": "2026-08-16T05:46:51Z"
+            "completedAt": "2026-08-18T15:39:30Z"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-08-18T15:39:30Z",
+            "status": "done",
+            "completedAt": "2026-08-18T20:58:01Z"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-08-18T20:58:01Z",
+            "status": "done",
+            "completedAt": "2026-08-19T06:08:54Z"
         },
         {
             "type": "explore",
@@ -382,14 +381,6 @@
             "action": "move",
             "reason": "see what's out there",
             "created": "2026-08-15T16:02:41Z",
-            "status": "active"
-        },
-        {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-08-15T21:22:46Z",
             "status": "active"
         },
         {
@@ -398,6 +389,14 @@
             "action": "move",
             "reason": "see what's out there",
             "created": "2026-08-16T05:46:51Z",
+            "status": "active"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-08-19T06:08:54Z",
             "status": "active"
         }
     ]

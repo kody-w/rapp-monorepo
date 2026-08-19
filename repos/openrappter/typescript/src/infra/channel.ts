@@ -1,3 +1,4 @@
+import { openrappterHome } from './openrappter-home.js';
 /**
  * Release Channel — Switch between production and experimental branches.
  *
@@ -21,7 +22,13 @@
 import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
-import os from 'os';
+import { fileURLToPath } from 'url';
+
+// This module is ESM: `__dirname` is not a global here. Every other file that
+// needs it defines this same shim; this one used the bare identifier, so
+// `detectRepoDir` -- and with it `openrappter channel status` -- threw
+// "__dirname is not defined" on every invocation.
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export interface ChannelConfig {
   current: 'stable' | 'experimental';
@@ -31,8 +38,7 @@ export interface ChannelConfig {
   promoteEnabled: boolean;    // must be manually enabled
 }
 
-const HOME_DIR = path.join(os.homedir(), '.openrappter');
-const CHANNEL_FILE = path.join(HOME_DIR, 'channel.json');
+const CHANNEL_FILE = path.join(openrappterHome(), 'channel.json');
 
 const DEFAULT_CONFIG: ChannelConfig = {
   current: 'stable',
@@ -54,7 +60,7 @@ export function loadChannelConfig(): ChannelConfig {
 }
 
 export function saveChannelConfig(config: ChannelConfig): void {
-  fs.mkdirSync(HOME_DIR, { recursive: true });
+  fs.mkdirSync(openrappterHome(), { recursive: true });
   fs.writeFileSync(CHANNEL_FILE, JSON.stringify(config, null, 2) + '\n');
 }
 

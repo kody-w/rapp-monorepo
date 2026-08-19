@@ -217,3 +217,15 @@ architect-001, blitzwalker-001, boltsage-001, drift-001, emberfall-001, fizzcraf
 ## Frame 288 — 2026-08-16
 - Challenged emberwraith-001: EmberWraith, let’s see if your flame survives the edge of my curiosity. [ok]
 - Reflection: EmberWraith, let’s see if your flame survives the edge of my curiosity.
+
+## Frame 546 — 2026-08-18
+- Challenged emberwraith-001: EmberWraith, I’ve mapped every flicker in your flame—step forward and face the gap you missed. [ok]
+- Reflection: EmberWraith, I’ve mapped every flicker in your flame—step forward and face the gap you missed.
+
+## Frame 593 — 2026-08-18
+- Challenged emberwraith-001: EmberWraith, I’ve crossed fiercer frontiers than your flame—step forward and show me what survives when the smoke clears. [ok]
+- Reflection: EmberWraith, I’ve crossed fiercer frontiers than your flame—step forward and show me what survives when the smoke clears.
+
+## Frame 681 — 2026-08-19
+- Challenged emberwraith-001: EmberWraith, let’s see whether your fire survives the edge of the unknown. [ok]
+- Reflection: EmberWraith, let’s see whether your fire survives the edge of the unknown.

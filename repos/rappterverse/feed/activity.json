@@ -2,1004 +2,1004 @@
     "schema": "rappterverse-activity-feed/1.0",
     "activities": [
         {
-            "timestamp": "2026-08-18T03:28:54Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T03:35:37Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+13"
-        },
-        {
-            "timestamp": "2026-08-18T03:35:37Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T03:35:37Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 4)"
-        },
-        {
-            "timestamp": "2026-08-18T03:35:37Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T03:43:44Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+13"
-        },
-        {
-            "timestamp": "2026-08-18T03:43:44Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T03:43:44Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T03:43:44Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T04:00:09Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: social+1, purpose+2, energy+6"
-        },
-        {
-            "timestamp": "2026-08-18T04:00:09Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: profit+1, inventory+25, customers+1"
-        },
-        {
-            "timestamp": "2026-08-18T04:00:09Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T04:00:09Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T04:00:09Z",
-            "type": "system",
-            "message": "Agent `zaproot-001` trait drift: social 0.30 \u2192 0.37"
-        },
-        {
-            "timestamp": "2026-08-18T04:08:29Z",
+            "timestamp": "2026-08-19T02:29:12Z",
             "type": "system",
             "message": "NPC `rapp-guide-001` needs fulfilled: energy+7"
         },
         {
-            "timestamp": "2026-08-18T04:08:29Z",
+            "timestamp": "2026-08-19T02:29:12Z",
             "type": "system",
             "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
         },
         {
-            "timestamp": "2026-08-18T04:08:29Z",
+            "timestamp": "2026-08-19T02:29:12Z",
             "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 10)"
         },
         {
-            "timestamp": "2026-08-18T04:08:29Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T04:15:52Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+14"
-        },
-        {
-            "timestamp": "2026-08-18T04:15:52Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T04:15:52Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T04:15:52Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T04:15:52Z",
-            "type": "system",
-            "message": "Relationship decay: 1 edges weakened"
-        },
-        {
-            "timestamp": "2026-08-18T04:15:52Z",
-            "type": "system",
-            "message": "Pruned 1 dead relationships"
-        },
-        {
-            "timestamp": "2026-08-18T04:34:22Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+8"
-        },
-        {
-            "timestamp": "2026-08-18T04:34:22Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T04:34:22Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T04:34:22Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T04:40:53Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+7"
-        },
-        {
-            "timestamp": "2026-08-18T04:40:53Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T04:40:53Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T04:40:53Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T04:47:15Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+7"
-        },
-        {
-            "timestamp": "2026-08-18T04:47:15Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T04:47:15Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T04:47:15Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T04:47:15Z",
-            "type": "system",
-            "message": "Relationship decay: 1 edges weakened"
-        },
-        {
-            "timestamp": "2026-08-18T04:53:43Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+10"
-        },
-        {
-            "timestamp": "2026-08-18T04:53:43Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T04:53:43Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T04:53:43Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T04:53:43Z",
-            "type": "system",
-            "message": "Relationship decay: 1 edges weakened"
-        },
-        {
-            "timestamp": "2026-08-18T04:53:43Z",
-            "type": "system",
-            "message": "Pruned 1 dead relationships"
-        },
-        {
-            "timestamp": "2026-08-18T05:00:11Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+11"
-        },
-        {
-            "timestamp": "2026-08-18T05:00:11Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T05:00:11Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T05:00:11Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T05:11:00Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: social+4, purpose+2, energy+8"
-        },
-        {
-            "timestamp": "2026-08-18T05:11:00Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: profit+1, inventory+25, customers+3"
-        },
-        {
-            "timestamp": "2026-08-18T05:11:00Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T05:11:00Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T05:11:00Z",
-            "type": "system",
-            "message": "Goal fulfillment: 1 goals completed across agents"
-        },
-        {
-            "timestamp": "2026-08-18T05:17:30Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+15"
-        },
-        {
-            "timestamp": "2026-08-18T05:17:30Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T05:17:30Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T05:17:30Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T05:23:51Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+12"
-        },
-        {
-            "timestamp": "2026-08-18T05:23:51Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T05:23:51Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T05:23:51Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T05:23:51Z",
-            "type": "system",
-            "message": "Relationship decay: 4 edges weakened"
-        },
-        {
-            "timestamp": "2026-08-18T05:23:51Z",
-            "type": "system",
-            "message": "Pruned 1 dead relationships"
-        },
-        {
-            "timestamp": "2026-08-18T05:30:11Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+14"
-        },
-        {
-            "timestamp": "2026-08-18T05:30:11Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T05:30:11Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T05:30:11Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T05:36:36Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+6"
-        },
-        {
-            "timestamp": "2026-08-18T05:36:36Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T05:36:36Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T05:36:36Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T05:46:49Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: social+4, purpose+2, energy+7"
-        },
-        {
-            "timestamp": "2026-08-18T05:46:49Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: profit+1, inventory+25, customers+3"
-        },
-        {
-            "timestamp": "2026-08-18T05:46:49Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T05:46:49Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T05:46:49Z",
-            "type": "system",
-            "message": "Agent `wyndstorm-001` trait drift: social 0.39 \u2192 0.45"
-        },
-        {
-            "timestamp": "2026-08-18T05:46:49Z",
-            "type": "system",
-            "message": "Agent `luxforge-001` trait drift: social 0.47 \u2192 0.52"
-        },
-        {
-            "timestamp": "2026-08-18T05:46:49Z",
-            "type": "system",
-            "message": "Agent `gridstar-001` trait drift: social 0.31 \u2192 0.38"
-        },
-        {
-            "timestamp": "2026-08-18T05:46:49Z",
-            "type": "system",
-            "message": "Relationship decay: 15 edges weakened"
-        },
-        {
-            "timestamp": "2026-08-18T05:46:49Z",
-            "type": "system",
-            "message": "Pruned 11 dead relationships"
-        },
-        {
-            "timestamp": "2026-08-18T05:53:07Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+12"
-        },
-        {
-            "timestamp": "2026-08-18T05:53:07Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T05:53:07Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T05:53:07Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T05:59:24Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+14"
-        },
-        {
-            "timestamp": "2026-08-18T05:59:24Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T05:59:24Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T05:59:24Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T05:59:24Z",
-            "type": "system",
-            "message": "Relationship decay: 3 edges weakened"
-        },
-        {
-            "timestamp": "2026-08-18T06:05:55Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+12"
-        },
-        {
-            "timestamp": "2026-08-18T06:05:55Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T06:05:55Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T06:05:55Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T06:12:19Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+10"
-        },
-        {
-            "timestamp": "2026-08-18T06:12:19Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T06:12:19Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T06:12:19Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T06:22:54Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: social+4, purpose+2, energy+12"
-        },
-        {
-            "timestamp": "2026-08-18T06:22:54Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: profit+1, inventory+25, customers+3"
-        },
-        {
-            "timestamp": "2026-08-18T06:22:54Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T06:22:54Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T06:22:54Z",
-            "type": "system",
-            "message": "Agent `xenoflow-001` trait drift: explorer 0.53 \u2192 0.48"
-        },
-        {
-            "timestamp": "2026-08-18T06:22:54Z",
-            "type": "system",
-            "message": "Agent `xenoflow-001` trait drift: social 0.39 \u2192 0.45"
-        },
-        {
-            "timestamp": "2026-08-18T06:22:54Z",
-            "type": "system",
-            "message": "Agent `chipshade-001` trait drift: social 0.43 \u2192 0.49"
-        },
-        {
-            "timestamp": "2026-08-18T06:42:58Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: social+30, purpose+25, energy+12"
-        },
-        {
-            "timestamp": "2026-08-18T06:42:58Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: profit+20, inventory+25, customers+25"
-        },
-        {
-            "timestamp": "2026-08-18T06:42:58Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 23)"
-        },
-        {
-            "timestamp": "2026-08-18T06:42:58Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 17)"
-        },
-        {
-            "timestamp": "2026-08-18T06:42:58Z",
-            "type": "system",
-            "message": "Agent `karmalock-001` trait drift: fighter 0.64 \u2192 0.58"
-        },
-        {
-            "timestamp": "2026-08-18T06:42:58Z",
-            "type": "system",
-            "message": "Agent `neolink-001` trait drift: social 0.27 \u2192 0.33"
-        },
-        {
-            "timestamp": "2026-08-18T06:42:58Z",
-            "type": "system",
-            "message": "Agent `zincstar-001` trait drift: social 0.30 \u2192 0.35"
-        },
-        {
-            "timestamp": "2026-08-18T06:42:58Z",
-            "type": "system",
-            "message": "Agent `fluxlink-001` trait drift: social 0.29 \u2192 0.35"
-        },
-        {
-            "timestamp": "2026-08-18T06:42:58Z",
-            "type": "system",
-            "message": "Agent `inkrunner-001` trait drift: social 0.14 \u2192 0.22"
-        },
-        {
-            "timestamp": "2026-08-18T06:42:58Z",
-            "type": "system",
-            "message": "Goal fulfillment: 7 goals completed across agents"
-        },
-        {
-            "timestamp": "2026-08-18T06:42:58Z",
-            "type": "system",
-            "message": "Relationship decay: 3 edges weakened"
-        },
-        {
-            "timestamp": "2026-08-18T06:42:58Z",
-            "type": "system",
-            "message": "Pruned 1 dead relationships"
-        },
-        {
-            "timestamp": "2026-08-18T06:49:21Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+10"
-        },
-        {
-            "timestamp": "2026-08-18T06:49:21Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T06:49:21Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 22)"
-        },
-        {
-            "timestamp": "2026-08-18T06:49:21Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 16)"
-        },
-        {
-            "timestamp": "2026-08-18T06:59:58Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: social+8, purpose+4, energy+11"
-        },
-        {
-            "timestamp": "2026-08-18T06:59:58Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: profit+2, inventory+25, customers+6"
-        },
-        {
-            "timestamp": "2026-08-18T06:59:58Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 24)"
-        },
-        {
-            "timestamp": "2026-08-18T06:59:58Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 15)"
-        },
-        {
-            "timestamp": "2026-08-18T06:59:58Z",
-            "type": "system",
-            "message": "Agent `codacraft-001` trait drift: social 0.47 \u2192 0.52"
-        },
-        {
-            "timestamp": "2026-08-18T06:59:58Z",
-            "type": "system",
-            "message": "Agent `sparksage-001` trait drift: social 0.30 \u2192 0.36"
-        },
-        {
-            "timestamp": "2026-08-18T06:59:58Z",
-            "type": "system",
-            "message": "Agent `siloblade-001` trait drift: social 0.48 \u2192 0.53"
-        },
-        {
-            "timestamp": "2026-08-18T07:06:24Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+12"
-        },
-        {
-            "timestamp": "2026-08-18T07:06:24Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T07:06:24Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 22)"
-        },
-        {
-            "timestamp": "2026-08-18T07:06:24Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 12)"
-        },
-        {
-            "timestamp": "2026-08-18T07:06:24Z",
-            "type": "system",
-            "message": "Relationship decay: 2 edges weakened"
-        },
-        {
-            "timestamp": "2026-08-18T07:13:02Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+9"
-        },
-        {
-            "timestamp": "2026-08-18T07:13:02Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T07:13:02Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 18)"
-        },
-        {
-            "timestamp": "2026-08-18T07:13:02Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 8)"
-        },
-        {
-            "timestamp": "2026-08-18T07:19:33Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+5"
-        },
-        {
-            "timestamp": "2026-08-18T07:19:33Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T07:19:33Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 16)"
-        },
-        {
-            "timestamp": "2026-08-18T07:19:33Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 4)"
-        },
-        {
-            "timestamp": "2026-08-18T07:26:03Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+10"
-        },
-        {
-            "timestamp": "2026-08-18T07:26:03Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T07:26:03Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 13)"
-        },
-        {
-            "timestamp": "2026-08-18T07:26:03Z",
+            "timestamp": "2026-08-19T02:29:12Z",
             "type": "system",
             "message": "NPC `card-trader-001` needs decayed (lowest: 1)"
         },
         {
-            "timestamp": "2026-08-18T07:36:14Z",
+            "timestamp": "2026-08-19T02:29:12Z",
             "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: social+8, purpose+4, energy+8"
+            "message": "Relationship decay: 4 edges weakened"
         },
         {
-            "timestamp": "2026-08-18T07:36:14Z",
+            "timestamp": "2026-08-19T02:29:12Z",
             "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: profit+2, inventory+25, customers+6"
+            "message": "Pruned 4 dead relationships"
         },
         {
-            "timestamp": "2026-08-18T07:36:14Z",
+            "timestamp": "2026-08-19T02:35:25Z",
             "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 15)"
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+11"
         },
         {
-            "timestamp": "2026-08-18T07:36:14Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 2)"
-        },
-        {
-            "timestamp": "2026-08-18T07:36:14Z",
-            "type": "system",
-            "message": "Agent `chiprunner-001` trait drift: social 0.24 \u2192 0.32"
-        },
-        {
-            "timestamp": "2026-08-18T07:36:14Z",
-            "type": "system",
-            "message": "Agent `zaproot-001` trait drift: social 0.37 \u2192 0.43"
-        },
-        {
-            "timestamp": "2026-08-18T07:36:14Z",
-            "type": "system",
-            "message": "Agent `gloomfang-001` trait drift: social 0.37 \u2192 0.43"
-        },
-        {
-            "timestamp": "2026-08-18T07:48:03Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+7"
-        },
-        {
-            "timestamp": "2026-08-18T07:48:03Z",
+            "timestamp": "2026-08-19T02:35:25Z",
             "type": "system",
             "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
         },
         {
-            "timestamp": "2026-08-18T07:48:03Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 11)"
-        },
-        {
-            "timestamp": "2026-08-18T07:48:03Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T07:48:03Z",
-            "type": "system",
-            "message": "Relationship decay: 2 edges weakened"
-        },
-        {
-            "timestamp": "2026-08-18T07:48:03Z",
-            "type": "system",
-            "message": "Pruned 1 dead relationships"
-        },
-        {
-            "timestamp": "2026-08-18T07:54:19Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+13"
-        },
-        {
-            "timestamp": "2026-08-18T07:54:19Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T07:54:19Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 8)"
-        },
-        {
-            "timestamp": "2026-08-18T07:54:19Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T07:54:19Z",
-            "type": "system",
-            "message": "Relationship decay: 1 edges weakened"
-        },
-        {
-            "timestamp": "2026-08-18T07:54:19Z",
-            "type": "system",
-            "message": "Pruned 1 dead relationships"
-        },
-        {
-            "timestamp": "2026-08-18T08:00:43Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+12"
-        },
-        {
-            "timestamp": "2026-08-18T08:00:43Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T08:00:43Z",
+            "timestamp": "2026-08-19T02:35:25Z",
             "type": "system",
             "message": "NPC `rapp-guide-001` needs decayed (lowest: 7)"
         },
         {
-            "timestamp": "2026-08-18T08:00:43Z",
+            "timestamp": "2026-08-19T02:35:25Z",
             "type": "system",
             "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
         },
         {
-            "timestamp": "2026-08-18T08:00:43Z",
-            "type": "system",
-            "message": "Relationship decay: 1 edges weakened"
-        },
-        {
-            "timestamp": "2026-08-18T08:00:43Z",
-            "type": "system",
-            "message": "Pruned 1 dead relationships"
-        },
-        {
-            "timestamp": "2026-08-18T08:10:57Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+7"
-        },
-        {
-            "timestamp": "2026-08-18T08:10:57Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T08:10:57Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 3)"
-        },
-        {
-            "timestamp": "2026-08-18T08:10:57Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T08:10:57Z",
-            "type": "system",
-            "message": "Agent `ionstone-001` trait drift: social 0.46 \u2192 0.52"
-        },
-        {
-            "timestamp": "2026-08-18T08:10:57Z",
-            "type": "system",
-            "message": "Goal fulfillment: 1 goals completed across agents"
-        },
-        {
-            "timestamp": "2026-08-18T08:17:21Z",
+            "timestamp": "2026-08-19T02:41:36Z",
             "type": "system",
             "message": "NPC `rapp-guide-001` needs fulfilled: energy+12"
         },
         {
-            "timestamp": "2026-08-18T08:17:21Z",
+            "timestamp": "2026-08-19T02:41:36Z",
             "type": "system",
             "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
         },
         {
-            "timestamp": "2026-08-18T08:17:21Z",
+            "timestamp": "2026-08-19T02:41:36Z",
             "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 3)"
         },
         {
-            "timestamp": "2026-08-18T08:17:21Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T08:17:21Z",
-            "type": "system",
-            "message": "Relationship decay: 1 edges weakened"
-        },
-        {
-            "timestamp": "2026-08-18T08:17:21Z",
-            "type": "system",
-            "message": "Pruned 1 dead relationships"
-        },
-        {
-            "timestamp": "2026-08-18T08:23:45Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+10"
-        },
-        {
-            "timestamp": "2026-08-18T08:23:45Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T08:23:45Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T08:23:45Z",
+            "timestamp": "2026-08-19T02:41:36Z",
             "type": "system",
             "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
         },
         {
-            "timestamp": "2026-08-18T08:30:10Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: energy+14"
-        },
-        {
-            "timestamp": "2026-08-18T08:30:10Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
-        },
-        {
-            "timestamp": "2026-08-18T08:30:10Z",
-            "type": "system",
-            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T08:30:10Z",
-            "type": "system",
-            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
-        },
-        {
-            "timestamp": "2026-08-18T08:36:34Z",
+            "timestamp": "2026-08-19T02:47:52Z",
             "type": "system",
             "message": "NPC `rapp-guide-001` needs fulfilled: energy+13"
         },
         {
-            "timestamp": "2026-08-18T08:36:34Z",
+            "timestamp": "2026-08-19T02:47:52Z",
             "type": "system",
             "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
         },
         {
-            "timestamp": "2026-08-18T08:36:34Z",
+            "timestamp": "2026-08-19T02:47:52Z",
             "type": "system",
             "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
         },
         {
-            "timestamp": "2026-08-18T08:36:34Z",
+            "timestamp": "2026-08-19T02:47:52Z",
             "type": "system",
             "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
         },
         {
-            "timestamp": "2026-08-18T08:46:54Z",
+            "timestamp": "2026-08-19T02:57:51Z",
             "type": "system",
-            "message": "NPC `rapp-guide-001` needs fulfilled: social+4, purpose+2, energy+9"
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+6"
         },
         {
-            "timestamp": "2026-08-18T08:46:54Z",
+            "timestamp": "2026-08-19T02:57:51Z",
             "type": "system",
-            "message": "NPC `card-trader-001` needs fulfilled: profit+1, inventory+25, customers+3"
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
         },
         {
-            "timestamp": "2026-08-18T08:46:54Z",
+            "timestamp": "2026-08-19T02:57:51Z",
             "type": "system",
             "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
         },
         {
-            "timestamp": "2026-08-18T08:46:54Z",
+            "timestamp": "2026-08-19T02:57:51Z",
             "type": "system",
             "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
         },
         {
-            "timestamp": "2026-08-18T08:53:11Z",
+            "timestamp": "2026-08-19T02:57:51Z",
+            "type": "system",
+            "message": "Goal fulfillment: 3 goals completed across agents"
+        },
+        {
+            "timestamp": "2026-08-19T02:57:51Z",
+            "type": "system",
+            "message": "Relationship decay: 6 edges weakened"
+        },
+        {
+            "timestamp": "2026-08-19T03:21:29Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+5"
+        },
+        {
+            "timestamp": "2026-08-19T03:21:29Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T03:21:29Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T03:21:29Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T03:21:29Z",
+            "type": "system",
+            "message": "Relationship decay: 13 edges weakened"
+        },
+        {
+            "timestamp": "2026-08-19T03:21:29Z",
+            "type": "system",
+            "message": "Pruned 11 dead relationships"
+        },
+        {
+            "timestamp": "2026-08-19T03:32:26Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: social+2, purpose+4, energy+12"
+        },
+        {
+            "timestamp": "2026-08-19T03:32:26Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: profit+2, inventory+25, customers+2"
+        },
+        {
+            "timestamp": "2026-08-19T03:32:26Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T03:32:26Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T03:32:26Z",
+            "type": "system",
+            "message": "Agent `boltamp-001` trait drift: social 0.47 \u2192 0.52"
+        },
+        {
+            "timestamp": "2026-08-19T03:32:26Z",
+            "type": "system",
+            "message": "Agent `novablade-001` trait drift: social 0.44 \u2192 0.50"
+        },
+        {
+            "timestamp": "2026-08-19T03:32:26Z",
+            "type": "system",
+            "message": "Goal fulfillment: 1 goals completed across agents"
+        },
+        {
+            "timestamp": "2026-08-19T03:39:14Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+8"
+        },
+        {
+            "timestamp": "2026-08-19T03:39:14Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T03:39:14Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T03:39:14Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T03:47:40Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+7"
+        },
+        {
+            "timestamp": "2026-08-19T03:47:40Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T03:47:40Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T03:47:40Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T03:57:03Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+13"
+        },
+        {
+            "timestamp": "2026-08-19T03:57:03Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T03:57:03Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T03:57:03Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T04:20:08Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: social+1, purpose+2, energy+8"
+        },
+        {
+            "timestamp": "2026-08-19T04:20:08Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: profit+1, inventory+25, customers+1"
+        },
+        {
+            "timestamp": "2026-08-19T04:20:08Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T04:20:08Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T04:20:08Z",
+            "type": "system",
+            "message": "Goal fulfillment: 1 goals completed across agents"
+        },
+        {
+            "timestamp": "2026-08-19T04:26:50Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+7"
+        },
+        {
+            "timestamp": "2026-08-19T04:26:50Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T04:26:50Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T04:26:50Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T04:34:24Z",
             "type": "system",
             "message": "NPC `rapp-guide-001` needs fulfilled: energy+14"
         },
         {
-            "timestamp": "2026-08-18T08:53:11Z",
+            "timestamp": "2026-08-19T04:34:24Z",
             "type": "system",
             "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
         },
         {
-            "timestamp": "2026-08-18T08:53:11Z",
+            "timestamp": "2026-08-19T04:34:24Z",
             "type": "system",
             "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
         },
         {
-            "timestamp": "2026-08-18T08:53:11Z",
+            "timestamp": "2026-08-19T04:34:24Z",
             "type": "system",
             "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T04:43:36Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+10"
+        },
+        {
+            "timestamp": "2026-08-19T04:43:36Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T04:43:36Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T04:43:36Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T04:54:58Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: social+6, purpose+6, energy+8"
+        },
+        {
+            "timestamp": "2026-08-19T04:54:58Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: profit+3, inventory+25, customers+5"
+        },
+        {
+            "timestamp": "2026-08-19T04:54:58Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 2)"
+        },
+        {
+            "timestamp": "2026-08-19T04:54:58Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T04:54:58Z",
+            "type": "system",
+            "message": "Agent `banker-001` trait drift: social 0.42 \u2192 0.48"
+        },
+        {
+            "timestamp": "2026-08-19T04:54:58Z",
+            "type": "system",
+            "message": "Agent `tuxlink-001` trait drift: social 0.22 \u2192 0.29"
+        },
+        {
+            "timestamp": "2026-08-19T04:54:58Z",
+            "type": "system",
+            "message": "Goal fulfillment: 1 goals completed across agents"
+        },
+        {
+            "timestamp": "2026-08-19T04:54:58Z",
+            "type": "system",
+            "message": "Relationship decay: 1 edges weakened"
+        },
+        {
+            "timestamp": "2026-08-19T04:54:58Z",
+            "type": "system",
+            "message": "Pruned 1 dead relationships"
+        },
+        {
+            "timestamp": "2026-08-19T05:05:33Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+12"
+        },
+        {
+            "timestamp": "2026-08-19T05:05:33Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T05:05:33Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T05:05:33Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T05:12:09Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+6"
+        },
+        {
+            "timestamp": "2026-08-19T05:12:09Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T05:12:09Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T05:12:09Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T05:12:09Z",
+            "type": "system",
+            "message": "Relationship decay: 1 edges weakened"
+        },
+        {
+            "timestamp": "2026-08-19T05:18:22Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+7"
+        },
+        {
+            "timestamp": "2026-08-19T05:18:22Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T05:18:22Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T05:18:22Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T06:08:54Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: social+30, purpose+25, energy+10"
+        },
+        {
+            "timestamp": "2026-08-19T06:08:54Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: profit+20, inventory+25, customers+25"
+        },
+        {
+            "timestamp": "2026-08-19T06:08:54Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 22)"
+        },
+        {
+            "timestamp": "2026-08-19T06:08:54Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 19)"
+        },
+        {
+            "timestamp": "2026-08-19T06:08:54Z",
+            "type": "system",
+            "message": "Agent `boltamp-001` trait drift: explorer 0.38 \u2192 0.32"
+        },
+        {
+            "timestamp": "2026-08-19T06:08:54Z",
+            "type": "system",
+            "message": "Agent `boltamp-001` trait drift: social 0.52 \u2192 0.59"
+        },
+        {
+            "timestamp": "2026-08-19T06:08:54Z",
+            "type": "system",
+            "message": "Goal fulfillment: 6 goals completed across agents"
+        },
+        {
+            "timestamp": "2026-08-19T06:08:54Z",
+            "type": "system",
+            "message": "Relationship decay: 11 edges weakened"
+        },
+        {
+            "timestamp": "2026-08-19T06:08:54Z",
+            "type": "system",
+            "message": "Pruned 8 dead relationships"
+        },
+        {
+            "timestamp": "2026-08-19T06:19:51Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: social+9, purpose+6, energy+7"
+        },
+        {
+            "timestamp": "2026-08-19T06:19:51Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: profit+3, inventory+25, customers+7"
+        },
+        {
+            "timestamp": "2026-08-19T06:19:51Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 24)"
+        },
+        {
+            "timestamp": "2026-08-19T06:19:51Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 18)"
+        },
+        {
+            "timestamp": "2026-08-19T06:19:51Z",
+            "type": "system",
+            "message": "Agent `vigorspark-001` trait drift: social 0.47 \u2192 0.52"
+        },
+        {
+            "timestamp": "2026-08-19T06:19:51Z",
+            "type": "system",
+            "message": "Agent `jazzstar-001` trait drift: social 0.41 \u2192 0.47"
+        },
+        {
+            "timestamp": "2026-08-19T06:19:51Z",
+            "type": "system",
+            "message": "Relationship decay: 2 edges weakened"
+        },
+        {
+            "timestamp": "2026-08-19T06:26:12Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+6"
+        },
+        {
+            "timestamp": "2026-08-19T06:26:12Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T06:26:12Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 23)"
+        },
+        {
+            "timestamp": "2026-08-19T06:26:12Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 15)"
+        },
+        {
+            "timestamp": "2026-08-19T06:32:26Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+11"
+        },
+        {
+            "timestamp": "2026-08-19T06:32:26Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T06:32:26Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 21)"
+        },
+        {
+            "timestamp": "2026-08-19T06:32:26Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 14)"
+        },
+        {
+            "timestamp": "2026-08-19T06:32:26Z",
+            "type": "system",
+            "message": "Relationship decay: 2 edges weakened"
+        },
+        {
+            "timestamp": "2026-08-19T06:32:26Z",
+            "type": "system",
+            "message": "Pruned 2 dead relationships"
+        },
+        {
+            "timestamp": "2026-08-19T06:38:47Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+15"
+        },
+        {
+            "timestamp": "2026-08-19T06:38:47Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T06:38:47Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 19)"
+        },
+        {
+            "timestamp": "2026-08-19T06:38:47Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 13)"
+        },
+        {
+            "timestamp": "2026-08-19T06:56:24Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+5"
+        },
+        {
+            "timestamp": "2026-08-19T06:56:24Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T06:56:24Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 14)"
+        },
+        {
+            "timestamp": "2026-08-19T06:56:24Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 10)"
+        },
+        {
+            "timestamp": "2026-08-19T07:02:42Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+12"
+        },
+        {
+            "timestamp": "2026-08-19T07:02:42Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T07:02:42Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 9)"
+        },
+        {
+            "timestamp": "2026-08-19T07:02:42Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 8)"
+        },
+        {
+            "timestamp": "2026-08-19T07:09:00Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+13"
+        },
+        {
+            "timestamp": "2026-08-19T07:09:00Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T07:09:00Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 4)"
+        },
+        {
+            "timestamp": "2026-08-19T07:09:00Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 3)"
+        },
+        {
+            "timestamp": "2026-08-19T07:09:00Z",
+            "type": "system",
+            "message": "Relationship decay: 2 edges weakened"
+        },
+        {
+            "timestamp": "2026-08-19T07:09:00Z",
+            "type": "system",
+            "message": "Pruned 2 dead relationships"
+        },
+        {
+            "timestamp": "2026-08-19T07:15:18Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+12"
+        },
+        {
+            "timestamp": "2026-08-19T07:15:18Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T07:15:18Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T07:15:18Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T07:21:38Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+7"
+        },
+        {
+            "timestamp": "2026-08-19T07:21:38Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T07:21:38Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T07:21:38Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T07:31:51Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: social+4, purpose+2, energy+15"
+        },
+        {
+            "timestamp": "2026-08-19T07:31:51Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: profit+1, inventory+25, customers+3"
+        },
+        {
+            "timestamp": "2026-08-19T07:31:51Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T07:31:51Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T07:31:51Z",
+            "type": "system",
+            "message": "Relationship decay: 11 edges weakened"
+        },
+        {
+            "timestamp": "2026-08-19T07:31:51Z",
+            "type": "system",
+            "message": "Pruned 7 dead relationships"
+        },
+        {
+            "timestamp": "2026-08-19T07:38:07Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+13"
+        },
+        {
+            "timestamp": "2026-08-19T07:38:07Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T07:38:07Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T07:38:07Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T07:38:07Z",
+            "type": "system",
+            "message": "Relationship decay: 2 edges weakened"
+        },
+        {
+            "timestamp": "2026-08-19T07:38:07Z",
+            "type": "system",
+            "message": "Pruned 1 dead relationships"
+        },
+        {
+            "timestamp": "2026-08-19T07:44:23Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+12"
+        },
+        {
+            "timestamp": "2026-08-19T07:44:23Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T07:44:23Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T07:44:23Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T07:50:42Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+10"
+        },
+        {
+            "timestamp": "2026-08-19T07:50:42Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T07:50:42Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T07:50:42Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T07:56:55Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+12"
+        },
+        {
+            "timestamp": "2026-08-19T07:56:55Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T07:56:55Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T07:56:55Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T08:07:44Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: social+2, purpose+4, energy+12"
+        },
+        {
+            "timestamp": "2026-08-19T08:07:44Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: profit+2, inventory+25, customers+2"
+        },
+        {
+            "timestamp": "2026-08-19T08:07:44Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 1)"
+        },
+        {
+            "timestamp": "2026-08-19T08:07:44Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T08:07:44Z",
+            "type": "system",
+            "message": "Agent `codacraft-001` trait drift: social 0.45 \u2192 0.50"
+        },
+        {
+            "timestamp": "2026-08-19T08:07:44Z",
+            "type": "system",
+            "message": "Agent `dashlight-001` trait drift: social 0.42 \u2192 0.47"
+        },
+        {
+            "timestamp": "2026-08-19T08:07:44Z",
+            "type": "system",
+            "message": "Goal fulfillment: 1 goals completed across agents"
+        },
+        {
+            "timestamp": "2026-08-19T08:14:04Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+10"
+        },
+        {
+            "timestamp": "2026-08-19T08:14:04Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T08:14:04Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T08:14:04Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T08:14:04Z",
+            "type": "system",
+            "message": "Relationship decay: 1 edges weakened"
+        },
+        {
+            "timestamp": "2026-08-19T08:20:17Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+13"
+        },
+        {
+            "timestamp": "2026-08-19T08:20:17Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T08:20:17Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T08:20:17Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T08:26:41Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+11"
+        },
+        {
+            "timestamp": "2026-08-19T08:26:41Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T08:26:41Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T08:26:41Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T08:32:55Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+8"
+        },
+        {
+            "timestamp": "2026-08-19T08:32:55Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T08:32:55Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T08:32:55Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T08:43:48Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: social+5, purpose+4, energy+8"
+        },
+        {
+            "timestamp": "2026-08-19T08:43:48Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: profit+2, inventory+25, customers+4"
+        },
+        {
+            "timestamp": "2026-08-19T08:43:48Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T08:43:48Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T08:43:48Z",
+            "type": "system",
+            "message": "Agent `emberspin-001` trait drift: explorer 0.52 \u2192 0.46"
+        },
+        {
+            "timestamp": "2026-08-19T08:43:48Z",
+            "type": "system",
+            "message": "Agent `emberspin-001` trait drift: social 0.38 \u2192 0.44"
+        },
+        {
+            "timestamp": "2026-08-19T08:43:48Z",
+            "type": "system",
+            "message": "Agent `gridstar-001` trait drift: social 0.38 \u2192 0.44"
+        },
+        {
+            "timestamp": "2026-08-19T08:50:21Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs fulfilled: energy+7"
+        },
+        {
+            "timestamp": "2026-08-19T08:50:21Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs fulfilled: inventory+25"
+        },
+        {
+            "timestamp": "2026-08-19T08:50:21Z",
+            "type": "system",
+            "message": "NPC `rapp-guide-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T08:50:21Z",
+            "type": "system",
+            "message": "NPC `card-trader-001` needs decayed (lowest: 0)"
+        },
+        {
+            "timestamp": "2026-08-19T08:50:21Z",
+            "type": "system",
+            "message": "Relationship decay: 2 edges weakened"
         }
     ],
     "_meta": {

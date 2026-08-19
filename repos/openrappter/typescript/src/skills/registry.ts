@@ -1,3 +1,4 @@
+import { openrappterPath } from '../infra/openrappter-home.js';
 /**
  * Skills Registry
  * Manages skill discovery, installation, and loading from ClawHub
@@ -5,7 +6,6 @@
 
 import { readdir, readFile, writeFile, mkdir, rm } from 'fs/promises';
 import { join } from 'path';
-import { homedir } from 'os';
 
 export interface Skill {
   id: string;
@@ -78,7 +78,6 @@ export interface SkillSearchResult {
 // Skills are public GitHub repos with skill.json + skill.md at their root
 const GITHUB_RAW = 'https://raw.githubusercontent.com';
 const GITHUB_API = 'https://api.github.com';
-const DEFAULT_SKILLS_DIR = join(homedir(), '.openrappter', 'skills');
 
 function describeError(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
@@ -90,7 +89,7 @@ export class SkillsRegistry {
   private loaded = new Map<string, Skill>();
 
   constructor(skillsDir?: string) {
-    this.skillsDir = skillsDir ?? DEFAULT_SKILLS_DIR;
+    this.skillsDir = skillsDir ?? openrappterPath('skills');
   }
 
   /**

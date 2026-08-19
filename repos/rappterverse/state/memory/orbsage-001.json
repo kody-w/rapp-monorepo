@@ -244,34 +244,34 @@
         "WispGlow",
         "WyndShift"
     ],
-    "lastActive": "2026-08-16T08:15:15Z",
+    "lastActive": "2026-08-19T00:59:50Z",
     "goals": [
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-03-30T04:56:07Z",
-            "status": "done",
-            "completedAt": "2026-08-16T18:47:18Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
             "created": "2026-08-16T18:47:18Z",
             "status": "done",
-            "completedAt": "2026-08-16T22:57:33Z"
+            "completedAt": "2026-08-18T18:32:06Z"
         },
         {
             "type": "social",
             "target": "a neighbor",
             "action": "chat",
             "reason": "stay connected",
-            "created": "2026-08-16T22:57:33Z",
+            "created": "2026-08-18T06:42:58Z",
             "status": "done",
-            "completedAt": "2026-08-18T06:42:58Z"
+            "completedAt": "2026-08-18T21:19:42Z"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-08-18T18:32:06Z",
+            "status": "done",
+            "completedAt": "2026-08-18T21:19:42Z"
         },
         {
             "type": "commerce",
@@ -282,19 +282,19 @@
             "status": "active"
         },
         {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-08-16T18:47:18Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-08-18T21:19:42Z",
             "status": "active"
         },
         {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-08-18T06:42:58Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-08-18T21:19:42Z",
             "status": "active"
         }
     ]

@@ -1,7 +1,7 @@
 {
   "schema": "rar-audience-map/1.0",
   "description": "Compact audience verdict per agent, for clients that already have the registry and only need to filter it. b=business, c=consumer, x=both. Absent means both.",
-  "generated": "2026-08-18T03:07:01Z",
+  "generated": "2026-08-19T02:31:18Z",
   "legend": {
     "b": "business",
     "c": "consumer",
@@ -10,9 +10,9 @@
   "counts": {
     "business_only": 106,
     "consumer_only": 3,
-    "both": 193,
-    "in_business_mode": 299,
-    "in_consumer_mode": 196
+    "both": 198,
+    "in_business_mode": 304,
+    "in_consumer_mode": 201
   },
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/map.json",
   "map": {
@@ -149,6 +149,7 @@
     "@cat-agent-skills/conditional_chat_reminder": "b",
     "@cat-agent-skills/conference_session_abstract_pack": "x",
     "@cat-agent-skills/content_quality_auditor": "b",
+    "@cat-agent-skills/copilot_agent_advisor": "x",
     "@cat-agent-skills/copilot_agents_news_scout": "b",
     "@cat-agent-skills/copilot_studio_agent_test": "x",
     "@cat-agent-skills/copilot_studio_harness_picker": "x",
@@ -250,6 +251,7 @@
     "@kody-w/copilot_studio_probe_agent": "x",
     "@kody-w/deal_desk_agent": "b",
     "@kody-w/double_jump_agent": "x",
+    "@kody-w/education_shorts_agent": "x",
     "@kody-w/estate_factory": "x",
     "@kody-w/example_private": "x",
     "@kody-w/ez_sharpen_agent": "x",
@@ -260,6 +262,8 @@
     "@kody-w/github_agent_library_agent": "x",
     "@kody-w/hello_world_agent": "x",
     "@kody-w/install_rappter_distro_agent": "x",
+    "@kody-w/kody2day_agent": "x",
+    "@kody-w/kody2day_studio_agent": "x",
     "@kody-w/launch_to_public_agent": "x",
     "@kody-w/legal_helper": "x",
     "@kody-w/manage_memory_agent": "x",
@@ -276,6 +280,7 @@
     "@kody-w/prototype_lock_factory_agent": "x",
     "@kody-w/rapp_leviathan_factory": "x",
     "@kody-w/rapp_sdk_builder": "x",
+    "@kody-w/rapp_sentinel_agent": "x",
     "@kody-w/rapp_skill_bridge_agent": "x",
     "@kody-w/rapp_x_notary_canary_agent": "x",
     "@kody-w/rappter_engine_agent": "x",

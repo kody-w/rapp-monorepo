@@ -1,15 +1,14 @@
+import { openrappterHome, openrappterPath } from './infra/openrappter-home.js';
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import fs from 'fs';
 import path from 'path';
-import os from 'os';
 
 const execAsync = promisify(exec);
 
-const OPENRAPPTER_DIR = path.join(os.homedir(), '.openrappter');
-const CREDENTIALS_DIR = path.join(OPENRAPPTER_DIR, 'credentials');
+const CREDENTIALS_DIR = path.join(openrappterHome(), 'credentials');
 const GITHUB_TOKEN_FILE = path.join(CREDENTIALS_DIR, 'github-token.json');
-const AUTH_PROFILES_FILE = path.join(OPENRAPPTER_DIR, 'auth-profiles.json');
+const AUTH_PROFILES_FILE = path.join(openrappterHome(), 'auth-profiles.json');
 
 interface CachedGitHubToken {
   token: string;
@@ -110,7 +109,7 @@ export async function resolveGithubToken(): Promise<string | null> {
     }
 
     try {
-      const envFile = path.join(os.homedir(), '.openrappter', '.env');
+      const envFile = openrappterPath('.env');
       const data = fs.readFileSync(envFile, 'utf-8');
       for (const line of data.split(/\r?\n/)) {
         const trimmed = line.trim();

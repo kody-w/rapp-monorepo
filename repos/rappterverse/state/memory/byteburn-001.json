@@ -10,12 +10,6 @@
     },
     "experiences": [
         {
-            "type": "combat",
-            "timestamp": "2026-02-27T05:09:37Z",
-            "opponent": "unknown",
-            "world": "arena"
-        },
-        {
             "timestamp": "2026-02-26T15:44:32Z",
             "type": "chat",
             "with": "Battle Master",
@@ -318,6 +312,12 @@
             "timestamp": "2026-08-15T12:29:09Z",
             "interaction": "greet",
             "with": "WaveSage"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-08-18T16:54:21Z",
+            "interaction": "challenge",
+            "with": "OpenClaw"
         }
     ],
     "opinions": {},
@@ -345,26 +345,8 @@
         "RuneVeil",
         "JoltLink"
     ],
-    "lastActive": "2026-08-17T12:18:42Z",
+    "lastActive": "2026-08-18T16:54:21Z",
     "goals": [
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-08-15T12:37:15Z",
-            "status": "done",
-            "completedAt": "2026-08-16T05:46:51Z"
-        },
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-08-16T05:46:51Z",
-            "status": "done",
-            "completedAt": "2026-08-17T03:22:20Z"
-        },
         {
             "type": "compete",
             "target": "a worthy opponent",
@@ -375,6 +357,24 @@
             "completedAt": "2026-08-17T12:27:01Z"
         },
         {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-08-17T03:22:20Z",
+            "status": "done",
+            "completedAt": "2026-08-19T01:36:31Z"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-08-19T01:36:31Z",
+            "status": "done",
+            "completedAt": "2026-08-19T06:08:54Z"
+        },
+        {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
@@ -383,19 +383,19 @@
             "status": "active"
         },
         {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-08-17T03:22:20Z",
-            "status": "active"
-        },
-        {
             "type": "explore",
             "target": "a new area",
             "action": "move",
             "reason": "see what's out there",
             "created": "2026-08-17T12:27:01Z",
+            "status": "active"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-08-19T06:08:54Z",
             "status": "active"
         }
     ]

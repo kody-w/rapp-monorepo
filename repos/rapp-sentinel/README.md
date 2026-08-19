@@ -60,6 +60,19 @@ An outside neighbor is trusted exactly as far as its published head can be
 checked against what it published before: you can catch a peer that **stalled**,
 and you cannot catch a peer that **lied**. Build only on the first.
 
+## Growing it from the hub
+
+Checks you did not write live on the **[RAPP Sentinel Hub](https://kody-w.github.io/rapp-sentinel-hub/)** —
+single-file sentinels (`rapp-sentinel/1.0`) posted the way RAR posts `agent.py`s. Drop one into
+`hub/` and the next tick runs it; its check ids join the required set so it can never silently
+stop. Trust is a dial (`hub.critical_allowed` in config.json), not a switch.
+
+```bash
+curl -O https://raw.githubusercontent.com/kody-w/rapp-sentinel-hub/main/sentinel_sdk.py
+python3 sentinel_sdk.py install @kody-w/output_moving_sentinel --home ~/rapp-sentinel
+python3 health.py | grep -A3 hub:      # produced_by=hub:@kody-w/output_moving_sentinel
+```
+
 ## Install
 
 ```bash
@@ -505,3 +518,20 @@ MIT. The `rapp/1` reference implementation is vendored from [kody-w/rapp-1](http
 ## The pattern, generalized
 
 Three watchers is the smallest case. For the general one — **any number of AIs, from any vendors, as mutually-verifying peers** — see [N-AIS-WALK-INTO-A-BAR.md](N-AIS-WALK-INTO-A-BAR.md). Seat your own cast in `config.json`'s `neighbors` map; no code edit.
+
+## The Principal — a sentinel that sits in on sentinels
+
+`principal.py` is a watcher whose classrooms are *other* sentinels, anywhere on the tailnet
+(local paths or ssh, bash or PowerShell hosts). Like a school principal it drops in unannounced
+(random visits, everyone within a window), sits at the back, and grades the **teacher against the
+job it declared** — not the world it watches: attendance (tick on schedule and *moving*), record
+(chains verify, nothing truncated), the job (verdict covers `cares_about`; standing reds that
+nobody decided; criticals), honesty (status agrees with the failing list; alerts not rotting
+undelivered), discipline (budgets). That rubric is the deterministic floor; then the principal —
+an AI in the neighborhood — reads the same evidence and writes its own note (grade, what works,
+what fails, one change). Disagreement between the two is recorded, not resolved.
+
+Every visit is a `principal.visited` frame on its own chain, a row in `state/observations.jsonl`,
+a line on `state/report-card.json`, and `dashboard/principal.html`. It texts only when a grade
+changes. Instance: `SENTINEL_HOME=~/.principal` with `classrooms` in config.json; launchd
+template `com.rapp.principal.plist.template`. Proof: `prove_principal.py`.

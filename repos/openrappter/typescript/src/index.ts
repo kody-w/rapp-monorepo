@@ -17,6 +17,13 @@ import { VERSION } from './version.js';
 import { registerTelephonyCommands } from './telephony/cli.js';
 import { registerTwinCommands } from './twin/index.js';
 import { registerCronCommand } from './cli/cron.js';
+import { registerApprovalsCommand } from './cli/approvals.js';
+import { registerBackupCommand } from './cli/backup.js';
+import { registerMemoryCommand } from './cli/memory.js';
+import { registerSessionsCommand } from './cli/sessions.js';
+import { registerChannelsCommand } from './cli/channels.js';
+import { registerAuditCommand } from './cli/audit.js';
+import { registerServiceStatusCommand } from './cli/service-status.js';
 import { registerConfigCommand } from './cli/config.js';
 import { registerDoctorCommand } from './cli/doctor.js';
 import { registerRappterCommand } from './cli/rappters.js';
@@ -497,6 +504,15 @@ async function startGatewayInProcess(opts?: {
     }
     return list;
   });
+
+  // `agent.tool` had a listener in the chat UI and no emit site anywhere, so
+  // tool use never appeared (#195). The assistant reports each finished call
+  // and the gateway forwards it; the payload carries the tool's name and
+  // outcome only, never its arguments.
+  const { GatewayEvents } = await import('./gateway/types.js');
+  assistant.onToolEvent = (event) => {
+    server.broadcastEvent(GatewayEvents.AGENT_TOOL, event);
+  };
 
   server.setAgentHandler(async (req, stream) => {
     const conversationKey = req.sessionId || req.conversationId || 'default';
@@ -2096,6 +2112,8 @@ const serviceCommand = program
   .command('service')
   .description('Manage the launchd-supervised OpenRappter gateway');
 
+registerServiceStatusCommand(serviceCommand);
+
 serviceCommand
   .command('install')
   .description('Install or adopt the gateway service')
@@ -2592,6 +2610,12 @@ registerTwinCommands(program);
 // message, which is why asking for `cron add --help` printed the top-level help
 // instead of an error.
 registerCronCommand(program);
+registerApprovalsCommand(program);
+registerBackupCommand(program);
+registerMemoryCommand(program);
+registerSessionsCommand(program);
+registerChannelsCommand(program);
+registerAuditCommand(program);
 registerConfigCommand(program);
 registerDoctorCommand(program);
 // Seeing and creating the rappters on this device. #107

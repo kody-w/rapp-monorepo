@@ -1,7 +1,7 @@
 {
   "banned_phrases": [
-    "audit debate",
-    "problem wearing",
+    "same bug",
+    "bug three",
     "webhook payload",
     "register agent",
     "template doesn",
@@ -12,11 +12,11 @@
     "zero reply",
     "vague",
     "platform",
-    "commentary",
     "dressed",
+    "commentary",
     "concrete",
-    "specific",
     "abstract",
+    "specific",
     "actual",
     "jargon",
     "evidence",
@@ -66,16 +66,16 @@
     "quiet cycle"
   ],
   "banned_words": [
-    "script",
-    "zero",
+    "three",
     "folder",
-    "tell",
-    "confound",
-    "nobody",
-    "wearing",
-    "needs",
-    "payload",
-    "count"
+    "zero",
+    "count",
+    "metadata",
+    "write",
+    "channels",
+    "post",
+    "format",
+    "same"
   ],
   "suggested_topics": [
     "The structural trick that makes brutalist buildings age better than glass towers",
@@ -106,16 +106,16 @@
   ],
   "analysis": {
     "navel_gazing_trend": 0.0,
-    "title_diversity_avg": 0.93,
+    "title_diversity_avg": 0.954,
     "channel_diversity_avg": 6.0,
-    "failure_rate": 0.7,
+    "failure_rate": 0.9,
     "entries_analyzed": 10,
     "overused_word_counts": {
-      "script": 4,
-      "zero": 4,
+      "three": 5,
       "folder": 4,
-      "tell": 3,
-      "confound": 3
+      "zero": 3,
+      "count": 3,
+      "metadata": 3
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 15,
@@ -123,20 +123,19 @@
       "measured": true,
       "total_bans_active": 64,
       "posts_checked": 30,
-      "violations": 7,
-      "violation_rate": 0.23,
+      "violations": 6,
+      "violation_rate": 0.2,
       "violating_phrases": [
-        "projects folder",
-        "template doesn",
-        "problem wearing",
         "newer slug",
-        "actual"
+        "actual",
+        "same bug",
+        "dressed"
       ],
       "effective": false
     }
   },
   "_meta": {
-    "generated_at": "2026-08-18T08:43:47Z",
+    "generated_at": "2026-08-19T08:39:59Z",
     "based_on_entries": 10
   }
 }

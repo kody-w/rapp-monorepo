@@ -131,7 +131,52 @@ export interface AssistantConversationMessage {
   content: string;
 }
 
+/**
+ * What a surface is told when the assistant runs a tool.
+ *
+ * Deliberately carries the tool's **name and outcome only**. Tool arguments
+ * can hold secrets -- the Flight Recorder omits them by default and scrubs
+ * opt-in IO for the same reason -- and this payload is broadcast to every
+ * subscribed client, which is a wider audience than a local trace file.
+ */
+export interface AgentToolEvent {
+  /**
+   * The model's own id for this call.
+   *
+   * The chat UI keys its list on `toolCallId ?? \`tool_${Date.now()}\``, so
+   * omitting it made two tools that finished in the same millisecond collide:
+   * the second *updated* the first's row instead of adding one, and its name
+   * was never shown. Sending the id the model already assigned removes the
+   * guess.
+   */
+  toolCallId: string;
+  /** Conversation this ran in. */
+  sessionId: string;
+  /** The tool the model asked for. */
+  name: string;
+  /**
+   * `'success'`, not `'ok'`.
+   *
+   * The chat UI has rendered this event since before it was emitted, and it
+   * reads the value literally:
+   *
+   *     tool.status === 'running' ? spinner : tool.status === 'success' ? '✓' : '✗'
+   *
+   * so `'ok'` matched neither arm and drew every *successful* tool call with
+   * the failure mark. The emitter must speak the consumer's vocabulary, and
+   * `chat-tool-event-contract.test.ts` now pins the two together.
+   */
+  status: 'success' | 'error';
+  durationMs: number;
+}
+
 export class Assistant {
+  /**
+   * Notified as each tool call finishes. Optional: the CLI sets nothing and
+   * pays only a null check, while the gateway forwards these as `agent.tool`.
+   */
+  onToolEvent?: (event: AgentToolEvent) => void;
+
   private agents: Map<string, BasicAgent>;
   private config: AssistantConfig;
   private provider: LLMProvider;
@@ -261,6 +306,30 @@ export class Assistant {
         this.getResponseWithinTrace(message, onDelta, memoryContext, key, signal),
       ),
     );
+  }
+
+  /**
+   * Report one finished tool call, never failing the turn.
+   *
+   * A subscriber that throws must not abort the tool loop: agents already
+   * report failure in their return value rather than by throwing (#134), and
+   * a broadcast is strictly less important than the answer being produced.
+   */
+  private emitToolEvent(
+    sessionId: string,
+    toolCallId: string,
+    name: string,
+    status: 'success' | 'error',
+    /** A `performance.now()` reading, matching the Flight Recorder's clock. */
+    startedAt: number,
+  ): void {
+    if (!this.onToolEvent) return;
+    try {
+      const durationMs = Math.max(0, Math.round(performance.now() - startedAt));
+      this.onToolEvent({ sessionId, toolCallId, name, status, durationMs });
+    } catch {
+      // Intentionally ignored; see the note above.
+    }
   }
 
   private async withConversationTurn<T>(
@@ -401,7 +470,7 @@ export class Assistant {
           try {
             const result = await getFlightRecorder().withParent(
               providerCall.parentEventId ?? null,
-              () => this.executeToolCall(tc, agentLogs),
+              () => this.executeToolCall(tc, agentLogs, conversationKey),
             );
             history.push({
               role: "tool",
@@ -721,7 +790,7 @@ export class Assistant {
           try {
             const result = await getFlightRecorder().withParent(
               providerParentEventId ?? null,
-              () => this.executeToolCall(tc, agentLogs),
+              () => this.executeToolCall(tc, agentLogs, conversationKey),
             );
             history.push({
               role: "tool",
@@ -942,6 +1011,7 @@ export class Assistant {
   private async executeToolCall(
     tc: ToolCall,
     agentLogs: string[],
+    conversationKey: string = "default",
   ): Promise<string> {
     const agentName = tc.function.name;
     const recorder = getFlightRecorder();
@@ -981,6 +1051,7 @@ export class Assistant {
       // product disagreeing on the wire is the failure PARITY §0 is about.
       if (!agent) {
         const msg = `Agent '${agentName}' not found.`;
+        this.emitToolEvent(conversationKey, tc.id, agentName, 'error', started);
         agentLogs.push(formatFlightAgentLog(agentName, msg));
         await recorder.record({
           kind: "tool.call.failed",
@@ -1007,7 +1078,12 @@ export class Assistant {
         const result = await agent.execute(params);
         const resultStr =
           result == null ? "Agent completed successfully" : String(result);
+        // The same classification the Flight Recorder makes two lines below.
+        // An agent reports failure by *resolving* with `{"status":"error"}` as
+        // often as by throwing (#134), so the absence of an exception proves
+        // nothing on its own.
         const failed = agentResultIsError(resultStr);
+        this.emitToolEvent(conversationKey, tc.id, agentName, failed ? 'error' : 'success', started);
         let structuredResult: unknown = sanitizeFlightValue(resultStr);
         try {
           structuredResult = sanitizeFlightValue(JSON.parse(resultStr));
@@ -1038,6 +1114,7 @@ export class Assistant {
         return resultStr;
       } catch (err) {
         const message = (err as Error).message;
+        this.emitToolEvent(conversationKey, tc.id, agentName, 'error', started);
         agentLogs.push(formatFlightAgentLog(agentName, message, true));
         const result = `Error: ${message}`;
         await recorder.record({

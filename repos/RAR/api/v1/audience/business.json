@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-08-18T03:07:01Z",
-  "count": 299,
+  "generated": "2026-08-19T02:31:18Z",
+  "count": 304,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
     {
@@ -4580,6 +4580,40 @@
       }
     },
     {
+      "id": "cat-agent-skills__copilot_agent_advisor",
+      "name": "@cat-agent-skills/copilot_agent_advisor",
+      "display_name": "Copilot Agent Advisor",
+      "description": "Tells you which Microsoft 365 / Copilot Studio agent option fits your scenario — use M365 Copilot as-is, build a standard (declarative) agent, or build a custom (custom engine) agent — and which Copilot Studio harness (GitHub Copilot, standard, or Copilot chat) to build on.",
+      "version": "2.0.0",
+      "publisher": "@cat-agent-skills",
+      "author": "Sandra Boucenna",
+      "category": "general",
+      "tags": [
+        "copilot_studio",
+        "agents",
+        "decision_support",
+        "architecture",
+        "advisor"
+      ],
+      "quality_tier": "frontier",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@cat-agent-skills/copilot_agent_advisor_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_agent_advisor_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/copilot_agent_advisor_agent.py",
+        "sha256": "d5cab65242f9c79bd79a21ec4e81f0801c1a64324d0619408d61a25528cbba8d"
+      },
+      "stats": {
+        "lines": 188,
+        "size_kb": 9.3,
+        "added_at": "2026-08-18T18:26:12-04:00"
+      }
+    },
+    {
       "id": "cat-agent-skills__copilot_agents_news_scout",
       "name": "@cat-agent-skills/copilot_agents_news_scout",
       "display_name": "Copilot & Agents News Scout",
@@ -8102,6 +8136,41 @@
       }
     },
     {
+      "id": "kody-w__education_shorts_agent",
+      "name": "@kody-w/education_shorts_agent",
+      "display_name": "Education Shorts",
+      "description": "Turns a topic into an animated 9:16 educational YouTube Short: linted script, HyperFrames composition, check, MP4 — every stage a file on a chained ledger.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "Kody Wildfeuer",
+      "category": "creative",
+      "tags": [
+        "video",
+        "youtube-shorts",
+        "hyperframes",
+        "animation",
+        "education",
+        "creative"
+      ],
+      "quality_tier": "official",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/education_shorts_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/education_shorts_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/education_shorts_agent.py",
+        "sha256": "e8dae3c739c30dd6ea7a3c690a4aa6aaa25cbbfd26ab906d274ec9b520f28715"
+      },
+      "stats": {
+        "lines": 259,
+        "size_kb": 14.9,
+        "added_at": "2026-08-18T18:19:54-04:00"
+      }
+    },
+    {
       "id": "kody-w__estate_factory",
       "name": "@kody-w/estate_factory",
       "display_name": "EstateFactory",
@@ -8445,6 +8514,79 @@
         "lines": 940,
         "size_kb": 36.4,
         "added_at": "2026-05-24T21:45:25-04:00"
+      }
+    },
+    {
+      "id": "kody-w__kody2day_agent",
+      "name": "@kody-w/kody2day_agent",
+      "display_name": "Kody2day",
+      "description": "Keep up with Kody: today's digest of what he shipped across his public GitHub, any past day, a multi-day catch-up, or a search by repo — Kody's own commits separated from the fleet of bots.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "Kody Wildfeuer",
+      "category": "productivity",
+      "tags": [
+        "digest",
+        "daily",
+        "changelog",
+        "github",
+        "kody",
+        "catch-up",
+        "news"
+      ],
+      "quality_tier": "official",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/kody2day_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/kody2day_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/kody2day_agent.py",
+        "sha256": "e4dd13bc20c0f1d3c4333cdbefe6f1e09359a7fc7da5309822248d41ba3b0638"
+      },
+      "stats": {
+        "lines": 297,
+        "size_kb": 14.5,
+        "added_at": "2026-08-18T21:17:02-04:00"
+      }
+    },
+    {
+      "id": "kody-w__kody2day_studio_agent",
+      "name": "@kody-w/kody2day_studio_agent",
+      "display_name": "Kody2day Studio",
+      "description": "Make the daily Kody2day episode: the day's digest → Claude writes the RAPP lesson, Copilot refutes it, the education-shorts pack renders a narrated 16:9 explainer plus byte-sized Shorts → queue with YouTube metadata.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "Kody Wildfeuer",
+      "category": "creative",
+      "tags": [
+        "video",
+        "youtube",
+        "shorts",
+        "education",
+        "kody2day",
+        "hyperframes",
+        "creative",
+        "autonomous"
+      ],
+      "quality_tier": "official",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/kody2day_studio_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/kody2day_studio_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/kody2day_studio_agent.py",
+        "sha256": "520f26e2500bd6ec02288d510735b6ed1c3997ca824735865695c47ae17645d9"
+      },
+      "stats": {
+        "lines": 328,
+        "size_kb": 17.0,
+        "added_at": "2026-08-18T22:13:18-04:00"
       }
     },
     {
@@ -9005,6 +9147,43 @@
       }
     },
     {
+      "id": "kody-w__rapp_sentinel_agent",
+      "name": "@kody-w/rapp_sentinel_agent",
+      "display_name": "RAPP Sentinel",
+      "description": "Run the RAPP Sentinel from the brainstem: free health verdicts over your declared GitHub targets, a roll-call of N mutually-verifying AI watchers, published heads peers can check, overnight standup reports — a watchdog that can't quietly lie.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "Kody Wildfeuer",
+      "category": "devtools",
+      "tags": [
+        "sentinel",
+        "watchdog",
+        "health",
+        "monitoring",
+        "rapp1",
+        "neighborhood",
+        "trifecta",
+        "devtools"
+      ],
+      "quality_tier": "official",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/rapp_sentinel_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_sentinel_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/rapp_sentinel_agent.py",
+        "sha256": "bfbd0a5baed8da9e3c813a90fc36a20961798f9d93e8ebe164425047d0dc8884"
+      },
+      "stats": {
+        "lines": 412,
+        "size_kb": 21.4,
+        "added_at": "2026-08-18T20:49:04-04:00"
+      }
+    },
+    {
       "id": "kody-w__rapp_skill_bridge_agent",
       "name": "@kody-w/rapp_skill_bridge_agent",
       "display_name": "RAPP Skill Bridge",
@@ -9183,7 +9362,7 @@
       "name": "@kody-w/rar_remote_agent",
       "display_name": "RAR Remote Agent",
       "description": "Discovers, searches, installs, votes on, reviews, and submits RAR agents via GitHub raw fetches and Issues, using the brainstem's GitHub token.",
-      "version": "1.7.4",
+      "version": "1.8.0",
       "publisher": "@kody-w",
       "author": "RAPP Core Team",
       "category": "core",
@@ -9206,11 +9385,11 @@
         "path": "agents/@kody-w/rar_remote_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rar_remote_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/rar_remote_agent.py",
-        "sha256": "584e0e180d07918b1b9371dc0271950991088a54db3664eb5f5e294e03716ee2"
+        "sha256": "6fe73b97844e2046ef4f3fc83d9dc0f65a1159c1b778796bfc8f76c0c4b1e63a"
       },
       "stats": {
-        "lines": 1400,
-        "size_kb": 59.4,
+        "lines": 1403,
+        "size_kb": 59.7,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },

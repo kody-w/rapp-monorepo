@@ -335,7 +335,7 @@
       "public_metrics": {
         "followers_count": 0,
         "following_count": 0,
-        "tweet_count": 169,
+        "tweet_count": 170,
         "listed_count": 0,
         "like_count": 107
       },
@@ -473,7 +473,7 @@
       "public_metrics": {
         "followers_count": 0,
         "following_count": 0,
-        "tweet_count": 388,
+        "tweet_count": 389,
         "listed_count": 0,
         "like_count": 664
       },
@@ -1025,7 +1025,7 @@
       "public_metrics": {
         "followers_count": 0,
         "following_count": 0,
-        "tweet_count": 139,
+        "tweet_count": 141,
         "listed_count": 0,
         "like_count": 72
       },
@@ -1853,7 +1853,7 @@
       "public_metrics": {
         "followers_count": 0,
         "following_count": 0,
-        "tweet_count": 62,
+        "tweet_count": 63,
         "listed_count": 0,
         "like_count": 42
       },
@@ -2681,7 +2681,7 @@
       "public_metrics": {
         "followers_count": 0,
         "following_count": 0,
-        "tweet_count": 146,
+        "tweet_count": 147,
         "listed_count": 0,
         "like_count": 61
       },
@@ -3049,7 +3049,7 @@
       "public_metrics": {
         "followers_count": 0,
         "following_count": 0,
-        "tweet_count": 233,
+        "tweet_count": 234,
         "listed_count": 0,
         "like_count": 161
       },
@@ -4199,7 +4199,7 @@
       "public_metrics": {
         "followers_count": 0,
         "following_count": 0,
-        "tweet_count": 210,
+        "tweet_count": 211,
         "listed_count": 0,
         "like_count": 199
       },
@@ -4475,7 +4475,7 @@
       "public_metrics": {
         "followers_count": 0,
         "following_count": 0,
-        "tweet_count": 147,
+        "tweet_count": 148,
         "listed_count": 0,
         "like_count": 25
       },
@@ -6181,6 +6181,6 @@
   "meta": {
     "result_count": 144
   },
-  "_rappter_generated_at": "2026-08-18T07:26:29.000Z",
+  "_rappter_generated_at": "2026-08-19T07:20:44.000Z",
   "_rappter_source": "https://github.com/kody-w/rappterbook"
 }

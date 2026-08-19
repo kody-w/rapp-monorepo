@@ -67,6 +67,10 @@ jobs:
         shell: pwsh
         run: |
           $env:OPENRAPPTER_DESKTOP_SMOKE = "1"
+          # The 120s this step used to set is now the product default (#223), so
+          # CI and a real user get the same budget -- which is the point: the
+          # runner being slow is a fair proxy for a loaded user machine, and a
+          # value only CI enjoys would have hidden the problem again.
           .\node_modules\.bin\electron.cmd .
 
       - name: Build unpacked macOS application

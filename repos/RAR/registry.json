@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-18T03:07:00.045396+00:00",
+  "generated_at": "2026-08-19T02:31:16.853265+00:00",
   "stats": {
-    "total_agents": 302,
+    "total_agents": 307,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 10,
@@ -7410,6 +7410,72 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/copilot_agent_advisor",
+      "version": "2.0.0",
+      "display_name": "Copilot Agent Advisor",
+      "description": "Tells you which Microsoft 365 / Copilot Studio agent option fits your scenario \u2014 use M365 Copilot as-is, build a standard (declarative) agent, or build a custom (custom engine) agent \u2014 and which Copilot Studio harness (GitHub Copilot, standard, or Copilot chat) to build on.",
+      "author": "Sandra Boucenna",
+      "tags": [
+        "copilot_studio",
+        "agents",
+        "decision_support",
+        "architecture",
+        "advisor"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "copilot-agent-advisor",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#copilot-agent-advisor",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "b04c9390fef8539e"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/copilot_agent_advisor_agent.py",
+      "_install_filename": "rar_cat_agent_skills_copilot_agent_advisor_agent.py",
+      "_sha256": "d5cab65242f9c79bd79a21ec4e81f0801c1a64324d0619408d61a25528cbba8d",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_cd6b985563f80b81bc3ffea8494418a7bb15f8f38bdfcc39b876988369753e23",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 20167080258405281196,
+      "_size_kb": 9.3,
+      "_lines": 188,
+      "_has_card": true,
+      "_added_at": "2026-08-18T18:26:12-04:00",
+      "_first_commit_sha": "871fe0c337dfb58aec623592c8890c66d9ee5bb0",
+      "_latest_commit_sha": "871fe0c337dfb58aec623592c8890c66d9ee5bb0",
+      "_card_sha256": "367c77631dd0afbcf83d898ad21ff753a857b9b565bb49e3ddfb38ec147bac85"
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@cat-agent-skills/copilot_agents_news_scout",
       "version": "2.0.0",
       "display_name": "Copilot & Agents News Scout",
@@ -13830,6 +13896,69 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@kody-w/education_shorts_agent",
+      "version": "1.0.0",
+      "display_name": "Education Shorts",
+      "description": "Turns a topic into an animated 9:16 educational YouTube Short: linted script, HyperFrames composition, check, MP4 \u2014 every stage a file on a chained ledger.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "video",
+        "youtube-shorts",
+        "hyperframes",
+        "animation",
+        "education",
+        "creative"
+      ],
+      "category": "creative",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "external_prereqs": [
+        "git",
+        "Node.js with npx (HyperFrames renderer, pinned per project)",
+        "optional: GitHub Copilot CLI on PATH, if you want the pack's model to write scripts"
+      ],
+      "example_call": {
+        "args": {
+          "action": "once",
+          "slug": "sky",
+          "topic": "Why is the sky blue?",
+          "theme": "midnight"
+        }
+      },
+      "_file": "agents/@kody-w/education_shorts_agent.py",
+      "_install_filename": "rar_kody_w_education_shorts_agent.py",
+      "_sha256": "e8dae3c739c30dd6ea7a3c690a4aa6aaa25cbbfd26ab906d274ec9b520f28715",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_c487d51f509db15b0b2858f91d28bf222f3ce10421f0e42e38386fbf56ee0902",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 54657433438960493003,
+      "_size_kb": 14.9,
+      "_lines": 259,
+      "_has_card": true,
+      "_added_at": "2026-08-18T18:19:54-04:00",
+      "_first_commit_sha": "17828d807f840c6d6338a3284b737735b1267142",
+      "_latest_commit_sha": "17828d807f840c6d6338a3284b737735b1267142",
+      "_card_sha256": "e92767d56b08af67a27c3037deb5674d6e217f3962ea3eb0ef11de3e96e6ddf2"
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@kody-w/estate_factory",
       "version": "0.1.2",
       "display_name": "EstateFactory",
@@ -14318,6 +14447,132 @@
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "026f18b4093e3ec07c2f359dd9618438e020a0be",
       "_card_sha256": "a75a9cf7516a8079f3007a1def9708b96281514b20983d8df506d0c46199c7d9"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/kody2day_agent",
+      "version": "1.0.0",
+      "display_name": "Kody2day",
+      "description": "Keep up with Kody: today's digest of what he shipped across his public GitHub, any past day, a multi-day catch-up, or a search by repo \u2014 Kody's own commits separated from the fleet of bots.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "digest",
+        "daily",
+        "changelog",
+        "github",
+        "kody",
+        "catch-up",
+        "news"
+      ],
+      "category": "productivity",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "external_prereqs": [
+        "network access to kody-w.github.io (static site, no token)",
+        "impact only: the owner's private ledger at ~/.rapp/kody2day-private (local, never published)"
+      ],
+      "example_call": {
+        "args": {
+          "action": "today"
+        }
+      },
+      "_file": "agents/@kody-w/kody2day_agent.py",
+      "_install_filename": "rar_kody_w_kody2day_agent.py",
+      "_sha256": "e4dd13bc20c0f1d3c4333cdbefe6f1e09359a7fc7da5309822248d41ba3b0638",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_2e4c5e6f6599495513ba0602a420956d37060f73fb3d635a22f7a85eca92b0cc",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 17715257770192547629,
+      "_size_kb": 14.5,
+      "_lines": 297,
+      "_has_card": true,
+      "_added_at": "2026-08-18T21:17:02-04:00",
+      "_first_commit_sha": "075e7a3b8cf977f88a7fed0a615c46b2062b0c77",
+      "_latest_commit_sha": "12b72173806aa97877273642ec6173ce9d4cb154",
+      "_card_sha256": "56fd215d028e122679338c9d79edb1a8dc015a6288f5ef0ecebe380b0402fa9c"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/kody2day_studio_agent",
+      "version": "1.0.0",
+      "display_name": "Kody2day Studio",
+      "description": "Make the daily Kody2day episode: the day's digest \u2192 Claude writes the RAPP lesson, Copilot refutes it, the education-shorts pack renders a narrated 16:9 explainer plus byte-sized Shorts \u2192 queue with YouTube metadata.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "video",
+        "youtube",
+        "shorts",
+        "education",
+        "kody2day",
+        "hyperframes",
+        "creative",
+        "autonomous"
+      ],
+      "category": "creative",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "external_prereqs": [
+        "git",
+        "claude CLI (signed in) \u2014 the writer",
+        "GitHub Copilot CLI (signed in) \u2014 the refute reviewer",
+        "Node.js with npx (HyperFrames renderer)",
+        "ffprobe",
+        "optional: VibeVoice venv for narration (else tts='none')"
+      ],
+      "example_call": {
+        "args": {
+          "action": "run",
+          "date": "2026-08-18"
+        }
+      },
+      "_file": "agents/@kody-w/kody2day_studio_agent.py",
+      "_install_filename": "rar_kody_w_kody2day_studio_agent.py",
+      "_sha256": "520f26e2500bd6ec02288d510735b6ed1c3997ca824735865695c47ae17645d9",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_7aae4d429f8f80bf0e36e1f8ef2e52f73dc42e56493d4bc7719c707bc0de10b4",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 43090629577852075925,
+      "_size_kb": 17.0,
+      "_lines": 328,
+      "_has_card": true,
+      "_added_at": "2026-08-18T22:13:18-04:00",
+      "_first_commit_sha": "34241ae10260c9d29669236e631d5bdd0ec1d141",
+      "_latest_commit_sha": "6df086ae702e7b5f1dbfec69470a242317e780be",
+      "_card_sha256": "e82a65c4a3d8eacc4ab61333dd07fa56828b6be13095c79388f0918525c887cb"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -15008,6 +15263,69 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@kody-w/rapp_sentinel_agent",
+      "version": "1.0.0",
+      "display_name": "RAPP Sentinel",
+      "description": "Run the RAPP Sentinel from the brainstem: free health verdicts over your declared GitHub targets, a roll-call of N mutually-verifying AI watchers, published heads peers can check, overnight standup reports \u2014 a watchdog that can't quietly lie.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "sentinel",
+        "watchdog",
+        "health",
+        "monitoring",
+        "rapp1",
+        "neighborhood",
+        "trifecta",
+        "devtools"
+      ],
+      "category": "devtools",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "external_prereqs": [
+        "git",
+        "gh (GitHub CLI, authenticated) for the GitHub health checks",
+        "optional: GitHub Copilot CLI for levels 1+ (repair/evolve arms)",
+        "optional: macOS launchd for install_launchd (every-15-minutes tick)"
+      ],
+      "example_call": {
+        "args": {
+          "action": "health"
+        }
+      },
+      "_file": "agents/@kody-w/rapp_sentinel_agent.py",
+      "_install_filename": "rar_kody_w_rapp_sentinel_agent.py",
+      "_sha256": "bfbd0a5baed8da9e3c813a90fc36a20961798f9d93e8ebe164425047d0dc8884",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_f56b38b203a1c631d83992d6b9391e502303428b9504db684acc58be671831b2",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 9983162944433694679,
+      "_size_kb": 21.4,
+      "_lines": 412,
+      "_has_card": true,
+      "_added_at": "2026-08-18T20:49:04-04:00",
+      "_first_commit_sha": "0cac8b2ead93e9791fa77022cbd654990205184e",
+      "_latest_commit_sha": "0cac8b2ead93e9791fa77022cbd654990205184e",
+      "_card_sha256": "41f94962279ceaa6842a55289493b735ea864560643b1ab390ff0ab47fbf911c"
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@kody-w/rapp_skill_bridge_agent",
       "version": "1.0.1",
       "display_name": "RAPP Skill Bridge",
@@ -15266,7 +15584,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/rar_remote_agent",
-      "version": "1.7.4",
+      "version": "1.8.0",
       "display_name": "RAR Remote Agent",
       "description": "Discovers, searches, installs, votes on, reviews, and submits RAR agents via GitHub raw fetches and Issues, using the brainstem's GitHub token.",
       "author": "RAPP Core Team",
@@ -15287,9 +15605,9 @@
       ],
       "_file": "agents/@kody-w/rar_remote_agent.py",
       "_install_filename": "rar_kody_w_rar_remote_agent.py",
-      "_sha256": "584e0e180d07918b1b9371dc0271950991088a54db3664eb5f5e294e03716ee2",
+      "_sha256": "6fe73b97844e2046ef4f3fc83d9dc0f65a1159c1b778796bfc8f76c0c4b1e63a",
       "_lifecycle": "notarized",
-      "_receipt": "rar_64b2f2ae8fe113bb15c3aee6e2de1c47561dcdc756ab9694e62db8513cd9ed40",
+      "_receipt": "rar_97803bde857c4794fee71e9894cdad43066a6688cc3ecde1680f193ed6ae6264",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -15306,13 +15624,13 @@
         ]
       },
       "_seed": 13515315761908692801,
-      "_size_kb": 59.4,
-      "_lines": 1400,
+      "_size_kb": 59.7,
+      "_lines": 1403,
       "_has_card": true,
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
-      "_latest_commit_sha": "d31f383a14b2ba7d8f6c5d6ee0321690dc3341d4",
-      "_card_sha256": "2313bf65842a03532f9e3eead0dbb5b0718b0c4c057b1f1bb5a3b8c66d12082c"
+      "_latest_commit_sha": "a406372feff89232194bf208658b526eb2440722",
+      "_card_sha256": "00814edd84e2e154074e2c417624b1860d13fd0cf38805e4d3277ca30e702600"
     },
     {
       "schema": "rapp-agent/1.0",
