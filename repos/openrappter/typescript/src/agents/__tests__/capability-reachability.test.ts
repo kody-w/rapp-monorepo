@@ -32,13 +32,43 @@ import { fileURLToPath } from 'node:url';
 const here = path.dirname(fileURLToPath(import.meta.url));
 const agentsDir = path.resolve(here, '..');
 
-/** Evidence that a capability is reachable, mirroring CAPABILITY_EVIDENCE. */
+/**
+ * Evidence that a capability is reachable, mirroring CAPABILITY_EVIDENCE.
+ *
+ * These patterns are the security-critical core of this file, and until now
+ * nothing tested them directly — they were only ever exercised against
+ * whichever agents happened to exist, so a gap could sit here indefinitely
+ * without a single test going red. Fourteen of fifteen realistic
+ * `filesystem-write` forms were invisible, including `fs.rm(dir, {recursive:
+ * true})`, the async twin of the `rmSync` the table already listed. The
+ * `\b...\b` word boundary also meant `rename` did not match `renameSync` and
+ * `copyFile` did not match `copyFileSync`, because the `S` that follows is a
+ * word character. Those forms are used 71 times elsewhere in `typescript/src`;
+ * it was luck, not design, that no self-contained agent had reached for one.
+ *
+ * The list is now built from verb + optional `Sync` so a twin cannot go
+ * missing again, and the classifier has unit tests of its own below.
+ *
+ * `rm` and `cp` are matched only in call position, since two letters are too
+ * little to spend a false positive on. Bare `link` is deliberately absent for
+ * the same reason — it is far more likely to be a markup helper than
+ * `fs.link`, and `symlink` covers the case that matters. A false positive here
+ * would push someone to declare a capability they do not have, which is the
+ * exact disease this file exists to treat.
+ */
+const FS_WRITE_VERBS = [
+  'writeFile', 'appendFile', 'copyFile', 'rename', 'mkdir', 'rmdir', 'unlink',
+  'truncate', 'ftruncate', 'symlink', 'chmod', 'chown', 'mkdtemp', 'writev',
+  'createWriteStream',
+];
+
 const EVIDENCE: Record<string, RegExp> = {
   'process-exec': /from\s+['"](?:node:)?child_process['"]/,
   'network':
-    /from\s+['"](?:node:)?(?:http|https|net|dns|dns\/promises|tls)['"]|from\s+['"](?:axios|node-fetch|undici|ws)['"]|\bfetch\s*\(/,
-  'filesystem-write':
-    /\b(writeFile|writeFileSync|mkdir|mkdirSync|rmSync|unlink|unlinkSync|appendFile|appendFileSync|copyFile|rename|createWriteStream)\b/,
+    /from\s+['"](?:node:)?(?:http|https|http2|net|dgram|dns|dns\/promises|tls)['"]|from\s+['"](?:axios|node-fetch|undici|ws)['"]|\bfetch\s*\(|\bnew\s+WebSocket\s*\(/,
+  'filesystem-write': new RegExp(
+    `\\b(?:${FS_WRITE_VERBS.join('|')})(?:Sync)?\\b|\\b(?:rm|cp)(?:Sync)?\\s*\\(`,
+  ),
 };
 
 function agentFiles(): string[] {
@@ -50,23 +80,126 @@ function agentFiles(): string[] {
  * An agent whose every import is a Node builtin, `./BasicAgent.js` or a type.
  * `BasicAgent` itself performs no disk or process I/O, so for these files the
  * source is the whole story.
+ *
+ * Dynamic imports count. This used to read static `import ... from` lines only,
+ * which meant `await import('../infra/gateway-lock.js')` was invisible to it —
+ * the very same specifier that disqualifies a file when written statically.
+ * Three of the thirteen agents this asserted against reached deep internals
+ * that way (`CronAgent` into `../cron/service.js`, `TTSAgent` into
+ * `../voice/tts.js`, and `NeighborAgent` into nine modules under `../infra`
+ * and `../twin`), so the file claimed "the source is the whole story" about
+ * files whose story continued somewhere it never looked. No live
+ * mis-declaration was hiding there — each one calls a pure helper — but the
+ * assertions were resting on a premise that was not true, which is the kind of
+ * thing that holds until it suddenly doesn't.
+ *
+ * A dynamic import with a computed specifier is excluded outright: if the
+ * target is only known at runtime, nothing here can say what it reaches. No
+ * agent in this directory does that today, but `morning_brief_agent.js` loads
+ * siblings by `import(path.join(...))`, so the shape is not hypothetical.
  */
 function isSelfContained(source: string): boolean {
-  const imports = [...source.matchAll(/^import\s[^;]*?from\s+['"]([^'"]+)['"]/gm)]
+  const isDeep = (spec: string) =>
+    spec.startsWith('../') || /^\.\/(?!BasicAgent|types)/.test(spec);
+
+  const staticImports = [...source.matchAll(/^import\s[^;]*?from\s+['"]([^'"]+)['"]/gm)]
     .map((m) => m[1]);
-  return imports.every(
-    (spec) => !spec.startsWith('../') && !/^\.\/(?!BasicAgent|types)/.test(spec),
-  );
+  if (!staticImports.every((spec) => !isDeep(spec))) return false;
+
+  const literalDynamic = [...source.matchAll(/\bimport\s*\(\s*['"]([^'"]+)['"]\s*\)/g)]
+    .map((m) => m[1]);
+  if (!literalDynamic.every((spec) => !isDeep(spec))) return false;
+
+  const everyDynamic = source.match(/\bimport\s*\(/g)?.length ?? 0;
+  return everyDynamic === literalDynamic.length;
 }
 
 describe('agents do not declare capabilities they cannot reach', () => {
   it('checks a meaningful number of agents', () => {
     // Anti-vacuity: if the self-contained set shrank to nothing, every
-    // assertion below would pass without examining anything.
+    // assertion below would pass without examining anything. The floor sits at
+    // the true current count rather than comfortably below it, because the
+    // failure this guards against is the set eroding one agent at a time —
+    // teaching an agent to reach a deep module through a dynamic import now
+    // drops it out of these assertions, and that should require saying so here
+    // rather than happening quietly.
     const selfContained = agentFiles().filter((f) =>
       isSelfContained(readFileSync(path.join(agentsDir, f), 'utf8')),
     );
-    expect(selfContained.length).toBeGreaterThanOrEqual(8);
+    expect(selfContained.length).toBeGreaterThanOrEqual(10);
+  });
+
+  describe('the self-contained rule sees past static imports', () => {
+    const builtinOnly = "import fs from 'node:fs';\nimport { BasicAgent } from './BasicAgent.js';\n";
+
+    it('accepts builtins and BasicAgent', () => {
+      expect(isSelfContained(builtinOnly)).toBe(true);
+    });
+
+    it('rejects a deep static import', () => {
+      expect(isSelfContained(`${builtinOnly}import { x } from '../infra/roster.js';\n`)).toBe(false);
+    });
+
+    it('rejects a deep dynamic import — the case that was invisible', () => {
+      expect(isSelfContained(`${builtinOnly}const m = await import('../infra/gateway-lock.js');`))
+        .toBe(false);
+    });
+
+    it('rejects a computed dynamic import, whose target it cannot know', () => {
+      expect(isSelfContained(`${builtinOnly}const m = await import(path.join(dir, name));`))
+        .toBe(false);
+    });
+
+    it('still accepts a dynamic import of a builtin', () => {
+      expect(isSelfContained(`${builtinOnly}const m = await import('node:os');`)).toBe(true);
+    });
+  });
+
+  describe('the evidence patterns see the forms this codebase actually uses', () => {
+    // These patterns decide whether an agent is holding an undeclared
+    // capability, and nothing tested them until now — they were only ever run
+    // against whichever agents existed, so a missing form failed silently.
+    // Every case below was measured as invisible to the previous table.
+    const fsWrite = EVIDENCE['filesystem-write'];
+
+    it.each([
+      ['await fs.rm(dir, { recursive: true, force: true });', 'recursive delete'],
+      ['fs.rmSync(dir, { recursive: true });', 'rmSync'],
+      ['await fs.rmdir(dir);', 'rmdir'],
+      ['fs.rmdirSync(dir);', 'rmdirSync'],
+      ['fs.renameSync(a, b);', 'renameSync — the word boundary hid this'],
+      ['fs.copyFileSync(a, b);', 'copyFileSync — likewise'],
+      ['await fs.cp(src, dst, { recursive: true });', 'cp'],
+      ['fs.cpSync(src, dst);', 'cpSync'],
+      ['await fs.truncate(p, 0);', 'truncate erases a file'],
+      ['await fs.symlink(target, linkPath);', 'symlink'],
+      ['await fs.chmod(p, 0o777);', 'chmod'],
+      ['await fs.mkdtemp(prefix);', 'mkdtemp creates a directory'],
+      ['await fsp.writeFile(p, data);', 'writeFile, which always worked'],
+    ])('sees %s (%s)', (source) => {
+      expect(fsWrite.test(source)).toBe(true);
+    });
+
+    it('does not fire on ordinary prose or unrelated calls', () => {
+      // A false positive here would push someone to declare a capability they
+      // do not hold, which is the failure this file exists to prevent.
+      for (const benign of [
+        'const url = link(label, href);',
+        '// remove the item from the array',
+        'const form = new FormData();',
+        'return items.map((i) => i.id);',
+      ]) {
+        expect(fsWrite.test(benign)).toBe(false);
+      }
+    });
+
+    it('sees network transports beyond http', () => {
+      const net = EVIDENCE['network'];
+      expect(net.test("import dgram from 'node:dgram';")).toBe(true);
+      expect(net.test("import http2 from 'node:http2';")).toBe(true);
+      expect(net.test('const s = new WebSocket(url);')).toBe(true);
+      expect(net.test("import path from 'node:path';")).toBe(false);
+    });
   });
 
   it('no self-contained agent declares an unreachable capability', async () => {

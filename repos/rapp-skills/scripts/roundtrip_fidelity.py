@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import subprocess
 import sys
@@ -25,6 +26,21 @@ def run(*args: str) -> subprocess.CompletedProcess[str]:
 
 
 def main() -> int:
+    argparse.ArgumentParser(
+        description="Prove every committed Agent Skill pair restores byte-identical "
+        "through the converter's public CLI."
+    ).parse_args()
+    engine_toast = ROOT / "engine" / "rapp-agent-converter" / "scripts" / "toast.py"
+    cat_toast = ROOT / "cat-agent-skills" / "rapp-agent-converter" / "scripts" / "toast.py"
+    if engine_toast.read_bytes() != cat_toast.read_bytes():
+        print(
+            "FAIL  cat-agent-skills/rapp-agent-converter/scripts/toast.py\n"
+            "      diverged from engine/rapp-agent-converter/scripts/toast.py; "
+            "re-run the cat import (or copy the engine file over the mirror) to resync"
+        )
+        return 1
+    print(f"ok    {'engine toast.py mirror':<52} byte-identical")
+
     skill_dirs = {
         path.parent
         for path in ROOT.rglob("SKILL.md")
@@ -39,6 +55,35 @@ def main() -> int:
         return 1
 
     failures: list[str] = []
+
+    pair_files = set(pair_agents)
+    pair_files |= set(ROOT.glob("*/SKILL.md"))
+    pair_files |= set(ROOT.glob("cat-agent-skills/*/SKILL.md"))
+    pair_dirs = {path.parent for path in pair_files}
+    for path in sorted(list(ROOT.rglob("*_agent.py")) + list(ROOT.rglob("SKILL.md"))):
+        if ".git" in path.parts or path in pair_files:
+            continue
+        rel = path.relative_to(ROOT)
+        if rel.parts[0] == "engine":
+            continue
+        pair_dir = next((p for p in path.parents if p in pair_dirs), None)
+        if pair_dir is not None:
+            if path.name == "SKILL.md":
+                continue  # backstopped by the skill_dirs pairing check
+            if path.relative_to(pair_dir).parts[0] in {
+                "assets",
+                "references",
+                "scripts",
+            }:
+                continue  # asset/script inside a verified pair directory
+        label = rel.as_posix()
+        failures.append(label)
+        print(
+            f"FAIL  {label}\n"
+            "      stray pair file outside discovery "
+            "(expected <pair>/ or cat-agent-skills/<pair>/)"
+        )
+
     for directory in sorted(skill_dirs - agent_dirs):
         label = directory.relative_to(ROOT).as_posix()
         failures.append(label)
@@ -116,9 +161,11 @@ def main() -> int:
                 try:
                     contract = json.loads(tool.stdout)
                     function = contract["function"]
-                    assert function["name"]
-                    assert function["parameters"]["type"] == "object"
-                except (AssertionError, KeyError, json.JSONDecodeError):
+                    if not function["name"]:
+                        raise ValueError("empty function name")
+                    if function["parameters"]["type"] != "object":
+                        raise ValueError("parameters.type must be 'object'")
+                except (ValueError, KeyError, TypeError):
                     problems.append("--tool output is not a function contract")
 
             if problems:

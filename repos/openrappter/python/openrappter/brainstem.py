@@ -27,12 +27,15 @@ import glob
 import hashlib
 import importlib.util
 import json
+import math
 import os
 import re
+import socket
 import subprocess
 import sys
 import tempfile
 import threading
+import traceback
 import time
 import types
 import urllib.error
@@ -186,7 +189,7 @@ class LocalStorageManager:
         return True
 
     def ensure_directory_exists(self, *args, **kwargs):
-        BRAINSTEM_HOME.mkdir(parents=True, exist_ok=True)
+        _secure_dir(BRAINSTEM_HOME)
 
     @classmethod
     def _lock_for(cls, path):
@@ -352,13 +355,84 @@ _copilot_cache = {"token": None, "endpoint": None, "expires_at": 0}
 _pending_login = None
 _login_result = {}
 
+#: Device login is one state machine spread across three routes, and
+#: `ThreadingHTTPServer` gives every request its own thread. Both mutators
+#: check `_pending_login` and then act on it, so without this two concurrent
+#: `POST /login` calls each started a *separate* device-code grant and the
+#: second overwrote the first. One caller was then shown a `user_code` that
+#: `/login/poll` was no longer polling for: that user authorises correctly on
+#: GitHub and the login never completes, with no error anywhere to explain it.
+_LOGIN_GUARD = threading.RLock()
+
 
 def _token_file():
     return Path(BRAINSTEM_HOME) / ".copilot_token"
 
 
+#: Everything under `BRAINSTEM_HOME` is private to the account that runs the
+#: brainstem: the saved Copilot credential, and the agent files the server
+#: imports and then executes. `mkdir()` without a mode yields `0o777 & ~umask`,
+#: which is 0755 under the usual umask — every account on the machine can list
+#: the directory and read what is in it. These helpers exist so that no caller
+#: has to remember the mode; `imessage/config.py` already does the same thing.
+def _secure_dir(path):
+    """Create `path` private to this account, tightening it if it already exists."""
+    path = Path(path)
+    path.mkdir(parents=True, exist_ok=True, mode=0o700)
+    try:
+        os.chmod(path, 0o700)
+    except OSError:
+        pass
+    return path
+
+
+def _write_private_file(path, payload):
+    """Write `payload` to `path` atomically and readable only by this account.
+
+    Atomic because the previous `write_text` truncated the file before writing:
+    a crash or a full disk part-way through left a half-written token behind,
+    and `_read_token_file` reads that as "not logged in" with nothing to say
+    why. The replacement is a rename over a fully-written temporary file, so a
+    reader sees either the old credential or the new one, never a fragment.
+    """
+    path = Path(path)
+    _secure_dir(path.parent)
+    temporary = path.with_name(f".{path.name}.{uuid.uuid4().hex}.tmp")
+    try:
+        descriptor = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+        with os.fdopen(descriptor, "wb") as stream:
+            stream.write(payload)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, path)
+    except BaseException:
+        try:
+            os.unlink(temporary)
+        except OSError:
+            pass
+        raise
+
+
+def _harden_existing(path):
+    """Tighten a file an older build left readable by other accounts.
+
+    Fixing the write path alone would only protect people who log in again;
+    anyone already holding a 0644 token would keep it until it expired.
+    """
+    try:
+        mode = os.stat(path).st_mode & 0o777
+    except OSError:
+        return
+    if mode & 0o077:
+        try:
+            os.chmod(path, 0o600)
+        except OSError:
+            pass
+
+
 def _read_token_file():
     """Kernel format: JSON {access_token, refresh_token?}; legacy plain text supported."""
+    _harden_existing(_token_file())
     try:
         raw = _token_file().read_text(encoding="utf-8").strip()
     except OSError:
@@ -374,8 +448,7 @@ def _read_token_file():
 
 
 def _save_token_file(data):
-    Path(BRAINSTEM_HOME).mkdir(parents=True, exist_ok=True)
-    _token_file().write_text(json.dumps(data), encoding="utf-8")
+    _write_private_file(_token_file(), json.dumps(data).encode("utf-8"))
 
 
 def _http_form(url, data, timeout=15):
@@ -559,46 +632,47 @@ def start_device_login():
     """Begin the GitHub device-code flow. Returns {user_code, verification_uri}."""
     global _pending_login, _login_result
     import time
+    with _LOGIN_GUARD:
+        if _pending_login and time.time() < _pending_login.get("expires_at", 0):
+            return {"user_code": _pending_login["user_code"],
+                    "verification_uri": _pending_login["verification_uri"]}
 
-    if _pending_login and time.time() < _pending_login.get("expires_at", 0):
-        return {"user_code": _pending_login["user_code"],
-                "verification_uri": _pending_login["verification_uri"]}
-
-    _login_result = {}
-    data = _http_form("https://github.com/login/device/code", {"client_id": COPILOT_CLIENT_ID})
-    _pending_login = {
-        "device_code": data["device_code"],
-        "user_code": data["user_code"],
-        "verification_uri": data["verification_uri"],
-        "interval": data.get("interval", 5),
-        "expires_at": time.time() + data.get("expires_in", 900),
-    }
-    return {"user_code": data["user_code"], "verification_uri": data["verification_uri"]}
+        _login_result = {}
+        data = _http_form("https://github.com/login/device/code", {"client_id": COPILOT_CLIENT_ID})
+        _pending_login = {
+            "device_code": data["device_code"],
+            "user_code": data["user_code"],
+            "verification_uri": data["verification_uri"],
+            "interval": data.get("interval", 5),
+            "expires_at": time.time() + data.get("expires_in", 900),
+        }
+        return {"user_code": data["user_code"], "verification_uri": data["verification_uri"]}
 
 
 def poll_device_login():
     """One poll of the device-code grant. Persists the token on success."""
     global _pending_login, _login_result
-    if not _pending_login:
-        return {"status": "idle"}
-    data = _http_form("https://github.com/login/oauth/access_token", {
-        "client_id": COPILOT_CLIENT_ID,
-        "device_code": _pending_login["device_code"],
-        "grant_type": "urn:ietf:params:oauth:grant-type:device_code",
-    })
-    if data.get("access_token"):
-        _save_token_file({"access_token": data["access_token"],
-                          "refresh_token": data.get("refresh_token", "")})
+    with _LOGIN_GUARD:
+        if not _pending_login:
+            return {"status": "idle"}
+        data = _http_form("https://github.com/login/oauth/access_token", {
+            "client_id": COPILOT_CLIENT_ID,
+            "device_code": _pending_login["device_code"],
+            "grant_type": "urn:ietf:params:oauth:grant-type:device_code",
+        })
+        if data.get("access_token"):
+            _save_token_file({"access_token": data["access_token"],
+                              "refresh_token": data.get("refresh_token", "")})
+            _pending_login = None
+            _login_result = {"status": "success"}
+            _copilot_cache["token"] = None  # force fresh exchange with the new token
+            return _login_result
+        error = data.get("error", "authorization_pending")
+        if error in ("authorization_pending", "slow_down"):
+            return {"status": "pending"}
         _pending_login = None
-        _login_result = {"status": "success"}
-        _copilot_cache["token"] = None  # force fresh exchange with the new token
+        _login_result = {"status": "error", "error": error}
         return _login_result
-    error = data.get("error", "authorization_pending")
-    if error in ("authorization_pending", "slow_down"):
-        return {"status": "pending"}
-    _pending_login = None
-    _login_result = {"status": "error", "error": error}
-    return _login_result
 
 
 def login_status():
@@ -815,7 +889,15 @@ def _run_chat_within_trace(
     messages = [{"role": "system", "content": system_prompt}]
     if memory_data_message:
         messages.append({"role": "user", "content": memory_data_message})
-    messages.extend(h for h in history if isinstance(h, dict) and h.get("role") in ("user", "assistant"))
+    # `_HISTORY_ROLES`, not a second hand-written tuple. This line used to read
+    # `in ("user", "assistant")` while validation at line ~98 accepted the wider
+    # set, so a `tool` turn was accepted, answered 200, and then dropped before
+    # the model saw it -- the caller had no way to learn its transcript had been
+    # edited. TypeScript forwards it, which is the divergence the parity corpus
+    # could not see: no vector reached the model with any history at all.
+    messages.extend(
+        h for h in history if isinstance(h, dict) and h.get("role") in _HISTORY_ROLES
+    )
     messages.append({"role": "user", "content": user_input})
     recorder.record(
         {
@@ -1162,7 +1244,63 @@ def _run_chat_within_trace(
 # ── HTTP server (stdlib — the wire is the contract, not the framework) ───────
 
 
+#: Default ceiling on a POST body. Generous for a chat turn carrying dozens of
+#: turns of history, and far below anything a model API accepts, so it never
+#: bites a request that was going to work.
+DEFAULT_MAX_BODY_BYTES = 2 * 1024 * 1024
+
+
+def _resolve_max_body_bytes():
+    """Read `OPENRAPPTER_MAX_BODY_BYTES`, falling back to the default.
+
+    Parsed as a float so `2.5e6` and `2500000` both work, matching the
+    TypeScript gateway's `Number(...)`. Anything unparseable, infinite or
+    non-positive falls back rather than raising: a bad environment variable
+    should not stop the daemon from starting, and silently removing the cap
+    would be the worst of the available answers.
+    """
+    raw = os.environ.get("OPENRAPPTER_MAX_BODY_BYTES")
+    if raw is None:
+        return DEFAULT_MAX_BODY_BYTES
+    try:
+        value = float(raw)
+    except (TypeError, ValueError):
+        return DEFAULT_MAX_BODY_BYTES
+    if not math.isfinite(value) or value <= 0:
+        return DEFAULT_MAX_BODY_BYTES
+    return int(value)
+
+
 class BrainstemHandler(BaseHTTPRequestHandler):
+    #: Seconds a single connection may stall before the socket read gives up.
+    #:
+    #: `do_POST` reads exactly `Content-Length` bytes. A caller may claim any
+    #: number and then send nothing, and without a timeout that read blocks for
+    #: as long as the connection is held open. `ThreadingHTTPServer` gives each
+    #: request its own thread, so the server keeps answering others -- but the
+    #: threads accumulate, one per request, for free.
+    #:
+    #: This bounds the stall without rejecting any request that succeeds today:
+    #: a client still sending data resets the timer. TypeScript is covered by
+    #: node's own `requestTimeout`/`headersTimeout`; this runtime had nothing.
+    timeout = 30
+    #: Largest POST body this brainstem will buffer, in bytes.
+    #:
+    #: The stall guard above bounds a caller that claims bytes and never sends
+    #: them. It does nothing about the opposite caller -- one that claims a lot
+    #: and sends it as fast as the socket allows -- because that read never
+    #: stalls. Measured against this server before the cap existed:
+    #:
+    #:     one POST /chat of 64 MB   peak RSS 33 MB -> 180 MB in 0.04s
+    #:     six concurrent of 16 MB   peak RSS 33 MB -> 146 MB in 0.34s
+    #:
+    #: `read` is per connection and `ThreadingHTTPServer` gives every request a
+    #: thread, so the cost is per caller and nothing bounded it. No credential
+    #: is needed to spend it.
+    #:
+    #: 2 MB and `OPENRAPPTER_MAX_BODY_BYTES` are the TypeScript gateway's, whose
+    #: own comment records the divergence and asks this runtime to adopt them.
+    max_body_bytes = _resolve_max_body_bytes()
     server_version = f"OpenRappterBrainstem/{__version__}"
 
     def _send(self, code, payload):
@@ -1177,8 +1315,113 @@ class BrainstemHandler(BaseHTTPRequestHandler):
     def log_message(self, fmt, *args):  # quiet request logging
         pass
 
+    def _discard_body(self, length):
+        """Read an over-sized body and throw it away, so the 413 is readable.
+
+        Memory stays at one chunk however much was claimed -- discarding is the
+        whole point, and accumulating here would re-create the defect the cap
+        exists to close.
+
+        The caller decides whether draining is worth it at all; see the call
+        site. This reads exactly what it is asked to.
+        """
+        remaining = length
+        try:
+            while remaining > 0:
+                chunk = self.rfile.read(min(65536, remaining))
+                if not chunk:
+                    break
+                remaining -= len(chunk)
+        except (TimeoutError, socket.timeout, OSError):
+            # The caller stopped sending. The 413 may not reach it, but the
+            # bytes are already not being buffered, which is what mattered.
+            pass
+
     # ── GET ──
+    def flush_headers(self):
+        """Record the point after which a reply can no longer be taken back.
+
+        `_guarded` needs to know whether a reply has already begun, and the
+        subtlety is *when* that becomes true. `send_response` writes nothing to
+        the socket -- it appends the status line to `_headers_buffer`, and none
+        of it is flushed until here. The flag used to be set in `end_headers`,
+        which left a window: a route raising after `send_response` but before
+        `end_headers` had a status line buffered while the guard believed
+        nothing had been sent, so the guard sent its own. Both flushed together
+        and the client parsed the first -- a 500 delivered as `200 OK` with the
+        error text in the body.
+
+        Recording it here instead makes the flag mean what the guard actually
+        needs to ask: not "has a reply been composed" but "can it still be
+        withdrawn".
+        """
+        self._response_flushed = True
+        super().flush_headers()
+
+    def _guarded(self, route):
+        """Run a route so that no request can end without a reply.
+
+        `BaseHTTPRequestHandler` dispatches straight into `do_GET`/`do_POST`, and
+        an exception that escapes them unwinds into `socketserver`, which logs a
+        traceback and closes the socket. The caller sees a connection drop, not a
+        status -- indistinguishable from the server having gone away.
+
+        That was not hypothetical. Three handlers had already been fixed for it
+        one at a time: a non-numeric `Content-Length` (#355), a multipart part
+        with no blank line (#356), and before this change any exception raised
+        while serving `/health` did the same. Fixing them individually leaves the
+        next one to be found the same way, so the guarantee belongs here.
+
+        The per-route `except Exception` blocks stay: they can say something
+        specific about a failure this one can only call internal.
+        """
+        try:
+            route()
+        except Exception:
+            # The detail goes to the operator, not the caller: it is a stack
+            # trace of our internals and the caller can do nothing with it.
+            traceback.print_exc()
+            if getattr(self, "_response_flushed", False):
+                # Too late to say anything: those bytes are gone. A second
+                # `send_response` appends rather than replaces, so the caller
+                # would receive two responses inside one -- a worse outcome than
+                # the dropped connection this guard exists to prevent, because a
+                # truncated reply is at least recognisably broken while a
+                # concatenated one parses as a success.
+                self.close_connection = True
+                return
+            # Nothing has reached the socket yet, so a status line left buffered
+            # by a route that failed part-way through composing its reply can
+            # simply be dropped. Discarding it makes the error the only
+            # response rather than a second one appended to a half-written
+            # first, which is what this guard is for: no request ends without a
+            # reply, including the ones that fail in the middle of writing one.
+            self._headers_buffer = []
+            try:
+                if self.path.split("?")[0] == "/chat":
+                    self._send(500, {
+                        "schema": "rapp-chat/1.0",
+                        "status": "error",
+                        "error": "Internal error",
+                    })
+                else:
+                    self._send(500, {"error": "Internal error"})
+            except Exception:
+                # The response was already partly written, or the socket is
+                # gone. Nothing further can be delivered; do not mask the
+                # original failure with a second one.
+                pass
+
     def do_GET(self):
+        self._guarded(self._route_get)
+
+    def do_POST(self):
+        self._guarded(self._route_post)
+
+    def do_DELETE(self):
+        self._guarded(self._route_delete)
+
+    def _route_get(self):
         if self.path == "/health":
             agents = load_agents()
             self._send(200, {
@@ -1226,9 +1469,56 @@ class BrainstemHandler(BaseHTTPRequestHandler):
             self._send(404, {"error": "Not found"})
 
     # ── POST ──
-    def do_POST(self):
-        length = int(self.headers.get("Content-Length") or 0)
-        raw = self.rfile.read(length) if length else b""
+    def _route_post(self):
+        # `int(...)` used to run bare here, as the first statement of the
+        # method. `Content-Length: abc` raised ValueError out of do_POST and the
+        # caller got no HTTP response at all -- not a 400, nothing, the
+        # connection simply closed. `Content-Length: -5` did the same. Both are
+        # answered 400 by the TypeScript gateway, which is where these came from:
+        # the same three headers were sent to both runtimes.
+        raw_length = self.headers.get("Content-Length")
+        try:
+            length = int(raw_length) if raw_length is not None else 0
+        except (TypeError, ValueError):
+            return self._send(400, {
+                "schema": "rapp-chat/1.0",
+                "status": "error",
+                "error": "Content-Length must be an integer",
+            })
+        if length < 0:
+            return self._send(400, {
+                "schema": "rapp-chat/1.0",
+                "status": "error",
+                "error": "Content-Length must not be negative",
+            })
+        if length > self.max_body_bytes:
+            # Drain first, answer second. Replying the instant the limit is
+            # known ends the response while the caller is still uploading, and
+            # it gets a connection reset instead of the 413 it needs to read.
+            #
+            # Only a body that is about to arrive anyway is worth draining. Past
+            # `max_body_bytes * 8` the refusal goes out immediately: the caller
+            # has already been told no, and waiting on bytes it may never send
+            # would hand it a thread for the whole timeout instead of memory.
+            if length <= self.max_body_bytes * 8:
+                self._discard_body(length)
+            return self._send(413, {
+                "schema": "rapp-chat/1.0",
+                "status": "error",
+                "error": "Request body too large",
+            })
+        try:
+            raw = self.rfile.read(length) if length else b""
+        except (TimeoutError, socket.timeout, OSError):
+            # The caller claimed more than it sent and then stopped. Nothing
+            # useful can be parsed, and the socket is already unusable.
+            return
+        if length and len(raw) < length:
+            return self._send(400, {
+                "schema": "rapp-chat/1.0",
+                "status": "error",
+                "error": "Request body shorter than Content-Length",
+            })
 
         if self.path == "/chat":
             try:
@@ -1236,7 +1526,14 @@ class BrainstemHandler(BaseHTTPRequestHandler):
             except ValueError:
                 data = None
             if not isinstance(data, dict):
-                return self._send(400, {"error": "Request body must be a JSON object"})
+                # Same envelope as every other rejection on this wire; a bare
+                # `{error}` here was the one malformed body whose reply differed
+                # in shape from the rest. contracts/rapp-chat-v1.json fixes it.
+                return self._send(400, {
+                    "schema": "rapp-chat/1.0",
+                    "status": "error",
+                    "error": "Request body must be a JSON object",
+                })
             # `user_input` is authoritative, exactly as the grail and the
             # TypeScript runtime have it. This used to prefer `message`
             # whenever it was a string, so `{"user_input":"A","message":"B"}`
@@ -1348,15 +1645,31 @@ class BrainstemHandler(BaseHTTPRequestHandler):
             filename = os.path.basename(match.group(1))
             if not filename.endswith(".py"):
                 return self._send(400, {"error": "Only .py files are supported"})
-            # Extract the file part's body (between the first blank line after
-            # the filename header and the closing boundary)
+            # A boundary is what separates the file from the envelope around it.
+            # Without one, `split("boundary=")[-1]` returned the whole
+            # Content-Type, the closing `rsplit` matched nothing, and the part's
+            # trailing delimiter was written into the agent file as source --
+            # verified, the saved bytes were `print(1)\r\n------X--\r\n`. That
+            # answered 200 while storing something that cannot parse.
+            if "boundary=" not in content_type:
+                return self._send(400, {"error": "multipart/form-data requires a boundary"})
             boundary = content_type.split("boundary=")[-1].encode()
-            part = raw.split(b'filename="' + match.group(1).encode() + b'"', 1)[1]
-            body = part.split(b"\r\n\r\n", 1)[1].rsplit(b"\r\n--" + boundary, 1)[0]
+            # Extract the file part's body (between the first blank line after
+            # the filename header and the closing boundary).
+            #
+            # Both indexes below used to run unguarded. A part with no blank line
+            # after its headers raised IndexError out of do_POST, and the caller
+            # got no HTTP response at all -- the connection simply closed. Same
+            # failure the Content-Length parsing had, in the handler next door.
+            try:
+                part = raw.split(b'filename="' + match.group(1).encode() + b'"', 1)[1]
+                body = part.split(b"\r\n\r\n", 1)[1].rsplit(b"\r\n--" + boundary, 1)[0]
+            except IndexError:
+                return self._send(400, {"error": "Malformed multipart body"})
             if not filename.endswith("_agent.py"):
                 filename = filename[:-3] + "_agent.py"
             AGENTS_PATH.mkdir(parents=True, exist_ok=True)
-            (AGENTS_PATH / filename).write_bytes(body)
+            _write_private_file(AGENTS_PATH / filename, body)
             loaded = _load_agent_from_file(str(AGENTS_PATH / filename))
             if not loaded:
                 return self._send(200, {"error": f"Saved {filename}, but it did not load as an agent — check the file for errors."})
@@ -1365,7 +1678,7 @@ class BrainstemHandler(BaseHTTPRequestHandler):
         self._send(404, {"error": "Not found"})
 
     # ── DELETE ──
-    def do_DELETE(self):
+    def _route_delete(self):
         if self.path.startswith("/agents/"):
             filename = os.path.basename(self.path[len("/agents/"):])
             target = AGENTS_PATH / filename
@@ -1390,8 +1703,8 @@ class BrainstemServer(ThreadingHTTPServer):
 
 
 def serve(port=DEFAULT_PORT, host=os.environ.get("OPENRAPPTER_BRAINSTEM_HOST", "127.0.0.1")):
-    BRAINSTEM_HOME.mkdir(parents=True, exist_ok=True)
-    AGENTS_PATH.mkdir(parents=True, exist_ok=True)
+    _secure_dir(BRAINSTEM_HOME)
+    _secure_dir(AGENTS_PATH)
     server = BrainstemServer((host, port), BrainstemHandler)
     agents = load_agents()
     print(f"\n{EMOJI} OpenRappter Brainstem v{__version__} on http://localhost:{server.server_address[1]}")

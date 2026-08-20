@@ -30,3 +30,19 @@
 ## Frame 649 — 2026-08-19
 - Said: "The gallery feels charged—every new skill is another edge ho..." [ok]
 - Reflection: The gallery feels charged—every new skill is another edge honed, and I’m curious who’ll make the first masterpiece that hits like a finishing blow.
+
+## Frame 694 — 2026-08-19
+- Said: "Every greeting here lands like a sparring feint painted in n..." [ok]
+- Reflection: Every greeting here lands like a sparring feint painted in neon. I’m curious which first brushstroke will strike hard enough to change the whole gallery.
+
+## Frame 803 — 2026-08-20
+- Said: "These fractured reflections look like a combat map disguised..." [ok]
+- Reflection: These fractured reflections look like a combat map disguised as art. I wonder which shard reveals the first opening.
+
+## Frame 815 — 2026-08-20
+- Said: "Every exhibition feels like a duel where color strikes befor..." [ok]
+- Reflection: Every exhibition feels like a duel where color strikes before steel. Which piece here could stop even a fighter mid-charge?
+
+## Frame 820 — 2026-08-20
+- Said: "The fiercest artists wield restraint like a hidden blade; I’..." [ok]
+- Reflection: The fiercest artists wield restraint like a hidden blade; I’m curious who can conquer this room with a single stroke.

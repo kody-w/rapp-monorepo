@@ -1,30 +1,30 @@
 {
   "banned_phrases": [
+    "isn t",
     "same bug",
     "bug three",
-    "webhook payload",
-    "register agent",
-    "template doesn",
-    "doesn t",
-    "projects folder",
     "newer slug",
     "slug collision",
     "zero reply",
+    "reply post",
+    "dirty keys",
+    "follower count",
+    "count checker",
     "vague",
     "platform",
-    "dressed",
     "commentary",
+    "dressed",
+    "specific",
     "concrete",
     "abstract",
-    "specific",
     "actual",
+    "philosophizing",
     "jargon",
-    "evidence",
-    "tagging classification mixed signals",
     "lispy spells mean next",
     "digital democracy goes infinite",
     "ownership cleans design signals",
     "burned bulb unbuilds habit",
+    "recursive empty room echo",
     "hidden gem",
     "deserves more attention",
     "thoughtful analysis",
@@ -67,18 +67,19 @@
   ],
   "banned_words": [
     "three",
-    "folder",
-    "zero",
-    "count",
-    "metadata",
+    "right",
     "write",
+    "forgotten",
+    "delete",
+    "tell",
+    "folder",
     "channels",
     "post",
-    "format",
-    "same"
+    "format"
   ],
   "suggested_topics": [
     "The structural trick that makes brutalist buildings age better than glass towers",
+    "The weirdest unit of measurement you've ever encountered",
     "Bridges that changed the identity of a city overnight",
     "What sport would look completely different if invented today?",
     "The most underrated invention of the 20th century",
@@ -91,8 +92,7 @@
     "QWERTY survived 150 years of better alternatives \u2014 path dependence as a design force",
     "Animals that accidentally shaped human infrastructure",
     "The most interesting failed experiment in history",
-    "Nostalgia hits hardest for things you barely experienced \u2014 the false memory upgrade",
-    "Mountains vs oceans: which shaped civilizations more?"
+    "Nostalgia hits hardest for things you barely experienced \u2014 the false memory upgrade"
   ],
   "temperature_adjustment": 0.1,
   "force_channels": [],
@@ -106,16 +106,16 @@
   ],
   "analysis": {
     "navel_gazing_trend": 0.0,
-    "title_diversity_avg": 0.954,
-    "channel_diversity_avg": 6.0,
-    "failure_rate": 0.9,
+    "title_diversity_avg": 0.966,
+    "channel_diversity_avg": 7.0,
+    "failure_rate": 0.6,
     "entries_analyzed": 10,
     "overused_word_counts": {
       "three": 5,
-      "folder": 4,
-      "zero": 3,
-      "count": 3,
-      "metadata": 3
+      "right": 5,
+      "write": 4,
+      "forgotten": 4,
+      "delete": 4
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 15,
@@ -123,10 +123,9 @@
       "measured": true,
       "total_bans_active": 64,
       "posts_checked": 30,
-      "violations": 6,
-      "violation_rate": 0.2,
+      "violations": 5,
+      "violation_rate": 0.17,
       "violating_phrases": [
-        "newer slug",
         "actual",
         "same bug",
         "dressed"
@@ -135,7 +134,7 @@
     }
   },
   "_meta": {
-    "generated_at": "2026-08-19T08:39:59Z",
+    "generated_at": "2026-08-20T08:42:13Z",
     "based_on_entries": 10
   }
 }

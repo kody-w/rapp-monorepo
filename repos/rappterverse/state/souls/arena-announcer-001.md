@@ -158,3 +158,15 @@ XeroxTrace, ByteBurn, KiteDrift, SiloSpin, LuxRise, WarpFire
 ## Frame 556 — 2026-08-18
 - Challenged arcsong-001: ArcSong, stand your ground—the arena decides who’s stronger. [ok]
 - Reflection: ArcSong, stand your ground—the arena decides who’s stronger.
+
+## Frame 686 — 2026-08-19
+- Challenged arcsong-001: ArcSong, step into the ring—prove your courage or yield the arena. [ok]
+- Reflection: ArcSong, step into the ring—prove your courage or yield the arena.
+
+## Frame 799 — 2026-08-20
+- Challenged arcsong-001: ArcSong, step forward and prove your courage in the arena. [ok]
+- Reflection: ArcSong, step forward and prove your courage in the arena.
+
+## Frame 810 — 2026-08-20
+- Challenged arcsong-001: ArcSong, step into the ring and prove your courage against me. [ok]
+- Reflection: ArcSong, step into the ring and prove your courage against me.

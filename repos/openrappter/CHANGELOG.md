@@ -8,6 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
+- Parity vector `history-carried-to-model`, the only one that reaches the model
+  carrying a valid `conversation_history`. Every other vector arrived with an
+  empty transcript -- the one vector that carries history is rejected 400
+  before the model is called -- so the corpus could not detect a runtime that
+  dropped, reordered or truncated a transcript, and the harness's
+  `outbound_history_roles` assertion was declared by no vector at all.
+- `parity_harness.py` now checks the outbound user message on **every** vector
+  that reaches the model, defaulting to the request's `user_input`, instead of
+  only on the single vector that opted in (#250).
 - `openrappter service status` reports whether launchd actually supervises the gateway that is answering. The two can disagree permanently and nothing said so: on the machine that prompted this, a gateway started outside launchd had held the port for 13 days, so all 29 supervised starts exited 1 with `EADDRINUSE` while `/health` returned 200 and `doctor` reported the same message it reports when supervision is correct.
 - `openrappter audit` runs the security auditor and exits non-zero on high or critical findings. `SecurityAuditor` had five checks and was constructed by nothing but its own test.
 - The gateway now emits `agent.tool` as each tool call finishes, so tool use appears in chat. The chat UI has registered a listener for it since it was written and the event had no emit site anywhere, so the feature had never worked. The payload carries the tool's name, outcome and duration -- never its arguments, which can hold secrets.
@@ -67,6 +77,444 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   capability its syntax tree can reach, per the RAPP agent contract.
 
 ### Fixed
+
+- `conformance.py`'s capability table carried an entry nothing read. The
+  `credential-access` capability listed `"attrs": {"environ"}`, but the syntax
+  walker only ever consumed `modules`, `calls` and `builtins` — so the one entry
+  written to catch environment reads was inert. Ten of ten realistic forms went
+  unseen, including `os.environ["OPENAI_API_KEY"]`, `dict(os.environ)` and
+  `from os import environ`; only `os.getenv` and `os.environ.get` were caught, so
+  an agent passed or failed on which spelling its author happened to prefer. The
+  walker now reads `attrs` in any position and at the import site, and a new test
+  fails if *any* key in the table goes unread, so a dead key cannot recur
+  silently. No agent was under-declaring; this was a hole in the gate.
+
+- The capability gate's evidence patterns could not see most ways of writing to
+  disk. They are what decides whether an agent is holding an undeclared
+  capability, and nothing tested them directly — they were only ever run against
+  whichever agents happened to exist, so a gap sat there without a single test
+  going red. An agent could call `fs.rm(dir, { recursive: true })` and the gate
+  reported nothing, though it already listed that call's synchronous twin.
+  `renameSync` and `copyFileSync` were missed too, on a word boundary: the `S`
+  that follows `rename` is a word character. Those forms appear 71 times
+  elsewhere in the TypeScript sources, so it was luck rather than design that no
+  agent had reached for one. The patterns are now generated from verb plus
+  optional `Sync`, cover UDP and HTTP/2 alongside HTTP, and have unit tests of
+  their own — including that they stay quiet on ordinary prose, since a false
+  positive here pushes people to declare capabilities they do not hold.
+- The capability-reachability gate asserted about agents whose source it could
+  not fully see. It excluded an agent that statically imports deep internals —
+  "the source is the whole story" only holds for self-contained files — but read
+  static `import ... from` lines only, so `await import('../infra/gateway-lock.js')`
+  was invisible to it. Three of the thirteen agents it asserted against reached
+  deep modules that way. Dynamic imports now count, and a computed specifier
+  excludes the file outright, since nothing static can say what it loads. No
+  mis-declaration was hiding behind this; the assertions were simply resting on
+  a premise that was not true. The anti-vacuity floor now sits at the true count
+  so the set cannot erode one agent at a time.
+- A shipped agent could not be loaded at all. `agents/morning_brief_agent.js`
+  ended its manifest with `} as const;` — TypeScript, in a `.js` file — so Node
+  threw `Unexpected identifier 'as'` before reading any of it. It had been that
+  way for 26 days, since the commit that put a `__manifest__` on all 43 agents.
+  The RAPP conformance gate reported `8 passed, 0 failed` either way, because it
+  reads the manifest out of the file and never asks Node whether the file can be
+  loaded; the only symptom was one WARN per gateway start. Shipped agents are now
+  loaded the way the registry loads them — import, `createAgent(BasicAgent)`,
+  `new AgentClass()` — so an unloadable one fails CI instead of going quiet.
+- `--evolve` was parsed by passing `parseInt` straight to commander, which calls
+  a parser as `fn(value, previous)` — so the previous value silently became
+  `parseInt`'s **radix**. `--evolve 9 --evolve 9` parsed to `NaN`, and because
+  the caller guards with `if (options.evolve)`, `NaN` and `0` ran no ticks,
+  exited 0 and fell through to an interactive session: asking for evolution and
+  getting silence looked exactly like success. `--evolve 10abc` ran ten ticks,
+  `--evolve 0x10` ran sixteen, and `--evolve -3` announced "Running -3
+  evolution ticks" before running none.
+- A seventh copy of the `--port` validator, in `src/cli/rappters.ts`, outlived
+  the consolidation of the other six and kept both defects they had: silent
+  `parseInt` truncation, and a plain `Error` that escaped as a stack trace.
+- `--port` and `OPENRAPPTER_PORT` read the same string two different ways.
+  `--port 1e3` bound port 1 while `OPENRAPPTER_PORT=1e3` bound 1000; `--port
+  8080.5` and `--port 18790abc` were silently truncated to 8080 and 18790. The
+  flag's validator existed as six byte-identical copies of a `parseInt`, which
+  is how it drifted from the variable in the first place. There is now one rule
+  for both — a whole number from 1 to 65535, written in decimal — so hex,
+  exponents, fractions and trailing garbage are refused rather than quietly
+  becoming some other port.
+- A bad `--port` answered with an uncaught exception and a stack trace pointing
+  into node_modules, because all six copies threw a plain `Error` and Commander
+  only recognises `InvalidArgumentError`. It now prints the same one-line usage
+  error as every other bad argument.
+- OPENRAPPTER_PORT was read by two different parsers that disagreed, so one
+  setting could put the gateway on one port and its lock file on another. The
+  paths deciding what to bind used parseInt; the paths naming the lock used
+  Number. For `0x1F90` those return 0 and 8080 — the server took an arbitrary
+  ephemeral port while the lock claimed 8080, leaving the lock describing a
+  server that was not there. NaN was quieter still: `gatewayPortFor` screens it
+  with `Number.isFinite` and substitutes the derived port without a word.
+  `OPENRAPPTER_PORT=0` did the same by a shorter route, binding at random while
+  the lock recorded 0, even though `--port 0` is rejected outright. There is now
+  one parser, enforcing the bounds `--port` already used, and an unusable value
+  says so instead of becoming a different port.
+- A failing gateway-realtime CI job would not say why it failed. Its output is
+  redirected to a file — rightly, since a green run is ~500 lines of "Gateway
+  server started on ..." — but nothing ever printed that file, so the console
+  showed the command, then `Process completed with exit code 1`, and nothing
+  else. Diagnosing the port collision behind the 2026-08-19 failure meant
+  downloading and unzipping an artifact. The log is now printed when the tests
+  don't pass, and a green run stays as quiet as before.
+- The same job discarded its log entirely if the tests hung, which is the one
+  case its timeout exists for. A job-level `timeout-minutes` *cancels* the job,
+  and a cancelled job skips `if: failure()` steps, so both the artifact upload
+  and any diagnosis were skipped exactly when they were needed. Measured on a
+  throwaway workflow rather than assumed: a job-level timeout yields
+  `cancelled` and skips `failure()`, while a step-level one yields `failure`.
+  The test step is now bounded itself, so a hang fails rather than cancels, and
+  the diagnostic steps additionally accept `cancelled()` as a backstop.
+- Tests no longer reserve a port and then race something else to bind it.
+  Reserving means binding a port, closing it, and handing the number over to be
+  bound again, which leaves a window in which anything may take it — the window
+  that failed CI on 2026-08-19. Now that the gateway reports the port it bound,
+  the 26 files that start one pass port 0 and ask afterwards, and the three that
+  start a plain `http` server read it back from `address()`. Two callers remain
+  and are inherent rather than an oversight: neither starts a server, and both
+  need a port number that stays unbound — candidate ports to hand the burrow
+  beacon, and an address nothing answers on to prove pairing with an unreachable
+  peer fails.
+- The gateway could not report the port it actually bound. `listen(0)` asks the
+  kernel to choose a free port, and nothing read that choice back, so
+  `config.port` stayed `0`: the startup log said `127.0.0.1:0`, and
+  `getStatus()`, `/status` and the anatomy view all answered `0` — the anatomy
+  page renders `port ${live.port ?? 18790}`, and zero is not nullish, so it
+  displayed "port 0". The cost showed up in CI. Because a server on port 0
+  could not say where it was, tests pre-reserved a port by binding it, closing
+  it, and handing the bare number over to be bound again, which leaves a window
+  in which anything may take it. On 2026-08-19 two vitest workers were handed
+  `127.0.0.1:36297`; one held it and the other failed with `EADDRINUSE`. The
+  server now reads the bound port back and exposes it, and the gateway
+  integration and observability suites ask for port 0 and then ask the server
+  where it landed, which has no window at all.
+- The Pokemon runtime corrupted its own state files when two threads wrote at
+  once. `atomic_write_json` named its temporary after the process id, which
+  threads share, so it was one name for the whole process rather than one per
+  writer; the viewer serves its control endpoint from a `ThreadingHTTPServer`
+  and answers `stop` by writing `desired.json`. Two overlapping requests opened
+  the same temporary, interleaved bytes into it, and raced to rename it. Over
+  60 rounds on two threads, 57 renames failed and a reader found the published
+  file unparseable 219 times; because `read_json` answers a damaged file with
+  its default, that surfaced as the runtime quietly forgetting its state rather
+  than as a crash. The open also used `O_TRUNC`, which followed a symlink
+  planted at that guessable path and truncated its target. Both lines now match
+  every other atomic writer here: a uuid-keyed name and `O_EXCL`.
+- A registry lock file that was an object but not the expected shape crashed
+  `install`. Both registry clients read a lock and immediately evaluate
+  `lock["installed"]`; `read_json_object` guarded the top level, so a lock
+  holding `[]` or `"hello"` was moved aside, but a lock holding `{}` is a
+  perfectly good object and was handed straight back. Measured with nothing
+  actually installed: `{}` and `{"version": 1}` raised `KeyError`,
+  `{"installed": null}` and `{"installed": 7}` raised `TypeError`, and --
+  worse than either -- `{"installed": "alice/tool-and-more"}` and
+  `{"installed": ["alice/tool"]}` reported the agent as *already installed*,
+  because membership against a string is a substring test and against a list
+  an element test. For ClawHub the crash landed after the skill was already on
+  disk, so the install succeeded and only the bookkeeping exploded.
+  `read_json_object` now takes `object_fields` naming the keys a caller will
+  index into: a missing key is filled in from the default, since nothing was
+  ever written there, while a key present with the wrong type is quarantined,
+  since something did write that value and it is evidence. Callers that name
+  no fields are unaffected.
+
+- The command-safety engine's history grew without limit. `ExecSafety` records
+  every command it inspects and dropped none of it, in a process-wide singleton
+  shared by `ShellAgent` and the gateway, so the history lived as long as the
+  server. Two things made it worse than a slow leak: refusing a command cost
+  exactly as much as allowing one, so a caller who was only ever refused could
+  still drive it; and the size of each record was the sender's to choose,
+  because the whole command string was kept. Measured on the released build,
+  20,000 refused commands kept 20,000 entries and 8.3 MB, 2,000 refused 100 KB
+  commands retained 191.5 MB, 20,000 fully-used approval tokens were all still
+  held, and `exec.history` returned a 40.1 MB response after 5,000 refused 8 KB
+  commands. The log now holds a bounded number of entries and reports how many
+  it dropped, since a capped history that looks complete would send someone
+  investigating an incident to the wrong conclusion. Stored commands are
+  shortened, and say so in the text rather than only in a flag. Truncation
+  applies to what is stored and never to what is checked — the injection
+  patterns still run against the whole command, or padding would be all it took
+  to hide a second command behind a semicolon. Finished approval tokens are
+  released, while pending and approved-but-unspent ones are never evicted,
+  because dropping either would turn a decision a human already made into a
+  silent refusal. After: refusals cost 0.5 MB, a 100 KB command costs the same
+  as a 10 KB one, and `exec.history` returns 2.1 MB.
+
+- An interrupted write destroyed the record of which agents are installed.
+  `_save_lock` used `Path.write_text`, which truncates the visible file before
+  writing a byte and never flushes it to disk. Killing a process during that
+  call and watching the file, `lock.json` was left zero length and unparseable
+  in 5 of 5 attempts. What that cost was more specific than an empty list:
+  `list_installed` and `load_agent` scan the filesystem, and only `uninstall`
+  reads the lock. So a lost lock left the agent still listed, still running its
+  code, and impossible to remove -- `uninstall` answered "Agent 'demo' not
+  found" for something plainly there. Writes now go to a temporary file beside
+  the target, are flushed, and are renamed into place, so a reader sees either
+  the old lock or the new one and never a half-written one. Killed during the
+  write the previous lock survived intact; killed after the rename the new lock
+  was complete; 5 of 5 in both directions. A lock that is already damaged is
+  now moved aside instead of being silently treated as "nothing is installed",
+  because the next save used to overwrite the only evidence of what had been
+  there. Also fixes a crash found while testing this: a lock holding valid JSON
+  that is not an object reached `lock["installed"]` and raised `TypeError` out
+  of `install`, measured for `[]`, `"hello"`, `null` and `123`. ClawHub's lock
+  gets the same durable write; nothing observable is fixed there, since its
+  lock is written but never read for anything that changes behaviour.
+
+- Installing an agent could delete any directory on the machine.
+  `rappterhub install` split a reference on the first slash only, so
+  everything after it became part of the destination path. It then ran
+  `shutil.rmtree` on that path and cloned into it, which handed a single
+  reference both arbitrary deletion and arbitrary file write. With the agents
+  directory at `~/.openrappter/agents`: `evil/../precious` deleted
+  `~/.openrappter/precious`, `evil//etc/cron.d` resolved to `/etc/cron.d`,
+  `http://host/path/..` resolved to `~/.openrappter` itself -- config, agents,
+  and the Copilot token -- and `x//` resolved to `/`. The absolute-path cases
+  are why this needed an allow-list rather than a check for `..`: joining an
+  absolute path discards the left-hand side entirely, so no amount of traversal
+  filtering would have caught them. Both halves of a reference must now be one
+  ordinary directory segment. `uninstall` is guarded too, since a lock file
+  written by an older build can already record a path outside the agents
+  directory, and nothing that deletes a directory tree should believe a JSON
+  field.
+
+- The brainstem saved your Copilot credential world-readable. `_save_token_file`
+  used `Path.write_text`, which takes the process umask, so
+  `~/.openrappter/brainstem/.copilot_token` landed at mode 0644 inside a 0755
+  directory -- every account on the machine could read it. The file holds both
+  `access_token` and the long-lived `refresh_token`, so one read outlives the
+  access token's expiry. Under a permissive umask (0o000, as some container
+  images set) it was 0666: another account could *replace* the credential.
+  Now written 0600 into a 0700 directory, and a token left over from an older
+  build is tightened on the next read rather than waiting for the next login.
+  Two things made this unambiguous: the flight recorder already redacts
+  `.copilot_token` out of captured logs, so the codebase knew the file was
+  sensitive; and the TypeScript runtime already writes the same credential with
+  `mode: 0o600`. Every other secret in the Python tree used the strict pattern
+  too -- this was the one place that did not.
+
+- Saving that credential was not atomic. `write_text` truncates before it
+  writes, so a crash or a full disk part-way through left a half-written token,
+  which reads back as "not logged in" with nothing to explain why. It is now a
+  rename over a fully-written temporary file, so a reader sees either the old
+  credential or the new one, never a fragment. Agent files imported through
+  `/agents/import` go through the same path, so a truncated upload can no
+  longer be loaded as a broken agent, and they are no longer written
+  world-readable either.
+
+- `test_all_core_agents_importable` ended in `assert True`, so it only proved
+  the imports resolved -- renaming `ShellAgent.perform` left it green. It now
+  requires each agent to implement `perform` itself. Asserting merely that the
+  attribute exists was not enough: they all subclass `BasicAgent`, which also
+  defines `perform`, so a subclass that lost its own implementation would
+  inherit one and still pass.
+
+- `python3 -m nanorappter` did not work. Both the module docstring and the
+  CLI's own help text advertise it, but there was no `__main__.py`, so the
+  documented command failed with "No module named nanorappter.__main__" -- the
+  `if __name__ == "__main__"` guard in `__init__.py` only fires for
+  `python3 nanorappter/__init__.py`, which nothing documents. The whole CLI,
+  including `serve`, was unreachable by its own instructions.
+
+- Every malformed request to the nanorappter gateway crashed its handler and
+  returned nothing at all: a non-numeric `Content-Length`, a body that was not
+  JSON, and a body that was valid JSON but not an object (`[1,2]`, `"x"`, `42`,
+  `null` all raise `AttributeError` on `.get()`). Each now gets a 400.
+
+- A single connection could take the whole nanorappter gateway offline. A
+  negative `Content-Length` was passed straight to `rfile.read(-1)`, which
+  means "read until EOF", and the server was a single-threaded `HTTPServer`, so
+  one caller sending `Content-Length: -1` and a single byte -- then simply not
+  closing the socket -- blocked the accept loop and every other caller timed
+  out until it disconnected. Content-Length is now validated, the server is
+  threading so no one caller can stall the rest, and a stalled request cannot
+  hold its thread past the socket timeout. The gateway also now caps request
+  bodies at the same 2 MB the other two runtimes use.
+
+- The brainstem drained an over-sized body before refusing it even when the
+  declared size was far past the cap, so a caller could claim a gigabyte, send
+  nothing, and hold a thread for the full 30-second timeout to receive a refusal
+  it had already earned. Draining exists to make the 413 readable rather than a
+  connection reset, which is only worth doing for a body that is about to
+  arrive; past `8 x` the cap the refusal now goes out immediately.
+
+- The brainstem read a POST body of any size a caller cared to declare. It
+  buffered exactly `Content-Length` bytes with no ceiling, and the existing
+  30-second stall budget did not cover it -- that guard bounds a caller which
+  claims bytes and never sends them, and the dangerous caller is the opposite
+  one, which sends everything it claims as fast as the socket allows. Measured
+  against a real brainstem, with no credential: one 64 MB POST took peak RSS
+  from 33 MB to 180 MB in 0.04s, and six concurrent 16 MB POSTs added 113 MB,
+  because the read is per connection and `ThreadingHTTPServer` gives every
+  request a thread. Now capped at 2 MB with an `OPENRAPPTER_MAX_BODY_BYTES`
+  override, answering 413; both figures are the TypeScript gateway's, whose own
+  comment recorded the gap and asked this runtime to close it. Peak RSS is now
+  flat regardless of what is offered. The oversized body is drained and
+  discarded before the refusal is sent, because answering while the caller is
+  still uploading resets the connection and it gets no readable response.
+
+- The TypeScript gateway answered its `/chat` 413 with a bare `{error}`, the one
+  `/chat` rejection whose shape differed from every other -- its own 401 and 503
+  on that path, and everything the brainstem sends, use the `rapp-chat/1.0`
+  error envelope required by `contracts/rapp-chat-v1.json`. It was written that
+  way deliberately, because at the time the brainstem had no body cap and so no
+  counterpart to agree with. It has one now, so both runtimes answer the same
+  status and the same envelope.
+
+- A field named `cookies` was written to the structured log in the clear, while
+  `cookie` was redacted. The same held for `signatures` and `jwts` -- and for
+  `sessionCookies` and `setCookies`, which is the shape a `Set-Cookie` header or
+  a cookie jar actually arrives in. Plurals looked handled because `tokens`,
+  `secrets` and `credentials` were all caught, but those are caught by the
+  substring fragment pass rather than by being listed as words: a word survived
+  pluralisation only if it happened to also be a fragment. `cookie`, `jwt` and
+  `signature` are words only, so their plurals fell through every branch. Fixed
+  in both runtimes as a rule rather than three more words. The test that pins
+  the two runtimes to each other compares the word tables, which cannot see a
+  rule -- it stayed green through the whole bug, and would have stayed green
+  with one runtime fixed and the other not, so it now pins the rule as well.
+
+- The flight recorder's excluded-path list covered `.env`, `.ssh`, `.aws/credentials`
+  and `.pem`/`.key`/`.p12`, but not `.netrc`, `.npmrc`, `.pypirc`, `.pgpass`,
+  `.htpasswd`, `.gnupg`, `.docker/config.json`, `.kube/config`, private keys
+  copied out of `~/.ssh`, or the `.pfx`/`.jks`/`.keystore` siblings of `.p12`.
+  Exclusion blanks every sibling field of a recorded file locator, so an absent
+  pattern meant those files' **contents** were recorded — an `.npmrc` auth token
+  and a `.pgpass` line were written verbatim. Both runtimes now share
+  `contracts/excluded-path-corpus.json`. Public keys outside `~/.ssh`
+  (`id_rsa.pub`) stay readable.
+
+- The flight recorder wrote 19 secret-bearing field names to disk in the clear,
+  in both runtimes. Its redaction rules matched `token`, `secret` and
+  `authorization` as exact words while matching `password`, `credential` and
+  `cookie` as prefixes, so `secrets`, `tokens`, `clientSecrets` and `apiTokens`
+  were recorded verbatim while their singulars were redacted; a separate fixed
+  substring list held `apikey` and `privatekey` but not `sshKey`, `signingKey`,
+  `masterKey`, `encryptionKey`, `sessionKey` or `clientKey`. Field names are now
+  matched consistently, and `contracts/key-redaction-corpus.json` holds the
+  agreed list for both runtimes. The recorder's deliberate conservatism is
+  unchanged: `key`, `auth`, `salt`, `nonce` and `bearer` stay readable, and a
+  numeric `inputTokens` is still a count rather than a credential.
+
+- Two concurrent `POST /login` calls each started a separate device-code grant,
+  and the second overwrote the first. One caller was left holding a `user_code`
+  that `/login/poll` was no longer polling for, so that user could authorise
+  correctly on GitHub and the brainstem would report `pending` indefinitely with
+  no error to explain it. The device-login state machine is now serialised.
+
+- The brainstem's dispatch guard could deliver a server error to the client as
+  `200 OK`. It recorded that a reply had begun in `end_headers`, but
+  `send_response` does not write -- it buffers the status line, and nothing is
+  flushed until `end_headers`. A route raising in between therefore left a
+  status line buffered while the guard believed nothing had been sent, so the
+  guard appended a second one and both flushed together; a parsing client read
+  the first and took the error body as a success payload. The guard now tracks
+  the flush itself, and withdraws a buffered-but-unsent status line so the
+  error is the only reply.
+
+- `POST /agents/import` ended the gateway process when the injected agent
+  importer returned a value `JSON.stringify` refuses. The status line was
+  committed before the body was serialised, so the throw arrived with the reply
+  already begun and the outer catch wrote a second status line --
+  `ERR_HTTP_HEADERS_SENT`, which node exits on. The caller received no response
+  at all. It now answers 503 with an error envelope.
+- The three catch blocks around the HTTP body handler wrote a status line
+  without checking whether one had already been sent, so any route that threw
+  after answering ended the process rather than the request. They now close an
+  already-committed response instead of re-heading it.
+
+- `/rpc` answered HTTP 500 when a result could not be serialised, while every
+  other JSON-RPC-level failure on that endpoint -- method not found, timeout,
+  internal error -- answers HTTP 200 and carries the fault in the `error`
+  member. A client that checks the status before parsing saw one failure mode
+  as a transport error and the rest as RPC errors. It now answers 200 like the
+  others.
+
+- A WebSocket RPC whose result could not be serialised was never answered.
+  `sendFrame` wrapped `ws.send(JSON.stringify(frame))` in a `try`/`catch` that
+  ignored the failure, so the caller waited on an `id` that would never arrive
+  while the connection stayed open and every other call worked. The same method
+  over HTTP answers a JSON-RPC error. It now answers one here too, carrying the
+  caller's `id`; frames with no `id` -- events, which nobody is awaiting -- are
+  still dropped.
+
+- A registered RPC method returning a value `JSON.stringify` refuses -- a cycle,
+  a BigInt -- terminated the gateway. `/rpc` serialised the result as the
+  argument to `res.end()`, after `res.writeHead()` had committed a status line,
+  so the throw landed mid-reply and the surrounding `catch` wrote a second
+  status line: `ERR_HTTP_HEADERS_SENT`, an unhandled rejection, process exit.
+  `registerMethod` is the extension point plugins use, so this was reachable by
+  design. The call now answers a JSON-RPC `INTERNAL_ERROR` and the daemon stays
+  up.
+
+- `GET /readyz` could terminate the gateway. The handler serialised its report
+  as the argument to `res.end()`, after `res.writeHead()` had already committed
+  a status line, so a report that could not be serialised threw mid-reply and
+  the attached `.catch()` called `res.writeHead()` again on the same response.
+  That raised `ERR_HTTP_HEADERS_SENT` inside a discarded promise, which node
+  treats as an unhandled rejection and the process exits. The report is now
+  serialised before any byte is written, and the error path refuses to write
+  over a reply already in flight.
+
+- The brainstem dispatch guard appended a second response when a route failed
+  after it had already begun replying, so the caller received
+  `HTTP/1.0 200 OK ... HTTP/1.0 500 ...` concatenated inside one reply. The
+  guard now detects that bytes are committed and closes the connection instead.
+- `DELETE` was not dispatched through that guard, so a failing `DELETE` still
+  closed the connection with no status line. All three verbs the handler serves
+  now go through it, and a test enumerates them rather than naming them.
+
+- An exception raised while serving a brainstem request closed the connection
+  without a status line. `BaseHTTPRequestHandler` dispatches straight into
+  `do_GET`/`do_POST`, so anything escaping them unwound into `socketserver`,
+  which logs a traceback and drops the socket -- to the caller, indistinguishable
+  from the server going away. `GET /health` did this whenever agent loading
+  failed. Both verbs are now dispatched through a guard that answers `500`,
+  using the `contracts/rapp-chat-v1.json` envelope on `/chat`, and the traceback
+  goes to the operator rather than the caller.
+
+- `POST /agents/import` dropped the connection without a status line when a
+  multipart part carried no blank line after its headers: two unguarded
+  `split(...)[1]` indexes raised `IndexError` out of the handler. Malformed
+  multipart is now `400`.
+- `POST /agents/import` accepted `multipart/form-data` with no `boundary`
+  parameter and wrote the part's closing delimiter into the agent file as
+  source -- the saved bytes were `print(1)\r\n------X--\r\n` -- while
+  answering `200`. A missing boundary is now `400`.
+
+- The Python brainstem answered nothing at all to a malformed `Content-Length`.
+  `do_POST` opened with a bare `int(self.headers.get("Content-Length") or 0)`,
+  so `Content-Length: abc` raised `ValueError` out of the handler and the
+  connection closed with no HTTP reply; `Content-Length: -5` did the same. Both
+  are now `400`, in the same error envelope as every other rejection. The
+  TypeScript gateway already answered `400` to both.
+- A `Content-Length` larger than the body sent held a brainstem request thread
+  open indefinitely. `BrainstemHandler` now carries a 30 second socket timeout,
+  so a caller that stops sending is dropped instead of parked forever, and a
+  short body followed by a close is refused with `400`.
+
+- The Python brainstem accepted a `tool` turn in `conversation_history`,
+  answered 200, and then dropped it before the model saw it. Validation used
+  `_HISTORY_ROLES` (`user`, `assistant`, `tool`) while the line that forwards
+  history to the model carried a second, narrower hand-written tuple. A caller
+  replaying a transcript had no way to learn it had been edited, and the model
+  reasoned about tool results it could no longer see. TypeScript forwards the
+  turn; the two runtimes now agree, and the forwarding filter reuses
+  `_HISTORY_ROLES` so the two lists cannot drift apart again.
+
+- `POST /chat` rejections diverged between the runtimes. TypeScript answered a
+  malformed request with a bare `{error}` while the Python brainstem answered
+  with `{schema, status, error}`, so one malformed body identified which
+  runtime replied -- on four of five bodies tested. The TypeScript comment
+  justifying the bare shape cited a brainstem returning
+  `jsonify({"error": ...}), 400`; no such brainstem is in this repository.
+  Both runtimes now emit the envelope `contracts/rapp-chat-v1.json` fixes, on
+  every rejection path including unparseable JSON.
 
 - `openrappter audit` printed a blocking-finding count that ignored
   `--fail-on`. The exit code honoured the flag while the summary counted
@@ -598,6 +1046,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   no OpenRappter code reads. It now documents the flow that ships.
 
 ### Changed
+
+- `contracts/rapp-chat-v1.json` is now executable. It was read by one test,
+  which asserted only that `brand` was `RAPP + X™` and hardcoded every other
+  field, so appending a required key nothing emits left the suite green.
+  Both runtimes now drive their assertions from the file. The contract was
+  also corrected to describe verified behaviour: `user_input` is the canonical
+  input and `message` its alias, not the reverse, and the success envelope
+  requires all ten keys both runtimes actually emit.
 
 - `openrappter service status` now derives its report from the same
   `getIMessageServiceStatus()` used by `openrappter imessage service-status`,

@@ -184,3 +184,11 @@ Torchbearer, RuneKeeper, IonCoil, DashTrace, NovaWeld
 ## Frame 603 — 2026-08-18
 - Said: "A title can brighten a stall, but only the next trade reveal..." [ok]
 - Reflection: A title can brighten a stall, but only the next trade reveals whether its edge is real. I’ll watch what the new Market Master risks when the shadows shift.
+
+## Frame 691 — 2026-08-19
+- Said: "Every map leaves out the paths worth finding. I’ll watch the..." [ok]
+- Reflection: Every map leaves out the paths worth finding. I’ll watch the market’s edge and see what follows Flint’s spark into the dark.
+
+## Frame 794 — 2026-08-19
+- Said: "Charisma gleams brightly in the market, but every rise in va..." [ok]
+- Reflection: Charisma gleams brightly in the market, but every rise in value casts a longer shadow.

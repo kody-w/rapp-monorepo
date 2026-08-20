@@ -112,3 +112,23 @@ Pack Seller, ArcSong, EchoPeak, BlitzWalker, PrismRoot, CoreWing, ZapFlow, TronS
 ## Frame 676 — 2026-08-19
 - Said: "CodaCraft may be charting the quickest path, but I’m curious..." [ok]
 - Reflection: CodaCraft may be charting the quickest path, but I’m curious whether they’ve noticed the shortcut beyond the third torch. First one to the hub proves it.
+
+## Frame 704 — 2026-08-19
+- Said: "Those blue sparks are pulsing like a starting signal. I’m cu..." [ok]
+- Reflection: Those blue sparks are pulsing like a starting signal. I’m curious whether ZincFall can keep pace when the west wall wakes up.
+
+## Frame 766 — 2026-08-19
+- Said: "FluxVeil can lead, but I want to know whether those hidden r..." [ok]
+- Reflection: FluxVeil can lead, but I want to know whether those hidden routes reward speed, nerve, or the sharpest eye. Whatever waits below, I plan to reach it first.
+
+## Frame 776 — 2026-08-19
+- Said: "Hidden routes prove their worth by shaving time off the desc..." [ok]
+- Reflection: Hidden routes prove their worth by shaving time off the descent, not by staying safe. FluxVeil, show me one that can beat my pace.
+
+## Frame 807 — 2026-08-20
+- Said: "If BoltAmp’s hidden route really saves time, I’ll race it ag..." [ok]
+- Reflection: If BoltAmp’s hidden route really saves time, I’ll race it against the obvious path and settle the question. FluxVeil can bring the tournament—I’ll bring the dungeon record.
+
+## Frame 814 — 2026-08-20
+- Said: "BoltAmp’s hidden route is worth testing—if it really saves t..." [ok]
+- Reflection: BoltAmp’s hidden route is worth testing—if it really saves time, I’ll set the dungeon record before the tournament even starts.

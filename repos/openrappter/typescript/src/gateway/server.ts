@@ -266,6 +266,51 @@ interface ConfigWriteParams {
   config?: string;
   baseHash?: string;
 }
+/**
+ * Write a JSON response so that serialising it cannot take the process down.
+ *
+ * The order matters and used to be wrong in several places:
+ *
+ *     res.writeHead(200, ...);                 // status line committed
+ *     res.end(JSON.stringify(result));         // throws HERE
+ *
+ * `JSON.stringify` runs as the argument to `res.end()`, so a value it refuses
+ * -- a cycle, a BigInt -- throws with the reply already begun. Every one of
+ * those sites sits inside a `try`, and the `catch` then writes a second status
+ * line onto the same response: `ERR_HTTP_HEADERS_SENT`, raised in an async
+ * handler, which node 20 turns into an unhandled rejection and exits on. #359
+ * fixed one such path in `/readyz`; `/rpc` was reachable the same way through
+ * any registered method, which is public API.
+ *
+ * Serialising first means a bad value produces a clean 500 instead, and the
+ * `headersSent` check means nothing here can ever append to a reply in flight.
+ */
+export function writeJsonResponse(
+  res: ServerResponse,
+  status: number,
+  body: unknown,
+  headers: Record<string, string> = {},
+  fallback: unknown = { status: 'error', error: 'Response could not be serialised' },
+  fallbackStatus = 500,
+): void {
+  let payload: string;
+  let code = status;
+  try {
+    payload = JSON.stringify(body);
+  } catch {
+    code = fallbackStatus;
+    payload = JSON.stringify(fallback);
+  }
+  if (res.headersSent) {
+    // Nothing valid is left to say and a second status line would
+    // desynchronise the connection. End what is already out there.
+    res.end();
+    return;
+  }
+  res.writeHead(code, { 'Content-Type': 'application/json', ...headers });
+  res.end(payload);
+}
+
 export interface GatewayReadiness {
   ready: boolean;
   status: 'ready' | 'degraded';
@@ -291,6 +336,8 @@ interface ParsedFrame {
 export class GatewayServer {
   private wss: WebSocketServer | null = null;
   private httpServer: ReturnType<typeof createServer> | null = null;
+  /** The port the kernel actually bound, which differs from config.port when that is 0. */
+  private boundPort: number | null = null;
   private connections = new Map<string, { ws: WebSocket; info: ConnectionInfo }>();
   private methods = new Map<string, { handler: RpcMethodHandler; requiresAuth: boolean }>();
   private publicHttpMethods = new Map<string, { handler: RpcMethodHandler; requiresAuth: boolean }>();
@@ -782,6 +829,17 @@ export class GatewayServer {
     });
   }
 
+  /**
+   * The port this server is reachable on.
+   *
+   * Before start() this is whatever was configured. After start() it is the
+   * port the kernel actually bound, which is the only useful answer when the
+   * configuration asked for port 0.
+   */
+  get port(): number {
+    return this.boundPort ?? this.config.port;
+  }
+
   async start(): Promise<void> {
     if (this.stopPromise) await this.stopPromise;
     if (this.wss) return;
@@ -816,11 +874,18 @@ export class GatewayServer {
       this.httpServer!.on('error', reject);
     });
 
+    // Port 0 means "any free port", and the kernel picks one during listen().
+    // Until we read it back, the number we were configured with is not the
+    // number we are reachable on, so every later reader -- the startup log,
+    // getStatus(), liveSignals(), /status -- would report 0. Ask the socket.
+    const bound = this.httpServer!.address();
+    this.boundPort = bound !== null && typeof bound === 'object' ? bound.port : this.config.port;
+
     logGatewayLifecycle(
       'gateway',
       'start',
-      `Gateway server started on ${host}:${this.config.port}`,
-      { host, port: this.config.port }
+      `Gateway server started on ${host}:${this.port}`,
+      { host, port: this.port }
     );
   }
 
@@ -869,6 +934,7 @@ export class GatewayServer {
     const httpServer = this.httpServer;
     this.wss = null;
     this.httpServer = null;
+    this.boundPort = null;
 
     const shutdownWaits: Promise<unknown>[] = [...pendingOperations];
     if (wss) {
@@ -923,7 +989,7 @@ export class GatewayServer {
       startedAt: this.startedAt ?? undefined,
       agents: agents.map(a => ({ id: a.id, name: a.id, description: a.description })),
       connections: this.connections.size,
-      port: this.config.port,
+      port: this.port,
       version: VERSION,
       cron: this.cronService?.list().map(j => ({
         name: j.name,
@@ -941,7 +1007,7 @@ export class GatewayServer {
   getStatus(): GatewayStatus {
     return {
       running: !!this.wss,
-      port: this.config.port,
+      port: this.port,
       connections: this.connections.size,
       uptime: this.startedAt ? Math.floor((Date.now() - this.startedAt) / 1000) : 0,
       version: VERSION,
@@ -1104,15 +1170,31 @@ export class GatewayServer {
             reason: this.wss ? undefined : 'gateway_stopped',
           });
       void readiness.then(result => {
+        // Serialised BEFORE any byte is written. This used to stringify as the
+        // argument to `res.end()`, after `writeHead` had already committed a
+        // status line, so a report that cannot be serialised threw with the
+        // reply half sent -- and the `.catch` below then called `writeHead`
+        // again on that same response. That is ERR_HTTP_HEADERS_SENT inside a
+        // discarded promise, which on node 20 is an unhandled rejection, which
+        // terminates the process. One GET /readyz killed the daemon.
+        const payload = JSON.stringify({
+          ...result,
+          timestamp: new Date().toISOString(),
+        });
         res.writeHead(result.ready ? 200 : 503, {
           'Content-Type': 'application/json',
           Connection: 'close',
         });
-        res.end(JSON.stringify({
-          ...result,
-          timestamp: new Date().toISOString(),
-        }));
+        res.end(payload);
       }).catch(() => {
+        // Belt as well as braces: whatever failed, this must not be the thing
+        // that takes the gateway down. If the reply has already begun there is
+        // nothing valid left to say, and appending a second status line would
+        // desynchronise the connection.
+        if (res.headersSent) {
+          res.end();
+          return;
+        }
         res.writeHead(503, {
           'Content-Type': 'application/json',
           Connection: 'close',
@@ -1208,10 +1290,11 @@ export class GatewayServer {
        * openrappter 503). Rejecting at the door costs nothing and is the same
        * answer every time.
        *
-       * This is a DELIBERATE divergence from the brainstem, which has no cap.
-       * Everywhere else on /chat the rule is to match it exactly; here matching
-       * it would mean copying a hole. The brainstem should adopt the same cap —
-       * it is a different repository and not mine to change.
+       * This was a DELIBERATE divergence from the brainstem, which had no cap:
+       * everywhere else on /chat the rule is to match it exactly, and here
+       * matching it would have meant copying a hole. The brainstem has since
+       * adopted the same limit and the same environment variable, so /chat now
+       * answers the same status AND the same envelope in both runtimes.
        */
       req.on('data', (chunk: Buffer) => {
         if (bodyTooLarge) {
@@ -1248,7 +1331,7 @@ export class GatewayServer {
           if (!res.writableEnded) {
             res.writeHead(413, { 'Content-Type': 'application/json', ...corsHeaders });
             res.end(JSON.stringify(isChat
-              ? { error: 'Request body too large' }
+              ? { schema: 'rapp-chat/1.0', status: 'error', error: 'Request body too large' }
               : { error: 'Request body too large', limit_bytes: this.maxHttpBodyBytes }));
           }
           return;
@@ -1318,8 +1401,22 @@ export class GatewayServer {
               return;
             }
             const result = await this.agentImporter(filename, Buffer.from(contents, 'utf-8'));
-            res.writeHead(result.status === 'ok' ? 200 : 400, { 'Content-Type': 'application/json', ...corsHeaders });
-            res.end(JSON.stringify(result));
+            // `agentImporter` is injected through the public `setAgentImporter`,
+            // so its return value is caller-supplied and may not be
+            // serialisable. Writing the head first and serialising second threw
+            // after the response was committed, the outer catch wrote a second
+            // head, and Node ended the process on ERR_HTTP_HEADERS_SENT -- the
+            // same shape as /readyz and /rpc.
+            writeJsonResponse(
+              res,
+              result.status === 'ok' ? 200 : 400,
+              result,
+              corsHeaders,
+              { status: 'error', error: 'Import result could not be serialised' },
+              // 503, matching this route's own "cannot install agents": the
+              // importer did not produce a usable answer.
+              503,
+            );
             return;
           }
 
@@ -1423,9 +1520,12 @@ export class GatewayServer {
                 agentLogs: (result.agentLogs ?? []).join('\n'),
               })));
             } catch (error) {
-              res.writeHead(error instanceof GatewayTimeoutError ? 504 : 503,
-                { 'Content-Type': 'application/json', ...corsHeaders });
-              res.end(JSON.stringify({ error: (error as Error).message }));
+              writeJsonResponse(
+                res,
+                error instanceof GatewayTimeoutError ? 504 : 503,
+                { error: (error as Error).message },
+                corsHeaders,
+              );
             }
             return;
           }
@@ -1457,16 +1557,25 @@ export class GatewayServer {
             // the transcript.
             const parsedRequest = parseChatRequest(parsed);
             if (!parsedRequest.ok) {
-              // Bare `{error}`, exactly as the brainstem writes it. PARITY §3
-              // permits extra axes, but the goal on this wire is stronger than
-              // §3: a peer must not be able to tell which runtime answered. A
-              // single malformed request was enough to fingerprint us, because
-              // ours carried `schema` and `status` and the brainstem's does not.
-              // Those keys survive on the paths the brainstem has no
-              // counterpart for (401 auth, 503, 409, 504) — nothing can be
-              // compared there, so nothing diverges.
+              // The same three keys `brainstem.py` writes -- verified by posting
+              // each malformed body to both runtimes, not by reading either.
+              //
+              // This used to send a bare `{error}` to avoid fingerprinting,
+              // citing a brainstem that replies `jsonify({"error": ...}), 400`.
+              // No such brainstem is in this repository: `brainstem.py` has no
+              // Flask and no `jsonify`, it answers through `_send`, and its
+              // rejections carry `schema` and `status`. Stripping them here
+              // therefore produced the divergence the change set out to remove
+              // -- one malformed request separated the runtimes on four of five
+              // bodies. `contracts/rapp-chat-v1.json` fixes the shape and both
+              // runtimes are now tested against the file rather than against a
+              // belief about each other.
               res.writeHead(400, { 'Content-Type': 'application/json', ...corsHeaders });
-              res.end(JSON.stringify({ error: parsedRequest.error }));
+              res.end(JSON.stringify({
+                schema: 'rapp-chat/1.0',
+                status: 'error',
+                error: parsedRequest.error,
+              }));
               return;
             }
             const message = parsedRequest.value.userInput;
@@ -1557,24 +1666,39 @@ export class GatewayServer {
             try {
               const responseBody = await this.runWithTimeout(responsePromise);
               if (!this.isGenerationActive(requestGeneration)) return;
-              res.writeHead(200, { 'Content-Type': 'application/json', ...corsHeaders });
-              res.end(JSON.stringify(responseBody));
+              writeJsonResponse(
+                res,
+                200,
+                responseBody,
+                corsHeaders,
+                {
+                  schema: 'rapp-chat/1.0',
+                  status: 'error',
+                  error: 'Response could not be serialised',
+                  session_id: sessionId,
+                  sessionId,
+                },
+                // 503, matching this handler's own catch for an internal
+                // failure, rather than a third status for the same situation.
+                503,
+              );
             } catch (error) {
               if (idempotencyKey && !(error instanceof GatewayTimeoutError)) {
                 this.httpChatIdempotency.delete(idempotencyKey);
               }
               if (!this.isGenerationActive(requestGeneration)) return;
-              res.writeHead(
+              writeJsonResponse(
+                res,
                 error instanceof GatewayTimeoutError ? 504 : 503,
-                { 'Content-Type': 'application/json', ...corsHeaders }
+                {
+                  schema: 'rapp-chat/1.0',
+                  status: 'error',
+                  error: (error as Error).message,
+                  session_id: sessionId,
+                  sessionId,
+                },
+                corsHeaders,
               );
-              res.end(JSON.stringify({
-                schema: 'rapp-chat/1.0',
-                status: 'error',
-                error: (error as Error).message,
-                session_id: sessionId,
-                sessionId,
-              }));
             }
             return;
           }
@@ -1618,8 +1742,28 @@ export class GatewayServer {
               if (!this.isGenerationActive(requestGeneration)) return;
               this.metrics.recordRequest('success');
               logGatewayRequest('gateway', 'rpc.dispatch', { transport: 'http', outcome: 'success', durationMs: Date.now() - dispatchStartedAt });
-              res.writeHead(200, { 'Content-Type': 'application/json', ...corsHeaders });
-              res.end(JSON.stringify({ jsonrpc: '2.0', id: parsed.id, result }));
+              writeJsonResponse(
+                res,
+                200,
+                { jsonrpc: '2.0', id: parsed.id, result },
+                corsHeaders,
+                {
+                  jsonrpc: '2.0',
+                  id: parsed.id,
+                  error: {
+                    code: RPC_ERROR.INTERNAL_ERROR,
+                    message: 'Result could not be serialised',
+                  },
+                },
+                // HTTP 200, like every other JSON-RPC-level failure on this
+                // endpoint: method-not-found, timeout and internal-error all
+                // answer 200 and carry the fault in `error`. 401 is the one
+                // exception and it is a transport refusal, not an RPC result.
+                // #361 shipped this as a 500, so a client that checks the
+                // status before parsing saw a serialisation failure as a
+                // transport error while seeing a timeout as an RPC error.
+                200,
+              );
             } catch (error) {
               if (
                 error instanceof GatewayStoppedError
@@ -1670,15 +1814,28 @@ export class GatewayServer {
           }
         } catch {
           // The brainstem answers malformed JSON with the same sentence it uses
-          // for a non-object body — `get_json(silent=True)` yields None and
-          // falls into the same branch. A `/chat` caller must not be able to
-          // tell the two runtimes apart by their parse errors either.
-          res.writeHead(400, { 'Content-Type': 'application/json', ...corsHeaders });
-          res.end(JSON.stringify(
+          // for a non-object body, and in the same envelope. (The `get_json`
+          // this comment used to cite is Flask; the brainstem here catches
+          // `json.loads` and replies through `_send` -- verified by posting
+          // `not json at all` to it.) A `/chat` caller must not be able to tell
+          // the two runtimes apart by their parse errors either.
+          // This is the last catch around the whole body handler, so it sees
+          // more than a malformed request: anything a route throws after it has
+          // already answered arrives here too. Writing a second head in that
+          // case is what ends the process, so it goes through the helper, which
+          // closes an already-committed response instead of re-heading it.
+          writeJsonResponse(
+            res,
+            400,
             pathOnly === '/chat'
-              ? { error: 'Request body must be a JSON object' }
+              ? {
+                schema: 'rapp-chat/1.0',
+                status: 'error',
+                error: 'Request body must be a JSON object',
+              }
               : { error: 'Invalid JSON' },
-          ));
+            corsHeaders,
+          );
         }
       });
       return;
@@ -2235,7 +2392,32 @@ export class GatewayServer {
       try { ws.close(1013, 'Outbound buffer limit exceeded'); } catch { /* already gone */ }
       return;
     }
-    try { ws.send(JSON.stringify(frame)); } catch { /* ignore */ }
+    let payload: string;
+    try {
+      payload = JSON.stringify(frame);
+    } catch {
+      // A frame that cannot be serialised used to be swallowed by the `catch`
+      // below, so the caller was never answered at all. Over HTTP the same
+      // method returns a JSON-RPC error (#361); over this transport it returned
+      // silence, which a client awaiting `id` cannot distinguish from a hung
+      // server -- it waits for its own timeout, or forever if it has none.
+      //
+      // Only a frame carrying an `id` has someone waiting on it. An event has
+      // no correlator and no awaiting caller, so there is nothing to answer and
+      // it is dropped as before.
+      const id = typeof frame.id === 'string' ? frame.id : '';
+      if (!id) return;
+      payload = JSON.stringify({
+        type: 'res',
+        id,
+        ok: false,
+        error: {
+          code: RPC_ERROR.INTERNAL_ERROR,
+          message: 'Result could not be serialised',
+        },
+      });
+    }
+    try { ws.send(payload); } catch { /* ignore */ }
   }
 
   private checkRateLimit(connId: string): boolean {

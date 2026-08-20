@@ -1,0 +1,144 @@
+{
+  "schema": "rapp-vision-channel/1.0",
+  "id": "rappter-plays-pokemon",
+  "name": "RAPPter Plays Pokemon",
+  "description": "Sanitized highlights from autonomous Pokemon playthroughs powered by GitHub Copilot.",
+  "author": {
+    "name": "kody-w",
+    "url": "https://github.com/kody-w"
+  },
+  "videos": [
+    {
+      "id": "yellow-001-pikachu-joins",
+      "title": "YELLOW receives Pikachu",
+      "description": "The autonomous Pokemon Yellow run reaches its first party milestone: Oak gives YELLOW the Pikachu caught outside Pallet Town.",
+      "published": "2026-08-19",
+      "duration": 99.067,
+      "width": 1024,
+      "height": 576,
+      "orientation": "landscape",
+      "tags": [
+        "pokemon-yellow",
+        "pikachu",
+        "autonomous-gameplay",
+        "milestone"
+      ],
+      "thumb": "thumbs/yellow-001-pikachu-joins.jpg",
+      "sources": [
+        {
+          "src": "media/yellow-001-pikachu-joins.mp4",
+          "type": "video/mp4; codecs=\"avc1.4D401F\""
+        },
+        {
+          "src": "media/yellow-001-pikachu-joins.webm",
+          "type": "video/webm; codecs=\"vp9\""
+        }
+      ],
+      "chapters": [
+        {
+          "t": 0,
+          "label": "BLUE claims Oak's Poke Ball"
+        },
+        {
+          "t": 23.7,
+          "label": "Oak lets BLUE keep it"
+        },
+        {
+          "t": 36.2,
+          "label": "Oak promises YELLOW another Pokemon"
+        },
+        {
+          "t": 70.8,
+          "label": "YELLOW receives Pikachu"
+        },
+        {
+          "t": 74.4,
+          "label": "Nickname prompt"
+        },
+        {
+          "t": 97.1,
+          "label": "Pikachu joins the party"
+        }
+      ]
+    },
+    {
+      "id": "yellow-002-first-viridian-arrival",
+      "title": "YELLOW reaches Viridian City",
+      "description": "After escaping Route 1's ledges, the autonomous Pokemon Yellow run crosses into Viridian City for the first time.",
+      "published": "2026-08-20",
+      "duration": 24.9,
+      "width": 1024,
+      "height": 576,
+      "orientation": "landscape",
+      "tags": [
+        "pokemon-yellow",
+        "viridian-city",
+        "autonomous-gameplay",
+        "milestone"
+      ],
+      "thumb": "thumbs/yellow-002-first-viridian-arrival.jpg",
+      "sources": [
+        {
+          "src": "media/yellow-002-first-viridian-arrival.mp4",
+          "type": "video/mp4; codecs=\"avc1.4D401F\""
+        },
+        {
+          "src": "media/yellow-002-first-viridian-arrival.webm",
+          "type": "video/webm; codecs=\"vp9\""
+        }
+      ],
+      "chapters": [
+        {
+          "t": 0,
+          "label": "Final Route 1 approach"
+        },
+        {
+          "t": 15,
+          "label": "Viridian City arrival"
+        }
+      ]
+    },
+    {
+      "id": "yellow-003-parcel-and-pokedex",
+      "title": "YELLOW receives the Pokedex",
+      "description": "YELLOW delivers Oak's Parcel, reunites with BLUE, and receives Professor Oak's Pokedex.",
+      "published": "2026-08-20",
+      "duration": 64.267,
+      "width": 1024,
+      "height": 576,
+      "orientation": "landscape",
+      "tags": [
+        "pokemon-yellow",
+        "pokedex",
+        "oaks-parcel",
+        "autonomous-gameplay",
+        "milestone"
+      ],
+      "thumb": "thumbs/yellow-003-parcel-and-pokedex.jpg",
+      "sources": [
+        {
+          "src": "media/yellow-003-parcel-and-pokedex.mp4",
+          "type": "video/mp4; codecs=\"avc1.4D401F\""
+        },
+        {
+          "src": "media/yellow-003-parcel-and-pokedex.webm",
+          "type": "video/webm; codecs=\"vp9\""
+        }
+      ],
+      "chapters": [
+        {
+          "t": 2.5,
+          "label": "Oak's Parcel delivered"
+        },
+        {
+          "t": 43,
+          "label": "Oak reveals the Pokedex"
+        },
+        {
+          "t": 58.25,
+          "label": "YELLOW receives the Pokedex"
+        }
+      ]
+    }
+  ]
+}

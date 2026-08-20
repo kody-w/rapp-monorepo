@@ -1,205 +1,6 @@
 {
   "runs": [
     {
-      "timestamp": "2026-08-17T13:22:09Z",
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 42,
-        "numbers": []
-      }
-    },
-    {
-      "ts": "2026-08-17T14:58:00Z",
-      "dry_run": false,
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 0,
-        "numbers": []
-      }
-    },
-    {
-      "timestamp": "2026-08-17T15:55:34Z",
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 42,
-        "numbers": []
-      }
-    },
-    {
-      "timestamp": "2026-08-17T17:00:11Z",
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 42,
-        "numbers": []
-      }
-    },
-    {
-      "timestamp": "2026-08-17T19:15:58Z",
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 42,
-        "numbers": []
-      }
-    },
-    {
-      "timestamp": "2026-08-17T19:57:09Z",
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 42,
-        "numbers": []
-      }
-    },
-    {
-      "timestamp": "2026-08-17T20:58:30Z",
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 42,
-        "numbers": []
-      }
-    },
-    {
-      "timestamp": "2026-08-17T21:55:13Z",
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 42,
-        "numbers": []
-      }
-    },
-    {
-      "timestamp": "2026-08-17T22:53:46Z",
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 42,
-        "numbers": []
-      }
-    },
-    {
-      "ts": "2026-08-17T23:50:45Z",
-      "dry_run": false,
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 37,
-        "numbers": []
-      }
-    },
-    {
-      "timestamp": "2026-08-18T02:06:44Z",
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 42,
-        "numbers": []
-      }
-    },
-    {
-      "ts": "2026-08-18T04:12:58Z",
-      "dry_run": false,
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 37,
-        "numbers": []
-      }
-    },
-    {
-      "timestamp": "2026-08-18T05:06:00Z",
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 42,
-        "numbers": []
-      }
-    },
-    {
-      "timestamp": "2026-08-18T09:08:26Z",
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 42,
-        "numbers": []
-      }
-    },
-    {
       "ts": "2026-08-18T10:00:18Z",
       "dry_run": false,
       "locks": {
@@ -429,11 +230,213 @@
         "skipped": 42,
         "numbers": []
       }
+    },
+    {
+      "timestamp": "2026-08-19T09:08:57Z",
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 42,
+        "numbers": []
+      }
+    },
+    {
+      "ts": "2026-08-19T13:19:55Z",
+      "dry_run": false,
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 37,
+        "numbers": []
+      }
+    },
+    {
+      "timestamp": "2026-08-19T15:08:14Z",
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 42,
+        "numbers": []
+      }
+    },
+    {
+      "timestamp": "2026-08-19T15:58:55Z",
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 42,
+        "numbers": []
+      }
+    },
+    {
+      "ts": "2026-08-19T19:53:46Z",
+      "dry_run": false,
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 37,
+        "numbers": []
+      }
+    },
+    {
+      "ts": "2026-08-19T20:54:28Z",
+      "dry_run": false,
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 37,
+        "numbers": []
+      }
+    },
+    {
+      "timestamp": "2026-08-19T21:55:30Z",
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 42,
+        "numbers": []
+      }
+    },
+    {
+      "timestamp": "2026-08-19T22:55:49Z",
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 42,
+        "numbers": []
+      }
+    },
+    {
+      "timestamp": "2026-08-20T02:07:17Z",
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 42,
+        "numbers": []
+      }
+    },
+    {
+      "timestamp": "2026-08-20T03:23:31Z",
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 42,
+        "numbers": []
+      }
+    },
+    {
+      "ts": "2026-08-20T04:07:05Z",
+      "dry_run": false,
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 37,
+        "numbers": []
+      }
+    },
+    {
+      "timestamp": "2026-08-20T05:06:48Z",
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 42,
+        "numbers": []
+      }
+    },
+    {
+      "ts": "2026-08-20T05:57:11Z",
+      "dry_run": false,
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 37,
+        "numbers": []
+      }
+    },
+    {
+      "ts": "2026-08-20T07:17:41Z",
+      "dry_run": false,
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 37,
+        "numbers": []
+      }
     }
   ],
   "_meta": {
-    "updated": "2026-08-19T07:19:54Z",
+    "updated": "2026-08-20T07:17:41Z",
     "keep": 30,
-    "materialized_at": "2026-08-19T07:19:54Z"
+    "materialized_at": "2026-08-20T07:17:41Z"
   }
 }

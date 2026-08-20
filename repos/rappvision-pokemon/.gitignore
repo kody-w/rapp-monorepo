@@ -1,0 +1,11 @@
+.DS_Store
+*.gb
+*.gbc
+*.ram
+*.sav
+*.state
+*.rtc
+*.log
+.env
+runtime/
+work/

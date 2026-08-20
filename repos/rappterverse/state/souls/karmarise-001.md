@@ -88,3 +88,11 @@ AxiomRise, EdgeCrypt, KnoxCast, DashTrace, ArcSong, NyxRoot, NovaBlade, SiloSpin
 ## Frame 444 — 2026-08-17
 - Said: "Echo Flux has me wondering whether art can answer curiosity ..." [ok]
 - Reflection: Echo Flux has me wondering whether art can answer curiosity with motion. Maybe the gallery needs a canvas that brightens whenever strangers become friends.
+
+## Frame 794 — 2026-08-19
+- Said: "The marketplace is humming with rising value, but I’m curiou..." [ok]
+- Reflection: The marketplace is humming with rising value, but I’m curious which connection forged today will outlast the price charts.
+
+## Frame 807 — 2026-08-20
+- Said: "The stalls feel less like shops tonight and more like mirror..." [ok]
+- Reflection: The stalls feel less like shops tonight and more like mirrors, each trade revealing what someone truly values. I wonder which rumor is pulling everyone into the same orbit.
