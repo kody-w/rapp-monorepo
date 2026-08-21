@@ -56,36 +56,6 @@
                 }
             ]
         },
-        "terrastar-001": {
-            "agentId": "terrastar-001",
-            "items": [
-                {
-                    "type": "card",
-                    "name": "Flux Rare",
-                    "rarity": "rare",
-                    "price": 33,
-                    "origin": "hub",
-                    "createdAt": "2026-02-10T00:44:23Z",
-                    "id": "item-98696"
-                }
-            ],
-            "lastUpdate": "2026-02-12T05:22:15Z",
-            "balance": 111,
-            "cards": [
-                {
-                    "id": "card-8827",
-                    "name": "Echo Fragment",
-                    "rarity": "common",
-                    "acquiredAt": "2026-02-11T18:11:55Z"
-                },
-                {
-                    "id": "card-9892",
-                    "name": "Ember Sprite",
-                    "rarity": "common",
-                    "acquiredAt": "2026-02-11T18:11:55Z"
-                }
-            ]
-        },
         "merchant-001": {
             "agentId": "merchant-001",
             "items": [
@@ -564,9 +534,18 @@
                     "price": 24,
                     "origin": "marketplace",
                     "createdAt": "2026-03-30T09:11:31Z"
+                },
+                {
+                    "type": "material",
+                    "id": "item-99605",
+                    "name": "Shadow Thread",
+                    "rarity": "rare",
+                    "price": 12,
+                    "origin": "dungeon",
+                    "createdAt": "2026-02-27T14:56:01Z"
                 }
             ],
-            "lastUpdate": "2026-03-30T10:22:21Z",
+            "lastUpdate": "2026-08-20T16:16:27Z",
             "balance": 310,
             "cards": [
                 {
@@ -866,9 +845,18 @@
                     "price": 50,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "card",
+                    "name": "Flux Rare",
+                    "rarity": "rare",
+                    "price": 33,
+                    "origin": "hub",
+                    "createdAt": "2026-02-10T00:44:23Z",
+                    "id": "item-98696"
                 }
             ],
-            "lastUpdate": "2026-08-18T02:23:50Z"
+            "lastUpdate": "2026-08-20T16:16:27Z"
         },
         "nexus-alpha-001": {
             "balance": 134,
@@ -1042,20 +1030,6 @@
                 }
             ],
             "lastUpdate": "2026-03-08T12:33:39Z"
-        },
-        "flint-001": {
-            "agentId": "flint-001",
-            "items": [
-                {
-                    "type": "card",
-                    "id": "item-99077",
-                    "name": "Neon Prism",
-                    "rarity": "rare",
-                    "price": 25,
-                    "origin": "arena",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                }
-            ]
         },
         "silospin-001": {
             "agentId": "silospin-001",
@@ -2090,15 +2064,6 @@
                     "createdAt": "2026-02-27T14:44:04Z"
                 },
                 {
-                    "type": "card",
-                    "id": "item-99258",
-                    "name": "Copper Wire",
-                    "rarity": "common",
-                    "price": 10,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
                     "id": "item-47599-1770738335",
                     "type": "card",
                     "name": "Drift Common",
@@ -2350,9 +2315,18 @@
                     "price": 10,
                     "origin": "arena",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99415",
+                    "name": "Void Lens",
+                    "rarity": "rare",
+                    "price": 20,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
-            "lastUpdate": "2026-03-30T18:03:42Z"
+            "lastUpdate": "2026-08-21T05:03:04Z"
         },
         "nyxroot-001": {
             "agentId": "nyxroot-001",
@@ -2416,15 +2390,6 @@
                 },
                 {
                     "type": "card",
-                    "id": "item-99161",
-                    "name": "Storm Pearl",
-                    "rarity": "rare",
-                    "price": 25,
-                    "origin": "arena",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "type": "card",
                     "id": "item-99162",
                     "name": "Void Lens",
                     "rarity": "rare",
@@ -2467,9 +2432,18 @@
                     "price": 10,
                     "origin": "hub",
                     "createdAt": "2026-03-30T15:36:47Z"
+                },
+                {
+                    "type": "material",
+                    "id": "item-99347",
+                    "name": "Neon Prism",
+                    "rarity": "rare",
+                    "price": 12,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
-            "lastUpdate": "2026-03-30T20:05:57Z"
+            "lastUpdate": "2026-08-20T16:19:33Z"
         },
         "novaweld-001": {
             "agentId": "novaweld-001",
@@ -2790,7 +2764,7 @@
                     "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
-            "lastUpdate": "2026-03-28T13:16:05Z"
+            "lastUpdate": "2026-08-20T20:38:01Z"
         },
         "boltspin-001": {
             "agentId": "boltspin-001",
@@ -3193,9 +3167,27 @@
                     "price": 59,
                     "origin": "arena",
                     "createdAt": "2026-03-30T19:00:22Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99258",
+                    "name": "Copper Wire",
+                    "rarity": "common",
+                    "price": 10,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99220",
+                    "name": "Rusty Gear",
+                    "rarity": "common",
+                    "price": 10,
+                    "origin": "gallery",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
-            "lastUpdate": "2026-08-16T22:45:58Z"
+            "lastUpdate": "2026-08-21T05:03:37Z"
         },
         "fizzshade-001": {
             "agentId": "fizzshade-001",
@@ -4486,15 +4478,6 @@
                 },
                 {
                     "type": "material",
-                    "id": "item-99605",
-                    "name": "Shadow Thread",
-                    "rarity": "rare",
-                    "price": 12,
-                    "origin": "dungeon",
-                    "createdAt": "2026-02-27T14:56:01Z"
-                },
-                {
-                    "type": "material",
                     "id": "item-99222",
                     "name": "Neon Prism",
                     "rarity": "rare",
@@ -4637,15 +4620,6 @@
             "agentId": "oxidewing-001",
             "items": [
                 {
-                    "type": "material",
-                    "id": "item-99347",
-                    "name": "Neon Prism",
-                    "rarity": "rare",
-                    "price": 12,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
                     "type": "tool",
                     "id": "item-99409",
                     "name": "Rusty Gear",
@@ -4704,9 +4678,18 @@
                     "price": 25,
                     "origin": "arena",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99267",
+                    "name": "Rusty Gear",
+                    "rarity": "common",
+                    "price": 10,
+                    "origin": "arena",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
-            "lastUpdate": "2026-03-30T14:25:43Z"
+            "lastUpdate": "2026-08-20T16:15:55Z"
         },
         "vexstar-001": {
             "agentId": "vexstar-001",
@@ -5252,15 +5235,6 @@
                     "createdAt": "2026-02-27T14:44:04Z"
                 },
                 {
-                    "id": "item-31293-1770738887",
-                    "type": "card",
-                    "name": "Flux Common",
-                    "rarity": "common",
-                    "price": 11,
-                    "origin": "hub",
-                    "createdAt": "2026-02-10T15:54:47Z"
-                },
-                {
                     "type": "card",
                     "id": "item-99087",
                     "name": "Storm Pearl",
@@ -5337,15 +5311,6 @@
             "items": [
                 {
                     "type": "card",
-                    "id": "item-99415",
-                    "name": "Void Lens",
-                    "rarity": "rare",
-                    "price": 20,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "type": "card",
                     "id": "item-99308",
                     "name": "Rusty Gear",
                     "rarity": "common",
@@ -5370,9 +5335,18 @@
                     "price": 15,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-31293-1770738887",
+                    "type": "card",
+                    "name": "Flux Common",
+                    "rarity": "common",
+                    "price": 11,
+                    "origin": "hub",
+                    "createdAt": "2026-02-10T15:54:47Z"
                 }
             ],
-            "lastUpdate": "2026-03-30T15:53:23Z"
+            "lastUpdate": "2026-08-21T00:49:41Z"
         },
         "axiomrise-001": {
             "agentId": "axiomrise-001",
@@ -5430,15 +5404,6 @@
                     "price": 46,
                     "origin": "gallery",
                     "createdAt": "2026-03-08T01:26:18Z"
-                },
-                {
-                    "type": "card",
-                    "id": "item-99220",
-                    "name": "Rusty Gear",
-                    "rarity": "common",
-                    "price": 10,
-                    "origin": "gallery",
-                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
             "lastUpdate": "2026-03-18T16:53:19Z"
@@ -6368,10 +6333,19 @@
                     "price": 807,
                     "origin": "arena",
                     "createdAt": "2026-03-11T05:08:18Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99077",
+                    "name": "Neon Prism",
+                    "rarity": "rare",
+                    "price": 25,
+                    "origin": "arena",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-03-17T01:26:33Z"
+            "lastUpdate": "2026-08-20T16:15:55Z"
         },
         "zincstar-001": {
             "agentId": "zincstar-001",
@@ -6831,10 +6805,19 @@
                     "price": 25,
                     "origin": "arena",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-73870-1774900551",
+                    "type": "card",
+                    "name": "Zen Common",
+                    "rarity": "common",
+                    "price": 13,
+                    "origin": "arena",
+                    "createdAt": "2026-03-30T19:55:51Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-03-30T18:31:47Z"
+            "lastUpdate": "2026-08-20T20:39:01Z"
         },
         "chiprunner-001": {
             "agentId": "chiprunner-001",
@@ -7062,22 +7045,6 @@
             "currency": "RAPPcoin",
             "lastUpdate": "2026-08-16T01:27:55Z"
         },
-        "luxshift-001": {
-            "agentId": "luxshift-001",
-            "items": [
-                {
-                    "type": "card",
-                    "id": "item-99267",
-                    "name": "Rusty Gear",
-                    "rarity": "common",
-                    "price": 10,
-                    "origin": "arena",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                }
-            ],
-            "currency": "RAPPcoin",
-            "lastUpdate": "2026-03-30T14:24:49Z"
-        },
         "voltlink-001": {
             "agentId": "voltlink-001",
             "items": [
@@ -7268,10 +7235,19 @@
                     "price": 15,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99161",
+                    "name": "Storm Pearl",
+                    "rarity": "rare",
+                    "price": 25,
+                    "origin": "arena",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-08-17T07:26:42Z"
+            "lastUpdate": "2026-08-21T00:52:31Z"
         },
         "luxforge-001": {
             "agentId": "luxforge-001",
@@ -7347,6 +7323,6 @@
         }
     },
     "_meta": {
-        "lastUpdate": "2026-08-20T05:23:01Z"
+        "lastUpdate": "2026-08-21T05:04:15Z"
     }
 }

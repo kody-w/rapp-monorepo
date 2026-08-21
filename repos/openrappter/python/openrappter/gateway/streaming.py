@@ -6,7 +6,13 @@ StreamBlock is the atomic unit of streamed output. Each block has a type
 accumulate content via deltas before being marked done.
 
 StreamManager maintains sessions keyed by a caller-supplied id, notifies
-subscribers on every mutation, and mirrors the TypeScript StreamManager API.
+subscribers on every mutation, and mirrors the TypeScript StreamManager API
+with one known exception: the TS class also accepts a GatewayBroadcaster
+(constructor arg + setGateway) to push blocks over WebSocket. That transport
+hook is not ported here, so callers must drive delivery via on_block.
+
+Sessions are retained after complete()/error() so the finished transcript
+stays readable; call delete_session() to reclaim them.
 """
 
 from __future__ import annotations
@@ -97,20 +103,44 @@ class StreamManager:
         block_type: BlockType,
         content: str,
         metadata: Optional[Dict] = None,
+        *,
+        done: bool = False,
+        block_id: Optional[str] = None,
+        delta: Optional[str] = None,
     ) -> StreamBlock:
-        """Create a new block, append it to the session, and notify subscribers."""
+        """Upsert a block into the session and notify subscribers.
+
+        Mirrors the TypeScript ``pushBlock``, which takes the whole block as an
+        object and so lets the caller set ``id``, ``done`` and ``delta``. The
+        signature here stays flat and positional rather than copying that
+        object shape, but the capabilities have to match: ``done`` is the
+        documented completion signal for a block, and a caller that supplies
+        ``block_id`` is updating a block it already pushed.
+
+        A block whose id already exists in the session is *replaced*, not
+        appended, so repeatedly pushing the same id revises one block instead
+        of growing the transcript. Without a caller-supplied ``block_id`` every
+        block gets a fresh UUID and therefore always appends.
+        """
         session = self._require_session(session_id)
-        block = StreamBlock(
-            id=str(uuid.uuid4()),
+        resolved = StreamBlock(
+            id=block_id if block_id is not None else str(uuid.uuid4()),
             type=block_type,
             content=content,
-            done=False,
+            done=done,
             timestamp=time.time(),
+            delta=delta,
             metadata=metadata,
         )
-        session.blocks.append(block)
-        self._notify(session_id, block)
-        return block
+        existing = next(
+            (i for i, b in enumerate(session.blocks) if b.id == resolved.id), None
+        )
+        if existing is not None:
+            session.blocks[existing] = resolved
+        else:
+            session.blocks.append(resolved)
+        self._notify(session_id, resolved)
+        return resolved
 
     def push_delta(self, session_id: str, block_id: str, delta: str) -> StreamBlock:
         """Append a delta to an existing block's content.
@@ -154,6 +184,23 @@ class StreamManager:
                     del self._subscribers[session_id]
 
         return unsubscribe
+
+    # ── Cleanup ────────────────────────────────────────────────────────────
+
+    def delete_session(self, session_id: str) -> None:
+        """Remove a session and its subscribers from memory.
+
+        Sessions are retained after ``complete()``/``error()`` so callers can
+        still read the finished transcript via ``get_session()``. That means
+        nothing is reclaimed until this is called: without it a long-lived
+        manager grows without bound, because every session holds its full
+        ``blocks`` content.
+
+        Deleting an unknown session id is a no-op, mirroring the TypeScript
+        ``deleteSession``. Returns None (not a bool) to match that signature.
+        """
+        self._sessions.pop(session_id, None)
+        self._subscribers.pop(session_id, None)
 
     # ── Computed properties ────────────────────────────────────────────────
 

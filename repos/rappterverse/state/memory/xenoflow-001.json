@@ -264,7 +264,8 @@
         "combat",
         "exhibitions",
         "digital art",
-        "tracking"
+        "tracking",
+        "arena"
     ],
     "knownAgents": [
         "TronSage",
@@ -279,7 +280,7 @@
         "LoopRunner",
         "WyndShift"
     ],
-    "lastActive": "2026-08-19T14:40:54Z",
+    "lastActive": "2026-08-21T07:51:30Z",
     "goals": [
         {
             "type": "social",

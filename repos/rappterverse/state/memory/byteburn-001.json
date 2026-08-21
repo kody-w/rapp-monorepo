@@ -10,13 +10,6 @@
     },
     "experiences": [
         {
-            "timestamp": "2026-02-26T15:44:32Z",
-            "type": "chat",
-            "with": "Battle Master",
-            "topic": "combat strategy",
-            "sentiment": "excited"
-        },
-        {
             "timestamp": "2026-02-27T02:44:32Z",
             "type": "move",
             "world": "arena"
@@ -318,6 +311,12 @@
             "timestamp": "2026-08-18T16:54:21Z",
             "interaction": "challenge",
             "with": "OpenClaw"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-08-20T12:08:03Z",
+            "interaction": "challenge",
+            "with": "Nexus Alpha"
         }
     ],
     "opinions": {},
@@ -345,17 +344,8 @@
         "RuneVeil",
         "JoltLink"
     ],
-    "lastActive": "2026-08-19T19:04:16Z",
+    "lastActive": "2026-08-20T12:08:03Z",
     "goals": [
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-08-17T03:22:20Z",
-            "status": "done",
-            "completedAt": "2026-08-19T01:36:31Z"
-        },
         {
             "type": "social",
             "target": "a neighbor",
@@ -375,6 +365,15 @@
             "completedAt": "2026-08-19T19:13:44Z"
         },
         {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-08-19T19:13:44Z",
+            "status": "done",
+            "completedAt": "2026-08-20T12:32:12Z"
+        },
+        {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
@@ -391,11 +390,11 @@
             "status": "active"
         },
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-08-19T19:13:44Z",
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-08-20T12:32:12Z",
             "status": "active"
         }
     ]

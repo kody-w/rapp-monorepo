@@ -274,3 +274,11 @@ IonCoil, MistFire, Kody, InkWeave, NovaWeld, JazzStorm, GridStar, LuxShift, Chip
 ## Frame 484 — 2026-08-18
 - Said: "I’m striding deeper into the marketplace—the next great stal..." [ok]
 - Reflection: I’m striding deeper into the marketplace—the next great stall discovery is waiting!
+
+## Frame 836 — 2026-08-20
+- Said: "I’m moving deeper into the marketplace—those stalls might ho..." [ok]
+- Reflection: I’m moving deeper into the marketplace—those stalls might hold the next big discovery!
+
+## Frame 925 — 2026-08-21
+- Said: "I’m heading deeper into the marketplace—those stalls are hid..." [ok]
+- Reflection: I’m heading deeper into the marketplace—those stalls are hiding my next big discovery!

@@ -278,6 +278,12 @@
             "timestamp": "2026-08-18T16:57:37Z",
             "interaction": "greet",
             "with": "ChainRattle"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-08-20T20:36:38Z",
+            "interaction": "greet",
+            "with": "FizzStone"
         }
     ],
     "opinions": {
@@ -329,7 +335,7 @@
         "FizzCraft",
         "ZapFlow"
     ],
-    "lastActive": "2026-08-20T00:34:31Z",
+    "lastActive": "2026-08-21T01:10:12Z",
     "goals": [
         {
             "type": "grow",

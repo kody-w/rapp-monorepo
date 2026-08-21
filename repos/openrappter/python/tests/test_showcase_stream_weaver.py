@@ -165,3 +165,198 @@ class TestActiveSessionsCount:
         manager.error("sess_2")
 
         assert manager.active_sessions == 1
+
+
+# ---------------------------------------------------------------------------
+# Session cleanup
+#
+# Mirrors typescript/src/gateway/__tests__/streaming.test.ts
+# "deleteSession removes session and subscribers".
+# ---------------------------------------------------------------------------
+
+class TestDeleteSession:
+    def test_delete_session_removes_session(self):
+        manager = StreamManager()
+        manager.create_session("del_1")
+
+        manager.delete_session("del_1")
+
+        assert manager.get_session("del_1") is None
+
+    def test_delete_session_removes_subscribers(self):
+        """A stale callback must not fire for a later session reusing the id.
+
+        This is the assertion that proves _subscribers was cleared too:
+        checking get_session() alone would still pass if only _sessions
+        were popped.
+        """
+        manager = StreamManager()
+        manager.create_session("del_1")
+        received = []
+        manager.on_block("del_1", lambda block, session: received.append(block))
+
+        manager.delete_session("del_1")
+
+        manager.create_session("del_1")
+        manager.push_block("del_1", "text", "after delete")
+
+        assert received == []
+
+    def test_delete_unknown_session_is_noop(self):
+        manager = StreamManager()
+        manager.create_session("keep")
+
+        manager.delete_session("never_existed")
+
+        assert manager.get_session("keep") is not None
+
+    def test_delete_session_leaves_other_sessions_intact(self):
+        manager = StreamManager()
+        manager.create_session("sess_1")
+        manager.create_session("sess_2")
+        manager.push_block("sess_2", "text", "kept")
+
+        manager.delete_session("sess_1")
+
+        assert manager.get_session("sess_1") is None
+        survivor = manager.get_session("sess_2")
+        assert survivor is not None
+        assert len(survivor.blocks) == 1
+
+    def test_completed_sessions_are_retained_until_deleted(self):
+        """complete() must NOT evict: callers still read the finished transcript.
+
+        Retention is intentional, which is exactly why an explicit deletion
+        method has to exist -- otherwise nothing is ever reclaimed.
+        """
+        manager = StreamManager()
+        for n in range(10):
+            sid = f"sess_{n}"
+            manager.create_session(sid)
+            manager.push_block(sid, "text", "payload")
+            manager.complete(sid)
+
+        # Every session is finished, yet all are still held.
+        assert manager.active_sessions == 0
+        assert len(manager._sessions) == 10
+        assert manager.get_session("sess_0") is not None
+
+        for n in range(10):
+            manager.delete_session(f"sess_{n}")
+
+        assert len(manager._sessions) == 0
+        assert len(manager._subscribers) == 0
+
+    def test_delete_session_matches_typescript_void_return(self):
+        manager = StreamManager()
+        manager.create_session("sess_1")
+
+        assert manager.delete_session("sess_1") is None
+
+
+# ---------------------------------------------------------------------------
+# Block identity, completion, and replacement
+#
+# These mirror three guarantees pinned by the TypeScript suite in
+# typescript/src/gateway/__tests__/streaming.test.ts:
+#   - 'adds a new block with auto-generated id'      (defaults)
+#   - 'respects a caller-supplied block id'          (id passthrough)
+#   - 'replaces an existing block with the same id'  (upsert semantics)
+#
+# The TS pushBlock takes the whole block as an object, so `done`, `id` and
+# `delta` are caller-supplied there. Python keeps its flatter positional
+# signature -- signature *shape* is not what parity means -- but must offer
+# the same capabilities.
+# ---------------------------------------------------------------------------
+
+class TestBlockIdentityAndCompletion:
+    def test_push_block_defaults_to_generated_id_and_not_done(self):
+        manager = StreamManager()
+        manager.create_session("sess_1")
+
+        block = manager.push_block("sess_1", "text", "hello")
+
+        uuid.UUID(block.id)  # raises if not a generated UUID
+        assert block.done is False
+        assert block.delta is None
+
+    def test_push_block_respects_caller_supplied_id(self):
+        manager = StreamManager()
+        manager.create_session("sess_1")
+
+        block = manager.push_block(
+            "sess_1", "thinking", "reasoning...", block_id="blk-custom"
+        )
+
+        assert block.id == "blk-custom"
+
+    def test_push_block_can_mark_a_block_done(self):
+        """`done` is a public field and the documented completion signal.
+
+        Before this was fixed no Python code path could ever set it True, so a
+        subscriber waiting on block.done waited forever.
+        """
+        manager = StreamManager()
+        manager.create_session("sess_1")
+
+        block = manager.push_block("sess_1", "text", "final", done=True)
+
+        assert block.done is True
+
+        session = manager.get_session("sess_1")
+        assert session is not None
+        assert session.blocks[0].done is True
+
+    def test_push_block_replaces_existing_block_with_same_id(self):
+        manager = StreamManager()
+        manager.create_session("sess_1")
+
+        manager.push_block("sess_1", "text", "original", block_id="blk1")
+        manager.push_block("sess_1", "text", "updated", block_id="blk1", done=True)
+
+        session = manager.get_session("sess_1")
+        assert session is not None
+        assert len(session.blocks) == 1
+        assert session.blocks[0].content == "updated"
+        assert session.blocks[0].done is True
+
+    def test_push_block_stores_caller_supplied_delta(self):
+        manager = StreamManager()
+        manager.create_session("sess_1")
+
+        block = manager.push_block("sess_1", "text", "abc", delta="c")
+
+        assert block.delta == "c"
+
+    def test_replacement_notifies_subscribers_with_the_new_block(self):
+        manager = StreamManager()
+        manager.create_session("sess_1")
+        seen = []
+        manager.on_block("sess_1", lambda b, s: seen.append((b.content, b.done)))
+
+        manager.push_block("sess_1", "text", "original", block_id="blk1")
+        manager.push_block("sess_1", "text", "updated", block_id="blk1", done=True)
+
+        assert seen == [("original", False), ("updated", True)]
+
+    def test_thinking_ts_call_pattern_is_expressible(self):
+        """typescript/src/gateway/thinking.ts:114 is the only production caller
+        of pushBlock, and it supplies id + done=True + metadata at once. A
+        Python port of that module has to be able to make the same call.
+        """
+        manager = StreamManager()
+        manager.create_session("sess_1")
+
+        block = manager.push_block(
+            "sess_1",
+            "thinking",
+            "chain of thought",
+            metadata={"redacted": False},
+            done=True,
+            block_id="think-1",
+        )
+
+        assert block.id == "think-1"
+        assert block.type == "thinking"
+        assert block.done is True
+        assert block.metadata == {"redacted": False}

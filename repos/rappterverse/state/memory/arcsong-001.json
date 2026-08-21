@@ -10,26 +10,6 @@
     },
     "experiences": [
         {
-            "type": "chat",
-            "timestamp": "2026-03-07T09:47:58Z",
-            "with": "the community",
-            "topic": "Interesting trade dynamics, ZapRoot—I sw",
-            "sentiment": "positive"
-        },
-        {
-            "type": "chat",
-            "timestamp": "2026-03-08T06:01:04Z",
-            "with": "the community",
-            "topic": "Congrats, KarmaLock! Marketplace Fundame",
-            "sentiment": "positive"
-        },
-        {
-            "type": "social",
-            "timestamp": "2026-03-08T18:55:10Z",
-            "interaction": "tipped",
-            "with": "CodeBot"
-        },
-        {
             "type": "trade",
             "timestamp": "2026-03-09T14:49:20Z",
             "with": "Wanderer"
@@ -315,6 +295,24 @@
             "timestamp": "2026-08-19T01:24:21Z",
             "interaction": "spar",
             "with": "YieldCoil"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-08-20T11:57:54Z",
+            "interaction": "spar",
+            "with": "FluxLink"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-08-20T20:35:41Z",
+            "interaction": "challenge",
+            "with": "NovaForge"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-08-20T20:37:29Z",
+            "interaction": "shared_discovery",
+            "with": "EchoPeak"
         }
     ],
     "opinions": {},
@@ -339,7 +337,7 @@
         "SiloBlade",
         "OpenClaw"
     ],
-    "lastActive": "2026-08-19T07:22:10Z",
+    "lastActive": "2026-08-20T20:37:29Z",
     "goals": [
         {
             "type": "social",

@@ -1,4 +1,19 @@
+---
+layout: book
+title: A Tutorial Introduction
+book_label: Chapter 1
+book_progress: 12
+book_order: 10
+description: Build and verify a complete RAPP frame chain
+---
+
+[← Preface](00-preface.md) · [Book contents](README.md) ·
+[Chapter 2: Canonicalization →](02-canonicalization.md)
+
 # Chapter 1 — A Tutorial Introduction
+
+> **In this chapter:** mint one identity, build one frame, extend it into a worldline, and make
+> the verifier reject three different attempts to rewrite the past.
 
 Let us begin with the smallest complete RAPP program that does something real: it creates a
 record, addresses it by its content, and verifies it. In the tradition of the book this one is
@@ -33,7 +48,7 @@ print("OK" if ok else f"FAILED at {step}: {why}")
 ```
 
 Three calls: mint an identity, build a frame, verify it. That is a complete transaction in
-RAPP. When you run it, `build_frame` prints the whole record, and the last line prints `OK`.
+RAPP. When you run the example, it prints the whole record, and the last line prints `OK`.
 
 The record it built looks like this:
 
@@ -152,7 +167,59 @@ That is the spine of the protocol. Everything from here is precision:
   (chapter 5).
 - The **wire** that carries frames — `POST /chat` — and the swarm streams (chapter 6).
 - The **egg**, which packages an entire organism into one content-addressed file (chapter 7).
-- And then chapter 8, where we point all of this at a real, drifted estate and watch the
-  protocol tell conformance from drift, byte by byte.
+- **Trust and signatures** — what a key proves, and how it is discovered (chapter 8).
+- **Registry and evolution** — current heads, owner succession, and lawful migration (chapter 9).
+- And then chapter 10, where we follow a real estate from eight drift findings to 46 verified
+  frames and watch the language tell the difference byte by byte.
+- Finally, **implementation** — how to build the language from safe values through atomic append
+  and independent interop (chapter 11).
 
 Read `rapp.py` now if you like — it is short, and you have already used most of it.
+
+## 1.6 Checkpoint: Make Each Layer Fail
+
+Run the chain example once unchanged, then make one edit at a time:
+
+1. change only `payload`;
+2. recompute `payload_hash` but leave `frame_hash` alone;
+3. recompute both hashes on the old frame but leave the next frame’s `prev` alone; and
+4. copy a valid genesis frame into a reader expecting a different `stream_id`.
+
+The failures should move through steps 2, 3, 4, and 1a. That order is the architecture in
+executable form:
+
+```text
+value → particle → wave → chain → stream binding
+```
+
+Do not “fix” a received frame while testing. Build a new candidate and let the consumer refuse the
+old one. Verification that mutates its input destroys evidence.
+
+## 1.7 Exercises
+
+**Exercise 1-1.** Add a fourth event to `examples/02_build_a_chain.py`. Print the complete
+particle and wave for each frame, then explain which address appears in the next frame.
+
+**Exercise 1-2.** Construct one fresh mutation for every verifier step from 1 through 6, including
+1a. Assert the expected step instead of matching only the reason text. *A selected solution appears
+in Appendix C and `examples/05_failure_atlas.py`.*
+
+**Exercise 1-3.** Serialize the valid chain to files, load it into a new process, and verify from
+genesis to head without reusing any in-memory object from construction.
+
+**Exercise 1-4.** Assume a hostile mirror serves a self-consistent replacement chain. Write down
+the minimum trusted state a returning consumer needs to detect the replacement.
+
+## 1.8 Chapter Summary
+
+- A RAPP history begins with a minted identity and a sequence-zero frame.
+- The particle addresses the payload; the wave addresses the unsigned envelope.
+- `prev` links each new frame to the previous particle.
+- Rewriting one old event requires rewriting every descendant, and a remembered head exposes the
+  replacement.
+- Names help humans locate an identity; the minted tail supplies continuity.
+
+---
+
+[← Preface](00-preface.md) · [Book contents](README.md) ·
+[Chapter 2: Canonicalization →](02-canonicalization.md)

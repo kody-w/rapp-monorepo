@@ -7,8 +7,345 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Deciding whether a recorded value hides a locator for an excluded file means
+  walking it, and the walk gives up past 16 levels and fails closed. Both
+  runtimes consulted that guard for values that never needed walking, so the
+  verdict on a leaf depended on its type and on how deep it sat. Two structures
+  of identical shape were classified differently because one ended in a string
+  and the other in a number: a 16-deep chain ending in `42` was replaced with
+  `[excluded-path]` while the same chain ending in `"leaf"` survived intact.
+  The runtimes disagreed about which, because Python short-circuited `None` and
+  `str` before the depth check while TypeScript short-circuited nothing --
+  TypeScript discarded an entire 16-deep array that Python kept, and at 17
+  levels they swapped. Both now answer for non-containers before consulting the
+  guard, which is exact: a leaf has no keys, so it can never hide a locator at
+  any depth. Detection of real excluded paths is unchanged, and the change can
+  only remove data from the log, never add it. Measured by running 231 nested
+  shapes through both sanitizers and diffing: 20 divergences before, 0 after.
+  A separate 252-shape sweep of the whole redaction surface -- secret-shaped
+  keys and values, unicode, truncation boundaries, embedded JSON, payload
+  limits and error summaries -- found no other divergence.
+
+- The two runtimes disagreed about which file metadata may ride along next to
+  an excluded credential path. When a recorded object carries a locator for an
+  excluded file, every sibling field is replaced with `[excluded-path]` except a
+  short allowlist -- `size`, `length`, `language`, `mime`, `mimetype`,
+  `extension` -- and a text field qualified only if it fit a 256 budget. Python
+  measured that budget with `len()`, which counts code points, and TypeScript
+  with `.length`, which counts UTF-16 code units, so a 200-emoji `mime` value
+  sat on opposite sides of the same number: Python wrote it to the flight log
+  verbatim while TypeScript blanked it. Both now measure it in UTF-8 bytes, the
+  unit every other size cap in the flight recorder already uses, which also
+  closes the case both runtimes got wrong -- a 200-character two-byte string
+  that fits either native length but not the byte budget. Verified by running
+  31 metadata shapes through both sanitizers and diffing: 1 divergence before,
+  0 after.
+- `contracts/excluded-path-corpus.json` said every sibling field is blanked,
+  without mentioning the metadata allowlist that is the one deliberate hole in
+  that sweep. The allowlist and its budget are now recorded in the contract and
+  asserted by both runtimes.
+
+- Python created private directories world-readable when it had to create their
+  parents. `Path.mkdir(parents=True, mode=0o700)` applies `mode` only to the
+  final directory -- CPython creates missing ancestors with the default
+  permissions and ignores `mode` for them -- while Node's
+  `mkdirSync(dir, { recursive: true, mode: 0o700 })` applies it to every
+  directory it creates. Both runtimes share one on-disk layout, so on a machine
+  where `~/.openrappter` did not exist yet, whichever runtime got there first
+  decided whether it was `0700` or world-readable `0755`. All 15 sites that
+  asked for `0700` now go through a new `private_mkdir()` helper that matches
+  Node, including the Flight Recorder log directory and the iMessage state and
+  config directories. A test fails the build if the old idiom reappears
+  anywhere in the Python product tree.
+- The Show-and-Tell contract's privacy and vocabulary guarantees were never
+  asserted: both runtimes checked only `session.schema`, so the `0700`/`0600`
+  mode promises, the 14-name event vocabulary, and the session-state list could
+  all drift silently. Both runtimes now measure them against
+  `contracts/show-and-tell-v1.json`, and the contract records explicitly that
+  the directory mode covers ancestors the runtime creates.
+
+- The Python gateway's `health` response omitted the `channels` check that
+  TypeScript reports. Every shared `channels.*` method guards on
+  `channel_registry`, and `channels.list` answers `[]` when it is absent --
+  which a client cannot tell apart from "no channels are configured". Python
+  now reports `channels` (and TypeScript's `storage` placeholder), so the
+  advertised channel surface can be pre-flighted on both runtimes.
+
+- `contracts/gateway-rpc-parity.json` claimed `health`'s `checks` sub-object
+  agreed between the runtimes, and scoped the only exception to the optional
+  `instance` field. It did not agree: TypeScript reported five checks and
+  Python two. The claim was prose, and prose cannot fail a build, so the
+  disagreement survived. Check names are now data under `health_checks`,
+  asserted by both runtimes. The contract's stated TypeScript method count
+  was also stale (54; the live count is 74).
+
+- `DashboardHandler.execute_agent()` dropped the `status` key when an agent
+  returned something that was not JSON. TypeScript falls back to
+  `{ status: 'success', raw: resultStr }` (`dashboard.ts:398`); Python fell
+  back to `{'raw': ...}`, so `result['status']` raised `KeyError` for a
+  plain-text agent but returned a value for a JSON one -- the result shape
+  depended on what the agent happened to emit.
+
+- `python/openrappter/gateway/dashboard.py` described itself as an "HTTP
+  dashboard handler" that "mirrors TypeScript gateway/dashboard.ts". It
+  handles no HTTP: `handle()`, `sendJson()` and prefix routing are not
+  ported, and the `_prefix` it stored was never read by anything. The
+  docstring now states the actual scope and names the omission, the dead
+  `_prefix` is gone, and the parity map records `gateway/dashboard` as a
+  partial port so a green dashboard audit is not mistaken for transport
+  coverage.
+
+- Python's `StreamManager.push_block()` could not mark a block finished. The
+  `done` field was public, mirrored TypeScript, and was named in the module
+  docstring as the signal that a block is "marked done" -- but it was
+  hardcoded `False` at every construction site, so no Python code path could
+  ever set it `True` and a subscriber waiting on `block.done` waited forever.
+  It also always generated a fresh UUID, so the caller-supplied block id and
+  the replace-by-id upsert that TypeScript guarantees were both unreachable;
+  pushing an updated block appended a duplicate instead of revising the
+  original. `push_block()` now accepts keyword-only `done`, `block_id` and
+  `delta` and replaces a block whose id already exists, matching
+  `pushBlock` in `typescript/src/gateway/streaming.ts`. Existing positional
+  callers are unaffected. The module docstring claimed it mirrored the
+  TypeScript API "with one known exception" (the WebSocket transport hook),
+  so this gap was undocumented as well as unreachable.
+
+- `test_imessage_rpc.py` failed roughly half the time when run immediately
+  after the full suite, and passed when run warm -- the pattern that trains
+  people to re-run red builds instead of reading them. Root cause was a
+  1-second timeout in the two tests that assert *terminal* conditions (the RPC
+  child exited, or emitted unframeable output). Those conditions resolve as
+  soon as the child acts, so the timeout is only a safety net against a hang,
+  but 1s raced a cold Python interpreter spawn: warm, the request resolves in
+  ~25ms; the first spawn after heavy disk activity measured ~920ms against the
+  1s budget. Past that the client correctly raised `ImsgRpcTimeout` instead of
+  the expected terminal error and the assertion failed. The client was never
+  at fault. Raised the safety net to 30s via a named constant, which leaves
+  the tests just as fast -- they resolve on the terminal condition, not the
+  timeout -- and measurably more consistent (0.57s per run, against 0.72-1.89s
+  before).
+
+- Python's MCP server diverged from TypeScript on five wire-visible points,
+  none of them covered by a test. The most serious: a tool whose agent
+  *resolved* with a structured `{"status": "error"}` envelope was reported to
+  the client as a **success**. TypeScript classifies that case through the
+  shared `agentResultIsError` helper and sets MCP's `isError` flag, and the
+  helper's own docstring states that every composition layer -- chain, graph,
+  broadcast, MCP, chat -- routes through it "so the two runtimes cannot drift
+  apart". Python ships the same classifier as `result_status.agent_result_is_error`
+  and already used it in chain, graph, subagent, and basic_agent; the MCP
+  server was the single layer that did not, so a declared failure reached the
+  client indistinguishable from success.
+
+  Also fixed, all confirmed by direct request/response capture: `initialize`
+  omitted the spec-required `protocolVersion` (TypeScript returns
+  `2024-11-05`, pinned by its parity test) so the response was not
+  spec-conformant; `tools/list` emitted `required: []` where TypeScript omits
+  the key entirely, which is not equivalent for strict schema validators;
+  `tools/call` returned an unknown-tool message of `Tool not found: X` against
+  TypeScript's `Unknown tool: X`; and JSON results were passed through
+  unformatted where TypeScript re-serialises with a 2-space indent, so
+  identical agent output rendered differently in the two runtimes.
+
+  Added `python/tests/test_mcp_server.py` (21 tests) mirroring
+  `typescript/src/__tests__/parity/mcp-server.test.ts`. The module previously
+  had no behavioral test at all -- `test_module_exports.py` only asserted that
+  it imports. One test pins the `isError` invariant against the shared
+  classifier itself rather than a hard-coded example, so the two cannot drift
+  again.
+
+- The TS<->Python parity map (`.claude/skills/ts-python-parity-check/SKILL.md`)
+  told auditors that three shipped subsystems did not exist in Python. It
+  listed `gateway`, `WatchmakerAgent`, and `mcp` as having "no Python
+  counterpart" while Python ships ~2,460 lines across them, including the
+  production `GatewayServer` wired up at `cli.py:1234`. Because the skill's
+  rule is "missing counterpart -> flag as a limitation," a wrong absence claim
+  does not warn -- it instructs the audit to skip real code, so those modules
+  were silently excluded from every parity check that trusted the map. This is
+  the likely reason the missing `StreamManager.delete_session` (previous entry)
+  went unnoticed. The map also cited a TS parity test,
+  `__tests__/parity/multiagent.test.ts`, that does not exist anywhere in the
+  repo, for `broadcast`/`router`/`subagent`.
+
+  Fixed by adding the seven missing pair rows, repointing the three phantom
+  test paths at `__tests__/integration/agents.test.ts` (which actually imports
+  `BroadcastManager`, `AgentRouter`, and `SubAgentManager`), and replacing the
+  two duplicated free-text absence claims with a single machine-checkable list
+  containing only the two genuine cases, `OuroborosAgent` and the UI. Added
+  `python/tests/test_parity_map.py`, which reads the map and fails if any path
+  it names is missing or if any module it declares absent has Python code --
+  so the map can no longer drift from the filesystem unnoticed. Also recorded
+  that `mcp` has no Python parity test, making that coverage gap explicit
+  rather than implied.
+
+- Python's `StreamManager` had no way to free a session. The class mirrors
+  TypeScript's `StreamManager` and its module docstring said so explicitly, but
+  TypeScript ships a tested `deleteSession()` that removes a session and its
+  subscribers, and Python shipped no removal method at all -- the entire public
+  API was `create_session`, `complete`, `error`, `get_session`, `push_block`,
+  `push_delta`, `on_block`, `active_sessions`. `complete()` and `error()` only
+  flip `status` and stamp `completed_at`; they never remove. Because sessions are
+  deliberately retained after completion so the transcript stays readable,
+  nothing was ever reclaimed, and each session holds its full `blocks` content.
+  Measured before the fix: 100 sessions created, pushed to, and completed left
+  `len(_sessions) == 100`, `len(_subscribers) == 100` and 977 KB of block content
+  pinned, growing monotonically, while `active_sessions` reported `0` -- the
+  manager's own health metric said nothing was active while a megabyte was held.
+  After the fix the same churn loop stays flat at 0 sessions, 0 subscribers and
+  0 KB. `delete_session()` clears both `_sessions` and `_subscribers`, is a no-op
+  on an unknown id, and returns `None` to match the TypeScript `void` signature
+  rather than a more useful bool, since the justification for the change is
+  parity. `complete()` deliberately still does not evict, so reading a finished
+  transcript keeps working. This was one of two public-API divergences found by
+  diffing the two classes method-for-method; the other, TypeScript's
+  `setGateway()` WebSocket transport hook, is not ported and is now named as a
+  known exception in the Python module docstring instead of being papered over by
+  a blanket "mirrors the TypeScript API" claim.
+- Corrected `fable5/reports/code-review.md`, whose top-ranked finding was
+  fabricated. The report's #1 top priority -- HIGH severity, described as
+  "verified directly in source" -- claimed Python's `AgentChain`/`AgentGraph`
+  enforce a `_RESERVED_RUNTIME_FIELDS` constant that TypeScript lacks, and
+  recommended adding matching machinery to TypeScript. That symbol has never
+  existed: `git log -S'_RESERVED_RUNTIME_FIELDS' --all` returns exactly one
+  commit, the one that added the report itself. The finding is also inverted --
+  `_trusted_context` and `_transport_event_id` appear zero times in all four
+  files it compares, so the runtimes already agree, and implementing the
+  recommendation would have manufactured the very parity gap it claimed to
+  close. Four further findings cite symbols with zero occurrences and zero
+  commits (`MemoryRetrievalSelector`, `is_healthy`, `list_items`,
+  `_memory_retrieval_selector`, `_compat_lock`, `_execute_request`,
+  `_context_snapshot`), two of them at line numbers already out of bounds when
+  written (`basic_agent.py` was 632 lines; the report cites 784-789 and
+  830-835). All original wording is preserved and annotated inline so the record
+  of what was claimed stays auditable. Two neighbouring claims were graded
+  separately and survive: the `chain.py` `daemon=True` thread leak (confirmed,
+  fixed in #403) and `streaming.py` `_sessions` never being evicted (plausible
+  when written, since confirmed and fixed by the `delete_session` entry above).
+- Python's `AgentGraph` accepted a `node_timeout` and then ignored it. The
+  constructor stored `self._node_timeout` and nothing ever read it again -- that
+  assignment was the only line in the whole file matching "timeout" -- so a node
+  that hung, hung the entire graph forever. TypeScript has always enforced its
+  `nodeTimeout`, and both `CLAUDE.md` and the Obsidian vault document the option
+  as part of `GraphOptions`, so the bound was promised in three places and
+  applied in one. Measured before the fix: a graph with a 100ms `node_timeout`
+  running a 3s node returned after 3.03s and reported the node as `success` --
+  the caller was told the work finished inside a budget it had blown by 30x.
+  It now fails that node at 100ms with `Node timeout after 100ms`, matching the
+  TypeScript message exactly, and dependents skip through the normal
+  failure path. The timeout is still opt-in: unset means unbounded, as before.
+
+- Step and node timeouts no longer outlive the work they bound. Both runtimes
+  raced a step against a timer and then leaked the loser. In Python,
+  `AgentChain` started its timeout worker with `threading.Thread(target=run)`
+  and no daemon flag, so when a step timed out the abandoned worker kept the
+  interpreter alive until the step we gave up on finally returned: a 100ms
+  timeout on a 5s step released `run()` in 0.20s but the process still took
+  5.14s to exit, so the timeout bought the caller nothing. In TypeScript,
+  `AgentChain` and `AgentGraph` raced against a `setTimeout` whose handle was
+  never captured, so it was never cleared; when the step won the race the timer
+  stayed pending and held the event loop open for the full window. A graph
+  configured with a five-minute `nodeTimeout` kept Node alive for five minutes
+  after a completely successful run. The Python worker is now a daemon and the
+  TypeScript timers are cleared in a `finally`, so both paths release the
+  process as soon as the work is done.
+
+- The step-timeout path had no test in either runtime, which is why both leaks
+  survived. It now has one, including a check that the timer is actually armed
+  before asserting it is gone -- without that, "no pending timers at the end"
+  passes just as well when the timeout was never set up at all.
+
+- Four more agents advertised a `query` parameter that no implementation reads,
+  the same defect fixed for `DesktopControl` in #401. A sweep of both runtimes
+  found every case, and the severity was not uniform. `DemoRecorder` (both
+  runtimes) defaults `action` to `record_rar`, so prose fell through and
+  recorded a screen capture of the RAR walkthrough, wrote the video to disk,
+  and returned success for a demo nobody asked for. `HNPipeline` declares
+  `required: []`, so prose returned the default-keyword stories as a success.
+  `DocScanner` and `NotesIntake` declare `required: ['path']` and so failed
+  safe with "path is required" -- a misleading schema rather than a false
+  success. All five advertised parameters are removed, and `DemoRecorder` now
+  refuses a prose-only call rather than recording the wrong demo, while a typed
+  action carrying stray prose still runs unchanged.
+
+- Agents can no longer advertise a parameter nothing reads. `capability-reachability`
+  already stopped an agent declaring a capability it cannot reach; the same check
+  now exists one level down for parameters, across both runtimes -- 34 TypeScript
+  agents and 21 Python agents, 284 advertised parameters. The check is
+  deliberately permissive, treating any mention of the name outside the metadata
+  block as a use, so it cannot redden CI over a spelling it does not recognise.
+  It carries anti-vacuity floors because an extractor returning nothing would
+  satisfy every "no dead parameters" assertion perfectly: the first draft of the
+  sweep did exactly that for Python, silently reporting a clean runtime that had
+  a dead parameter sitting in it.
+
+- `DesktopControl` no longer advertises a `query` parameter that it silently
+  threw away. The schema offered `query: 'Natural-language fallback.'` --
+  copied from `ShowAndTell`, where every `query` really does land in a free-text
+  field -- but `perform` forwards a fixed key allowlist that never contained it.
+  A model that took the documented fallback at its word had the instruction
+  stripped, `action` defaulted to `snapshot`, and the reply came back
+  `status: "success"`: a request reported as performed that never ran. Wiring it
+  up was not the fix either, because the only fields it could plausibly feed are
+  `value`, which reaches `setControlValue`, and `view`, which reaches the
+  navigation allowlist. The dead parameter is gone, a prose-only call is now
+  refused with an error naming the typed actions instead of being answered with
+  a substituted snapshot, and a typed action that happens to carry stray prose
+  still runs unchanged. A new contract test asserts every advertised parameter
+  other than `action` actually reaches the command queue, so schema and
+  implementation cannot drift apart again in either direction.
+
+- The debug view's RPC console can no longer be read or driven by desktop
+  automation. `debug` is in the enforced navigable view list, and the console
+  invokes whatever gateway method is typed into it, so an agent could set the
+  method to `config.get` -- which returns the entire config file and, unlike
+  `config.set`/`config.apply`, requires no auth -- click Call, and read the
+  result out of the next snapshot. That bypassed the config view's own
+  redaction entirely. The console card is now marked `data-desktop-private`,
+  which both hides its output and drops its controls from the snapshot so no
+  ref can reach them, and each control additionally carries
+  `data-desktop-sensitive` as defence in depth. The status, models and
+  heartbeat cards render fixed, known-shape payloads and stay readable.
+
+- The config view no longer prints config values into a model-visible desktop
+  snapshot. `config` is a view `DesktopControlAgent` is told it can navigate to,
+  and the view already redacted values twice over -- raw mode keeps the file in
+  a `<textarea>` and scalars go in an `<input>`, both excluded from snapshots,
+  with inputs reported only as empty/set -- but nested values fell back to a
+  `<pre>` JSON dump that printed them verbatim. A channel with an array field
+  (`allowFrom` is in the schema) fails the "all sub-values are flat" check, so a
+  configured Telegram or Discord channel rendered its whole object, `botToken`
+  included, straight into the snapshot text. The dumps now carry
+  `data-desktop-private`, so the operator still sees their config and the model
+  does not.
+
+- Show-and-Tell's privacy boundary is now regression-tested against the real
+  component instead of a hand-written fixture. A single `data-desktop-private`
+  wrapper is the only thing keeping recordings, narration transcripts and their
+  controls out of a model-visible desktop snapshot, and the panel promises the
+  user "frames never go to Copilot", but every test asserting that built its own
+  markup, so narrowing or moving that div would have broken the promise
+  silently.
+- The `data-desktop-sensitive` markers in Show-and-Tell were on the wrong
+  controls: `model-download` sat on "Start recording" and `microphone` on the
+  note button, while "Download Whisper (~252 MB)" and "Start narration" -- which
+  performs the download *and* opens the microphone -- carried none. Not
+  reachable today, because the whole surface is `data-desktop-private`, so this
+  is defence in depth for if that wrapper ever narrows.
+
 ### Added
 
+- `python/tests/test_report_citations.py`, a citation gate that fails CI when a
+  report's `Evidence:` bullet cites a code symbol absent from the source tree.
+  It checks symbol existence rather than line numbers, because code moves and a
+  test that fails on unrelated refactors gets disabled -- the point is to catch
+  invented symbols, not drifted ones. `Fix:` bullets are excluded, since they
+  propose things that should not exist yet. The existence search deliberately
+  excludes `*.md`: without that exclusion a report quoting its own invented
+  symbol proves the symbol exists, which mutation testing confirms blinds the
+  gate completely. Retracted claims stay exempt by keeping their original text,
+  and the retraction count is pinned so one cannot be deleted silently.
 - Parity vector `history-carried-to-model`, the only one that reaches the model
   carrying a valid `conversation_history`. Every other vector arrived with an
   empty transcript -- the one vector that carries history is rejected 400
@@ -77,6 +414,58 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   capability its syntax tree can reach, per the RAPP agent contract.
 
 ### Fixed
+
+- Two consent dialogs could be switched off by an environment variable that
+  nothing needed switched off. `OPENRAPPTER_DESKTOP_SMOKE=1` skipped the
+  approval prompts for the Whisper model download and the local VibeVoice
+  install, but the desktop smoke script only ever asks those two services for
+  their status -- it never downloads or enables. The release workflow sets that
+  variable on the packaged, signed binary, so the waiver shipped. Both prompts
+  are now unconditional. The agent-install prompt still honours the flag
+  because the smoke run genuinely installs agents, and it is now the only one
+  that does.
+
+- Nothing defended the line between an agent driving the desktop UI and an
+  agent asking to install another agent. `BasicAgent.run` pipes every agent's
+  result through `dispatchAgentUiCommands`, so the `ui_commands` channel is
+  open to any agent by design; the allowlist in `desktop-control/result.ts` is
+  what keeps `install_agent` off that channel. Adding `install_agent` to the
+  allowlist left all 5350 TypeScript tests green. A native approval dialog
+  still stands behind it, so this is defence in depth rather than the only
+  gate — but it is the gate that stops an agent from raising an install prompt
+  the user never asked for, and that dialog is skipped when
+  `OPENRAPPTER_DESKTOP_SMOKE=1`. The boundary is now asserted behaviourally:
+  a withheld action is refused, never reaches the queue, and does not stop the
+  permitted commands beside it. A third test forces any newly added desktop
+  action to be classified as agent-reachable or withheld.
+
+- TypeScript agents could not be checked for `credential-access` or
+  `dynamic-code` at all. `conformance.py` knows five capabilities and hands
+  TypeScript coverage to `capability-reachability.test.ts`, saying so in R4's
+  own success message — but that file's evidence table held only three, so two
+  capabilities were undetectable in either direction. `PythonAgent.ts` was
+  wrong both ways at once: it reads `process.env.OPENRAPPTER_PYTHON` and
+  declared no `credential-access` (Python's table has always counted any
+  environment read — `pokemon_agent.py` declares it for a ROM path), and its
+  correct `dynamic-code` declaration could not be corroborated because the
+  runner it spawns loads an arbitrary `.py` file by path. The table now carries
+  all five, `PythonAgent.ts` declares what it reads, and a new test asserts the
+  two runtimes can detect the same capabilities so the mirror cannot drift
+  again. Over-declaration is deliberately *not* reported for `dynamic-code`:
+  evidence proves reach, absence of evidence does not prove its opposite, and a
+  false alarm there would push someone to delete a true declaration.
+
+- The gate read JavaScript manifests without knowing what a string was. It
+  counted braces to find the manifest block and then matched `key: value` per
+  line, so a `}` inside a description ended the manifest early and dropped
+  every field after it, a `{` inside a description or a comment meant the block
+  never closed and the manifest vanished entirely, a value stopped at the first
+  apostrophe, `'a ' + 'b'` kept only `'a '`, `\u2014` was never decoded, and a
+  nested object hoisted its keys — so a nested `capabilities` overwrote the
+  declared one. Measured against real JavaScript across the 35 shipped JS/TS
+  agents, **6 were already being misread**. The block scan and the value reader
+  now skip strings and comments, decode escapes, join concatenations, and parse
+  nested objects in place; all 35 now match the language exactly.
 
 - `conformance.py`'s capability table carried an entry nothing read. The
   `credential-access` capability listed `"attrs": {"environ"}`, but the syntax

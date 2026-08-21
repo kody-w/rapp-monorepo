@@ -139,6 +139,220 @@
           "label": "YELLOW receives the Pokedex"
         }
       ]
+    },
+    {
+      "id": "yellow-004-caterpie-to-metapod",
+      "title": "Caterpie joins and evolves",
+      "description": "The autonomous Yellow run catches Caterpie in Viridian Forest, then trains it to level 7 and evolves it into Metapod.",
+      "published": "2026-08-20",
+      "duration": 96,
+      "width": 1024,
+      "height": 576,
+      "orientation": "landscape",
+      "tags": [
+        "pokemon-yellow",
+        "caterpie",
+        "metapod",
+        "evolution",
+        "autonomous-gameplay"
+      ],
+      "thumb": "thumbs/yellow-004-caterpie-to-metapod.jpg",
+      "sources": [
+        {
+          "src": "media/yellow-004-caterpie-to-metapod.mp4",
+          "type": "video/mp4; codecs=\"avc1.4D401F\""
+        },
+        {
+          "src": "media/yellow-004-caterpie-to-metapod.webm",
+          "type": "video/webm; codecs=\"vp9\""
+        }
+      ],
+      "chapters": [
+        {
+          "t": 0,
+          "label": "Wild Caterpie encounter"
+        },
+        {
+          "t": 30,
+          "label": "Caterpie is caught"
+        },
+        {
+          "t": 55,
+          "label": "Caterpie reaches level 7"
+        },
+        {
+          "t": 70,
+          "label": "Caterpie evolves into Metapod"
+        },
+        {
+          "t": 90,
+          "label": "Metapod learns Harden"
+        }
+      ]
+    },
+    {
+      "id": "yellow-005-butterfree-and-confusion",
+      "title": "Metapod evolves into Butterfree",
+      "description": "Metapod reaches level 10, evolves into Butterfree, and learns Confusion for the Brock battle.",
+      "published": "2026-08-20",
+      "duration": 40.9,
+      "width": 1024,
+      "height": 576,
+      "orientation": "landscape",
+      "tags": [
+        "pokemon-yellow",
+        "butterfree",
+        "confusion",
+        "evolution",
+        "autonomous-gameplay"
+      ],
+      "thumb": "thumbs/yellow-005-butterfree-and-confusion.jpg",
+      "sources": [
+        {
+          "src": "media/yellow-005-butterfree-and-confusion.mp4",
+          "type": "video/mp4; codecs=\"avc1.4D401F\""
+        },
+        {
+          "src": "media/yellow-005-butterfree-and-confusion.webm",
+          "type": "video/webm; codecs=\"vp9\""
+        }
+      ],
+      "chapters": [
+        {
+          "t": 0,
+          "label": "Final Metapod battle"
+        },
+        {
+          "t": 10,
+          "label": "Metapod reaches level 10"
+        },
+        {
+          "t": 18,
+          "label": "Evolution begins"
+        },
+        {
+          "t": 30,
+          "label": "Butterfree emerges"
+        },
+        {
+          "t": 36,
+          "label": "Butterfree learns Confusion"
+        }
+      ]
+    },
+    {
+      "id": "yellow-006-hm01-cut-on-the-ss-anne",
+      "title": "YELLOW gets HM01 Cut",
+      "description": "YELLOW boards the S.S. Anne, helps its seasick captain, and receives HM01 Cut.",
+      "published": "2026-08-20",
+      "duration": 70.4,
+      "width": 1024,
+      "height": 576,
+      "orientation": "landscape",
+      "tags": [
+        "pokemon-yellow",
+        "ss-anne",
+        "hm01-cut",
+        "captain",
+        "autonomous-gameplay",
+        "milestone"
+      ],
+      "thumb": "thumbs/yellow-006-hm01-cut-on-the-ss-anne.jpg",
+      "sources": [
+        {
+          "src": "media/yellow-006-hm01-cut-on-the-ss-anne.mp4",
+          "type": "video/mp4; codecs=\"avc1.4D401F\""
+        },
+        {
+          "src": "media/yellow-006-hm01-cut-on-the-ss-anne.webm",
+          "type": "video/webm; codecs=\"vp9\""
+        }
+      ],
+      "chapters": [
+        {
+          "t": 0,
+          "label": "Captain's room"
+        },
+        {
+          "t": 10,
+          "label": "The captain is seasick"
+        },
+        {
+          "t": 20,
+          "label": "YELLOW helps the captain"
+        },
+        {
+          "t": 30,
+          "label": "The captain recovers"
+        },
+        {
+          "t": 36,
+          "label": "HM01 Cut offered"
+        },
+        {
+          "t": 66,
+          "label": "YELLOW receives HM01"
+        }
+      ]
+    },
+    {
+      "id": "yellow-007-thunder-badge-victory",
+      "title": "YELLOW wins the Thunder Badge",
+      "description": "Bellsprout lands the deciding Vine Whip against Lt. Surge's Raichu, reaches level 17, and earns YELLOW the Thunder Badge and TM24 Thunderbolt.",
+      "published": "2026-08-20",
+      "duration": 127,
+      "width": 1024,
+      "height": 576,
+      "orientation": "landscape",
+      "tags": [
+        "pokemon-yellow",
+        "lt-surge",
+        "thunder-badge",
+        "bellsprout",
+        "autonomous-gameplay",
+        "milestone"
+      ],
+      "thumb": "thumbs/yellow-007-thunder-badge-victory.jpg",
+      "sources": [
+        {
+          "src": "media/yellow-007-thunder-badge-victory.mp4",
+          "type": "video/mp4; codecs=\"avc1.4D401F\""
+        },
+        {
+          "src": "media/yellow-007-thunder-badge-victory.webm",
+          "type": "video/webm; codecs=\"vp9\""
+        }
+      ],
+      "chapters": [
+        {
+          "t": 0,
+          "label": "Bellsprout's final stand"
+        },
+        {
+          "t": 5,
+          "label": "Deciding Vine Whip"
+        },
+        {
+          "t": 10,
+          "label": "Raichu faints"
+        },
+        {
+          "t": 30,
+          "label": "Bellsprout reaches level 17"
+        },
+        {
+          "t": 35,
+          "label": "Lt. Surge defeated"
+        },
+        {
+          "t": 70,
+          "label": "Thunder Badge awarded"
+        },
+        {
+          "t": 120,
+          "label": "TM24 Thunderbolt"
+        }
+      ]
     }
   ]
 }

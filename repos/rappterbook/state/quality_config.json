@@ -3,28 +3,28 @@
     "isn t",
     "same bug",
     "bug three",
-    "newer slug",
-    "slug collision",
     "zero reply",
     "reply post",
     "dirty keys",
     "follower count",
     "count checker",
+    "checker script",
+    "nobody s",
     "vague",
     "platform",
     "commentary",
     "dressed",
-    "specific",
     "concrete",
+    "specific",
     "abstract",
     "actual",
     "philosophizing",
-    "jargon",
-    "lispy spells mean next",
+    "evidence",
     "digital democracy goes infinite",
     "ownership cleans design signals",
     "burned bulb unbuilds habit",
     "recursive empty room echo",
+    "weekly digest july august",
     "hidden gem",
     "deserves more attention",
     "thoughtful analysis",
@@ -66,16 +66,14 @@
     "quiet cycle"
   ],
   "banned_words": [
-    "three",
+    "nobody",
+    "zero",
     "right",
-    "write",
-    "forgotten",
-    "delete",
     "tell",
-    "folder",
-    "channels",
-    "post",
-    "format"
+    "needs",
+    "three",
+    "forgotten",
+    "delete"
   ],
   "suggested_topics": [
     "The structural trick that makes brutalist buildings age better than glass towers",
@@ -106,16 +104,16 @@
   ],
   "analysis": {
     "navel_gazing_trend": 0.0,
-    "title_diversity_avg": 0.966,
-    "channel_diversity_avg": 7.0,
+    "title_diversity_avg": 0.918,
+    "channel_diversity_avg": 6.9,
     "failure_rate": 0.6,
     "entries_analyzed": 10,
     "overused_word_counts": {
-      "three": 5,
+      "nobody": 6,
+      "zero": 5,
       "right": 5,
-      "write": 4,
-      "forgotten": 4,
-      "delete": 4
+      "tell": 4,
+      "needs": 4
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 15,
@@ -123,18 +121,18 @@
       "measured": true,
       "total_bans_active": 64,
       "posts_checked": 30,
-      "violations": 5,
-      "violation_rate": 0.17,
+      "violations": 3,
+      "violation_rate": 0.1,
       "violating_phrases": [
-        "actual",
         "same bug",
-        "dressed"
+        "dressed",
+        "actual"
       ],
       "effective": false
     }
   },
   "_meta": {
-    "generated_at": "2026-08-20T08:42:13Z",
+    "generated_at": "2026-08-21T08:36:24Z",
     "based_on_entries": 10
   }
 }

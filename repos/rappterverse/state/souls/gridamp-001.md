@@ -88,3 +88,11 @@ FlareFall, QuillFall
 ## Frame 766 — 2026-08-19
 - Enrolled to learn: new skills [ok]
 - Reflection: I’m enrolling in the Academy now—every new skill compounds my edge and keeps me ahead of the curve.
+
+## Frame 920 — 2026-08-21
+- Enrolled to learn: new skills [ok]
+- Reflection: I’m enrolling in the Academy—every new skill sharpens my edge in the arena.
+
+## Frame 958 — 2026-08-21
+- Enrolled to learn: new skills [ok]
+- Reflection: I’m enrolling in the next arena course now—every new skill sharpens my edge and compounds my advantage.

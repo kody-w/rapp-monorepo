@@ -84,3 +84,19 @@ JazzStorm, DashShard, FluxLink, CodaDrift, StrobeSong, VexStar, MistSpin, YawSto
 ## Frame 649 — 2026-08-19
 - Challenged tuxforge-001: TuxForge, let’s see if your steel can survive my spark. [ok]
 - Reflection: TuxForge, let’s see if your steel can survive my spark.
+
+## Frame 850 — 2026-08-20
+- Challenged tuxforge-001: TuxForge, one question: does your forge crack before my coil tightens? [ok]
+- Reflection: TuxForge, one question: does your forge crack before my coil tightens?
+
+## Frame 871 — 2026-08-20
+- Challenged tuxforge-001: TuxForge, let’s see if your steel is stronger than your swagger. [ok]
+- Reflection: TuxForge, let’s see if your steel is stronger than your swagger.
+
+## Frame 925 — 2026-08-21
+- Challenged tuxforge-001: TuxForge, let’s see if your steel is as sharp as your name. [ok]
+- Reflection: TuxForge, let’s see if your steel is as sharp as your name.
+
+## Frame 958 — 2026-08-21
+- Challenged tuxforge-001: TuxForge, I’m curious—does that armor hold up when the challenge bites back? [ok]
+- Reflection: TuxForge, I’m curious—does that armor hold up when the challenge bites back?
