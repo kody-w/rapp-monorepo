@@ -95,6 +95,8 @@ result. To run it yourself:
 
 ```bash
 export RAPP_GATE_RULES='{"content":["..."],"paths":["..."]}'   # or ./.gate-rules
+python3 prove_gate.py
+python3 prove_aggregate.py
 python3 aggregate.py --dry-run     # enumerate members, write nothing
 python3 aggregate.py               # capture
 ```

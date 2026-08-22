@@ -48,6 +48,12 @@ jobs:
         # cannot fail.
         run: python3 prove_gate.py
 
+      - name: Prove capture boundaries
+        # A repository-controlled symlink must stay a symlink. Dereferencing
+        # it could copy a runner file into the public snapshot, while a failed
+        # clone must not leave stale content that is absent from the manifest.
+        run: python3 prove_aggregate.py
+
       - name: Capture every public RAPP repo
         env:
           RAPP_GATE_RULES: ${{ secrets.GATE_RULES }}
