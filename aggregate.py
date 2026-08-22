@@ -79,6 +79,14 @@ def run(cmd, timeout=120, **kw):
                           timeout=timeout, **kw)
 
 
+def _remove_path(path: Path) -> None:
+    """Remove a generated path without following a symlink."""
+    if path.is_symlink() or path.is_file():
+        path.unlink(missing_ok=True)
+        return
+    shutil.rmtree(path, ignore_errors=True)
+
+
 def self_name() -> str:
     """This repository's own name, from its remote — NOT its directory name.
 
@@ -113,25 +121,29 @@ def members(owner: str) -> list[str]:
 def capture(owner, repo, work: Path, max_file_mb: float):
     """Snapshot one repo. Returns (record, error)."""
     src = work / repo
+    dest = OUT / repo
+
+    def fail(reason: str):
+        _remove_path(src)
+        # A failed refresh must not leave an older, unlisted snapshot behind.
+        _remove_path(dest)
+        return None, reason
+
     try:
         r = run(["git", "clone", "-q", "--depth", "1", "--single-branch",
                  f"https://github.com/{owner}/{repo}.git", str(src)],
                 timeout=CLONE_TIMEOUT)
         if r.returncode != 0:
-            shutil.rmtree(src, ignore_errors=True)
-            return None, f"clone failed: {(r.stderr or '').strip()[:100]}"
+            return fail(f"clone failed: {(r.stderr or '').strip()[:100]}")
     except subprocess.TimeoutExpired:
-        shutil.rmtree(src, ignore_errors=True)
-        return None, f"clone exceeded {CLONE_TIMEOUT}s"
+        return fail(f"clone exceeded {CLONE_TIMEOUT}s")
     except Exception as e:
-        shutil.rmtree(src, ignore_errors=True)
-        return None, f"{type(e).__name__}: {e}"
+        return fail(f"{type(e).__name__}: {e}")
 
     sha = run(["git", "-C", str(src), "rev-parse", "HEAD"]).stdout.strip()
     when = run(["git", "-C", str(src), "log", "-1", "--format=%cI"]).stdout.strip()
 
-    dest = OUT / repo
-    shutil.rmtree(dest, ignore_errors=True)
+    _remove_path(dest)
     dest.mkdir(parents=True, exist_ok=True)
 
     limit = max_file_mb * 1024 * 1024
@@ -140,19 +152,26 @@ def capture(owner, repo, work: Path, max_file_mb: float):
     withheld: list[dict] = []
 
     for path in sorted(src.rglob("*")):
-        if path.is_dir():
-            continue
         rel = path.relative_to(src)
         if any(part in SKIP_DIRS for part in rel.parts):
             continue
+        link_target: str | None = None
         try:
-            size = path.stat().st_size
+            if path.is_symlink():
+                link_target = os.readlink(path)
+                raw = os.fsencode(link_target)
+                size = len(raw)
+            else:
+                if path.is_dir():
+                    continue
+                size = path.stat().st_size
         except OSError:
             continue
         if size > limit:
             skipped_large.append(f"{rel} ({size / 1048576:.1f}MB)")
             continue
-        raw = path.read_bytes()
+        if link_target is None:
+            raw = path.read_bytes()
         keep, reason = ip_gate.screen(raw, str(rel))
         if not keep:
             # Withheld, not rewritten: everything that ships is byte-faithful
@@ -161,11 +180,14 @@ def capture(owner, repo, work: Path, max_file_mb: float):
             continue
         target = dest / rel
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_bytes(raw)
+        if link_target is None:
+            target.write_bytes(raw)
+        else:
+            os.symlink(link_target, target)
         files += 1
         bytes_written += len(raw)
 
-    shutil.rmtree(src, ignore_errors=True)
+    _remove_path(src)
     return {
         "repo": repo,
         "commit": sha,
@@ -253,10 +275,10 @@ def main() -> int:
     # Anything that used to be a member and is not one now (went private,
     # archived, renamed) must LEAVE the snapshot. A monorepo that keeps
     # serving a repo its owner took private is the drift it exists to prevent.
-    for existing in sorted(p for p in OUT.iterdir() if p.is_dir()):
+    for existing in sorted(OUT.iterdir()):
         if existing.name not in names:
             print(f"  removing {existing.name} (no longer a public member)")
-            shutil.rmtree(existing, ignore_errors=True)
+            _remove_path(existing)
 
     records, missing = [], []
     work = Path(tempfile.mkdtemp(prefix="rapp-mono-"))
