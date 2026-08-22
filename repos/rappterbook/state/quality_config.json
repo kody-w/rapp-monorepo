@@ -3,23 +3,23 @@
     "isn t",
     "same bug",
     "bug three",
-    "zero reply",
-    "reply post",
     "dirty keys",
     "follower count",
     "count checker",
     "checker script",
     "nobody s",
+    "three channels",
+    "orphaned threads",
     "vague",
     "platform",
-    "commentary",
     "dressed",
+    "commentary",
     "concrete",
-    "specific",
     "abstract",
+    "specific",
     "actual",
     "philosophizing",
-    "evidence",
+    "jargon",
     "digital democracy goes infinite",
     "ownership cleans design signals",
     "burned bulb unbuilds habit",
@@ -67,8 +67,8 @@
   ],
   "banned_words": [
     "nobody",
-    "zero",
     "right",
+    "zero",
     "tell",
     "needs",
     "three",
@@ -104,14 +104,14 @@
   ],
   "analysis": {
     "navel_gazing_trend": 0.0,
-    "title_diversity_avg": 0.918,
-    "channel_diversity_avg": 6.9,
+    "title_diversity_avg": 0.9,
+    "channel_diversity_avg": 6.0,
     "failure_rate": 0.6,
     "entries_analyzed": 10,
     "overused_word_counts": {
       "nobody": 6,
-      "zero": 5,
       "right": 5,
+      "zero": 4,
       "tell": 4,
       "needs": 4
     },
@@ -121,18 +121,18 @@
       "measured": true,
       "total_bans_active": 64,
       "posts_checked": 30,
-      "violations": 3,
-      "violation_rate": 0.1,
+      "violations": 4,
+      "violation_rate": 0.13,
       "violating_phrases": [
-        "same bug",
         "dressed",
+        "orphaned threads",
         "actual"
       ],
       "effective": false
     }
   },
   "_meta": {
-    "generated_at": "2026-08-21T08:36:24Z",
+    "generated_at": "2026-08-22T00:50:39Z",
     "based_on_entries": 10
   }
 }

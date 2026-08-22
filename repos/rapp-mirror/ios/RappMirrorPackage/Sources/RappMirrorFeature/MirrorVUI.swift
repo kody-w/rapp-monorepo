@@ -41,6 +41,10 @@ public struct MirrorVUI: View {
     }
 
     @State private var voice = Voice()
+    /// The companion this phone is carrying. Every turn below adds a tile to
+    /// it, so the thing you talk to is also the thing that remembers.
+    @State private var companion = Companion()
+    @State private var showTiles = false
     private let client: BrainstemClient
     private let sessionId = "ios-\(UUID().uuidString.prefix(8))"
 
@@ -69,6 +73,8 @@ public struct MirrorVUI: View {
         .task {
             await voice.requestPermission()
             await refreshEngine()
+            await companion.load()
+            await companion.record(.woke, ["engine": .string(engine?.ok == true ? "reachable" : "unreachable")])
         }
         .onOpenURL(perform: openCard)
         .sheet(item: $cardsSheet) { sheet in AgentCardsSheet(arrived: sheet.card) }
@@ -102,9 +108,23 @@ public struct MirrorVUI: View {
             }
             .accessibilityIdentifier("open-cards")
             .accessibilityLabel("Agent cards")
+
+            Button { showTiles = true } label: {
+                Image(systemName: "square.grid.2x2.fill")
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundStyle(VUI.ink.opacity(0.7))
+                    .frame(width: 40, height: 40)
+                    .background(VUI.card, in: RoundedRectangle(cornerRadius: 13, style: .continuous))
+            }
+            .accessibilityIdentifier("open-companion")
+            .accessibilityLabel("Companion tiles")
         }
         .padding(.horizontal, 20)
         .padding(.top, 6)
+        // Presented from the header rather than the root: two sheets on one
+        // view fight over the same presentation slot, and the loser silently
+        // never appears.
+        .sheet(isPresented: $showTiles) { CompanionTilesView(companion: companion) }
     }
 
     private var engineDot: some View {
@@ -236,16 +256,23 @@ public struct MirrorVUI: View {
         lastSaid = text
         transcript.append(ChatTurn(role: "user", content: text))
 
+        await companion.recordUtterance(.heard, text: text)
+
         let result = await client.chat(text, history: transcript, sessionId: sessionId)
         guard result.ok, let raw = result.response else {
             // Honest failure, in the interface itself — never a silent stall.
-            notice = result.error ?? "the brainstem did not answer"
+            let why = result.error ?? "the brainstem did not answer"
+            // The failure is a tile too. A life with the stalls deleted is a
+            // portrait, and the companion's whole job is to be a record.
+            await companion.recordUtterance(.stalled, text: why)
+            notice = why
             phase = .idle
             return
         }
 
         transcript.append(ChatTurn(role: "assistant", content: raw))
         let envelope = EnvelopeParser.parse(raw)
+        await companion.recordUtterance(.spoke, text: Plain.text(envelope.text), extra: ["model": .string(result.model ?? "unknown")])
         // The brainstem answers in markdown; a voice interface must never show
         // `###` in a glanced-at caption or read `**` aloud.
         lastSaid = Plain.text(envelope.text)
@@ -285,6 +312,7 @@ public struct MirrorVUI: View {
         let decoded = ShareURL.decodeShareUrl(url.absoluteString)
         if decoded.ok, let spec = decoded.spec {
             cardsSheet = .arrived(GalleryCard(spec: spec, shareURL: url.absoluteString))
+            Task { await companion.record(.met, ["card": .string(spec.title), "class": .string(spec.className)]) }
             notice = nil
         } else {
             let why = decoded.error ?? "that card could not be read"

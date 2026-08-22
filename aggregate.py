@@ -37,6 +37,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import stat
 import shutil
 import subprocess
 import sys
@@ -46,6 +47,7 @@ import re
 from pathlib import Path
 
 import ip_gate
+from verify_snapshot import TreeDigest
 
 HERE = Path(__file__).resolve().parent
 OUT = HERE / "repos"
@@ -140,8 +142,20 @@ def capture(owner, repo, work: Path, max_file_mb: float):
     except Exception as e:
         return fail(f"{type(e).__name__}: {e}")
 
-    sha = run(["git", "-C", str(src), "rev-parse", "HEAD"]).stdout.strip()
-    when = run(["git", "-C", str(src), "log", "-1", "--format=%cI"]).stdout.strip()
+    head = run([
+        "git", "-C", str(src), "rev-parse", "--verify", "HEAD^{commit}",
+    ])
+    sha = (head.stdout or "").strip()
+    if head.returncode != 0 or not re.fullmatch(
+        r"(?:[0-9a-f]{40}|[0-9a-f]{64})", sha
+    ):
+        return fail("repository has no resolvable HEAD commit")
+    committed = run([
+        "git", "-C", str(src), "log", "-1", "--format=%cI",
+    ])
+    when = (committed.stdout or "").strip()
+    if committed.returncode != 0 or not when:
+        return fail("repository HEAD has no commit timestamp")
 
     _remove_path(dest)
     dest.mkdir(parents=True, exist_ok=True)
@@ -150,6 +164,7 @@ def capture(owner, repo, work: Path, max_file_mb: float):
     files = bytes_written = 0
     skipped_large: list[str] = []
     withheld: list[dict] = []
+    tree_digest = TreeDigest()
 
     for path in sorted(src.rglob("*")):
         rel = path.relative_to(src)
@@ -161,10 +176,19 @@ def capture(owner, repo, work: Path, max_file_mb: float):
                 link_target = os.readlink(path)
                 raw = os.fsencode(link_target)
                 size = len(raw)
+                git_mode = "120000"
             else:
-                if path.is_dir():
+                source_mode = path.lstat().st_mode
+                if stat.S_ISDIR(source_mode):
                     continue
-                size = path.stat().st_size
+                if not stat.S_ISREG(source_mode):
+                    continue
+                size = path.lstat().st_size
+                git_mode = (
+                    "100755"
+                    if source_mode & (stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+                    else "100644"
+                )
         except OSError:
             continue
         if size > limit:
@@ -182,8 +206,10 @@ def capture(owner, repo, work: Path, max_file_mb: float):
         target.parent.mkdir(parents=True, exist_ok=True)
         if link_target is None:
             target.write_bytes(raw)
+            target.chmod(0o755 if git_mode == "100755" else 0o644)
         else:
             os.symlink(link_target, target)
+        tree_digest.add(rel.as_posix(), git_mode, raw)
         files += 1
         bytes_written += len(raw)
 
@@ -195,6 +221,7 @@ def capture(owner, repo, work: Path, max_file_mb: float):
         "captured_at": utc_now(),
         "files": files,
         "bytes": bytes_written,
+        "tree_sha256": tree_digest.hexdigest(),
         "skipped_large": skipped_large,
         "withheld": withheld,
     }, ""
@@ -310,6 +337,9 @@ def main() -> int:
 
     total = sum(r["bytes"] for r in records) / 1048576
     print(f"\n{len(records)} captured, {len(missing)} not captured, {total:.0f}MB total")
+    if missing:
+        print("REFUSING TO PUBLISH: at least one member was not captured")
+        return 4
     return 0
 
 

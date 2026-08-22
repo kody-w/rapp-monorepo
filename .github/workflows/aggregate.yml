@@ -52,7 +52,9 @@ jobs:
         # A repository-controlled symlink must stay a symlink. Dereferencing
         # it could copy a runner file into the public snapshot, while a failed
         # clone must not leave stale content that is absent from the manifest.
-        run: python3 prove_aggregate.py
+        run: |
+          python3 prove_aggregate.py
+          python3 prove_snapshot.py
 
       - name: Capture every public RAPP repo
         env:
@@ -81,7 +83,10 @@ jobs:
         run: |
           git config user.name  "rapp-monorepo"
           git config user.email "noreply@github.com"
-          git add -A
+          # Raw-stage only publishable outputs so copied .gitignore files
+          # cannot hide upstream-tracked files. The verifier also bypasses
+          # copied clean filters while staging and proves the resulting index.
+          python3 verify_snapshot.py --stage
           if git diff --cached --quiet; then
             echo "estate unchanged since the last snapshot"
             exit 0
