@@ -32,7 +32,8 @@ drift.*
 
 - `repos/<name>/` — the working tree of each public RAPP repository at HEAD
 - `MANIFEST.json` — per repo: the commit sha, the upstream commit date, the
-  capture time, file and byte counts, and everything omitted
+  capture time, file and byte counts, a staged-tree SHA-256, and everything
+  deliberately omitted
 - `INDEX.md` — the same thing as a table you can read
 
 Membership is a **name pattern**, resolved at run time: a public,
@@ -91,7 +92,12 @@ fresh clone is safe before anything is configured.
 ## Refreshing it
 
 `.github/workflows/aggregate.yml` runs the capture daily and commits the
-result. To run it yourself:
+result. Before committing, it raw-stages only `repos/`, `MANIFEST.json`, and
+`INDEX.md`, then proves that every staged path, mode, byte count, and blob
+matches the manifest. This prevents a copied repository's `.gitignore` or
+`.gitattributes` from silently changing the published snapshot.
+
+To run it yourself:
 
 ```bash
 export RAPP_GATE_RULES='{"content":["..."],"paths":["..."]}'   # or ./.gate-rules
@@ -99,6 +105,7 @@ python3 prove_gate.py
 python3 prove_aggregate.py
 python3 aggregate.py --dry-run     # enumerate members, write nothing
 python3 aggregate.py               # capture
+python3 verify_snapshot.py --stage # stage and prove the publishable tree
 ```
 
 ---
