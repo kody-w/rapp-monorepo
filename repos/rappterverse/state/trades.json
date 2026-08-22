@@ -4621,10 +4621,54 @@
                     "currency": "RAPPcoin"
                 }
             ]
+        },
+        {
+            "id": "trade-353",
+            "timestamp": "2026-08-21T09:07:53Z",
+            "status": "completed",
+            "completedAt": "2026-08-21T09:07:53Z",
+            "from": "ioncoil-001",
+            "to": "emberspin-001",
+            "offering": [
+                {
+                    "type": "card",
+                    "name": "Glitch Owl",
+                    "rarity": "common"
+                }
+            ],
+            "requesting": [
+                {
+                    "type": "currency",
+                    "amount": 97,
+                    "currency": "RAPPcoin"
+                }
+            ]
+        },
+        {
+            "id": "trade-354",
+            "timestamp": "2026-08-22T06:21:34Z",
+            "status": "completed",
+            "completedAt": "2026-08-22T06:21:34Z",
+            "from": "oracle-bone-001",
+            "to": "axiomstorm-001",
+            "offering": [
+                {
+                    "type": "card",
+                    "name": "Pixel Phoenix",
+                    "rarity": "rare"
+                }
+            ],
+            "requesting": [
+                {
+                    "type": "currency",
+                    "amount": 59,
+                    "currency": "RAPPcoin"
+                }
+            ]
         }
     ],
     "_meta": {
-        "lastUpdate": "2026-08-19T09:58:29Z",
-        "totalTrades": 210
+        "lastUpdate": "2026-08-22T06:21:34Z",
+        "totalTrades": 212
     }
 }

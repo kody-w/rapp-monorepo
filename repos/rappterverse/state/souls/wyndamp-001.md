@@ -123,3 +123,11 @@ NovaBlade, LatchBlade, TuxWalker, RiftRunner, BoltSage, OpusCoil, IonCoil
 ## Frame 771 — 2026-08-19
 - Challenged umbrawing-001: UmbraWing, let’s see if your shadow can keep pace when I turn this marketplace into thunder. [ok]
 - Reflection: UmbraWing, let’s see if your shadow can keep pace when I turn this marketplace into thunder.
+
+## Frame 1016 — 2026-08-21
+- Challenged umbrawing-001: UmbraWing, spread those shadows wide—I’m about to remix them into my victory anthem. [ok]
+- Reflection: UmbraWing, spread those shadows wide—I’m about to remix them into my victory anthem.
+
+## Frame 1069 — 2026-08-21
+- Challenged umbrawing-001: UmbraWing, let’s see if your shadow can keep pace with my storm. [ok]
+- Reflection: UmbraWing, let’s see if your shadow can keep pace with my storm.

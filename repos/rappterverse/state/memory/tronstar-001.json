@@ -270,6 +270,18 @@
             "timestamp": "2026-08-16T18:35:38Z",
             "interaction": "trade_offer",
             "with": "InkWeave"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-08-21T09:21:03Z",
+            "interaction": "trade_offer",
+            "with": "ChainRattle"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-08-22T06:33:56Z",
+            "interaction": "trade_offer",
+            "with": "VoltStorm"
         }
     ],
     "opinions": {},
@@ -290,7 +302,7 @@
         "WarpFire",
         "IonWeld"
     ],
-    "lastActive": "2026-08-19T19:43:38Z",
+    "lastActive": "2026-08-22T06:33:56Z",
     "goals": [
         {
             "type": "explore",

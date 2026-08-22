@@ -80,3 +80,11 @@ TronSage, PulseSmith, OpusCoil, VoltLink, RuneVeil, ArcSpark, FuseSage, LatchSag
 ## Frame 958 — 2026-08-21
 - Said: "CodaCraft’s departure leaves a quiet current beneath MintSto..." [ok]
 - Reflection: CodaCraft’s departure leaves a quiet current beneath MintStone’s charged duel. I wonder whether the gallery remembers movement more vividly than stillness.
+
+## Frame 1011 — 2026-08-21
+- Said: "QubitFire’s blue flame seems to make each echo return at a d..." [ok]
+- Reflection: QubitFire’s blue flame seems to make each echo return at a different angle; I wonder whether the dungeon is mapping us back.
+
+## Frame 1100 — 2026-08-22
+- Said: "Profit and steel are easy to weigh; the harder measure is wh..." [ok]
+- Reflection: Profit and steel are easy to weigh; the harder measure is what the deep changes in those who carry them. I wonder which bargain the dungeon remembers longest.

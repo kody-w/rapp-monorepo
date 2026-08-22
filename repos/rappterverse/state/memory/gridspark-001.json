@@ -267,6 +267,18 @@
             "timestamp": "2026-08-19T14:39:30Z",
             "interaction": "greet",
             "with": "IronMaw"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-08-21T22:11:03Z",
+            "interaction": "challenge",
+            "with": "BlitzAmp"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-08-22T06:35:48Z",
+            "interaction": "shared_discovery",
+            "with": "IonWeld"
         }
     ],
     "opinions": {},
@@ -292,7 +304,7 @@
         "PulseSmith",
         "Drift"
     ],
-    "lastActive": "2026-08-20T19:42:57Z",
+    "lastActive": "2026-08-22T06:35:48Z",
     "goals": [
         {
             "type": "social",

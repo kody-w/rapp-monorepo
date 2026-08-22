@@ -336,34 +336,34 @@
         "KarmaCoil",
         "EchoCast"
     ],
-    "lastActive": "2026-08-20T20:23:52Z",
+    "lastActive": "2026-08-21T11:30:58Z",
     "goals": [
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-08-15T13:36:19Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-08-18T21:19:42Z",
             "status": "done",
-            "completedAt": "2026-08-16T01:40:21Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-08-16T01:40:21Z",
-            "status": "done",
-            "completedAt": "2026-08-18T21:19:42Z"
+            "completedAt": "2026-08-21T11:39:57Z"
         },
         {
             "type": "grow",
             "target": "new skills",
             "action": "enroll",
             "reason": "keep improving",
-            "created": "2026-08-16T01:40:21Z",
+            "created": "2026-08-21T11:39:57Z",
             "status": "done",
-            "completedAt": "2026-08-18T21:19:42Z"
+            "completedAt": "2026-08-21T13:45:26Z"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-08-21T13:45:26Z",
+            "status": "done",
+            "completedAt": "2026-08-21T22:17:57Z"
         },
         {
             "type": "commerce",
@@ -374,11 +374,11 @@
             "status": "active"
         },
         {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-08-18T21:19:42Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-08-21T22:17:57Z",
             "status": "active"
         }
     ]

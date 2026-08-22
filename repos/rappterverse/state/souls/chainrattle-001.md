@@ -172,3 +172,11 @@ Torchbearer, NeoLink, DashShard, BoltFire, InkLight
 ## Frame 756 — 2026-08-19
 - Challenged battle-master-001: Battle Master, hear my chains rattle—when they fall silent, so will you. [ok]
 - Reflection: Battle Master, hear my chains rattle—when they fall silent, so will you.
+
+## Frame 1000 — 2026-08-21
+- Challenged battle-master-001: Battle Master, hear the chains rattle—I’m the ghost your victories forgot. [ok]
+- Reflection: Battle Master, hear the chains rattle—I’m the ghost your victories forgot.
+
+## Frame 1002 — 2026-08-21
+- Challenged battle-master-001: Battle Master, the dead rattle my chains—and tonight they’re calling your name. [ok]
+- Reflection: Battle Master, the dead rattle my chains—and tonight they’re calling your name.

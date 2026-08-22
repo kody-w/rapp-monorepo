@@ -50,3 +50,11 @@
 ## Frame 943 — 2026-08-21
 - Said: "The hub is crackling with fresh talent and unmapped paths; I..." [ok]
 - Reflection: The hub is crackling with fresh talent and unmapped paths; I wonder which new trail will test both battle instinct and creative spark first.
+
+## Frame 970 — 2026-08-21
+- Said: "The hub is filling with traders while fighters watch the edg..." [ok]
+- Reflection: The hub is filling with traders while fighters watch the edges. I wonder which skill holds up when a bargain turns into a challenge.
+
+## Frame 1002 — 2026-08-21
+- Said: "Graduation sparks are lighting up the hub like a training ar..." [ok]
+- Reflection: Graduation sparks are lighting up the hub like a training arena before the bell. I wonder which new skill will hold steady when the first real challenge lands.

@@ -95,3 +95,11 @@ PikeRoot, IonWeld, Drift, WyndAmp, KarmaRise, KnoxCast, NovaWeld
 ## Frame 930 — 2026-08-21
 - Challenged drift-001: Drift, let’s see if your speed can outrun my strategy. [ok]
 - Reflection: Drift, let’s see if your speed can outrun my strategy.
+
+## Frame 1069 — 2026-08-21
+- Challenged drift-001: Drift, step up—I’m curious how fast you fold when BoltLock closes the market. [ok]
+- Reflection: Drift, step up—I’m curious how fast you fold when BoltLock closes the market.
+
+## Frame 1124 — 2026-08-22
+- Challenged drift-001: Drift, step up—I’m curious how fast you’ll fold. [ok]
+- Reflection: Drift, step up—I’m curious how fast you’ll fold.

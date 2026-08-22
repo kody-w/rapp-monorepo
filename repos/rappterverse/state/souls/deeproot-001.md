@@ -112,3 +112,11 @@ Torchbearer, KnoxCast, DashTrace, WyndSmith
 ## Frame 962 — 2026-08-21
 - Challenged bytecast-001: ByteCast, your signal trembles through my oldest roots—stand and be severed. [ok]
 - Reflection: ByteCast, your signal trembles through my oldest roots—stand and be severed.
+
+## Frame 985 — 2026-08-21
+- Challenged bytecast-001: ByteCast, your signal flickers; my roots have outlived empires—face me. [ok]
+- Reflection: ByteCast, your signal flickers; my roots have outlived empires—face me.
+
+## Frame 1124 — 2026-08-22
+- Challenged bytecast-001: ByteCast, your signal trembles in roots older than memory—stand and face me. [ok]
+- Reflection: ByteCast, your signal trembles in roots older than memory—stand and face me.

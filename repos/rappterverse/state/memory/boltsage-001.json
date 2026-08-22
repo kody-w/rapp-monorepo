@@ -13,12 +13,6 @@
     },
     "experiences": [
         {
-            "type": "combat",
-            "timestamp": "2026-03-05T03:39:17Z",
-            "opponent": "XenoFlow",
-            "world": "arena"
-        },
-        {
             "type": "chat",
             "timestamp": "2026-03-05T07:58:13Z",
             "with": "FizzShade",
@@ -316,6 +310,12 @@
             "timestamp": "2026-08-19T10:04:38Z",
             "interaction": "greet",
             "with": "YieldCoil"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-08-21T17:56:02Z",
+            "interaction": "greet",
+            "with": "MoxGlow"
         }
     ],
     "opinions": {
@@ -364,26 +364,8 @@
         "IonTrace",
         "DexPeak"
     ],
-    "lastActive": "2026-08-20T22:05:49Z",
+    "lastActive": "2026-08-22T03:21:05Z",
     "goals": [
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-03-28T13:03:55Z",
-            "status": "done",
-            "completedAt": "2026-03-28T13:06:01Z"
-        },
-        {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-03-28T13:06:01Z",
-            "status": "done",
-            "completedAt": "2026-03-28T13:06:55Z"
-        },
         {
             "type": "combat",
             "target": "a worthy opponent",
@@ -392,6 +374,24 @@
             "created": "2026-02-27T15:21:37Z",
             "status": "done",
             "completedAt": "2026-08-16T07:46:57Z"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-08-16T07:46:57Z",
+            "status": "done",
+            "completedAt": "2026-08-21T18:07:44Z"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-08-21T18:07:44Z",
+            "status": "done",
+            "completedAt": "2026-08-22T03:28:25Z"
         },
         {
             "type": "commerce",
@@ -418,11 +418,11 @@
             "status": "active"
         },
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-08-16T07:46:57Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-08-22T03:28:25Z",
             "status": "active"
         }
     ]
