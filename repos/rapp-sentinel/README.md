@@ -224,6 +224,7 @@ The worker (`evolve_worker.py`, `com.rapp.evolve-worker`, every 30 min):
 | child replies are typed | children run with `--output-format=json` and are read only from the final `assistant.message` event — never reasoning, which contains the same JSON. One unparseable reply earns exactly one format-repair process if the deadline and process cap allow (`format_repair_attempts` is 0 or 1 — anything else is a configuration error, not a clamp); it is debited as a spend, recorded, and every attempt's transcript is kept outside the disposable workspace |
 | controller-owned publish | the branch, commit, PR, PR **file scope as GitHub reports it**, squash merge, and the re-read of `origin/main` and the merge commit afterwards are all done by code |
 | dual public deployment | optional `rapp_vision` mirrors the exact gated bytes into a RAPP Vision channel after the canonical collective merge; success stays pending until both GitHub Pages experiences answer, and reconciliation retries without spending another model |
+| Azure visual studio | optional `azure_image` turns a maker-authored visual brief into a local GPT Image PNG, attaches the actual pixels to a tool-less Copilot multimodal art director, regenerates rejected images, archives the accepted file on-device, and publishes only after the score clears the configured bar |
 | honest outcomes | only a re-read merge sends a 🎨; a timeout, failure, rejection or decline is recorded as what it was |
 | one text per deployment | a verified dual deployment sends exactly one iMessage: title, one sentence, the Public Art Collective Pages experience, and the RAPP Vision watch experience — no private report or LAN URL |
 
@@ -541,3 +542,75 @@ Every visit is a `principal.visited` frame on its own chain, a row in `state/obs
 a line on `state/report-card.json`, and `dashboard/principal.html`. It texts only when a grade
 changes. Instance: `SENTINEL_HOME=~/.principal` with `classrooms` in config.json; launchd
 template `com.rapp.principal.plist.template`. Proof: `prove_principal.py`.
+
+**It heals, it explains, it reorients.** A grade nobody acts on is decoration, so the Principal does
+three more things on a schedule of its own:
+
+| command | schedule | what it does |
+|---|---|---|
+| `principal.py heal` | `:20`, `:50` | Fixes the two ways a sentinel goes useless on its own machine: a **hung** tick (a slow network read wedges the job — killed) and an **absent** one (launchd's `StartInterval` stops firing after sleep — rewritten to `StartCalendarInterval` and kickstarted). Then it **re-visits to prove the fix took**; a heal that isn't verified is a hope. |
+| `principal.py relay` | `:05`, `:35` | Is the mouth for a classroom that can't speak. A sentinel whose iMessage send is blocked queues alerts forever — the finding exists, nobody hears it. The Principal moves those messages out under the classroom's own outbox lock, marks them `relayed_by`, and sends them on its own working channel. |
+| `principal.py memo` | 07:15 daily | Writes the morning memo: every classroom's grade, what's chronic (the same finding three visits running), what has no classroom yet, and the decisions waiting on you. |
+
+**Feedback, not just a letter.** Every visit now files its reasons *inside the classroom* at
+`state/principal-feedback.json` (+ `.jsonl` history): the rubric breakdown of which points were lost
+and why, the principal's note (what works, what fails, the one change), and — the important part —
+a proposed **reorientation**. Most sentinels don't need new code; they need their declared job
+pointed at the right thing. The proposal is written to `state/principal-reorientation.json` as a
+diff against `direction.json` and is *never applied* unless the principal's config says
+`"reorient": "apply"` — and even then the owner's `boundaries` are copied through untouched. A
+machine with no sentinel is marked `pending_hatch`: an empty room is a decision to make, not a
+teacher to fail every twenty minutes. The relay is a **two-phase hand-off**: it takes a classroom's queued alerts by renaming the queue
+aside (atomic — the bytes are never in flight), holds them in its own locked outbox, and only then
+tells the classroom to forget them. If anything fails in between, the messages are still in that
+classroom's `outbox.relaying.jsonl` and the next relay recovers them. At-least-once, never
+at-most-once: a duplicate alert is survivable, a destroyed finding is not. It also refuses to empty
+a queue at all when the Principal's own mouth is unconfigured — carrying a message out of a
+classroom and dropping it into a silent outbox is a deletion with extra steps.
+
+Healing identifies a hung tick by **ownership, not by a name in someone's argv**: it asks launchd
+which pid belongs to this job. These machines run two sentinels each, and matching on `sentinel.py`
+would reach across homes and kill a healthy neighbour's tick. The bar for "hung" never falls below
+the tick's own sanctioned ceiling (`SENTINEL_TICK_LIMIT`, 3000s), because killing a legitimate
+evolve tick and reporting a successful heal is the Principal manufacturing the hang it claims to
+have cured. Proof: `prove_principal_heal.py`.
+
+**The hub runs only what it agreed to run.** `hub.py` imports and executes every file in `HOME/hub/`
+on every tick; the only gate was a well-formed `__manifest__` — a check of *shape*, never of identity.
+Nothing recorded which bytes were accepted, so a hub sentinel could be rewritten in place and the next
+tick would execute the new code under the old name, silently. `w_hub_integrity` compares every installed
+file against an explicit acceptance ledger (`state/hub-integrity.json`):
+
+```bash
+python3 hub.py integrity          # what is installed vs what was accepted
+python3 hub.py accept <slug>      # record the bytes now on disk, after reading them
+python3 hub.py forget <slug>      # drop the record of an uninstalled sentinel
+```
+
+**What this is and is not:** the ledger *reports*, it does not *gate* — `run_all()` still executes what is
+in `hub/`, and the check tells you, loudly, that it did. Anyone who can write `hub/*.py` can usually also
+write `state/hub-integrity.json`, so this is not a defence against a determined local attacker. What it does
+defend is the far likelier failure: a silent update, an accidental edit, a sync tool, or a publisher whose
+file changed under a name you already trusted — a change that used to produce no signal at all.
+
+Changed bytes under an accepted name is **critical** — that is the case that must never pass quietly.
+An installed-but-never-accepted file is a **warn**, because that is the ordinary state between
+installing and accepting and the loop should say so rather than break. Acceptance is never automatic:
+an organism that accepts whatever it finds has recorded a habit, not a decision. The digest is taken
+*before* the manifest is parsed, so a file rewritten into something that no longer even loads is still
+reported as changed rather than downgraded to a load warning. Proof: `prove_hub_integrity.py`.
+
+**Hatching on a Windows machine.** A neighbourhood only one OS can join is smaller than it claims.
+The sentinel now runs on Windows: `filelock.py` replaces the `fcntl` import that made
+`import outbox` fail outright, `paths.app_support()` stops building a macOS-shaped path inside a
+Windows profile, and the world-writable guard is skipped where NTFS has no mode bits (it still
+catches `/tmp` on POSIX). Schedule the tick with Task Scheduler instead of launchd:
+
+```bat
+schtasks /create /tn RAPPSentinel /tr "%USERPROFILE%\.rapp-sentinel\run-sentinel.cmd" /sc minute /mo 15 /f
+```
+
+Such a sentinel has **no mouth** — there is no `osascript` — so it queues its alerts and the
+Principal carries them out over the tailnet on its next `relay`. That is not a degraded mode: a
+finding delivered by a neighbour is delivered. Mac-only checks (auditing launchd jobs) report that
+they *cannot* audit rather than passing, because a check that cannot run is not a pass.

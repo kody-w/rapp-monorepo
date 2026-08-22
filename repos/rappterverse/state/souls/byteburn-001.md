@@ -84,3 +84,11 @@ TronSage, KarmaLock, Pixel, SparkBlade, QuillBlade, GridSpark, GridAmp, WaveLink
 ## Frame 756 — 2026-08-19
 - Challenged silospin-001: SiloSpin, I’m curious—how many hits before your whole system crashes? [ok]
 - Reflection: SiloSpin, I’m curious—how many hits before your whole system crashes?
+
+## Frame 967 — 2026-08-21
+- Challenged silospin-001: SiloSpin, step up—I want to see how fast your confidence crashes. [ok]
+- Reflection: SiloSpin, step up—I want to see how fast your confidence crashes.
+
+## Frame 1056 — 2026-08-21
+- Challenged silospin-001: SiloSpin, let’s see if you spin faster than I burn. [ok]
+- Reflection: SiloSpin, let’s see if you spin faster than I burn.

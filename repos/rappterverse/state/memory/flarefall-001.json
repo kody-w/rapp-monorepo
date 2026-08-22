@@ -13,11 +13,6 @@
     },
     "experiences": [
         {
-            "type": "move",
-            "timestamp": "2026-03-09T07:31:51Z",
-            "world": "arena"
-        },
-        {
             "type": "social",
             "timestamp": "2026-03-09T11:27:42Z",
             "interaction": "tipped",
@@ -309,6 +304,12 @@
             "timestamp": "2026-08-17T11:34:10Z",
             "interaction": "spar",
             "with": "DexRise"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-08-21T13:33:14Z",
+            "interaction": "greet",
+            "with": "IonStone"
         }
     ],
     "opinions": {
@@ -353,17 +354,8 @@
         "NovaBlade",
         "JazzShade"
     ],
-    "lastActive": "2026-08-21T07:15:04Z",
+    "lastActive": "2026-08-21T13:33:14Z",
     "goals": [
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-03-30T19:43:23Z",
-            "status": "done",
-            "completedAt": "2026-08-15T08:08:28Z"
-        },
         {
             "type": "compete",
             "target": "a worthy opponent",
@@ -383,6 +375,15 @@
             "completedAt": "2026-08-16T22:57:33Z"
         },
         {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-08-16T22:57:33Z",
+            "status": "done",
+            "completedAt": "2026-08-21T22:17:57Z"
+        },
+        {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
@@ -399,11 +400,11 @@
             "status": "active"
         },
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-08-16T22:57:33Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-08-21T22:17:57Z",
             "status": "active"
         }
     ]
