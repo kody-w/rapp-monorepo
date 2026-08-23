@@ -24,6 +24,8 @@ WHAT IT LEAVES BEHIND
   and raw blobs, never the worktree, so attributes and smudge filters cannot
   change what the recorded commit authenticates. Tracked gitlinks are kept as
   exact mode-160000 commit pointers without cloning or dereferencing targets.
+  Their reviewed source URLs are projected into a deterministic root
+  .gitmodules so standard Git submodule tooling can safely inspect the tree.
 
   Large files, over --max-file-mb. A desert-island copy is worth more if it
   fits on the boat. Everything skipped is NAMED in the manifest — a snapshot
@@ -58,13 +60,16 @@ from verify_snapshot import (
     MANIFEST_SCHEMA,
     SUPPORTED_MODES,
     TreeDigest,
+    render_gitmodules,
     render_index,
+    validate_gitlink_url,
 )
 
 HERE = Path(__file__).resolve().parent
 OUT = HERE / "repos"
 MANIFEST = HERE / "MANIFEST.json"
 INDEX = HERE / "INDEX.md"
+GITMODULES = HERE / ".gitmodules"
 ORGANISM = HERE / "ORGANISM.json"
 
 OWNER = os.environ.get("RAPP_OWNER", "kody-w")
@@ -295,6 +300,94 @@ def _source_index_entries(src: Path) -> list[SourceIndexEntry]:
     return entries
 
 
+def _source_submodule_urls(
+    src: Path,
+    gitmodules_oid: str,
+    gitlinks: list[SourceIndexEntry],
+) -> dict[str, str]:
+    result = subprocess.run(
+        [
+            "git",
+            "-C",
+            str(src),
+            "config",
+            "--blob",
+            gitmodules_oid,
+            "--null",
+            "--get-regexp",
+            r"^submodule\..*\.(path|url)$",
+        ],
+        capture_output=True,
+    )
+    if result.returncode not in {0, 1} or (
+        result.returncode == 1 and result.stdout
+    ):
+        detail = result.stderr.decode("utf-8", errors="replace").strip()
+        raise RuntimeError(
+            f"cannot parse source .gitmodules: {detail[:200]}"
+        )
+
+    sections: dict[bytes, dict[str, list[str]]] = {}
+    for item in result.stdout.split(b"\0"):
+        if not item:
+            continue
+        try:
+            key, raw_value = item.split(b"\n", 1)
+        except ValueError as exc:
+            raise RuntimeError(
+                "git returned malformed .gitmodules metadata"
+            ) from exc
+        lowered = key.lower()
+        if lowered.endswith(b".path"):
+            section = lowered[:-5]
+            field = "path"
+            value = os.fsdecode(raw_value)
+        elif lowered.endswith(b".url"):
+            section = lowered[:-4]
+            field = "url"
+            try:
+                value = raw_value.decode("utf-8")
+            except UnicodeDecodeError as exc:
+                raise RuntimeError(
+                    ".gitmodules contains a non-UTF-8 URL"
+                ) from exc
+        else:
+            continue
+        sections.setdefault(
+            section,
+            {"path": [], "url": []},
+        )[field].append(value)
+
+    urls: dict[str, str] = {}
+    for gitlink in gitlinks:
+        matches = [
+            values
+            for values in sections.values()
+            if gitlink.path in values["path"]
+        ]
+        if not matches:
+            raise RuntimeError(
+                f"gitlink {gitlink.path} has no .gitmodules mapping"
+            )
+        if len(matches) != 1:
+            raise RuntimeError(
+                f"gitlink {gitlink.path} has ambiguous .gitmodules mappings"
+            )
+        mapping = matches[0]
+        if len(mapping["path"]) != 1 or len(mapping["url"]) != 1:
+            raise RuntimeError(
+                f"gitlink {gitlink.path} has incomplete or ambiguous "
+                ".gitmodules metadata"
+            )
+        try:
+            urls[gitlink.path] = validate_gitlink_url(mapping["url"][0])
+        except RuntimeError as exc:
+            raise RuntimeError(
+                f"gitlink {gitlink.path} has an unsafe URL: {exc}"
+            ) from exc
+    return urls
+
+
 class _GitBlobReader:
     """Read raw source blobs without invoking checkout filters."""
 
@@ -448,9 +541,77 @@ def capture(owner, repo, work: Path, max_file_mb: float):
     try:
         blobs = _GitBlobReader(src)
         with blobs:
+            link_decisions: dict[str, tuple[bool, str]] = {}
+            kept_link_entries: list[SourceIndexEntry] = []
+            for entry in source_entries:
+                if entry.mode != "160000":
+                    continue
+                if any(
+                    ord(char) < 32
+                    or ord(char) == 127
+                    or 0xD800 <= ord(char) <= 0xDFFF
+                    for char in entry.path
+                ):
+                    raise RuntimeError(
+                        f"gitlink {entry.path!r} has an unsafe path"
+                    )
+                decision = ip_gate.screen_path(entry.path)
+                link_decisions[entry.path] = decision
+                if decision[0]:
+                    kept_link_entries.append(entry)
+
+            gitlink_urls: dict[str, str] = {}
+            if kept_link_entries:
+                modules_entries = [
+                    entry
+                    for entry in source_entries
+                    if entry.path == ".gitmodules"
+                ]
+                if not modules_entries:
+                    paths = ", ".join(
+                        entry.path for entry in kept_link_entries
+                    )
+                    raise RuntimeError(
+                        "source .gitmodules is missing for captured "
+                        f"gitlink(s): {paths}"
+                    )
+                if len(modules_entries) != 1:
+                    raise RuntimeError(
+                        "captured gitlinks require exactly one root "
+                        ".gitmodules blob"
+                    )
+                modules_entry = modules_entries[0]
+                if modules_entry.mode not in {"100644", "100755"}:
+                    raise RuntimeError(
+                        "source .gitmodules must be a regular Git blob"
+                    )
+                modules_size = blobs.size(modules_entry.oid)
+                if modules_size > limit:
+                    raise RuntimeError(
+                        "source .gitmodules exceeds the snapshot file limit"
+                    )
+                modules_raw = blobs.read(
+                    modules_entry.oid,
+                    modules_size,
+                )
+                keep_modules, modules_reason = ip_gate.screen(
+                    modules_raw,
+                    ".gitmodules",
+                )
+                if not keep_modules:
+                    raise RuntimeError(
+                        "source .gitmodules cannot be published: "
+                        f"{modules_reason}"
+                    )
+                gitlink_urls = _source_submodule_urls(
+                    src,
+                    modules_entry.oid,
+                    kept_link_entries,
+                )
+
             for entry in source_entries:
                 if entry.mode == "160000":
-                    keep, reason = ip_gate.screen_path(entry.path)
+                    keep, reason = link_decisions[entry.path]
                     if not keep:
                         withheld.append({
                             "file": entry.path,
@@ -461,6 +622,7 @@ def capture(owner, repo, work: Path, max_file_mb: float):
                     gitlinks.append({
                         "path": entry.path,
                         "commit": entry.oid,
+                        "url": gitlink_urls[entry.path],
                     })
                     tree_digest.add(entry.path, entry.mode, raw_oid)
                     files += 1
@@ -590,6 +752,10 @@ def main() -> int:
         json.dumps(document, indent=2) + "\n", encoding="utf-8"
     )
     INDEX.write_text(render_index(document), encoding="utf-8")
+    root_gitmodules = render_gitmodules(document)
+    _remove_path(GITMODULES)
+    if root_gitmodules:
+        GITMODULES.write_text(root_gitmodules, encoding="utf-8")
 
     total = sum(r["bytes"] for r in records) / 1048576
     print(f"\n{len(records)} captured, {len(missing)} not captured, {total:.0f}MB total")

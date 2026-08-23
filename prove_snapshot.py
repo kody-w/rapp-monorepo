@@ -2,7 +2,6 @@
 """Prove the staged Git tree exactly matches the generated snapshot contract."""
 
 import json
-import os
 import subprocess
 import tempfile
 import unittest
@@ -13,10 +12,13 @@ from verify_snapshot import (
     MANIFEST_SCHEMA,
     SnapshotVerificationError,
     compute_tree_sha256,
+    render_gitmodules,
     render_index,
     stage_and_verify,
     verify_staged,
 )
+
+GITLINK_URL = "https://example.invalid/dependency.git"
 
 
 class SnapshotIntegrityTests(unittest.TestCase):
@@ -117,6 +119,14 @@ class SnapshotIntegrityTests(unittest.TestCase):
             render_index(manifest),
             encoding="utf-8",
         )
+        gitmodules_path = self.root / ".gitmodules"
+        gitmodules_path.unlink(missing_ok=True)
+        root_gitmodules = render_gitmodules(manifest)
+        if root_gitmodules:
+            gitmodules_path.write_text(
+                root_gitmodules,
+                encoding="utf-8",
+            )
 
     def test_force_staging_includes_nested_ignored_files_but_not_gate_rules(self):
         ignored = b"tracked upstream but ignored here\n"
@@ -204,8 +214,16 @@ class SnapshotIntegrityTests(unittest.TestCase):
         commit = "1" * 40
         self.write_manifest(
             [],
-            gitlinks=[{"path": "vendor/dependency", "commit": commit}],
+            gitlinks=[{
+                "path": "vendor/dependency",
+                "commit": commit,
+                "url": GITLINK_URL,
+            }],
         )
+        expected_gitmodules = (self.root / ".gitmodules").read_bytes()
+        attributes = self.root / ".git" / "info" / "attributes"
+        attributes.parent.mkdir(parents=True, exist_ok=True)
+        attributes.write_bytes(b".gitmodules text eol=crlf\n")
 
         summary = stage_and_verify(self.root)
 
@@ -228,31 +246,173 @@ class SnapshotIntegrityTests(unittest.TestCase):
         index = (self.root / "INDEX.md").read_text(encoding="utf-8")
         self.assertIn("`demo/vendor/dependency`", index)
         self.assertIn(f"`{commit}`", index)
+        self.assertIn(f"`{GITLINK_URL}`", index)
+        root_gitmodules = (self.root / ".gitmodules").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn(
+            'path = "repos/demo/vendor/dependency"',
+            root_gitmodules,
+        )
+        self.assertIn(f'url = "{GITLINK_URL}"', root_gitmodules)
+        staged_gitmodules = subprocess.check_output([
+            "git",
+            "-C",
+            str(self.root),
+            "show",
+            ":.gitmodules",
+        ])
+        self.assertEqual(staged_gitmodules, expected_gitmodules)
+        self.assertEqual(
+            root_gitmodules.encode(),
+            expected_gitmodules,
+        )
+        cleanup = self.git(
+            "submodule",
+            "foreach",
+            "--recursive",
+            "true",
+            check=False,
+        )
+        self.assertEqual(cleanup.returncode, 0, cleanup.stderr)
+        self.assertNotIn("No url found", cleanup.stderr)
 
-    def test_index_percent_encodes_arbitrary_gitlink_path_bytes(self):
-        commit = "1" * 40
-        injected = "safe\n- `forged`"
-        non_utf8 = os.fsdecode(b"vendor/\xff")
-        self.write_manifest(
-            [],
-            gitlinks=[
-                {"path": injected, "commit": commit},
-                {"path": non_utf8, "commit": "2" * 40},
-            ],
+    def test_manifest_rejects_unsafe_gitlink_paths(self):
+        for path in ("safe\n- forged", "vendor/\udcff"):
+            with (
+                self.subTest(path=repr(path)),
+                self.assertRaisesRegex(
+                    SnapshotVerificationError,
+                    "path/commit/url",
+                ),
+            ):
+                self.write_manifest(
+                    [],
+                    gitlinks=[{
+                        "path": path,
+                        "commit": "1" * 40,
+                        "url": GITLINK_URL,
+                    }],
+                )
+
+    def test_root_gitmodules_rendering_is_deterministic(self):
+        links = [
+            {
+                "path": "zeta/dependency",
+                "commit": "a" * 40,
+                "url": "https://example.invalid/zeta.git",
+            },
+            {
+                "path": "alpha/dependency",
+                "commit": "b" * 40,
+                "url": "ssh://git@example.invalid/alpha.git",
+            },
+        ]
+        self.write_manifest([], gitlinks=links)
+        first = (self.root / ".gitmodules").read_bytes()
+
+        self.write_manifest([], gitlinks=list(reversed(links)))
+        second = (self.root / ".gitmodules").read_bytes()
+
+        self.assertEqual(first, second)
+        self.assertEqual(first.count(b'[submodule "snapshot-'), 2)
+        self.assertLess(
+            first.index(b"repos/demo/alpha/dependency"),
+            first.index(b"repos/demo/zeta/dependency"),
         )
 
-        rendered = (self.root / "INDEX.md").read_text(encoding="utf-8")
+    def test_root_gitmodules_uses_safe_sections_and_escaped_paths(self):
+        path = 'vendor/quoted"name\\part'
+        self.write_manifest(
+            [],
+            gitlinks=[{
+                "path": path,
+                "commit": "e" * 40,
+                "url": GITLINK_URL,
+            }],
+        )
 
-        self.assertIn("demo/safe%0A-%20%60forged%60", rendered)
-        self.assertIn("demo/vendor/%FF", rendered)
-        self.assertNotIn("\n- `forged`", rendered)
+        parsed = self.git(
+            "config",
+            "--file",
+            str(self.root / ".gitmodules"),
+            "--get-regexp",
+            r"^submodule\..*\.path$",
+        ).stdout.strip()
+        key, value = parsed.split(" ", 1)
+
+        self.assertRegex(
+            key,
+            r"^submodule\.snapshot-[0-9a-f]{64}\.path$",
+        )
+        self.assertEqual(value, f"repos/demo/{path}")
+
+    def test_verifier_rejects_gitmodules_projection_mismatch(self):
+        self.write_manifest(
+            [],
+            gitlinks=[{
+                "path": "vendor/dependency",
+                "commit": "c" * 40,
+                "url": GITLINK_URL,
+            }],
+        )
+        stage_and_verify(self.root)
+        (self.root / ".gitmodules").write_text(
+            '[submodule "forged"]\n'
+            '\tpath = "repos/demo/vendor/dependency"\n'
+            '\turl = "https://example.invalid/forged.git"\n',
+            encoding="utf-8",
+        )
+        self.git("add", "-f", "--", ".gitmodules")
+
+        with self.assertRaisesRegex(
+            SnapshotVerificationError,
+            "not the deterministic manifest projection",
+        ):
+            verify_staged(self.root)
+
+    def test_gitlinks_require_root_gitmodules(self):
+        self.write_manifest(
+            [],
+            gitlinks=[{
+                "path": "vendor/dependency",
+                "commit": "d" * 40,
+                "url": GITLINK_URL,
+            }],
+        )
+        (self.root / ".gitmodules").unlink()
+
+        with self.assertRaisesRegex(
+            SnapshotVerificationError,
+            "require staged root .gitmodules",
+        ):
+            stage_and_verify(self.root)
+
+    def test_stale_root_gitmodules_is_rejected_without_gitlinks(self):
+        self.write_manifest([])
+        (self.root / ".gitmodules").write_text(
+            '[submodule "stale"]\n'
+            '\tpath = "repos/demo/stale"\n'
+            f'\turl = "{GITLINK_URL}"\n',
+            encoding="utf-8",
+        )
+
+        with self.assertRaisesRegex(
+            SnapshotVerificationError,
+            "manifest has no gitlinks",
+        ):
+            stage_and_verify(self.root)
 
     def test_verifier_rejects_a_missing_manifest_gitlink(self):
         commit = "2" * 40
         path = "repos/demo/vendor/dependency"
         self.write_manifest(
             [],
-            gitlinks=[{"path": "vendor/dependency", "commit": commit}],
+            gitlinks=[{
+                "path": "vendor/dependency",
+                "commit": commit,
+                "url": GITLINK_URL,
+            }],
         )
         stage_and_verify(self.root)
         self.git("update-index", "--force-remove", "--", path)
@@ -284,7 +444,11 @@ class SnapshotIntegrityTests(unittest.TestCase):
         path = "repos/demo/vendor/dependency"
         self.write_manifest(
             [],
-            gitlinks=[{"path": "vendor/dependency", "commit": expected}],
+            gitlinks=[{
+                "path": "vendor/dependency",
+                "commit": expected,
+                "url": GITLINK_URL,
+            }],
         )
         stage_and_verify(self.root)
         self.git(
@@ -304,7 +468,11 @@ class SnapshotIntegrityTests(unittest.TestCase):
         path = self.root / "repos" / "demo" / "vendor" / "dependency"
         self.write_manifest(
             [],
-            gitlinks=[{"path": "vendor/dependency", "commit": commit}],
+            gitlinks=[{
+                "path": "vendor/dependency",
+                "commit": commit,
+                "url": GITLINK_URL,
+            }],
         )
         stage_and_verify(self.root)
         path.parent.mkdir(parents=True)
@@ -326,6 +494,7 @@ class SnapshotIntegrityTests(unittest.TestCase):
                 gitlinks=[{
                     "path": "vendor/dependency",
                     "commit": commit,
+                    "url": GITLINK_URL,
                 }],
                 withheld=[{
                     "file": "vendor/dependency",
@@ -347,7 +516,11 @@ class SnapshotIntegrityTests(unittest.TestCase):
         target.write_bytes(b"must not be copied\n")
         self.write_manifest(
             [],
-            gitlinks=[{"path": "vendor/dependency", "commit": commit}],
+            gitlinks=[{
+                "path": "vendor/dependency",
+                "commit": commit,
+                "url": GITLINK_URL,
+            }],
         )
 
         with self.assertRaisesRegex(

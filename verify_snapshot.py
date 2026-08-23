@@ -12,6 +12,7 @@ import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
+from urllib.parse import urlsplit
 from urllib.parse import quote_from_bytes
 
 HERE = Path(__file__).resolve().parent
@@ -23,6 +24,9 @@ COMMIT_OID = re.compile(r"^(?:[0-9a-f]{40}|[0-9a-f]{64})$")
 SKIPPED_LARGE_ENTRY = re.compile(
     r"^(?P<path>.+) \((?P<size>[0-9]+(?:\.[0-9]+)?)MB\)$",
     re.DOTALL,
+)
+SCP_GIT_URL = re.compile(
+    r"^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+:[^\s\x00-\x1f\x7f`]+$"
 )
 
 
@@ -257,6 +261,7 @@ def _staged_entries(
         "repos",
         "MANIFEST.json",
         "INDEX.md",
+        ".gitmodules",
     )
     entries: list[IndexEntry] = []
     metadata: dict[str, IndexEntry] = {}
@@ -284,7 +289,7 @@ def _staged_entries(
             mode=raw_mode.decode("ascii"),
             oid=raw_oid.decode("ascii"),
         )
-        if path in {"MANIFEST.json", "INDEX.md"}:
+        if path in {"MANIFEST.json", "INDEX.md", ".gitmodules"}:
             metadata[path] = entry
             continue
         if not path.startswith("repos/"):
@@ -378,6 +383,52 @@ def _valid_omitted_path(path: str) -> bool:
     )
 
 
+def _valid_gitlink_path(path: str) -> bool:
+    return (
+        _valid_omitted_path(path)
+        and all(
+            ord(char) >= 32
+            and ord(char) != 127
+            and not 0xD800 <= ord(char) <= 0xDFFF
+            for char in path
+        )
+    )
+
+
+def validate_gitlink_url(url: str) -> str:
+    """Return a safe absolute submodule URL or refuse it."""
+    if (
+        not isinstance(url, str)
+        or not url
+        or url != url.strip()
+        or any(
+            char.isspace() or ord(char) == 127
+            for char in url
+        )
+        or any(char in url for char in ('`', '"', "\\"))
+    ):
+        raise SnapshotVerificationError("gitlink URL is empty or unsafe")
+    if url.startswith(("./", "../")):
+        raise SnapshotVerificationError(
+            f"relative gitlink URL is not supported: {url!r}"
+        )
+    if SCP_GIT_URL.fullmatch(url):
+        return url
+    parsed = urlsplit(url)
+    if (
+        parsed.scheme not in {"https", "ssh"}
+        or not parsed.netloc
+        or parsed.password is not None
+        or (parsed.scheme == "https" and parsed.username is not None)
+        or parsed.query
+        or parsed.fragment
+    ):
+        raise SnapshotVerificationError(
+            f"gitlink URL must be absolute HTTPS or SSH: {url!r}"
+        )
+    return url
+
+
 def _skipped_large_path(repo: str, item: str) -> str:
     match = SKIPPED_LARGE_ENTRY.fullmatch(item)
     if match is None or not _valid_omitted_path(match["path"]):
@@ -401,7 +452,7 @@ def _record_omitted_paths(record: dict) -> set[str]:
     return set(paths)
 
 
-def _record_gitlinks(record: dict) -> dict[str, str]:
+def _record_gitlinks(record: dict) -> dict[str, dict]:
     repo = record["repo"]
     gitlinks = record.get("gitlinks", [])
     if not isinstance(gitlinks, list):
@@ -412,15 +463,17 @@ def _record_gitlinks(record: dict) -> dict[str, str]:
     for item in gitlinks:
         if (
             not isinstance(item, dict)
-            or set(item) != {"path", "commit"}
+            or set(item) != {"path", "commit", "url"}
             or not isinstance(item["path"], str)
-            or not _valid_omitted_path(item["path"])
+            or not _valid_gitlink_path(item["path"])
             or not isinstance(item["commit"], str)
             or not COMMIT_OID.fullmatch(item["commit"])
+            or not isinstance(item["url"], str)
         ):
             raise SnapshotVerificationError(
-                f"{repo}: manifest gitlinks must contain path/commit objects"
+                f"{repo}: manifest gitlinks must contain path/commit/url objects"
             )
+        validate_gitlink_url(item["url"])
         if item["path"] in result:
             raise SnapshotVerificationError(
                 f"{repo}: duplicate manifest gitlink path {item['path']}"
@@ -433,7 +486,7 @@ def _record_gitlinks(record: dict) -> dict[str, str]:
             raise SnapshotVerificationError(
                 f"{repo}: nested manifest gitlink path {item['path']}"
             )
-        result[item["path"]] = item["commit"]
+        result[item["path"]] = item
     return result
 
 
@@ -526,6 +579,38 @@ def _manifest_records(document: dict) -> dict[str, dict]:
     return records
 
 
+def _git_config_quote(value: str) -> str:
+    if any(ord(char) < 32 or ord(char) == 127 for char in value):
+        raise SnapshotVerificationError(
+            "gitmodule metadata contains an unsafe control character"
+        )
+    return '"' + value.replace("\\", "\\\\").replace('"', '\\"') + '"'
+
+
+def render_gitmodules(document: dict) -> str:
+    """Render root submodule mappings for every captured gitlink."""
+    records = _manifest_records(document)
+    entries = sorted(
+        (
+            f"repos/{repo}/{path}",
+            link["url"],
+        )
+        for repo, record in records.items()
+        for path, link in _record_gitlinks(record).items()
+    )
+    if not entries:
+        return ""
+    lines: list[str] = []
+    for outer_path, url in entries:
+        section = hashlib.sha256(os.fsencode(outer_path)).hexdigest()
+        lines.extend([
+            f'[submodule "snapshot-{section}"]',
+            f"\tpath = {_git_config_quote(outer_path)}",
+            f"\turl = {_git_config_quote(url)}",
+        ])
+    return "\n".join(lines) + "\n"
+
+
 def render_index(document: dict) -> str:
     """Render the one human index corresponding to a validated manifest."""
 
@@ -567,13 +652,14 @@ def render_index(document: dict) -> str:
             "",
         ]
         for record in linked:
-            for path, commit in sorted(
+            for path, link in sorted(
                 _record_gitlinks(record).items(),
                 key=lambda item: os.fsencode(item[0]),
             ):
                 displayed = _markdown_path(record["repo"] + "/" + path)
                 lines.append(
-                    f"- `{displayed}` — `{commit}`"
+                    f"- `{displayed}` — `{link['commit']}` — "
+                    f"`{link['url']}`"
                 )
     dropped = [record for record in ordered if record["skipped_large"]]
     if dropped:
@@ -649,6 +735,10 @@ def verify_staged(
             raise SnapshotVerificationError(
                 f"staged metadata has unsupported mode {entry.mode}: {path}"
             )
+        if path == ".gitmodules" and entry.mode != "100644":
+            raise SnapshotVerificationError(
+                "staged .gitmodules must use mode 100644"
+            )
 
     staged_manifest = _git(
         root,
@@ -683,6 +773,42 @@ def verify_staged(
         )
 
     document = _parse_manifest(staged_manifest, "staged MANIFEST.json")
+    records = _manifest_records(document)
+    expected_gitmodules = render_gitmodules(document).encode("utf-8")
+    gitmodules_path = root / ".gitmodules"
+    if expected_gitmodules:
+        if ".gitmodules" not in metadata:
+            raise SnapshotVerificationError(
+                "manifest gitlinks require staged root .gitmodules"
+            )
+        staged_gitmodules = _git(
+            root,
+            "cat-file",
+            "blob",
+            metadata[".gitmodules"].oid,
+        )
+        try:
+            worktree_gitmodules = gitmodules_path.read_bytes()
+        except FileNotFoundError as exc:
+            raise SnapshotVerificationError(
+                "manifest gitlinks require working-tree root .gitmodules"
+            ) from exc
+        if staged_gitmodules != worktree_gitmodules:
+            raise SnapshotVerificationError(
+                "staged .gitmodules differs from the working tree"
+            )
+        if staged_gitmodules != expected_gitmodules:
+            raise SnapshotVerificationError(
+                "root .gitmodules is not the deterministic manifest projection"
+            )
+    elif (
+        ".gitmodules" in metadata
+        or gitmodules_path.exists()
+        or gitmodules_path.is_symlink()
+    ):
+        raise SnapshotVerificationError(
+            "root .gitmodules exists but the manifest has no gitlinks"
+        )
     if document.get("membership_exclusions") is not None:
         expected_owner, expected_pattern, expected_exclusions = (
             _organism_membership_contract(root)
@@ -700,7 +826,6 @@ def verify_staged(
         raise SnapshotVerificationError(
             f"{len(missing)} repositories were not captured; refusing publication"
         )
-    records = _manifest_records(document)
     expected_index = render_index(document).encode("utf-8")
     if staged_index != expected_index:
         raise SnapshotVerificationError(
@@ -754,14 +879,15 @@ def verify_staged(
             expected_gitlinks = _record_gitlinks(record)
             seen_gitlinks: set[str] = set()
             for relative, entry in repo_entries:
-                expected_oid = expected_gitlinks.get(relative)
+                expected_link = expected_gitlinks.get(relative)
                 if entry.mode == "160000":
-                    if expected_oid is None:
+                    if expected_link is None:
                         errors.append(
                             f"{name}: extra staged gitlink at {relative}"
                         )
                     else:
                         seen_gitlinks.add(relative)
+                        expected_oid = expected_link["commit"]
                         if entry.oid != expected_oid:
                             errors.append(
                                 f"{name}: staged gitlink {relative} OID "
@@ -771,7 +897,7 @@ def verify_staged(
                     digest.add(relative, entry.mode, raw_oid)
                     byte_count += len(raw_oid)
                     continue
-                if expected_oid is not None:
+                if expected_link is not None:
                     seen_gitlinks.add(relative)
                     errors.append(
                         f"{name}: staged gitlink {relative} has mode "
@@ -832,6 +958,9 @@ class WorktreeEntry:
 
 def _worktree_entries(root: Path) -> list[WorktreeEntry]:
     paths = [root / "MANIFEST.json", root / "INDEX.md"]
+    gitmodules = root / ".gitmodules"
+    if gitmodules.exists() or gitmodules.is_symlink():
+        paths.append(gitmodules)
     repos = root / "repos"
     if not repos.is_dir():
         raise SnapshotVerificationError(f"snapshot directory not found: {repos}")
@@ -929,10 +1058,10 @@ def _manifest_gitlink_entries(
         (
             f"repos/{repo}/{path}",
             "160000",
-            commit,
+            link["commit"],
         )
         for repo, record in records.items()
-        for path, commit in _record_gitlinks(record).items()
+        for path, link in _record_gitlinks(record).items()
     )
 
 
@@ -948,6 +1077,7 @@ def _replace_snapshot_index(
         "repos",
         "MANIFEST.json",
         "INDEX.md",
+        ".gitmodules",
     )
     if existing:
         _git(

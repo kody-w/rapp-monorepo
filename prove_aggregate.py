@@ -15,9 +15,12 @@ from verify_snapshot import (
     MANIFEST_INTEGRITY_PROFILE,
     MANIFEST_SCHEMA,
     compute_tree_sha256,
+    render_gitmodules,
     render_index,
     stage_and_verify,
 )
+
+GITLINK_URL = "https://example.invalid/dependency.git"
 
 
 class CaptureBoundaryTests(unittest.TestCase):
@@ -223,7 +226,7 @@ class CaptureBoundaryTests(unittest.TestCase):
             gitmodules = (
                 '[submodule "deps/child"]\n'
                 "\tpath = deps/child\n"
-                f"\turl = {child.resolve().as_uri()}\n"
+                f"\turl = {GITLINK_URL}\n"
             )
             (source / ".gitmodules").write_text(
                 gitmodules,
@@ -251,6 +254,7 @@ class CaptureBoundaryTests(unittest.TestCase):
             self.assertEqual(record["gitlinks"], [{
                 "path": "deps/child",
                 "commit": child_commit,
+                "url": GITLINK_URL,
             }])
             self.assertEqual(
                 record["tree_sha256"],
@@ -276,6 +280,13 @@ class CaptureBoundaryTests(unittest.TestCase):
 
             source = root / "source"
             self.init_repo(source)
+            (source / ".gitmodules").write_text(
+                '[submodule "openclaw"]\n'
+                "\tpath = openclaw\n"
+                f"\turl = {GITLINK_URL}\n",
+                encoding="utf-8",
+            )
+            self.git(source, "add", ".gitmodules")
             self.git(
                 source,
                 "update-index",
@@ -327,6 +338,10 @@ class CaptureBoundaryTests(unittest.TestCase):
                 render_index(document),
                 encoding="utf-8",
             )
+            (destination / ".gitmodules").write_text(
+                render_gitmodules(document),
+                encoding="utf-8",
+            )
 
             summary = stage_and_verify(destination)
 
@@ -338,7 +353,8 @@ class CaptureBoundaryTests(unittest.TestCase):
                 "repos/demo/openclaw",
             ).stdout.split()
             self.assertEqual(staged[:2], ["160000", child_commit])
-            self.assertEqual(summary["files"], 1)
+            self.assertEqual(summary["files"], 2)
+            self.assertEqual(record["gitlinks"][0]["url"], GITLINK_URL)
             self.assertFalse(
                 (destination / "repos" / "demo" / "openclaw").exists()
             )
@@ -356,6 +372,16 @@ class CaptureBoundaryTests(unittest.TestCase):
                 ).returncode,
                 0,
             )
+            cleanup = self.git(
+                destination,
+                "submodule",
+                "foreach",
+                "--recursive",
+                "true",
+                check=False,
+            )
+            self.assertEqual(cleanup.returncode, 0, cleanup.stderr)
+            self.assertNotIn("No url found", cleanup.stderr)
 
     def test_gitlink_path_gate_still_withholds_the_pointer(self):
         with tempfile.TemporaryDirectory() as td:
@@ -392,6 +418,84 @@ class CaptureBoundaryTests(unittest.TestCase):
             self.assertFalse(
                 (out / "repo" / "private-notes" / "dependency").exists()
             )
+
+    def test_gitlink_without_source_mapping_fails_closed(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            source = root / "source"
+            self.init_repo(source)
+            (source / ".gitmodules").write_text(
+                '[submodule "other"]\n'
+                "\tpath = other\n"
+                f"\turl = {GITLINK_URL}\n",
+                encoding="utf-8",
+            )
+            self.git(source, "add", ".gitmodules")
+            self.git(
+                source,
+                "update-index",
+                "--add",
+                "--cacheinfo",
+                f"160000,{'a' * 40},openclaw",
+            )
+            self.git(source, "commit", "-qm", "missing mapping")
+
+            out, record, error = self.capture_repo(root, source)
+
+            self.assertIsNone(record)
+            self.assertIn("openclaw has no .gitmodules mapping", error)
+            self.assertFalse((out / "repo").exists())
+
+    def test_gitlink_without_gitmodules_fails_closed_and_names_path(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            source = root / "source"
+            self.init_repo(source)
+            self.git(
+                source,
+                "update-index",
+                "--add",
+                "--cacheinfo",
+                f"160000,{'c' * 40},openclaw",
+            )
+            self.git(source, "commit", "-qm", "missing gitmodules")
+
+            out, record, error = self.capture_repo(root, source)
+
+            self.assertIsNone(record)
+            self.assertIn(
+                "source .gitmodules is missing for captured "
+                "gitlink(s): openclaw",
+                error,
+            )
+            self.assertFalse((out / "repo").exists())
+
+    def test_relative_gitlink_url_is_explicitly_rejected(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            source = root / "source"
+            self.init_repo(source)
+            (source / ".gitmodules").write_text(
+                '[submodule "openclaw"]\n'
+                "\tpath = openclaw\n"
+                "\turl = ../openclaw.git\n",
+                encoding="utf-8",
+            )
+            self.git(source, "add", ".gitmodules")
+            self.git(
+                source,
+                "update-index",
+                "--add",
+                "--cacheinfo",
+                f"160000,{'b' * 40},openclaw",
+            )
+            self.git(source, "commit", "-qm", "relative mapping")
+
+            out, record, error = self.capture_repo(root, source)
+
+            self.assertIsNone(record)
+            self.assertIn("relative gitlink URL is not supported", error)
+            self.assertFalse((out / "repo").exists())
 
     def test_source_blob_error_fails_and_removes_partial_output(self):
         with tempfile.TemporaryDirectory() as td:
@@ -523,6 +627,8 @@ class CaptureBoundaryTests(unittest.TestCase):
             out = root / "repos"
             manifest_path = root / "MANIFEST.json"
             index_path = root / "INDEX.md"
+            gitmodules_path = root / ".gitmodules"
+            gitmodules_path.write_text("stale\n", encoding="utf-8")
             record = {
                 "repo": "good",
                 "commit": "a" * 40,
@@ -545,6 +651,7 @@ class CaptureBoundaryTests(unittest.TestCase):
                 patch.object(aggregate, "OUT", out),
                 patch.object(aggregate, "MANIFEST", manifest_path),
                 patch.object(aggregate, "INDEX", index_path),
+                patch.object(aggregate, "GITMODULES", gitmodules_path),
                 patch.object(aggregate, "self_name", return_value="rapp-monorepo"),
                 patch.object(aggregate.ip_gate, "assert_configured"),
                 patch.object(
@@ -586,6 +693,7 @@ class CaptureBoundaryTests(unittest.TestCase):
                     ],
                 },
             )
+            self.assertFalse(gitmodules_path.exists())
 
 
 if __name__ == "__main__":
