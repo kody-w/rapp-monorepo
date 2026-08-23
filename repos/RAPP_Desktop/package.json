@@ -13,26 +13,28 @@
     "start": "electron .",
     "preview": "vite preview",
     "pretest": "npm run build",
-    "test": "node --test test/*.test.mjs",
-    "dist": "npm run build && electron-builder --publish never"
+    "test": "node --import=tsx --test test/*.test.mjs",
+    "dist": "node scripts/dist.mjs"
   },
   "dependencies": {
     "react": "^19.2.5",
     "react-dom": "^19.2.5"
   },
   "devDependencies": {
+    "@electron/notarize": "^2.5.0",
     "@types/node": "^22.10.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.2",
     "electron": "^43.0.0",
     "electron-builder": "^26.15.3",
+    "tsx": "^4.23.12",
     "typescript": "^7.0.0",
     "vite": "^8.0.16",
     "vite-plugin-electron": "1.0.4"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22.12.0"
   },
   "build": {
     "appId": "com.rapp.desktop",
@@ -57,16 +59,21 @@
         ]
       }
     ],
+    "afterSign": "scripts/notarize-app.mjs",
+    "afterAllArtifactBuild": "scripts/notarize-artifacts.mjs",
     "mac": {
       "category": "public.app-category.productivity",
+      "forceCodeSigning": true,
       "hardenedRuntime": true,
-      "gatekeeperAssess": false,
       "icon": "build/icon.png",
-      "notarize": true,
+      "notarize": false,
       "target": [
         "dmg",
         "zip"
       ]
+    },
+    "dmg": {
+      "sign": true
     },
     "win": {
       "icon": "build/icon.png",

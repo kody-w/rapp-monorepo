@@ -12,6 +12,7 @@ export const IPC = {
   brainstemStart: 'rapp:brainstem-start',
   brainstemStop: 'rapp:brainstem-stop',
   brainstemChat: 'rapp:brainstem-chat',
+  brainstemCancelChat: 'rapp:brainstem-cancel-chat',
   brainstemLogin: 'rapp:brainstem-login',
   brainstemLoginPoll: 'rapp:brainstem-login-poll',
   brainstemStatusChanged: 'rapp:brainstem-status-changed',

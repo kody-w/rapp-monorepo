@@ -19,7 +19,9 @@ import { BrainstemManager } from './brainstem.js'
 import { IPC } from './channels.js'
 import { DesktopService } from './desktop-service.js'
 import {
+  isTrustedRendererUrl,
   requireExternalUrl,
+  resolveRendererTarget,
   SECURE_RENDERER_PREFERENCES,
 } from './security.js'
 
@@ -27,6 +29,11 @@ const sourceDirectory = path.dirname(fileURLToPath(import.meta.url))
 const preloadPath = path.join(sourceDirectory, 'preload.cjs')
 const rendererDirectory = path.join(app.getAppPath(), 'dist')
 const rendererIndex = path.join(rendererDirectory, 'index.html')
+const rendererTarget = resolveRendererTarget({
+  isPackaged: app.isPackaged,
+  developmentUrl: process.env.VITE_DEV_SERVER_URL,
+  rendererIndex,
+})
 const desktopSmoke = process.env.RAPP_DESKTOP_SMOKE === '1'
 
 let mainWindow: BrowserWindow | null = null
@@ -42,28 +49,13 @@ let latestStatus: BrainstemStatus = {
   phase: 'checking',
 }
 
-function isPathInside(root: string, target: string): boolean {
-  const relative = path.relative(path.resolve(root), path.resolve(target))
-  return relative === '' || (!relative.startsWith('..') && !path.isAbsolute(relative))
-}
-
-function isTrustedRendererUrl(rawUrl: string): boolean {
-  try {
-    const url = new URL(rawUrl)
-    const developmentUrl = process.env.VITE_DEV_SERVER_URL
-    if (developmentUrl) {
-      return url.origin === new URL(developmentUrl).origin
-    }
-    return url.protocol === 'file:'
-      && isPathInside(rendererDirectory, fileURLToPath(url))
-  } catch {
-    return false
-  }
+function isTrustedRenderer(rawUrl: string): boolean {
+  return isTrustedRendererUrl(rawUrl, rendererTarget, rendererDirectory)
 }
 
 function assertTrustedSender(event: IpcMainInvokeEvent): void {
   const senderUrl = event.senderFrame?.url
-  if (!senderUrl || !isTrustedRendererUrl(senderUrl)) {
+  if (!senderUrl || !isTrustedRenderer(senderUrl)) {
     throw new Error('Rejected IPC from an untrusted renderer.')
   }
 }
@@ -97,6 +89,7 @@ function registerIpc(service: DesktopService): void {
   handle(IPC.brainstemStart, () => brainstem!.start())
   handle(IPC.brainstemStop, () => brainstem!.stop())
   handle(IPC.brainstemChat, (payload) => brainstem!.chat(payload))
+  handle(IPC.brainstemCancelChat, (payload) => brainstem!.cancelChat(payload))
   handle(IPC.brainstemLogin, async () => {
     const login = await brainstem!.login()
     await shell.openExternal(requireExternalUrl(login.verificationUrl))
@@ -133,23 +126,26 @@ function showWindow(): void {
 
 function refreshTray(): void {
   if (!tray) return
+  const brainstemReady = latestStatus.phase === 'ready'
   const supportsLoginItem = process.platform === 'darwin'
     || process.platform === 'win32'
   const login = supportsLoginItem
     ? app.getLoginItemSettings().openAtLogin
     : false
-  const statusLabel = latestStatus.running
+  const statusLabel = brainstemReady
     ? `Brainstem ready on :${latestStatus.port}`
     : latestStatus.phase === 'starting'
       ? 'Brainstem is starting'
+      : latestStatus.phase === 'error'
+        ? 'Brainstem is unavailable'
       : 'Brainstem is offline'
   tray.setContextMenu(Menu.buildFromTemplate([
     { label: 'Open RAPP Desktop', click: showWindow },
     { label: statusLabel, enabled: false },
     {
-      label: latestStatus.running ? 'Check Brainstem' : 'Wake Brainstem',
+      label: brainstemReady ? 'Check Brainstem' : 'Wake Brainstem',
       click: () => {
-        const action = latestStatus.running ? brainstem!.status() : brainstem!.start()
+        const action = brainstemReady ? brainstem!.status() : brainstem!.start()
         void action.catch(showError)
       },
     },
@@ -215,7 +211,7 @@ function createWindow(): BrowserWindow {
     return { action: 'deny' }
   })
   window.webContents.on('will-navigate', (event, url) => {
-    if (isTrustedRendererUrl(url)) return
+    if (isTrustedRenderer(url)) return
     event.preventDefault()
     try {
       void shell.openExternal(requireExternalUrl(url))
@@ -252,11 +248,10 @@ function createWindow(): BrowserWindow {
     if (mainWindow === window) mainWindow = null
   })
 
-  const developmentUrl = process.env.VITE_DEV_SERVER_URL
-  if (developmentUrl) {
-    void window.loadURL(developmentUrl)
+  if (rendererTarget.kind === 'development') {
+    void window.loadURL(rendererTarget.url)
   } else {
-    void window.loadFile(rendererIndex)
+    void window.loadFile(rendererTarget.path)
   }
   return window
 }

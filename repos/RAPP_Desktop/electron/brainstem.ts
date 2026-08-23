@@ -1,5 +1,13 @@
-import { spawn, type ChildProcess } from 'node:child_process'
-import { existsSync, readFileSync } from 'node:fs'
+import {
+  execFile,
+  spawn,
+  type ChildProcess,
+} from 'node:child_process'
+import {
+  existsSync,
+  lstatSync,
+  readFileSync,
+} from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 
@@ -11,17 +19,39 @@ import type {
   ChatTurn,
 } from '../src/desktop-api.js'
 import {
+  assessLoopbackPeer,
+  parseLsofListeners,
+  PeerIdentityError,
   requireRecord,
   requireString,
+  type LauncherResult,
+  type ListenerProcess,
+  type PeerVerification,
+  useTrustedPeer,
+  waitAfterLauncher,
 } from './security.js'
 
 const HEALTH_TIMEOUT_MS = 5_000
 const CHAT_TIMEOUT_MS = 120_000
+const CANCEL_TIMEOUT_MS = 10_000
 const START_TIMEOUT_MS = 45_000
 
-interface BrainstemManagerOptions {
+export interface BrainstemManagerOptions {
   legacyScriptPath: string
   onStatus(status: BrainstemStatus): void
+  baseUrl?: string
+  fetch?: typeof fetch
+  verifyPeer?(
+    port: number,
+    managedPid?: number,
+  ): Promise<PeerVerification>
+  credentialHeaders?(): Record<string, string>
+}
+
+interface CommandResult {
+  executed: boolean
+  succeeded: boolean
+  output: string
 }
 
 function normalizeBaseUrl(raw: string): string {
@@ -41,6 +71,173 @@ function isLoopback(hostname: string): boolean {
 
 function message(error: unknown): string {
   return error instanceof Error ? error.message : String(error)
+}
+
+function runCommand(command: string, args: readonly string[]): Promise<CommandResult> {
+  return new Promise((resolve) => {
+    execFile(
+      command,
+      [...args],
+      { encoding: 'utf8', windowsHide: true },
+      (error, stdout) => {
+        const code = error && 'code' in error ? error.code : undefined
+        resolve({
+          executed: code !== 'ENOENT',
+          succeeded: error === null,
+          output: typeof stdout === 'string' ? stdout : '',
+        })
+      },
+    )
+  })
+}
+
+export function windowsListenerScript(port: number): string {
+  return [
+    `$connections = @(Get-NetTCPConnection -State Listen -LocalPort ${port} -ErrorAction SilentlyContinue)`,
+    '$processIds = @($connections | Select-Object -ExpandProperty OwningProcess -Unique)',
+    'foreach ($processId in $processIds) {',
+    '$process = Get-CimInstance Win32_Process -Filter "ProcessId = $processId" -ErrorAction SilentlyContinue',
+    'if ($process) {',
+    '$owner = Invoke-CimMethod -InputObject $process -MethodName GetOwner',
+    'Write-Output ("{0}|{1}\\{2}" -f $processId,$owner.Domain,$owner.User)',
+    '}',
+    '}',
+  ].join('; ')
+}
+
+function readPrivateSecret(secretPath: string): string {
+  let stats
+  try {
+    stats = lstatSync(secretPath)
+  } catch (error) {
+    if (
+      error
+      && typeof error === 'object'
+      && 'code' in error
+      && error.code === 'ENOENT'
+    ) {
+      return ''
+    }
+    throw error
+  }
+  if (!stats.isFile() || stats.isSymbolicLink()) {
+    throw new Error(`Brainstem secret is not a private regular file: ${secretPath}`)
+  }
+  if (
+    process.platform !== 'win32'
+    && (
+      (typeof process.getuid === 'function' && stats.uid !== process.getuid())
+      || (stats.mode & 0o077) !== 0
+    )
+  ) {
+    throw new Error(`Brainstem secret file permissions are unsafe: ${secretPath}`)
+  }
+  return readFileSync(secretPath, 'utf8').trim()
+}
+
+function parseWindowsListeners(output: string): ListenerProcess[] {
+  return output
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .flatMap((line) => {
+      const separator = line.indexOf('|')
+      const pid = Number(line.slice(0, separator))
+      const ownerId = line.slice(separator + 1).trim()
+      return separator > 0 && Number.isSafeInteger(pid) && pid > 0
+        ? [{ pid, ownerId }]
+        : []
+    })
+}
+
+async function inspectLoopbackPeer(
+  port: number,
+  managedPid?: number,
+): Promise<PeerVerification> {
+  if (process.platform === 'win32') {
+    const script = windowsListenerScript(port)
+    const result = await runCommand(
+      process.env.SystemRoot
+        ? path.join(process.env.SystemRoot, 'System32', 'WindowsPowerShell', 'v1.0', 'powershell.exe')
+        : 'powershell.exe',
+      ['-NoLogo', '-NoProfile', '-NonInteractive', '-Command', script],
+    )
+    if (!result.executed || !result.succeeded) {
+      return {
+        kind: 'untrusted',
+        detail: 'Cannot verify ownership of the local Brainstem endpoint.',
+      }
+    }
+    const username = process.env.USERNAME ?? ''
+    const domain = process.env.USERDOMAIN ?? ''
+    return assessLoopbackPeer(
+      parseWindowsListeners(result.output),
+      [`${domain}\\${username}`, username],
+      managedPid,
+    )
+  }
+
+  const candidates = [
+    '/usr/sbin/lsof',
+    '/usr/bin/lsof',
+    'lsof',
+  ]
+  let executed = false
+  let output = ''
+  for (const candidate of candidates) {
+    if (path.isAbsolute(candidate) && !existsSync(candidate)) continue
+    const result = await runCommand(candidate, [
+      '-nP',
+      '-a',
+      `-iTCP:${port}`,
+      '-sTCP:LISTEN',
+      '-Fpu',
+    ])
+    if (!result.executed) continue
+    executed = true
+    output = result.output
+    break
+  }
+  if (!executed && process.platform === 'linux') {
+    const result = await runCommand('ss', [
+      '-ltnpH',
+      `sport = :${port}`,
+    ])
+    if (result.executed) {
+      executed = true
+      output = result.output
+      const listeners: ListenerProcess[] = []
+      for (const [index, line] of output.split(/\r?\n/).entries()) {
+        const processIds = [...line.matchAll(/pid=(\d+)/g)]
+        if (processIds.length === 0 && line.trim()) {
+          listeners.push({ pid: -(index + 1), ownerId: '' })
+        } else {
+          for (const match of processIds) {
+            listeners.push({
+              pid: Number(match[1]),
+              ownerId: String(process.getuid?.() ?? ''),
+            })
+          }
+        }
+      }
+      return assessLoopbackPeer(
+        listeners,
+        [String(process.getuid?.() ?? ''), os.userInfo().username],
+        managedPid,
+      )
+    }
+  }
+  if (!executed || typeof process.getuid !== 'function') {
+    return {
+      kind: 'untrusted',
+      detail: 'Cannot verify ownership of the local Brainstem endpoint.',
+    }
+  }
+  return assessLoopbackPeer(
+    parseLsofListeners(output),
+    [String(process.getuid()), os.userInfo().username],
+    managedPid,
+  )
 }
 
 function parseHistory(value: unknown): ChatTurn[] {
@@ -68,6 +265,9 @@ function parseChatRequest(value: unknown): BrainstemChatRequest {
   const record = requireRecord(value, 'Chat request')
   return {
     userInput: requireString(record.userInput, 'Chat message', 100_000),
+    requestId: record.requestId
+      ? requireString(record.requestId, 'Chat request id', 128)
+      : undefined,
     sessionId: record.sessionId
       ? requireString(record.sessionId, 'Session id', 512)
       : undefined,
@@ -105,7 +305,7 @@ async function waitForExit(
   })
 }
 
-async function waitForProcessExit(
+export async function waitForProcessExit(
   child: ChildProcess,
   timeoutMs: number,
 ): Promise<boolean> {
@@ -125,16 +325,22 @@ async function waitForProcessExit(
 }
 
 export class BrainstemManager {
-  private readonly baseUrl = normalizeBaseUrl(
-    process.env.RAPP_BRAINSTEM_URL ?? 'http://127.0.0.1:7071',
-  )
+  private readonly baseUrl: string
+  private readonly fetchImpl: typeof fetch
   private readonly options: BrainstemManagerOptions
+  private readonly chatRequests = new Map<string, AbortController>()
   private ownedProcess: ChildProcess | null = null
   private starting: Promise<BrainstemStatus> | null = null
   private lastStatus: BrainstemStatus
 
   constructor(options: BrainstemManagerOptions) {
     this.options = options
+    this.baseUrl = normalizeBaseUrl(
+      options.baseUrl
+        ?? process.env.RAPP_BRAINSTEM_URL
+        ?? 'http://127.0.0.1:7071',
+    )
+    this.fetchImpl = options.fetch ?? fetch
     this.lastStatus = this.makeStatus({
       running: false,
       phase: 'checking',
@@ -171,10 +377,27 @@ export class BrainstemManager {
     return status
   }
 
-  private headers(): Record<string, string> {
+  private peerVerification(): Promise<PeerVerification> {
+    const url = new URL(this.baseUrl)
+    if (url.protocol === 'https:') {
+      return Promise.resolve({ kind: 'trusted', proof: 'https' })
+    }
+    return (this.options.verifyPeer ?? inspectLoopbackPeer)(
+      Number(url.port || 80),
+      this.ownedProcess?.pid,
+    )
+  }
+
+  private credentialHeaders(): Record<string, string> {
     const headers: Record<string, string> = {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+    }
+    if (this.options.credentialHeaders) {
+      return {
+        ...headers,
+        ...this.options.credentialHeaders(),
+      }
     }
     const loopback = isLoopback(new URL(this.baseUrl).hostname)
     const explicitSecret = process.env.RAPP_BRAINSTEM_SECRET
@@ -190,9 +413,7 @@ export class BrainstemManager {
         )
         : undefined)
     const secret = explicitSecret
-      ?? (secretPath && existsSync(secretPath)
-        ? readFileSync(secretPath, 'utf8').trim()
-        : '')
+      ?? (secretPath ? readPrivateSecret(secretPath) : '')
     if (secret) headers['X-Brainstem-Secret'] = secret
     if (loopback) {
       const desktopSecretPath = path.join(
@@ -200,20 +421,28 @@ export class BrainstemManager {
         '.rapp',
         'desktop_secret',
       )
-      if (existsSync(desktopSecretPath)) {
-        const desktopSecret = readFileSync(desktopSecretPath, 'utf8').trim()
-        if (desktopSecret) {
-          headers['X-RAPP-Desktop-Secret'] = desktopSecret
-        }
+      const desktopSecret = readPrivateSecret(desktopSecretPath)
+      if (desktopSecret) {
+        headers['X-RAPP-Desktop-Secret'] = desktopSecret
       }
     }
     return headers
   }
 
+  private async authenticatedHeaders(
+    signal?: AbortSignal,
+  ): Promise<Record<string, string>> {
+    signal?.throwIfAborted()
+    const peer = await this.peerVerification()
+    signal?.throwIfAborted()
+    return useTrustedPeer(peer, () => this.credentialHeaders())
+  }
+
   async status(): Promise<BrainstemStatus> {
     try {
-      const response = await fetch(`${this.baseUrl}/health`, {
-        headers: this.headers(),
+      const headers = await this.authenticatedHeaders()
+      const response = await this.fetchImpl(`${this.baseUrl}/health`, {
+        headers,
         signal: AbortSignal.timeout(HEALTH_TIMEOUT_MS),
       })
       const data = requireRecord(await response.json(), 'Brainstem health response')
@@ -254,8 +483,12 @@ export class BrainstemManager {
       }))
     } catch (error) {
       return this.emit(this.makeStatus({
-        running: false,
-        phase: 'stopped',
+        running: error instanceof PeerIdentityError
+          && error.peerKind === 'untrusted',
+        phase: error instanceof PeerIdentityError
+          && error.peerKind === 'untrusted'
+          ? 'error'
+          : 'stopped',
         managed: this.ownedProcess !== null,
         detail: message(error),
       }))
@@ -294,14 +527,21 @@ export class BrainstemManager {
       throw new Error('A remote Brainstem must be started by its host.')
     }
 
-    const launcherError = await this.tryGlobalLauncher()
-    if (await this.waitForHealth(START_TIMEOUT_MS)) return this.status()
+    const launcherResult = await this.tryGlobalLauncher()
+    if (
+      await waitAfterLauncher(
+        launcherResult,
+        () => this.waitForHealth(START_TIMEOUT_MS),
+      )
+    ) {
+      return this.status()
+    }
 
     await this.startLegacyFallback()
     if (!(await this.waitForHealth(START_TIMEOUT_MS))) {
       await this.stopOwnedProcess()
-      const detail = launcherError
-        ? `Global launcher failed (${launcherError}); bundled fallback did not become healthy.`
+      const detail = launcherResult.kind === 'failed'
+        ? `Global launcher failed (${launcherResult.error}); bundled fallback did not become healthy.`
         : 'Bundled Brainstem did not become healthy.'
       return this.emit(this.makeStatus({
         running: false,
@@ -335,9 +575,9 @@ export class BrainstemManager {
       Boolean(candidate && existsSync(candidate)))
   }
 
-  private async tryGlobalLauncher(): Promise<string | undefined> {
+  private async tryGlobalLauncher(): Promise<LauncherResult> {
     const launcher = this.launcherCandidates()[0]
-    if (!launcher) return undefined
+    if (!launcher) return { kind: 'not-found' }
     try {
       const child = process.platform === 'win32'
         ? spawn(
@@ -350,9 +590,11 @@ export class BrainstemManager {
           stdio: 'ignore',
         })
       const code = await waitForExit(child, 120_000)
-      return code === 0 ? undefined : `exit code ${code}`
+      return code === 0
+        ? { kind: 'launched' }
+        : { kind: 'failed', error: `exit code ${code}` }
     } catch (error) {
-      return message(error)
+      return { kind: 'failed', error: message(error) }
     }
   }
 
@@ -414,8 +656,9 @@ export class BrainstemManager {
     const deadline = Date.now() + timeoutMs
     while (Date.now() < deadline) {
       try {
-        const response = await fetch(`${this.baseUrl}/health`, {
-          headers: this.headers(),
+        const headers = await this.authenticatedHeaders()
+        const response = await this.fetchImpl(`${this.baseUrl}/health`, {
+          headers,
           signal: AbortSignal.timeout(2_000),
         })
         if (response.ok) return true
@@ -487,19 +730,41 @@ export class BrainstemManager {
 
   async chat(value: unknown): Promise<BrainstemChatResponse> {
     const request = parseChatRequest(value)
+    const requestId = request.requestId
+      ?? `internal-${Date.now()}-${Math.random().toString(16).slice(2)}`
+    if (this.chatRequests.has(requestId)) {
+      throw new Error('A chat request with this id is already active.')
+    }
+    const controller = new AbortController()
+    this.chatRequests.set(requestId, controller)
+    try {
+      return await this.performChat(request, requestId, controller.signal)
+    } finally {
+      if (this.chatRequests.get(requestId) === controller) {
+        this.chatRequests.delete(requestId)
+      }
+    }
+  }
+
+  private async performChat(
+    request: BrainstemChatRequest,
+    requestId: string,
+    signal: AbortSignal,
+  ): Promise<BrainstemChatResponse> {
     const body = {
+      request_id: requestId,
       user_input: request.userInput,
       session_id: request.sessionId ?? '',
       conversation_history: request.conversationHistory ?? [],
     }
-    let response = await this.post('/chat', body)
+    let response = await this.post('/chat', body, signal)
     if (response.status === 404) {
       response = await this.post('/api/rapp', {
         ...body,
         user_guid: 'desktop',
         session_guid: request.sessionId ?? '',
         context_guid: 'default',
-      })
+      }, signal)
     }
     const data = requireRecord(await response.json(), 'Brainstem chat response')
     if (!response.ok || data.error) {
@@ -524,12 +789,60 @@ export class BrainstemManager {
     }
   }
 
-  private post(pathname: string, body: object): Promise<Response> {
-    return fetch(`${this.baseUrl}${pathname}`, {
+  async cancelChat(value: unknown): Promise<void> {
+    const requestId = requireString(value, 'Chat request id', 128)
+    const controller = this.chatRequests.get(requestId)
+    if (!controller) return
+    controller.abort(
+      new Error('Chat request was cancelled.'),
+    )
+    const managed = this.ownedProcess !== null
+    const response = await this.post(
+      '/cancel',
+      { request_id: requestId },
+      undefined,
+      CANCEL_TIMEOUT_MS,
+    )
+    if ([404, 405, 501].includes(response.status)) {
+      if (!managed) return
+      throw new Error(
+        'The bundled Brainstem does not support request cancellation.',
+      )
+    }
+    const data = requireRecord(
+      await response.json(),
+      'Brainstem cancellation response',
+    )
+    if (!response.ok) {
+      throw new Error(
+        typeof data.error === 'string'
+          ? data.error
+          : `Brainstem cancellation returned HTTP ${response.status}.`,
+      )
+    }
+    const acknowledged = data.cancelled === true
+      || data.status === 'not_found'
+    if (!acknowledged || (managed && data.worker_ended !== true)) {
+      throw new Error('Brainstem did not acknowledge request cancellation.')
+    }
+  }
+
+  private async post(
+    pathname: string,
+    body: object,
+    signal?: AbortSignal,
+    timeoutMs = CHAT_TIMEOUT_MS,
+  ): Promise<Response> {
+    const requestSignal = signal
+      ? AbortSignal.any([signal, AbortSignal.timeout(timeoutMs)])
+      : AbortSignal.timeout(timeoutMs)
+    const headers = await this.authenticatedHeaders(requestSignal)
+    requestSignal.throwIfAborted()
+    return this.fetchImpl(`${this.baseUrl}${pathname}`, {
       method: 'POST',
-      headers: this.headers(),
+      headers,
       body: JSON.stringify(body),
-      signal: AbortSignal.timeout(CHAT_TIMEOUT_MS),
+      signal: requestSignal,
     })
   }
 
@@ -594,6 +907,11 @@ export class BrainstemManager {
   }
 
   async dispose(): Promise<void> {
+    const activeRequestIds = [...this.chatRequests.keys()]
+    await Promise.allSettled(
+      activeRequestIds.map((requestId) => this.cancelChat(requestId)),
+    )
+    this.chatRequests.clear()
     await this.stopOwnedProcess()
   }
 }

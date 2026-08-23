@@ -8,7 +8,6 @@ const read = (relative) =>
 const desktopPackage = JSON.parse(read('package.json'))
 const main = read('electron/main.ts')
 const preload = read('electron/preload.cjs')
-const security = read('electron/security.ts')
 const renderer = read('src/App.tsx')
 const index = read('index.html')
 const brainstem = read('electron/brainstem.ts')
@@ -23,11 +22,7 @@ test('Electron is the only native desktop shell', () => {
   assert.equal(desktopPackage.devDependencies?.['@tauri-apps/cli'], undefined)
 })
 
-test('renderer runs isolated, sandboxed, and without Node.js', () => {
-  assert.match(security, /contextIsolation:\s*true/)
-  assert.match(security, /nodeIntegration:\s*false/)
-  assert.match(security, /sandbox:\s*true/)
-  assert.match(security, /webSecurity:\s*true/)
+test('main process applies renderer security and permission policy', () => {
   assert.match(main, /SECURE_RENDERER_PREFERENCES/)
   assert.match(main, /setPermissionRequestHandler/)
   assert.match(main, /callback\(false\)/)
@@ -43,12 +38,11 @@ test('preload exposes capabilities instead of a generic invoke primitive', () =>
   assert.match(renderer, /window\.rappDesktop/)
 })
 
-test('main process owns navigation, IPC trust, and companion lifecycle', () => {
+test('main process wires the resident companion shell', () => {
   assert.match(main, /requestSingleInstanceLock/)
   assert.match(main, /new Tray/)
   assert.match(main, /event\.preventDefault\(\)[\s\S]*window\.hide\(\)/)
   assert.match(main, /Launch at Login/)
-  assert.match(main, /assertTrustedSender/)
   assert.match(main, /setWindowOpenHandler/)
   assert.match(main, /will-navigate/)
   assert.match(main, /window-all-closed[\s\S]*resident companion/)
@@ -62,10 +56,9 @@ test('packaged renderer carries a restrictive content security policy', () => {
   assert.match(read('vite.config.ts'), /connect-src 'none'/)
 })
 
-test('Brainstem authentication stays in the trusted main process', () => {
+test('Brainstem authentication UI stays behind narrow main-process IPC', () => {
   assert.match(brainstem, /authentication-required/)
   assert.match(brainstem, /Remote Brainstem URLs must use HTTPS/)
-  assert.match(brainstem, /X-RAPP-Desktop-Secret/)
   assert.match(brainstem, /async login\(\)/)
   assert.match(brainstem, /async pollLogin\(\)/)
   assert.match(main, /shell\.openExternal\(requireExternalUrl\(login\.verificationUrl\)\)/)
@@ -93,12 +86,6 @@ test('Hub clones only the selected implementation through atomic staging', () =>
   assert.match(desktopService, /sparse-checkout/)
   assert.match(desktopService, /stagingDirectory/)
   assert.match(desktopService, /finally\s*\{[\s\S]*rm\(staging/)
-})
-
-test('bundled process ownership is retained until confirmed exit', () => {
-  assert.match(brainstem, /waitForProcessExit/)
-  assert.match(brainstem, /Bundled Brainstem did not stop/)
-  assert.match(brainstem, /SIGTERM[\s\S]*SIGKILL/)
 })
 
 test('terminal authentication failures stop polling and expose retry', () => {

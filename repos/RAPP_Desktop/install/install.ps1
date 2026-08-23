@@ -20,9 +20,11 @@ Require-Command "node"
 Require-Command "npm"
 Require-Command "python"
 
-$NodeMajor = [int]((node --version).TrimStart("v").Split(".")[0])
-if ($NodeMajor -lt 20) {
-    throw "Node.js 20 or newer is required."
+$NodeVersionParts = (node --version).TrimStart("v").Split(".")
+$NodeMajor = [int]$NodeVersionParts[0]
+$NodeMinor = [int]$NodeVersionParts[1]
+if (($NodeMajor -lt 22) -or (($NodeMajor -eq 22) -and ($NodeMinor -lt 12))) {
+    throw "Node.js 22.12.0 or newer is required."
 }
 
 New-Item -ItemType Directory -Force -Path $RappHome | Out-Null

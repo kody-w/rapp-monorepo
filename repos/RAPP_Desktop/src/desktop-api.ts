@@ -82,6 +82,7 @@ export interface ChatTurn {
 
 export interface BrainstemChatRequest {
   userInput: string
+  requestId?: string
   sessionId?: string
   conversationHistory?: ChatTurn[]
 }
@@ -115,6 +116,39 @@ export interface DesktopAppInfo {
     | 'netbsd'
 }
 
+export interface ChatRequestToken {
+  requestId: string
+  generation: number
+}
+
+export class ChatRequestLifecycle {
+  private generation = 0
+  private activeRequestId: string | null = null
+
+  begin(requestId: string): ChatRequestToken {
+    this.activeRequestId = requestId
+    return { requestId, generation: this.generation }
+  }
+
+  accepts(token: ChatRequestToken): boolean {
+    return token.generation === this.generation
+      && token.requestId === this.activeRequestId
+  }
+
+  finish(token: ChatRequestToken): boolean {
+    if (!this.accepts(token)) return false
+    this.activeRequestId = null
+    return true
+  }
+
+  clear(): string | null {
+    const activeRequestId = this.activeRequestId
+    this.generation += 1
+    this.activeRequestId = null
+    return activeRequestId
+  }
+}
+
 export interface RappDesktopApi {
   catalog: {
     store(): Promise<StoreManifest>
@@ -133,6 +167,7 @@ export interface RappDesktopApi {
     start(): Promise<BrainstemStatus>
     stop(): Promise<BrainstemStatus>
     chat(request: BrainstemChatRequest): Promise<BrainstemChatResponse>
+    cancelChat(requestId: string): Promise<void>
     login(): Promise<BrainstemLogin>
     pollLogin(): Promise<BrainstemStatus>
     onStatus(listener: (status: BrainstemStatus) => void): () => void

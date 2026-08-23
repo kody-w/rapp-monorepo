@@ -42,7 +42,7 @@ requests.
 
 ## Development
 
-Prerequisites: Node.js 20+ and Python 3.
+Prerequisites: Node.js 22.12.0 or newer and Python 3.
 
 ```bash
 npm install
@@ -61,7 +61,23 @@ npm run dist
 ```
 
 `npm run dist` creates platform installers in `release/` with
-`electron-builder`.
+`electron-builder`. Non-macOS builds do not require Apple credentials.
+
+On macOS, the distribution orchestrator refuses to run the build unless one
+complete notarization credential set is present:
+
+- `APPLE_KEYCHAIN_PROFILE` (and optional `APPLE_KEYCHAIN`);
+- `APPLE_API_KEY`, `APPLE_API_KEY_ID`, and `APPLE_API_ISSUER`; or
+- `APPLE_ID`, `APPLE_APP_SPECIFIC_PASSWORD`, and `APPLE_TEAM_ID`.
+
+A Developer ID Application identity must also be available to
+`electron-builder` (normally through the signing keychain or its supported
+`CSC_*` configuration). Notarization is performed by explicit post-sign and
+post-artifact hooks rather than `electron-builder`'s `notarize: true` option.
+The completed app and DMG must pass Developer ID signature validation, stapled
+ticket validation, and Gatekeeper assessment. The ZIP is extracted and its
+contained app must pass those same checks. Any failed or unavailable check
+makes `npm run dist` fail.
 
 ## Install from source
 
@@ -72,6 +88,13 @@ curl -fsSL https://raw.githubusercontent.com/kody-w/RAPP_Desktop/main/install/in
 # Windows PowerShell
 irm https://raw.githubusercontent.com/kody-w/RAPP_Desktop/main/install/install.ps1 | iex
 ```
+
+The macOS source installer is intended for release maintainers with Apple
+signing and notarization credentials. Before it changes `~/Applications` or
+opens the app, it requires a Developer ID signature, validates a stapled
+notarization ticket, and runs `spctl` Gatekeeper assessment. It aborts without
+copying the bundle if any check fails. RAPP Desktop does not currently
+advertise an unsigned macOS install path.
 
 ## RAPP ecosystem
 

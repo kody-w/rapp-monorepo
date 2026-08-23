@@ -13,6 +13,7 @@ import tempfile
 import threading
 import time
 import requests
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from unittest.mock import Mock, patch, MagicMock
 
@@ -25,6 +26,44 @@ TEST_SECRET = "test-secret"
 
 def auth_headers(server):
     return {"X-RAPP-Desktop-Secret": server.secret}
+
+
+def _test_worker_target(
+    user_input,
+    user_guid,
+    session_guid,
+    context_guid,
+    conversation_history,
+):
+    if user_input == "slow":
+        time.sleep(30)
+    response = "X" * 4_100_000 if user_input == "large" else "Test response"
+    return {
+        "response": response,
+        "voice_response": "",
+        "agent_logs": [],
+        "agents_used": [],
+        "session_guid": "test_session",
+        "context_guid": context_guid,
+        "received": {
+            "user_input": user_input,
+            "user_guid": user_guid,
+            "session_guid": session_guid,
+            "context_guid": context_guid,
+            "conversation_history": conversation_history,
+        },
+    }
+
+
+def wait_for_worker(server, request_id, timeout=10):
+    deadline = time.monotonic() + timeout
+    while time.monotonic() < deadline:
+        with server.server._workers_lock:
+            worker = server.server._workers.get(request_id)
+        if worker is not None:
+            return worker
+        time.sleep(0.02)
+    pytest.fail(f"Worker {request_id} did not start")
 
 
 @pytest.fixture
@@ -82,7 +121,11 @@ class TestServerEndpoints:
                 mock_brain_instance.context_manager.list_contexts.return_value = []
                 mock_brain.return_value = mock_brain_instance
 
-                server = RappLocalServer(port=7999, secret=TEST_SECRET)
+                server = RappLocalServer(
+                    port=7999,
+                    secret=TEST_SECRET,
+                    worker_target=_test_worker_target,
+                )
                 server.start()
                 time.sleep(0.2)  # Wait for server to start
 
@@ -154,8 +197,7 @@ class TestServerEndpoints:
         data = response.json()
         assert "response" in data
         assert data["session_id"] == "test_session"
-        assert mock_process.call_args[1]["session_guid"] == "desktop-session"
-        mock_process.assert_called()
+        assert data["received"]["session_guid"] == "desktop-session"
 
     def test_chat_endpoint_missing_input(self, running_server):
         """Test chat endpoint requires user_input."""
@@ -198,11 +240,168 @@ class TestServerEndpoints:
         assert response.status_code == 200
 
         # Verify all params were passed
-        call_kwargs = mock_process.call_args[1]
+        call_kwargs = response.json()["received"]
         assert call_kwargs["user_input"] == "Hello"
         assert call_kwargs["user_guid"] == "test_user"
         assert call_kwargs["session_guid"] == "test_session"
         assert call_kwargs["context_guid"] == "test_context"
+
+
+class TestCancellation:
+    """Chat work is isolated, cancellable, and never serializes the server."""
+
+    @pytest.fixture
+    def running_server(self):
+        from local_server import RappLocalServer
+
+        server = RappLocalServer(
+            port=0,
+            secret=TEST_SECRET,
+            worker_target=_test_worker_target,
+        )
+        server.start()
+        yield server
+        server.stop()
+
+    def test_cancel_ends_exact_worker_and_next_request_is_prompt(
+        self,
+        running_server,
+    ):
+        server = running_server
+        base_url = f"http://127.0.0.1:{server.port}"
+        headers = auth_headers(server)
+
+        with ThreadPoolExecutor(max_workers=1) as executor:
+            pending = executor.submit(
+                requests.post,
+                f"{base_url}/chat",
+                json={"request_id": "slow-request", "user_input": "slow"},
+                headers=headers,
+                timeout=10,
+            )
+            worker = wait_for_worker(server, "slow-request")
+
+            started = time.monotonic()
+            health = requests.get(f"{base_url}/health", timeout=2)
+            assert health.status_code == 200
+            assert time.monotonic() - started < 1
+
+            duplicate = requests.post(
+                f"{base_url}/chat",
+                json={"request_id": "slow-request", "user_input": "Hello"},
+                headers=headers,
+                timeout=2,
+            )
+            assert duplicate.status_code == 409
+
+            started = time.monotonic()
+            cancelled = requests.post(
+                f"{base_url}/cancel",
+                json={"request_id": "slow-request"},
+                headers=headers,
+                timeout=7,
+            )
+            assert cancelled.status_code == 200
+            assert cancelled.json() == {
+                "status": "cancelled",
+                "request_id": "slow-request",
+                "cancelled": True,
+                "worker_ended": True,
+            }
+            assert time.monotonic() - started < 5
+            assert not worker.process.is_alive()
+            assert pending.result(timeout=2).status_code == 409
+
+        started = time.monotonic()
+        second = requests.post(
+            f"{base_url}/chat",
+            json={"request_id": "second-request", "user_input": "Hello"},
+            headers=headers,
+            timeout=7,
+        )
+        assert second.status_code == 200
+        assert second.json()["response"] == "Test response"
+        assert time.monotonic() - started < 5
+
+    def test_cancel_requires_authentication(self, running_server):
+        response = requests.post(
+            f"http://127.0.0.1:{running_server.port}/cancel",
+            json={"request_id": "not-authorized"},
+            timeout=2,
+        )
+        assert response.status_code == 401
+
+    def test_client_disconnect_ends_worker(self, running_server):
+        import socket
+
+        server = running_server
+        body = json.dumps({
+            "request_id": "disconnected-request",
+            "user_input": "slow",
+        }).encode()
+        connection = socket.create_connection(("127.0.0.1", server.port))
+        connection.sendall(
+            (
+                "POST /chat HTTP/1.1\r\n"
+                f"Host: 127.0.0.1:{server.port}\r\n"
+                "Content-Type: application/json\r\n"
+                f"X-RAPP-Desktop-Secret: {server.secret}\r\n"
+                f"Content-Length: {len(body)}\r\n"
+                "Connection: close\r\n\r\n"
+            ).encode()
+            + body
+        )
+        worker = wait_for_worker(server, "disconnected-request")
+        connection.close()
+
+        deadline = time.monotonic() + 5
+        while worker.process.is_alive() and time.monotonic() < deadline:
+            time.sleep(0.02)
+        assert not worker.process.is_alive()
+        with server.server._workers_lock:
+            assert "disconnected-request" not in server.server._workers
+
+    def test_server_shutdown_ends_workers(self, running_server):
+        server = running_server
+        base_url = f"http://127.0.0.1:{server.port}"
+        with ThreadPoolExecutor(max_workers=1) as executor:
+            pending = executor.submit(
+                requests.post,
+                f"{base_url}/chat",
+                json={"request_id": "shutdown-request", "user_input": "slow"},
+                headers=auth_headers(server),
+                timeout=10,
+            )
+            worker = wait_for_worker(server, "shutdown-request")
+            server.stop()
+            assert not worker.process.is_alive()
+            try:
+                pending.result(timeout=2)
+            except requests.RequestException:
+                pass
+
+    def test_request_and_result_sizes_are_bounded(self, running_server):
+        server = running_server
+        base_url = f"http://127.0.0.1:{server.port}"
+        oversized = requests.post(
+            f"{base_url}/chat",
+            data=b"X" * 1_000_001,
+            headers={
+                **auth_headers(server),
+                "Content-Type": "application/json",
+            },
+            timeout=2,
+        )
+        assert oversized.status_code == 413
+
+        result = requests.post(
+            f"{base_url}/chat",
+            json={"request_id": "large-result", "user_input": "large"},
+            headers=auth_headers(server),
+            timeout=7,
+        )
+        assert result.status_code == 502
+        assert result.json()["error"] == "Brainstem result is too large"
 
 
 class TestBrowserIsolation:

@@ -14,6 +14,7 @@ const IPC = Object.freeze({
   brainstemStart: 'rapp:brainstem-start',
   brainstemStop: 'rapp:brainstem-stop',
   brainstemChat: 'rapp:brainstem-chat',
+  brainstemCancelChat: 'rapp:brainstem-cancel-chat',
   brainstemLogin: 'rapp:brainstem-login',
   brainstemLoginPoll: 'rapp:brainstem-login-poll',
   brainstemStatusChanged: 'rapp:brainstem-status-changed',
@@ -41,6 +42,8 @@ const api = Object.freeze({
     start: () => ipcRenderer.invoke(IPC.brainstemStart),
     stop: () => ipcRenderer.invoke(IPC.brainstemStop),
     chat: (request) => ipcRenderer.invoke(IPC.brainstemChat, request),
+    cancelChat: (requestId) =>
+      ipcRenderer.invoke(IPC.brainstemCancelChat, requestId),
     login: () => ipcRenderer.invoke(IPC.brainstemLogin),
     pollLogin: () => ipcRenderer.invoke(IPC.brainstemLoginPoll),
     onStatus: (listener) => {

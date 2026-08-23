@@ -1,4 +1,4 @@
-import { spawn } from 'node:child_process'
+import { spawn, type ChildProcess } from 'node:child_process'
 import { createHash, randomUUID } from 'node:crypto'
 import {
   access,
@@ -34,10 +34,36 @@ const STORE_MANIFEST =
   'https://raw.githubusercontent.com/kody-w/RAPP_Store/main/index.json'
 const HUB_MANIFEST =
   'https://raw.githubusercontent.com/kody-w/RAPP_Hub/main/manifest.json'
-const STORE_RAW_ROOT =
-  'https://raw.githubusercontent.com/kody-w/RAPP_Store/main/'
 const MAX_MANIFEST_BYTES = 2 * 1024 * 1024
 const MAX_PACKAGE_BYTES = 5 * 1024 * 1024
+const DEFAULT_AVAILABILITY_CACHE_TTL_MS = 5 * 60_000
+const MAX_AVAILABILITY_CACHE_TTL_MS = 15 * 60_000
+
+type FetchImplementation = typeof fetch
+type CommandResult = { code: number; stderr: string }
+type CommandRunner = (
+  command: string,
+  args: string[],
+  timeoutMs?: number,
+) => Promise<CommandResult>
+
+interface InstallableSkill extends CatalogSkill {
+  downloadUrl: string
+  sha256: string
+}
+
+interface StoreCatalog {
+  manifest: StoreManifest
+  installableSkills: InstallableSkill[]
+}
+
+export interface DesktopServiceOptions {
+  fetch?: FetchImplementation
+  rappHome?: string
+  runCommand?: CommandRunner
+  availabilityCacheTtlMs?: number
+  now?: () => number
+}
 
 function optionalString(value: unknown, label: string): string | undefined {
   return value === undefined || value === null || value === ''
@@ -105,16 +131,27 @@ function parseAgent(value: unknown): CatalogAgent {
   }
 }
 
-function parseSkill(value: unknown): CatalogSkill {
-  const record = requireRecord(value, 'Skill')
+function parseSkillProjection(record: Record<string, unknown>): InstallableSkill {
+  const downloadUrl = requireRawGitHubUrl(record.skill_url, 'Skill URL')
+  const url = new URL(downloadUrl)
+  const parts = url.pathname.split('/').filter(Boolean)
+  if (parts.at(-1) !== 'SKILL.md' || parts.length < 5) {
+    throw new TypeError('Skill URL must identify a SKILL.md in a GitHub repository.')
+  }
   return {
     id: requireSafeRelativePath(record.id, 'Skill id'),
     name: requireString(record.name, 'Skill name', 256),
-    description: requireString(record.description, 'Skill description', 4096),
+    description: requireString(
+      record.summary ?? record.tagline,
+      'Skill description',
+      4096,
+    ),
     version: requireString(record.version, 'Skill version', 64),
     icon: optionalString(record.icon, 'Skill icon'),
-    path: requireSafeRelativePath(record.path, 'Skill path'),
-    features: stringArray(record.features),
+    path: requireSafeRelativePath(parts.slice(3, -1).join('/'), 'Skill path'),
+    features: stringArray(record.tags),
+    downloadUrl,
+    sha256: requireSha256(record.skill_sha256, 'Skill SHA-256'),
   }
 }
 
@@ -149,9 +186,69 @@ function requireGitRef(value: unknown): string {
   return ref
 }
 
-async function fetchText(url: string, maximumBytes: number): Promise<string> {
-  const response = await fetch(url, {
-    headers: { Accept: 'application/json, text/plain;q=0.9' },
+function publicRapplications(value: unknown): Record<string, unknown>[] {
+  if (!Array.isArray(value)) {
+    throw new Error('Store catalog does not satisfy rapp-store/1.0.')
+  }
+  const visible: Record<string, unknown>[] = []
+  value.forEach((entry, index) => {
+    const record = requireRecord(entry, `Rapplication ${index + 1}`)
+    const access = optionalString(record.access, 'Rapplication access')
+    if (access === 'private') return
+    if (access !== undefined && access !== 'public') {
+      throw new TypeError('Rapplication access must be public or private.')
+    }
+    visible.push(record)
+  })
+  return visible
+}
+
+function parseStoreCatalog(value: unknown): StoreCatalog {
+  const record = requireRecord(value, 'Store manifest')
+  if (record.schema !== 'rapp-store/1.0') {
+    throw new Error('Store catalog does not satisfy rapp-store/1.0.')
+  }
+  const rapplications = publicRapplications(record.rapplications)
+  const installableSkills = rapplications
+    .filter((entry) => entry.skill_url !== undefined && entry.skill_url !== null)
+    .map(parseSkillProjection)
+  return {
+    manifest: {
+      agents: rapplications.map(parseAgent),
+      skills: installableSkills.map((skill) => ({
+        id: skill.id,
+        name: skill.name,
+        description: skill.description,
+        version: skill.version,
+        icon: skill.icon,
+        path: skill.path,
+        features: skill.features,
+      })),
+    },
+    installableSkills,
+  }
+}
+
+export function parseStoreManifestDocument(value: unknown): StoreManifest {
+  return parseStoreCatalog(value).manifest
+}
+
+export function parseHubManifestDocument(value: unknown): HubManifest {
+  const record = requireRecord(value, 'Hub manifest')
+  if (!Array.isArray(record.implementations)) {
+    throw new Error('Hub manifest is missing implementations.')
+  }
+  return { implementations: record.implementations.map(parseImplementation) }
+}
+
+async function fetchBytes(
+  url: string,
+  maximumBytes: number,
+  fetchImplementation: FetchImplementation,
+  accept = 'application/json, text/plain;q=0.9',
+): Promise<Buffer> {
+  const response = await fetchImplementation(url, {
+    headers: { Accept: accept },
     redirect: 'error',
     signal: AbortSignal.timeout(15_000),
   })
@@ -162,19 +259,81 @@ async function fetchText(url: string, maximumBytes: number): Promise<string> {
   if (contentLength > maximumBytes) {
     throw new Error('Remote content exceeds the allowed size.')
   }
-  const text = await response.text()
-  if (Buffer.byteLength(text) > maximumBytes) {
+  const content = Buffer.from(await response.arrayBuffer())
+  if (content.byteLength > maximumBytes) {
     throw new Error('Remote content exceeds the allowed size.')
   }
-  return text
+  return content
 }
 
-async function fetchJson(url: string): Promise<unknown> {
-  const text = await fetchText(url, MAX_MANIFEST_BYTES)
+async function fetchText(
+  url: string,
+  maximumBytes: number,
+  fetchImplementation: FetchImplementation,
+): Promise<string> {
+  return (await fetchBytes(url, maximumBytes, fetchImplementation)).toString('utf8')
+}
+
+async function fetchJson(
+  url: string,
+  fetchImplementation: FetchImplementation,
+): Promise<unknown> {
+  const text = await fetchText(url, MAX_MANIFEST_BYTES, fetchImplementation)
   try {
     return JSON.parse(text)
   } catch {
     throw new Error('Remote manifest is not valid JSON.')
+  }
+}
+
+function boundedAvailabilityCacheTtl(value: number | undefined): number {
+  if (value === undefined) return DEFAULT_AVAILABILITY_CACHE_TTL_MS
+  if (!Number.isFinite(value) || value <= 0) {
+    throw new TypeError('Availability cache TTL must be a positive finite number.')
+  }
+  return Math.min(Math.floor(value), MAX_AVAILABILITY_CACHE_TTL_MS)
+}
+
+function implementationAvailabilityUrl(
+  implementation: CatalogImplementation,
+): string {
+  const repository = new URL(implementation.repo)
+  const [owner, name] = repository.pathname.split('/').filter(Boolean)
+  const selectedPath = implementation.path
+    .split('/')
+    .map((segment) => encodeURIComponent(segment))
+    .join('/')
+  return (
+    `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(name)}`
+    + `/contents/${selectedPath}?ref=${encodeURIComponent(implementation.branch)}`
+  )
+}
+
+async function implementationDirectoryIsPublic(
+  availabilityUrl: string,
+  fetchImplementation: FetchImplementation,
+): Promise<boolean> {
+  const response = await fetchImplementation(availabilityUrl, {
+    headers: { Accept: 'application/vnd.github+json' },
+    redirect: 'error',
+    signal: AbortSignal.timeout(15_000),
+  })
+  if (response.status === 404) return false
+  if (!response.ok) {
+    throw new Error(`Request failed with HTTP ${response.status}.`)
+  }
+  const contentLength = Number(response.headers.get('content-length') ?? '0')
+  if (contentLength > MAX_MANIFEST_BYTES) {
+    throw new Error('Remote content exceeds the allowed size.')
+  }
+  const content = Buffer.from(await response.arrayBuffer())
+  if (content.byteLength > MAX_MANIFEST_BYTES) {
+    throw new Error('Remote content exceeds the allowed size.')
+  }
+  try {
+    return Array.isArray(JSON.parse(content.toString('utf8')))
+  } catch {
+    throw new Error('GitHub availability response is not valid JSON.')
   }
 }
 
@@ -187,59 +346,147 @@ async function pathExists(target: string): Promise<boolean> {
   }
 }
 
-async function atomicWrite(target: string, content: string): Promise<void> {
+async function atomicWrite(
+  target: string,
+  content: string | Uint8Array,
+): Promise<void> {
   const temporary = `${target}.${process.pid}.${randomUUID()}.tmp`
-  await writeFile(temporary, content, { encoding: 'utf8', flag: 'wx', mode: 0o600 })
+  await writeFile(temporary, content, { flag: 'wx', mode: 0o600 })
   try {
     await rename(temporary, target)
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code !== 'EEXIST') throw error
-    await rm(target, { force: true })
-    await rename(temporary, target)
+  } finally {
+    await rm(temporary, { force: true })
   }
 }
 
-async function run(
-  command: string,
-  args: string[],
-  timeoutMs = 120_000,
-): Promise<{ code: number; stderr: string }> {
-  return new Promise((resolve, reject) => {
-    const child = spawn(command, args, {
-      shell: false,
-      windowsHide: true,
-      stdio: ['ignore', 'ignore', 'pipe'],
-    })
-    let stderr = ''
-    child.stderr?.on('data', (chunk: Buffer) => {
-      stderr = `${stderr}${chunk.toString()}`.slice(-16_384)
-    })
-    let timedOut = false
-    const timer = setTimeout(() => {
-      timedOut = true
+async function terminateProcessTree(child: ChildProcess): Promise<void> {
+  if (child.pid === undefined) return
+  if (process.platform !== 'win32') {
+    try {
+      process.kill(-child.pid, 'SIGKILL')
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== 'ESRCH') throw error
+    }
+    return
+  }
+
+  await new Promise<void>((resolve) => {
+    const terminator = spawn(
+      'taskkill',
+      ['/pid', String(child.pid), '/T', '/F'],
+      { shell: false, windowsHide: true, stdio: 'ignore' },
+    )
+    terminator.once('error', () => {
       child.kill('SIGKILL')
-    }, timeoutMs)
-    child.once('error', (error) => {
-      clearTimeout(timer)
-      reject(error)
+      resolve()
     })
-    child.once('exit', (code) => {
-      clearTimeout(timer)
-      if (timedOut) {
-        reject(new Error(`${command} timed out.`))
-      } else {
-        resolve({ code: code ?? -1, stderr: stderr.trim() })
-      }
-    })
+    terminator.once('close', () => resolve())
   })
 }
 
+export async function runCommand(
+  command: string,
+  args: string[],
+  timeoutMs = 120_000,
+): Promise<CommandResult> {
+  const child = spawn(command, args, {
+    detached: process.platform !== 'win32',
+    shell: false,
+    windowsHide: true,
+    stdio: ['ignore', 'ignore', 'pipe'],
+  })
+  let stderr = ''
+  child.stderr?.on('data', (chunk: Buffer) => {
+    stderr = `${stderr}${chunk.toString()}`.slice(-16_384)
+  })
+
+  const completion = new Promise<CommandResult>((resolve, reject) => {
+    child.once('error', reject)
+    child.once('close', (code) => {
+      resolve({ code: code ?? -1, stderr: stderr.trim() })
+    })
+  })
+
+  let timer: NodeJS.Timeout | undefined
+  const timeout = new Promise<'timeout'>((resolve) => {
+    timer = setTimeout(() => resolve('timeout'), timeoutMs)
+  })
+
+  try {
+    const outcome = await Promise.race([
+      completion.then((result) => ({ kind: 'complete' as const, result })),
+      timeout.then(() => ({ kind: 'timeout' as const })),
+    ])
+    if (outcome.kind === 'complete') return outcome.result
+
+    await terminateProcessTree(child)
+    await completion.catch(() => undefined)
+    throw new Error(`${command} timed out.`)
+  } finally {
+    if (timer !== undefined) clearTimeout(timer)
+  }
+}
+
 export class DesktopService {
-  readonly rappHome = path.join(os.homedir(), '.rapp')
-  readonly agentsDirectory = path.join(this.rappHome, 'agents')
-  readonly skillsDirectory = path.join(this.rappHome, 'skills')
-  readonly projectsDirectory = path.join(this.rappHome, 'projects')
-  readonly stagingDirectory = path.join(this.rappHome, '.staging')
+  readonly rappHome: string
+  readonly agentsDirectory: string
+  readonly skillsDirectory: string
+  readonly projectsDirectory: string
+  readonly stagingDirectory: string
+  private readonly fetchImplementation: FetchImplementation
+  private readonly commandRunner: CommandRunner
+  private readonly availabilityCacheTtlMs: number
+  private readonly now: () => number
+  private readonly availabilityCache = new Map<
+    string,
+    { available: boolean; expiresAt: number }
+  >()
+  private readonly availabilityRequests = new Map<string, Promise<boolean>>()
+
+  constructor(options: DesktopServiceOptions = {}) {
+    this.rappHome = options.rappHome ?? path.join(os.homedir(), '.rapp')
+    this.agentsDirectory = path.join(this.rappHome, 'agents')
+    this.skillsDirectory = path.join(this.rappHome, 'skills')
+    this.projectsDirectory = path.join(this.rappHome, 'projects')
+    this.stagingDirectory = path.join(this.rappHome, '.staging')
+    this.fetchImplementation = options.fetch ?? fetch
+    this.commandRunner = options.runCommand ?? runCommand
+    this.availabilityCacheTtlMs = boundedAvailabilityCacheTtl(
+      options.availabilityCacheTtlMs,
+    )
+    this.now = options.now ?? Date.now
+  }
+
+  private implementationIsAvailable(
+    implementation: CatalogImplementation,
+  ): Promise<boolean> {
+    const key = implementationAvailabilityUrl(implementation)
+    const cached = this.availabilityCache.get(key)
+    if (cached && cached.expiresAt > this.now()) {
+      return Promise.resolve(cached.available)
+    }
+    if (cached) this.availabilityCache.delete(key)
+
+    const pending = this.availabilityRequests.get(key)
+    if (pending) return pending
+
+    const request = implementationDirectoryIsPublic(
+      key,
+      this.fetchImplementation,
+    ).then((available) => {
+      this.availabilityCache.set(key, {
+        available,
+        expiresAt: this.now() + this.availabilityCacheTtlMs,
+      })
+      return available
+    }).finally(() => {
+      if (this.availabilityRequests.get(key) === request) {
+        this.availabilityRequests.delete(key)
+      }
+    })
+    this.availabilityRequests.set(key, request)
+    return request
+  }
 
   async initialize(): Promise<void> {
     await Promise.all([
@@ -253,22 +500,23 @@ export class DesktopService {
   }
 
   async storeManifest(): Promise<StoreManifest> {
-    const record = requireRecord(await fetchJson(STORE_MANIFEST), 'Store manifest')
-    if (record.schema !== 'rapp-store/1.0' || !Array.isArray(record.rapplications)) {
-      throw new Error('Store catalog does not satisfy rapp-store/1.0.')
-    }
-    return {
-      agents: record.rapplications.map(parseAgent),
-      skills: [],
-    }
+    return parseStoreManifestDocument(
+      await fetchJson(STORE_MANIFEST, this.fetchImplementation),
+    )
   }
 
   async hubManifest(): Promise<HubManifest> {
-    const record = requireRecord(await fetchJson(HUB_MANIFEST), 'Hub manifest')
-    if (!Array.isArray(record.implementations)) {
-      throw new Error('Hub manifest is missing implementations.')
+    const manifest = parseHubManifestDocument(
+      await fetchJson(HUB_MANIFEST, this.fetchImplementation),
+    )
+    const availability = await Promise.all(manifest.implementations.map(
+      (implementation) => this.implementationIsAvailable(implementation),
+    ))
+    return {
+      implementations: manifest.implementations.filter(
+        (_implementation, index) => availability[index],
+      ),
     }
-    return { implementations: record.implementations.map(parseImplementation) }
   }
 
   async installAgent(value: unknown): Promise<InstallResult> {
@@ -279,7 +527,11 @@ export class DesktopService {
     if (path.basename(agent.filename) !== agent.filename) {
       throw new TypeError('Agent filename cannot contain directories.')
     }
-    const content = await fetchText(agent.downloadUrl, MAX_PACKAGE_BYTES)
+    const content = await fetchBytes(
+      agent.downloadUrl,
+      MAX_PACKAGE_BYTES,
+      this.fetchImplementation,
+    )
     const digest = createHash('sha256').update(content).digest('hex')
     if (digest !== agent.sha256) {
       throw new Error(`Integrity check failed for ${agent.name}.`)
@@ -290,9 +542,24 @@ export class DesktopService {
   }
 
   async installSkill(value: unknown): Promise<InstallResult> {
-    const skill = parseSkill(value)
-    const source = new URL(`${skill.path}/SKILL.md`, STORE_RAW_ROOT)
-    const content = await fetchText(source.toString(), MAX_PACKAGE_BYTES)
+    const input = typeof value === 'string'
+      ? value
+      : requireRecord(value, 'Skill').id
+    const skillId = requireSafeRelativePath(input, 'Skill id')
+    const catalog = parseStoreCatalog(
+      await fetchJson(STORE_MANIFEST, this.fetchImplementation),
+    )
+    const skill = catalog.installableSkills.find((candidate) => candidate.id === skillId)
+    if (!skill) throw new Error(`Skill ${skillId} is not in the current Store catalog.`)
+    const content = await fetchBytes(
+      skill.downloadUrl,
+      MAX_PACKAGE_BYTES,
+      this.fetchImplementation,
+    )
+    const digest = createHash('sha256').update(content).digest('hex')
+    if (digest !== skill.sha256) {
+      throw new Error(`Integrity check failed for ${skill.name}.`)
+    }
     const directory = resolveInside(this.skillsDirectory, skill.id)
     await mkdir(directory, { recursive: true, mode: 0o700 })
     const target = resolveInside(directory, 'SKILL.md')
@@ -360,7 +627,19 @@ export class DesktopService {
   }
 
   async cloneImplementation(value: unknown): Promise<InstallResult> {
-    const implementation = parseImplementation(value)
+    const input = typeof value === 'string'
+      ? value
+      : requireRecord(value, 'Implementation').id
+    const implementationId = requireProjectName(input)
+    const manifest = await this.hubManifest()
+    const implementation = manifest.implementations.find(
+      (candidate) => candidate.id === implementationId,
+    )
+    if (!implementation) {
+      throw new Error(
+        `Implementation ${implementationId} is not currently available in the Hub.`,
+      )
+    }
     const target = resolveInside(this.projectsDirectory, implementation.id)
     if (await pathExists(target)) {
       return { success: false, message: 'Already exists' }
@@ -370,7 +649,7 @@ export class DesktopService {
       `clone-${implementation.id}-${randomUUID()}`,
     )
     try {
-      const clone = await run('git', [
+      const clone = await this.commandRunner('git', [
         'clone',
         '--depth',
         '1',
@@ -388,7 +667,7 @@ export class DesktopService {
           message: clone.stderr || `git exited with code ${clone.code}`,
         }
       }
-      const sparse = await run('git', [
+      const sparse = await this.commandRunner('git', [
         '-C',
         staging,
         'sparse-checkout',

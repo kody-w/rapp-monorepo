@@ -7,6 +7,7 @@ import type {
   CatalogSkill as Skill,
   ProjectInfo as Project,
 } from './desktop-api'
+import { ChatRequestLifecycle } from './desktop-api'
 
 type Page = 'home' | 'chat' | 'store' | 'hub' | 'projects' | 'settings'
 
@@ -42,6 +43,10 @@ export default function App() {
   const [chatLoading, setChatLoading] = useState(false)
   const [loginCode, setLoginCode] = useState('')
   const chatEndRef = useRef<HTMLDivElement>(null)
+  const chatLifecycleRef = useRef<ChatRequestLifecycle | null>(null)
+  if (!chatLifecycleRef.current) {
+    chatLifecycleRef.current = new ChatRequestLifecycle()
+  }
 
   useEffect(() => {
     void loadProjects()
@@ -202,6 +207,8 @@ export default function App() {
 
   async function sendMessage() {
     if (!chatInput.trim() || chatLoading) return
+    const requestId = crypto.randomUUID()
+    const token = chatLifecycleRef.current!.begin(requestId)
 
     const userMessage: ChatMessage = {
       role: 'user',
@@ -216,6 +223,7 @@ export default function App() {
     try {
       const response: BrainstemChatResponse = await window.rappDesktop.brainstem.chat({
         userInput: userMessage.content,
+        requestId,
         sessionId: sessionGuid || undefined,
         conversationHistory: chatMessages.map(m => ({
           role: m.role,
@@ -223,6 +231,7 @@ export default function App() {
         }))
       })
 
+      if (!chatLifecycleRef.current!.accepts(token)) return
       if (response.sessionId) {
         setSessionGuid(response.sessionId)
       }
@@ -236,20 +245,29 @@ export default function App() {
 
       setChatMessages(prev => [...prev, assistantMessage])
     } catch (e) {
+      if (!chatLifecycleRef.current!.accepts(token)) return
       const errorMessage: ChatMessage = {
         role: 'assistant',
         content: `Error: ${e}. Make sure the RAPP Brainstem is running.`,
         timestamp: new Date()
       }
       setChatMessages(prev => [...prev, errorMessage])
+    } finally {
+      if (chatLifecycleRef.current!.finish(token)) {
+        setChatLoading(false)
+      }
     }
-
-    setChatLoading(false)
   }
 
   function clearChat() {
+    const activeRequestId = chatLifecycleRef.current!.clear()
     setChatMessages([])
     setSessionGuid('')
+    setChatLoading(false)
+    if (activeRequestId) {
+      void window.rappDesktop.brainstem.cancelChat(activeRequestId)
+        .catch(error => console.error('Unable to cancel chat request:', error))
+    }
   }
 
   const filteredAgents = agents.filter(a =>
@@ -353,12 +371,12 @@ export default function App() {
             <header className="header">
               <h2>Chat with RAPP</h2>
               <div className="header-actions">
-                <span className={`status-badge ${brainstemStatus.running ? 'online' : 'offline'}`}>
+                <span className={`status-badge ${brainstemReady ? 'online' : 'offline'}`}>
                   {brainstemStatus.phase === 'authentication-required'
                     ? 'Sign-in Required'
                     : brainstemStatus.phase === 'authentication-failed'
                       ? 'Sign-in Failed'
-                    : brainstemStatus.running
+                    : brainstemReady
                       ? 'Brainstem Ready'
                       : 'Brainstem Offline'}
                 </span>
@@ -600,17 +618,19 @@ export default function App() {
                 <div className="settings-row">
                   <div>
                     <strong>Status:</strong>{' '}
-                    <span className={`status-badge ${brainstemStatus.running ? 'online' : 'offline'}`}>
+                    <span className={`status-badge ${brainstemReady ? 'online' : 'offline'}`}>
                       {brainstemStatus.phase === 'authentication-required'
                         ? 'Sign-in Required'
                         : brainstemStatus.phase === 'authentication-failed'
                           ? 'Sign-in Failed'
-                        : brainstemStatus.running
+                        : brainstemStatus.phase === 'error'
+                          ? 'Unavailable'
+                        : brainstemReady
                           ? 'Ready'
                           : 'Offline'}
                     </span>
                   </div>
-                  {brainstemStatus.running && (
+                  {brainstemReady && (
                     <div style={{ marginTop: '0.5rem', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
                       Endpoint: {brainstemStatus.endpoint}
                     </div>
