@@ -1,0 +1,5 @@
+include SDK.md
+include SDK_LICENSE
+include pyproject.toml
+recursive-include rapp_sdk *.py
+recursive-include tests *.py
