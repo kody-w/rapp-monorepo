@@ -2,40 +2,57 @@
   "schema": "rapp-monorepo/1.0",
   "integrity_profile": "rapp-monorepo-staged-tree/1.0",
   "owner": "kody-w",
-  "captured_at": "2026-08-23T18:54:36+00:00",
+  "captured_at": "2026-08-23T20:59:22+00:00",
   "membership_pattern": "(?i)^(rapp|rappter|openrappter|RAR$|twin|brainstem|wildhaven)",
+  "membership_exclusions": {
+    "exclude_archived": true,
+    "repositories": [
+      {
+        "repo": "rapp-monorepo",
+        "reason_code": "snapshot-self-recursion",
+        "reason": "The aggregate repository cannot capture itself without recursive, non-point-in-time content."
+      },
+      {
+        "repo": "rapp-shape-aibast",
+        "reason_code": "non-organ-staging-repository",
+        "reason": "AIBAST library-layout shape staging is an external delivery rehearsal, not a RAPP organism organ."
+      }
+    ]
+  },
   "max_file_mb": 2.0,
   "repos": [
     {
       "repo": "brainstem-bootcamp",
       "commit": "c690f51648cc968c005077147af553b8eb85dd3d",
       "committed_at": "2026-07-28T14:30:01-04:00",
-      "captured_at": "2026-08-23T18:51:41+00:00",
+      "captured_at": "2026-08-23T20:56:14+00:00",
       "files": 6,
       "bytes": 51556,
       "tree_sha256": "303f32323c2b35f25c96b12d361ed6c866b69735be0f1a1067f568c7da4c2cbc",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "brainstem-harness",
       "commit": "dbabbf2bfea744c2d8522082c2003b62a897c4b1",
       "committed_at": "2026-08-05T21:12:51-04:00",
-      "captured_at": "2026-08-23T18:51:41+00:00",
+      "captured_at": "2026-08-23T20:56:14+00:00",
       "files": 3,
       "bytes": 29890,
       "tree_sha256": "b18b3fee20acee55685ece9f5b57804888a070d55f6796cecb63713c3ea8500c",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "openrappter",
-      "commit": "9913ca2e5237c44620f5422644cbe6060f2c8c18",
-      "committed_at": "2026-08-23T10:38:58-04:00",
-      "captured_at": "2026-08-23T18:51:46+00:00",
-      "files": 1789,
-      "bytes": 24078464,
-      "tree_sha256": "bc700de454e745062b0c625794ea3c7e5ad52f6fa062f24474125d3ce7484626",
+      "commit": "9556eec44623ef00b7fa4213e70bf964c0f1845d",
+      "committed_at": "2026-08-23T15:52:02-04:00",
+      "captured_at": "2026-08-23T20:56:18+00:00",
+      "files": 1749,
+      "bytes": 18060101,
+      "tree_sha256": "31d259db55074141172f757b0780a8bf41c302ad6cd132ae106fb232d03ebac8",
       "skipped_large": [
         "macos/dist/OpenRappter-Bar-1.4.0.dmg (2.6MB)",
         "macos/dist/OpenRappter-Bar-1.5.0.dmg (2.6MB)",
@@ -49,6 +66,174 @@
           "reason": "path matches an always-withhold shape (**/.npmrc)"
         },
         {
+          "file": "beta/build/icon.icns",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icon.ico",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icon.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/1024x1024.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/120x120.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/128x128.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/152x152.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/167x167.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/16x16.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/180x180.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/192x192.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/20x20.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/24x24.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/256x256.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/29x29.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/32x32.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/40x40.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/48x48.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/512x512.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/58x58.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/60x60.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/64x64.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/72x72.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/76x76.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/80x80.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/87x87.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/build/icons/96x96.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/docs/show-mode/force-mode.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/docs/show-mode/step-01-welcome.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/docs/show-mode/step-02-interview.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/docs/show-mode/step-03-pill.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/docs/show-mode/step-04-doors.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/docs/show-mode/step-05-import.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/docs/show-mode/step-06-analyze.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/docs/show-mode/step-07-edit.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/docs/show-mode/step-08-approve.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/docs/show-mode/step-09-preview.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/docs/show-mode/step-10-test.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/docs/show-mode/step-11-confirm.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/docs/show-mode/step-12-promote.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/docs/show-mode/step-13-why.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "beta/docs/show-mode/step-14-end.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
           "file": "beta/scripts/data-sloshing-proof.mjs",
           "reason": "contains something shaped like a credential"
         },
@@ -57,83 +242,117 @@
           "reason": "contains something shaped like a credential"
         },
         {
+          "file": "docs/blog/dojo-screenshot.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
           "file": "python/tests/test_flight_recorder.py",
           "reason": "contains something shaped like a credential"
         },
         {
           "file": "rapp_brainstem/.env.example",
           "reason": "path matches an always-withhold shape (**/.env.*)"
+        },
+        {
+          "file": "typescript/desktop/build/icon.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
         }
-      ]
+      ],
+      "gitlinks": []
     },
     {
       "repo": "openrappter-alpha",
       "commit": "288c961fc26883dfc8805d57e848096aebafdc4e",
       "committed_at": "2026-07-21T16:40:46-04:00",
-      "captured_at": "2026-08-23T18:51:46+00:00",
+      "captured_at": "2026-08-23T20:56:19+00:00",
       "files": 4,
       "bytes": 6467,
       "tree_sha256": "db453e56b5b8c27dce82642e27050377e24674b6419fa16b3960cdd25e87d045",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "openrappter-beta",
       "commit": "9c1c2ebaf96cfbc2042283f5d3da37c23173148a",
       "committed_at": "2026-07-21T16:40:47-04:00",
-      "captured_at": "2026-08-23T18:51:46+00:00",
+      "captured_at": "2026-08-23T20:56:19+00:00",
       "files": 4,
       "bytes": 6453,
       "tree_sha256": "67461b93cb6ab6003aa006ab190c4a53c49017a6789934eca3fa10d08c84fae1",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "openrappter-canary",
       "commit": "9980e11e1bdeddadc712ad8b58ef6537bdfc8c85",
       "committed_at": "2026-07-21T16:40:42-04:00",
-      "captured_at": "2026-08-23T18:51:46+00:00",
+      "captured_at": "2026-08-23T20:56:19+00:00",
       "files": 4,
       "bytes": 6495,
       "tree_sha256": "53a0f2d45da1c5bce4ec558e03adf74959d1681a3b363e2c07229bc01a546392",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "openrappter-nightly",
       "commit": "ac9ba747b44363e8d972394d019774316979d9fd",
       "committed_at": "2026-07-21T16:40:44-04:00",
-      "captured_at": "2026-08-23T18:51:46+00:00",
+      "captured_at": "2026-08-23T20:56:20+00:00",
       "files": 4,
       "bytes": 6499,
       "tree_sha256": "ed76d356190b29e60001b99c09c28eb03c4cfbdcb54e367768ac41d7141e0344",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "openrappter-release-train",
       "commit": "279c2dfd3c14b96868c82dd35761dfef0cff3e71",
       "committed_at": "2026-07-21T15:54:03-04:00",
-      "captured_at": "2026-08-23T18:51:47+00:00",
+      "captured_at": "2026-08-23T20:56:21+00:00",
       "files": 6,
       "bytes": 13060,
       "tree_sha256": "4202e301be6a0cf36362ea6c4bb10b2949ae79d3dcfe03bd3884ff5e230e1fcb",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "RAPP",
       "commit": "789e6c5245f18e9685450fd6105dc26867837895",
       "committed_at": "2026-08-16T20:35:21-04:00",
-      "captured_at": "2026-08-23T18:51:27+00:00",
-      "files": 691,
-      "bytes": 7923661,
-      "tree_sha256": "eb7f6f53de2a438c74c36f823f6f51bc8bc11d4162c996cea8a8785ab404e97e",
+      "captured_at": "2026-08-23T20:56:00+00:00",
+      "files": 686,
+      "bytes": 6628497,
+      "tree_sha256": "8a4261078ba1b1caf096af3b1431021a5e3392e4ec93b2ac43ce7ca50e2218eb",
       "skipped_large": [],
       "withheld": [
         {
+          "file": "MSFTAIBASMultiAgentCopilot_1_0_0_5.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "cave/cubbies/kody-w/eggs/cubby-rapp-installer.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "cave/rapplications/rapp-installer/cubby-rapp-installer.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "cave/rapplications/rapp-installer/installer/MSFTAIBASMultiAgentCopilot_1_0_0_5.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
           "file": "cave/rapplications/rapp-installer/kernel/.env.example",
           "reason": "path matches an always-withhold shape (**/.env.*)"
+        },
+        {
+          "file": "installer/MSFTAIBASMultiAgentCopilot_1_0_0_5.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
         },
         {
           "file": "rapp_brainstem/.env.example",
@@ -143,177 +362,238 @@
           "file": "tests/test_rapp1_owner_actions.py",
           "reason": "contains something shaped like a credential"
         }
-      ]
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-1",
       "commit": "afc913ca3fe7dbc9da97871e67240f34416e5929",
       "committed_at": "2026-08-20T22:09:39-04:00",
-      "captured_at": "2026-08-23T18:51:47+00:00",
-      "files": 60,
-      "bytes": 1836538,
-      "tree_sha256": "7eecbcd8b77ebae26ff83b919c41344affa92aa8f26d5a9bb3022928421e5b4e",
+      "captured_at": "2026-08-23T20:56:21+00:00",
+      "files": 59,
+      "bytes": 466863,
+      "tree_sha256": "b15bb8f54decda13b7fc14d366a4992aba54e5bbfa7e52c4de4b2fd47ebccbad",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "book/the-rapp-programming-language.pdf",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-agents",
       "commit": "3de844fc39195b8a73246f4f0598cb768b57ca05",
       "committed_at": "2026-07-24T22:12:47-04:00",
-      "captured_at": "2026-08-23T18:51:47+00:00",
+      "captured_at": "2026-08-23T20:56:22+00:00",
       "files": 15,
       "bytes": 167907,
       "tree_sha256": "662605b533f7d9a9a09a6b1e9f9d09957848d4dfa33bad01f0fe4f08f3383d38",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-ai",
       "commit": "eaee484bf99a46127985cd9571b78e4c44916a40",
       "committed_at": "2026-08-02T10:24:22-04:00",
-      "captured_at": "2026-08-23T18:51:48+00:00",
+      "captured_at": "2026-08-23T20:56:23+00:00",
       "files": 55,
       "bytes": 632317,
       "tree_sha256": "fe7393172953ec46e044ece2b57b4102bd160296b15ff587699e732a6696110f",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-alpha",
       "commit": "6b81273d8e5aa1805ab5e6b5ff1709c4136ea1d8",
       "committed_at": "2026-07-18T14:55:20-05:00",
-      "captured_at": "2026-08-23T18:51:48+00:00",
-      "files": 73,
-      "bytes": 1188438,
-      "tree_sha256": "00181df90569281803f67743c9c609303f735619ec775957f6acc5daab43f6e5",
+      "captured_at": "2026-08-23T20:56:24+00:00",
+      "files": 72,
+      "bytes": 1107388,
+      "tree_sha256": "78e5c5a8fb7e6a576b8402b9674d5b3882f95341263283892b730a36ed633513",
       "skipped_large": [],
       "withheld": [
+        {
+          "file": "MSFTAIBASMultiAgentCopilot_1_0_0_5.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
         {
           "file": "rapp_brainstem/.env.example",
           "reason": "path matches an always-withhold shape (**/.env.*)"
         }
-      ]
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-apex-dino",
       "commit": "f7c0c7c8dbb9fc26506e968b5012c383c1cfd8f1",
       "committed_at": "2026-08-16T18:36:00-04:00",
-      "captured_at": "2026-08-23T18:51:48+00:00",
+      "captured_at": "2026-08-23T20:56:25+00:00",
       "files": 11,
       "bytes": 59930,
       "tree_sha256": "57e085bd9ef8ec166316e40031a2ec9740e66f7dc81f4084587618ae0e9b9835",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-bake-off",
       "commit": "318d632f2ca8e55643bee06769db891a635cea2e",
       "committed_at": "2026-07-25T09:28:48-04:00",
-      "captured_at": "2026-08-23T18:51:49+00:00",
+      "captured_at": "2026-08-23T20:56:26+00:00",
       "files": 9,
       "bytes": 59591,
       "tree_sha256": "92faf69e5ee400d81c9627182387bf09092877391ca5a5af2a325aed1a430b67",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-base",
       "commit": "7e4b8a56c17bbd82187a67c9662845a6328edc48",
       "committed_at": "2026-07-21T13:22:51-04:00",
-      "captured_at": "2026-08-23T18:51:49+00:00",
+      "captured_at": "2026-08-23T20:56:26+00:00",
       "files": 121,
       "bytes": 647127,
       "tree_sha256": "35e77899f71c4de779878abdd203100eb77c7fa0ae29dcce1660e65495b9ba48",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-base-template",
       "commit": "0242efba7d3e987528e450f2f5e74c4a88fd3cbb",
       "committed_at": "2026-07-19T05:21:47-04:00",
-      "captured_at": "2026-08-23T18:51:50+00:00",
+      "captured_at": "2026-08-23T20:56:27+00:00",
       "files": 92,
       "bytes": 603645,
       "tree_sha256": "c8dc297d3bac33e0310876d364ede3a5a8445414b30f38b86aa075a0029a0d30",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-basket",
       "commit": "3636fb9d13c7a025814c9696cef2e8327c1d7c38",
       "committed_at": "2026-07-04T10:51:37-04:00",
-      "captured_at": "2026-08-23T18:51:50+00:00",
+      "captured_at": "2026-08-23T20:56:27+00:00",
       "files": 4,
       "bytes": 52540,
       "tree_sha256": "e652b900054a46bbfeeaffe3c60e3ee2d8a624a4404afc85e6cf583770d8f4dc",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-bench",
       "commit": "1b157a8b5449d401177f9862706fccad9d338330",
       "committed_at": "2026-07-07T18:41:25-04:00",
-      "captured_at": "2026-08-23T18:51:50+00:00",
+      "captured_at": "2026-08-23T20:56:28+00:00",
       "files": 7,
       "bytes": 7690,
       "tree_sha256": "3a5e5dcdf0d30e73697c5e08e9512d4eb0c1cb704189e90558f87fa5188bdcbc",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-beta",
       "commit": "6d7604a1349d8e8272f9193b266cff43d8918a36",
       "committed_at": "2026-07-18T14:55:25-05:00",
-      "captured_at": "2026-08-23T18:51:51+00:00",
-      "files": 73,
-      "bytes": 1188423,
-      "tree_sha256": "5a9b5037a4c38bc9a79449a5a3063831e806a46a001875906fb5f863d38794b7",
+      "captured_at": "2026-08-23T20:56:28+00:00",
+      "files": 72,
+      "bytes": 1107373,
+      "tree_sha256": "4fcc766f531f76abd822fe1e05730b35f82873979a3a6570355bd567d31a3215",
       "skipped_large": [],
       "withheld": [
+        {
+          "file": "MSFTAIBASMultiAgentCopilot_1_0_0_5.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
         {
           "file": "rapp_brainstem/.env.example",
           "reason": "path matches an always-withhold shape (**/.env.*)"
         }
-      ]
+      ],
+      "gitlinks": []
     },
     {
       "repo": "RAPP-Bible",
       "commit": "798e4085041440099eb7b2ead727aba9aa862f6b",
       "committed_at": "2026-08-17T10:32:26-04:00",
-      "captured_at": "2026-08-23T18:51:27+00:00",
+      "captured_at": "2026-08-23T20:56:01+00:00",
       "files": 92,
       "bytes": 758482,
       "tree_sha256": "45c8f1bbfa87c3b29708bd1295118670f3b1560743febaa5df2e3bf22001e716",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-body",
       "commit": "e2f6c987db8037678603c20d788759ad95d337ca",
       "committed_at": "2026-08-16T07:45:48Z",
-      "captured_at": "2026-08-23T18:51:52+00:00",
-      "files": 111,
-      "bytes": 3381362,
-      "tree_sha256": "9f72b8a88bdfb5adaeb14401780a4ecf764ee14c17f238b6618c98084f792015",
+      "captured_at": "2026-08-23T20:56:29+00:00",
+      "files": 103,
+      "bytes": 1309850,
+      "tree_sha256": "8eff488ef3aeec6afeaf68b1c0cf3fcf2599747612cfe840dca92d0a90fa3157",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "shots/01-early-reconstructed.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "shots/02-mid-diff-birth.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "shots/03-genesis-witnessed.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "shots/04-healing-diff.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "shots/live-01-cradle.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "shots/live-02-playing.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "shots/live-03-genesis.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "shots/live-04-herald-conversation.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-brainstem",
       "commit": "b98a6d64cdc04c53f95347e29dd29e8a5698b58a",
       "committed_at": "2026-07-18T16:55:14-05:00",
-      "captured_at": "2026-08-23T18:51:52+00:00",
+      "captured_at": "2026-08-23T20:56:30+00:00",
       "files": 3,
       "bytes": 3126,
       "tree_sha256": "dfe405ad41e34bca8f4f3950876ad24ce630d2a5461c2342cf435bd0b1ca8b80",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-brainstem-beta",
       "commit": "349c5c0aae8335b51812a3549ee24b906d02bd14",
       "committed_at": "2026-06-04T16:27:57-06:00",
-      "captured_at": "2026-08-23T18:51:52+00:00",
+      "captured_at": "2026-08-23T20:56:30+00:00",
       "files": 25,
       "bytes": 221520,
       "tree_sha256": "88038973fbd6c153cfc327a40bd3bd11a402f67e687161ab7d075eb8190ff82b",
@@ -323,124 +603,172 @@
           "file": "brainstem/.env.example",
           "reason": "path matches an always-withhold shape (**/.env.*)"
         }
-      ]
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-brainstem-sdk",
       "commit": "418fd69d76e8fc6a494782b669560f4212292fb5",
       "committed_at": "2026-06-03T07:06:34-06:00",
-      "captured_at": "2026-08-23T18:51:52+00:00",
+      "captured_at": "2026-08-23T20:56:31+00:00",
       "files": 3,
       "bytes": 26169,
       "tree_sha256": "5179d42be65672c9dc61c416e3c4fe40bbe89751a55f3e5dc1a92dbf189d5d1a",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-brainstem-walkthrough",
       "commit": "8393e67a9d7226147eedfd20d96dc6d7e21cab20",
       "committed_at": "2026-07-22T17:02:32-04:00",
-      "captured_at": "2026-08-23T18:51:53+00:00",
+      "captured_at": "2026-08-23T20:56:32+00:00",
       "files": 22,
       "bytes": 675415,
       "tree_sha256": "d7b37e30e4ff222b3c617e7744e631a8e30043c8858fce4a7988c0c2217562bb",
       "skipped_large": [
         "brainstem-guide-walkthrough.mp4 (29.4MB)"
       ],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-burrow",
       "commit": "36f57fafedae548095f2fe123cfd1f98fffc65b8",
       "committed_at": "2026-06-29T13:22:19-04:00",
-      "captured_at": "2026-08-23T18:51:53+00:00",
-      "files": 7,
-      "bytes": 12990,
-      "tree_sha256": "f0321a5276a9fed90ae621b9681aa86de560e08bb9af8bbf32ba0df32d44a2ea",
+      "captured_at": "2026-08-23T20:56:32+00:00",
+      "files": 5,
+      "bytes": 8695,
+      "tree_sha256": "151193f3cf2a7ff5f293f36427d6be053df3fefedc877fc2ea936fbb56f6bae8",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "icon-192.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "icon-512.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-canary",
       "commit": "b9a225310087fb61a59dae6fce792a33b719618b",
       "committed_at": "2026-07-25T13:16:19-04:00",
-      "captured_at": "2026-08-23T18:51:54+00:00",
-      "files": 123,
-      "bytes": 1422374,
-      "tree_sha256": "2236ef0f5cdd2e37407a0d7bee40dd540b68483206ca9eef36fafd13a781bf27",
+      "captured_at": "2026-08-23T20:56:33+00:00",
+      "files": 122,
+      "bytes": 1341324,
+      "tree_sha256": "0c3e2c83c56d80d3fe120d0586afc5d98e66f22733266e156cd3fee151246fc0",
       "skipped_large": [],
       "withheld": [
+        {
+          "file": "MSFTAIBASMultiAgentCopilot_1_0_0_5.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
         {
           "file": "rapp_brainstem/.env.example",
           "reason": "path matches an always-withhold shape (**/.env.*)"
         }
-      ]
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-carts",
       "commit": "eeed9732be6142cf45a09eb6635a01bd4a508470",
       "committed_at": "2026-06-03T07:06:51-06:00",
-      "captured_at": "2026-08-23T18:51:54+00:00",
+      "captured_at": "2026-08-23T20:56:33+00:00",
       "files": 3,
       "bytes": 8625,
       "tree_sha256": "e9a5b1d9b67ea7972972d1996d028e2b571d0f894a4a3bd8564e81dd6acb1995",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-claude-skills",
       "commit": "d675bf06c4b51232833fb426ddcb7bc4079b4b6c",
       "committed_at": "2026-07-16T13:56:34-05:00",
-      "captured_at": "2026-08-23T18:51:54+00:00",
+      "captured_at": "2026-08-23T20:56:34+00:00",
       "files": 12,
       "bytes": 47629,
       "tree_sha256": "85c392a0121618d17fd1aab6f2e01edc5ef73cbaffa98eac38347855b0220455",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-cli",
       "commit": "df8cd1614c2c35b626f7cb8cc9b5a3283615ef5e",
       "committed_at": "2026-07-22T00:32:26-04:00",
-      "captured_at": "2026-08-23T18:51:55+00:00",
+      "captured_at": "2026-08-23T20:56:34+00:00",
       "files": 38,
       "bytes": 251192,
       "tree_sha256": "29cd51bc385785bd6c581e57a6d8a151fe672791b4a860c056328c41e9112295",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-commons",
       "commit": "c9247c368390df4e6efae3d24a42b5fe31833956",
       "committed_at": "2026-07-16T14:50:42-05:00",
-      "captured_at": "2026-08-23T18:51:56+00:00",
-      "files": 217,
-      "bytes": 3680244,
-      "tree_sha256": "975a181f577d5f6f1100841ce0e0f6ad4ed6cbda842bbeab6e2dd62a874022c0",
+      "captured_at": "2026-08-23T20:56:36+00:00",
+      "files": 211,
+      "bytes": 2213253,
+      "tree_sha256": "5d857b6f88058e5aef11475f54a5dff0eaa7ae183b724a147fbb1b879b064273",
       "skipped_large": [
         "ambient.mp4 (7.1MB)",
         "hologram/drops.json (3.1MB)",
         "hologram/warehouse.json (4.3MB)",
         "trailer.mp4 (8.6MB)"
       ],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "__pycache__/swarm_agent.cpython-314.pyc",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "__pycache__/twin_chat_agent.cpython-314.pyc",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "agents/__pycache__/rapp_commons_agent.cpython-314.pyc",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "games/poker/__pycache__/engine.cpython-311.pyc",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "games/poker/__pycache__/engine.cpython-314.pyc",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "short.mp4",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-constitution",
       "commit": "bb407c1e9f97bb18bd24eecd47aec479e3c835c0",
       "committed_at": "2026-08-17T10:28:53-04:00",
-      "captured_at": "2026-08-23T18:51:56+00:00",
+      "captured_at": "2026-08-23T20:56:37+00:00",
       "files": 9,
       "bytes": 329807,
       "tree_sha256": "df1e9f293b654228b9d7dbbc513855fc94e29b3f5542e7fe9c94ef69c225a5ab",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-coop",
       "commit": "d71893259a0ba23c5bd81bf157260cf662ddf198",
       "committed_at": "2026-08-01T19:23:03-04:00",
-      "captured_at": "2026-08-23T18:51:57+00:00",
+      "captured_at": "2026-08-23T20:56:37+00:00",
       "files": 21,
       "bytes": 165371,
       "tree_sha256": "a5bd1a8fd7e4be40316585148ee10a1b9aa2e87674bd637a053611084b824029",
@@ -450,369 +778,859 @@
           "file": "tests/test_recorder.py",
           "reason": "contains something shaped like a credential"
         }
-      ]
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-copilot-in-chrome",
       "commit": "49899d9e065988e382a6da5282921f1ad4ee1371",
       "committed_at": "2026-08-17T19:22:50-04:00",
-      "captured_at": "2026-08-23T18:51:57+00:00",
+      "captured_at": "2026-08-23T20:56:38+00:00",
       "files": 49,
       "bytes": 656686,
       "tree_sha256": "ac2c43d2ab95c3019b43feafe3cba447b76d3fc813ecbab24ce7847a8583a0ad",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-copilot-in-edge",
       "commit": "ba7c26200544831f9aedbb55de909e1c340bc48e",
       "committed_at": "2026-08-17T19:25:29-04:00",
-      "captured_at": "2026-08-23T18:51:57+00:00",
+      "captured_at": "2026-08-23T20:56:38+00:00",
       "files": 49,
       "bytes": 657149,
       "tree_sha256": "c3b38d1e5e7ad4a045d5db7c91d5d67dea338bf82c5489687ecb0aa4c65c0cef",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-cortex",
       "commit": "63101ef2d9f85c2a19445204123077ac14e5bb86",
       "committed_at": "2026-07-18T16:55:32-05:00",
-      "captured_at": "2026-08-23T18:51:58+00:00",
+      "captured_at": "2026-08-23T20:56:38+00:00",
       "files": 3,
       "bytes": 3027,
       "tree_sha256": "ef83cf0e32bf3dd0f5a6b8fcf926d21ab227c25db870d4a1ccbcee259d46d567",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-crispy",
       "commit": "66df7c58ce21dff1e96777404e84a8de4c3efcb9",
       "committed_at": "2026-07-26T03:46:45-04:00",
-      "captured_at": "2026-08-23T18:51:58+00:00",
-      "files": 21,
-      "bytes": 162836,
-      "tree_sha256": "98bdcfa3966dcff3259c0f0e8df30f38a878c6b0fe51a0f6539816bcb1e22c51",
+      "captured_at": "2026-08-23T20:56:39+00:00",
+      "files": 20,
+      "bytes": 149141,
+      "tree_sha256": "5036d7604d05fed64f93eb118626598810432c3d1ef9ce91dde25380211744b5",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "rapp_crispy/eggs/rapp_crispy.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-dataverse",
       "commit": "bd843bba3ba14754ccd85594b3a1ce2b26a4cc74",
       "committed_at": "2026-06-17T11:20:20-04:00",
-      "captured_at": "2026-08-23T18:51:58+00:00",
+      "captured_at": "2026-08-23T20:56:39+00:00",
       "files": 27,
       "bytes": 119351,
       "tree_sha256": "0ac17eda8cd2a283b7d9a8ec45c711cf04c03d5b2ca31a2485342a52cff62fad",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-demos",
       "commit": "dabd5938e116204ea4a4b1881e737334d8a4d642",
       "committed_at": "2026-05-25T20:48:47-04:00",
-      "captured_at": "2026-08-23T18:51:59+00:00",
+      "captured_at": "2026-08-23T20:56:40+00:00",
       "files": 6,
       "bytes": 102095,
       "tree_sha256": "926944222039ca42fc6c4d399d62798c36167979f084a78b71a28ab5122d8267",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-dino",
       "commit": "b598a8287dbbb0cd2eeb76c52369fd64570b232d",
       "committed_at": "2026-08-16T18:36:02-04:00",
-      "captured_at": "2026-08-23T18:51:59+00:00",
+      "captured_at": "2026-08-23T20:56:40+00:00",
       "files": 13,
       "bytes": 67295,
       "tree_sha256": "5f4cca42163948f0b7e1a100fa32a151f6bd99135ba7ae6c28a7bbce25cbf9fe",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-distro",
       "commit": "dad58796450d2e561121f3ff9c6f0efc668d2859",
       "committed_at": "2026-06-28T17:05:34-04:00",
-      "captured_at": "2026-08-23T18:51:59+00:00",
+      "captured_at": "2026-08-23T20:56:41+00:00",
       "files": 6,
       "bytes": 13660,
       "tree_sha256": "40dc00d4d41a8cf494c3f4eff0c78c5e6fd24b73975fe0b469bb3eaa64baff46",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-docs",
       "commit": "0cd0b0a136997991d18dbd267432d47b5677f664",
       "committed_at": "2026-07-25T20:19:24-04:00",
-      "captured_at": "2026-08-23T18:52:00+00:00",
+      "captured_at": "2026-08-23T20:56:41+00:00",
       "files": 9,
       "bytes": 25997,
       "tree_sha256": "87305a92c31870d82f768fdae84a8d4c10bb0813766fcf27d5c7f67df1e9e9f6",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-dog-hub",
       "commit": "7d7211429b9308839de98150d5f6df764f39c9fe",
       "committed_at": "2026-08-01T16:41:25-04:00",
-      "captured_at": "2026-08-23T18:52:00+00:00",
+      "captured_at": "2026-08-23T20:56:42+00:00",
       "files": 7,
       "bytes": 49384,
       "tree_sha256": "f879127eb9fc5701755dd6b4128782e8ae9f84911e9f1a3b3c9e074e491867c2",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-doorman",
       "commit": "bc9099eb3c79a59fb43a3a2ba7f5d3caec0df381",
       "committed_at": "2026-06-03T07:06:56-06:00",
-      "captured_at": "2026-08-23T18:52:00+00:00",
+      "captured_at": "2026-08-23T20:56:42+00:00",
       "files": 4,
       "bytes": 19784,
       "tree_sha256": "f183b0b45229b27e891fe6be4564653d452bf39a880a08a6f1033a572ba38052",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-drift-lint",
       "commit": "de1c664154d3456224bdf95e830736ffb5270c2b",
       "committed_at": "2026-07-16T14:33:59-05:00",
-      "captured_at": "2026-08-23T18:52:00+00:00",
+      "captured_at": "2026-08-23T20:56:43+00:00",
       "files": 3,
       "bytes": 12446,
       "tree_sha256": "88177f0780d76cad483499a4c5ebfae069cc8b8dfac5725bf810cb31f4a6bad0",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-dynamic-workflows",
       "commit": "b8b1de6d3b187e5e488b5b745d82df131525796f",
       "committed_at": "2026-07-21T19:40:11-04:00",
-      "captured_at": "2026-08-23T18:52:01+00:00",
+      "captured_at": "2026-08-23T20:56:43+00:00",
       "files": 37,
       "bytes": 344616,
       "tree_sha256": "3d871207d00fa6bb000a34302dc90b729aaa614b618c572802ff33191dc34b74",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-education-shorts",
       "commit": "bbda5b7371f5e635b97d80dd62afaf191ec557e8",
       "committed_at": "2026-08-18T21:33:45-04:00",
-      "captured_at": "2026-08-23T18:52:01+00:00",
-      "files": 22,
-      "bytes": 1590453,
-      "tree_sha256": "d75361db68ad5b521e12d3c8b7b9bd44b3ebbf608c2a03c6dd46d04377dc7a95",
+      "captured_at": "2026-08-23T20:56:44+00:00",
+      "files": 19,
+      "bytes": 187699,
+      "tree_sha256": "0d82fcaf09158f817bd9825379735bf4836b7467f89fdf4dd15c7d374c6f7eae",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "examples/account-intelligence.long-frames.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "examples/compound-interest.frames.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "examples/why-is-the-sky-blue.frames.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-egg-hub",
       "commit": "4c49318fcafe526c56802c50131699006501e3e1",
       "committed_at": "2026-08-17T00:31:56Z",
-      "captured_at": "2026-08-23T18:52:01+00:00",
-      "files": 36,
-      "bytes": 1741744,
-      "tree_sha256": "bf38ea55bb47f198892691bcb614340a8b4741e3415c98cede54bd8f99044e45",
+      "captured_at": "2026-08-23T20:56:45+00:00",
+      "files": 31,
+      "bytes": 1690201,
+      "tree_sha256": "1aef2f139bcb6c76f017ac5adc887a0997e7ad7086ce6f85399fc5ab00be3335",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "eggs/generic-twin.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "eggs/grandma-rose.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "eggs/kody-w.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "eggs/rock-tumbler.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "eggs/wildhaven-ceo.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-estate",
       "commit": "610c5b7f5d439801f87f086467c03d8c17b3cc33",
       "committed_at": "2026-07-17T16:09:07-04:00",
-      "captured_at": "2026-08-23T18:52:02+00:00",
+      "captured_at": "2026-08-23T20:56:45+00:00",
       "files": 10,
       "bytes": 58643,
       "tree_sha256": "8b59519da848970a0a3ca32dca77d4a9a635e22b0fafdd7c82713f072f7618e8",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-eternity",
       "commit": "17bb6d21f46797968acfc383e53b5282be8b135e",
       "committed_at": "2026-07-17T15:45:44-04:00",
-      "captured_at": "2026-08-23T18:52:02+00:00",
+      "captured_at": "2026-08-23T20:56:46+00:00",
       "files": 2,
       "bytes": 10440,
       "tree_sha256": "67dfa99801bbb6fd259d4219a6d6ce80ee0e5b4a7dad9be1afd24b213c417326",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-flight",
       "commit": "17bc55ce386f9f6adc833fc75c885d6ae7fd863e",
       "committed_at": "2026-07-18T16:55:26-05:00",
-      "captured_at": "2026-08-23T18:52:02+00:00",
+      "captured_at": "2026-08-23T20:56:46+00:00",
       "files": 3,
       "bytes": 3041,
       "tree_sha256": "08bc6b0f3fdbb06e8c5862062c3957041c0981abf280bc55265b158bf8139c87",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-flight-deck",
       "commit": "f33f26514fa65e7fc7ab1ebd3711de53b0e8c7e7",
       "committed_at": "2026-07-18T16:55:23-05:00",
-      "captured_at": "2026-08-23T18:52:02+00:00",
+      "captured_at": "2026-08-23T20:56:47+00:00",
       "files": 3,
       "bytes": 3144,
       "tree_sha256": "8c16be87f93b5abec49c3e0c4a52dcaf68c7396185f66990af7dc27609a0700b",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-fps",
       "commit": "9eacce9b365023d8a803533d63c5f1e1a73e2bbb",
       "committed_at": "2026-08-15T22:24:00-04:00",
-      "captured_at": "2026-08-23T18:52:06+00:00",
-      "files": 412,
-      "bytes": 83972682,
-      "tree_sha256": "acdf59d8fdd9f5bdd84afd1415a61a26f916aeb58446de7c24145fd977e3c561",
+      "captured_at": "2026-08-23T20:57:01+00:00",
+      "files": 319,
+      "bytes": 2951443,
+      "tree_sha256": "d64ab8909fadc41ce9e4c5cc104d1876e643c3c50efb7e866e1edcde65c080de",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "shots/evidence/render-budget-after/default.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "shots/evidence/render-budget-before/default.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "shots/player-trial1/at-wall.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "shots/player-trial1/crouched.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "shots/player-trial1/default.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "shots/player-trial1/on-stairs.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "shots/player-trial1/top-of-step.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "shots/production-integration/default.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "shots/slice/slice.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "shots/true-budget-matrix/ao-half-1/default.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "shots/true-budget-matrix/ao-off-1/default.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "shots/weapon-37-t1/ads.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "shots/weapon-37-t1/default.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "shots/weapon-37-t1/flash.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "shots/weapon-37-t1/shot-5.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "shots/weapon-37-t1/sway.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/ai/evidence/shots/cover.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/ai/evidence/shots/death.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/ai/evidence/shots/fire.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/ai/evidence/shots/notice.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/ai/evidence/shots/patrol.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/ai/evidence/shots/search.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/ai/evidence/shots/telegraph.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/audio/evidence/generated/automatic-30-no-limiter.wav",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/audio/evidence/generated/automatic-30.wav",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/audio/evidence/generated/footsteps-concrete.wav",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/audio/evidence/generated/impact-concrete.wav",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/audio/evidence/generated/impact-dirt.wav",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/audio/evidence/generated/impact-fabric.wav",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/audio/evidence/generated/impact-flesh.wav",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/audio/evidence/generated/impact-foliage.wav",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/audio/evidence/generated/impact-glass.wav",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/audio/evidence/generated/impact-metal.wav",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/audio/evidence/generated/impact-sand.wav",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/audio/evidence/generated/impact-water.wav",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/audio/evidence/generated/impact-wood.wav",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/audio/evidence/generated/matrix-44100-left-seed-1918988402.wav",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/audio/evidence/generated/shot-far.wav",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/audio/evidence/generated/shot-near.wav",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/hud/evidence/ads.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/hud/evidence/damaged-left.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/hud/evidence/debug.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/hud/evidence/hip.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/hud/evidence/hit-confirm.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/hud/evidence/low-health.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/hud/evidence/objective.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/hud/evidence/reload.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/evidence/contact-off/grounding.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/evidence/contact-off/lane_west.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/evidence/contact-off/materials.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/evidence/contact-on/grounding.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/evidence/contact-on/lane_west.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/evidence/contact-on/materials.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/evidence/container-art-off/containers.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/evidence/container-art-off/materials.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/evidence/container-art-on/containers.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/evidence/container-art-on/materials.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/evidence/lane_west.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/evidence/materials.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/evidence/objective.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/evidence/overwatch.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/evidence/silhouette.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/evidence/spawn.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/evidence/stairs.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/missions/foundry/evidence/frames/casting_lane.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/missions/foundry/evidence/frames/final_objective.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/missions/foundry/evidence/frames/furnace_contrast.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/missions/foundry/evidence/frames/gantry_traversal.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/missions/foundry/evidence/frames/silhouette.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/missions/foundry/evidence/timing-trial-1/silhouette.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/missions/foundry/evidence/timing-trial-2/silhouette.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/missions/foundry/evidence/timing-trial-3/silhouette.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/missions/relay/evidence/shots/controldeck.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/missions/relay/evidence/shots/objective.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/missions/relay/evidence/shots/silhouette.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/missions/relay/evidence/shots/spawn.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/missions/relay/evidence/shots/stairs.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/level/missions/relay/evidence/shots/switchyard.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/weapons/evidence/after/ads.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/weapons/evidence/after/default.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/weapons/evidence/after/flash.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/weapons/evidence/after/shot-15.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/weapons/evidence/after/shot-5.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/weapons/evidence/after/sway.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/weapons/evidence/before/ads.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/weapons/evidence/before/default.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/weapons/evidence/before/flash.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/weapons/evidence/before/shot-15.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/weapons/evidence/before/shot-5.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/weapons/evidence/before/sway.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/weapons/evidence/verify-slice/trial-1/slice.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/weapons/evidence/verify-slice/trial-2/slice.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "src/weapons/evidence/verify-slice/trial-3/slice.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-frame-net",
       "commit": "ad6f24801716f48e11bd453fe1525dd3cedd3e63",
       "committed_at": "2026-07-17T15:57:33-04:00",
-      "captured_at": "2026-08-23T18:52:06+00:00",
+      "captured_at": "2026-08-23T20:57:01+00:00",
       "files": 23,
       "bytes": 56827,
       "tree_sha256": "8ef24cbaf16b79b74b469d7440caf2a341ac6bc2ac41f8f8fb32ed9e82fadf45",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-god-forum",
       "commit": "65f82e371d0de28681ddf59f1c6088edbcbd606c",
       "committed_at": "2026-07-16T14:50:58-05:00",
-      "captured_at": "2026-08-23T18:52:06+00:00",
-      "files": 7,
-      "bytes": 56727,
-      "tree_sha256": "660cd436af8e5a06b7298ec48f7658126927ba32a809ac6dc25ebd1baf550491",
+      "captured_at": "2026-08-23T20:57:02+00:00",
+      "files": 6,
+      "bytes": 39410,
+      "tree_sha256": "92e598f1f6f8eaed8f32697ed5ff8108791fc339251fe68b947650e5736a9375",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "singleton/__pycache__/forum_agent.cpython-314.pyc",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-heir",
       "commit": "58362a43bbf02d3909aacb6617b745f0fca8d0ad",
       "committed_at": "2026-07-12T23:53:52-04:00",
-      "captured_at": "2026-08-23T18:52:07+00:00",
-      "files": 72,
-      "bytes": 855056,
-      "tree_sha256": "171c39b6471771730b860d6c9e9b68ea9b8d632340beaaf1b48a92c9c0daa9aa",
+      "captured_at": "2026-08-23T20:57:02+00:00",
+      "files": 69,
+      "bytes": 794166,
+      "tree_sha256": "4b6991b176c896894f1060d74788e3302f1fee6b1c66a6427d0478f5554f1964",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "public/icons/apple-touch-icon.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "public/icons/icon-192.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "public/icons/icon-512.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-herdr",
       "commit": "409115ea8a97415eeda55766913f4c890c6d7534",
       "committed_at": "2026-08-23T09:45:35-04:00",
-      "captured_at": "2026-08-23T18:52:07+00:00",
+      "captured_at": "2026-08-23T20:57:03+00:00",
       "files": 3,
       "bytes": 1641,
       "tree_sha256": "8ff9ee6f9edd020a8099aec53e5f0b1da740118f37bc4cc25018fb883297d517",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-hippocampus",
       "commit": "45005c0fd1d332a92d0308d05cd60f0b583db095",
       "committed_at": "2026-07-18T16:55:41-05:00",
-      "captured_at": "2026-08-23T18:52:07+00:00",
+      "captured_at": "2026-08-23T20:57:03+00:00",
       "files": 3,
       "bytes": 2982,
       "tree_sha256": "17e2cb44013ee50400d41c302daf8114c13b0cfbadc601b6681ec5fa1ea76577",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-holo",
       "commit": "ff29652478d45f21351dd5ae1cabc217f9cbf26b",
       "committed_at": "2026-07-18T16:56:04-05:00",
-      "captured_at": "2026-08-23T18:52:07+00:00",
+      "captured_at": "2026-08-23T20:57:03+00:00",
       "files": 3,
       "bytes": 5896,
       "tree_sha256": "56e351d570256c48ab6e7c24ed2ef7a5fd733dd80b4455f7b2357a807d626b72",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-hologram",
       "commit": "4c981887623b341fa094d4ba70126c4631a2c581",
       "committed_at": "2026-07-04T09:05:01-04:00",
-      "captured_at": "2026-08-23T18:52:07+00:00",
+      "captured_at": "2026-08-23T20:57:04+00:00",
       "files": 33,
       "bytes": 243133,
       "tree_sha256": "e37fa95534e3c0525f641ba69ba63e998be35b06b9322b819084c9fa039f8b97",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-infrastructure-city",
       "commit": "9b8f4678254c9f1f7a6b3172d331f2633f60eb74",
       "committed_at": "2026-08-16T20:58:53-04:00",
-      "captured_at": "2026-08-23T18:52:08+00:00",
+      "captured_at": "2026-08-23T20:57:04+00:00",
       "files": 14,
       "bytes": 84956,
       "tree_sha256": "310efa9b33f2d8f9a5d90f60ff35b0a28d1412bfa38f064f916840ad05b23152",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-installer",
       "commit": "5fbde1776a72715935c3d597a9ddfce28a04032b",
       "committed_at": "2026-07-10T13:20:38-04:00",
-      "captured_at": "2026-08-23T18:52:08+00:00",
-      "files": 62,
-      "bytes": 1110896,
-      "tree_sha256": "e2122fa9952cd42e4cec3575e91f3eb95decee3ea8589aec7a1e2f1230376e29",
+      "captured_at": "2026-08-23T20:57:05+00:00",
+      "files": 61,
+      "bytes": 1029846,
+      "tree_sha256": "ad9521ebe1a5bac724646c23d4c19525d8dd2357b5e213bca71ba949a2d0d16a",
       "skipped_large": [],
       "withheld": [
+        {
+          "file": "MSFTAIBASMultiAgentCopilot_1_0_0_5.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
         {
           "file": "rapp_brainstem/.env.example",
           "reason": "path matches an always-withhold shape (**/.env.*)"
         }
-      ]
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-installer-canary",
       "commit": "8bb6b75d2cfc0227bfd69e0995a308e4f2309cdc",
       "committed_at": "2026-07-16T13:56:38-05:00",
-      "captured_at": "2026-08-23T18:52:09+00:00",
-      "files": 44,
-      "bytes": 566483,
-      "tree_sha256": "4bd7b281cc816da69d18e6f1ab7130bb5362becbb69130d6066fa00297c3eefc",
+      "captured_at": "2026-08-23T20:57:06+00:00",
+      "files": 41,
+      "bytes": 471089,
+      "tree_sha256": "5bbf61a9852a882879d6866a9ccd35fe0debb26ff7b3b16b39d8c6c14a17479d",
       "skipped_large": [],
       "withheld": [
         {
+          "file": "MSFTAIBASMultiAgentCopilot_1_0_0_5.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "rapp_brainstem/.DS_Store",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
           "file": "rapp_brainstem/.env.example",
           "reason": "path matches an always-withhold shape (**/.env.*)"
+        },
+        {
+          "file": "rapp_brainstem/agents/.DS_Store",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
         }
-      ]
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-installer-dev",
       "commit": "7cf2dcc4adad0a9272947484ffc0c0463beadfd9",
       "committed_at": "2026-07-16T13:56:40-05:00",
-      "captured_at": "2026-08-23T18:52:09+00:00",
-      "files": 51,
-      "bytes": 613684,
-      "tree_sha256": "77548f10c2caa090c05b86e6065e3fbe0e87dac540527fc1c6ae541488c56e63",
+      "captured_at": "2026-08-23T20:57:06+00:00",
+      "files": 48,
+      "bytes": 518290,
+      "tree_sha256": "10b5451a7e305f789d576152a167c39f4c81eee401909aca6e263a512ca83b6f",
       "skipped_large": [],
       "withheld": [
         {
+          "file": "MSFTAIBASMultiAgentCopilot_1_0_0_5.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "rapp_brainstem/.DS_Store",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
           "file": "rapp_brainstem/.env.example",
           "reason": "path matches an always-withhold shape (**/.env.*)"
+        },
+        {
+          "file": "rapp_brainstem/agents/.DS_Store",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
         }
-      ]
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-keyring",
       "commit": "89386724e9bf8b365ce3bd2847fbcc06365953d5",
       "committed_at": "2026-07-25T20:19:21-04:00",
-      "captured_at": "2026-08-23T18:52:09+00:00",
+      "captured_at": "2026-08-23T20:57:07+00:00",
       "files": 15,
       "bytes": 123350,
       "tree_sha256": "b79a9780ab0d750289308e28e6dc3b6dcf683d9279d3c03c23272074cf4103cb",
@@ -822,454 +1640,685 @@
           "file": "conformance.py",
           "reason": "contains something shaped like a credential"
         }
-      ]
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-kite",
       "commit": "f3e7e2d04c30772d1abc0476da945a860fe226ab",
       "committed_at": "2026-05-25T19:55:30-04:00",
-      "captured_at": "2026-08-23T18:52:09+00:00",
+      "captured_at": "2026-08-23T20:57:07+00:00",
       "files": 6,
       "bytes": 26186,
       "tree_sha256": "253c8a7166a5d86d915e8f252e8717d0da5796bbd26dc0c900e6ee4ef618a688",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-kited-twin",
       "commit": "9f844ec5e8a148b5a17e1080e9a715feea954e5b",
       "committed_at": "2026-05-25T21:54:48-04:00",
-      "captured_at": "2026-08-23T18:52:10+00:00",
-      "files": 5,
-      "bytes": 15942,
-      "tree_sha256": "278fe788632401a1b3393a9f9f6454791095837a536be84fadb8a6df2856935a",
+      "captured_at": "2026-08-23T20:57:07+00:00",
+      "files": 4,
+      "bytes": 4291,
+      "tree_sha256": "f713eb3dfa4117c569e33aede7faf6aa703b5916ed9a1fa2c43621e10504be0d",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "kited-twin.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-lantern",
       "commit": "1af70befbe287f3dd7f6cb13806a7d8f845533f8",
       "committed_at": "2026-07-15T23:25:01-05:00",
-      "captured_at": "2026-08-23T18:52:10+00:00",
-      "files": 18,
-      "bytes": 209245,
-      "tree_sha256": "4d9c9ee724604b43a058d9fe4136e844c8bfb020c80409cba138dc1bb05e9cf7",
+      "captured_at": "2026-08-23T20:57:08+00:00",
+      "files": 10,
+      "bytes": 190773,
+      "tree_sha256": "ec144886c94f7af9316a48bb369be6ed8dc7b190075b74c635f1a0cff1d2a639",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "eggs/atlas-segment-spot.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "eggs/atlas-star-stripe.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "eggs/cross-ushuaia-dubai.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "eggs/fog-sanfrancisco.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "eggs/lumina.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "eggs/moon.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "eggs/original-frenzy.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "eggs/weather-huila.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-leviathan-hub",
       "commit": "bfefc798b9b3ce49c4b9c941830607e21aa8e623",
       "committed_at": "2026-07-15T23:25:03-05:00",
-      "captured_at": "2026-08-23T18:52:10+00:00",
-      "files": 8,
-      "bytes": 925418,
-      "tree_sha256": "793cf2293832ea1098cc7627c7f3a35a4992ca5cfb105ba41a0249820bcc73d9",
+      "captured_at": "2026-08-23T20:57:09+00:00",
+      "files": 6,
+      "bytes": 84672,
+      "tree_sha256": "8d795cb301f106990876d657058608915c7e64d407d61dcd68bcdb7747ecf8e2",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "eggs/kody.leviathan.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "eggs/macrohard.leviathan.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-light",
       "commit": "01a7e1b444ef3269836036a63f291223eb132bc0",
       "committed_at": "2026-07-25T22:50:42-04:00",
-      "captured_at": "2026-08-23T18:52:11+00:00",
+      "captured_at": "2026-08-23T20:57:09+00:00",
       "files": 22,
       "bytes": 265305,
       "tree_sha256": "803345551f8802eb8295d5ce3fbfe4d61066fe0999e4140255d99d0274bb8ae9",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-local-install",
       "commit": "8795f5b03a2da7243c26cec6f3be48284c9f71ce",
       "committed_at": "2026-08-04T19:29:20-04:00",
-      "captured_at": "2026-08-23T18:52:11+00:00",
+      "captured_at": "2026-08-23T20:57:09+00:00",
       "files": 5,
       "bytes": 36041,
       "tree_sha256": "32dcfee999c23a35248ac54789eb3dad6f04c518130fce43f1377173aa3348cd",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-map",
       "commit": "f3dd5ed11514d0562eb7fc87afc2eb59ed87aca6",
       "committed_at": "2026-08-16T20:33:39-04:00",
-      "captured_at": "2026-08-23T18:52:12+00:00",
-      "files": 44,
-      "bytes": 1602682,
-      "tree_sha256": "cc059d5b437f86c29debbcbc6dba70915b5775cb25833530ae4eefdc21f981c7",
+      "captured_at": "2026-08-23T20:57:11+00:00",
+      "files": 41,
+      "bytes": 1528664,
+      "tree_sha256": "fbe574eb7d910c64e7bb9d6df5b0678c99a804a1d29d1d860c8d04aba211091f",
       "skipped_large": [
         "neurons.json (2.4MB)"
       ],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "__pycache__/build_graph.cpython-314.pyc",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "spine/vertebrae/estate-2026-07-25.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "tools/__pycache__/spine.cpython-314.pyc",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-mapp",
       "commit": "4743d74ce64d8e2d053140a837b34a2c04833c80",
       "committed_at": "2026-08-02T09:57:02-04:00",
-      "captured_at": "2026-08-23T18:52:12+00:00",
-      "files": 14,
-      "bytes": 66315,
-      "tree_sha256": "61ee10e89fbd45ec37084e0afddc1560b55a34dfc97b17d07d76dcc232ad48fa",
+      "captured_at": "2026-08-23T20:57:11+00:00",
+      "files": 11,
+      "bytes": 51384,
+      "tree_sha256": "bf1536b39de033f12882ed93592d85ff4b71aeb6cb93c72b0eefaf29bcc2bf63",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "docs/icon-180.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "docs/icon-192.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "docs/icon-512.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-mcp",
       "commit": "651ce8250b9569e890c03f6743f45a16675419c9",
       "committed_at": "2026-07-16T13:56:44-05:00",
-      "captured_at": "2026-08-23T18:52:12+00:00",
+      "captured_at": "2026-08-23T20:57:11+00:00",
       "files": 20,
       "bytes": 147285,
       "tree_sha256": "a13a245c3965c31d2204546ab923ff8e486fb5be1b7a1e00fd4fcf37f7cd1c9b",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-membrane",
       "commit": "62da93daa849624336dbfe162d3a0af24ceedd7a",
       "committed_at": "2026-07-25T01:22:05-04:00",
-      "captured_at": "2026-08-23T18:52:13+00:00",
+      "captured_at": "2026-08-23T20:57:12+00:00",
       "files": 10,
       "bytes": 106873,
       "tree_sha256": "a32f28eafd2e8613966e676b913e2b5bf9f0420e3b06262b8036e43f25af732f",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-messaging",
       "commit": "0586678530bb16215f91104a11737bc69c6f0c48",
       "committed_at": "2026-07-11T13:24:36-04:00",
-      "captured_at": "2026-08-23T18:52:13+00:00",
+      "captured_at": "2026-08-23T20:57:12+00:00",
       "files": 14,
       "bytes": 24884,
       "tree_sha256": "b42986126dd41d644205632b741507129057d355839e170fa06b1c9675f692dd",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-metrics",
       "commit": "294050046f1dc7974d515bc13b53744beaa02a38",
       "committed_at": "2026-08-02T22:43:58-04:00",
-      "captured_at": "2026-08-23T18:52:13+00:00",
+      "captured_at": "2026-08-23T20:57:13+00:00",
       "files": 11,
       "bytes": 335889,
       "tree_sha256": "42aa8fffa2bc268f8b1b46f8fb5d81d322de8ad3d4a61f2d25d215119ed39816",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-mirror",
       "commit": "757c479a3042647088c8d7d263c612904a72defd",
       "committed_at": "2026-08-21T14:48:22-04:00",
-      "captured_at": "2026-08-23T18:52:15+00:00",
-      "files": 154,
-      "bytes": 3376727,
-      "tree_sha256": "388ae9e7b940233af17234b06057b289871dbd54799507ab368baff3c6c91907",
+      "captured_at": "2026-08-23T20:57:14+00:00",
+      "files": 149,
+      "bytes": 1164471,
+      "tree_sha256": "b87c562b6aa7d0a32ab1b28b32a7b0087a69c23af63506f2792c70860311d492",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "docs/agent-cards.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "docs/arrival-consent.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "ios/Screenshots/ios-cards.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "ios/Screenshots/ios-scanned-card.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "ios/Screenshots/ios-vui.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-mirror-releases",
       "commit": "f10ff84702eeb534856a602f08c0cf2555f45296",
       "committed_at": "2026-08-09T21:04:01-04:00",
-      "captured_at": "2026-08-23T18:52:15+00:00",
+      "captured_at": "2026-08-23T20:57:14+00:00",
       "files": 1,
       "bytes": 779,
       "tree_sha256": "78598df82b0fb76478e565adbb01c7d0fc7a1ef7e830590fbd14f4975a2d0749",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-moment",
       "commit": "229db186c505d2f2a693fac41cbbe84cadf7a07c",
       "committed_at": "2026-08-04T17:41:46-04:00",
-      "captured_at": "2026-08-23T18:52:15+00:00",
+      "captured_at": "2026-08-23T20:57:15+00:00",
       "files": 12,
       "bytes": 42417,
       "tree_sha256": "16a19a69a1bc5c67d177c4d7766f6acfaacf57300ca9fad12b1d8bd12adc2b22",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-moonshots",
       "commit": "789f9334050c40d115216d37f20f9b77e8429d12",
       "committed_at": "2026-07-12T23:21:33-04:00",
-      "captured_at": "2026-08-23T18:52:16+00:00",
-      "files": 177,
-      "bytes": 2082316,
-      "tree_sha256": "ca449b5aa3e5462c0c05524e4cf222e6243c1c7c30be38c34c48a6770dd1272d",
+      "captured_at": "2026-08-23T20:57:16+00:00",
+      "files": 174,
+      "bytes": 2077292,
+      "tree_sha256": "5f616f123d0c9274fa43d288fb33d71cb33674a0bf4d68b4125200be2e9b2ff0",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "moonshots/003-impossible-interface-tournament/adaptive-orb/icons/apple-touch-icon.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "moonshots/003-impossible-interface-tournament/adaptive-orb/icons/icon-192.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "moonshots/003-impossible-interface-tournament/adaptive-orb/icons/icon-512.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-neighborhood-protocol",
       "commit": "44e0c6eb49d619932e645fb9d9b12a5fa37f71b1",
       "committed_at": "2026-06-28T17:21:56-04:00",
-      "captured_at": "2026-08-23T18:52:16+00:00",
+      "captured_at": "2026-08-23T20:57:16+00:00",
       "files": 4,
       "bytes": 51377,
       "tree_sha256": "b8fb633255989eb39ba6a367b4b6df062a44ccae0abca5eb3b487f8ece052f35",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-nervous-system",
       "commit": "4068ccf75f55d1736c264f68ee215af8d2f72daf",
       "committed_at": "2026-07-18T16:55:38-05:00",
-      "captured_at": "2026-08-23T18:52:16+00:00",
+      "captured_at": "2026-08-23T20:57:16+00:00",
       "files": 3,
       "bytes": 2990,
       "tree_sha256": "7ae4c713062bd3142579dd8f062f960a11d51b99f7ff596096e420faeba79009",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "RAPP-Network",
       "commit": "a22f3f2be9bfc5b311b2e3956069779cd10f42ef",
       "committed_at": "2026-07-24T22:10:07-04:00",
-      "captured_at": "2026-08-23T18:51:27+00:00",
-      "files": 6,
-      "bytes": 178952,
-      "tree_sha256": "28602208f054548e22dff0d2162eaadf8a7200baf30d0c25852bae2a23613660",
+      "captured_at": "2026-08-23T20:56:01+00:00",
+      "files": 5,
+      "bytes": 97539,
+      "tree_sha256": "bdbba125b1ec1b75fa0b914789830b7382a37079c95e48c802e7e27573026aae",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "__pycache__/project_twin_agent.cpython-314.pyc",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-nightly",
       "commit": "4410a1c8062f2faa3e045fca84a607c961ff3a9e",
       "committed_at": "2026-07-18T14:55:15-05:00",
-      "captured_at": "2026-08-23T18:52:17+00:00",
-      "files": 73,
-      "bytes": 1188505,
-      "tree_sha256": "18609cecfcbda3f64afa8fdc1b89edd4f07031943b62326cffcbe23d55dc0585",
+      "captured_at": "2026-08-23T20:57:18+00:00",
+      "files": 72,
+      "bytes": 1107455,
+      "tree_sha256": "abee94b0eba948f6dbd6d78ee99b2e0d67e8dc35c9523740737057b040ee7329",
       "skipped_large": [],
       "withheld": [
+        {
+          "file": "MSFTAIBASMultiAgentCopilot_1_0_0_5.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
         {
           "file": "rapp_brainstem/.env.example",
           "reason": "path matches an always-withhold shape (**/.env.*)"
         }
-      ]
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-oneclick-deploy",
       "commit": "b42ea35deefa1d021efeb11a9980ce0a8d367008",
       "committed_at": "2026-07-16T13:56:46-05:00",
-      "captured_at": "2026-08-23T18:52:17+00:00",
-      "files": 45,
-      "bytes": 726577,
-      "tree_sha256": "7136a54ea577d597693e5f6b827575da7dd0b486e5a221b57e9d65faf8cfc089",
+      "captured_at": "2026-08-23T20:57:18+00:00",
+      "files": 32,
+      "bytes": 171625,
+      "tree_sha256": "a599fda7efcc092094a5ea5625e1b2b7e64fffc1178da5fd7125aab811371bd4",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "api/v1/egg/copilot_studio_deploy.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "pipeline/skeleton.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "solution/dealprogression_solution.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "solutions/ask_hr_solution.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "solutions/asset_maintenance_forecast_solution.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "solutions/care_gap_closure_solution.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "solutions/cart_abandonment_recovery_solution.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "solutions/contract_risk_review_solution.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "solutions/federal_grants_oversight_solution.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "solutions/it_helpdesk_solution.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "solutions/loan_origination_assistant_solution.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "solutions/personalized_shopping_assistant_solution.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "solutions/proposal_copilot_solution.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-open",
       "commit": "797f225bccf97ee098afb7fd6fd49d76c36f9e84",
       "committed_at": "2026-08-16T18:57:13-04:00",
-      "captured_at": "2026-08-23T18:52:17+00:00",
+      "captured_at": "2026-08-23T20:57:19+00:00",
       "files": 11,
       "bytes": 55624,
       "tree_sha256": "5ebb39934ee19fcdf888b7d0323fb449b35ec77555a336d5e79b15d83abfd22c",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-overwatch",
       "commit": "8205512ba970be3bb08157d85fa0d6491694afd2",
       "committed_at": "2026-08-05T15:28:24-04:00",
-      "captured_at": "2026-08-23T18:52:17+00:00",
+      "captured_at": "2026-08-23T20:57:19+00:00",
       "files": 14,
       "bytes": 86038,
       "tree_sha256": "bcdfdd3e91e91e736ab485cd711c3f2fec697d10fdb8e3c1e772ba848b99e238",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-personpower",
       "commit": "fcd4b9e9ae85de0a891e67c7c2238336a9496866",
       "committed_at": "2026-08-04T12:18:01-04:00",
-      "captured_at": "2026-08-23T18:52:18+00:00",
+      "captured_at": "2026-08-23T20:57:20+00:00",
       "files": 4,
       "bytes": 9458,
       "tree_sha256": "0783213df8e76490d249b2c013abbb38d3105715a20278f86d86ee798c699df7",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-petri",
       "commit": "b1f953c9cb498eb13fa0da07d94f065f0664d782",
       "committed_at": "2026-08-03T17:01:06-04:00",
-      "captured_at": "2026-08-23T18:52:18+00:00",
+      "captured_at": "2026-08-23T20:57:20+00:00",
       "files": 6,
       "bytes": 41883,
       "tree_sha256": "49386e0748cc438f8ff854f69792e0d51f48c7de68efd37d4f56b557dc139376",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-pets",
       "commit": "2ab70ab29ee9d6510a8239e4e26e12a421a5ec8e",
       "committed_at": "2026-08-02T17:39:41-04:00",
-      "captured_at": "2026-08-23T18:52:19+00:00",
-      "files": 16,
-      "bytes": 146969,
-      "tree_sha256": "dd32786688c5e28c2f7aaf54e39800363491407f157379009b70bf798ae173fb",
+      "captured_at": "2026-08-23T20:57:21+00:00",
+      "files": 12,
+      "bytes": 101198,
+      "tree_sha256": "16300a2164fb432c62e819380ddcd458a52186e26aae04ce553bcb7ece0253c4",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "icons/icon-192.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "icons/icon-512-maskable.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "icons/icon-512.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "og.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-plant-smoke-20260505-233637",
       "commit": "3db61bf8442a810e53871b34517af22f5681da5b",
       "committed_at": "2026-07-15T21:41:06-05:00",
-      "captured_at": "2026-08-23T18:52:19+00:00",
+      "captured_at": "2026-08-23T20:57:21+00:00",
       "files": 8,
       "bytes": 82929,
       "tree_sha256": "3ed40c6f7365816e7c6015cfad0cec235c9eb81f765ee5cfef5a437fbaac140e",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-platform",
       "commit": "d7f3f7d18e62867be1065b19e404e733320e5ad2",
       "committed_at": "2026-07-18T16:55:56-05:00",
-      "captured_at": "2026-08-23T18:52:19+00:00",
+      "captured_at": "2026-08-23T20:57:21+00:00",
       "files": 3,
       "bytes": 3110,
       "tree_sha256": "17d24f350dfff17a04f9316a7e66bf2f70d5eb8d5eabf1f0a2699eeeaec24ae3",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-play-pokemon",
       "commit": "10a2c560b8297560a12ea7773a611761a793ad60",
       "committed_at": "2026-07-13T01:08:36-04:00",
-      "captured_at": "2026-08-23T18:52:20+00:00",
+      "captured_at": "2026-08-23T20:57:22+00:00",
       "files": 22,
       "bytes": 265887,
       "tree_sha256": "556058f1a51e5290b1f6364d4f268740e85bf7927585209f585e519cb948597d",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-postflight",
       "commit": "4d2ef44edc413f11f74b65c527d10e0eeb24c1b9",
       "committed_at": "2026-07-07T19:37:41-04:00",
-      "captured_at": "2026-08-23T18:52:20+00:00",
+      "captured_at": "2026-08-23T20:57:22+00:00",
       "files": 7,
       "bytes": 46712,
       "tree_sha256": "283c24f820a1dbc847eca6ba7cb737c8f5a1c7cf0407918f6a0d746f4465d0a8",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-quests",
       "commit": "d2eb2e29dfa6c7275b0d41fa73bf51178c6aa2d9",
       "committed_at": "2026-07-07T18:46:58-04:00",
-      "captured_at": "2026-08-23T18:52:21+00:00",
+      "captured_at": "2026-08-23T20:57:23+00:00",
       "files": 5,
       "bytes": 5444,
       "tree_sha256": "9a63ed33b36ee9b9136e914546991734a8e8de8570332674e28475210bcd43be",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-ratchet",
       "commit": "187bff19c5dde13b88af0b1f0f45f116a36d4766",
       "committed_at": "2026-08-05T06:54:15-04:00",
-      "captured_at": "2026-08-23T18:52:21+00:00",
+      "captured_at": "2026-08-23T20:57:23+00:00",
       "files": 11,
       "bytes": 64161,
       "tree_sha256": "bfcf43a695565b774c026bdaeaa181d6cd97c9a44e813361672f3bce05e2068c",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-recall",
       "commit": "cfd5491d60746496b2a04e4f15529f14fa959148",
       "committed_at": "2026-08-15T00:41:39-04:00",
-      "captured_at": "2026-08-23T18:52:22+00:00",
+      "captured_at": "2026-08-23T20:57:24+00:00",
       "files": 32,
       "bytes": 825525,
       "tree_sha256": "c79f8f2810a129ebbfb6186b52d6c7ccf99420a60c5c5a9080fb23021a77e1a7",
       "skipped_large": [
         "Sources/CSQLite/sqlite3.c (9.3MB)"
       ],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-release-train",
       "commit": "4cb6e1469c56428a470eb709f6494772266e33e5",
       "committed_at": "2026-07-18T19:34:59Z",
-      "captured_at": "2026-08-23T18:52:23+00:00",
+      "captured_at": "2026-08-23T20:57:24+00:00",
       "files": 19,
       "bytes": 135285,
       "tree_sha256": "01aa79d91ca7e4fe3cd2e5b658aa09d6fc78d35d8448963f157cc116d829480c",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-remix",
       "commit": "04cb6f56ab05e00fe54880e4631a27093a5651ad",
       "committed_at": "2026-08-01T18:51:39-04:00",
-      "captured_at": "2026-08-23T18:52:23+00:00",
+      "captured_at": "2026-08-23T20:57:25+00:00",
       "files": 5,
       "bytes": 36444,
       "tree_sha256": "e3e833fd91c88cb609833aca35f472ca8dc40e48c56af1dcf6c5a7ed218a2a13",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-resident",
       "commit": "de07d307740e318723426c9463fd0c3a2654707b",
       "committed_at": "2026-05-27T13:56:06-04:00",
-      "captured_at": "2026-08-23T18:52:24+00:00",
+      "captured_at": "2026-08-23T20:57:26+00:00",
       "files": 11,
       "bytes": 15398,
       "tree_sha256": "09c6738e5e8b726b1f30ee85f7b5af2cf7cb5c8fcacc6a832a66557cad5cf454",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-rewind",
       "commit": "11656f0f06629f1b3fdf0ed47527a201bb151989",
       "committed_at": "2026-07-26T03:46:47-04:00",
-      "captured_at": "2026-08-23T18:52:24+00:00",
-      "files": 16,
-      "bytes": 83477,
-      "tree_sha256": "5537c22b15ba9e1cbacb3af0cd144107bd4714a384530a4a28e20781aaa5f251",
+      "captured_at": "2026-08-23T20:57:26+00:00",
+      "files": 15,
+      "bytes": 78405,
+      "tree_sha256": "4965f959e0326f6147e5e65d39627fd625e99fc28f28f4cf0761b32965dea4f8",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "rapp_rewind/eggs/rapp_rewind.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-rings",
       "commit": "4eb4fcace7f70d5af3d0d0e8d47c0db8498bd8b9",
       "committed_at": "2026-07-18T16:55:29-05:00",
-      "captured_at": "2026-08-23T18:52:24+00:00",
+      "captured_at": "2026-08-23T20:57:27+00:00",
       "files": 3,
       "bytes": 3140,
       "tree_sha256": "7d15ac6db5bce155f29df13499bd5a44aa179bb70c4479ab68fbb513bf0c7652",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-roadmap",
       "commit": "cfe58561727a4b018fc0ff6aa51dda84352861cb",
       "committed_at": "2026-08-16T21:38:10-04:00",
-      "captured_at": "2026-08-23T18:52:24+00:00",
+      "captured_at": "2026-08-23T20:57:27+00:00",
       "files": 10,
       "bytes": 443351,
       "tree_sha256": "72e319528b337fc5ab720f3e4b88b7313d3da9c5ac1c6c33df2d4d1b0c4e9cab",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-rock-tumbler",
       "commit": "cb3dd662e874b02a1a903fdbab0863d4b876895f",
       "committed_at": "2026-08-01T16:36:24-04:00",
-      "captured_at": "2026-08-23T18:52:26+00:00",
-      "files": 28,
-      "bytes": 2170115,
-      "tree_sha256": "674a3c2a066c9c24e28397432972f18394759d0550f83c5055a15d649450e9b0",
+      "captured_at": "2026-08-23T20:57:29+00:00",
+      "files": 14,
+      "bytes": 65406,
+      "tree_sha256": "4e015b1e06841ff13ae751d0ccda2d56372cae1d5954d4cf7273e9886d3d0a49",
       "skipped_large": [
         "media/rock-tumbler.mp4 (6.9MB)",
         "media/rock-tumbler.webm (5.4MB)",
@@ -1277,60 +2326,122 @@
         "media/showcase-1080p.mp4 (26.3MB)",
         "media/showcase-1080p.webm (15.4MB)"
       ],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "media/poster.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/short-1080x1920.webm",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/short-poster.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/showcase-poster.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/still-1.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/still-10.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/still-2.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/still-3.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/still-4.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/still-5.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/still-6.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/still-7.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/still-8.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/still-9.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-sdk",
       "commit": "ae9c5185fd73fd8cf31c45a0292f5b09dc4476d8",
       "committed_at": "2026-07-18T16:55:44-05:00",
-      "captured_at": "2026-08-23T18:52:26+00:00",
+      "captured_at": "2026-08-23T20:57:30+00:00",
       "files": 3,
       "bytes": 2978,
       "tree_sha256": "2668659754b3bc3b5d4414d82e2ab0d6ff62b973d6d34d65fe1738efa8b2bd2d",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-sealed",
       "commit": "c6e35c85428bd8761d2398ce172e14b22f9364c9",
       "committed_at": "2026-06-03T07:07:25-06:00",
-      "captured_at": "2026-08-23T18:52:26+00:00",
+      "captured_at": "2026-08-23T20:57:30+00:00",
       "files": 5,
       "bytes": 9574,
       "tree_sha256": "909fd4d260683b65e9db3c51c01d73d2d45d7ed313557ba1c7ac2321d5051265",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-second-brain",
       "commit": "c71de71f2ed4de039ba19725d0f3c407756e5fa0",
       "committed_at": "2026-07-18T18:21:42-05:00",
-      "captured_at": "2026-08-23T18:52:26+00:00",
+      "captured_at": "2026-08-23T20:57:30+00:00",
       "files": 357,
       "bytes": 425865,
       "tree_sha256": "eaba45aa7f1bc71d88f37899aa343fb1e9182bdfb0f9f92d0101133f0503d117",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-secondbrain",
       "commit": "7846dfdd5e2c74ea2201e1b141269df359b4ce5a",
       "committed_at": "2026-08-01T15:03:44-04:00",
-      "captured_at": "2026-08-23T18:52:27+00:00",
+      "captured_at": "2026-08-23T20:57:31+00:00",
       "files": 13,
       "bytes": 195770,
       "tree_sha256": "2738567a45f1fc525b78b755326121beecfb38bf931607b329171294f7403424",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-sentinel",
       "commit": "3ad59db0b32bfd3ae77c06b2c3ad6a743c04dd16",
       "committed_at": "2026-08-21T21:11:25-04:00",
-      "captured_at": "2026-08-23T18:52:28+00:00",
-      "files": 137,
-      "bytes": 4040820,
-      "tree_sha256": "75027cdf5c7e1f325462b072f07eea74e60b16bf030bb008593bba4938f09f7a",
+      "captured_at": "2026-08-23T20:57:32+00:00",
+      "files": 128,
+      "bytes": 1691087,
+      "tree_sha256": "e8d5dbaec7bfa03d497c30d95330b468edbfa6e3e7d5937ee13023e35df6a502",
       "skipped_large": [
         "docs/above-not-beside.mp4 (6.4MB)",
         "videos/eight-ais-bar/renders/eight-ais-bar_2026-08-17_23-05-46.mp4 (2.1MB)",
@@ -1340,91 +2451,177 @@
         {
           "file": "prove_diagnose.py",
           "reason": "contains something shaped like a credential"
+        },
+        {
+          "file": "videos/eight-ais-bar/.DS_Store",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "videos/eight-ais-bar/assets/narration.wav",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "videos/eight-ais-bar/snapshots/contact-sheet.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "videos/eight-ais-bar/snapshots/frame-00-at-2s.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "videos/eight-ais-bar/snapshots/frame-01-at-8s.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "videos/eight-ais-bar/snapshots/frame-02-at-17.5s.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "videos/eight-ais-bar/snapshots/frame-03-at-22s.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "videos/eight-ais-bar/snapshots/frame-04-at-28s.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "videos/eight-ais-bar/snapshots/frame-05-at-29.1s.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
         }
-      ]
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-sentinel-hub",
       "commit": "b3a4dfbe05ae9bb291b651e552394aa53e3ee84c",
       "committed_at": "2026-08-19T09:13:11-04:00",
-      "captured_at": "2026-08-23T18:52:28+00:00",
+      "captured_at": "2026-08-23T20:57:33+00:00",
       "files": 23,
       "bytes": 98622,
       "tree_sha256": "0bb38c369c31b7b66385b6b10ff4bae8fc0da4004979603836099b8d98b5f92b",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-shot",
       "commit": "1f2f5ee718b499e8b87e9315264fb0d9a7c3f30c",
       "committed_at": "2026-07-26T04:19:30-04:00",
-      "captured_at": "2026-08-23T18:52:28+00:00",
-      "files": 23,
-      "bytes": 131506,
-      "tree_sha256": "2371ed5d9aaa95f659a485ba27d65f44d650e92332ca93c7dc7ae83ddcc982e7",
+      "captured_at": "2026-08-23T20:57:33+00:00",
+      "files": 22,
+      "bytes": 126326,
+      "tree_sha256": "08634e99165c86927a54be7cdbbe26ab0b3ebde6425ae0cf4ed493da77d5781c",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "rapp_shot/eggs/rapp_shot.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-skill",
       "commit": "ff36d917d3a20b459cd37404fdf16ebd9d0a15a0",
       "committed_at": "2026-08-10T14:11:24-04:00",
-      "captured_at": "2026-08-23T18:52:29+00:00",
+      "captured_at": "2026-08-23T20:57:34+00:00",
       "files": 27,
       "bytes": 198965,
       "tree_sha256": "0ee1fca1e1acf8ca67d1696d7c334a2cd31d681ff4bce81b8e0720cb2ae4c1f6",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-skills",
       "commit": "312617f8479e28c654897d713141573a191d6552",
       "committed_at": "2026-08-19T19:45:56-04:00",
-      "captured_at": "2026-08-23T18:52:31+00:00",
-      "files": 498,
-      "bytes": 11155550,
-      "tree_sha256": "8e6cc805823d30fc0fcc0570aae606d3a6b364378ecdeaf393258e4626ae161e",
+      "captured_at": "2026-08-23T20:57:36+00:00",
+      "files": 489,
+      "bytes": 10455259,
+      "tree_sha256": "7ee7b112ee109eaf035994e8cabf9dd4d3bb163ef709a1cb02533842217d792a",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "cat-agent-skills/acroform-writer/assets/sample_intake_form.pdf",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "cat-agent-skills/ai-usecase-assessment/knowledge/Agentic_Use_Case_Assessment_Rubric_v2.docx",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "cat-agent-skills/ai-usecase-assessment/knowledge/UseCase_Categories_and_Subcategories_Guidance.docx",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "cat-agent-skills/campaign-deck-builder/assets/campaign-template.pptx",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "cat-agent-skills/doc-format-converter/assets/samples/sample.docx",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "cat-agent-skills/doc-format-converter/assets/samples/sample.pptx",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "cat-agent-skills/doc-format-converter/assets/samples/sample.xlsx",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "cat-agent-skills/redlining-content/assets/template.docx",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "cat-agent-skills/scrollytelling-data/assets/Basketball_Demo_Data.xlsx",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-snap",
       "commit": "9fed5a91fbc9c77b948bb580fe4432621f0b2ea5",
       "committed_at": "2026-07-04T10:34:42-04:00",
-      "captured_at": "2026-08-23T18:52:31+00:00",
+      "captured_at": "2026-08-23T20:57:36+00:00",
       "files": 4,
       "bytes": 49835,
       "tree_sha256": "bd2941b9cbd6b6991eeee2a00d503e29b1f631b3f65afe6c6b47e3c451332f42",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-spinal-cord",
       "commit": "d6fcb9730b463f236dd7d6fbaf68d8a86fa53412",
       "committed_at": "2026-07-18T16:55:35-05:00",
-      "captured_at": "2026-08-23T18:52:32+00:00",
+      "captured_at": "2026-08-23T20:57:37+00:00",
       "files": 3,
       "bytes": 2994,
       "tree_sha256": "8155cd91cdc18d6f5527d67edf77e417ab67e5ae5fbdcfa5b238985adc5cdc3f",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-spine",
       "commit": "ffbd55b7e0eee17b47e38e3f2e4609b2b35c64d3",
       "committed_at": "2026-08-15T04:21:16-04:00",
-      "captured_at": "2026-08-23T18:52:32+00:00",
+      "captured_at": "2026-08-23T20:57:37+00:00",
       "files": 28,
       "bytes": 1237825,
       "tree_sha256": "21615606d0deb83e30c71cf33091c5d316564e0c1f90d45a15a845d8b913d01f",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-stack-cubby",
       "commit": "1fee3896099e634bc90f50d2c4fac3e971379ec2",
       "committed_at": "2026-07-16T09:31:48-05:00",
-      "captured_at": "2026-08-23T18:52:34+00:00",
+      "captured_at": "2026-08-23T20:57:39+00:00",
       "files": 377,
       "bytes": 7303748,
       "tree_sha256": "d80db181dd83f438e5edbdf62085ec3d3946419e965ab9f62855b5786515a7a4",
@@ -1446,145 +2643,187 @@
           "file": "tests/packaging/test_source_archive.py",
           "reason": "contains something shaped like a credential"
         }
-      ]
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-static-apis",
       "commit": "ea4a19eabf00212aa4062a42d530ad3e758c7685",
       "committed_at": "2026-08-20T16:28:11-04:00",
-      "captured_at": "2026-08-23T18:52:37+00:00",
-      "files": 2445,
-      "bytes": 13193530,
-      "tree_sha256": "8d28fd0c6fd417b101a735382d1ea3571d13533ec73693ab714b064c123ae0fa",
+      "captured_at": "2026-08-23T20:57:41+00:00",
+      "files": 2438,
+      "bytes": 12610990,
+      "tree_sha256": "8ffc511354a6ad76b777a8adbe456a66180709a4aec1658fb6a41f5078cc1b21",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "companion/icon-180.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "companion/icon-192.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "companion/icon-512.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "rapp-go/icon-180.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "rapp-go/icon-192.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "rapp-go/icon-512.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "showcase/demos/.DS_Store",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-static-mcp",
       "commit": "922760a6cb960f063633aa2ac4e02e540a456415",
       "committed_at": "2026-07-06T20:43:33-04:00",
-      "captured_at": "2026-08-23T18:52:38+00:00",
+      "captured_at": "2026-08-23T20:57:42+00:00",
       "files": 43,
       "bytes": 121110,
       "tree_sha256": "8975dcbfb5c54c966ce5aaf87c7c356a7eb51ee8d85660587afe3cf856a83ac9",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-store-archive",
       "commit": "da2b3643c52043c2bd8845cea3d6ddcdda620ed4",
       "committed_at": "2026-01-31T18:11:49-05:00",
-      "captured_at": "2026-08-23T18:52:38+00:00",
+      "captured_at": "2026-08-23T20:57:42+00:00",
       "files": 22,
       "bytes": 199759,
       "tree_sha256": "76835d57869e7d3588199310272785e07190f9da65104ff47b4e2138fe815d00",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-support",
       "commit": "533059ca57bb09e0fdd2cd110e2124e7be184c41",
       "committed_at": "2026-07-07T18:46:14-04:00",
-      "captured_at": "2026-08-23T18:52:39+00:00",
+      "captured_at": "2026-08-23T20:57:43+00:00",
       "files": 4,
       "bytes": 2858,
       "tree_sha256": "3c28e9c51644253741059fd784648069d16c19d65a36d08c813471745a11d575",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-test-neighbor",
       "commit": "d830223edf2c19c84e3185195daa71acf693a9de",
       "committed_at": "2026-07-16T13:56:50-05:00",
-      "captured_at": "2026-08-23T18:52:39+00:00",
+      "captured_at": "2026-08-23T20:57:43+00:00",
       "files": 30,
       "bytes": 168344,
       "tree_sha256": "23cabdb20d491007a8572eb9e2dde6d32c77688c36d66093da87db2e8a638a81",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-toaster",
       "commit": "d54ba8484b5c5dae6406d2090c03115d12985446",
       "committed_at": "2026-08-20T10:38:34-04:00",
-      "captured_at": "2026-08-23T18:52:39+00:00",
+      "captured_at": "2026-08-23T20:57:43+00:00",
       "files": 16,
       "bytes": 153408,
       "tree_sha256": "93b1ef781ed36c3be179e5a016e439da4ab9cb930890140062892aec40a11c34",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-tools",
       "commit": "bbf6038ad9c93fdfd47a0b422ae2b5a6459e12d2",
       "committed_at": "2026-07-26T04:19:32-04:00",
-      "captured_at": "2026-08-23T18:52:39+00:00",
+      "captured_at": "2026-08-23T20:57:44+00:00",
       "files": 10,
       "bytes": 60060,
       "tree_sha256": "4c22ab214aa8993699a8e3cfb610f320d395e75daa12bca9bf432469bd9f4290",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-train",
       "commit": "fd9d4e84d25ef78c4c8aaf9c9ca2615b494f523a",
       "committed_at": "2026-08-16T19:51:41-04:00",
-      "captured_at": "2026-08-23T18:52:40+00:00",
+      "captured_at": "2026-08-23T20:57:44+00:00",
       "files": 8,
       "bytes": 34679,
       "tree_sha256": "fc4b8b37b9bccad82aba6786275f7664c9278d073e7f69de472173b6621b21a3",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-twin",
       "commit": "588feadbf37b2efa76eca74a6bbdd9523bd711c9",
       "committed_at": "2026-07-18T16:55:17-05:00",
-      "captured_at": "2026-08-23T18:52:40+00:00",
+      "captured_at": "2026-08-23T20:57:44+00:00",
       "files": 3,
       "bytes": 3100,
       "tree_sha256": "f3dcd43fc4e01b18d68575f7d2c1ee037b500f682531dd6db625285b69d5306b",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-twin-hub",
       "commit": "97fb82d5c2b21535a9717176f3a8dc813eb28804",
       "committed_at": "2026-08-01T16:28:53-04:00",
-      "captured_at": "2026-08-23T18:52:40+00:00",
+      "captured_at": "2026-08-23T20:57:45+00:00",
       "files": 16,
       "bytes": 85000,
       "tree_sha256": "8e0c9dd5a439b9541a7642f2fba17abd7df1d5ed5ea18268d942af9505c66d38",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-twin-in-residence",
       "commit": "ec47ca5bba545a9a04e9b61a5aec0aeb825ce0ce",
       "committed_at": "2026-07-18T16:55:20-05:00",
-      "captured_at": "2026-08-23T18:52:40+00:00",
+      "captured_at": "2026-08-23T20:57:45+00:00",
       "files": 3,
       "bytes": 3127,
       "tree_sha256": "2e88eae18df64c9c725e287056668e660d42e687bd4da980ac0bb82fff508a08",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-ultracode",
       "commit": "f27181f221c1c760128fd7dd3ae2a25b1e778202",
       "committed_at": "2026-07-21T23:39:15-04:00",
-      "captured_at": "2026-08-23T18:52:41+00:00",
+      "captured_at": "2026-08-23T20:57:46+00:00",
       "files": 39,
       "bytes": 149313,
       "tree_sha256": "997568825360b61532eecc72e234e1851bf741edecbb8332c3894c2cf24d248c",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-version-selector",
       "commit": "79a007f8f9d24cdc23a1cf1e457bdebf246d34b3",
       "committed_at": "2026-07-07T19:42:43-04:00",
-      "captured_at": "2026-08-23T18:52:41+00:00",
+      "captured_at": "2026-08-23T20:57:46+00:00",
       "files": 79,
       "bytes": 1105887,
       "tree_sha256": "f80a34f66ff996718cee3e917d613c9f67dbc850b83cebab70c75085f5306601",
@@ -1602,38 +2841,46 @@
           "file": "versions/v0.6.7/rapp_brainstem/.env.example",
           "reason": "path matches an always-withhold shape (**/.env.*)"
         }
-      ]
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-video",
       "commit": "5516a84177eb3ce156609985cf6cc78ef6f498e2",
       "committed_at": "2026-07-21T15:34:46-04:00",
-      "captured_at": "2026-08-23T18:52:42+00:00",
-      "files": 12,
-      "bytes": 682555,
-      "tree_sha256": "030ed650c38c271b7be99573e29702fecbf8659af96ff1c4907eb352800836ea",
+      "captured_at": "2026-08-23T20:57:47+00:00",
+      "files": 11,
+      "bytes": 207534,
+      "tree_sha256": "44be1083261902672df8a5a59feea15d5c226aed995ea8aa6000bd65108cb6cd",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "test/assets/test-image.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-virtual-as400",
       "commit": "2b510ed0b97d24f9423be2a0a7eb7d2e54d52887",
       "committed_at": "2026-08-22T23:18:05-04:00",
-      "captured_at": "2026-08-23T18:52:42+00:00",
+      "captured_at": "2026-08-23T20:57:47+00:00",
       "files": 45,
       "bytes": 366895,
       "tree_sha256": "a13beba41f16c54bdd9cfa6bc1c37b127d781e1e425b0abb6cee01692a65642d",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-vision",
       "commit": "ab75d4ca429109891b2a8ccd4a0ade9e73e870d4",
       "committed_at": "2026-08-22T08:43:07Z",
-      "captured_at": "2026-08-23T18:52:44+00:00",
-      "files": 32,
-      "bytes": 2504463,
-      "tree_sha256": "7f189b325423066a4032cc2b5f9c8e4cde0b6d190573deba808cbadaf4110650",
+      "captured_at": "2026-08-23T20:57:49+00:00",
+      "files": 28,
+      "bytes": 650093,
+      "tree_sha256": "e97a5089c1193227f80c25a0a886dd6541656fa755364c92563a57a68ef946c5",
       "skipped_large": [
         "media/rock-tumbler-reel.mp4 (6.9MB)",
         "media/rock-tumbler-reel.webm (5.4MB)",
@@ -1641,318 +2888,576 @@
         "media/rock-tumbler-showcase.mp4 (26.3MB)",
         "media/rock-tumbler-showcase.webm (15.4MB)"
       ],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "media/rock-tumbler-short.webm",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "thumbs/rock-tumbler-reel.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "thumbs/rock-tumbler-short.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "thumbs/rock-tumbler-showcase.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-vision-neighborhood",
       "commit": "2e6c62e77cad7f6b85008c75a4554924b4c6b504",
       "committed_at": "2026-08-04T12:06:50-04:00",
-      "captured_at": "2026-08-23T18:52:44+00:00",
+      "captured_at": "2026-08-23T20:57:50+00:00",
       "files": 48,
       "bytes": 237469,
       "tree_sha256": "b1d5c59ad834456071987151cf15417a528a56f0eda4e2ad787be4c555edabda",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-vneighborhood",
       "commit": "b727e96be888e319bdad760593744e511917615a",
       "committed_at": "2026-06-03T07:07:14-06:00",
-      "captured_at": "2026-08-23T18:52:44+00:00",
+      "captured_at": "2026-08-23T20:57:50+00:00",
       "files": 7,
       "bytes": 48520,
       "tree_sha256": "5839d3196bda33f2eaa5ffc59311e74dd512dbf6d13e85e0547b6e69fddbb3a2",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-voice",
       "commit": "6acf23cbc97831f4a003f9bcf59948513e9a886f",
       "committed_at": "2026-07-26T03:46:43-04:00",
-      "captured_at": "2026-08-23T18:52:44+00:00",
-      "files": 18,
-      "bytes": 107127,
-      "tree_sha256": "efe33224467b3566a95ee4ee94c1962bc652c3ae4558fac8c40c2e1735210263",
+      "captured_at": "2026-08-23T20:57:51+00:00",
+      "files": 17,
+      "bytes": 100875,
+      "tree_sha256": "a060b91db2b7ffde347d8f10cd859a59cecfa97de356df21caeb6fa4dcc67e11",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "rapp_voice/eggs/rapp_voice.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-vscode-extension",
       "commit": "d515e8cc9ea6647ba478cc4f723e022ca712aec5",
       "committed_at": "2026-05-22T20:54:59Z",
-      "captured_at": "2026-08-23T18:52:45+00:00",
-      "files": 20,
-      "bytes": 162331,
-      "tree_sha256": "cc2afcc5983d65594978bc518597fc5d50699697f1cbd4112355468dc5d20bb4",
+      "captured_at": "2026-08-23T20:57:51+00:00",
+      "files": 19,
+      "bytes": 138804,
+      "tree_sha256": "05045a1ffb5f6ae73735b105fceae0e599413bcccc7fba668c20e34209909e09",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "docs/rapp-brainstem.vsix",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-vui",
       "commit": "d15a6f6d80299529ca110787b75ebcdf44bab3e4",
       "committed_at": "2026-07-18T19:22:03-05:00",
-      "captured_at": "2026-08-23T18:52:45+00:00",
-      "files": 10,
-      "bytes": 160691,
-      "tree_sha256": "5fb3f339e2f07a3c7a43c5f01c826d519895ecf58ce3d4fdf2ffe3538b402352",
+      "captured_at": "2026-08-23T20:57:52+00:00",
+      "files": 6,
+      "bytes": 56368,
+      "tree_sha256": "6e54b9edf25b0620769eefc77592b248b9d7c42c6efa0600876d55ecdbf4f46d",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "icon-180.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "icon-192.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "icon-512.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "icon-maskable-512.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-work-cubbies",
       "commit": "6d9061348337da670821bdd7000767a9cc98af96",
       "committed_at": "2026-08-16T02:08:57Z",
-      "captured_at": "2026-08-23T18:52:45+00:00",
+      "captured_at": "2026-08-23T20:57:52+00:00",
       "files": 20,
       "bytes": 171694,
       "tree_sha256": "f200f6ad22174b2da72d28771829d56c22f74414165b9da535394cb37431fc9f",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp-zoo",
       "commit": "ce5211647f51a0d29162dde514e1a839994d40bf",
       "committed_at": "2026-07-15T23:11:55-05:00",
-      "captured_at": "2026-08-23T18:52:45+00:00",
-      "files": 36,
-      "bytes": 372729,
-      "tree_sha256": "52489c79f98b75c93d3f4c98bad05d59001ace03bdf2169d8d87cfbc9ad78e7e",
+      "captured_at": "2026-08-23T20:57:53+00:00",
+      "files": 31,
+      "bytes": 359489,
+      "tree_sha256": "5b061d5c4eacaac74aeb14976b3396edabf95e204567a369d5f48cfc32f2ca02",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "docs/icon-192.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "docs/icon-512.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "starters/dist/journal.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "starters/dist/playtime.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "starters/dist/workday.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rapp-zoo-v2",
       "commit": "e230e9065440a80fd1bef2586969d2a252c7ba31",
       "committed_at": "2026-08-22T20:03:36-04:00",
-      "captured_at": "2026-08-23T18:52:46+00:00",
+      "captured_at": "2026-08-23T20:57:53+00:00",
       "files": 91,
       "bytes": 437679,
       "tree_sha256": "9926d8a1ce6d1af228683fcb3c425c58a19175d11462534ae8e4e493a46297c7",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "RAPP_Desktop",
       "commit": "0aea2ecf7e66ebffb30d3af6a550eac638356292",
       "committed_at": "2026-01-31T18:11:45-05:00",
-      "captured_at": "2026-08-23T18:51:28+00:00",
+      "captured_at": "2026-08-23T20:56:03+00:00",
       "files": 44,
       "bytes": 464023,
       "tree_sha256": "100d7f6fc24d99c396caca59e78b5a13c0e947877cda4afa1c099abec8f58405",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp_docs",
       "commit": "45d6ee5049dfc35d12d6cbb14e9e27e0297573cf",
       "committed_at": "2026-06-21T20:10:29-04:00",
-      "captured_at": "2026-08-23T18:52:46+00:00",
+      "captured_at": "2026-08-23T20:57:53+00:00",
       "files": 3,
       "bytes": 9246,
       "tree_sha256": "8737794111a1f8cb16ddb2254be1717cd2299ce2d39021301f74bd2c4951bf09",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "RAPP_hippo",
       "commit": "c55d62315104540f859a9e9db6d14fc385739f8e",
       "committed_at": "2026-07-16T13:56:25-05:00",
-      "captured_at": "2026-08-23T18:51:30+00:00",
+      "captured_at": "2026-08-23T20:56:06+00:00",
       "files": 73,
       "bytes": 820913,
       "tree_sha256": "120ffa3e33f9a6ef634767e4e5741105db7af4c39337057c97b56c19caad48a8",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "RAPP_Hub",
       "commit": "00ac2f73cade3f64c39359e9a90fca636bc387aa",
       "committed_at": "2026-02-03T11:08:58-05:00",
-      "captured_at": "2026-08-23T18:51:28+00:00",
+      "captured_at": "2026-08-23T20:56:03+00:00",
       "files": 61,
       "bytes": 232535,
       "tree_sha256": "b92c8a6791722d38a49257ffcc3eb0229e85b27951efe01b3d8890ff8004a842",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rapp_orion",
       "commit": "7ba9bd9d69812c3dc2d418dcd2029c49b379ffe3",
       "committed_at": "2026-07-16T13:56:26-05:00",
-      "captured_at": "2026-08-23T18:52:46+00:00",
-      "files": 45,
-      "bytes": 607946,
-      "tree_sha256": "09ebff0b4cddcbc93959886785721f702c3de14954add22bac59fedf68495510",
+      "captured_at": "2026-08-23T20:57:54+00:00",
+      "files": 44,
+      "bytes": 526896,
+      "tree_sha256": "d8dc4778761dbfe2978911abfd59aa52116fe58992fc659f5a664fa783b9d4b7",
       "skipped_large": [],
       "withheld": [
+        {
+          "file": "MSFTAIBASMultiAgentCopilot_1_0_0_5.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
         {
           "file": "rapp_brainstem/.env.example",
           "reason": "path matches an always-withhold shape (**/.env.*)"
         }
-      ]
+      ],
+      "gitlinks": []
     },
     {
       "repo": "RAPP_Sense_Store",
       "commit": "36efba8f7ca381f7fa39b6b08e5a0f06aec1d946",
       "committed_at": "2026-07-15T22:23:19-05:00",
-      "captured_at": "2026-08-23T18:51:29+00:00",
+      "captured_at": "2026-08-23T20:56:04+00:00",
       "files": 43,
       "bytes": 116829,
       "tree_sha256": "dda6b214f87b6a7811bda867893a582c3050c84f2d56cafcfd64d2285dd2081b",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "RAPP_Store",
       "commit": "27215155ae43ebdfe0a7292dc778dd8243841a4f",
       "committed_at": "2026-08-23T02:13:26-04:00",
-      "captured_at": "2026-08-23T18:51:29+00:00",
-      "files": 242,
-      "bytes": 2777391,
-      "tree_sha256": "45a07ff332ca0175fae25b4656ce32a24e2a2131ecbda28af8739e01dbbc5cb1",
+      "captured_at": "2026-08-23T20:56:05+00:00",
+      "files": 218,
+      "bytes": 2449188,
+      "tree_sha256": "5472d251108fd2212936872eb2282d1051f461cb449e395aa4c1f428695a510f",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "api/v1/egg/agent_team.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "api/v1/egg/bookfactory.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "api/v1/egg/chainforge.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "api/v1/egg/cockpit.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "api/v1/egg/coe_starter_kit.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "api/v1/egg/csv_surgeon.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "api/v1/egg/egg_hatcher.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "api/v1/egg/json_doctor.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "api/v1/egg/log_detective.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "api/v1/egg/markdown_medic.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "api/v1/egg/perpetual_loop_factory.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "api/v1/egg/pii_scout.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "api/v1/egg/project_tracker.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "api/v1/egg/rapp-zoo.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "api/v1/egg/rapp_commons.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "api/v1/egg/rapp_god_forum.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "api/v1/egg/spine_dag.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "api/v1/egg/thoughtbox.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "api/v1/egg/toaster.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "api/v1/egg/vibe-coding-loop.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "api/v1/egg/wildhaven_ceo.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "apps/@kody-w/thoughtbox/eggs/thoughtbox-1.0.0.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "apps/@rapp/bookfactory/eggs/bookfactoryagent-demo.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "tests/fixtures/spine_dag-1.0.0.zip",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "RAPPAIClaudeCodePlayground",
       "commit": "4f5bde0fb01bad5497ecbfb3ff0360aa58b8a8d5",
       "committed_at": "2025-10-08T20:17:40-04:00",
-      "captured_at": "2026-08-23T18:51:28+00:00",
-      "files": 22,
-      "bytes": 1230100,
-      "tree_sha256": "63ae409337c8736da0d39b2554145a9b46256d73150fc81ef87e56b46ab1a424",
+      "captured_at": "2026-08-23T20:56:02+00:00",
+      "files": 20,
+      "bytes": 270705,
+      "tree_sha256": "5dc578397253f24d9c1cc9c5dbb29941b2ad1b7176855fb2a7a0eda687328f6b",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "docs/images/afterTemplate1.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "docs/images/afterTemplate2.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rappbook-admin",
       "commit": "33f9f0df373cbe37197d6292f5bc3fdd89027573",
       "committed_at": "2026-01-31T18:01:50-05:00",
-      "captured_at": "2026-08-23T18:52:47+00:00",
+      "captured_at": "2026-08-23T20:57:54+00:00",
       "files": 6,
       "bytes": 54992,
       "tree_sha256": "397f4f59241fa9a7432fcbdabf33fab0fc2e625eaaab4f671dd6b81eded57505",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "RAPPcards",
       "commit": "5bfcea8d6aaa78e988827783b44e0d384ed3c14a",
       "committed_at": "2026-04-18T11:09:09-04:00",
-      "captured_at": "2026-08-23T18:51:30+00:00",
+      "captured_at": "2026-08-23T20:56:06+00:00",
       "files": 8,
       "bytes": 260930,
       "tree_sha256": "1aaeeae68f3be4c88c1a3d5c2fd5d971d1e420a99d92df874f407dc5bfa227ef",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappdex",
       "commit": "10017ccf6b0b97fefa5613fc73606860a16f8bd1",
       "committed_at": "2026-08-02T17:39:36-04:00",
-      "captured_at": "2026-08-23T18:52:47+00:00",
-      "files": 19,
-      "bytes": 146803,
-      "tree_sha256": "9cc3feb8827a45b48bc2d4044af9d5793e813fade0b1996eb09ff88176c74d4f",
+      "captured_at": "2026-08-23T20:57:55+00:00",
+      "files": 15,
+      "bytes": 105493,
+      "tree_sha256": "ac2c3608833cdec0e4ac7d7b2449ea8c07da6c6542cf33858c16f3abec734343",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "icons/icon-192.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "icons/icon-512-maskable.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "icons/icon-512.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "og.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "RAPPsquared",
       "commit": "c99214c84fb2682c7b700fa0c60cc5133509085f",
       "committed_at": "2026-07-16T13:56:53-05:00",
-      "captured_at": "2026-08-23T18:51:30+00:00",
+      "captured_at": "2026-08-23T20:56:07+00:00",
       "files": 16,
       "bytes": 209467,
       "tree_sha256": "8d23cb704202473f8d7c65c8a968dd234c2e3b17af211f76d9e06feeef3ed7f0",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappter-cli",
       "commit": "c7b919357a201489ba3ecaae83cb56386eb15ea9",
       "committed_at": "2026-03-20T20:40:33-04:00",
-      "captured_at": "2026-08-23T18:52:47+00:00",
+      "captured_at": "2026-08-23T20:57:55+00:00",
       "files": 5,
       "bytes": 78267,
       "tree_sha256": "3ad4573edb81cdfc84a93d4791331b77cd4718dee49f83a00023e2d845c1d492",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappter-distro",
       "commit": "fe8d558b3930a14b95bc21987c3f4923d8dc1c04",
       "committed_at": "2026-08-16T20:28:25-04:00",
-      "captured_at": "2026-08-23T18:52:48+00:00",
-      "files": 133,
-      "bytes": 2663028,
-      "tree_sha256": "d19fe41fef6161dbb70115afdf186bebaabbbacce42e2647be7cb3afabdc5094",
+      "captured_at": "2026-08-23T20:57:56+00:00",
+      "files": 127,
+      "bytes": 2612305,
+      "tree_sha256": "828341fd1d4c465f9af53fd78e71d8e56231efea6522d3da4183255ef15f773f",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "rapp-zoo/starters/journal.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "rapp-zoo/starters/playtime.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "rapp-zoo/starters/workday.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "ui/web/icon-180.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "ui/web/icon-192.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "ui/web/icon-512.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rappter-factory",
       "commit": "652702855bcde92e3b2aeac5712dcd35971f54a0",
       "committed_at": "2026-03-16T18:49:43-04:00",
-      "captured_at": "2026-08-23T18:52:49+00:00",
+      "captured_at": "2026-08-23T20:57:57+00:00",
       "files": 11,
       "bytes": 1030103,
       "tree_sha256": "9295e7ff7eb696879a64a3310e033ecdaa9f04a6c1e59f2660b78f3ec75999a6",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappter-mmo",
       "commit": "757291f589d31a466923dcc96185b3662f750435",
       "committed_at": "2026-03-20T17:31:21-04:00",
-      "captured_at": "2026-08-23T18:52:49+00:00",
+      "captured_at": "2026-08-23T20:57:57+00:00",
       "files": 3,
       "bytes": 26437,
       "tree_sha256": "bbfc441f36f1c3ced98f30c97d6cce6adffb50ac4087f782d36b62a61c6e1929",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappter-plays-palworld",
       "commit": "88f59b6d1db8649891dd553695e47d7909bb4b6e",
       "committed_at": "2026-07-24T23:14:11-04:00",
-      "captured_at": "2026-08-23T18:52:49+00:00",
+      "captured_at": "2026-08-23T20:57:57+00:00",
       "files": 29,
       "bytes": 233866,
       "tree_sha256": "ad6c3f2e854edb4be7eee1c7fc67b94e5593309fc2e7c2c5ecfeca4bf3c42e68",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappter-plays-pokemon",
       "commit": "dfda5a8a5791cc24bde388497431421dba341178",
       "committed_at": "2026-07-24T00:03:28-04:00",
-      "captured_at": "2026-08-23T18:52:50+00:00",
-      "files": 165,
-      "bytes": 3798364,
-      "tree_sha256": "60fd249e2ea5627565410b8023a9887cbfa87ced758e700981e163ab11b03830",
+      "captured_at": "2026-08-23T20:57:58+00:00",
+      "files": 162,
+      "bytes": 3630592,
+      "tree_sha256": "3a9484fee1bc5fb00f9015fdcd02d04adc6d3f98fcbbc952d3a4fa85f4a10c4b",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "vendor/browser/sources/noble-secp256k1-3.1.0.tgz",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "vendor/browser/sources/trystero-p2p-core-0.25.3.tgz",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "vendor/browser/sources/trystero-p2p-nostr-0.25.3.tgz",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rappter-vui",
       "commit": "20d949bbd78cc6a994dfb28c6da818347e1f3072",
       "committed_at": "2026-07-21T19:50:55-04:00",
-      "captured_at": "2026-08-23T18:52:50+00:00",
+      "captured_at": "2026-08-23T20:57:59+00:00",
       "files": 2,
       "bytes": 32768,
       "tree_sha256": "73de419e71bd41a4cbff0e3aa74283aea85c6f21ca46209b6b965f850415b02e",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappterbook",
-      "commit": "a36ae0f49b2d1beb05e06869779b1eeb485f9eb9",
-      "committed_at": "2026-08-23T18:50:41Z",
-      "captured_at": "2026-08-23T18:54:11+00:00",
-      "files": 9062,
-      "bytes": 417855729,
-      "tree_sha256": "c6ea4ba0d543347e49364f90cbddf5a1ebc22b9daba3ccde765e4331f9869cfe",
+      "commit": "eb08b549343227fe74fff22a8ea4730a61d230ed",
+      "committed_at": "2026-08-23T20:55:55Z",
+      "captured_at": "2026-08-23T20:58:52+00:00",
+      "files": 9044,
+      "bytes": 413097683,
+      "tree_sha256": "f1d50c741ad5cb4fff3bb4ead9bc506a9e749ef210ee02f7ea58b272f9034242",
       "skipped_large": [
         "docs/evolution.db (4.9MB)",
         "docs/feeds/all.xml (3.7MB)",
@@ -1981,17 +3486,21 @@
         "state/event_log.jsonl (8.0MB)",
         "state/frame_timeline.json (2.0MB)",
         "state/posted_log.json (6.3MB)",
-        "state/prompts.jsonl (15.0MB)",
+        "state/prompts.jsonl (15.1MB)",
         "state/synthetic_comments.json (10.9MB)",
         "state/synthetic_posts.json (5.1MB)",
         "state/synthetic_votes.json (5.3MB)",
-        "state/twin_content/medium.json (4.3MB)",
+        "state/twin_content/medium.json (4.4MB)",
         "zion/seed_comments.json (6.2MB)"
       ],
       "withheld": [
         {
           "file": ".env.example",
           "reason": "path matches an always-withhold shape (**/.env.*)"
+        },
+        {
+          "file": "awakening.rappterbook.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
         },
         {
           "file": "docs/adopt.html",
@@ -2006,6 +3515,22 @@
           "reason": "matches configured content rule 6"
         },
         {
+          "file": "docs/egg/examples/sparky.rappter.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "docs/icon-192.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "docs/icon-512.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "docs/kodyTwinAI.rapp.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
           "file": "docs/landing.html",
           "reason": "matches configured content rule 6"
         },
@@ -2018,12 +3543,68 @@
           "reason": "matches configured content rule 6"
         },
         {
+          "file": "docs/screenshots/dashboard-full.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "docs/screenshots/dashboard.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "docs/screenshots/scenarios.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
           "file": "docs/twin/guides/ceo-sales-playbook.md",
           "reason": "matches configured content rule 6"
         },
         {
           "file": "docs/twin/substack/the-master-plan.md",
           "reason": "matches configured content rule 6"
+        },
+        {
+          "file": "eggs/rappterbook-cohesive.network.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "extensions/edge-rappter/icons/icon128.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "extensions/edge-rappter/icons/icon16.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "extensions/edge-rappter/icons/icon48.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "kodyTwinAI.rapp.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/audio/hn-radio-episode-1.m4a",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/audio/openrappter-voice-test.m4a",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/audio/openrappter-voice-update.m4a",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/video/rapptertube-intro.mp4",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/video/weekend-briefing.mp4",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "medic.rapp.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
         },
         {
           "file": "state/twins/rar/agents.json",
@@ -2037,21 +3618,28 @@
           "file": "tests/test_pii_scan.py",
           "reason": "contains something shaped like a credential"
         }
-      ]
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rappterbook-agent",
       "commit": "2521b3073603a898e158dea5b5ac21d3e96d08a0",
       "committed_at": "2026-03-16T11:11:48-04:00",
-      "captured_at": "2026-08-23T18:54:12+00:00",
-      "files": 666,
-      "bytes": 4989449,
-      "tree_sha256": "f055087e45639bcde87e26f80254348743d4bd75fd80e44df2bc9c772b5623c6",
+      "captured_at": "2026-08-23T20:58:53+00:00",
+      "files": 667,
+      "bytes": 4989469,
+      "tree_sha256": "91a07858dd6fd9d84ee4cb36aa8d7a4629cc435b75139328b177c492b0b1ebb2",
       "skipped_large": [],
       "withheld": [
         {
           "file": "typescript/src/__tests__/parity/channels.test.ts",
           "reason": "contains something shaped like a credential"
+        }
+      ],
+      "gitlinks": [
+        {
+          "path": "openclaw",
+          "commit": "39a60142bb4a8a0effba17d6d93bfbc05939f462"
         }
       ]
     },
@@ -2059,62 +3647,67 @@
       "repo": "rappterbook-agent-dna",
       "commit": "b054f180c8f20a3b3224b803957994671ef3a8b8",
       "committed_at": "2026-03-16T15:44:48-04:00",
-      "captured_at": "2026-08-23T18:54:12+00:00",
+      "captured_at": "2026-08-23T20:58:54+00:00",
       "files": 6,
       "bytes": 317381,
       "tree_sha256": "edc6d9dfcddb4a221271171e9f62a9646cd9083b8e878d51972948342fb5ea24",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappterbook-agent-exchange",
-      "commit": "16d4179fe0347db2bdd380377c7cd65322c2bb0d",
-      "committed_at": "2026-08-23T18:26:12Z",
-      "captured_at": "2026-08-23T18:54:15+00:00",
+      "commit": "4b5251f7c617547e081a0e0148d9e1b0b293549f",
+      "committed_at": "2026-08-23T20:20:11Z",
+      "captured_at": "2026-08-23T20:58:56+00:00",
       "files": 479,
-      "bytes": 11094454,
-      "tree_sha256": "2f76a620594a6f6065deebc04599ff39e97796bc49d15b1fa49df498448bb347",
+      "bytes": 11106697,
+      "tree_sha256": "232c0f20f6566561f787aebdf43e51fc3aa1beaca0bcf4e09e95be98a8d22616",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappterbook-api",
       "commit": "a3f5202ba1b42a72b9bfe7e6f2c6ba2feef2ec90",
       "committed_at": "2026-03-16T14:42:27-04:00",
-      "captured_at": "2026-08-23T18:54:15+00:00",
+      "captured_at": "2026-08-23T20:58:56+00:00",
       "files": 11,
       "bytes": 193413,
       "tree_sha256": "306d0e368fd0d91e801f9220e13952c25342030e9cc6556210aa699d5f089172",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappterbook-autopilot",
       "commit": "a6b65c3a232ff630b25627c16438811750c67100",
       "committed_at": "2026-03-16T15:05:31-04:00",
-      "captured_at": "2026-08-23T18:54:15+00:00",
+      "captured_at": "2026-08-23T20:58:56+00:00",
       "files": 3,
       "bytes": 12050,
       "tree_sha256": "70b83db3065c0b9d91bae21ce01b5b288a2ab9a021d03985655a96320e1aefe3",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappterbook-commons",
       "commit": "9f2dc28d961ee86c2e1d83f2488d45aeb67baafc",
       "committed_at": "2026-07-16T14:50:58-05:00",
-      "captured_at": "2026-08-23T18:54:16+00:00",
+      "captured_at": "2026-08-23T20:58:57+00:00",
       "files": 4,
       "bytes": 22323,
       "tree_sha256": "2e1a7fa40072bf3a850794f9c6c420ee8867bf95ce4d138dad0b1db2066966b7",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappterbook-engine-test",
       "commit": "040cc86fbc0058800bfdf7639c7f879b7a5ffed0",
       "committed_at": "2026-03-20T11:53:50-04:00",
-      "captured_at": "2026-08-23T18:54:17+00:00",
+      "captured_at": "2026-08-23T20:58:58+00:00",
       "files": 72,
       "bytes": 5217184,
       "tree_sha256": "7f2e8a915423c7df2f9496d41cfde1f310ce3701a2b9b8b66d0572557e003613",
@@ -2123,320 +3716,517 @@
         "state/posted_log.json (6.8MB)",
         "zion/seed_comments.json (6.2MB)"
       ],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappterbook-first-bond",
       "commit": "6da27b309760f2b2c0b97dae0a1ad15a906c4fd3",
       "committed_at": "2026-07-12T16:38:20-04:00",
-      "captured_at": "2026-08-23T18:54:18+00:00",
+      "captured_at": "2026-08-23T20:58:59+00:00",
       "files": 13,
       "bytes": 101725,
       "tree_sha256": "c78d72d2d971ffff55bdb4569712ae15a5860513de26e2b6d76fe3ae9fd76709",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappterbook-governance",
       "commit": "3b8e7938fd1622257c774cef4b236111ae6d54ba",
       "committed_at": "2026-03-15T19:41:44-04:00",
-      "captured_at": "2026-08-23T18:54:18+00:00",
+      "captured_at": "2026-08-23T20:58:59+00:00",
       "files": 9,
       "bytes": 85556,
       "tree_sha256": "d6bc94ffe2aaeba2eddcf360f06771efef4be2ffb2ab5e22f025e99dce34f8a6",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappterbook-impossible-product",
       "commit": "08a448149023eadd403ec3ae5b51f32f78a51528",
       "committed_at": "2026-07-12T01:33:28-04:00",
-      "captured_at": "2026-08-23T18:54:18+00:00",
+      "captured_at": "2026-08-23T20:58:59+00:00",
       "files": 47,
       "bytes": 376222,
       "tree_sha256": "76de1a625ca65cc593c82cfc10282025f1eab09262fe78fb244c6c869d471f58",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappterbook-knowledge-graph",
       "commit": "ff6a9c79d107ab38f1ae82c87c1c90c7569447a3",
       "committed_at": "2026-03-15T17:19:39-04:00",
-      "captured_at": "2026-08-23T18:54:18+00:00",
+      "captured_at": "2026-08-23T20:59:00+00:00",
       "files": 6,
       "bytes": 17956,
       "tree_sha256": "0ce88011f9f6a3127d464bd35d5da27fccb81c9e121e3715c9fa92e7ed435f33",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappterbook-market-maker",
       "commit": "8306b50efd61b8ea0ce4137a6a03ff240b9250ff",
       "committed_at": "2026-03-16T14:19:49-04:00",
-      "captured_at": "2026-08-23T18:54:19+00:00",
+      "captured_at": "2026-08-23T20:59:00+00:00",
       "files": 9,
       "bytes": 257080,
       "tree_sha256": "395e2b3e565136fc0bc7bae969872c0a18fb91508ab5cc095a56a1412ed4f96b",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappterbook-mars-barn",
       "commit": "5d9ca2f0fd84782a0c5fb506515691e839bfaf86",
       "committed_at": "2026-03-26T21:12:17-07:00",
-      "captured_at": "2026-08-23T18:54:20+00:00",
+      "captured_at": "2026-08-23T20:59:01+00:00",
       "files": 26,
       "bytes": 327944,
       "tree_sha256": "2cc898051287e5aaabf0dd7e6423e83133e10da8d1ddab1c3035a349103aee12",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappterbook-phantom",
       "commit": "999d76c90bd231a83eee1815654a3fa6fbe9dd7f",
       "committed_at": "2026-03-15T18:21:26-04:00",
-      "captured_at": "2026-08-23T18:54:20+00:00",
+      "captured_at": "2026-08-23T20:59:02+00:00",
       "files": 4,
       "bytes": 28208,
       "tree_sha256": "1782e71d56b04d3a4432665fdd21972508f066f60dbfdfa4558508ac4466eaef",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappterbook-seedmaker",
       "commit": "11688fd903ea10af88d8b20a84f9154802a7e8e2",
       "committed_at": "2026-03-26T13:41:48-07:00",
-      "captured_at": "2026-08-23T18:54:20+00:00",
+      "captured_at": "2026-08-23T20:59:02+00:00",
       "files": 3,
       "bytes": 63001,
       "tree_sha256": "6d80b4b7320c72377f6f58b4960453abe646a417201851c977fdf3699c379702",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappterbook-social-graph",
       "commit": "acb1957ceb0a6c31d9bdf33eed7ee784210b1b14",
       "committed_at": "2026-03-16T21:18:39-04:00",
-      "captured_at": "2026-08-23T18:54:20+00:00",
+      "captured_at": "2026-08-23T20:59:03+00:00",
       "files": 8,
       "bytes": 580968,
       "tree_sha256": "d391095c62c04d1e5365d13033a2c538f95a7e020c9bed6ebc4d73da8cfedfdd",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappterbook-v2",
       "commit": "ed4a91faa1dd1ebf275a97966110a8e4b1c8828f",
       "committed_at": "2026-04-09T14:44:13-04:00",
-      "captured_at": "2026-08-23T18:54:21+00:00",
+      "captured_at": "2026-08-23T20:59:03+00:00",
       "files": 46,
       "bytes": 290720,
       "tree_sha256": "463421ce8dd987e7afe420505458967db5c95c3eeeba445d861595ebe058f96d",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappterbook-v2-state",
       "commit": "7bb79f1e0b812752916cd3e656eb7eeb08cd366c",
       "committed_at": "2026-04-09T16:08:03-04:00",
-      "captured_at": "2026-08-23T18:54:21+00:00",
+      "captured_at": "2026-08-23T20:59:04+00:00",
       "files": 38,
       "bytes": 360630,
       "tree_sha256": "09bcca44f992d23f9d79da6cedde75885932e30d173ba30ee496452f8a47d197",
       "skipped_large": [
         "events/frame-000000/1775755437147.json (2.2MB)"
       ],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappterbook-vm",
       "commit": "9b575df2cd7c15bbfe535d4f7198bcefdfbe76ea",
       "committed_at": "2026-02-15T19:21:19-05:00",
-      "captured_at": "2026-08-23T18:54:22+00:00",
+      "captured_at": "2026-08-23T20:59:05+00:00",
       "files": 152,
       "bytes": 1069875,
       "tree_sha256": "e73598c4b136800e1f3c62cc926f8f4a92466cc77a1e048abd2e3a3058e14203",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappterbox",
       "commit": "656d12767d461c2e9aab5a695be28f2b247fd187",
       "committed_at": "2026-08-16T20:29:08-04:00",
-      "captured_at": "2026-08-23T18:54:22+00:00",
-      "files": 67,
-      "bytes": 1234771,
-      "tree_sha256": "dceff6940fd71447e440f83d69f751e439e03dca3314e2089da8a5067b909d9a",
+      "captured_at": "2026-08-23T20:59:05+00:00",
+      "files": 64,
+      "bytes": 1189417,
+      "tree_sha256": "24dd96bc80d6e7f40dc645ffeff14f577e41dea7e9e9422707364aba0a3eebca",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "utils/web/icon-180.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "utils/web/icon-192.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "utils/web/icon-512.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rappterhub",
       "commit": "e06632d6d33bfacf0c6d0234911389cc3b4b5631",
       "committed_at": "2026-03-29T16:37:04-04:00",
-      "captured_at": "2026-08-23T18:54:22+00:00",
+      "captured_at": "2026-08-23T20:59:06+00:00",
       "files": 20,
       "bytes": 178623,
       "tree_sha256": "da0cf2e59b8c33065e8e399e8397f347e27bc0651c20e15f4ddee31cfb45166d",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "RappterNest",
       "commit": "67d7be53241a2519ef508668a1c828ff2c51cfc0",
       "committed_at": "2026-02-22T17:34:22-05:00",
-      "captured_at": "2026-08-23T18:51:40+00:00",
+      "captured_at": "2026-08-23T20:56:13+00:00",
       "files": 1,
       "bytes": 22899,
       "tree_sha256": "30736f1717847b981e1992f235d896496a5ffee3de800eb66cdf013c50862298",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappterverse",
       "commit": "da0dbb3988df833099bd3be5828c1d51024c6f5c",
       "committed_at": "2026-08-23T09:17:56-04:00",
-      "captured_at": "2026-08-23T18:54:25+00:00",
+      "captured_at": "2026-08-23T20:59:08+00:00",
       "files": 1141,
       "bytes": 10934579,
       "tree_sha256": "2abc655faa6ba728f22d10b93df6d07acac2a3ae79c5f4a0cdc9776f32832a02",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappterverse-data",
       "commit": "cff8bb0358ce10449ee1d72018a7624009aa3599",
       "committed_at": "2026-07-13T01:48:42-04:00",
-      "captured_at": "2026-08-23T18:54:26+00:00",
+      "captured_at": "2026-08-23T20:59:09+00:00",
       "files": 301,
       "bytes": 1444368,
       "tree_sha256": "4030862e2500226c3a437c288a1c418b804bfc52283dc9d2688e137427a42fc5",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "rappvision-field-notes",
       "commit": "02fd87a056e24fcaa642b9f8f266a57b2364eb2d",
       "committed_at": "2026-08-04T12:14:43-04:00",
-      "captured_at": "2026-08-23T18:54:27+00:00",
-      "files": 14,
-      "bytes": 243535,
-      "tree_sha256": "0f304160fa38d451a6f6d79cdea9addbf1a87a06e7ca7e37827319cbba73e369",
+      "captured_at": "2026-08-23T20:59:11+00:00",
+      "files": 12,
+      "bytes": 78373,
+      "tree_sha256": "4186f058181de3f0c2abcf5730ac0eb91a42ffa9b2fb4ef8e4767c21caa4be3a",
       "skipped_large": [
         "rappvision/media/above-not-beside.mp4 (6.4MB)",
         "rappvision/media/above-not-beside.webm (2.6MB)",
         "rappvision/media/platform-relaunch-recap.mp4 (15.4MB)",
         "rappvision/media/platform-relaunch-recap.webm (5.5MB)"
       ],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "rappvision/thumbs/above-not-beside.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "rappvision/thumbs/platform-relaunch-recap.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rappvision-pokemon",
       "commit": "3c693cf3d0683fe94acc4c19b2dc5a8f8c6da618",
       "committed_at": "2026-08-20T23:06:09-04:00",
-      "captured_at": "2026-08-23T18:54:28+00:00",
-      "files": 26,
-      "bytes": 5629590,
-      "tree_sha256": "148bb18140e0cad14c0a759271b153f0a81068d8a5fb7ab79d4cf9f2977e4a1f",
+      "captured_at": "2026-08-23T20:59:13+00:00",
+      "files": 5,
+      "bytes": 9762,
+      "tree_sha256": "a119f231850c656119cb96e312e4b1d8c8fdb1085f5dca49f35c902b5342e316",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "media/yellow-001-pikachu-joins.mp4",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/yellow-001-pikachu-joins.webm",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/yellow-002-first-viridian-arrival.mp4",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/yellow-002-first-viridian-arrival.webm",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/yellow-003-parcel-and-pokedex.mp4",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/yellow-003-parcel-and-pokedex.webm",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/yellow-004-caterpie-to-metapod.mp4",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/yellow-004-caterpie-to-metapod.webm",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/yellow-005-butterfree-and-confusion.mp4",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/yellow-005-butterfree-and-confusion.webm",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/yellow-006-hm01-cut-on-the-ss-anne.mp4",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/yellow-006-hm01-cut-on-the-ss-anne.webm",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/yellow-007-thunder-badge-victory.mp4",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "media/yellow-007-thunder-badge-victory.webm",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "thumbs/yellow-001-pikachu-joins.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "thumbs/yellow-002-first-viridian-arrival.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "thumbs/yellow-003-parcel-and-pokedex.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "thumbs/yellow-004-caterpie-to-metapod.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "thumbs/yellow-005-butterfree-and-confusion.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "thumbs/yellow-006-hm01-cut-on-the-ss-anne.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "thumbs/yellow-007-thunder-badge-victory.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rappvision-prompt-frontier",
       "commit": "524941761ef713f1884f9cf6029ba1a1281a1ef2",
       "committed_at": "2026-08-08T23:46:48-04:00",
-      "captured_at": "2026-08-23T18:54:28+00:00",
-      "files": 4,
-      "bytes": 111671,
-      "tree_sha256": "cd2676371c92d787dfa2160ba3825e668e83f20b1525d10d991daa90b5970c83",
+      "captured_at": "2026-08-23T20:59:13+00:00",
+      "files": 3,
+      "bytes": 3938,
+      "tree_sha256": "8018592a8f6f62ca129027a9fcbb68aca873bd9780a4e06bdca71373b31f5418",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "thumbs/prompt-frontier-founding.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rappvision-rappterbox",
       "commit": "48ddf41857e67687ad18629ffb309c6979f0c598",
       "committed_at": "2026-08-09T13:24:00-04:00",
-      "captured_at": "2026-08-23T18:54:33+00:00",
-      "files": 4,
-      "bytes": 508035,
-      "tree_sha256": "a902b54ccb0a9d744ec823b27bb4a5200f885c596d0ea3f4fd7c53e64d0e6c61",
+      "captured_at": "2026-08-23T20:59:19+00:00",
+      "files": 2,
+      "bytes": 4599,
+      "tree_sha256": "4f0f76311e31f72255fdf8f9bfb7732013dc6878c506e0e08cd4f15558ddca95",
       "skipped_large": [
         "media/aivms-watch-their-own-film.mp4 (53.0MB)",
         "media/aivms-watch-their-own-film.webm (16.4MB)",
         "media/veridion-proof-trailer.mp4 (72.1MB)",
         "media/veridion-proof-trailer.webm (8.3MB)"
       ],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "thumbs/aivms-watch-their-own-film.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "thumbs/veridion-proof-trailer.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "rappvision-rnr",
       "commit": "eb9d2880cccbef929baf998741b0d7aa084ab7db",
       "committed_at": "2026-08-02T10:34:25-04:00",
-      "captured_at": "2026-08-23T18:54:33+00:00",
-      "files": 14,
-      "bytes": 1898598,
-      "tree_sha256": "2fbc33a36aeb091332f8373a1766cb90a0b75af77d54530e0e7aa854622e9d27",
+      "captured_at": "2026-08-23T20:59:20+00:00",
+      "files": 11,
+      "bytes": 64121,
+      "tree_sha256": "e31dde4099e40296aa27800dc1a2faea92797f7f475db202e233e12462dc5808",
       "skipped_large": [
         "rappvision/media/front-page.mp4 (4.9MB)",
         "rappvision/media/front-page.webm (2.7MB)",
         "rappvision/media/nightly-revival.mp4 (3.0MB)"
       ],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "rappvision/media/nightly-revival.webm",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "rappvision/thumbs/front-page.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "rappvision/thumbs/nightly-revival.jpg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "RAR",
-      "commit": "7624e456c9ada8d3e98a052366abec282436dd16",
-      "committed_at": "2026-08-23T18:20:39Z",
-      "captured_at": "2026-08-23T18:51:40+00:00",
-      "files": 9881,
-      "bytes": 33493138,
-      "tree_sha256": "005b8518a8418162852fef986447a77f5ec8b5df8716bc4f95a71dfc82e67776",
+      "commit": "c97f4b4c5388656bff5fed5650b911b13f6e2dfb",
+      "committed_at": "2026-08-23T20:15:20Z",
+      "captured_at": "2026-08-23T20:56:13+00:00",
+      "files": 9885,
+      "bytes": 33101905,
+      "tree_sha256": "46e5d417b644c72a4ea62614dcb63d4346ec2ee834e95a1a657118f60be9c822",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "stacks/microsoft-365-team/microsoft-365-team.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "stacks/neighborhood-starter/neighborhood-starter.egg",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "twin",
       "commit": "56a2ca517aca4a3976a1c412c331bd4de3344166",
       "committed_at": "2026-08-16T20:28:24-04:00",
-      "captured_at": "2026-08-23T18:54:34+00:00",
-      "files": 232,
-      "bytes": 2234360,
-      "tree_sha256": "e8dc92e577b90b1a22fb1783f9e40316ac079e719a87de25f325603eec86ac21",
+      "captured_at": "2026-08-23T20:59:21+00:00",
+      "files": 229,
+      "bytes": 2189006,
+      "tree_sha256": "1f74ef8cc132f12c34fb232bc74dc33f371b6a5ffb729338b4f1d5c7345f6eb8",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "utils/web/icon-180.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "utils/web/icon-192.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "utils/web/icon-512.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     },
     {
       "repo": "twin-binder",
       "commit": "5e41cd9088deee8394d22d5941f1fa8bc37b990f",
       "committed_at": "2026-04-17T22:17:00-04:00",
-      "captured_at": "2026-08-23T18:54:34+00:00",
+      "captured_at": "2026-08-23T20:59:21+00:00",
       "files": 5,
       "bytes": 31342,
       "tree_sha256": "d755277e61326fb32f5573c3ed54f14321856a098c630a7af9c36384ebb0746f",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "twin-egg-hatcher",
       "commit": "6e96a7ed24b3f70a8568543510792236d5a53a8d",
       "committed_at": "2026-07-15T22:20:53-05:00",
-      "captured_at": "2026-08-23T18:54:35+00:00",
+      "captured_at": "2026-08-23T20:59:22+00:00",
       "files": 5,
       "bytes": 52208,
       "tree_sha256": "9a849e7c4d526b2310b4673e2078236634d6ce3f5fea5154697a0a9653e08d0f",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [],
+      "gitlinks": []
     },
     {
       "repo": "wildhaven-ai-homes-twin",
       "commit": "ed3ec76979700d183614d856da8c93073c8acfde",
       "committed_at": "2026-08-16T20:28:20-04:00",
-      "captured_at": "2026-08-23T18:54:36+00:00",
-      "files": 94,
-      "bytes": 1449219,
-      "tree_sha256": "def02a20eea6eb2220233e3b9442027645232a3b1ec20c33b0790dd17fda152f",
+      "captured_at": "2026-08-23T20:59:22+00:00",
+      "files": 91,
+      "bytes": 1403865,
+      "tree_sha256": "085a1aa2fe64849b83d53473c9bb63a816f7ed7fc8b19c86cdb182853aeaaf10",
       "skipped_large": [],
-      "withheld": []
+      "withheld": [
+        {
+          "file": "utils/web/icon-180.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "utils/web/icon-192.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "file": "utils/web/icon-512.png",
+          "reason": "content is not valid UTF-8 and cannot be screened safely"
+        }
+      ],
+      "gitlinks": []
     }
   ],
   "not_captured": []
