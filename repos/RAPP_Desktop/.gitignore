@@ -1,6 +1,3 @@
-# Local configuration (contains user-specific settings)
-config.local.js
-
 # Environment files
 .env
 .env.local
@@ -9,6 +6,8 @@ config.local.js
 # Build outputs
 node_modules/
 dist/
+dist-electron/
+release/
 target/
 
 # OS

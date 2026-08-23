@@ -1,85 +1,86 @@
 # RAPP Desktop
 
-Native desktop application for the RAPP ecosystem. Browse agents, install skills, clone implementations, and manage your AI projects - all from a beautiful native UI.
+RAPP Desktop is the resident Electron companion for the RAPP Brainstem. It
+keeps chat, projects, the agent store, and the implementation hub in one
+local-first desktop experience while the Brainstem remains the engine of
+record.
 
-## Install
+## Companion behavior
 
-**Via RAPP Installer (Recommended):**
-```bash
-# macOS / Linux
-curl -fsSL https://raw.githubusercontent.com/kody-w/rapp-installer/main/install.sh | bash
-
-# Windows
-irm https://raw.githubusercontent.com/kody-w/rapp-installer/main/install.ps1 | iex
-```
-
-**Build from Source:**
-```bash
-# Prerequisites: Node.js 18+, Rust, Cargo
-
-git clone https://github.com/kody-w/RAPP_Desktop.git
-cd RAPP_Desktop
-npm install
-npm run tauri build
-```
-
-## Features
-
-- **RAPP Store** - Browse and install agents & skills
-- **RAPP Hub** - Discover and clone complete implementations
-- **Project Management** - Create and manage your RAPP projects
-- **One-Click Install** - Install dependencies with a single click
-- **Native Performance** - Built with Tauri + Rust
-
-## Screenshots
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│  🤖 RAPP                                                    │
-├──────────────┬──────────────────────────────────────────────┤
-│              │                                              │
-│  🏠 Home     │    Welcome to RAPP                          │
-│  📦 Store    │                                              │
-│  🌐 Hub      │    ┌──────┐  ┌──────┐  ┌──────┐            │
-│  📁 Projects │    │ Store│  │  Hub │  │ New  │            │
-│  ⚙️ Settings │    └──────┘  └──────┘  └──────┘            │
-│              │                                              │
-└──────────────┴──────────────────────────────────────────────┘
-```
+- Starts as a single-instance desktop companion and stays available from the
+  system tray when its window is closed.
+- Attaches to `RAPP_BRAINSTEM_URL` or the global Brainstem on
+  `http://127.0.0.1:7071`.
+- Wakes an installed global Brainstem automatically. A bundled legacy engine
+  remains available as an offline-compatible fallback.
+- Sends chat through the RAPP/1 `/chat` contract without exposing Brainstem
+  secrets to the renderer.
+- Browses and installs RAPP Store agents and skills, clones Hub
+  implementations, and manages projects under `~/.rapp`.
 
 ## Architecture
 
-```
-RAPP Desktop
-    │
-    ├── Tauri (Rust) ─── System Integration
-    │                    └── File System, Process, HTTP
-    │
-    └── React (TypeScript) ─── User Interface
-                               └── Store, Hub, Projects
+```text
+┌─────────────────────────────────────────────────────────────┐
+│ Electron main process                                      │
+│  lifecycle · tray · Brainstem client · filesystem · Git     │
+├──────────────────── typed, capability-scoped IPC ───────────┤
+│ sandboxed preload                                           │
+├──────────────────────── contextBridge ──────────────────────┤
+│ React renderer                                              │
+│  chat · store · hub · projects · settings                   │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              └── RAPP/1 → Brainstem /chat
 ```
 
-## RAPP Ecosystem
-
-| Component | Description |
-|-----------|-------------|
-| **[RAPP Desktop](https://github.com/kody-w/RAPP_Desktop)** | This app - native GUI |
-| **[RAPP Installer](https://github.com/kody-w/rapp-installer)** | Bootstrapper & Azure deploy |
-| **[RAPP Hub](https://github.com/kody-w/RAPP_Hub)** | Implementation registry |
-| **[RAPP Store](https://github.com/kody-w/RAPP_Store)** | Agent & skill packages |
+The renderer has no Node.js integration, no generic IPC primitive, and no
+direct network access in packaged builds. The main process validates every
+IPC sender and input, restricts file operations to RAPP-owned directories,
+allows only HTTPS external navigation, and denies renderer permission
+requests.
 
 ## Development
 
+Prerequisites: Node.js 20+ and Python 3.
+
 ```bash
-# Install dependencies
 npm install
-
-# Run in development mode
-npm run tauri dev
-
-# Build for production
-npm run tauri build
+npm run dev
 ```
+
+`npm run dev` starts Vite and Electron together. Closing the window hides the
+companion; use the tray menu to quit it.
+
+## Build and test
+
+```bash
+npm run typecheck
+npm test
+npm run dist
+```
+
+`npm run dist` creates platform installers in `release/` with
+`electron-builder`.
+
+## Install from source
+
+```bash
+# macOS / Linux
+curl -fsSL https://raw.githubusercontent.com/kody-w/RAPP_Desktop/main/install/install.sh | bash
+
+# Windows PowerShell
+irm https://raw.githubusercontent.com/kody-w/RAPP_Desktop/main/install/install.ps1 | iex
+```
+
+## RAPP ecosystem
+
+| Component | Description |
+|---|---|
+| [RAPP Desktop](https://github.com/kody-w/RAPP_Desktop) | Resident AI companion |
+| [RAPP Installer](https://github.com/kody-w/rapp-installer) | Brainstem bootstrapper and Azure deploy |
+| [RAPP Hub](https://github.com/kody-w/RAPP_Hub) | Implementation registry |
+| [RAPP Store](https://github.com/kody-w/RAPP_Store) | Agent and skill packages |
 
 ## License
 

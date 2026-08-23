@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="background" x1="128" y1="64" x2="896" y2="960" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#16372f"/>
+      <stop offset="1" stop-color="#07100e"/>
+    </linearGradient>
+    <linearGradient id="creature" x1="270" y1="270" x2="770" y2="790" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8affdf"/>
+      <stop offset="1" stop-color="#20d7ad"/>
+    </linearGradient>
+  </defs>
+  <rect x="48" y="48" width="928" height="928" rx="224" fill="url(#background)"/>
+  <circle cx="512" cy="512" r="330" fill="#0d211c" stroke="#2c5a4e" stroke-width="18"/>
+  <path
+    d="M258 598c48-168 165-275 326-268 100 4 185 58 205 142 22 93-35 183-131 207-44 11-88 8-124-7l-35 112-80-25 34-109c-91 1-156-16-195-52Z"
+    fill="url(#creature)"
+  />
+  <path d="M358 514c59-85 136-124 236-116-63 15-111 48-145 99-23 34-53 45-91 17Z" fill="#d5fff4" opacity=".72"/>
+  <circle cx="664" cy="468" r="31" fill="#07100e"/>
+  <circle cx="674" cy="458" r="9" fill="#d5fff4"/>
+  <path d="M752 522l108 37-112 26c13-18 14-39 4-63Z" fill="#f8b84e"/>
+  <path d="M406 752l90 28-30 96-90-28 30-96Z" fill="#20d7ad"/>
+</svg>

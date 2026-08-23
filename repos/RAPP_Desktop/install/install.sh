@@ -1,275 +1,97 @@
-#!/bin/bash
-#
-# RAPP Desktop Installer - macOS/Linux
-#
-# One-line install:
-#   curl -fsSL https://raw.githubusercontent.com/kody-w/RAPP_Desktop/main/install/install.sh | bash
-#
+#!/usr/bin/env bash
+set -euo pipefail
 
-set -e
-
-RAPP_VERSION="${RAPP_VERSION:-latest}"
 RAPP_HOME="$HOME/.rapp"
-RAPP_INSTALL_DIR="$HOME/.rapp/app"
+RAPP_INSTALL_DIR="$RAPP_HOME/app"
 
-# Colors
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m'
+log() { printf '[RAPP] %s\n' "$1"; }
+fail() { printf '[RAPP] ERROR: %s\n' "$1" >&2; exit 1; }
 
-log() { echo -e "${BLUE}[RAPP]${NC} $1"; }
-success() { echo -e "${GREEN}[RAPP]${NC} $1"; }
-warn() { echo -e "${YELLOW}[RAPP]${NC} $1"; }
-error() { echo -e "${RED}[RAPP]${NC} $1"; exit 1; }
+case "$(uname -s)" in
+  Darwin*) OS="macos" ;;
+  Linux*) OS="linux" ;;
+  *) fail "RAPP Desktop supports macOS and Linux." ;;
+esac
 
-# Banner
-echo ""
-echo -e "${BLUE}╔══════════════════════════════════════════════════════════╗${NC}"
-echo -e "${BLUE}║${NC}                                                          ${BLUE}║${NC}"
-echo -e "${BLUE}║${NC}    ${GREEN}RAPP Desktop Installer${NC}                               ${BLUE}║${NC}"
-echo -e "${BLUE}║${NC}    Rapid AI Agent Production Pipeline                    ${BLUE}║${NC}"
-echo -e "${BLUE}║${NC}                                                          ${BLUE}║${NC}"
-echo -e "${BLUE}╚══════════════════════════════════════════════════════════╝${NC}"
-echo ""
-
-# Detect OS
-detect_os() {
-    case "$(uname -s)" in
-        Darwin*) OS="macos" ;;
-        Linux*)  OS="linux" ;;
-        *)       error "Unsupported operating system" ;;
-    esac
-    log "Detected OS: $OS"
-}
-
-# Check and install Rust
-install_rust() {
-    if command -v cargo &> /dev/null; then
-        success "Rust already installed: $(rustc --version)"
-    else
-        log "Installing Rust..."
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-        source "$HOME/.cargo/env"
-        success "Rust installed: $(rustc --version)"
-    fi
-}
-
-# Check and install Node.js
 install_node() {
-    if command -v node &> /dev/null; then
-        success "Node.js already installed: $(node --version)"
-    else
-        log "Installing Node.js..."
-        if [ "$OS" = "macos" ]; then
-            if command -v brew &> /dev/null; then
-                brew install node
-            else
-                # Install nvm
-                curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-                export NVM_DIR="$HOME/.nvm"
-                [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-                nvm install --lts
-            fi
-        else
-            # Linux - use nvm
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install --lts
-        fi
-        success "Node.js installed: $(node --version)"
-    fi
+  if command -v node >/dev/null 2>&1; then
+    node -e 'const major=Number(process.versions.node.split(".")[0]); process.exit(major >= 20 ? 0 : 1)' \
+      || fail "Node.js 20 or newer is required."
+    return
+  fi
+  log "Installing Node.js LTS..."
+  if [ "$OS" = "macos" ] && command -v brew >/dev/null 2>&1; then
+    brew install node
+    return
+  fi
+  export NVM_DIR="$HOME/.nvm"
+  curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+  # shellcheck source=/dev/null
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+  nvm install --lts
 }
 
-# Check and install Python
-install_python() {
-    if command -v python3 &> /dev/null; then
-        success "Python already installed: $(python3 --version)"
-    else
-        log "Installing Python..."
-        if [ "$OS" = "macos" ]; then
-            if command -v brew &> /dev/null; then
-                brew install python@3.11
-            else
-                error "Please install Homebrew first: https://brew.sh"
-            fi
-        else
-            sudo apt-get update && sudo apt-get install -y python3 python3-pip python3-venv
-        fi
-        success "Python installed: $(python3 --version)"
-    fi
-}
+for command in git python3; do
+  command -v "$command" >/dev/null 2>&1 || fail "$command is required."
+done
+install_node
 
-# Install system dependencies
-install_dependencies() {
-    log "Installing system dependencies..."
+mkdir -p "$RAPP_HOME"
+if [ -d "$RAPP_INSTALL_DIR/.git" ]; then
+  log "Updating RAPP Desktop..."
+  git -C "$RAPP_INSTALL_DIR" pull --ff-only origin main
+else
+  log "Cloning RAPP Desktop..."
+  git clone https://github.com/kody-w/RAPP_Desktop.git "$RAPP_INSTALL_DIR"
+fi
 
-    if [ "$OS" = "macos" ]; then
-        # macOS dependencies for Tauri
-        if ! command -v brew &> /dev/null; then
-            warn "Homebrew not found. Installing..."
-            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        fi
-        # Tauri needs these on macOS
-        xcode-select --install 2>/dev/null || true
-    else
-        # Linux dependencies for Tauri
-        sudo apt-get update
-        sudo apt-get install -y \
-            libwebkit2gtk-4.0-dev \
-            libgtk-3-dev \
-            libayatana-appindicator3-dev \
-            librsvg2-dev \
-            build-essential \
-            curl \
-            wget \
-            file \
-            libssl-dev
-    fi
+log "Building the Electron companion..."
+cd "$RAPP_INSTALL_DIR"
+npm ci
+npm run dist
 
-    success "System dependencies installed"
-}
+log "Preparing the bundled Brainstem fallback..."
+python3 -m venv "$RAPP_HOME/venv"
+"$RAPP_HOME/venv/bin/python" -m pip install --quiet --upgrade pip
+"$RAPP_HOME/venv/bin/python" -m pip install --quiet -r rapp_os/requirements.txt
 
-# Clone or update RAPP Desktop
-clone_rapp() {
-    log "Setting up RAPP Desktop..."
+mkdir -p \
+  "$RAPP_HOME/agents" \
+  "$RAPP_HOME/skills" \
+  "$RAPP_HOME/projects" \
+  "$RAPP_HOME/contexts" \
+  "$RAPP_HOME/memory"
 
-    mkdir -p "$RAPP_HOME"
+cat > "$RAPP_HOME/rapp" <<EOF
+#!/usr/bin/env bash
+exec "$RAPP_HOME/venv/bin/python" "$RAPP_INSTALL_DIR/rapp_os/rapp_os.py" "\$@"
+EOF
+chmod +x "$RAPP_HOME/rapp"
 
-    if [ -d "$RAPP_INSTALL_DIR" ]; then
-        log "Updating existing installation..."
-        cd "$RAPP_INSTALL_DIR"
-        git pull origin main
-    else
-        log "Cloning RAPP Desktop..."
-        git clone https://github.com/kody-w/RAPP_Desktop.git "$RAPP_INSTALL_DIR"
-        cd "$RAPP_INSTALL_DIR"
-    fi
-
-    success "RAPP Desktop source ready"
-}
-
-# Build RAPP Desktop
-build_rapp() {
-    log "Building RAPP Desktop (this may take a few minutes)..."
-    cd "$RAPP_INSTALL_DIR"
-
-    # Install npm dependencies
-    npm install
-
-    # Source cargo if needed
-    [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
-
-    # Build release
-    npm run tauri build
-
-    success "RAPP Desktop built successfully"
-}
-
-# Install RAPP OS Python dependencies
-install_rapp_os() {
-    log "Setting up RAPP OS..."
-
-    cd "$RAPP_INSTALL_DIR/rapp_os"
-
-    # Create virtual environment
-    python3 -m venv "$RAPP_HOME/venv"
-    source "$RAPP_HOME/venv/bin/activate"
-
-    # Install dependencies
-    pip install --upgrade pip
-    pip install -r requirements.txt
-
-    success "RAPP OS dependencies installed"
-}
-
-# Create launch script
-create_launcher() {
-    log "Creating launcher..."
-
-    # Find the built app
-    if [ "$OS" = "macos" ]; then
-        APP_PATH="$RAPP_INSTALL_DIR/src-tauri/target/release/bundle/macos/RAPP Desktop.app"
-        if [ -d "$APP_PATH" ]; then
-            # Copy to Applications
-            cp -r "$APP_PATH" /Applications/ 2>/dev/null || true
-            success "RAPP Desktop installed to /Applications"
-        fi
-    else
-        BINARY_PATH="$RAPP_INSTALL_DIR/src-tauri/target/release/rapp-desktop"
-        if [ -f "$BINARY_PATH" ]; then
-            # Create desktop entry
-            mkdir -p "$HOME/.local/share/applications"
-            cat > "$HOME/.local/share/applications/rapp-desktop.desktop" << EOF
+if [ "$OS" = "macos" ]; then
+  APP_PATH="$(find "$RAPP_INSTALL_DIR/release" -maxdepth 3 -type d -name 'RAPP Desktop.app' -print -quit)"
+  [ -n "$APP_PATH" ] || fail "The macOS application bundle was not produced."
+  mkdir -p "$HOME/Applications"
+  rm -rf "$HOME/Applications/RAPP Desktop.app"
+  cp -R "$APP_PATH" "$HOME/Applications/RAPP Desktop.app"
+  log "Installed RAPP Desktop in $HOME/Applications."
+  open "$HOME/Applications/RAPP Desktop.app"
+else
+  APPIMAGE="$(find "$RAPP_INSTALL_DIR/release" -maxdepth 2 -type f -name '*.AppImage' -print -quit)"
+  [ -n "$APPIMAGE" ] || fail "The Linux AppImage was not produced."
+  mkdir -p "$HOME/.local/bin" "$HOME/.local/share/applications"
+  cp "$APPIMAGE" "$HOME/.local/bin/rapp-desktop"
+  chmod +x "$HOME/.local/bin/rapp-desktop"
+  cat > "$HOME/.local/share/applications/rapp-desktop.desktop" <<EOF
 [Desktop Entry]
 Name=RAPP Desktop
-Comment=Rapid AI Agent Production Pipeline
-Exec=$BINARY_PATH
-Icon=$RAPP_INSTALL_DIR/src-tauri/icons/icon.png
+Comment=Local-first RAPP AI companion
+Exec=$HOME/.local/bin/rapp-desktop
 Terminal=false
 Type=Application
-Categories=Development;
+Categories=Utility;Development;
 EOF
-            success "RAPP Desktop launcher created"
-        fi
-    fi
+  log "Installed RAPP Desktop in $HOME/.local/bin."
+fi
 
-    # Create CLI launcher for RAPP OS
-    cat > "$RAPP_HOME/rapp" << EOF
-#!/bin/bash
-source "$RAPP_HOME/venv/bin/activate"
-python "$RAPP_INSTALL_DIR/rapp_os/rapp_os.py" "\$@"
-EOF
-    chmod +x "$RAPP_HOME/rapp"
-
-    # Add to PATH suggestion
-    echo ""
-    log "Add RAPP to your PATH by adding this to your shell profile:"
-    echo -e "  ${YELLOW}export PATH=\"\$PATH:$RAPP_HOME\"${NC}"
-}
-
-# Setup directory structure
-setup_directories() {
-    log "Creating RAPP directories..."
-    mkdir -p "$RAPP_HOME/agents"
-    mkdir -p "$RAPP_HOME/skills"
-    mkdir -p "$RAPP_HOME/projects"
-    mkdir -p "$RAPP_HOME/contexts"
-    mkdir -p "$RAPP_HOME/memory"
-    success "RAPP directories created"
-}
-
-# Main installation
-main() {
-    detect_os
-    install_dependencies
-    install_rust
-    install_node
-    install_python
-    clone_rapp
-    build_rapp
-    install_rapp_os
-    setup_directories
-    create_launcher
-
-    echo ""
-    echo -e "${GREEN}╔══════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${GREEN}║${NC}                                                          ${GREEN}║${NC}"
-    echo -e "${GREEN}║${NC}    ${GREEN}RAPP Desktop Installed Successfully!${NC}                 ${GREEN}║${NC}"
-    echo -e "${GREEN}║${NC}                                                          ${GREEN}║${NC}"
-    echo -e "${GREEN}╚══════════════════════════════════════════════════════════╝${NC}"
-    echo ""
-
-    if [ "$OS" = "macos" ]; then
-        log "Launch RAPP Desktop from /Applications"
-    else
-        log "Launch RAPP Desktop from your application menu"
-    fi
-
-    log "Or run RAPP OS from terminal: $RAPP_HOME/rapp"
-    echo ""
-}
-
-main "$@"
+log "RAPP Desktop is ready."

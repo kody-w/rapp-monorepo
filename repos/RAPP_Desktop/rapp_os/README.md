@@ -23,7 +23,8 @@ The unified RAPP endpoint. Routes requests to appropriate agents based on GUID s
 HTTP REST API for RAPP Desktop integration. Runs on port 7071 by default.
 
 **Endpoints:**
-- `POST /api/rapp` - Main chat endpoint
+- `POST /chat` - Main RAPP/1 chat endpoint
+- `POST /api/rapp` - Legacy chat alias
 - `GET /health` - Health check
 - `GET /agents` - List available agents
 - `GET /contexts` - List available contexts
@@ -78,7 +79,10 @@ python rapp_os.py --no-server           # Disable HTTP server
 ```
 
 ### With RAPP Desktop
-The Tauri desktop application automatically manages RAPP OS. Use the "Start RAPP OS" button in the Chat page or Settings.
+
+The Electron companion prefers the global Brainstem and automatically wakes
+it when available. This bundled engine remains the local compatibility
+fallback and is managed from the tray, Chat page, or Settings.
 
 ## Environment Variables
 

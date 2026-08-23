@@ -1,47 +1,20 @@
 import { useState, useEffect, useRef } from 'react'
-import { invoke } from '@tauri-apps/api/tauri'
+import type {
+  BrainstemChatResponse,
+  BrainstemStatus,
+  CatalogAgent as Agent,
+  CatalogImplementation as Implementation,
+  CatalogSkill as Skill,
+  ProjectInfo as Project,
+} from './desktop-api'
 
 type Page = 'home' | 'chat' | 'store' | 'hub' | 'projects' | 'settings'
-
-interface Agent {
-  id: string; name: string; description: string; version: string;
-  icon?: string; path: string; filename: string; features?: string[];
-}
-
-interface Skill {
-  id: string; name: string; description: string; version: string;
-  icon?: string; path: string; features?: string[];
-}
-
-interface Implementation {
-  id: string; name: string; description: string; version: string;
-  icon?: string; repo: string; features?: string[];
-}
-
-interface Project {
-  name: string; path: string; created: string;
-}
-
-interface RappOsStatus {
-  running: boolean;
-  port: number;
-  endpoint: string;
-}
 
 interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;
   timestamp: Date;
   agentsUsed?: string[];
-}
-
-interface ChatResponse {
-  response: string;
-  voice_response?: string;
-  agent_logs: string[];
-  agents_used: string[];
-  session_guid: string;
-  context_guid: string;
 }
 
 export default function App() {
@@ -51,21 +24,29 @@ export default function App() {
   const [implementations, setImplementations] = useState<Implementation[]>([])
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(false)
+  const [catalogError, setCatalogError] = useState('')
   const [search, setSearch] = useState('')
   const [showNewProject, setShowNewProject] = useState(false)
   const [newProjectName, setNewProjectName] = useState('')
 
-  // RAPP OS state
-  const [rappOsStatus, setRappOsStatus] = useState<RappOsStatus>({ running: false, port: 7071, endpoint: '' })
+  const [brainstemStatus, setBrainstemStatus] = useState<BrainstemStatus>({
+    running: false,
+    port: 7071,
+    endpoint: 'http://127.0.0.1:7071/chat',
+    managed: false,
+    phase: 'checking',
+  })
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([])
   const [chatInput, setChatInput] = useState('')
   const [sessionGuid, setSessionGuid] = useState('')
   const [chatLoading, setChatLoading] = useState(false)
+  const [loginCode, setLoginCode] = useState('')
   const chatEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    loadProjects()
-    checkRappOsStatus()
+    void loadProjects()
+    void checkBrainstemStatus()
+    return window.rappDesktop.brainstem.onStatus(setBrainstemStatus)
   }, [])
 
   useEffect(() => {
@@ -77,99 +58,145 @@ export default function App() {
     if (page === 'hub') loadHub()
   }, [page])
 
+  useEffect(() => {
+    if (!loginCode) return
+    let cancelled = false
+    let timer = 0
+    const poll = async () => {
+      try {
+        const status = await window.rappDesktop.brainstem.pollLogin()
+        if (cancelled) return
+        setBrainstemStatus(status)
+        if (status.phase === 'ready') {
+          setLoginCode('')
+          return
+        }
+        if (status.phase === 'authentication-failed') {
+          setLoginCode('')
+          return
+        }
+      } catch (error) {
+        if (!cancelled) {
+          setBrainstemStatus(current => ({
+            ...current,
+            detail: String(error),
+          }))
+        }
+      }
+      if (!cancelled) timer = window.setTimeout(poll, 2500)
+    }
+    timer = window.setTimeout(poll, 1000)
+    return () => {
+      cancelled = true
+      window.clearTimeout(timer)
+    }
+  }, [loginCode])
+
   async function loadStore() {
     setLoading(true)
+    setCatalogError('')
     try {
-      const data = await invoke<string>('fetch_manifest', {
-        url: 'https://raw.githubusercontent.com/kody-w/RAPP_Store/main/manifest.json'
-      })
-      const manifest = JSON.parse(data)
-      setAgents(manifest.agents || [])
-      setSkills(manifest.skills || [])
-    } catch (e) { console.error(e) }
+      const manifest = await window.rappDesktop.catalog.store()
+      setAgents(manifest.agents)
+      setSkills(manifest.skills)
+    } catch (e) {
+      console.error(e)
+      setCatalogError(e instanceof Error ? e.message : String(e))
+    }
     setLoading(false)
   }
 
   async function loadHub() {
     setLoading(true)
     try {
-      const data = await invoke<string>('fetch_manifest', {
-        url: 'https://raw.githubusercontent.com/kody-w/RAPP_Hub/main/manifest.json'
-      })
-      const manifest = JSON.parse(data)
-      setImplementations(manifest.implementations || [])
+      const manifest = await window.rappDesktop.catalog.hub()
+      setImplementations(manifest.implementations)
     } catch (e) { console.error(e) }
     setLoading(false)
   }
 
   async function loadProjects() {
     try {
-      const list = await invoke<Project[]>('list_projects')
+      const list = await window.rappDesktop.projects.list()
       setProjects(list)
     } catch (e) { console.error(e) }
   }
 
   async function installAgent(agent: Agent) {
     try {
-      await invoke('install_agent', { agentId: agent.id, path: agent.path, filename: agent.filename })
-      alert(`Installed ${agent.name}`)
+      const result = await window.rappDesktop.catalog.installAgent(agent.id)
+      alert(result.message)
     } catch (e) { alert(`Error: ${e}`) }
   }
 
   async function installSkill(skill: Skill) {
     try {
-      await invoke('install_skill', { skillId: skill.id, path: skill.path })
-      alert(`Installed ${skill.name}`)
+      const result = await window.rappDesktop.catalog.installSkill(skill)
+      alert(result.message)
     } catch (e) { alert(`Error: ${e}`) }
   }
 
   async function cloneImpl(impl: Implementation) {
     try {
-      await invoke('clone_implementation', { repo: impl.repo, name: impl.id })
-      alert(`Cloned ${impl.name}`)
-      loadProjects()
+      const result = await window.rappDesktop.projects.clone(impl)
+      alert(result.message)
+      if (result.success) await loadProjects()
     } catch (e) { alert(`Error: ${e}`) }
   }
 
   async function createProject() {
     if (!newProjectName.trim()) return
     try {
-      await invoke('create_project', { name: newProjectName })
+      const result = await window.rappDesktop.projects.create(newProjectName)
+      if (!result.success) {
+        alert(result.message)
+        return
+      }
       setNewProjectName('')
       setShowNewProject(false)
-      loadProjects()
+      await loadProjects()
     } catch (e) { alert(`Error: ${e}`) }
   }
 
   async function openProject(path: string) {
-    await invoke('open_path', { path })
+    await window.rappDesktop.projects.reveal(path)
   }
 
-  // RAPP OS functions
-  async function checkRappOsStatus() {
+  async function checkBrainstemStatus() {
     try {
-      const status = await invoke<RappOsStatus>('get_rapp_os_status')
-      setRappOsStatus(status)
+      setBrainstemStatus(await window.rappDesktop.brainstem.status())
     } catch (e) {
-      setRappOsStatus({ running: false, port: 7071, endpoint: '' })
+      setBrainstemStatus(current => ({
+        ...current,
+        running: false,
+        phase: 'error',
+        detail: String(e),
+      }))
     }
   }
 
-  async function startRappOs() {
+  async function startBrainstem() {
     try {
-      const status = await invoke<RappOsStatus>('start_rapp_os')
-      setRappOsStatus(status)
+      setBrainstemStatus(await window.rappDesktop.brainstem.start())
     } catch (e) {
-      alert(`Error starting RAPP OS: ${e}`)
+      alert(`Error starting the Brainstem: ${e}`)
     }
   }
 
-  async function stopRappOs() {
+  async function stopBrainstem() {
     try {
-      const status = await invoke<RappOsStatus>('stop_rapp_os')
-      setRappOsStatus(status)
+      setBrainstemStatus(await window.rappDesktop.brainstem.stop())
     } catch (e) {
-      alert(`Error stopping RAPP OS: ${e}`)
+      alert(`Error stopping the Brainstem: ${e}`)
+    }
+  }
+
+  async function startLogin() {
+    try {
+      const login = await window.rappDesktop.brainstem.login()
+      setLoginCode(login.userCode)
+    } catch (e) {
+      alert(`Error starting GitHub sign-in: ${e}`)
     }
   }
 
@@ -187,35 +214,31 @@ export default function App() {
     setChatLoading(true)
 
     try {
-      const response = await invoke<ChatResponse>('chat_with_rapp', {
-        request: {
-          user_input: userMessage.content,
-          user_guid: 'desktop',
-          session_guid: sessionGuid || null,
-          context_guid: 'default',
-          conversation_history: chatMessages.map(m => ({
-            role: m.role,
-            content: m.content
-          }))
-        }
+      const response: BrainstemChatResponse = await window.rappDesktop.brainstem.chat({
+        userInput: userMessage.content,
+        sessionId: sessionGuid || undefined,
+        conversationHistory: chatMessages.map(m => ({
+          role: m.role,
+          content: m.content
+        }))
       })
 
-      if (response.session_guid) {
-        setSessionGuid(response.session_guid)
+      if (response.sessionId) {
+        setSessionGuid(response.sessionId)
       }
 
       const assistantMessage: ChatMessage = {
         role: 'assistant',
         content: response.response,
         timestamp: new Date(),
-        agentsUsed: response.agents_used
+        agentsUsed: response.agentsUsed
       }
 
       setChatMessages(prev => [...prev, assistantMessage])
     } catch (e) {
       const errorMessage: ChatMessage = {
         role: 'assistant',
-        content: `Error: ${e}. Make sure RAPP OS is running.`,
+        content: `Error: ${e}. Make sure the RAPP Brainstem is running.`,
         timestamp: new Date()
       }
       setChatMessages(prev => [...prev, errorMessage])
@@ -241,6 +264,9 @@ export default function App() {
     i.name.toLowerCase().includes(search.toLowerCase()) ||
     i.description.toLowerCase().includes(search.toLowerCase())
   )
+  const brainstemReady = brainstemStatus.phase === 'ready'
+  const brainstemNeedsLogin = brainstemStatus.phase === 'authentication-required'
+    || brainstemStatus.phase === 'authentication-failed'
 
   return (
     <div className="app">
@@ -255,7 +281,7 @@ export default function App() {
           </button>
           <button className={`nav-item ${page === 'chat' ? 'active' : ''}`} onClick={() => setPage('chat')}>
             <span className="nav-icon">💬</span> Chat
-            {rappOsStatus.running && <span className="status-dot online" />}
+            {brainstemStatus.running && <span className="status-dot online" />}
           </button>
           <button className={`nav-item ${page === 'store' ? 'active' : ''}`} onClick={() => setPage('store')}>
             <span className="nav-icon">📦</span> Store
@@ -280,7 +306,7 @@ export default function App() {
               <div className="welcome">
                 <div className="welcome-icon">🚀</div>
                 <h2>Rapid AI Agent Production Pipeline</h2>
-                <p>Build production-ready AI agents in minutes</p>
+                <p>Your secure, local-first AI companion</p>
                 <div className="quick-actions">
                   <div className="quick-action" onClick={() => setPage('chat')}>
                     <div className="quick-action-icon">💬</div>
@@ -327,13 +353,28 @@ export default function App() {
             <header className="header">
               <h2>Chat with RAPP</h2>
               <div className="header-actions">
-                <span className={`status-badge ${rappOsStatus.running ? 'online' : 'offline'}`}>
-                  {rappOsStatus.running ? 'RAPP OS Running' : 'RAPP OS Stopped'}
+                <span className={`status-badge ${brainstemStatus.running ? 'online' : 'offline'}`}>
+                  {brainstemStatus.phase === 'authentication-required'
+                    ? 'Sign-in Required'
+                    : brainstemStatus.phase === 'authentication-failed'
+                      ? 'Sign-in Failed'
+                    : brainstemStatus.running
+                      ? 'Brainstem Ready'
+                      : 'Brainstem Offline'}
                 </span>
-                {rappOsStatus.running ? (
-                  <button className="btn btn-secondary" onClick={stopRappOs}>Stop</button>
+                {brainstemNeedsLogin ? (
+                  <button className="btn btn-primary" onClick={startLogin}>
+                    {brainstemStatus.phase === 'authentication-failed' ? 'Retry sign-in' : 'Sign in'}
+                  </button>
+                ) : brainstemStatus.running && brainstemStatus.managed ? (
+                  <button className="btn btn-secondary" onClick={stopBrainstem}>Stop</button>
                 ) : (
-                  <button className="btn btn-primary" onClick={startRappOs}>Start RAPP OS</button>
+                  !brainstemStatus.running && (
+                    <button className="btn btn-primary" onClick={startBrainstem}>Wake Brainstem</button>
+                  )
+                )}
+                {loginCode && (
+                  <span className="status-badge">GitHub code: {loginCode}</span>
                 )}
                 <button className="btn btn-secondary" onClick={clearChat}>Clear Chat</button>
               </div>
@@ -345,9 +386,11 @@ export default function App() {
                     <div className="chat-empty-icon">💬</div>
                     <h3>Start a Conversation</h3>
                     <p>
-                      {rappOsStatus.running
+                      {brainstemReady
                         ? 'Type a message below to chat with your RAPP agents'
-                        : 'Click "Start RAPP OS" above to begin'}
+                        : brainstemNeedsLogin
+                          ? 'Sign in with GitHub above to activate the Brainstem'
+                          : 'Wake the Brainstem above to begin'}
                     </p>
                   </div>
                 ) : (
@@ -388,13 +431,13 @@ export default function App() {
                   value={chatInput}
                   onChange={e => setChatInput(e.target.value)}
                   onKeyDown={e => e.key === 'Enter' && !e.shiftKey && sendMessage()}
-                  placeholder={rappOsStatus.running ? "Type your message..." : "Start RAPP OS to chat..."}
-                  disabled={!rappOsStatus.running || chatLoading}
+                  placeholder={brainstemReady ? "Type your message..." : "Activate the Brainstem to chat..."}
+                  disabled={!brainstemReady || chatLoading}
                 />
                 <button
                   className="btn btn-primary chat-send"
                   onClick={sendMessage}
-                  disabled={!rappOsStatus.running || chatLoading || !chatInput.trim()}
+                  disabled={!brainstemReady || chatLoading || !chatInput.trim()}
                 >
                   Send
                 </button>
@@ -413,6 +456,9 @@ export default function App() {
               </div>
             </header>
             <div className="content">
+              {catalogError && (
+                <div className="error">Store unavailable: {catalogError}</div>
+              )}
               {loading ? (
                 <div className="loading"><div className="spinner" /> Loading...</div>
               ) : (
@@ -550,27 +596,49 @@ export default function App() {
             <header className="header"><h2>Settings</h2></header>
             <div className="content">
               <div className="card" style={{ maxWidth: 500, marginBottom: '1rem' }}>
-                <h3 style={{ marginBottom: '1rem' }}>RAPP OS</h3>
+                <h3 style={{ marginBottom: '1rem' }}>RAPP Brainstem</h3>
                 <div className="settings-row">
                   <div>
                     <strong>Status:</strong>{' '}
-                    <span className={`status-badge ${rappOsStatus.running ? 'online' : 'offline'}`}>
-                      {rappOsStatus.running ? 'Running' : 'Stopped'}
+                    <span className={`status-badge ${brainstemStatus.running ? 'online' : 'offline'}`}>
+                      {brainstemStatus.phase === 'authentication-required'
+                        ? 'Sign-in Required'
+                        : brainstemStatus.phase === 'authentication-failed'
+                          ? 'Sign-in Failed'
+                        : brainstemStatus.running
+                          ? 'Ready'
+                          : 'Offline'}
                     </span>
                   </div>
-                  {rappOsStatus.running && (
+                  {brainstemStatus.running && (
                     <div style={{ marginTop: '0.5rem', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
-                      Endpoint: {rappOsStatus.endpoint}
+                      Endpoint: {brainstemStatus.endpoint}
+                    </div>
+                  )}
+                  {brainstemStatus.detail && (
+                    <div style={{ marginTop: '0.5rem', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
+                      {brainstemStatus.detail}
                     </div>
                   )}
                 </div>
                 <div className="card-actions" style={{ marginTop: '1rem' }}>
-                  {rappOsStatus.running ? (
-                    <button className="btn btn-secondary" onClick={stopRappOs}>Stop RAPP OS</button>
+                  {brainstemNeedsLogin ? (
+                    <button className="btn btn-primary" onClick={startLogin}>
+                      {brainstemStatus.phase === 'authentication-failed'
+                        ? 'Retry GitHub sign-in'
+                        : 'Sign in with GitHub'}
+                    </button>
+                  ) : brainstemStatus.running && brainstemStatus.managed ? (
+                    <button className="btn btn-secondary" onClick={stopBrainstem}>Stop bundled Brainstem</button>
                   ) : (
-                    <button className="btn btn-primary" onClick={startRappOs}>Start RAPP OS</button>
+                    !brainstemStatus.running && (
+                      <button className="btn btn-primary" onClick={startBrainstem}>Wake Brainstem</button>
+                    )
                   )}
-                  <button className="btn btn-secondary" onClick={checkRappOsStatus}>Refresh Status</button>
+                  {loginCode && (
+                    <span className="status-badge">GitHub code: {loginCode}</span>
+                  )}
+                  <button className="btn btn-secondary" onClick={checkBrainstemStatus}>Refresh Status</button>
                 </div>
               </div>
 

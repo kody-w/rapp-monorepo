@@ -20,6 +20,12 @@ from unittest.mock import Mock, patch, MagicMock
 sys.path.insert(0, str(Path(__file__).parent.parent / "rapp_os" / "core"))
 sys.path.insert(0, str(Path(__file__).parent.parent / "rapp_os"))
 
+TEST_SECRET = "test-secret"
+
+
+def auth_headers(server):
+    return {"X-RAPP-Desktop-Secret": server.secret}
+
 
 @pytest.fixture
 def mock_brain_stem(tmp_path):
@@ -39,7 +45,7 @@ class TestRappLocalServer:
         """Test server initializes with correct defaults."""
         from local_server import RappLocalServer
 
-        server = RappLocalServer()
+        server = RappLocalServer(secret=TEST_SECRET)
         assert server.port == 7071
         assert server.server is None
         assert server.thread is None
@@ -48,7 +54,7 @@ class TestRappLocalServer:
         """Test server with custom port."""
         from local_server import RappLocalServer
 
-        server = RappLocalServer(port=8080)
+        server = RappLocalServer(port=8080, secret=TEST_SECRET)
         assert server.port == 8080
 
 
@@ -76,7 +82,7 @@ class TestServerEndpoints:
                 mock_brain_instance.context_manager.list_contexts.return_value = []
                 mock_brain.return_value = mock_brain_instance
 
-                server = RappLocalServer(port=7999)
+                server = RappLocalServer(port=7999, secret=TEST_SECRET)
                 server.start()
                 time.sleep(0.2)  # Wait for server to start
 
@@ -96,7 +102,10 @@ class TestServerEndpoints:
     def test_agents_endpoint(self, running_server):
         """Test /agents endpoint returns agent list."""
         server, _ = running_server
-        response = requests.get(f"http://127.0.0.1:{server.port}/agents")
+        response = requests.get(
+            f"http://127.0.0.1:{server.port}/agents",
+            headers=auth_headers(server),
+        )
         assert response.status_code == 200
         data = response.json()
         assert "agents" in data
@@ -104,7 +113,10 @@ class TestServerEndpoints:
     def test_contexts_endpoint(self, running_server):
         """Test /contexts endpoint returns context list."""
         server, _ = running_server
-        response = requests.get(f"http://127.0.0.1:{server.port}/contexts")
+        response = requests.get(
+            f"http://127.0.0.1:{server.port}/contexts",
+            headers=auth_headers(server),
+        )
         assert response.status_code == 200
         data = response.json()
         assert "contexts" in data
@@ -112,7 +124,11 @@ class TestServerEndpoints:
     def test_reload_endpoint(self, running_server):
         """Test /reload endpoint triggers reload."""
         server, _ = running_server
-        response = requests.get(f"http://127.0.0.1:{server.port}/reload")
+        response = requests.post(
+            f"http://127.0.0.1:{server.port}/reload",
+            json={},
+            headers=auth_headers(server),
+        )
         assert response.status_code == 200
         data = response.json()
         assert data["status"] == "reloaded"
@@ -120,19 +136,25 @@ class TestServerEndpoints:
     def test_not_found_endpoint(self, running_server):
         """Test unknown endpoint returns 404."""
         server, _ = running_server
-        response = requests.get(f"http://127.0.0.1:{server.port}/unknown")
+        response = requests.get(
+            f"http://127.0.0.1:{server.port}/unknown",
+            headers=auth_headers(server),
+        )
         assert response.status_code == 404
 
     def test_chat_endpoint(self, running_server):
-        """Test /api/rapp chat endpoint."""
+        """Test the RAPP/1 /chat endpoint."""
         server, mock_process = running_server
         response = requests.post(
-            f"http://127.0.0.1:{server.port}/api/rapp",
-            json={"user_input": "Hello"}
+            f"http://127.0.0.1:{server.port}/chat",
+            json={"user_input": "Hello", "session_id": "desktop-session"},
+            headers=auth_headers(server),
         )
         assert response.status_code == 200
         data = response.json()
         assert "response" in data
+        assert data["session_id"] == "test_session"
+        assert mock_process.call_args[1]["session_guid"] == "desktop-session"
         mock_process.assert_called()
 
     def test_chat_endpoint_missing_input(self, running_server):
@@ -140,7 +162,8 @@ class TestServerEndpoints:
         server, _ = running_server
         response = requests.post(
             f"http://127.0.0.1:{server.port}/api/rapp",
-            json={}
+            json={},
+            headers=auth_headers(server),
         )
         assert response.status_code == 400
         data = response.json()
@@ -151,7 +174,8 @@ class TestServerEndpoints:
         server, mock_process = running_server
         response = requests.post(
             f"http://127.0.0.1:{server.port}/api/rapp",
-            json={"message": "Hello via message key"}
+            json={"message": "Hello via message key"},
+            headers=auth_headers(server),
         )
         assert response.status_code == 200
 
@@ -168,7 +192,8 @@ class TestServerEndpoints:
                 "conversation_history": [
                     {"role": "user", "content": "Previous message"}
                 ]
-            }
+            },
+            headers=auth_headers(server),
         )
         assert response.status_code == 200
 
@@ -180,12 +205,12 @@ class TestServerEndpoints:
         assert call_kwargs["context_guid"] == "test_context"
 
 
-class TestCORS:
-    """Tests for CORS headers."""
+class TestBrowserIsolation:
+    """The local engine is not a browser API."""
 
     @pytest.fixture
     def running_server(self):
-        """Start a server for CORS testing."""
+        """Start a server for browser-isolation testing."""
         from local_server import RappLocalServer
 
         with patch('local_server.process_request') as mock_process:
@@ -201,7 +226,7 @@ class TestCORS:
             with patch('local_server.get_brain_stem') as mock_brain:
                 mock_brain.return_value = MagicMock()
 
-                server = RappLocalServer(port=7998)
+                server = RappLocalServer(port=7998, secret=TEST_SECRET)
                 server.start()
                 time.sleep(0.2)
 
@@ -209,17 +234,36 @@ class TestCORS:
 
                 server.stop()
 
-    def test_cors_headers_present(self, running_server):
-        """Test CORS headers are present in response."""
+    def test_cors_headers_are_not_exposed(self, running_server):
+        """A random web page cannot call the local companion engine."""
         response = requests.get(f"http://127.0.0.1:{running_server.port}/health")
-        assert "Access-Control-Allow-Origin" in response.headers
-        assert response.headers["Access-Control-Allow-Origin"] == "*"
+        assert "Access-Control-Allow-Origin" not in response.headers
 
-    def test_options_preflight(self, running_server):
-        """Test OPTIONS preflight request."""
+    def test_options_preflight_is_rejected(self, running_server):
+        """Browser preflight is rejected instead of granting wildcard CORS."""
         response = requests.options(f"http://127.0.0.1:{running_server.port}/api/rapp")
-        assert response.status_code == 200
-        assert "Access-Control-Allow-Methods" in response.headers
+        assert response.status_code == 403
+        assert response.json()["error"] == "Browser access is disabled"
+
+    def test_cross_origin_simple_post_is_rejected(self, running_server):
+        """A no-CORS browser POST cannot trigger a local agent."""
+        response = requests.post(
+            f"http://127.0.0.1:{running_server.port}/chat",
+            data='{"user_input":"attack"}',
+            headers={
+                "Content-Type": "text/plain",
+                "Origin": "https://attacker.example",
+            },
+        )
+        assert response.status_code == 403
+        assert response.json()["error"] == "Browser access is disabled"
+
+    def test_missing_secret_is_rejected(self, running_server):
+        response = requests.post(
+            f"http://127.0.0.1:{running_server.port}/chat",
+            json={"user_input": "Hello"},
+        )
+        assert response.status_code == 401
 
 
 class TestContextCreation:
@@ -239,7 +283,7 @@ class TestContextCreation:
             mock_brain_instance.context_manager.create_context.return_value = mock_context
             mock_brain.return_value = mock_brain_instance
 
-            server = RappLocalServer(port=7997)
+            server = RappLocalServer(port=7997, secret=TEST_SECRET)
             server.start()
             time.sleep(0.2)
 
@@ -256,7 +300,8 @@ class TestContextCreation:
                 "name": "Test Context",
                 "agents": ["agent1"],
                 "description": "Test description"
-            }
+            },
+            headers=auth_headers(server),
         )
         assert response.status_code == 200
         data = response.json()
@@ -275,7 +320,7 @@ class TestInvalidJSON:
         with patch('local_server.get_brain_stem') as mock_brain:
             mock_brain.return_value = MagicMock()
 
-            server = RappLocalServer(port=7996)
+            server = RappLocalServer(port=7996, secret=TEST_SECRET)
             server.start()
             time.sleep(0.2)
 
@@ -288,7 +333,10 @@ class TestInvalidJSON:
         response = requests.post(
             f"http://127.0.0.1:{running_server.port}/api/rapp",
             data="not valid json",
-            headers={"Content-Type": "application/json"}
+            headers={
+                "Content-Type": "application/json",
+                **auth_headers(running_server),
+            }
         )
         assert response.status_code == 400
         data = response.json()
@@ -306,7 +354,7 @@ class TestServerLifecycle:
         with patch('local_server.get_brain_stem') as mock_brain:
             mock_brain.return_value = MagicMock()
 
-            server = RappLocalServer(port=7995)
+            server = RappLocalServer(port=7995, secret=TEST_SECRET)
             server.start()
             time.sleep(0.2)
 

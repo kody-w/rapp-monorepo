@@ -151,7 +151,7 @@ class RappOS:
         print("\n" + "=" * 50)
         print("RAPP OS Running")
         print("=" * 50)
-        print(f"API: http://127.0.0.1:{self.config['server']['port']}/api/rapp")
+        print(f"API: http://127.0.0.1:{self.config['server']['port']}/chat")
         print("Press Ctrl+C to stop")
         print("=" * 50 + "\n")
 
