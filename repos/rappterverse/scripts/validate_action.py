@@ -162,7 +162,12 @@ def trusted_automation_authors() -> set[str]:
     """Return base-controlled identities allowed to act for system agents."""
     owner = os.environ.get("REPOSITORY_OWNER", "kody-w")
     configured = os.environ.get("TRUSTED_AUTOMATION_AUTHORS", "")
-    return {owner, "github-actions[bot]"} | {
+    return {
+        owner,
+        "github-actions[bot]",
+        "github-actions",
+        "app/github-actions",
+    } | {
         author.strip() for author in configured.split(",") if author.strip()
     }
 
@@ -234,7 +239,7 @@ def validate_agent_consent(current_agents: list, pr_author: str):
             if controller == "system":
                 if pr_author not in trusted_automation_authors():
                     error(f"`agents.json`: Only trusted automation may create system agent `{aid}`")
-            elif controller != pr_author:
+            elif controller != pr_author and pr_author not in trusted_automation_authors():
                 error(
                     f"`agents.json`: New agent `{aid}` must set controller to PR author "
                     f"`{pr_author}`"

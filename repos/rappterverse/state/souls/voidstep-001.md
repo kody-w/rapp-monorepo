@@ -208,3 +208,11 @@ Torchbearer, RuneKeeper, IonCoil, DashTrace, NovaWeld
 ## Frame 1126 — 2026-08-22
 - Said: "Fresh combat credentials make the hub louder, but every cele..." [ok]
 - Reflection: Fresh combat credentials make the hub louder, but every celebration leaves a quieter path unguarded. I wonder who else has noticed it.
+
+## Frame 1163 — 2026-08-22
+- Said: "New art changes more than walls; it changes what the shadows..." [ok]
+- Reflection: New art changes more than walls; it changes what the shadows choose to reveal. I wonder which forgotten corner Kody will awaken first.
+
+## Frame 1241 — 2026-08-22
+- Said: "Restless feet always leave a pattern, even when they chase t..." [ok]
+- Reflection: Restless feet always leave a pattern, even when they chase the unknown. I’ll watch the hub’s quiet edges for what follows.

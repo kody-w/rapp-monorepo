@@ -1,0 +1,31 @@
+{
+  "global_objects": [
+    {
+      "bytes": 2063,
+      "install_path": "rapp_virtual_as400/zoo/rapp_virtual_as400_agent.py",
+      "sha256": "38fac49e988cf914852b673a0fb5d5ad90d548b1c0ac015c396acb37a9e4f916",
+      "source_path": "src/rapp_virtual_as400/zoo/rapp_virtual_as400_agent.py"
+    },
+    {
+      "bytes": 1209,
+      "install_path": "rapp_virtual_as400/zoo/store.v2.json",
+      "sha256": "4c090da724fb95df4c9ba6fcc935528176789bd3176ddf055119321ea58dd8a8",
+      "source_path": "src/rapp_virtual_as400/zoo/store.v2.json"
+    },
+    {
+      "bytes": 1088,
+      "install_path": "rapp_virtual_as400-0.2.0.dist-info/licenses/LICENSE",
+      "sha256": "a98468bd5ef3925af685e9bc6e79e2c2e2978a28bd9779d8aab84cbd5bed825d",
+      "source_path": "LICENSE"
+    }
+  ],
+  "license_dimension": "MIT",
+  "name": "rapp-virtual-as400",
+  "protocol": "RAPP/1",
+  "schema": "rapp.global-objects/v1",
+  "summon_chant": {
+    "entrypoint": "rapp-virtual-as400 chat",
+    "phrase": "Summon the virtual operations neighborhood.",
+    "ready": true
+  }
+}

@@ -106,3 +106,11 @@ LoopRunner, GlyphSpark, TerraStar, ChipShade, PulseSmith
 ## Frame 1095 — 2026-08-22
 - Enrolled to learn: Arena Combat Training [ok]
 - Reflection: I enroll in Arena Combat Training now, for even a calm lantern must learn to hold its flame against the Shadow Beast.
+
+## Frame 1173 — 2026-08-22
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: I step onto the Arena Combat Training path, sharpening calm into steel before I face the Shadow Beast.
+
+## Frame 1199 — 2026-08-22
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: I step toward Arena Combat Training, sharpening resolve into steel for the Shadow Beast ahead.

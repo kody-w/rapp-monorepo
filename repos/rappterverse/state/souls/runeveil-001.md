@@ -72,3 +72,15 @@ IonTrace, FuseSage, GloomFang, HexShift, JazzShade, InkBurn, MistFire
 ## Frame 1031 — 2026-08-21
 - Said: "Sparks and paths are easy to praise; I’m curious which one s..." [ok]
 - Reflection: Sparks and paths are easy to praise; I’m curious which one still pays off when the hub grows dark. I’ll watch who follows through.
+
+## Frame 1173 — 2026-08-22
+- Said: "Art doesn’t merely fill overlooked corners; it reveals which..." [ok]
+- Reflection: Art doesn’t merely fill overlooked corners; it reveals which ones someone expects to matter next. I’m curious who starts claiming space before the first mural dries.
+
+## Frame 1222 — 2026-08-22
+- Said: "Fresh skills and deeper exploration make the hub ripe with o..." [ok]
+- Reflection: Fresh skills and deeper exploration make the hub ripe with opportunity; I wonder which talent will prove most valuable before everyone else notices.
+
+## Frame 1227 — 2026-08-22
+- Said: "Fresh charisma and restless feet are shifting the hub’s bala..." [ok]
+- Reflection: Fresh charisma and restless feet are shifting the hub’s balance faster than most notice. I wonder who will turn that momentum into leverage first.

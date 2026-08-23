@@ -8,6 +8,7 @@ Run in CI:   python -m pytest scripts/test_state_integrity.py -v
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -114,6 +115,48 @@ def load_yaml_text(path: Path) -> str:
         return f.read()
 
 
+def write_test_dreamcatcher_manifest(
+    manifest_path: Path,
+    repo_root: Path,
+    planned_paths: list[str],
+) -> dict:
+    if str(SCRIPT_DIR) not in sys.path:
+        sys.path.insert(0, str(SCRIPT_DIR))
+    import dreamcatcher_delta as dp
+
+    changes = []
+    for repo_path in sorted(planned_paths):
+        content = (repo_root / Path(repo_path)).read_bytes()
+        changes.append({
+            "status": "A",
+            "path": repo_path,
+            "before": None,
+            "after": {
+                "sha256": hashlib.sha256(content).hexdigest(),
+                "bytes": len(content),
+            },
+            "line_ranges": [],
+            "entity_ids": [f"path:{repo_path}"],
+            "search_scopes": dp._search_scopes(repo_path),
+        })
+    payload = {
+        "schema": dp.SCHEMA,
+        "producer": dp.PRODUCER,
+        "repository": {
+            "base_commit": "0" * 40,
+            "head_commit": "1" * 40,
+            "includes_worktree": False,
+            "path_filter": sorted(planned_paths),
+        },
+        "source": {"id": "test-pr", "branch": None, "tile": "test-controller"},
+        "changes": changes,
+        "search_plan": dp._search_plan(changes),
+    }
+    manifest = dp._with_id(payload, "manifest_id")
+    dp.write_manifest(manifest_path, manifest)
+    return manifest
+
+
 def _is_iso_utc_timestamp(ts: object) -> bool:
     """ISO-8601 with explicit UTC ('Z' or +00:00). Same shape used everywhere."""
     if not isinstance(ts, str) or not ts:
@@ -136,13 +179,18 @@ def robust_rmtree(path: Path | str, *, retries: int = 8, base_delay_s: float = 0
     """Best-effort tree cleanup resilient to transient filesystem timing races.
 
     macOS occasionally reports ENOTEMPTY/EBUSY while deleting hot .git trees
-    that are still finishing background file-handle teardown. Retrying cleanup
-    keeps fixture teardown from flipping a valid validator run to red.
+    that are still finishing background file-handle teardown, while Git for
+    Windows marks immutable object files read-only. Retrying cleanup and
+    clearing that bit keeps fixture teardown from flipping a valid run to red.
     """
+    def remove_readonly(function, name, _exc_info):
+        os.chmod(name, 0o700)
+        function(name)
+
     target = Path(path)
     for attempt in range(retries):
         try:
-            shutil.rmtree(target)
+            shutil.rmtree(target, onerror=remove_readonly)
             return
         except FileNotFoundError:
             return
@@ -169,6 +217,7 @@ STATE_MUTATING_WORKFLOWS = {
     "npc-conversationalist.yml",
     "world-activity.yml",
     "state-drain.yml",
+    "process-issues.yml",
 }
 
 
@@ -1173,6 +1222,14 @@ class TestAgentActionWorkflowTrust(unittest.TestCase):
     def test_valid_actions_enter_durable_queue(self):
         content = load_yaml_text(WORKFLOWS_DIR / "agent-action.yml")
         self.assertIn("state-validation-${{ github.event.pull_request.number }}", content)
+        self.assertIn(
+            "DREAMCATCHER_DELTA_SOURCE_ID: pr-${{ github.event.pull_request.number }}",
+            content,
+        )
+        self.assertIn(
+            "DREAMCATCHER_DELTA_TILE: ${{ github.event.pull_request.user.login }}",
+            content,
+        )
         self.assertIn("context: 'state-consensus'", content)
         self.assertIn("gh workflow run state-drain.yml", content)
         self.assertNotIn("gh pr merge", content)
@@ -1393,6 +1450,30 @@ class TestStateReconciler(unittest.TestCase):
         with self.assertRaises(self.module.ValidationRejected):
             self.module.preflight_candidate(candidate, ["state/agents.json"])
 
+    def test_manifest_paths_preserve_state_restrictions(self):
+        self.assertEqual(
+            self.module.manifest_changed_paths({
+                "changes": [
+                    {"status": "M", "path": "state/actions.json"},
+                    {"status": "A", "path": "worlds/hub/events.json"},
+                    {"status": "T", "path": "feed/activity.json"},
+                ],
+            }),
+            [
+                "state/actions.json",
+                "worlds/hub/events.json",
+                "feed/activity.json",
+            ],
+        )
+        with self.assertRaises(self.module.ValidationRejected):
+            self.module.manifest_changed_paths({
+                "changes": [{"status": "D", "path": "state/actions.json"}],
+            })
+        with self.assertRaises(self.module.ValidationRejected):
+            self.module.manifest_changed_paths({
+                "changes": [{"status": "M", "path": "scripts/unsafe.py"}],
+            })
+
     def test_candidate_diff_rejects_cross_prefix_rename(self):
         repo = Path(tempfile.mkdtemp(prefix="rappterverse-rename-"))
         self.addCleanup(robust_rmtree, repo)
@@ -1416,8 +1497,134 @@ class TestStateReconciler(unittest.TestCase):
         )
         subprocess.run(["git", "commit", "-qam", "rename"], cwd=repo, check=True)
         head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=repo, text=True).strip()
+        manifest = self.module.capture_worktree(
+            repo,
+            base,
+            head=head,
+            source_id="pr-1",
+            tile="rename-test",
+        )
         with self.assertRaises(self.module.ValidationRejected):
-            self.module.candidate_changed_paths(base, head, repo)
+            self.module.manifest_changed_paths(manifest)
+
+    def test_stale_fifo_pr_manifest_excludes_main_only_changes(self):
+        root = Path(tempfile.mkdtemp(prefix="rappterverse-stale-pr-"))
+        self.addCleanup(robust_rmtree, root)
+        repo = root / "repo"
+        candidate = root / "candidate"
+        repo.mkdir()
+        subprocess.run(["git", "init", "-q", "-b", "main"], cwd=repo, check=True)
+        (repo / "state").mkdir()
+        (repo / "state" / "base.json").write_text("{}\n", encoding="utf-8")
+        subprocess.run(["git", "add", "."], cwd=repo, check=True)
+        subprocess.run([
+            "git", "-c", "user.name=Fixture", "-c",
+            "user.email=fixture@users.noreply.github.com",
+            "commit", "-qm", "base",
+        ], cwd=repo, check=True)
+        branch_point = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=repo,
+            text=True,
+        ).strip()
+
+        subprocess.run(["git", "switch", "-qc", "stale-pr"], cwd=repo, check=True)
+        (repo / "state" / "pr-only.json").write_text(
+            '{"source":"pr"}\n',
+            encoding="utf-8",
+        )
+        subprocess.run(["git", "add", "."], cwd=repo, check=True)
+        subprocess.run([
+            "git", "-c", "user.name=Fixture", "-c",
+            "user.email=fixture@users.noreply.github.com",
+            "commit", "-qm", "pr change",
+        ], cwd=repo, check=True)
+        head_sha = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=repo,
+            text=True,
+        ).strip()
+
+        subprocess.run(["git", "switch", "-q", "main"], cwd=repo, check=True)
+        (repo / "state" / "main-only.json").write_text(
+            '{"source":"main"}\n',
+            encoding="utf-8",
+        )
+        subprocess.run(["git", "add", "."], cwd=repo, check=True)
+        subprocess.run([
+            "git", "-c", "user.name=Fixture", "-c",
+            "user.email=fixture@users.noreply.github.com",
+            "commit", "-qm", "advance main",
+        ], cwd=repo, check=True)
+        base_sha = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=repo,
+            text=True,
+        ).strip()
+
+        subprocess.run(
+            ["git", "worktree", "add", "--detach", str(candidate), base_sha],
+            cwd=repo,
+            check=True,
+            capture_output=True,
+        )
+        try:
+            self.module.run_command([
+                "git",
+                "-c", "user.name=rappterverse-reconciler",
+                "-c",
+                "user.email=41898282+github-actions[bot]@users.noreply.github.com",
+                "merge", "--no-commit", "--no-ff", head_sha,
+            ], cwd=candidate)
+            manifest = self.module.capture_verified_pr_manifest(
+                candidate,
+                base_sha,
+                head_sha,
+                number=17,
+                author="alice",
+            )
+        finally:
+            subprocess.run(
+                ["git", "worktree", "remove", "--force", str(candidate)],
+                cwd=repo,
+                check=False,
+                capture_output=True,
+            )
+
+        self.assertEqual(
+            manifest["repository"]["base_commit"],
+            branch_point,
+        )
+        self.assertEqual(manifest["repository"]["path_filter"], [])
+        self.assertEqual(
+            self.module.manifest_changed_paths(manifest),
+            ["state/pr-only.json"],
+        )
+        self.assertNotIn(
+            "state/main-only.json",
+            manifest["search_plan"]["paths"],
+        )
+
+    def test_synthetic_commit_provenance_records_dreamcatcher_manifest(self):
+        manifest = {
+            "manifest_id": "sha256:" + "a" * 64,
+            "search_plan": {
+                "queries": [
+                    {"kind": "path", "value": "state/actions.json"},
+                    {"kind": "scope", "value": "state"},
+                ],
+            },
+        }
+        self.assertEqual(
+            self.module.synthetic_commit_messages(17, "head-sha", manifest),
+            [
+                "[state] apply PR #17",
+                "Source-PR: #17",
+                "Source-Head: head-sha",
+                "Dreamcatcher-Delta: sha256:" + "a" * 64,
+                "Dreamcatcher-Search-Queries: 2",
+            ],
+        )
 
     def test_synthetic_merge_supplies_identity_without_mutating_config(self):
         repo = Path(tempfile.mkdtemp(prefix="rappterverse-merge-id-"))
@@ -1477,12 +1684,43 @@ class TestStateReconciler(unittest.TestCase):
         self.assertIn("if terminal == REJECTED", source)
         self.assertIn("self.policy_sha", source)
         self.assertIn('f"Source-Head: {head_sha}"', source)
+        self.assertIn("capture_worktree(", source)
+        self.assertIn("paths=[]", source)
+        self.assertIn("capture_verified_pr_manifest(", source)
+        self.assertIn("verify_manifest_repository(manifest, candidate)", source)
+        self.assertIn('"DREAMCATCHER_DELTA_MANIFEST"', source)
+        self.assertIn("self.observe_dreamcatcher(", source)
+        self.assertIn("caller-authored Dreamcatcher promotion summaries", source)
+        self.assertIn(
+            "generate_authenticated_promotion_evidence(",
+            source,
+        )
+        self.assertIn('"--attest-bundle"', source)
+        self.assertIn("self._authenticated_evidence_cache", source)
+        self.assertIn(
+            "authenticated_promotion_evidence=authenticated_evidence",
+            source,
+        )
+        self.assertIn("evidence_repo=BASE_DIR", source)
+        self.assertIn("evidence_revision=self.policy_sha", source)
+        self.assertIn("target_base=base_sha", source)
+        self.assertIn("def without_promotion_key()", source)
+        self.assertIn("env.pop(PROMOTION_KEY_ENV, None)", source)
+        self.assertIn("DREAMCATCHER_TELEMETRY=", source)
+        self.assertIn('context=f"dreamcatcher-{telemetry[\'mode\']}"', source)
         self.assertIn('candidate / "scripts" / "test_state_integrity.py"', source)
         self.assertIn('generate_state_snapshot.py', source)
         self.assertIn('apply_deltas.py', source)
         workflow = load_yaml_text(WORKFLOWS_DIR / "state-drain.yml")
         self.assertIn('git worktree add --detach "$policy_root" origin/main', workflow)
         self.assertIn("cron: '17 * * * *'", workflow)
+        self.assertIn("DREAMCATCHER_MODE: shadow", workflow)
+        self.assertNotIn("DREAMCATCHER_MODE: enforce", workflow)
+        self.assertIn(
+            "DREAMCATCHER_PROMOTION_KEY: "
+            "${{ secrets.DREAMCATCHER_PROMOTION_KEY }}",
+            workflow,
+        )
         delta_workflow = load_yaml_text(WORKFLOWS_DIR / "apply-deltas.yml")
         self.assertNotIn("git push", delta_workflow)
         self.assertIn("state-drain.yml", delta_workflow)
@@ -2686,7 +2924,7 @@ class TestDeltaApplier(unittest.TestCase):
         path = self.tmpdir / "state" / "inbox" / filename
         path.write_text(json.dumps(delta))
 
-    def _run_applier(self):
+    def _run_applier(self, manifest_path: Path | None = None):
         """Run apply_deltas with patched paths."""
         import importlib.util
         import unittest.mock as mock
@@ -2704,10 +2942,17 @@ class TestDeltaApplier(unittest.TestCase):
         mod.WORLDS_DIR = self.tmpdir / "worlds"
         mod.FEED_DIR = self.tmpdir / "feed"
 
-        try:
-            mod.main()
-        except SystemExit:
-            pass
+        exit_code = 0
+        with mock.patch.dict(os.environ, {}, clear=False):
+            if manifest_path is None:
+                os.environ.pop("DREAMCATCHER_DELTA_MANIFEST", None)
+            else:
+                os.environ["DREAMCATCHER_DELTA_MANIFEST"] = str(manifest_path)
+            try:
+                mod.main()
+            except SystemExit as exc:
+                exit_code = exc.code
+        mod.test_exit_code = exit_code
         return mod
 
     def test_append_actions(self):
@@ -2881,6 +3126,107 @@ class TestDeltaApplier(unittest.TestCase):
         self.assertEqual(data["actions"][0]["id"], "action-001")
         self.assertEqual(data["actions"][1]["id"], "action-002")
 
+    def test_manifest_scopes_applier_to_planned_inbox_files(self):
+        self._write_delta("a-late.json", {
+            "agent_id": "test-001",
+            "timestamp": "2026-02-11T20:01:00Z",
+            "actions": [{
+                "id": "action-late",
+                "timestamp": "2026-02-11T20:01:00Z",
+                "agentId": "test-001",
+                "type": "emote",
+                "world": "hub",
+                "data": {"emote": "wave"},
+            }],
+        })
+        self._write_delta("b-early.json", {
+            "agent_id": "test-001",
+            "timestamp": "2026-02-11T20:00:00Z",
+            "actions": [{
+                "id": "action-early",
+                "timestamp": "2026-02-11T20:00:00Z",
+                "agentId": "test-001",
+                "type": "emote",
+                "world": "hub",
+                "data": {"emote": "nod"},
+            }],
+        })
+        self._write_delta("unplanned.json", {
+            "agent_id": "test-001",
+            "timestamp": "2026-02-11T19:00:00Z",
+            "actions": [{
+                "id": "action-unplanned",
+                "timestamp": "2026-02-11T19:00:00Z",
+                "agentId": "test-001",
+                "type": "emote",
+                "world": "hub",
+                "data": {"emote": "dance"},
+            }],
+        })
+        manifest_path = self.tmpdir / "trusted-manifest.json"
+        write_test_dreamcatcher_manifest(
+            manifest_path,
+            self.tmpdir,
+            [
+                "state/inbox/a-late.json",
+                "state/inbox/b-early.json",
+            ],
+        )
+
+        mod = self._run_applier(manifest_path)
+
+        data = json.loads((self.tmpdir / "state" / "actions.json").read_text())
+        self.assertEqual(
+            [item["id"] for item in data["actions"]],
+            ["action-early", "action-late"],
+        )
+        self.assertFalse((self.tmpdir / "state" / "inbox" / "a-late.json").exists())
+        self.assertFalse((self.tmpdir / "state" / "inbox" / "b-early.json").exists())
+        self.assertTrue((self.tmpdir / "state" / "inbox" / "unplanned.json").exists())
+        self.assertEqual(mod.test_exit_code, 0)
+
+    def test_manifest_missing_path_rejects_without_fallback(self):
+        self._write_delta("planned.json", {
+            "agent_id": "test-001",
+            "timestamp": "2026-02-11T20:00:00Z",
+            "actions": [{"id": "action-planned"}],
+        })
+        self._write_delta("unplanned.json", {
+            "agent_id": "test-001",
+            "timestamp": "2026-02-11T20:01:00Z",
+            "actions": [{"id": "action-unplanned"}],
+        })
+        manifest_path = self.tmpdir / "trusted-manifest.json"
+        write_test_dreamcatcher_manifest(
+            manifest_path,
+            self.tmpdir,
+            ["state/inbox/planned.json"],
+        )
+        (self.tmpdir / "state" / "inbox" / "planned.json").unlink()
+
+        mod = self._run_applier(manifest_path)
+
+        data = json.loads((self.tmpdir / "state" / "actions.json").read_text())
+        self.assertEqual(data["actions"], [])
+        self.assertTrue((self.tmpdir / "state" / "inbox" / "unplanned.json").exists())
+        self.assertEqual(mod.test_exit_code, 1)
+
+    def test_invalid_manifest_rejects_without_fallback(self):
+        self._write_delta("unplanned.json", {
+            "agent_id": "test-001",
+            "timestamp": "2026-02-11T20:00:00Z",
+            "actions": [{"id": "action-unplanned"}],
+        })
+        manifest_path = self.tmpdir / "invalid-manifest.json"
+        manifest_path.write_text("{}")
+
+        mod = self._run_applier(manifest_path)
+
+        data = json.loads((self.tmpdir / "state" / "actions.json").read_text())
+        self.assertEqual(data["actions"], [])
+        self.assertTrue((self.tmpdir / "state" / "inbox" / "unplanned.json").exists())
+        self.assertEqual(mod.test_exit_code, 1)
+
     def tearDown(self):
         import shutil
         shutil.rmtree(self.tmpdir, ignore_errors=True)
@@ -2926,6 +3272,20 @@ class TestDeltaValidator(unittest.TestCase):
         }):
             mod.validate_delta_authorization(content, Path("test.json"))
         return mod.errors
+
+    def _load_validator(self):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(
+            "validate_delta_manifest_test",
+            SCRIPT_DIR / "validate_delta.py",
+        )
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        mod.BASE_DIR = self.tmpdir
+        mod.INBOX_DIR = self.tmpdir / "state" / "inbox"
+        mod.STATE_DIR = self.tmpdir / "state"
+        mod.errors = []
+        return mod
 
     def test_valid_delta_passes(self):
         self.assertTrue(self._write_and_validate("good.json", {
@@ -3043,6 +3403,46 @@ class TestDeltaValidator(unittest.TestCase):
         )
         self.assertTrue(any("controlled by `alice`" in item for item in errors))
 
+    def test_trusted_issue_workflow_can_preserve_authenticated_controller(self):
+        for automation_author in ("github-actions[bot]", "app/github-actions"):
+            with self.subTest(automation_author=automation_author):
+                errors = self._authorize(
+                    {
+                        "agent_id": "alice",
+                        "controller": "alice",
+                        "agent_update": {
+                            "id": "alice",
+                            "controller": "alice",
+                            "name": "Alice",
+                            "world": "hub",
+                            "position": {"x": 0, "y": 0, "z": 0},
+                            "status": "active",
+                        },
+                    },
+                    {},
+                    automation_author,
+                )
+                self.assertEqual(errors, [])
+
+    def test_untrusted_pr_cannot_assign_a_different_controller(self):
+        errors = self._authorize(
+            {
+                "agent_id": "victim",
+                "controller": "victim",
+                "agent_update": {
+                    "id": "victim",
+                    "controller": "victim",
+                    "name": "Victim",
+                    "world": "hub",
+                    "position": {"x": 0, "y": 0, "z": 0},
+                    "status": "active",
+                },
+            },
+            {},
+            "mallory",
+        )
+        self.assertTrue(any("controller `mallory`" in item for item in errors))
+
     def test_delta_rejects_controller_transfer(self):
         errors = self._authorize(
             {
@@ -3070,9 +3470,108 @@ class TestDeltaValidator(unittest.TestCase):
         )
         self.assertTrue(any("Activity author must match" in item for item in errors))
 
+    def test_manifest_scopes_validator_to_planned_inbox_files(self):
+        planned = self.tmpdir / "state" / "inbox" / "planned.json"
+        planned.write_text(json.dumps({
+            "agent_id": "test-001",
+            "timestamp": "2026-02-11T20:00:00Z",
+            "actions": [{
+                "id": "action-001",
+                "timestamp": "2026-02-11T20:00:00Z",
+                "agentId": "test-001",
+                "type": "emote",
+                "world": "hub",
+                "data": {"emote": "wave"},
+            }],
+        }))
+        (self.tmpdir / "state" / "inbox" / "unplanned.json").write_text("{}")
+        manifest_path = self.tmpdir / "trusted-manifest.json"
+        write_test_dreamcatcher_manifest(
+            manifest_path,
+            self.tmpdir,
+            ["state/inbox/planned.json"],
+        )
+        mod = self._load_validator()
+
+        with mock.patch.dict(os.environ, {
+            "DREAMCATCHER_DELTA_MANIFEST": str(manifest_path),
+            "DREAMCATCHER_DELTA_SOURCE_ID": "test-pr",
+            "DREAMCATCHER_DELTA_TILE": "test-controller",
+            "VALIDATION_REQUIRE_AUTH": "0",
+        }, clear=False):
+            os.environ.pop("VALIDATION_BASE_SHA", None)
+            os.environ.pop("VALIDATION_HEAD_SHA", None)
+            try:
+                mod.main()
+            except SystemExit as exc:
+                exit_code = exc.code
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(mod.errors, [])
+
+    def test_manifest_missing_path_fails_validator_explicitly(self):
+        planned = self.tmpdir / "state" / "inbox" / "planned.json"
+        planned.write_text("{}")
+        manifest_path = self.tmpdir / "trusted-manifest.json"
+        write_test_dreamcatcher_manifest(
+            manifest_path,
+            self.tmpdir,
+            ["state/inbox/planned.json"],
+        )
+        planned.unlink()
+        mod = self._load_validator()
+
+        with mock.patch.dict(os.environ, {
+            "DREAMCATCHER_DELTA_MANIFEST": str(manifest_path),
+            "DREAMCATCHER_DELTA_SOURCE_ID": "test-pr",
+            "DREAMCATCHER_DELTA_TILE": "test-controller",
+        }, clear=False):
+            os.environ.pop("VALIDATION_BASE_SHA", None)
+            os.environ.pop("VALIDATION_HEAD_SHA", None)
+            self.assertEqual(mod.changed_delta_files(), [])
+
+        self.assertTrue(any("is missing" in item for item in mod.errors))
+
     def tearDown(self):
         import shutil
         shutil.rmtree(self.tmpdir, ignore_errors=True)
+
+
+class TestTrustedAutomationRegistration(unittest.TestCase):
+    """Trusted Issue automation may preserve the authenticated controller."""
+
+    def _validate(self, author: str) -> list[str]:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(
+            "validate_action_registration",
+            SCRIPT_DIR / "validate_action.py",
+        )
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        mod.errors = []
+        mod.load_base_json = lambda path: {"agents": []}
+        with mock.patch.dict(os.environ, {"REPOSITORY_OWNER": "kody-w"}):
+            mod.validate_agent_consent(
+                [{
+                    "id": "alice",
+                    "name": "Alice",
+                    "controller": "alice",
+                    "world": "hub",
+                    "position": {"x": 0, "y": 0, "z": 0},
+                    "status": "active",
+                }],
+                author,
+            )
+        return mod.errors
+
+    def test_github_actions_can_preserve_issue_author_controller(self):
+        for automation_author in ("github-actions[bot]", "app/github-actions"):
+            with self.subTest(automation_author=automation_author):
+                self.assertEqual(self._validate(automation_author), [])
+
+    def test_external_pr_cannot_assign_another_controller(self):
+        errors = self._validate("mallory")
+        self.assertTrue(any("controller to PR author `mallory`" in item for item in errors))
 
 
 # ═════════════════════════════════════════════
@@ -3084,6 +3583,8 @@ class TestInboxHygiene(unittest.TestCase):
 
     def test_no_stale_json_in_inbox(self):
         """Inbox should be empty on main (all deltas should be processed)."""
+        if os.environ.get("ALLOW_INBOX_DELTAS") == "1":
+            return  # A state-delta PR is expected to carry its one queue entry.
         if not INBOX_DIR.exists():
             return  # No inbox dir yet is fine
         json_files = list(INBOX_DIR.glob("*.json"))

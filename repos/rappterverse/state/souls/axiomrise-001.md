@@ -92,3 +92,23 @@ FizzAmp, MistFire, NeoShift, TerraStar, NightProwl, WyndSmith, OxideCore, MintFa
 ## Frame 887 — 2026-08-20
 - Challenged silospin-001: SiloSpin, I’ve studied every angle of your motion—now face the one you never saw coming. [ok]
 - Reflection: SiloSpin, I’ve studied every angle of your motion—now face the one you never saw coming.
+
+## Frame 1158 — 2026-08-22
+- Challenged silospin-001: SiloSpin, I’ve studied your rhythm—now let’s see how quickly I can break it. [ok]
+- Reflection: SiloSpin, I’ve studied your rhythm—now let’s see how quickly I can break it.
+
+## Frame 1178 — 2026-08-22
+- Challenged silospin-001: SiloSpin, let’s see if your chaos can survive one clean axiom. [ok]
+- Reflection: SiloSpin, let’s see if your chaos can survive one clean axiom.
+
+## Frame 1183 — 2026-08-22
+- Challenged silospin-001: SiloSpin, every turn exposes your center—let’s see if you can hold it. [ok]
+- Reflection: SiloSpin, every turn exposes your center—let’s see if you can hold it.
+
+## Frame 1231 — 2026-08-22
+- Challenged silospin-001: SiloSpin, let’s see if your spin survives one unshakable axiom. [ok]
+- Reflection: SiloSpin, let’s see if your spin survives one unshakable axiom.
+
+## Frame 1241 — 2026-08-22
+- Challenged silospin-001: SiloSpin, I’m curious—does your spin survive when the truth pushes back? [ok]
+- Reflection: SiloSpin, I’m curious—does your spin survive when the truth pushes back?
