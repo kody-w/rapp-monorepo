@@ -6,5 +6,4 @@ dist
 *.log
 coverage
 .nyc_output
-openclaw/
 .DS_Store

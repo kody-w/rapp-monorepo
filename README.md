@@ -1,6 +1,7 @@
 # rapp-monorepo
 
-**Every public RAPP repository, in one place, captured in a single pass.**
+**The complete declared public RAPP organism, assembled in one place at one
+moment under a machine-recorded scope boundary.**
 
 Clone this one repo and you have the whole estate as it stood at the last
 snapshot — no drift between the pieces, because they were all taken together
@@ -10,21 +11,29 @@ and each one records the exact commit it came from.
 git clone --depth 1 https://github.com/kody-w/rapp-monorepo.git
 ```
 
-Then read [`INDEX.md`](INDEX.md) for the table of contents, or
-[`MANIFEST.json`](MANIFEST.json) if you want it machine-readable.
+Start with [`ARCHITECTURE.md`](ARCHITECTURE.md) for the whole-organism model,
+[`SDK.md`](SDK.md) for the standard SDK, [`INDEX.md`](INDEX.md) for the
+captured anatomy, or [`MANIFEST.json`](MANIFEST.json) for the machine-readable
+specimen.
 
 ---
 
 ## Why this exists
 
-The RAPP estate is spread across ~190 public repositories. Reading it one
-repo at a time means every piece you hold is from a different moment, and the
-seams between them drift while you work. This repo removes that problem in
-the only way that actually works: capture everything at once, write down what
-you captured, and refresh it on a schedule.
+RAPP is not one application or one repository. It is a federated organism of
+protocols, runtimes, registries, stateful worlds, distribution channels,
+operator surfaces, and observability systems. Reading those organs one repo at
+a time means every piece you hold is from a different moment, and the seams
+between them drift while you work. This repository supplies the missing
+whole-body view: capture the defined public estate at once, pin every organ to
+its upstream commit, and refresh the specimen on a schedule.
 
 The test it is built to pass: *one download, no network afterwards, no
 drift.*
+
+This snapshot is evidence, not authority. It does not replace the source
+repositories, the RAPP/1 protocol authority, a registry trust root, or a
+running brainstem.
 
 ---
 
@@ -32,14 +41,56 @@ drift.*
 
 - `repos/<name>/` — the working tree of each public RAPP repository at HEAD
 - `MANIFEST.json` — per repo: the commit sha, the upstream commit date, the
-  capture time, file and byte counts, and everything omitted
+  capture time, file and byte counts, gitlink commit pointers, a staged-tree
+  SHA-256, and everything deliberately omitted
 - `INDEX.md` — the same thing as a table you can read
+- `ORGANISM.json` — the machine-readable estate scope and deliberate
+  exclusions, body-system taxonomy, authority boundaries, Map/Spine projection
+  evidence, relationships, and known conflicts
+- `rapp_sdk/` — the installable RAPP/1 protocol and whole-organism SDK
+- `architecture/rapp-organism.excalidraw` — the editable full-body diagram
 
-Membership is a **name pattern**, resolved at run time: a public,
-non-archived repo whose name starts with `rapp`, `rappter`, `openrappter`,
-`RAR`, `twin`, `brainstem` or `wildhaven` is a member. Nothing is listed by
-hand, so a new repo joins by existing and a repo that goes private leaves on
-the next run — including having its directory deleted from this snapshot.
+Candidate membership is the exact **name pattern** recorded in
+`ORGANISM.json`, resolved at run time: a public, non-archived repo whose name
+starts with `rapp`, `rappter`, `openrappter`, `twin`, `brainstem` or
+`wildhaven` enters the candidate set; `RAR` itself is also included, but
+`RAR-*` names are not. The machine-readable
+`estate_scope.deliberate_exclusions` is then applied. At this snapshot, the
+predicate selected 199 repositories and two deliberate exclusions produced
+the 197-organ specimen:
+
+- `kody-w/rapp-monorepo` — excluded to prevent recursive self-capture;
+- `kody-w/rapp-shape-aibast` — excluded because it rehearses delivery into an
+  external AIBAST library layout and is not a RAPP organism organ.
+
+A new matching repo joins automatically unless a reviewed exclusion record
+names it with a reason. A repo that goes private leaves on the next run,
+including having its directory deleted from this snapshot.
+
+## Standard SDK
+
+The root SDK turns the specimen into a safe, typed development surface without
+importing or executing captured code:
+
+```bash
+python3.11 -m venv .venv
+.venv/bin/python -m pip install .
+.venv/bin/rapp-sdk --root "$PWD" status
+.venv/bin/rapp-sdk --root "$PWD" alignment
+```
+
+It provides strict RAPP/1 canonicalization, hashes, identities, frames, eggs,
+detached JWS, signed registry verification, persistent head/registry state,
+the exact `/chat` client, organism inventory, and no-follow specimen access.
+`kody-w/rapp-1` is the normative protocol source. The `RAPP` public product is
+retired, while its target status record remains current evidence with a
+drifted structural pin. Map and Spine are modeled separately so none can
+silently redefine the standard.
+
+Full authenticated conformance remains false until the estate owner publishes
+the signed section-13 registry and distributes its self-certifying anchor out
+of band. The SDK reports that blocker rather than manufacturing trust. See
+[`SDK.md`](SDK.md) for the API and conformance matrix.
 
 ## What is deliberately NOT in here
 
@@ -54,6 +105,12 @@ that, every single file passes a gate before it is written — see below.
 **Large files**, over the per-file limit (2MB by default). A copy you can
 actually carry is worth more than a complete one you cannot. Every skipped
 file is named in `INDEX.md`.
+
+**Gitlink target repositories.** A mode-160000 entry is preserved exactly as
+the superproject stores it: path plus full commit OID. The target repository's
+content is not dereferenced or copied. This keeps the source Git tree honest
+and offline-verifiable without pretending an external submodule is local
+content.
 
 ---
 
@@ -91,14 +148,23 @@ fresh clone is safe before anything is configured.
 ## Refreshing it
 
 `.github/workflows/aggregate.yml` runs the capture daily and commits the
-result. To run it yourself:
+result. Before committing, it raw-stages only `repos/`, `MANIFEST.json`, and
+`INDEX.md`, then proves that every staged path, mode, byte count, and blob
+matches the manifest's `rapp-monorepo-staged-tree/1.0` integrity profile. It
+also regenerates `INDEX.md` from the manifest and compares exact bytes. This
+prevents a copied repository's `.gitignore` or `.gitattributes` from silently
+changing the published snapshot.
+
+To run it yourself:
 
 ```bash
 export RAPP_GATE_RULES='{"content":["..."],"paths":["..."]}'   # or ./.gate-rules
 python3 prove_gate.py
 python3 prove_aggregate.py
+python3 prove_snapshot.py
 python3 aggregate.py --dry-run     # enumerate members, write nothing
 python3 aggregate.py               # capture
+python3 verify_snapshot.py --stage # stage and prove the publishable tree
 ```
 
 ---
@@ -107,8 +173,12 @@ python3 aggregate.py               # capture
 
 - A snapshot is **as of** its timestamp. `MANIFEST.json` says when; nothing
   here claims to be live.
+- "Complete" means complete under `ORGANISM.json`'s candidate membership rule
+  and explicit exclusions; an exclusion is never a silent omission.
 - Withheld and skipped files are listed, but the listing is the only evidence
   of them — this repo cannot show you what it decided not to carry.
+- Gitlinks retain their exact commit pointer but not the external target
+  repository contents.
 - The gate screens the files it is given. It cannot screen a repository that
   failed to clone, and any member not captured is named in `INDEX.md` rather
   than quietly missing.
@@ -119,4 +189,5 @@ python3 aggregate.py               # capture
 
 Each `repos/<name>/` directory keeps whatever license its source repository
 ships. Nothing here relicenses anything — check the individual repo. The
-aggregation tooling itself (`aggregate.py`, `ip_gate.py`) is MIT.
+aggregation tooling itself (`aggregate.py`, `ip_gate.py`) is MIT. The root SDK
+is separately covered by [`SDK_LICENSE`](SDK_LICENSE).

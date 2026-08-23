@@ -29,6 +29,9 @@ suppresses. Sources, in order:
 
 `content` patterns are matched case-insensitively against the file's text.
 `paths` are globs matched against the repo-relative path.
+Invalid UTF-8 is still scanned with a byte-preserving decode and is withheld
+if no rule matches, because content the gate cannot fully interpret must not
+be treated as screened.
 
 If neither source is configured, assert_configured() RAISES and the
 aggregation refuses to run. A gate that is not configured screens nothing
@@ -127,21 +130,31 @@ def _path_hit(rel: str, globs) -> str | None:
     return None
 
 
-def screen(raw: bytes, rel_path: str) -> tuple[bool, str]:
-    """(keep, reason). reason names the RULE, never the matched text."""
+def screen_path(rel_path: str) -> tuple[bool, str]:
+    """Screen a path without pretending a gitlink OID is file content."""
     rules = _load()
-
     hit = _path_hit(rel_path, ALWAYS_WITHHOLD_PATHS)
     if hit:
         return False, f"path matches an always-withhold shape ({hit})"
     hit = _path_hit(rel_path, rules["paths"])
     if hit:
         return False, "path matches a configured withhold rule"
+    return True, ""
+
+
+def screen(raw: bytes, rel_path: str) -> tuple[bool, str]:
+    """(keep, reason). reason names the RULE, never the matched text."""
+    keep, reason = screen_path(rel_path)
+    if not keep:
+        return keep, reason
+    rules = _load()
 
     try:
         text = raw.decode("utf-8")
+        invalid_utf8 = False
     except UnicodeDecodeError:
-        return True, ""          # binary: path rules already had their say
+        text = raw.decode("utf-8", errors="surrogateescape")
+        invalid_utf8 = True
 
     for pat in ALWAYS_WITHHOLD_CONTENT:
         if re.search(pat, text):
@@ -149,4 +162,6 @@ def screen(raw: bytes, rel_path: str) -> tuple[bool, str]:
     for i, pat in enumerate(rules["content"]):
         if pat.search(text):
             return False, f"matches configured content rule {i + 1}"
+    if invalid_utf8:
+        return False, "content is not valid UTF-8 and cannot be screened safely"
     return True, ""

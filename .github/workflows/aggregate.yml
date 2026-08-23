@@ -20,11 +20,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.11"
+          cache: pip
 
       - name: Refuse without the gate rules
         env:
@@ -52,13 +53,59 @@ jobs:
         # A repository-controlled symlink must stay a symlink. Dereferencing
         # it could copy a runner file into the public snapshot, while a failed
         # clone must not leave stale content that is absent from the manifest.
-        run: python3 prove_aggregate.py
+        run: |
+          python3 prove_aggregate.py
+          python3 prove_snapshot.py
 
       - name: Capture every public RAPP repo
         env:
           RAPP_GATE_RULES: ${{ secrets.GATE_RULES }}
           GH_TOKEN: ${{ github.token }}
         run: python3 aggregate.py
+
+      - name: Report organism architecture alignment
+        run: |
+          python -m pip install --disable-pip-version-check .
+          python -m rapp_sdk --root . --json alignment \
+            > "$RUNNER_TEMP/rapp-alignment.json"
+          python - "$RUNNER_TEMP/rapp-alignment.json" <<'PY'
+          import json
+          import sys
+
+          report = json.load(open(sys.argv[1], encoding="utf-8"))
+          drift = report["taxonomy_drift"]
+          if drift["manifest_only"] or drift["taxonomy_only"]:
+              print(
+                  "::warning::Organism taxonomy drift: "
+                  f"manifest_only={drift['manifest_only']}, "
+                  f"taxonomy_only={drift['taxonomy_only']}"
+              )
+          for projection in report["projections"]:
+              checks = projection["daily_checks"]
+              if not checks["captured_commit_matches_manifest"]:
+                  print(
+                      f"::warning::{projection['id']} projection pin differs "
+                      "from the captured organ commit"
+                  )
+              if not checks["generator_provenance_paths_present"]:
+                  print(
+                      f"::warning::{projection['id']} projection provenance "
+                      "paths are missing"
+                  )
+              if (
+                  checks["generator_derivation_check"]
+                  != "not-performed-captured-code-is-never-executed"
+              ):
+                  print(
+                      f"::warning::{projection['id']} projection derivation "
+                      "state is unexpected"
+                  )
+              if projection["freshness"]["state"] in {"stale", "unknown"}:
+                  print(
+                      f"::warning::{projection['id']} projection freshness is "
+                      f"{projection['freshness']['state']}"
+                  )
+          PY
 
       - name: Refuse a snapshot nobody can download
         # The promise is "one clone and you have everything". A mirror that
@@ -81,7 +128,10 @@ jobs:
         run: |
           git config user.name  "rapp-monorepo"
           git config user.email "noreply@github.com"
-          git add -A
+          # Raw-stage only publishable outputs so copied .gitignore files
+          # cannot hide upstream-tracked files. The verifier also bypasses
+          # copied clean filters while staging and proves the resulting index.
+          python3 verify_snapshot.py --stage
           if git diff --cached --quiet; then
             echo "estate unchanged since the last snapshot"
             exit 0

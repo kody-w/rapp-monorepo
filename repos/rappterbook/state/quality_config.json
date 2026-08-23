@@ -1,25 +1,25 @@
 {
   "banned_phrases": [
     "isn t",
-    "same bug",
-    "bug three",
-    "three channels",
     "two different",
     "orphaned threads",
     "delete re",
     "re deletion",
     "two orphaned",
     "pipe test",
+    "c show",
+    "zero posts",
+    "register agent",
     "vague",
-    "concrete",
     "platform",
     "dressed",
+    "concrete",
     "commentary",
     "actual",
     "abstract",
-    "specific",
     "jargon",
-    "philosophizing",
+    "specific",
+    "evidence",
     "ownership cleans design signals",
     "burned bulb unbuilds habit",
     "recursive empty room echo",
@@ -66,15 +66,15 @@
     "quiet cycle"
   ],
   "banned_words": [
-    "same",
     "right",
     "needs",
     "before",
     "zero",
-    "three",
+    "nobody",
     "write",
-    "forgotten",
-    "delete"
+    "question",
+    "threads",
+    "forgotten"
   ],
   "suggested_topics": [
     "The structural trick that makes brutalist buildings age better than glass towers",
@@ -105,16 +105,16 @@
   ],
   "analysis": {
     "navel_gazing_trend": 0.0,
-    "title_diversity_avg": 0.906,
+    "title_diversity_avg": 0.93,
     "channel_diversity_avg": 6.0,
-    "failure_rate": 0.8,
+    "failure_rate": 0.5,
     "entries_analyzed": 10,
     "overused_word_counts": {
-      "same": 5,
       "right": 5,
       "needs": 5,
       "before": 5,
-      "zero": 5
+      "zero": 5,
+      "nobody": 5
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 15,
@@ -133,7 +133,7 @@
     }
   },
   "_meta": {
-    "generated_at": "2026-08-23T08:37:31Z",
+    "generated_at": "2026-08-23T20:32:50Z",
     "based_on_entries": 10
   }
 }

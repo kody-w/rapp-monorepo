@@ -1,0 +1,109 @@
+name: Root SDK proof
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "ORGANISM.json"
+      - "SDK.md"
+      - "SDK_LICENSE"
+      - "MANIFEST.in"
+      - "pyproject.toml"
+      - "rapp_sdk/**"
+      - "tests/**"
+      - "ARCHITECTURE.md"
+      - "INDEX.md"
+      - "MANIFEST.json"
+      - "aggregate.py"
+      - "ip_gate.py"
+      - "prove_aggregate.py"
+      - "prove_gate.py"
+      - "prove_snapshot.py"
+      - "verify_snapshot.py"
+      - ".github/workflows/aggregate.yml"
+      - ".github/workflows/sdk.yml"
+  push:
+    paths:
+      - "ORGANISM.json"
+      - "SDK.md"
+      - "SDK_LICENSE"
+      - "MANIFEST.in"
+      - "pyproject.toml"
+      - "rapp_sdk/**"
+      - "tests/**"
+      - "ARCHITECTURE.md"
+      - "aggregate.py"
+      - "ip_gate.py"
+      - "prove_aggregate.py"
+      - "prove_gate.py"
+      - "prove_snapshot.py"
+      - "verify_snapshot.py"
+      - ".github/workflows/aggregate.yml"
+      - ".github/workflows/sdk.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  sdk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install SDK test dependencies
+        run: python -m pip install '.[test]'
+      - name: Run root SDK tests
+        run: python -m pytest tests -q
+      - name: Run snapshot publication proofs
+        run: |
+          python prove_gate.py
+          python prove_aggregate.py
+          python prove_snapshot.py
+      - name: Compile root SDK and tests
+        run: |
+          python -m compileall -q \
+            rapp_sdk tests aggregate.py ip_gate.py prove_aggregate.py \
+            prove_gate.py prove_snapshot.py verify_snapshot.py
+      - name: Check ORGANISM and projection alignment
+        run: |
+          python - <<'PY'
+          from rapp_sdk import Organism, inspect_alignment
+          organism = Organism(".")
+          assert organism.drift == {"manifest_only": [], "taxonomy_only": []}
+          report = inspect_alignment(".").as_dict()
+          assert all(
+              item["daily_checks"]["captured_commit_matches_manifest"]
+              for item in report["projections"]
+          )
+          assert all(
+              item["daily_checks"]["generator_provenance_paths_present"]
+              for item in report["projections"]
+          )
+          assert all(
+              item["daily_checks"]["generator_derivation_check"]
+              == "not-performed-captured-code-is-never-executed"
+              and item["daily_checks"]["generator_provenance_complete"] is False
+              for item in report["projections"]
+          )
+          assert report["active_legacy_claims"]
+          PY
+      - name: Validate diagram source
+        run: python -m json.tool architecture/rapp-organism.excalidraw >/dev/null
+      - name: Build wheel and source distribution
+        run: python -m build
+      - name: Retain built distributions
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: rapp-sdk-${{ github.sha }}
+          path: dist/*
+          if-no-files-found: error
+          retention-days: 30
+      - name: Smoke-test installed wheel
+        run: |
+          python -m venv .ci-installed
+          .ci-installed/bin/python -m pip install dist/*.whl
+          .ci-installed/bin/rapp-sdk --root "$PWD" --json status >/dev/null
+          .ci-installed/bin/rapp-sdk --root "$PWD" --json alignment >/dev/null

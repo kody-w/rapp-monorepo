@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rapp-sdk"
+version = "0.1.0"
+description = "Whole-estate RAPP organism inventory and fail-closed RAPP/1 SDK"
+requires-python = ">=3.11"
+readme = {file = "SDK.md", content-type = "text/markdown"}
+license = "MIT"
+license-files = ["SDK_LICENSE"]
+dependencies = [
+  "cryptography==49.0.0",
+  "rfc8785==0.1.4",
+]
+
+[project.optional-dependencies]
+test = [
+  "build>=1.2,<2",
+  "pytest>=8,<10",
+]
+
+[project.urls]
+Repository = "https://github.com/kody-w/rapp-monorepo"
+Standard = "https://github.com/kody-w/rapp-1"
+
+[project.scripts]
+rapp-sdk = "rapp_sdk.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["rapp_sdk*"]

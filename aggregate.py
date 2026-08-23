@@ -20,6 +20,13 @@ WHAT IT LEAVES BEHIND
   estate, not a backup of its git. The commit sha is recorded per repo in
   MANIFEST.json so any piece can be traced back and re-cloned in full.
 
+  Checkout transformations. Files and modes come from the cloned Git index
+  and raw blobs, never the worktree, so attributes and smudge filters cannot
+  change what the recorded commit authenticates. Tracked gitlinks are kept as
+  exact mode-160000 commit pointers without cloning or dereferencing targets.
+  Their reviewed source URLs are projected into a deterministic root
+  .gitmodules so standard Git submodule tooling can safely inspect the tree.
+
   Large files, over --max-file-mb. A desert-island copy is worth more if it
   fits on the boat. Everything skipped is NAMED in the manifest — a snapshot
   that silently drops content is worse than one that admits its edges.
@@ -37,37 +44,39 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
 import tempfile
+from dataclasses import dataclass
 from datetime import datetime, timezone
-import re
 from pathlib import Path
+from urllib.parse import quote
 
 import ip_gate
+from verify_snapshot import (
+    MANIFEST_INTEGRITY_PROFILE,
+    MANIFEST_SCHEMA,
+    SUPPORTED_MODES,
+    TreeDigest,
+    render_gitmodules,
+    render_index,
+    validate_gitlink_url,
+)
 
 HERE = Path(__file__).resolve().parent
 OUT = HERE / "repos"
 MANIFEST = HERE / "MANIFEST.json"
 INDEX = HERE / "INDEX.md"
+GITMODULES = HERE / ".gitmodules"
+ORGANISM = HERE / "ORGANISM.json"
 
 OWNER = os.environ.get("RAPP_OWNER", "kody-w")
 
-# MEMBERSHIP — what counts as "a RAPP repo". Deliberately a name pattern, so
-# a new repo joins the estate by being named like one; nothing to update here.
-MEMBER = r"(?i)^(rapp|rappter|openrappter|RAR$|twin|brainstem|wildhaven)"
-
-# Named exclusions, applied after MEMBER. A repo can match the estate's naming
-# convention and still not belong in a single "here is everything RAPP"
-# download: staging repos that rehearse deliveries into a third party's layout
-# carry that third party's packaged artifacts, and "one clone, everything" is a
-# very different distribution posture for those than a staging repo is. They
-# stay public where they are; they do not get amplified from here.
-NOT_MEMBERS = re.compile(r"(?i)aibast")
-
 CLONE_TIMEOUT = int(os.environ.get("RAPP_CLONE_TIMEOUT", "600"))
-SKIP_DIRS = {".git", "node_modules", "__pycache__", ".venv", "venv", ".next"}
+REST_PAGE_SIZE = 100
+COMMIT_OID = re.compile(r"^(?:[0-9a-f]{40}|[0-9a-f]{64})$")
 
 
 def utc_now() -> str:
@@ -103,19 +112,373 @@ def self_name() -> str:
     return os.environ.get("RAPP_SELF_NAME", "rapp-monorepo")
 
 
-def members(owner: str) -> list[str]:
-    r = run(["gh", "repo", "list", owner, "--limit", "1000", "--json",
-             "name,visibility,isArchived"], timeout=180)
+def _api_json(endpoint: str):
+    r = run(["gh", "api", "--method", "GET", endpoint], timeout=180)
     if r.returncode != 0:
-        raise RuntimeError(f"gh repo list failed: {(r.stderr or '')[:160]}")
-    pat = re.compile(MEMBER)
-    me = self_name()
+        raise RuntimeError(
+            f"GitHub REST request failed for {endpoint}: "
+            f"{(r.stderr or '').strip()[:160]}"
+        )
+    try:
+        return json.loads(r.stdout)
+    except json.JSONDecodeError as exc:
+        raise RuntimeError(
+            f"GitHub REST request returned invalid JSON for {endpoint}"
+        ) from exc
+
+
+def _public_repositories(owner: str) -> list[dict]:
+    """Return a count-verified, completely paginated public inventory."""
+    encoded_owner = quote(owner, safe="")
+    account = _api_json(f"/users/{encoded_owner}")
+    if not isinstance(account, dict):
+        raise RuntimeError("GitHub owner metadata must be an object")
+    expected = account.get("public_repos")
+    if (
+        not isinstance(expected, int)
+        or isinstance(expected, bool)
+        or expected < 0
+    ):
+        raise RuntimeError("GitHub owner metadata has no valid public_repos count")
+
+    repositories: list[dict] = []
+    seen: set[str] = set()
+    page = 1
+    while True:
+        endpoint = (
+            f"/users/{encoded_owner}/repos?per_page={REST_PAGE_SIZE}"
+            f"&page={page}&sort=full_name&direction=asc"
+        )
+        items = _api_json(endpoint)
+        if not isinstance(items, list):
+            raise RuntimeError(f"GitHub repository page {page} must be an array")
+        for item in items:
+            if not isinstance(item, dict):
+                raise RuntimeError(
+                    f"GitHub repository page {page} contains a non-object"
+                )
+            name = item.get("name")
+            if not isinstance(name, str) or not name:
+                raise RuntimeError(
+                    f"GitHub repository page {page} contains an invalid name"
+                )
+            if item.get("private") is not False:
+                raise RuntimeError(
+                    f"public repository endpoint returned non-public repo {name}"
+                )
+            key = name.casefold()
+            if key in seen:
+                raise RuntimeError(
+                    f"GitHub pagination returned duplicate repository {name}"
+                )
+            seen.add(key)
+            repositories.append(item)
+        if len(items) < REST_PAGE_SIZE:
+            break
+        page += 1
+
+    if len(repositories) != expected:
+        raise RuntimeError(
+            "GitHub public repository pagination was incomplete: "
+            f"expected {expected}, received {len(repositories)}"
+        )
+    return repositories
+
+
+def _membership_contract(owner: str, self_repo: str) -> tuple[re.Pattern, list[dict]]:
+    """Load the one reviewed membership policy consumed by docs, SDK, and publisher."""
+
+    try:
+        document = json.loads(ORGANISM.read_text(encoding="utf-8"))
+        scope = document["estate_scope"]
+        membership = scope["membership"]
+        exclusions = scope["deliberate_exclusions"]
+    except (OSError, KeyError, TypeError, json.JSONDecodeError) as exc:
+        raise RuntimeError("ORGANISM.json has no usable estate membership contract") from exc
+    if (
+        scope.get("owner") != owner
+        or membership.get("visibility") != "public"
+        or membership.get("archived") is not False
+        or not isinstance(membership.get("name_pattern"), str)
+        or not membership["name_pattern"]
+        or not isinstance(exclusions, list)
+    ):
+        raise RuntimeError("ORGANISM.json estate membership contract is invalid")
+    try:
+        pattern = re.compile(membership["name_pattern"])
+    except re.error as exc:
+        raise RuntimeError("ORGANISM.json membership pattern is invalid") from exc
+
+    normalized: list[dict] = []
+    seen: set[str] = set()
+    for item in exclusions:
+        if (
+            not isinstance(item, dict)
+            or set(item) != {"repository", "reason_code", "reason"}
+            or not isinstance(item["repository"], str)
+            or item["repository"].count("/") != 1
+            or not item["repository"].startswith(f"{owner}/")
+            or not isinstance(item["reason_code"], str)
+            or not item["reason_code"]
+            or not isinstance(item["reason"], str)
+            or not item["reason"]
+        ):
+            raise RuntimeError("ORGANISM.json contains an invalid membership exclusion")
+        name = item["repository"].split("/", 1)[1]
+        key = name.casefold()
+        if key in seen or pattern.search(name) is None:
+            raise RuntimeError("ORGANISM.json membership exclusions are duplicate or out of scope")
+        seen.add(key)
+        normalized.append({
+            "repo": name,
+            "reason_code": item["reason_code"],
+            "reason": item["reason"],
+        })
+    if self_repo.casefold() not in seen:
+        raise RuntimeError("ORGANISM.json must explicitly exclude the snapshot repository")
+    return pattern, sorted(normalized, key=lambda item: item["repo"].casefold())
+
+
+def members(owner: str, self_repo: str | None = None) -> list[str]:
+    repositories = _public_repositories(owner)
+    me = self_repo or self_name()
+    pattern, exclusions = _membership_contract(owner, me)
+    excluded = {item["repo"].casefold() for item in exclusions}
     return sorted(
-        x["name"] for x in json.loads(r.stdout)
-        if x["visibility"] == "PUBLIC" and not x["isArchived"]
-        and pat.search(x["name"]) and not NOT_MEMBERS.search(x["name"])
-        and x["name"] != me
+        x["name"] for x in repositories
+        if not x.get("archived", False)
+        and pattern.search(x["name"])
+        and x["name"].casefold() not in excluded
     )
+
+
+@dataclass(frozen=True)
+class SourceIndexEntry:
+    path: str
+    mode: str
+    oid: str
+
+
+def _source_index_entries(src: Path) -> list[SourceIndexEntry]:
+    result = subprocess.run(
+        ["git", "-C", str(src), "ls-files", "--stage", "-z"],
+        capture_output=True,
+    )
+    if result.returncode != 0:
+        detail = result.stderr.decode("utf-8", errors="replace").strip()
+        raise RuntimeError(f"git ls-files failed: {detail[:200]}")
+
+    entries: list[SourceIndexEntry] = []
+    seen: set[str] = set()
+    for item in result.stdout.split(b"\0"):
+        if not item:
+            continue
+        try:
+            header, raw_path = item.split(b"\t", 1)
+            raw_mode, raw_oid, raw_stage = header.split(b" ", 2)
+            mode = raw_mode.decode("ascii")
+            oid = raw_oid.decode("ascii")
+        except (UnicodeDecodeError, ValueError) as exc:
+            raise RuntimeError("git returned a malformed source index entry") from exc
+        path = os.fsdecode(raw_path)
+        if raw_stage != b"0":
+            raise RuntimeError(f"unmerged source index entry at {path}")
+        if (
+            not path
+            or path.startswith("/")
+            or any(part in {"", ".", ".."} for part in path.split("/"))
+        ):
+            raise RuntimeError(f"unsafe source index path: {path!r}")
+        if path in seen:
+            raise RuntimeError(f"duplicate source index path: {path}")
+        seen.add(path)
+        if mode not in SUPPORTED_MODES:
+            raise RuntimeError(f"unsupported Git mode {mode} at {path}")
+        if not COMMIT_OID.fullmatch(oid):
+            raise RuntimeError(f"invalid Git object ID at {path}")
+        entries.append(SourceIndexEntry(path=path, mode=mode, oid=oid))
+    return entries
+
+
+def _source_submodule_urls(
+    src: Path,
+    gitmodules_oid: str,
+    gitlinks: list[SourceIndexEntry],
+) -> dict[str, str]:
+    result = subprocess.run(
+        [
+            "git",
+            "-C",
+            str(src),
+            "config",
+            "--blob",
+            gitmodules_oid,
+            "--null",
+            "--get-regexp",
+            r"^submodule\..*\.(path|url)$",
+        ],
+        capture_output=True,
+    )
+    if result.returncode not in {0, 1} or (
+        result.returncode == 1 and result.stdout
+    ):
+        detail = result.stderr.decode("utf-8", errors="replace").strip()
+        raise RuntimeError(
+            f"cannot parse source .gitmodules: {detail[:200]}"
+        )
+
+    sections: dict[bytes, dict[str, list[str]]] = {}
+    for item in result.stdout.split(b"\0"):
+        if not item:
+            continue
+        try:
+            key, raw_value = item.split(b"\n", 1)
+        except ValueError as exc:
+            raise RuntimeError(
+                "git returned malformed .gitmodules metadata"
+            ) from exc
+        lowered = key.lower()
+        if lowered.endswith(b".path"):
+            section = lowered[:-5]
+            field = "path"
+            value = os.fsdecode(raw_value)
+        elif lowered.endswith(b".url"):
+            section = lowered[:-4]
+            field = "url"
+            try:
+                value = raw_value.decode("utf-8")
+            except UnicodeDecodeError as exc:
+                raise RuntimeError(
+                    ".gitmodules contains a non-UTF-8 URL"
+                ) from exc
+        else:
+            continue
+        sections.setdefault(
+            section,
+            {"path": [], "url": []},
+        )[field].append(value)
+
+    urls: dict[str, str] = {}
+    for gitlink in gitlinks:
+        matches = [
+            values
+            for values in sections.values()
+            if gitlink.path in values["path"]
+        ]
+        if not matches:
+            raise RuntimeError(
+                f"gitlink {gitlink.path} has no .gitmodules mapping"
+            )
+        if len(matches) != 1:
+            raise RuntimeError(
+                f"gitlink {gitlink.path} has ambiguous .gitmodules mappings"
+            )
+        mapping = matches[0]
+        if len(mapping["path"]) != 1 or len(mapping["url"]) != 1:
+            raise RuntimeError(
+                f"gitlink {gitlink.path} has incomplete or ambiguous "
+                ".gitmodules metadata"
+            )
+        try:
+            urls[gitlink.path] = validate_gitlink_url(mapping["url"][0])
+        except RuntimeError as exc:
+            raise RuntimeError(
+                f"gitlink {gitlink.path} has an unsafe URL: {exc}"
+            ) from exc
+    return urls
+
+
+class _GitBlobReader:
+    """Read raw source blobs without invoking checkout filters."""
+
+    def __init__(self, src: Path):
+        self.src = src
+        self.info: subprocess.Popen | None = None
+        self.contents: subprocess.Popen | None = None
+        self.sizes: dict[str, int] = {}
+
+    def __enter__(self):
+        common = {
+            "stdin": subprocess.PIPE,
+            "stdout": subprocess.PIPE,
+            "stderr": subprocess.PIPE,
+        }
+        self.info = subprocess.Popen(
+            ["git", "-C", str(self.src), "cat-file", "--batch-check"],
+            **common,
+        )
+        self.contents = subprocess.Popen(
+            ["git", "-C", str(self.src), "cat-file", "--batch"],
+            **common,
+        )
+        return self
+
+    @staticmethod
+    def _header(process: subprocess.Popen, oid: str) -> int:
+        if process.stdin is None or process.stdout is None:
+            raise RuntimeError("Git blob reader is not running")
+        process.stdin.write(oid.encode("ascii") + b"\n")
+        process.stdin.flush()
+        header = process.stdout.readline().rstrip(b"\n")
+        fields = header.split(b" ")
+        if len(fields) != 3 or fields[1] != b"blob":
+            raise RuntimeError(
+                f"cannot read Git blob {oid}: "
+                f"{header.decode('utf-8', errors='replace')}"
+            )
+        try:
+            return int(fields[2])
+        except ValueError as exc:
+            raise RuntimeError(f"invalid Git blob size for {oid}") from exc
+
+    def size(self, oid: str) -> int:
+        cached = self.sizes.get(oid)
+        if cached is not None:
+            return cached
+        if self.info is None:
+            raise RuntimeError("Git blob reader is not running")
+        size = self._header(self.info, oid)
+        self.sizes[oid] = size
+        return size
+
+    def read(self, oid: str, expected_size: int) -> bytes:
+        if self.contents is None or self.contents.stdout is None:
+            raise RuntimeError("Git blob reader is not running")
+        size = self._header(self.contents, oid)
+        if size != expected_size:
+            raise RuntimeError(
+                f"Git blob {oid} changed size from {expected_size} to {size}"
+            )
+        raw = self.contents.stdout.read(size)
+        terminator = self.contents.stdout.read(1)
+        if len(raw) != size or terminator != b"\n":
+            raise RuntimeError(f"truncated Git blob {oid}")
+        return raw
+
+    def __exit__(self, exc_type, _exc, _traceback):
+        failures: list[str] = []
+        for process in (self.info, self.contents):
+            if process is None:
+                continue
+            if process.stdin is not None:
+                process.stdin.close()
+            stderr = (
+                process.stderr.read()
+                if process.stderr is not None
+                else b""
+            )
+            returncode = process.wait()
+            if process.stdout is not None:
+                process.stdout.close()
+            if process.stderr is not None:
+                process.stderr.close()
+            if returncode != 0:
+                failures.append(
+                    stderr.decode("utf-8", errors="replace").strip()[:200]
+                )
+        if exc_type is None and failures:
+            raise RuntimeError(f"git cat-file failed: {'; '.join(failures)}")
+        return False
 
 
 def capture(owner, repo, work: Path, max_file_mb: float):
@@ -130,8 +493,9 @@ def capture(owner, repo, work: Path, max_file_mb: float):
         return None, reason
 
     try:
-        r = run(["git", "clone", "-q", "--depth", "1", "--single-branch",
-                 f"https://github.com/{owner}/{repo}.git", str(src)],
+        r = run(["git", "clone", "-q", "--no-checkout", "--depth", "1",
+                 "--single-branch", f"https://github.com/{owner}/{repo}.git",
+                 str(src)],
                 timeout=CLONE_TIMEOUT)
         if r.returncode != 0:
             return fail(f"clone failed: {(r.stderr or '').strip()[:100]}")
@@ -140,8 +504,29 @@ def capture(owner, repo, work: Path, max_file_mb: float):
     except Exception as e:
         return fail(f"{type(e).__name__}: {e}")
 
-    sha = run(["git", "-C", str(src), "rev-parse", "HEAD"]).stdout.strip()
-    when = run(["git", "-C", str(src), "log", "-1", "--format=%cI"]).stdout.strip()
+    head = run([
+        "git", "-C", str(src), "rev-parse", "--verify", "HEAD^{commit}",
+    ])
+    sha = (head.stdout or "").strip()
+    if head.returncode != 0 or not COMMIT_OID.fullmatch(sha):
+        return fail("repository has no resolvable HEAD commit")
+    committed = run([
+        "git", "-C", str(src), "log", "-1", "--format=%cI",
+    ])
+    when = (committed.stdout or "").strip()
+    if committed.returncode != 0 or not when:
+        return fail("repository HEAD has no commit timestamp")
+
+    indexed = run(["git", "-C", str(src), "read-tree", "HEAD"])
+    if indexed.returncode != 0:
+        return fail(
+            f"cannot populate source Git index: "
+            f"{(indexed.stderr or '').strip()[:120]}"
+        )
+    try:
+        source_entries = _source_index_entries(src)
+    except (OSError, RuntimeError) as e:
+        return fail(f"cannot enumerate source Git index: {str(e)[:240]}")
 
     _remove_path(dest)
     dest.mkdir(parents=True, exist_ok=True)
@@ -150,42 +535,140 @@ def capture(owner, repo, work: Path, max_file_mb: float):
     files = bytes_written = 0
     skipped_large: list[str] = []
     withheld: list[dict] = []
+    gitlinks: list[dict] = []
+    tree_digest = TreeDigest()
 
-    for path in sorted(src.rglob("*")):
-        rel = path.relative_to(src)
-        if any(part in SKIP_DIRS for part in rel.parts):
-            continue
-        link_target: str | None = None
-        try:
-            if path.is_symlink():
-                link_target = os.readlink(path)
-                raw = os.fsencode(link_target)
-                size = len(raw)
-            else:
-                if path.is_dir():
+    try:
+        blobs = _GitBlobReader(src)
+        with blobs:
+            link_decisions: dict[str, tuple[bool, str]] = {}
+            kept_link_entries: list[SourceIndexEntry] = []
+            for entry in source_entries:
+                if entry.mode != "160000":
                     continue
-                size = path.stat().st_size
-        except OSError:
-            continue
-        if size > limit:
-            skipped_large.append(f"{rel} ({size / 1048576:.1f}MB)")
-            continue
-        if link_target is None:
-            raw = path.read_bytes()
-        keep, reason = ip_gate.screen(raw, str(rel))
-        if not keep:
-            # Withheld, not rewritten: everything that ships is byte-faithful
-            # to upstream, and everything that does not is named.
-            withheld.append({"file": str(rel), "reason": reason})
-            continue
-        target = dest / rel
-        target.parent.mkdir(parents=True, exist_ok=True)
-        if link_target is None:
-            target.write_bytes(raw)
-        else:
-            os.symlink(link_target, target)
-        files += 1
-        bytes_written += len(raw)
+                if any(
+                    ord(char) < 32
+                    or ord(char) == 127
+                    or 0xD800 <= ord(char) <= 0xDFFF
+                    for char in entry.path
+                ):
+                    raise RuntimeError(
+                        f"gitlink {entry.path!r} has an unsafe path"
+                    )
+                decision = ip_gate.screen_path(entry.path)
+                link_decisions[entry.path] = decision
+                if decision[0]:
+                    kept_link_entries.append(entry)
+
+            gitlink_urls: dict[str, str] = {}
+            if kept_link_entries:
+                modules_entries = [
+                    entry
+                    for entry in source_entries
+                    if entry.path == ".gitmodules"
+                ]
+                if not modules_entries:
+                    paths = ", ".join(
+                        entry.path for entry in kept_link_entries
+                    )
+                    raise RuntimeError(
+                        "source .gitmodules is missing for captured "
+                        f"gitlink(s): {paths}"
+                    )
+                if len(modules_entries) != 1:
+                    raise RuntimeError(
+                        "captured gitlinks require exactly one root "
+                        ".gitmodules blob"
+                    )
+                modules_entry = modules_entries[0]
+                if modules_entry.mode not in {"100644", "100755"}:
+                    raise RuntimeError(
+                        "source .gitmodules must be a regular Git blob"
+                    )
+                modules_size = blobs.size(modules_entry.oid)
+                if modules_size > limit:
+                    raise RuntimeError(
+                        "source .gitmodules exceeds the snapshot file limit"
+                    )
+                modules_raw = blobs.read(
+                    modules_entry.oid,
+                    modules_size,
+                )
+                keep_modules, modules_reason = ip_gate.screen(
+                    modules_raw,
+                    ".gitmodules",
+                )
+                if not keep_modules:
+                    raise RuntimeError(
+                        "source .gitmodules cannot be published: "
+                        f"{modules_reason}"
+                    )
+                gitlink_urls = _source_submodule_urls(
+                    src,
+                    modules_entry.oid,
+                    kept_link_entries,
+                )
+
+            for entry in source_entries:
+                if entry.mode == "160000":
+                    keep, reason = link_decisions[entry.path]
+                    if not keep:
+                        withheld.append({
+                            "file": entry.path,
+                            "reason": reason,
+                        })
+                        continue
+                    raw_oid = bytes.fromhex(entry.oid)
+                    gitlinks.append({
+                        "path": entry.path,
+                        "commit": entry.oid,
+                        "url": gitlink_urls[entry.path],
+                    })
+                    tree_digest.add(entry.path, entry.mode, raw_oid)
+                    files += 1
+                    bytes_written += len(raw_oid)
+                    continue
+                try:
+                    size = blobs.size(entry.oid)
+                except (OSError, RuntimeError) as e:
+                    raise RuntimeError(
+                        f"cannot inspect Git blob at {entry.path}: "
+                        f"{type(e).__name__}: {str(e)[:120]}"
+                    ) from e
+                if size > limit:
+                    skipped_large.append(
+                        f"{entry.path} ({size / 1048576:.1f}MB)"
+                    )
+                    continue
+                try:
+                    raw = blobs.read(entry.oid, size)
+                except (OSError, RuntimeError) as e:
+                    raise RuntimeError(
+                        f"cannot read Git blob at {entry.path}: "
+                        f"{type(e).__name__}: {str(e)[:120]}"
+                    ) from e
+                keep, reason = ip_gate.screen(raw, entry.path)
+                if not keep:
+                    withheld.append({"file": entry.path, "reason": reason})
+                    continue
+                target = dest / entry.path
+                try:
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    if entry.mode == "120000":
+                        os.symlink(os.fsdecode(raw), target)
+                    else:
+                        target.write_bytes(raw)
+                        target.chmod(0o755 if entry.mode == "100755" else 0o644)
+                except OSError as e:
+                    raise RuntimeError(
+                        f"cannot materialize {entry.path}: "
+                        f"{type(e).__name__}: {str(e)[:120]}"
+                    ) from e
+                tree_digest.add(entry.path, entry.mode, raw)
+                files += 1
+                bytes_written += len(raw)
+    except (OSError, RuntimeError) as e:
+        return fail(f"cannot read source Git objects: {type(e).__name__}: {e}")
 
     _remove_path(src)
     return {
@@ -195,61 +678,11 @@ def capture(owner, repo, work: Path, max_file_mb: float):
         "captured_at": utc_now(),
         "files": files,
         "bytes": bytes_written,
+        "tree_sha256": tree_digest.hexdigest(),
         "skipped_large": skipped_large,
         "withheld": withheld,
+        "gitlinks": gitlinks,
     }, ""
-
-
-def write_index(records, missing, args):
-    total_files = sum(r["files"] for r in records)
-    total_bytes = sum(r["bytes"] for r in records)
-    lines = [
-        "# What is in here",
-        "",
-        f"{len(records)} public RAPP repositories, captured at HEAD in a single "
-        f"pass on {utc_now()}.",
-        f"{total_files:,} files, {total_bytes / 1048576:.0f} MB.",
-        "",
-        "Every row is the exact commit this snapshot took. Nothing here is a "
-        "guess about what upstream contains — re-clone any row's repo at its "
-        "sha to get the full history behind it.",
-        "",
-        "| repo | commit | upstream commit date | files | MB |",
-        "|---|---|---|---|---|",
-    ]
-    for r in sorted(records, key=lambda x: x["repo"].lower()):
-        lines.append(
-            f"| [`{r['repo']}`](repos/{r['repo']}) | `{r['commit'][:8]}` | "
-            f"{(r['committed_at'] or '')[:10]} | {r['files']:,} | "
-            f"{r['bytes'] / 1048576:.1f} |")
-    dropped = [r for r in records if r["skipped_large"]]
-    if dropped:
-        lines += ["", "## Files too large for the boat", "",
-                  f"Skipped at the {args.max_file_mb}MB per-file limit. Named, "
-                  "not silently dropped — clone the upstream repo if you need "
-                  "one of these.", ""]
-        for r in dropped:
-            for f in r["skipped_large"]:
-                lines.append(f"- `{r['repo']}/{f}`")
-    held = [r for r in records if r["withheld"]]
-    if held:
-        lines += ["", "## Withheld by the gate", "",
-                  "These files exist upstream and are deliberately NOT here. "
-                  "They are withheld whole rather than rewritten, so that "
-                  "everything this mirror does carry is byte-identical to its "
-                  "source. The rule is named; the matched text is not, because "
-                  "quoting a finding republishes it.", ""]
-        for r in held:
-            for w in r["withheld"]:
-                lines.append(f"- `{r['repo']}/{w['file']}` — {w['reason']}")
-    if missing:
-        lines += ["", "## Not captured this run", "",
-                  "A snapshot that hides its gaps is a snapshot you cannot "
-                  "trust. These members were not captured:", ""]
-        for m in missing:
-            lines.append(f"- `{m['repo']}` — {m['reason']}")
-    INDEX.write_text("\n".join(lines) + "\n", encoding="utf-8")
-
 
 def main() -> int:
     ap = argparse.ArgumentParser()
@@ -264,7 +697,11 @@ def main() -> int:
         print(f"REFUSING TO AGGREGATE: {e}")
         return 3
 
-    names = members(args.owner)
+    me = self_name()
+    membership_pattern, membership_exclusions = _membership_contract(
+        args.owner, me
+    )
+    names = members(args.owner, me)
     print(f"{len(names)} public RAPP repos under {args.owner}")
     if args.dry_run:
         for n in names:
@@ -297,19 +734,34 @@ def main() -> int:
     finally:
         shutil.rmtree(work, ignore_errors=True)
 
-    MANIFEST.write_text(json.dumps({
-        "schema": "rapp-monorepo/1.0",
+    document = {
+        "schema": MANIFEST_SCHEMA,
+        "integrity_profile": MANIFEST_INTEGRITY_PROFILE,
         "owner": args.owner,
         "captured_at": utc_now(),
-        "membership_pattern": MEMBER,
+        "membership_pattern": membership_pattern.pattern,
+        "membership_exclusions": {
+            "exclude_archived": True,
+            "repositories": membership_exclusions,
+        },
         "max_file_mb": args.max_file_mb,
         "repos": sorted(records, key=lambda r: r["repo"].lower()),
         "not_captured": missing,
-    }, indent=2) + "\n", encoding="utf-8")
-    write_index(records, missing, args)
+    }
+    MANIFEST.write_text(
+        json.dumps(document, indent=2) + "\n", encoding="utf-8"
+    )
+    INDEX.write_text(render_index(document), encoding="utf-8")
+    root_gitmodules = render_gitmodules(document)
+    _remove_path(GITMODULES)
+    if root_gitmodules:
+        GITMODULES.write_text(root_gitmodules, encoding="utf-8")
 
     total = sum(r["bytes"] for r in records) / 1048576
     print(f"\n{len(records)} captured, {len(missing)} not captured, {total:.0f}MB total")
+    if missing:
+        print("REFUSING TO PUBLISH: at least one member was not captured")
+        return 4
     return 0
 
 

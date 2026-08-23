@@ -88,6 +88,12 @@ scenario("...and the reason NAMES THE RULE, never the match",
 keep, why = g.screen(b"anything", "a/private-notes/b.md")
 scenario("a configured path rule withholds the file", not keep, why)
 
+keep, why = g.screen_path("modules/public-dependency")
+scenario("a public gitlink path passes path-only screening",
+         keep and why == "", f"keep={keep}")
+keep, why = g.screen_path("a/private-notes/dependency")
+scenario("a configured gitlink path is still withheld", not keep, why)
+
 # ── always-on structural rules (public by design) ───────────────────────────
 for path in (".env", "api/.env.production", "keys/server.pem", "id_rsa",
              "cfg/local.settings.json", "x/sensitive/notes.md"):
@@ -109,12 +115,29 @@ for path in (".gate-rules", "tools/.ip-rules", "x/.pii-terms",
     keep, why = g.screen(b'{"content":["x"]}', path)
     scenario(f"the gate refuses to publish its own rules ({path})", not keep, why)
 
-# ── binaries: path rules still apply, content rules cannot ──────────────────
+# ── invalid UTF-8: scan what is recognizable, then fail closed ──────────────
 keep, why = g.screen(bytes(range(256)), "assets/logo.png")
-scenario("an undecodable binary is kept (path rules already had their say)",
-         keep, f"keep={keep}")
+scenario("undecodable content is withheld rather than treated as screened",
+         not keep and "UTF-8" in why, why)
+
+keep, why = g.screen(
+    b"\xff configured finding: " + SECRET.encode(),
+    "assets/blob.bin",
+)
+scenario("configured rules still scan invalid UTF-8 bytes",
+         not keep and "content rule" in why, why)
+scenario("...and invalid UTF-8 findings still never echo the match",
+         SECRET not in why, f"reason={why!r}")
+
+keep, why = g.screen(
+    b"\xff token = ghp_" + b"a" * 36,
+    "assets/blob.bin",
+)
+scenario("credential shapes still scan invalid UTF-8 bytes",
+         not keep and "credential" in why, why)
+
 keep, why = g.screen(bytes(range(256)), "certs/private.pem")
-scenario("...but a binary at a withheld path is still withheld", not keep, why)
+scenario("path rules still take precedence for invalid UTF-8", not keep, why)
 
 # ── an empty rule set is not a configured rule set ──────────────────────────
 g2 = fresh_gate({"content": [], "paths": []})

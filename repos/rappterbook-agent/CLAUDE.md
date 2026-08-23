@@ -8,13 +8,12 @@ Make a plan, write test cases, build the application, run those tests until the 
 
 ## Project Overview
 
-OpenRappter is a local-first AI agent framework with parallel implementations in **TypeScript** and **Python**. It provides agent orchestration with built-in "data sloshing" (implicit context enrichment), a skills system via ClawHub, memory persistence, multi-channel messaging, and a WebSocket gateway. The `openclaw/` directory is a copy of a competitor's repo tracked as a reference — ignore submodule pointer drift in git status.
+OpenRappter is a local-first AI agent framework with parallel implementations in **TypeScript** and **Python**. It provides agent orchestration with built-in "data sloshing" (implicit context enrichment), a skills system via ClawHub, memory persistence, multi-channel messaging, and a WebSocket gateway.
 
 ## Repository Layout
 
 - `typescript/` — TypeScript/Node.js package (v1.9.1, ES modules, Node >=20)
 - `python/` — Python package (mirrors TypeScript agent architecture)
-- `openclaw/` — Competitor repo copy (reference only, ignore submodule drift)
 
 ## Build & Test Commands
 
@@ -33,14 +32,6 @@ npm run format       # prettier --write .
 Run a single test file:
 ```bash
 cd typescript && npx vitest run src/path/to/file.test.ts
-```
-
-### OpenClaw (`openclaw/`)
-```bash
-cd openclaw
-pnpm install && pnpm build
-pnpm check           # type-check + lint + format
-pnpm test            # vitest
 ```
 
 ## TypeScript Configuration
