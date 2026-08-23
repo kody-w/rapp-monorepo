@@ -16,6 +16,7 @@ from rapp_sdk.alignment import inspect_alignment
 from rapp_sdk.authority import inspect_authority
 from rapp_sdk.errors import InventoryError, SpecimenAccessError
 from rapp_sdk.inventory import Organism, SafeSpecimen
+from verify_snapshot import verify_staged
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -235,27 +236,6 @@ def _write_minimal_root(
     )
 
 
-def _captured_repo_stats(root: Path) -> tuple[int, int]:
-    files = 0
-    byte_length = 0
-    for directory, child_directories, child_files in os.walk(
-        root, followlinks=False
-    ):
-        directory_path = Path(directory)
-        for name in list(child_directories):
-            path = directory_path / name
-            if path.is_symlink():
-                status = path.lstat()
-                files += 1
-                byte_length += status.st_size
-                child_directories.remove(name)
-        for name in child_files:
-            status = (directory_path / name).lstat()
-            files += 1
-            byte_length += status.st_size
-    return files, byte_length
-
-
 def test_inventory_taxonomy_is_complete() -> None:
     organism = Organism(ROOT)
     assert organism.statistics.repositories == len(organism.manifest["repos"])
@@ -265,15 +245,10 @@ def test_inventory_taxonomy_is_complete() -> None:
         if item.is_dir() and not item.is_symlink()
     }
     assert captured_names == set(organism.repository_names)
-    captured_files = 0
-    captured_bytes = 0
-    for record in organism.manifest["repos"]:
-        stats = _captured_repo_stats(ROOT / "repos" / record["repo"])
-        assert stats == (record["files"], record["bytes"])
-        captured_files += stats[0]
-        captured_bytes += stats[1]
-    assert organism.statistics.files == captured_files
-    assert organism.statistics.bytes == captured_bytes
+    staged = verify_staged(ROOT)
+    assert organism.statistics.repositories == staged["repos"]
+    assert organism.statistics.files == staged["files"]
+    assert organism.statistics.bytes == staged["bytes"]
     assert organism.drift == {"manifest_only": [], "taxonomy_only": []}
     organs = organism.organs()
     assert len(organs) == len({organ["repo"] for organ in organs})

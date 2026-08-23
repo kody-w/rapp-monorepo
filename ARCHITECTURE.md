@@ -43,8 +43,8 @@ This architecture separates four facts that must not be collapsed:
    them.
 3. The stricter public, non-archived, exact name-pattern candidate rule matched
    **199** repositories.
-4. Two machine-recorded exclusions left **197 repositories, 33,610 files, and
-   688 MB** in the captured organism
+4. Two machine-recorded exclusions left **197 repositories, 33,239 files, and
+   571 MB** in the captured organism
    ([`INDEX.md`](INDEX.md#L1-L8)).
 
 The exclusions are `kody-w/rapp-monorepo`, which cannot recursively capture
