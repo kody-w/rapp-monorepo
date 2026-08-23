@@ -1,7 +1,7 @@
 # What is in here
 
-197 public RAPP repositories, captured at HEAD in a single pass on 2026-08-23T20:59:22+00:00.
-33,240 files, 571 MB.
+197 public RAPP repositories, captured at HEAD in a single pass on 2026-08-23T21:27:07+00:00.
+33,239 files, 571 MB.
 
 Every row is the exact commit this snapshot took. Nothing here is a guess about what upstream contains — re-clone any row's repo at its sha to get the full history behind it.
 
@@ -169,8 +169,8 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rappter-plays-palworld`](repos/rappter-plays-palworld) | `88f59b6d` | 2026-07-24 | 29 | 0.2 |
 | [`rappter-plays-pokemon`](repos/rappter-plays-pokemon) | `dfda5a8a` | 2026-07-24 | 162 | 3.5 |
 | [`rappter-vui`](repos/rappter-vui) | `20d949bb` | 2026-07-21 | 2 | 0.0 |
-| [`rappterbook`](repos/rappterbook) | `eb08b549` | 2026-08-23 | 9,044 | 394.0 |
-| [`rappterbook-agent`](repos/rappterbook-agent) | `2521b307` | 2026-03-16 | 667 | 4.8 |
+| [`rappterbook`](repos/rappterbook) | `72297ca7` | 2026-08-23 | 9,044 | 394.0 |
+| [`rappterbook-agent`](repos/rappterbook-agent) | `8d15842a` | 2026-08-23 | 666 | 4.8 |
 | [`rappterbook-agent-dna`](repos/rappterbook-agent-dna) | `b054f180` | 2026-03-16 | 6 | 0.3 |
 | [`rappterbook-agent-exchange`](repos/rappterbook-agent-exchange) | `4b5251f7` | 2026-08-23 | 479 | 10.6 |
 | [`rappterbook-api`](repos/rappterbook-api) | `a3f5202b` | 2026-03-16 | 11 | 0.2 |
@@ -204,12 +204,6 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`twin-binder`](repos/twin-binder) | `5e41cd90` | 2026-04-17 | 5 | 0.0 |
 | [`twin-egg-hatcher`](repos/twin-egg-hatcher) | `6e96a7ed` | 2026-07-15 | 5 | 0.0 |
 | [`wildhaven-ai-homes-twin`](repos/wildhaven-ai-homes-twin) | `ed3ec769` | 2026-08-16 | 91 | 1.3 |
-
-## Gitlinks
-
-These mode-160000 entries preserve the superproject's exact commit pointer. Target repository content is not copied or dereferenced.
-
-- `rappterbook-agent/openclaw` — `39a60142bb4a8a0effba17d6d93bfbc05939f462`
 
 ## Files too large for the boat
 
@@ -266,7 +260,7 @@ Skipped at the 2.0MB per-file limit. Named, not silently dropped — clone the u
 - `rappterbook/state/agents.json.bak` (2.9MB)
 - `rappterbook/state/event_log.jsonl` (8.0MB)
 - `rappterbook/state/frame_timeline.json` (2.0MB)
-- `rappterbook/state/posted_log.json` (6.3MB)
+- `rappterbook/state/posted_log.json` (7.3MB)
 - `rappterbook/state/prompts.jsonl` (15.1MB)
 - `rappterbook/state/synthetic_comments.json` (10.9MB)
 - `rappterbook/state/synthetic_posts.json` (5.1MB)
