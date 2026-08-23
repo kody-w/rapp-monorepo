@@ -1,6 +1,7 @@
 name: Root SDK proof
 
 on:
+  workflow_dispatch:
   pull_request:
     paths:
       - "ORGANISM.json"
@@ -47,8 +48,8 @@ jobs:
   sdk:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.11"
           cache: pip
@@ -78,7 +79,13 @@ jobs:
               for item in report["projections"]
           )
           assert all(
-              item["daily_checks"]["generator_provenance_complete"]
+              item["daily_checks"]["generator_provenance_paths_present"]
+              for item in report["projections"]
+          )
+          assert all(
+              item["daily_checks"]["generator_derivation_check"]
+              == "not-performed-captured-code-is-never-executed"
+              and item["daily_checks"]["generator_provenance_complete"] is False
               for item in report["projections"]
           )
           assert report["active_legacy_claims"]
@@ -87,6 +94,13 @@ jobs:
         run: python -m json.tool architecture/rapp-organism.excalidraw >/dev/null
       - name: Build wheel and source distribution
         run: python -m build
+      - name: Retain built distributions
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: rapp-sdk-${{ github.sha }}
+          path: dist/*
+          if-no-files-found: error
+          retention-days: 30
       - name: Smoke-test installed wheel
         run: |
           python -m venv .ci-installed

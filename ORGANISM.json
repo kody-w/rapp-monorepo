@@ -2,6 +2,26 @@
   "schema": "rapp-organism/1.0",
   "snapshot_schema": "rapp-monorepo/1.0",
   "name": "RAPP complete organism SDK estate",
+  "estate_scope": {
+    "owner": "kody-w",
+    "membership": {
+      "visibility": "public",
+      "archived": false,
+      "name_pattern": "(?i)^(rapp|rappter|openrappter|RAR$|twin|brainstem|wildhaven)"
+    },
+    "deliberate_exclusions": [
+      {
+        "repository": "kody-w/rapp-monorepo",
+        "reason_code": "snapshot-self-recursion",
+        "reason": "The aggregate repository cannot capture itself without recursive, non-point-in-time content."
+      },
+      {
+        "repository": "kody-w/rapp-shape-aibast",
+        "reason_code": "non-organ-staging-repository",
+        "reason": "AIBAST library-layout shape staging is an external delivery rehearsal, not a RAPP organism organ."
+      }
+    ]
+  },
   "public_sdk": {
     "package": "rapp_sdk",
     "command": "rapp-sdk",
@@ -60,7 +80,8 @@
     "retired_public_target": {
       "repository": "kody-w/RAPP",
       "pages": "https://kody-w.github.io/RAPP/",
-      "lifecycle": "stale-retired",
+      "product_lifecycle": "retired",
+      "target_record_currency": "current-but-drifted",
       "replacement_boundary": "this root rapp_sdk package",
       "protocol_authority": false,
       "may_redefine_rapp_1": false
@@ -93,7 +114,14 @@
       "generated_from": [
         "repos/rapp-map/spine/observations.json",
         "repos/rapp-map/spine/overlay.json"
-      ]
+      ],
+      "coverage_source": {
+        "organ": "rapp-map",
+        "path": "estate-map.json",
+        "extractor": "members[].repo",
+        "evidence_kind": "recomputable-from-captured-artifact",
+        "missing_reason": "not present in the captured Map estate member set at its declared observation"
+      }
     },
     {
       "schema": "rapp-projection-evidence/1.0",
@@ -119,7 +147,14 @@
       "generated_from": [
         "repos/rapp-spine/registry.json",
         "repos/rapp-spine/foundation.json"
-      ]
+      ],
+      "coverage_source": {
+        "organ": "rapp-spine",
+        "path": "crawl.json",
+        "extractor": "graph.nodes[].repo",
+        "evidence_kind": "recomputable-from-captured-artifact",
+        "missing_reason": "not modeled by a repository-bearing node in the captured Spine crawl graph"
+      }
     }
   ],
   "relationships": [

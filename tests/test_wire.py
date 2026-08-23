@@ -12,6 +12,7 @@ from rapp_sdk.errors import (
     StructuralRefusalOnly,
     WireProtocolError,
 )
+from rapp_sdk import parse_refusal as public_parse_refusal
 from rapp_sdk.wire import ChatClient, ChatRequest, accept_refusal, parse_refusal
 
 
@@ -51,6 +52,7 @@ class _Server:
 
 
 def test_exact_wire_success_and_unknown_request_members_not_emitted() -> None:
+    assert public_parse_refusal is parse_refusal
     server = _Server(
         200, {"response": "ok", "agent_logs": ["one"], "session_id": "session"}
     )

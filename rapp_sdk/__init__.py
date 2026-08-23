@@ -32,7 +32,14 @@ from .trust import (
     parse_detached_jws,
     verify_registry,
 )
-from .wire import ChatClient, ChatRequest, ChatSuccess, Refusal, accept_refusal
+from .wire import (
+    ChatClient,
+    ChatRequest,
+    ChatSuccess,
+    Refusal,
+    accept_refusal,
+    parse_refusal,
+)
 
 __all__ = [
     "AcceptedFrame",
@@ -72,6 +79,7 @@ __all__ = [
     "mint_keyless_rappid",
     "pack_egg",
     "parse_detached_jws",
+    "parse_refusal",
     "strict_loads",
     "validate_kind",
     "validate_rappid",

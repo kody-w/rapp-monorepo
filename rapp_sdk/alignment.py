@@ -9,7 +9,8 @@ from pathlib import Path
 import stat
 from typing import Any
 
-from .inventory import Organism
+from .inventory import Organism, SafeSpecimen
+from .json_profile import strict_loads
 
 
 @dataclass(frozen=True)
@@ -27,6 +28,12 @@ class AlignmentReport:
             "semantics": {
                 "live_state": "declared-cartographer-evidence-not-dynamically-fetched",
                 "conflicts": "validated records or evidence-backed declared findings",
+                "coverage": (
+                    "recomputed-from-captured-artifact-or-explicitly-not-recomputed"
+                ),
+                "generator_derivation": (
+                    "not-performed-captured-code-is-never-executed"
+                ),
                 "authenticated_acceptance": False,
             },
             "generated_at": self.generated_at,
@@ -39,6 +46,12 @@ class AlignmentReport:
                     "artifact": item["generated_artifact"],
                     "generator": item["generator"],
                     "generated_from": item["generated_from"],
+                    "input_paths_present": item["daily_checks"][
+                        "generator_provenance_paths_present"
+                    ],
+                    "derivation_check": item["daily_checks"][
+                        "generator_derivation_check"
+                    ],
                 }
                 for item in self.projections
             ],
@@ -53,6 +66,98 @@ class AlignmentReport:
         }
 
 
+def _source_repository_names(
+    source: Any,
+    *,
+    extractor: str,
+    owner: str,
+) -> set[str]:
+    if not isinstance(source, dict):
+        raise ValueError("coverage source must be a JSON object")
+    if extractor == "members[].repo":
+        records = source.get("members")
+    elif extractor == "graph.nodes[].repo":
+        graph = source.get("graph")
+        records = graph.get("nodes") if isinstance(graph, dict) else None
+    else:
+        raise ValueError(f"unsupported coverage extractor {extractor!r}")
+    if not isinstance(records, list) or not records:
+        raise ValueError("coverage source records must be a non-empty array")
+    repositories: set[str] = set()
+    owner_prefix = f"{owner}/"
+    for record in records:
+        if not isinstance(record, dict):
+            raise ValueError("coverage source records must be objects")
+        repository = record.get("repo")
+        if repository is None:
+            continue
+        if not isinstance(repository, str) or not repository.startswith(owner_prefix):
+            raise ValueError("coverage source repository is outside the declared estate owner")
+        name = repository[len(owner_prefix) :]
+        if not name or "/" in name:
+            raise ValueError("coverage source repository identifier is invalid")
+        repositories.add(name)
+    if not repositories:
+        raise ValueError("coverage source did not yield any repository identifiers")
+    return repositories
+
+
+def _recompute_projection_coverage(
+    organism: Organism,
+    projection: dict[str, Any],
+) -> dict[str, Any]:
+    source = projection["coverage_source"]
+    evidence = {
+        "state": "not-recomputed",
+        "artifact": f"repos/{source['organ']}/{source['path']}",
+        "extractor": source["extractor"],
+        "evidence_kind": source["evidence_kind"],
+    }
+    if organism.drift != {"manifest_only": [], "taxonomy_only": []}:
+        return {
+            **evidence,
+            "reason": "manifest/taxonomy drift prevents SafeSpecimen evidence access",
+            "covered_organs": None,
+            "missing_organs": None,
+        }
+    try:
+        specimen = SafeSpecimen(organism)
+        parsed = strict_loads(specimen.read_bytes(source["organ"], source["path"]))
+        source_names = _source_repository_names(
+            parsed,
+            extractor=source["extractor"],
+            owner=organism.registry["estate_scope"]["owner"],
+        )
+    except Exception as exc:
+        return {
+            **evidence,
+            "reason": f"captured coverage evidence unavailable or invalid: {exc}",
+            "covered_organs": None,
+            "missing_organs": None,
+        }
+    manifest_names = set(organism.repository_names)
+    covered = sorted(manifest_names & source_names)
+    missing = sorted(manifest_names - source_names)
+    coverage = projection["coverage"]
+    numerator_key = (
+        "captured_organ_overlap" if projection["id"] == "map" else "modeled_organs"
+    )
+    return {
+        **evidence,
+        "state": "recomputed-from-captured-artifact",
+        "source_repository_count": len(source_names),
+        "covered_organs": covered,
+        "covered_organ_count": len(covered),
+        "declared_covered_organ_count": coverage[numerator_key],
+        "declared_count_matches_recomputed": len(covered) == coverage[numerator_key],
+        "missing_organs": [
+            {"organ": name, "reason": source["missing_reason"]} for name in missing
+        ],
+        "missing_organ_count": len(missing),
+        "source_repositories_outside_snapshot_count": len(source_names - manifest_names),
+    }
+
+
 def inspect_alignment(
     root: str,
     *,
@@ -61,7 +166,7 @@ def inspect_alignment(
 ) -> AlignmentReport:
     """Compare declared projection evidence with today's captured manifest."""
 
-    organism = Organism(root)
+    organism = Organism(root, allow_drift=True)
     checked = (now or datetime.now(timezone.utc)).astimezone(timezone.utc)
     if not isinstance(stale_after_days, int) or isinstance(stale_after_days, bool):
         raise ValueError("stale_after_days must be an integer")
@@ -95,9 +200,16 @@ def inspect_alignment(
         projection["daily_checks"]["generator_provenance_regular_files"] = (
             provenance_regular
         )
-        projection["daily_checks"]["generator_provenance_complete"] = all(
+        paths_present = bool(provenance_regular) and all(
             provenance_regular.values()
         )
+        projection["daily_checks"]["generator_provenance_paths_present"] = (
+            paths_present
+        )
+        projection["daily_checks"]["generator_derivation_check"] = (
+            "not-performed-captured-code-is-never-executed"
+        )
+        projection["daily_checks"]["generator_provenance_complete"] = False
         coverage = projection["coverage"]
         measured = coverage.get("snapshot_organs_at_measurement")
         numerator = coverage.get("captured_organ_overlap", coverage.get("modeled_organs"))
@@ -106,6 +218,9 @@ def inspect_alignment(
             "against_current_snapshot": f"{numerator}/{snapshot_count}",
             "measurement_denominator_matches_current": measured == snapshot_count,
         }
+        projection["coverage_evidence"] = _recompute_projection_coverage(
+            organism, projection
+        )
         observed_at = projection.get("observed_at")
         if observed_at is None:
             projection["freshness"] = {

@@ -18,7 +18,7 @@ RAPP has five architectural scales:
 
 | Scale | Meaning |
 |---|---|
-| **Organism** | The complete public estate represented by the repositories in this snapshot. It is an ecosystem, not one deployable process. |
+| **Organism** | The complete declared public estate represented by the repositories in this snapshot after applying `ORGANISM.json`'s explicit scope exclusions. It is an ecosystem, not one deployable process. |
 | **Protocol organism** | In RAPP/1, a running brainstem with persistent identity. This is the narrower normative use of "organism." |
 | **Organ** | A repository or tightly coupled repository family with one bounded responsibility: runtime, registry, memory, world, surface, distribution, or observation. |
 | **Cell / agent** | The smallest independently executable capability, usually a `*_agent.py` or TypeScript equivalent with metadata and a `perform()`/`execute()` contract. |
@@ -36,18 +36,23 @@ publishes.
 
 ## 2. Boundary and evidence
 
-This architecture separates three facts that must not be collapsed:
+This architecture separates four facts that must not be collapsed:
 
 1. The GitHub owner had **435 public repositories** when audited.
 2. A broad `rapp|brainstem|twin|wildhaven` family search matched **243** of
    them.
-3. The snapshot's stricter public, non-archived, name-prefix membership rule
-   captured **197 repositories, 33,610 files, and 688 MB** in one pass
+3. The stricter public, non-archived, exact name-pattern candidate rule matched
+   **199** repositories.
+4. Two machine-recorded exclusions left **197 repositories, 33,610 files, and
+   688 MB** in the captured organism
    ([`INDEX.md`](INDEX.md#L1-L8)).
 
-The 46-repository difference between the broad family search and snapshot
-membership is a classification boundary, not proof that 46 repositories were
-missed. The search and capture predicates are intentionally different.
+The exclusions are `kody-w/rapp-monorepo`, which cannot recursively capture
+itself as a point-in-time specimen, and `kody-w/rapp-shape-aibast`, which is an
+external AIBAST library-layout staging rehearsal rather than an organism organ.
+Both are records in `ORGANISM.json`, not silent omissions. The 46-repository
+difference between broad search and the final specimen therefore combines a
+different candidate predicate with these two explicit scope decisions.
 
 The snapshot is:
 
@@ -66,6 +71,22 @@ The snapshot is not:
 Large files may be skipped and sensitive files may be withheld. Both are named
 in [`INDEX.md`](INDEX.md), and the source repository remains authoritative.
 
+### 2.1 Lifecycle vocabulary
+
+`ORGANISM.json` lifecycle values are closed vocabularies enforced by
+`Organism`:
+
+| Dimension | Allowed values |
+|---|---|
+| System lifecycle | `mixed-snapshot`, `generated-snapshot`, `historical-or-retired`, `experimental-or-incubating`, `unclassified-incubator` |
+| Projection lifecycle | `active-but-observation-stale`, `active-but-incomplete` |
+| Product lifecycle | `active`, `retired` |
+| Target-record currency | `current-aligned`, `current-but-drifted`, `historical` |
+
+Product lifecycle and record currency are independent dimensions. In
+particular, a current status record for a retired product does not make that
+product current.
+
 ## 3. Authority hierarchy
 
 Authority is explicit and directional. A repository name such as "Bible,"
@@ -74,8 +95,8 @@ Authority is explicit and directional. A repository name such as "Bible,"
 | Rank | Authority | Rule |
 |---|---|---|
 | 1 | Exact current `rapp-1` specification bytes | Normative protocol authority. The last specification-changing commit is `d2cd5ab`; the current bytes are 41,952 bytes with SHA-256 `cea7847f...b91a`. |
-| 2 | `RAPP/RAPP1_AUTHORITY.json` and `RAPP1_STATUS.md` | Describes one target's structural pin and limits what that target may claim. Its older 41,880-byte pin currently trails the normative source. |
-| 3 | Current target constitution | Supersedes incompatible historical target documents. |
+| 2 | Current target records in the retired `RAPP` product repository | `RAPP1_AUTHORITY.json` and `RAPP1_STATUS.md` remain current status evidence. Their older 41,880-byte structural pin trails the normative source; current record currency does not reactivate the retired product. |
+| 3 | Current target constitution record | Supersedes incompatible historical target documents for target assessment without becoming a live product surface. |
 | 4 | Domain authoring sources | RAR source agents, Store source manifests, and state repositories govern their own domain content. |
 | 5 | Generated indexes and projections | Derived outputs; never independent authority. |
 | 6 | Bible, map, spine, and documentation repositories | Navigation and explanation only. |
@@ -196,13 +217,17 @@ lawful re-anchor, replacement invite, and mirror corrections remain owner
 actions
 ([`RAPP1_STATUS.md`](repos/RAPP/RAPP1_STATUS.md#L49-L78)).
 
-### 6.2 Current `RAPP` target
+### 6.2 Current target record for the retired `RAPP` product
 
-The current target-owned synchronous adapter is a loopback pre-acceptance
-facade. It parses the exact request, reserves idempotency/session state, calls
-injected inference, and emits the exact response or an `inference-refused`
-error. It is intentionally not presented as a complete agent-discovery runtime.
-Historical port-7071 launchers are tombstones, not the current target path
+The public `RAPP` product lifecycle is **retired**. Its target status and
+authority records are **current-but-drifted** evidence: they describe the
+present assessment of a target whose structural pin trails `rapp-1`. The
+target-owned synchronous adapter retained in that repository is a loopback
+pre-acceptance facade. It parses the exact request, reserves
+idempotency/session state, calls injected inference, and emits the exact
+response or an `inference-refused` error. It is evidence, not a reactivated
+public product or complete agent-discovery runtime. Historical port-7071
+launchers are tombstones
 ([`RAPP1_STATUS.md`](repos/RAPP/RAPP1_STATUS.md#L80-L101)).
 
 ### 6.3 Grail installer lineage
@@ -213,7 +238,7 @@ The installer lineage implements the familiar local organism:
 perform tools -> persist memory -> return through /chat`
 
 It remains useful implementation evidence, but it is not the same path as the
-current pre-acceptance target
+retired `RAPP` product's retained pre-acceptance target evidence
 ([`rapp-installer/README.md`](repos/rapp-installer/README.md#L1-L50)).
 
 ### 6.4 OpenRappter
@@ -334,13 +359,13 @@ specimen. It does not turn captured repositories into an import path.
 
 | SDK layer | Responsibility | Trust rule |
 |---|---|---|
-| **Inventory** | Loads `MANIFEST.json` and `ORGANISM.json`, classifies organs, and reports omissions and projection drift. | Names and classifications grant no authority. |
+| **Inventory** | Loads `MANIFEST.json` and `ORGANISM.json`, validates the constrained lifecycle and authority taxonomy, and reports scope and projection evidence. | Default construction requires exact manifest/taxonomy equality. Scheduled status and alignment reporting must opt into `allow_drift=True` and expose the difference. |
 | **Specimen access** | Reads bounded bytes from a named organ through descriptor-relative, no-follow traversal. | Captured code is data; no implicit import or execution. |
 | **Protocol core** | Implements strict I-JSON/JCS, allocated domain hashes, rappids, frames, eggs, and detached JWS. | Exact shapes and bytes or refusal. |
 | **Registry trust** | Verifies signed section-13 registries against an out-of-band self-certifying anchor, freshness policy, and monotonic persisted sequence. | Callers cannot promote an unsigned catalog or projection into trust evidence. |
 | **Stream state** | Persists verified heads and rejects rollback, forks, gaps, and unauthorized resets. | Re-genesis requires a newer verified registry and owner signature. |
 | **Wire** | Sends the exact synchronous `/chat` request and accepts only exact success or registered refusal forms. | A structurally shaped 422 is not conformant until its code resolves through verified registry evidence. |
-| **Alignment** | Reports current target-pin drift, Map/Spine coverage, stale observations, provenance, and declared legacy claims. | Offline evidence is labeled; live state is never implied. |
+| **Alignment** | Reports current target-pin drift, recomputed Map/Spine covered and missing organ sets, stale observations, provenance, and declared legacy claims. | Coverage is recomputed from named captured artifacts; failures to recompute are explicit. Offline evidence is labeled and live state is never implied. |
 
 The trust chain is deliberately non-circular:
 
@@ -406,8 +431,22 @@ protocol or trust authority.
 
 | Projection | Captured/live state | Coverage and freshness |
 |---|---|---|
-| **Map** | Captured and live HEAD are both `f3dd5ed1`. The snapshot contains 44 of 45 live tracked blobs; only the 2.4 MB `neurons.json` exceeds the per-file limit. | The owner-wide observation contains 522 repositories. At measurement time it overlapped 152 of the then-196 captured organs. Its mechanical observation is dated 2026-07-26. |
-| **Spine** | Captured and live HEAD are both `ffbd55b7`; all 28 live tracked blobs are present. | At measurement time its routing registry modeled 42 of the then-196 captured organs. Coverage reports itself incomplete, with 34 of 60 protocol materials and 36 of 129 required sources unresolved. |
+| **Map** | Captured and declared-live HEAD are both `f3dd5ed1`. The snapshot contains 44 of 45 declared-live tracked blobs; only the 2.4 MB `neurons.json` exceeds the per-file limit. | `estate-map.json` yields 522 repository identifiers, 152 current manifest organs, and an exact 45-organ missing list. Its mechanical observation is dated 2026-07-26 and is stale under the SDK's seven-day default. |
+| **Spine** | Captured and declared-live HEAD are both `ffbd55b7`; all 28 declared-live tracked blobs are present. | `crawl.json` graph nodes yield 48 repository identifiers, 42 current manifest organs, and an exact 155-organ missing list. Its observation timestamp is absent, so freshness is unknown. Coverage also reports 34 of 60 protocol materials and 36 of 129 required sources unresolved. |
+
+The live values above are cartographer declarations stored in the snapshot,
+not claims that an offline SDK invocation fetched GitHub. `rapp-sdk alignment`
+recomputes current covered and missing sets from each projection's
+`coverage_source` artifact and labels the result
+`recomputed-from-captured-artifact`. If safe access, parsing, or extraction is
+impossible, it emits `not-recomputed` with a reason rather than an empty list
+that could be mistaken for complete coverage.
+
+Generator provenance is deliberately narrower: the SDK proves that the named
+artifact, generator, and non-empty input paths are regular captured files, but
+does not execute captured generators. It therefore reports derivation as
+`not-performed-captured-code-is-never-executed` and never turns path presence
+into a false `generator_provenance_complete` claim.
 
 Map's `RAPP1_AUTHORITY.json` pins the current 41,952-byte `rapp-1` specification
 at its last specification-changing commit, `d2cd5ab`. That matches the
@@ -444,9 +483,9 @@ rapp-spine
 ```
 
 Map and Spine must not reverse those arrows. Their generated and curated
-artifacts need explicit `authority_kind`, `authority_scope`, `lifecycle`,
-`generated_from`, `observed_at`, and `freshness` fields. Terms with overloaded
-meanings require typed dimensions:
+artifacts need explicit `authority_kind`, `authority_scope`, constrained
+`lifecycle`, non-empty `generated_from`, `coverage_source`, `observed_at`, and
+freshness fields. Terms with overloaded meanings require typed dimensions:
 
 | Term | Required type distinction |
 |---|---|
@@ -469,8 +508,11 @@ The SDK must expose these alignment checks:
 5. Evaluate observation age from `observed_at`, not repository push time.
 6. Compare bytes only inside declared mirror/equivalence groups, never merely
    because two repositories use the same path.
-7. Require every generated projection to name its generator and exact inputs.
-8. Require every omitted organ to carry an explicit projection-scope reason.
+7. Require every generated projection to name its generator, non-empty exact
+   inputs, and a captured coverage artifact plus extractor.
+8. Recompute every omitted organ from that artifact and attach the projection's
+   explicit scope reason; an unavailable computation must fail visibly as
+   `not-recomputed`.
 
 ## 13. Measured contradictions
 
@@ -605,9 +647,9 @@ taxonomy describes architectural role, not trust or support status.
    specification bytes, while preserving its historical pin as provenance.
 2. Publish the authenticated RAPP/1 section 13 registry and out-of-band owner
    anchor.
-3. Create an estate-wide lifecycle and authority manifest for the broad family:
-   owner, role, authority class, lifecycle, replacement, canonical commit,
-   emitted/consumed schemas, release surface, and last verification.
+3. Extend the constrained system-level lifecycle and authority registry to
+   per-organ owner, role, replacement, emitted/consumed schemas, release
+   surface, and last verification.
 4. Declare one current installation and reference-runtime story across the
    `RAPP`, grail installer, and OpenRappter lineages.
 5. Add exact RAPP/1 adapters and black-box conformance to any promoted runtime.

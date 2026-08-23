@@ -1,6 +1,7 @@
 # rapp-monorepo
 
-**The full public RAPP organism, assembled in one place at one moment.**
+**The complete declared public RAPP organism, assembled in one place at one
+moment under a machine-recorded scope boundary.**
 
 Clone this one repo and you have the whole estate as it stood at the last
 snapshot — no drift between the pieces, because they were all taken together
@@ -43,16 +44,28 @@ running brainstem.
   capture time, file and byte counts, a staged-tree SHA-256, and everything
   deliberately omitted
 - `INDEX.md` — the same thing as a table you can read
-- `ORGANISM.json` — the machine-readable body-system taxonomy, authority
-  boundaries, Map/Spine projection evidence, relationships, and known conflicts
+- `ORGANISM.json` — the machine-readable estate scope and deliberate
+  exclusions, body-system taxonomy, authority boundaries, Map/Spine projection
+  evidence, relationships, and known conflicts
 - `rapp_sdk/` — the installable RAPP/1 protocol and whole-organism SDK
 - `architecture/rapp-organism.excalidraw` — the editable full-body diagram
 
-Membership is a **name pattern**, resolved at run time: a public,
-non-archived repo whose name starts with `rapp`, `rappter`, `openrappter`,
-`RAR`, `twin`, `brainstem` or `wildhaven` is a member. Nothing is listed by
-hand, so a new repo joins by existing and a repo that goes private leaves on
-the next run — including having its directory deleted from this snapshot.
+Candidate membership is the exact **name pattern** recorded in
+`ORGANISM.json`, resolved at run time: a public, non-archived repo whose name
+starts with `rapp`, `rappter`, `openrappter`, `twin`, `brainstem` or
+`wildhaven` enters the candidate set; `RAR` itself is also included, but
+`RAR-*` names are not. The machine-readable
+`estate_scope.deliberate_exclusions` is then applied. At this snapshot, the
+predicate selected 199 repositories and two deliberate exclusions produced
+the 197-organ specimen:
+
+- `kody-w/rapp-monorepo` — excluded to prevent recursive self-capture;
+- `kody-w/rapp-shape-aibast` — excluded because it rehearses delivery into an
+  external AIBAST library layout and is not a RAPP organism organ.
+
+A new matching repo joins automatically unless a reviewed exclusion record
+names it with a reason. A repo that goes private leaves on the next run,
+including having its directory deleted from this snapshot.
 
 ## Standard SDK
 
@@ -69,8 +82,10 @@ python3.11 -m venv .venv
 It provides strict RAPP/1 canonicalization, hashes, identities, frames, eggs,
 detached JWS, signed registry verification, persistent head/registry state,
 the exact `/chat` client, organism inventory, and no-follow specimen access.
-`kody-w/rapp-1` is the normative protocol source. The older `RAPP` target,
-Map, and Spine are modeled separately so none can silently redefine it.
+`kody-w/rapp-1` is the normative protocol source. The `RAPP` public product is
+retired, while its target status record remains current evidence with a
+drifted structural pin. Map and Spine are modeled separately so none can
+silently redefine the standard.
 
 Full authenticated conformance remains false until the estate owner publishes
 the signed section-13 registry and distributes its self-certifying anchor out
@@ -152,6 +167,8 @@ python3 verify_snapshot.py --stage # stage and prove the publishable tree
 
 - A snapshot is **as of** its timestamp. `MANIFEST.json` says when; nothing
   here claims to be live.
+- "Complete" means complete under `ORGANISM.json`'s candidate membership rule
+  and explicit exclusions; an exclusion is never a silent omission.
 - Withheld and skipped files are listed, but the listing is the only evidence
   of them — this repo cannot show you what it decided not to carry.
 - The gate screens the files it is given. It cannot screen a repository that

@@ -26,6 +26,8 @@ class AuthorityReport:
     target_pin_sha256: str | None
     target_pin_byte_length: int | None
     target_pin_state: str
+    target_product_lifecycle: str
+    target_record_currency: str
     spine_observed_pin: str | None
     spine_pin_equals_map_current: bool
     target_status: str
@@ -57,6 +59,8 @@ class AuthorityReport:
                 "sha256": self.target_pin_sha256,
                 "byte_length": self.target_pin_byte_length,
                 "state": self.target_pin_state,
+                "product_lifecycle": self.target_product_lifecycle,
+                "record_currency": self.target_record_currency,
                 "matches_normative_source_current_bytes": self.target_pin_state
                 == "aligned-with-normative-source-current",
             },
@@ -77,12 +81,13 @@ class AuthorityReport:
 
 
 def inspect_authority(root: str) -> AuthorityReport:
-    organism = Organism(root)
+    organism = Organism(root, allow_drift=True)
     specimen = SafeSpecimen(organism)
     model = organism.authority_paths
     current_model = model["normative_source_current"]
     map_model = model["map_structural_pin"]
     target_model = model["target_structural_pin"]
+    target_context = model["retired_public_target"]
     spine_model = model["spine_pin_claim"]
     normative_source_commit = organism.organ("rapp-1")["commit"]
     findings: list[str] = []
@@ -286,6 +291,8 @@ def inspect_authority(root: str) -> AuthorityReport:
         target_pin_sha256=standard.get("sha256"),
         target_pin_byte_length=standard.get("byte_length"),
         target_pin_state=target_pin_state,
+        target_product_lifecycle=target_context["product_lifecycle"],
+        target_record_currency=target_context["target_record_currency"],
         spine_observed_pin=spine_observed_pin,
         spine_pin_equals_map_current=spine_equals_map,
         target_status=status_state,

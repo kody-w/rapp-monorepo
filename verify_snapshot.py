@@ -19,6 +19,10 @@ MANIFEST_INTEGRITY_PROFILE = "rapp-monorepo-staged-tree/1.0"
 SUPPORTED_MODES = {"100644", "100755", "120000"}
 TREE_SHA256 = re.compile(r"^[0-9a-f]{64}$")
 COMMIT_OID = re.compile(r"^(?:[0-9a-f]{40}|[0-9a-f]{64})$")
+SKIPPED_LARGE_ENTRY = re.compile(
+    r"^(?P<path>.+) \((?P<size>[0-9]+(?:\.[0-9]+)?)MB\)$",
+    re.DOTALL,
+)
 
 
 class SnapshotVerificationError(RuntimeError):
@@ -143,7 +147,94 @@ def _parse_manifest(raw: bytes, source: str) -> dict:
         raise SnapshotVerificationError(
             "manifest not_captured must be an array"
         )
+    exclusions = document.get("membership_exclusions")
+    if exclusions is not None:
+        expected_keys = {"exclude_archived", "repositories"}
+        if not isinstance(exclusions, dict) or set(exclusions) != expected_keys:
+            raise SnapshotVerificationError(
+                "manifest membership_exclusions has an invalid shape"
+            )
+        if exclusions["exclude_archived"] is not True:
+            raise SnapshotVerificationError(
+                "manifest membership_exclusions must exclude archived repos"
+            )
+        repositories = exclusions["repositories"]
+        if (
+            not isinstance(repositories, list)
+            or not repositories
+            or not all(
+                isinstance(item, dict)
+                and set(item) == {"repo", "reason_code", "reason"}
+                and isinstance(item["repo"], str)
+                and item["repo"]
+                and item["repo"] not in {".", ".."}
+                and "/" not in item["repo"]
+                and "\\" not in item["repo"]
+                and isinstance(item["reason_code"], str)
+                and bool(item["reason_code"])
+                and isinstance(item["reason"], str)
+                and bool(item["reason"])
+                for item in repositories
+            )
+            or len({item["repo"].casefold() for item in repositories})
+            != len(repositories)
+        ):
+            raise SnapshotVerificationError(
+                "manifest membership exclusion repositories are invalid"
+            )
     return document
+
+
+def _organism_membership_contract(root: Path) -> tuple[str, str, dict]:
+    try:
+        organism = json.loads((root / "ORGANISM.json").read_text(encoding="utf-8"))
+        scope = organism["estate_scope"]
+        membership = scope["membership"]
+        exclusions = scope["deliberate_exclusions"]
+    except (OSError, KeyError, TypeError, json.JSONDecodeError) as exc:
+        raise SnapshotVerificationError(
+            "ORGANISM.json has no usable estate membership contract"
+        ) from exc
+    if (
+        not isinstance(scope.get("owner"), str)
+        or not scope["owner"]
+        or membership.get("visibility") != "public"
+        or membership.get("archived") is not False
+        or not isinstance(membership.get("name_pattern"), str)
+        or not membership["name_pattern"]
+        or not isinstance(exclusions, list)
+        or not exclusions
+    ):
+        raise SnapshotVerificationError(
+            "ORGANISM.json estate membership contract is invalid"
+        )
+    repositories: list[dict[str, str]] = []
+    for item in exclusions:
+        if (
+            not isinstance(item, dict)
+            or set(item) != {"repository", "reason_code", "reason"}
+            or not isinstance(item["repository"], str)
+            or item["repository"].count("/") != 1
+            or not item["repository"].startswith(f"{scope['owner']}/")
+            or not isinstance(item["reason_code"], str)
+            or not item["reason_code"]
+            or not isinstance(item["reason"], str)
+            or not item["reason"]
+        ):
+            raise SnapshotVerificationError(
+                "ORGANISM.json contains an invalid membership exclusion"
+            )
+        repositories.append({
+            "repo": item["repository"].split("/", 1)[1],
+            "reason_code": item["reason_code"],
+            "reason": item["reason"],
+        })
+    repositories.sort(key=lambda item: item["repo"].casefold())
+    return (
+        scope["owner"],
+        membership["name_pattern"],
+        {"exclude_archived": True, "repositories": repositories},
+    )
 
 
 @dataclass(frozen=True)
@@ -278,6 +369,37 @@ class _BlobReader:
         return False
 
 
+def _valid_omitted_path(path: str) -> bool:
+    return (
+        bool(path)
+        and not path.startswith("/")
+        and all(part not in {"", ".", ".."} for part in path.split("/"))
+    )
+
+
+def _skipped_large_path(repo: str, item: str) -> str:
+    match = SKIPPED_LARGE_ENTRY.fullmatch(item)
+    if match is None or not _valid_omitted_path(match["path"]):
+        raise SnapshotVerificationError(
+            f"{repo}: malformed skipped_large entry: {item!r}"
+        )
+    return match["path"]
+
+
+def _record_omitted_paths(record: dict) -> set[str]:
+    repo = record["repo"]
+    paths = [
+        _skipped_large_path(repo, item)
+        for item in record["skipped_large"]
+    ]
+    paths.extend(item["file"] for item in record["withheld"])
+    if len(paths) != len(set(paths)):
+        raise SnapshotVerificationError(
+            f"{repo}: duplicate path in omission declarations"
+        )
+    return set(paths)
+
+
 def _manifest_records(document: dict) -> dict[str, dict]:
     records: dict[str, dict] = {}
     for record in document["repos"]:
@@ -341,12 +463,15 @@ def _manifest_records(document: dict) -> dict[str, dict]:
             isinstance(item, dict)
             and set(item) == {"file", "reason"}
             and isinstance(item["file"], str)
+            and _valid_omitted_path(item["file"])
             and isinstance(item["reason"], str)
+            and bool(item["reason"])
             for item in withheld
         ):
             raise SnapshotVerificationError(
                 f"{name}: manifest withheld entries must be file/reason objects"
             )
+        _record_omitted_paths(record)
         records[name] = record
     return records
 
@@ -478,6 +603,18 @@ def verify_staged(
         )
 
     document = _parse_manifest(staged_manifest, "staged MANIFEST.json")
+    if document.get("membership_exclusions") is not None:
+        expected_owner, expected_pattern, expected_exclusions = (
+            _organism_membership_contract(root)
+        )
+        if (
+            document["owner"] != expected_owner
+            or document["membership_pattern"] != expected_pattern
+            or document["membership_exclusions"] != expected_exclusions
+        ):
+            raise SnapshotVerificationError(
+                "manifest membership contract differs from ORGANISM.json"
+            )
     missing = document["not_captured"]
     if missing:
         raise SnapshotVerificationError(
@@ -513,6 +650,22 @@ def verify_staged(
     errors: list[str] = []
     total_files = 0
     total_bytes = 0
+    for name, record in records.items():
+        overlap = sorted(
+            {
+                relative
+                for relative, _entry in grouped[name]
+                if relative in _record_omitted_paths(record)
+            },
+            key=os.fsencode,
+        )
+        if overlap:
+            errors.append(
+                f"{name}: staged path is also declared omitted: {overlap[0]}"
+            )
+    if errors:
+        raise SnapshotVerificationError("; ".join(errors[:20]))
+
     with _BlobReader(root) as blobs:
         for name, record in records.items():
             digest = TreeDigest()

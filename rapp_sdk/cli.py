@@ -28,7 +28,10 @@ def _lead() -> None:
 
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="rapp-sdk")
-    parser.add_argument("--root", default=".", help="snapshot/SDK root")
+    parser.add_argument(
+        "--root",
+        help="explicit snapshot/SDK root (required except for chat)",
+    )
     parser.add_argument("--json", action="store_true", help="machine-readable output")
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("status", help="snapshot and conformance status")
@@ -53,7 +56,7 @@ def _parser() -> argparse.ArgumentParser:
 
 
 def _status(root: str) -> dict[str, Any]:
-    organism = Organism(root)
+    organism = Organism(root, allow_drift=True)
     try:
         authority_report = inspect_authority(root).as_dict()
     except RappSDKError as exc:
@@ -75,10 +78,14 @@ def _status(root: str) -> dict[str, Any]:
 
 
 def main(argv: list[str] | None = None) -> int:
-    args = _parser().parse_args(argv)
-    root = str(Path(args.root).absolute())
+    parser = _parser()
+    args = parser.parse_args(argv)
+    if args.command != "chat" and args.root is None:
+        parser.error("--root is required for snapshot and architecture commands")
+    root = str(Path(args.root).absolute()) if args.root is not None else None
     try:
         if args.command == "status":
+            assert root is not None
             value = _status(root)
             if args.json:
                 _emit_json(value)
@@ -119,6 +126,7 @@ def main(argv: list[str] | None = None) -> int:
                         print(f"- {log}")
             return 0
         if args.command == "alignment":
+            assert root is not None
             value = inspect_alignment(
                 root, stale_after_days=args.stale_after_days
             ).as_dict()
@@ -144,6 +152,7 @@ def main(argv: list[str] | None = None) -> int:
                         f"({conflict['evidence_mode']})"
                     )
             return 0
+        assert root is not None
         organism = Organism(root)
         if args.command == "systems":
             value = organism.systems()

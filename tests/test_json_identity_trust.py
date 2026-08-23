@@ -150,6 +150,35 @@ def test_detached_jws_requires_opaque_verified_registry(registry_factory) -> Non
         )
 
 
+def test_registry_rejects_corrupted_ed25519_signature_bytes(registry_factory) -> None:
+    original = strict_loads(registry_factory.raw(sequence=1))
+    protected, detached_payload, encoded_signature = original["sig"].split(".")
+    assert detached_payload == ""
+    signature = bytearray(
+        base64.urlsafe_b64decode(
+            encoded_signature + "=" * (-len(encoded_signature) % 4)
+        )
+    )
+    signature[-1] ^= 1
+    corrupted = dict(original)
+    corrupted["sig"] = f"{protected}..{_b64(bytes(signature))}"
+    assert {key: value for key, value in corrupted.items() if key != "sig"} == {
+        key: value for key, value in original.items() if key != "sig"
+    }
+
+    with pytest.raises(TrustError, match="^JWS signature did not verify$"):
+        verify_registry(
+            canonical_bytes(corrupted),
+            out_of_band_anchor=registry_factory.anchor,
+            anchor_spki_der=registry_factory.spki,
+            state=MemoryRegistrySequenceStore(),
+            source=registry_factory.source,
+            fetched_at=registry_factory.now,
+            now=registry_factory.now,
+            max_age_seconds=60,
+        )
+
+
 def test_registry_signature_freshness_and_monotonic_state(registry_factory) -> None:
     first = registry_factory.make(sequence=4)
     assert first.registry_seq == 4

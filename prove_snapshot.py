@@ -28,6 +28,32 @@ class SnapshotIntegrityTests(unittest.TestCase):
         self.git("commit", "--allow-empty", "-qm", "base")
         (self.root / "repos" / "demo").mkdir(parents=True)
         (self.root / "INDEX.md").write_text("# test index\n", encoding="utf-8")
+        self.membership_exclusions = {
+            "exclude_archived": True,
+            "repositories": [{
+                "repo": "demo-excluded",
+                "reason_code": "fixture-exclusion",
+                "reason": "test-only named exclusion",
+            }],
+        }
+        (self.root / "ORGANISM.json").write_text(
+            json.dumps({
+                "estate_scope": {
+                    "owner": "test-owner",
+                    "membership": {
+                        "visibility": "public",
+                        "archived": False,
+                        "name_pattern": "^demo",
+                    },
+                    "deliberate_exclusions": [{
+                        "repository": "test-owner/demo-excluded",
+                        "reason_code": "fixture-exclusion",
+                        "reason": "test-only named exclusion",
+                    }],
+                },
+            }),
+            encoding="utf-8",
+        )
 
     def tearDown(self):
         self.temp.cleanup()
@@ -46,6 +72,9 @@ class SnapshotIntegrityTests(unittest.TestCase):
         not_captured=None,
         schema=MANIFEST_SCHEMA,
         integrity_profile=MANIFEST_INTEGRITY_PROFILE,
+        skipped_large=None,
+        withheld=None,
+        membership_exclusions=None,
     ):
         total_bytes = sum(len(raw) for _, _, raw in entries)
         manifest = {
@@ -53,7 +82,7 @@ class SnapshotIntegrityTests(unittest.TestCase):
             "integrity_profile": integrity_profile,
             "owner": "test-owner",
             "captured_at": "2026-08-21T00:00:00+00:00",
-            "membership_pattern": "^demo$",
+            "membership_pattern": "^demo",
             "max_file_mb": 2.0,
             "repos": [{
                 "repo": "demo",
@@ -63,11 +92,13 @@ class SnapshotIntegrityTests(unittest.TestCase):
                 "files": len(entries),
                 "bytes": total_bytes,
                 "tree_sha256": compute_tree_sha256(entries),
-                "skipped_large": [],
-                "withheld": [],
+                "skipped_large": skipped_large or [],
+                "withheld": withheld or [],
             }],
             "not_captured": not_captured or [],
         }
+        if membership_exclusions is not None:
+            manifest["membership_exclusions"] = membership_exclusions
         (self.root / "MANIFEST.json").write_text(
             json.dumps(manifest, indent=2) + "\n",
             encoding="utf-8",
@@ -204,6 +235,37 @@ class SnapshotIntegrityTests(unittest.TestCase):
         ):
             verify_staged(self.root)
 
+    def test_verifier_rejects_a_staged_path_declared_withheld(self):
+        payload = b"must not travel\n"
+        path = self.root / "repos" / "demo" / "secret.txt"
+        path.write_bytes(payload)
+        self.write_manifest(
+            [("secret.txt", "100644", payload)],
+            withheld=[{
+                "file": "secret.txt",
+                "reason": "matches configured content rule 1",
+            }],
+        )
+
+        with self.assertRaisesRegex(
+            SnapshotVerificationError, "declared omitted.*secret.txt"
+        ):
+            stage_and_verify(self.root)
+
+    def test_verifier_rejects_a_staged_path_declared_too_large(self):
+        payload = b"must not travel\n"
+        path = self.root / "repos" / "demo" / "large.bin"
+        path.write_bytes(payload)
+        self.write_manifest(
+            [("large.bin", "100644", payload)],
+            skipped_large=["large.bin (3.0MB)"],
+        )
+
+        with self.assertRaisesRegex(
+            SnapshotVerificationError, "declared omitted.*large.bin"
+        ):
+            stage_and_verify(self.root)
+
     def test_verifier_rejects_any_failed_capture(self):
         self.write_manifest(
             [],
@@ -222,6 +284,35 @@ class SnapshotIntegrityTests(unittest.TestCase):
 
         with self.assertRaisesRegex(
             SnapshotVerificationError, "manifest schema"
+        ):
+            verify_staged(self.root)
+
+    def test_verifier_accepts_recorded_membership_exclusions(self):
+        self.write_manifest(
+            [],
+            membership_exclusions=self.membership_exclusions,
+        )
+
+        summary = stage_and_verify(self.root)
+
+        self.assertEqual(summary["repos"], 1)
+
+    def test_verifier_rejects_membership_contract_drift(self):
+        self.write_manifest(
+            [],
+            membership_exclusions={
+                "exclude_archived": True,
+                "repositories": [{
+                    "repo": "demo-other",
+                    "reason_code": "fixture-exclusion",
+                    "reason": "not the reviewed exclusion",
+                }],
+            },
+        )
+        self.git("add", "-A", "--", "MANIFEST.json", "INDEX.md")
+
+        with self.assertRaisesRegex(
+            SnapshotVerificationError, "differs from ORGANISM"
         ):
             verify_staged(self.root)
 

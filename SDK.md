@@ -20,6 +20,11 @@ For development and verification:
 .venv/bin/python -m pytest tests -q
 ```
 
+Every SDK workflow run retains the built wheel and source distribution as a
+30-day GitHub Actions artifact. The workflow can also be started manually;
+publishing to a package index remains an explicit release decision rather than
+an automatic side effect of verification.
+
 The SDK root is always explicit. A globally installed CLI does not guess which
 checkout or runtime lineage is authoritative.
 
@@ -41,9 +46,11 @@ Use the global `--json` option for machine-readable output.
 The user-designated current protocol source is
 [`kody-w/rapp-1`](https://github.com/kody-w/rapp-1). In this snapshot,
 `repos/rapp-1/SPEC.md` is 41,952 bytes with SHA-256 `cea7847f…`; Map's
-`d2cd5a…` structural pin names those bytes. The retired `kody-w/RAPP` target
-still records an older 41,880-byte `6723c7…` structural pin. That target record
-is useful drift evidence and does not redefine the current standard.
+`d2cd5a…` structural pin names those bytes. The `kody-w/RAPP` public product is
+retired, while its target record remains current-but-drifted and records an
+older 41,880-byte `6723c7…` structural pin. Current record currency does not
+reactivate the product; the record is useful drift evidence and does not
+redefine the current standard.
 
 No checked-in record is the missing authenticated section-13 registry. Full
 authenticated conformance remains false until the owner publishes:
@@ -123,3 +130,26 @@ freshness, generator provenance, authority-pin conflicts, and active legacy
 frame/egg/wire claims. Live-head values and crawl findings recorded in
 `ORGANISM.json` are labeled as cartographer evidence; the SDK does not pretend
 that they were dynamically fetched during an offline invocation.
+
+Generator provenance distinguishes named-path presence from derivation.
+Because captured code is never executed, the SDK can confirm that the declared
+artifact, generator, and inputs are regular files but labels the derivation
+check as not performed; `generator_provenance_complete` remains false.
+
+The architecture registry is strict by default. `Organism(root)` requires
+exact manifest/taxonomy set equality, constrained lifecycle values, both
+non-empty Map and Spine projection records, and `rapp-1` in
+`authority-contracts-navigation`. Scheduled status/alignment code that must
+report drift instead of refusing it uses the explicit
+`Organism(root, allow_drift=True)` path and must display `architecture_drift`.
+
+Each projection names a captured `coverage_source` and extractor. Alignment
+recomputes the exact current covered and missing organ sets from
+`rapp-map/estate-map.json` and `rapp-spine/crawl.json`, attaching a reason to
+every missing organ. An unreadable or invalid source is labeled
+`not-recomputed`; it never becomes a vacuous empty success.
+
+`ORGANISM.json` also records the candidate membership predicate and its two
+deliberate exclusions. `kody-w/rapp-monorepo` is excluded to avoid recursive
+self-capture, and `kody-w/rapp-shape-aibast` is excluded as external
+library-layout staging rather than silently disappearing from the estate.
