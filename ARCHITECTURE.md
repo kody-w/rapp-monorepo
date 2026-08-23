@@ -42,11 +42,11 @@ This architecture separates three facts that must not be collapsed:
 2. A broad `rapp|brainstem|twin|wildhaven` family search matched **243** of
    them.
 3. The snapshot's stricter public, non-archived, name-prefix membership rule
-   captured **196 repositories, 33,492 files, and 681 MB** in one pass
+   captured **197 repositories, 33,610 files, and 688 MB** in one pass
    ([`INDEX.md`](INDEX.md#L1-L8)).
 
-The 47-repository difference between the broad family search and snapshot
-membership is a classification boundary, not proof that 47 repositories were
+The 46-repository difference between the broad family search and snapshot
+membership is a classification boundary, not proof that 46 repositories were
 missed. The search and capture predicates are intentionally different.
 
 The snapshot is:
@@ -406,8 +406,8 @@ protocol or trust authority.
 
 | Projection | Captured/live state | Coverage and freshness |
 |---|---|---|
-| **Map** | Captured and live HEAD are both `f3dd5ed1`. The snapshot contains 42 of 45 live tracked blobs: `neurons.json` exceeds the 2 MB limit, and two tracked Python bytecode files are deliberately excluded. | The owner-wide observation contains 522 repositories and overlaps 152 of the 196 captured organs. Its mechanical observation is dated 2026-07-26. |
-| **Spine** | Captured and live HEAD are both `ffbd55b7`; all 28 live tracked blobs are present. | Its routing registry models 42 of the 196 captured organs. Coverage reports itself incomplete, with 34 of 60 protocol materials and 36 of 129 required sources unresolved. |
+| **Map** | Captured and live HEAD are both `f3dd5ed1`. The snapshot contains 44 of 45 live tracked blobs; only the 2.4 MB `neurons.json` exceeds the per-file limit. | The owner-wide observation contains 522 repositories. At measurement time it overlapped 152 of the then-196 captured organs. Its mechanical observation is dated 2026-07-26. |
+| **Spine** | Captured and live HEAD are both `ffbd55b7`; all 28 live tracked blobs are present. | At measurement time its routing registry modeled 42 of the then-196 captured organs. Coverage reports itself incomplete, with 34 of 60 protocol materials and 36 of 129 required sources unresolved. |
 
 Map's `RAPP1_AUTHORITY.json` pins the current 41,952-byte `rapp-1` specification
 at its last specification-changing commit, `d2cd5ab`. That matches the
@@ -514,13 +514,13 @@ taxonomy describes architectural role, not trust or support status.
 `rapp-roadmap`, `rapp-docs`, `rapp_docs`, `RAPP-Network`,
 `rapp-neighborhood-protocol`
 
-### Runtime and organism substrate (22)
+### Runtime and organism substrate (23)
 
 `brainstem-bootcamp`, `brainstem-harness`, `openrappter`, `rapp-agents`,
 `rapp-ai`, `rapp-base`, `rapp-base-template`, `rapp-brainstem`,
-`rapp-brainstem-sdk`, `rapp-cortex`, `rapp-distro`, `rapp-hippocampus`,
-`rapp-installer`, `rapp-nervous-system`, `rapp-platform`, `rapp-sdk`,
-`rapp-spinal-cord`, `RAPP_hippo`, `rapp_orion`, `rappter-cli`,
+`rapp-brainstem-sdk`, `rapp-cortex`, `rapp-distro`, `rapp-herdr`,
+`rapp-hippocampus`, `rapp-installer`, `rapp-nervous-system`, `rapp-platform`,
+`rapp-sdk`, `rapp-spinal-cord`, `RAPP_hippo`, `rapp_orion`, `rappter-cli`,
 `rappter-distro`, `rappterbox`
 
 ### Registries, catalogs, skills, and discovery (24)

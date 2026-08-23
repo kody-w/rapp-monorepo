@@ -1,6 +1,6 @@
 # RAPP organism SDK
 
-`rapp_sdk` is the root SDK for inspecting this captured 196-organ estate and
+`rapp_sdk` is the root SDK for inspecting this captured 197-organ estate and
 for implementing the current RAPP/1 protocol. It does not import or execute
 captured repositories.
 

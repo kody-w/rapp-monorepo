@@ -78,10 +78,9 @@
       "captured_commit": "f3dd5ed11514d0562eb7fc87afc2eb59ed87aca6",
       "live_commit": "f3dd5ed11514d0562eb7fc87afc2eb59ed87aca6",
       "live_evidence": "declared-cartographer-report-not-dynamically-fetched-by-sdk",
-      "tracked_blobs": {"captured": 42, "live": 45},
+      "tracked_blobs": {"captured": 44, "live": 45},
       "omitted_blobs": [
-        {"path": "neurons.json", "reason": "exceeds-2MiB-snapshot-limit"},
-        {"count": 2, "reason": "tracked-python-bytecode-deliberately-excluded"}
+        {"path": "neurons.json", "reason": "exceeds-2MiB-snapshot-limit"}
       ],
       "coverage": {
         "observed_owner_repositories": 522,
@@ -223,7 +222,7 @@
       "name": "Runtime and organism substrate",
       "lifecycle": "mixed-snapshot",
       "authority": "implementation evidence only",
-      "organs": ["brainstem-bootcamp", "brainstem-harness", "openrappter", "rapp-agents", "rapp-ai", "rapp-base", "rapp-base-template", "rapp-brainstem", "rapp-brainstem-sdk", "rapp-cortex", "rapp-distro", "rapp-hippocampus", "rapp-installer", "rapp-nervous-system", "rapp-platform", "rapp-sdk", "rapp-spinal-cord", "RAPP_hippo", "rapp_orion", "rappter-cli", "rappter-distro", "rappterbox"]
+      "organs": ["brainstem-bootcamp", "brainstem-harness", "openrappter", "rapp-agents", "rapp-ai", "rapp-base", "rapp-base-template", "rapp-brainstem", "rapp-brainstem-sdk", "rapp-cortex", "rapp-distro", "rapp-herdr", "rapp-hippocampus", "rapp-installer", "rapp-nervous-system", "rapp-platform", "rapp-sdk", "rapp-spinal-cord", "RAPP_hippo", "rapp_orion", "rappter-cli", "rappter-distro", "rappterbox"]
     },
     {
       "id": "registries-catalogs-skills-discovery",
