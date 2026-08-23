@@ -907,7 +907,7 @@
       "y": 545,
       "width": 320,
       "height": 335,
-      "text": "PUBLIC INVENTORY\n  -> membership predicate\n  -> explicit scope exclusions\n  -> shallow clone exact HEAD\n  -> fail-closed content gate\n  -> preserve bytes / modes / links\n  -> per-organ tree SHA-256\n  -> manifest + index\n  -> raw Git staging\n  -> staged-tree verification\n  -> size gate\n  -> commit + push",
+      "text": "PUBLIC INVENTORY\n  -> membership predicate\n  -> explicit scope exclusions\n  -> shallow clone exact HEAD\n  -> fail-closed content gate\n  -> bytes / modes / symlinks / gitlinks\n  -> per-organ tree SHA-256\n  -> manifest + index\n  -> raw Git staging\n  -> staged-tree verification\n  -> size gate\n  -> commit + push",
       "fontSize": 15,
       "fontFamily": 3,
       "strokeColor": "#000000",

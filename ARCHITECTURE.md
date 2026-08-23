@@ -323,7 +323,7 @@ GitHub public inventory
   -> shallow clone exact HEAD
   -> validate commit identity and timestamp
   -> gate every path and byte sequence
-  -> preserve regular-file mode or symlink target
+  -> preserve regular-file mode, symlink target, or gitlink commit pointer
   -> compute per-repository canonical tree SHA-256
   -> write MANIFEST.json and INDEX.md
   -> refuse any incomplete capture
@@ -348,6 +348,8 @@ Failures are fail-closed:
 - a missing gate configuration stops before capture;
 - a failed clone removes stale output and makes the run non-publishable;
 - an unborn or unresolvable repository is not reported as captured;
+- a gitlink is staged as its exact mode-160000 commit pointer without
+  dereferencing target content;
 - a missing staged file, unsupported mode, altered byte sequence, or divergent
   digest stops publication;
 - a snapshot beyond the configured size ceiling is not committed.

@@ -41,8 +41,8 @@ running brainstem.
 
 - `repos/<name>/` — the working tree of each public RAPP repository at HEAD
 - `MANIFEST.json` — per repo: the commit sha, the upstream commit date, the
-  capture time, file and byte counts, a staged-tree SHA-256, and everything
-  deliberately omitted
+  capture time, file and byte counts, gitlink commit pointers, a staged-tree
+  SHA-256, and everything deliberately omitted
 - `INDEX.md` — the same thing as a table you can read
 - `ORGANISM.json` — the machine-readable estate scope and deliberate
   exclusions, body-system taxonomy, authority boundaries, Map/Spine projection
@@ -105,6 +105,12 @@ that, every single file passes a gate before it is written — see below.
 **Large files**, over the per-file limit (2MB by default). A copy you can
 actually carry is worth more than a complete one you cannot. Every skipped
 file is named in `INDEX.md`.
+
+**Gitlink target repositories.** A mode-160000 entry is preserved exactly as
+the superproject stores it: path plus full commit OID. The target repository's
+content is not dereferenced or copied. This keeps the source Git tree honest
+and offline-verifiable without pretending an external submodule is local
+content.
 
 ---
 
@@ -171,6 +177,8 @@ python3 verify_snapshot.py --stage # stage and prove the publishable tree
   and explicit exclusions; an exclusion is never a silent omission.
 - Withheld and skipped files are listed, but the listing is the only evidence
   of them — this repo cannot show you what it decided not to carry.
+- Gitlinks retain their exact commit pointer but not the external target
+  repository contents.
 - The gate screens the files it is given. It cannot screen a repository that
   failed to clone, and any member not captured is named in `INDEX.md` rather
   than quietly missing.

@@ -2,6 +2,7 @@
 """Prove the staged Git tree exactly matches the generated snapshot contract."""
 
 import json
+import os
 import subprocess
 import tempfile
 import unittest
@@ -75,8 +76,27 @@ class SnapshotIntegrityTests(unittest.TestCase):
         skipped_large=None,
         withheld=None,
         membership_exclusions=None,
+        gitlinks=None,
     ):
-        total_bytes = sum(len(raw) for _, _, raw in entries)
+        link_entries = [
+            (item["path"], "160000", bytes.fromhex(item["commit"]))
+            for item in (gitlinks or [])
+        ]
+        digest_entries = [*entries, *link_entries]
+        total_bytes = sum(len(raw) for _, _, raw in digest_entries)
+        record = {
+            "repo": "demo",
+            "commit": "a" * 40,
+            "committed_at": "2026-08-21T00:00:00+00:00",
+            "captured_at": "2026-08-21T00:00:00+00:00",
+            "files": len(digest_entries),
+            "bytes": total_bytes,
+            "tree_sha256": compute_tree_sha256(digest_entries),
+            "skipped_large": skipped_large or [],
+            "withheld": withheld or [],
+        }
+        if gitlinks is not None:
+            record["gitlinks"] = gitlinks
         manifest = {
             "schema": schema,
             "integrity_profile": integrity_profile,
@@ -84,17 +104,7 @@ class SnapshotIntegrityTests(unittest.TestCase):
             "captured_at": "2026-08-21T00:00:00+00:00",
             "membership_pattern": "^demo",
             "max_file_mb": 2.0,
-            "repos": [{
-                "repo": "demo",
-                "commit": "a" * 40,
-                "committed_at": "2026-08-21T00:00:00+00:00",
-                "captured_at": "2026-08-21T00:00:00+00:00",
-                "files": len(entries),
-                "bytes": total_bytes,
-                "tree_sha256": compute_tree_sha256(entries),
-                "skipped_large": skipped_large or [],
-                "withheld": withheld or [],
-            }],
+            "repos": [record],
             "not_captured": not_captured or [],
         }
         if membership_exclusions is not None:
@@ -189,6 +199,161 @@ class SnapshotIntegrityTests(unittest.TestCase):
         self.assertEqual(mode, "120000")
         staged = self.git("cat-file", "blob", oid).stdout
         self.assertEqual(staged, target)
+
+    def test_gitlink_is_raw_staged_without_target_or_object(self):
+        commit = "1" * 40
+        self.write_manifest(
+            [],
+            gitlinks=[{"path": "vendor/dependency", "commit": commit}],
+        )
+
+        summary = stage_and_verify(self.root)
+
+        mode, oid, _stage_path = self.git(
+            "ls-files",
+            "--stage",
+            "--",
+            "repos/demo/vendor/dependency",
+        ).stdout.split(maxsplit=2)
+        self.assertEqual((mode, oid), ("160000", commit))
+        self.assertEqual(summary["files"], 1)
+        self.assertEqual(summary["bytes"], len(bytes.fromhex(commit)))
+        self.assertFalse(
+            (self.root / "repos" / "demo" / "vendor" / "dependency").exists()
+        )
+        self.assertNotEqual(
+            self.git("cat-file", "-e", commit, check=False).returncode,
+            0,
+        )
+        index = (self.root / "INDEX.md").read_text(encoding="utf-8")
+        self.assertIn("`demo/vendor/dependency`", index)
+        self.assertIn(f"`{commit}`", index)
+
+    def test_index_percent_encodes_arbitrary_gitlink_path_bytes(self):
+        commit = "1" * 40
+        injected = "safe\n- `forged`"
+        non_utf8 = os.fsdecode(b"vendor/\xff")
+        self.write_manifest(
+            [],
+            gitlinks=[
+                {"path": injected, "commit": commit},
+                {"path": non_utf8, "commit": "2" * 40},
+            ],
+        )
+
+        rendered = (self.root / "INDEX.md").read_text(encoding="utf-8")
+
+        self.assertIn("demo/safe%0A-%20%60forged%60", rendered)
+        self.assertIn("demo/vendor/%FF", rendered)
+        self.assertNotIn("\n- `forged`", rendered)
+
+    def test_verifier_rejects_a_missing_manifest_gitlink(self):
+        commit = "2" * 40
+        path = "repos/demo/vendor/dependency"
+        self.write_manifest(
+            [],
+            gitlinks=[{"path": "vendor/dependency", "commit": commit}],
+        )
+        stage_and_verify(self.root)
+        self.git("update-index", "--force-remove", "--", path)
+
+        with self.assertRaisesRegex(
+            SnapshotVerificationError, "gitlink is missing.*vendor/dependency"
+        ):
+            verify_staged(self.root)
+
+    def test_verifier_rejects_an_extra_staged_gitlink(self):
+        commit = "3" * 40
+        self.write_manifest([])
+        stage_and_verify(self.root)
+        self.git(
+            "update-index",
+            "--add",
+            "--cacheinfo",
+            f"160000,{commit},repos/demo/extra",
+        )
+
+        with self.assertRaisesRegex(
+            SnapshotVerificationError, "extra staged gitlink.*extra"
+        ):
+            verify_staged(self.root)
+
+    def test_verifier_rejects_a_wrong_gitlink_oid(self):
+        expected = "4" * 40
+        actual = "5" * 40
+        path = "repos/demo/vendor/dependency"
+        self.write_manifest(
+            [],
+            gitlinks=[{"path": "vendor/dependency", "commit": expected}],
+        )
+        stage_and_verify(self.root)
+        self.git(
+            "update-index",
+            "--add",
+            "--cacheinfo",
+            f"160000,{actual},{path}",
+        )
+
+        with self.assertRaisesRegex(
+            SnapshotVerificationError, "gitlink.*OID.*!= manifest OID"
+        ):
+            verify_staged(self.root)
+
+    def test_verifier_rejects_a_wrong_gitlink_mode(self):
+        commit = "6" * 40
+        path = self.root / "repos" / "demo" / "vendor" / "dependency"
+        self.write_manifest(
+            [],
+            gitlinks=[{"path": "vendor/dependency", "commit": commit}],
+        )
+        stage_and_verify(self.root)
+        path.parent.mkdir(parents=True)
+        path.write_bytes(b"not a gitlink\n")
+        self.git("add", "-f", "--", "repos/demo/vendor/dependency")
+
+        with self.assertRaisesRegex(
+            SnapshotVerificationError, "has mode 100644, expected 160000"
+        ):
+            verify_staged(self.root)
+
+    def test_manifest_rejects_a_gitlink_declared_omitted(self):
+        commit = "7" * 40
+        with self.assertRaisesRegex(
+            SnapshotVerificationError, "gitlink is also declared omitted"
+        ):
+            self.write_manifest(
+                [],
+                gitlinks=[{
+                    "path": "vendor/dependency",
+                    "commit": commit,
+                }],
+                withheld=[{
+                    "file": "vendor/dependency",
+                    "reason": "matches configured path rule",
+                }],
+            )
+
+    def test_staging_rejects_materialized_gitlink_target_content(self):
+        commit = "9" * 40
+        target = (
+            self.root
+            / "repos"
+            / "demo"
+            / "vendor"
+            / "dependency"
+            / "target.txt"
+        )
+        target.parent.mkdir(parents=True)
+        target.write_bytes(b"must not be copied\n")
+        self.write_manifest(
+            [],
+            gitlinks=[{"path": "vendor/dependency", "commit": commit}],
+        )
+
+        with self.assertRaisesRegex(
+            SnapshotVerificationError, "collides with materialized path"
+        ):
+            stage_and_verify(self.root)
 
     def test_staging_does_not_modify_shared_git_attributes(self):
         payload = b"raw bytes\n"

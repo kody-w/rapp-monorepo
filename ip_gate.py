@@ -130,16 +130,24 @@ def _path_hit(rel: str, globs) -> str | None:
     return None
 
 
-def screen(raw: bytes, rel_path: str) -> tuple[bool, str]:
-    """(keep, reason). reason names the RULE, never the matched text."""
+def screen_path(rel_path: str) -> tuple[bool, str]:
+    """Screen a path without pretending a gitlink OID is file content."""
     rules = _load()
-
     hit = _path_hit(rel_path, ALWAYS_WITHHOLD_PATHS)
     if hit:
         return False, f"path matches an always-withhold shape ({hit})"
     hit = _path_hit(rel_path, rules["paths"])
     if hit:
         return False, "path matches a configured withhold rule"
+    return True, ""
+
+
+def screen(raw: bytes, rel_path: str) -> tuple[bool, str]:
+    """(keep, reason). reason names the RULE, never the matched text."""
+    keep, reason = screen_path(rel_path)
+    if not keep:
+        return keep, reason
+    rules = _load()
 
     try:
         text = raw.decode("utf-8")

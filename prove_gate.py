@@ -88,6 +88,12 @@ scenario("...and the reason NAMES THE RULE, never the match",
 keep, why = g.screen(b"anything", "a/private-notes/b.md")
 scenario("a configured path rule withholds the file", not keep, why)
 
+keep, why = g.screen_path("modules/public-dependency")
+scenario("a public gitlink path passes path-only screening",
+         keep and why == "", f"keep={keep}")
+keep, why = g.screen_path("a/private-notes/dependency")
+scenario("a configured gitlink path is still withheld", not keep, why)
+
 # ── always-on structural rules (public by design) ───────────────────────────
 for path in (".env", "api/.env.production", "keys/server.pem", "id_rsa",
              "cfg/local.settings.json", "x/sensitive/notes.md"):

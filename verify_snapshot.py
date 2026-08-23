@@ -12,11 +12,12 @@ import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
+from urllib.parse import quote_from_bytes
 
 HERE = Path(__file__).resolve().parent
 MANIFEST_SCHEMA = "rapp-monorepo/1.0"
 MANIFEST_INTEGRITY_PROFILE = "rapp-monorepo-staged-tree/1.0"
-SUPPORTED_MODES = {"100644", "100755", "120000"}
+SUPPORTED_MODES = {"100644", "100755", "120000", "160000"}
 TREE_SHA256 = re.compile(r"^[0-9a-f]{64}$")
 COMMIT_OID = re.compile(r"^(?:[0-9a-f]{40}|[0-9a-f]{64})$")
 SKIPPED_LARGE_ENTRY = re.compile(
@@ -30,7 +31,7 @@ class SnapshotVerificationError(RuntimeError):
 
 
 class TreeDigest:
-    """A bounded digest of path, Git mode, size, and SHA-256 for every blob."""
+    """Digest path, mode, size, and raw bytes for every snapshot entry."""
 
     def __init__(self):
         self._entries: list[tuple[str, str, int, str]] = []
@@ -400,6 +401,48 @@ def _record_omitted_paths(record: dict) -> set[str]:
     return set(paths)
 
 
+def _record_gitlinks(record: dict) -> dict[str, str]:
+    repo = record["repo"]
+    gitlinks = record.get("gitlinks", [])
+    if not isinstance(gitlinks, list):
+        raise SnapshotVerificationError(
+            f"{repo}: manifest gitlinks must be an array"
+        )
+    result: dict[str, str] = {}
+    for item in gitlinks:
+        if (
+            not isinstance(item, dict)
+            or set(item) != {"path", "commit"}
+            or not isinstance(item["path"], str)
+            or not _valid_omitted_path(item["path"])
+            or not isinstance(item["commit"], str)
+            or not COMMIT_OID.fullmatch(item["commit"])
+        ):
+            raise SnapshotVerificationError(
+                f"{repo}: manifest gitlinks must contain path/commit objects"
+            )
+        if item["path"] in result:
+            raise SnapshotVerificationError(
+                f"{repo}: duplicate manifest gitlink path {item['path']}"
+            )
+        if any(
+            existing.startswith(item["path"] + "/")
+            or item["path"].startswith(existing + "/")
+            for existing in result
+        ):
+            raise SnapshotVerificationError(
+                f"{repo}: nested manifest gitlink path {item['path']}"
+            )
+        result[item["path"]] = item["commit"]
+    return result
+
+
+def _markdown_path(path: str) -> str:
+    """Render arbitrary Git path bytes as one safe, deterministic ASCII token."""
+
+    return quote_from_bytes(os.fsencode(path), safe="/-._~")
+
+
 def _manifest_records(document: dict) -> dict[str, dict]:
     records: dict[str, dict] = {}
     for record in document["repos"]:
@@ -471,7 +514,14 @@ def _manifest_records(document: dict) -> dict[str, dict]:
             raise SnapshotVerificationError(
                 f"{name}: manifest withheld entries must be file/reason objects"
             )
-        _record_omitted_paths(record)
+        omitted = _record_omitted_paths(record)
+        gitlinks = _record_gitlinks(record)
+        overlap = omitted.intersection(gitlinks)
+        if overlap:
+            path = sorted(overlap, key=os.fsencode)[0]
+            raise SnapshotVerificationError(
+                f"{name}: gitlink is also declared omitted: {path}"
+            )
         records[name] = record
     return records
 
@@ -505,6 +555,26 @@ def render_index(document: dict) -> str:
             f"{record['committed_at'][:10]} | {record['files']:,} | "
             f"{record['bytes'] / 1048576:.1f} |"
         )
+    linked = [record for record in ordered if _record_gitlinks(record)]
+    if linked:
+        lines += [
+            "",
+            "## Gitlinks",
+            "",
+            "These mode-160000 entries preserve the superproject's exact "
+            "commit pointer. Target repository content is not copied or "
+            "dereferenced.",
+            "",
+        ]
+        for record in linked:
+            for path, commit in sorted(
+                _record_gitlinks(record).items(),
+                key=lambda item: os.fsencode(item[0]),
+            ):
+                displayed = _markdown_path(record["repo"] + "/" + path)
+                lines.append(
+                    f"- `{displayed}` — `{commit}`"
+                )
     dropped = [record for record in ordered if record["skipped_large"]]
     if dropped:
         lines += [
@@ -518,7 +588,14 @@ def render_index(document: dict) -> str:
         ]
         for record in dropped:
             for item in record["skipped_large"]:
-                lines.append(f"- `{record['repo']}/{item}`")
+                skipped_path = _skipped_large_path(record["repo"], item)
+                suffix = item[len(skipped_path):]
+                displayed = _markdown_path(
+                    record["repo"] + "/" + skipped_path
+                )
+                lines.append(
+                    f"- `{displayed}`{suffix}"
+                )
     held = [record for record in ordered if record["withheld"]]
     if held:
         lines += [
@@ -534,8 +611,11 @@ def render_index(document: dict) -> str:
         ]
         for record in held:
             for item in record["withheld"]:
+                displayed = _markdown_path(
+                    record["repo"] + "/" + item["file"]
+                )
                 lines.append(
-                    f"- `{record['repo']}/{item['file']}` — {item['reason']}"
+                    f"- `{displayed}` — {item['reason']}"
                 )
     if missing:
         lines += [
@@ -671,7 +751,33 @@ def verify_staged(
             digest = TreeDigest()
             byte_count = 0
             repo_entries = grouped[name]
+            expected_gitlinks = _record_gitlinks(record)
+            seen_gitlinks: set[str] = set()
             for relative, entry in repo_entries:
+                expected_oid = expected_gitlinks.get(relative)
+                if entry.mode == "160000":
+                    if expected_oid is None:
+                        errors.append(
+                            f"{name}: extra staged gitlink at {relative}"
+                        )
+                    else:
+                        seen_gitlinks.add(relative)
+                        if entry.oid != expected_oid:
+                            errors.append(
+                                f"{name}: staged gitlink {relative} OID "
+                                f"{entry.oid} != manifest OID {expected_oid}"
+                            )
+                    raw_oid = bytes.fromhex(entry.oid)
+                    digest.add(relative, entry.mode, raw_oid)
+                    byte_count += len(raw_oid)
+                    continue
+                if expected_oid is not None:
+                    seen_gitlinks.add(relative)
+                    errors.append(
+                        f"{name}: staged gitlink {relative} has mode "
+                        f"{entry.mode}, expected 160000"
+                    )
+                    continue
                 size, content_sha256 = blobs.describe(entry.oid)
                 digest.add_digest(
                     relative,
@@ -680,6 +786,14 @@ def verify_staged(
                     content_sha256,
                 )
                 byte_count += size
+            for relative in sorted(
+                set(expected_gitlinks) - seen_gitlinks,
+                key=os.fsencode,
+            ):
+                errors.append(
+                    f"{name}: manifest gitlink is missing from the index: "
+                    f"{relative}"
+                )
             file_count = len(repo_entries)
             total_files += file_count
             total_bytes += byte_count
@@ -799,6 +913,29 @@ def _hash_worktree_entries(
     ]
 
 
+def _manifest_gitlink_entries(
+    root: Path,
+) -> list[tuple[str, str, str]]:
+    manifest_path = root / "MANIFEST.json"
+    try:
+        raw = manifest_path.read_bytes()
+    except FileNotFoundError as exc:
+        raise SnapshotVerificationError(
+            f"manifest not found: {manifest_path}"
+        ) from exc
+    document = _parse_manifest(raw, "working-tree MANIFEST.json")
+    records = _manifest_records(document)
+    return sorted(
+        (
+            f"repos/{repo}/{path}",
+            "160000",
+            commit,
+        )
+        for repo, record in records.items()
+        for path, commit in _record_gitlinks(record).items()
+    )
+
+
 def _replace_snapshot_index(
     root: Path,
     entries: list[tuple[str, str, str]],
@@ -844,6 +981,27 @@ def stage_and_verify(root: Path = HERE) -> dict[str, int]:
     root = root.resolve()
     worktree_entries = _worktree_entries(root)
     staged_entries = _hash_worktree_entries(root, worktree_entries)
+    gitlink_entries = _manifest_gitlink_entries(root)
+    worktree_paths = {path for path, _mode, _oid in staged_entries}
+    for path, _mode, _oid in gitlink_entries:
+        collision = next(
+            (
+                existing
+                for existing in worktree_paths
+                if (
+                    existing == path
+                    or existing.startswith(path + "/")
+                    or path.startswith(existing + "/")
+                )
+            ),
+            None,
+        )
+        if collision is not None:
+            raise SnapshotVerificationError(
+                f"gitlink {path} collides with materialized path {collision}"
+            )
+    staged_entries.extend(gitlink_entries)
+    staged_entries.sort(key=lambda entry: os.fsencode(entry[0]))
     _replace_snapshot_index(root, staged_entries)
     return verify_staged(root)
 

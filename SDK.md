@@ -119,6 +119,10 @@ registry-authorized owner-signed re-genesis resets.
 - rejects absolute paths, traversal, directories, and symlink components;
 - fails closed on platforms without descriptor-relative no-follow primitives.
 
+Mode-160000 gitlinks are inventory pointers, not readable specimen files. The
+manifest exposes their path and exact commit OID; the SDK never dereferences or
+executes their external target content.
+
 Egg extraction likewise uses descriptor-relative `mkdir`/`open` operations
 with `O_DIRECTORY` and `O_NOFOLLOW`. It verifies the complete recursively
 bounded egg before creating the destination.

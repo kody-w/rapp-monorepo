@@ -18,6 +18,7 @@ MANIFEST_SCHEMA = "rapp-monorepo/1.0"
 ORGANISM_SCHEMA = "rapp-organism/1.0"
 _ORGAN_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,99}$")
 _COMMIT_RE = re.compile(r"^[0-9a-f]{40}$")
+_GIT_OID_RE = re.compile(r"^(?:[0-9a-f]{40}|[0-9a-f]{64})$")
 _SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 
 SYSTEM_LIFECYCLES = frozenset(
@@ -141,6 +142,7 @@ class Organism:
             raise InventoryError("allow_drift must be a boolean")
         self.root = Path(root).absolute()
         self.allow_drift = allow_drift
+        self._gitlinks_by_organ: dict[str, frozenset[str]] = {}
         self.manifest = _load_object(self.root / "MANIFEST.json", "MANIFEST.json")
         self.registry = _load_object(self.root / "ORGANISM.json", "ORGANISM.json")
         self._validate()
@@ -326,6 +328,35 @@ class Organism:
                 raise InventoryError(
                     "manifest repository does not match the estate membership pattern"
                 )
+            gitlinks = record.get("gitlinks", [])
+            if not isinstance(gitlinks, list):
+                raise InventoryError("manifest gitlinks must be an array")
+            gitlink_paths: set[str] = set()
+            for item in gitlinks:
+                if (
+                    not isinstance(item, dict)
+                    or set(item) != {"path", "commit"}
+                    or not isinstance(item.get("path"), str)
+                    or not _GIT_OID_RE.fullmatch(str(item.get("commit", "")))
+                ):
+                    raise InventoryError(
+                        "manifest gitlinks must contain path/commit objects"
+                    )
+                path = _validate_relative_path(
+                    item["path"], f"{record['repo']} gitlink path"
+                )
+                if path in gitlink_paths or any(
+                    existing.startswith(path + "/")
+                    or path.startswith(existing + "/")
+                    for existing in gitlink_paths
+                ):
+                    raise InventoryError(
+                        "manifest gitlink paths must be unique and non-nested"
+                    )
+                gitlink_paths.add(path)
+            self._gitlinks_by_organ[record["repo"]] = frozenset(
+                gitlink_paths
+            )
             names.append(record["repo"])
         if len(names) != len(set(names)):
             raise InventoryError("manifest repository names must be unique")
@@ -725,6 +756,10 @@ class Organism:
                 return record
         raise InventoryError(f"unknown organ {name!r}")
 
+    def gitlink_paths(self, name: str) -> frozenset[str]:
+        self.organ(name)
+        return self._gitlinks_by_organ.get(name, frozenset())
+
     def summary(self) -> dict[str, Any]:
         return {
             "schema": self.registry["schema"],
@@ -789,7 +824,16 @@ class SafeSpecimen:
     def _open_parent(self, organ: str, path: str) -> tuple[int, str]:
         self._require_no_follow_primitives()
         self.organism.organ(organ)
-        parts = ("repos", organ, *self._parts(path))
+        relative_parts = self._parts(path)
+        relative = "/".join(relative_parts)
+        if any(
+            relative == gitlink or relative.startswith(gitlink + "/")
+            for gitlink in self.organism.gitlink_paths(organ)
+        ):
+            raise SpecimenAccessError(
+                "specimen path is a gitlink pointer and cannot be traversed"
+            )
+        parts = ("repos", organ, *relative_parts)
         directory_flags = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW
         try:
             descriptor = os.open(self.organism.root, directory_flags)

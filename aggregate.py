@@ -22,8 +22,8 @@ WHAT IT LEAVES BEHIND
 
   Checkout transformations. Files and modes come from the cloned Git index
   and raw blobs, never the worktree, so attributes and smudge filters cannot
-  change what the recorded commit authenticates. A tracked gitlink fails the
-  repo by name because silently dropping mode 160000 is not a snapshot.
+  change what the recorded commit authenticates. Tracked gitlinks are kept as
+  exact mode-160000 commit pointers without cloning or dereferencing targets.
 
   Large files, over --max-file-mb. A desert-island copy is worth more if it
   fits on the boat. Everything skipped is NAMED in the manifest — a snapshot
@@ -287,11 +287,6 @@ def _source_index_entries(src: Path) -> list[SourceIndexEntry]:
         if path in seen:
             raise RuntimeError(f"duplicate source index path: {path}")
         seen.add(path)
-        if mode == "160000":
-            raise RuntimeError(
-                f"tracked gitlink at {path} uses mode 160000; "
-                "submodule pointers cannot be represented by this snapshot"
-            )
         if mode not in SUPPORTED_MODES:
             raise RuntimeError(f"unsupported Git mode {mode} at {path}")
         if not COMMIT_OID.fullmatch(oid):
@@ -447,12 +442,30 @@ def capture(owner, repo, work: Path, max_file_mb: float):
     files = bytes_written = 0
     skipped_large: list[str] = []
     withheld: list[dict] = []
+    gitlinks: list[dict] = []
     tree_digest = TreeDigest()
 
     try:
         blobs = _GitBlobReader(src)
         with blobs:
             for entry in source_entries:
+                if entry.mode == "160000":
+                    keep, reason = ip_gate.screen_path(entry.path)
+                    if not keep:
+                        withheld.append({
+                            "file": entry.path,
+                            "reason": reason,
+                        })
+                        continue
+                    raw_oid = bytes.fromhex(entry.oid)
+                    gitlinks.append({
+                        "path": entry.path,
+                        "commit": entry.oid,
+                    })
+                    tree_digest.add(entry.path, entry.mode, raw_oid)
+                    files += 1
+                    bytes_written += len(raw_oid)
+                    continue
                 try:
                     size = blobs.size(entry.oid)
                 except (OSError, RuntimeError) as e:
@@ -506,6 +519,7 @@ def capture(owner, repo, work: Path, max_file_mb: float):
         "tree_sha256": tree_digest.hexdigest(),
         "skipped_large": skipped_large,
         "withheld": withheld,
+        "gitlinks": gitlinks,
     }, ""
 
 def main() -> int:

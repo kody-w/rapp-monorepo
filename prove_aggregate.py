@@ -11,7 +11,13 @@ from pathlib import Path
 from unittest.mock import patch
 
 import aggregate
-from verify_snapshot import compute_tree_sha256
+from verify_snapshot import (
+    MANIFEST_INTEGRITY_PROFILE,
+    MANIFEST_SCHEMA,
+    compute_tree_sha256,
+    render_index,
+    stage_and_verify,
+)
 
 
 class CaptureBoundaryTests(unittest.TestCase):
@@ -49,6 +55,7 @@ class CaptureBoundaryTests(unittest.TestCase):
         root: Path,
         source: Path,
         screen=lambda _raw, _path: (True, ""),
+        screen_path=lambda _path: (True, ""),
     ):
         out = root / "out"
         work = root / "work"
@@ -57,6 +64,11 @@ class CaptureBoundaryTests(unittest.TestCase):
             patch.object(aggregate, "OUT", out),
             patch.object(aggregate, "run", self.local_run(source)),
             patch.object(aggregate.ip_gate, "screen", screen),
+            patch.object(
+                aggregate.ip_gate,
+                "screen_path",
+                screen_path,
+            ),
         ):
             record, error = aggregate.capture(
                 "owner", "repo", work, max_file_mb=2.0
@@ -197,7 +209,7 @@ class CaptureBoundaryTests(unittest.TestCase):
                 upstream_blob,
             )
 
-    def test_tracked_gitlink_fails_capture_and_names_the_path(self):
+    def test_tracked_gitlink_is_preserved_without_copying_target_content(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
             child = root / "child"
@@ -208,10 +220,13 @@ class CaptureBoundaryTests(unittest.TestCase):
 
             source = root / "source"
             self.init_repo(source)
-            (source / ".gitmodules").write_text(
+            gitmodules = (
                 '[submodule "deps/child"]\n'
                 "\tpath = deps/child\n"
-                f"\turl = {child.resolve().as_uri()}\n",
+                f"\turl = {child.resolve().as_uri()}\n"
+            )
+            (source / ".gitmodules").write_text(
+                gitmodules,
                 encoding="utf-8",
             )
             self.git(source, "add", ".gitmodules")
@@ -226,11 +241,157 @@ class CaptureBoundaryTests(unittest.TestCase):
 
             out, record, error = self.capture_repo(root, source)
 
-            self.assertIsNone(record)
-            self.assertIn("gitlink", error)
-            self.assertIn("160000", error)
-            self.assertIn("deps/child", error)
-            self.assertFalse((out / "repo").exists())
+            self.assertEqual(error, "")
+            self.assertIsNotNone(record)
+            self.assertEqual(record["files"], 2)
+            self.assertEqual(
+                record["bytes"],
+                len(gitmodules.encode()) + len(bytes.fromhex(child_commit)),
+            )
+            self.assertEqual(record["gitlinks"], [{
+                "path": "deps/child",
+                "commit": child_commit,
+            }])
+            self.assertEqual(
+                record["tree_sha256"],
+                compute_tree_sha256([
+                    (".gitmodules", "100644", gitmodules.encode()),
+                    ("deps/child", "160000", bytes.fromhex(child_commit)),
+                ]),
+            )
+            self.assertFalse((out / "repo" / "deps" / "child").exists())
+            self.assertEqual(
+                list((out / "repo").rglob("child.txt")),
+                [],
+            )
+
+    def test_gitlink_capture_and_raw_stage_end_to_end(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            child = root / "child"
+            self.init_repo(child)
+            (child / "target.txt").write_text("do not copy\n", encoding="utf-8")
+            self.commit(child)
+            child_commit = self.git(child, "rev-parse", "HEAD").stdout.strip()
+
+            source = root / "source"
+            self.init_repo(source)
+            self.git(
+                source,
+                "update-index",
+                "--add",
+                "--cacheinfo",
+                f"160000,{child_commit},openclaw",
+            )
+            self.git(source, "commit", "-qm", "gitlink-only superproject")
+
+            destination = root / "destination"
+            self.init_repo(destination)
+            self.git(destination, "commit", "--allow-empty", "-qm", "base")
+            (destination / "repos").mkdir()
+            work = root / "work"
+            work.mkdir()
+            with (
+                patch.object(aggregate, "OUT", destination / "repos"),
+                patch.object(aggregate, "run", self.local_run(source)),
+                patch.object(
+                    aggregate.ip_gate,
+                    "screen",
+                    lambda _raw, _path: (True, ""),
+                ),
+                patch.object(
+                    aggregate.ip_gate,
+                    "screen_path",
+                    lambda _path: (True, ""),
+                ),
+            ):
+                record, error = aggregate.capture(
+                    "owner", "demo", work, max_file_mb=2.0
+                )
+            self.assertEqual(error, "")
+            document = {
+                "schema": MANIFEST_SCHEMA,
+                "integrity_profile": MANIFEST_INTEGRITY_PROFILE,
+                "owner": "owner",
+                "captured_at": "2026-08-23T00:00:00+00:00",
+                "membership_pattern": "^demo$",
+                "max_file_mb": 2.0,
+                "repos": [record],
+                "not_captured": [],
+            }
+            (destination / "MANIFEST.json").write_text(
+                json.dumps(document, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            (destination / "INDEX.md").write_text(
+                render_index(document),
+                encoding="utf-8",
+            )
+
+            summary = stage_and_verify(destination)
+
+            staged = self.git(
+                destination,
+                "ls-files",
+                "--stage",
+                "--",
+                "repos/demo/openclaw",
+            ).stdout.split()
+            self.assertEqual(staged[:2], ["160000", child_commit])
+            self.assertEqual(summary["files"], 1)
+            self.assertFalse(
+                (destination / "repos" / "demo" / "openclaw").exists()
+            )
+            self.assertEqual(
+                list((destination / "repos").rglob("target.txt")),
+                [],
+            )
+            self.assertNotEqual(
+                self.git(
+                    destination,
+                    "cat-file",
+                    "-e",
+                    child_commit,
+                    check=False,
+                ).returncode,
+                0,
+            )
+
+    def test_gitlink_path_gate_still_withholds_the_pointer(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            source = root / "source"
+            self.init_repo(source)
+            commit = "8" * 40
+            self.git(
+                source,
+                "update-index",
+                "--add",
+                "--cacheinfo",
+                f"160000,{commit},private-notes/dependency",
+            )
+            self.git(source, "commit", "-qm", "withheld gitlink")
+
+            out, record, error = self.capture_repo(
+                root,
+                source,
+                screen_path=lambda _path: (
+                    False,
+                    "path matches a configured withhold rule",
+                ),
+            )
+
+            self.assertEqual(error, "")
+            self.assertEqual(record["files"], 0)
+            self.assertEqual(record["bytes"], 0)
+            self.assertEqual(record["gitlinks"], [])
+            self.assertEqual(record["withheld"], [{
+                "file": "private-notes/dependency",
+                "reason": "path matches a configured withhold rule",
+            }])
+            self.assertFalse(
+                (out / "repo" / "private-notes" / "dependency").exists()
+            )
 
     def test_source_blob_error_fails_and_removes_partial_output(self):
         with tempfile.TemporaryDirectory() as td:
@@ -372,6 +533,7 @@ class CaptureBoundaryTests(unittest.TestCase):
                 "tree_sha256": compute_tree_sha256([]),
                 "skipped_large": [],
                 "withheld": [],
+                "gitlinks": [],
             }
 
             def fake_capture(_owner, repo, _work, _max_file_mb):

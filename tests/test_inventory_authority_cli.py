@@ -438,6 +438,21 @@ def test_safe_specimen_refuses_traversal_absolute_directories_and_symlinks() -> 
         with pytest.raises(SpecimenAccessError, match="symlink"):
             local.read_bytes("organ", "link")
         assert local.readlink("organ", "link") == "target"
+
+        materialized = scratch / "repos" / "organ" / "external"
+        materialized.mkdir()
+        (materialized / "mutable.txt").write_text("outside the specimen")
+        manifest = _minimal_manifest("organ")
+        next(
+            item for item in manifest["repos"] if item["repo"] == "organ"
+        )["gitlinks"] = [{
+            "path": "external",
+            "commit": "1" * 40,
+        }]
+        (scratch / "MANIFEST.json").write_text(json.dumps(manifest))
+        gitlink_specimen = SafeSpecimen(Organism(scratch))
+        with pytest.raises(SpecimenAccessError, match="gitlink pointer"):
+            gitlink_specimen.read_bytes("organ", "external/mutable.txt")
     finally:
         shutil.rmtree(scratch, ignore_errors=True)
 
