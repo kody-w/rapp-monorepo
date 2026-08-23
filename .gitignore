@@ -2,3 +2,10 @@
 .pii-terms
 __pycache__/
 *.pyc
+/.ci-installed/
+/.pytest_cache/
+/.venv/
+/.venv-sdk/
+/build/
+/dist/
+/*.egg-info/

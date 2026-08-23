@@ -38,6 +38,7 @@ import argparse
 import json
 import os
 import shutil
+import stat
 import subprocess
 import sys
 import tempfile
@@ -46,6 +47,12 @@ import re
 from pathlib import Path
 
 import ip_gate
+from verify_snapshot import (
+    MANIFEST_INTEGRITY_PROFILE,
+    MANIFEST_SCHEMA,
+    TreeDigest,
+    render_index,
+)
 
 HERE = Path(__file__).resolve().parent
 OUT = HERE / "repos"
@@ -67,7 +74,7 @@ MEMBER = r"(?i)^(rapp|rappter|openrappter|RAR$|twin|brainstem|wildhaven)"
 NOT_MEMBERS = re.compile(r"(?i)aibast")
 
 CLONE_TIMEOUT = int(os.environ.get("RAPP_CLONE_TIMEOUT", "600"))
-SKIP_DIRS = {".git", "node_modules", "__pycache__", ".venv", "venv", ".next"}
+SKIP_DIRS = {".git"}
 
 
 def utc_now() -> str:
@@ -140,8 +147,20 @@ def capture(owner, repo, work: Path, max_file_mb: float):
     except Exception as e:
         return fail(f"{type(e).__name__}: {e}")
 
-    sha = run(["git", "-C", str(src), "rev-parse", "HEAD"]).stdout.strip()
-    when = run(["git", "-C", str(src), "log", "-1", "--format=%cI"]).stdout.strip()
+    head = run([
+        "git", "-C", str(src), "rev-parse", "--verify", "HEAD^{commit}",
+    ])
+    sha = (head.stdout or "").strip()
+    if head.returncode != 0 or not re.fullmatch(
+        r"(?:[0-9a-f]{40}|[0-9a-f]{64})", sha
+    ):
+        return fail("repository has no resolvable HEAD commit")
+    committed = run([
+        "git", "-C", str(src), "log", "-1", "--format=%cI",
+    ])
+    when = (committed.stdout or "").strip()
+    if committed.returncode != 0 or not when:
+        return fail("repository HEAD has no commit timestamp")
 
     _remove_path(dest)
     dest.mkdir(parents=True, exist_ok=True)
@@ -150,8 +169,14 @@ def capture(owner, repo, work: Path, max_file_mb: float):
     files = bytes_written = 0
     skipped_large: list[str] = []
     withheld: list[dict] = []
+    tree_digest = TreeDigest()
 
-    for path in sorted(src.rglob("*")):
+    try:
+        source_paths = sorted(src.rglob("*"))
+    except OSError as e:
+        return fail(f"cannot enumerate repository tree: {type(e).__name__}: {e}")
+
+    for path in source_paths:
         rel = path.relative_to(src)
         if any(part in SKIP_DIRS for part in rel.parts):
             continue
@@ -161,17 +186,33 @@ def capture(owner, repo, work: Path, max_file_mb: float):
                 link_target = os.readlink(path)
                 raw = os.fsencode(link_target)
                 size = len(raw)
+                git_mode = "120000"
             else:
-                if path.is_dir():
+                source_mode = path.lstat().st_mode
+                if stat.S_ISDIR(source_mode):
                     continue
-                size = path.stat().st_size
-        except OSError:
-            continue
+                if not stat.S_ISREG(source_mode):
+                    return fail(f"unsupported tracked file type at {rel}")
+                size = path.lstat().st_size
+                git_mode = (
+                    "100755"
+                    if source_mode & (stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+                    else "100644"
+                )
+        except OSError as e:
+            return fail(
+                f"cannot inspect {rel}: {type(e).__name__}: {str(e)[:120]}"
+            )
         if size > limit:
             skipped_large.append(f"{rel} ({size / 1048576:.1f}MB)")
             continue
         if link_target is None:
-            raw = path.read_bytes()
+            try:
+                raw = path.read_bytes()
+            except OSError as e:
+                return fail(
+                    f"cannot read {rel}: {type(e).__name__}: {str(e)[:120]}"
+                )
         keep, reason = ip_gate.screen(raw, str(rel))
         if not keep:
             # Withheld, not rewritten: everything that ships is byte-faithful
@@ -179,11 +220,18 @@ def capture(owner, repo, work: Path, max_file_mb: float):
             withheld.append({"file": str(rel), "reason": reason})
             continue
         target = dest / rel
-        target.parent.mkdir(parents=True, exist_ok=True)
-        if link_target is None:
-            target.write_bytes(raw)
-        else:
-            os.symlink(link_target, target)
+        try:
+            target.parent.mkdir(parents=True, exist_ok=True)
+            if link_target is None:
+                target.write_bytes(raw)
+                target.chmod(0o755 if git_mode == "100755" else 0o644)
+            else:
+                os.symlink(link_target, target)
+        except OSError as e:
+            return fail(
+                f"cannot materialize {rel}: {type(e).__name__}: {str(e)[:120]}"
+            )
+        tree_digest.add(rel.as_posix(), git_mode, raw)
         files += 1
         bytes_written += len(raw)
 
@@ -195,61 +243,10 @@ def capture(owner, repo, work: Path, max_file_mb: float):
         "captured_at": utc_now(),
         "files": files,
         "bytes": bytes_written,
+        "tree_sha256": tree_digest.hexdigest(),
         "skipped_large": skipped_large,
         "withheld": withheld,
     }, ""
-
-
-def write_index(records, missing, args):
-    total_files = sum(r["files"] for r in records)
-    total_bytes = sum(r["bytes"] for r in records)
-    lines = [
-        "# What is in here",
-        "",
-        f"{len(records)} public RAPP repositories, captured at HEAD in a single "
-        f"pass on {utc_now()}.",
-        f"{total_files:,} files, {total_bytes / 1048576:.0f} MB.",
-        "",
-        "Every row is the exact commit this snapshot took. Nothing here is a "
-        "guess about what upstream contains — re-clone any row's repo at its "
-        "sha to get the full history behind it.",
-        "",
-        "| repo | commit | upstream commit date | files | MB |",
-        "|---|---|---|---|---|",
-    ]
-    for r in sorted(records, key=lambda x: x["repo"].lower()):
-        lines.append(
-            f"| [`{r['repo']}`](repos/{r['repo']}) | `{r['commit'][:8]}` | "
-            f"{(r['committed_at'] or '')[:10]} | {r['files']:,} | "
-            f"{r['bytes'] / 1048576:.1f} |")
-    dropped = [r for r in records if r["skipped_large"]]
-    if dropped:
-        lines += ["", "## Files too large for the boat", "",
-                  f"Skipped at the {args.max_file_mb}MB per-file limit. Named, "
-                  "not silently dropped — clone the upstream repo if you need "
-                  "one of these.", ""]
-        for r in dropped:
-            for f in r["skipped_large"]:
-                lines.append(f"- `{r['repo']}/{f}`")
-    held = [r for r in records if r["withheld"]]
-    if held:
-        lines += ["", "## Withheld by the gate", "",
-                  "These files exist upstream and are deliberately NOT here. "
-                  "They are withheld whole rather than rewritten, so that "
-                  "everything this mirror does carry is byte-identical to its "
-                  "source. The rule is named; the matched text is not, because "
-                  "quoting a finding republishes it.", ""]
-        for r in held:
-            for w in r["withheld"]:
-                lines.append(f"- `{r['repo']}/{w['file']}` — {w['reason']}")
-    if missing:
-        lines += ["", "## Not captured this run", "",
-                  "A snapshot that hides its gaps is a snapshot you cannot "
-                  "trust. These members were not captured:", ""]
-        for m in missing:
-            lines.append(f"- `{m['repo']}` — {m['reason']}")
-    INDEX.write_text("\n".join(lines) + "\n", encoding="utf-8")
-
 
 def main() -> int:
     ap = argparse.ArgumentParser()
@@ -297,19 +294,26 @@ def main() -> int:
     finally:
         shutil.rmtree(work, ignore_errors=True)
 
-    MANIFEST.write_text(json.dumps({
-        "schema": "rapp-monorepo/1.0",
+    document = {
+        "schema": MANIFEST_SCHEMA,
+        "integrity_profile": MANIFEST_INTEGRITY_PROFILE,
         "owner": args.owner,
         "captured_at": utc_now(),
         "membership_pattern": MEMBER,
         "max_file_mb": args.max_file_mb,
         "repos": sorted(records, key=lambda r: r["repo"].lower()),
         "not_captured": missing,
-    }, indent=2) + "\n", encoding="utf-8")
-    write_index(records, missing, args)
+    }
+    MANIFEST.write_text(
+        json.dumps(document, indent=2) + "\n", encoding="utf-8"
+    )
+    INDEX.write_text(render_index(document), encoding="utf-8")
 
     total = sum(r["bytes"] for r in records) / 1048576
     print(f"\n{len(records)} captured, {len(missing)} not captured, {total:.0f}MB total")
+    if missing:
+        print("REFUSING TO PUBLISH: at least one member was not captured")
+        return 4
     return 0
 
 

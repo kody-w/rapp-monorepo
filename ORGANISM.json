@@ -1,0 +1,291 @@
+{
+  "schema": "rapp-organism/1.0",
+  "snapshot_schema": "rapp-monorepo/1.0",
+  "name": "RAPP complete organism SDK estate",
+  "public_sdk": {
+    "package": "rapp_sdk",
+    "command": "rapp-sdk",
+    "python": ">=3.11",
+    "wire": "rapp/1"
+  },
+  "conformance": {
+    "state": "not-fully-rapp-1-conformant",
+    "full_conformance": false,
+    "reason": "The stale RAPP target pin drifts from the user-designated current kody-w/rapp-1 source, and the authenticated section-13 registry and out-of-band estate-owner anchor have not been published."
+  },
+  "authority": {
+    "normative_source_current": {
+      "repository": "kody-w/rapp-1",
+      "repository_url": "https://github.com/kody-w/rapp-1",
+      "authority_role": "normative-protocol-authority",
+      "organ": "rapp-1",
+      "snapshot_path": "repos/rapp-1/SPEC.md",
+      "snapshot_commit": "afc913ca3fe7dbc9da97871e67240f34416e5929",
+      "sha256": "cea7847f98f9751734995f46fd4e1bde211c8eb9d03dbbb477934213865bb91a",
+      "byte_length": 41952,
+      "revision": "rev-5",
+      "designation": "user-designated-current-standard-source"
+    },
+    "map_structural_pin": {
+      "record_path": "repos/rapp-map/RAPP1_AUTHORITY.json",
+      "commit": "d2cd5abed48d3f52b86bbb975ac3558286d1db41",
+      "sha256": "cea7847f98f9751734995f46fd4e1bde211c8eb9d03dbbb477934213865bb91a",
+      "byte_length": 41952,
+      "matches_normative_source_current_bytes": true,
+      "authenticated_registry_acceptance": false
+    },
+    "target_structural_pin": {
+      "target": "kody-w/RAPP",
+      "record_path": "repos/RAPP/RAPP1_AUTHORITY.json",
+      "commit": "6723c7add2aed36bb68992fc71a56b0a4bd5ad81",
+      "sha256": "6d06daba65d7c045716f3d6e95db8401ab58e727820e4114466d847f62cae49b",
+      "byte_length": 41880,
+      "matches_normative_source_current_bytes": false,
+      "state": "structurally-valid-for-target-but-drifted"
+    },
+    "spine_pin_claim": {
+      "observed_old_commit": "6723c7add2aed36bb68992fc71a56b0a4bd5ad81",
+      "map_current_commit": "d2cd5abed48d3f52b86bbb975ac3558286d1db41",
+      "commits_equal": false,
+      "claim_that_old_pin_equals_map_current": "false",
+      "evidence_path": "repos/rapp-spine/CRAWL_GRAPH.md"
+    },
+    "target_status": "repos/RAPP/RAPP1_STATUS.md",
+    "owner_actions": "repos/RAPP/RAPP1_OWNER_ACTIONS.json",
+    "authenticated_registry": {
+      "state": "absent",
+      "is_section_13_registry": false,
+      "out_of_band_anchor": null
+    },
+    "retired_public_target": {
+      "repository": "kody-w/RAPP",
+      "pages": "https://kody-w.github.io/RAPP/",
+      "lifecycle": "stale-retired",
+      "replacement_boundary": "this root rapp_sdk package",
+      "protocol_authority": false,
+      "may_redefine_rapp_1": false
+    }
+  },
+  "projections": [
+    {
+      "schema": "rapp-projection-evidence/1.0",
+      "id": "map",
+      "organ": "rapp-map",
+      "projection_type": "owner-wide-observation-map",
+      "authority_kind": "derived-observation",
+      "authority_scope": "navigation-and-cartography-only",
+      "lifecycle": "active-but-observation-stale",
+      "captured_commit": "f3dd5ed11514d0562eb7fc87afc2eb59ed87aca6",
+      "live_commit": "f3dd5ed11514d0562eb7fc87afc2eb59ed87aca6",
+      "live_evidence": "declared-cartographer-report-not-dynamically-fetched-by-sdk",
+      "tracked_blobs": {"captured": 44, "live": 45},
+      "omitted_blobs": [
+        {"path": "neurons.json", "reason": "exceeds-2MiB-snapshot-limit"}
+      ],
+      "coverage": {
+        "observed_owner_repositories": 522,
+        "captured_organ_overlap": 152,
+        "snapshot_organs_at_measurement": 196
+      },
+      "observed_at": "2026-07-26T01:25:20Z",
+      "generated_artifact": "repos/rapp-map/estate-map.json",
+      "generator": "repos/rapp-map/tools/spine.py",
+      "generated_from": [
+        "repos/rapp-map/spine/observations.json",
+        "repos/rapp-map/spine/overlay.json"
+      ]
+    },
+    {
+      "schema": "rapp-projection-evidence/1.0",
+      "id": "spine",
+      "organ": "rapp-spine",
+      "projection_type": "routing-and-foundation-index",
+      "authority_kind": "curated-generated-projection",
+      "authority_scope": "routing-and-navigation-only",
+      "lifecycle": "active-but-incomplete",
+      "captured_commit": "ffbd55b7e0eee17b47e38e3f2e4609b2b35c64d3",
+      "live_commit": "ffbd55b7e0eee17b47e38e3f2e4609b2b35c64d3",
+      "live_evidence": "declared-cartographer-report-not-dynamically-fetched-by-sdk",
+      "tracked_blobs": {"captured": 28, "live": 28},
+      "coverage": {
+        "modeled_organs": 42,
+        "snapshot_organs_at_measurement": 196,
+        "protocol_materials": {"unresolved": 34, "total": 60},
+        "required_sources": {"unresolved": 36, "total": 129}
+      },
+      "observed_at": null,
+      "generated_artifact": "repos/rapp-spine/crawl.json",
+      "generator": "repos/rapp-spine/generate_crawl.py",
+      "generated_from": [
+        "repos/rapp-spine/registry.json",
+        "repos/rapp-spine/foundation.json"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "type": "normative-authority",
+      "from": "kody-w/rapp-1",
+      "to": "rapp/1",
+      "state": "current-user-designated-source"
+    },
+    {
+      "type": "projection-of",
+      "from": "map",
+      "to": "captured-organism",
+      "authority": false
+    },
+    {
+      "type": "projection-of",
+      "from": "spine",
+      "to": "captured-organism",
+      "authority": false
+    },
+    {
+      "type": "structural-pin-for-stale-target",
+      "from": "kody-w/RAPP",
+      "to": "kody-w/rapp-1@6723c7add2aed36bb68992fc71a56b0a4bd5ad81",
+      "current_normative_bytes": false
+    }
+  ],
+  "alignment_conflicts": [
+    {
+      "id": "target-pin-behind-current-standard",
+      "type": "authority-pin-conflict",
+      "state": "active",
+      "evidence_mode": "validated-local-records",
+      "evidence_paths": [
+        "repos/RAPP/RAPP1_AUTHORITY.json",
+        "repos/rapp-map/RAPP1_AUTHORITY.json",
+        "repos/rapp-1/SPEC.md"
+      ]
+    },
+    {
+      "id": "spine-pin-equality-false",
+      "type": "authority-pin-conflict",
+      "state": "active",
+      "evidence_mode": "evidence-backed-declared-finding",
+      "evidence_paths": ["repos/rapp-spine/CRAWL_GRAPH.md", "repos/rapp-map/RAPP1_AUTHORITY.json"]
+    },
+    {
+      "id": "spine-legacy-frame-current-claim",
+      "type": "legacy-frame-claim",
+      "token": "rapp-frame/2.0",
+      "state": "active-projection-conflict",
+      "evidence_mode": "evidence-backed-declared-finding",
+      "evidence_paths": ["repos/rapp-spine/foundation.json", "repos/rapp-spine/registry.json"]
+    },
+    {
+      "id": "spine-legacy-egg-current-claim",
+      "type": "legacy-egg-claim",
+      "token_family": "legacy-2.3-brainstem-egg",
+      "state": "active-projection-conflict",
+      "evidence_mode": "evidence-backed-declared-finding",
+      "evidence_paths": ["repos/rapp-spine/foundation.json", "repos/rapp-spine/registry.json"]
+    },
+    {
+      "id": "spine-nonexact-wire-current-claim",
+      "type": "legacy-wire-claim",
+      "token": "six-field-/chat-response",
+      "state": "active-projection-conflict",
+      "evidence_mode": "evidence-backed-declared-finding",
+      "evidence_paths": ["repos/rapp-spine/foundation.json", "repos/rapp-spine/registry.json"]
+    },
+    {
+      "id": "spine-repository-auth-as-protocol-trust",
+      "type": "trust-model-conflict",
+      "token": "github-collaborator-authorization",
+      "state": "active-projection-conflict",
+      "evidence_mode": "evidence-backed-declared-finding",
+      "evidence_paths": ["repos/rapp-spine/foundation.json"]
+    }
+  ],
+  "specimen_policy": {
+    "captured_tree": "repos/",
+    "mode": "read-only-cage",
+    "implicit_import": false,
+    "implicit_execution": false,
+    "follow_symlinks": false,
+    "path_traversal": false,
+    "safe_access": "named-organ-relative-content-only"
+  },
+  "systems": [
+    {
+      "id": "authority-contracts-navigation",
+      "name": "Authority, contracts, and navigation",
+      "lifecycle": "mixed-snapshot",
+      "authority": "mixed; classification alone grants no authority",
+      "organs": ["RAPP", "rapp-1", "RAPP-Bible", "rapp-constitution", "rapp-map", "rapp-spine", "rapp-roadmap", "rapp-docs", "rapp_docs", "RAPP-Network", "rapp-neighborhood-protocol"]
+    },
+    {
+      "id": "runtime-organism-substrate",
+      "name": "Runtime and organism substrate",
+      "lifecycle": "mixed-snapshot",
+      "authority": "implementation evidence only",
+      "organs": ["brainstem-bootcamp", "brainstem-harness", "openrappter", "rapp-agents", "rapp-ai", "rapp-base", "rapp-base-template", "rapp-brainstem", "rapp-brainstem-sdk", "rapp-cortex", "rapp-distro", "rapp-herdr", "rapp-hippocampus", "rapp-installer", "rapp-nervous-system", "rapp-platform", "rapp-sdk", "rapp-spinal-cord", "RAPP_hippo", "rapp_orion", "rappter-cli", "rappter-distro", "rappterbox"]
+    },
+    {
+      "id": "registries-catalogs-skills-discovery",
+      "name": "Registries, catalogs, skills, and discovery",
+      "lifecycle": "mixed-snapshot",
+      "authority": "catalog presence is not authenticated acceptance",
+      "organs": ["RAR", "RAPP_Store", "RAPP_Sense_Store", "rapp-carts", "rapp-claude-skills", "rapp-egg-hub", "rapp-leviathan-hub", "rapp-mapp", "rapp-mcp", "rapp-skill", "rapp-skills", "rapp-static-apis", "rapp-static-mcp", "rapp-toaster", "rapp-tools", "rapp-twin-hub", "rapp-zoo", "rapp-zoo-v2", "RAPP_Hub", "RAPPcards", "rappdex", "rappterhub", "twin-binder", "twin-egg-hatcher"]
+    },
+    {
+      "id": "distribution-release-channels",
+      "name": "Distribution and release channels",
+      "lifecycle": "mixed-snapshot",
+      "authority": "transport and release names do not grant protocol authority",
+      "organs": ["openrappter-alpha", "openrappter-beta", "openrappter-canary", "openrappter-nightly", "openrappter-release-train", "rapp-alpha", "rapp-beta", "rapp-brainstem-beta", "rapp-brainstem-walkthrough", "rapp-canary", "rapp-demos", "rapp-flight", "rapp-flight-deck", "rapp-local-install", "rapp-mirror-releases", "rapp-nightly", "rapp-oneclick-deploy", "rapp-postflight", "rapp-release-train", "rapp-rings", "rapp-support", "rapp-train", "rapp-version-selector", "RAPP_Desktop"]
+    },
+    {
+      "id": "trust-networking-observability",
+      "name": "Trust, networking, and observability",
+      "lifecycle": "mixed-snapshot",
+      "authority": "observation and naming are not trust proof",
+      "organs": ["rapp-bench", "rapp-body", "rapp-burrow", "rapp-commons", "rapp-coop", "rapp-dog-hub", "rapp-doorman", "rapp-drift-lint", "rapp-estate", "rapp-heir", "rapp-keyring", "rapp-kite", "rapp-kited-twin", "rapp-light", "rapp-membrane", "rapp-messaging", "rapp-metrics", "rapp-open", "rapp-overwatch", "rapp-ratchet", "rapp-resident", "rapp-rock-tumbler", "rapp-sealed", "rapp-sentinel", "rapp-sentinel-hub", "rapp-test-neighbor", "rapp-vneighborhood"]
+    },
+    {
+      "id": "surfaces-memory-local-tools",
+      "name": "Surfaces, memory, and local tools",
+      "lifecycle": "mixed-snapshot",
+      "authority": "presentation and local state do not extend the RAPP/1 wire",
+      "organs": ["rapp-basket", "rapp-cli", "rapp-copilot-in-chrome", "rapp-copilot-in-edge", "rapp-crispy", "rapp-dataverse", "rapp-dynamic-workflows", "rapp-fps", "rapp-holo", "rapp-hologram", "rapp-infrastructure-city", "rapp-lantern", "rapp-mirror", "rapp-moment", "rapp-pets", "rapp-quests", "rapp-recall", "rapp-remix", "rapp-rewind", "rapp-second-brain", "rapp-secondbrain", "rapp-shot", "rapp-snap", "rapp-stack-cubby", "rapp-twin", "rapp-twin-in-residence", "rapp-ultracode", "rapp-virtual-as400", "rapp-vision", "rapp-vision-neighborhood", "rapp-voice", "rapp-vscode-extension", "rapp-vui", "rapp-work-cubbies", "rappter-vui", "twin"]
+    },
+    {
+      "id": "social-world-organisms",
+      "name": "Social and world-scale organisms",
+      "lifecycle": "mixed-snapshot",
+      "authority": "domain state only; not protocol authority",
+      "organs": ["rapp-god-forum", "RAPPsquared", "rappter-factory", "rappter-mmo", "rappterbook", "rappterbook-agent", "rappterbook-api", "rappterbook-commons", "rappterbook-v2", "rappterbook-vm", "rappterverse"]
+    },
+    {
+      "id": "generated-state-publication",
+      "name": "Generated state and publication repositories",
+      "lifecycle": "generated-snapshot",
+      "authority": "derived output; never independent authority",
+      "organs": ["rappterbook-agent-dna", "rappterbook-social-graph", "rappterbook-v2-state", "rappterverse-data", "rappvision-field-notes", "rappvision-pokemon", "rappvision-prompt-frontier", "rappvision-rappterbox", "rappvision-rnr"]
+    },
+    {
+      "id": "historical-retired",
+      "name": "Explicitly historical or retired",
+      "lifecycle": "historical-or-retired",
+      "authority": "historical evidence only",
+      "organs": ["rapp-eternity", "rapp-frame-net", "rapp-installer-canary", "rapp-installer-dev", "rapp-store-archive"]
+    },
+    {
+      "id": "experiments-incubators",
+      "name": "Experiments and incubators",
+      "lifecycle": "experimental-or-incubating",
+      "authority": "none from classification",
+      "organs": ["rapp-apex-dino", "rapp-bake-off", "rapp-dino", "rapp-education-shorts", "rapp-moonshots", "rapp-personpower", "rapp-petri", "rapp-plant-smoke-20260505-233637", "rapp-play-pokemon", "rapp-video", "RAPPAIClaudeCodePlayground", "rappbook-admin", "rappter-plays-palworld", "rappter-plays-pokemon", "rappterbook-agent-exchange", "rappterbook-autopilot", "rappterbook-engine-test", "rappterbook-first-bond", "rappterbook-governance", "rappterbook-impossible-product", "rappterbook-knowledge-graph", "rappterbook-market-maker", "rappterbook-mars-barn", "rappterbook-phantom", "rappterbook-seedmaker", "wildhaven-ai-homes-twin"]
+    },
+    {
+      "id": "unclassified-incubator",
+      "name": "Unclassified / incubator",
+      "lifecycle": "unclassified-incubator",
+      "authority": "none from classification",
+      "organs": ["RappterNest"]
+    }
+  ]
+}
