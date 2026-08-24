@@ -48,10 +48,14 @@
     },
     "map_structural_pin": {
       "record_path": "repos/rapp-map/RAPP1_AUTHORITY.json",
+      "status_path": "repos/rapp-map/RAPP1_STATUS.md",
+      "status": "not-yet-fully-rapp-1-conformant",
+      "authority_scope": "Sole RAPP/1 protocol authority for this repository.",
       "commit": "d2cd5abed48d3f52b86bbb975ac3558286d1db41",
       "sha256": "cea7847f98f9751734995f46fd4e1bde211c8eb9d03dbbb477934213865bb91a",
       "byte_length": 41952,
       "matches_normative_source_current_bytes": true,
+      "structural_pin_only": true,
       "authenticated_registry_acceptance": false
     },
     "target_structural_pin": {
@@ -99,9 +103,28 @@
       "captured_commit": "f3dd5ed11514d0562eb7fc87afc2eb59ed87aca6",
       "live_commit": "f3dd5ed11514d0562eb7fc87afc2eb59ed87aca6",
       "live_evidence": "declared-cartographer-report-not-dynamically-fetched-by-sdk",
-      "tracked_blobs": {"captured": 44, "live": 45},
+      "tracked_blobs": {"captured": 41, "live": 45},
       "omitted_blobs": [
-        {"path": "neurons.json", "reason": "exceeds-2MiB-snapshot-limit"}
+        {
+          "path": "neurons.json",
+          "disposition": "skipped-large",
+          "manifest_detail": "neurons.json (2.4MB)"
+        },
+        {
+          "path": "__pycache__/build_graph.cpython-314.pyc",
+          "disposition": "withheld",
+          "manifest_detail": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "path": "spine/vertebrae/estate-2026-07-25.egg",
+          "disposition": "withheld",
+          "manifest_detail": "content is not valid UTF-8 and cannot be screened safely"
+        },
+        {
+          "path": "tools/__pycache__/spine.cpython-314.pyc",
+          "disposition": "withheld",
+          "manifest_detail": "content is not valid UTF-8 and cannot be screened safely"
+        }
       ],
       "coverage": {
         "observed_owner_repositories": 522,

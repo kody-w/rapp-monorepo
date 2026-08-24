@@ -29,6 +29,10 @@ suppresses. Sources, in order:
 
 `content` patterns are matched case-insensitively against the file's text.
 `paths` are globs matched against the repo-relative path.
+This is a closed schema: both keys are required, no other keys are allowed,
+both values must be arrays of unique, nonblank strings, every regex must
+compile, and at least one rule must exist. A malformed policy is rejected as
+a whole; valid entries never excuse invalid siblings.
 Invalid UTF-8 is still scanned with a byte-preserving decode and is withheld
 if no rule matches, because content the gate cannot fully interpret must not
 be treated as screened.
@@ -80,6 +84,10 @@ class GateNotConfigured(RuntimeError):
     """Raised when the injected rules are missing. Never swallow this."""
 
 
+class GatePolicyInvalid(GateNotConfigured):
+    """Raised when configured rules do not satisfy the closed policy schema."""
+
+
 _MESSAGE = (
     "No gate rules configured, so screening would pass everything through.\n"
     "  Set RAPP_GATE_RULES='{\"content\":[...],\"paths\":[...]}'\n"
@@ -88,27 +96,112 @@ _MESSAGE = (
     "Refusing to aggregate unscreened content (fail closed)."
 )
 
+_INVALID_MESSAGE = (
+    "Gate rules are configured but invalid. Expected exactly "
+    "'content' and 'paths', each an array of unique nonblank strings, "
+    "with at least one rule in total. Refusing to aggregate unscreened "
+    "content (fail closed)."
+)
+
 _cache: dict | None = None
+
+
+class _MalformedJson(ValueError):
+    pass
+
+
+def _local_rules_file() -> Path | None:
+    """Return the local source; kept injectable so proofs never move it."""
+    return Path(__file__).resolve().parent / ".gate-rules"
+
+
+def _reject_duplicate_keys(pairs):
+    doc = {}
+    for key, value in pairs:
+        if key in doc:
+            raise _MalformedJson
+        doc[key] = value
+    return doc
+
+
+def _reject_non_json_constant(_value):
+    raise _MalformedJson
+
+
+def _invalid() -> None:
+    raise GatePolicyInvalid(_INVALID_MESSAGE)
+
+
+def _read_policy() -> str:
+    if "RAPP_GATE_RULES" in os.environ:
+        raw = os.environ["RAPP_GATE_RULES"]
+        if not raw.strip():
+            _invalid()
+        return raw
+
+    source = _local_rules_file()
+    if source is None:
+        raise GateNotConfigured(_MESSAGE)
+    try:
+        if not source.is_file():
+            raise GateNotConfigured(_MESSAGE)
+        raw = source.read_text(encoding="utf-8")
+    except GateNotConfigured:
+        raise
+    except (OSError, UnicodeError):
+        _invalid()
+    if not raw.strip():
+        _invalid()
+    return raw
+
+
+def _validate_strings(values, *, regex: bool) -> list:
+    if type(values) is not list:
+        _invalid()
+
+    validated = []
+    seen = set()
+    for value in values:
+        if type(value) is not str or not value.strip() or value in seen:
+            _invalid()
+        try:
+            value.encode("utf-8")
+        except UnicodeEncodeError:
+            _invalid()
+        if not regex and "\x00" in value:
+            _invalid()
+        seen.add(value)
+        if regex:
+            try:
+                value = re.compile(value, re.IGNORECASE)
+            except (re.error, OverflowError):
+                _invalid()
+        validated.append(value)
+    return validated
 
 
 def _load() -> dict:
     global _cache
     if _cache is not None:
         return _cache
-    raw = os.environ.get("RAPP_GATE_RULES", "").strip()
-    if not raw:
-        f = Path(__file__).resolve().parent / ".gate-rules"
-        if f.is_file():
-            raw = f.read_text(encoding="utf-8").strip()
-    if not raw:
-        raise GateNotConfigured(_MESSAGE)
-    doc = json.loads(raw)
-    content = [c for c in (doc.get("content") or []) if isinstance(c, str) and c.strip()]
-    paths = [p for p in (doc.get("paths") or []) if isinstance(p, str) and p.strip()]
+
+    try:
+        doc = json.loads(
+            _read_policy(),
+            object_pairs_hook=_reject_duplicate_keys,
+            parse_constant=_reject_non_json_constant,
+        )
+    except (json.JSONDecodeError, _MalformedJson):
+        _invalid()
+
+    if type(doc) is not dict or set(doc) != {"content", "paths"}:
+        _invalid()
+    content = _validate_strings(doc["content"], regex=True)
+    paths = _validate_strings(doc["paths"], regex=False)
     if not content and not paths:
-        raise GateNotConfigured(_MESSAGE)
+        _invalid()
     _cache = {
-        "content": [re.compile(c, re.IGNORECASE) for c in content],
+        "content": content,
         "paths": paths,
         "labels": {i: f"rule-{i + 1}" for i in range(len(content))},
     }

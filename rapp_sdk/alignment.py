@@ -4,9 +4,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime, timezone
-import os
-from pathlib import Path
-import stat
 from typing import Any
 
 from .inventory import Organism, SafeSpecimen
@@ -30,6 +27,9 @@ class AlignmentReport:
                 "conflicts": "validated records or evidence-backed declared findings",
                 "coverage": (
                     "recomputed-from-captured-artifact-or-explicitly-not-recomputed"
+                ),
+                "component_coverage": (
+                    "manifest-derived-captured-files-versus-all-omitted-blobs"
                 ),
                 "generator_derivation": (
                     "not-performed-captured-code-is-never-executed"
@@ -173,11 +173,40 @@ def inspect_alignment(
     if stale_after_days < 0:
         raise ValueError("stale_after_days must be non-negative")
     snapshot_count = len(organism.repository_names)
-    root_path = Path(root).absolute()
+    try:
+        provenance_specimen: SafeSpecimen | None = SafeSpecimen(organism)
+        provenance_unavailable: str | None = None
+    except Exception as exc:
+        provenance_specimen = None
+        provenance_unavailable = str(exc)
     projections: list[dict[str, Any]] = []
     for declared in organism.projections():
         projection = dict(declared)
-        manifest_commit = organism.organ(projection["organ"])["commit"]
+        manifest_record = organism.organ(projection["organ"])
+        manifest_commit = manifest_record["commit"]
+        manifest_omissions = organism.omitted_blobs(projection["organ"])
+        tracked = projection["tracked_blobs"]
+        projection["component_coverage"] = {
+            "captured": manifest_record["files"],
+            "declared_live": tracked["live"],
+            "state": "complete" if not manifest_omissions else "incomplete",
+            "manifest_reconciled": (
+                tracked["captured"] == manifest_record["files"]
+                and tracked["live"]
+                == manifest_record["files"] + len(manifest_omissions)
+            ),
+            "evidence_source": (
+                f"MANIFEST.json repos[{projection['organ']!r}] file and omission counts"
+            ),
+        }
+        projection["omission_evidence"] = {
+            "source": (
+                f"MANIFEST.json repos[{projection['organ']!r}]."
+                "{skipped_large,withheld}"
+            ),
+            "count": len(manifest_omissions),
+            "blobs": manifest_omissions,
+        }
         projection["daily_checks"] = {
             "captured_commit_matches_manifest": projection["captured_commit"]
             == manifest_commit,
@@ -191,14 +220,24 @@ def inspect_alignment(
             *projection["generated_from"],
         ]
         provenance_regular: dict[str, bool] = {}
+        provenance_errors: dict[str, str] = {}
+        projection_prefix = f"repos/{projection['organ']}/"
         for relative in provenance_paths:
+            specimen_relative = relative.removeprefix(projection_prefix)
             try:
-                mode = os.lstat(root_path / relative).st_mode
-                provenance_regular[relative] = stat.S_ISREG(mode)
-            except OSError:
+                if provenance_specimen is None:
+                    raise ValueError(provenance_unavailable or "safe access unavailable")
+                provenance_regular[relative] = provenance_specimen.is_regular_file(
+                    projection["organ"], specimen_relative
+                )
+            except Exception as exc:
                 provenance_regular[relative] = False
+                provenance_errors[relative] = str(exc)
         projection["daily_checks"]["generator_provenance_regular_files"] = (
             provenance_regular
+        )
+        projection["daily_checks"]["generator_provenance_errors"] = (
+            provenance_errors
         )
         paths_present = bool(provenance_regular) and all(
             provenance_regular.values()

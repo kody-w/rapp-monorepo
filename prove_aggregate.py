@@ -3,6 +3,7 @@
 
 import json
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -24,6 +25,68 @@ GITLINK_URL = "https://example.invalid/dependency.git"
 
 
 class CaptureBoundaryTests(unittest.TestCase):
+    @staticmethod
+    def api_repository(
+        repository_id: int,
+        name: str,
+        *,
+        archived: bool = False,
+        private: bool = False,
+        node_id: str | None = None,
+        visibility: str | None = None,
+    ) -> dict:
+        return {
+            "id": repository_id,
+            "node_id": node_id or f"R_{repository_id}",
+            "name": name,
+            "private": private,
+            "archived": archived,
+            "visibility": visibility or (
+                "private" if private else "public"
+            ),
+        }
+
+    @staticmethod
+    def inventory_entry(
+        repository_id: int,
+        name: str,
+        *,
+        archived: bool = False,
+    ) -> aggregate.RepositoryInventoryEntry:
+        return aggregate.RepositoryInventoryEntry(
+            id=repository_id,
+            node_id=f"R_{repository_id}",
+            name=name,
+            archived=archived,
+            visibility="public",
+        )
+
+    @staticmethod
+    def empty_record(name: str) -> dict:
+        return {
+            "repo": name,
+            "commit": "a" * 40,
+            "committed_at": "2026-08-21T00:00:00+00:00",
+            "captured_at": "2026-08-21T00:00:00+00:00",
+            "files": 0,
+            "bytes": 0,
+            "tree_sha256": compute_tree_sha256([]),
+            "skipped_large": [],
+            "withheld": [],
+            "gitlinks": [],
+        }
+
+    @staticmethod
+    def membership_contract() -> tuple[re.Pattern, list[dict]]:
+        return (
+            re.compile(r"^rapp"),
+            [{
+                "repo": "rapp-monorepo",
+                "reason_code": "snapshot-self-recursion",
+                "reason": "fixture self exclusion",
+            }],
+        )
+
     def git(self, root: Path, *args: str, check: bool = True):
         return subprocess.run(
             ["git", "-C", str(root), *args],
@@ -300,6 +363,32 @@ class CaptureBoundaryTests(unittest.TestCase):
             self.init_repo(destination)
             self.git(destination, "commit", "--allow-empty", "-qm", "base")
             (destination / "repos").mkdir()
+            membership_exclusions = {
+                "exclude_archived": True,
+                "repositories": [{
+                    "repo": "demo-excluded",
+                    "reason_code": "fixture-exclusion",
+                    "reason": "test-only named exclusion",
+                }],
+            }
+            (destination / "ORGANISM.json").write_text(
+                json.dumps({
+                    "estate_scope": {
+                        "owner": "owner",
+                        "membership": {
+                            "visibility": "public",
+                            "archived": False,
+                            "name_pattern": "^demo",
+                        },
+                        "deliberate_exclusions": [{
+                            "repository": "owner/demo-excluded",
+                            "reason_code": "fixture-exclusion",
+                            "reason": "test-only named exclusion",
+                        }],
+                    },
+                }),
+                encoding="utf-8",
+            )
             work = root / "work"
             work.mkdir()
             with (
@@ -325,7 +414,8 @@ class CaptureBoundaryTests(unittest.TestCase):
                 "integrity_profile": MANIFEST_INTEGRITY_PROFILE,
                 "owner": "owner",
                 "captured_at": "2026-08-23T00:00:00+00:00",
-                "membership_pattern": "^demo$",
+                "membership_pattern": "^demo",
+                "membership_exclusions": membership_exclusions,
                 "max_file_mb": 2.0,
                 "repos": [record],
                 "not_captured": [],
@@ -536,17 +626,16 @@ class CaptureBoundaryTests(unittest.TestCase):
             self.assertFalse((out / "repo").exists())
 
     def test_public_inventory_paginates_to_count_without_private_inflation(self):
-        first_page = [{
-            "name": f"other-{index:03d}",
-            "private": False,
-            "archived": False,
-        } for index in range(aggregate.REST_PAGE_SIZE)]
+        first_page = [
+            self.api_repository(index + 1, f"other-{index:03d}")
+            for index in range(aggregate.REST_PAGE_SIZE)
+        ]
         second_page = [
-            {"name": "rapp-final", "private": False, "archived": False},
-            {"name": "rapp-monorepo", "private": False, "archived": False},
-            {"name": "rapp-aibast-stage", "private": False, "archived": False},
-            {"name": "rapp-shape-aibast", "private": False, "archived": False},
-            {"name": "rapp-archived", "private": False, "archived": True},
+            self.api_repository(101, "rapp-final"),
+            self.api_repository(102, "rapp-monorepo"),
+            self.api_repository(103, "rapp-aibast-stage"),
+            self.api_repository(104, "rapp-shape-aibast"),
+            self.api_repository(105, "rapp-archived", archived=True),
         ]
         endpoints = []
         commands = []
@@ -578,11 +667,10 @@ class CaptureBoundaryTests(unittest.TestCase):
         self.assertFalse(any("--limit" in cmd for cmd in commands))
 
     def test_public_inventory_rejects_incomplete_pagination(self):
-        page = [{
-            "name": f"repo-{index:03d}",
-            "private": False,
-            "archived": False,
-        } for index in range(99)]
+        page = [
+            self.api_repository(index + 1, f"repo-{index:03d}")
+            for index in range(99)
+        ]
 
         def fake_run(cmd, **_kwargs):
             endpoint = cmd[-1]
@@ -603,11 +691,11 @@ class CaptureBoundaryTests(unittest.TestCase):
             (
                 "/users/kody-w/repos?per_page=100&page=1"
                 "&sort=full_name&direction=asc"
-            ): [{
-                "name": "rapp-private",
-                "private": True,
-                "archived": False,
-            }],
+            ): [self.api_repository(
+                1,
+                "rapp-private",
+                private=True,
+            )],
         }
 
         def fake_run(cmd, **_kwargs):
@@ -621,6 +709,124 @@ class CaptureBoundaryTests(unittest.TestCase):
         ):
             aggregate.members("kody-w", "rapp-monorepo")
 
+    def test_public_inventory_rejects_id_and_name_collisions(self):
+        collision_cases = {
+            "duplicate repository id": [
+                self.api_repository(1, "rapp-one"),
+                self.api_repository(1, "rapp-two", node_id="R_2"),
+            ],
+            "duplicate repository node_id": [
+                self.api_repository(1, "rapp-one", node_id="R_same"),
+                self.api_repository(2, "rapp-two", node_id="R_same"),
+            ],
+            "duplicate repository name": [
+                self.api_repository(1, "rapp-one"),
+                self.api_repository(2, "RAPP-ONE"),
+            ],
+        }
+        for expected, page in collision_cases.items():
+            with self.subTest(expected=expected):
+                def fake_run(cmd, **_kwargs):
+                    payload = (
+                        {"public_repos": len(page)}
+                        if cmd[-1] == "/users/kody-w"
+                        else page
+                    )
+                    return subprocess.CompletedProcess(
+                        cmd, 0, json.dumps(payload), ""
+                    )
+
+                with (
+                    patch.object(aggregate, "run", fake_run),
+                    self.assertRaisesRegex(RuntimeError, expected),
+                ):
+                    aggregate._public_repositories("kody-w")
+
+    def test_main_requires_stable_second_inventory_pass(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            inventory = [self.inventory_entry(1, "rapp-good")]
+            record = self.empty_record("rapp-good")
+            inventory_mock = unittest.mock.Mock(
+                side_effect=[inventory, list(inventory)]
+            )
+
+            with (
+                patch.object(aggregate, "OUT", root / "repos"),
+                patch.object(aggregate, "MANIFEST", root / "MANIFEST.json"),
+                patch.object(aggregate, "INDEX", root / "INDEX.md"),
+                patch.object(aggregate, "GITMODULES", root / ".gitmodules"),
+                patch.object(aggregate, "self_name", return_value="rapp-monorepo"),
+                patch.object(
+                    aggregate,
+                    "_membership_contract",
+                    return_value=self.membership_contract(),
+                ),
+                patch.object(
+                    aggregate,
+                    "_public_repositories",
+                    inventory_mock,
+                ),
+                patch.object(
+                    aggregate,
+                    "capture",
+                    return_value=(record, ""),
+                ),
+                patch.object(aggregate.ip_gate, "assert_configured"),
+                patch.object(sys, "argv", ["aggregate.py"]),
+            ):
+                exit_code = aggregate.main()
+
+            self.assertEqual(exit_code, 0)
+            self.assertEqual(inventory_mock.call_count, 2)
+            manifest = json.loads(
+                (root / "MANIFEST.json").read_text(encoding="utf-8")
+            )
+            self.assertEqual(
+                [item["repo"] for item in manifest["repos"]],
+                ["rapp-good"],
+            )
+
+    def test_main_rejects_repository_rename_churn(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            captured = [self.inventory_entry(1, "rapp-good")]
+            renamed = [self.inventory_entry(1, "rapp-renamed")]
+            inventory_mock = unittest.mock.Mock(
+                side_effect=[captured, renamed]
+            )
+
+            with (
+                patch.object(aggregate, "OUT", root / "repos"),
+                patch.object(aggregate, "MANIFEST", root / "MANIFEST.json"),
+                patch.object(aggregate, "INDEX", root / "INDEX.md"),
+                patch.object(aggregate, "GITMODULES", root / ".gitmodules"),
+                patch.object(aggregate, "self_name", return_value="rapp-monorepo"),
+                patch.object(
+                    aggregate,
+                    "_membership_contract",
+                    return_value=self.membership_contract(),
+                ),
+                patch.object(
+                    aggregate,
+                    "_public_repositories",
+                    inventory_mock,
+                ),
+                patch.object(
+                    aggregate,
+                    "capture",
+                    return_value=(self.empty_record("rapp-good"), ""),
+                ),
+                patch.object(aggregate.ip_gate, "assert_configured"),
+                patch.object(sys, "argv", ["aggregate.py"]),
+            ):
+                exit_code = aggregate.main()
+
+            self.assertEqual(exit_code, 5)
+            self.assertEqual(inventory_mock.call_count, 2)
+            self.assertFalse((root / "MANIFEST.json").exists())
+            self.assertFalse((root / "INDEX.md").exists())
+
     def test_main_returns_failure_when_any_repo_is_not_captured(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
@@ -629,18 +835,11 @@ class CaptureBoundaryTests(unittest.TestCase):
             index_path = root / "INDEX.md"
             gitmodules_path = root / ".gitmodules"
             gitmodules_path.write_text("stale\n", encoding="utf-8")
-            record = {
-                "repo": "good",
-                "commit": "a" * 40,
-                "committed_at": "2026-08-21T00:00:00+00:00",
-                "captured_at": "2026-08-21T00:00:00+00:00",
-                "files": 0,
-                "bytes": 0,
-                "tree_sha256": compute_tree_sha256([]),
-                "skipped_large": [],
-                "withheld": [],
-                "gitlinks": [],
-            }
+            record = self.empty_record("good")
+            inventory = [
+                self.inventory_entry(1, "good"),
+                self.inventory_entry(2, "bad"),
+            ]
 
             def fake_capture(_owner, repo, _work, _max_file_mb):
                 if repo == "good":
@@ -655,7 +854,19 @@ class CaptureBoundaryTests(unittest.TestCase):
                 patch.object(aggregate, "self_name", return_value="rapp-monorepo"),
                 patch.object(aggregate.ip_gate, "assert_configured"),
                 patch.object(
-                    aggregate, "members", return_value=["good", "bad"]
+                    aggregate,
+                    "_membership_contract",
+                    return_value=self.membership_contract(),
+                ),
+                patch.object(
+                    aggregate,
+                    "_public_repositories",
+                    side_effect=[inventory, list(inventory)],
+                ),
+                patch.object(
+                    aggregate,
+                    "_member_names",
+                    return_value=["good", "bad"],
                 ),
                 patch.object(aggregate, "capture", fake_capture),
                 patch.object(sys, "argv", ["aggregate.py"]),
@@ -672,25 +883,7 @@ class CaptureBoundaryTests(unittest.TestCase):
                 manifest["membership_exclusions"],
                 {
                     "exclude_archived": True,
-                    "repositories": [
-                        {
-                            "repo": "rapp-monorepo",
-                            "reason_code": "snapshot-self-recursion",
-                            "reason": (
-                                "The aggregate repository cannot capture itself "
-                                "without recursive, non-point-in-time content."
-                            ),
-                        },
-                        {
-                            "repo": "rapp-shape-aibast",
-                            "reason_code": "non-organ-staging-repository",
-                            "reason": (
-                                "AIBAST library-layout shape staging is an "
-                                "external delivery rehearsal, not a RAPP "
-                                "organism organ."
-                            ),
-                        },
-                    ],
+                    "repositories": self.membership_contract()[1],
                 },
             )
             self.assertFalse(gitmodules_path.exists())

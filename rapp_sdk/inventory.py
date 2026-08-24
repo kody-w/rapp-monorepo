@@ -20,6 +20,9 @@ _ORGAN_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,99}$")
 _COMMIT_RE = re.compile(r"^[0-9a-f]{40}$")
 _GIT_OID_RE = re.compile(r"^(?:[0-9a-f]{40}|[0-9a-f]{64})$")
 _SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
+_SKIPPED_LARGE_RE = re.compile(
+    r"^(?P<path>.+) \((?P<size>(?:0|[1-9][0-9]*)(?:\.[0-9]+)?)MB\)$"
+)
 
 SYSTEM_LIFECYCLES = frozenset(
     {
@@ -109,6 +112,53 @@ def _validate_observed_at(value: Any, label: str) -> None:
         raise InventoryError(f"{label} must include a UTC offset")
 
 
+def _manifest_omitted_blobs(record: dict[str, Any]) -> list[dict[str, str]]:
+    """Normalize one manifest record's skipped and withheld blob evidence."""
+
+    skipped = record.get("skipped_large", [])
+    withheld = record.get("withheld", [])
+    if not isinstance(skipped, list) or not isinstance(withheld, list):
+        raise InventoryError("manifest skipped_large and withheld values must be arrays")
+    omitted: list[dict[str, str]] = []
+    paths: set[str] = set()
+    for entry in skipped:
+        if not isinstance(entry, str):
+            raise InventoryError("manifest skipped_large entries must be strings")
+        match = _SKIPPED_LARGE_RE.fullmatch(entry)
+        if match is None:
+            raise InventoryError("manifest skipped_large entry has an invalid shape")
+        path = _validate_relative_path(match.group("path"), "manifest skipped blob path")
+        if path in paths:
+            raise InventoryError("manifest omitted blob paths must be unique")
+        paths.add(path)
+        omitted.append(
+            {
+                "path": path,
+                "disposition": "skipped-large",
+                "manifest_detail": entry,
+            }
+        )
+    for entry in withheld:
+        if (
+            not isinstance(entry, dict)
+            or set(entry) != {"file", "reason"}
+            or not _is_nonempty_string(entry.get("reason"))
+        ):
+            raise InventoryError("manifest withheld entries must contain file and reason")
+        path = _validate_relative_path(entry.get("file"), "manifest withheld blob path")
+        if path in paths:
+            raise InventoryError("manifest omitted blob paths must be unique")
+        paths.add(path)
+        omitted.append(
+            {
+                "path": path,
+                "disposition": "withheld",
+                "manifest_detail": entry["reason"],
+            }
+        )
+    return omitted
+
+
 @dataclass(frozen=True)
 class SnapshotStatistics:
     repositories: int
@@ -143,6 +193,9 @@ class Organism:
         self.root = Path(root).absolute()
         self.allow_drift = allow_drift
         self._gitlinks_by_organ: dict[str, frozenset[str]] = {}
+        self._omitted_blobs_by_organ: dict[
+            str, tuple[dict[str, str], ...]
+        ] = {}
         self.manifest = _load_object(self.root / "MANIFEST.json", "MANIFEST.json")
         self.registry = _load_object(self.root / "ORGANISM.json", "ORGANISM.json")
         self._validate()
@@ -241,7 +294,7 @@ class Organism:
                     "manifest membership exclusions differ from ORGANISM estate_scope"
                 )
         authority = self.registry.get("authority")
-        if not isinstance(authority, dict) or not {
+        authority_keys = {
             "normative_source_current",
             "map_structural_pin",
             "target_structural_pin",
@@ -250,31 +303,127 @@ class Organism:
             "owner_actions",
             "authenticated_registry",
             "retired_public_target",
-        } <= set(authority):
+        }
+        if not isinstance(authority, dict) or set(authority) != authority_keys:
             raise InventoryError("ORGANISM.json authority model is incomplete")
         current = authority["normative_source_current"]
+        current_keys = {
+            "repository",
+            "repository_url",
+            "authority_role",
+            "organ",
+            "snapshot_path",
+            "snapshot_commit",
+            "sha256",
+            "byte_length",
+            "revision",
+            "designation",
+        }
         if (
             not isinstance(current, dict)
+            or set(current) != current_keys
             or current.get("authority_role") != "normative-protocol-authority"
             or current.get("repository") != f"{owner}/rapp-1"
+            or current.get("repository_url") != f"https://github.com/{owner}/rapp-1"
             or current.get("organ") != "rapp-1"
             or current.get("snapshot_path") != "repos/rapp-1/SPEC.md"
-            or not _is_nonempty_string(current.get("repository_url"))
             or not _COMMIT_RE.fullmatch(str(current.get("snapshot_commit", "")))
             or not _SHA256_RE.fullmatch(str(current.get("sha256", "")))
             or not isinstance(current.get("byte_length"), int)
             or isinstance(current.get("byte_length"), bool)
             or current["byte_length"] <= 0
+            or current.get("revision") != "rev-5"
+            or current.get("designation") != "user-designated-current-standard-source"
         ):
             raise InventoryError("normative_source_current is invalid")
-        for key in ("map_structural_pin", "target_structural_pin", "spine_pin_claim"):
-            if not isinstance(authority[key], dict):
-                raise InventoryError(f"{key} must be an object")
+        map_pin = authority["map_structural_pin"]
+        if (
+            not isinstance(map_pin, dict)
+            or set(map_pin)
+            != {
+                "record_path",
+                "status_path",
+                "status",
+                "authority_scope",
+                "commit",
+                "sha256",
+                "byte_length",
+                "matches_normative_source_current_bytes",
+                "structural_pin_only",
+                "authenticated_registry_acceptance",
+            }
+            or map_pin.get("record_path") != "repos/rapp-map/RAPP1_AUTHORITY.json"
+            or map_pin.get("status_path") != "repos/rapp-map/RAPP1_STATUS.md"
+            or map_pin.get("status") != "not-yet-fully-rapp-1-conformant"
+            or map_pin.get("authority_scope")
+            != "Sole RAPP/1 protocol authority for this repository."
+            or not _COMMIT_RE.fullmatch(str(map_pin.get("commit", "")))
+            or map_pin.get("sha256") != current["sha256"]
+            or map_pin.get("byte_length") != current["byte_length"]
+            or map_pin.get("matches_normative_source_current_bytes") is not True
+            or map_pin.get("structural_pin_only") is not True
+            or map_pin.get("authenticated_registry_acceptance") is not False
+        ):
+            raise InventoryError("map_structural_pin scope, status, or pin is invalid")
+        target_pin = authority["target_structural_pin"]
+        if (
+            not isinstance(target_pin, dict)
+            or set(target_pin)
+            != {
+                "target",
+                "record_path",
+                "commit",
+                "sha256",
+                "byte_length",
+                "matches_normative_source_current_bytes",
+                "state",
+            }
+            or target_pin.get("target") != f"{owner}/RAPP"
+            or target_pin.get("record_path") != "repos/RAPP/RAPP1_AUTHORITY.json"
+            or not _COMMIT_RE.fullmatch(str(target_pin.get("commit", "")))
+            or not _SHA256_RE.fullmatch(str(target_pin.get("sha256", "")))
+            or not isinstance(target_pin.get("byte_length"), int)
+            or isinstance(target_pin.get("byte_length"), bool)
+            or target_pin["byte_length"] <= 0
+            or (
+                target_pin.get("sha256"),
+                target_pin.get("byte_length"),
+            )
+            == (current["sha256"], current["byte_length"])
+            or target_pin.get("matches_normative_source_current_bytes") is not False
+            or target_pin.get("state") != "structurally-valid-for-target-but-drifted"
+        ):
+            raise InventoryError("target_structural_pin is invalid")
+        spine_pin = authority["spine_pin_claim"]
+        if (
+            not isinstance(spine_pin, dict)
+            or set(spine_pin)
+            != {
+                "observed_old_commit",
+                "map_current_commit",
+                "commits_equal",
+                "claim_that_old_pin_equals_map_current",
+                "evidence_path",
+            }
+            or spine_pin.get("observed_old_commit") != target_pin["commit"]
+            or spine_pin.get("map_current_commit") != map_pin["commit"]
+            or spine_pin.get("commits_equal") is not False
+            or spine_pin.get("claim_that_old_pin_equals_map_current") != "false"
+            or spine_pin.get("evidence_path") != "repos/rapp-spine/CRAWL_GRAPH.md"
+        ):
+            raise InventoryError("spine_pin_claim is invalid")
+        if authority.get("target_status") != "repos/RAPP/RAPP1_STATUS.md":
+            raise InventoryError("target_status authority path is invalid")
+        if authority.get("owner_actions") != "repos/RAPP/RAPP1_OWNER_ACTIONS.json":
+            raise InventoryError("owner_actions authority path is invalid")
         authenticated = authority["authenticated_registry"]
         if (
             not isinstance(authenticated, dict)
+            or set(authenticated)
+            != {"state", "is_section_13_registry", "out_of_band_anchor"}
             or authenticated.get("is_section_13_registry") is not False
             or authenticated.get("state") != "absent"
+            or authenticated.get("out_of_band_anchor") is not None
         ):
             raise InventoryError("snapshot must not claim an authenticated registry")
         conformance = self.registry.get("conformance")
@@ -291,7 +440,18 @@ class Organism:
         retired_target = authority["retired_public_target"]
         if (
             not isinstance(retired_target, dict)
+            or set(retired_target)
+            != {
+                "repository",
+                "pages",
+                "product_lifecycle",
+                "target_record_currency",
+                "replacement_boundary",
+                "protocol_authority",
+                "may_redefine_rapp_1",
+            }
             or retired_target.get("repository") != f"{owner}/RAPP"
+            or retired_target.get("pages") != f"https://{owner}.github.io/RAPP/"
             or not _is_nonempty_string(retired_target.get("product_lifecycle"))
             or retired_target.get("product_lifecycle") not in PRODUCT_LIFECYCLES
             or retired_target.get("product_lifecycle") != "retired"
@@ -316,6 +476,7 @@ class Organism:
         ):
             raise InventoryError("manifest repos and organism systems must be arrays")
         names: list[str] = []
+        manifest_records: dict[str, dict[str, Any]] = {}
         for record in repos:
             if not isinstance(record, dict) or not isinstance(record.get("repo"), str):
                 raise InventoryError("each manifest repository must have a string repo")
@@ -324,10 +485,20 @@ class Organism:
                 raise InventoryError("each manifest repository must have a commit pin")
             if not _COMMIT_RE.fullmatch(record["commit"]):
                 raise InventoryError("each manifest repository commit must be a 40-hex pin")
+            if (
+                not isinstance(record.get("files"), int)
+                or isinstance(record.get("files"), bool)
+                or record["files"] < 0
+                or not isinstance(record.get("bytes"), int)
+                or isinstance(record.get("bytes"), bool)
+                or record["bytes"] < 0
+            ):
+                raise InventoryError("manifest repository file and byte counts are invalid")
             if member_pattern.search(record["repo"]) is None:
                 raise InventoryError(
                     "manifest repository does not match the estate membership pattern"
                 )
+            omitted_blobs = _manifest_omitted_blobs(record)
             gitlinks = record.get("gitlinks", [])
             if not isinstance(gitlinks, list):
                 raise InventoryError("manifest gitlinks must be an array")
@@ -357,11 +528,21 @@ class Organism:
             self._gitlinks_by_organ[record["repo"]] = frozenset(
                 gitlink_paths
             )
+            self._omitted_blobs_by_organ[record["repo"]] = tuple(
+                dict(item) for item in omitted_blobs
+            )
+            manifest_records[record["repo"]] = record
             names.append(record["repo"])
         if len(names) != len(set(names)):
             raise InventoryError("manifest repository names must be unique")
         if current["organ"] not in names:
             raise InventoryError("normative rapp-1 organ is absent from the manifest")
+        if manifest_records[current["organ"]]["commit"] != current["snapshot_commit"]:
+            raise InventoryError(
+                "normative_source_current snapshot commit differs from the manifest"
+            )
+        if not {"RAPP", "rapp-map", "rapp-spine"} <= set(names):
+            raise InventoryError("authority and projection organs are absent from the manifest")
         if set(names) & set(excluded_names):
             raise InventoryError("deliberately excluded repositories must not appear in manifest")
         classified: list[str] = []
@@ -493,6 +674,19 @@ class Organism:
                 or tracked["captured"] > tracked["live"]
             ):
                 raise InventoryError("projection tracked_blobs counts are invalid")
+            projection_record = manifest_records[projection["organ"]]
+            manifest_omissions = [
+                dict(item)
+                for item in self._omitted_blobs_by_organ[projection["organ"]]
+            ]
+            if (
+                tracked["captured"] != projection_record["files"]
+                or tracked["live"]
+                != projection_record["files"] + len(manifest_omissions)
+            ):
+                raise InventoryError(
+                    "projection component coverage differs from manifest-derived evidence"
+                )
             coverage = projection.get("coverage")
             numerator_key = (
                 "captured_organ_overlap" if projection["id"] == "map" else "modeled_organs"
@@ -602,17 +796,15 @@ class Organism:
                 f"{projection['id']} coverage_source path",
             )
             omitted_blobs = projection.get("omitted_blobs")
-            if omitted_blobs is not None:
-                if not isinstance(omitted_blobs, list) or not omitted_blobs:
-                    raise InventoryError("omitted_blobs must be absent or non-empty")
-                for omission in omitted_blobs:
-                    if (
-                        not isinstance(omission, dict)
-                        or set(omission) != {"path", "reason"}
-                        or not _is_nonempty_string(omission.get("path"))
-                        or not _is_nonempty_string(omission.get("reason"))
-                    ):
-                        raise InventoryError("omitted blob evidence is invalid")
+            if manifest_omissions:
+                if omitted_blobs != manifest_omissions:
+                    raise InventoryError(
+                        "projection omitted_blobs differ from manifest-derived evidence"
+                    )
+            elif omitted_blobs is not None:
+                raise InventoryError(
+                    "projection omitted_blobs must be absent when the manifest has none"
+                )
         if projection_ids != set(PROJECTION_ORGANS):
             raise InventoryError("both Map and Spine projections are required")
         expected_relationships = [
@@ -760,6 +952,12 @@ class Organism:
         self.organ(name)
         return self._gitlinks_by_organ.get(name, frozenset())
 
+    def omitted_blobs(self, name: str) -> list[dict[str, str]]:
+        self.organ(name)
+        return [
+            dict(item) for item in self._omitted_blobs_by_organ.get(name, ())
+        ]
+
     def summary(self) -> dict[str, Any]:
         return {
             "schema": self.registry["schema"],
@@ -850,6 +1048,28 @@ class SafeSpecimen:
             raise SpecimenAccessError(
                 "specimen parent is missing, not a directory, or a symlink"
             ) from exc
+
+    def is_regular_file(self, organ: str, path: str) -> bool:
+        """Inspect a specimen path without following any path component."""
+
+        parent, name = self._open_parent(organ, path)
+        flags = os.O_RDONLY | os.O_NOFOLLOW
+        if hasattr(os, "O_NONBLOCK"):
+            flags |= os.O_NONBLOCK
+        try:
+            descriptor = os.open(name, flags, dir_fd=parent)
+            try:
+                return stat.S_ISREG(os.fstat(descriptor).st_mode)
+            finally:
+                os.close(descriptor)
+        except OSError as exc:
+            if exc.errno == errno.ELOOP:
+                raise SpecimenAccessError(
+                    "specimen target is a symlink and was not followed"
+                ) from exc
+            raise SpecimenAccessError(f"cannot inspect specimen file: {exc}") from exc
+        finally:
+            os.close(parent)
 
     def read_bytes(self, organ: str, path: str, *, max_bytes: int | None = None) -> bytes:
         if max_bytes is not None and (

@@ -127,7 +127,16 @@ def _api_json(endpoint: str):
         ) from exc
 
 
-def _public_repositories(owner: str) -> list[dict]:
+@dataclass(frozen=True)
+class RepositoryInventoryEntry:
+    id: int
+    node_id: str
+    name: str
+    archived: bool
+    visibility: str
+
+
+def _public_repositories(owner: str) -> list[RepositoryInventoryEntry]:
     """Return a count-verified, completely paginated public inventory."""
     encoded_owner = quote(owner, safe="")
     account = _api_json(f"/users/{encoded_owner}")
@@ -141,8 +150,10 @@ def _public_repositories(owner: str) -> list[dict]:
     ):
         raise RuntimeError("GitHub owner metadata has no valid public_repos count")
 
-    repositories: list[dict] = []
-    seen: set[str] = set()
+    repositories: list[RepositoryInventoryEntry] = []
+    seen_ids: set[int] = set()
+    seen_node_ids: set[str] = set()
+    seen_names: set[str] = set()
     page = 1
     while True:
         endpoint = (
@@ -162,17 +173,56 @@ def _public_repositories(owner: str) -> list[dict]:
                 raise RuntimeError(
                     f"GitHub repository page {page} contains an invalid name"
                 )
-            if item.get("private") is not False:
+            repository_id = item.get("id")
+            node_id = item.get("node_id")
+            archived = item.get("archived")
+            visibility = item.get("visibility")
+            if (
+                not isinstance(repository_id, int)
+                or isinstance(repository_id, bool)
+                or repository_id <= 0
+            ):
+                raise RuntimeError(
+                    f"GitHub repository page {page} contains an invalid id"
+                )
+            if not isinstance(node_id, str) or not node_id:
+                raise RuntimeError(
+                    f"GitHub repository page {page} contains an invalid node_id"
+                )
+            if not isinstance(archived, bool):
+                raise RuntimeError(
+                    f"GitHub repository page {page} contains invalid archived "
+                    f"state for {name}"
+                )
+            if item.get("private") is not False or visibility != "public":
                 raise RuntimeError(
                     f"public repository endpoint returned non-public repo {name}"
                 )
-            key = name.casefold()
-            if key in seen:
+            name_key = name.casefold()
+            if repository_id in seen_ids:
                 raise RuntimeError(
-                    f"GitHub pagination returned duplicate repository {name}"
+                    "GitHub pagination returned duplicate repository id "
+                    f"{repository_id}"
                 )
-            seen.add(key)
-            repositories.append(item)
+            if node_id in seen_node_ids:
+                raise RuntimeError(
+                    "GitHub pagination returned duplicate repository node_id "
+                    f"{node_id}"
+                )
+            if name_key in seen_names:
+                raise RuntimeError(
+                    f"GitHub pagination returned duplicate repository name {name}"
+                )
+            seen_ids.add(repository_id)
+            seen_node_ids.add(node_id)
+            seen_names.add(name_key)
+            repositories.append(RepositoryInventoryEntry(
+                id=repository_id,
+                node_id=node_id,
+                name=name,
+                archived=archived,
+                visibility=visibility,
+            ))
         if len(items) < REST_PAGE_SIZE:
             break
         page += 1
@@ -182,7 +232,58 @@ def _public_repositories(owner: str) -> list[dict]:
             "GitHub public repository pagination was incomplete: "
             f"expected {expected}, received {len(repositories)}"
         )
-    return repositories
+    return sorted(
+        repositories,
+        key=lambda repository: (repository.name.casefold(), repository.id),
+    )
+
+
+def _require_stable_inventory(
+    captured: list[RepositoryInventoryEntry],
+    publication: list[RepositoryInventoryEntry],
+) -> None:
+    """Reject any owner inventory change between capture and publication."""
+
+    captured_by_id = {repository.id: repository for repository in captured}
+    publication_by_id = {
+        repository.id: repository for repository in publication
+    }
+    disappeared = sorted(set(captured_by_id) - set(publication_by_id))
+    appeared = sorted(set(publication_by_id) - set(captured_by_id))
+    if disappeared or appeared:
+        changes: list[str] = []
+        if disappeared:
+            names = ", ".join(
+                captured_by_id[repository_id].name
+                for repository_id in disappeared
+            )
+            changes.append(f"disappeared: {names}")
+        if appeared:
+            names = ", ".join(
+                publication_by_id[repository_id].name
+                for repository_id in appeared
+            )
+            changes.append(f"appeared: {names}")
+        raise RuntimeError(
+            "GitHub repository inventory changed between capture and "
+            f"publication ({'; '.join(changes)})"
+        )
+
+    for repository_id in sorted(captured_by_id):
+        before = captured_by_id[repository_id]
+        after = publication_by_id[repository_id]
+        if before == after:
+            continue
+        changed = [
+            field
+            for field in ("node_id", "name", "archived", "visibility")
+            if getattr(before, field) != getattr(after, field)
+        ]
+        raise RuntimeError(
+            "GitHub repository inventory changed between capture and "
+            f"publication for id {repository_id} ({before.name!r} -> "
+            f"{after.name!r}; changed {', '.join(changed)})"
+        )
 
 
 def _membership_contract(owner: str, self_repo: str) -> tuple[re.Pattern, list[dict]]:
@@ -239,17 +340,25 @@ def _membership_contract(owner: str, self_repo: str) -> tuple[re.Pattern, list[d
     return pattern, sorted(normalized, key=lambda item: item["repo"].casefold())
 
 
+def _member_names(
+    repositories: list[RepositoryInventoryEntry],
+    pattern: re.Pattern,
+    exclusions: list[dict],
+) -> list[str]:
+    excluded = {item["repo"].casefold() for item in exclusions}
+    return sorted(
+        repository.name for repository in repositories
+        if not repository.archived
+        and pattern.search(repository.name)
+        and repository.name.casefold() not in excluded
+    )
+
+
 def members(owner: str, self_repo: str | None = None) -> list[str]:
     repositories = _public_repositories(owner)
     me = self_repo or self_name()
     pattern, exclusions = _membership_contract(owner, me)
-    excluded = {item["repo"].casefold() for item in exclusions}
-    return sorted(
-        x["name"] for x in repositories
-        if not x.get("archived", False)
-        and pattern.search(x["name"])
-        and x["name"].casefold() not in excluded
-    )
+    return _member_names(repositories, pattern, exclusions)
 
 
 @dataclass(frozen=True)
@@ -701,7 +810,12 @@ def main() -> int:
     membership_pattern, membership_exclusions = _membership_contract(
         args.owner, me
     )
-    names = members(args.owner, me)
+    captured_inventory = _public_repositories(args.owner)
+    names = _member_names(
+        captured_inventory,
+        membership_pattern,
+        membership_exclusions,
+    )
     print(f"{len(names)} public RAPP repos under {args.owner}")
     if args.dry_run:
         for n in names:
@@ -733,6 +847,19 @@ def main() -> int:
                   f"{rec['bytes'] / 1048576:.1f}MB{note}", flush=True)
     finally:
         shutil.rmtree(work, ignore_errors=True)
+
+    try:
+        publication_inventory = _public_repositories(args.owner)
+        _require_stable_inventory(
+            captured_inventory,
+            publication_inventory,
+        )
+    except RuntimeError as exc:
+        print(
+            "REFUSING TO PUBLISH: GitHub repository inventory was not stable: "
+            f"{exc}"
+        )
+        return 5
 
     document = {
         "schema": MANIFEST_SCHEMA,

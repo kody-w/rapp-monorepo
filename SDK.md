@@ -52,6 +52,11 @@ older 41,880-byte `6723c7…` structural pin. Current record currency does not
 reactivate the product; the record is useful drift evidence and does not
 redefine the current standard.
 
+Authority inspection validates every modeled authority subrecord with exact
+keys and fail-closed values. Map is valid only when its pin, structural-only
+scope, non-conformant status document, and refusal of authenticated-registry
+acceptance all agree; a correct hash cannot rescue a false scope or status.
+
 No checked-in record is the missing authenticated section-13 registry. Full
 authenticated conformance remains false until the owner publishes:
 
@@ -138,7 +143,10 @@ that they were dynamically fetched during an offline invocation.
 Generator provenance distinguishes named-path presence from derivation.
 Because captured code is never executed, the SDK can confirm that the declared
 artifact, generator, and inputs are regular files but labels the derivation
-check as not performed; `generator_provenance_complete` remains false.
+check as not performed; `generator_provenance_complete` remains false. Every
+path component is opened descriptor-relatively with `O_NOFOLLOW`, and the leaf
+is checked with `fstat`; missing platform support or a symlinked parent makes
+provenance unavailable rather than silently falling back to pathname `stat`.
 
 The architecture registry is strict by default. `Organism(root)` requires
 exact manifest/taxonomy set equality, constrained lifecycle values, both
@@ -152,6 +160,12 @@ recomputes the exact current covered and missing organ sets from
 `rapp-map/estate-map.json` and `rapp-spine/crawl.json`, attaching a reason to
 every missing organ. An unreadable or invalid source is labeled
 `not-recomputed`; it never becomes a vacuous empty success.
+
+Alignment renders repository component coverage separately from organism
+coverage. It reconciles component counts and the complete omission list
+against each projection's `MANIFEST.json` record. Map therefore reports 41/45
+captured blobs with four omissions (one skipped `neurons.json` and three
+withheld blobs), independently of its 152/197 captured-organ overlap.
 
 `ORGANISM.json` also records the candidate membership predicate and its two
 deliberate exclusions. `kody-w/rapp-monorepo` is excluded to avoid recursive

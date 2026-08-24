@@ -1,19 +1,22 @@
 name: Aggregate the estate
 
-# Daily, plus on demand. The snapshot's whole value is that its pieces were
-# taken together, so this never runs partially: either the pass completes and
-# the commit lands, or nothing changes and the previous snapshot stands.
+# Daily, plus on demand. Generation and every proof finish before the remote
+# snapshot branch is touched. Publication then advances one deterministic
+# branch without force and opens or refreshes a pull request to main.
 on:
   schedule:
     - cron: "17 8 * * *"
   workflow_dispatch:
 
 concurrency:
-  group: aggregate
+  group: estate-snapshot-publication
   cancel-in-progress: false
 
+# GITHUB_TOKEN is deliberately read-only. The final two steps mint a
+# repository-scoped GitHub App token with only contents and pull-request write
+# access, so the resulting push/PR events trigger their downstream workflows.
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   aggregate:
@@ -21,6 +24,10 @@ jobs:
     timeout-minutes: 120
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: main
+          fetch-depth: 1
+          persist-credentials: false
 
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
@@ -124,7 +131,8 @@ jobs:
             echo "::warning::Snapshot is ${MB}MB and heading for the ceiling."
           fi
 
-      - name: Commit the snapshot
+      - name: Prepare the snapshot commit
+        id: snapshot
         run: |
           git config user.name  "rapp-monorepo"
           git config user.email "noreply@github.com"
@@ -134,9 +142,96 @@ jobs:
           python3 verify_snapshot.py --stage
           if git diff --cached --quiet; then
             echo "estate unchanged since the last snapshot"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           CAPTURED=$(python3 -c "import json;d=json.load(open('MANIFEST.json'));print(len(d['repos']))")
           MISSED=$(python3 -c "import json;d=json.load(open('MANIFEST.json'));print(len(d['not_captured']))")
           git commit -m "Snapshot: ${CAPTURED} repos captured, ${MISSED} not captured"
-          git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Mint least-privilege publication token
+        id: publisher-token
+        if: steps.snapshot.outputs.changed == 'true'
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ vars.SNAPSHOT_PUBLISHER_CLIENT_ID }}
+          private-key: ${{ secrets.SNAPSHOT_PUBLISHER_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ github.event.repository.name }}
+          permission-contents: write
+          permission-pull-requests: write
+
+      - name: Publish the snapshot branch and pull request
+        if: steps.snapshot.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ steps.publisher-token.outputs.token }}
+          SNAPSHOT_BRANCH: automation/estate-snapshot
+        run: |
+          set -euo pipefail
+          gh auth setup-git
+
+          # Keep the prior deterministic branch tip in history even when its
+          # previous PR was squash- or rebase-merged. This makes the update a
+          # normal fast-forward push; a concurrent update is rejected.
+          set +e
+          REMOTE_REF=$(git ls-remote --exit-code --heads origin \
+            "refs/heads/${SNAPSHOT_BRANCH}")
+          LS_REMOTE_STATUS=$?
+          set -e
+          case "$LS_REMOTE_STATUS" in
+            0)
+              git fetch --no-tags origin \
+                "refs/heads/${SNAPSHOT_BRANCH}:refs/remotes/origin/${SNAPSHOT_BRANCH}"
+              if ! git merge-base --is-ancestor \
+                "origin/${SNAPSHOT_BRANCH}" HEAD; then
+                git merge --strategy=ours --no-edit \
+                  "origin/${SNAPSHOT_BRANCH}" \
+                  -m "Merge prior snapshot publication history"
+              fi
+              ;;
+            2)
+              echo "creating ${SNAPSHOT_BRANCH}"
+              ;;
+            *)
+              echo "::error::Could not inspect ${SNAPSHOT_BRANCH}; refusing to publish."
+              exit "$LS_REMOTE_STATUS"
+              ;;
+          esac
+          test -n "${REMOTE_REF:-}" || test "$LS_REMOTE_STATUS" -eq 2
+
+          git push origin "HEAD:refs/heads/${SNAPSHOT_BRANCH}"
+
+          PR_BODY="$RUNNER_TEMP/estate-snapshot-pr.md"
+          cat > "$PR_BODY" <<EOF
+          Automated public-estate snapshot from workflow run
+          [${GITHUB_RUN_ID}](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}).
+
+          Snapshot commit: \`$(git rev-parse HEAD)\`
+
+          Merge only after the required \`sdk\` and
+          \`GitGuardian Security Checks\` checks pass.
+          EOF
+
+          mapfile -t OPEN_PRS < <(
+            gh pr list --repo "$GITHUB_REPOSITORY" --state open \
+              --base main --head "$SNAPSHOT_BRANCH" \
+              --json number --jq '.[].number'
+          )
+          case "${#OPEN_PRS[@]}" in
+            0)
+              gh pr create --repo "$GITHUB_REPOSITORY" \
+                --base main --head "$SNAPSHOT_BRANCH" \
+                --title "Snapshot: refresh the public RAPP estate" \
+                --body-file "$PR_BODY"
+              ;;
+            1)
+              gh pr edit "${OPEN_PRS[0]}" --repo "$GITHUB_REPOSITORY" \
+                --title "Snapshot: refresh the public RAPP estate" \
+                --body-file "$PR_BODY"
+              ;;
+            *)
+              echo "::error::Multiple open snapshot PRs found; refusing an ambiguous update."
+              exit 1
+              ;;
+          esac

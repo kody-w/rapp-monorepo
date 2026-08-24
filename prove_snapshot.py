@@ -9,6 +9,7 @@ from pathlib import Path
 
 from verify_snapshot import (
     MANIFEST_INTEGRITY_PROFILE,
+    MANIFEST_MIGRATION_ONLY_PROFILE,
     MANIFEST_SCHEMA,
     SnapshotVerificationError,
     compute_tree_sha256,
@@ -19,6 +20,7 @@ from verify_snapshot import (
 )
 
 GITLINK_URL = "https://example.invalid/dependency.git"
+DEFAULT_MEMBERSHIP_EXCLUSIONS = object()
 
 
 class SnapshotIntegrityTests(unittest.TestCase):
@@ -57,6 +59,7 @@ class SnapshotIntegrityTests(unittest.TestCase):
             }),
             encoding="utf-8",
         )
+        self.git("add", "-f", "--", "ORGANISM.json")
 
     def tearDown(self):
         self.temp.cleanup()
@@ -77,7 +80,7 @@ class SnapshotIntegrityTests(unittest.TestCase):
         integrity_profile=MANIFEST_INTEGRITY_PROFILE,
         skipped_large=None,
         withheld=None,
-        membership_exclusions=None,
+        membership_exclusions=DEFAULT_MEMBERSHIP_EXCLUSIONS,
         gitlinks=None,
     ):
         link_entries = [
@@ -109,6 +112,8 @@ class SnapshotIntegrityTests(unittest.TestCase):
             "repos": [record],
             "not_captured": not_captured or [],
         }
+        if membership_exclusions is DEFAULT_MEMBERSHIP_EXCLUSIONS:
+            membership_exclusions = self.membership_exclusions
         if membership_exclusions is not None:
             manifest["membership_exclusions"] = membership_exclusions
         (self.root / "MANIFEST.json").write_text(
@@ -635,6 +640,14 @@ class SnapshotIntegrityTests(unittest.TestCase):
 
         self.assertEqual(summary["repos"], 1)
 
+    def test_current_profile_requires_membership_exclusions(self):
+        self.write_manifest([], membership_exclusions=None)
+
+        with self.assertRaisesRegex(
+            SnapshotVerificationError, "require membership_exclusions"
+        ):
+            stage_and_verify(self.root)
+
     def test_verifier_rejects_membership_contract_drift(self):
         self.write_manifest(
             [],
@@ -650,7 +663,7 @@ class SnapshotIntegrityTests(unittest.TestCase):
         self.git("add", "-A", "--", "MANIFEST.json", "INDEX.md")
 
         with self.assertRaisesRegex(
-            SnapshotVerificationError, "differs from ORGANISM"
+            SnapshotVerificationError, "differs from staged ORGANISM"
         ):
             verify_staged(self.root)
 
@@ -659,7 +672,56 @@ class SnapshotIntegrityTests(unittest.TestCase):
         self.git("add", "-A", "--", "MANIFEST.json", "INDEX.md")
 
         with self.assertRaisesRegex(
-            SnapshotVerificationError, "integrity profile"
+            SnapshotVerificationError, "migration-only"
+        ):
+            verify_staged(self.root)
+
+    def test_migration_only_manifest_cannot_publish(self):
+        self.write_manifest(
+            [],
+            integrity_profile=MANIFEST_MIGRATION_ONLY_PROFILE,
+        )
+        self.git("add", "-A", "--", "MANIFEST.json", "INDEX.md")
+
+        with self.assertRaisesRegex(
+            SnapshotVerificationError, "migration-only.*cannot be published"
+        ):
+            verify_staged(self.root)
+
+    def test_verifier_binds_scope_to_staged_organism(self):
+        self.write_manifest([])
+        expected = stage_and_verify(self.root)
+        organism = json.loads(
+            (self.root / "ORGANISM.json").read_text(encoding="utf-8")
+        )
+        organism["estate_scope"]["membership"]["name_pattern"] = "^other"
+        organism["estate_scope"]["deliberate_exclusions"] = [{
+            "repository": "test-owner/other-excluded",
+            "reason_code": "other-exclusion",
+            "reason": "divergent worktree contract",
+        }]
+        (self.root / "ORGANISM.json").write_text(
+            json.dumps(organism),
+            encoding="utf-8",
+        )
+
+        self.assertEqual(verify_staged(self.root), expected)
+
+        self.git("add", "-f", "--", "ORGANISM.json")
+        with self.assertRaisesRegex(
+            SnapshotVerificationError,
+            "differs from staged ORGANISM",
+        ):
+            verify_staged(self.root)
+
+    def test_verifier_requires_staged_organism_metadata(self):
+        self.write_manifest([])
+        stage_and_verify(self.root)
+        self.git("rm", "--cached", "-q", "--", "ORGANISM.json")
+
+        with self.assertRaisesRegex(
+            SnapshotVerificationError,
+            "required snapshot metadata.*ORGANISM",
         ):
             verify_staged(self.root)
 

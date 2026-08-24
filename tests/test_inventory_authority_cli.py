@@ -44,24 +44,53 @@ def _minimal_authority() -> dict:
         "normative_source_current": {
             "authority_role": "normative-protocol-authority",
             "repository": "kody-w/rapp-1",
-            "repository_url": "https://example.invalid/rapp-1",
+            "repository_url": "https://github.com/kody-w/rapp-1",
             "organ": "rapp-1",
             "snapshot_path": "repos/rapp-1/SPEC.md",
             "snapshot_commit": "0" * 40,
             "sha256": "0" * 64,
             "byte_length": 1,
+            "revision": "rev-5",
+            "designation": "user-designated-current-standard-source",
         },
-        "map_structural_pin": {},
-        "target_structural_pin": {"commit": "0" * 40},
-        "spine_pin_claim": {},
-        "target_status": "unused",
-        "owner_actions": "unused",
+        "map_structural_pin": {
+            "record_path": "repos/rapp-map/RAPP1_AUTHORITY.json",
+            "status_path": "repos/rapp-map/RAPP1_STATUS.md",
+            "status": "not-yet-fully-rapp-1-conformant",
+            "authority_scope": "Sole RAPP/1 protocol authority for this repository.",
+            "commit": "2" * 40,
+            "sha256": "0" * 64,
+            "byte_length": 1,
+            "matches_normative_source_current_bytes": True,
+            "structural_pin_only": True,
+            "authenticated_registry_acceptance": False,
+        },
+        "target_structural_pin": {
+            "target": "kody-w/RAPP",
+            "record_path": "repos/RAPP/RAPP1_AUTHORITY.json",
+            "commit": "1" * 40,
+            "sha256": "1" * 64,
+            "byte_length": 2,
+            "matches_normative_source_current_bytes": False,
+            "state": "structurally-valid-for-target-but-drifted",
+        },
+        "spine_pin_claim": {
+            "observed_old_commit": "1" * 40,
+            "map_current_commit": "2" * 40,
+            "commits_equal": False,
+            "claim_that_old_pin_equals_map_current": "false",
+            "evidence_path": "repos/rapp-spine/CRAWL_GRAPH.md",
+        },
+        "target_status": "repos/RAPP/RAPP1_STATUS.md",
+        "owner_actions": "repos/RAPP/RAPP1_OWNER_ACTIONS.json",
         "authenticated_registry": {
             "state": "absent",
             "is_section_13_registry": False,
+            "out_of_band_anchor": None,
         },
         "retired_public_target": {
             "repository": "kody-w/RAPP",
+            "pages": "https://kody-w.github.io/RAPP/",
             "product_lifecycle": "retired",
             "target_record_currency": "current-but-drifted",
             "replacement_boundary": "test SDK",
@@ -135,7 +164,7 @@ def _minimal_registry(*extra_organs: str) -> dict:
             "name": "Authority",
             "lifecycle": "mixed-snapshot",
             "authority": "classification grants no authority",
-            "organs": ["rapp-1", "rapp-map", "rapp-spine"],
+            "organs": ["RAPP", "rapp-1", "rapp-map", "rapp-spine"],
         }
     ]
     if extra_organs:
@@ -182,7 +211,7 @@ def _minimal_registry(*extra_organs: str) -> dict:
             {
                 "type": "structural-pin-for-stale-target",
                 "from": "kody-w/RAPP",
-                "to": f"kody-w/rapp-1@{'0' * 40}",
+                "to": f"kody-w/rapp-1@{'1' * 40}",
                 "current_normative_bytes": False,
             },
         ],
@@ -201,8 +230,8 @@ def _manifest_record(name: str) -> dict:
     return {
         "repo": name,
         "commit": "0" * 40,
-        "files": 0,
-        "bytes": 0,
+        "files": 1,
+        "bytes": 1,
         "skipped_large": [],
         "withheld": [],
     }
@@ -215,7 +244,7 @@ def _minimal_manifest(*extra_organs: str) -> dict:
         "membership_pattern": "(?i)^(rapp|RAR$|organ|safe)",
         "repos": [
             _manifest_record(name)
-            for name in ("rapp-1", "rapp-map", "rapp-spine", *extra_organs)
+            for name in ("RAPP", "rapp-1", "rapp-map", "rapp-spine", *extra_organs)
         ],
         "not_captured": [],
     }
@@ -269,6 +298,18 @@ def test_inventory_taxonomy_is_complete() -> None:
     assert authority["map_structural_pin"]["matches_normative_source_current_bytes"]
     assert not authority["target_structural_pin"]["matches_normative_source_current_bytes"]
     assert not authority["spine_pin_claim"]["commits_equal"]
+    projections = {item["id"]: item for item in organism.projections()}
+    assert projections["map"]["tracked_blobs"] == {"captured": 41, "live": 45}
+    assert projections["map"]["omitted_blobs"] == organism.omitted_blobs("rapp-map")
+    assert {
+        (item["path"], item["disposition"])
+        for item in projections["map"]["omitted_blobs"]
+    } == {
+        ("neurons.json", "skipped-large"),
+        ("__pycache__/build_graph.cpython-314.pyc", "withheld"),
+        ("spine/vertebrae/estate-2026-07-25.egg", "withheld"),
+        ("tools/__pycache__/spine.cpython-314.pyc", "withheld"),
+    }
 
 
 def test_architecture_registry_rejects_false_or_vacuous_contracts() -> None:
@@ -302,6 +343,52 @@ def test_architecture_registry_rejects_false_or_vacuous_contracts() -> None:
                 {"product_lifecycle": "active"}
             ),
             "product lifecycle",
+        )
+        rejected(
+            lambda registry: registry["authority"].update({"surprise": {}}),
+            "authority model",
+        )
+        rejected(
+            lambda registry: registry["authority"]["normative_source_current"].update(
+                {"revision": "rev-999"}
+            ),
+            "normative_source_current",
+        )
+        rejected(
+            lambda registry: registry["authority"]["map_structural_pin"].update(
+                {"authority_scope": "rapp-map may redefine RAPP/1"}
+            ),
+            "scope, status, or pin",
+        )
+        rejected(
+            lambda registry: registry["authority"]["map_structural_pin"].update(
+                {"status": "fully-rapp-1-conformant"}
+            ),
+            "scope, status, or pin",
+        )
+        rejected(
+            lambda registry: registry["authority"]["target_structural_pin"].update(
+                {"matches_normative_source_current_bytes": True}
+            ),
+            "target_structural_pin",
+        )
+        rejected(
+            lambda registry: registry["authority"]["spine_pin_claim"].update(
+                {"commits_equal": True}
+            ),
+            "spine_pin_claim",
+        )
+        rejected(
+            lambda registry: registry["authority"]["authenticated_registry"].update(
+                {"out_of_band_anchor": "invented"}
+            ),
+            "authenticated registry",
+        )
+        rejected(
+            lambda registry: registry["authority"].update(
+                {"target_status": "repos/rapp-map/RAPP1_STATUS.md"}
+            ),
+            "target_status",
         )
         rejected(
             lambda registry: registry["estate_scope"].update(
@@ -378,6 +465,11 @@ def test_authority_reports_exact_snapshot_mismatch_and_blockers() -> None:
     )
     assert report.map_pin_valid and report.map_pin_matches_current
     assert report.map_pin_commit == "d2cd5abed48d3f52b86bbb975ac3558286d1db41"
+    assert report.map_authority_scope == (
+        "Sole RAPP/1 protocol authority for this repository."
+    )
+    assert report.map_status == "NOT YET FULLY RAPP/1 CONFORMANT"
+    assert report.map_status_valid
     assert report.target_pin_valid
     assert report.target_pin_state == "structurally-valid-for-target-but-drifted"
     assert report.target_product_lifecycle == "retired"
@@ -386,6 +478,68 @@ def test_authority_reports_exact_snapshot_mismatch_and_blockers() -> None:
     assert not report.spine_pin_equals_map_current
     assert report.authenticated_registry == "absent"
     assert "owner-publish-authenticated-registry" in report.owner_action_blockers
+    assert not report.full_conformance
+
+
+@pytest.mark.parametrize("fault", ["scope", "status", "pin"])
+def test_authority_rejects_false_map_scope_status_or_pin(
+    monkeypatch, fault: str
+) -> None:
+    original = SafeSpecimen.read_bytes
+
+    def altered(self, organ, path, **kwargs):
+        data = original(self, organ, path, **kwargs)
+        if organ == "rapp-map" and path == "RAPP1_AUTHORITY.json" and fault != "status":
+            record = json.loads(data)
+            if fault == "scope":
+                record["authority_scope"] = "rapp-map is the protocol authority"
+            else:
+                record["commit"] = "0" * 40
+            return json.dumps(record).encode()
+        if organ == "rapp-map" and path == "RAPP1_STATUS.md" and fault == "status":
+            return data.replace(
+                b"# NOT YET FULLY RAPP/1 CONFORMANT",
+                b"# FULLY RAPP/1 CONFORMANT",
+                1,
+            )
+        return data
+
+    monkeypatch.setattr(SafeSpecimen, "read_bytes", altered)
+    report = inspect_authority(str(ROOT))
+    assert not report.map_pin_valid
+    assert not report.map_pin_matches_current
+    assert not report.full_conformance
+
+
+@pytest.mark.parametrize(
+    "fault", ["target", "standard", "offline", "registry", "boundary"]
+)
+def test_authority_rejects_invalid_target_authority_subrecords(
+    monkeypatch, fault: str
+) -> None:
+    original = SafeSpecimen.read_bytes
+
+    def altered(self, organ, path, **kwargs):
+        data = original(self, organ, path, **kwargs)
+        if organ != "RAPP" or path != "RAPP1_AUTHORITY.json":
+            return data
+        record = json.loads(data)
+        if fault == "target":
+            record["target"]["status"] = "fully-rapp-1-conformant"
+        elif fault == "standard":
+            record["standard"]["wire_tag"] = "rapp/2"
+        elif fault == "offline":
+            record["offline_verification"]["vendored_spec_bytes"] = True
+        elif fault == "registry":
+            record["authenticated_registry"]["is_section_13_registry"] = True
+        else:
+            record["immutable_grail_boundary"]["policy"] = "mutable"
+        return json.dumps(record).encode()
+
+    monkeypatch.setattr(SafeSpecimen, "read_bytes", altered)
+    report = inspect_authority(str(ROOT))
+    assert not report.target_pin_valid
+    assert report.target_pin_state == "invalid-target-pin-record"
     assert not report.full_conformance
 
 
@@ -515,12 +669,28 @@ def test_alignment_report_labels_declared_evidence_and_daily_drift() -> None:
     assert report["semantics"]["coverage"].startswith(
         "recomputed-from-captured-artifact"
     )
+    assert report["semantics"]["component_coverage"].startswith(
+        "manifest-derived"
+    )
     assert report["semantics"]["generator_derivation"].startswith("not-performed")
     projections = {item["id"]: item for item in report["projections"]}
     assert projections["map"]["freshness"]["state"] == "stale"
     assert projections["spine"]["freshness"]["state"] == "unknown"
     assert projections["map"]["daily_checks"]["captured_commit_matches_manifest"]
     assert projections["spine"]["daily_checks"]["captured_commit_matches_manifest"]
+    assert projections["map"]["component_coverage"] == {
+        "captured": 41,
+        "declared_live": 45,
+        "state": "incomplete",
+        "manifest_reconciled": True,
+        "evidence_source": (
+            "MANIFEST.json repos['rapp-map'] file and omission counts"
+        ),
+    }
+    assert projections["map"]["omission_evidence"]["count"] == 4
+    assert len(projections["map"]["omission_evidence"]["blobs"]) == 4
+    assert projections["spine"]["component_coverage"]["state"] == "complete"
+    assert projections["spine"]["omission_evidence"]["blobs"] == []
     for projection in projections.values():
         checks = projection["daily_checks"]
         assert checks["generator_provenance_paths_present"]
@@ -555,6 +725,39 @@ def test_alignment_report_labels_declared_evidence_and_daily_drift() -> None:
         "legacy-egg-claim",
         "legacy-wire-claim",
     }
+
+
+def test_alignment_provenance_rejects_symlinked_parent() -> None:
+    scratch = ROOT / "tests" / f".provenance-{uuid.uuid4().hex}"
+    try:
+        registry = _minimal_registry("organ")
+        registry["projections"][0]["generator"] = (
+            "repos/rapp-map/linked/generate.py"
+        )
+        _write_minimal_root(scratch, registry=registry)
+        for projection in registry["projections"]:
+            organ_root = scratch / "repos" / projection["organ"]
+            organ_root.mkdir(parents=True)
+            (organ_root / "generated.json").write_text("{}")
+            (organ_root / "source.json").write_text("{}")
+            if projection["id"] == "spine":
+                (organ_root / "generate.py").write_text("")
+        backing = scratch / "backing"
+        backing.mkdir()
+        (backing / "generate.py").write_text("")
+        os.symlink("../../backing", scratch / "repos" / "rapp-map" / "linked")
+        assert (scratch / "repos" / "rapp-map" / "linked" / "generate.py").is_file()
+
+        report = inspect_alignment(str(scratch)).as_dict()
+        map_checks = next(
+            item for item in report["projections"] if item["id"] == "map"
+        )["daily_checks"]
+        generator = "repos/rapp-map/linked/generate.py"
+        assert not map_checks["generator_provenance_regular_files"][generator]
+        assert not map_checks["generator_provenance_paths_present"]
+        assert "symlink" in map_checks["generator_provenance_errors"][generator]
+    finally:
+        shutil.rmtree(scratch, ignore_errors=True)
 
 
 def test_alignment_labels_coverage_that_cannot_be_recomputed(monkeypatch) -> None:

@@ -18,6 +18,7 @@ from urllib.parse import quote_from_bytes
 HERE = Path(__file__).resolve().parent
 MANIFEST_SCHEMA = "rapp-monorepo/1.0"
 MANIFEST_INTEGRITY_PROFILE = "rapp-monorepo-staged-tree/1.0"
+MANIFEST_MIGRATION_ONLY_PROFILE = "rapp-monorepo-migration-only/1.0"
 SUPPORTED_MODES = {"100644", "100755", "120000", "160000"}
 TREE_SHA256 = re.compile(r"^[0-9a-f]{64}$")
 COMMIT_OID = re.compile(r"^(?:[0-9a-f]{40}|[0-9a-f]{64})$")
@@ -127,9 +128,21 @@ def _parse_manifest(raw: bytes, source: str) -> dict:
         raise SnapshotVerificationError(
             f"manifest schema must be {MANIFEST_SCHEMA!r}"
         )
-    if document.get("integrity_profile") != MANIFEST_INTEGRITY_PROFILE:
+    integrity_profile = document.get("integrity_profile")
+    if integrity_profile is None:
         raise SnapshotVerificationError(
-            "manifest does not declare the staged-tree integrity profile; "
+            "legacy manifest has no integrity profile; it is migration-only "
+            "and cannot be published"
+        )
+    if integrity_profile == MANIFEST_MIGRATION_ONLY_PROFILE:
+        raise SnapshotVerificationError(
+            "manifest declares the migration-only integrity profile and "
+            "cannot be published"
+        )
+    if integrity_profile != MANIFEST_INTEGRITY_PROFILE:
+        raise SnapshotVerificationError(
+            "manifest does not declare the current staged-tree integrity "
+            "profile; "
             "regenerate the snapshot before publication"
         )
     for field in ("owner", "captured_at", "membership_pattern"):
@@ -153,55 +166,73 @@ def _parse_manifest(raw: bytes, source: str) -> dict:
             "manifest not_captured must be an array"
         )
     exclusions = document.get("membership_exclusions")
-    if exclusions is not None:
-        expected_keys = {"exclude_archived", "repositories"}
-        if not isinstance(exclusions, dict) or set(exclusions) != expected_keys:
-            raise SnapshotVerificationError(
-                "manifest membership_exclusions has an invalid shape"
-            )
-        if exclusions["exclude_archived"] is not True:
-            raise SnapshotVerificationError(
-                "manifest membership_exclusions must exclude archived repos"
-            )
-        repositories = exclusions["repositories"]
-        if (
-            not isinstance(repositories, list)
-            or not repositories
-            or not all(
-                isinstance(item, dict)
-                and set(item) == {"repo", "reason_code", "reason"}
-                and isinstance(item["repo"], str)
-                and item["repo"]
-                and item["repo"] not in {".", ".."}
-                and "/" not in item["repo"]
-                and "\\" not in item["repo"]
-                and isinstance(item["reason_code"], str)
-                and bool(item["reason_code"])
-                and isinstance(item["reason"], str)
-                and bool(item["reason"])
-                for item in repositories
-            )
-            or len({item["repo"].casefold() for item in repositories})
-            != len(repositories)
-        ):
-            raise SnapshotVerificationError(
-                "manifest membership exclusion repositories are invalid"
-            )
+    if exclusions is None:
+        raise SnapshotVerificationError(
+            "current integrity-profile manifests require "
+            "membership_exclusions"
+        )
+    expected_keys = {"exclude_archived", "repositories"}
+    if not isinstance(exclusions, dict) or set(exclusions) != expected_keys:
+        raise SnapshotVerificationError(
+            "manifest membership_exclusions has an invalid shape"
+        )
+    if exclusions["exclude_archived"] is not True:
+        raise SnapshotVerificationError(
+            "manifest membership_exclusions must exclude archived repos"
+        )
+    repositories = exclusions["repositories"]
+    if (
+        not isinstance(repositories, list)
+        or not repositories
+        or not all(
+            isinstance(item, dict)
+            and set(item) == {"repo", "reason_code", "reason"}
+            and isinstance(item["repo"], str)
+            and item["repo"]
+            and item["repo"] not in {".", ".."}
+            and "/" not in item["repo"]
+            and "\\" not in item["repo"]
+            and isinstance(item["reason_code"], str)
+            and bool(item["reason_code"])
+            and isinstance(item["reason"], str)
+            and bool(item["reason"])
+            for item in repositories
+        )
+        or len({item["repo"].casefold() for item in repositories})
+        != len(repositories)
+    ):
+        raise SnapshotVerificationError(
+            "manifest membership exclusion repositories are invalid"
+        )
     return document
 
 
-def _organism_membership_contract(root: Path) -> tuple[str, str, dict]:
+def _organism_membership_contract(
+    raw: bytes,
+    source: str,
+) -> tuple[str, str, dict]:
     try:
-        organism = json.loads((root / "ORGANISM.json").read_text(encoding="utf-8"))
+        organism = json.loads(raw.decode("utf-8"))
+    except UnicodeDecodeError as exc:
+        raise SnapshotVerificationError(f"{source} is not UTF-8") from exc
+    except json.JSONDecodeError as exc:
+        raise SnapshotVerificationError(
+            f"{source} is not valid JSON: {exc}"
+        ) from exc
+    try:
         scope = organism["estate_scope"]
         membership = scope["membership"]
         exclusions = scope["deliberate_exclusions"]
-    except (OSError, KeyError, TypeError, json.JSONDecodeError) as exc:
+    except (KeyError, TypeError) as exc:
         raise SnapshotVerificationError(
-            "ORGANISM.json has no usable estate membership contract"
+            f"{source} has no usable estate membership contract"
         ) from exc
     if (
-        not isinstance(scope.get("owner"), str)
+        not isinstance(scope, dict)
+        or set(scope) != {"owner", "membership", "deliberate_exclusions"}
+        or not isinstance(membership, dict)
+        or set(membership) != {"visibility", "archived", "name_pattern"}
+        or not isinstance(scope.get("owner"), str)
         or not scope["owner"]
         or membership.get("visibility") != "public"
         or membership.get("archived") is not False
@@ -211,9 +242,16 @@ def _organism_membership_contract(root: Path) -> tuple[str, str, dict]:
         or not exclusions
     ):
         raise SnapshotVerificationError(
-            "ORGANISM.json estate membership contract is invalid"
+            f"{source} estate membership contract is invalid"
         )
+    try:
+        pattern = re.compile(membership["name_pattern"])
+    except re.error as exc:
+        raise SnapshotVerificationError(
+            f"{source} membership pattern is invalid"
+        ) from exc
     repositories: list[dict[str, str]] = []
+    seen: set[str] = set()
     for item in exclusions:
         if (
             not isinstance(item, dict)
@@ -227,10 +265,17 @@ def _organism_membership_contract(root: Path) -> tuple[str, str, dict]:
             or not item["reason"]
         ):
             raise SnapshotVerificationError(
-                "ORGANISM.json contains an invalid membership exclusion"
+                f"{source} contains an invalid membership exclusion"
             )
+        name = item["repository"].split("/", 1)[1]
+        key = name.casefold()
+        if key in seen or pattern.search(name) is None:
+            raise SnapshotVerificationError(
+                f"{source} membership exclusions are duplicate or out of scope"
+            )
+        seen.add(key)
         repositories.append({
-            "repo": item["repository"].split("/", 1)[1],
+            "repo": name,
             "reason_code": item["reason_code"],
             "reason": item["reason"],
         })
@@ -261,6 +306,7 @@ def _staged_entries(
         "repos",
         "MANIFEST.json",
         "INDEX.md",
+        "ORGANISM.json",
         ".gitmodules",
     )
     entries: list[IndexEntry] = []
@@ -289,7 +335,12 @@ def _staged_entries(
             mode=raw_mode.decode("ascii"),
             oid=raw_oid.decode("ascii"),
         )
-        if path in {"MANIFEST.json", "INDEX.md", ".gitmodules"}:
+        if path in {
+            "MANIFEST.json",
+            "INDEX.md",
+            "ORGANISM.json",
+            ".gitmodules",
+        }:
             metadata[path] = entry
             continue
         if not path.startswith("repos/"):
@@ -724,7 +775,11 @@ def verify_staged(
     """Verify staged paths, modes, bytes, and contents against MANIFEST.json."""
     root = root.resolve()
     entries, metadata = _staged_entries(root)
-    absent_metadata = {"MANIFEST.json", "INDEX.md"} - metadata.keys()
+    absent_metadata = {
+        "MANIFEST.json",
+        "INDEX.md",
+        "ORGANISM.json",
+    } - metadata.keys()
     if absent_metadata:
         raise SnapshotVerificationError(
             "required snapshot metadata is not staged: "
@@ -735,9 +790,9 @@ def verify_staged(
             raise SnapshotVerificationError(
                 f"staged metadata has unsupported mode {entry.mode}: {path}"
             )
-        if path == ".gitmodules" and entry.mode != "100644":
+        if path in {".gitmodules", "ORGANISM.json"} and entry.mode != "100644":
             raise SnapshotVerificationError(
-                "staged .gitmodules must use mode 100644"
+                f"staged {path} must use mode 100644"
             )
 
     staged_manifest = _git(
@@ -774,6 +829,12 @@ def verify_staged(
 
     document = _parse_manifest(staged_manifest, "staged MANIFEST.json")
     records = _manifest_records(document)
+    staged_organism = _git(
+        root,
+        "cat-file",
+        "blob",
+        metadata["ORGANISM.json"].oid,
+    )
     expected_gitmodules = render_gitmodules(document).encode("utf-8")
     gitmodules_path = root / ".gitmodules"
     if expected_gitmodules:
@@ -809,18 +870,20 @@ def verify_staged(
         raise SnapshotVerificationError(
             "root .gitmodules exists but the manifest has no gitlinks"
         )
-    if document.get("membership_exclusions") is not None:
-        expected_owner, expected_pattern, expected_exclusions = (
-            _organism_membership_contract(root)
+    expected_owner, expected_pattern, expected_exclusions = (
+        _organism_membership_contract(
+            staged_organism,
+            "staged ORGANISM.json",
         )
-        if (
-            document["owner"] != expected_owner
-            or document["membership_pattern"] != expected_pattern
-            or document["membership_exclusions"] != expected_exclusions
-        ):
-            raise SnapshotVerificationError(
-                "manifest membership contract differs from ORGANISM.json"
-            )
+    )
+    if (
+        document["owner"] != expected_owner
+        or document["membership_pattern"] != expected_pattern
+        or document["membership_exclusions"] != expected_exclusions
+    ):
+        raise SnapshotVerificationError(
+            "manifest membership contract differs from staged ORGANISM.json"
+        )
     missing = document["not_captured"]
     if missing:
         raise SnapshotVerificationError(
@@ -957,7 +1020,11 @@ class WorktreeEntry:
 
 
 def _worktree_entries(root: Path) -> list[WorktreeEntry]:
-    paths = [root / "MANIFEST.json", root / "INDEX.md"]
+    paths = [
+        root / "MANIFEST.json",
+        root / "INDEX.md",
+        root / "ORGANISM.json",
+    ]
     gitmodules = root / ".gitmodules"
     if gitmodules.exists() or gitmodules.is_symlink():
         paths.append(gitmodules)
@@ -1077,6 +1144,7 @@ def _replace_snapshot_index(
         "repos",
         "MANIFEST.json",
         "INDEX.md",
+        "ORGANISM.json",
         ".gitmodules",
     )
     if existing:

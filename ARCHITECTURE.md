@@ -433,7 +433,7 @@ protocol or trust authority.
 
 | Projection | Captured/live state | Coverage and freshness |
 |---|---|---|
-| **Map** | Captured and declared-live HEAD are both `f3dd5ed1`. The snapshot contains 44 of 45 declared-live tracked blobs; only the 2.4 MB `neurons.json` exceeds the per-file limit. | `estate-map.json` yields 522 repository identifiers, 152 current manifest organs, and an exact 45-organ missing list. Its mechanical observation is dated 2026-07-26 and is stale under the SDK's seven-day default. |
+| **Map** | Captured and declared-live HEAD are both `f3dd5ed1`. Manifest-derived component coverage is 41 of 45 blobs: `neurons.json` was skipped at 2.4 MB, and three binary blobs were withheld because they could not be screened as UTF-8. | `estate-map.json` yields 522 repository identifiers, 152 current manifest organs, and an exact 45-organ missing list. Its mechanical observation is dated 2026-07-26 and is stale under the SDK's seven-day default. |
 | **Spine** | Captured and declared-live HEAD are both `ffbd55b7`; all 28 declared-live tracked blobs are present. | `crawl.json` graph nodes yield 48 repository identifiers, 42 current manifest organs, and an exact 155-organ missing list. Its observation timestamp is absent, so freshness is unknown. Coverage also reports 34 of 60 protocol materials and 36 of 129 required sources unresolved. |
 
 The live values above are cartographer declarations stored in the snapshot,
@@ -443,6 +443,14 @@ recomputes current covered and missing sets from each projection's
 `recomputed-from-captured-artifact`. If safe access, parsing, or extraction is
 impossible, it emits `not-recomputed` with a reason rather than an empty list
 that could be mistaken for complete coverage.
+
+Component coverage and projection coverage are different dimensions. The
+former reconciles each projection's captured file count and every skipped or
+withheld blob directly against its `MANIFEST.json` repository record. The
+latter measures which of the 197 organism repositories appear in the
+projection's captured coverage artifact. Alignment renders both dimensions and
+lists all four Map omissions; a 152-organ Map overlap does not erase missing
+Map blobs, and a captured Map blob does not imply organism coverage.
 
 Generator provenance is deliberately narrower: the SDK proves that the named
 artifact, generator, and non-empty input paths are regular captured files, but

@@ -2,27 +2,12 @@ name: Root SDK proof
 
 on:
   workflow_dispatch:
+  # This job is a required check, so every pull request must receive a result.
+  # Path-filtered required workflows otherwise remain pending forever.
   pull_request:
-    paths:
-      - "ORGANISM.json"
-      - "SDK.md"
-      - "SDK_LICENSE"
-      - "MANIFEST.in"
-      - "pyproject.toml"
-      - "rapp_sdk/**"
-      - "tests/**"
-      - "ARCHITECTURE.md"
-      - "INDEX.md"
-      - "MANIFEST.json"
-      - "aggregate.py"
-      - "ip_gate.py"
-      - "prove_aggregate.py"
-      - "prove_gate.py"
-      - "prove_snapshot.py"
-      - "verify_snapshot.py"
-      - ".github/workflows/aggregate.yml"
-      - ".github/workflows/sdk.yml"
   push:
+    branches:
+      - main
     paths:
       - "ORGANISM.json"
       - "SDK.md"
@@ -62,11 +47,13 @@ jobs:
           python prove_gate.py
           python prove_aggregate.py
           python prove_snapshot.py
+          python prove_publication.py
       - name: Compile root SDK and tests
         run: |
           python -m compileall -q \
             rapp_sdk tests aggregate.py ip_gate.py prove_aggregate.py \
-            prove_gate.py prove_snapshot.py verify_snapshot.py
+            prove_gate.py prove_publication.py prove_snapshot.py \
+            verify_snapshot.py
       - name: Check ORGANISM and projection alignment
         run: |
           python - <<'PY'

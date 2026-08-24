@@ -46,7 +46,8 @@ running brainstem.
 - `INDEX.md` — the same thing as a table you can read
 - `ORGANISM.json` — the machine-readable estate scope and deliberate
   exclusions, body-system taxonomy, authority boundaries, Map/Spine projection
-  evidence, relationships, and known conflicts
+  evidence, manifest-reconciled component coverage and omissions,
+  relationships, and known conflicts
 - `rapp_sdk/` — the installable RAPP/1 protocol and whole-organism SDK
 - `architecture/rapp-organism.excalidraw` — the editable full-body diagram
 
@@ -86,6 +87,11 @@ the exact `/chat` client, organism inventory, and no-follow specimen access.
 retired, while its target status record remains current evidence with a
 drifted structural pin. Map and Spine are modeled separately so none can
 silently redefine the standard.
+
+Projection component coverage is distinct from estate coverage. In this
+snapshot Map carries 41 of 45 blobs; `MANIFEST.json` identifies the skipped
+`neurons.json` blob and three separately withheld blobs. Map's captured
+`estate-map.json` independently covers 152 of the 197 organism repositories.
 
 Full authenticated conformance remains false until the estate owner publishes
 the signed section-13 registry and distributes its self-certifying anchor out
@@ -162,6 +168,7 @@ export RAPP_GATE_RULES='{"content":["..."],"paths":["..."]}'   # or ./.gate-rule
 python3 prove_gate.py
 python3 prove_aggregate.py
 python3 prove_snapshot.py
+python3 prove_publication.py
 python3 aggregate.py --dry-run     # enumerate members, write nothing
 python3 aggregate.py               # capture
 python3 verify_snapshot.py --stage # stage and prove the publishable tree
@@ -177,6 +184,8 @@ python3 verify_snapshot.py --stage # stage and prove the publishable tree
   and explicit exclusions; an exclusion is never a silent omission.
 - Withheld and skipped files are listed, but the listing is the only evidence
   of them — this repo cannot show you what it decided not to carry.
+- Coverage counts never hide omissions: Map's 152/197 repository overlap is
+  separate from its 41/45 manifest-derived component capture.
 - Gitlinks retain their exact commit pointer but not the external target
   repository contents.
 - The gate screens the files it is given. It cannot screen a repository that
