@@ -23,10 +23,9 @@ makes the entire ecosystem reachable through natural language — and of every
 specialist agent the one agent `install`s on demand (`@rapp/twin_agent`,
 `@rapp/egg_hatcher`, and the rest).
 
-It is also **leg one of the [drift triangle](../DRIFT_TRIANGLE.md)**: the live
-agent's action enum is the executable contract that `ecosystem-spec.json`
-describes. `action=verify` asserts the enum is a superset of the spec's
-`required_actions`.
+Historical Bible versions called this “leg one” of the
+[drift triangle](../DRIFT_TRIANGLE.md). The mirror contract is retired; this
+page makes no current `action=verify` or spec-alignment claim.
 
 ---
 

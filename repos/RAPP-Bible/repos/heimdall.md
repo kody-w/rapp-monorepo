@@ -2,7 +2,9 @@
 
 **Tier 3** — Front door — Heimdall
 
-> **⚠ Illustrative example, not a canonical repo (drift-reconciliation note, 2026-07-08).** `heimdall` appears in the canonical [`ecosystem-spec.json`](https://raw.githubusercontent.com/kody-w/rapp-god/main/api/v1/ecosystem-spec.json) (v1.2.0) **only as an example in `fractal_scales`** — it is **not** a member of the `repos` "front doors & neighborhoods" group (rapp-vneighborhood, rapp-commons, rapp-god-forum, rapp-resident, RAPP-Network). The versioned spec is the winning authority; this Bible repo-page is an out-of-catalog overview. Kept as an illustrative front-door example unless the ecosystem promotes it into the spec `repos` map.
+> **Historical v1.2.0 note.** `heimdall` appeared only as a
+> `fractal_scales` example, not in that snapshot's `repos` group. The snapshot
+> is retired and is not current authority; this page remains illustrative.
 
 - Canonical: https://github.com/kody-w/heimdall
 - Default branch: `main`

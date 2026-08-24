@@ -97,8 +97,8 @@ the canonical legacy head in the `rapp/1:seal` hash space.
   "provenance": { "mode": "witnessed" | "reconstructed", "evidence": ["…"] },
   "skeleton": {
     "spec_version": "1.1.0",
-    "homes": { "rapp": {…}, "rapp_god": {…}, "rapp_map": {…} },   // the 3 spec homes + shas
-    "mirrors_identical": true,                                    // equality is a vital sign
+    "homes": { "historical_rapp": {…} },                          // immutable census input
+    "mirrors_identical": null,                                    // retired; schema continuity only
     "spine": { "registry_sha256": "…", "foundation_sha256": "…" }
   },
   "census": {
@@ -114,7 +114,7 @@ the canonical legacy head in the `rapp/1:seal` hash space.
   "vitals": {
     "sync": { "verdict": "DRIFT-FOUND", "findings": 13, "high": 3, … },  // from sweeps/latest.json
     "drift_issues": { "open": 1, "by_severity": {…} },                   // live open drift() issues
-    "mirrors_identical": true
+    "mirrors_identical": null
   },
   "events": [ { "type": "birth"|"vanish"|"heads-advanced"|"sweep"|"drift-delta"|"genesis"|"heartbeat"|"observation-gap"|… } ]
 }
@@ -229,18 +229,21 @@ optional off-swarm and omitted here; `prev` carries the particle chain.
 
 ## The census (which repos are organs)
 
-The cell census is composed, never invented, from the grail data:
+The cell census is composed, never invented, from explicitly pinned inputs:
 
-- **`ecosystem-spec.json`** `repos` (10 cluster groups) — published byte-identical to three
-  homes: `kody-w/RAPP` (`specs/ecosystem-spec.json`, canonical), `kody-w/rapp-god`
-  (`api/v1/ecosystem-spec.json`), `kody-w/rapp-map` (`ecosystem-spec.json`). Divergence
-  between the homes IS drift, so `mirrors_identical` is recorded on every frame.
+- **Historical ecosystem v1.2.0 `repos`** (10 cluster groups) — read only from
+  `kody-w/RAPP@789e6c5245f18e9685450fd6105dc26867837895:specs/ecosystem-spec.json`.
+  This is an immutable census input, not protocol authority or a registry. The
+  former `rapp-god`/`rapp-map` byte-identical contract is retired, so
+  `mirrors_identical` is now always `null` and remains only for frame-schema
+  continuity.
 - **`kody-w/rapp-spine` `registry.json`** — the layer taxonomy
   (`kernel · map · runtime · distribution · identity · network · leviathan`, plus
   `uncataloged`) and each repo's placement.
 
-The census is the **union** of both, deduped. Layer comes from the spine; cluster/category
-from the spec.
+The census is the **union** of both, deduped. Layer comes from the spine;
+cluster/category is historical metadata from the pinned snapshot. Current
+protocol authority is the exact `kody-w/rapp-1` rev-5 pin.
 
 ---
 

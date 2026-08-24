@@ -103,10 +103,9 @@ footer { max-width: 980px; margin: 0 auto; padding: 40px 24px;
   <div class="eyebrow">RAPP Bible</div>
   <h1>One repo. Every RAPP spec. Every entry point.</h1>
   <p class="tagline">
-    The canonical aggregation point for the RAPP (Rapid Agent Prototyping
-    Platform) ecosystem. Land here, find the spec or the front door, follow
-    the link to the canonical source. Two sources of truth: each canonical
-    repo stays authoritative; the Bible aggregates and surfaces drift.
+    A historical aggregation of the RAPP (Rapid Agent Prototyping Platform)
+    ecosystem. Current protocol questions resolve to the exact RAPP/1 rev-5
+    authority pin; this site does not provide registry or mirror authority.
   </p>
   <div class="cta-row">
     <a class="cta" href="OVERVIEW.md">Read the overview</a>
@@ -115,10 +114,9 @@ footer { max-width: 980px; margin: 0 auto; padding: 40px 24px;
     <a class="cta secondary" href="https://github.com/kody-w/RAPP-Bible">View on GitHub</a>
   </div>
   <p class="tagline" style="font-size:0.95em;margin-top:14px;">
-    This Bible <strong>renders <code>ecosystem-spec.json</code> v1.2.0</strong> —
-    the single canonical machine spec, mirrored byte-identical in
-    <a href="repos/rapp-god.md">rapp-god</a> and <a href="repos/rapp-map.md">rapp-map</a> —
-    for a human reader.
+    This Bible preserves a <strong>historical ecosystem v1.2.0 rendering</strong>.
+    The former <a href="DRIFT_TRIANGLE.md">byte-identical mirror contract is
+    retired</a>. See <a href="RAPP1_STATUS.md">current status</a>.
   </p>
 </header>
 
@@ -214,8 +212,7 @@ footer { max-width: 980px; margin: 0 auto; padding: 40px 24px;
     </div>
     <div class="card">
       <h4><a href="DRIFT_TRIANGLE.md">DRIFT_TRIANGLE.md</a></h4>
-      <p>The four-leg alignment (this Bible + rapp-god + rapp-map + the agent)
-      and how <code>verify</code> keeps it in sync.</p>
+      <p>Exact evidence for retiring the former four-leg mirror assertion.</p>
     </div>
   </div>
 </section>
@@ -303,11 +300,11 @@ e.g.  rappid:@kody-w/heimdall:5f3c...e21a</pre>
 
 <section class="panel" id="repos">
   <h2>Repos</h2>
-  <p>Every RAPP-ecosystem repo the Bible knows about. Each links to a
-  one-pager with metadata, role, and a direct link to the canonical source.</p>
+  <p>Every RAPP-ecosystem repo in the Bible's historical snapshot. Each links
+  to a one-pager with its dated role and current disposition where known.</p>
 
-  <p>Grouped by the <code>ecosystem-spec.json</code> v1.2.0 <code>repos</code>
-  families. The most important "repo" is not a repo: it is
+  <p>Grouped by the retired ecosystem v1.2.0 <code>repos</code> families. The
+  most important "repo" in that snapshot was not a repo: it was
   <a href="THE_ONE_AGENT.md">the one agent</a>, <code>@rapp/rapp</code>, which
   lives in RAR and makes everything below reachable through natural language.</p>
 
@@ -327,8 +324,8 @@ e.g.  rappid:@kody-w/heimdall:5f3c...e21a</pre>
   <table>
     <thead><tr><th>Repo</th><th>Role</th></tr></thead>
     <tbody>
-      <tr><td><a href="repos/rapp-god.md">rapp-god</a></td><td>Registry of every part + version; drift observatory; hosts the spec.</td></tr>
-      <tr><td><a href="repos/rapp-map.md">rapp-map</a></td><td>Which repo houses which part; the neuron mesh; hosts the spec.</td></tr>
+      <tr><td><a href="repos/rapp-god.md">rapp-god</a></td><td>Historical private surface; not a public mirror.</td></tr>
+      <tr><td><a href="repos/rapp-map.md">rapp-map</a></td><td>Read-only map; former mirror path quarantined.</td></tr>
       <tr><td><a href="repos/RAR.md">RAR</a></td><td>Single-file agent registry — home of <code>@rapp/rapp</code>.</td></tr>
       <tr><td><a href="repos/rapp-static-apis.md">rapp-static-apis</a></td><td>APIs on GitHub raw, no server.</td></tr>
     </tbody>
@@ -428,11 +425,10 @@ e.g.  rappid:@kody-w/heimdall:5f3c...e21a</pre>
 </main>
 
 <footer>
-  <p>The RAPP Bible renders <code>ecosystem-spec.json</code> <strong>v1.2.0</strong>
-  for a human reader. It is one leg of the four-leg
-  <a href="DRIFT_TRIANGLE.md">drift triangle</a> (this Bible + rapp-god +
-  rapp-map + the one agent); where this Bible and the spec JSON disagree, the
-  JSON wins. Source:
+  <p>The RAPP Bible preserves a historical ecosystem v1.2.0 rendering. Its
+  former <a href="DRIFT_TRIANGLE.md">four-leg mirror contract</a> is retired;
+  current protocol authority is pinned in
+  <a href="RAPP1_AUTHORITY.json">RAPP1_AUTHORITY.json</a>. Source:
   <a href="https://github.com/kody-w/RAPP-Bible">github.com/kody-w/RAPP-Bible</a>.</p>
 </footer>
 

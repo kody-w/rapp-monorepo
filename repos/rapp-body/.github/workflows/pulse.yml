@@ -35,6 +35,9 @@ jobs:
       - name: Verify chain (before)
         run: node tools/verify-chain.mjs
 
+      - name: Verify retired mirror contract
+        run: node tools/check-mirror-contract.mjs
+
       - name: Pulse
         # CI ALWAYS runs with GITHUB_TOKEN (5000 req/hr), so the coherence gate is never
         # tripped by rate-limiting. Only coherence exit 3 is a clean skip; a pre-append

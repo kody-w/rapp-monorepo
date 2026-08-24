@@ -1,8 +1,8 @@
 # Repos Index
 
-Every RAPP-ecosystem repo the Bible knows about, grouped by the families in
-[`ecosystem-spec.json`](https://raw.githubusercontent.com/kody-w/rapp-god/main/api/v1/ecosystem-spec.json)
-v1.2.0 `repos`. Each entry links to the Bible one-pager (which links upstream).
+Every RAPP-ecosystem repo in the Bible's historical v1.2.0 snapshot, grouped
+by that snapshot's `repos` families. This is not a current registry or
+authority inventory; see [`RAPP1_STATUS.md`](../RAPP1_STATUS.md).
 
 > The single most important "repo" is not a repo at all — it is **one agent**.
 > See [`THE_ONE_AGENT.md`](../THE_ONE_AGENT.md): drop `@rapp/rapp` (`rapp_agent.py`)
@@ -23,8 +23,8 @@ v1.2.0 `repos`. Each entry links to the Bible one-pager (which links upstream).
 
 | Repo | Role |
 |------|------|
-| [rapp-god](rapp-god.md) | Registry of every part + version; drift observatory; hosts the spec |
-| [rapp-map](rapp-map.md) | Which repo houses which part; the neuron mesh; hosts the spec |
+| [rapp-god](rapp-god.md) | Historical private surface; not a public mirror |
+| [rapp-map](rapp-map.md) | Read-only map; its former mirror path is quarantined |
 | [RAR](RAR.md) | The single-file agent registry (the agent Pokédex) — home of `@rapp/rapp` |
 | [rapp-static-apis](rapp-static-apis.md) | APIs on GitHub raw, no server (`rapp-static-api/1.0`) |
 
@@ -112,4 +112,5 @@ Example twins built on top of the kernel. The Bible links them; it does not mirr
 
 ---
 
-*Grouped per `ecosystem-spec.json` v1.2.0 `repos`. If a repo here disagrees with its upstream README, upstream wins.*
+*Grouped from the historical ecosystem v1.2.0 snapshot. It is not current
+authority; consult each public repository's current status.*

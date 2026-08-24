@@ -1,6 +1,8 @@
 # The one agent — `rapp_agent.py` / `@rapp/rapp`
 
-> *Renders the `the_one_agent`, `required_actions`, `operator_journeys`, and `specialist_agents` sections of [`ecosystem-spec.json`](https://raw.githubusercontent.com/kody-w/rapp-god/main/api/v1/ecosystem-spec.json) v1.2.0.*
+> **Historical snapshot.** This page renders fields from the retired ecosystem
+> v1.2.0 document. It is not a current action contract. See
+> [`RAPP1_STATUS.md`](RAPP1_STATUS.md).
 
 There is one agent that makes the **entire** RAPP ecosystem reachable through natural language. Drop a single file — `rapp_agent.py`, published as **`@rapp/rapp`** in [RAR](https://github.com/kody-w/RAR) — into a brainstem's `agents/` directory, and an operator can orient in the ecosystem, bootstrap their identity and a fresh organism, operate every core scale, record lineage, and **install any specialist agent** for everything deeper. All through conversation.
 
@@ -35,7 +37,7 @@ The live agent's `metadata` enum must be a **superset** of every action below. `
 | `protocol` | Surface the neighborhood / network wire protocol. |
 | `ecosystem` | Render the parts database — schemas, repos, neuron mesh. |
 | `find` | Search the ecosystem for a part by name / kind / tag. |
-| `refresh` | Re-sync the embedded map from the global grail (rapp-god / rapp-map). |
+| `refresh` | Historical action description: re-sync the embedded map from the former ecosystem surfaces. Those surfaces are no longer an active mirror contract. |
 
 ### Identity & bootstrap — "set me up"
 | Action | Does |
@@ -162,4 +164,7 @@ This is the whole point: the one agent is the front of the line. It knows what e
 
 ---
 
-*Authority: `ecosystem-spec.json` v1.2.0 (`the_one_agent` + `required_actions` + `operator_journeys` + `specialist_agents`). The agent's live action enum is the executable contract; this page renders it for a human reader.*
+*Historical provenance: retired ecosystem v1.2.0 fields
+`the_one_agent`, `required_actions`, `operator_journeys`, and
+`specialist_agents`. Current protocol authority is
+[`RAPP1_AUTHORITY.json`](RAPP1_AUTHORITY.json).*

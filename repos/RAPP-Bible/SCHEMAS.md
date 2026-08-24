@@ -1,6 +1,9 @@
 # Schema registry
 
-> *Renders the schema families referenced in [`ecosystem-spec.json`](https://raw.githubusercontent.com/kody-w/rapp-god/main/api/v1/ecosystem-spec.json) v1.2.0 (`schemas_ref` + `primitives`) and the full ~80-schema table in [`ECOSYSTEM_MAP.md`](https://github.com/kody-w/RAPP/blob/main/ECOSYSTEM_MAP.md) §5.*
+> **Historical snapshot.** This page renders schema families from the retired
+> ecosystem v1.2.0 document and a dated `ECOSYSTEM_MAP.md` table. It is not
+> current protocol authority. Use
+> [`RAPP1_AUTHORITY.json`](RAPP1_AUTHORITY.json) for RAPP/1 rev-5.
 
 Every payload in RAPP carries a `schema` string of the form `rapp-*/N.M` (or `brainstem-egg/*`). The rule (ANTIPATTERNS §3): **search this registry before defining a new schema.** If a schema changes, bump the version string and migrate cleanly — no backward-compat shims for half-released features.
 

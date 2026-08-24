@@ -1,21 +1,17 @@
-# rapp-god
+# rapp-god — historical surface
 
-**Identity & registry** — the registry of every part *and every version*; the drift observatory; one of the two grail mirrors that host `ecosystem-spec.json`.
+> **Current disposition:** not a public mirror. The repository is owned by
+> `kody-w` and is private. An unauthenticated request to the former
+> `api/v1/ecosystem-spec.json` raw path returns HTTP 404 with the exact
+> 14-byte `404: Not Found` sentinel.
 
-- Canonical: https://github.com/kody-w/rapp-god
-- Spec mirror: https://raw.githubusercontent.com/kody-w/rapp-god/main/api/v1/ecosystem-spec.json
-- Default branch: `main`
+Earlier Bible versions described `rapp-god` as a public registry observatory
+and one leg of a byte-identical ecosystem mirror set. That assertion is
+retired. This page does not expose, reproduce, or infer private repository
+content.
 
-## What it is
-
-rapp-god is the **god's-eye registry**: a content-addressed catalog of every part in the ecosystem and every version of it. It is the drift observatory — because it records versions, it can tell you when a part has drifted from its declared schema.
-
-It is also **leg two of the drift triangle**: it hosts `ecosystem-spec.json` (the machine spec) and `ECOSYSTEM_SPEC.md` (the human one), published byte-identical to its sibling mirror [rapp-map](rapp-map.md). The two mirrors must `sha256`-match; any divergence is drift.
-
-## What it provides
-
-- `api/v1/ecosystem-spec.json` — the canonical machine spec this Bible renders (v1.2.0).
-- `api/v1/registry.json` — every part + version, content-addressed.
-- The drift observatory surface — what version of what lives where.
-
-See [`DRIFT_TRIANGLE.md`](../DRIFT_TRIANGLE.md) for how rapp-god, rapp-map, the one agent, and this Bible stay in sync.
+Current RAPP/1 protocol authority is
+[`RAPP1_AUTHORITY.json`](../RAPP1_AUTHORITY.json). Exact former-surface evidence
+and reinstatement requirements are recorded in
+[`RAPP1_STATUS.md`](../RAPP1_STATUS.md) and
+[`DRIFT_TRIANGLE.md`](../DRIFT_TRIANGLE.md).
