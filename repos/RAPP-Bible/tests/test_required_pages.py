@@ -10,6 +10,8 @@ REQUIRED = [
     "index.html",
     "SPEC/_index.md",
     "repos/_index.md",
+    "RAPP1_AUTHORITY.json",
+    "RAPP1_STATUS.md",
     "CONTRIBUTING.md",
     "LICENSE",
 ]

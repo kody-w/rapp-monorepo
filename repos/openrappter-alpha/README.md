@@ -1,34 +1,26 @@
-# openrappter-alpha
+# OpenRappter alpha ring
 
-Ring **alpha** (rank 2) of the OpenRappter release train.
+Alpha is an **explicit early promotion** from a vetted nightly. It never follows
+a branch automatically. This repository is a maintained pointer, not a source
+copy: OpenRappter code remains in [`kody-w/openrappter`](https://github.com/kody-w/openrappter).
 
-    canary -> nightly -> alpha -> beta -> stable
+The current [closed manifest](.ring/manifest.json) is `disabled`: the recorded
+commit and GitHub archive SHA-256 are real, but no promotion receipt or
+installable alpha artifact exists. `--ring alpha` must therefore fail closed.
 
-- **Publishes to:** `openrappter-alpha` on npm — and nothing else.
-- **Promotes to:** `beta`
-- **Cut by:** hand-promoted from nightly
+Train: `nightly -> alpha -> canary -> beta -> stable`.
 
-## Install this ring
+Validate with `node scripts/validate-manifest.mjs .ring/manifest.json alpha`.
 
-```sh
-curl -fsSL https://kody-w.github.io/openrappter/install.sh | bash -s -- --channel alpha
-```
+Distribution invariant: alpha must descend from a finalized nightly receipt
+and is step 2 of the machine-required nightly → alpha → canary → beta chain.
+No stable/tag/registry/release/installer path may bypass it; authority is the
+release-train tests, not prose.
 
-or directly:
+Target `main` files are informational and never define latest. Clients start
+from the monotonic `openrappter-release-train/heads/alpha.json`, then verify its
+immutable receipt and exact target manifest commit.
 
-```sh
-npm install -g openrappter-alpha
-```
-
-## Why a separate repo and package
-
-Production is **unreachable** from this repo, not merely guarded. This repo has
-no credentials for and no code path to the production `openrappter` package.
-Deleting this repo and its npm package outright would have zero effect on
-anyone running the released build.
-
-Promotion republishes the *identical tarball* under the next ring's package
-name — it never rebuilds, mirroring the exact-commit promotion rule of the rapp
-release train.
-
-Dashboard: https://kody-w.github.io/openrappter-release-train/
+The worker consumes only finalized-sequence+1 and records an immutable
+`.ring/applied/<sequence>-<request-id>.json`; it never reads the removed
+single acknowledgement path.

@@ -1,34 +1,24 @@
-# openrappter-canary
+# OpenRappter canary ring
 
-Ring **canary** (rank 0) of the OpenRappter release train.
+Canary follows an alpha only after a **successful real smoke test or limited
+rollout** of the same source and bytes. This repository is a maintained pointer,
+not a code copy.
 
-    canary -> nightly -> alpha -> beta -> stable
+The current [manifest](.ring/manifest.json) is `disabled`: the source archive is
+real and checksummed, but there is no smoke/rollout receipt or installable
+canary artifact. `--ring canary` must fail closed.
 
-- **Publishes to:** `openrappter-canary` on npm — and nothing else.
-- **Promotes to:** `nightly`
-- **Cut by:** every push to openrappter main
+Train: `nightly -> alpha -> canary -> beta -> stable`.
 
-## Install this ring
+Validate with `node scripts/validate-manifest.mjs .ring/manifest.json canary`.
 
-```sh
-curl -fsSL https://kody-w.github.io/openrappter/install.sh | bash -s -- --channel canary
-```
+Distribution invariant: canary must descend from finalized nightly and alpha
+receipts after rollout evidence, as step 3 of nightly → alpha → canary → beta.
+No stable/tag/registry/release/installer path may bypass the machine gate.
 
-or directly:
+Target `main` files are informational. Latest canary is named only by the
+monotonic release-train authority head, which binds an immutable receipt and
+exact target manifest commit.
 
-```sh
-npm install -g openrappter-canary
-```
-
-## Why a separate repo and package
-
-Production is **unreachable** from this repo, not merely guarded. This repo has
-no credentials for and no code path to the production `openrappter` package.
-Deleting this repo and its npm package outright would have zero effect on
-anyone running the released build.
-
-Promotion republishes the *identical tarball* under the next ring's package
-name — it never rebuilds, mirroring the exact-commit promotion rule of the rapp
-release train.
-
-Dashboard: https://kody-w.github.io/openrappter-release-train/
+Per-sequence acknowledgements are immutable under `.ring/applied/`; applied and
+finalized cursors remain separate so canary N+1 cannot outrun finalization N.

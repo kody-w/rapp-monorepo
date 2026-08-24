@@ -1,0 +1,25 @@
+{
+  "schema": "openrappter-ring/v1",
+  "ring": "canary",
+  "source": {
+    "repository": "kody-w/openrappter",
+    "commit": "9913ca2e5237c44620f5422644cbe6060f2c8c18",
+    "tag": null
+  },
+  "version": "1.13.0-canary.0+g9913ca2",
+  "artifact": {
+    "url": "https://github.com/kody-w/openrappter/archive/9913ca2e5237c44620f5422644cbe6060f2c8c18.tar.gz",
+    "install_url": null,
+    "sha256": "96162c003da42118290b48df71bcb3aa6a940f1ac7d5e3ec304f757f2c0a719c",
+    "provenance": "github-commit-archive-sha256"
+  },
+  "promoted_at": "2026-08-23T14:38:58Z",
+  "predecessor": "alpha",
+  "status": "disabled",
+  "reason": "No successful real smoke test or limited-rollout receipt exists for this source commit.",
+  "receipt": null,
+  "promotion_id": "b4b0ff0fa4bbb79b637f8682966ab54942bd3060798beb3c397e9b350392061a",
+  "intended_release_tag": null,
+  "channel_version": null,
+  "intended_release_tag": null
+}

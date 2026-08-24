@@ -1,16 +1,18 @@
-// tools/_census.mjs — the body's cell census, composed from the canonical sources.
+// tools/_census.mjs — the body's cell census, composed from pinned historical input.
 //
-// Source of truth (per ORDER + ecosystem-spec.mirrors): the census covers every repo the
-// ecosystem-spec catalogs (spec.repos, 10 cluster groups) UNION every repo the rapp-spine
-// registry lists, deduped. Layer/cluster metadata comes from the spine registry (7 layers)
-// plus the spec categories. Nothing here is invented — it is parsed from the grail data.
+// The former ecosystem mirror contract is retired. The old v1.2.0 RAPP document remains
+// useful only as an immutable census input; it is not protocol authority or a registry.
+// Current protocol authority is kody-w/rapp-1 rev-5. The census unions the historical
+// repo list with the current rapp-spine registry and labels the result accordingly.
 
-// The three published homes of the ecosystem-spec (equality across them is itself a vital
-// sign — the agent's `verify` action sha256-compares them; divergence IS drift).
 export const SPEC_HOMES = {
-  rapp: { owner: "kody-w", repo: "RAPP", ref: "main", path: "specs/ecosystem-spec.json", label: "kody-w/RAPP (canonical source)" },
-  rapp_god: { owner: "kody-w", repo: "rapp-god", ref: "main", path: "api/v1/ecosystem-spec.json", label: "kody-w/rapp-god" },
-  rapp_map: { owner: "kody-w", repo: "rapp-map", ref: "main", path: "ecosystem-spec.json", label: "kody-w/rapp-map (mirror of record for reads)" },
+  historical_rapp: {
+    owner: "kody-w",
+    repo: "RAPP",
+    ref: "789e6c5245f18e9685450fd6105dc26867837895",
+    path: "specs/ecosystem-spec.json",
+    label: "historical RAPP ecosystem v1.2.0 census input (non-authoritative)",
+  },
 };
 
 export const SPINE = {

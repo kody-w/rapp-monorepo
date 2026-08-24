@@ -4,13 +4,13 @@
 // Takes one live slice of the RAPP organism and, unless nothing material changed,
 // mints a `body.pulse` frame that chains onto the biography. A slice has three organs:
 //
-//   skeleton — the ecosystem-spec version + sha256 as served from each of its three
-//              homes (RAPP, rapp-god, rapp-map; equality across them is itself a vital
-//              sign) + the spine registry.json / foundation.json shas.
+//   skeleton — the immutable historical ecosystem-census input + the current spine
+//              registry.json / foundation.json shas. No active mirror set exists.
 //   census   — per cataloged repo: default-branch head sha, pushed_at, created_at, layer,
 //              a lifecycle status; plus born[] / vanished[] vs the previous frame.
 //   vitals   — the latest mesh-sweep verdict + drift counts (sweeps/latest.json, optional),
-//              the open drift() issue census, and mirrors_identical.
+//              the open drift() issue census. mirrors_identical remains null after
+//              retirement and is retained only for frame-schema continuity.
 //
 // A source it cannot read becomes an explicit `observation-gap` event — NEVER silently
 // thinner data (the false-green lesson: absence must be visible).
@@ -20,7 +20,7 @@
 //     (stale:true), emits an observation-gap, and NEVER yields born/vanish/census-change.
 //   • `vanish` requires POSITIVE evidence: HTTP 404 on the repo, confirmed on TWO
 //     consecutive runs (present → 404 → 404). 429/403/network are blindness, not absence.
-//   • Coherence gate: if ANY spec home is unreadable, or >20% of census repos are
+//   • Coherence gate: if the pinned census input is unreadable, or >20% of census repos are
 //     transport-unreadable, pulse EXITS 3 ("slice incoherent — refusing to mint") and
 //     mints nothing — unless --force-degraded. CI always runs WITH GITHUB_TOKEN.
 //   • The no-churn fingerprint EXCLUDES observation-gap events and stale markers entirely.
@@ -118,7 +118,7 @@ async function gatherSkeleton() {
     }
   }
 
-  // mirrors_identical only means something with >=2 readable homes.
+  // Retained for frame-schema continuity. One pinned historical input is not a mirror set.
   let mirrors_identical = null;
   const readableCount = Object.values(homes).filter((h) => h.present).length;
   if (readableCount >= 2) mirrors_identical = new Set(readableShas).size === 1;
@@ -340,7 +340,7 @@ function deriveEvents({ isGenesis, prevFrame, skeleton, census, vitals, sweep, a
 
   // Mirror divergence is a first-class drift signal.
   if (skeleton.mirrors_identical === false) {
-    events.push({ type: "mirror-divergence", text: "ecosystem-spec homes DIVERGE — the three published copies no longer sha256-match. This is drift the day it happens." });
+    events.push({ type: "mirror-divergence", text: "Configured census inputs diverge. No current mirror authority is inferred." });
   }
 
   // Births / vanishings of organs vs the previous frame. Both come ONLY from positive
@@ -398,7 +398,7 @@ async function main() {
   // marked). CI always runs with GITHUB_TOKEN, so it never trips this gate.
   const homesUnreadable = Object.values(sk.skeleton.homes).filter((h) => !h.present).map((h) => h.repo);
   if (!sk.specObj) {
-    console.error(`slice incoherent — refusing to mint: could not read ecosystem-spec from ANY home (${homesUnreadable.join(", ") || "all"}). Re-run with a GITHUB_TOKEN.`);
+    console.error(`slice incoherent — refusing to mint: could not read the pinned historical census input (${homesUnreadable.join(", ") || "all"}). Re-run with a GITHUB_TOKEN.`);
     process.exit(3);
   }
   const rows = unionCensus(sk.specObj, sk.spineObj);

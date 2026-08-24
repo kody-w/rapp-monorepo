@@ -19,20 +19,20 @@ NO git actions — the cortex publishes.
 2. **Identity:** mint the body's `rappid.json` per rapp-eternity/1.0 Eternity form
    (`rappid:@kody-w/rapp-body:<64hex>`, sha256 content-address — conform to `kody-w/twin/rappid.json`
    shape; keypair/sig OPTIONAL and omitted for now — chain integrity comes from sha256 links).
-3. **Census source of truth:** the canonical repos list inside the ecosystem spec. Fetch
-   `https://raw.githubusercontent.com/kody-w/rapp-map/main/ecosystem-spec.json` (mirror of record
-   for reads) — census covers every repo it catalogs, PLUS `kody-w/rapp-spine` registry entries'
-   repos, deduped. Layer/cluster metadata comes from the spine registry + spec categories.
+3. **Census input:** read the historical repos list only from immutable
+   `kody-w/RAPP@789e6c5245f18e9685450fd6105dc26867837895:specs/ecosystem-spec.json`,
+   then union it with `kody-w/rapp-spine` registry entries. The former
+   `rapp-god`/`rapp-map` mirror contract is retired; neither path is a census
+   source, registry, or protocol authority.
 
 ## Deliverables
 
 ### 1. `tools/pulse.mjs` — the witnessed frame-taker (Node ≥20, ZERO deps)
-- Gathers a slice: **skeleton** (ecosystem-spec version + sha256 as served from each of its three
-  homes: kody-w/RAPP (locate in-repo path), rapp-god `api/v1/ecosystem-spec.json`, rapp-map
-  `ecosystem-spec.json`; plus rapp-spine `registry.json`/`foundation.json` shas), **census**
+- Gathers a slice: **skeleton** (the immutable historical census input plus
+  rapp-spine `registry.json`/`foundation.json` shas), **census**
   (per cataloged repo: name, default-branch head sha, pushed_at, created_at, spine layer if known;
   plus `born[]`/`vanished[]` vs previous frame), **vitals** (open issues labeled `drift` across the
-  cataloged repos by severity-prefix in title; `mirrors_identical` bool; last-sweep info if a
+  cataloged repos by severity-prefix in title; retired `mirrors_identical: null`; last-sweep info if a
   `sweeps/latest.json` exists in this repo — optional input, absent OK), **events[]** (derived:
   births, vanishings, spec version changes, drift deltas vs previous frame).
 - Every frame gets `ts` (slice time = now for witnessed) and `payload.taken_ts`; witnessed frames

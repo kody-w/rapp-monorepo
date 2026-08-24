@@ -565,6 +565,21 @@ test('release workflows retain per-tag builds and globally serialize publication
   );
 });
 
+test('Install Smoke runs whenever any shell script changes', () => {
+  const workflow = readFileSync(
+    new URL('../.github/workflows/install-smoke.yml', import.meta.url),
+    'utf8',
+  );
+  const pathsBlock =
+    workflow.match(/paths: &install-smoke-paths\n(?<paths>(?:\s+- .*\n)+)/)
+      ?.groups?.paths ?? '';
+  assert.match(pathsBlock, /^\s+- '\*\*\/\*\.sh'$/m);
+  assert.doesNotMatch(
+    pathsBlock.replace(/^\s+- '\*\*\/\*\.sh'\n/m, ''),
+    /^\s+- '\*\*\/\*\.sh'$/m,
+  );
+});
+
 test('macOS workflow validates tag provenance and never injects output into shell', () => {
   const workflow = readFileSync(
     new URL('../.github/workflows/release-bar.yml', import.meta.url),
@@ -626,8 +641,7 @@ test('registry publication reconciles exact artifacts and selects an explicit np
   const publishCommand = workflow.slice(publishStart, publishEnd);
   assert.match(publishCommand, /--tag "\$NPM_PUBLISH_TAG"/);
   assert.equal((workflow.match(/^\s+npm publish \\\s*$/gm) || []).length, 1);
-  assert.match(workflow, /"build==1\.5\.1"[\s\S]*"hatchling==1\.31\.0"/);
-  assert.match(workflow, /python -m build --no-isolation/);
+  assert.doesNotMatch(workflow, /python -m build/);
   assert.match(workflow, /overwrite: true/);
   assert.match(workflow, /overwrite_files: false/);
   assert.match(
@@ -636,13 +650,15 @@ test('registry publication reconciles exact artifacts and selects an explicit np
   );
   assert.match(
     workflow,
-    /publish-registries:[\s\S]*?needs: \[preflight, smoke-artifacts, build-electron-artifacts\]/,
+    /publish-registries:[\s\S]*?needs: \[preflight, smoke-artifacts, build-electron-artifacts, release-constitution\]/,
   );
   assert.match(
     workflow,
-    /needs: \[preflight, publish-registries, build-electron-artifacts\]/,
+    /needs: \[preflight, publish-registries, build-electron-artifacts, release-constitution\]/,
   );
-  assert.match(workflow, /node scripts\/pack-locked\.mjs/);
+  assert.doesNotMatch(workflow, /node scripts\/pack-locked\.mjs/);
+  assert.match(workflow, /Materialize finalized candidate bytes without rebuild/);
+  assert.match(workflow, /tar -xzf candidate\.tar\.gz -C release-dist/);
   const desktopJob = workflow.slice(
     workflow.indexOf('  build-electron-artifacts:'),
     workflow.indexOf('  build-artifacts:'),
@@ -670,11 +686,11 @@ test('parsed release workflow preserves the privileged dependency graph', () => 
   ));
   assert.deepEqual(
     workflow.jobs['publish-registries'].needs,
-    ['preflight', 'smoke-artifacts', 'build-electron-artifacts'],
+    ['preflight', 'smoke-artifacts', 'build-electron-artifacts', 'release-constitution'],
   );
   assert.deepEqual(
     workflow.jobs['github-release'].needs,
-    ['preflight', 'publish-registries', 'build-electron-artifacts'],
+    ['preflight', 'publish-registries', 'build-electron-artifacts', 'release-constitution'],
   );
   assert.equal(
     workflow.jobs.preflight.steps.some(

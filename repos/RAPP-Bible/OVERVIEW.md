@@ -2,7 +2,10 @@
 
 > *If you only read one file in this Bible, read this one.*
 >
-> **This document renders [`ecosystem-spec.json`](https://raw.githubusercontent.com/kody-w/rapp-god/main/api/v1/ecosystem-spec.json) v1.2.0** (the single canonical machine description, mirrored byte-identical in [rapp-god](https://github.com/kody-w/rapp-god) and [rapp-map](https://github.com/kody-w/rapp-map)) for a human reader. Where this prose and that JSON disagree, the JSON wins and this file is wrong — fix this file.
+> **Historical snapshot.** This document renders the retired ecosystem v1.2.0
+> snapshot; it is not current protocol authority or a live mirror. Use
+> [`RAPP1_AUTHORITY.json`](RAPP1_AUTHORITY.json) for the exact RAPP/1 rev-5 pin
+> and [`RAPP1_STATUS.md`](RAPP1_STATUS.md) for current disposition.
 
 RAPP — the **Rapid Agent Prototype Platform** — is a way to grow AI organisms that own their own identity, carry their own memory, talk to each other, and run on hardware nobody had to buy. It is "engine, not experience": infrastructure only, no opinionated UI, no workflow you have to adopt.
 
@@ -171,7 +174,11 @@ The ecosystem is described in many places at once, on purpose, so that any diver
 4. The vault (`Decisions/` + `Architecture/` essays — the *why*).
 5. Code — last, because code rots and the spec is canonical.
 
-Four independent representations of the same truth form the **drift triangle** (see [`DRIFT_TRIANGLE.md`](DRIFT_TRIANGLE.md)): the one agent's action enum, rapp-god's spec, rapp-map's byte-identical mirror, and this Bible. The agent's `action=verify` self-checks all four legs; the `ecosystem-sync` swarm re-derives the whole spec from the live ecosystem and reconciles any drift. No single point can silently rot.
+The former four-leg **drift triangle** is retired (see
+[`DRIFT_TRIANGLE.md`](DRIFT_TRIANGLE.md)). Its `rapp-god` surface is not
+publicly reachable and `rapp-map` now serves a quarantine status document, so
+neither can support a current byte-identical claim. The prose below remains a
+historical ecosystem rendering.
 
 ---
 

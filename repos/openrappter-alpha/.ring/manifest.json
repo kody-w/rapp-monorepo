@@ -1,0 +1,25 @@
+{
+  "schema": "openrappter-ring/v1",
+  "ring": "alpha",
+  "source": {
+    "repository": "kody-w/openrappter",
+    "commit": "9913ca2e5237c44620f5422644cbe6060f2c8c18",
+    "tag": null
+  },
+  "version": "1.13.0-alpha.0+g9913ca2",
+  "artifact": {
+    "url": "https://github.com/kody-w/openrappter/archive/9913ca2e5237c44620f5422644cbe6060f2c8c18.tar.gz",
+    "install_url": null,
+    "sha256": "96162c003da42118290b48df71bcb3aa6a940f1ac7d5e3ec304f757f2c0a719c",
+    "provenance": "github-commit-archive-sha256"
+  },
+  "promoted_at": "2026-08-23T14:38:58Z",
+  "predecessor": "nightly",
+  "status": "disabled",
+  "reason": "No explicit nightly-to-alpha promotion receipt exists. This source snapshot is recorded but is not an alpha release.",
+  "receipt": null,
+  "promotion_id": "adfd022545dce9ddea8eff1f533158cc59e0925802a3cc91e9a5b61266dda4c6",
+  "intended_release_tag": null,
+  "channel_version": null,
+  "intended_release_tag": null
+}

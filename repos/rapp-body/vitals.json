@@ -1,36 +1,32 @@
 {
   "spec": "rapp-body-vitals/1.0",
   "stream_id": "rappid:@kody-w/rapp-body:817839d299ddfb173097c58a0434c5c1ef5cd2cd55086c46cfe728bf9bfeb657",
-  "updated": "2026-08-16T07:45:48.124Z",
+  "updated": "2026-08-24T08:08:35.399Z",
   "head": {
-    "seq": 42,
-    "payload_hash": "f5dccd309150320295ad946f7000eb9814641fb6b1684ff2017cd2ceef27425d",
-    "frame_hash": "005f7577d9e130e00d054d6cfc4dccbfaba9d88fa1b037edf4939e772c563491",
-    "utc": "2026-08-16T07:45:48.068Z",
+    "seq": 44,
+    "payload_hash": "2c6de2882cc62e1370a9dfa5c3eb67aa8c58b819fea53ed0e5d0d8beb5f8d6f9",
+    "frame_hash": "bea35d3941d25fdd3bbe671cad2869f8de322be8e27f83547a12e60663d47171",
+    "utc": "2026-08-24T08:08:35.343Z",
     "kind": "body.pulse"
   },
   "health": {
     "spec_version": "1.2.0",
-    "mirrors_identical": false,
-    "repos_total": 56,
-    "repos_present": 53,
+    "mirrors_identical": null,
+    "repos_total": 55,
+    "repos_present": 52,
     "transport_unreadable": 0,
     "degraded": false,
     "born_recent": [],
-    "vanished_recent": [],
-    "heads_advanced_recent": [
-      "openrappter",
-      "rapp-god",
-      "rapp-spine",
-      "rappterbook",
-      "RAR"
+    "vanished_recent": [
+      "rapp-god"
     ],
+    "heads_advanced_recent": [],
     "drift_sweep": {
       "verdict": "RECONCILED",
       "findings": 7,
       "high": 2
     },
-    "open_drift_issues": 6,
+    "open_drift_issues": 5,
     "observation_gaps": 0
   }
 }

@@ -1,6 +1,8 @@
 # Capabilities — what the ecosystem can do, honestly
 
-> *Renders the `capability_domains` of [`ecosystem-spec.json`](https://raw.githubusercontent.com/kody-w/rapp-god/main/api/v1/ecosystem-spec.json) v1.2.0 for a human reader.*
+> **Historical snapshot.** This page renders `capability_domains` from the
+> retired ecosystem v1.2.0 document. It is not a current capability or mirror
+> contract. See [`RAPP1_STATUS.md`](RAPP1_STATUS.md).
 
 This page is the honest coverage map. Every capability in the RAPP ecosystem falls into one of three buckets:
 
@@ -298,11 +300,14 @@ Entirely **specialist-owned** by [rapp-mcp](https://github.com/kody-w/rapp-mcp).
 
 ---
 
-## Registry Observatory (rapp-god & rapp-map)
+## Historical registry observatory (`rapp-god` & `rapp-map`)
+
+These rows preserve the v1.2.0 rendering. The former surfaces are not an
+authenticated registry or active byte-identical mirrors.
 
 | Capability | Coverage | Action / owner |
 |---|---|---|
-| rapp-god specs | native | `spec`, `refresh` |
+| Former rapp-god specs | historical | retired public surface; do not resolve authority here |
 | rapp-map neurons | native (partial) | `ecosystem`, `find` |
 | Schema drift watch | native (partial → `to_close`) | `ecosystem` → dedicated `drift_check` |
 | Complete neuron-mesh view | native *(to_close)* | `neurons` |
@@ -347,6 +352,9 @@ Entirely **specialist-owned** by [rapp-mcp](https://github.com/kody-w/rapp-mcp).
 
 ## How to read the gaps
 
-A `to_close` tag is not a broken promise — it is the spec being honest about which actions are planned vs. live. The four-leg drift triangle exists precisely so that when an action *does* ship, `action=verify` confirms the agent's enum now matches the spec, and the gap closes for real. See [`DRIFT_TRIANGLE.md`](DRIFT_TRIANGLE.md).
+A `to_close` tag records what the historical snapshot described as planned
+versus live. The former four-leg verification claim is retired; see
+[`DRIFT_TRIANGLE.md`](DRIFT_TRIANGLE.md).
 
-*Authority: `ecosystem-spec.json` v1.2.0 `capability_domains`. This page is the human rendering; the JSON is canonical.*
+*Historical provenance: ecosystem v1.2.0 `capability_domains`. Current RAPP/1
+authority is [`RAPP1_AUTHORITY.json`](RAPP1_AUTHORITY.json).*

@@ -1,34 +1,26 @@
-# openrappter-beta
+# OpenRappter beta ring
 
-Ring **beta** (rank 3) of the OpenRappter release train.
+Beta points only at a **prerelease** promoted from a proven canary. This
+repository is a maintained pointer, not a divergent code copy.
 
-    canary -> nightly -> alpha -> beta -> stable
+The current [manifest](.ring/manifest.json) records the real
+`v0.1.0-beta.10` tag, exact commit, and measured GitHub archive SHA-256. It is
+`unpublished` because no verified installable OpenRappter beta ring artifact is
+available. `--ring beta` must fail closed rather than install something else.
 
-- **Publishes to:** `openrappter-beta` on npm — and nothing else.
-- **Promotes to:** `stable`
-- **Cut by:** hand-promoted from alpha
+Train: `nightly -> alpha -> canary -> beta -> stable`.
 
-## Install this ring
+Validate with `node scripts/validate-manifest.mjs .ring/manifest.json beta`.
 
-```sh
-curl -fsSL https://kody-w.github.io/openrappter/install.sh | bash -s -- --channel beta
-```
+Distribution invariant: beta must descend from finalized nightly, alpha, and
+canary receipts and is the final prerequisite before any stable/tag/npm/PyPI,
+GitHub release, or installer-channel publication. Release-train tests enforce
+the rule; there is no bypass flag.
 
-or directly:
+Target `main` files are informational and cannot replay latest. Clients trust
+only `openrappter-release-train/heads/beta.json`, its immutable finalized
+receipt, and the exact target manifest commit named there.
 
-```sh
-npm install -g openrappter-beta
-```
-
-## Why a separate repo and package
-
-Production is **unreachable** from this repo, not merely guarded. This repo has
-no credentials for and no code path to the production `openrappter` package.
-Deleting this repo and its npm package outright would have zero effect on
-anyone running the released build.
-
-Promotion republishes the *identical tarball* under the next ring's package
-name — it never rebuilds, mirroring the exact-commit promotion rule of the rapp
-release train.
-
-Dashboard: https://kody-w.github.io/openrappter-release-train/
+Beta consumes the same tagged candidate bundle promoted by prior rings and
+records one immutable sequence acknowledgement. Continuous snapshot candidates
+remain non-stable and never satisfy the release constitution.

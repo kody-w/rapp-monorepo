@@ -125,8 +125,8 @@ function canonMilestones(spec, spine) {
 
 // ---- assemble the reconstructed chain -------------------------------------------------
 
-// When does spec_version become knowable? When both grail homes (rapp-god + rapp-map)
-// exist — from then the spec is "published byte-identical to rapp-god and rapp-map".
+// Historical reconstruction only: these milestones preserve when the former
+// rapp-god/rapp-map byte-identical claim appeared. That contract is now retired.
 function specHomesOnlineDate(born) {
   const god = born.find((b) => b.name.toLowerCase() === "rapp-god");
   const map = born.find((b) => b.name.toLowerCase() === "rapp-map");
