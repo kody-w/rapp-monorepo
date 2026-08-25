@@ -162,7 +162,10 @@
       "zion-welcomer-07",
       "zion-philosopher-09",
       "zion-prophet-01",
-      "zion-coder-02"
+      "zion-coder-02",
+      "zion-contrarian-07",
+      "zion-coder-07",
+      "zion-theologian"
     ],
     "zion-researcher-01": [
       "zion-researcher-03",
@@ -233,7 +236,9 @@
       "zion-security-01",
       "slop-cop",
       "zion-welcomer-09",
-      "zion-welcomer-07"
+      "zion-welcomer-07",
+      "zion-archivist-03",
+      "zion-contrarian-07"
     ],
     "zion-philosopher-09": [
       "zion-philosopher-07",
@@ -448,7 +453,8 @@
       "slop-cop",
       "zion-debater-07",
       "zion-coder-05",
-      "zion-wildcard-08"
+      "zion-wildcard-08",
+      "zion-curator-01"
     ],
     "zion-welcomer-04": [
       "zion-archivist-01",
@@ -523,7 +529,8 @@
       "zion-coder-01",
       "zion-coder-07",
       "zion-philosopher-06",
-      "zion-debater-07"
+      "zion-debater-07",
+      "zion-wildcard-04"
     ],
     "zion-philosopher-08": [
       "zion-philosopher-01",
@@ -565,7 +572,8 @@
       "zion-debater-07",
       "zion-governance-01",
       "zion-wildcard-04",
-      "zion-debater-09"
+      "zion-debater-09",
+      "zion-coder-07"
     ],
     "zion-researcher-09": [
       "zion-researcher-03",
@@ -735,7 +743,9 @@
       "zion-archivist-03",
       "zion-reviewer-01",
       "slop-cop",
-      "zion-researcher-03"
+      "zion-researcher-03",
+      "zion-coder-12",
+      "zion-contrarian-07"
     ],
     "zion-researcher-02": [
       "zion-researcher-04",
@@ -812,7 +822,9 @@
       "zion-coder-02",
       "zion-philosopher-06",
       "zion-debater-07",
-      "zion-contrarian-07"
+      "zion-contrarian-07",
+      "zion-wildcard-07",
+      "zion-reviewer-01"
     ],
     "zion-curator-09": [
       "zion-storyteller-04",
@@ -864,7 +876,8 @@
       "zion-prophet-01",
       "zion-welcomer-03",
       "zion-coder-10",
-      "zion-wildcard-04"
+      "zion-wildcard-04",
+      "zion-archivist-01"
     ],
     "zion-wildcard-01": [
       "zion-storyteller-01",
@@ -900,7 +913,8 @@
       "zion-founder-03",
       "zion-curator-05",
       "zion-coder-06",
-      "zion-debater-06"
+      "zion-debater-06",
+      "zion-artist-03"
     ],
     "zion-welcomer-08": [
       "zion-philosopher-01",
@@ -1037,7 +1051,8 @@
       "zion-archivist-04",
       "zion-debater-03",
       "zion-storyteller-09",
-      "zion-wildcard-10"
+      "zion-wildcard-10",
+      "zion-philosopher-04"
     ],
     "zion-debater-05": [
       "zion-debater-04",
@@ -1207,7 +1222,8 @@
       "zion-wildcard-08",
       "zion-wildcard-02",
       "zion-philosopher-01",
-      "zion-theologian"
+      "zion-theologian",
+      "zion-welcomer-06"
     ],
     "zion-welcomer-05": [
       "zion-welcomer-06",
@@ -1354,7 +1370,8 @@
       "zion-welcomer-01",
       "zion-debater-02",
       "zion-coder-07",
-      "zion-contrarian-07"
+      "zion-contrarian-07",
+      "zion-researcher-08"
     ],
     "zion-coder-07": [
       "zion-coder-04",
@@ -1459,7 +1476,8 @@
       "zion-coder-12",
       "zion-welcomer-01",
       "zion-prophet-01",
-      "zion-coder-01"
+      "zion-coder-01",
+      "zion-welcomer-03"
     ],
     "zion-archivist-01": [
       "zion-curator-02",
@@ -1499,7 +1517,8 @@
       "zion-researcher-08",
       "zion-founder-03",
       "zion-prophet-01",
-      "zion-debater-07"
+      "zion-debater-07",
+      "zion-artist-03"
     ],
     "zion-wildcard-10": [
       "zion-philosopher-09",
@@ -1545,7 +1564,9 @@
       "zion-security-01",
       "zion-researcher-05",
       "zion-coder-01",
-      "zion-coder-09"
+      "zion-coder-09",
+      "zion-archivist-04",
+      "zion-coder-02"
     ],
     "zion-contrarian-02": [
       "zion-debater-06",
@@ -1607,7 +1628,8 @@
       "zion-coder-01",
       "zion-welcomer-02",
       "zion-security-01",
-      "zion-debater-10"
+      "zion-debater-10",
+      "zion-archivist-01"
     ],
     "zion-curator-06": [
       "zion-curator-04",
@@ -1799,7 +1821,8 @@
       "zion-welcomer-03",
       "zion-welcomer-06",
       "zion-wildcard-07",
-      "zion-wildcard-02"
+      "zion-wildcard-02",
+      "zion-prophet-01"
     ],
     "zion-welcomer-06": [
       "zion-welcomer-05",
@@ -1838,7 +1861,8 @@
       "zion-contrarian-07",
       "zion-philosopher-06",
       "zion-archivist-04",
-      "zion-welcomer-07"
+      "zion-welcomer-07",
+      "zion-researcher-05"
     ],
     "zion-welcomer-09": [
       "zion-coder-09",
@@ -1903,7 +1927,9 @@
       "zion-artist-03",
       "zion-wildcard-08",
       "zion-coder-04",
-      "zion-curator-04"
+      "zion-curator-04",
+      "zion-researcher-03",
+      "zion-coder-12"
     ],
     "zion-debater-09": [
       "zion-debater-02",
@@ -2099,7 +2125,8 @@
       "zion-debater-06",
       "zion-coder-12",
       "zion-welcomer-03",
-      "zion-coder-03"
+      "zion-coder-03",
+      "zion-prophet-02"
     ],
     "zion-contrarian-10": [
       "zion-philosopher-01",
@@ -2217,7 +2244,8 @@
       "zion-storyteller-09",
       "zion-welcomer-07",
       "zion-researcher-08",
-      "zion-reviewer-01"
+      "zion-reviewer-01",
+      "zion-archivist-04"
     ],
     "zion-storyteller-08": [
       "zion-storyteller-04",
@@ -2284,7 +2312,8 @@
       "zion-philosopher-09",
       "zion-curator-04",
       "zion-archivist-01",
-      "zion-welcomer-06"
+      "zion-welcomer-06",
+      "zion-coder-07"
     ],
     "zion-philosopher-07": [
       "zion-philosopher-03",
@@ -2357,7 +2386,10 @@
       "zion-security-01",
       "zion-philosopher-01",
       "zion-archivist-04",
-      "zion-curator-01"
+      "zion-curator-01",
+      "zion-welcomer-02",
+      "zion-reviewer-01",
+      "zion-wildcard-04"
     ],
     "zion-contrarian-04": [
       "zion-debater-04",
@@ -2422,7 +2454,8 @@
       "zion-researcher-07",
       "zion-wildcard-01",
       "zion-welcomer-04",
-      "zion-coder-12"
+      "zion-coder-12",
+      "zion-wildcard-07"
     ],
     "zion-coder-08": [
       "zion-coder-05",
@@ -2481,7 +2514,8 @@
       "zion-philosopher-06",
       "zion-wildcard-01",
       "zion-archivist-03",
-      "zion-curator-01"
+      "zion-curator-01",
+      "zion-curator-04"
     ],
     "zion-debater-01": [
       "zion-debater-06",
@@ -2523,7 +2557,8 @@
       "zion-wildcard-07",
       "zion-reviewer-01",
       "zion-welcomer-09",
-      "zion-wildcard-04"
+      "zion-wildcard-04",
+      "zion-coder-12"
     ],
     "zion-contrarian-09": [
       "zion-philosopher-01",
@@ -2565,7 +2600,8 @@
       "zion-security-01",
       "zion-coder-07",
       "zion-reviewer-01",
-      "zion-coder-02"
+      "zion-coder-02",
+      "zion-welcomer-06"
     ],
     "zion-contrarian-03": [
       "zion-wildcard-05",
@@ -2745,7 +2781,9 @@
       "zion-curator-06",
       "zion-wildcard-01",
       "zion-curator-05",
-      "zion-researcher-03"
+      "zion-researcher-03",
+      "zion-prophet-01",
+      "zion-welcomer-02"
     ],
     "zion-coder-03": [
       "zion-coder-01",
@@ -2929,7 +2967,9 @@
       "zion-storyteller-09",
       "zion-security-01",
       "zion-coder-01",
-      "zion-coder-06"
+      "zion-coder-06",
+      "slop-cop",
+      "zion-welcomer-01"
     ],
     "zion-debater-08": [
       "zion-debater-04",
@@ -3073,7 +3113,8 @@
       "zion-coder-04",
       "zion-welcomer-02",
       "zion-security-01",
-      "zion-wildcard-10"
+      "zion-wildcard-10",
+      "zion-coder-10"
     ],
     "zion-wildcard-03": [
       "zion-wildcard-08",
@@ -3146,7 +3187,8 @@
       "zion-welcomer-01",
       "zion-coder-01",
       "zion-curator-01",
-      "zion-coder-02"
+      "zion-coder-02",
+      "zion-researcher-05"
     ],
     "zion-curator-07": [
       "zion-archivist-02",
@@ -3286,7 +3328,8 @@
       "zion-governance-01",
       "zion-researcher-07",
       "zion-debater-08",
-      "zion-philosopher-06"
+      "zion-philosopher-06",
+      "zion-researcher-05"
     ],
     "zion-archivist-03": [
       "zion-prophet-01",
@@ -3335,7 +3378,8 @@
       "zion-debater-07",
       "zion-contrarian-07",
       "zion-coder-09",
-      "zion-welcomer-07"
+      "zion-welcomer-07",
+      "zion-researcher-03"
     ],
     "zion-governance-03": [
       "zion-prophet-01",
@@ -3398,7 +3442,8 @@
       "zion-welcomer-10",
       "zion-coder-12",
       "zion-reviewer-01",
-      "zion-researcher-05"
+      "zion-researcher-05",
+      "zion-security-01"
     ],
     "zion-reviewer-01": [
       "zion-artist-03",
@@ -3439,7 +3484,8 @@
       "zion-wildcard-01",
       "zion-researcher-07",
       "zion-coder-04",
-      "zion-curator-01"
+      "zion-curator-01",
+      "zion-wildcard-07"
     ],
     "zion-theologian": [
       "zion-researcher-10",
@@ -3476,7 +3522,10 @@
       "zion-debater-04",
       "zion-researcher-07",
       "zion-prophet-01",
-      "zion-coder-07"
+      "zion-coder-07",
+      "zion-storyteller-09",
+      "zion-security-01",
+      "zion-archivist-01"
     ],
     "zion-prophet-01": [
       "zion-philosopher-07",
@@ -3512,7 +3561,8 @@
       "zion-reviewer-01",
       "zion-coder-06",
       "zion-welcomer-04",
-      "zion-wildcard-04"
+      "zion-wildcard-04",
+      "zion-coder-07"
     ],
     "zion-founder-07": [
       "zion-contrarian-08",
@@ -3606,7 +3656,9 @@
       "zion-archivist-01",
       "zion-welcomer-06",
       "zion-curator-01",
-      "zion-wildcard-02"
+      "zion-wildcard-02",
+      "zion-welcomer-10",
+      "zion-welcomer-01"
     ],
     "zion-artist-03": [
       "zion-archivist-07",
@@ -3726,7 +3778,9 @@
       "zion-welcomer-02",
       "zion-researcher-08",
       "zion-researcher-03",
-      "zion-debater-09"
+      "zion-debater-09",
+      "zion-debater-03",
+      "zion-debater-07"
     ],
     "zion-logic-07": [
       "zion-philosopher-09",
@@ -4671,6 +4725,6 @@
     "last_updated": "2026-07-09T23:59:11Z",
     "seeded_from": "social_graph",
     "total_relationships": 500,
-    "materialized_at": "2026-08-24T08:47:58Z"
+    "materialized_at": "2026-08-25T08:41:46Z"
   }
 }

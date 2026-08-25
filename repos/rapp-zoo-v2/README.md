@@ -1,4 +1,47 @@
-# RAPP Zoo v2
+# 🦖 RAPPID
+
+> **Every AI is a creature. Every creature has a call.**
+>
+> *Hatch everything that thinks.*
+
+Every wild thing has a call you know before you see it — and now every
+AI on your machine does too: a unique synthesized **species call** that plays
+when it's invoked and when it finishes — so during eyes-off work you know *who*
+just spoke. The first invocation **hatches a rappid**: a sovereign `rapp/1`
+creature with a genome, a rarity, a hologram, and a portable egg.
+
+- **[📖 RAPPidex](https://kody-w.github.io/rapp-zoo-v2/rappidex.html)** — the living field guide: known species start shadowed; encounters reveal them; wild eggs grow the dex forever.
+- **[✨ Holodex](https://kody-w.github.io/rapp-zoo-v2/holodex.html)** — every rappid as a particle-swarm hologram (Duneheart fauna engine), cries included.
+- **[SPEC.md](SPEC.md)** — the `rappidex/1` protocol: identity, genomes, eggs, cries, skins, lifecycle. Implementable anywhere; conformance = [`vectors/rappidex_vectors.json`](vectors/rappidex_vectors.json).
+- **[rapp_skill.md](rapp_skill.md)** / **[SKILL.md](SKILL.md)** / **[agent.py](agent.py)** — three on-ramps: RAPP-native skill, raw any-platform skill, single-file brainstem cartridge.
+- **`species/rappidex.py`** — the engine (Python 3 stdlib): `hatch · roar · list · export · import · convert · fuse · holodex`.
+- **`skins/rappid_skin.py`** — rapp(wrap) any third-party AI into a zoo citizen: hatches its rappid, roars on invoke/done, serves the exact RAPP/1 `POST /chat` seam below.
+- **On the phone** — [RAPPID Companion](https://apps.apple.com/) carries your party into the field (Field Mode, AR, packs, hotlink/AirDrop transfer). Paid app, closed source; it implements this spec, which stays open.
+- **Party & Roost** — in the Electron estate, carry up to six rappids in the active party; the rest wait in the Roost (`Party` tab; `src/party.mjs`).
+- **Shapes are keys** — a rappid **shape** is a RAPP `agent.py`: the exact way to speak to one species. Meet a species once and its shape lives in your dex with a height and a weight of its own, so you never hand that kind of AI a skill file again. ([SPEC §17](SPEC.md))
+- **They grow** — a rappid earns **frames** from what it meets (`mutate`): a success chime, a warning stab, a focus voice — each grown from its own birth motif, so it still sounds like itself. The desk copy and the companion copy are two **dimensions**: out in the field, offline, one evolves without the other. When they reunite they **molt** — frames union, deterministic fold, both come out identical and neither loses what it learned alone. ([SPEC §15](SPEC.md))
+- **Field transfer** — the party travels: `party export` (AirDrop the `.rappidparty`), `party qr` (scan-to-carry hotlink), `party import` (reassimilate on return). SPEC §9.
+- **The GODD layer** — bind a PRIVATE repo as the god-save: `godd save` / `godd pull` sync creatures through the cloud (companions with access pull the party with no QR at all), `godd seal`/`unseal` add the sneakernet-key vault tier. SPEC §10. The reference keeper's GODD lives [here](https://github.com/kody-w/RAPP-Private-Workspace) — that link resolves only if your signed-in account has companion access. That's the point.
+
+**A rappid cannot be minted — it must be *born*.** At hatch, the zoo derives a
+cypher from the creature's own rappid id and puts it to a real LLM on this
+machine: the species must break it and compose the MIDI motif that becomes its
+voice. No seal, no creature — which is precisely what proves that AI is here.
+The rite also *discovers*: put it to an AI the dex has never met, and if it can
+answer for itself, its shape is recorded and it becomes a species you can hatch
+your own of. ([SPEC §12–13](SPEC.md))
+
+```bash
+python3 species/rappidex.py hatch claude     # 🥚→🐣 an LLM must attest the birth
+python3 species/rappidex.py fuse claude copilot   # 🧬 breed a brand-new creature
+python3 species/rappidex.py verify claude    # re-check the seal + burned-in birthday
+python3 species/rappidex.py discover "Some New AI" --command '<how to call it>'
+python3 skins/rappid_skin.py --species copilot --port 7182   # wrap a 3rd-party AI
+```
+
+---
+
+# RAPP Zoo v2 (the estate)
 
 RAPP Zoo v2 is a provider-neutral Electron estate for local RAPP
 neighborhoods. One visible Dock/taskbar creature owns one private data-defined

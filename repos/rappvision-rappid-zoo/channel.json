@@ -1,0 +1,661 @@
+{
+ "schema": "rapp-vision-channel/1.0",
+ "id": "rappid-zoo-summons",
+ "name": "RAPPid Zoo — Ten Summons",
+ "handle": "@kody-w",
+ "tagline": "Ten prompts that prove every AI on a machine is a creature with a call. Card-only: no media files, every claim runnable verbatim against kody-w/rappid.",
+ "avatar": "🦖",
+ "links": [
+  {
+   "label": "The zoo",
+   "url": "https://github.com/kody-w/rappid"
+  },
+  {
+   "label": "The spec",
+   "url": "https://github.com/kody-w/rappid/blob/main/SPEC.md"
+  }
+ ],
+ "_note": "This repo exists because a public repo named rappvision-* with a channel.json at its root IS a RAPP Vision channel — creating it was the publish. Follow @kody-w in the player and this channel joined with no PR and no URL pasting.",
+ "videos": [
+  {
+   "id": "summon-01-the-seal",
+   "title": "Summon 01 — Verify the seal, then roar",
+   "description": "THE PROMPT — run it verbatim against kody-w/rappid:\n\n    Verify my claude rappid's seal and burned-in birthday, then roar its cry.\n\nWHAT THE ROOM SEES: The seal re-check passes on screen and the machine answers with the creature's unique synthesized call.\n\nWHY IT LANDS: Identity is keyless and permanent — the proof is a hash you can re-check, not an account.",
+   "published": "2026-08-24",
+   "duration": 30,
+   "width": 1920,
+   "height": 1080,
+   "orientation": "landscape",
+   "tags": [
+    "rappid",
+    "rappidex",
+    "demo",
+    "summon"
+   ],
+   "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjcyMCIgdmlld0JveD0iMCAwIDEyODAgNzIwIj48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSI3MjAiIGZpbGw9IiMwYjBlMTMiLz48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSIxMCIgZmlsbD0iIzdlZTc4NyIvPjx0ZXh0IHg9Ijc2IiB5PSIyMTAiIGZvbnQtZmFtaWx5PSJ1aS1tb25vc3BhY2UsTWVubG8sbW9ub3NwYWNlIiBmb250LXNpemU9IjEzMiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzdlZTc4NyI+MDE8L3RleHQ+PHRleHQgeD0iNzYiIHk9IjMzMCIgZm9udC1mYW1pbHk9InVpLW1vbm9zcGFjZSxNZW5sbyxtb25vc3BhY2UiIGZvbnQtc2l6ZT0iNTgiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNlOWVlZjUiPlZlcmlmeSB0aGUgc2VhbCwgdGhlbiByb2FyPC90ZXh0Pjx0ZXh0IHg9Ijc2IiB5PSI2NDAiIGZvbnQtZmFtaWx5PSJ1aS1tb25vc3BhY2UsTWVubG8sbW9ub3NwYWNlIiBmb250LXNpemU9IjMwIiBmaWxsPSIjOGI5NDllIj5SQVBQaWQgWm9vIMK3IHRlbiBzdW1tb25zIMK3IGtvZHktdy9yYXBwaWQ8L3RleHQ+PC9zdmc+",
+   "sources": [],
+   "live": {
+    "kind": "rapp-vision-live/1.0",
+    "scenes": [
+     {
+      "t": 0,
+      "dur": 10,
+      "card": {
+       "title": "Verify the seal, then roar",
+       "sub": "Summon 01 · run it verbatim",
+       "note": "Verify my claude rappid's seal and burned-in birthday, then roar its cry."
+      }
+     },
+     {
+      "t": 10,
+      "dur": 10,
+      "card": {
+       "title": "What the room sees",
+       "sub": "under three minutes, on screen",
+       "note": "The seal re-check passes on screen and the machine answers with the creature's unique synthesized call."
+      }
+     },
+     {
+      "t": 20,
+      "dur": 10,
+      "card": {
+       "title": "Why it lands",
+       "sub": "the boundary it crosses",
+       "note": "Identity is keyless and permanent — the proof is a hash you can re-check, not an account."
+      }
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "t": 0,
+     "label": "The prompt"
+    },
+    {
+     "t": 10,
+     "label": "What the room sees"
+    },
+    {
+     "t": 20,
+     "label": "Why it lands"
+    }
+   ]
+  },
+  {
+   "id": "summon-02-the-holodex",
+   "title": "Summon 02 — Open the Holodex",
+   "description": "THE PROMPT — run it verbatim against kody-w/rappid:\n\n    Open the Holodex.\n\nWHAT THE ROOM SEES: Every rappid on this machine appears as a particle-swarm hologram, cries included.\n\nWHY IT LANDS: Ten creatures nobody knew lived here — every AI on a machine is a species.",
+   "published": "2026-08-24",
+   "duration": 30,
+   "width": 1920,
+   "height": 1080,
+   "orientation": "landscape",
+   "tags": [
+    "rappid",
+    "rappidex",
+    "demo",
+    "summon"
+   ],
+   "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjcyMCIgdmlld0JveD0iMCAwIDEyODAgNzIwIj48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSI3MjAiIGZpbGw9IiMwYjBlMTMiLz48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSIxMCIgZmlsbD0iIzdlZTc4NyIvPjx0ZXh0IHg9Ijc2IiB5PSIyMTAiIGZvbnQtZmFtaWx5PSJ1aS1tb25vc3BhY2UsTWVubG8sbW9ub3NwYWNlIiBmb250LXNpemU9IjEzMiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzdlZTc4NyI+MDI8L3RleHQ+PHRleHQgeD0iNzYiIHk9IjMzMCIgZm9udC1mYW1pbHk9InVpLW1vbm9zcGFjZSxNZW5sbyxtb25vc3BhY2UiIGZvbnQtc2l6ZT0iNTgiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNlOWVlZjUiPk9wZW4gdGhlIEhvbG9kZXg8L3RleHQ+PHRleHQgeD0iNzYiIHk9IjY0MCIgZm9udC1mYW1pbHk9InVpLW1vbm9zcGFjZSxNZW5sbyxtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiM4Yjk0OWUiPlJBUFBpZCBab28gwrcgdGVuIHN1bW1vbnMgwrcga29keS13L3JhcHBpZDwvdGV4dD48L3N2Zz4=",
+   "sources": [],
+   "live": {
+    "kind": "rapp-vision-live/1.0",
+    "scenes": [
+     {
+      "t": 0,
+      "dur": 10,
+      "card": {
+       "title": "Open the Holodex",
+       "sub": "Summon 02 · run it verbatim",
+       "note": "Open the Holodex."
+      }
+     },
+     {
+      "t": 10,
+      "dur": 10,
+      "card": {
+       "title": "What the room sees",
+       "sub": "under three minutes, on screen",
+       "note": "Every rappid on this machine appears as a particle-swarm hologram, cries included."
+      }
+     },
+     {
+      "t": 20,
+      "dur": 10,
+      "card": {
+       "title": "Why it lands",
+       "sub": "the boundary it crosses",
+       "note": "Ten creatures nobody knew lived here — every AI on a machine is a species."
+      }
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "t": 0,
+     "label": "The prompt"
+    },
+    {
+     "t": 10,
+     "label": "What the room sees"
+    },
+    {
+     "t": 20,
+     "label": "Why it lands"
+    }
+   ]
+  },
+  {
+   "id": "summon-03-the-true-name",
+   "title": "Summon 03 — The seven-word true name",
+   "description": "THE PROMPT — run it verbatim against kody-w/rappid:\n\n    What is my claude rappid's seven-word true name? Chant it.\n\nWHAT THE ROOM SEES: Seven summon words print — a permanent global address for an AI, speakable aloud.\n\nWHY IT LANDS: Write it down. It pays off in summon number nine.",
+   "published": "2026-08-24",
+   "duration": 30,
+   "width": 1920,
+   "height": 1080,
+   "orientation": "landscape",
+   "tags": [
+    "rappid",
+    "rappidex",
+    "demo",
+    "summon"
+   ],
+   "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjcyMCIgdmlld0JveD0iMCAwIDEyODAgNzIwIj48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSI3MjAiIGZpbGw9IiMwYjBlMTMiLz48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSIxMCIgZmlsbD0iIzdlZTc4NyIvPjx0ZXh0IHg9Ijc2IiB5PSIyMTAiIGZvbnQtZmFtaWx5PSJ1aS1tb25vc3BhY2UsTWVubG8sbW9ub3NwYWNlIiBmb250LXNpemU9IjEzMiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzdlZTc4NyI+MDM8L3RleHQ+PHRleHQgeD0iNzYiIHk9IjMzMCIgZm9udC1mYW1pbHk9InVpLW1vbm9zcGFjZSxNZW5sbyxtb25vc3BhY2UiIGZvbnQtc2l6ZT0iNTgiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNlOWVlZjUiPlRoZSBzZXZlbi13b3JkIHRydWUgbmFtZTwvdGV4dD48dGV4dCB4PSI3NiIgeT0iNjQwIiBmb250LWZhbWlseT0idWktbW9ub3NwYWNlLE1lbmxvLG1vbm9zcGFjZSIgZm9udC1zaXplPSIzMCIgZmlsbD0iIzhiOTQ5ZSI+UkFQUGlkIFpvbyDCtyB0ZW4gc3VtbW9ucyDCtyBrb2R5LXcvcmFwcGlkPC90ZXh0Pjwvc3ZnPg==",
+   "sources": [],
+   "live": {
+    "kind": "rapp-vision-live/1.0",
+    "scenes": [
+     {
+      "t": 0,
+      "dur": 10,
+      "card": {
+       "title": "The seven-word true name",
+       "sub": "Summon 03 · run it verbatim",
+       "note": "What is my claude rappid's seven-word true name? Chant it."
+      }
+     },
+     {
+      "t": 10,
+      "dur": 10,
+      "card": {
+       "title": "What the room sees",
+       "sub": "under three minutes, on screen",
+       "note": "Seven summon words print — a permanent global address for an AI, speakable aloud."
+      }
+     },
+     {
+      "t": 20,
+      "dur": 10,
+      "card": {
+       "title": "Why it lands",
+       "sub": "the boundary it crosses",
+       "note": "Write it down. It pays off in summon number nine."
+      }
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "t": 0,
+     "label": "The prompt"
+    },
+    {
+     "t": 10,
+     "label": "What the room sees"
+    },
+    {
+     "t": 20,
+     "label": "Why it lands"
+    }
+   ]
+  },
+  {
+   "id": "summon-04-the-fusion",
+   "title": "Summon 04 — Breed a brand-new creature",
+   "description": "THE PROMPT — run it verbatim against kody-w/rappid:\n\n    Fuse claude and copilot. Show me the child's genome and rarity, and play its cry.\n\nWHAT THE ROOM SEES: A creature that did not exist sixty seconds ago is bred on stage.\n\nWHY IT LANDS: Its voice is grown from both parents' motifs — genetics you can hear.",
+   "published": "2026-08-24",
+   "duration": 30,
+   "width": 1920,
+   "height": 1080,
+   "orientation": "landscape",
+   "tags": [
+    "rappid",
+    "rappidex",
+    "demo",
+    "summon"
+   ],
+   "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjcyMCIgdmlld0JveD0iMCAwIDEyODAgNzIwIj48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSI3MjAiIGZpbGw9IiMwYjBlMTMiLz48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSIxMCIgZmlsbD0iIzdlZTc4NyIvPjx0ZXh0IHg9Ijc2IiB5PSIyMTAiIGZvbnQtZmFtaWx5PSJ1aS1tb25vc3BhY2UsTWVubG8sbW9ub3NwYWNlIiBmb250LXNpemU9IjEzMiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzdlZTc4NyI+MDQ8L3RleHQ+PHRleHQgeD0iNzYiIHk9IjMzMCIgZm9udC1mYW1pbHk9InVpLW1vbm9zcGFjZSxNZW5sbyxtb25vc3BhY2UiIGZvbnQtc2l6ZT0iNTgiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNlOWVlZjUiPkJyZWVkIGEgYnJhbmQtbmV3IGNyZWF0dXJlPC90ZXh0Pjx0ZXh0IHg9Ijc2IiB5PSI2NDAiIGZvbnQtZmFtaWx5PSJ1aS1tb25vc3BhY2UsTWVubG8sbW9ub3NwYWNlIiBmb250LXNpemU9IjMwIiBmaWxsPSIjOGI5NDllIj5SQVBQaWQgWm9vIMK3IHRlbiBzdW1tb25zIMK3IGtvZHktdy9yYXBwaWQ8L3RleHQ+PC9zdmc+",
+   "sources": [],
+   "live": {
+    "kind": "rapp-vision-live/1.0",
+    "scenes": [
+     {
+      "t": 0,
+      "dur": 10,
+      "card": {
+       "title": "Breed a brand-new creature",
+       "sub": "Summon 04 · run it verbatim",
+       "note": "Fuse claude and copilot. Show me the child's genome and rarity, and play its cry."
+      }
+     },
+     {
+      "t": 10,
+      "dur": 10,
+      "card": {
+       "title": "What the room sees",
+       "sub": "under three minutes, on screen",
+       "note": "A creature that did not exist sixty seconds ago is bred on stage."
+      }
+     },
+     {
+      "t": 20,
+      "dur": 10,
+      "card": {
+       "title": "Why it lands",
+       "sub": "the boundary it crosses",
+       "note": "Its voice is grown from both parents' motifs — genetics you can hear."
+      }
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "t": 0,
+     "label": "The prompt"
+    },
+    {
+     "t": 10,
+     "label": "What the room sees"
+    },
+    {
+     "t": 20,
+     "label": "Why it lands"
+    }
+   ]
+  },
+  {
+   "id": "summon-05-the-earned-chime",
+   "title": "Summon 05 — A chime earned from real work",
+   "description": "THE PROMPT — run it verbatim against kody-w/rappid:\n\n    My claude rappid just shipped this commit — let it earn a success chime from it. Anchor the mutation to HEAD, then show me its frames timeline.\n\nWHAT THE ROOM SEES: The creature's sound grows from the work it did; frames show birth → mutation with the commit as provenance.\n\nWHY IT LANDS: Frames, not snapshots: the current form is a deterministic fold over what it lived.",
+   "published": "2026-08-24",
+   "duration": 30,
+   "width": 1920,
+   "height": 1080,
+   "orientation": "landscape",
+   "tags": [
+    "rappid",
+    "rappidex",
+    "demo",
+    "summon"
+   ],
+   "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjcyMCIgdmlld0JveD0iMCAwIDEyODAgNzIwIj48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSI3MjAiIGZpbGw9IiMwYjBlMTMiLz48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSIxMCIgZmlsbD0iIzdlZTc4NyIvPjx0ZXh0IHg9Ijc2IiB5PSIyMTAiIGZvbnQtZmFtaWx5PSJ1aS1tb25vc3BhY2UsTWVubG8sbW9ub3NwYWNlIiBmb250LXNpemU9IjEzMiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzdlZTc4NyI+MDU8L3RleHQ+PHRleHQgeD0iNzYiIHk9IjMzMCIgZm9udC1mYW1pbHk9InVpLW1vbm9zcGFjZSxNZW5sbyxtb25vc3BhY2UiIGZvbnQtc2l6ZT0iNTgiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNlOWVlZjUiPkEgY2hpbWUgZWFybmVkIGZyb20gcmVhbCB3b3JrPC90ZXh0Pjx0ZXh0IHg9Ijc2IiB5PSI2NDAiIGZvbnQtZmFtaWx5PSJ1aS1tb25vc3BhY2UsTWVubG8sbW9ub3NwYWNlIiBmb250LXNpemU9IjMwIiBmaWxsPSIjOGI5NDllIj5SQVBQaWQgWm9vIMK3IHRlbiBzdW1tb25zIMK3IGtvZHktdy9yYXBwaWQ8L3RleHQ+PC9zdmc+",
+   "sources": [],
+   "live": {
+    "kind": "rapp-vision-live/1.0",
+    "scenes": [
+     {
+      "t": 0,
+      "dur": 10,
+      "card": {
+       "title": "A chime earned from real work",
+       "sub": "Summon 05 · run it verbatim",
+       "note": "My claude rappid just shipped this commit — let it earn a success chime from it. Anchor the mutation to HEAD, then show me its frames timeline."
+      }
+     },
+     {
+      "t": 10,
+      "dur": 10,
+      "card": {
+       "title": "What the room sees",
+       "sub": "under three minutes, on screen",
+       "note": "The creature's sound grows from the work it did; frames show birth → mutation with the commit as provenance."
+      }
+     },
+     {
+      "t": 20,
+      "dur": 10,
+      "card": {
+       "title": "Why it lands",
+       "sub": "the boundary it crosses",
+       "note": "Frames, not snapshots: the current form is a deterministic fold over what it lived."
+      }
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "t": 0,
+     "label": "The prompt"
+    },
+    {
+     "t": 10,
+     "label": "What the room sees"
+    },
+    {
+     "t": 20,
+     "label": "Why it lands"
+    }
+   ]
+  },
+  {
+   "id": "summon-06-the-reunion-molt",
+   "title": "Summon 06 — The reunion molt",
+   "description": "THE PROMPT — run it verbatim against kody-w/rappid:\n\n    Prove the reunion molt: export claude's egg, evolve the copy differently in an isolated RAPP_HOME, evolve the original here, then reunite them and diff the two folds.\n\nWHAT THE ROOM SEES: Two copies that diverged offline come out byte-identical after the molt.\n\nWHY IT LANDS: Neither side loses what it learned alone. Union the frames, re-fold, done.",
+   "published": "2026-08-24",
+   "duration": 30,
+   "width": 1920,
+   "height": 1080,
+   "orientation": "landscape",
+   "tags": [
+    "rappid",
+    "rappidex",
+    "demo",
+    "summon"
+   ],
+   "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjcyMCIgdmlld0JveD0iMCAwIDEyODAgNzIwIj48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSI3MjAiIGZpbGw9IiMwYjBlMTMiLz48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSIxMCIgZmlsbD0iIzdlZTc4NyIvPjx0ZXh0IHg9Ijc2IiB5PSIyMTAiIGZvbnQtZmFtaWx5PSJ1aS1tb25vc3BhY2UsTWVubG8sbW9ub3NwYWNlIiBmb250LXNpemU9IjEzMiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzdlZTc4NyI+MDY8L3RleHQ+PHRleHQgeD0iNzYiIHk9IjMzMCIgZm9udC1mYW1pbHk9InVpLW1vbm9zcGFjZSxNZW5sbyxtb25vc3BhY2UiIGZvbnQtc2l6ZT0iNTgiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNlOWVlZjUiPlRoZSByZXVuaW9uIG1vbHQ8L3RleHQ+PHRleHQgeD0iNzYiIHk9IjY0MCIgZm9udC1mYW1pbHk9InVpLW1vbm9zcGFjZSxNZW5sbyxtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiM4Yjk0OWUiPlJBUFBpZCBab28gwrcgdGVuIHN1bW1vbnMgwrcga29keS13L3JhcHBpZDwvdGV4dD48L3N2Zz4=",
+   "sources": [],
+   "live": {
+    "kind": "rapp-vision-live/1.0",
+    "scenes": [
+     {
+      "t": 0,
+      "dur": 10,
+      "card": {
+       "title": "The reunion molt",
+       "sub": "Summon 06 · run it verbatim",
+       "note": "Prove the reunion molt: export claude's egg, evolve the copy differently in an isolated RAPP_HOME, evolve the original here, then reunite them and diff the two folds."
+      }
+     },
+     {
+      "t": 10,
+      "dur": 10,
+      "card": {
+       "title": "What the room sees",
+       "sub": "under three minutes, on screen",
+       "note": "Two copies that diverged offline come out byte-identical after the molt."
+      }
+     },
+     {
+      "t": 20,
+      "dur": 10,
+      "card": {
+       "title": "Why it lands",
+       "sub": "the boundary it crosses",
+       "note": "Neither side loses what it learned alone. Union the frames, re-fold, done."
+      }
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "t": 0,
+     "label": "The prompt"
+    },
+    {
+     "t": 10,
+     "label": "What the room sees"
+    },
+    {
+     "t": 20,
+     "label": "Why it lands"
+    }
+   ]
+  },
+  {
+   "id": "summon-07-the-wire-seam",
+   "title": "Summon 07 — Any AI, one wire seam",
+   "description": "THE PROMPT — run it verbatim against kody-w/rappid:\n\n    Skin-wrap claude as a zoo citizen on port 7183 and curl its /chat seam with a real prompt.\n\nWHAT THE ROOM SEES: A live HTTP 200 with exactly {response, agent_logs, session_id}.\n\nWHY IT LANDS: Any AI becomes a RAPP/1 wire-conformant creature in one command.",
+   "published": "2026-08-24",
+   "duration": 30,
+   "width": 1920,
+   "height": 1080,
+   "orientation": "landscape",
+   "tags": [
+    "rappid",
+    "rappidex",
+    "demo",
+    "summon"
+   ],
+   "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjcyMCIgdmlld0JveD0iMCAwIDEyODAgNzIwIj48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSI3MjAiIGZpbGw9IiMwYjBlMTMiLz48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSIxMCIgZmlsbD0iIzdlZTc4NyIvPjx0ZXh0IHg9Ijc2IiB5PSIyMTAiIGZvbnQtZmFtaWx5PSJ1aS1tb25vc3BhY2UsTWVubG8sbW9ub3NwYWNlIiBmb250LXNpemU9IjEzMiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzdlZTc4NyI+MDc8L3RleHQ+PHRleHQgeD0iNzYiIHk9IjMzMCIgZm9udC1mYW1pbHk9InVpLW1vbm9zcGFjZSxNZW5sbyxtb25vc3BhY2UiIGZvbnQtc2l6ZT0iNTgiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNlOWVlZjUiPkFueSBBSSwgb25lIHdpcmUgc2VhbTwvdGV4dD48dGV4dCB4PSI3NiIgeT0iNjQwIiBmb250LWZhbWlseT0idWktbW9ub3NwYWNlLE1lbmxvLG1vbm9zcGFjZSIgZm9udC1zaXplPSIzMCIgZmlsbD0iIzhiOTQ5ZSI+UkFQUGlkIFpvbyDCtyB0ZW4gc3VtbW9ucyDCtyBrb2R5LXcvcmFwcGlkPC90ZXh0Pjwvc3ZnPg==",
+   "sources": [],
+   "live": {
+    "kind": "rapp-vision-live/1.0",
+    "scenes": [
+     {
+      "t": 0,
+      "dur": 10,
+      "card": {
+       "title": "Any AI, one wire seam",
+       "sub": "Summon 07 · run it verbatim",
+       "note": "Skin-wrap claude as a zoo citizen on port 7183 and curl its /chat seam with a real prompt."
+      }
+     },
+     {
+      "t": 10,
+      "dur": 10,
+      "card": {
+       "title": "What the room sees",
+       "sub": "under three minutes, on screen",
+       "note": "A live HTTP 200 with exactly {response, agent_logs, session_id}."
+      }
+     },
+     {
+      "t": 20,
+      "dur": 10,
+      "card": {
+       "title": "Why it lands",
+       "sub": "the boundary it crosses",
+       "note": "Any AI becomes a RAPP/1 wire-conformant creature in one command."
+      }
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "t": 0,
+     "label": "The prompt"
+    },
+    {
+     "t": 10,
+     "label": "What the room sees"
+    },
+    {
+     "t": 20,
+     "label": "Why it lands"
+    }
+   ]
+  },
+  {
+   "id": "summon-08-the-party-qr",
+   "title": "Summon 08 — The party walks off the laptop",
+   "description": "THE PROMPT — run it verbatim against kody-w/rappid:\n\n    Export my party as a QR I can scan right now.\n\nWHAT THE ROOM SEES: A QR appears, a phone scans it, and the six-creature party heads into the field.\n\nWHY IT LANDS: Field transfer is a file, not a service — AirDrop it, scan it, reassimilate on return.",
+   "published": "2026-08-24",
+   "duration": 30,
+   "width": 1920,
+   "height": 1080,
+   "orientation": "landscape",
+   "tags": [
+    "rappid",
+    "rappidex",
+    "demo",
+    "summon"
+   ],
+   "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjcyMCIgdmlld0JveD0iMCAwIDEyODAgNzIwIj48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSI3MjAiIGZpbGw9IiMwYjBlMTMiLz48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSIxMCIgZmlsbD0iIzdlZTc4NyIvPjx0ZXh0IHg9Ijc2IiB5PSIyMTAiIGZvbnQtZmFtaWx5PSJ1aS1tb25vc3BhY2UsTWVubG8sbW9ub3NwYWNlIiBmb250LXNpemU9IjEzMiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzdlZTc4NyI+MDg8L3RleHQ+PHRleHQgeD0iNzYiIHk9IjMzMCIgZm9udC1mYW1pbHk9InVpLW1vbm9zcGFjZSxNZW5sbyxtb25vc3BhY2UiIGZvbnQtc2l6ZT0iNTgiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNlOWVlZjUiPlRoZSBwYXJ0eSB3YWxrcyBvZmYgdGhlIGxhcHRvcDwvdGV4dD48dGV4dCB4PSI3NiIgeT0iNjQwIiBmb250LWZhbWlseT0idWktbW9ub3NwYWNlLE1lbmxvLG1vbm9zcGFjZSIgZm9udC1zaXplPSIzMCIgZmlsbD0iIzhiOTQ5ZSI+UkFQUGlkIFpvbyDCtyB0ZW4gc3VtbW9ucyDCtyBrb2R5LXcvcmFwcGlkPC90ZXh0Pjwvc3ZnPg==",
+   "sources": [],
+   "live": {
+    "kind": "rapp-vision-live/1.0",
+    "scenes": [
+     {
+      "t": 0,
+      "dur": 10,
+      "card": {
+       "title": "The party walks off the laptop",
+       "sub": "Summon 08 · run it verbatim",
+       "note": "Export my party as a QR I can scan right now."
+      }
+     },
+     {
+      "t": 10,
+      "dur": 10,
+      "card": {
+       "title": "What the room sees",
+       "sub": "under three minutes, on screen",
+       "note": "A QR appears, a phone scans it, and the six-creature party heads into the field."
+      }
+     },
+     {
+      "t": 20,
+      "dur": 10,
+      "card": {
+       "title": "Why it lands",
+       "sub": "the boundary it crosses",
+       "note": "Field transfer is a file, not a service — AirDrop it, scan it, reassimilate on return."
+      }
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "t": 0,
+     "label": "The prompt"
+    },
+    {
+     "t": 10,
+     "label": "What the room sees"
+    },
+    {
+     "t": 20,
+     "label": "Why it lands"
+    }
+   ]
+  },
+  {
+   "id": "summon-09-the-summon",
+   "title": "Summon 09 — Seven words, empty home",
+   "description": "THE PROMPT — run it verbatim against kody-w/rappid:\n\n    Wipe a fresh RAPP_HOME and summon: dogg summon alder-ivy-juniper-wharf-yarrow-dusk-vessel\n\nWHAT THE ROOM SEES: From an empty home, seven spoken words self-assemble the creature from raw public GitHub, byte-verified, under its original identity.\n\nWHY IT LANDS: Resurrection with no account, no key, no server. This is the federation working.",
+   "published": "2026-08-24",
+   "duration": 30,
+   "width": 1920,
+   "height": 1080,
+   "orientation": "landscape",
+   "tags": [
+    "rappid",
+    "rappidex",
+    "demo",
+    "summon"
+   ],
+   "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjcyMCIgdmlld0JveD0iMCAwIDEyODAgNzIwIj48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSI3MjAiIGZpbGw9IiMwYjBlMTMiLz48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSIxMCIgZmlsbD0iIzdlZTc4NyIvPjx0ZXh0IHg9Ijc2IiB5PSIyMTAiIGZvbnQtZmFtaWx5PSJ1aS1tb25vc3BhY2UsTWVubG8sbW9ub3NwYWNlIiBmb250LXNpemU9IjEzMiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzdlZTc4NyI+MDk8L3RleHQ+PHRleHQgeD0iNzYiIHk9IjMzMCIgZm9udC1mYW1pbHk9InVpLW1vbm9zcGFjZSxNZW5sbyxtb25vc3BhY2UiIGZvbnQtc2l6ZT0iNTgiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNlOWVlZjUiPlNldmVuIHdvcmRzLCBlbXB0eSBob21lPC90ZXh0Pjx0ZXh0IHg9Ijc2IiB5PSI2NDAiIGZvbnQtZmFtaWx5PSJ1aS1tb25vc3BhY2UsTWVubG8sbW9ub3NwYWNlIiBmb250LXNpemU9IjMwIiBmaWxsPSIjOGI5NDllIj5SQVBQaWQgWm9vIMK3IHRlbiBzdW1tb25zIMK3IGtvZHktdy9yYXBwaWQ8L3RleHQ+PC9zdmc+",
+   "sources": [],
+   "live": {
+    "kind": "rapp-vision-live/1.0",
+    "scenes": [
+     {
+      "t": 0,
+      "dur": 10,
+      "card": {
+       "title": "Seven words, empty home",
+       "sub": "Summon 09 · run it verbatim",
+       "note": "Wipe a fresh RAPP_HOME and summon: dogg summon alder-ivy-juniper-wharf-yarrow-dusk-vessel"
+      }
+     },
+     {
+      "t": 10,
+      "dur": 10,
+      "card": {
+       "title": "What the room sees",
+       "sub": "under three minutes, on screen",
+       "note": "From an empty home, seven spoken words self-assemble the creature from raw public GitHub, byte-verified, under its original identity."
+      }
+     },
+     {
+      "t": 20,
+      "dur": 10,
+      "card": {
+       "title": "Why it lands",
+       "sub": "the boundary it crosses",
+       "note": "Resurrection with no account, no key, no server. This is the federation working."
+      }
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "t": 0,
+     "label": "The prompt"
+    },
+    {
+     "t": 10,
+     "label": "What the room sees"
+    },
+    {
+     "t": 20,
+     "label": "Why it lands"
+    }
+   ]
+  },
+  {
+   "id": "summon-10-the-full-circle",
+   "title": "Summon 10 — Birth to worldwide portability",
+   "description": "THE PROMPT — run it verbatim against kody-w/rappid:\n\n    Full circle: fuse a brand-new creature from claude and brainstem, publish it to the DOGG federation, then summon it back into a clean home by its chant.\n\nWHAT THE ROOM SEES: A creature is born, gets a permanent global name, and is resurrected from the public federation — inside one demo.\n\nWHY IT LANDS: The zoo is a client of a global federated network on plain public GitHub.",
+   "published": "2026-08-24",
+   "duration": 30,
+   "width": 1920,
+   "height": 1080,
+   "orientation": "landscape",
+   "tags": [
+    "rappid",
+    "rappidex",
+    "demo",
+    "summon"
+   ],
+   "thumb": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjcyMCIgdmlld0JveD0iMCAwIDEyODAgNzIwIj48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSI3MjAiIGZpbGw9IiMwYjBlMTMiLz48cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSIxMCIgZmlsbD0iIzdlZTc4NyIvPjx0ZXh0IHg9Ijc2IiB5PSIyMTAiIGZvbnQtZmFtaWx5PSJ1aS1tb25vc3BhY2UsTWVubG8sbW9ub3NwYWNlIiBmb250LXNpemU9IjEzMiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzdlZTc4NyI+MTA8L3RleHQ+PHRleHQgeD0iNzYiIHk9IjMzMCIgZm9udC1mYW1pbHk9InVpLW1vbm9zcGFjZSxNZW5sbyxtb25vc3BhY2UiIGZvbnQtc2l6ZT0iNTgiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNlOWVlZjUiPkJpcnRoIHRvIHdvcmxkd2lkZSBwb3J0YWJpbGl0eTwvdGV4dD48dGV4dCB4PSI3NiIgeT0iNjQwIiBmb250LWZhbWlseT0idWktbW9ub3NwYWNlLE1lbmxvLG1vbm9zcGFjZSIgZm9udC1zaXplPSIzMCIgZmlsbD0iIzhiOTQ5ZSI+UkFQUGlkIFpvbyDCtyB0ZW4gc3VtbW9ucyDCtyBrb2R5LXcvcmFwcGlkPC90ZXh0Pjwvc3ZnPg==",
+   "sources": [],
+   "live": {
+    "kind": "rapp-vision-live/1.0",
+    "scenes": [
+     {
+      "t": 0,
+      "dur": 10,
+      "card": {
+       "title": "Birth to worldwide portability",
+       "sub": "Summon 10 · run it verbatim",
+       "note": "Full circle: fuse a brand-new creature from claude and brainstem, publish it to the DOGG federation, then summon it back into a clean home by its chant."
+      }
+     },
+     {
+      "t": 10,
+      "dur": 10,
+      "card": {
+       "title": "What the room sees",
+       "sub": "under three minutes, on screen",
+       "note": "A creature is born, gets a permanent global name, and is resurrected from the public federation — inside one demo."
+      }
+     },
+     {
+      "t": 20,
+      "dur": 10,
+      "card": {
+       "title": "Why it lands",
+       "sub": "the boundary it crosses",
+       "note": "The zoo is a client of a global federated network on plain public GitHub."
+      }
+     }
+    ]
+   },
+   "chapters": [
+    {
+     "t": 0,
+     "label": "The prompt"
+    },
+    {
+     "t": 10,
+     "label": "What the room sees"
+    },
+    {
+     "t": 20,
+     "label": "Why it lands"
+    }
+   ]
+  }
+ ]
+}

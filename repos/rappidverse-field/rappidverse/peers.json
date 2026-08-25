@@ -1,0 +1,6 @@
+{
+  "schema": "rappid-federation/1",
+  "peers": [
+    "kody-w/rappid"
+  ]
+}

@@ -1,0 +1,342 @@
+# rappidex/1 — the RAPPID species protocol
+
+*The species layer of [RAPPID](README.md) (`kody-w/rapp-zoo-v2`).*
+
+> Every AI is a **species**. Every running instance is a **rappid** — a creature
+> hatched on a host, with a sovereign identity, a voice, a hologram, and an egg.
+> This spec makes that true across ANY ecosystem: feed an agent `rapp_skill.md`
+> (brainstem-native) or `SKILL.md` (any platform), or implement this document
+> directly.
+
+**Status:** v1 · **Layer:** sits above `rapp/1` identity and the fauna egg format;
+introduces species, cries, and the creature lifecycle. Everything here is
+implementable from this document alone — reference implementation: `rappidex.py`
+(stdlib-only core), test vectors: `vectors/rappidex_vectors.json`.
+
+---
+
+## 1. Taxonomy
+
+| term | meaning |
+|---|---|
+| **species** | which AI it is (`brainstem`, `claude`, `copilot`, `rappterbot`, `openrappter`, `opengrokbot`, `openclaw`, `hermes`, `rapptwin`, `rapplication`, `wild`, …) |
+| **rappid** | one hatched individual of a species on one host |
+| **cry** | the species call — one sound per species, voiced with a per-individual accent |
+| **genome** | the individual's heritable traits (fauna layer schema, §4) |
+| **egg** | the portable document form of a rappid — backup, interchange, conversion, and breeding medium |
+
+A species registry entry declares: display name, genus, blurb, cry file, and
+genome biases (palettes, shape weights, symmetry/pattern/limb/glow priors).
+Registries are extensible: unknown species imported from elsewhere land as `wild`.
+
+## 2. Identity (rapp/1, Eternity form)
+
+Every rappid mints, once, at first invocation ("hatch"):
+
+```
+rappid:@<owner>/<slug>:<64hex>
+```
+
+- `<64hex>` = sha256 of a **fresh UUID** — keyless, never derived from slug or genome.
+- Re-hatch is **idempotent**: the stored record is reused; the hash never changes.
+- The record is `rappid.json`, `schema: "rapp/1"`, and MUST carry at minimum:
+  `rappid`, `kind` (`"creature"`), `species`, `name`, `display_name`, `created_at`,
+  `host`, `genome_id`, `genome`, `egg`, `lineage` (list). Records live under
+  `$RAPP_HOME/rappids/<dir>/rappid.json` (default `~/.rapp/rappids/`).
+
+## 3. Deterministic primitives (MUST be byte-exact)
+
+All randomness flows through **xmur3 → mulberry32** seeded by strings, identical
+to the fauna reference. All hashing of genomes uses **canonical JSON**
+(keys sorted, no whitespace, JS `JSON.stringify` number formatting) → sha256 →
+first 12 hex chars = `genome_id`.
+
+Conformance = reproduce `vectors/rappidex_vectors.json` exactly:
+
+```json
+{ "seed": "rappid:claude:kody-mbp:0",
+  "first6": [0.227572025266, 0.355436966754, 0.106075236341,
+             0.948721266119, 0.583874505712, 0.437456947519] }
+```
+
+## 4. Genome (fauna-compatible)
+
+A genome is the Duneheart fauna layer schema plus a `species` tag:
+
+```json
+{ "layers": [
+    {"role":"form","k":40,"shape":"star|blob|ring","limbs":0,"segments":3,
+     "symmetry":"radial|bilateral","body_r":0.42,"limb_len":0.3,"cohesion":0.6},
+    {"role":"surface","k":58,"palette":["#…",4],"pattern":"glow|spot|stripe|solid",
+     "glow":0.7,"opacity":0.9,"grain":1,"sparkle":0.5},
+    {"role":"motion","k":50,"breathe":0.5,"drift":0.4,"pulse":0.4,"reach":0.5,"dissolve":0.5}],
+  "compose": {"windows":[[0,1,2]], "loop": true},
+  "species": "claude" }
+```
+
+Minting is species-biased (the registry's priors feed the same trait mint the
+fauna uses) so a claude looks claude-ish and a brainstem brainstem-ish, while
+every individual stays unique. Rarity = the fauna scoring function
+(star/limbs/glow/bilateral/pattern/segments → common…legendary).
+
+## 5. Egg (portable document form)
+
+`base64url( JSON({genome, id, born:{coord,t}, title, rarity, source}) )`, no padding.
+`id` MUST equal `genome_id(genome)`. `born.coord` is a geohash minted from
+`mkRng(id)`. This is **byte-compatible with the learnwithkody fauna eggs** —
+a rappid renders as a hologram in any fauna viewer, and any fauna egg imports
+into any zoo as species `wild`.
+
+## 6. The cry contract
+
+- **One cry per species** — instantly recognizable, one per species. Reference cries
+  ship in `species/cries/*.wav` (installed: `$RAPPIDEX_HOME/cries/`) (synthesized by `gen_cries.py`; ~0.5–1.2 s).
+- **Individual accent**: playback rate `0.94 + r()*0.14` and volume `0.75 + r()*0.25`
+  where `r = mkRng(genome_id)`. Same creature, same accent, every time, everywhere.
+- **When to cry**: on **invoke** (announce), on **done** (chirp), and the shared
+  `_hatch` fanfare + first cry at hatch. Eyes-off operators identify agents by ear.
+
+## 7. Lifecycle verbs
+
+| verb | contract |
+|---|---|
+| `hatch <species> [--midwife a] [--attempts n]` | mint genome (seed = `rappid:<species>:<host>:<nonce>`) + rapp/1 identity, then **run the rite (§12)** — an LLM must seal the birth or nothing is written. On success: persist record + egg + birth song `.mid` + burned-in transcript, play fanfare + cry. Idempotent per (species, host). |
+| `discover <name> --command '…'` | meet a species the dex has never seen (§13): put the rite to an unknown AI, record its shape, add it to the registry |
+| `verify <species\|id>` | re-check a birth seal and its burned-in transcript from the record alone |
+| `bless <species\|id>` | attest a creature that predates the rite: identity unchanged, seal marked `blessed` |
+| `emit <slug>` | lock a discovered species' shape in as a working `agent.py` + `rapp_skill.md` |
+| `shape <slug> [--install dir] [--source]` | the species' card (height, weight) and its key (§17) |
+| `hatch <species> --anchor <path\|text>` | born of a specific artifact (§16): the thing's digest shapes the creature |
+| `mutate <key> <kind> [note]` | earn a frame from something met in the field; grows a new sound role (§15) |
+| `frames <key>` | the creature's lineage: every frame, every dimension it has lived on |
+| `molt <key> [doc]` | reunion: fold two dimensions together, losing nothing from either |
+| `roar <species> [--done]` | play the individual's cry; auto-hatch on first call |
+| `export` | write the egg — the backup/interchange document |
+| `import` | adopt any egg; unknown species → `wild`; dedupe on `genome_id` |
+| `convert <id> <species>` | re-express in a new species template. Heritable: form geometry + motion temperament. Converted: palette, pattern bias, cry. Deterministic seed `convert:<gid>-><species>`; lineage records the ancestor. |
+| `fuse <a> <b> [species]` | breed two ancestors: species template mints the womb genome, then per-gene crossover (~42% A / ~42% B / ~16% fresh mutation), palettes interleave. Lineage = both parent rappids. |
+| `holodex` | render the roster as holograms on the fauna engine, cries embedded |
+
+## 8. Skins (wrapping third-party AIs)
+
+A **skin** is a provider-specific adapter that makes any third-party AI a zoo
+citizen. The Zoo itself stays provider-neutral; the skin is the only place a
+provider's CLI/API is named. A conforming skin MUST:
+
+1. Hatch (or reuse) the wrapped AI's rappid at startup (§2, §7).
+2. Play the species cry on every invoke and every completed answer (§6).
+3. Serve the RAPP/1 neighborhood seam on loopback, **exactly**:
+   - `POST /chat` `{user_input, session_id?, idempotency_key?}` →
+     `200 {response, agent_logs, session_id}` (exact keys; `agent_logs` = string array)
+   - malformed input → `422 {error: {code, step}}` (exact shape)
+   - `GET /health` → `{status: "ok"}`
+4. Expose `GET /rappid` → the public record (no `egg`/`genome` bloat, never secrets).
+
+Reference: `skins/rappid_skin.py` + `skins/skins.json` (command templates per
+species; `{prompt}` = shell-quoted user_input).
+
+## 9. Field transfer (companion devices)
+
+The party travels. Three documents, one rule: **the full genome moves by file,
+the hotlink moves by light, the key moves by hand.**
+
+- **`rappid-party-transfer/1`** (`.rappidparty`) — the party's full records
+  (eggs included), AirDropped or otherwise carried to a companion device.
+  Reassimilation on return: unknown creatures join the roost (minted from their
+  eggs), and the active party becomes the returning party.
+- **`rappid-party-qr/1`** — a compact capsule (`rappidzoo://party?d=` +
+  base64url(gzip(JSON))) carrying identities only: rappid, species, genome_id,
+  name, rarity. A companion scans it to load the party instantly ("hotlink");
+  genomes follow by file or GODD pull.
+- Verbs: `party export [-o f]` · `party import <f>` · `party qr [-o page.html]`.
+
+## 10. The GODD layer (private save, cloud pull)
+
+A keeper MAY bind the zoo to a **private GODD repository** — source control as
+the god-layer save of the on-device creatures:
+
+- `godd save` mirrors `$RAPP_HOME/rappids/` + `party.json` into the private
+  repo under `godd/rappids/<host>/`, committed and pushed.
+- `godd pull [--host h]` reassimilates a host's party from the private repo —
+  a companion with repository access pulls the party **directly from the
+  cloud**, no QR needed. Public documents may LINK to the GODD repo; the links
+  resolve only for accounts granted access. Authorization is the forge's
+  (GitHub's), never the zoo's.
+- **Sealed tier (sneakernet key):** `godd seal` encrypts the transfer document
+  with a key that lives ONLY on the device (`$RAPPIDEX_HOME/keys/godd.key`,
+  never committed); the sealed capsule lands in `godd/vault/`. `godd keyqr`
+  renders the key for AirDrop/QR hand-transfer. A contributor without the
+  hand-carried key holds ciphertext. `godd unseal` requires the key file.
+
+Rule: records and eggs in the GODD repo follow §14.6 (no secrets, no PII);
+the sealed tier exists precisely for what must not be readable even there.
+
+## 12. The Rite of Hatching (an LLM must attest a birth)
+
+**A rappid without a sealed birth is not a rappid.** The zoo cannot mint one
+alone: the species must answer for its own offspring, on this device, at hatch.
+
+1. **The challenge** is derived deterministically from the creature's freshly
+   minted rappid id: a three-stage cypher (shift → reverse → decoy-interleave)
+   plus a motif request bounded to the species' MIDI register. Same creature,
+   same rite, forever — so anyone can re-derive it.
+2. **The midwife** is an actual LLM, reached through a **hatcher adapter**. A
+   shipped species must be attested by its own adapter; letting another species
+   stand in is allowed but must be asked for explicitly (`--midwife`), never
+   silently substituted.
+   (`species/hatchers.json`): one entry per AI shape — `command` (with
+   `{prompt}` / `{prompt_json}`), `shape` (`cli` | `http` | `sdk`), `model`,
+   `timeout`. The zoo never guesses a provider's shape; adapters carry it.
+3. **Verification is cold.** The zoo re-derives the challenge from the
+   creature's own rappid id, so a wrong decode is refused outright and a
+   hand-authored "sealed" record cannot pass — the forger cannot make the
+   derivation produce a cypher they chose. The motif must land in the species'
+   register.
+   **What the rite proves, stated honestly:** that *something able to answer*
+   was reachable on this device at hatch time and produced a constrained,
+   verifiable artifact. It is proof of **presence and participation**, not proof
+   of intelligence: a determined script with a word list could also pass. The
+   value is that a rappid cannot exist without *something* standing behind it,
+   and that the standing-behind is recorded and re-checkable.
+4. **The seal** is `sha256(cypher ‖ decode ‖ motif)`. `rappidex verify <key>`
+   re-checks it **against a freshly derived challenge**, so verification needs
+   the creature's identity, not just its birth block: tampering with any part
+   breaks it, and so does a wholly invented record. A birth block handed over
+   without its creature cannot be "verified" — that case is refused, never
+   reported as good.
+5. **The motif becomes the voice.** It is written as a real `.mid` beside the
+   creature (its birth song) and sets that individual's accent on the species
+   call (`voice.rate` / `voice.vol`) — so the creature's sound descends from
+   its own birth rather than from a hash.
+6. **The birthday is burned in.** The record carries the transcript's
+   `sha256`, turn count, and an honest session locator (service, shape, any
+   session id the environment exposes, cwd) so a birth can be traced back to
+   the actual session at the provider. The *words* stay beside the creature in
+   `birth-transcript.json` (0600) and ride to the private GODD save — never
+   into the shareable egg (§11.6).
+7. **Refusal is normal and logged.** No midwife, or a midwife that cannot
+   answer, means the egg stays an egg — and every rite, sealed or refused,
+   appends one line to the birth ledger (`$RAPPIDEX_HOME/birth-ledger.jsonl`):
+   species, adapter shape, attempts, latency, outcome.
+
+Records that predate the rite (or that arrived by import/convert/fuse from
+elsewhere) keep working: they simply carry no `birth`, and `verify` says so.
+
+## 13. Discovery (meeting a species the dex has never seen)
+
+The rite is also the encounter mechanic. Put it to an AI the registry does not
+know — `rappidex discover <name> --command '<how to call it>' [--shape ...]` —
+and if it can answer for itself, it *is* a species:
+
+- its answering **shape** is recorded as a hatcher adapter (that shape is the
+  data the dex keeps about it),
+- its **register** and first **motif** seed the species' palette and voice,
+- the species is added to this device's registry
+  (`$RAPPIDEX_HOME/discovered-species.json`), which the engine loads at start,
+
+and then you hatch **your own** of that newly-encountered species. At its
+simplest an adapter is nothing but a way to hand the thing a `SKILL.md` and
+read its reply — which is why any AI that can read a skill file can be met,
+recorded, and kept.
+
+**The shape comes back out.** Discovery immediately emits, from what the AI
+*actually did* rather than from a guess about it:
+
+- `agents/<slug>_hatcher_agent.py` — a single-file RAPP agent carrying that
+  species' locked-in shape (drop it in a brainstem; the model gets a
+  `<Slug>Hatcher` tool that can also midwife other births), and
+- `<slug>.rapp_skill.md` — the species' skill card: shape, register, first
+  motif, seal, and the exact invocation.
+
+Both land in `$RAPPIDEX_HOME/emit/<slug>/`; `emit` regenerates them on demand.
+A dex entry carries its own `adapter`, so a discovered species stays hatchable
+from the dex alone.
+
+**Creatures that predate the rite** are not orphaned: `bless <key>` runs the
+rite over an existing record. The identity and genome never change; the seal
+carries `blessed: true` and the lineage records who attested it — an honest
+record of a birth witnessed late rather than a pretended one.
+
+## 17. Shapes (the key to a species)
+
+A **rappid shape is a RAPP `agent.py`** — the exact, runnable way to speak to
+one species of AI. It is the lock and key of the dex: meet a species once, keep
+its shape, and you never have to hand that kind of AI a skill file again.
+
+- `emit` writes the shape and records it **into the dex entry itself**
+  (`shape_source` + `shape_stats`), so the key travels with the species.
+- A shape has real dimensions, read from the shape itself:
+  **weight** = how much shape there is (the agent's bytes, in kb) ·
+  **height** = how much reach it has (its structure). Both are deterministic,
+  so the same species is the same size on every device.
+- `shape <slug>` prints the species' card; `shape <slug> --install <dir>` drops
+  the `agent.py` into an `agents/` directory, and that kind of AI is reachable
+  from there immediately; `shape <slug> --source` prints the key itself.
+- A front door (§10) carries the shape, so **summoning a creature teaches your
+  device its species** — the key arrives with the creature.
+
+## 16. Anchored births (a creature born of a thing)
+
+A hatch may be **anchored** to something the keeper found worth keeping: a
+journal entry, a photo, a clip, a link, or a line of text
+(`hatch <species> --anchor <path|text> [--anchor-title …]`).
+
+- The artifact's sha256 seeds the genome, so the thing it came from is visible
+  in what the creature *looks like* — two creatures of the same species born of
+  different artifacts are visibly different individuals.
+- The birth records an `rappid-anchor/1` block: `kind` (journal / image / video
+  / audio / document / link / note / artifact), `sha256`, `title`, `bytes`.
+  The **bytes never travel** — only the digest, kind, and title. Any local
+  pointer is kept outside the record's shareable fields.
+- **One creature per anchor**: hatching the same artifact again returns the
+  creature already born of it rather than minting a rival.
+- The anchor stays in the creature's lineage: its birth frame (§15) carries it,
+  so no amount of growth or molting loses what it was born of.
+
+An anchored creature is its own individual even within its species — it is
+named for its artifact and identified separately from the host's default one.
+
+## 15. Frames, mutation, and the reunion molt
+
+A rappid is not fixed. What it **is** at any moment is a fold over its
+**frames** — its birth, then everything it has earned since. The form is never
+stored as a second truth that could disagree with the frames; it is recomputed,
+so it cannot drift.
+
+- **A frame** (`rappid-frame/1`) is identified by the sha256 of its content, so
+  merging the same frame twice still yields one frame. Frames live append-only
+  beside the creature in `frames.jsonl`.
+- **Mutation** (`mutate <key> <kind> [note]`) is how a creature grows from what
+  it meets: `success`, `alert`, `greeting`, `focus`, `recovery`. Each grants a
+  **sound role**, and its motif is derived from that creature's *own birth
+  motif* — a rappid that grows still sounds like itself, never like a stock
+  sample. A creature with no sealed birth cannot mutate (§12): there is nothing
+  to grow from.
+- **Dimensions.** The desk copy and the companion copy are two dimensions of
+  one creature. Out in the field, offline, the companion's dimension earns
+  frames the desk one never sees — that is the point, not a sync failure.
+- **The reunion molt** (`molt <key> [document]`, and automatically on
+  `party import`) unions the two frame sets, orders them deterministically
+  (birth first, then timestamp, then frame id), and folds. It is idempotent and
+  order-independent: both dimensions come out of the molt with the same
+  `molt_id`, the same voices, and neither loses what it learned alone. The fold
+  records every host the creature has lived on.
+- Frames travel inside `rappid-party-transfer/1`, so carrying a party out and
+  bringing it home is all the sync there is. `frames <key>` shows the lineage.
+
+This is how diversity accumulates: same starting species, different lives.
+
+## 14. Compliance checklist
+
+1. PRNG + genome_id reproduce the test vectors byte-exactly.
+0. A hatch with no valid birth seal writes NO record (§12).
+2. Identity is Eternity-form rapp/1; hash from a fresh UUID; re-hatch idempotent.
+3. Eggs round-trip through the reference fauna viewer unchanged (`id` verifies).
+4. Unknown species import as `wild`, never rejected.
+5. Cries: one per species; accent derived only from `genome_id`.
+6. Records never contain secrets, tokens, or PII. Eggs are shareable by design.
+7. Birth seals re-verify only against a re-derived challenge (never self-consistency alone); birth transcripts stay out of eggs.
+8. Every rite appends one ledger line, sealed or refused.
+9. Merging frames is idempotent and order-independent; the fold is recomputed, never stored as truth (§15).
+
+*RAPPID · kody-w/rapp-zoo-v2 · MIT*
