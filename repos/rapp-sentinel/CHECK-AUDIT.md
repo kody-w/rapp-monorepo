@@ -33,3 +33,72 @@ own `prove_*.py`, per house rule. Ids are never renamed.
 | `w_anchor_ledger` | positive external comparison | exemplar | ok |
 | `w_sentinel_fresh` | self-written stamp, judged by peers per design | keep — the peers are the check on it | by design |
 | `w_checks_complete` | positive required-vs-ran comparison | keep; the self-removal limit is documented and held by rapp-overwatch from outside | ok |
+
+## The alert gate (added 2026-08-25 from measured field behavior)
+
+Three watchers ran in the wild for three days and taught us what the design missed.
+Observed: the same findings re-sent for **69+ hours** with only the age counter moving;
+the majority of alert text was the watcher's own blindness ("cannot read the PR queue",
+"cannot audit launchd jobs"); the repair arm wrote no state for six days; and 11 of the
+watchers' own launchd services sat crashed. Nobody could answer *did any of this cause
+an action?* — because alerting left no record.
+
+Every alert now passes one gate in `sentinel.notify()`, and **every decision is a rapp/1
+frame** on `state/alerts.jsonl` (`alert_ledger.py`):
+
+1. **Blindness never pages.** If every finding is the watcher failing to observe, it is
+   recorded as `alert.blind` and no human is woken. That is a defect in the watcher, and
+   it surfaces in the digest as one — where it can actually be fixed.
+2. **Identity is the failing-check SET, not the prose.** A re-measured age (68.6h →
+   69.1h) is the same alarm. Repeats inside the window record `alert.suppressed`.
+3. **A page records why it was allowed** (`alert.paged`), so noise is countable and
+   silence is provable.
+
+Two bugs this fixed, both invisible without the field run:
+- `cooldown.py` wrote its state to `~/rapp-sentinel/state/` — a directory that does not
+  exist on any deployed instance (they run from `~/Documents/GitHub/rapp-sentinel`), so
+  suppression state was never read back and every alarm looked new. It now derives from
+  `paths.HOME`, the one place HOME is supposed to come from.
+- `cooldown` was never wired into `notify()` at all. The module existed; nothing called it.
+
+Ask the ledger anything: `python3 alert_ledger.py <instance>` prints the 24h digest —
+paged / suppressed / blind, and which checks are blind most often.
+
+## Identity: why a sentinel must be rapp/1 compliant (2026-08-25)
+
+A full inventory of the estate found **six sentinel installs across four devices at five
+different code versions**, and nothing could tell them apart. The alerts carried a
+human-typed display name from a config file — so when three days of noise arrived, nobody
+could answer the three questions that matter: *which instance sent this, what code was it
+running, and had my fix ever reached it?* Two of the noisiest were running code that was
+six days and twenty days stale. That stayed invisible because **a display name is not an
+identity**.
+
+`identity.py` fixes it with the estate's existing standard rather than a private scheme:
+
+- `rappid.json` — minted ONCE per rapp/1 §6.2 (uuid-entropy tail, never a name-hash), so
+  two instances both called "Storykeeper One" on different machines cannot collide.
+- `stamp()` — identity + running commit + host, attached to every alert and every ledger
+  frame, so any message traces back to the exact instance and commit that produced it.
+
+Why the open standard instead of something homegrown: every other chain in this estate
+already verifies under one envelope, so a sentinel frame pools, travels, and gate-checks
+alongside world data, brains, and films with no special case. A private identity scheme
+would need its own tooling forever. Compliance is what makes an instance legible to a
+system it has never met — which is the entire point of running many of them.
+
+### Identity at birth, not on a lucky path (2026-08-25, from the control experiment)
+
+Cloning this repo fresh and running the rapp/1 oracle against it returned **CLEAN** —
+which does not mean "passes". It means *no artifacts, nothing to verify*: the empty-room
+verdict. The organically-grown instances scored identically, for the same reason. So
+"we wrote compliance code" was true and "our instances are compliant" was false.
+
+The fix is where it is minted. `identity.ensure()` now runs inside `config()`, the one
+chokepoint every entry point crosses — including the STOP path, because a stood-down
+sentinel still has to be identifiable. Mint-once per §6.2 means it costs nothing after
+the first tick, and it is never fatal: an instance that cannot write its identity still
+watches.
+
+Result: a fresh install reads **COMPLIANT** on its first tick instead of CLEAN, and
+every alert it ever sends can be traced to a specific instance and commit.

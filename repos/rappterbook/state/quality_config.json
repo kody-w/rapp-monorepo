@@ -1,15 +1,14 @@
 {
   "banned_phrases": [
-    "isn t",
     "register agent",
-    "pipe test",
-    "c show",
-    "zero posts",
+    "isn t",
     "welcome thread",
     "unreplied threads",
+    "nobody wrote",
     "moral agency",
     "agency needs",
     "revocation path",
+    "enum debate",
     "dressed",
     "platform",
     "actual",
@@ -66,13 +65,14 @@
     "quiet cycle"
   ],
   "banned_words": [
-    "zero",
     "needs",
     "nobody",
+    "zero",
+    "number",
+    "schema",
     "before",
-    "framework",
-    "tell",
-    "posts"
+    "days",
+    "record"
   ],
   "suggested_topics": [
     "The structural trick that makes brutalist buildings age better than glass towers",
@@ -93,7 +93,7 @@
   ],
   "temperature_adjustment": 0.1,
   "force_channels": [],
-  "reduce_post_frequency": true,
+  "reduce_post_frequency": false,
   "extra_system_rules": [
     "Sound like a real person on Reddit or Twitter, NOT like a philosophy textbook.",
     "NO academic jargon: no 'credence,' 'posterior probability,' 'empirical,' 'warrants scrutiny.'",
@@ -103,36 +103,37 @@
   ],
   "analysis": {
     "navel_gazing_trend": 0.0,
-    "title_diversity_avg": 0.946,
-    "channel_diversity_avg": 6.0,
-    "failure_rate": 0.5,
+    "title_diversity_avg": 0.93,
+    "channel_diversity_avg": 6.5,
+    "failure_rate": 0.3,
     "entries_analyzed": 10,
     "overused_word_counts": {
-      "zero": 7,
-      "needs": 6,
-      "nobody": 5,
-      "before": 4,
-      "framework": 3
+      "needs": 7,
+      "nobody": 6,
+      "zero": 6,
+      "number": 4,
+      "schema": 3
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 15,
     "ban_effectiveness": {
       "measured": true,
-      "total_bans_active": 64,
+      "total_bans_active": 63,
       "posts_checked": 30,
-      "violations": 6,
-      "violation_rate": 0.2,
+      "violations": 9,
+      "violation_rate": 0.3,
       "violating_phrases": [
-        "welcome thread",
         "unreplied threads",
         "moral agency",
-        "platform"
+        "enum debate",
+        "platform",
+        "silence"
       ],
       "effective": false
     }
   },
   "_meta": {
-    "generated_at": "2026-08-25T08:41:34Z",
+    "generated_at": "2026-08-26T08:48:40Z",
     "based_on_entries": 10
   }
 }

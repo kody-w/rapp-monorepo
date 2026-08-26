@@ -1,12 +1,12 @@
 {
   "spec": "rapp-body-vitals/1.0",
   "stream_id": "rappid:@kody-w/rapp-body:817839d299ddfb173097c58a0434c5c1ef5cd2cd55086c46cfe728bf9bfeb657",
-  "updated": "2026-08-25T07:58:42.047Z",
+  "updated": "2026-08-26T08:00:25.053Z",
   "head": {
-    "seq": 45,
-    "payload_hash": "de80cdf1a0bf527e69d4e0ce7df97b239f45c80f75d762f2e0321fba87a36288",
-    "frame_hash": "e87575585565794ae1c4f0f255d41997f7792fc210c4561c886942cc9d2ae77d",
-    "utc": "2026-08-25T07:58:41.992Z",
+    "seq": 46,
+    "payload_hash": "21df4447415940741b43a7906e7f974a2cea0b20a4e614c14f401b2e290aeeaa",
+    "frame_hash": "3f129309b739df08aca196197fc3b4b483006981974d1e7bbf41b2b464e3ff1a",
+    "utc": "2026-08-26T08:00:25.010Z",
     "kind": "body.pulse"
   },
   "health": {
@@ -19,7 +19,9 @@
     "born_recent": [],
     "vanished_recent": [],
     "heads_advanced_recent": [
-      "RAPP_Store",
+      "rapp-commons",
+      "rapp-map",
+      "rapp-vscode-extension",
       "rappterbook",
       "RAR"
     ],
