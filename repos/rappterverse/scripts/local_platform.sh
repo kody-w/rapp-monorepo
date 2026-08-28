@@ -971,6 +971,30 @@ discard_failed_cycle() {
   rm -f "$PUBLICATION_BLOCK"
 }
 
+isolated_worktree_intact() {
+  # The disposable worktree can lose its .git link while the loop still owns it
+  # -- /tmp reaping, or an interrupted `worktree remove` that leaves the entry
+  # prunable. Every git command then fails identically, so retrying can never
+  # repair it: the loop below just re-runs a doomed cycle every INTERVAL and
+  # keeps the process alive, which means KeepAlive never rebuilds the worktree
+  # and every liveness probe reads green while the world is frozen. Ran is not
+  # worked. Report the breakage so the caller can exit and let the supervisor
+  # build a fresh worktree off origin/main.
+  git -C "$REPO" rev-parse --git-dir >/dev/null 2>&1 || return 1
+  # Reaping is not all-or-nothing. /tmp evicts by access time, so it takes the
+  # scripts a cycle only runs occasionally well before it takes the .git link
+  # the cycle touches every 300s. Live, 2026-08-22: validate_action.py and
+  # pii_scan.py went missing at 23:56Z and .git stayed addressable until
+  # 00:30Z. For those 34min the probe above read intact, so the loop retried in
+  # place -- correctly, by its own rule, since a validation failure is not a
+  # broken worktree. But job_world_growth failed on the missing scripts every
+  # cycle, and Phase 9 publishes only when the cycle is clean, so job_git_sync
+  # was never even attempted again: no frame PR, no gate run, and chat.json
+  # froze on the public API for 127h while the loop looked healthy. A worktree
+  # that has lost the code it executes is reaped too, whatever .git still says.
+  [ -z "$(git -C "$REPO" ls-files -d -- scripts 2>/dev/null)" ]
+}
+
 run_cycle() {
   CYCLE=$((CYCLE + 1))
   local cycle_failed=0
@@ -1125,6 +1149,10 @@ case "${1:-}" in
     log ""
     while true; do
       if ! run_cycle; then
+        if ! isolated_worktree_intact; then
+          err "Isolated worktree is no longer a git repository; exiting so the supervisor rebuilds it"
+          exit 1
+        fi
         err "Cycle failed; retained publication block and will retry"
       fi
       log "Sleeping ${INTERVAL}s..."

@@ -1,0 +1,181 @@
+{
+ "starter_pack": "The owner's prompt library as the ten routines a RappterBox runs on day one",
+ "routines": [
+  {
+   "routine": "morning-brief",
+   "title": "The 7am Brief",
+   "method": "https://github.com/kody-w/rappter-prompts/blob/main/prompts/morning-brief.md",
+   "schedule": "daily 06:30",
+   "reads": [
+    "inbox subjects",
+    "calendar today",
+    "open invoices"
+   ],
+   "writes": "one rapp/1 frame (kind memory.save) per run: the output + a receipt of every input touched",
+   "will_never": [
+    "send",
+    "sign",
+    "pay",
+    "delete"
+   ],
+   "needs_owner_when": "any date, number or promise is not in the inputs (marked UNKNOWN / ASK OWNER)"
+  },
+  {
+   "routine": "chase-invoices",
+   "title": "The Invoice Chaser",
+   "method": "https://github.com/kody-w/rappter-prompts/blob/main/prompts/chase-invoices.md",
+   "schedule": "daily 07:00 (sends nothing; drafts)",
+   "reads": [
+    "open invoices with days late",
+    "last messages per customer"
+   ],
+   "writes": "one rapp/1 frame (kind memory.save) per run: the output + a receipt of every input touched",
+   "will_never": [
+    "send",
+    "sign",
+    "pay",
+    "delete"
+   ],
+   "needs_owner_when": "any date, number or promise is not in the inputs (marked UNKNOWN / ASK OWNER)"
+  },
+  {
+   "routine": "compliance-calendar",
+   "title": "The Deadline Ledger",
+   "method": "https://github.com/kody-w/rappter-prompts/blob/main/prompts/compliance-calendar.md",
+   "schedule": "weekly Mon 06:00",
+   "reads": [
+    "business type, state, city",
+    "known licenses/policies/filings"
+   ],
+   "writes": "one rapp/1 frame (kind memory.save) per run: the output + a receipt of every input touched",
+   "will_never": [
+    "send",
+    "sign",
+    "pay",
+    "delete"
+   ],
+   "needs_owner_when": "any date, number or promise is not in the inputs (marked UNKNOWN / ASK OWNER)"
+  },
+  {
+   "routine": "review-replies",
+   "title": "The Review Desk",
+   "method": "https://github.com/kody-w/rappter-prompts/blob/main/prompts/review-replies.md",
+   "schedule": "daily 06:45",
+   "reads": [
+    "new reviews",
+    "owner voice notes"
+   ],
+   "writes": "one rapp/1 frame (kind memory.save) per run: the output + a receipt of every input touched",
+   "will_never": [
+    "send",
+    "sign",
+    "pay",
+    "delete"
+   ],
+   "needs_owner_when": "any date, number or promise is not in the inputs (marked UNKNOWN / ASK OWNER)"
+  },
+  {
+   "routine": "sop-from-memo",
+   "title": "The Playbook Writer",
+   "method": "https://github.com/kody-w/rappter-prompts/blob/main/prompts/sop-from-memo.md",
+   "schedule": "on new voice memo",
+   "reads": [
+    "voice memo transcript"
+   ],
+   "writes": "one rapp/1 frame (kind memory.save) per run: the output + a receipt of every input touched",
+   "will_never": [
+    "send",
+    "sign",
+    "pay",
+    "delete"
+   ],
+   "needs_owner_when": "any date, number or promise is not in the inputs (marked UNKNOWN / ASK OWNER)"
+  },
+  {
+   "routine": "hiring-ad",
+   "title": "The Job Post",
+   "method": "https://github.com/kody-w/rappter-prompts/blob/main/prompts/hiring-ad.md",
+   "schedule": "on request",
+   "reads": [
+    "role, pay, hours, location",
+    "what the last hire got wrong"
+   ],
+   "writes": "one rapp/1 frame (kind memory.save) per run: the output + a receipt of every input touched",
+   "will_never": [
+    "send",
+    "sign",
+    "pay",
+    "delete"
+   ],
+   "needs_owner_when": "any date, number or promise is not in the inputs (marked UNKNOWN / ASK OWNER)"
+  },
+  {
+   "routine": "weekly-numbers",
+   "title": "The Friday Numbers",
+   "method": "https://github.com/kody-w/rappter-prompts/blob/main/prompts/weekly-numbers.md",
+   "schedule": "Fri 16:00",
+   "reads": [
+    "week numbers: sales, cash in/out, unpaid total, jobs booked/done"
+   ],
+   "writes": "one rapp/1 frame (kind memory.save) per run: the output + a receipt of every input touched",
+   "will_never": [
+    "send",
+    "sign",
+    "pay",
+    "delete"
+   ],
+   "needs_owner_when": "any date, number or promise is not in the inputs (marked UNKNOWN / ASK OWNER)"
+  },
+  {
+   "routine": "vendor-compare",
+   "title": "The Quote Reader",
+   "method": "https://github.com/kody-w/rappter-prompts/blob/main/prompts/vendor-compare.md",
+   "schedule": "on new quotes",
+   "reads": [
+    "quotes"
+   ],
+   "writes": "one rapp/1 frame (kind memory.save) per run: the output + a receipt of every input touched",
+   "will_never": [
+    "send",
+    "sign",
+    "pay",
+    "delete"
+   ],
+   "needs_owner_when": "any date, number or promise is not in the inputs (marked UNKNOWN / ASK OWNER)"
+  },
+  {
+   "routine": "customer-followup",
+   "title": "The Follow-Up Engine",
+   "method": "https://github.com/kody-w/rappter-prompts/blob/main/prompts/customer-followup.md",
+   "schedule": "daily 06:50",
+   "reads": [
+    "completed jobs last week"
+   ],
+   "writes": "one rapp/1 frame (kind memory.save) per run: the output + a receipt of every input touched",
+   "will_never": [
+    "send",
+    "sign",
+    "pay",
+    "delete"
+   ],
+   "needs_owner_when": "any date, number or promise is not in the inputs (marked UNKNOWN / ASK OWNER)"
+  },
+  {
+   "routine": "meeting-to-tasks",
+   "title": "The Meeting Cleaner",
+   "method": "https://github.com/kody-w/rappter-prompts/blob/main/prompts/meeting-to-tasks.md",
+   "schedule": "after each meeting",
+   "reads": [
+    "meeting transcript"
+   ],
+   "writes": "one rapp/1 frame (kind memory.save) per run: the output + a receipt of every input touched",
+   "will_never": [
+    "send",
+    "sign",
+    "pay",
+    "delete"
+   ],
+   "needs_owner_when": "any date, number or promise is not in the inputs (marked UNKNOWN / ASK OWNER)"
+  }
+ ]
+}

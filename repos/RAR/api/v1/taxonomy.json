@@ -1,10 +1,14 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-23T23:33:04Z",
+  "generated": "2026-08-28T19:26:31Z",
   "categories": [
     {
+      "name": "integrations",
+      "count": 1474
+    },
+    {
       "name": "general",
-      "count": 65
+      "count": 64
     },
     {
       "name": "productivity",
@@ -12,101 +16,53 @@
     },
     {
       "name": "core",
-      "count": 28
+      "count": 33
     },
     {
       "name": "devtools",
       "count": 25
     },
     {
-      "name": "b2b_sales",
-      "count": 24
-    },
-    {
       "name": "pipeline",
       "count": 18
     },
     {
-      "name": "integrations",
-      "count": 17
-    },
-    {
-      "name": "financial_services",
-      "count": 10
+      "name": "analysis",
+      "count": 12
     },
     {
       "name": "creative",
       "count": 10
     },
     {
-      "name": "b2c_sales",
-      "count": 7
-    },
-    {
-      "name": "analysis",
-      "count": 7
-    },
-    {
       "name": "platform",
       "count": 7
-    },
-    {
-      "name": "energy",
-      "count": 6
-    },
-    {
-      "name": "federal_government",
-      "count": 5
-    },
-    {
-      "name": "slg_government",
-      "count": 5
-    },
-    {
-      "name": "healthcare",
-      "count": 5
-    },
-    {
-      "name": "professional_services",
-      "count": 5
-    },
-    {
-      "name": "manufacturing",
-      "count": 5
-    },
-    {
-      "name": "retail_cpg",
-      "count": 5
-    },
-    {
-      "name": "software_digital_products",
-      "count": 5
     },
     {
       "name": "workflow",
       "count": 5
     },
     {
-      "name": "human_resources",
-      "count": 1
-    },
-    {
-      "name": "it_management",
+      "name": "b2b_sales",
       "count": 1
     },
     {
       "name": "meta",
       "count": 1
+    },
+    {
+      "name": "energy",
+      "count": 1
     }
   ],
   "publishers": [
     {
-      "name": "@aibast-agents-library",
-      "count": 104
+      "name": "@cowork-cookbook",
+      "count": 1481
     },
     {
       "name": "@cat-agent-skills",
-      "count": 93
+      "count": 95
     },
     {
       "name": "@kody-w",
@@ -114,7 +70,7 @@
     },
     {
       "name": "@rapp",
-      "count": 21
+      "count": 23
     },
     {
       "name": "@discreetRappers",
@@ -123,6 +79,10 @@
     {
       "name": "@howardh",
       "count": 8
+    },
+    {
+      "name": "@rapter",
+      "count": 3
     },
     {
       "name": "@wildhaven",
@@ -144,19 +104,19 @@
   "quality_tiers": [
     {
       "name": "community",
-      "count": 166
-    },
-    {
-      "name": "frontier",
-      "count": 93
-    },
-    {
-      "name": "official",
-      "count": 44
+      "count": 1270
     },
     {
       "name": "verified",
-      "count": 5
+      "count": 281
+    },
+    {
+      "name": "frontier",
+      "count": 95
+    },
+    {
+      "name": "official",
+      "count": 46
     },
     {
       "name": "private",
@@ -165,24 +125,160 @@
   ],
   "tags": [
     {
+      "name": "industry_solution",
+      "count": 1481
+    },
+    {
+      "name": "business_process",
+      "count": 1481
+    },
+    {
+      "name": "integration",
+      "count": 1459
+    },
+    {
+      "name": "prompt",
+      "count": 1444
+    },
+    {
+      "name": "intermediate",
+      "count": 1434
+    },
+    {
+      "name": "dynamics_365_erp",
+      "count": 1413
+    },
+    {
+      "name": "administer_to_operate",
+      "count": 268
+    },
+    {
+      "name": "audit",
+      "count": 161
+    },
+    {
+      "name": "report",
+      "count": 152
+    },
+    {
+      "name": "dashboard",
+      "count": 148
+    },
+    {
+      "name": "scheduled_brief",
+      "count": 148
+    },
+    {
+      "name": "teams_update",
+      "count": 138
+    },
+    {
+      "name": "bulk_update",
+      "count": 137
+    },
+    {
+      "name": "ppt_exec",
+      "count": 135
+    },
+    {
+      "name": "adaptive_card",
+      "count": 133
+    },
+    {
+      "name": "configure",
+      "count": 129
+    },
+    {
+      "name": "demo_data",
+      "count": 126
+    },
+    {
+      "name": "hire_to_retire",
+      "count": 116
+    },
+    {
+      "name": "record_to_report",
+      "count": 106
+    },
+    {
+      "name": "forecast_to_plan",
+      "count": 93
+    },
+    {
+      "name": "source_to_pay",
+      "count": 93
+    },
+    {
+      "name": "order_to_cash",
+      "count": 91
+    },
+    {
+      "name": "acquire_to_dispose",
+      "count": 90
+    },
+    {
+      "name": "inventory_to_deliver",
+      "count": 85
+    },
+    {
+      "name": "concept_to_market",
+      "count": 82
+    },
+    {
+      "name": "other",
+      "count": 81
+    },
+    {
+      "name": "project_to_profit",
+      "count": 77
+    },
+    {
+      "name": "case_to_resolution",
+      "count": 77
+    },
+    {
+      "name": "service_to_deliver",
+      "count": 77
+    },
+    {
+      "name": "prospect_to_quote",
+      "count": 76
+    },
+    {
+      "name": "plan_to_produce",
+      "count": 65
+    },
+    {
+      "name": "design_to_retire",
+      "count": 65
+    },
+    {
       "name": "productivity",
       "count": 40
     },
     {
-      "name": "sales",
-      "count": 30
+      "name": "advanced",
+      "count": 33
     },
     {
-      "name": "b2b",
+      "name": "prompt_skill",
+      "count": 33
+    },
+    {
+      "name": "read_only",
       "count": 24
     },
     {
-      "name": "pipeline",
-      "count": 19
+      "name": "automation",
+      "count": 21
     },
     {
-      "name": "automation",
-      "count": 18
+      "name": "dynamics_365_sales",
+      "count": 21
+    },
+    {
+      "name": "work_management",
+      "count": 20
     },
     {
       "name": "content",
@@ -193,16 +289,20 @@
       "count": 15
     },
     {
-      "name": "email",
-      "count": 14
-    },
-    {
-      "name": "compliance",
+      "name": "beginner",
       "count": 14
     },
     {
       "name": "documents",
-      "count": 13
+      "count": 12
+    },
+    {
+      "name": "copilot_studio",
+      "count": 12
+    },
+    {
+      "name": "pipeline",
+      "count": 12
     },
     {
       "name": "rapplication",
@@ -213,23 +313,11 @@
       "count": 11
     },
     {
-      "name": "deal-progression",
-      "count": 10
+      "name": "email",
+      "count": 11
     },
     {
-      "name": "crm",
-      "count": 10
-    },
-    {
-      "name": "financial-services",
-      "count": 10
-    },
-    {
-      "name": "audit",
-      "count": 10
-    },
-    {
-      "name": "copilot_studio",
+      "name": "fabric_iq",
       "count": 10
     },
     {
@@ -237,11 +325,11 @@
       "count": 10
     },
     {
-      "name": "testing",
+      "name": "powerpoint",
       "count": 9
     },
     {
-      "name": "powerpoint",
+      "name": "testing",
       "count": 9
     },
     {
@@ -249,7 +337,7 @@
       "count": 9
     },
     {
-      "name": "sharepoint",
+      "name": "analysis",
       "count": 8
     },
     {
@@ -257,19 +345,15 @@
       "count": 8
     },
     {
-      "name": "healthcare",
-      "count": 7
+      "name": "governance",
+      "count": 8
     },
     {
-      "name": "b2c",
-      "count": 7
+      "name": "m365",
+      "count": 8
     },
     {
-      "name": "routing",
-      "count": 7
-    },
-    {
-      "name": "marketing",
+      "name": "copilot-studio",
       "count": 7
     },
     {
@@ -281,11 +365,11 @@
       "count": 7
     },
     {
-      "name": "governance",
+      "name": "sharepoint",
       "count": 7
     },
     {
-      "name": "m365",
+      "name": "rapp",
       "count": 7
     },
     {
@@ -293,27 +377,19 @@
       "count": 7
     },
     {
-      "name": "energy",
-      "count": 6
-    },
-    {
-      "name": "pricing",
-      "count": 6
-    },
-    {
-      "name": "retail",
-      "count": 6
-    },
-    {
-      "name": "copilot-studio",
-      "count": 6
-    },
-    {
       "name": "microsoft_365",
       "count": 6
     },
     {
+      "name": "assessment",
+      "count": 6
+    },
+    {
       "name": "html",
+      "count": 6
+    },
+    {
+      "name": "marketing",
       "count": 6
     },
     {
@@ -325,51 +401,19 @@
       "count": 6
     },
     {
+      "name": "miro",
+      "count": 6
+    },
+    {
       "name": "singleton",
       "count": 6
     },
     {
-      "name": "procurement",
-      "count": 5
-    },
-    {
-      "name": "federal",
-      "count": 5
-    },
-    {
-      "name": "planning",
-      "count": 5
-    },
-    {
-      "name": "knowledge-base",
-      "count": 5
-    },
-    {
-      "name": "professional-services",
-      "count": 5
-    },
-    {
-      "name": "analytics",
-      "count": 5
-    },
-    {
-      "name": "reporting",
-      "count": 5
-    },
-    {
-      "name": "onboarding",
-      "count": 5
-    },
-    {
-      "name": "manufacturing",
-      "count": 5
+      "name": "drift",
+      "count": 6
     },
     {
       "name": "core",
-      "count": 5
-    },
-    {
-      "name": "analysis",
       "count": 5
     },
     {
@@ -401,15 +445,19 @@
       "count": 5
     },
     {
+      "name": "blueprint",
+      "count": 5
+    },
+    {
       "name": "visualization",
       "count": 5
     },
     {
-      "name": "microsoft",
+      "name": "monday_com",
       "count": 5
     },
     {
-      "name": "rapp",
+      "name": "microsoft",
       "count": 5
     },
     {
@@ -441,43 +489,15 @@
       "count": 5
     },
     {
-      "name": "orchestration",
-      "count": 4
-    },
-    {
-      "name": "customer-service",
-      "count": 4
-    },
-    {
-      "name": "risk",
-      "count": 4
-    },
-    {
-      "name": "legal",
-      "count": 4
-    },
-    {
-      "name": "regulatory",
-      "count": 4
-    },
-    {
-      "name": "training",
-      "count": 4
-    },
-    {
-      "name": "copilot",
-      "count": 4
-    },
-    {
-      "name": "voice",
-      "count": 4
-    },
-    {
-      "name": "insights",
-      "count": 4
-    },
-    {
       "name": "memory",
+      "count": 4
+    },
+    {
+      "name": "knowledge-base",
+      "count": 4
+    },
+    {
+      "name": "bootstrap",
       "count": 4
     },
     {
@@ -485,7 +505,11 @@
       "count": 4
     },
     {
-      "name": "assessment",
+      "name": "power-platform",
+      "count": 4
+    },
+    {
+      "name": "monitoring",
       "count": 4
     },
     {
@@ -505,7 +529,27 @@
       "count": 4
     },
     {
+      "name": "compliance",
+      "count": 4
+    },
+    {
+      "name": "planning",
+      "count": 4
+    },
+    {
+      "name": "crm",
+      "count": 4
+    },
+    {
       "name": "discovery",
+      "count": 4
+    },
+    {
+      "name": "sales",
+      "count": 4
+    },
+    {
+      "name": "prompt_blueprint",
       "count": 4
     },
     {
@@ -541,154 +585,6 @@
       "count": 4
     },
     {
-      "name": "account-intelligence",
-      "count": 3
-    },
-    {
-      "name": "competitive-intel",
-      "count": 3
-    },
-    {
-      "name": "outreach",
-      "count": 3
-    },
-    {
-      "name": "support",
-      "count": 3
-    },
-    {
-      "name": "budget",
-      "count": 3
-    },
-    {
-      "name": "local-government",
-      "count": 3
-    },
-    {
-      "name": "insurance",
-      "count": 3
-    },
-    {
-      "name": "retention",
-      "count": 3
-    },
-    {
-      "name": "churn",
-      "count": 3
-    },
-    {
-      "name": "competitive-intelligence",
-      "count": 3
-    },
-    {
-      "name": "recommendations",
-      "count": 3
-    },
-    {
-      "name": "speech",
-      "count": 3
-    },
-    {
-      "name": "sentiment",
-      "count": 3
-    },
-    {
-      "name": "scoring",
-      "count": 3
-    },
-    {
-      "name": "forecasting",
-      "count": 3
-    },
-    {
-      "name": "d365",
-      "count": 3
-    },
-    {
-      "name": "proposal",
-      "count": 3
-    },
-    {
-      "name": "templates",
-      "count": 3
-    },
-    {
-      "name": "sustainability",
-      "count": 3
-    },
-    {
-      "name": "advisor",
-      "count": 3
-    },
-    {
-      "name": "portfolio",
-      "count": 3
-    },
-    {
-      "name": "deployment",
-      "count": 3
-    },
-    {
-      "name": "inventory",
-      "count": 3
-    },
-    {
-      "name": "supply-chain",
-      "count": 3
-    },
-    {
-      "name": "saas",
-      "count": 3
-    },
-    {
-      "name": "scheduling",
-      "count": 3
-    },
-    {
-      "name": "briefing",
-      "count": 3
-    },
-    {
-      "name": "dashboard",
-      "count": 3
-    },
-    {
-      "name": "intake",
-      "count": 3
-    },
-    {
-      "name": "communication",
-      "count": 3
-    },
-    {
-      "name": "style",
-      "count": 3
-    },
-    {
-      "name": "contracts",
-      "count": 3
-    },
-    {
-      "name": "product",
-      "count": 3
-    },
-    {
-      "name": "personas",
-      "count": 3
-    },
-    {
-      "name": "triage",
-      "count": 3
-    },
-    {
-      "name": "handoff",
-      "count": 3
-    },
-    {
-      "name": "power-platform",
-      "count": 3
-    },
-    {
       "name": "github",
       "count": 3
     },
@@ -702,6 +598,10 @@
     },
     {
       "name": "demo",
+      "count": 3
+    },
+    {
+      "name": "copilot",
       "count": 3
     },
     {
@@ -725,11 +625,19 @@
       "count": 3
     },
     {
+      "name": "templates",
+      "count": 3
+    },
+    {
       "name": "matplotlib",
       "count": 3
     },
     {
       "name": "agents",
+      "count": 3
+    },
+    {
+      "name": "orchestration",
       "count": 3
     },
     {
@@ -741,7 +649,15 @@
       "count": 3
     },
     {
+      "name": "routing",
+      "count": 3
+    },
+    {
       "name": "social_media",
+      "count": 3
+    },
+    {
+      "name": "insights",
       "count": 3
     },
     {
@@ -749,7 +665,11 @@
       "count": 3
     },
     {
-      "name": "monitoring",
+      "name": "observability",
+      "count": 3
+    },
+    {
+      "name": "legal",
       "count": 3
     },
     {
@@ -781,6 +701,10 @@
       "count": 3
     },
     {
+      "name": "frames",
+      "count": 3
+    },
+    {
       "name": "deploy",
       "count": 3
     },
@@ -789,7 +713,15 @@
       "count": 3
     },
     {
+      "name": "private",
+      "count": 3
+    },
+    {
       "name": "local-first",
+      "count": 3
+    },
+    {
+      "name": "protocol",
       "count": 3
     },
     {
@@ -798,6 +730,10 @@
     },
     {
       "name": "organism",
+      "count": 3
+    },
+    {
+      "name": "interop",
       "count": 3
     },
     {
@@ -817,202 +753,6 @@
       "count": 3
     },
     {
-      "name": "stakeholder-mapping",
-      "count": 2
-    },
-    {
-      "name": "risk-assessment",
-      "count": 2
-    },
-    {
-      "name": "escalation",
-      "count": 2
-    },
-    {
-      "name": "hr",
-      "count": 2
-    },
-    {
-      "name": "benefits",
-      "count": 2
-    },
-    {
-      "name": "maintenance",
-      "count": 2
-    },
-    {
-      "name": "predictive",
-      "count": 2
-    },
-    {
-      "name": "permits",
-      "count": 2
-    },
-    {
-      "name": "conversion",
-      "count": 2
-    },
-    {
-      "name": "municipal",
-      "count": 2
-    },
-    {
-      "name": "fraud",
-      "count": 2
-    },
-    {
-      "name": "NPS",
-      "count": 2
-    },
-    {
-      "name": "win-loss",
-      "count": 2
-    },
-    {
-      "name": "revenue",
-      "count": 2
-    },
-    {
-      "name": "customer-360",
-      "count": 2
-    },
-    {
-      "name": "next-best-action",
-      "count": 2
-    },
-    {
-      "name": "omnichannel",
-      "count": 2
-    },
-    {
-      "name": "strategy",
-      "count": 2
-    },
-    {
-      "name": "dynamics-365",
-      "count": 2
-    },
-    {
-      "name": "follow-up",
-      "count": 2
-    },
-    {
-      "name": "grants",
-      "count": 2
-    },
-    {
-      "name": "oversight",
-      "count": 2
-    },
-    {
-      "name": "field-service",
-      "count": 2
-    },
-    {
-      "name": "ai",
-      "count": 2
-    },
-    {
-      "name": "redaction",
-      "count": 2
-    },
-    {
-      "name": "transparency",
-      "count": 2
-    },
-    {
-      "name": "approval",
-      "count": 2
-    },
-    {
-      "name": "warehouse",
-      "count": 2
-    },
-    {
-      "name": "rebalancing",
-      "count": 2
-    },
-    {
-      "name": "it",
-      "count": 2
-    },
-    {
-      "name": "helpdesk",
-      "count": 2
-    },
-    {
-      "name": "itsm",
-      "count": 2
-    },
-    {
-      "name": "tickets",
-      "count": 2
-    },
-    {
-      "name": "sla",
-      "count": 2
-    },
-    {
-      "name": "priority",
-      "count": 2
-    },
-    {
-      "name": "resolution",
-      "count": 2
-    },
-    {
-      "name": "underwriting",
-      "count": 2
-    },
-    {
-      "name": "meeting-prep",
-      "count": 2
-    },
-    {
-      "name": "licenses",
-      "count": 2
-    },
-    {
-      "name": "personalization",
-      "count": 2
-    },
-    {
-      "name": "supplier",
-      "count": 2
-    },
-    {
-      "name": "compatibility",
-      "count": 2
-    },
-    {
-      "name": "returns",
-      "count": 2
-    },
-    {
-      "name": "performance",
-      "count": 2
-    },
-    {
-      "name": "simulation",
-      "count": 2
-    },
-    {
-      "name": "transcription",
-      "count": 2
-    },
-    {
-      "name": "entity-extraction",
-      "count": 2
-    },
-    {
-      "name": "billing",
-      "count": 2
-    },
-    {
-      "name": "bootstrap",
-      "count": 2
-    },
-    {
       "name": "platform",
       "count": 2
     },
@@ -1029,11 +769,23 @@
       "count": 2
     },
     {
-      "name": "use_case",
+      "name": "analytics",
       "count": 2
     },
     {
-      "name": "report",
+      "name": "operations",
+      "count": 2
+    },
+    {
+      "name": "security",
+      "count": 2
+    },
+    {
+      "name": "risk",
+      "count": 2
+    },
+    {
+      "name": "use_case",
       "count": 2
     },
     {
@@ -1053,11 +805,19 @@
       "count": 2
     },
     {
+      "name": "voice",
+      "count": 2
+    },
+    {
       "name": "speaking",
       "count": 2
     },
     {
       "name": "conference",
+      "count": 2
+    },
+    {
+      "name": "advisor",
       "count": 2
     },
     {
@@ -1077,6 +837,10 @@
       "count": 2
     },
     {
+      "name": "sustainability",
+      "count": 2
+    },
+    {
       "name": "greenwashing",
       "count": 2
     },
@@ -1085,7 +849,19 @@
       "count": 2
     },
     {
+      "name": "training",
+      "count": 2
+    },
+    {
+      "name": "communication",
+      "count": 2
+    },
+    {
       "name": "files",
+      "count": 2
+    },
+    {
+      "name": "handoff",
       "count": 2
     },
     {
@@ -1097,11 +873,19 @@
       "count": 2
     },
     {
+      "name": "healthcare",
+      "count": 2
+    },
+    {
       "name": "mcp",
       "count": 2
     },
     {
       "name": "azure",
+      "count": 2
+    },
+    {
+      "name": "personas",
       "count": 2
     },
     {
@@ -1133,7 +917,7 @@
       "count": 2
     },
     {
-      "name": "observability",
+      "name": "style",
       "count": 2
     },
     {
@@ -1145,11 +929,23 @@
       "count": 2
     },
     {
+      "name": "contracts",
+      "count": 2
+    },
+    {
       "name": "diagrams",
       "count": 2
     },
     {
       "name": "calendar",
+      "count": 2
+    },
+    {
+      "name": "briefing",
+      "count": 2
+    },
+    {
+      "name": "prezi",
       "count": 2
     },
     {
@@ -1177,6 +973,10 @@
       "count": 2
     },
     {
+      "name": "onboarding",
+      "count": 2
+    },
+    {
       "name": "wiki",
       "count": 2
     },
@@ -1197,6 +997,10 @@
       "count": 2
     },
     {
+      "name": "verification",
+      "count": 2
+    },
+    {
       "name": "determinism",
       "count": 2
     },
@@ -1205,15 +1009,7 @@
       "count": 2
     },
     {
-      "name": "frames",
-      "count": 2
-    },
-    {
       "name": "virtual-world",
-      "count": 2
-    },
-    {
-      "name": "integration",
       "count": 2
     },
     {
@@ -1225,15 +1021,19 @@
       "count": 2
     },
     {
+      "name": "forge",
+      "count": 2
+    },
+    {
+      "name": "deployment",
+      "count": 2
+    },
+    {
       "name": "parity",
       "count": 2
     },
     {
       "name": "hyperframes",
-      "count": 2
-    },
-    {
-      "name": "private",
       "count": 2
     },
     {
@@ -1277,6 +1077,10 @@
       "count": 2
     },
     {
+      "name": "aibast",
+      "count": 2
+    },
+    {
       "name": "prototype",
       "count": 2
     },
@@ -1297,10 +1101,6 @@
       "count": 2
     },
     {
-      "name": "drift",
-      "count": 2
-    },
-    {
       "name": "alignment",
       "count": 2
     },
@@ -1317,6 +1117,14 @@
       "count": 2
     },
     {
+      "name": "fleet",
+      "count": 2
+    },
+    {
+      "name": "deterministic",
+      "count": 2
+    },
+    {
       "name": "moment-pipeline",
       "count": 2
     },
@@ -1325,7 +1133,35 @@
       "count": 2
     },
     {
+      "name": "rapp-1",
+      "count": 2
+    },
+    {
+      "name": "dogg",
+      "count": 2
+    },
+    {
+      "name": "canon",
+      "count": 2
+    },
+    {
+      "name": "anchor",
+      "count": 2
+    },
+    {
       "name": "build",
+      "count": 2
+    },
+    {
+      "name": "census",
+      "count": 2
+    },
+    {
+      "name": "hive",
+      "count": 2
+    },
+    {
+      "name": "shape",
       "count": 2
     },
     {
@@ -1333,35 +1169,159 @@
       "count": 2
     },
     {
-      "name": "messaging",
+      "name": "neuron",
       "count": 1
     },
     {
-      "name": "email-sequences",
+      "name": "d365",
       "count": 1
     },
     {
-      "name": "churn-prediction",
+      "name": "assimilation",
       "count": 1
     },
     {
-      "name": "deal-risk",
+      "name": "acroform",
       "count": 1
     },
     {
-      "name": "acquisition",
+      "name": "forms",
       "count": 1
     },
     {
-      "name": "FAR",
+      "name": "tasks",
       "count": 1
     },
     {
-      "name": "DFAR",
+      "name": "action_items",
       "count": 1
     },
     {
-      "name": "vendor-evaluation",
+      "name": "quality_assurance",
+      "count": 1
+    },
+    {
+      "name": "go_live",
+      "count": 1
+    },
+    {
+      "name": "diagnostics",
+      "count": 1
+    },
+    {
+      "name": "runtime",
+      "count": 1
+    },
+    {
+      "name": "capabilities",
+      "count": 1
+    },
+    {
+      "name": "snapshots",
+      "count": 1
+    },
+    {
+      "name": "optimization",
+      "count": 1
+    },
+    {
+      "name": "post_launch",
+      "count": 1
+    },
+    {
+      "name": "backlog",
+      "count": 1
+    },
+    {
+      "name": "prompt_injection",
+      "count": 1
+    },
+    {
+      "name": "responsible_ai",
+      "count": 1
+    },
+    {
+      "name": "agentic_workflow",
+      "count": 1
+    },
+    {
+      "name": "ai",
+      "count": 1
+    },
+    {
+      "name": "scoring",
+      "count": 1
+    },
+    {
+      "name": "intake",
+      "count": 1
+    },
+    {
+      "name": "case_study",
+      "count": 1
+    },
+    {
+      "name": "inbox",
+      "count": 1
+    },
+    {
+      "name": "reminder",
+      "count": 1
+    },
+    {
+      "name": "seo",
+      "count": 1
+    },
+    {
+      "name": "structure",
+      "count": 1
+    },
+    {
+      "name": "events",
+      "count": 1
+    },
+    {
+      "name": "branding",
+      "count": 1
+    },
+    {
+      "name": "word",
+      "count": 1
+    },
+    {
+      "name": "uat",
+      "count": 1
+    },
+    {
+      "name": "business",
+      "count": 1
+    },
+    {
+      "name": "problem_solving",
+      "count": 1
+    },
+    {
+      "name": "project_planning",
+      "count": 1
+    },
+    {
+      "name": "skill_generation",
+      "count": 1
+    },
+    {
+      "name": "adventure",
+      "count": 1
+    },
+    {
+      "name": "game",
+      "count": 1
+    },
+    {
+      "name": "narration",
+      "count": 1
+    },
+    {
+      "name": "clipchamp",
       "count": 1
     }
   ]

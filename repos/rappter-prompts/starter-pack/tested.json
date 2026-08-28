@@ -1,0 +1,378 @@
+{
+ "tested_utc": "2026-08-28T18:06:20Z",
+ "box": "rapterbox (RapterBox LLC's own box)",
+ "data": "synthetic business (rappter-prompts/starter-pack/synthetic/maple-and-sons.json) + simulated small-business CRM (kody-w/rapp-static-apis/smb-crm, Maple & Sons, Dynamics-shaped)",
+ "routines": {
+  "morning-brief": {
+   "pass": true,
+   "asked_instead": false,
+   "markdown": false,
+   "arithmetic_ok": true,
+   "frame_verified": true,
+   "inputs_pinned": true,
+   "reads": [
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rappter-prompts/63cad83877425921d9a5701715a48e0c26ffccdd/prompts/morning-brief.md",
+     "sha256": "edf7a65c294b49df2d48bf56cec2bcf42a198a745f6ddb8114ff18f8000840b3",
+     "bytes": 2382
+    },
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rappter-prompts/63cad83877425921d9a5701715a48e0c26ffccdd/starter-pack/synthetic/maple-and-sons.json",
+     "sha256": "9437128f3c823487c0b080356d0881b27ac02fe9217c511e64b8e4b48461dbe6",
+     "bytes": 5938
+    },
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rapp-static-apis/89c1cf3550109bc7422e496dcc7265d5bbe24218/smb-crm/registry.json",
+     "sha256": "04a28aa6dcb60509041b4a4d310eed3721e6d1b54393bfed4cb8b4e63820055f",
+     "bytes": 1384
+    },
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rapp-static-apis/89c1cf3550109bc7422e496dcc7265d5bbe24218/smb-crm/api/data/v9.2/incidents.json",
+     "sha256": "cae61f497517bfb320dd2fdc74af5163c3edc652b36ef141b6487d1e11a736a2",
+     "bytes": 4411
+    }
+   ],
+   "library_commit": "63cad83877425921d9a5701715a48e0c26ffccdd",
+   "today": "2026-08-28",
+   "shape_found": [
+    "NEEDS YOU",
+    "HANDLED",
+    "QUIETED"
+   ],
+   "chars": 962,
+   "seconds": 6,
+   "frame_hash": "24e24045c2beb8a65b3137bc9c386f96602a6d9eead883e3ff0d212a173ea4e9",
+   "seq": 155,
+   "attempt": 1
+  },
+  "chase-invoices": {
+   "pass": true,
+   "asked_instead": false,
+   "markdown": false,
+   "arithmetic_ok": true,
+   "frame_verified": true,
+   "inputs_pinned": true,
+   "reads": [
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rappter-prompts/63cad83877425921d9a5701715a48e0c26ffccdd/prompts/chase-invoices.md",
+     "sha256": "aec3c1d24c61c890cf9251275ef98a286a76bd70ade0d7d7b6565543b925e1cf",
+     "bytes": 2166
+    },
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rappter-prompts/63cad83877425921d9a5701715a48e0c26ffccdd/starter-pack/synthetic/maple-and-sons.json",
+     "sha256": "9437128f3c823487c0b080356d0881b27ac02fe9217c511e64b8e4b48461dbe6",
+     "bytes": 5938
+    },
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rapp-static-apis/89c1cf3550109bc7422e496dcc7265d5bbe24218/smb-crm/registry.json",
+     "sha256": "04a28aa6dcb60509041b4a4d310eed3721e6d1b54393bfed4cb8b4e63820055f",
+     "bytes": 1384
+    },
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rapp-static-apis/89c1cf3550109bc7422e496dcc7265d5bbe24218/smb-crm/api/data/v9.2/accounts.json",
+     "sha256": "00c62c00c8044b8ff261f4ff4eab3df71be48ed9bfdcbdbf5a78ea722c49ed2f",
+     "bytes": 6441
+    }
+   ],
+   "library_commit": "63cad83877425921d9a5701715a48e0c26ffccdd",
+   "today": "2026-08-28",
+   "shape_found": [
+    "DAY 7",
+    "DAY 21",
+    "DAY 45"
+   ],
+   "chars": 2462,
+   "seconds": 10,
+   "frame_hash": "42a85e167200163842a17e871ea2ed2cfeaa62deff97cf4fce5518084b9bccd0",
+   "seq": 156,
+   "attempt": 1
+  },
+  "compliance-calendar": {
+   "pass": true,
+   "asked_instead": false,
+   "markdown": false,
+   "arithmetic_ok": true,
+   "frame_verified": true,
+   "inputs_pinned": true,
+   "reads": [
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rappter-prompts/63cad83877425921d9a5701715a48e0c26ffccdd/prompts/compliance-calendar.md",
+     "sha256": "d7e0e8588a68d46b34a543addbe116b5ab623ed08b96dccf1fb5a96feeea2f98",
+     "bytes": 2147
+    },
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rappter-prompts/63cad83877425921d9a5701715a48e0c26ffccdd/starter-pack/synthetic/maple-and-sons.json",
+     "sha256": "9437128f3c823487c0b080356d0881b27ac02fe9217c511e64b8e4b48461dbe6",
+     "bytes": 5938
+    }
+   ],
+   "library_commit": "63cad83877425921d9a5701715a48e0c26ffccdd",
+   "today": "2026-08-28",
+   "shape_found": [
+    "NEEDS YOU",
+    "UNKNOWN"
+   ],
+   "chars": 1390,
+   "seconds": 6,
+   "frame_hash": "74fb98364295efbea12ea49d8c68c84a02a155cc4a71a176a4deaadc7facb578",
+   "seq": 157,
+   "attempt": 1
+  },
+  "review-replies": {
+   "pass": true,
+   "asked_instead": false,
+   "markdown": false,
+   "arithmetic_ok": true,
+   "frame_verified": true,
+   "inputs_pinned": true,
+   "reads": [
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rappter-prompts/63cad83877425921d9a5701715a48e0c26ffccdd/prompts/review-replies.md",
+     "sha256": "27907d1325e588dc8bc6e6ad057ce821f88b472016086a5df6bbcceae5edc102",
+     "bytes": 2132
+    },
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rappter-prompts/63cad83877425921d9a5701715a48e0c26ffccdd/starter-pack/synthetic/maple-and-sons.json",
+     "sha256": "9437128f3c823487c0b080356d0881b27ac02fe9217c511e64b8e4b48461dbe6",
+     "bytes": 5938
+    },
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rapp-static-apis/89c1cf3550109bc7422e496dcc7265d5bbe24218/smb-crm/registry.json",
+     "sha256": "04a28aa6dcb60509041b4a4d310eed3721e6d1b54393bfed4cb8b4e63820055f",
+     "bytes": 1384
+    },
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rapp-static-apis/89c1cf3550109bc7422e496dcc7265d5bbe24218/smb-crm/api/data/v9.2/incidents.json",
+     "sha256": "cae61f497517bfb320dd2fdc74af5163c3edc652b36ef141b6487d1e11a736a2",
+     "bytes": 4411
+    }
+   ],
+   "library_commit": "63cad83877425921d9a5701715a48e0c26ffccdd",
+   "today": "2026-08-28",
+   "shape_found": [
+    "NEEDS YOU"
+   ],
+   "chars": 1236,
+   "seconds": 7,
+   "frame_hash": "4bacbe4e78492a8b48d053c846af2a43f74e9b675b401f2a4e12c49edc125ed9",
+   "seq": 158,
+   "attempt": 1
+  },
+  "sop-from-memo": {
+   "pass": true,
+   "asked_instead": false,
+   "markdown": false,
+   "arithmetic_ok": true,
+   "frame_verified": true,
+   "inputs_pinned": true,
+   "reads": [
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rappter-prompts/63cad83877425921d9a5701715a48e0c26ffccdd/prompts/sop-from-memo.md",
+     "sha256": "4ab51e8491c0d6eb88a97cc0a58d84564ffdf628d2d32c97b019e68af55abc74",
+     "bytes": 2108
+    },
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rappter-prompts/63cad83877425921d9a5701715a48e0c26ffccdd/starter-pack/synthetic/maple-and-sons.json",
+     "sha256": "9437128f3c823487c0b080356d0881b27ac02fe9217c511e64b8e4b48461dbe6",
+     "bytes": 5938
+    }
+   ],
+   "library_commit": "63cad83877425921d9a5701715a48e0c26ffccdd",
+   "today": "2026-08-28",
+   "shape_found": [
+    "You will need",
+    "Common mistakes"
+   ],
+   "chars": 2193,
+   "seconds": 8,
+   "frame_hash": "9ad2ef2d4a04e084fab74d95aa14945b3b30714ba9f40bf655591e957e46a509",
+   "seq": 159,
+   "attempt": 1
+  },
+  "hiring-ad": {
+   "pass": true,
+   "asked_instead": false,
+   "markdown": false,
+   "arithmetic_ok": true,
+   "frame_verified": true,
+   "inputs_pinned": true,
+   "reads": [
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rappter-prompts/63cad83877425921d9a5701715a48e0c26ffccdd/prompts/hiring-ad.md",
+     "sha256": "b8eb9691fe6f9e952a1d027d31bc57a44d78c0b7c59d2d5f114d404c05c257dc",
+     "bytes": 2050
+    },
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rappter-prompts/63cad83877425921d9a5701715a48e0c26ffccdd/starter-pack/synthetic/maple-and-sons.json",
+     "sha256": "9437128f3c823487c0b080356d0881b27ac02fe9217c511e64b8e4b48461dbe6",
+     "bytes": 5938
+    }
+   ],
+   "library_commit": "63cad83877425921d9a5701715a48e0c26ffccdd",
+   "today": "2026-08-28",
+   "shape_found": [
+    "screening"
+   ],
+   "chars": 1443,
+   "seconds": 6,
+   "frame_hash": "4909cd78acfc0d44bea9d0435acaa58924431de3edea06da58eabfaee875ee71",
+   "seq": 160,
+   "attempt": 1
+  },
+  "weekly-numbers": {
+   "pass": true,
+   "asked_instead": false,
+   "markdown": false,
+   "arithmetic_ok": true,
+   "frame_verified": true,
+   "inputs_pinned": true,
+   "reads": [
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rappter-prompts/63cad83877425921d9a5701715a48e0c26ffccdd/prompts/weekly-numbers.md",
+     "sha256": "f2920f16784d64f3be57e537a599321e91243962928f22dd81070ebadf51c8f0",
+     "bytes": 2259
+    },
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rappter-prompts/63cad83877425921d9a5701715a48e0c26ffccdd/starter-pack/synthetic/maple-and-sons.json",
+     "sha256": "9437128f3c823487c0b080356d0881b27ac02fe9217c511e64b8e4b48461dbe6",
+     "bytes": 5938
+    },
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rapp-static-apis/89c1cf3550109bc7422e496dcc7265d5bbe24218/smb-crm/registry.json",
+     "sha256": "04a28aa6dcb60509041b4a4d310eed3721e6d1b54393bfed4cb8b4e63820055f",
+     "bytes": 1384
+    },
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rapp-static-apis/89c1cf3550109bc7422e496dcc7265d5bbe24218/smb-crm/api/data/v9.2/opportunities.json",
+     "sha256": "78c671884849f9a1b80af5e19326bdbf2d86611ea4fcd65853f1cdeeb1267428",
+     "bytes": 1221
+    }
+   ],
+   "library_commit": "63cad83877425921d9a5701715a48e0c26ffccdd",
+   "today": "2026-08-28",
+   "shape_found": [
+    "runway|weeks of .{0,14}cash|days of .{0,14}cash|months of .{0,14}cash"
+   ],
+   "chars": 764,
+   "seconds": 5,
+   "frame_hash": "88f318582a49dd2db04f893fb38ed4a84e154d94950f236572a55342c34ed464",
+   "seq": 161,
+   "attempt": 1
+  },
+  "vendor-compare": {
+   "pass": true,
+   "asked_instead": false,
+   "markdown": false,
+   "arithmetic_ok": true,
+   "frame_verified": true,
+   "inputs_pinned": true,
+   "reads": [
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rappter-prompts/63cad83877425921d9a5701715a48e0c26ffccdd/prompts/vendor-compare.md",
+     "sha256": "43d14404369239f52d0326555ca0395db8757c02708c11ac137bf2bf046df78b",
+     "bytes": 2014
+    },
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rappter-prompts/63cad83877425921d9a5701715a48e0c26ffccdd/starter-pack/synthetic/maple-and-sons.json",
+     "sha256": "9437128f3c823487c0b080356d0881b27ac02fe9217c511e64b8e4b48461dbe6",
+     "bytes": 5938
+    }
+   ],
+   "library_commit": "63cad83877425921d9a5701715a48e0c26ffccdd",
+   "today": "2026-08-28",
+   "shape_found": [
+    "recommend",
+    "question|ask (each|the|every) vendor|ask them|before (you )?sign"
+   ],
+   "chars": 2205,
+   "seconds": 10,
+   "frame_hash": "e25017ab738ee7f18537649d1bef94eeec673ae64a2cf3e6379af44bf1e822c2",
+   "seq": 162,
+   "attempt": 1
+  },
+  "customer-followup": {
+   "pass": true,
+   "asked_instead": false,
+   "markdown": false,
+   "arithmetic_ok": true,
+   "frame_verified": true,
+   "inputs_pinned": true,
+   "reads": [
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rappter-prompts/63cad83877425921d9a5701715a48e0c26ffccdd/prompts/customer-followup.md",
+     "sha256": "53f3765606f9b5883aec2c17bc5cd877381bbc274e3dcddbeccaeff3579fa061",
+     "bytes": 2072
+    },
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rappter-prompts/63cad83877425921d9a5701715a48e0c26ffccdd/starter-pack/synthetic/maple-and-sons.json",
+     "sha256": "9437128f3c823487c0b080356d0881b27ac02fe9217c511e64b8e4b48461dbe6",
+     "bytes": 5938
+    },
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rapp-static-apis/89c1cf3550109bc7422e496dcc7265d5bbe24218/smb-crm/registry.json",
+     "sha256": "04a28aa6dcb60509041b4a4d310eed3721e6d1b54393bfed4cb8b4e63820055f",
+     "bytes": 1384
+    },
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rapp-static-apis/89c1cf3550109bc7422e496dcc7265d5bbe24218/smb-crm/api/data/v9.2/contacts.json",
+     "sha256": "1d9bb6ce31cee1683139cf6b2cd633fc0c9f269ef6403d6c749f184c14ee1b54",
+     "bytes": 6049
+    }
+   ],
+   "library_commit": "63cad83877425921d9a5701715a48e0c26ffccdd",
+   "today": "2026-08-28",
+   "shape_found": [
+    "send.{0,6}20\\d\\d-\\d\\d-\\d\\d.*send.{0,6}20\\d\\d-\\d\\d-\\d\\d.*send.{0,6}20\\d\\d-\\d\\d-\\d\\d",
+    "review|referral"
+   ],
+   "chars": 2921,
+   "seconds": 12,
+   "frame_hash": "6f9f3e9d34e5bec9fb99991d4e34b8c3fb9287d1716318763a9b2016501a2214",
+   "seq": 163,
+   "attempt": 1
+  },
+  "meeting-to-tasks": {
+   "pass": true,
+   "asked_instead": false,
+   "markdown": false,
+   "arithmetic_ok": true,
+   "frame_verified": true,
+   "inputs_pinned": true,
+   "reads": [
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rappter-prompts/63cad83877425921d9a5701715a48e0c26ffccdd/prompts/meeting-to-tasks.md",
+     "sha256": "718ac6805ed50705a53b8721211e8e11a9beb474ba05bd37af712698430b8441",
+     "bytes": 1920
+    },
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rappter-prompts/63cad83877425921d9a5701715a48e0c26ffccdd/starter-pack/synthetic/maple-and-sons.json",
+     "sha256": "9437128f3c823487c0b080356d0881b27ac02fe9217c511e64b8e4b48461dbe6",
+     "bytes": 5938
+    },
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rapp-static-apis/89c1cf3550109bc7422e496dcc7265d5bbe24218/smb-crm/registry.json",
+     "sha256": "04a28aa6dcb60509041b4a4d310eed3721e6d1b54393bfed4cb8b4e63820055f",
+     "bytes": 1384
+    },
+    {
+     "url": "https://raw.githubusercontent.com/kody-w/rapp-static-apis/89c1cf3550109bc7422e496dcc7265d5bbe24218/smb-crm/api/data/v9.2/accounts.json",
+     "sha256": "00c62c00c8044b8ff261f4ff4eab3df71be48ed9bfdcbdbf5a78ea722c49ed2f",
+     "bytes": 6441
+    }
+   ],
+   "library_commit": "63cad83877425921d9a5701715a48e0c26ffccdd",
+   "today": "2026-08-28",
+   "shape_found": [
+    "DECIDED",
+    "TASKS"
+   ],
+   "chars": 493,
+   "seconds": 4,
+   "frame_hash": "e456f2069e36f8c8f57963fae68e0088383c133844f32ab8c6de27624ca28488",
+   "seq": 164,
+   "attempt": 1
+  }
+ },
+ "passed": 10,
+ "total": 10
+}

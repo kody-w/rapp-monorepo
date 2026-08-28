@@ -1,0 +1,156 @@
+{
+ "business": {
+  "name": "SYNTHETIC \u2014 Maple & Sons Plumbing (not a real company)",
+  "type": "residential plumbing",
+  "staff": 9,
+  "city": "Marietta",
+  "state": "GA",
+  "owner_rate_per_hour": 150
+ },
+ "how_today_transcript": "So every Friday afternoon I open the bank app on my phone and go down the list of who paid. Then I open the invoice folder and anyone who hasn't paid in like three weeks I text them myself, something like hey just checking in on that invoice. If they don't answer I forget about it honestly until the next Friday. Twice a year somebody's like 90 days late and I only notice when I need the cash.",
+ "open_invoices": [
+  {
+   "customer": "Customer A",
+   "amount": 1840,
+   "due": "2026-08-04",
+   "days_late": 24,
+   "last_message": "said they'd pay after the inspection"
+  },
+  {
+   "customer": "Customer B",
+   "amount": 620,
+   "due": "2026-08-19",
+   "days_late": 9,
+   "last_message": null
+  },
+  {
+   "customer": "Customer C",
+   "amount": 4200,
+   "due": "2026-06-30",
+   "days_late": 59,
+   "last_message": "no reply to two texts"
+  }
+ ],
+ "inbox_subjects": [
+  "Re: water heater quote",
+  "Your Georgia contractor license \u2014 renewal notice",
+  "Invoice 1042 question",
+  "Review posted on your listing",
+  "Permit inspection scheduled Thu 9am",
+  "Newsletter: 10 tips for plumbers",
+  "Supplier price update effective Sept 1"
+ ],
+ "calendar_today": [
+  "8:00 job \u2014 Customer D, leak repair",
+  "11:30 estimate \u2014 new customer",
+  "3:00 permit inspection prep"
+ ],
+ "licenses": [
+  {
+   "item": "GA Master Plumber license",
+   "renews": "2026-10-15"
+  },
+  {
+   "item": "General liability policy",
+   "renews": "UNKNOWN"
+  },
+  {
+   "item": "Van registration (2)",
+   "renews": "2026-09-30"
+  }
+ ],
+ "reviews": [
+  {
+   "stars": 5,
+   "text": "Came out same day for a burst pipe, cleaned up after. Fair price."
+  },
+  {
+   "stars": 2,
+   "text": "Showed up 40 minutes late and nobody called. Work was fine."
+  },
+  {
+   "stars": 4,
+   "text": "Good work on the water heater, invoice took a week to arrive."
+  },
+  {
+   "stars": 1,
+   "text": "Quoted one price, charged another. Still waiting on a call back."
+  }
+ ],
+ "owner_voice": "Plain, friendly, no corporate words. Says 'appreciate you'. Owns mistakes fast.",
+ "week_numbers": {
+  "week_ending": "2026-08-28",
+  "sales_booked": 18400,
+  "cash_in": 12150,
+  "cash_out": 9800,
+  "unpaid_invoices_total": 6660,
+  "jobs_booked": 22,
+  "jobs_completed": 19,
+  "last_week": {
+   "cash_in": 10400,
+   "cash_out": 10100,
+   "jobs_completed": 21
+  },
+  "cash_on_hand": 31000
+ },
+ "completed_jobs_last_week": [
+  {
+   "customer": "Customer D",
+   "job": "leak repair under sink",
+   "issue": null,
+   "completed": "2026-08-24"
+  },
+  {
+   "customer": "Customer E",
+   "job": "water heater replacement",
+   "issue": "arrived late",
+   "completed": "2026-08-25"
+  },
+  {
+   "customer": "Customer F",
+   "job": "drain clearing",
+   "issue": null,
+   "completed": "2026-08-27"
+  }
+ ],
+ "quotes": [
+  {
+   "vendor": "Vendor 1 (van lease)",
+   "monthly": 890,
+   "term_months": 36,
+   "fees": "$1,200 setup, $0.22/mile over 15k",
+   "includes": "maintenance"
+  },
+  {
+   "vendor": "Vendor 2 (van lease)",
+   "monthly": 740,
+   "term_months": 48,
+   "fees": "$0 setup, $0.30/mile over 12k",
+   "includes": "nothing; maintenance extra ~$95/mo"
+  },
+  {
+   "vendor": "Vendor 3 (van lease)",
+   "monthly": 960,
+   "term_months": 24,
+   "fees": "$500 setup",
+   "includes": "maintenance, tires, early-exit at month 12"
+  }
+ ],
+ "vendor_need": "one more work van for the second crew; ~18k miles/yr; keep for 3 years",
+ "transcripts": {
+  "chase-invoices": "So every Friday afternoon I open the bank app on my phone and go down the list of who paid. Then I open the invoice folder and anyone who hasn't paid in like three weeks I text them myself, something like hey just checking in on that invoice. If they don't answer I forget about it honestly until the next Friday. Twice a year somebody's like 90 days late and I only notice when I need the cash.",
+  "sop-from-memo": "Okay so when we do a water heater swap, first thing, you shut the water at the main and kill the breaker, don't trust the little valve. Drain it into the floor drain with the garden hose from the van. Disconnect, haul the old one out, new one in, new flex lines every time even if the old ones look fine. Fill it, bleed the air at the closest faucet, THEN power. Check for leaks after 20 minutes, not 2. Take the photo for the file. The thing guys forget is the expansion tank when there's a check valve on the main.",
+  "meeting-to-tasks": "",
+  "hiring-ad": "Last guy we hired said he had five years and couldn't sweat a joint. I need someone who can run a service call alone by month two. It's 7 to 4, Marietta and the north side, van provided, $28 to $34 an hour depending, weekends on rotation one in three.",
+  "morning-brief": "I read email in the truck at lights, which is dumb. I mostly want to know what's on fire and what's due."
+ },
+ "hiring": {
+  "role": "Service plumber",
+  "pay": "$28\u201334/hour",
+  "hours": "Mon\u2013Fri 7\u20134, weekend rotation 1 in 3",
+  "location": "Marietta GA and north metro, van provided",
+  "last_hire_problem": "claimed five years' experience, could not solder a joint; needed supervision on every call"
+ },
+ "meeting_transcript": "Kody: okay quick one. The Northside job \u2014 Dave, can you get the permit in by Thursday? Dave: yeah if the drawings are done. Maria: drawings are done, I'll send them tonight. Kody: good. Second thing, the van lease, I'm leaning Vendor 3 because of the exit clause, but I want to see the mileage math. Maria: I can do that Friday. Kody: fine. Also somebody needs to call Customer C about the four grand, it's been two months. Dave: I'll do it. Kody: when. Dave: tomorrow. Kody: and we still don't have a decision on the second crew truck, that's on me. That's it.",
+ "as_of": "2026-08-28"
+}

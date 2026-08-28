@@ -60,6 +60,94 @@ The runtime is welded into a reusable module, **`brainstem.mjs`**: `createBrains
 verify-before-exec) and `createLiveBrainstem` (wrap a live `brainstem.py`) both produce an `mcp(req)`;
 `lendBrainstem` / `borrowBrainstem` are the serverless P2P host/client. Every page here is a thin UI over it.
 
+### Add the live Brainstem to Scout or another desktop MCP client
+
+`live-stdio.mjs` exposes the running Brainstem as a standard line-delimited stdio MCP server. It is
+an external adapter: it calls `/health` and `/chat` and does not modify the Brainstem source or state.
+
+```json
+{
+  "name": "RAPP Brainstem",
+  "command": "/opt/homebrew/bin/node",
+  "args": [
+    "/absolute/path/to/rapp-static-mcp/examples/brainstem/live-stdio.mjs"
+  ],
+  "env": {
+    "RAPP_BRAINSTEM_URL": "http://localhost:7071"
+  }
+}
+```
+
+Tools:
+
+- `brainstem_status` - health, model, authentication, and loaded agents.
+- `brainstem_chat` - the existing `user_input` -> `/chat` path, with MCP-process session/history continuity.
+- `brainstem_new_session` - reset that MCP-held conversation without restarting either process.
+
+For a non-loopback Brainstem, also set `RAPP_BRAINSTEM_SECRET`; it is sent only as the
+`X-Brainstem-Secret` header and is never printed.
+
+### Let Brainstem call back into Scout over the same MCP connection
+
+MCP is bidirectional. A client normally calls server tools, but a server can make a nested
+`sampling/createMessage` request back to a client that advertised `capabilities.sampling` during
+initialization. An optional drop-in callback agent can originate that handoff without changing the
+Brainstem kernel or Grail. Its marker travels through the existing `agent_logs`
+field, and the adapter validates and removes it before calling the client. The adapter also accepts
+a structured `mcp_callbacks` response field from compatible hosts.
+
+The explicit caller flag remains available as a compatibility path:
+
+```json
+{
+  "name": "brainstem_chat",
+  "arguments": {
+    "user_input": "Review this through the Brainstem, then call Scout back with the result.",
+    "callback_to_scout": true,
+    "callback_max_tokens": 1200
+  }
+}
+```
+
+The flow is:
+
+```text
+Scout --tools/call--> live-stdio.mjs --POST /chat--> Brainstem
+Scout <--sampling/createMessage-- live-stdio.mjs <--response-- Brainstem
+Scout --sampling result--> live-stdio.mjs --tool result--> Scout
+```
+
+The callback uses the same long-lived stdio transport and the client's own model access; the
+adapter holds no model key. It is a nested, user-governed callback while the original tool call is
+open, not an unbounded proactive push after Scout disconnects. If the MCP client does not advertise
+sampling, the tool result is marked as an error with code `sampling-not-supported` while preserving
+the successful Brainstem response.
+
+### One-file on-device bootstrap
+
+`mcp_callback_agent.py` is the optional drop-in for users who want this path. It contains the
+reviewed adapter modules as embedded, SHA-256-pinned bytes. Drop only that agent into Brainstem:
+
+```bash
+curl -fsSL \
+  https://raw.githubusercontent.com/kody-w/rapp-static-mcp/main/examples/brainstem/mcp_callback_agent.py \
+  -o ~/.brainstem/src/rapp_brainstem/agents/mcp_callback_agent.py
+```
+
+On its first Brainstem load, the agent idempotently:
+
+1. verifies and installs `live-stdio.mjs` plus `brainstem.mjs` under
+   `~/.copilot/mcp-servers/rapp-brainstem/`;
+2. locates Node.js, including Scout's bundled macOS runtime as a fallback;
+3. creates `~/.copilot/bin/rapp-brainstem-mcp`;
+4. atomically adds the `rapp_brainstem` command server to
+   `~/.scout/m-mcp-servers.json`, preserving the rest of the file and backing up anything it
+   replaces.
+
+Restart Scout once after the first load. The agent exposes `status`, `bootstrap`, and `callback`
+operations. It does not edit `brainstem.py`, the Grail, or any canonical agent other than its own
+drop-in file.
+
 ## Add an agent (RAPP style)
 1. Drop a single-file Python agent in `brain/agents/<id>.py` exporting `META` + `def perform(input): ...`.
 2. Add it to `brain/agents.json`.

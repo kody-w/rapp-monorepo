@@ -6,20 +6,31 @@
     "organization": "RapterBox LLC",
     "since": "2026-08-24"
   },
-  "what_this_is": "The public view of one business's digital twin. An agent can read what this business is, what it offers, and act on it directly \u2014 the website is a projection of this surface, not the other way round.",
-  "human_view": "https://rapterbox.com/",
-  "agent_view": "https://rapterbox.com/agent.json",
+  "what_this_is": "The public view of one business's digital twin. An agent can read what this business is, what it offers, and act on it directly — the website is a projection of this surface, not the other way round.",
+  "human_view": "https://rappter.com/",
+  "agent_view": "https://rappter.com/agent.json",
   "streams": {
     "lessons": {
-      "url": "https://rapterbox.com/lessons.jsonl",
+      "url": "https://rappter.com/lessons.jsonl",
       "what": "operational knowledge this twin has published, as rapp/1 frames",
       "licence": "read freely; cite the frame_hash"
+    },
+    "mesh-offers": {
+      "url": "https://rappter.com/mesh/chain/offers.jsonl",
+      "what": "the rapp-mesh offer board: bounded idle-hours work blocks, as rapp/1 frames (stream rappid:@rapterbox/mesh:2e5e4778794a31d95d70cb7da71f4d4c88ea35369bf8af3790052751e0f9a43f)",
+      "licence": "read freely; verify by replay — projections at https://rappter.com/mesh/offers.json"
     }
   },
   "offers": [
     {
+      "id": "founding-ten",
+      "status": "prelaunch",
+      "state": "closed",
+      "what": "Not for sale yet. The first install cohort and its pricing are announced to the waitlist first, in sign-up order. Use the waitlist offer."
+    },
+    {
       "id": "waitlist",
-      "what": "Priority access when the product fully launches. Boxes ship in join order; the first group is set up directly.",
+      "what": "Priority in line for the RappterBox release: the list hears the price, the install dates and every new owner prompt first, in sign-up order. Free. The owner's prompt library is available now at https://rappter.com/prompts/ and a live box can be watched at https://rappter.com/try/.",
       "state": "open",
       "act": {
         "method": "POST",
@@ -28,13 +39,35 @@
         "fields": {
           "name": "string, required",
           "email": "string, required",
-          "note": "string, optional \u2014 what the business would want handled",
-          "source": "string, optional \u2014 set to your agent name"
+          "business": "string, required — the business in a sentence",
+          "admin_hours": "string, optional — under 5 | 5–10 | 10–20 | more than 20 (hours/week the owner spends on admin)",
+          "how_today": "string, optional — how the owner does one admin job today, in their own words; we run it on a real box with synthetic data before any meeting",
+          "source": "string — set to 'waitlist' plus your agent name"
         },
         "on_success": "{\"ok\": true}",
-        "human_equivalent": "the form at https://rapterbox.com/#join"
+        "human_equivalent": "the form at https://rappter.com/#claim"
       },
-      "consent": "Only submit on behalf of a human who asked you to. This is a real business waitlist and every entry is read by a person."
+      "consent": "Only submit on behalf of a business owner who asked you to. This joins a pre-launch waitlist: nothing is charged, no reply time is promised; the list is emailed when the price and install dates are set.",
+      "status": "open"
+    },
+    {
+      "id": "mesh",
+      "what": "Bounded agent work blocks from the fleet — code review, repo recon, verification passes, documentation, ratings. Fixed scope, priced in rpp, every block ends in an artifact, a verification note, or an explicit no-result finding.",
+      "state": "open",
+      "board": "https://rappter.com/mesh/offers.json",
+      "act": {
+        "method": "POST",
+        "url": "https://formspree.io/f/mgawgado",
+        "content_type": "application/json",
+        "fields": {
+          "offer_slug": "string, required — from the board",
+          "contact": "string, required — where the artifact goes",
+          "scope": "string, required — the bounded task",
+          "source": "string — set to 'mesh-agent' plus your agent name"
+        },
+        "human_equivalent": "https://rappter.com/mesh/#hire"
+      },
+      "consent": "Only request a block on behalf of a human who asked you to. A person confirms scope before any work starts."
     }
   ],
   "capabilities_you_may_use": [
@@ -52,19 +85,19 @@
   ],
   "privacy": "Every frame on the public streams passes a deny-by-default gate: a field allowlist, shape scans for emails, phones, personal paths, IPs, tokens, addresses and account identifiers, plus a scan against real held secrets. Nothing about a customer is ever published.",
   "federation": {
-    "pattern": "one stream, one writer \u2014 others federate as equal streams",
+    "pattern": "one stream, one writer — others federate as equal streams",
     "prior_art": "https://kody-w.github.io/dogg/",
     "spec": "https://github.com/kody-w/rapp-1"
   },
   "access_tiers": {
-    "url": "https://rapterbox.com/tiers.json",
+    "url": "https://rappter.com/tiers.json",
     "summary": {
-      "T0 GLOBAL": "anyone, no account \u2014 identity, offers, published lessons (this document)",
+      "T0 GLOBAL": "anyone, no account — identity, offers, published lessons (this document)",
       "T1 AUTHENTICATED": "a named GitHub account with READ on the private DOGG",
-      "T2 COLLABORATOR": "a named GitHub account with WRITE \u2014 twin-to-twin collaboration",
+      "T2 COLLABORATOR": "a named GitHub account with WRITE — twin-to-twin collaboration",
       "T3 PRIVATE": "this twin alone; never published at any tier"
     },
-    "how_to_request": "Ask this business to add your GitHub account to their private DOGG as a read (T1) or write (T2) collaborator. There is no separate signup \u2014 GitHub verifies identity and its permissions ARE the access control.",
+    "how_to_request": "Ask this business to add your GitHub account to their private DOGG as a read (T1) or write (T2) collaborator. There is no separate signup — GitHub verifies identity and its permissions ARE the access control.",
     "note": "Anonymous requests for a private DOGG receive 404, not 403: its existence is not disclosed."
   }
 }

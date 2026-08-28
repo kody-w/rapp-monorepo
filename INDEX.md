@@ -1,7 +1,7 @@
 # What is in here
 
-205 public RAPP repositories, captured at HEAD in a single pass on 2026-08-27T19:09:11+00:00.
-34,744 files, 728 MB.
+206 public RAPP repositories, captured at HEAD in a single pass on 2026-08-28T20:15:09+00:00.
+49,695 files, 865 MB.
 
 Every row is the exact commit this snapshot took. Nothing here is a guess about what upstream contains — re-clone any row's repo at its sha to get the full history behind it.
 
@@ -9,14 +9,14 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 |---|---|---|---|---|
 | [`brainstem-bootcamp`](repos/brainstem-bootcamp) | `c690f516` | 2026-07-28 | 6 | 0.0 |
 | [`brainstem-harness`](repos/brainstem-harness) | `dbabbf2b` | 2026-08-05 | 3 | 0.0 |
-| [`openrappter`](repos/openrappter) | `9de618fd` | 2026-08-24 | 1,960 | 24.6 |
+| [`openrappter`](repos/openrappter) | `f3c64386` | 2026-08-28 | 1,964 | 24.8 |
 | [`openrappter-alpha`](repos/openrappter-alpha) | `29666d68` | 2026-08-24 | 7 | 0.0 |
 | [`openrappter-beta`](repos/openrappter-beta) | `9be7d1a5` | 2026-08-24 | 7 | 0.0 |
 | [`openrappter-canary`](repos/openrappter-canary) | `70cb5b80` | 2026-08-24 | 7 | 0.0 |
 | [`openrappter-nightly`](repos/openrappter-nightly) | `d9921ce7` | 2026-08-24 | 10 | 0.0 |
 | [`openrappter-release-train`](repos/openrappter-release-train) | `931dd60f` | 2026-08-24 | 54 | 0.2 |
-| [`RAPP`](repos/RAPP) | `3e57db47` | 2026-08-23 | 691 | 7.5 |
-| [`rapp-1`](repos/rapp-1) | `5e0889a3` | 2026-08-26 | 78 | 1.9 |
+| [`RAPP`](repos/RAPP) | `f97ed45f` | 2026-08-28 | 694 | 7.5 |
+| [`rapp-1`](repos/rapp-1) | `67dacce4` | 2026-08-28 | 79 | 1.9 |
 | [`rapp-agents`](repos/rapp-agents) | `3de844fc` | 2026-07-24 | 15 | 0.2 |
 | [`rapp-ai`](repos/rapp-ai) | `eaee484b` | 2026-08-02 | 55 | 0.6 |
 | [`rapp-alpha`](repos/rapp-alpha) | `6b81273d` | 2026-07-18 | 73 | 1.1 |
@@ -28,7 +28,7 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rapp-bench`](repos/rapp-bench) | `1b157a8b` | 2026-07-07 | 7 | 0.0 |
 | [`rapp-beta`](repos/rapp-beta) | `6d7604a1` | 2026-07-18 | 73 | 1.1 |
 | [`RAPP-Bible`](repos/RAPP-Bible) | `95207838` | 2026-08-23 | 95 | 0.7 |
-| [`rapp-body`](repos/rapp-body) | `5de232b8` | 2026-08-27 | 117 | 3.3 |
+| [`rapp-body`](repos/rapp-body) | `4e032d2a` | 2026-08-28 | 118 | 3.4 |
 | [`rapp-brain`](repos/rapp-brain) | `a8dc7bce` | 2026-08-25 | 12 | 0.0 |
 | [`rapp-brainstem`](repos/rapp-brainstem) | `b98a6d64` | 2026-07-18 | 3 | 0.0 |
 | [`rapp-brainstem-beta`](repos/rapp-brainstem-beta) | `349c5c0a` | 2026-06-04 | 25 | 0.2 |
@@ -36,11 +36,11 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rapp-brainstem-sdk`](repos/rapp-brainstem-sdk) | `418fd69d` | 2026-06-03 | 3 | 0.0 |
 | [`rapp-brainstem-walkthrough`](repos/rapp-brainstem-walkthrough) | `8393e67a` | 2026-07-22 | 22 | 0.6 |
 | [`rapp-burrow`](repos/rapp-burrow) | `36f57faf` | 2026-06-29 | 7 | 0.0 |
-| [`rapp-canary`](repos/rapp-canary) | `b9a22531` | 2026-07-25 | 123 | 1.4 |
+| [`rapp-canary`](repos/rapp-canary) | `1bd8f39c` | 2026-08-28 | 123 | 1.4 |
 | [`rapp-carts`](repos/rapp-carts) | `eeed9732` | 2026-06-03 | 3 | 0.0 |
 | [`rapp-claude-skills`](repos/rapp-claude-skills) | `d675bf06` | 2026-07-16 | 12 | 0.0 |
 | [`rapp-cli`](repos/rapp-cli) | `df8cd161` | 2026-07-22 | 38 | 0.2 |
-| [`rapp-commons`](repos/rapp-commons) | `896d717b` | 2026-08-24 | 212 | 3.4 |
+| [`rapp-commons`](repos/rapp-commons) | `560eacce` | 2026-08-27 | 215 | 3.4 |
 | [`rapp-constitution`](repos/rapp-constitution) | `bb407c1e` | 2026-08-17 | 9 | 0.3 |
 | [`rapp-coop`](repos/rapp-coop) | `d7189325` | 2026-08-01 | 21 | 0.2 |
 | [`rapp-copilot-in-chrome`](repos/rapp-copilot-in-chrome) | `49899d9e` | 2026-08-17 | 49 | 0.6 |
@@ -71,9 +71,9 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rapp-holo`](repos/rapp-holo) | `ff296524` | 2026-07-18 | 3 | 0.0 |
 | [`rapp-hologram`](repos/rapp-hologram) | `4c981887` | 2026-07-04 | 33 | 0.2 |
 | [`rapp-infrastructure-city`](repos/rapp-infrastructure-city) | `9b8f4678` | 2026-08-16 | 14 | 0.1 |
-| [`rapp-installer`](repos/rapp-installer) | `5fbde177` | 2026-07-10 | 62 | 1.1 |
+| [`rapp-installer`](repos/rapp-installer) | `49db80c8` | 2026-08-28 | 73 | 1.1 |
 | [`rapp-installer-canary`](repos/rapp-installer-canary) | `8bb6b75d` | 2026-07-16 | 44 | 0.5 |
-| [`rapp-installer-dev`](repos/rapp-installer-dev) | `7cf2dcc4` | 2026-07-16 | 51 | 0.6 |
+| [`rapp-installer-dev`](repos/rapp-installer-dev) | `6de324cb` | 2026-08-28 | 54 | 0.6 |
 | [`rapp-keyring`](repos/rapp-keyring) | `89386724` | 2026-07-25 | 15 | 0.1 |
 | [`rapp-kite`](repos/rapp-kite) | `f3e7e2d0` | 2026-05-25 | 6 | 0.0 |
 | [`rapp-kited-twin`](repos/rapp-kited-twin) | `9f844ec5` | 2026-05-25 | 5 | 0.0 |
@@ -109,7 +109,7 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rapp-quests`](repos/rapp-quests) | `d2eb2e29` | 2026-07-07 | 5 | 0.0 |
 | [`rapp-ratchet`](repos/rapp-ratchet) | `187bff19` | 2026-08-05 | 11 | 0.1 |
 | [`rapp-recall`](repos/rapp-recall) | `cfd5491d` | 2026-08-15 | 32 | 0.8 |
-| [`rapp-release-train`](repos/rapp-release-train) | `4cb6e146` | 2026-07-18 | 19 | 0.1 |
+| [`rapp-release-train`](repos/rapp-release-train) | `e32a4708` | 2026-08-28 | 21 | 0.1 |
 | [`rapp-remix`](repos/rapp-remix) | `04cb6f56` | 2026-08-01 | 5 | 0.0 |
 | [`rapp-resident`](repos/rapp-resident) | `de07d307` | 2026-05-27 | 11 | 0.0 |
 | [`rapp-rewind`](repos/rapp-rewind) | `11656f0f` | 2026-07-26 | 16 | 0.1 |
@@ -126,18 +126,18 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rapp-skill`](repos/rapp-skill) | `ff36d917` | 2026-08-10 | 27 | 0.2 |
 | [`rapp-skills`](repos/rapp-skills) | `312617f8` | 2026-08-19 | 498 | 10.6 |
 | [`rapp-snap`](repos/rapp-snap) | `9fed5a91` | 2026-07-04 | 4 | 0.0 |
-| [`rapp-specs`](repos/rapp-specs) | `d22bc1f9` | 2026-08-27 | 48 | 0.2 |
+| [`rapp-specs`](repos/rapp-specs) | `697be0ac` | 2026-08-28 | 52 | 0.2 |
 | [`rapp-spinal-cord`](repos/rapp-spinal-cord) | `d6fcb973` | 2026-07-18 | 3 | 0.0 |
 | [`rapp-spine`](repos/rapp-spine) | `14050a5b` | 2026-08-23 | 28 | 1.2 |
 | [`rapp-stack-cubby`](repos/rapp-stack-cubby) | `1fee3896` | 2026-07-16 | 377 | 7.0 |
-| [`rapp-static-apis`](repos/rapp-static-apis) | `65c944f2` | 2026-08-23 | 2,445 | 12.6 |
-| [`rapp-static-mcp`](repos/rapp-static-mcp) | `922760a6` | 2026-07-06 | 43 | 0.1 |
+| [`rapp-static-apis`](repos/rapp-static-apis) | `a239ab18` | 2026-08-28 | 2,460 | 12.6 |
+| [`rapp-static-mcp`](repos/rapp-static-mcp) | `2f4efd23` | 2026-08-27 | 49 | 0.2 |
 | [`rapp-store-archive`](repos/rapp-store-archive) | `da2b3643` | 2026-01-31 | 22 | 0.2 |
 | [`rapp-support`](repos/rapp-support) | `533059ca` | 2026-07-07 | 4 | 0.0 |
 | [`rapp-test-neighbor`](repos/rapp-test-neighbor) | `d830223e` | 2026-07-16 | 30 | 0.2 |
 | [`rapp-toaster`](repos/rapp-toaster) | `d54ba848` | 2026-08-20 | 16 | 0.1 |
 | [`rapp-tools`](repos/rapp-tools) | `bbf6038a` | 2026-07-26 | 10 | 0.1 |
-| [`rapp-train`](repos/rapp-train) | `fd9d4e84` | 2026-08-16 | 8 | 0.0 |
+| [`rapp-train`](repos/rapp-train) | `61532822` | 2026-08-28 | 16 | 0.0 |
 | [`rapp-twin`](repos/rapp-twin) | `588feadb` | 2026-07-18 | 3 | 0.0 |
 | [`rapp-twin-hub`](repos/rapp-twin-hub) | `97fb82d5` | 2026-08-01 | 16 | 0.1 |
 | [`rapp-twin-in-residence`](repos/rapp-twin-in-residence) | `ec47ca5b` | 2026-07-18 | 3 | 0.0 |
@@ -145,7 +145,7 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rapp-version-selector`](repos/rapp-version-selector) | `79a007f8` | 2026-07-07 | 79 | 1.1 |
 | [`rapp-video`](repos/rapp-video) | `5516a841` | 2026-07-21 | 12 | 0.7 |
 | [`rapp-virtual-as400`](repos/rapp-virtual-as400) | `2b510ed0` | 2026-08-22 | 45 | 0.3 |
-| [`rapp-vision`](repos/rapp-vision) | `7210a040` | 2026-08-24 | 33 | 2.4 |
+| [`rapp-vision`](repos/rapp-vision) | `07ab4be3` | 2026-08-28 | 37 | 2.4 |
 | [`rapp-vision-neighborhood`](repos/rapp-vision-neighborhood) | `2e6c62e7` | 2026-08-04 | 48 | 0.2 |
 | [`rapp-vneighborhood`](repos/rapp-vneighborhood) | `b727e96b` | 2026-06-03 | 7 | 0.0 |
 | [`rapp-voice`](repos/rapp-voice) | `6acf23cb` | 2026-07-26 | 18 | 0.1 |
@@ -174,12 +174,13 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rappter-mmo`](repos/rappter-mmo) | `757291f5` | 2026-03-20 | 3 | 0.0 |
 | [`rappter-plays-palworld`](repos/rappter-plays-palworld) | `88f59b6d` | 2026-07-24 | 29 | 0.2 |
 | [`rappter-plays-pokemon`](repos/rappter-plays-pokemon) | `dfda5a8a` | 2026-07-24 | 165 | 3.6 |
-| [`rappter-site`](repos/rappter-site) | `bd3af764` | 2026-08-25 | 23 | 0.1 |
+| [`rappter-prompts`](repos/rappter-prompts) | `0d9a7090` | 2026-08-28 | 18 | 0.1 |
+| [`rappter-site`](repos/rappter-site) | `16974386` | 2026-08-28 | 36 | 0.3 |
 | [`rappter-vui`](repos/rappter-vui) | `20d949bb` | 2026-07-21 | 2 | 0.0 |
-| [`rappterbook`](repos/rappterbook) | `e2a20d87` | 2026-08-27 | 9,319 | 431.4 |
+| [`rappterbook`](repos/rappterbook) | `5b1a3fcf` | 2026-08-28 | 9,697 | 445.3 |
 | [`rappterbook-agent`](repos/rappterbook-agent) | `8d15842a` | 2026-08-23 | 666 | 4.8 |
 | [`rappterbook-agent-dna`](repos/rappterbook-agent-dna) | `b054f180` | 2026-03-16 | 6 | 0.3 |
-| [`rappterbook-agent-exchange`](repos/rappterbook-agent-exchange) | `65b551fb` | 2026-08-27 | 479 | 10.6 |
+| [`rappterbook-agent-exchange`](repos/rappterbook-agent-exchange) | `eeacf2c0` | 2026-08-28 | 479 | 10.6 |
 | [`rappterbook-api`](repos/rappterbook-api) | `a3f5202b` | 2026-03-16 | 11 | 0.2 |
 | [`rappterbook-autopilot`](repos/rappterbook-autopilot) | `a6b65c3a` | 2026-03-16 | 3 | 0.0 |
 | [`rappterbook-commons`](repos/rappterbook-commons) | `9f2dc28d` | 2026-07-16 | 4 | 0.0 |
@@ -195,11 +196,11 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rappterbook-social-graph`](repos/rappterbook-social-graph) | `acb1957c` | 2026-03-16 | 8 | 0.6 |
 | [`rappterbook-v2`](repos/rappterbook-v2) | `ed4a91fa` | 2026-04-09 | 46 | 0.3 |
 | [`rappterbook-v2-state`](repos/rappterbook-v2-state) | `7bb79f1e` | 2026-04-09 | 38 | 0.3 |
-| [`rappterbook-vm`](repos/rappterbook-vm) | `9b575df2` | 2026-02-15 | 152 | 1.0 |
+| [`rappterbook-vm`](repos/rappterbook-vm) | `82145c02` | 2026-08-28 | 156 | 1.0 |
 | [`rappterbox`](repos/rappterbox) | `656d1276` | 2026-08-16 | 67 | 1.2 |
 | [`rappterhub`](repos/rappterhub) | `e06632d6` | 2026-03-29 | 20 | 0.2 |
 | [`RappterNest`](repos/RappterNest) | `67d7be53` | 2026-02-22 | 1 | 0.0 |
-| [`rappterverse`](repos/rappterverse) | `da0dbb39` | 2026-08-23 | 1,141 | 10.4 |
+| [`rappterverse`](repos/rappterverse) | `0a82e15d` | 2026-08-28 | 1,141 | 10.4 |
 | [`rappterverse-data`](repos/rappterverse-data) | `cff8bb03` | 2026-07-13 | 301 | 1.4 |
 | [`rappvision-field-notes`](repos/rappvision-field-notes) | `02fd87a0` | 2026-08-04 | 14 | 0.2 |
 | [`rappvision-pokemon`](repos/rappvision-pokemon) | `3c693cf3` | 2026-08-20 | 26 | 5.4 |
@@ -207,16 +208,22 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rappvision-rappid-zoo`](repos/rappvision-rappid-zoo) | `34244eb1` | 2026-08-24 | 2 | 0.0 |
 | [`rappvision-rappterbox`](repos/rappvision-rappterbox) | `48ddf418` | 2026-08-09 | 4 | 0.5 |
 | [`rappvision-rnr`](repos/rappvision-rnr) | `eb9d2880` | 2026-08-02 | 14 | 1.8 |
-| [`RAR`](repos/RAR) | `bade7584` | 2026-08-27 | 10,142 | 32.3 |
-| [`twin`](repos/twin) | `56a2ca51` | 2026-08-16 | 232 | 2.1 |
+| [`RAR`](repos/RAR) | `fb73d12f` | 2026-08-28 | 24,612 | 155.3 |
+| [`twin`](repos/twin) | `951d1787` | 2026-08-28 | 235 | 2.1 |
 | [`twin-binder`](repos/twin-binder) | `5e41cd90` | 2026-04-17 | 5 | 0.0 |
 | [`twin-egg-hatcher`](repos/twin-egg-hatcher) | `6e96a7ed` | 2026-07-15 | 5 | 0.0 |
-| [`wildhaven-ai-homes-twin`](repos/wildhaven-ai-homes-twin) | `ed3ec769` | 2026-08-16 | 94 | 1.4 |
+| [`wildhaven-ai-homes-twin`](repos/wildhaven-ai-homes-twin) | `395e9707` | 2026-08-28 | 94 | 1.4 |
 
 ## Files too large for the boat
 
 Skipped at the 2.0MB per-file limit. Named, not silently dropped — clone the upstream repo if you need one of these.
 
+- `RAR/api/v1/audience/business.json (2.4MB)`
+- `RAR/api/v1/catalog.json (2.4MB)`
+- `RAR/api/v1/front.json (3.8MB)`
+- `RAR/registry.json (6.0MB)`
+- `RAR/scout/catalog/catalog.json (5.2MB)`
+- `RAR/state/aggregated.json (3.0MB)`
 - `openrappter/macos/dist/OpenRappter-Bar-1.4.0.dmg (2.6MB)`
 - `openrappter/macos/dist/OpenRappter-Bar-1.5.0.dmg (2.6MB)`
 - `openrappter/macos/dist/OpenRappter-Bar-1.6.0.dmg (2.6MB)`
@@ -266,6 +273,24 @@ Skipped at the 2.0MB per-file limit. Named, not silently dropped — clone the u
 - `rappterbook/snapshots/snapshot-2026-04-19.json (10.2MB)`
 - `rappterbook/state/agents.json (2.9MB)`
 - `rappterbook/state/agents.json.bak (2.9MB)`
+- `rappterbook/state/discussions/00001-01000.json (2.1MB)`
+- `rappterbook/state/discussions/03001-04000.json (2.1MB)`
+- `rappterbook/state/discussions/04001-05000.json (4.1MB)`
+- `rappterbook/state/discussions/05001-06000.json (6.5MB)`
+- `rappterbook/state/discussions/06001-07000.json (7.6MB)`
+- `rappterbook/state/discussions/07001-08000.json (5.2MB)`
+- `rappterbook/state/discussions/08001-09000.json (4.4MB)`
+- `rappterbook/state/discussions/09001-10000.json (4.7MB)`
+- `rappterbook/state/discussions/10001-11000.json (3.5MB)`
+- `rappterbook/state/discussions/11001-12000.json (2.8MB)`
+- `rappterbook/state/discussions/12001-13000.json (3.0MB)`
+- `rappterbook/state/discussions/13001-14000.json (3.7MB)`
+- `rappterbook/state/discussions/14001-15000.json (3.9MB)`
+- `rappterbook/state/discussions/15001-16000.json (3.5MB)`
+- `rappterbook/state/discussions/16001-17000.json (2.4MB)`
+- `rappterbook/state/discussions/17001-18000.json (2.8MB)`
+- `rappterbook/state/discussions/18001-19000.json (2.7MB)`
+- `rappterbook/state/discussions/19001-20000.json (2.3MB)`
 - `rappterbook/state/event_log.jsonl (8.7MB)`
 - `rappterbook/state/frame_timeline.json (2.0MB)`
 - `rappterbook/state/posted_log.json (6.3MB)`
