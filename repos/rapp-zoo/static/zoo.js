@@ -50,10 +50,12 @@ function rarityFor(entry, kind) {
   // Drives the foil treatment (rare+ get holo overlays, ultra+ get
   // animated rainbow shimmer, secret gets the works).
   if (kind === 'holocard') return entry.rarity || 'common';
+  if (kind === 'hologram') return entry.kind === 'character' ? 'ultra' : 'holo';
   if (kind === 'twin') {
-    if ((entry.incarnations || []).some(i => i.live && i.is_global)) return 'secret';
-    if ((entry.incarnations || []).some(i => i.live)) return 'ultra';
-    if ((entry.incarnations || []).length > 1) return 'holo';   // parallel-omniscience
+    const instances = entry.instances || entry.incarnations || [];
+    if (instances.some(i => i.live && i.is_global)) return 'secret';
+    if (instances.some(i => i.live)) return 'ultra';
+    if (instances.length > 1) return 'holo';
     if (entry.rappid_uuid) return 'rare';
     return 'uncommon';
   }
@@ -98,8 +100,9 @@ function hpFor(entry, kind) {
   // from real metrics so identical inputs always give identical numbers.
   let n = 40;
   if (kind === 'twin') {
-    n += ((entry.incarnations || []).length * 30);
-    if ((entry.incarnations || []).some(i => i.live)) n += 30;
+    const instances = entry.instances || entry.incarnations || [];
+    n += (instances.length * 30);
+    if (instances.some(i => i.live)) n += 30;
   } else if (kind === 'starter') {
     n += Math.round((entry.size_bytes || 0) / 200);
   } else if (kind === 'discover') {
@@ -118,6 +121,7 @@ function inferType(entry, kind) {
     if (c in TYPE_ICONS) return c;
   }
   if (kind === 'twin') return 'twin';
+  if (kind === 'hologram') return 'organism';
   if (kind === 'discover') return entry.kind === 'tool' ? 'tool' : 'rapp';
   if (kind === 'holocard') return 'rapp';
   return 'rapp';
@@ -191,10 +195,11 @@ function holocardHTML(entry, kind, opts) {
   const hp     = hpFor(entry, kind);
   const tagline = entry.tagline || entry.summary || entry.description ||
                   (kind === 'starter' ? starterDescription(entry.rapp_id) : '') || '';
+  const instances = entry.instances || entry.incarnations || [];
   const version = entry.version ||
-                  (entry.incarnations && (entry.incarnations.find(i => i.version) || {}).version) || '';
+                  ((instances.find(i => i.version) || {}).version) || '';
   const publisher = entry.publisher || entry.author || entry.maintainer || '';
-  const isLive = (entry.incarnations || []).some(i => i.live);
+  const isLive = instances.some(i => i.live);
   const isSelf = entry.id === 'rapp-zoo';
 
   // Pills (existing pill styles stay; we just curate which ones)
@@ -207,7 +212,7 @@ function holocardHTML(entry, kind, opts) {
   if (entry.quality_tier && entry.quality_tier !== 'official') {
     pills.push(`<span class="pill">${escapeHtml(entry.quality_tier)}</span>`);
   }
-  for (const inc of (entry.incarnations || [])) {
+  for (const inc of instances) {
     const [cls, label] = scopeFor(inc);
     pills.push(`<span class="pill ${cls}" title=":${inc.port || '?'}">${label}</span>`);
   }
@@ -218,8 +223,11 @@ function holocardHTML(entry, kind, opts) {
   // Data attrs the caller's existing event delegation relies on
   const dataAttrs = [
     `data-rappid="${escapeHtml(rappid)}"`,
-    entry.brainstem_dir || (entry.incarnations || [])[0]?.brainstem_dir
-      ? `data-repo="${escapeHtml(entry.brainstem_dir || (entry.incarnations || []).find(i => i.brainstem_dir)?.brainstem_dir || '')}"`
+    entry.selected_instance_rappid
+      ? `data-instance="${escapeHtml(entry.selected_instance_rappid)}"`
+      : '',
+    entry.brainstem_dir || instances[0]?.brainstem_dir
+      ? `data-repo="${escapeHtml(entry.brainstem_dir || instances.find(i => i.brainstem_dir)?.brainstem_dir || '')}"`
       : '',
   ].filter(Boolean).join(' ');
 
@@ -327,6 +335,7 @@ document.querySelectorAll('.tab').forEach(tab => {
     if (tab.dataset.tab === 'starters') loadStarters();
     if (tab.dataset.tab === 'discover') loadDiscover();
     if (tab.dataset.tab === 'holocards') loadHolocards();
+    if (tab.dataset.tab === 'holograms') loadHolograms();
   });
 });
 
@@ -347,7 +356,7 @@ function renderTwins(data) {
     return;
   }
   root.innerHTML = twins.map(t => {
-    const incs = (t.incarnations || []);
+    const incs = t.instances || t.incarnations || [];
     const target = incs.find(i => i.is_twin_only) || incs[0];
     const isLive = !!(target && target.live);
     const port = target && target.port;
@@ -358,7 +367,10 @@ function renderTwins(data) {
         : `<button class="btn primary" data-act="start">Start</button>`}
       <button class="btn" data-act="lay-egg" title="Pack as portable .egg">⬇ Egg</button>
       <button class="btn" data-act="reveal" title="Open workspace in Finder">📂</button>`;
-    return holocardHTML(t, 'twin', { actions });
+    return holocardHTML({
+      ...t,
+      selected_instance_rappid: target && target.instance_rappid,
+    }, 'twin', { actions });
   }).join('');
   root.onclick = onTwinAction;
   bindHoloTilt(root);
@@ -373,12 +385,15 @@ async function renderEggs(data) {
     return;
   }
   root.innerHTML = eggs.map(e => {
-    const schemaShort = (e.schema || '').replace('brainstem-egg/', '');
+    const schemaShort = e.schema
+      ? `${e.schema}${e.variant ? ' · ' + e.variant : ''}`
+      : 'invalid egg';
+    const artifact = e.artifact_rappid || e.rappid_uuid || 'unknown';
     return `
       <div class="egg-row" data-path="${escapeHtml(e.path)}">
         <div class="name">${escapeHtml(e.filename)}</div>
         <div class="size">${(e.size_bytes / 1024).toFixed(1)} KB</div>
-        <div class="ts">${e.mtime} · ${escapeHtml(e.rappid_uuid.slice(0, 8))}…</div>
+        <div class="ts">${e.mtime} · ${escapeHtml(artifact.slice(0, 18))}…</div>
         <div class="schema">${schemaShort}${e.kernel_version ? ' · k' + e.kernel_version : ''}</div>
         <div class="actions">
           <button class="btn" data-act="inspect">Inspect</button>
@@ -403,7 +418,7 @@ async function onTwinAction(e) {
   if (!btn) return;
   const card = btn.closest('.card');
   if (!card) return;
-  const rid = card.dataset.rappid;
+  const rid = card.dataset.instance || card.dataset.rappid;
   const repo = card.dataset.repo;
   const name = card.querySelector('h3').textContent;
   const act = btn.dataset.act;
@@ -413,7 +428,7 @@ async function onTwinAction(e) {
       btn.disabled = true;
       const r = await api('/api/start', {
         method: 'POST', headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({ rappid_uuid: rid }),
+        body: JSON.stringify({ instance_rappid: rid }),
       });
       toast(r.already_running ? 'Already running (pid ' + r.pid + ')' : 'Started (pid ' + r.pid + ')');
       setTimeout(refresh, 1200);
@@ -426,7 +441,7 @@ async function onTwinAction(e) {
       btn.disabled = true;
       const r = await api('/api/stop', {
         method: 'POST', headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({ rappid_uuid: rid }),
+        body: JSON.stringify({ instance_rappid: rid }),
       });
       toast(r.was_running ? 'Stopped (pid ' + r.pid + ')' : 'Was not running');
       setTimeout(refresh, 600);
@@ -477,23 +492,28 @@ function confirmThen({title, body}) {
 // because the path-traversal guard rejects anything that isn't a real
 // file under ~/.rapp/eggs/. Dispatch on shape now.
 async function showInspect(eggSource) {
-  const isUrl = /^https?:/i.test(eggSource);
+  const isUrl = /^https?:/i.test(eggSource)
+    || eggSource.startsWith('/starters/dist/');
   try {
     let manifest, fileTree, exportHref;
     if (isUrl) {
-      // Client-side parse — fetch the egg bytes, unzip in browser.
-      if (typeof JSZip === 'undefined') {
-        throw new Error('JSZip not loaded — refresh and try again');
-      }
       const r = await fetch(eggSource, { cache: 'no-cache' });
       if (!r.ok) throw new Error('fetch failed: HTTP ' + r.status);
       const buf = await r.arrayBuffer();
-      const zip = await JSZip.loadAsync(buf);
-      const mf = zip.file('manifest.json');
-      if (!mf) throw new Error('no manifest.json in egg');
-      manifest = JSON.parse(await mf.async('string'));
       fileTree = [];
-      zip.forEach((p, e) => { if (!e.dir) fileTree.push(p); });
+      const bytes = new Uint8Array(buf);
+      if (bytes[0] === 0x50 && bytes[1] === 0x4b) {
+        if (typeof JSZip === 'undefined') {
+          throw new Error('JSZip not loaded — refresh and try again');
+        }
+        const zip = await JSZip.loadAsync(buf);
+        const mf = zip.file('manifest.json');
+        if (!mf) throw new Error('no manifest.json in egg');
+        manifest = JSON.parse(await mf.async('string'));
+        zip.forEach((p, e) => { if (!e.dir) fileTree.push(p); });
+      } else {
+        manifest = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes));
+      }
       fileTree.sort();
       exportHref = eggSource;  // direct download link to the URL
     } else {
@@ -503,6 +523,7 @@ async function showInspect(eggSource) {
       fileTree = r.file_tree || [];
       exportHref = '/api/export-egg?path=' + encodeURIComponent(eggSource);
     }
+    $('inspect-close').addEventListener('click', () => $('inspect-dialog').close());
     $('inspect-body').textContent = JSON.stringify(manifest, null, 2);
     $('inspect-tree').innerHTML = fileTree.map(n =>
       '<li>' + escapeHtml(n) + '</li>'
@@ -523,6 +544,7 @@ async function loadStarters() {
       root.innerHTML = '<div class="empty">No starters available — run <code>python3 starters/build_starters.py</code> in the rapp-zoo repo to build them.</div>';
       return;
     }
+
     root.innerHTML = starters.map(s => {
       const fullEggUrl = s.egg_url.startsWith('/')
         ? location.origin + s.egg_url
@@ -542,6 +564,175 @@ async function loadStarters() {
     root.innerHTML = '<div class="err">' + escapeHtml(e.message) + '</div>';
   }
 }
+
+// ── Holograms: sandboxed 3D characters + data projections ───────────
+let hologramEntries = [];
+let activeHologram = null;
+let activeHologramContext = null;
+let currentDataSlosh = null;
+let hologramPolishing = false;
+let justCaughtHologramId = null;
+
+async function loadHolograms() {
+  const root = $('holograms');
+  root.innerHTML = '<div class="empty">Calibrating emitters…</div>';
+  try {
+    const data = await api('/api/holograms');
+    const local = data.holograms || [];
+    let remote = [];
+    try {
+      remote = (await api('/api/holograms/rar')).entries || [];
+    } catch {
+      // The local bundled gallery remains usable when RAR is offline.
+    }
+    const byId = new Map(local.map(entry => [entry.id, entry]));
+    for (const entry of remote) {
+      if (byId.has(entry.id)) {
+        byId.get(entry.id).rar_available = true;
+      } else {
+        byId.set(entry.id, {
+          ...entry,
+          description: 'RAR hologram DOGG — summon its verified data record to project it.',
+          source: 'rar-catalog',
+          rar_available: true,
+          rar_notarized: false,
+          remote_only: true,
+        });
+      }
+    }
+    hologramEntries = [...byId.values()];
+    $('holograms-count').textContent = `${hologramEntries.length} bottles`;
+    root.innerHTML = hologramEntries.map(entry => {
+      const rarAction = entry.rar_notarized
+        ? '<span class="pill live">RAR bottle ✓</span>'
+        : `<button class="btn" data-hologram-summon="${escapeHtml(entry.id)}" data-zoo-control="hologram.summon.${escapeHtml(entry.id)}">Catch RAR bottle</button>`;
+      const projectAction = entry.remote_only
+        ? ''
+        : `<button class="btn primary" data-hologram="${escapeHtml(entry.id)}" data-zoo-control="hologram.project.${escapeHtml(entry.id)}">Hotload</button>`;
+      const actions = `
+        ${projectAction}
+        ${rarAction}`;
+      const html = holocardHTML({
+        ...entry,
+        type: entry.kind === 'character' ? 'twin' : 'analysis',
+        tagline: entry.description,
+      }, 'hologram', { actions });
+      return html.replace('class="sprite"', 'class="sprite hologram-card-art"');
+    }).join('');
+    root.onclick = event => {
+      const button = event.target.closest('button[data-hologram]');
+      if (button) {
+        openHologram(button.dataset.hologram);
+        return;
+      }
+      const summon = event.target.closest('button[data-hologram-summon]');
+      if (summon) summonHologramDogg(summon.dataset.hologramSummon, summon);
+    };
+    bindHoloTilt(root);
+  } catch (error) {
+    root.innerHTML = `<div class="err">${escapeHtml(error.message)}</div>`;
+  }
+
+  async function summonHologramDogg(id, button) {
+    button.disabled = true;
+    const original = button.textContent;
+    button.textContent = 'Verifying RAR…';
+    try {
+      const result = await api('/api/holograms/summon', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ id }),
+      });
+      toast(`Caught ${id} bottle · ${result.record_sha256.slice(0, 12)}…`);
+      await loadHolograms();
+    } catch (error) {
+      button.disabled = false;
+      button.textContent = original;
+      toast(error.message, 'err');
+    }
+  }
+}
+
+function sendHologramContext(context) {
+  if (!activeHologram || !$('hologram-frame').contentWindow) return;
+  $('hologram-frame').contentWindow.postMessage({
+    schema: 'rapp-zoo-hologram-context/1.0',
+    hologram_id: activeHologram.id,
+    data_slosh: context,
+  }, '*');
+}
+
+function openHologram(id) {
+  if (justCaughtHologramId !== id) justCaughtHologramId = null;
+  activeHologram = hologramEntries.find(entry => entry.id === id);
+  if (!activeHologram) return;
+  activeHologramContext = currentDataSlosh;
+  $('hologram-viewer-kind').textContent = activeHologram.kind === 'character'
+    ? '3D CHARACTER BOTTLE'
+    : 'DATA HOLOGRAM BOTTLE';
+  $('hologram-viewer-title').textContent = activeHologram.name;
+  $('hologram-binding-status').textContent = currentDataSlosh
+    ? 'data slosh'
+    : 'bottle memory';
+  const frame = $('hologram-frame');
+  const loopback = ['127.0.0.1', 'localhost', '[::1]'].includes(location.hostname);
+  frame.setAttribute(
+    'sandbox',
+    loopback ? 'allow-scripts allow-same-origin' : 'allow-scripts',
+  );
+  const hologramOrigin = loopback
+    ? `${location.protocol}//hologram.localhost:${location.port}`
+    : location.origin;
+  frame.src = `${hologramOrigin}/holograms/${encodeURIComponent(activeHologram.id)}`;
+  if (!$('hologram-dialog').open) $('hologram-dialog').showModal();
+}
+
+window.addEventListener('message', event => {
+  if (event.source !== $('hologram-frame').contentWindow) return;
+  const message = event.data || {};
+  if (message.hologram_id !== activeHologram?.id) return;
+  if (message.schema === 'rapp-zoo-hologram-ready/1.0') {
+    sendHologramContext(activeHologramContext);
+  } else if (message.schema === 'rapp-zoo-hologram-bound/1.0') {
+    $('hologram-binding-status').textContent = hologramPolishing
+      ? `matched ${activeHologram.name} · polishing`
+      : justCaughtHologramId === activeHologram.id
+        ? 'new bottle caught'
+      : message.live ? 'data slosh' : 'bottle memory';
+  } else if (message.schema === 'rapp-zoo-hologram-error/1.0') {
+    $('hologram-binding-status').textContent = 'projection error';
+    toast(message.error || 'Hologram projection failed', 'err');
+  }
+});
+
+$('hologram-bind').addEventListener('click', async () => {
+  try {
+    const context = await api('/api/intelligence-context');
+    activeHologramContext = {
+      ...context,
+      data_slosh: currentDataSlosh?.data_slosh || null,
+    };
+    sendHologramContext(activeHologramContext);
+  } catch (error) {
+    toast(error.message, 'err');
+  }
+});
+$('hologram-demo').addEventListener('click', () => {
+  currentDataSlosh = null;
+  activeHologramContext = null;
+  sendHologramContext(null);
+});
+$('hologram-fullscreen').addEventListener('click', () => {
+  $('hologram-frame').requestFullscreen?.();
+});
+$('hologram-close').addEventListener('click', () => {
+  $('hologram-dialog').close();
+});
+$('hologram-dialog').addEventListener('close', () => {
+  $('hologram-frame').src = 'about:blank';
+  activeHologram = null;
+  activeHologramContext = null;
+});
 
 function starterDescription(rappId) {
   const m = {
@@ -1067,7 +1258,9 @@ async function uploadEgg(file) {
     const r = await fetch('/api/import-egg', { method: 'POST', body: fd });
     const d = await r.json();
     if (!r.ok) throw new Error(d.error || ('HTTP ' + r.status));
-    const mname = (d.manifest && (d.manifest.name || d.manifest.id || d.manifest.rappid)) || file.name;
+    const payload = (d.manifest && d.manifest.payload) || {};
+    const mname = payload.name || payload.rapp_id ||
+                  (d.manifest && d.manifest.rappid) || file.name;
     toast('🥚 Imported ' + mname + ' (' + (d.size_bytes / 1024).toFixed(1) + ' KB)');
     refresh();
   } catch (e) { toast(e.message, 'err'); }
@@ -1147,6 +1340,157 @@ $('lay-egg-dialog').addEventListener('close', async function () {
     refresh();
   } catch (e) { toast(e.message, 'err'); }
 });
+
+// ── Frontier app-owned Brainstem ────────────────────────────────────
+const desktopBridge = window.rappZooDesktop;
+let copilotBusy = false;
+let copilotAssistant = null;
+
+function copilotMessage(kind, text) {
+  const node = document.createElement('div');
+  node.className = 'copilot-message ' + kind;
+  node.textContent = text;
+  $('copilot-transcript').appendChild(node);
+  $('copilot-transcript').scrollTop = $('copilot-transcript').scrollHeight;
+  return node;
+}
+
+function setCopilotBusy(busy) {
+  copilotBusy = busy;
+  $('copilot-input').disabled = busy;
+  $('copilot-send').disabled = busy;
+  $('copilot-cancel').disabled = !busy;
+  $('copilot-status').textContent = busy ? 'thinking' : 'ready';
+}
+
+if (desktopBridge) {
+  $('btn-copilot').hidden = false;
+  $('hologram-generate').hidden = false;
+  $('hologram-generate').disabled = true;
+  desktopBridge.brainstemStatus().then((status) => {
+    const ready = status.state === 'ready';
+    $('copilot-status').textContent = ready ? `${status.tools.length} tools ready` : status.state;
+    $('copilot-status').title = status.model || '';
+    $('copilot-send').disabled = !ready;
+    $('hologram-generate').disabled = !ready;
+  }).catch((error) => {
+    $('copilot-status').textContent = 'Brainstem unavailable';
+    $('copilot-status').title = error.message;
+    $('copilot-send').disabled = true;
+  });
+  desktopBridge.onState((state) => {
+    const status = state.brainstem || {};
+    if (!copilotBusy) {
+      $('copilot-status').textContent = status.state === 'ready'
+        ? `${(status.tools || []).length} tools ready`
+        : status.state || 'starting';
+    }
+    $('copilot-send').disabled = status.state !== 'ready' || copilotBusy;
+    $('hologram-generate').disabled = status.state !== 'ready';
+  });
+  $('btn-copilot').addEventListener('click', () => {
+    $('copilot-dialog').showModal();
+    $('copilot-input').focus();
+  });
+  $('copilot-close').addEventListener('click', () => $('copilot-dialog').close());
+  $('copilot-cancel').addEventListener('click', async () => {
+    await desktopBridge.cancelBrainstem(null);
+  });
+  $('copilot-form').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const prompt = $('copilot-input').value.trim();
+    if (!prompt || copilotBusy) return;
+    copilotMessage('user', prompt);
+    $('copilot-input').value = '';
+    copilotAssistant = copilotMessage('assistant', '');
+    setCopilotBusy(true);
+    try {
+      const result = await desktopBridge.askBrainstem(prompt);
+      copilotAssistant.textContent = result.response;
+      if (result.agent_logs) {
+        copilotAssistant.textContent += `\n\nAgents: ${result.agent_logs}`;
+      }
+    } catch (error) {
+      copilotAssistant.textContent = 'Brainstem error: ' + error.message;
+    } finally {
+      copilotAssistant = null;
+      setCopilotBusy(false);
+    }
+  });
+
+  $('hologram-generate').addEventListener('click', () => {
+    $('hologram-generate-dialog').showModal();
+  });
+  $('hologram-generate-close').addEventListener('click', () => {
+    $('hologram-generate-dialog').close();
+  });
+  $('hologram-capture-frame').addEventListener('click', async () => {
+    try {
+      const frame = await api('/api/holograms/example-frame');
+      $('hologram-frame-input').value = JSON.stringify(frame, null, 2);
+      $('hologram-generate-status').textContent = 'Live frame captured. Ready to match.';
+    } catch (error) {
+      $('hologram-generate-status').textContent = error.message;
+    }
+  });
+  $('hologram-generate-submit').addEventListener('click', async () => {
+    const button = $('hologram-generate-submit');
+    let frame;
+    try {
+      frame = JSON.parse($('hologram-frame-input').value);
+    } catch {
+      $('hologram-generate-status').textContent = 'Paste or capture a valid JSON frame first.';
+      return;
+    }
+    button.disabled = true;
+    try {
+      $('hologram-generate-status').textContent = 'Finding the nearest bottle…';
+      const match = await api('/api/holograms/match', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ frame }),
+      });
+      const snapshot = await api('/api/intelligence-context');
+      currentDataSlosh = {
+        ...snapshot,
+        data_slosh: { frame },
+      };
+      hologramPolishing = true;
+      $('hologram-generate-dialog').close();
+      if (!hologramEntries.length) await loadHolograms();
+      openHologram(match.hologram.id);
+      $('hologram-binding-status').textContent = `matched ${match.hologram.name} · polishing`;
+      sendHologramContext(currentDataSlosh);
+
+      const result = await desktopBridge.generateHologram({
+        frame,
+        randomize: $('hologram-randomize').checked,
+      });
+      hologramPolishing = false;
+      await loadHolograms();
+      justCaughtHologramId = result.hologram.id;
+      openHologram(result.hologram.id);
+      $('hologram-binding-status').textContent = 'new bottle caught';
+      sendHologramContext(currentDataSlosh);
+      toast(`Caught ${result.hologram.name} from frame ${frame.frame_hash.slice(0, 12)}…`);
+    } catch (error) {
+      hologramPolishing = false;
+      $('hologram-generate-status').textContent = error.message;
+      if (activeHologram) $('hologram-binding-status').textContent = 'polish failed';
+      toast(error.message, 'err');
+    } finally {
+      button.disabled = false;
+    }
+  });
+}
+
+if ('serviceWorker' in navigator && location.protocol === 'http:') {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch((error) => {
+      console.warn('[rapp-zoo] service worker registration failed', error);
+    });
+  });
+}
 
 refresh();
 setInterval(refresh, 15000);

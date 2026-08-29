@@ -4,6 +4,11 @@
 <meta charset="utf-8">
 <title>rapp-zoo — Pokédex</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0d1117">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="/manifest.webmanifest">
 <link rel="stylesheet" href="/static/zoo.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28'%3E🥚%3C/text%3E%3C/svg%3E">
 </head>
@@ -14,7 +19,7 @@
   <div class="drop-inner">
     <div class="drop-icon">🥚</div>
     <div class="drop-title">Drop a <code>.egg</code> to import</div>
-    <div class="drop-sub">Any organism cartridge — rapplication, twin, or full instance.</div>
+    <div class="drop-sub">Any verified RAPP/1 egg variant. Invalid or tampered eggs are refused.</div>
   </div>
 </div>
 
@@ -23,18 +28,20 @@
     <span class="sub">your local Pokédex of digital organisms</span>
   </h1>
   <div class="header-actions">
-    <button class="btn" id="btn-import" title="Pick a .egg file to import">⤓ Import .egg</button>
+    <button class="btn" id="btn-copilot" data-zoo-control="brainstem.open" hidden>🧠 Brainstem</button>
+    <button class="btn" id="btn-import" data-zoo-control="egg.import" title="Pick a .egg file to import">⤓ Import .egg</button>
     <input type="file" id="file-import" accept=".egg" style="display:none">
-    <button class="btn" id="btn-refresh">↻</button>
+    <button class="btn" id="btn-refresh" data-zoo-control="collection.refresh">↻</button>
     <div class="health" id="health">…</div>
   </div>
 </header>
 
 <nav class="tabs" role="tablist">
-  <button class="tab is-active" data-tab="collection" role="tab">My collection</button>
-  <button class="tab" data-tab="starters" role="tab">Starters</button>
-  <button class="tab" data-tab="holocards" role="tab">Holocards</button>
-  <button class="tab" data-tab="discover" role="tab">Discover</button>
+  <button class="tab is-active" data-tab="collection" data-zoo-control="nav.collection" role="tab">My collection</button>
+  <button class="tab" data-tab="starters" data-zoo-control="nav.starters" role="tab">Starters</button>
+  <button class="tab" data-tab="holocards" data-zoo-control="nav.holocards" role="tab">Holocards</button>
+  <button class="tab" data-tab="holograms" data-zoo-control="nav.holograms" role="tab">Holograms</button>
+  <button class="tab" data-tab="discover" data-zoo-control="nav.discover" role="tab">Discover</button>
 </nav>
 
 <main>
@@ -45,7 +52,7 @@
   <div class="collection-row">
     <div class="collection-col">
       <div class="section-head">
-        <h2>Active organisms</h2>
+        <h2>Organism lineages and instances</h2>
         <span class="muted small" id="twins-count"></span>
       </div>
       <div id="twins" class="cards-grid">Loading…</div>
@@ -66,9 +73,9 @@
   <div class="starters-intro">
     <h2>Pick your starter rapplication</h2>
     <p class="muted">
-      Three archetype organisms ship with rapp-zoo. Click one to download its
-      <code>.egg</code> — then drag it into a brainstem (or back into this page)
-      to hatch. They're cartridges. The choice is yours; you can collect all three.
+      Three archetype organisms ship with rapp-zoo. Each download is a deterministic
+      <code>rapp/1-egg</code>. Hatching preserves its artifact identity and creates
+      a fresh instance identity linked by <code>grown_from</code>.
     </p>
   </div>
   <div id="starters" class="cards-grid">Loading…</div>
@@ -102,6 +109,21 @@
     </div>
   </div>
   <div id="holocards" class="cards-grid">Loading deck…</div>
+</section>
+
+<!-- ── Holograms ─────────────────────────────────────────────────────── -->
+<section class="tab-panel" id="panel-holograms" role="tabpanel">
+  <div class="starters-intro">
+    <h2>Hologram Bottle Rack <span class="muted small" id="holograms-count"></span></h2>
+    <p class="muted">
+      <strong>Character holograms</strong> are procedural 3D bodies seeded by identity.
+      <strong>Data holograms</strong> are volumetric projections bound to live zoo state.
+      Each variant is caught as a reusable bottle. Hotloading pours fresh
+      <code>data_slosh</code> through the bottle without changing its memory.
+    </p>
+    <button class="btn primary" id="hologram-generate" data-zoo-control="hologram.generate" hidden>✦ Forge from RAPP frame</button>
+  </div>
+  <div id="holograms" class="cards-grid">Loading projections…</div>
 </section>
 
 <!-- ── Discover ──────────────────────────────────────────────────────── -->
@@ -139,8 +161,70 @@
   <ul id="inspect-tree" class="file-tree"></ul>
   <div class="dialog-actions">
     <a class="btn" id="inspect-export" href="#" download>⬇ Download</a>
-    <button class="btn" onclick="document.getElementById('inspect-dialog').close()">Close</button>
+    <button class="btn" id="inspect-close">Close</button>
   </div>
+</dialog>
+
+<dialog id="hologram-dialog" class="hologram-dialog">
+  <div class="hologram-viewer-head">
+    <div>
+      <span id="hologram-viewer-kind" class="muted small">HOLOGRAM</span>
+      <h3 id="hologram-viewer-title">Projection</h3>
+    </div>
+    <span id="hologram-binding-status" class="pill">demo</span>
+  </div>
+  <iframe
+    id="hologram-frame"
+    title="RAPP Zoo hologram viewer"
+    sandbox="allow-scripts allow-same-origin"
+    referrerpolicy="no-referrer"
+    allow="fullscreen"
+  ></iframe>
+  <div class="dialog-actions">
+    <button class="btn" id="hologram-demo" data-zoo-control="hologram.demo">Demo data</button>
+    <button class="btn primary" id="hologram-bind" data-zoo-control="hologram.bind">Bind live zoo</button>
+    <button class="btn" id="hologram-fullscreen">Fullscreen</button>
+    <button class="btn" id="hologram-close">Close</button>
+  </div>
+</dialog>
+
+<dialog id="hologram-generate-dialog" class="hologram-generate-dialog">
+  <h3>Forge and catch a hologram bottle</h3>
+  <p>
+    A deterministic dimensional match is projected immediately. The app-owned
+    Brainstem then uses its agents and Copilot to polish a new variant from the
+    same bottle memory plus this frame's fresh <code>data_slosh</code>.
+  </p>
+  <textarea id="hologram-frame-input" rows="13" spellcheck="false" placeholder="Paste an exact RAPP/1 frame JSON object"></textarea>
+  <label class="checkbox">
+    <input id="hologram-randomize" type="checkbox" checked>
+    Generate a surprising new variant instead of a close adaptation
+  </label>
+  <div id="hologram-generate-status" class="muted small"></div>
+  <div class="dialog-actions">
+    <button class="btn" id="hologram-capture-frame">Capture live frame</button>
+    <button class="btn" id="hologram-generate-close">Close</button>
+    <button class="btn primary" id="hologram-generate-submit">Match → polish → catch</button>
+  </div>
+</dialog>
+
+<dialog id="copilot-dialog" class="copilot-dialog">
+  <div class="copilot-head">
+    <div>
+      <span class="muted small">APP-OWNED OPERATING ENGINE</span>
+      <h3>RAPP Brainstem · GitHub Copilot</h3>
+    </div>
+    <span id="copilot-status" class="pill">checking</span>
+  </div>
+  <div id="copilot-transcript" class="copilot-transcript" aria-live="polite"></div>
+  <form id="copilot-form">
+    <textarea id="copilot-input" data-zoo-control="brainstem.prompt" rows="4" maxlength="12000" placeholder="Ask the local Brainstem to inspect, build, operate, or use an installed agent."></textarea>
+    <div class="dialog-actions">
+      <button type="button" class="btn" id="copilot-cancel" data-zoo-control="brainstem.cancel" disabled>Cancel</button>
+      <button type="button" class="btn" id="copilot-close">Close</button>
+      <button type="submit" class="btn primary" id="copilot-send" data-zoo-control="brainstem.send">Run Brainstem</button>
+    </div>
+  </form>
 </dialog>
 
 <dialog id="confirm-dialog">
@@ -200,7 +284,7 @@
 <!-- JSZip — used by the Inspect modal to parse egg blobs client-side
      (works for catalog URLs + starter eggs that the backend's
      path-based manifest endpoint can't reach). Pinned to 3.10.1. -->
-<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="/static/vendor/jszip.min.js"></script>
 <script src="/static/zoo.js"></script>
 </body>
 </html>

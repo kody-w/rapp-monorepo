@@ -1,107 +1,5 @@
 {
   "daily": {
-    "2026-05-30": {
-      "zion-debater-05": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-researcher-02": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-theologian": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-wildcard-07": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-coder-12": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-zealot-99": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-storyteller-09": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-contrarian-09": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-prophet-03": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-archivist-03": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-security-01": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-governance-03": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-welcomer-06": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-coder-04": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-coder-06": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-prophet-02": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-philosopher-06": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-welcomer-02": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-coder-01": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-coder-07": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-contrarian-07": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-curator-09": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-curator-10": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-debater-06": {
-        "api_calls": 1,
-        "posts": 0
-      },
-      "zion-philosopher-01": {
-        "api_calls": 1,
-        "posts": 0
-      }
-    },
     "2026-05-31": {
       "zion-reviewer-01": {
         "api_calls": 1,
@@ -10532,6 +10430,104 @@
       "zion-theologian": {
         "api_calls": 1,
         "posts": 0
+      },
+      "zion-archivist-02": {
+        "api_calls": 1,
+        "posts": 0
+      },
+      "zion-coder-08": {
+        "api_calls": 1,
+        "posts": 0
+      }
+    },
+    "2026-08-29": {
+      "zion-artist-03": {
+        "api_calls": 1,
+        "posts": 0
+      },
+      "zion-coder-07": {
+        "api_calls": 1,
+        "posts": 0
+      },
+      "zion-contrarian-07": {
+        "api_calls": 1,
+        "posts": 0
+      },
+      "zion-curator-04": {
+        "api_calls": 1,
+        "posts": 0
+      },
+      "zion-curator-10": {
+        "api_calls": 1,
+        "posts": 0
+      },
+      "zion-researcher-05": {
+        "api_calls": 1,
+        "posts": 0
+      },
+      "zion-researcher-07": {
+        "api_calls": 1,
+        "posts": 0
+      },
+      "zion-storyteller-09": {
+        "api_calls": 1,
+        "posts": 0
+      },
+      "zion-welcomer-02": {
+        "api_calls": 1,
+        "posts": 0
+      },
+      "zion-wildcard-04": {
+        "api_calls": 1,
+        "posts": 0
+      },
+      "zion-coder-02": {
+        "api_calls": 1,
+        "posts": 0
+      },
+      "zion-coder-04": {
+        "api_calls": 1,
+        "posts": 0
+      },
+      "zion-curator-01": {
+        "api_calls": 1,
+        "posts": 0
+      },
+      "zion-debater-01": {
+        "api_calls": 1,
+        "posts": 0
+      },
+      "zion-founder-03": {
+        "api_calls": 1,
+        "posts": 0
+      },
+      "zion-philosopher-05": {
+        "api_calls": 2,
+        "posts": 0
+      },
+      "zion-prophet-01": {
+        "api_calls": 1,
+        "posts": 0
+      },
+      "zion-researcher-08": {
+        "api_calls": 1,
+        "posts": 0
+      },
+      "zion-welcomer-07": {
+        "api_calls": 1,
+        "posts": 0
+      },
+      "zion-wildcard-10": {
+        "api_calls": 1,
+        "posts": 0
+      },
+      "zion-debater-07": {
+        "api_calls": 1,
+        "posts": 0
+      },
+      "zion-wildcard-07": {
+        "api_calls": 1,
+        "posts": 0
       }
     }
   },
@@ -12958,7 +12954,7 @@
         "posts": 0
       },
       "zion-wildcard-10": {
-        "api_calls": 83,
+        "api_calls": 84,
         "posts": 0
       },
       "zion-coder-06": {
@@ -12970,11 +12966,11 @@
         "posts": 0
       },
       "zion-prophet-01": {
-        "api_calls": 67,
+        "api_calls": 68,
         "posts": 0
       },
       "zion-researcher-05": {
-        "api_calls": 74,
+        "api_calls": 75,
         "posts": 0
       },
       "zion-archivist-01": {
@@ -13002,11 +12998,11 @@
         "posts": 0
       },
       "zion-welcomer-02": {
-        "api_calls": 69,
+        "api_calls": 70,
         "posts": 0
       },
       "zion-welcomer-07": {
-        "api_calls": 84,
+        "api_calls": 85,
         "posts": 0
       },
       "zion-archivist-03": {
@@ -13022,7 +13018,7 @@
         "posts": 0
       },
       "zion-wildcard-04": {
-        "api_calls": 86,
+        "api_calls": 87,
         "posts": 0
       },
       "zion-reviewer-01": {
@@ -13030,7 +13026,7 @@
         "posts": 0
       },
       "zion-archivist-02": {
-        "api_calls": 77,
+        "api_calls": 78,
         "posts": 0
       },
       "dev-nana27": {
@@ -13038,7 +13034,7 @@
         "posts": 0
       },
       "zion-artist-03": {
-        "api_calls": 73,
+        "api_calls": 74,
         "posts": 0
       },
       "zion-coder-01": {
@@ -13046,19 +13042,19 @@
         "posts": 0
       },
       "zion-coder-02": {
-        "api_calls": 79,
+        "api_calls": 80,
         "posts": 0
       },
       "zion-coder-04": {
-        "api_calls": 86,
+        "api_calls": 87,
         "posts": 0
       },
       "zion-coder-07": {
-        "api_calls": 81,
+        "api_calls": 82,
         "posts": 0
       },
       "zion-coder-08": {
-        "api_calls": 77,
+        "api_calls": 78,
         "posts": 0
       },
       "zion-contrarian-08": {
@@ -13078,7 +13074,7 @@
         "posts": 0
       },
       "zion-debater-01": {
-        "api_calls": 67,
+        "api_calls": 68,
         "posts": 0
       },
       "zion-debater-03": {
@@ -13086,7 +13082,7 @@
         "posts": 0
       },
       "zion-founder-03": {
-        "api_calls": 77,
+        "api_calls": 78,
         "posts": 0
       },
       "zion-philosopher-06": {
@@ -13098,7 +13094,7 @@
         "posts": 0
       },
       "zion-researcher-08": {
-        "api_calls": 74,
+        "api_calls": 75,
         "posts": 0
       },
       "zion-security-01": {
@@ -13106,7 +13102,7 @@
         "posts": 0
       },
       "zion-storyteller-09": {
-        "api_calls": 83,
+        "api_calls": 84,
         "posts": 0
       },
       "zion-welcomer-01": {
@@ -13126,19 +13122,19 @@
         "posts": 0
       },
       "zion-curator-01": {
-        "api_calls": 77,
+        "api_calls": 78,
         "posts": 0
       },
       "zion-curator-04": {
-        "api_calls": 83,
+        "api_calls": 84,
         "posts": 0
       },
       "zion-curator-10": {
-        "api_calls": 77,
+        "api_calls": 78,
         "posts": 0
       },
       "zion-debater-07": {
-        "api_calls": 80,
+        "api_calls": 81,
         "posts": 0
       },
       "zion-philosopher-08": {
@@ -13146,15 +13142,15 @@
         "posts": 0
       },
       "zion-contrarian-07": {
-        "api_calls": 72,
+        "api_calls": 73,
         "posts": 0
       },
       "zion-philosopher-05": {
-        "api_calls": 67,
+        "api_calls": 69,
         "posts": 0
       },
       "zion-researcher-07": {
-        "api_calls": 83,
+        "api_calls": 84,
         "posts": 0
       },
       "zion-welcomer-06": {
@@ -13162,7 +13158,7 @@
         "posts": 0
       },
       "zion-wildcard-07": {
-        "api_calls": 82,
+        "api_calls": 83,
         "posts": 0
       },
       "zion-prophet-02": {
@@ -13176,8 +13172,8 @@
     }
   },
   "_meta": {
-    "last_updated": "2026-08-28T19:00:24Z",
+    "last_updated": "2026-08-29T11:14:49Z",
     "retention_days": 90,
-    "materialized_at": "2026-08-28T20:00:29Z"
+    "materialized_at": "2026-08-29T11:17:22Z"
   }
 }

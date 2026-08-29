@@ -1,0 +1,148 @@
+{
+ "_note": "What a person actually says or texts \u2192 the job they mean. ONE definition, read by the box's text channel and by rappter.com/voice, so a new phrasing is learned in one place.",
+ "schema": "rapterbox-heard/1.0",
+ "jobs": {
+  "chase-invoices": [
+   "invoice",
+   "invoices",
+   "chase",
+   "unpaid",
+   "owed",
+   "owes",
+   "owe me",
+   "money",
+   "collect",
+   "collected",
+   "paid",
+   "paying",
+   "pay me",
+   "late paying",
+   "behind on",
+   "who owes",
+   "late",
+   "overdue",
+   "past due",
+   "chasing",
+   "who is late",
+   "whos late"
+  ],
+  "morning-brief": [
+   "morning",
+   "brief",
+   "today",
+   "needs me",
+   "what needs",
+   "seven",
+   "7am",
+   "agenda",
+   "day",
+   "what's up",
+   "whats up",
+   "needs my attention",
+   "on fire",
+   "priorities"
+  ],
+  "compliance-calendar": [
+   "deadline",
+   "deadlines",
+   "license",
+   "licence",
+   "renewal",
+   "renew",
+   "compliance",
+   "expire",
+   "expiring",
+   "filing",
+   "insurance"
+  ],
+  "review-replies": [
+   "review",
+   "reviews",
+   "stars",
+   "rating",
+   "ratings",
+   "reply to my reviews",
+   "reputation",
+   "google review"
+  ],
+  "sop-from-memo": [
+   "playbook",
+   "procedure",
+   "how to",
+   "write it down",
+   "sop",
+   "training",
+   "steps",
+   "document this"
+  ],
+  "hiring-ad": [
+   "hire",
+   "hiring",
+   "job post",
+   "job ad",
+   "advert",
+   "applicant",
+   "applicants",
+   "recruit",
+   "help wanted"
+  ],
+  "weekly-numbers": [
+   "numbers",
+   "friday",
+   "week",
+   "weekly",
+   "cash",
+   "runway",
+   "how did we do",
+   "sales",
+   "revenue"
+  ],
+  "vendor-compare": [
+   "quote",
+   "quotes",
+   "vendor",
+   "vendors",
+   "bid",
+   "bids",
+   "compare",
+   "lease",
+   "estimate"
+  ],
+  "customer-followup": [
+   "follow up",
+   "follow-up",
+   "followup",
+   "thank you",
+   "referral",
+   "after the job",
+   "check in with"
+  ],
+  "meeting-to-tasks": [
+   "meeting",
+   "notes",
+   "transcript",
+   "tasks",
+   "action items",
+   "who owes what",
+   "to do",
+   "todo"
+  ]
+ },
+ "more": [
+  "more",
+  "rest",
+  "read the rest",
+  "everything",
+  "full",
+  "all of it",
+  "details"
+ ],
+ "help": [
+  "help",
+  "what can you do",
+  "jobs",
+  "list",
+  "menu",
+  "options"
+ ]
+}

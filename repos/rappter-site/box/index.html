@@ -31,7 +31,7 @@ input,select{width:100%;background:#fff;border:2px solid var(--ink);color:var(--
 input[type=checkbox]{width:auto}
 input:focus,select:focus,button:focus-visible{outline:3px solid var(--amberdeep);outline-offset:2px}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
-.btn{background:var(--card);color:var(--ink);border:2px solid var(--ink);padding:10px 14px;font:inherit;font-size:14px;font-weight:800;cursor:pointer;box-shadow:3px 3px 0 var(--ink)}
+.btn{background:var(--card);color:var(--ink);border:2px solid var(--ink);padding:10px 14px;font-family:inherit;font-size:14px;font-weight:800;text-transform:none;letter-spacing:0;cursor:pointer;box-shadow:3px 3px 0 var(--ink)}
 .btn:disabled{opacity:.55;cursor:not-allowed}
 .picks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
 .pick{border:2px solid var(--ink);background:var(--card);padding:11px 12px;font:inherit;font-size:14px;font-weight:700;text-align:left;cursor:pointer;box-shadow:3px 3px 0 var(--ink)}
@@ -52,11 +52,29 @@ input:focus,select:focus,button:focus-visible{outline:3px solid var(--amberdeep)
 .chain div{border-bottom:1px dotted var(--rule);padding:3px 0;overflow-wrap:anywhere}
 .warn{border:2px solid var(--ink);background:var(--card);padding:12px 14px;font-size:14px;color:var(--body);box-shadow:5px 5px 0 var(--green)}
 footer{padding:26px 0 60px;border-top:2px solid var(--ink);font-family:ui-monospace,Menlo,monospace;font-size:13px;color:var(--mute)}
+/* app mode: the product face. No nav, no hero, no marketing — the box, its jobs, its receipts. */
+html.app nav,html.app .hero,html.app footer,html.app .lede,html.app .kicker,html.app h1,
+body.app nav,body.app .hero,body.app footer,body.app .lede,body.app .kicker,body.app h1{display:none}
+html.app section{padding:14px 0}
+body.app section{padding:14px 0}
+html.app .w{padding:0 14px}
+body.app .w{padding:0 14px}
+html.app .stage{grid-template-columns:1fr;gap:16px}
+body.app .stage{grid-template-columns:1fr;gap:16px}
+html.app .tear{border-top:0}
+body.app .tear{border-top:0}
+html.app .appbar{display:flex}
+body.app .appbar{display:flex}
+.appbar{display:none;align-items:center;gap:10px;padding:12px 14px;border-bottom:2px solid var(--ink);background:var(--card);position:sticky;top:0;z-index:5}
+.appbar .wm{font-size:17px;font-weight:800;letter-spacing:-.03em;flex:none}
+.appbar .fine{flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.appbar .swap{margin-left:auto;border:2px solid var(--ink);background:var(--paper);padding:7px 11px;font:700 12px ui-monospace,Menlo,monospace;cursor:pointer;box-shadow:3px 3px 0 var(--ink)}
 @media(max-width:900px){.stage{grid-template-columns:1fr}.picks{grid-template-columns:1fr}nav .line{display:none}.paper{padding:18px 16px}
   .ev{grid-template-columns:auto 1fr}.ev .t{grid-column:1/-1;font-size:11px}}
 </style>
 </head>
 <body>
+<header class="appbar"><span class="wm">rbox</span><span class="fine" id="appwhere">this device</span><button class="swap" id="swap" type="button">Hands-free</button></header>
 <nav><div class="w"><a class="wm" href="/">RappterBox</a><span class="line">Rapter see, rapter do.</span><a class="cta" href="/#claim">Join the waitlist</a></div></nav>
 
 <section><div class="w">
@@ -68,19 +86,23 @@ footer{padding:26px 0 60px;border-top:2px solid var(--ink);font-family:ui-monosp
 <section class="tear"><div class="w stage">
   <div>
     <div class="card"><div class="k">This box</div>
-      <div class="id" id="rappid">minting…</div>
+      <div class="id" id="rappid" title="tap to show the whole identity">minting…</div>
       <div class="fine" id="lineage" style="margin-top:6px"></div>
       <div class="row"><button class="btn" id="export">Export .egg (backup)</button><label for="import" class="btn" style="margin:0">Hatch an .egg here<input id="import" type="file" accept=".egg,.json,application/json" style="display:none"></label><button class="btn" id="wipe">Forget this box</button></div>
       <div class="fine" id="chainmeta" style="margin-top:8px"></div>
     </div>
-    <div class="card"><div class="k">Think with</div>
-      <label for="prov">Model provider</label>
-      <select id="prov"><option value="openai">OpenAI-compatible (OpenAI, Azure, local server)</option><option value="anthropic">Anthropic</option></select>
-      <label for="endpoint">Endpoint — where your key is sent</label><input id="endpoint" value="https://api.openai.com/v1/chat/completions" spellcheck="false">
-      <label for="model">Model</label><input id="model" value="gpt-4o-mini" spellcheck="false">
-      <label for="key">API key — stays in this browser</label><input id="key" type="password" autocomplete="off" placeholder="paste your key">
-      <div class="row"><label class="chk" for="remember"><input type="checkbox" id="remember"> remember key on this device</label></div>
-      <p class="fine" style="margin:10px 0 0">The key goes only to the endpoint above, straight from your browser; we never see it. This page sends Anthropic's direct-browser-access header, so Anthropic keys work from here. A local server on 127.0.0.1 needs no key. If an endpoint refuses browser requests, run a local proxy or watch the office box at <a href="/try/">/try</a>.</p>
+    <div class="card"><div class="k">What it thinks with</div>
+      <p class="fine" id="who" style="margin:0 0 10px">Looking for your box…</p>
+      <button class="btn" id="signin" type="button">Sign in with GitHub</button>
+      <div id="devicecode" hidden style="margin-top:12px;border:2px solid var(--ink);background:var(--white);padding:12px 14px">
+        <div class="fine">Open <a id="ghlink" href="https://github.com/login/device" target="_blank" rel="noopener">github.com/login/device</a> and type this code:</div>
+        <div id="usercode" style="font:800 30px/1.2 ui-monospace,Menlo,monospace;letter-spacing:.14em;margin:8px 0 4px"></div>
+        <div class="fine" id="devicestate">Waiting for you to say yes on GitHub…</div>
+      </div>
+      <label for="model" style="margin-top:14px">Model</label>
+      <input id="model" list="models" value="auto" spellcheck="false">
+      <datalist id="models"><option value="auto"></option><option value="claude-sonnet-4.5"></option><option value="gpt-5.6-sol"></option><option value="gpt-5"></option></datalist>
+      <p class="fine" style="margin:8px 0 0">Your box thinks with your own GitHub Copilot, through the official Copilot CLI on your machine. No key is pasted here and no Copilot credential is ever in a browser — this device only proves who you are. “auto” lets Copilot choose.</p>
     </div>
     <div class="card"><div class="k">Pick a job</div>
       <div class="picks" id="picks" role="group" aria-label="job"></div>
@@ -107,6 +129,8 @@ footer{padding:26px 0 60px;border-top:2px solid var(--ink);font-family:ui-monosp
 <footer><div class="w">RapterBox LLC · the RappterBox product · <a href="https://github.com/kody-w/rapp-1">rapp/1</a>, the receipt and egg format, is open · <a href="https://github.com/kody-w/rappter-prompts">the prompts and sample data</a></div></footer>
 
 <script>
+/* app mode is decided before the first paint — a phone must never flash the brochure it is not here for */
+(function(){try{if(new URLSearchParams(location.search).get('app')||window.ReactNativeWebView){document.documentElement.className='app';document.title='rbox';}}catch(_){}})();
 // ---------- rapp/1 primitives — the same profile as the reference implementation (rapp-1/rapp.py) ----------
 const RE_RAPPID=/^rappid:@([a-z0-9]+(?:-[a-z0-9]+)*)\/([a-z0-9]+(?:-[a-z0-9]+)*):([0-9a-f]{64})$/;
 const RE_LCLABEL=/^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -180,6 +204,11 @@ function reset(){$('events').innerHTML='';$('out').style.display='none';$('out')
 function renderChain(){const c=$('chain');c.innerHTML='';if(!chain.length)c.innerHTML='<div>empty — run a job</div>';for(const f of chain.slice().reverse()){const d=document.createElement('div');d.textContent=`#${f.seq} ${f.utc} ${f.payload.routine||f.kind} · ${f.frame_hash.slice(0,16)}… ← ${(f.prev||'genesis').slice(0,12)}`;c.appendChild(d);}
   $('chainmeta').textContent=chain.length?`${chain.length} receipt frame${chain.length>1?'s':''} on this device · head ${chain[chain.length-1].frame_hash.slice(0,16)}…`:'no receipts yet';
   const h=$('hatched');h.innerHTML='';const ks=Object.keys(hatched);if(!ks.length)h.innerHTML='<div>none — hatch an .egg to bring another box\'s receipts here</div>';for(const k of ks){const fr=hatched[k];const d=document.createElement('div');d.textContent=`${k.slice(0,48)}… · ${fr.length} frames · head ${fr[fr.length-1].frame_hash.slice(0,12)}…`;h.appendChild(d);}}
+function nameTheBar(){    // the bar names the box that is actually here now, not the one that was
+  const w=document.getElementById('appwhere');
+  if(!w||!document.body.classList.contains('app'))return;
+  w.textContent=((identity&&identity.rappid||'').split('/')[1]||'this device').split(':')[0];
+}
 async function boot(){
   let id=null;try{id=JSON.parse(localStorage.getItem('rapterbox.virtual.identity')||'null');}catch(e){}
   if(!id||!isRappid(id.rappid)){
@@ -187,34 +216,166 @@ async function boot(){
     id={spec:'rapp/1',kind:'organism',rappid:await mintRappid('rapterbox',slug),what:'rbox mobile (mk0): a RappterBox running in a browser',grown_from:null,minted_utc:utc()};
     try{localStorage.setItem('rapterbox.virtual.identity',JSON.stringify(id));}catch(e){}
   }
-  identity=id;$('rappid').textContent=id.rappid;$('lineage').textContent=id.grown_from?('minted here, once (§6.2) · grown from egg '+id.grown_from.slice(0,16)+'… (§9.4 lineage)'):'minted here, once (§6.2 keyless) — not grown from an egg';
+  identity=id;
+  const short=(id.rappid.split('/')[1]||'').split(':');
+  const full=id.rappid, brief='rappid:@rapterbox/'+short[0]+':'+(short[1]||'').slice(0,12)+'…';
+  const el=$('rappid'); let open=false;
+  el.textContent=document.body.classList.contains('app')?brief:full;
+  el.style.cursor='pointer';
+  el.onclick=()=>{open=!open;el.textContent=open?full:(document.body.classList.contains('app')?brief:full);};$('lineage').textContent=id.grown_from?('minted here, once (§6.2) · grown from egg '+id.grown_from.slice(0,16)+'… (§9.4 lineage)'):'minted here, once (§6.2 keyless) — not grown from an egg';
+  nameTheBar();               // the bar names the box that is here NOW — a wipe re-boots, so a wipe renames it
   const all=await loadStreams();chain=all[own()]||[];hatched={};for(const k in all)if(k!==own())hatched[k]=all[k];renderChain();
-  try{const s=JSON.parse(localStorage.getItem('rapterbox.virtual.settings')||'{}');if(s.prov)$('prov').value=s.prov;if(s.endpoint)$('endpoint').value=s.endpoint;if(s.model)$('model').value=s.model;if(s.key){$('key').value=s.key;$('remember').checked=true;}}catch(e){}
+  try{const s=JSON.parse(localStorage.getItem('rapterbox.virtual.settings.v2')||'{}');if(s.model)$('model').value=s.model;}catch(e){}
 }
 for(const [slug,name] of Object.entries(NAMES)){const b=document.createElement('button');b.className='pick';b.dataset.slug=slug;b.setAttribute('aria-pressed',String(slug===routine));b.textContent=name;b.onclick=()=>{routine=slug;document.querySelectorAll('.pick').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.slug===slug)));};$('picks').appendChild(b);}
-function saveSettings(){const s={prov:$('prov').value,endpoint:$('endpoint').value,model:$('model').value};if($('remember').checked)s.key=$('key').value;try{localStorage.setItem('rapterbox.virtual.settings',JSON.stringify(s));}catch(e){}}
-['prov','endpoint','model','key','remember'].forEach(i=>$(i).addEventListener('change',saveSettings));
-function applyProv(){if($('prov').value==='anthropic'){$('model').value='claude-sonnet-4-5';$('endpoint').value='https://api.anthropic.com/v1/messages';}else{$('model').value='gpt-4o-mini';$('endpoint').value='https://api.openai.com/v1/chat/completions';}}
-$('prov').addEventListener('change',()=>{applyProv();saveSettings();});
+function saveSettings(){try{localStorage.setItem('rapterbox.virtual.settings.v2',JSON.stringify({model:$('model').value}));}catch(e){}}
+$('model').addEventListener('change',saveSettings);
+// ---------- the owner's box, and proving who you are to it ----------
+const ENDPOINT_JSON='https://raw.githubusercontent.com/kody-w/rappter-prompts/main/starter-pack/try-endpoint.json';
+const ENDPOINT_API='https://api.github.com/repos/kody-w/rappter-prompts/contents/starter-pack/try-endpoint.json';
+let boxBase=null, session=null, signedIn=null;
+try{const sv=JSON.parse(localStorage.getItem('rapterbox.virtual.session')||'null');if(sv&&sv.token&&sv.expires>Date.now()){session=sv.token;signedIn=sv.login;}}catch(e){}
+function saySignedIn(){ $('who').textContent='Signed in as '+signedIn+' — your box does the thinking.'; $('signin').style.display='none'; }
+const HOME_BOX='http://127.0.0.1:7093';
+let onTheDesk=false;
+async function findBox(){
+  try{
+    // If the box is the machine you are sitting at, talk to it directly. It knows the difference between the
+    // desk and the tunnel, and on the desk it needs no sign-in at all — the same reason the grail Brainstem
+    // trusts loopback. Going out to the tunnel and back would turn the owner into a stranger to their own box.
+    try{
+      // A clock that cannot fail to fire. AbortSignal alone is not enough here: a page on the public internet
+      // reaching 127.0.0.1 is a private-network request, and a browser may sit on that preflight indefinitely
+      // — which would hang the search for the box behind a convenience.
+      const ctrl=new AbortController();
+      const hh=await Promise.race([
+        fetch(HOME_BOX+'/try/health',{cache:'no-store',signal:ctrl.signal}),
+        new Promise(res=>setTimeout(()=>{try{ctrl.abort();}catch(_){}res(null);},1500)),
+      ]);
+      if(hh&&hh.ok&&!toldByShell){        // a shell already said where this page thinks; do not overrule it
+        const hj=await hh.json();
+        if(hj.desk){
+          boxBase=HOME_BOX; onTheDesk=true;
+          if(!toldByShell)$('who').textContent='This is your box — it is right here, so it thinks without a sign-in.';
+          const b=$('signin'); if(b)b.hidden=true;
+          return;
+        }
+      }
+    }catch(_){}                        // no box on this machine: the ordinary case, and not an error
+    let j=null;
+    try{const a=await fetch(ENDPOINT_API,{cache:'no-store',headers:{Accept:'application/vnd.github+json'}});if(a.ok){const c=await a.json();j=JSON.parse(atob(c.content.replace(/\n/g,'')));}}catch(_){}
+    if(!j){const r=await fetch(ENDPOINT_JSON+'?t='+Date.now(),{cache:'no-store'});j=await r.json();}
+    // The endpoint is read from a public repo, and the session bearer token and the whole sign-in go to
+    // whatever it names — so the page checks the shape it expects before it will talk to it.
+    if(!/^https:\/\/[a-z0-9-]+\.trycloudflare\.com\/?$/.test(String(j.url||'')))
+      throw new Error('the published box address does not look like this box');
+    boxBase=String(j.url).replace(/\/+$/,'');
+    const h=await(await fetch(boxBase+'/try/health',{cache:'no-store'})).json();
+    if(toldByShell)return;              // the desk thinks on the desk; do not offer it a sign-in it cannot use
+    if(signedIn)saySignedIn();
+    else if(h.github_signin)$('who').textContent='Your box is awake. Sign in with GitHub so it will think for this device.';
+    else $('who').textContent='Your box is awake, but this box does not know who owns it yet.';
+  }catch(e){ if(!toldByShell)$('who').textContent='Cannot reach your box right now — it thinks when the box is awake.'; }
+}
+$('signin').addEventListener('click',async()=>{
+  if(!boxBase){await findBox();if(!boxBase)return;}
+  $('signin').disabled=true;
+  try{
+    const r=await fetch(boxBase+'/auth/start',{method:'POST',headers:{'content-type':'application/json'},body:'{}'});
+    const d=await r.json().catch(()=>({error:'your box answered with something I could not read'}));
+    if(!r.ok){$('who').textContent=(d.error||'sign-in is not available')+(d.how?' — '+d.how:'');$('signin').disabled=false;return;}
+    $('devicecode').hidden=false;$('usercode').textContent=d.user_code||'';$('ghlink').href=d.verification_uri||'https://github.com/login/device';
+    try{window.open(d.verification_uri,'_blank','noopener');}catch(_){}
+    const wait=Math.max(5,d.interval||5)*1000;
+    for(let i=0;i<120;i++){
+      await new Promise(z=>setTimeout(z,wait));
+      const f=await fetch(boxBase+'/auth/finish',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({handle:d.handle})});
+      const fd=await f.json().catch(()=>({}));
+      if(f.status===202){$('devicestate').textContent='Still waiting for you to say yes on GitHub…';continue;}
+      if(!f.ok){$('devicestate').textContent=fd.error||'that sign-in did not finish';break;}
+      session=fd.session;signedIn=fd.login;
+      try{localStorage.setItem('rapterbox.virtual.session',JSON.stringify({token:session,login:signedIn,expires:Date.now()+(fd.hours||12)*3600e3}));}catch(_){}
+      $('devicecode').hidden=true;saySignedIn();break;
+    }
+  }catch(e){                                  // said where the person is looking, not inside a panel that never opened
+    $('who').textContent='Could not reach your box just now — it may be asleep. Try again in a moment.';
+    $('devicecode').hidden=true;
+  }
+  $('signin').disabled=false;
+});
+
 // ---------- public inputs, pinned to a commit ----------
 async function getJSON(u,opt){const r=await fetch(u,opt);if(!r.ok)throw new Error('fetch '+r.status+' '+u);return r.json();}
 async function pin(repo){try{const j=await getJSON(`https://api.github.com/repos/${repo}/commits/main`,{headers:{Accept:'application/vnd.github+json'}});return j.sha;}catch(e){throw new Error('could not pin inputs for '+repo);}}
 async function readBytes(url,reads){const r=await fetch(url,{cache:'no-store'});if(!r.ok)throw new Error('read failed '+r.status+' '+url);const b=new Uint8Array(await r.arrayBuffer());const h=await sha256hex(b);reads.push({url,sha256:h,bytes:b.length});ev('read',url.replace('https://raw.githubusercontent.com/','').replace(/\/[0-9a-f]{40}\//,'/@/')+' · '+b.length+' bytes · '+h.slice(0,12));return new TextDecoder().decode(b);}
-// ---------- think: bring your own key ----------
+// ---------- think: the owner's box, or the machine this page is running on ----------
+// A native shell (the Launchpad) runs on the owner's own Mac beside their Copilot CLI, so it has no sign-in
+// to do — it hands the page a thinker directly. That hook is deliberately NOT a URL parameter and NOT a
+// field: a link must never be able to choose where anything is sent. It accepts loopback and nothing else,
+// so the worst a stray call could do is talk to this same machine.
+let localThinker=null;
+let toldByShell=false;
+function thinkHere(url){
+  // an origin, with or without a path — and nothing that is not this machine
+  if(typeof url!=='string'||!/^http:\/\/(127\.0\.0\.1|\[::1\]|localhost):\d+(\/|$)/.test(url))
+    throw new Error('a thinker must be on this machine');
+  localThinker=url.replace(/\/+$/,'').replace(/\/v1\/chat\/completions$/,'');   // the caller may pass either shape
+  toldByShell=true;                 // a shell has spoken for this page; findBox must not talk over it
+  const w=$('who'); if(w)w.textContent='Thinking on this machine, with the Copilot CLI already signed in here.';
+  const b=$('signin'); if(b)b.hidden=true;
+  return localThinker;
+}
+const THINK_DEADLINE=420000;
+async function askThinker(url,body,auth){
+  // Every wait carries a clock (rbox SDK law XVIII). A think that never returns must end as a sentence the
+  // owner can act on, not as a Run button that never comes back.
+  const ctrl=new AbortController();
+  const t=setTimeout(()=>ctrl.abort(),THINK_DEADLINE);
+  try{
+    const r=await fetch(url,{method:'POST',signal:ctrl.signal,
+      headers:Object.assign({'content-type':'application/json'},auth?{authorization:'Bearer '+auth}:{}),
+      body:JSON.stringify(body)});
+    if(!r.ok){
+      let m=''; try{m=(await r.json()).error||'';}catch(_){}
+      const e=new Error(m||('your box answered '+r.status)); e.status=r.status; throw e;
+    }
+    const j=await r.json();
+    return ((j.choices||[])[0]||{}).message?.content||'';
+  }catch(e){
+    if(ctrl.signal.aborted)throw new Error('your box took too long to think — it may be busy');
+    throw e;
+  }finally{ clearTimeout(t); }
+}
 async function think(prompt){
-  const prov=$('prov').value,key=$('key').value.trim(),model=$('model').value.trim(),endpoint=$('endpoint').value.trim();
-  const local=/^https?:\/\/(127\.0\.0\.1|localhost)(:|\/)/.test(endpoint);
-  if(!key&&!local)throw new Error('paste an API key first — it stays in this browser');
-  if(prov==='anthropic'){
-    const r=await fetch(endpoint,{method:'POST',headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model,max_tokens:1500,messages:[{role:'user',content:prompt}]})});
-    if(!r.ok)throw new Error('model endpoint answered '+r.status);const j=await r.json();return (j.content||[]).map(c=>c.text||'').join('');}
-  const hdr={'content-type':'application/json'};if(key)hdr.authorization='Bearer '+key;
-  const r=await fetch(endpoint,{method:'POST',headers:hdr,body:JSON.stringify({model,messages:[{role:'user',content:prompt}],temperature:0.2})});
-  if(!r.ok)throw new Error('model endpoint answered '+r.status);const j=await r.json();return j.choices?.[0]?.message?.content||'';
+  const model=$('model').value.trim()||'auto';
+  const msg={model,messages:[{role:'user',content:prompt}]};
+  if(localThinker)return askThinker(localThinker+'/v1/chat/completions',msg);  // a shell SAID where to think: that wins
+  if(onTheDesk)return askThinker(boxBase+'/think/v1/chat/completions',msg);    // otherwise, the box is this machine
+  if(!boxBase)await findBox();
+  if(!boxBase)throw new Error('your box is not reachable right now — it thinks when the box is awake');
+  if(!session)throw new Error('sign in with GitHub first — your box will not think for a device it does not know');
+  try{
+    return await askThinker(boxBase+'/think/v1/chat/completions',msg,session);
+  }catch(e){
+    if(e.status===403){        // the box no longer knows this device: forget the session and ask again
+      session=null;signedIn=null;
+      try{localStorage.removeItem('rapterbox.virtual.session');}catch(_){}
+      $('signin').style.display='';
+      throw new Error('that sign-in is no longer good — sign in again');
+    }
+    throw e;
+  }
 }
 // ---------- one run = one receipt frame on THIS box's stream ----------
 async function runOnce(){
-  reset();$('run').disabled=true;$('sub').textContent='receipt · this browser · '+NAMES[routine];
+  reset();
+  if(!session&&!localThinker&&!onTheDesk){   // said before the work, not after: a run that cannot finish should not look like one that might
+    ev('note','Sign in with GitHub first — your box will not think for a device it does not know.');
+    $('who').scrollIntoView({block:'center',behavior:'smooth'});
+    $('signin').focus();
+    return;
+  }
+  $('run').disabled=true;$('sub').textContent='receipt · this browser · '+NAMES[routine];
   const reads=[];const t0=Date.now();
   try{
     ev('box',identity.rappid.slice(0,40)+'… · '+new Date().toISOString().slice(0,19)+'Z');
@@ -235,10 +396,10 @@ async function runOnce(){
       +"Never invent dates, numbers or promises — mark UNKNOWN or ASK OWNER. You draft; the owner sends, signs, pays or deletes.\nWrite PLAIN TEXT for a phone: no Markdown headings (#), no ** bold **, no | tables, no code fences.\n"
       +`TODAY is ${today}. Compute every 'days late' / 'days until' from that date.\n\n=== METHOD ===\n${method}\n\n`+(transcript.trim()?`=== TRANSCRIPT (owner, verbatim) ===\n${transcript}\n\n`:'')
       +`=== DATA (all public, synthetic or simulated CRM) ===\n${JSON.stringify(data).slice(0,14000)}\n`;
-    ev('think','this browser is asking '+$('prov').value+' · '+$('model').value+' ('+prompt.length+' chars of method + data)');
+    ev('think','your box is thinking with Copilot · '+($('model').value||'auto')+' ('+prompt.length+' chars of method + data)');
     let text=plain(await think(prompt));if(!text)throw new Error('the model returned nothing');
     let dataSha=null;try{dataSha=await sha256hex(enc.encode(canonical(data)));}catch(e){}
-    const payload={routine,business:'maple-and-sons',output:text,receipt:{reads,today,library_commit:lib,static_apis_commit:stat,transcript_sha256:await sha256hex(enc.encode(transcript)),data_sha256:dataSha,thinker:$('prov').value+':'+$('model').value,will_never:['send','sign','pay','delete']}};
+    const payload={routine,business:'maple-and-sons',output:text,receipt:{reads,today,library_commit:lib,static_apis_commit:stat,transcript_sha256:await sha256hex(enc.encode(transcript)),data_sha256:dataSha,thinker:'copilot:'+($('model').value||'auto'),will_never:['send','sign','pay','delete']}};
     const head=chain[chain.length-1]||null;const now=utc();
     if(head&&now<head.utc)throw new Error("this device's clock is behind the last receipt ("+head.utc+") — fix the clock and run again");
     const frame={spec:'rapp/1',kind:'memory.save',stream_id:own(),seq:head?head.seq+1:0,utc:now,payload,payload_hash:await H('rapp/1:particle',payload),prev:head?head.payload_hash:null,prev_wave:null,sig:null};
@@ -284,9 +445,26 @@ async function hatchText(txt){
   renderChain();ev('egg','hatched '+frames.length+' verified frames from egg '+egg_hash.slice(0,16)+'… as read-only history · this box keeps its own identity');return egg_hash;
 }
 $('import').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{await hatchText(await f.text());}catch(err){ev('error',err.message);}e.target.value='';});
-$('wipe').onclick=async()=>{if(!confirm('Forget this box on this device? This erases its chain and every chain hatched here. Export an .egg first if you want it back.'))return;await clearAll();chain=[];hatched={};localStorage.removeItem('rapterbox.virtual.identity');localStorage.removeItem('rapterbox.virtual.settings');await boot();reset();ev('note','this device forgot the box; a new identity was minted');};
-// demo/test hooks: ?endpoint=&model=&prov=&auto=1 — applied AFTER saved settings; a key is never taken from the URL
-window.__vbox={run:()=>$('run').click(),runAsync:runOnce,chain:()=>chain,hatched:()=>hatched,identity:()=>identity,packEgg,hatchText,verifyFrame,canonical,wipeSilently:async()=>{await clearAll();chain=[];hatched={};localStorage.removeItem('rapterbox.virtual.identity');await boot();}};
-window.__vbox.ready=boot().then(()=>{const q=new URLSearchParams(location.search);if(q.get('prov')){$('prov').value=q.get('prov');applyProv();}if(q.get('endpoint'))$('endpoint').value=q.get('endpoint');if(q.get('model'))$('model').value=q.get('model');if(q.get('auto'))$('run').click();});
+async function forgetBox(){          // the ONE way a box is forgotten — the paper goes with the chain
+  await clearAll();chain=[];hatched={};
+  localStorage.removeItem('rapterbox.virtual.identity');
+  localStorage.removeItem('rapterbox.virtual.settings.v2');
+  await boot();reset();
+}
+$('wipe').onclick=async()=>{if(!confirm('Forget this box on this device? This erases its chain and every chain hatched here. Export an .egg first if you want it back.'))return;await forgetBox();ev('note','this device forgot the box; a new identity was minted');};
+// demo/test hooks: ?model= and ?auto=1 only. A link can never say where this box sends anything.
+window.__vbox={thinkHere,run:()=>$('run').click(),runAsync:runOnce,chain:()=>chain,hatched:()=>hatched,identity:()=>identity,packEgg,hatchText,verifyFrame,canonical,wipeSilently:async()=>{await forgetBox();}};
+findBox();
+window.__vbox.ready=boot().then(()=>{const q=new URLSearchParams(location.search);
+  if(q.get('app')||window.ReactNativeWebView){                 // the phone opens the box, not the brochure
+    document.body.classList.add('app');
+    document.title='rbox';
+    if(identity){const sh=(identity.rappid.split('/')[1]||'').split(':');$('rappid').textContent='rappid:@rapterbox/'+sh[0]+':'+(sh[1]||'').slice(0,12)+'…';}
+    const sw=document.getElementById('swap'); if(sw)sw.addEventListener('click',()=>{location.href='/voice/?app=1';});
+    nameTheBar();
+  }
+  if(q.get('model'))$('model').value=q.get('model');   /* a link may suggest a model; it may never choose where anything is sent */
+  if(q.get('auto'))$('run').click();
+});
 </script>
 </body></html>
