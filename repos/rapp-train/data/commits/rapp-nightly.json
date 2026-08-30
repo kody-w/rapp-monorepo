@@ -1,17 +1,17 @@
 {
- "sha": "4410a1c8062f2faa3e045fca84a607c961ff3a9e",
- "html_url": "https://github.com/kody-w/rapp-nightly/commit/4410a1c8062f2faa3e045fca84a607c961ff3a9e",
+ "sha": "0b68d80c3ec9e0d869aa334bb05dd1c9fabace69",
+ "html_url": "https://github.com/kody-w/rapp-nightly/commit/0b68d80c3ec9e0d869aa334bb05dd1c9fabace69",
  "commit": {
-  "message": "promote: canary -> nightly (tutorial six-steps + shape-finding fixes)\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>",
+  "message": "reseed: restore production baseline\n\nReset the Nightly shared payload to exact Grail main bytes; preserve the prior tip at archive/pre-pristine-20260830.\n\nCo-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>\nCopilot-Session: 690f70cf-c834-40ff-b050-37382ea46b0d",
   "author": {
    "name": "Kody Wildfeuer",
    "email": "kwildfeuer@me.com",
-   "date": "2026-07-18T14:55:15-05:00"
+   "date": "2026-08-30T08:30:21-04:00"
   },
   "committer": {
    "name": "Kody Wildfeuer",
    "email": "kwildfeuer@me.com",
-   "date": "2026-07-18T14:55:15-05:00"
+   "date": "2026-08-30T08:30:21-04:00"
   }
  }
 }

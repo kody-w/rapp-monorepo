@@ -24,10 +24,7 @@ $VENV_DIR = "$env:USERPROFILE\.brainstem\venv"
 # tag form brainstem-v0.6.14). Parsed from the script arguments so a user can pin or
 # RC-test a specific release on Windows, e.g.
 #   & ([scriptblock]::Create((irm https://.../install.ps1))) --version v0.6.14
-# The BRAINSTEM_VERSION env var is the pipe-friendly form (survives `irm | iex`):
-#   $env:BRAINSTEM_VERSION = "v0.6.14"; irm https://.../install.ps1 | iex
-# --version wins if both are given.
-$PIN_VERSION = if ($env:BRAINSTEM_VERSION) { [string]$env:BRAINSTEM_VERSION } else { "" }
+$PIN_VERSION = ""
 $argList = @($args)
 for ($i = 0; $i -lt $argList.Count; $i++) {
     if ($argList[$i] -eq "--version" -and ($i + 1) -lt $argList.Count) {
@@ -683,7 +680,7 @@ function Check-PythonDeps {
     $prev = $ErrorActionPreference
     $ErrorActionPreference = 'Continue'
     try {
-        & $py -c "import flask, flask_cors, requests, dotenv, pyzipper" 2>&1 | Out-Null
+        & $py -c "import flask, flask_cors, requests, dotenv" 2>&1 | Out-Null
         return ($LASTEXITCODE -eq 0)
     } catch {
         return $false
@@ -834,23 +831,14 @@ function Launch-Brainstem {
                     "Editor-Plugin-Version" = "copilot/1.0.0"
                 }
                 try {
-                    $checkResp = Invoke-WebRequest -Uri "https://api.github.com/copilot_internal/v2/token" -Headers $headers -UseBasicParsing -TimeoutSec 10 -ErrorAction Stop
+                    $checkResp = Invoke-WebRequest -Uri "https://api.github.com/copilot_internal/v2/token" -Headers $headers -UseBasicParsing -TimeoutSec 10 -ErrorAction SilentlyContinue
                     if ($checkResp.StatusCode -eq 200) {
                         Write-Host "  [OK] Already authenticated with GitHub Copilot" -ForegroundColor Green
                         $needsAuth = $false
                     }
                 } catch {
-                    if ($_.Exception.Response) {
-                        # GitHub answered with an error status — the token itself is bad.
-                        Write-Host "  [..] Saved token expired — re-authenticating..." -ForegroundColor Yellow
-                        Remove-Item $tokenFile -Force -ErrorAction SilentlyContinue
-                    } else {
-                        # Never reached GitHub (offline, captive portal, timeout) — that
-                        # says nothing about the token. Keep it; the server retries live.
-                        # Mirrors install.sh's unreachable-is-not-expired handling.
-                        Write-Host "  [..] Couldn't verify the saved token (no network) — keeping it" -ForegroundColor Yellow
-                        $needsAuth = $false
-                    }
+                    Write-Host "  [..] Saved token expired — re-authenticating..." -ForegroundColor Yellow
+                    Remove-Item $tokenFile -Force -ErrorAction SilentlyContinue
                 }
             }
         } catch {
@@ -1049,9 +1037,6 @@ try {
     Write-Host "      Need help? Open an issue at https://github.com/kody-w/rapp-installer/issues" -ForegroundColor Gray
     Write-Host ""
     # `irm | iex` has no $PSCommandPath — return to the prompt quietly. A file-based
-    # run (CI, a saved script) must still report failure through the exit code, and
-    # so must a wrapper that spawned its own powershell for us (install.cmd sets
-    # BRAINSTEM_INSTALL_EXIT) — otherwise its ERRORLEVEL check reads 0 and it
-    # announces success over a failed install.
-    if ($PSCommandPath -or $env:BRAINSTEM_INSTALL_EXIT) { exit 1 }
+    # run (CI, a saved script) must still report failure through the exit code.
+    if ($PSCommandPath) { exit 1 }
 }

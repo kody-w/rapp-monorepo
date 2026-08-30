@@ -4,15 +4,13 @@ set -e
 # RAPP Brainstem Installer
 # Usage: curl -fsSL https://kody-w.github.io/rapp-installer/install.sh | bash
 # Pin a version: curl ... install.sh | bash -s -- --version v0.6.0
-#            or: BRAINSTEM_VERSION=v0.6.0 curl ... install.sh | bash
-#                (env var form survives the pipe; --version wins if both given)
 
 BRAINSTEM_HOME="$HOME/.brainstem"
 BRAINSTEM_BIN="$HOME/.local/bin"
 VENV_DIR="$BRAINSTEM_HOME/venv"
 REPO_URL="https://github.com/kody-w/rapp-installer.git"
 REMOTE_VERSION_URL="https://raw.githubusercontent.com/kody-w/rapp-installer/main/rapp_brainstem/VERSION"
-PIN_VERSION="${BRAINSTEM_VERSION:-}"
+PIN_VERSION=""
 
 # Colors
 RED='\033[0;31m'
@@ -20,34 +18,6 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 CYAN='\033[0;36m'
 NC='\033[0m'
-
-# Run a long step with a spinner + elapsed seconds so a slow network/AV scan
-# never looks like a hang. Output is captured and shown only on failure.
-run_with_heartbeat() {
-    local label="$1"; shift
-    local log_file
-    log_file=$(mktemp "${TMPDIR:-/tmp}/brainstem-progress-XXXXXX")
-    "$@" >"$log_file" 2>&1 &
-    local pid=$!
-    local started=$SECONDS
-    local frame=0
-    while kill -0 "$pid" 2>/dev/null; do
-        local glyph
-        case "$frame" in 0) glyph='|';; 1) glyph='/';; 2) glyph='-';; *) glyph='\';; esac
-        printf "\r  [%s] %s (%ss)" "$glyph" "$label" "$((SECONDS - started))"
-        frame=$(( (frame + 1) % 4 ))
-        sleep 1
-    done
-    local status=0
-    wait "$pid" || status=$?
-    if [ "$status" -eq 0 ]; then
-        printf "\r  [✓] %s (%ss)\n" "$label" "$((SECONDS - started))"
-        rm -f "$log_file"; return 0
-    fi
-    printf "\r  [✗] %s failed after %ss\n" "$label" "$((SECONDS - started))"
-    cat "$log_file" >&2
-    rm -f "$log_file"; return "$status"
-}
 
 read_input() {
     local prompt="$1" default="$2" result
@@ -336,8 +306,8 @@ install_brainstem() {
             echo "  Switching v${LOCAL_VER} → v${TARGET_VER}..."
 
             # 1. Backup user's local files (soul, custom agents, .env)
-            local BACKUP
-            BACKUP=$(mktemp -d "${TMPDIR:-/tmp}/brainstem-upgrade-XXXXXX")
+            local BACKUP="/tmp/brainstem-upgrade-$$"
+            mkdir -p "$BACKUP"
             [ -f "$SOUL_FILE" ] && cp "$SOUL_FILE" "$BACKUP/soul.md"
             [ -f "$ENV_FILE" ] && cp "$ENV_FILE" "$BACKUP/.env"
             if [ -d "$AGENTS_DIR" ]; then
@@ -410,19 +380,10 @@ install_brainstem() {
 
             # 4. Clean up backup
             rm -rf "$BACKUP"
-            # Report what actually happened — the fetch/pull above tolerates failure
-            # (offline falls back to local bytes), so read the landed version from
-            # disk instead of announcing the target as fact.
-            local LANDED_VER
-            LANDED_VER=$(cat "$LOCAL_VERSION_FILE" 2>/dev/null | tr -d '[:space:]')
-            if [ "$LANDED_VER" = "$TARGET_VER" ]; then
-                echo -e "  ${GREEN}✓${NC} ${PIN_VERSION:+Pinned to}${PIN_VERSION:-Upgrade complete:} v${TARGET_VER}"
-            else
-                echo -e "  ${YELLOW}⚠${NC} Update did not land — still on v${LANDED_VER:-unknown} (wanted v${TARGET_VER}); launching what's installed"
-            fi
+            echo -e "  ${GREEN}✓${NC} ${PIN_VERSION:+Pinned to}${PIN_VERSION:-Upgrade complete:} v${TARGET_VER}"
         fi
     else
-        echo "  Fresh install — downloading the Brainstem (progress below)..."
+        echo "  Fresh install — cloning repository..."
         # A broken prior install (src present but .git gone) may still hold the user's
         # soul, .env, and custom agents — none of which are in git. Preserve them
         # before wiping so a re-run can't silently destroy the user's work. The common
@@ -437,13 +398,7 @@ install_brainstem() {
             [ -d "$DATA_DIR" ] && cp -R "$DATA_DIR" "$FRESH_BACKUP/.brainstem_data" 2>/dev/null || true
         fi
         rm -rf "$BRAINSTEM_HOME/src" 2>/dev/null || true
-        git clone --progress "$REPO_URL" "$BRAINSTEM_HOME/src" || {
-            echo -e "  ${RED}✗${NC} Clone failed — check your network and re-run the installer"
-            if [ -n "$FRESH_BACKUP" ]; then
-                echo -e "    Your soul, agents, and config were preserved at: ${FRESH_BACKUP}"
-            fi
-            exit 1
-        }
+        git clone --quiet "$REPO_URL" "$BRAINSTEM_HOME/src"
         # If pinning, checkout the specific tag after clone (accepts every tag form).
         if [ -n "$PIN_VERSION" ]; then
             cd "$BRAINSTEM_HOME/src"
@@ -492,20 +447,18 @@ setup_venv() {
         rm -rf "$VENV_DIR"
     fi
 
-    if ! run_with_heartbeat "Creating Python virtual environment" "$PYTHON_CMD" -m venv "$VENV_DIR"; then
+    echo "  Creating virtual environment..."
+    "$PYTHON_CMD" -m venv "$VENV_DIR" 2>/dev/null || {
         # Some systems need ensurepip first
         "$PYTHON_CMD" -m ensurepip 2>/dev/null || true
-        run_with_heartbeat "Retrying Python virtual environment" "$PYTHON_CMD" -m venv "$VENV_DIR" || {
+        "$PYTHON_CMD" -m venv "$VENV_DIR" || {
             echo -e "  ${RED}✗${NC} Failed to create virtual environment"
             echo "    Try: $PYTHON_CMD -m pip install virtualenv"
             exit 1
         }
-    fi
-    # pip self-upgrade is optional (the venv already ships a working pip). Behind a
-    # proxy this used to retry silently for minutes and look like a hang, so it is
-    # capped and visible now.
-    run_with_heartbeat "Updating pip (optional)" "$VENV_DIR/bin/python" -m pip install --upgrade pip --disable-pip-version-check --timeout 15 --retries 1 \
-        || echo -e "  ${YELLOW}⚠${NC} pip self-upgrade skipped (network) — continuing with bundled pip"
+    }
+    # Ensure pip is up to date inside the venv
+    "$VENV_DIR/bin/python" -m pip install --upgrade pip --quiet 2>/dev/null || true
     echo -e "  ${GREEN}✓${NC} Virtual environment ready"
 }
 
@@ -513,11 +466,11 @@ setup_deps() {
     echo ""
     echo "Installing dependencies..."
     local req_file="$BRAINSTEM_HOME/src/rapp_brainstem/requirements.txt"
-    run_with_heartbeat "Installing Python dependencies" "$VENV_DIR/bin/python" -m pip install -r "$req_file" --disable-pip-version-check --timeout 15 --retries 2 || \
-        "$VENV_DIR/bin/python" -m pip install -r "$req_file" --progress-bar on
+    "$VENV_DIR/bin/pip" install -r "$req_file" --quiet 2>/dev/null || \
+        "$VENV_DIR/bin/pip" install -r "$req_file"
 
     # Verify the critical imports actually work
-    if ! "$VENV_DIR/bin/python" -c "import flask, flask_cors, requests, dotenv, pyzipper" 2>/dev/null; then
+    if ! "$VENV_DIR/bin/python" -c "import flask, flask_cors, requests, dotenv" 2>/dev/null; then
         echo -e "  ${RED}✗${NC} Dependencies failed to install"
         echo "    Try: $VENV_DIR/bin/pip install -r $req_file"
         exit 1
@@ -527,17 +480,17 @@ setup_deps() {
 
 ensure_deps() {
     # Quick import check — only install if something is missing
-    if "$VENV_DIR/bin/python" -c "import flask, flask_cors, requests, dotenv, pyzipper" 2>/dev/null; then
+    if "$VENV_DIR/bin/python" -c "import flask, flask_cors, requests, dotenv" 2>/dev/null; then
         echo -e "  ${GREEN}✓${NC} Dependencies verified"
         return 0
     fi
 
     echo -e "  ${YELLOW}⚠${NC} Missing dependencies — installing..."
     local req_file="$BRAINSTEM_HOME/src/rapp_brainstem/requirements.txt"
-    run_with_heartbeat "Installing missing Python dependencies" "$VENV_DIR/bin/python" -m pip install -r "$req_file" --disable-pip-version-check --timeout 15 --retries 2 || \
-        "$VENV_DIR/bin/python" -m pip install -r "$req_file" --progress-bar on
+    "$VENV_DIR/bin/pip" install -r "$req_file" --quiet 2>/dev/null || \
+        "$VENV_DIR/bin/pip" install -r "$req_file"
 
-    if ! "$VENV_DIR/bin/python" -c "import flask, flask_cors, requests, dotenv, pyzipper" 2>/dev/null; then
+    if ! "$VENV_DIR/bin/python" -c "import flask, flask_cors, requests, dotenv" 2>/dev/null; then
         echo -e "  ${RED}✗${NC} Dependencies failed — try: $VENV_DIR/bin/pip install -r $req_file"
         exit 1
     fi
@@ -566,7 +519,7 @@ if [ ! -x "$VENV_PYTHON" ]; then
 fi
 
 # Verify deps on every launch (fast no-op if already installed)
-if ! "$VENV_PYTHON" -c "import flask, flask_cors, requests, dotenv, pyzipper" 2>/dev/null; then
+if ! "$VENV_PYTHON" -c "import flask, flask_cors, requests, dotenv" 2>/dev/null; then
     "$BRAINSTEM_HOME/venv/bin/pip" install -r requirements.txt --quiet 2>/dev/null || true
 fi
 
@@ -602,21 +555,10 @@ create_env() {
 launch_brainstem() {
     export PATH="$BRAINSTEM_BIN:/opt/homebrew/bin:/usr/local/bin:$PATH"
 
-    # Refresh from the repo before launching (no-op if already current). Skip when
-    # a version is pinned — pulling main would move off the pinned tag — and on a
-    # detached HEAD (an earlier pin), which a bare pull can't fast-forward anyway.
+    # Always pull latest code before launching
     if [ -d "$BRAINSTEM_HOME/src/.git" ]; then
         cd "$BRAINSTEM_HOME/src"
-        local pre_pull_head
-        pre_pull_head=$(git rev-parse HEAD 2>/dev/null) || true
-        if [ -z "$PIN_VERSION" ] && git symbolic-ref -q HEAD >/dev/null 2>&1; then
-            git pull --quiet 2>/dev/null || true
-        fi
-        # The pull can bring a commit whose requirements.txt grew — resync deps so
-        # the launch below can't die importing a module the old checkout never needed.
-        if [ "$(git rev-parse HEAD 2>/dev/null)" != "$pre_pull_head" ]; then
-            "$VENV_DIR/bin/pip" install -r "$BRAINSTEM_HOME/src/rapp_brainstem/requirements.txt" --quiet 2>/dev/null || true
-        fi
+        git pull --quiet 2>/dev/null || true
     fi
 
     local venv_python="$VENV_DIR/bin/python"
@@ -733,16 +675,13 @@ except: pass
                 error=$(echo "$poll_resp" | "$venv_python" -c "import sys,json; d=json.load(sys.stdin); print(d.get('error',''))" 2>/dev/null)
 
                 if [[ -n "$access_token" ]]; then
-                    # Save token file (same format brainstem.py expects), owner-only:
-                    # a default umask would land it 0644, world-readable on shared machines.
+                    # Save token file (same format brainstem.py expects)
                     "$venv_python" -c "
-import sys, json, os
+import sys, json
 d = json.loads(sys.argv[1])
 out = {'access_token': d['access_token']}
 if d.get('refresh_token'): out['refresh_token'] = d['refresh_token']
-fd = os.open(sys.argv[2], os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
-with os.fdopen(fd, 'w') as f: json.dump(out, f)
-os.chmod(sys.argv[2], 0o600)
+with open(sys.argv[2], 'w') as f: json.dump(out, f)
 " "$poll_resp" "$token_file"
 
                     # Validate Copilot access immediately
@@ -777,12 +716,6 @@ os.chmod(sys.argv[2], 0o600)
                     break
                 fi
 
-                # GitHub's device-flow contract: on slow_down, add 5s to the poll
-                # interval — keeping the old cadence gets every later poll rejected.
-                if [[ "$error" == "slow_down" ]]; then
-                    interval=$(( ${interval:-5} + 5 ))
-                fi
-
                 if [[ "$error" != "authorization_pending" && "$error" != "slow_down" && -n "$error" ]]; then
                     echo -e "  ${YELLOW}!${NC} Auth error: $error — sign in at http://localhost:7071/login"
                     break
@@ -799,11 +732,9 @@ os.chmod(sys.argv[2], 0o600)
 
     cd "$BRAINSTEM_HOME/src/rapp_brainstem"
 
-    # Kill any existing brainstem on port 7071 before starting. Match the LISTENER
-    # only — a bare port match can hit a client connection (a browser tab, curl)
-    # and leave the old server running. install.ps1 already does listener-only.
+    # Kill any existing brainstem on port 7071 before starting
     local existing_pid
-    existing_pid=$(lsof -ti tcp:7071 -sTCP:LISTEN 2>/dev/null | head -1)
+    existing_pid=$(lsof -ti:7071 2>/dev/null | head -1)
     if [ -n "$existing_pid" ]; then
         echo -e "  ${YELLOW}⚠${NC} Stopping existing server (PID $existing_pid)..."
         kill "$existing_pid" 2>/dev/null
@@ -825,7 +756,7 @@ os.chmod(sys.argv[2], 0o600)
     ) &
 
     # Final dep safety net — if somehow we got here without deps, fix it
-    if ! "$venv_python" -c "import flask, flask_cors, requests, dotenv, pyzipper" 2>/dev/null; then
+    if ! "$venv_python" -c "import flask, flask_cors, requests, dotenv" 2>/dev/null; then
         echo -e "  ${YELLOW}⚠${NC} Fixing missing dependencies..."
         "$VENV_DIR/bin/pip" install -r "$BRAINSTEM_HOME/src/rapp_brainstem/requirements.txt" --quiet 2>/dev/null || \
             "$VENV_DIR/bin/pip" install -r "$BRAINSTEM_HOME/src/rapp_brainstem/requirements.txt"

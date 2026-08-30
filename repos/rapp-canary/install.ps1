@@ -24,10 +24,7 @@ $VENV_DIR = "$env:USERPROFILE\.brainstem\venv"
 # tag form brainstem-v0.6.14). Parsed from the script arguments so a user can pin or
 # RC-test a specific release on Windows, e.g.
 #   & ([scriptblock]::Create((irm https://.../install.ps1))) --version v0.6.14
-# The BRAINSTEM_VERSION env var is the pipe-friendly form (survives `irm | iex`):
-#   $env:BRAINSTEM_VERSION = "v0.6.14"; irm https://.../install.ps1 | iex
-# --version wins if both are given.
-$PIN_VERSION = if ($env:BRAINSTEM_VERSION) { [string]$env:BRAINSTEM_VERSION } else { "" }
+$PIN_VERSION = ""
 $argList = @($args)
 for ($i = 0; $i -lt $argList.Count; $i++) {
     if ($argList[$i] -eq "--version" -and ($i + 1) -lt $argList.Count) {
@@ -96,9 +93,7 @@ function Check-ForUpgrade {
 function Install-WithWinget {
     param([string]$PackageId, [string]$Name)
     Write-Host "  [..] Installing $Name via winget..." -ForegroundColor Yellow
-    Write-Host "       This can take several minutes; winget progress will appear below." -ForegroundColor Gray
-    winget install --id $PackageId --accept-source-agreements --accept-package-agreements --silent 2>&1 |
-        ForEach-Object { Write-Host "       $_" }
+    winget install --id $PackageId --accept-source-agreements --accept-package-agreements --silent 2>&1 | Out-Null
     # Refresh PATH for this session
     $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
 }
@@ -224,42 +219,27 @@ function Setup-Venv {
     }
 
     $sysPy = Resolve-PythonExe
-    Write-Host "  [..] Creating Python virtual environment (can take a minute under antivirus scanning)..."
+    Write-Host "  Creating virtual environment..."
     $prev = $ErrorActionPreference
     $ErrorActionPreference = 'Continue'
-    $venvStart = Get-Date
-    & $sysPy -m venv $VENV_DIR 2>&1 | ForEach-Object { Write-Host "       $_" }
+    & $sysPy -m venv $VENV_DIR 2>&1 | Out-Null
     if (-not (Test-Path (Get-VenvPython))) {
         # Some minimal Python installs need ensurepip primed before venv works.
-        Write-Host "  [..] venv did not appear - priming ensurepip and retrying..." -ForegroundColor Yellow
-        & $sysPy -m ensurepip --upgrade 2>&1 | ForEach-Object { Write-Host "       $_" }
-        & $sysPy -m venv $VENV_DIR 2>&1 | ForEach-Object { Write-Host "       $_" }
+        & $sysPy -m ensurepip --upgrade 2>&1 | Out-Null
+        & $sysPy -m venv $VENV_DIR 2>&1 | Out-Null
     }
     $ErrorActionPreference = $prev
-    Write-Host ("  [OK] Virtual environment created ({0}s)" -f [int]((Get-Date) - $venvStart).TotalSeconds) -ForegroundColor Green
 
     if (-not (Test-Path (Get-VenvPython))) {
         Write-Host "  [X] Failed to create virtual environment at $VENV_DIR" -ForegroundColor Red
         throw "venv creation failed"
     }
 
-    # Upgrade pip inside the venv. OPTIONAL: the venv already ships a working pip.
-    # Behind a corporate proxy this step used to retry silently for ~5 minutes and
-    # looked like the installer had hung on "Creating virtual environment" — so it
-    # is now visible, capped, and skipped on failure.
-    Write-Host "  [..] Updating pip (optional, capped at ~30s)..." -ForegroundColor Gray
+    # Upgrade pip inside the venv (best-effort; venv already ships pip).
     $prev = $ErrorActionPreference
     $ErrorActionPreference = 'Continue'
-    $pipStart = Get-Date
-    & (Get-VenvPython) -m pip install --upgrade pip --disable-pip-version-check --timeout 15 --retries 1 2>&1 |
-        ForEach-Object { Write-Host "       $_" }
-    $pipOk = ($LASTEXITCODE -eq 0)
+    & (Get-VenvPython) -m pip install --upgrade pip 2>&1 | Out-Null
     $ErrorActionPreference = $prev
-    if ($pipOk) {
-        Write-Host ("  [OK] pip updated ({0}s)" -f [int]((Get-Date) - $pipStart).TotalSeconds) -ForegroundColor Green
-    } else {
-        Write-Host "  [!] pip self-upgrade skipped (network) - continuing with the bundled pip" -ForegroundColor Yellow
-    }
     Write-Host "  [OK] Virtual environment ready" -ForegroundColor Green
 }
 
@@ -677,8 +657,7 @@ function Run-PipInstall {
     $prev = $ErrorActionPreference
     $ErrorActionPreference = 'Continue'
     try {
-        Write-Host "  [..] Installing Python dependencies (pip output below)..." -ForegroundColor Gray
-        & $py -m pip install --progress-bar on --disable-pip-version-check --timeout 15 --retries 2 -r $reqFile 2>&1 | ForEach-Object { "$_" }
+        & $py -m pip install -r $reqFile 2>&1 | ForEach-Object { "$_" }
         # `--user` is only valid (and only needed) on the system-python fallback; it
         # errors inside a venv, so skip it when installing into the venv.
         if ($LASTEXITCODE -ne 0 -and $py -ne (Get-VenvPython)) {
@@ -701,7 +680,7 @@ function Check-PythonDeps {
     $prev = $ErrorActionPreference
     $ErrorActionPreference = 'Continue'
     try {
-        & $py -c "import flask, flask_cors, requests, dotenv, pyzipper" 2>&1 | Out-Null
+        & $py -c "import flask, flask_cors, requests, dotenv" 2>&1 | Out-Null
         return ($LASTEXITCODE -eq 0)
     } catch {
         return $false
@@ -852,23 +831,14 @@ function Launch-Brainstem {
                     "Editor-Plugin-Version" = "copilot/1.0.0"
                 }
                 try {
-                    $checkResp = Invoke-WebRequest -Uri "https://api.github.com/copilot_internal/v2/token" -Headers $headers -UseBasicParsing -TimeoutSec 10 -ErrorAction Stop
+                    $checkResp = Invoke-WebRequest -Uri "https://api.github.com/copilot_internal/v2/token" -Headers $headers -UseBasicParsing -TimeoutSec 10 -ErrorAction SilentlyContinue
                     if ($checkResp.StatusCode -eq 200) {
                         Write-Host "  [OK] Already authenticated with GitHub Copilot" -ForegroundColor Green
                         $needsAuth = $false
                     }
                 } catch {
-                    if ($_.Exception.Response) {
-                        # GitHub answered with an error status — the token itself is bad.
-                        Write-Host "  [..] Saved token expired — re-authenticating..." -ForegroundColor Yellow
-                        Remove-Item $tokenFile -Force -ErrorAction SilentlyContinue
-                    } else {
-                        # Never reached GitHub (offline, captive portal, timeout) — that
-                        # says nothing about the token. Keep it; the server retries live.
-                        # Mirrors install.sh's unreachable-is-not-expired handling.
-                        Write-Host "  [..] Couldn't verify the saved token (no network) — keeping it" -ForegroundColor Yellow
-                        $needsAuth = $false
-                    }
+                    Write-Host "  [..] Saved token expired — re-authenticating..." -ForegroundColor Yellow
+                    Remove-Item $tokenFile -Force -ErrorAction SilentlyContinue
                 }
             }
         } catch {
@@ -1067,9 +1037,6 @@ try {
     Write-Host "      Need help? Open an issue at https://github.com/kody-w/rapp-installer/issues" -ForegroundColor Gray
     Write-Host ""
     # `irm | iex` has no $PSCommandPath — return to the prompt quietly. A file-based
-    # run (CI, a saved script) must still report failure through the exit code, and
-    # so must a wrapper that spawned its own powershell for us (install.cmd sets
-    # BRAINSTEM_INSTALL_EXIT) — otherwise its ERRORLEVEL check reads 0 and it
-    # announces success over a failed install.
-    if ($PSCommandPath -or $env:BRAINSTEM_INSTALL_EXIT) { exit 1 }
+    # run (CI, a saved script) must still report failure through the exit code.
+    if ($PSCommandPath) { exit 1 }
 }

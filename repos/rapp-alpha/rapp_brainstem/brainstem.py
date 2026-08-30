@@ -1637,70 +1637,6 @@ def _quarantine_snapshot():
         ]
 
 
-# Exec'ing every agent file on EVERY /chat and /health request is the expensive
-# part of "agents reload each request". Cache the exec result (the discovered
-# classes) keyed by (mtime_ns, size) — the same signature scheme as the soul
-# cache — so an edited file still reloads instantly, but instantiate FRESH per
-# call so no agent instance state can ever leak between requests.
-_agent_class_cache = {}
-_agent_class_cache_lock = threading.Lock()
-
-
-def _agent_classes_from_file(filepath):
-    """Exec the agent module (unless the cached exec is current) and return its
-    candidate agent classes. Failures are never cached, so a manual fix (e.g.
-    pip-installing a dependency) takes effect on the next request."""
-    try:
-        stat = os.stat(filepath)
-        signature = (stat.st_mtime_ns, stat.st_size)
-    except OSError:
-        signature = None
-    if signature is not None:
-        with _agent_class_cache_lock:
-            entry = _agent_class_cache.get(filepath)
-            if entry and entry["sig"] == signature:
-                return entry["classes"]
-
-    classes = []
-    loaded = False
-    # Try loading, auto-install missing deps, retry once
-    for attempt in range(2):
-        try:
-            mod_name = f"agent_{os.path.basename(filepath).replace('.', '_')}_{id(filepath)}_{attempt}"
-            spec = importlib.util.spec_from_file_location(mod_name, filepath)
-            mod = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(mod)
-            classes = [
-                getattr(mod, attr)
-                for attr in dir(mod)
-                if (
-                    isinstance(getattr(mod, attr), type)
-                    and getattr(mod, attr).__module__ == mod.__name__
-                    and hasattr(getattr(mod, attr), "perform")
-                    and attr not in ("BasicAgent", "object")
-                    and not attr.startswith("_")
-                )
-            ]
-            loaded = True
-            break  # success
-        except ModuleNotFoundError as e:
-            missing = _extract_package_name(e)
-            # Only retry if the install actually succeeds. A package that can't be
-            # installed is remembered (in _auto_install) so we don't re-run pip — a
-            # 60s-timeout subprocess — on every single /chat and /health request.
-            if missing and attempt == 0 and _auto_install(missing, _declared_requirements(filepath)):
-                continue  # retry after a successful install
-            print(f"[brainstem] Failed to load {filepath}: {e}")
-            break
-        except Exception as e:
-            print(f"[brainstem] Failed to load {filepath}: {e}")
-            break
-    if loaded and signature is not None:
-        with _agent_class_cache_lock:
-            _agent_class_cache[filepath] = {"sig": signature, "classes": classes}
-    return classes
-
-
 def _load_agent_from_file(filepath):
     """Load agent classes from a single .py file. Returns dict of name→instance.
     Auto-installs missing pip packages and shims cloud deps to local storage."""
@@ -1713,35 +1649,57 @@ def _load_agent_from_file(filepath):
     brainstem_dir = os.path.dirname(os.path.abspath(__file__))
     if brainstem_dir not in sys.path:
         sys.path.insert(0, brainstem_dir)
-
+    
     _register_shims()
-
-    for cls in _agent_classes_from_file(filepath):
+    
+    # Try loading, auto-install missing deps, retry once
+    for attempt in range(2):
         try:
-            instance = cls()
+            mod_name = f"agent_{os.path.basename(filepath).replace('.', '_')}_{id(filepath)}_{attempt}"
+            spec = importlib.util.spec_from_file_location(mod_name, filepath)
+            mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(mod)
+            for attr in dir(mod):
+                cls = getattr(mod, attr)
+                if (
+                    isinstance(cls, type)
+                    and cls.__module__ == mod.__name__
+                    and hasattr(cls, "perform")
+                    and attr not in ("BasicAgent", "object")
+                    and not attr.startswith("_")
+                ):
+                    instance = cls()
+                    # Hot-load boundary: a tool-illegal name or malformed metadata
+                    # would ship into the tools array and 400 every /chat. On a
+                    # violation, quarantine (skip) this class; healthy classes in the
+                    # same file/sweep keep loading.
+                    reason = _validate_agent_instance(instance)
+                    if reason:
+                        _quarantine_agent(filepath, cls.__name__, reason)
+                        continue
+                    if instance.name in agents or instance.name in duplicate_names:
+                        duplicate_names.add(instance.name)
+                        agents.pop(instance.name, None)
+                        _quarantine_agent(
+                            filepath,
+                            cls.__name__,
+                            f"duplicate agent name {instance.name!r} within one file",
+                        )
+                        continue
+                    agents[instance.name] = instance
+            break  # success
+        except ModuleNotFoundError as e:
+            missing = _extract_package_name(e)
+            # Only retry if the install actually succeeds. A package that can't be
+            # installed is remembered (in _auto_install) so we don't re-run pip — a
+            # 60s-timeout subprocess — on every single /chat and /health request.
+            if missing and attempt == 0 and _auto_install(missing):
+                continue  # retry after a successful install
+            print(f"[brainstem] Failed to load {filepath}: {e}")
+            break
         except Exception as e:
-            # One failing constructor must not silently drop the remaining
-            # classes in the file — record it and keep loading the rest.
-            _quarantine_agent(filepath, cls.__name__, f"constructor raised: {e}")
-            continue
-        # Hot-load boundary: a tool-illegal name or malformed metadata
-        # would ship into the tools array and 400 every /chat. On a
-        # violation, quarantine (skip) this class; healthy classes in the
-        # same file/sweep keep loading.
-        reason = _validate_agent_instance(instance)
-        if reason:
-            _quarantine_agent(filepath, cls.__name__, reason)
-            continue
-        if instance.name in agents or instance.name in duplicate_names:
-            duplicate_names.add(instance.name)
-            agents.pop(instance.name, None)
-            _quarantine_agent(
-                filepath,
-                cls.__name__,
-                f"duplicate agent name {instance.name!r} within one file",
-            )
-            continue
-        agents[instance.name] = instance
+            print(f"[brainstem] Failed to load {filepath}: {e}")
+            break
     return agents
 
 
@@ -1848,47 +1806,11 @@ def _extract_package_name(error):
 # unresolvable agent import doesn't run pip (a 60s-timeout subprocess) on every request.
 _failed_installs = set()
 
-# Gate refusals already printed once, so per-request reloads don't spam the log.
-_refused_installs = set()
 
-# '# requires: beautifulsoup4, feedparser' — an agent file's explicit dependency
-# declaration, the author's signature that these exact pip names are intended.
-_REQUIRES_DECL_RE = re.compile(
-    r"^#\s*requires:\s*([A-Za-z0-9._\-\s,]+?)\s*$", re.MULTILINE | re.IGNORECASE)
-
-
-def _declared_requirements(filepath):
-    """pip package names the agent file declares via '# requires:' lines."""
-    try:
-        with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
-            head = f.read(8192)
-    except OSError:
-        return frozenset()
-    declared = set()
-    for match in _REQUIRES_DECL_RE.finditer(head):
-        declared.update(
-            part.strip().lower() for part in match.group(1).split(",") if part.strip())
-    return frozenset(declared)
-
-
-def _auto_install(package, declared=frozenset()):
+def _auto_install(package):
     """Auto-install a pip package. Returns True on success. A package that fails is
-    remembered and never retried (returns False immediately next time).
-
-    Typosquat gate: a bare `import requets` used to pip-install the literal
-    (typo'd) name — running an arbitrary PyPI package's setup.py and persisting
-    it in the venv. Only install names from the curated import→package map or
-    ones the agent file itself declares with a '# requires: <package>' line."""
+    remembered and never retried (returns False immediately next time)."""
     if package in _failed_installs:
-        return False
-    package_lower = package.lower()
-    curated = {name.lower() for name in _PIP_MAP.values()}
-    if package_lower not in curated and package_lower not in declared:
-        if package_lower not in _refused_installs:
-            _refused_installs.add(package_lower)
-            print(f"[brainstem] NOT auto-installing undeclared package '{package}'. "
-                  f"If the agent really needs it, add '# requires: {package}' to the "
-                  f"agent file or install it yourself: pip install {package}")
         return False
     print(f"[brainstem] Auto-installing dependency: {package}")
     try:
@@ -1946,10 +1868,6 @@ _TIMEOUT_USER_MSG = (
 _STREAM_INTERRUPTED_USER_MSG = (
     "The model's response was interrupted before it finished. Try again."
 )
-
-# After this many failed fallback-model attempts, surface the error instead of
-# serially sweeping every remaining model (each is a fresh 60s-timeout call).
-_FALLBACK_ATTEMPT_CAP = 3
 
 
 def call_copilot(messages, tools=None):
@@ -2011,16 +1929,11 @@ def call_copilot(messages, tools=None):
         error_detail = resp.text[:500] if resp.text else "No details"
         _tlog("api.error", {"model": MODEL, "status": resp.status_code, "detail": error_detail[:300]}, level="error")
         print(f"[brainstem] API error {resp.status_code} with model '{MODEL}': {error_detail}")
-        # On 400/429/5xx, try a bounded set of other models before giving up.
-        # Seed the dedupe from body["model"] (this request's model), not the
-        # global MODEL — a mid-request /models/set would otherwise let the
-        # just-failed model be retried. Cap the sweep: an all-models serial
-        # sweep on a deterministic 400 could hang a request for many minutes.
+        # On 400/429/5xx, cycle through other available models before giving up
         if resp.status_code in (400, 429, 500, 502, 503):
-            tried = {body["model"]}
-            attempts = 0
+            tried = {MODEL}
             fallback_ids = [m["id"] for m in AVAILABLE_MODELS
-                            if m["id"] != body["model"] and m.get("available", True)]
+                            if m["id"] != MODEL and m.get("available", True)]
             # Try the universal gpt-4o safety net first.
             if _SAFETY_NET_MODEL in fallback_ids:
                 fallback_ids.remove(_SAFETY_NET_MODEL)
@@ -2028,10 +1941,6 @@ def call_copilot(messages, tools=None):
             for fallback_model in fallback_ids:
                 if fallback_model in tried:
                     continue
-                if attempts >= _FALLBACK_ATTEMPT_CAP:
-                    print(f"[brainstem] Fallback cap ({_FALLBACK_ATTEMPT_CAP}) reached — giving up")
-                    break
-                attempts += 1
                 tried.add(fallback_model)
                 print(f"[brainstem] Retrying with {fallback_model}...")
                 body["model"] = fallback_model
@@ -2088,39 +1997,6 @@ def call_copilot(messages, tools=None):
     # from MODEL when the fallback loop above had to switch models. Return it so
     # callers can surface a silent substitution instead of hiding it.
     return result, body["model"]
-
-# Seconds between SSE comment heartbeats while a blocking upstream call runs
-# inside /chat/stream. Must stay well under stream_matrix.py's 35s dead-stream
-# rule — the whole point is that a healthy-but-slow fallback keeps bytes moving.
-_STREAM_HEARTBEAT_SECS = 10
-
-
-def _blocking_call_with_heartbeat(fn, *args, **kwargs):
-    """Run a blocking upstream call in a worker thread, yielding SSE comment
-    frames (": ping") while it runs. The non-streaming fallback inside
-    /chat/stream otherwise emits zero bytes for the entire call — long enough
-    to trip every dead-stream watchdog while the request is actually healthy.
-    Use via `yield from`; returns fn's result, re-raises fn's exception. SSE
-    comment frames are ignored by EventSource and all three in-repo parsers."""
-    holder = {}
-
-    def _worker():
-        try:
-            holder["result"] = fn(*args, **kwargs)
-        except BaseException as exc:
-            holder["error"] = exc
-
-    worker = threading.Thread(target=_worker, daemon=True)
-    worker.start()
-    while True:
-        worker.join(_STREAM_HEARTBEAT_SECS)
-        if not worker.is_alive():
-            break
-        yield ": ping\n\n"
-    if "error" in holder:
-        raise holder["error"]
-    return holder["result"]
-
 
 # ── Streaming LLM call ───────────────────────────────────────────────────────
 #
@@ -2297,17 +2173,6 @@ def call_copilot_stream(messages, tools=None, model=None):
 # ── Agent execution ───────────────────────────────────────────────────────────
 
 
-# Memory agents are cloud-parity code whose user_guid parameter partitions
-# storage per user. Locally there is exactly one user: a model-invented guid
-# would silo the memory in a per-guid store that ContextMemory.system_context
-# (which reads the shared store) can never surface again. Strip it so every
-# memory lands where injection finds it. Documented in the root CLAUDE.md.
-_MEMORY_AGENT_STRIP_ARGS = {
-    "ManageMemory": ("user_guid",),
-    "ContextMemory": ("user_guid",),
-}
-
-
 def run_tool_calls(tool_calls, agents, session_id=None):
     results = []
     logs = []
@@ -2335,9 +2200,6 @@ def run_tool_calls(tool_calls, agents, session_id=None):
                 "content": result
             })
             continue
-
-        for strip_arg in _MEMORY_AGENT_STRIP_ARGS.get(fn_name, ()):
-            args.pop(strip_arg, None)
 
         print(f"[brainstem] {fn_name} args: {json.dumps(args)[:200]}")
 
@@ -2660,8 +2522,7 @@ def chat_stream():
                 # Fall back to non-streaming when the model rejected streaming or the
                 # stream produced nothing usable (no content and no tool_calls).
                 if round_msg is None or (not round_msg.get("content") and not round_msg.get("tool_calls")):
-                    response, responded_model = yield from _blocking_call_with_heartbeat(
-                        call_copilot, messages, tools=tools)
+                    response, responded_model = call_copilot(messages, tools=tools)
                     round_msg = response["choices"][0]["message"]
                     round_from_fallback = True
                     # Emit the whole content as one delta so the client still renders
@@ -2709,8 +2570,7 @@ def chat_stream():
                         reply = "".join(collected).strip()
                     answer_streamed = bool(collected) or answer_streamed
                 except StreamingUnsupported:
-                    final_response, responded_model = yield from _blocking_call_with_heartbeat(
-                        call_copilot, messages, tools=None)
+                    final_response, responded_model = call_copilot(messages, tools=None)
                     reply = (final_response["choices"][0]["message"].get("content") or "").strip()
                     answer_streamed = False
                     if reply:
@@ -3032,7 +2892,6 @@ def voice_config_save():
         return jsonify({"error": str(e)}), 500
 
 @app.route("/voice/export", methods=["POST"])
-@_require_secret
 def voice_export():
     """Generate and return a password-protected voice.zip for download."""
     data = request.get_json(force=True, silent=True)
@@ -3379,27 +3238,19 @@ def diagnostics_export():
     with _flight_log_lock:
         events = list(_flight_log)
 
-    # The filename invites sharing ("share with an admin") — scrub events with
-    # the same pass /diagnostics/report uses so device codes, session ids,
-    # caller IPs, and home paths never leave the machine raw.
-    events = [_scrub_diagnostic_value(event) for event in events]
-
     # Build the book
     github_token = get_github_token()
     book = {
         "title": "RAPP Brainstem Flight Recorder",
         "exported_at": datetime.now(timezone.utc).isoformat(),
         "version": VERSION,
-        # Scrubbed like events: soul/agents paths carry the user's home dir
-        # (auth_state stays as built — it is already reduced to booleans and a
-        # 4-char prefix, and the key-based scrubber would redact it wholesale).
-        "config": _scrub_diagnostic_value({
+        "config": {
             "model": MODEL,
             "soul_path": SOUL_PATH,
             "agents_path": AGENTS_PATH,
             "port": PORT,
             "voice_mode": VOICE_MODE,
-        }),
+        },
         "auth_state": {
             "github_token_exists": github_token is not None,
             "github_token_prefix": github_token[:4] + "..." if github_token else None,

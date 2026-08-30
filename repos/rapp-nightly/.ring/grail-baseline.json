@@ -1,0 +1,12 @@
+{
+  "grail_commit": "49db80c8c6b6caa7647369beaf477d374a8f293c",
+  "grail_repository": "kody-w/rapp-installer",
+  "grail_tree": "94b85084b1dee1183a5c21c45e97e955cd688d8a",
+  "preserved_branch": "archive/pre-pristine-20260830",
+  "previous_main": "125e733077892562943fab950e5dede51e6613da",
+  "recorded_at": "2026-08-30T12:10:53.288875Z",
+  "repository": "kody-w/rapp-nightly",
+  "ring": "nightly",
+  "schema": "rapp-ring-grail-baseline/1",
+  "shared_sha256": "412b597cb205882bf2746efd6e56c3dda79d98c63f16916e4c3131305459e2e0"
+}

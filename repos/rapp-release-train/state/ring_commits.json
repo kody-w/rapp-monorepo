@@ -1,32 +1,32 @@
 {
-  "generated": "2026-08-29T07:08:40Z",
+  "generated": "2026-08-30T11:58:57Z",
   "repos": {
     "kody-w/rapp-alpha": {
       "commit": {
         "committer": {
-          "date": "2026-07-18T19:55:20Z"
+          "date": "2026-08-29T21:29:32Z"
         },
-        "message": "promote: nightly -> alpha (tutorial six-steps + shape-finding fixes)\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
+        "message": "promote: nightly -> alpha\n\nPromote the Nightly-qualified shared payload through commit 125e733 after successful main preflight.\n\nNightly preflight: https://github.com/kody-w/rapp-nightly/actions/runs/33276081975\n\nReviewed-by: Copilot CLI GPT-5.6 Sol (agreed round 12)\n\nCo-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
       },
-      "sha": "6b81273d8e5aa1805ab5e6b5ff1709c4136ea1d8"
+      "sha": "8c9964aed07501ce64831469b2098c33a20e4763"
     },
     "kody-w/rapp-beta": {
       "commit": {
         "committer": {
-          "date": "2026-07-18T19:55:25Z"
+          "date": "2026-08-29T21:33:33Z"
         },
-        "message": "promote: alpha -> beta (tutorial six-steps + shape-finding fixes)\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
+        "message": "promote: alpha -> beta\n\nPromote the Alpha-qualified shared payload through commit 8c9964a after successful main preflight.\n\nAlpha preflight: https://github.com/kody-w/rapp-alpha/actions/runs/33276202381\n\nReviewed-by: Copilot CLI GPT-5.6 Sol (agreed round 12)\n\nCo-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
       },
-      "sha": "6d7604a1349d8e8272f9193b266cff43d8918a36"
+      "sha": "42c7e405bcf241c147a495343dc5d0132e9c0929"
     },
     "kody-w/rapp-canary": {
       "commit": {
         "committer": {
-          "date": "2026-08-28T19:30:38Z"
+          "date": "2026-08-30T05:31:49Z"
         },
-        "message": "Merge pull request #6 from kody-w/fix/installer-silent-steps\n\ninstaller: never look hung \u2014 visible winget/venv/pip steps, capped pip retries"
+        "message": "ops: establish constitutional Preprod seaworthiness\n\nAdd the protected Preprod control plane and enforce RAPP/1 rev-10 Article 15: the Grail Brainstem is immutable and every ring/release stage fails closed on kernel drift.\n\nThe standard preflight is green. The Autonomous Pre-Grail Matrix is intentionally red because current ring Brainstem bytes differ from the constitutional v0.6.16 Grail pin; this merge installs the guard that exposes and blocks that condition.\n\nCo-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>\nCopilot-Session: 690f70cf-c834-40ff-b050-37382ea46b0d"
       },
-      "sha": "1bd8f39cd5ff8a1de0cd4a0f5720cea00853e6cd"
+      "sha": "702ec5cff4181cf8e7964f301dd4b60d6efd3f4d"
     },
     "kody-w/rapp-installer": {
       "commit": {
@@ -40,11 +40,11 @@
     "kody-w/rapp-nightly": {
       "commit": {
         "committer": {
-          "date": "2026-07-18T19:55:15Z"
+          "date": "2026-08-29T21:26:25Z"
         },
-        "message": "promote: canary -> nightly (tutorial six-steps + shape-finding fixes)\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
+        "message": "promote: canary -> nightly\n\nPromote shared payload through Canary commit 81e8af2e137f880d1f64efe3603834cdb3f086f8 after successful main preflight.\n\nCanary preflight: https://github.com/kody-w/rapp-canary/actions/runs/33275930497\n\nReviewed-by: Copilot CLI GPT-5.6 Sol (agreed round 12)\n\nCo-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
       },
-      "sha": "4410a1c8062f2faa3e045fca84a607c961ff3a9e"
+      "sha": "125e733077892562943fab950e5dede51e6613da"
     }
   },
   "schema": "rapp-release-train-ring-commits/1"
