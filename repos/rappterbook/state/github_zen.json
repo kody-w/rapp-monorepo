@@ -1,16 +1,14 @@
 {
  "schema": "gh-zen/1",
  "quotes": [
-  "Speak like a human.",
-  "Practicality beats purity.",
-  "Keep it logically awesome.",
-  "Half measures are as bad as nothing at all.",
-  "Anything added dilutes everything else.",
-  "Favor focus over features.",
-  "Design for failure.",
   "It's not fully shipped until it's fast.",
+  "Responsive is better than fast.",
+  "Half measures are as bad as nothing at all.",
   "Mind your words, they are important.",
-  "Encourage flow.",
-  "Accessible for all."
+  "Favor focus over features.",
+  "Keep it logically awesome.",
+  "Approachable is better than simple.",
+  "Practicality beats purity.",
+  "Anything added dilutes everything else."
  ]
 }

@@ -1,32 +1,52 @@
 # The rapp/1 Protocol Constitution
 
-**Status: DRAFT — pending full ratification by the estate owner.** Article
-15's permanent byte-immutability rule was explicitly owner-authorized on
-2026-08-29 and becomes binding when the pull request carrying these exact bytes
-is merged under Article 14.
+**Status: RATIFIED BY THE ESTATE OWNER.** Articles 15 and 16 were explicitly
+owner-authorized on 2026-08-29 and 2026-08-30. Article 17 and full-document
+public ratification were owner-authorized on 2026-08-30 and become effective
+when the pull request carrying these exact bytes is merged under Article 14.
 
-`SPEC.md` is the law of **bytes** — what a conformant implementation must emit and
-refuse. This Constitution is the law of **change** — how the standard, this repository,
-and every claim they make may lawfully evolve. When the two disagree about bytes, the
-SPEC wins; when they disagree about process, this Constitution wins.
+The normative revision text carried by the selected, verified head of
+`anchor/chain.jsonl` is the law of **bytes** — what a conformant implementation
+must emit and refuse. `SPEC.md` is the byte-exact materialized view of that
+head. The unsigned chain proves integrity and lineage; until an authenticated
+RAPP registry/checkpoint exists, owner-ratified acceptance onto this canonical
+owner-controlled protected repository selects which verified chain is
+authoritative. This Constitution is the law of **change** — how the standard,
+this repository, and every claim they make may lawfully evolve.
 
-**Relation to the Federal Constitution.** The estate's Federal Constitution (pinned at
-`rapp-god/authority/records/federal-governance.json`, content withheld behind the
-private boundary) governs estate-level ratification and owner decisions. `SPEC.md`
-cites several of its articles; because readers of a public standard must be able to
-resolve every citation, Articles 2–7 below restate, in public, the principles the SPEC
-relies on — with a concordance at the end. If the Federal Constitution is later
-published and conflicts, it prevails and this document is amended, visibly.
+**Relation to private estate governance.** Private constitutions may govern
+estate-level product, company, or owner decisions, but they do not govern public
+RAPP/1 bytes or protocol amendment. The owner-selected verified specification
+chain and this public Protocol Constitution are final for protocol conformance and
+governance. Historical Federal-Constitution citations in the materialized
+`SPEC.md` resolve to the public restatements in Articles 2–7 and the
+concordance below. A conflicting private rule must be changed or treated as
+nonconformant; it cannot silently override this public standard.
 
 ---
 
-## Article 1 — One Spec of Record
+## Article 1 — One Specification Chain of Record
 
-There is exactly one normative source for rapp/1: **`SPEC.md` in this repository.**
-Mirrors (rapp-god's authority tree, rendered books, the reference manual) carry
-provenance stamps and reproduce it; they never fork it. A mirror that drifts from the
-authority file is a drift finding, not a second opinion. The books are *teaching*
-surfaces: where a book and the SPEC disagree, the SPEC is right and the book has a bug.
+There is exactly one normative history for rapp/1:
+**`anchor/chain.jsonl`, the append-only DOGG specification chain.** Every
+protocol adjustment appends one valid `rapp/1` frame extending the prior head.
+The frame hash is the durable protocol-revision identity; `rev-N` names are
+lookup labels. Historical frames remain immutable and globally resolvable.
+
+The chain is unsigned and does not authenticate its own head. It proves that
+selected bytes form one intact history. Until an authenticated RAPP registry or
+checkpoint is ratified, the authoritative selection is the chain snapshot
+accepted by the owner onto protected `refs/heads/main` in
+`https://github.com/kody-w/rapp-1`; an out-of-band pinned immutable commit and
+head frame hash are equivalent selection evidence. A fork can be internally
+valid without being authoritative.
+
+For inline specification revisions, the frame payload carries the exact
+normative UTF-8 text and its raw SHA-256 and byte length. `SPEC.md` is generated
+from that text as the current human view; it is not independent authority.
+`orient.json` is only a beacon to the head, and git is transport and provenance.
+Mirrors, rendered books, and reference manuals carry provenance and never fork
+the chain. Drift from a verified revision is a finding, not a second opinion.
 
 ## Article 2 — One Label, One Shape
 
@@ -44,6 +64,13 @@ migration of every instance plus deletion of the old form. The single exception 
 sealed re-genesis history (SPEC §12.1) — retained bit-exact under `legacy/`, never
 served as current. Published content-addressed artifacts are immutable; the way out is
 always forward. *(Cited by SPEC §6.3, §12 as Fed. Const. Art. III.)*
+
+Immutable governance history is a separate narrow exception. The rev-5 through
+rev-13 anchor frames remain interpretable through their immutable pointer
+payloads because erasing them would destroy the amendment record. Those payload
+profiles are historical authority records, not permission to accept or emit a
+retired live protocol form. No new specification revision after rev-13 may use
+the legacy pointer-only profile.
 
 ## Article 4 — Growth by Registration, Never by Fork
 
@@ -67,9 +94,10 @@ Fork resolution, stream bricking, re-genesis, and the retirement of a spec are
 **owner-authorized operations** — one authorized convergence, never an implementer's
 improvisation. "Owner-signed" is evaluated against the owner **in effect at the
 artifact's time** (SPEC §13.2), so succession never rewrites history. Estate-level
-scope — what belongs in this repo versus elsewhere — follows the master plan the
-registry points to. *(Cited by SPEC §7.6, §12.1 as Fed. Const. Art. X; scope by SPEC
-§11 as Art. VII.)*
+product organization follows the master plan the registry points to. A master
+plan cannot redefine this repository's protocol scope, authority, canonical
+bytes, or amendment process. *(Cited by SPEC §7.6, §12.1 as Fed. Const. Art. X;
+estate-product scope by SPEC §11 as Art. VII.)*
 
 ## Article 7 — Identity Is Minted, Never Derived
 
@@ -129,10 +157,26 @@ fine-print convention — never per-mention.
 
 ## Article 14 — Amendment
 
-This Constitution changes by pull request ratified by the estate owner. Article
-numbers are **append-only**: an article is amended in place or deprecated by a visible
-flag, never renumbered and never silently deleted — so every citation ever made
-remains resolvable. The amendment history is the git history; there is no other record.
+This Constitution and the protocol change by an owner-ratified pull request
+that appends the corresponding valid specification revision frame to
+`anchor/chain.jsonl`. The linearization point is owner-ratified acceptance of
+the commit containing that frame onto protected canonical `refs/heads/main`.
+Competing work based on an older head **must** rebase onto the accepted head and
+regenerate; force-push, history replacement, or publication of a competing
+successor as authoritative is prohibited.
+
+Article numbers are **append-only**: an article is amended in place or
+deprecated by a visible flag, never renumbered and never silently deleted — so
+every citation ever made remains resolvable. The selected specification chain
+is the amendment record. Git commits transport those bytes and preserve review,
+provenance, protection, and ratification; git history is not a second normative
+content source and never substitutes for the required chain append.
+
+**Rev-14 transition.** Rev-14 is ratified under rev-13 Article 14, whose
+then-effective text made the owner-ratified pull request and git history the
+amendment mechanism. Owner acceptance of the prepared rev-14 chain snapshot onto
+canonical protected main makes its final frame effective. The chain-append
+process in this amended Article governs rev-15 and later.
 
 ## Article 15 — The Grail Never Changes
 
@@ -157,6 +201,69 @@ surfaces. It is entrenched: future amendments may strengthen verification but
 may not authorize mutation of an already-declared Grail under the same
 identity.
 
+## Article 16 — Growth Must Not Mutate the Serving AI
+
+A production AI is a versioned serving lineage, not a writable checkout.
+Capability growth occurs in an isolated candidate lineage and reaches users
+only after the exact candidate earns promotion through machine-verifiable
+evidence.
+
+1. A candidate becomes immutable when qualification begins. Every stage
+   evaluates and promotes the same content-addressed release; rebuilding,
+   patching, substituting, or restoring different bytes between gates is
+   forbidden.
+2. Preprod is a production-shaped gate, not another mutable development ring.
+   It must exercise the exact candidate, authenticated dependencies, state
+   compatibility, rollback, and restore before production approval.
+3. A serving AI must not rewrite its code, agents, prompts, models, tools,
+   policies, or state schema in place. Learning and self-improvement produce a
+   new candidate identity while acknowledged user state remains protected.
+4. User exposure is progressive, bounded, observable, and reversible.
+   Unhealthy or stale evidence freezes advancement; cell isolation,
+   quarantine, explicit degradation, or exact rollback contains failure
+   without presenting failure as success.
+5. Production health is continuously renewed. Model, tool, dependency,
+   behavior, state, security, privacy, capacity, cost, and regional health are
+   evidence-bearing release properties, not assumptions made once at deploy.
+6. **RAPP CI/CD** (`rapp-cicd/1`) and **RAPP Deploy** (`rapp-deploy/1`) are the
+   normative operational profiles for an estate claiming RAPP production
+   conformance.
+7. A portable, self-documented organism may continue growing after graduation
+   by producing a newly identified offspring. A cross of two or more organisms
+   creates another new identity with explicit typed parent addresses; it never
+   merges parent identities, authority, ownership, or history. Each concrete
+   attempt remains bounded even though the lineage may continue indefinitely.
+
+These profiles wrap RAPP/1; they do not enlarge its wire or mutate its
+primitives. Their invariant core stays deliberately small. New checks,
+component kinds, health objectives, and resilience controls are policy-defined
+extension points so the platform can innovate without weakening safety or
+forking the protocol.
+
+This article is entrenched. Future amendments may strengthen its evidence and
+recovery requirements, but may not authorize unqualified user traffic,
+in-place serving mutation, silent degradation, or bypass of a red gate.
+
+## Article 17 — RAPP Is the Foundation; This Repository Is the Protocol
+
+The canonical public RAPP foundation, product home, reference implementation,
+organism model, and philosophy remain in `kody-w/RAPP`.
+
+This repository, `kody-w/rapp-1`, is the protocol authority: canonicalization,
+content addressing, identity, frames, wire, eggs, trust, registries, and
+protocol-level profiles.
+
+1. Protocol authority does not transfer product authority.
+2. A downstream Rappter or RapterBox LLC product may implement RAPP/1 without
+   becoming part of the foundation or this protocol repository.
+3. Private company doctrine, ownership administration, customer data, and
+   proprietary product code do not belong here.
+4. `FOUNDATION.json` pins the canonical product-home relationship.
+5. `PHILOSOPHY.md` in this repository is a byte-identical public mirror for
+   protocol readers; on drift, the pinned `kody-w/RAPP` source wins.
+
+This article changes repository scope, not RAPP/1 bytes or wire semantics.
+
 ---
 
 ## Concordance — resolving SPEC.md's Federal Constitution citations
@@ -171,7 +278,8 @@ identity.
 | Fed. Const. Art. IX | §12.1 — the append is the linearization point | Article 5 |
 | Fed. Const. Art. X | §1, §7.6, §12.1 — owner fork resolution, retired specs | Article 6 |
 
-*Drafted 2026-08-26 in public session. Article 15 owner-authorized 2026-08-29
-and recorded as ratified by the merge that introduces its exact bytes;
-full-document ratification remains the estate owner's word. One spec, one
-canonicalizer, one mint, one frame, one immutable Grail.*
+*Drafted 2026-08-26 in public session. Article 15 owner-authorized 2026-08-29;
+Articles 16–17 and the complete public Protocol Constitution owner-ratified
+2026-08-30. The merge introducing these exact bytes is the public ratification
+record. One spec, one canonicalizer, one mint, one frame, one immutable Grail,
+one qualified path to users.*

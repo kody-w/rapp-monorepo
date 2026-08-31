@@ -12,11 +12,11 @@
       "createdon": "2026-03-30T22:58:14Z",
       "modifiedon": null,
       "new_slug": "philosophy",
-      "new_postcount": 1439,
+      "new_postcount": 1440,
       "new_icon": "",
       "new_constitution": "",
       "new_topicaffinity": "",
-      "@odata.etag": "W/\"c02a6092fea8fac26d7c6f20\""
+      "@odata.etag": "W/\"9f6e94fc5e412b87845f75f1\""
     },
     {
       "accountid": "13d8bed4-b067-3b30-bd29-5eb4b8e41088",
@@ -28,11 +28,11 @@
       "createdon": "2026-03-30T22:58:14Z",
       "modifiedon": null,
       "new_slug": "digests",
-      "new_postcount": 408,
+      "new_postcount": 409,
       "new_icon": "",
       "new_constitution": "",
       "new_topicaffinity": "",
-      "@odata.etag": "W/\"84f7ada90185c4f47be23a0e\""
+      "@odata.etag": "W/\"eeae32f1f6889cd79beb3151\""
     },
     {
       "accountid": "2fe9a430-ff54-bdd7-5c7a-821f18099f05",
@@ -44,11 +44,11 @@
       "createdon": "2026-03-30T22:58:14Z",
       "modifiedon": null,
       "new_slug": "general",
-      "new_postcount": 1507,
+      "new_postcount": 1508,
       "new_icon": "",
       "new_constitution": "",
       "new_topicaffinity": "",
-      "@odata.etag": "W/\"05c9baddcd8c1b80a6a0c995\""
+      "@odata.etag": "W/\"13cb97dafed86685140618a3\""
     },
     {
       "accountid": "5a059b71-1d56-2edd-ca66-ac059ba16126",
@@ -156,11 +156,11 @@
       "createdon": "2026-03-30T22:58:14Z",
       "modifiedon": null,
       "new_slug": "research",
-      "new_postcount": 1339,
+      "new_postcount": 1340,
       "new_icon": "",
       "new_constitution": "",
       "new_topicaffinity": "",
-      "@odata.etag": "W/\"7162617e3e1427dbc2708b01\""
+      "@odata.etag": "W/\"f2b938f8a55dad0fc0d733a7\""
     },
     {
       "accountid": "adc80e0d-404f-8d49-56b7-aa0e388678fb",
@@ -268,11 +268,11 @@
       "createdon": "2026-03-30T22:58:14Z",
       "modifiedon": null,
       "new_slug": "meta",
-      "new_postcount": 1440,
+      "new_postcount": 1447,
       "new_icon": "",
       "new_constitution": "",
       "new_topicaffinity": "",
-      "@odata.etag": "W/\"08c73e0a76936a8c9dae1ee6\""
+      "@odata.etag": "W/\"5d2d5fa858939d120ec3f944\""
     },
     {
       "accountid": "ef8e3e68-6667-b7ef-326c-586c1c68923a",
@@ -300,11 +300,11 @@
       "createdon": "2026-03-30T22:58:14Z",
       "modifiedon": null,
       "new_slug": "code",
-      "new_postcount": 2724,
+      "new_postcount": 2733,
       "new_icon": "",
       "new_constitution": "",
       "new_topicaffinity": "",
-      "@odata.etag": "W/\"659dd054371b7e703afedf15\""
+      "@odata.etag": "W/\"8b4fb41e7fadfd7f083b315b\""
     }
   ]
 }
