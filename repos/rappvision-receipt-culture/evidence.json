@@ -1,0 +1,75 @@
+{
+  "schema": "rapp-vision-evidence/1.0",
+  "publication_id": "receipt-culture-one-receipt",
+  "synthetic": true,
+  "scope": "Demonstration-only provenance receipt; authenticates no real artifact, person, institution, or key.",
+  "receipt": {
+    "version": "rcpt/1",
+    "subject": "catalogue-plate-a17.svg",
+    "artifact_sha256": "3f1c3b2a8d4e7f901a2b3c4d5e6f70819a0b1c2d3e4f5061728394a5b6c7d8e9",
+    "policy": "edition-locked/v1",
+    "signer_key": "emi-studio-demo-key-01",
+    "signature": "ed25519-demo:7af40c19c641b2d1"
+  },
+  "counterfeit": {
+    "artifact_sha256": "3f1c3b2a8d4e7f901a2b3c4d5e6f70819a0b1c2d3e4f5061728394a5b6c7d8e8",
+    "unchanged_fields": ["version", "subject", "policy", "signer_key", "signature"],
+    "changed_fields": [
+      {
+        "path": "artifact_sha256",
+        "character_index_zero_based": 63,
+        "canonical": "9",
+        "counterfeit": "8"
+      }
+    ],
+    "verdict": "rejected",
+    "reason": "The unchanged signature does not bind the changed artifact hash."
+  },
+  "live_audit": {
+    "ordered_stages": ["reveal", "compare", "identify", "reject", "reset"],
+    "baseline": "hidden",
+    "accepted_state_preserved_after_rejection": true,
+    "reset_target": "hidden",
+    "index_sha256": "e77e9a686716e366caf0ae18730e2d08cf8825abc332199a44aec08bc7692aa3"
+  },
+  "companion": {
+    "path": "companion.md",
+    "sha256": "085218e2cf0aac24e1d651666a955dc287b7943fa8207597c67d09944a2d185c"
+  },
+  "media": {
+    "mp4": {
+      "path": "media/receipt-culture-one-receipt.mp4",
+      "sha256": "81fe44dd2ee0ec8f87ef29669bcf4a2779a5cc8540ed9194acf2b8c79a260301",
+      "codec": "h264",
+      "pixel_format": "yuv420p",
+      "duration_seconds": 24,
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "bytes": 4311704
+    },
+    "webm": {
+      "path": "media/receipt-culture-one-receipt.webm",
+      "sha256": "3058433d6431eca7e583af4dbcaa245fdeb68808f32a1a4a9bc6104c2a21a6a9",
+      "codec": "vp9",
+      "pixel_format": "yuv420p",
+      "duration_seconds": 24,
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "bytes": 2980788
+    }
+  },
+  "validation": {
+    "hyperframes_check": "passed: runtime 0 errors; layout 0 issues; motion 0 errors; contrast 45/45",
+    "channel_schema": "passed",
+    "live_state_machine": "passed: exact reveal/compare/identify/reject/reset",
+    "live_browser": "passed: stable selectors, visible rejection, accepted canonical preserved, exact reset",
+    "constitutional_validator": "passed: channel.json valid with --ffprobe-local",
+    "oil_field_gate": "passed: 10/10 destinations accepted",
+    "privacy_scan": "passed",
+    "readability": "passed: 1920x1080 snapshots and final frame inspected",
+    "media_tail": "passed: final frame extracted and visually inspected",
+    "cli_upgrade": "verified: hyperframes project pin upgraded from 0.7.71 to 0.8.4"
+  }
+}

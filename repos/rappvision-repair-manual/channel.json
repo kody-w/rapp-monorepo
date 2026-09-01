@@ -1,0 +1,141 @@
+{
+  "schema": "rapp-vision-channel/2.0",
+  "id": "repair-manual",
+  "name": "The Repair Manual",
+  "handle": "@rowan-pike",
+  "tagline": "Fictional machines that explain their own exact-fit diagnosis.",
+  "creator": {
+    "name": "Rowan Pike",
+    "kind": "fictional-synthetic-maker",
+    "synthetic": true
+  },
+  "videos": [
+    {
+      "id": "machine-knows-the-fit",
+      "title": "The Machine Knows the Fit",
+      "description": "Start with the 28-second guided film to understand the fictional C17 fault and its exact replacement specification. Then try the live replay to inspect the witness marks, reject the near-match, accept the exact part, restore the harmless hand-cranked teaching fixture, and reset it.",
+      "duration": 28,
+      "width": 1920,
+      "height": 1080,
+      "orientation": "landscape",
+      "tags": [
+        "fictional-repair",
+        "exact-fit",
+        "industrial-diagram",
+        "paired-publication",
+        "synthetic"
+      ],
+      "thumb": "thumbs/rowan-pike-repair-manual.svg",
+      "sources": [
+        {
+          "src": "media/repair-manual.mp4",
+          "type": "video/mp4"
+        },
+        {
+          "src": "media/repair-manual.webm",
+          "type": "video/webm"
+        }
+      ],
+      "chapters": [
+        {
+          "t": 0,
+          "label": "The machine refuses the wrong part"
+        },
+        {
+          "t": 4.5,
+          "label": "Inspect the witness marks"
+        },
+        {
+          "t": 9.5,
+          "label": "Match the exact specification"
+        },
+        {
+          "t": 15.5,
+          "label": "Reject near-match, accept exact match"
+        },
+        {
+          "t": 22,
+          "label": "Restore and take control"
+        }
+      ],
+      "live": {
+        "kind": "rapp-vision-live/1.0",
+        "label": "Try live replay",
+        "duration": 20,
+        "chapters": [
+          {
+            "t": 0,
+            "label": "Inspect"
+          },
+          {
+            "t": 3,
+            "label": "Reject the near-match"
+          },
+          {
+            "t": 8,
+            "label": "Verify the exact part"
+          },
+          {
+            "t": 13,
+            "label": "Restore the fixture"
+          },
+          {
+            "t": 17,
+            "label": "Reset"
+          }
+        ],
+        "scenes": [
+          {
+            "t": 0,
+            "dur": 20,
+            "app": "live/index.html",
+            "ready": {
+              "selector": "#inspect"
+            },
+            "lower": {
+              "title": "Exact-fit diagnostic replay",
+              "fix": "Watch the verifier reject RP-C17-11, accept RP-C17-12, restore the fixture, and reset."
+            },
+            "actions": [
+              {
+                "at": 0.8,
+                "do": "click",
+                "selector": "#inspect"
+              },
+              {
+                "at": 3,
+                "do": "click",
+                "selector": "#choose-wrong"
+              },
+              {
+                "at": 4.5,
+                "do": "click",
+                "selector": "#verify"
+              },
+              {
+                "at": 8,
+                "do": "click",
+                "selector": "#choose-correct"
+              },
+              {
+                "at": 9.5,
+                "do": "click",
+                "selector": "#verify"
+              },
+              {
+                "at": 13,
+                "do": "click",
+                "selector": "#restore"
+              },
+              {
+                "at": 17,
+                "do": "click",
+                "selector": "#reset"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

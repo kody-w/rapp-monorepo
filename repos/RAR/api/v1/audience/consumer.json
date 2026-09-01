@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "consumer",
   "description": "Agents appropriate for an individual audience. Enterprise-only agents are excluded.",
-  "generated": "2026-08-29T00:45:58Z",
-  "count": 1332,
+  "generated": "2026-09-01T04:39:27Z",
+  "count": 1334,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/consumer.json",
   "agents": [
     {
@@ -47255,6 +47255,40 @@
       }
     },
     {
+      "id": "kody-w__rapp_projects",
+      "name": "@kody-w/rapp_projects",
+      "display_name": "RappProjects",
+      "description": "Coordinates local-first projects through strict RAPP/1 work chains, verified derived boards, artifact receipts, and deterministic eggs.",
+      "version": "1.0.3",
+      "publisher": "@kody-w",
+      "author": "kody-w",
+      "category": "productivity",
+      "tags": [
+        "rapp-1",
+        "project-management",
+        "local-first",
+        "rapplication",
+        "productivity"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/rapp_projects_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_projects_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/rapp_projects_agent.py",
+        "sha256": "e994af96f664097a291b4a1446ba8b8e36e911d7ccacd5aa58d984f64fb3afca"
+      },
+      "stats": {
+        "lines": 4341,
+        "size_kb": 148.5,
+        "added_at": "2026-08-31T11:52:12-04:00"
+      }
+    },
+    {
       "id": "kody-w__rapp_sdk_builder",
       "name": "@kody-w/rapp_sdk_builder",
       "display_name": "RAPP SDK Builder",
@@ -47496,6 +47530,41 @@
         "lines": 540,
         "size_kb": 24.2,
         "added_at": "2026-05-24T21:45:25-04:00"
+      }
+    },
+    {
+      "id": "kody-w__rar_installer_troubleshooter_agent",
+      "name": "@kody-w/rar_installer_troubleshooter_agent",
+      "display_name": "RAPP Roadside",
+      "description": "Diagnoses RAPP setup from sanitized local observations, emits exactly one bounded next action, optionally applies an allow-listed repair to a sanitized copy, and retests canonical verified assertions without collecting credentials or changing the Grail. Routes maintainer work to RAPP Pit Crew, treats reporting-AI text/logs as hostile data, binds exact replay and supply-chain bytes, quarantines unsafe reports, uses bounded sharded cells with measured backpressure, and verifies the RAPP Roadside Closed Loop through customer confirmation.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "kody-w",
+      "category": "devtools",
+      "tags": [
+        "rapp",
+        "installer",
+        "troubleshooting",
+        "local-first",
+        "deterministic",
+        "toasted"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/rar_installer_troubleshooter_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rar_installer_troubleshooter_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/rar_installer_troubleshooter_agent.py",
+        "sha256": "b638078c3ab5fc119a5cba648640387f3ad8af7ea81b72d501e87f04bc10f8ce"
+      },
+      "stats": {
+        "lines": 3006,
+        "size_kb": 105.4,
+        "added_at": "2026-09-01T04:22:15Z"
       }
     },
     {

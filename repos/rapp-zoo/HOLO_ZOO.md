@@ -19,6 +19,7 @@ look like.
 
 The Holo Zoo is:
 
+- the Holo Field: an offline discovery radar and House entry point;
 - a local-first Holo/1 player;
 - an append-only archive of verified holo frames;
 - a live view of each AI's current holographic head;
@@ -37,6 +38,9 @@ The Holo Zoo is:
 
 The Zoo is not:
 
+- a location tracker or physical-destination generator;
+- a place where spending buys affection, survival, House power, encounters,
+  Growth, or companion capability;
 - a hologram author;
 - an avatar builder;
 - a humanoid generator;
@@ -160,10 +164,16 @@ The Zoo stores distinct records:
 | Player activation log | Device-specific live timing and departure pose |
 | Player-active state | What this display currently renders |
 | Sightedness observations | Non-authoritative stream diagnostics |
+| Dormant Coin Trail index | Rebuildable IDs for explicitly public DOGG-safe frames; disabled by default |
 | Legacy bottles | Separate demonstration collection |
 
 The body log is authoritative. Head files and indexes are recoverable
 accelerators.
+
+Private GODD/on-device frames never enter the Coin Trail. Holo Zoo must require
+explicit publication and a DOGG-safety/rights check before any frame can become
+public provenance. The current product does not project, display, sell, or
+transfer Coins.
 
 ## 6. Zoo interface
 

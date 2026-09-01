@@ -1,0 +1,54 @@
+{
+  "baseline": {
+    "mode": "baseline",
+    "compare": false,
+    "waypoint": {
+      "lat": 41.865,
+      "lon": -87.69
+    },
+    "totalKm": 69.811048,
+    "baselineTotalKm": 69.811048
+  },
+  "moved": {
+    "mode": "moved",
+    "compare": true,
+    "waypoint": {
+      "lat": 42.045,
+      "lon": -87.745
+    },
+    "totalKm": 87.37295,
+    "baselineTotalKm": 69.811048
+  },
+  "afterInvalid": {
+    "mode": "moved",
+    "compare": true,
+    "waypoint": {
+      "lat": 42.045,
+      "lon": -87.745
+    },
+    "totalKm": 87.37295,
+    "baselineTotalKm": 69.811048,
+    "status": "Rejected: that coordinate falls outside the fictional survey extent. The accepted route is unchanged."
+  },
+  "compared": {
+    "mode": "moved",
+    "compare": false,
+    "waypoint": {
+      "lat": 42.045,
+      "lon": -87.745
+    },
+    "totalKm": 87.37295,
+    "baselineTotalKm": 69.811048
+  },
+  "reset": {
+    "mode": "baseline",
+    "compare": false,
+    "waypoint": {
+      "lat": 41.865,
+      "lon": -87.69
+    },
+    "totalKm": 69.811048,
+    "baselineTotalKm": 69.811048,
+    "status": "Reset complete: exact canonical coordinates, route geometry, and distance restored."
+  }
+}

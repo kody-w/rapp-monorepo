@@ -1,0 +1,35 @@
+{
+  "schema": "rapp-vision-browser-evidence/1.0",
+  "driver": "real-profile browser bridge",
+  "status": "passed",
+  "newcomer_guidance_visible": true,
+  "initial": {
+    "status": "Replay ready. Start with INSPECT.",
+    "candidate_buttons_disabled": true,
+    "verify_disabled": true,
+    "restore_disabled": true,
+    "machine_restored": false
+  },
+  "rejection": {
+    "status": "RP-C17-11 REJECTED - exact mismatch.",
+    "mismatch_count": 3,
+    "correct_candidate_remained_available": true
+  },
+  "acceptance": {
+    "status": "RP-C17-12 ACCEPTED - all required fields match.",
+    "restore_enabled": true
+  },
+  "restoration": {
+    "status": "RESTORED - synthetic runout is 0.2 mm baseline.",
+    "machine_restored": true
+  },
+  "reset": {
+    "status": "Replay ready. Start with INSPECT.",
+    "candidate_buttons_disabled": true,
+    "verify_disabled": true,
+    "restore_disabled": true,
+    "machine_restored": false,
+    "log_restored_to_single_baseline_entry": true
+  },
+  "console_errors": 0
+}

@@ -1,0 +1,113 @@
+{
+  "schema": "rapp-vision-evidence/1.0",
+  "publication_id": "machine-knows-the-fit",
+  "status": "passed",
+  "claims": {
+    "newcomer_orientation": {
+      "claim": "The film names the fictional machine, isolates C17, shows the exact specification, demonstrates rejection and acceptance, and explicitly hands control to the live replay.",
+      "evidence": [
+        "SCRIPT.md",
+        "snapshots/final-layout/contact-sheet.jpg",
+        "evidence/visual-review.md"
+      ]
+    },
+    "exact_fit_logic": {
+      "required_part": "RP-C17-12",
+      "required_fields": {
+        "teeth": 12,
+        "bore": "17 mm",
+        "geometry": "keyed-flat K3"
+      },
+      "rejected_part": "RP-C17-11",
+      "evidence": [
+        "live/state.js",
+        "production/validate-live.mjs",
+        "evidence/browser-validation.json"
+      ]
+    },
+    "safety_scope": {
+      "claim": "All people, parts, measurements, diagnostics, and machine behavior are fictional or synthetic; the depicted fixture is harmless, unpowered, and hand-cranked.",
+      "evidence": [
+        "BRIEF.md",
+        "live/index.html",
+        "evidence/privacy-scan.txt"
+      ]
+    },
+    "media": {
+      "evidence": "evidence/media-validation.json"
+    },
+    "audio_provenance": {
+      "claim": "Narration was synthesized locally from SCRIPT.md and combined with an original deterministic mechanical bed; no third-party music or recorded voice was used.",
+      "evidence": [
+        "assets/repair-voice.wav",
+        "assets/repair-manual-master.wav"
+      ]
+    }
+  },
+  "encodes": [
+    {
+      "path": "media/repair-manual.mp4",
+      "sha256": "f01a1522ee089f14b3d938b7466d419d7ff5ee54aa96f518e869fab10d73ff32",
+      "bytes": 7315095,
+      "duration_seconds": 28.0,
+      "video_codec": "h264",
+      "audio_codec": "aac",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "path": "media/repair-manual.webm",
+      "sha256": "e1822b385dd89f9a426291b8708675dee5f57c042333e3aa4510a13d4ce43e91",
+      "bytes": 3838759,
+      "duration_seconds": 28.018,
+      "video_codec": "vp9",
+      "audio_codec": "opus",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "live/index.html",
+      "sha256": "25e3f3b1299711f61f38519ba415403f00de80361a17bdf11a3861e5858d8348",
+      "bytes": 11754
+    },
+    {
+      "path": "live/state.js",
+      "sha256": "f878938ef7a0fe0114eeb969f41e165ffc4792abc7a5acb40dcabafc69b8843f",
+      "bytes": 2140
+    },
+    {
+      "path": "thumbs/rowan-pike-repair-manual.svg",
+      "sha256": "0aa51f2802ef1fa3d84207aabdb0b47650f5f34f2ba0073b3af4eceb93c3cd06",
+      "bytes": 2558
+    },
+    {
+      "path": "index.html",
+      "sha256": "c577f630aa8294f7bc8d932cdf39ef0de60587127d65f44c706d348956e892f7",
+      "bytes": 25577
+    },
+    {
+      "path": "assets/repair-manual-master.wav",
+      "sha256": "1ba20195702e944352c8ce39469536bc71f0f0ed87623eece4b1b737d9a42635",
+      "bytes": 5376078
+    },
+    {
+      "path": "assets/repair-voice.wav",
+      "sha256": "90028591e30a2b0fd71a9011f915fad359375a4fa5d328c3c7062b336663c17e",
+      "bytes": 1470508
+    }
+  ],
+  "verification": {
+    "hyperframes_runtime_layout_motion_contrast": "passed",
+    "visual_contact_sheet": "passed",
+    "state_machine": "passed",
+    "real_browser_rejection_path": "passed",
+    "real_browser_acceptance_path": "passed",
+    "real_browser_exact_reset": "passed",
+    "media_codecs_and_dimensions": "passed",
+    "black_interval_scan": "passed",
+    "silence_interval_scan": "passed",
+    "privacy_and_scope_scan": "passed"
+  }
+}

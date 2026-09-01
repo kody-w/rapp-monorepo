@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+  <title id="title">After Midnight Maps route comparison</title>
+  <desc id="desc">An indigo paper map with a sodium-orange route and a dashed preserved alternative over synthetic places.</desc>
+  <defs>
+    <pattern id="grid" width="96" height="96" patternUnits="userSpaceOnUse">
+      <path d="M96 0H0V96" fill="none" stroke="#8790b8" stroke-opacity=".12" stroke-width="2"/>
+    </pattern>
+    <radialGradient id="lamp" cx="65%" cy="42%" r="60%">
+      <stop offset="0" stop-color="#4a517d" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#11162f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="#11162f"/>
+  <rect width="1920" height="1080" fill="url(#grid)"/>
+  <rect width="1920" height="1080" fill="url(#lamp)"/>
+  <g fill="none" stroke="#8b92b7" stroke-opacity=".18" stroke-width="3">
+    <path d="M80 800C380 670 510 920 790 760S1240 510 1810 650"/>
+    <path d="M40 420C390 300 650 510 960 350S1480 250 1880 360"/>
+  </g>
+  <path d="M250 760L690 580L1080 650L1640 330" fill="none" stroke="#ff9c45" stroke-opacity=".45" stroke-width="12" stroke-dasharray="28 24"/>
+  <path d="M250 760L690 380L1080 650L1640 330" fill="none" stroke="#ff9c45" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#ffd1a2" stroke="#11162f" stroke-width="8">
+    <circle cx="250" cy="760" r="18"/><circle cx="690" cy="380" r="24"/>
+    <circle cx="1080" cy="650" r="18"/><circle cx="1640" cy="330" r="18"/>
+  </g>
+  <text x="110" y="170" fill="#f2ebda" font-family="Georgia,serif" font-size="88" letter-spacing="-2">After Midnight Maps</text>
+  <text x="116" y="226" fill="#c1c7e4" font-family="monospace" font-size="26" letter-spacing="5">ONE WAYPOINT MOVES · THE ORIGINAL REMAINS</text>
+  <text x="116" y="970" fill="#aab1d2" font-family="monospace" font-size="22">SYNTHETIC PLACES · HAVERSINE DISTANCE · LIVE RESETTABLE REPLAY</text>
+</svg>

@@ -48,6 +48,7 @@ describe("Rapterbox consumer branding", () => {
     assert.equal(config.scheme, "holo-zoo");
     assert.equal(config.ios.bundleIdentifier, "com.rapterbox.holozoo");
     assert.equal(config.android.package, "com.rapterbox.holozoo");
+    assert.ok(config.plugins.includes("./plugins/with-private-network-http"));
     assert.equal(config.ios.infoPlist.UIBackgroundModes, undefined);
     assert.ok(
       config.ios.infoPlist.CFBundleDocumentTypes[0].LSItemContentTypes.includes(
@@ -56,7 +57,7 @@ describe("Rapterbox consumer branding", () => {
     );
     assert.equal(
       config.extra.brand.marketingUrl,
-      "https://rapterbox.com/holo",
+      "https://rapterbox.com/holo/",
     );
     assert.equal(config.extra.brand.product, "Rolling Cores");
     assert.equal(config.extra.brand.displayName, "Holo Zoo");

@@ -1,0 +1,3 @@
+PASS
+Scanned public text artifacts for local paths, private-network indicators, credentials, key material, and unsafe executable URLs. No matches.
+All creators, values, visuals, and audio are explicitly fictional or synthetic.

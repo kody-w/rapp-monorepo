@@ -1,0 +1,31 @@
+{
+  "schema": "after-midnight-maps-verification/1",
+  "status": "passed",
+  "required_artifacts": 11,
+  "encodes": {
+    "mp4": {
+      "codec": "h264",
+      "sha256": "069d64619509aa8bd769bc92784720bbd87e652cabeb32e95131725b67339a7d",
+      "duration": 26.0
+    },
+    "webm": {
+      "codec": "vp9",
+      "sha256": "dc3db70cb17d4443f34eb5a21e48e7285e1abbd35ea76fc4ceadc251a8a52ce4",
+      "duration": 26.013
+    }
+  },
+  "route_math": {
+    "independent_method": "spherical law of cosines",
+    "original_total_km": 69.811048,
+    "moved_total_km": 87.37295,
+    "unchanged_final_leg_km": 27.254919
+  },
+  "interaction": {
+    "move": "passed",
+    "compare": "passed",
+    "invalid_rejection_preserved_state": true,
+    "exact_reset": true
+  },
+  "hashes": "passed",
+  "privacy": "passed"
+}

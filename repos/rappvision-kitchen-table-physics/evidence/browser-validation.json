@@ -1,0 +1,50 @@
+{
+  "schema": "kitchen-table-physics.browser-validation/1",
+  "status": "passed",
+  "browser": "Google Chrome headless via Puppeteer",
+  "checks": [
+    {
+      "name": "boot and newcomer guidance",
+      "passed": true,
+      "observed": {
+        "mass": 2,
+        "force": 10,
+        "friction": 0.25,
+        "acceleration": "2.55 m/s²",
+        "guidance": true
+      }
+    },
+    {
+      "name": "three controls recompute positive path",
+      "passed": true,
+      "observed": {
+        "mass": 1,
+        "force": 12,
+        "friction": 0.1,
+        "acceleration": "11.02 m/s²",
+        "dataAcceleration": "11.02"
+      }
+    },
+    {
+      "name": "out-of-range coefficient rejected without changing accepted state",
+      "passed": true,
+      "observed": {
+        "message": "Rejected: μ must stay between 0.05 and 0.50. The accepted simulator state was not changed.",
+        "friction": 0.1,
+        "acceleration": "11.02 m/s²"
+      }
+    },
+    {
+      "name": "reset restores exact baseline",
+      "passed": true,
+      "observed": {
+        "mass": 2,
+        "force": 10,
+        "friction": 0.25,
+        "challenge": "1.20",
+        "acceleration": "2.55 m/s²",
+        "rejection": ""
+      }
+    }
+  ]
+}

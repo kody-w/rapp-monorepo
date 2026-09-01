@@ -1,0 +1,65 @@
+{
+  "schema": "rapp-vision-channel/2.0",
+  "id": "creature-office-hours",
+  "name": "Creature Office Hours",
+  "title": "Creature Office Hours",
+  "description": "Whimsical synthetic natural-history films with replayable fictional biology.",
+  "creator": {
+    "name": "Dr. Moss",
+    "handle": "dr-moss",
+    "identity": "fictional synthetic naturalist",
+    "disclosure": "Dr. Moss and every featured species are fictional and synthetically authored."
+  },
+  "videos": [
+    {
+      "id": "creature-office-hours",
+      "title": "The Mossbell Glider Family Tree",
+      "description": "A fictional field note about feeding, parent-linked reproduction, and one rejected impossible mutation.",
+      "duration": 28,
+      "duration_seconds": 28,
+      "width": 1920,
+      "height": 1080,
+      "sources": [
+        {
+          "src": "media/creature-office-hours.mp4",
+          "type": "video/mp4",
+          "codec": "h264"
+        },
+        {
+          "src": "media/creature-office-hours.webm",
+          "type": "video/webm",
+          "codec": "vp9"
+        }
+      ],
+      "thumbnail": "thumbs/creature-office-hours.svg",
+      "chapters": [
+        { "t": 0, "label": "Fictional field note" },
+        { "t": 7, "label": "Lantern-spore feeding" },
+        { "t": 14, "label": "Linked hatchling" },
+        { "t": 21, "label": "Impossible mutation rejected" }
+      ],
+      "live": {
+        "kind": "rapp-vision-live/1.0",
+        "duration": 28,
+        "title": "Try live replay",
+        "summary": "Feed both adults, reproduce H-03, inspect both parent links, reject glass antlers without losing lineage, and reset.",
+        "scenes": [
+          {
+            "id": "habitat-replay",
+            "title": "Mossbell habitat",
+            "t": 0,
+            "dur": 28,
+            "app": "live/index.html",
+            "actions": [
+              { "at": 1, "do": "click", "id": "feed", "label": "Feed both adults", "selector": "#feed-btn", "event": "click" },
+              { "at": 5, "do": "click", "id": "reproduce", "label": "Reproduce one hatchling", "selector": "#reproduce-btn", "event": "click" },
+              { "at": 9, "do": "click", "id": "inspect", "label": "Inspect linked parent lineage", "selector": "#inspect-btn", "event": "click" },
+              { "at": 14, "do": "click", "id": "reject", "label": "Attempt impossible glass-antler mutation", "selector": "#mutate-btn", "event": "click", "expected": "rejected; accepted lineage preserved" },
+              { "at": 20, "do": "click", "id": "reset", "label": "Reset habitat", "selector": "#reset-btn", "event": "click", "expected": "exact baseline restored" }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Receipt Culture thumbnail</title>
+  <desc id="desc">An ivory museum-catalogue layout comparing canonical and counterfeit receipt hashes.</desc>
+  <rect width="1920" height="1080" fill="#f2eddf"/>
+  <path d="M0 120H1920M0 240H1920M0 360H1920M0 480H1920M0 600H1920M0 720H1920M0 840H1920M0 960H1920M120 0V1080M240 0V1080M360 0V1080M480 0V1080M600 0V1080M720 0V1080M840 0V1080M960 0V1080M1080 0V1080M1200 0V1080M1320 0V1080M1440 0V1080M1560 0V1080M1680 0V1080M1800 0V1080" stroke="#171410" stroke-opacity=".06"/>
+  <rect x="108" width="12" height="1080" fill="#dc3f24"/>
+  <text x="164" y="126" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" letter-spacing="5" fill="#dc3f24">RECEIPT CULTURE · EMI CHEN</text>
+  <text x="164" y="320" font-family="Georgia, Times New Roman, serif" font-size="122" fill="#171410">One field</text>
+  <text x="164" y="438" font-family="Georgia, Times New Roman, serif" font-size="122" fill="#171410">changes.</text>
+  <text x="164" y="556" font-family="Georgia, Times New Roman, serif" font-size="122" fill="#171410">Trust stops.</text>
+  <rect x="990" y="176" width="750" height="690" fill="#fbf7eb" stroke="#171410" stroke-width="4"/>
+  <text x="1052" y="252" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" letter-spacing="3" fill="#6f675b">ARTIFACT SHA-256</text>
+  <text x="1052" y="350" font-family="Courier New, monospace" font-size="34" fill="#171410">…8394a5b6c7d8e</text>
+  <rect x="1426" y="378" width="78" height="78" fill="#dc3f24"/>
+  <text x="1451" y="435" font-family="Courier New, monospace" font-size="48" font-weight="700" fill="#fbf7eb">9</text>
+  <text x="1540" y="435" font-family="Georgia, Times New Roman, serif" font-size="52" fill="#171410">→</text>
+  <rect x="1630" y="378" width="78" height="78" fill="#dc3f24"/>
+  <text x="1655" y="435" font-family="Courier New, monospace" font-size="48" font-weight="700" fill="#fbf7eb">8</text>
+  <line x1="1052" y1="520" x2="1680" y2="520" stroke="#171410" stroke-width="3"/>
+  <text x="1052" y="610" font-family="Georgia, Times New Roman, serif" font-size="70" fill="#dc3f24">REJECT</text>
+  <text x="1052" y="690" font-family="Arial, Helvetica, sans-serif" font-size="29" fill="#6f675b">One changed character breaks</text>
+  <text x="1052" y="730" font-family="Arial, Helvetica, sans-serif" font-size="29" fill="#6f675b">the synthetic signature binding.</text>
+  <text x="164" y="980" font-family="Arial, Helvetica, sans-serif" font-size="23" letter-spacing="3" fill="#6f675b">AUTHORED SYNTHETIC EVIDENCE ONLY</text>
+</svg>

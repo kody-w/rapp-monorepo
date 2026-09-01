@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#c8d0ad"/>
+  <rect x="42" y="42" width="1196" height="636" fill="#f1ecd3" stroke="#4d6248" stroke-width="6"/>
+  <path d="M62 122H1218" stroke="#7b896a" stroke-width="4"/>
+  <text x="78" y="92" fill="#924632" font-family="monospace" font-size="22" font-weight="700">CREATURE OFFICE HOURS · FICTIONAL SPECIES</text>
+  <text x="78" y="230" fill="#24382c" font-family="Georgia,serif" font-size="84" font-weight="700">Mossbell Glider</text>
+  <text x="80" y="280" fill="#5c6b52" font-family="Georgia,serif" font-size="30" font-style="italic">a synthetic field note by fictional naturalist Dr. Moss</text>
+  <g transform="translate(760 150)">
+    <circle cx="225" cy="230" r="205" fill="#a8b987" stroke="#354b36" stroke-width="8"/>
+    <ellipse cx="126" cy="230" rx="122" ry="74" fill="#c2cc98" stroke="#354b36" stroke-width="7" transform="rotate(-25 126 230)"/>
+    <ellipse cx="324" cy="230" rx="122" ry="74" fill="#c2cc98" stroke="#354b36" stroke-width="7" transform="rotate(25 324 230)"/>
+    <rect x="184" y="166" width="82" height="180" rx="40" fill="#6f8b62" stroke="#354b36" stroke-width="8"/>
+    <circle cx="225" cy="155" r="48" fill="#d6cb8e" stroke="#354b36" stroke-width="8"/>
+    <circle cx="209" cy="154" r="6" fill="#24382c"/><circle cx="241" cy="154" r="6" fill="#24382c"/>
+    <path d="M195 118L175 62M255 118L278 62" stroke="#354b36" stroke-width="7" stroke-linecap="round"/>
+    <path d="M175 348C250 320 324 364 308 433C240 445 190 411 175 348Z" fill="#c2ad56" stroke="#354b36" stroke-width="8"/>
+  </g>
+  <rect x="78" y="548" width="570" height="72" fill="#e7dfbf" stroke="#924632" stroke-width="4"/>
+  <text x="105" y="594" fill="#924632" font-family="monospace" font-size="23" font-weight="700">FEED → REPRODUCE → INSPECT → REJECT → RESET</text>
+</svg>

@@ -1,0 +1,35 @@
+{
+  "schema": "rapp-vision-channel/2.0",
+  "id": "tiny-bureau",
+  "name": "Tiny Bureau",
+  "creator": {
+    "name": "Imani Reed",
+    "identity": "fictional synthetic civic investigator",
+    "disclosure": "Imani Reed is invented and does not represent a real person."
+  },
+  "description": "Fictional civic case files that teach evidence literacy.",
+  "videos": [
+    {
+      "id": "tiny-bureau-five-fixture-gap",
+      "title": "The Five-Fixture Gap",
+      "duration": 26,
+      "width": 1920,
+      "height": 1080,
+      "fictional": true,
+      "summary": "Two synthetic records support an inventory discrepancy, while an unsupported accusation is rejected.",
+      "sources": [
+        { "src": "media/tiny-bureau-five-fixture-gap.mp4", "type": "video/mp4" },
+        { "src": "media/tiny-bureau-five-fixture-gap.webm", "type": "video/webm" }
+      ],
+      "thumbnail": "thumbs/tiny-bureau-five-fixture-gap.svg",
+      "live": {
+        "kind": "rapp-vision-live/1.0",
+        "duration": 26,
+        "label": "Try live replay",
+        "scenes": [
+          { "t": 0, "dur": 26, "id": "evidence-desk", "title": "Cite, challenge, inspect, reset", "app": "live/index.html" }
+        ]
+      }
+    }
+  ]
+}

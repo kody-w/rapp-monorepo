@@ -1,0 +1,233 @@
+# RAPP Projects skill quickstart
+
+`rar-kody-w-rapp-projects` is a local-first project punch clock and handoff
+board for any AI runtime. It records project history as an append-only,
+hash-linked RAPP/1 chain, derives current status and board views, verifies the
+chain and its receipts, and can create a portable project-specific egg.
+
+## Data boundary
+
+The root is selected from an explicit `"root"`, then `RAPP_PROJECTS_ROOT`, then
+the default `~/.rapp/projects-control/`. Minting a new root also requires the
+operator's lowercase GitHub login from explicit `identity_owner` or
+`RAPP_PROJECTS_OWNER`; it is written into the RAPPID once and reused for every
+project identity. Existing identities are never silently reminted. Use an
+absolute custom root to create a separate authority:
+
+```json
+{"operation":"board","root":"/absolute/path/to/projects-control","identity_owner":"github-login"}
+```
+
+The selected root is the complete storage boundary. The skill does not search
+other project roots, silently merge divergent histories, or send, publish,
+sign, pay, or delete external resources. It makes no network calls and never
+writes project state beside the agent. Artifact entries are references and
+receipts, not copied bodies. A `handoff` document is hashed and recorded as a
+receipt; its body is not copied into project state. External receipt paths are
+kept only in a private locator file inside the selected project. Chains,
+derived views, and eggs contain an opaque `local-private://` token instead of
+the machine path. Locator files are never exported; after import, those
+external receipts remain explicitly unverifiable until rebound locally.
+Authority files, locks, locators, derived views, and `PROJECT.egg` itself
+cannot be receipted, because an operation could otherwise invalidate its own
+evidence.
+
+Each project lives at `<root>/<slug>/`. Its `chain.jsonl`, `rappid.json`, and
+`head.json` carry the authority. The trusted head includes a rolling digest of
+every ordered frame hash, so rewriting interior history is detected even
+though RAPP/1 memory-stream `prev` links the prior particle. Boards, status
+pages, indexes, and eggs are derived projections rebuilt from verified history.
+On first locked read, a valid `rapp-project-head/1` from version 1.0.2 is
+checked against its chain and atomically upgraded to `rapp-project-head/2`;
+the chain and RAPPID are never rewritten.
+Root initialization, append/head advancement, project creation, and import use
+fsynced journals plus atomic replacement. Interrupted hidden staging is
+recovered or removed before root validation, so a process crash cannot expose
+a half-created project cell. New external receipt locators are committed by the
+same append journal as their frame, so a rejected request leaves no private
+path side effect.
+
+## RAPP/1 project lifecycle
+
+1. `open` creates the project genesis frame.
+2. Each runtime `punchin`s before non-trivial work.
+3. Append `status` whenever progress, location, artifacts, blockers, or the
+   next action changes.
+4. Use `handoff` when responsibility moves to another runtime.
+5. `punchout` with `done`, `blocked`, or `abandoned` and supporting receipts.
+6. `verify` checks the complete chain. Historical frames are never edited;
+   corrections are new frames.
+7. Use `board` for the cross-project view or `inspect` for one project.
+8. `export` creates `<root>/<project>/PROJECT.egg` only after successful
+   verification and explicit owner approval.
+9. `import` verifies the complete egg before creating or fast-forwarding a
+   project. Stale, malformed, or divergent history is refused without mutation.
+
+## Operations
+
+Requests are JSON objects. Supply `operation`, or use `action` as a
+compatibility alias. If both are present, `operation` wins; omitting both is an
+error. Undeclared fields are refused consistently by the canonical agent and
+generated runners. Project slugs use lowercase letters, numbers, and single
+hyphens.
+
+### `protocol`
+
+```json
+{"operation":"protocol"}
+```
+
+### `open`
+
+```json
+{"operation":"open","identity_owner":"github-login","project":"example-project","title":"Example project","goal":"Ship a verified result","owner":"project-owner","origin":"initial brief"}
+```
+
+### `punchin`
+
+```json
+{"operation":"punchin","project":"example-project","agent":"claude-code","runtime":"claude-code","session_id":"optional-session","location":"/absolute/worktree","intent":"Implement the next slice","role":"builder","capabilities":["files","shell","tests"]}
+```
+
+### `status`
+
+`next_action` is required; `pct` is an integer from 0 through 100.
+
+```json
+{"operation":"status","project":"example-project","agent":"github-copilot-cli","location":"/absolute/worktree","status":"testing","artifacts":["build/report.json"],"blockers":[],"next_action":"Run the acceptance gate","pct":80,"project_state":"active"}
+```
+
+### `handoff`
+
+`doc` must name an existing file. The skill records its content-addressed
+receipt without copying its body.
+
+```json
+{"operation":"handoff","project":"example-project","from_agent":"claude-code","to_agent":"github-copilot-cli","doc":"/absolute/path/HANDOFF.md","open_questions":["Does the release gate pass?"]}
+```
+
+### `punchout`
+
+```json
+{"operation":"punchout","project":"example-project","agent":"github-copilot-cli","outcome":"done","summary":"Acceptance gate passed","receipts":["build/report.json"],"blockers":[]}
+```
+
+### `verify`
+
+```json
+{"operation":"verify","project":"example-project"}
+```
+
+An imported opaque receipt can be rebound during verification only with fresh
+owner approval and a local file whose byte count and SHA-256 match every
+historical use of that token:
+
+```json
+{"operation":"verify","project":"example-project","owner_approved":true,"receipt_bindings":{"local-private://0123456789abcdef0123456789abcdef":"/absolute/path/to/restored-artifact"}}
+```
+
+Binding updates only the private locator file; it does not rewrite a frame or
+copy the artifact into project state. A wrong path, hash, size, token, or
+missing approval is refused before the locator changes.
+
+A passing verdict imported from another device is historical evidence, not a
+claim that this device can resolve its private receipts. Local boards and
+inspection remain unverified until every receipt resolves here and a new local
+verification frame passes.
+
+### `board`
+
+```json
+{"operation":"board"}
+```
+
+### `inspect`
+
+```json
+{"operation":"inspect","project":"example-project"}
+```
+
+### `export`
+
+```json
+{"operation":"export","root":"/absolute/path/to/projects-control","project":"example-project","owner_approved":true}
+```
+
+This operation refuses to write without `owner_approved: true`, refuses an
+unverified project, and writes only the selected project's `PROJECT.egg`.
+The optional `output` compatibility field is accepted only when it resolves to
+that exact path; arbitrary output paths are refused.
+The egg is `local-private`: sharing it requires owner approval. Approval is per
+export; installing or invoking the skill is not approval. Its deterministic
+`rapp/1-egg` payload contains verified project metadata and chain projections,
+never artifact bodies.
+
+### `import`
+
+```json
+{"operation":"import","root":"/absolute/path/to/projects-control","egg":"/absolute/path/to/PROJECT.egg"}
+```
+
+Import verifies the full egg before creating or fast-forwarding a destination.
+A malformed, stale, or divergent egg creates no destination and changes no
+existing chain.
+
+## Result envelope
+
+Success returns `status: "ok"` and the canonical `operation`. Verification also
+returns `verification_frame_hash`:
+
+```json
+{"status":"ok","operation":"verify","project":"example-project","verdict":"pass","verification_frame_hash":"<64-hex>"}
+```
+
+Board `verified` is true only when the latest frame is a passing
+`project.verify` verdict that covers its immediate predecessor. Any later work
+frame resets it to false until the new head is verified.
+
+Errors keep details under `error`; verification failures may also include a
+protocol `step`:
+
+```json
+{"status":"error","operation":"verify","error":{"code":"chain-verification","message":"verification failed","step":"<protocol-step>"}}
+```
+
+An authoritative append remains a success if only its disposable view rebuild
+fails. In that case the result includes `view_refresh.status: "error"` with a
+sanitized error record, so callers do not retry and duplicate the committed
+frame.
+
+## Use from Claude, Copilot, or Scout
+
+- **Claude Code:** install or reference the skill, then ask: “Use
+  `rar-kody-w-rapp-projects` to punch in to `example-project` and record this
+  work.” Supply the JSON payload when exact fields matter.
+- **GitHub Copilot CLI:** place the complete generated skill directory under
+  `~/.copilot/skills/`, invoke `rar-kody-w-rapp-projects`, and pass one of the
+  JSON objects above.
+- **Microsoft Scout:** import the generated workflow, select
+  `rar-kody-w-rapp-projects`, run its verified `scripts/run_agent.py` preflight,
+  and send the operation JSON on stdin. If local execution is unavailable,
+  route the canonical agent through the configured Brainstem.
+
+All runtimes use the same operation names and RAPP/1 history. `agent` and
+`runtime` are declarations, not an allowlist.
+
+The stored project profile emits unsigned memory-stream frames only:
+`prev_wave: null`, `sig: null`. Frame verification requires the stream of
+record. A syntactically valid signed frame is accepted only when a caller
+supplies a RAPP registry-backed §10 trust verifier; malformed JWS is refused at
+step 1 and missing/untrusted signature authority at step 6.
+
+## Stable sources
+
+- Stable workflow skill:
+  <https://raw.githubusercontent.com/kody-w/RAR/main/scout/workflows/rar-kody-w-rapp-projects/skills/rar-kody-w-rapp-projects/SKILL.md>
+- Canonical agent:
+  <https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_projects_agent.py>
+- Scout catalog:
+  <https://raw.githubusercontent.com/kody-w/RAR/main/scout/catalog/catalog.json>
+
+Prefer the stable workflow URL for Scout imports. Generated bundle placement
+may change when the catalog is rebuilt; the canonical agent URL is the
+single-file implementation authority.

@@ -1,0 +1,33 @@
+{
+  "schema": "rapp-vision-public-boundary/1",
+  "repository": "kody-w/rappvision-patch-notes-tomorrow",
+  "repository_url": "https://github.com/kody-w/rappvision-patch-notes-tomorrow",
+  "pages_url": "https://kody-w.github.io/rappvision-patch-notes-tomorrow/",
+  "watch_url": "https://kody-w.github.io/rapp-vision/#/watch/patch-notes-tomorrow%2Fcivic-os-12",
+  "included": [
+    ".nojekyll",
+    "BRIEF.md",
+    "README.md",
+    "SCRIPT.md",
+    "STORYBOARD.md",
+    "assets/kira-voss.wav",
+    "channel.json",
+    "companion.md",
+    "evidence.json",
+    "frame.md",
+    "index.html",
+    "index.motion.json",
+    "live/index.html",
+    "media/civic-os-12.mp4",
+    "media/civic-os-12.webm",
+    "proof/encoded-01.jpg",
+    "proof/encoded-02.jpg",
+    "proof/encoded-03.jpg",
+    "thumbs/civic-os-12.svg"
+  ],
+  "excluded": [
+    "agent instruction files",
+    "private worker identifiers and orchestration logs",
+    "unreferenced production caches and diagnostic snapshots"
+  ]
+}

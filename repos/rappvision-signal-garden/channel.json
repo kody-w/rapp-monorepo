@@ -1,0 +1,78 @@
+{
+  "schema": "rapp-vision-channel/2.0",
+  "id": "signal-garden",
+  "name": "Signal Garden",
+  "creator": {
+    "name": "Mina Vale",
+    "identity": "fictional synthetic field scientist"
+  },
+  "thesis": "Measured system signals become observable botanical states.",
+  "videos": [
+    {
+      "id": "signal-garden-pulse-lag",
+      "kind": "paired",
+      "title": "When a Heartbeat Wilts",
+      "duration": 26,
+      "promise": "Iris Three's heartbeat interval changes from 4.0 seconds to 11.8, crosses an 8.0-second threshold and wilts, then returns to 4.0 after healing.",
+      "sources": [
+        {
+          "src": "media/signal-garden-pulse-lag.mp4",
+          "type": "video/mp4"
+        },
+        {
+          "src": "media/signal-garden-pulse-lag.webm",
+          "type": "video/webm"
+        }
+      ],
+      "thumbnail": "thumbs/signal-garden-pulse-lag.svg",
+      "live": {
+        "kind": "rapp-vision-live/1.0",
+        "duration": 10,
+        "scenes": [
+          {
+            "t": 0,
+            "dur": 10,
+            "app": "live/index.html",
+            "ready": {
+              "selector": "#anomaly-button",
+              "enabled": true
+            },
+            "actions": [
+              {
+                "at": 1,
+                "do": "click",
+                "selector": "#anomaly-button"
+              },
+              {
+                "at": 4,
+                "do": "click",
+                "selector": "#heal-button"
+              },
+              {
+                "at": 7,
+                "do": "click",
+                "selector": "#reset-button"
+              }
+            ]
+          }
+        ],
+        "chapters": [
+          {
+            "t": 0,
+            "label": "Introduce anomaly"
+          },
+          {
+            "t": 4,
+            "label": "Heal signal"
+          },
+          {
+            "t": 7,
+            "label": "Reset"
+          }
+        ]
+      },
+      "companion": "companion.md",
+      "evidence": "evidence.json"
+    }
+  ]
+}

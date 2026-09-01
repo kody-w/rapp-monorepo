@@ -1,0 +1,25 @@
+{
+  "schema": "rapp-vision-public-boundary/1",
+  "repository": "kody-w/rappvision-creature-office-hours",
+  "repository_url": "https://github.com/kody-w/rappvision-creature-office-hours",
+  "pages_url": "https://kody-w.github.io/rappvision-creature-office-hours/",
+  "watch_url": "https://kody-w.github.io/rapp-vision/#/watch/creature-office-hours%2Fcreature-office-hours",
+  "included": [
+    ".nojekyll",
+    "README.md",
+    "channel.json",
+    "companion.md",
+    "evidence.json",
+    "evidence/contact-sheet.jpg",
+    "live/index.html",
+    "live/model.mjs",
+    "media/creature-office-hours.mp4",
+    "media/creature-office-hours.webm",
+    "thumbs/creature-office-hours.svg"
+  ],
+  "excluded": [
+    "agent instruction files",
+    "private worker identifiers and orchestration logs",
+    "unreferenced production caches and diagnostic snapshots"
+  ]
+}

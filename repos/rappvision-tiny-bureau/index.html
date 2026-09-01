@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Tiny Bureau — The Five-Fixture Gap</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #d9d2c1; }
+      body { color: #171916; font-family: "IBM Plex Mono", monospace; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #e9e2d1; }
+      #root::before {
+        content: ""; position: absolute; inset: 0; opacity: .3; pointer-events: none;
+        background-image:
+          repeating-linear-gradient(0deg, rgba(30,31,27,.06) 0, rgba(30,31,27,.06) 1px, transparent 1px, transparent 5px),
+          radial-gradient(circle at 16% 28%, rgba(139,47,39,.16), transparent 30%),
+          radial-gradient(circle at 83% 74%, rgba(55,74,91,.12), transparent 28%);
+      }
+      .clip { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; padding: 118px 126px 94px; }
+      .mast { position: absolute; top: 38px; left: 58px; right: 58px; display: flex; justify-content: space-between; align-items: center; z-index: 20; font-size: 20px; letter-spacing: .13em; text-transform: uppercase; }
+      .mast strong { font-family: "Oswald", sans-serif; font-size: 32px; letter-spacing: .08em; }
+      .fiction { color: #8b2f27; border: 3px solid #8b2f27; padding: 8px 14px; transform: rotate(-1deg); }
+      .folio { position: absolute; left: 58px; bottom: 38px; font-size: 18px; text-transform: uppercase; letter-spacing: .1em; z-index: 20; }
+      .case-id { position: absolute; right: 58px; bottom: 38px; font-size: 18px; z-index: 20; }
+      h1, h2, p { margin: 0; }
+      h1, h2 { font-family: "Oswald", sans-serif; text-transform: uppercase; line-height: .92; }
+      .eyebrow { color: #8b2f27; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; font-size: 24px; margin-bottom: 24px; }
+      .paper { background: #f4eedf; border: 3px solid #252722; box-shadow: 15px 18px 0 rgba(24,25,22,.18); }
+      .rule { height: 4px; width: 100%; background: #242621; transform-origin: left center; }
+      .redact { display: inline-block; color: #f4eedf; -webkit-text-fill-color: #f4eedf; background: #20211e; padding: 2px 12px 6px; font-size: 58px; line-height: 1.08; transform: rotate(-.5deg); }
+      .stamp { border: 7px double #8b2f27; color: #8b2f27; font-family: "Oswald", sans-serif; font-size: 64px; letter-spacing: .06em; padding: 18px 34px; text-transform: uppercase; transform: rotate(-7deg); }
+      .scene1 { display: grid; grid-template-columns: 1.15fr .85fr; gap: 80px; align-items: center; }
+      .scene1 h1 { font-size: 116px; max-width: 1050px; letter-spacing: -.025em; }
+      .scene1 h1 em { display: block; color: #8b2f27; font-style: normal; }
+      .folder { height: 610px; padding: 58px; transform: rotate(2deg); position: relative; }
+      .folder::before { content: "CASE FILE"; position: absolute; top: -46px; left: 54px; width: 260px; height: 48px; padding: 10px 24px; background: #c7a65a; border: 3px solid #252722; font-family: "Oswald"; font-size: 28px; letter-spacing: .1em; }
+      .folder .big { font-family: "Oswald"; font-size: 146px; line-height: .85; margin: 54px 0 26px; color: #374b5c; }
+      .folder p { font-size: 27px; line-height: 1.45; }
+      .scene2 h2, .scene3 h2, .scene4 h2, .scene5 h2 { font-size: 78px; letter-spacing: -.015em; }
+      .scene2 { display: grid; grid-template-rows: auto 1fr; gap: 52px; }
+      .compare { display: grid; grid-template-columns: 1fr 130px 1fr; align-items: stretch; gap: 30px; }
+      .record { padding: 42px 48px; position: relative; }
+      .record header { display: flex; justify-content: space-between; border-bottom: 3px solid #252722; padding-bottom: 18px; margin-bottom: 28px; text-transform: uppercase; font-size: 22px; }
+      .record .number { font-family: "Oswald"; font-size: 170px; color: #374b5c; line-height: .9; }
+      .record .label { font-size: 28px; margin-top: 18px; }
+      .ticks { display: grid; grid-template-columns: repeat(7, 1fr); gap: 11px; margin-top: 32px; }
+      .tick { height: 31px; border: 4px solid #374b5c; background: #374b5c; }
+      .tick.empty { background: transparent; border-color: #8b2f27; }
+      .versus { align-self: center; text-align: center; font-family: "Oswald"; font-size: 38px; color: #8b2f27; }
+      .gap-note { position: absolute; right: 30px; bottom: 128px; z-index: 3; font-weight: 700; color: #8b2f27; font-size: 26px; transform: rotate(-3deg); }
+      .scene3 { display: grid; grid-template-columns: 1fr .7fr; gap: 70px; align-items: center; }
+      .ledger { display: grid; gap: 28px; }
+      .ledger-card { padding: 30px 36px; display: grid; grid-template-columns: 150px 1fr; gap: 28px; align-items: center; }
+      .ledger-card .tag { font-family: "Oswald"; font-size: 52px; color: #374b5c; }
+      .ledger-card h3 { margin: 0 0 10px; font-size: 26px; text-transform: uppercase; }
+      .ledger-card p { font-size: 22px; line-height: 1.4; }
+      .chain { position: relative; height: 650px; display: grid; place-items: center; }
+      .chain svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+      .finding { width: 430px; padding: 48px; text-align: center; z-index: 2; }
+      .finding .five { font-family: "Oswald"; font-size: 180px; line-height: .8; color: #8b2f27; }
+      .finding p { font-size: 26px; text-transform: uppercase; font-weight: 700; margin-top: 24px; }
+      .scene4 { display: grid; grid-template-columns: 1.15fr .85fr; gap: 68px; align-items: center; }
+      .claim { padding: 54px; position: relative; min-height: 550px; }
+      .claim h3 { font-family: "Oswald"; text-transform: uppercase; font-size: 38px; border-bottom: 3px solid #252722; padding-bottom: 20px; margin: 0 0 36px; }
+      .claim blockquote { margin: 0; font-family: "Oswald"; font-size: 70px; line-height: 1.08; }
+      .claim small { display: block; margin-top: 38px; font-size: 20px; }
+      .reject-panel { display: grid; gap: 32px; justify-items: center; }
+      .reason { font-size: 25px; line-height: 1.45; max-width: 520px; text-align: center; }
+      .scene5 { display: grid; grid-template-columns: 1.1fr .9fr; gap: 80px; align-items: center; }
+      .outcome { display: grid; gap: 22px; margin-top: 44px; }
+      .outcome-row { display: grid; grid-template-columns: 74px 1fr; gap: 24px; align-items: center; border-top: 3px solid #252722; padding-top: 22px; font-size: 32px; }
+      .outcome-row b { font-family: "Oswald"; font-size: 58px; color: #8b2f27; }
+      .replay { padding: 52px; min-height: 570px; display: flex; flex-direction: column; justify-content: space-between; transform: rotate(1deg); }
+      .replay h3 { font-family: "Oswald"; text-transform: uppercase; font-size: 62px; margin: 0; }
+      .replay p { font-size: 26px; line-height: 1.5; }
+      .replay .path { color: #8b2f27; font-size: 30px; font-weight: 700; text-transform: uppercase; }
+      .caption { position: absolute; left: 126px; right: 126px; bottom: 84px; background: rgba(23,25,22,.93); color: #f4eedf; padding: 18px 28px; font-size: 25px; line-height: 1.35; z-index: 40; }
+      .micro { font-size: 18px; text-transform: uppercase; letter-spacing: .08em; color: #4c4e48; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="tiny-bureau-film" data-start="0" data-duration="26" data-width="1920" data-height="1080">
+      <div class="mast"><strong>Tiny Bureau / Imani Reed</strong><span class="fiction">Fictional records only</span></div>
+      <div class="folio">Synthetic civic investigation · no real case</div>
+      <div class="case-id">TB-014/009 · Bellwether Crossing (invented)</div>
+
+      <section id="scene-1" class="clip scene1" data-start="0" data-duration="4.5" data-track-index="1">
+        <div>
+          <div class="eyebrow" id="s1-eye">The standard of proof</div>
+          <h1 id="s1-title">A discrepancy is <em>evidence.</em> An accusation is not.</h1>
+        </div>
+        <article class="paper folder" id="s1-folder">
+          <div class="micro">Bellwether Crossing Public Works / invented</div>
+          <div class="big">14 / 09</div>
+          <div class="rule"></div>
+          <p>Plaza lighting inventory review. Every name, record, and event in this file is synthetic.</p>
+        </article>
+        <div class="caption" data-layout-allow-caption-zone>A discrepancy is evidence. An accusation is not.</div>
+      </section>
+
+      <section id="scene-2" class="clip scene2" data-start="4.5" data-duration="5" data-track-index="2">
+        <div>
+          <div class="eyebrow">The five-fixture gap</div>
+          <h2>Two records. One measurable mismatch.</h2>
+        </div>
+        <div class="compare">
+          <article class="paper record s2-card">
+            <header><span>Synthetic delivery receipt</span><span>BC-PW-441</span></header>
+            <div class="number">14</div><div class="label">fixtures accepted · 12 Frostwane 2031</div>
+            <div class="ticks" aria-hidden="true">
+              <i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i>
+              <i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i>
+            </div>
+          </article>
+          <div class="versus">VERSUS</div>
+          <article class="paper record s2-card">
+            <header><span>Synthetic inspection log</span><span>BC-INSP-118</span></header>
+            <div class="number">09</div><div class="label">fixtures observed · 03 Rainmoot 2031</div>
+            <div class="ticks" aria-hidden="true">
+              <i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i>
+              <i class="tick"></i><i class="tick"></i><i class="tick empty"></i><i class="tick empty"></i><i class="tick empty"></i><i class="tick empty"></i><i class="tick empty"></i>
+            </div>
+            <div class="gap-note">5 not reconciled</div>
+          </article>
+        </div>
+        <div class="caption" data-layout-allow-caption-zone>Bellwether Crossing is fictional. Fourteen plaza lights are listed as delivered; the inspection log records nine.</div>
+      </section>
+
+      <section id="scene-3" class="clip scene3" data-start="9.5" data-duration="6.5" data-track-index="3">
+        <div>
+          <div class="eyebrow">Provenance before conclusion</div>
+          <h2>Support the finding with the chain.</h2>
+          <div class="ledger">
+            <article class="paper ledger-card s3-card"><div class="tag">E-01</div><div><h3>Procurement + delivery</h3><p>Invented record BC-PW-441 · fourteen units · synthetic clerk: Oren Pike.</p></div></article>
+            <article class="paper ledger-card s3-card"><div class="tag">E-02</div><div><h3>Field inspection</h3><p>Invented record BC-INSP-118 · nine observed · synthetic inspector: Leena Moss.</p></div></article>
+          </div>
+        </div>
+        <div class="chain">
+          <svg viewBox="0 0 650 650" aria-hidden="true"><path id="chain-path" d="M70 110 C320 40 330 250 570 240 S380 450 330 570" fill="none" stroke="#374b5c" stroke-width="10" stroke-dasharray="18 14"/><circle cx="70" cy="110" r="18" fill="#8b2f27"/><circle cx="330" cy="570" r="18" fill="#8b2f27"/></svg>
+          <article class="paper finding" id="s3-finding"><div class="five">5</div><p>fixture inventory gap supported</p></article>
+        </div>
+        <div class="caption" data-layout-allow-caption-zone>Together, these invented records support a five-fixture inventory gap.</div>
+      </section>
+
+      <section id="scene-4" class="clip scene4" data-start="16" data-duration="5.5" data-track-index="4">
+        <article class="paper claim" id="s4-claim">
+          <h3>Claim submitted for challenge</h3>
+          <blockquote>“Deputy Director Mara Quill <span class="redact">diverted five fixtures</span>.”</blockquote>
+          <small>Fictional person · unsupported statement · no source attached</small>
+        </article>
+        <div class="reject-panel">
+          <div class="stamp" id="s4-stamp">Not supported</div>
+          <p class="reason" id="s4-reason">The two records establish a count mismatch. Neither record names Mara Quill, assigns custody, or explains where the five fixtures went.</p>
+        </div>
+        <div class="caption" data-layout-allow-caption-zone>The records do not support blaming Deputy Director Mara Quill. No record links her to the gap.</div>
+      </section>
+
+      <section id="scene-5" class="clip scene5" data-start="21.5" data-duration="4.5" data-track-index="5">
+        <div>
+          <div class="eyebrow">Case outcome</div>
+          <h2>Stop where the evidence stops.</h2>
+          <div class="outcome">
+            <div class="outcome-row s5-row"><b>01</b><span>Confirm the five-fixture discrepancy.</span></div>
+            <div class="outcome-row s5-row"><b>02</b><span>Reject the unsupported blame claim.</span></div>
+            <div class="outcome-row s5-row"><b>03</b><span>Request an inventory reconciliation.</span></div>
+          </div>
+        </div>
+        <article class="paper replay" id="s5-replay">
+          <div><div class="micro">Interactive companion</div><h3>Try live replay</h3></div>
+          <p>Cite the two synthetic records. Challenge the accusation. Inspect provenance and rejection.</p>
+          <div class="path">Cite → challenge → reset</div>
+        </article>
+        <div class="caption" data-layout-allow-caption-zone>Confirm the discrepancy. Reject the blame. Request inventory reconciliation.</div>
+      </section>
+
+      <audio id="narration" src="assets/tiny-bureau-narration.wav" data-start="0" data-duration="26" data-track-index="20" data-volume="1"></audio>
+      <audio id="bed" src="assets/tiny-bureau-bed.wav" data-start="0" data-duration="26" data-track-index="21" data-volume=".22"></audio>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s1-eye", { opacity: 0, x: -70 }, { opacity: 1, x: 0, duration: .45, ease: "power3.out" }, .18)
+        .fromTo("#s1-title", { opacity: 0, y: 76 }, { opacity: 1, y: 0, duration: .75, ease: "expo.out" }, .42)
+        .fromTo("#s1-folder", { opacity: 0, x: 140, rotation: 8 }, { opacity: 1, x: 0, rotation: 2, duration: .85, ease: "back.out(1.35)" }, .72)
+        .to("#s1-folder", { y: -8, duration: 1.1, yoyo: true, repeat: 1, ease: "sine.inOut" }, 2.2);
+      tl.fromTo(".s2-card", { opacity: 0, y: 70, rotation: 2 }, { opacity: 1, y: 0, rotation: 0, duration: .65, stagger: .16, ease: "power3.out" }, 4.72)
+        .fromTo(".scene2 .tick", { scaleY: 0 }, { scaleY: 1, duration: .42, stagger: .025, transformOrigin: "bottom", ease: "back.out(1.4)" }, 5.35)
+        .fromTo(".gap-note", { opacity: 0, scale: .7 }, { opacity: 1, scale: 1, duration: .45, ease: "back.out(2)" }, 6.65)
+        .to(".scene2 .empty", { backgroundColor: "rgba(139,47,39,.16)", duration: .65, yoyo: true, repeat: 2, ease: "sine.inOut" }, 7.2)
+        .to(".s2-card", { y: -6, duration: 1.1, yoyo: true, repeat: 1, ease: "sine.inOut" }, 7.0);
+      tl.fromTo(".s3-card", { opacity: 0, x: -95 }, { opacity: 1, x: 0, duration: .6, stagger: .22, ease: "power4.out" }, 9.72)
+        .fromTo("#chain-path", { strokeDashoffset: 520 }, { strokeDashoffset: 0, duration: 1.3, ease: "power2.inOut" }, 10.35)
+        .fromTo("#s3-finding", { opacity: 0, scale: .6, rotation: -5 }, { opacity: 1, scale: 1, rotation: 0, duration: .7, ease: "back.out(1.8)" }, 11.6)
+        .to("#s3-finding", { y: -7, duration: 1, yoyo: true, repeat: 2, ease: "sine.inOut" }, 13.0);
+      tl.fromTo("#s4-claim", { opacity: 0, x: -120 }, { opacity: 1, x: 0, duration: .65, ease: "power3.out" }, 16.15)
+        .fromTo("#s4-stamp", { opacity: 0, scale: 1.55, rotation: -18 }, { opacity: 1, scale: 1, rotation: -7, duration: .34, ease: "power4.in" }, 17.25)
+        .fromTo("#s4-reason", { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: .55, ease: "power2.out" }, 17.7)
+        .to("#s4-stamp", { scale: .96, duration: .12, ease: "power1.in" }, 19.1)
+        .to("#s4-stamp", { scale: 1, duration: .28, ease: "back.out(2)" }, 19.23);
+      tl.fromTo(".s5-row", { opacity: 0, x: -70 }, { opacity: 1, x: 0, duration: .46, stagger: .22, ease: "power3.out" }, 21.7)
+        .fromTo("#s5-replay", { opacity: 0, x: 120, rotation: 5 }, { opacity: 1, x: 0, rotation: 1, duration: .72, ease: "back.out(1.4)" }, 22.2)
+        .to("#s5-replay", { y: -8, duration: .8, yoyo: true, repeat: 2, ease: "sine.inOut" }, 23.35);
+      window.__timelines["tiny-bureau-film"] = tl;
+    </script>
+  </body>
+</html>

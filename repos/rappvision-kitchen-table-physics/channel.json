@@ -1,0 +1,67 @@
+{
+  "schema": "rapp-vision-channel/2.0",
+  "id": "kitchen-table-physics",
+  "name": "Kitchen Table Physics",
+  "title": "Kitchen Table Physics",
+  "description": "Warm, synthetic tabletop experiments from fictional educator duo Theo & Nia.",
+  "creator": {
+    "name": "Theo & Nia",
+    "kind": "fictional-synthetic-educator-duo",
+    "synthetic": true
+  },
+  "videos": [
+    {
+      "id": "push-friction-motion",
+      "title": "Push, Friction, Motion",
+      "description": "A 24-second paper-tabletop experiment using one bounded kinetic-friction equation.",
+      "duration": 24,
+      "duration_seconds": 24,
+      "aspect": "16:9",
+      "width": 1920,
+      "height": 1080,
+      "language": "en",
+      "sources": [
+        {
+          "src": "media/push-friction-motion.mp4",
+          "type": "video/mp4"
+        },
+        {
+          "src": "media/push-friction-motion.webm",
+          "type": "video/webm"
+        }
+      ],
+      "thumbnail": "thumbs/push-friction-motion.svg",
+      "chapters": [
+        { "t": 0, "label": "Question" },
+        { "t": 4.5, "label": "Experiment" },
+        { "t": 10.5, "label": "Equation" },
+        { "t": 17.5, "label": "Result" }
+      ],
+      "live": {
+        "kind": "rapp-vision-live/1.0",
+        "label": "Try live replay",
+        "duration": 12,
+        "scenes": [
+          {
+            "id": "friction-simulator",
+            "title": "Perturb the tabletop",
+            "t": 0,
+            "dur": 12,
+            "app": "live/index.html",
+            "ready": {
+              "selector": "#mass",
+              "enabled": true
+            },
+            "actions": [
+              { "at": 1, "do": "drag", "from": [312, 390], "to": [410, 390] },
+              { "at": 3, "do": "drag", "from": [312, 520], "to": [475, 520] },
+              { "at": 5, "do": "drag", "from": [312, 650], "to": [360, 650] },
+              { "at": 7, "do": "click", "selector": "#challenge-button" },
+              { "at": 10, "do": "click", "selector": "#reset" }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

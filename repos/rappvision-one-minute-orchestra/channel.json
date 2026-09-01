@@ -1,0 +1,94 @@
+{
+  "schema": "rapp-vision-channel/2.0",
+  "id": "one-minute-orchestra",
+  "name": "One Minute Orchestra",
+  "title": "One Minute Orchestra",
+  "description": "Original proof events performed as four musical voices, followed by a deterministic live remix.",
+  "creator": {
+    "name": "Asha Bell",
+    "kind": "synthetic experimental composer",
+    "fictional": true
+  },
+  "videos": [
+    {
+      "id": "one-minute-orchestra-proof-in-four-voices",
+      "title": "Proof in Four Voices",
+      "description": "A 32-second square performance that assembles, remixes, and restores a locked canonical score.",
+      "duration": 32,
+      "aspect_ratio": "1:1",
+      "poster": "thumbs/one-minute-orchestra.svg",
+      "sources": [
+        {
+          "src": "media/one-minute-orchestra.mp4",
+          "type": "video/mp4"
+        },
+        {
+          "src": "media/one-minute-orchestra.webm",
+          "type": "video/webm"
+        }
+      ],
+      "chapters": [
+        {
+          "t": 0,
+          "label": "Four voices assemble"
+        },
+        {
+          "t": 12,
+          "label": "Canonical performance"
+        },
+        {
+          "t": 22,
+          "label": "Remix audition \u2014 not canonical"
+        },
+        {
+          "t": 28,
+          "label": "Canonical restoration"
+        }
+      ],
+      "live": {
+        "kind": "rapp-vision-live/1.0",
+        "label": "Try live replay",
+        "duration": 4,
+        "scenes": [
+          {
+            "id": "orchestra-sequencer",
+            "title": "Deterministic step sequencer",
+            "t": 0,
+            "dur": 4,
+            "app": "live/index.html",
+            "actions": [
+              {
+                "id": "play-remix",
+                "label": "Play remix",
+                "selector": "#play",
+                "at": 0,
+                "do": "click"
+              },
+              {
+                "id": "toggle-step",
+                "label": "Toggle a remix step",
+                "selector": "#remix-grid .cell",
+                "at": 0.5,
+                "do": "click"
+              },
+              {
+                "id": "reject-source-edit",
+                "label": "Try editing canonical",
+                "selector": "#reject",
+                "at": 1.5,
+                "do": "click"
+              },
+              {
+                "id": "reset",
+                "label": "Reset",
+                "selector": "#reset",
+                "at": 3.5,
+                "do": "click"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

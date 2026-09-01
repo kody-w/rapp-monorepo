@@ -1,0 +1,241 @@
+{
+  "schema": "rapp-vision-evidence/1.0",
+  "publicationId": "signal-garden-pulse-lag",
+  "generatedAt": "2026-09-01T03:28:34.615139Z",
+  "overall": "passed",
+  "promise": "A heartbeat interval changes from 4.0 seconds to 11.8, crosses an 8.0-second threshold, and returns to 4.0 after healing.",
+  "hyperframes": {
+    "version": "0.8.4",
+    "upgradedFrom": "0.7.71",
+    "command": "npx hyperframes@0.8.4 check --timeout 30000 --json",
+    "ok": true,
+    "compositionSourceIncluded": false,
+    "reproducibleFromPackage": false,
+    "verificationScope": "Historical production check recorded before delivery cleanup; it cannot be rerun from the shipped package.",
+    "errors": 0,
+    "warnings": 0,
+    "runtimeFindings": 0,
+    "snapshotReview": {
+      "command": "npx hyperframes@0.8.4 check --snapshots --samples 13 --json",
+      "timesSeconds": [
+        1,
+        7,
+        13,
+        19,
+        25
+      ],
+      "inspected": true,
+      "result": "Baseline growth, anomaly/wilt, threshold, recovery, and replay handoff were legible and on-theme."
+    }
+  },
+  "encodes": {
+    "mp4": {
+      "format": "mov,mp4,m4a,3gp,3g2,mj2",
+      "durationSeconds": 26.0,
+      "bytes": 4611286,
+      "video": {
+        "codec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "fps": "30/1",
+        "decodedFrames": 780
+      },
+      "audio": {
+        "codec": "aac",
+        "sampleRate": 48000,
+        "channels": 2
+      },
+      "fullDecode": "passed"
+    },
+    "webm": {
+      "format": "matroska,webm",
+      "durationSeconds": 26.013,
+      "bytes": 3730742,
+      "video": {
+        "codec": "vp9",
+        "width": 1920,
+        "height": 1080,
+        "fps": "30/1",
+        "decodedFrames": 780
+      },
+      "audio": {
+        "codec": "opus",
+        "sampleRate": 48000,
+        "channels": 2
+      },
+      "fullDecode": "passed"
+    },
+    "distinctFiles": true,
+    "commands": [
+      "ffprobe -v error -count_frames media/signal-garden-pulse-lag.mp4",
+      "ffprobe -v error -count_frames media/signal-garden-pulse-lag.webm",
+      "ffmpeg -v error -i <encode> -f null -"
+    ]
+  },
+  "liveReplay": {
+    "runner": "local Chromium via puppeteer-core",
+    "httpStatus": 200,
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "buttonLabels": [
+      "Introduce anomaly",
+      "Heal signal",
+      "Reset"
+    ],
+    "consoleErrors": [],
+    "ok": true,
+    "states": [
+      {
+        "state": "baseline",
+        "heartbeatSeconds": 4,
+        "thresholdSeconds": 8,
+        "iris": "Iris Three healthy",
+        "event": "EVENT 00 \u00b7 canonical baseline",
+        "phase": "boot"
+      },
+      {
+        "state": "baseline",
+        "heartbeatSeconds": 4,
+        "thresholdSeconds": 8,
+        "iris": "Iris Three healthy",
+        "event": "EVENT NO-OP \u00b7 nothing to heal \u00b7 interval remains 4.0 s",
+        "phase": "failure-path"
+      },
+      {
+        "state": "anomaly",
+        "heartbeatSeconds": 11.8,
+        "thresholdSeconds": 8,
+        "iris": "Iris Three wilted after threshold crossing",
+        "event": "EVENT 01 \u00b7 Iris Three delayed to 11.8 s \u00b7 wilt triggered",
+        "phase": "anomaly"
+      },
+      {
+        "state": "healed",
+        "heartbeatSeconds": 4,
+        "thresholdSeconds": 8,
+        "iris": "Iris Three healthy",
+        "event": "EVENT 02 \u00b7 heartbeat restored to 4.0 s \u00b7 iris recovered",
+        "phase": "healed"
+      },
+      {
+        "state": "baseline",
+        "heartbeatSeconds": 4,
+        "thresholdSeconds": 8,
+        "iris": "Iris Three healthy",
+        "event": "EVENT 00 \u00b7 canonical baseline",
+        "phase": "reset"
+      }
+    ],
+    "visualStateChecks": {
+      "anomalyTransformChanged": true,
+      "anomalyMeterExpanded": true,
+      "healedTransformReset": true
+    }
+  },
+  "promiseParity": {
+    "tokens": {
+      "4.0": {
+        "film": true,
+        "replay": true,
+        "channel": true
+      },
+      "11.8": {
+        "film": true,
+        "replay": true,
+        "channel": true
+      },
+      "8.0": {
+        "film": true,
+        "replay": true,
+        "channel": true
+      },
+      "Iris Three": {
+        "film": true,
+        "replay": true,
+        "channel": true
+      }
+    },
+    "allMatch": true,
+    "filmOutcome": "11.8 seconds exceeds 8.0 seconds and Iris Three wilts; healing restores 4.0 seconds and the iris.",
+    "replayOutcome": "The same readings, threshold, wilt, heal, no-op failure path, and reset are directly observable."
+  },
+  "provenance": {
+    "creator": "Mina Vale is fictional and synthetic.",
+    "visuals": "Authored locally with HTML, CSS, SVG, and deterministic GSAP motion; the production composition source is not included.",
+    "narration": "Synthesized locally with Kokoro voice bf_emma; no cloud voice service used.",
+    "music": "Authored locally from deterministic sine-wave sources and mixed locally.",
+    "externalMedia": []
+  },
+  "privacyScan": {
+    "files": [
+      "BRIEF.md",
+      "SCRIPT.md",
+      "STORYBOARD.md",
+      "channel.json",
+      "live/index.html",
+      "thumbs/signal-garden-pulse-lag.svg",
+      "companion.md"
+    ],
+    "categories": [
+      "local_path",
+      "private_network",
+      "credential_indicator",
+      "proprietary_indicator"
+    ],
+    "findings": [],
+    "passed": true
+  },
+  "files": {
+    "BRIEF.md": {
+      "sha256": "c93261e77be2dedda53fa4be81dae3e9320dc262f753e4fd1377e19007040d55",
+      "bytes": 1477
+    },
+    "SCRIPT.md": {
+      "sha256": "577fa5ca967156cfc04ad1b69174542c4e9dc364cc31537f61f34045ba406c9d",
+      "bytes": 1319
+    },
+    "STORYBOARD.md": {
+      "sha256": "ff332e5b72ec18d861c9b1ce0e6ae9264e9195e3d37f5124d48d4b3440054777",
+      "bytes": 7086
+    },
+    "channel.json": {
+      "sha256": "3e7775adf9eba66b542a39e269dcaa7c86339da6085e65dd38416046f1b79601",
+      "bytes": 2001
+    },
+    "live/index.html": {
+      "sha256": "43947e7a6a762faf3b0aeebe5c86d9d97e92dcbb484a6514f96533fa5a7cdffb",
+      "bytes": 17036
+    },
+    "media/signal-garden-pulse-lag.mp4": {
+      "sha256": "8e3753fae2982f19c7ca1e18af500af8ece4d87f8285ad2e43e18098cd01969a",
+      "bytes": 4611286
+    },
+    "media/signal-garden-pulse-lag.webm": {
+      "sha256": "afc1458ebb762d31c86996fe289a5794044c5e92d7a7621c3db530f155be917d",
+      "bytes": 3730742
+    },
+    "thumbs/signal-garden-pulse-lag.svg": {
+      "sha256": "6c38e71683377f2b541455f2544208363a6744058c8ace757d8905b26dd2d954",
+      "bytes": 2709
+    },
+    "companion.md": {
+      "sha256": "73c0cafd412077e8daa3edc4cf98525b7a6ebf16b38e22bd6034e7b7130a22e9",
+      "bytes": 1864
+    }
+  },
+  "selfHash": "excluded because evidence.json contains the hash ledger",
+  "repairValidation": {
+    "publicationValidator": {
+      "command": "validate_publications.py channel.json --source-url https://example.invalid/01-signal-garden/channel.json --ffprobe-local",
+      "result": "passed: channel.json valid"
+    },
+    "oilFieldValidator": {
+      "command": "python3 ../integration/validate-oil-field.py",
+      "well01": "passed",
+      "globalResult": "failed only because wells 06 and 10 lacked required companion headings"
+    },
+    "publicationCount": 1
+  }
+}

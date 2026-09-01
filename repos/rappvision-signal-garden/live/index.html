@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>Signal Garden — Live Replay</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #f3ebd8;
+        --cream: #fff8e8;
+        --ink: #173a2a;
+        --muted: #66735f;
+        --green: #2f6b45;
+        --green-soft: #8aaf87;
+        --rust: #a34f35;
+        --indigo: #31566e;
+        --focus: #cf7c31;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 10% 10%, rgba(47,107,69,.11), transparent 32rem),
+          radial-gradient(circle at 90% 80%, rgba(49,86,110,.09), transparent 34rem),
+          repeating-linear-gradient(0deg, rgba(23,58,42,.018) 0 1px, transparent 1px 5px),
+          var(--paper);
+        font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+      }
+      button { font: inherit; }
+      button:focus-visible { outline: 4px solid var(--focus); outline-offset: 4px; }
+      .shell {
+        width: min(1500px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 34px 0 48px;
+      }
+      header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 24px;
+        padding-bottom: 22px;
+        border-bottom: 2px solid rgba(49,86,110,.35);
+      }
+      .eyebrow {
+        color: var(--indigo);
+        font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+        font-size: .82rem;
+        font-weight: 800;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+      }
+      h1 {
+        margin: 10px 0 8px;
+        font-family: Georgia, serif;
+        font-size: clamp(2.4rem, 5vw, 5.2rem);
+        line-height: .98;
+        letter-spacing: -.04em;
+      }
+      .newcomer-heading {
+        margin: 20px 0 6px;
+        color: var(--indigo);
+        font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+        font-size: .9rem;
+        font-weight: 800;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+      }
+      .dek { max-width: 750px; margin: 0; color: var(--muted); font-size: 1.13rem; line-height: 1.55; }
+      .badge {
+        flex: none;
+        padding: 10px 13px;
+        color: var(--rust);
+        border: 2px solid rgba(163,79,53,.62);
+        border-radius: 5px 12px 4px 9px;
+        font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+        font-size: .78rem;
+        font-weight: 800;
+        letter-spacing: .07em;
+        text-transform: uppercase;
+      }
+      .guide {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        margin: 24px 0;
+        padding: 0;
+        list-style: none;
+        counter-reset: steps;
+      }
+      .guide li {
+        position: relative;
+        min-height: 72px;
+        padding: 16px 18px 16px 54px;
+        background: rgba(255,248,232,.74);
+        border: 2px solid rgba(49,86,110,.28);
+        border-radius: 6px 15px 5px 11px;
+        line-height: 1.35;
+      }
+      .guide li::before {
+        counter-increment: steps;
+        content: counter(steps);
+        position: absolute;
+        left: 16px;
+        top: 15px;
+        display: grid;
+        place-items: center;
+        width: 26px;
+        height: 26px;
+        color: var(--cream);
+        background: var(--indigo);
+        border-radius: 50%;
+        font-weight: 800;
+      }
+      .workspace {
+        display: grid;
+        grid-template-columns: minmax(0, 1.45fr) minmax(320px, .55fr);
+        gap: 22px;
+        align-items: stretch;
+      }
+      .garden-card, .measure-card {
+        background: rgba(255,248,232,.83);
+        border: 3px solid rgba(49,86,110,.36);
+        border-radius: 8px 22px 7px 16px;
+        box-shadow: 0 24px 60px rgba(55,62,45,.12);
+      }
+      .garden-card { position: relative; min-height: 550px; overflow: hidden; }
+      .garden-card::after {
+        content: "";
+        position: absolute;
+        left: 5%;
+        right: 5%;
+        bottom: 70px;
+        border-bottom: 3px dashed rgba(23,58,42,.24);
+      }
+      .plot-label {
+        position: absolute;
+        left: 28px;
+        top: 24px;
+        z-index: 2;
+        color: var(--indigo);
+        font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+        font-size: .82rem;
+        font-weight: 800;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+      }
+      .plants {
+        position: absolute;
+        inset: 80px 30px 52px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        align-items: end;
+        gap: 12px;
+      }
+      .plant {
+        position: relative;
+        height: 390px;
+        transform-origin: 50% 100%;
+        transition: transform 680ms cubic-bezier(.22,.9,.3,1);
+      }
+      .stem {
+        position: absolute;
+        left: calc(50% - 7px);
+        bottom: 28px;
+        width: 14px;
+        height: 245px;
+        background: var(--green);
+        border-radius: 100% 45% 40% 45%;
+        transition: background-color 500ms ease;
+      }
+      .stem::before, .stem::after {
+        content: "";
+        position: absolute;
+        width: 74px;
+        height: 34px;
+        background: rgba(47,107,69,.22);
+        border: 7px solid var(--green);
+        border-radius: 100% 0 100% 0;
+        transition: border-color 500ms ease, background-color 500ms ease;
+      }
+      .stem::before { left: -66px; top: 92px; transform: rotate(-20deg); }
+      .stem::after { left: 6px; top: 144px; transform: scaleX(-1) rotate(-20deg); }
+      .flower {
+        position: absolute;
+        left: calc(50% - 74px);
+        bottom: 245px;
+        width: 148px;
+        height: 148px;
+        transition: transform 680ms cubic-bezier(.22,.9,.3,1);
+      }
+      .petal {
+        position: absolute;
+        left: 49px;
+        top: 5px;
+        width: 50px;
+        height: 95px;
+        background: rgba(138,175,135,.38);
+        border: 7px solid var(--green);
+        border-radius: 65% 35% 65% 35%;
+        transform-origin: 50% 70px;
+        transition: border-color 500ms ease, background-color 500ms ease;
+      }
+      .petal:nth-child(2) { transform: rotate(90deg); }
+      .petal:nth-child(3) { transform: rotate(180deg); }
+      .petal:nth-child(4) { transform: rotate(270deg); }
+      .center {
+        position: absolute;
+        left: 55px;
+        top: 55px;
+        width: 38px;
+        height: 38px;
+        border: 4px solid var(--ink);
+        border-radius: 50%;
+        background: #d5a94f;
+      }
+      .plant-name {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        color: var(--indigo);
+        font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+        font-size: .82rem;
+        font-weight: 800;
+        text-align: center;
+      }
+      body[data-state="anomaly"] #iris3 {
+        transform: rotate(15deg) translate(18px, 14px);
+      }
+      body[data-state="anomaly"] #iris3 .flower { transform: rotate(26deg) translate(15px, 18px); }
+      body[data-state="anomaly"] #iris3 .stem { background: var(--rust); }
+      body[data-state="anomaly"] #iris3 .stem::before,
+      body[data-state="anomaly"] #iris3 .stem::after,
+      body[data-state="anomaly"] #iris3 .petal {
+        border-color: var(--rust);
+        background: rgba(163,79,53,.18);
+      }
+      .measure-card {
+        display: flex;
+        flex-direction: column;
+        padding: 28px;
+      }
+      .measure-label {
+        color: var(--indigo);
+        font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+        font-size: .82rem;
+        font-weight: 800;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+      }
+      .reading {
+        margin-top: 12px;
+        color: var(--green);
+        font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+        font-size: clamp(4rem, 8vw, 7.4rem);
+        font-weight: 900;
+        line-height: .95;
+        letter-spacing: -.08em;
+        font-variant-numeric: tabular-nums;
+      }
+      body[data-state="anomaly"] .reading { color: var(--rust); }
+      .unit { font-size: .35em; letter-spacing: 0; }
+      .threshold {
+        margin: 22px 0;
+        padding: 14px 16px;
+        color: var(--indigo);
+        background: rgba(49,86,110,.09);
+        border-left: 5px solid var(--indigo);
+        font-weight: 750;
+        line-height: 1.4;
+      }
+      .meter {
+        position: relative;
+        height: 34px;
+        margin: 8px 0 28px;
+        background: rgba(49,86,110,.14);
+        border-radius: 99px;
+        overflow: visible;
+      }
+      .meter::after {
+        content: "8.0 s threshold";
+        position: absolute;
+        left: 66.666%;
+        top: -28px;
+        transform: translateX(-50%);
+        color: var(--indigo);
+        font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+        font-size: .72rem;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+      .meter-fill {
+        width: 33.333%;
+        height: 100%;
+        background: var(--green);
+        border-radius: inherit;
+        transition: width 680ms cubic-bezier(.22,.9,.3,1), background-color 500ms ease;
+      }
+      body[data-state="anomaly"] .meter-fill { width: 98.333%; background: var(--rust); }
+      .status {
+        min-height: 106px;
+        padding: 17px 18px;
+        background: var(--cream);
+        border: 2px solid rgba(49,86,110,.28);
+        border-radius: 5px 13px 5px 10px;
+        line-height: 1.48;
+      }
+      .status strong { display: block; margin-bottom: 4px; font-family: Georgia, serif; font-size: 1.35rem; }
+      .controls {
+        display: grid;
+        gap: 10px;
+        margin-top: auto;
+        padding-top: 22px;
+      }
+      .controls button {
+        min-height: 52px;
+        padding: 12px 16px;
+        color: var(--cream);
+        background: var(--green);
+        border: 0;
+        border-radius: 5px 13px 5px 10px;
+        cursor: pointer;
+        font-weight: 850;
+      }
+      .controls button:hover { filter: brightness(1.08); }
+      #anomaly-button { background: var(--rust); }
+      #reset-button { color: var(--indigo); background: transparent; border: 2px solid var(--indigo); }
+      .event {
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+        font-size: .8rem;
+      }
+      footer { margin-top: 24px; color: var(--muted); font-size: .9rem; line-height: 1.5; }
+      @media (max-width: 900px) {
+        header { display: block; }
+        .badge { display: inline-block; margin-top: 16px; }
+        .guide { grid-template-columns: 1fr; }
+        .workspace { grid-template-columns: 1fr; }
+        .garden-card { min-height: 480px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { transition-duration: .001ms !important; }
+      }
+    </style>
+  </head>
+  <body data-state="baseline">
+    <main class="shell">
+      <header>
+        <div>
+          <div class="eyebrow">Signal Garden · deterministic live replay</div>
+          <h1>Make one heartbeat wilt.</h1>
+          <h2 class="newcomer-heading">What you are looking at</h2>
+          <p class="dek">The same synthetic measurement as the film. Watch the number, compare it with the 8.0-second threshold, and observe Iris Three.</p>
+        </div>
+        <div class="badge">Mina Vale · fictional synthetic creator</div>
+      </header>
+
+      <ol class="guide" aria-label="Replay instructions">
+        <li><strong>Introduce anomaly</strong><br />Change Iris Three from 4.0 to 11.8 seconds.</li>
+        <li><strong>Heal signal</strong><br />Return the heartbeat and plant to healthy.</li>
+        <li><strong>Reset</strong><br />Restore the canonical baseline and clear the event.</li>
+      </ol>
+
+      <section class="workspace" aria-label="Signal Garden replay">
+        <div class="garden-card">
+          <div class="plot-label">Synthetic replica plot · visible outcome</div>
+          <div class="plants">
+            <div class="plant" id="fern1" aria-label="Fern One healthy">
+              <div class="stem"></div><div class="flower"><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="center"></i></div>
+              <div class="plant-name">FERN-01 · 4.0 s</div>
+            </div>
+            <div class="plant" id="moss2" aria-label="Moss Two healthy">
+              <div class="stem"></div><div class="flower"><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="center"></i></div>
+              <div class="plant-name">MOSS-02 · 4.0 s</div>
+            </div>
+            <div class="plant" id="iris3" aria-label="Iris Three healthy">
+              <div class="stem"></div><div class="flower"><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="center"></i></div>
+              <div class="plant-name" id="iris-label">IRIS-03 · 4.0 s</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="measure-card">
+          <div class="measure-label">Iris Three heartbeat interval</div>
+          <div class="reading"><span id="reading">4.0</span><span class="unit"> s</span></div>
+          <div class="threshold">Synthetic rule: Iris Three wilts only when its heartbeat interval is greater than 8.0 seconds.</div>
+          <div class="meter" aria-hidden="true"><div class="meter-fill"></div></div>
+          <div id="status" class="status" role="status" aria-live="polite">
+            <strong>Baseline healthy</strong>
+            All three replicas report every 4.0 seconds. No threshold is crossed.
+          </div>
+          <div class="controls">
+            <button id="anomaly-button" type="button">Introduce anomaly</button>
+            <button id="heal-button" type="button">Heal signal</button>
+            <button id="reset-button" type="button">Reset</button>
+          </div>
+          <p id="event" class="event">EVENT 00 · canonical baseline</p>
+        </aside>
+      </section>
+
+      <footer>Fictional synthetic demonstration. No real infrastructure, telemetry, person, place, or production data is represented.</footer>
+    </main>
+
+    <script>
+      (() => {
+        const body = document.body;
+        const reading = document.querySelector("#reading");
+        const iris = document.querySelector("#iris3");
+        const irisLabel = document.querySelector("#iris-label");
+        const status = document.querySelector("#status");
+        const event = document.querySelector("#event");
+        let state = "baseline";
+
+        const render = (next, eventText) => {
+          state = next;
+          body.dataset.state = next === "anomaly" ? "anomaly" : next;
+          const anomalous = next === "anomaly";
+          reading.textContent = anomalous ? "11.8" : "4.0";
+          irisLabel.textContent = anomalous ? "IRIS-03 · 11.8 s" : "IRIS-03 · 4.0 s";
+          iris.setAttribute("aria-label", anomalous ? "Iris Three wilted after threshold crossing" : "Iris Three healthy");
+          if (next === "anomaly") {
+            status.innerHTML = "<strong>Anomaly detected</strong>11.8 seconds is greater than the 8.0-second threshold. Iris Three wilts.";
+          } else if (next === "healed") {
+            status.innerHTML = "<strong>Signal healed</strong>The interval is restored to 4.0 seconds. Iris Three recovers with the signal.";
+          } else {
+            status.innerHTML = "<strong>Baseline healthy</strong>All three replicas report every 4.0 seconds. No threshold is crossed.";
+          }
+          event.textContent = eventText;
+        };
+
+        const introduceAnomaly = () => render("anomaly", "EVENT 01 · Iris Three delayed to 11.8 s · wilt triggered");
+        const healSignal = () => {
+          if (state !== "anomaly") {
+            render(state === "healed" ? "healed" : "baseline", "EVENT NO-OP · nothing to heal · interval remains 4.0 s");
+            return false;
+          }
+          render("healed", "EVENT 02 · heartbeat restored to 4.0 s · iris recovered");
+          return true;
+        };
+        const reset = () => render("baseline", "EVENT 00 · canonical baseline");
+
+        document.querySelector("#anomaly-button").addEventListener("click", introduceAnomaly);
+        document.querySelector("#heal-button").addEventListener("click", healSignal);
+        document.querySelector("#reset-button").addEventListener("click", reset);
+
+        window.SignalGarden = {
+          introduceAnomaly,
+          healSignal,
+          reset,
+          snapshot: () => ({
+            state,
+            heartbeatSeconds: Number(reading.textContent),
+            thresholdSeconds: 8,
+            iris: iris.getAttribute("aria-label"),
+            event: event.textContent
+          })
+        };
+      })();
+    </script>
+  </body>
+</html>

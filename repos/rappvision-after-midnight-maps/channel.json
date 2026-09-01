@@ -1,0 +1,109 @@
+{
+  "schema": "rapp-vision-channel/2.0",
+  "id": "after-midnight-maps",
+  "name": "After Midnight Maps",
+  "creator": {
+    "name": "Sol Navarro",
+    "identity": "fictional synthetic nocturnal cartographer"
+  },
+  "tagline": "Quiet coordinate essays for places that never existed.",
+  "avatar": "◉",
+  "videos": [
+    {
+      "id": "after-midnight-maps",
+      "title": "The waypoint moves. The proof rules remain.",
+      "description": "A quiet 26-second route essay across four clearly synthetic places. Moving Lumen Bend changes its two adjacent legs and the total Haversine distance while preserving the endpoints, calculation rule, and original route as an alternative.\n\nPaired with a deterministic live replay for moving, comparing, rejecting an out-of-bounds coordinate, and resetting.",
+      "published": "2026-08-31",
+      "duration": 26.0,
+      "width": 1920,
+      "height": 1080,
+      "orientation": "landscape",
+      "tags": [
+        "synthetic-cartography",
+        "ambient-essay",
+        "route-math",
+        "live-replay"
+      ],
+      "thumb": "thumbs/after-midnight-maps.svg",
+      "sources": [
+        {
+          "src": "media/after-midnight-maps.mp4",
+          "type": "video/mp4; codecs=\"avc1.640028, mp4a.40.2\""
+        },
+        {
+          "src": "media/after-midnight-maps.webm",
+          "type": "video/webm; codecs=\"vp9, opus\""
+        }
+      ],
+      "chapters": [
+        {
+          "t": 0,
+          "label": "A synthetic route"
+        },
+        {
+          "t": 4,
+          "label": "The original measurement"
+        },
+        {
+          "t": 10,
+          "label": "Move one waypoint"
+        },
+        {
+          "t": 17,
+          "label": "What changes and what remains"
+        },
+        {
+          "t": 22,
+          "label": "Try the live replay"
+        }
+      ],
+      "live": {
+        "kind": "rapp-vision-live/1.0",
+        "scenes": [
+          {
+            "t": 0,
+            "dur": 4,
+            "card": {
+              "title": "After Midnight Maps",
+              "sub": "Move one synthetic waypoint; preserve the original route.",
+              "note": "Coordinate distance only — not travel advice."
+            }
+          },
+          {
+            "t": 4,
+            "dur": 22,
+            "app": "live/index.html",
+            "lower": {
+              "title": "Deterministic route replay",
+              "bench": "Haversine coordinate distance",
+              "bug": "An out-of-bounds move is rejected without replacing accepted state.",
+              "fix": "Reset restores exact canonical coordinates and 69.811048 km."
+            },
+            "actions": [
+              {
+                "at": 2,
+                "do": "click",
+                "selector": "#move-waypoint"
+              },
+              {
+                "at": 7,
+                "do": "click",
+                "selector": "#compare-routes"
+              },
+              {
+                "at": 11,
+                "do": "click",
+                "selector": "#invalid-move"
+              },
+              {
+                "at": 16,
+                "do": "click",
+                "selector": "#reset"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

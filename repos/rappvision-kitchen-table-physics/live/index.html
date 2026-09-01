@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kitchen Table Physics — Live Replay</title>
+    <style>
+      :root {
+        --cream: #fff4d6;
+        --ink: #2f2a25;
+        --tomato: #c94532;
+        --mustard: #e3ad39;
+        --sage: #52745a;
+        --blue: #426c83;
+        --wood: #c98c55;
+        --wood-dark: #8b5435;
+        --danger: #9e2c26;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 18% 0, rgba(255,244,214,.56), transparent 32rem),
+          repeating-linear-gradient(3deg, rgba(68,39,24,.08) 0 2px, transparent 2px 72px),
+          var(--wood);
+        font-family: "Avenir Next", "Trebuchet MS", system-ui, sans-serif;
+      }
+      button, input { font: inherit; }
+      .shell {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 30px 0 52px;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        align-items: center;
+        margin-bottom: 22px;
+      }
+      .identity, .synthetic {
+        padding: 10px 18px;
+        font-size: .82rem;
+        font-weight: 900;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+      .identity {
+        color: var(--cream);
+        background: var(--sage);
+        clip-path: polygon(1% 7%, 98% 0, 100% 90%, 3% 100%);
+      }
+      .synthetic {
+        border: 2px solid var(--ink);
+        background: rgba(255,244,214,.82);
+        transform: rotate(1deg);
+      }
+      .paper {
+        background: var(--cream);
+        border: 3px solid rgba(47,42,37,.15);
+        box-shadow: 10px 13px 0 rgba(69,39,24,.15);
+      }
+      .intro {
+        padding: clamp(24px, 5vw, 54px);
+        clip-path: polygon(.5% 1%, 99.4% 0, 100% 96%, 1% 100%, 0 45%);
+      }
+      h1 {
+        margin: 0;
+        max-width: 900px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(2.45rem, 6vw, 5.6rem);
+        line-height: .95;
+        letter-spacing: -.055em;
+      }
+      .intro p {
+        margin: 22px 0 0;
+        max-width: 840px;
+        font-size: clamp(1.05rem, 2.2vw, 1.45rem);
+        line-height: 1.48;
+        font-weight: 650;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: minmax(300px, .92fr) minmax(420px, 1.35fr);
+        gap: 24px;
+        margin-top: 28px;
+      }
+      .controls, .stage-card { padding: 30px; }
+      h2 {
+        margin: 0 0 8px;
+        font-family: Georgia, serif;
+        font-size: 2rem;
+      }
+      .helper { margin: 0 0 26px; line-height: 1.45; }
+      .control { margin: 0 0 26px; }
+      .control-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 16px;
+        margin-bottom: 10px;
+        font-weight: 900;
+      }
+      output {
+        min-width: 92px;
+        padding: 5px 9px;
+        text-align: center;
+        background: var(--mustard);
+        border: 2px solid var(--ink);
+      }
+      input[type="range"] {
+        width: 100%;
+        accent-color: var(--tomato);
+      }
+      .range-note {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 4px;
+        font-size: .76rem;
+        font-weight: 750;
+      }
+      .button-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 10px;
+      }
+      button {
+        border: 3px solid var(--ink);
+        padding: 12px 17px;
+        color: var(--ink);
+        background: var(--cream);
+        box-shadow: 5px 5px 0 var(--ink);
+        font-weight: 900;
+        cursor: pointer;
+      }
+      button:active { transform: translate(3px, 3px); box-shadow: 2px 2px 0 var(--ink); }
+      #reset { background: var(--mustard); }
+      .challenge {
+        margin-top: 28px;
+        padding-top: 22px;
+        border-top: 3px dashed rgba(47,42,37,.38);
+      }
+      .challenge label { display: block; font-weight: 900; margin-bottom: 8px; }
+      .challenge-line { display: flex; gap: 10px; }
+      .challenge input {
+        width: 110px;
+        border: 3px solid var(--ink);
+        background: #fffaf0;
+        padding: 10px;
+      }
+      #challenge-button { color: var(--cream); background: var(--danger); }
+      #rejection {
+        min-height: 48px;
+        margin: 15px 0 0;
+        padding: 10px 12px;
+        border-left: 6px solid transparent;
+        line-height: 1.35;
+        font-weight: 800;
+      }
+      #rejection[data-state="rejected"] {
+        color: #681713;
+        background: #ffd9d0;
+        border-left-color: var(--danger);
+      }
+      .stage {
+        position: relative;
+        height: 330px;
+        overflow: hidden;
+        border: 4px solid var(--ink);
+        background:
+          repeating-linear-gradient(2deg, rgba(63,37,24,.07) 0 2px, transparent 2px 62px),
+          #d4a16d;
+      }
+      .rail {
+        position: absolute;
+        left: 6%;
+        right: 6%;
+        top: 66%;
+        height: 10px;
+        border-radius: 99px;
+        background: rgba(47,42,37,.48);
+      }
+      .block {
+        position: absolute;
+        left: 42%;
+        top: 35%;
+        width: 150px;
+        height: 108px;
+        display: grid;
+        place-items: center;
+        background: #e9c484;
+        border: 4px solid var(--ink);
+        box-shadow: 8px 10px 0 rgba(47,42,37,.16);
+        font-size: 1.35rem;
+        font-weight: 900;
+        clip-path: polygon(3% 5%, 96% 0, 100% 91%, 6% 100%, 0 44%);
+      }
+      .force-arrow, .friction-arrow {
+        position: absolute;
+        top: 48%;
+        height: 14px;
+        border-radius: 99px;
+      }
+      .force-arrow { left: calc(42% + 160px); width: 31%; color: var(--tomato); background: var(--tomato); }
+      .friction-arrow { right: 58%; width: 18%; color: var(--blue); background: var(--blue); }
+      .force-arrow::after, .friction-arrow::after {
+        content: "";
+        position: absolute;
+        top: -13px;
+        width: 0;
+        height: 0;
+        border-top: 20px solid transparent;
+        border-bottom: 20px solid transparent;
+      }
+      .force-arrow::after { right: -2px; border-left: 32px solid currentColor; }
+      .friction-arrow::after { left: -2px; border-right: 32px solid currentColor; }
+      .arrow-label {
+        position: absolute;
+        top: 17%;
+        padding: 7px 10px;
+        font-weight: 900;
+        background: rgba(255,244,214,.92);
+        border: 2px solid var(--ink);
+      }
+      .push-label { right: 11%; transform: rotate(2deg); }
+      .friction-label { left: 9%; transform: rotate(-2deg); }
+      .results {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-top: 20px;
+      }
+      .result {
+        min-height: 132px;
+        padding: 18px;
+        border: 3px solid var(--ink);
+        background: #fffaf0;
+      }
+      .result span {
+        display: block;
+        font-size: .78rem;
+        font-weight: 900;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+      }
+      .result strong {
+        display: block;
+        margin-top: 13px;
+        font-family: Georgia, serif;
+        font-size: clamp(1.7rem, 3vw, 2.45rem);
+        color: var(--sage);
+      }
+      #motion-note {
+        margin: 16px 0 0;
+        padding: 14px 16px;
+        color: var(--cream);
+        background: var(--sage);
+        font-size: 1.08rem;
+        line-height: 1.42;
+        font-weight: 800;
+      }
+      .equation {
+        margin-top: 24px;
+        padding: 22px;
+        color: var(--cream);
+        background: var(--ink);
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: clamp(.9rem, 1.6vw, 1.08rem);
+        line-height: 1.65;
+      }
+      .scope {
+        margin-top: 26px;
+        padding: 26px 30px;
+        line-height: 1.48;
+        clip-path: polygon(.5% 2%, 99% 0, 100% 94%, 1% 100%);
+      }
+      .scope strong { color: var(--tomato); }
+      .scope code { padding: 2px 6px; background: rgba(47,42,37,.09); }
+      @media (max-width: 850px) {
+        header { align-items: flex-start; flex-direction: column; }
+        .grid { grid-template-columns: 1fr; }
+        .results { grid-template-columns: 1fr; }
+        .stage { height: 280px; }
+        .block { left: 37%; }
+        .force-arrow { left: calc(37% + 158px); }
+        .friction-arrow { right: 63%; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header>
+        <div class="identity">Theo &amp; Nia · fictional educators</div>
+        <div class="synthetic">Kitchen Table Physics · live replay</div>
+      </header>
+
+      <section class="intro paper" aria-labelledby="title">
+        <h1 id="title">Perturb the tabletop.</h1>
+        <p><strong>What you are looking at:</strong> a deterministic simulator of the same ideal sliding-block experiment in the film. Move any of the three sliders; friction, net force, and acceleration recompute immediately.</p>
+      </section>
+
+      <div class="grid">
+        <section class="controls paper" aria-labelledby="controls-title">
+          <h2 id="controls-title">Three things you control</h2>
+          <p class="helper">The baseline is the film: 2.00 kg, 10.0 N, and μ = 0.25.</p>
+
+          <div class="control">
+            <div class="control-head">
+              <label for="mass">Mass</label>
+              <output id="mass-output" for="mass">2.00 kg</output>
+            </div>
+            <input id="mass" type="range" min="0.5" max="3" step="0.05" value="2" />
+            <div class="range-note"><span>0.50 kg</span><span>3.00 kg</span></div>
+          </div>
+
+          <div class="control">
+            <div class="control-head">
+              <label for="force">Applied force</label>
+              <output id="force-output" for="force">10.0 N</output>
+            </div>
+            <input id="force" type="range" min="2" max="20" step="0.1" value="10" />
+            <div class="range-note"><span>2.0 N</span><span>20.0 N</span></div>
+          </div>
+
+          <div class="control">
+            <div class="control-head">
+              <label for="friction">Kinetic friction μ</label>
+              <output id="friction-output" for="friction">0.25</output>
+            </div>
+            <input id="friction" type="range" min="0.05" max="0.5" step="0.01" value="0.25" />
+            <div class="range-note"><span>0.05</span><span>0.50</span></div>
+          </div>
+
+          <div class="button-row">
+            <button id="reset" type="button">Reset exact baseline</button>
+          </div>
+
+          <div class="challenge">
+            <label for="challenge-input">Deliberate boundary test: try μ = 1.20</label>
+            <div class="challenge-line">
+              <input id="challenge-input" type="number" step="0.01" value="1.20" aria-describedby="rejection" />
+              <button id="challenge-button" type="button">Test value</button>
+            </div>
+            <p id="rejection" role="status" aria-live="polite"></p>
+          </div>
+        </section>
+
+        <section class="stage-card paper" aria-labelledby="outcome-title">
+          <h2 id="outcome-title">Recomputed outcome</h2>
+          <p class="helper">Red is the push. Blue is kinetic friction opposing the current rightward slide.</p>
+          <div class="stage" aria-label="Paper block with opposing force arrows">
+            <div class="rail"></div>
+            <div id="block" class="block">2.00 kg</div>
+            <div id="force-arrow" class="force-arrow"></div>
+            <div id="friction-arrow" class="friction-arrow"></div>
+            <div class="arrow-label push-label">push →</div>
+            <div class="arrow-label friction-label">← friction</div>
+          </div>
+
+          <div class="results">
+            <div class="result">
+              <span>Friction force</span>
+              <strong id="friction-force">4.90 N</strong>
+            </div>
+            <div class="result">
+              <span>Net force</span>
+              <strong id="net-force">5.10 N</strong>
+            </div>
+            <div class="result">
+              <span>Acceleration</span>
+              <strong id="acceleration">2.55 m/s²</strong>
+            </div>
+          </div>
+          <p id="motion-note">Positive acceleration: the already-sliding block speeds up to the right.</p>
+          <div id="equation" class="equation" aria-label="Current calculation">
+            Ffriction = μ × m × g = 0.25 × 2.00 × 9.8 = 4.90 N<br />
+            a = (Fapplied − Ffriction) ÷ m = (10.0 − 4.90) ÷ 2.00 = 2.55 m/s²
+          </div>
+        </section>
+      </div>
+
+      <section class="scope paper">
+        <strong>Units and scope.</strong> N means newtons, kg means kilograms,
+        and m/s² means velocity changes by that many metres per second each
+        second. The equation is <code>a = (F − μmg) / m</code>. It models a
+        block already sliding right on a flat horizontal table, while the
+        applied force remains constant. Negative acceleration means the block
+        slows while it is still sliding; the model stops at rest because static
+        friction is outside this replay. Air drag, rotation, and changing
+        surfaces are also out of scope.
+      </section>
+    </main>
+
+    <script>
+      (() => {
+        const G = 9.8;
+        const LIMITS = Object.freeze({
+          mass: Object.freeze([0.5, 3]),
+          force: Object.freeze([2, 20]),
+          friction: Object.freeze([0.05, 0.5])
+        });
+        const BASELINE = Object.freeze({ mass: 2, force: 10, friction: 0.25, challenge: 1.2 });
+
+        const controls = {
+          mass: document.querySelector("#mass"),
+          force: document.querySelector("#force"),
+          friction: document.querySelector("#friction")
+        };
+
+        function calculate(mass, force, friction) {
+          const frictionForce = friction * mass * G;
+          const netForce = force - frictionForce;
+          const acceleration = netForce / mass;
+          return { frictionForce, netForce, acceleration };
+        }
+
+        function currentState() {
+          return {
+            mass: Number(controls.mass.value),
+            force: Number(controls.force.value),
+            friction: Number(controls.friction.value)
+          };
+        }
+
+        function fixed(value, digits) {
+          const clean = Math.abs(value) < 0.0000001 ? 0 : value;
+          return clean.toFixed(digits);
+        }
+
+        function render() {
+          const state = currentState();
+          const result = calculate(state.mass, state.force, state.friction);
+
+          document.querySelector("#mass-output").textContent = `${fixed(state.mass, 2)} kg`;
+          document.querySelector("#force-output").textContent = `${fixed(state.force, 1)} N`;
+          document.querySelector("#friction-output").textContent = fixed(state.friction, 2);
+          document.querySelector("#block").textContent = `${fixed(state.mass, 2)} kg`;
+          document.querySelector("#friction-force").textContent = `${fixed(result.frictionForce, 2)} N`;
+          document.querySelector("#net-force").textContent = `${fixed(result.netForce, 2)} N`;
+          document.querySelector("#acceleration").textContent = `${fixed(result.acceleration, 2)} m/s²`;
+
+          const pushScale = 0.35 + (state.force - LIMITS.force[0]) / (LIMITS.force[1] - LIMITS.force[0]) * 0.65;
+          const frictionMax = LIMITS.friction[1] * LIMITS.mass[1] * G;
+          const frictionScale = 0.35 + result.frictionForce / frictionMax * 0.65;
+          document.querySelector("#force-arrow").style.transform = `scaleX(${pushScale.toFixed(4)})`;
+          document.querySelector("#force-arrow").style.transformOrigin = "left center";
+          document.querySelector("#friction-arrow").style.transform = `scaleX(${frictionScale.toFixed(4)})`;
+          document.querySelector("#friction-arrow").style.transformOrigin = "right center";
+
+          const note = document.querySelector("#motion-note");
+          if (result.acceleration > 0.005) {
+            note.textContent = "Positive acceleration: the already-sliding block speeds up to the right.";
+            note.style.background = "var(--sage)";
+          } else if (result.acceleration < -0.005) {
+            note.textContent = "Negative acceleration: friction wins, so the rightward-sliding block slows until it stops.";
+            note.style.background = "var(--blue)";
+          } else {
+            note.textContent = "Balanced forces: speed stays constant while the block remains sliding.";
+            note.style.background = "var(--wood-dark)";
+          }
+
+          document.querySelector("#equation").innerHTML =
+            `Ffriction = μ × m × g = ${fixed(state.friction, 2)} × ${fixed(state.mass, 2)} × 9.8 = ${fixed(result.frictionForce, 2)} N<br>` +
+            `a = (Fapplied − Ffriction) ÷ m = (${fixed(state.force, 1)} − ${fixed(result.frictionForce, 2)}) ÷ ${fixed(state.mass, 2)} = ${fixed(result.acceleration, 2)} m/s²`;
+
+          document.documentElement.dataset.mass = fixed(state.mass, 2);
+          document.documentElement.dataset.force = fixed(state.force, 1);
+          document.documentElement.dataset.friction = fixed(state.friction, 2);
+          document.documentElement.dataset.acceleration = fixed(result.acceleration, 2);
+        }
+
+        function clearRejection() {
+          const rejection = document.querySelector("#rejection");
+          rejection.textContent = "";
+          rejection.dataset.state = "";
+        }
+
+        function reset() {
+          controls.mass.value = String(BASELINE.mass);
+          controls.force.value = String(BASELINE.force);
+          controls.friction.value = String(BASELINE.friction);
+          document.querySelector("#challenge-input").value = BASELINE.challenge.toFixed(2);
+          clearRejection();
+          render();
+        }
+
+        Object.values(controls).forEach((control) => {
+          control.addEventListener("input", () => {
+            clearRejection();
+            render();
+          });
+        });
+
+        document.querySelector("#reset").addEventListener("click", reset);
+        document.querySelector("#challenge-button").addEventListener("click", () => {
+          const candidate = Number(document.querySelector("#challenge-input").value);
+          const [minimum, maximum] = LIMITS.friction;
+          const rejection = document.querySelector("#rejection");
+          if (!Number.isFinite(candidate) || candidate < minimum || candidate > maximum) {
+            rejection.textContent = `Rejected: μ must stay between ${minimum.toFixed(2)} and ${maximum.toFixed(2)}. The accepted simulator state was not changed.`;
+            rejection.dataset.state = "rejected";
+            return;
+          }
+          controls.friction.value = String(candidate);
+          clearRejection();
+          render();
+        });
+
+        window.__kitchenTablePhysics = Object.freeze({
+          calculate,
+          reset,
+          baseline: BASELINE,
+          limits: LIMITS
+        });
+        reset();
+      })();
+    </script>
+  </body>
+</html>

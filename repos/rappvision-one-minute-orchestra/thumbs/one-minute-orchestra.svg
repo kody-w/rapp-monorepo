@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <rect width="1080" height="1080" fill="#07080a"/>
+  <rect x="42" y="42" width="996" height="996" fill="none" stroke="#e4e1d8" stroke-width="3"/>
+  <text x="76" y="112" fill="#aeb5be" font-family="monospace" font-size="22" letter-spacing="5">PROOF STUDIES / NO. 08</text>
+  <text x="76" y="252" fill="#e4e1d8" font-family="Georgia,serif" font-size="102">ONE MINUTE</text>
+  <text x="76" y="344" fill="#e4e1d8" font-family="Georgia,serif" font-size="102">ORCHESTRA</text>
+  <g fill="none" stroke-width="6">
+    <path d="M76 510H180l18-44 18 88 18-44h770" stroke="#ff476f"/>
+    <path d="M76 620c80-80 160 80 240 0s160-80 240 0 160 80 240 0 160-80 208 0" stroke="#42a5ff"/>
+    <path d="M76 730c110 90 220-90 330 0s220 90 330 0 220-90 268 0" stroke="#31d59b"/>
+    <path d="M76 840h220c30 0 30-90 60-90s30 180 60 180 30-90 60-90h528" stroke="#bb7cff"/>
+  </g>
+  <text x="76" y="985" fill="#aeb5be" font-family="monospace" font-size="22" letter-spacing="3">FOUR EVENTS · FOUR VOICES · ONE LOCKED SOURCE</text>
+</svg>

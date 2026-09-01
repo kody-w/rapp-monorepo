@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <rect width="1920" height="1080" fill="#e9e2d1"/>
+  <g opacity=".18" stroke="#252722"><path d="M0 80h1920M0 160h1920M0 240h1920M0 320h1920M0 400h1920M0 480h1920M0 560h1920M0 640h1920M0 720h1920M0 800h1920M0 880h1920M0 960h1920"/></g>
+  <text x="88" y="100" font-family="monospace" font-size="32" fill="#252722">TINY BUREAU / IMANI REED</text>
+  <rect x="1450" y="48" width="380" height="70" fill="none" stroke="#8b2f27" stroke-width="7"/>
+  <text x="1480" y="95" font-family="monospace" font-size="25" font-weight="bold" fill="#8b2f27">ENTIRELY FICTIONAL</text>
+  <g transform="rotate(-2 470 560)">
+    <rect x="110" y="220" width="720" height="650" fill="#f4eedf" stroke="#252722" stroke-width="7"/>
+    <rect x="165" y="165" width="270" height="62" fill="#c7a65a" stroke="#252722" stroke-width="7"/>
+    <text x="195" y="208" font-family="Impact,sans-serif" font-size="42" fill="#252722">CASE FILE</text>
+    <text x="180" y="350" font-family="monospace" font-size="28" fill="#8b2f27">THE FIVE-FIXTURE GAP</text>
+    <text x="180" y="590" font-family="Impact,sans-serif" font-size="250" fill="#374b5c">14/09</text>
+    <rect x="180" y="655" width="575" height="12" fill="#252722"/>
+    <text x="180" y="730" font-family="monospace" font-size="28" fill="#252722">BELLWETHER CROSSING</text>
+    <text x="180" y="775" font-family="monospace" font-size="24" fill="#252722">SYNTHETIC CIVIC RECORDS</text>
+  </g>
+  <text x="930" y="355" font-family="Impact,sans-serif" font-size="126" fill="#252722">A DISCREPANCY</text>
+  <text x="930" y="485" font-family="Impact,sans-serif" font-size="126" fill="#8b2f27">IS EVIDENCE.</text>
+  <text x="930" y="615" font-family="Impact,sans-serif" font-size="108" fill="#252722">AN ACCUSATION</text>
+  <text x="930" y="730" font-family="Impact,sans-serif" font-size="108" fill="#252722">IS NOT.</text>
+  <g transform="rotate(-5 1390 860)"><rect x="1130" y="790" width="590" height="120" fill="none" stroke="#8b2f27" stroke-width="10"/><text x="1190" y="875" font-family="Impact,sans-serif" font-size="74" fill="#8b2f27">NOT SUPPORTED</text></g>
+</svg>

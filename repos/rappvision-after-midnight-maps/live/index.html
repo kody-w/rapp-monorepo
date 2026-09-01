@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>After Midnight Maps — live route replay</title>
+  <style>
+    :root{--ink:#11162f;--paper:#20284d;--paper2:#29325c;--text:#f2ebda;--muted:#b6bedc;--orange:#ff9c45;--orange2:#ffd1a2;--rain:#8390bd;--good:#93d8b2;--bad:#ff8f8f}
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:var(--ink);color:var(--text);font-family:Montserrat,Arial,sans-serif}
+    body{min-height:100vh;background-image:radial-gradient(circle at 72% 15%,rgba(91,102,157,.22),transparent 42%)}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;background-image:repeating-linear-gradient(112deg,transparent 0 22px,rgba(174,188,231,.18) 23px,transparent 24px 52px);background-size:170px 170px}
+    main{width:min(1500px,calc(100% - 40px));margin:auto;padding:42px 0 64px}
+    header{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end;border-bottom:1px solid rgba(182,190,220,.3);padding-bottom:24px}
+    .eyebrow{font:700 12px/1.4 "IBM Plex Mono","Courier New",monospace;letter-spacing:.22em;color:var(--orange2);text-transform:uppercase}
+    h1{margin:8px 0 4px;font:400 clamp(48px,7vw,92px)/.95 Georgia,serif;letter-spacing:-.045em}
+    .synthetic{color:var(--muted);max-width:620px;font-size:17px;line-height:1.55}
+    .seal{width:118px;height:118px;border:1px solid rgba(255,156,69,.58);border-radius:50%;display:grid;place-items:center;text-align:center;color:var(--orange2);font:700 11px/1.45 "IBM Plex Mono","Courier New",monospace;letter-spacing:.13em;transform:rotate(4deg)}
+    .intro{display:grid;grid-template-columns:1.25fr .75fr;gap:18px;margin:22px 0}
+    .note{background:rgba(41,50,92,.58);border:1px solid rgba(182,190,220,.18);padding:20px 24px;line-height:1.55}
+    .note strong{display:block;margin-bottom:5px;color:var(--orange2);font:700 13px "IBM Plex Mono","Courier New",monospace;letter-spacing:.12em;text-transform:uppercase}
+    .layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px}
+    .map-card{position:relative;min-height:660px;background-color:var(--paper);background-image:linear-gradient(rgba(131,144,189,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(131,144,189,.09) 1px,transparent 1px);background-size:52px 52px;border:1px solid rgba(182,190,220,.23);box-shadow:0 32px 80px rgba(5,8,24,.38);overflow:hidden}
+    .map-card:after{content:"N";position:absolute;right:27px;top:24px;width:44px;height:44px;border:1px solid rgba(182,190,220,.35);border-radius:50%;display:grid;place-items:center;color:var(--muted);font:700 13px "IBM Plex Mono","Courier New",monospace}
+    svg{display:block;width:100%;height:660px;touch-action:none}
+    .contour{fill:none;stroke:var(--rain);stroke-opacity:.13;stroke-width:2}
+    .original{fill:none;stroke:var(--orange);stroke-opacity:.38;stroke-width:7;stroke-dasharray:18 16;stroke-linecap:round;stroke-linejoin:round;transition:opacity .25s}
+    .current{fill:none;stroke:var(--orange);stroke-width:11;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 10px rgba(255,156,69,.26));transition:d .35s}
+    .original.hidden{opacity:0}
+    .point{fill:var(--orange2);stroke:var(--ink);stroke-width:5}
+    .point.movable{fill:var(--orange);cursor:grab}
+    .point.movable:active{cursor:grabbing}
+    .point-halo{fill:none;stroke:var(--orange);stroke-width:2;stroke-opacity:.5;stroke-dasharray:5 5;pointer-events:none}
+    .place{fill:var(--text);font:700 16px "IBM Plex Mono","Courier New",monospace;paint-order:stroke;stroke:var(--paper);stroke-width:8}
+    .coord{fill:var(--muted);font:400 12px "IBM Plex Mono","Courier New",monospace;paint-order:stroke;stroke:var(--paper);stroke-width:7}
+    aside{display:flex;flex-direction:column;gap:14px}
+    .panel{background:rgba(41,50,92,.76);border:1px solid rgba(182,190,220,.2);padding:19px}
+    .panel h2{margin:0 0 15px;font:700 13px "IBM Plex Mono","Courier New",monospace;letter-spacing:.15em;color:var(--orange2);text-transform:uppercase}
+    .distance{font:400 48px/1 Georgia,serif;color:var(--text)}
+    .delta{margin-top:7px;color:var(--muted);font:13px "IBM Plex Mono","Courier New",monospace}
+    .legs{display:grid;gap:7px;margin-top:17px;padding-top:13px;border-top:1px solid rgba(182,190,220,.18);font:12px/1.4 "IBM Plex Mono","Courier New",monospace;color:var(--muted)}
+    .leg{display:flex;justify-content:space-between;gap:10px}
+    button{width:100%;border:1px solid rgba(255,156,69,.48);background:rgba(17,22,47,.55);color:var(--text);padding:13px 14px;text-align:left;font:700 12px "IBM Plex Mono","Courier New",monospace;letter-spacing:.07em;cursor:pointer;transition:.2s}
+    button:hover,button:focus-visible{background:var(--orange);color:var(--ink);outline:none}
+    button.secondary{border-color:rgba(182,190,220,.3)}
+    #status{min-height:76px;color:var(--muted);font-size:14px;line-height:1.5}
+    #status.good{color:var(--good)}#status.bad{color:var(--bad)}
+    .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .compare-grid div{padding:12px;background:rgba(17,22,47,.48);font-size:13px;line-height:1.45}
+    .compare-grid strong{display:block;margin-bottom:5px;color:var(--orange2);font:700 11px "IBM Plex Mono","Courier New",monospace;letter-spacing:.1em}
+    .scope{margin-top:16px;color:var(--muted);font-size:13px;line-height:1.55}
+    @media(max-width:980px){header{grid-template-columns:1fr}.seal{display:none}.intro,.layout{grid-template-columns:1fr}.map-card,svg{min-height:520px;height:520px}aside{display:grid;grid-template-columns:1fr 1fr}.controls{grid-column:1/-1}}
+    @media(max-width:620px){main{width:min(100% - 20px,1500px);padding-top:24px}.intro,aside{grid-template-columns:1fr}.controls{grid-column:auto}.map-card,svg{min-height:440px;height:440px}.place{font-size:12px}.coord{display:none}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <div class="eyebrow">Sol Navarro · fictional synthetic cartographer</div>
+      <h1>After Midnight Maps</h1>
+      <div class="synthetic">A deterministic route study across invented places. Nothing here describes a real road, person, forecast, or journey.</div>
+    </div>
+    <div class="seal">SYNTHETIC<br>ATLAS<br>NO. 05</div>
+  </header>
+
+  <section class="intro" aria-label="Newcomer guidance">
+    <div class="note"><strong>What you are looking at</strong>An original four-point route and a movable waypoint called Lumen Bend. Distances are computed from latitude and longitude with the Haversine great-circle formula.</div>
+    <div class="note"><strong>What to watch for</strong>Move the orange waypoint. Its two adjacent legs and the total change; the endpoints, formula, and original dashed alternative remain.</div>
+  </section>
+
+  <section class="layout">
+    <div class="map-card">
+      <svg id="map" viewBox="0 0 1040 660" role="img" aria-labelledby="mapTitle mapDesc">
+        <title id="mapTitle">Synthetic route map</title>
+        <desc id="mapDesc">Four fictional places connected by a route. Lumen Bend can be moved to recompute the route.</desc>
+        <g aria-hidden="true">
+          <path class="contour" d="M-40 180C170 80 310 260 500 150S820 50 1100 130"/>
+          <path class="contour" d="M-40 270C170 170 340 350 540 240S870 140 1110 210"/>
+          <path class="contour" d="M-20 520C210 410 370 590 590 475S900 390 1090 430"/>
+          <path class="contour" d="M70 20C140 150 55 265 145 380S170 570 120 700"/>
+          <path class="contour" d="M850 -30C780 125 900 230 820 350S790 560 910 710"/>
+        </g>
+        <path id="original-route" class="original hidden"/>
+        <path id="current-route" class="current"/>
+        <g id="points"></g>
+      </svg>
+    </div>
+
+    <aside>
+      <section class="panel" aria-live="polite">
+        <h2>Measured route</h2>
+        <div id="total" class="distance">—</div>
+        <div id="delta" class="delta">canonical baseline</div>
+        <div id="legs" class="legs"></div>
+      </section>
+
+      <section class="panel controls">
+        <h2>Try live replay</h2>
+        <button id="move-waypoint" type="button">01 · MOVE WAYPOINT NORTH</button>
+        <button id="compare-routes" class="secondary" type="button">02 · COMPARE ROUTES</button>
+        <button id="invalid-move" class="secondary" type="button">03 · TRY INVALID MOVE</button>
+        <button id="reset" class="secondary" type="button">04 · RESET</button>
+        <p id="status">Drag Lumen Bend, or use the deterministic move button. The original route is preserved for comparison.</p>
+      </section>
+
+      <section class="panel">
+        <h2>What changes / remains</h2>
+        <div class="compare-grid">
+          <div><strong>CHANGES</strong>Waypoint coordinates, its two adjacent legs, and total distance.</div>
+          <div><strong>REMAINS</strong>Start and end, Haversine rule, original route, and synthetic scope.</div>
+        </div>
+        <div class="scope">Coordinate distance only. No streets, traffic, accessibility, weather, safety, or travel advice.</div>
+      </section>
+    </aside>
+  </section>
+</main>
+
+<script>
+(() => {
+  "use strict";
+  const R = 6371.0088;
+  const bounds = {latMin:41.65,latMax:42.20,lonMin:-88.00,lonMax:-87.15};
+  const baseline = [
+    {name:"Mirelight Quay",lat:41.730,lon:-87.920},
+    {name:"Lumen Bend",lat:41.865,lon:-87.690},
+    {name:"Saltglass Station",lat:41.955,lon:-87.505},
+    {name:"Ember Reach",lat:42.115,lon:-87.255}
+  ];
+  const deterministicMove = {lat:42.045,lon:-87.745};
+  let current = baseline.map(p=>({...p}));
+  let compare = false;
+  let dragging = false;
+  const svg = document.querySelector("#map");
+  const originalPath = document.querySelector("#original-route");
+  const currentPath = document.querySelector("#current-route");
+  const points = document.querySelector("#points");
+  const status = document.querySelector("#status");
+
+  const rad = d => d * Math.PI / 180;
+  function haversine(a,b){
+    const p1=rad(a.lat), p2=rad(b.lat), dp=rad(b.lat-a.lat), dl=rad(b.lon-a.lon);
+    const h=Math.sin(dp/2)**2+Math.cos(p1)*Math.cos(p2)*Math.sin(dl/2)**2;
+    return 2*R*Math.asin(Math.sqrt(h));
+  }
+  function legs(route){return route.slice(0,-1).map((p,i)=>haversine(p,route[i+1]));}
+  function total(route){return legs(route).reduce((a,b)=>a+b,0);}
+  function xy(p){
+    return {
+      x:70+(p.lon-bounds.lonMin)/(bounds.lonMax-bounds.lonMin)*900,
+      y:600-(p.lat-bounds.latMin)/(bounds.latMax-bounds.latMin)*540
+    };
+  }
+  function coordinate(x,y){
+    return {
+      lon:bounds.lonMin+((x-70)/900)*(bounds.lonMax-bounds.lonMin),
+      lat:bounds.latMin+((600-y)/540)*(bounds.latMax-bounds.latMin)
+    };
+  }
+  function routePath(route){return route.map((p,i)=>`${i?"L":"M"} ${xy(p).x.toFixed(2)} ${xy(p).y.toFixed(2)}`).join(" ");}
+  const baselineTotal = total(baseline);
+
+  function setStatus(message,kind=""){
+    status.textContent=message;
+    status.className=kind;
+  }
+  function render(){
+    originalPath.setAttribute("d",routePath(baseline));
+    currentPath.setAttribute("d",routePath(current));
+    originalPath.classList.toggle("hidden",!compare && Math.abs(total(current)-baselineTotal)<0.0001);
+    points.replaceChildren();
+    current.forEach((p,i)=>{
+      const pos=xy(p);
+      const g=document.createElementNS("http://www.w3.org/2000/svg","g");
+      if(i===1){
+        const halo=document.createElementNS(g.namespaceURI,"circle");
+        halo.setAttribute("class","point-halo"); halo.setAttribute("cx",pos.x); halo.setAttribute("cy",pos.y); halo.setAttribute("r","25"); g.append(halo);
+      }
+      const circle=document.createElementNS(g.namespaceURI,"circle");
+      circle.setAttribute("class",`point${i===1?" movable":""}`);
+      circle.setAttribute("cx",pos.x);circle.setAttribute("cy",pos.y);circle.setAttribute("r",i===1?"14":"10");
+      if(i===1){circle.id="waypoint";circle.setAttribute("tabindex","0");circle.setAttribute("role","button");circle.setAttribute("aria-label","Move Lumen Bend waypoint");}
+      g.append(circle);
+      const label=document.createElementNS(g.namespaceURI,"text");
+      label.setAttribute("class","place");label.setAttribute("x",pos.x+18);label.setAttribute("y",pos.y-14);label.textContent=p.name;g.append(label);
+      const coord=document.createElementNS(g.namespaceURI,"text");
+      coord.setAttribute("class","coord");coord.setAttribute("x",pos.x+18);coord.setAttribute("y",pos.y+8);
+      coord.textContent=`${p.lat.toFixed(3)} / ${p.lon.toFixed(3)}`;g.append(coord);
+      points.append(g);
+    });
+    const routeLegs=legs(current), routeTotal=routeLegs.reduce((a,b)=>a+b,0);
+    document.querySelector("#total").textContent=`${routeTotal.toFixed(1)} km`;
+    const difference=routeTotal-baselineTotal;
+    document.querySelector("#delta").textContent=Math.abs(difference)<.001?"canonical baseline":`${difference>=0?"+":""}${difference.toFixed(1)} km from original`;
+    document.querySelector("#legs").innerHTML=routeLegs.map((d,i)=>`<div class="leg"><span>${current[i].name} → ${current[i+1].name}</span><span>${d.toFixed(1)} km</span></div>`).join("");
+    window.__replayState={
+      mode:Math.abs(difference)<.001?"baseline":"moved",
+      compare,
+      waypoint:{lat:+current[1].lat.toFixed(6),lon:+current[1].lon.toFixed(6)},
+      totalKm:+routeTotal.toFixed(6),
+      baselineTotalKm:+baselineTotal.toFixed(6)
+    };
+  }
+  function moveWaypoint(lat,lon,source){
+    if(lat<bounds.latMin||lat>bounds.latMax||lon<bounds.lonMin||lon>bounds.lonMax){
+      setStatus("Rejected: that coordinate falls outside the fictional survey extent. The accepted route is unchanged.","bad");
+      return false;
+    }
+    current[1]={...current[1],lat,lon};
+    compare=true; render();
+    setStatus(`${source}: Lumen Bend moved. Two legs and the total were recomputed; the dashed original remains.`,`good`);
+    return true;
+  }
+  document.querySelector("#move-waypoint").addEventListener("click",()=>moveWaypoint(deterministicMove.lat,deterministicMove.lon,"Accepted"));
+  document.querySelector("#compare-routes").addEventListener("click",()=>{
+    compare=!compare; render();
+    setStatus(compare?"Comparison on: solid current route; dashed original alternative.":"Comparison off: the current route remains active.","good");
+  });
+  document.querySelector("#invalid-move").addEventListener("click",()=>moveWaypoint(43.250,-89.400,"Rejected"));
+  document.querySelector("#reset").addEventListener("click",()=>{
+    current=baseline.map(p=>({...p}));compare=false;render();
+    setStatus("Reset complete: exact canonical coordinates, route geometry, and distance restored.","good");
+  });
+  svg.addEventListener("pointerdown",e=>{if(e.target.id==="waypoint"){dragging=true;svg.setPointerCapture(e.pointerId);}});
+  svg.addEventListener("pointermove",e=>{
+    if(!dragging)return;
+    const rect=svg.getBoundingClientRect();
+    const p=coordinate((e.clientX-rect.left)*1040/rect.width,(e.clientY-rect.top)*660/rect.height);
+    moveWaypoint(p.lat,p.lon,"Accepted drag");
+  });
+  svg.addEventListener("pointerup",()=>{dragging=false});
+  svg.addEventListener("pointercancel",()=>{dragging=false});
+  window.__routeMath={haversine,legs,total,baseline:baseline.map(p=>({...p})),deterministicMove:{...deterministicMove},bounds:{...bounds}};
+  render();
+  if(new URLSearchParams(location.search).has("selftest")){
+    const snapshots={baseline:{...window.__replayState}};
+    document.querySelector("#move-waypoint").click();
+    snapshots.moved={...window.__replayState};
+    document.querySelector("#invalid-move").click();
+    snapshots.afterInvalid={...window.__replayState,status:status.textContent};
+    document.querySelector("#compare-routes").click();
+    snapshots.compared={...window.__replayState};
+    document.querySelector("#reset").click();
+    snapshots.reset={...window.__replayState,status:status.textContent};
+    const report=document.createElement("pre");
+    report.id="selftest-result";
+    report.hidden=true;
+    report.textContent=JSON.stringify(snapshots);
+    document.body.append(report);
+  }
+})();
+</script>
+</body>
+</html>

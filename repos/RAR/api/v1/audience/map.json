@@ -1,7 +1,7 @@
 {
   "schema": "rar-audience-map/1.0",
   "description": "Compact audience verdict per agent, for clients that already have the registry and only need to filter it. b=business, c=consumer, x=both. Absent means both.",
-  "generated": "2026-08-29T00:45:58Z",
+  "generated": "2026-09-01T04:39:27Z",
   "legend": {
     "b": "business",
     "c": "consumer",
@@ -10,9 +10,9 @@
   "counts": {
     "business_only": 363,
     "consumer_only": 3,
-    "both": 1329,
-    "in_business_mode": 1692,
-    "in_consumer_mode": 1332
+    "both": 1331,
+    "in_business_mode": 1694,
+    "in_consumer_mode": 1334
   },
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/map.json",
   "map": {
@@ -1662,6 +1662,7 @@
     "@kody-w/prompt_extractor": "x",
     "@kody-w/prototype_lock_factory_agent": "x",
     "@kody-w/rapp_leviathan_factory": "x",
+    "@kody-w/rapp_projects": "x",
     "@kody-w/rapp_sdk_builder": "x",
     "@kody-w/rapp_sentinel_agent": "x",
     "@kody-w/rapp_skill_bridge_agent": "x",
@@ -1669,6 +1670,7 @@
     "@kody-w/rappter_engine_agent": "x",
     "@kody-w/rappterbook_agent": "x",
     "@kody-w/rappterpedia_agent": "x",
+    "@kody-w/rar_installer_troubleshooter_agent": "x",
     "@kody-w/rar_remote_agent": "x",
     "@kody-w/recon_deck_agent": "x",
     "@kody-w/second_life_agent": "c",

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Patch Notes from Tomorrow — Live Replay</title>
+  <style>
+    :root{--navy:#12243a;--paper:#f3eedf;--amber:#f4b942;--red:#d85d4a;--mint:#8dc6c1;--ink:#182331}
+    *{box-sizing:border-box}body{margin:0;background:var(--navy);color:var(--paper);font-family:Arial,sans-serif;min-height:100vh}
+    header{background:var(--red);padding:14px 28px;display:flex;justify-content:space-between;font:700 14px monospace;letter-spacing:.08em}
+    main{max-width:1180px;margin:auto;padding:34px 28px 60px}.brand{font:700 15px monospace;color:var(--amber);letter-spacing:.12em}
+    h1{font-size:58px;line-height:1;margin:12px 0 16px;text-transform:uppercase}.intro{font:18px/1.5 monospace;max-width:880px;color:#d9e1df}
+    .orientation{margin-top:24px;border:2px solid #56708b;padding:18px 22px;background:#0b1a2a}
+    .orientation strong{display:block;color:var(--amber);font:700 17px monospace;margin-bottom:8px}.orientation p{margin:0;font:15px/1.5 monospace;color:#d9e1df}
+    .event{margin-top:18px;background:var(--paper);color:var(--ink);padding:24px 28px;border:4px solid var(--amber);display:flex;justify-content:space-between;gap:24px}
+    .event strong{font-size:28px;text-transform:uppercase}.event span{font:700 14px/1.5 monospace;text-align:right}
+    .controls{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0}button{border:3px solid var(--paper);background:transparent;color:var(--paper);padding:14px 19px;font:700 15px monospace;cursor:pointer}
+    button:hover,button:focus{background:var(--amber);color:var(--ink);outline:3px solid var(--amber);outline-offset:3px}#reset{border-color:var(--red)}
+    .results{display:grid;grid-template-columns:1fr 1fr;gap:22px}.panel{min-height:270px;border:3px solid #56708b;padding:24px;position:relative;overflow:hidden}
+    .panel h2{margin:0 0 12px;font-size:29px;text-transform:uppercase}.panel p{font:16px/1.5 monospace}.empty{opacity:.66}
+    .panel.a.done{background:var(--mint);color:var(--ink);border-color:var(--mint)}.panel.b.done{background:var(--red);color:#fff8e8;border-color:var(--red)}
+    .metric{font-size:60px;font-weight:800;margin:24px 0 4px}.umbrellas{font-size:56px;letter-spacing:10px;margin-top:28px}
+    #compare{margin-top:22px;padding:22px;border:3px solid var(--amber);background:#0b1a2a;font:16px/1.6 monospace}
+    .hidden{display:none}.status{margin:18px 0;font:700 15px monospace;color:var(--amber)}footer{border-top:2px solid #56708b;padding-top:22px;margin-top:32px;font:14px/1.5 monospace;color:#bac9c9}
+    @media(max-width:760px){.results{grid-template-columns:1fr}h1{font-size:40px}.event{display:block}.event span{display:block;text-align:left;margin-top:12px}}
+  </style>
+</head>
+<body>
+  <header><span>FICTION • SYNTHETIC • 2036 SIMULATION</span><span>NO REAL PERSON / OUTLET / EVENT</span></header>
+  <main>
+    <div class="brand">TOMORROW PUBLIC SERVICE / LIVE NEWSROOM REPLAY</div>
+    <h1>One patch. Two invented futures.</h1>
+    <p class="intro">Replay the fictional Civic OS 12 event reported in the film. Run each deterministic branch in any order, compare the stored outcomes, then reset to the same baseline.</p>
+    <section class="orientation" aria-labelledby="orientation-title">
+      <strong id="orientation-title">What you are looking at</strong>
+      <p>This is a fictional branching newsroom replay. Start from the shared patch event below, run Outcome A and Outcome B, compare the two stored futures, then use Reset to restore the untouched baseline.</p>
+    </section>
+    <div class="event"><strong>Civic OS 12: all public queues become visible</strong><span>EVENT ID: COS12-QV<br>TRUTH STATUS: INVENTED<br>BASELINE: UNRUN</span></div>
+    <div class="controls">
+      <button id="run-a" type="button">Run Outcome A — Coordinate</button>
+      <button id="run-b" type="button">Run Outcome B — Forecast</button>
+      <button id="compare-btn" type="button">Compare outcomes</button>
+      <button id="reset" type="button">Reset</button>
+    </div>
+    <div id="status" class="status" role="status">Baseline ready. Choose either outcome.</div>
+    <div class="results">
+      <section id="panel-a" class="panel a"><h2>Outcome A</h2><p class="empty">Not run. This branch tests civic coordination.</p></section>
+      <section id="panel-b" class="panel b"><h2>Outcome B</h2><p class="empty">Not run. This branch tests indoor queue weather.</p></section>
+    </div>
+    <section id="compare" class="hidden" aria-live="polite"></section>
+    <footer>Kira Voss is a fictional synthetic correspondent. Tomorrow Public Service, Civic OS 12, all metrics, and both outcomes are invented for this pilot. No external data, network request, personal data, or persistent storage is used.</footer>
+  </main>
+  <script>
+    const state={a:false,b:false};
+    const A='<h2>Outcome A — Coordinate</h2><div class="metric">−42%</div><p>Synthetic wait index. Neighbors exchange visible queue positions as shared civic capacity. No weather forms.</p>';
+    const B='<h2>Outcome B — Forecast</h2><div class="umbrellas">☂ ☂ ☂</div><p>Indoor fronts form above public lines. Umbrellas become mandatory at noon. Forecast confidence: fictional.</p>';
+    const status=document.getElementById('status'),compare=document.getElementById('compare');
+    function run(key){state[key]=true;const p=document.getElementById('panel-'+key);p.innerHTML=key==='a'?A:B;p.classList.add('done');compare.classList.add('hidden');status.textContent='Outcome '+key.toUpperCase()+' stored. '+(state.a&&state.b?'Both outcomes are ready to compare.':'Run the other branch or reset.');}
+    document.getElementById('run-a').onclick=()=>run('a');
+    document.getElementById('run-b').onclick=()=>run('b');
+    document.getElementById('compare-btn').onclick=()=>{if(!(state.a&&state.b)){status.textContent='Comparison needs both outcomes. Run A and B first.';return}compare.innerHTML='<strong>COMPARISON COMPLETE</strong><br>Same fictional patch event, opposite synthetic consequences: Outcome A turns visibility into coordination; Outcome B turns visibility into meteorology. Neither is a factual prediction.';compare.classList.remove('hidden');status.textContent='Both outcomes compared. Reset restores the baseline.';};
+    document.getElementById('reset').onclick=()=>{state.a=false;state.b=false;document.getElementById('panel-a').className='panel a';document.getElementById('panel-b').className='panel b';document.getElementById('panel-a').innerHTML='<h2>Outcome A</h2><p class="empty">Not run. This branch tests civic coordination.</p>';document.getElementById('panel-b').innerHTML='<h2>Outcome B</h2><p class="empty">Not run. This branch tests indoor queue weather.</p>';compare.classList.add('hidden');compare.innerHTML='';status.textContent='Baseline restored. Choose either outcome.';};
+  </script>
+</body>
+</html>

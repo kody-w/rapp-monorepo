@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Repair Manual — Live Diagnostic Replay</title>
+  <style>
+    :root{--paper:#e8e0cf;--ink:#20231f;--muted:#5f6258;--orange:#f05a28;--green:#27735d;--red:#a63a2a;--line:#8b887b}
+    *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Mono","Courier New",monospace;background-image:linear-gradient(rgba(32,35,31,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(32,35,31,.08) 1px,transparent 1px);background-size:32px 32px}
+    header{display:flex;justify-content:space-between;gap:24px;padding:22px 32px;border-bottom:4px solid var(--ink);background:rgba(232,224,207,.96)}
+    h1{font-family:"Arial Narrow","League Gothic",sans-serif;font-size:clamp(38px,6vw,76px);line-height:.9;text-transform:uppercase;margin:0;letter-spacing:-.03em}
+    .scope{max-width:510px;border:3px solid var(--orange);padding:12px 14px;background:#f3ead7;font-size:13px;line-height:1.45}
+    main{display:grid;grid-template-columns:minmax(360px,1.15fr) minmax(360px,.85fr);gap:24px;padding:24px;max-width:1440px;margin:auto}
+    .panel{border:3px solid var(--ink);background:#eee6d4;box-shadow:8px 8px 0 rgba(32,35,31,.18)}
+    .panel h2{margin:0;padding:12px 16px;border-bottom:3px solid var(--ink);font-size:18px;text-transform:uppercase;letter-spacing:.08em;background:var(--ink);color:var(--paper)}
+    .machine{min-height:420px;display:grid;place-items:center;padding:20px;position:relative;overflow:hidden}
+    svg{max-width:100%;height:auto}.drum{transform-origin:433px 220px;transition:transform .5s ease}.restored .drum{transform:rotate(24deg)}.fault{transition:opacity .2s}.restored .fault{opacity:0}
+    .status{padding:16px;border-top:3px solid var(--ink);min-height:96px;font-weight:700}.status[data-kind="rejected"]{background:#f1d1c5;color:#6f2118}.status[data-kind="accepted"],.status[data-kind="restored"]{background:#cfe3d9;color:#164c3c}
+    .controls{padding:16px;display:grid;gap:10px}.button-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    button{appearance:none;border:3px solid var(--ink);background:#f4ecd9;color:var(--ink);font:700 14px/1.2 inherit;padding:13px 12px;text-align:left;cursor:pointer;box-shadow:4px 4px 0 var(--ink);transition:transform .08s,box-shadow .08s}
+    button:hover:not(:disabled){background:#fff2d7}button:active:not(:disabled){transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}button:disabled{opacity:.42;cursor:not-allowed}.primary{background:var(--orange);color:#1b1b18}.restore{background:var(--green);color:#f5f0e4}.reset{background:var(--ink);color:var(--paper)}
+    .rail{list-style:none;margin:0;padding:14px 16px;display:grid;grid-template-columns:repeat(5,1fr);gap:6px;border-bottom:3px solid var(--ink)}
+    .rail li{border:2px solid var(--line);padding:8px 5px;font-size:11px;text-align:center;text-transform:uppercase;background:#ded5c3}.rail li.active{background:var(--orange);border-color:var(--ink);font-weight:700}.rail li.done{background:var(--green);color:white;border-color:var(--ink)}
+    .spec{padding:14px 16px}.spec table{width:100%;border-collapse:collapse;font-size:13px}.spec th,.spec td{text-align:left;border-bottom:1px solid var(--line);padding:8px 4px}.spec th{color:var(--muted);width:42%}
+    .result{padding:14px 16px;border-top:3px solid var(--ink);min-height:158px}.result h3{margin:0 0 10px;text-transform:uppercase}.mismatch{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;font-size:12px;margin:7px 0}.mismatch span{padding:8px;border:2px solid var(--red);background:#f1d1c5}.mismatch strong{color:var(--red)}
+    .log{padding:12px 16px;border-top:3px solid var(--ink);font-size:12px;max-height:150px;overflow:auto}.log div+div{margin-top:7px}.tag{display:inline-block;background:var(--orange);padding:3px 7px;font-weight:700}
+    @media(max-width:850px){header{display:block}.scope{margin-top:16px}main{grid-template-columns:1fr}.rail{grid-template-columns:1fr}.button-row{grid-template-columns:1fr}.mismatch{grid-template-columns:1fr}}
+    @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+  </style>
+</head>
+<body>
+  <header>
+    <div><div class="tag">ROWAN PIKE · FICTIONAL MAKER</div><h1>Live Diagnostic Replay</h1></div>
+    <div class="scope"><strong>WHAT YOU ARE LOOKING AT</strong><br>This replay depicts the fictional Pike Bench Winder 7, an unpowered hand-cranked tabletop teaching fixture. Inspect its synthetic fault, reject the near-match, install the exact part, then reset. It is not repair guidance for any real machine.</div>
+  </header>
+  <main>
+    <section class="panel" aria-labelledby="machine-title">
+      <h2 id="machine-title">Fixture RP-BW7 · diagnostic bay</h2>
+      <ol class="rail" aria-label="Replay stages">
+        <li data-stage="inspect">1 Inspect</li><li data-stage="choose">2 Choose</li><li data-stage="reject">3 Reject</li><li data-stage="accept">4 Accept</li><li data-stage="restore">5 Restore</li>
+      </ol>
+      <div class="machine" id="machine">
+        <svg viewBox="0 0 760 400" role="img" aria-label="Authored diagram of a harmless hand-cranked tabletop winding fixture">
+          <rect x="70" y="305" width="620" height="35" rx="4" fill="#20231f"/><rect x="115" y="115" width="85" height="190" fill="#c9bda5" stroke="#20231f" stroke-width="7"/>
+          <circle cx="155" cy="205" r="64" fill="none" stroke="#20231f" stroke-width="12"/><circle cx="155" cy="205" r="9" fill="#f05a28"/>
+          <path d="M155 205 L108 160 M155 205 L210 181 M155 205 L145 266" stroke="#20231f" stroke-width="8"/>
+          <rect x="190" y="194" width="330" height="22" fill="#20231f"/>
+          <g id="collar-shape"><circle cx="333" cy="205" r="46" fill="#f05a28" stroke="#20231f" stroke-width="7"/><circle cx="333" cy="205" r="17" fill="#e8e0cf" stroke="#20231f" stroke-width="5"/><path d="M333 188v17h17" fill="none" stroke="#20231f" stroke-width="5"/></g>
+          <g class="drum"><rect x="430" y="115" width="140" height="180" rx="12" fill="#b9b2a3" stroke="#20231f" stroke-width="8"/><path d="M455 130v150M482 130v150M509 130v150M536 130v150" stroke="#76766d" stroke-width="4"/></g>
+          <rect x="568" y="165" width="62" height="80" fill="#c9bda5" stroke="#20231f" stroke-width="7"/>
+          <g class="fault" fill="none" stroke="#a63a2a" stroke-width="7" stroke-linecap="round"><path d="M295 142c34-26 84-21 112 11"/><path d="M302 132l-18 22M410 142l14 24"/></g>
+          <path d="M282 94 Q342 56 401 94" fill="none" stroke="#f05a28" stroke-width="6" stroke-linecap="round"/><text x="305" y="65" font-family="monospace" font-size="20" font-weight="700">C17 WITNESS ZONE</text>
+        </svg>
+      </div>
+      <div id="status" class="status" role="status" aria-live="polite">Replay ready. Start with INSPECT.</div>
+    </section>
+    <section class="panel" aria-labelledby="console-title">
+      <h2 id="console-title">Exact-fit console</h2>
+      <div class="spec">
+        <table><caption style="text-align:left;font-weight:700;margin-bottom:7px">REQUIRED C17 SPECIFICATION</caption>
+          <tr><th>Part ID</th><td>RP-C17-12</td></tr><tr><th>Tooth count</th><td>12</td></tr><tr><th>Bore</th><td>17 mm</td></tr><tr><th>Geometry</th><td>keyed-flat K3</td></tr>
+        </table>
+      </div>
+      <div class="controls">
+        <button id="inspect" class="primary">01 / INSPECT WITNESS MARKS</button>
+        <div class="button-row"><button id="choose-wrong" disabled>02A / CHOOSE RP-C17-11<br>near-match</button><button id="choose-correct" disabled>02B / CHOOSE RP-C17-12<br>exact match</button></div>
+        <button id="verify" disabled>03 / VERIFY SELECTED PART</button>
+        <button id="restore" class="restore" disabled>04 / INSTALL + RESTORE</button>
+        <button id="reset" class="reset">RESET REPLAY</button>
+      </div>
+      <div id="result" class="result"><h3>Inspection not started</h3><p>Follow the numbered controls. Try the near-match to see an exact rejection, then choose the correct collar.</p></div>
+      <div id="log" class="log" aria-label="Diagnostic log"></div>
+    </section>
+  </main>
+  <script type="module">
+    import { initialState, inspect, choosePart, verifyPart, restoreMachine, PARTS } from "./state.js";
+    let state = initialState();
+    const $ = (id) => document.getElementById(id);
+    const stageOrder = ["inspect","choose","reject","accept","restore"];
+    const esc = (value) => String(value).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+    function render(){
+      $("choose-wrong").disabled = !state.inspected;
+      $("choose-correct").disabled = !state.inspected;
+      $("verify").disabled = !state.selected;
+      $("restore").disabled = state.result?.status !== "accepted";
+      $("machine").classList.toggle("restored", state.restored);
+      document.querySelectorAll("[data-stage]").forEach((el) => {
+        const idx = stageOrder.indexOf(el.dataset.stage);
+        const current = stageOrder.indexOf(state.stage);
+        el.classList.toggle("active", el.dataset.stage === state.stage);
+        el.classList.toggle("done", idx < current || (state.restored && el.dataset.stage === "restore"));
+      });
+      const selected = state.selected ? PARTS[state.selected] : null;
+      let kind = state.restored ? "restored" : state.result?.status || "";
+      let status = "Replay ready. Start with INSPECT.";
+      let result = "<h3>Inspection not started</h3><p>Follow the numbered controls. Try the near-match to see an exact rejection, then choose the correct collar.</p>";
+      if(state.inspected){ status = selected ? `Selected ${selected.id}. Verify the exact fields.` : "Inspection complete: C17 witness marks exceed synthetic baseline."; result = "<h3>Inspection complete</h3><p>Choose a candidate collar. The verifier compares every field against the required C17 specification.</p>"; }
+      if(state.result?.status === "rejected"){
+        status = `${state.result.partId} REJECTED — exact mismatch.`;
+        result = `<h3>Rejected exact mismatch</h3>${state.result.mismatches.map(m => `<div class="mismatch"><span><strong>${esc(m.field)}</strong></span><span>expected ${esc(m.expected)}</span><span>received ${esc(m.received)}</span></div>`).join("")}<p>Choose RP-C17-12 to continue.</p>`;
+      }
+      if(state.result?.status === "accepted"){ status = `${state.result.partId} ACCEPTED — all required fields match.`; result = "<h3>Accepted exact match</h3><p>12 teeth · 17 mm bore · keyed-flat K3. Install the accepted collar to restore the fixture.</p>"; }
+      if(state.restored){ status = "RESTORED — synthetic runout is 0.2 mm baseline."; result = "<h3>Fixture restored</h3><p>The hand-cranked drum turns true. Reset returns every control and diagnostic state to baseline.</p>"; }
+      $("status").dataset.kind = kind; $("status").textContent = status; $("result").innerHTML = result;
+      $("log").innerHTML = state.log.map((line,i) => `<div>${String(i+1).padStart(2,"0")} / ${esc(line)}</div>`).join("");
+      $("log").scrollTop = $("log").scrollHeight;
+    }
+    $("inspect").addEventListener("click",()=>{state=inspect(state);render()});
+    $("choose-wrong").addEventListener("click",()=>{state=choosePart(state,"wrong");render()});
+    $("choose-correct").addEventListener("click",()=>{state=choosePart(state,"correct");render()});
+    $("verify").addEventListener("click",()=>{state=verifyPart(state);render()});
+    $("restore").addEventListener("click",()=>{state=restoreMachine(state);render()});
+    $("reset").addEventListener("click",()=>{state=initialState();render()});
+    render();
+  </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+{
+  "schema": "rapp-vision-evidence/1.0",
+  "publication_id": "one-minute-orchestra-proof-in-four-voices",
+  "status": "accepted",
+  "media": {
+    "mp4": {
+      "path": "media/one-minute-orchestra.mp4",
+      "sha256": "a038e585cda7a21667ce3e41e7c21d37e4ed460a44900bca718dc27afc66a49f",
+      "bytes": 5221237,
+      "duration_seconds": 32.0,
+      "video": {
+        "codec": "h264",
+        "width": 1080,
+        "height": 1080
+      },
+      "audio": {
+        "codec": "aac",
+        "sample_rate_hz": 48000,
+        "channels": 2
+      }
+    },
+    "webm": {
+      "path": "media/one-minute-orchestra.webm",
+      "sha256": "43d5998bd4253af46382f4bdff53f5ecb5d279729b10040a95c16e2b16cc101f",
+      "bytes": 3513416,
+      "duration_seconds": 32.008,
+      "video": {
+        "codec": "vp9",
+        "width": 1080,
+        "height": 1080
+      },
+      "audio": {
+        "codec": "opus",
+        "sample_rate_hz": 48000,
+        "channels": 2
+      }
+    }
+  },
+  "audio_provenance": {
+    "schema": "one-minute-orchestra-audio-provenance/1",
+    "title": "Proof in Four Voices",
+    "composer": {
+      "name": "Asha Bell",
+      "fictional": true
+    },
+    "rights": "Original score authored and synthesized locally for this pilot; no samples or external recordings.",
+    "generator": "audio/generate_score.py",
+    "determinism": {
+      "sample_rate_hz": 48000,
+      "duration_seconds": 32.0,
+      "bpm": 120,
+      "step_seconds": 0.125,
+      "randomness": "none"
+    },
+    "voice_map": {
+      "pulse": "event observed",
+      "prism": "signature verified",
+      "verdant": "state applied",
+      "pearl": "receipt sealed"
+    },
+    "sections": [
+      {
+        "bars": "1-4",
+        "kind": "canonical layer introduction"
+      },
+      {
+        "bars": "5-11",
+        "kind": "canonical performance"
+      },
+      {
+        "bars": "12-14",
+        "kind": "remix audition",
+        "canonical": false
+      },
+      {
+        "bars": "15-16",
+        "kind": "canonical restoration"
+      }
+    ],
+    "output": {
+      "path": "assets/one-minute-orchestra.wav",
+      "sha256": "d9c53726a97c8da510ba4f8faab75934213479f286f6681083b513cf0ab2cd6f"
+    }
+  },
+  "measurements": {
+    "canvas": "1080x1080",
+    "duration_window_requested_seconds": [
+      25,
+      40
+    ],
+    "integrated_loudness_lufs": -18.0,
+    "loudness_range_lu": 3.0,
+    "black_tail_detected": false,
+    "silence_longer_than_two_seconds_detected": false
+  },
+  "checks": [
+    {
+      "name": "hyperframes check --snapshots",
+      "result": "pass",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "name": "live-state deterministic reset test",
+      "result": "pass"
+    },
+    {
+      "name": "headless browser live replay smoke test",
+      "result": "pass"
+    },
+    {
+      "name": "live module syntax check",
+      "result": "pass"
+    },
+    {
+      "name": "codec, square, audio, hashes, rights, privacy package test",
+      "result": "pass"
+    },
+    {
+      "name": "paired-publication schema and ffprobe validator",
+      "result": "pass"
+    }
+  ],
+  "rights": {
+    "music": "Original code-synthesized score; no samples, recordings, or model-generated music.",
+    "visuals": "Original HTML, CSS, SVG, and deterministic motion.",
+    "identity": "Asha Bell is explicitly fictional and synthetic."
+  },
+  "privacy": {
+    "source_material": "Synthetic only",
+    "contains_pii": false,
+    "contains_credentials": false,
+    "contains_private_urls": false,
+    "public_paths_are_relative": true
+  }
+}

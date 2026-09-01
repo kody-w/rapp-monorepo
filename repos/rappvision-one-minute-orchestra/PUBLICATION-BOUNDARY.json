@@ -1,0 +1,26 @@
+{
+  "schema": "rapp-vision-public-boundary/1",
+  "repository": "kody-w/rappvision-one-minute-orchestra",
+  "repository_url": "https://github.com/kody-w/rappvision-one-minute-orchestra",
+  "pages_url": "https://kody-w.github.io/rappvision-one-minute-orchestra/",
+  "watch_url": "https://kody-w.github.io/rapp-vision/#/watch/one-minute-orchestra%2Fone-minute-orchestra-proof-in-four-voices",
+  "included": [
+    ".nojekyll",
+    "README.md",
+    "SILENT.md",
+    "assets/one-minute-orchestra.wav",
+    "channel.json",
+    "companion.md",
+    "evidence.json",
+    "live/index.html",
+    "live/logic.mjs",
+    "media/one-minute-orchestra.mp4",
+    "media/one-minute-orchestra.webm",
+    "thumbs/one-minute-orchestra.svg"
+  ],
+  "excluded": [
+    "agent instruction files",
+    "private worker identifiers and orchestration logs",
+    "unreferenced production caches and diagnostic snapshots"
+  ]
+}

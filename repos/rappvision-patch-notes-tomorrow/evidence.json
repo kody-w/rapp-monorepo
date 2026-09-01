@@ -1,0 +1,177 @@
+{
+  "schema": "rapp-vision-evidence/1.0",
+  "publication_id": "civic-os-12",
+  "channel": "patch-notes-tomorrow",
+  "creator": {
+    "name": "Kira Voss",
+    "kind": "fictional synthetic correspondent"
+  },
+  "generated_at": "2026-08-31T22:29:13-04:00",
+  "disclosure": {
+    "status": "passed",
+    "persistent_film_label": "FICTION \u2022 SYNTHETIC \u2022 2036 SIMULATION",
+    "replay_label": "FICTION \u2022 SYNTHETIC \u2022 2036 SIMULATION",
+    "real_person_or_outlet_impersonation": false
+  },
+  "paired_contract": {
+    "status": "passed",
+    "channel_schema": "rapp-vision-channel/2.0",
+    "publication_count": 1,
+    "live_schema": "rapp-vision-live/1.0",
+    "distinct_sources": true,
+    "constitutional_validator": "passed with --ffprobe-local"
+  },
+  "film_validation": {
+    "status": "passed",
+    "hyperframes_version": "0.8.4",
+    "hyperframes_check": "passed: runtime 0 errors; layout 0 issues/13 samples; motion 0 errors; contrast 60/60",
+    "snapshot_midpoints": [
+      1.0,
+      7.2,
+      13.4,
+      19.6,
+      25.8
+    ],
+    "snapshot_review": "passed; all five scenes legible, disclosure persistent, surreal umbrella payoff visible",
+    "encoded_frame_review": "passed; sampled MP4 frames at opening, Outcome A, and comparison match the checked composition",
+    "animation_map": "passed: 28/32 material tweens mapped; continuous ticker spans 26.8 seconds",
+    "design_adherence": "passed: declared palette/type used; mostly square broadcast panels; restrained shadows; no real-outlet marks"
+  },
+  "live_replay_validation": {
+    "status": "passed",
+    "method": "browser interaction against local static server",
+    "sequence": [
+      "run Outcome A",
+      "run Outcome B",
+      "compare outcomes",
+      "reset replay"
+    ],
+    "outcome_a": "synthetic wait index \u221242%; coordination result stored",
+    "outcome_b": "indoor queue weather; umbrella result stored",
+    "compare": "both stored outcomes visible and contrasted",
+    "reset": "both panels return to Not run; comparison hidden; baseline status restored",
+    "newcomer_orientation": "visible “What you are looking at” guidance explains the shared event, both branches, comparison, and Reset",
+    "reset_control": "visible button labeled Reset",
+    "external_requests": false,
+    "persistent_storage": false
+  },
+  "encodes": {
+    "mp4": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1920,
+          "height": 1080,
+          "r_frame_rate": "30/1"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "sample_rate": "48000",
+          "channels": 2,
+          "r_frame_rate": "0/0"
+        }
+      ],
+      "format": {
+        "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+        "duration": "26.816000",
+        "size": "8141528",
+        "bit_rate": "2428856"
+      }
+    },
+    "webm": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "vp9",
+          "codec_type": "video",
+          "width": 1920,
+          "height": 1080,
+          "r_frame_rate": "30/1"
+        },
+        {
+          "codec_name": "opus",
+          "codec_type": "audio",
+          "sample_rate": "48000",
+          "channels": 2,
+          "r_frame_rate": "0/0"
+        }
+      ],
+      "format": {
+        "format_name": "matroska,webm",
+        "duration": "26.824000",
+        "size": "3675269",
+        "bit_rate": "1096113"
+      }
+    },
+    "sha256_distinct": true,
+    "audio_levels": {
+      "mean_volume_db": -21.5,
+      "max_volume_db": -1.0,
+      "status": "audible, not silent"
+    }
+  },
+  "privacy": {
+    "status": "passed",
+    "scan": "no local paths, loopback or private-network addresses, credentials, secrets, customer or employer material in public artifacts",
+    "inputs": "synthetic authored text, vector graphics, deterministic UI, locally synthesized narration"
+  },
+  "files": {
+    "BRIEF.md": {
+      "sha256": "8650ebfd4275ad332a2472a7cb7fa8f61f97f86e60c4cbf4c46ce7069b6d4412",
+      "bytes": 1339
+    },
+    "SCRIPT.md": {
+      "sha256": "cd99a5ed92fe533f48a52fc77207f6283b9374719091ef2ac0942177c276943f",
+      "bytes": 548
+    },
+    "STORYBOARD.md": {
+      "sha256": "e7fd2495690d6331feceada93360ba992cc8a9a57853c309d163ed2278b16699",
+      "bytes": 977
+    },
+    "channel.json": {
+      "sha256": "1d0ef7daaf8aa07b5ddb186a802004da4fab623a21782fa92886c52cb2319ccb",
+      "bytes": 2444
+    },
+    "companion.md": {
+      "sha256": "118f66cf2eb877301e6c583ea581cd3ad3ef5f875c721e16516de7137c768c5c",
+      "bytes": 1880
+    },
+    "frame.md": {
+      "sha256": "fc5bc4844cd00ab7da6927c51e68a077134e6a3db2e72d8b324949df81957fe0",
+      "bytes": 733
+    },
+    "index.html": {
+      "sha256": "6320e54789bf7ac3c039212817679b90c82777f6cbc557baab8a8b8d8fd77843",
+      "bytes": 17929
+    },
+    "index.motion.json": {
+      "sha256": "b3ca062ec87fcf400d355633914c8c426865a3b9bd7d02f80eae94831faaed6a",
+      "bytes": 404
+    },
+    "live/index.html": {
+      "sha256": "bc366f700d4eef26ab28399ca4d6b7bdf5366d8983ea5e726b076aab99a0c468",
+      "bytes": 6943
+    },
+    "thumbs/civic-os-12.svg": {
+      "sha256": "27a59e904b82689ca0ba5106a3987d05aacd372b3e58ff1cfb1ea82c13590108",
+      "bytes": 1507
+    },
+    "assets/kira-voss.wav": {
+      "sha256": "9603ddfc8d35076ead8870fec96454cd8b83134a6dd9817bc4fc08e3b03f1c94",
+      "bytes": 1188908
+    },
+    "media/civic-os-12.mp4": {
+      "sha256": "17e0335a73012471f93818c16d49fd19f0f0d2102a2ecb013ced2f1b30693f34",
+      "bytes": 8141528
+    },
+    "media/civic-os-12.webm": {
+      "sha256": "d477cc34b5f54954d83ed6e88ad312384c942aed4d7f30b88483d1d577333beb",
+      "bytes": 3675269
+    }
+  }
+}

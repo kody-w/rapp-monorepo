@@ -1,0 +1,73 @@
+{
+  "schema": "rapp-vision-evidence/1.0",
+  "publication_id": "push-friction-motion",
+  "status": "passed",
+  "claims": {
+    "math": {
+      "equation": "a = (F - mu*m*g) / m",
+      "baseline": "m=2.00 kg, F=10.0 N, mu=0.25, g=9.8 m/s^2",
+      "expected": "friction=4.90 N, net=5.10 N, acceleration=2.55 m/s^2",
+      "evidence": "evidence/math-validation.json"
+    },
+    "browser": {
+      "evidence": "evidence/browser-validation.json"
+    },
+    "privacy": {
+      "evidence": "evidence/privacy-scan.txt"
+    },
+    "media": {
+      "evidence": "evidence/media-probes.json"
+    },
+    "audio": {
+      "claim": "Original synthetic tonal bed and taps normalized to restrained audible loudness",
+      "evidence": "evidence/audio-normalization.json"
+    }
+  },
+  "encodes": [
+    {
+      "path": "media/push-friction-motion.mp4",
+      "sha256": "4da3bf91e717a73e12d0da204c8effa98d00146861ea5e43a87ccf0b2449611d",
+      "bytes": 7591179,
+      "duration_seconds": 24.0,
+      "video_codec": "h264",
+      "audio_codec": "aac",
+      "width": 1920,
+      "height": 1080,
+      "integrated_lufs": -21.5,
+      "true_peak_dbfs": -1.5
+    },
+    {
+      "path": "media/push-friction-motion.webm",
+      "sha256": "76c5e5561c3c35bf793589fc6b8f5326971f6f4247884a849abfc0881fc7c476",
+      "bytes": 2375667,
+      "duration_seconds": 24.008,
+      "video_codec": "vp9",
+      "audio_codec": "opus",
+      "width": 1920,
+      "height": 1080,
+      "integrated_lufs": -21.5,
+      "true_peak_dbfs": -1.5
+    }
+  ],
+  "verification": {
+    "math": "passed",
+    "browser_controls": "passed",
+    "exact_reset": "passed",
+    "invalid_input_rejection": "passed",
+    "media_probes": "passed",
+    "black_tail_scan": "passed",
+    "privacy_scan": "passed",
+    "canonical_channel_schema": "passed",
+    "manifest_repair": "passed",
+    "loudness_target": "passed",
+    "silence_scan": "passed"
+  },
+  "artifacts": {
+    "channel.json": {
+      "sha256": "0f6a6d9b2fcf18b326826bfc34a1db4c3d10ac157266b4025d1371840922df03"
+    },
+    "live/index.html": {
+      "sha256": "8777a68133176c9ff834915e8804d373d82d9b474b3646ab55cce2123d915508"
+    }
+  }
+}

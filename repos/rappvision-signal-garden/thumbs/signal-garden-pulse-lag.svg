@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+  <title id="title">When a Heartbeat Wilts</title>
+  <desc id="desc">A cream botanical field journal showing two healthy green flowers, one rust-colored wilted iris, and heartbeat readings of 4.0 and 11.8 seconds.</desc>
+  <defs>
+    <filter id="paper" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="17" result="n"/>
+      <feColorMatrix in="n" values="0 0 0 0 0.18 0 0 0 0 0.23 0 0 0 0 0.16 0 0 0 .08 0"/>
+    </filter>
+  </defs>
+  <rect width="1920" height="1080" fill="#F3EBD8"/>
+  <rect width="1920" height="1080" filter="url(#paper)" opacity=".4"/>
+  <path d="M90 155H1830M90 890H1830" stroke="#31566E" stroke-width="3" opacity=".35"/>
+  <text x="110" y="245" fill="#31566E" font-family="Avenir Next, sans-serif" font-size="30" letter-spacing="7">MINA VALE · SYNTHETIC FIELD NOTE 01</text>
+  <text x="110" y="390" fill="#173A2A" font-family="Georgia, serif" font-size="104" font-weight="700">When a heartbeat wilts.</text>
+  <g transform="translate(220 450)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M120 420C126 295 102 200 135 92" fill="none" stroke="#2F6B45" stroke-width="18"/>
+    <path d="M500 420C500 294 482 190 515 86" fill="none" stroke="#2F6B45" stroke-width="18"/>
+    <path d="M880 420C870 310 855 238 930 160" fill="none" stroke="#A34F35" stroke-width="18"/>
+    <g fill="#2F6B45" opacity=".26">
+      <ellipse cx="135" cy="80" rx="90" ry="62"/><ellipse cx="515" cy="74" rx="90" ry="62"/>
+    </g>
+    <g fill="none" stroke="#2F6B45" stroke-width="15">
+      <path d="M135 82c-58-54-78-98-38-115 35-15 55 29 38 115Z"/>
+      <path d="M135 82c58-54 78-98 38-115-35-15-55 29-38 115Z"/>
+      <path d="M515 76c-58-54-78-98-38-115 35-15 55 29 38 115Z"/>
+      <path d="M515 76c58-54 78-98 38-115-35-15-55 29-38 115Z"/>
+    </g>
+    <g transform="translate(930 160) rotate(36)" fill="none" stroke="#A34F35" stroke-width="15">
+      <path d="M0 0c-58-54-78-98-38-115 35-15 55 29 38 115Z"/>
+      <path d="M0 0c58-54 78-98 38-115-35-15-55 29-38 115Z"/>
+    </g>
+    <path d="M1060 365h100l28-62 48 125 48-94 42 31h170" fill="none" stroke="#31566E" stroke-width="10"/>
+    <text x="1080" y="210" fill="#2F6B45" font-family="SFMono-Regular, monospace" font-size="58">4.0 s</text>
+    <text x="1080" y="300" fill="#A34F35" font-family="SFMono-Regular, monospace" font-size="58">11.8 s</text>
+  </g>
+  <text x="110" y="980" fill="#173A2A" font-family="Avenir Next, sans-serif" font-size="32">Measured signal → visible outcome → deterministic recovery</text>
+</svg>

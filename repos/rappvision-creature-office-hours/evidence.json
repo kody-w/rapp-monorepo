@@ -1,0 +1,101 @@
+{
+  "schema": "rapp-vision-evidence/1.0",
+  "publication_id": "creature-office-hours",
+  "status": "accepted-local",
+  "generated_at": "2026-09-01T03:26:00Z",
+  "manifest_binding": {
+    "path": "channel.json",
+    "sha256": "849111934538a6a078047ee88b2f399ee38aa0380af7597b272abf8f92e2d75c",
+    "repair": "canonical channel name, publication duration, chapters, live timing, and actions"
+  },
+  "media": {
+    "video/mp4": {
+      "path": "media/creature-office-hours.mp4",
+      "codec": "h264",
+      "audio_codec": "aac",
+      "width": 1920,
+      "height": 1080,
+      "duration_seconds": 28.0,
+      "bytes": 6087411,
+      "sha256": "b972cec1156a7a5503e3d6d420d0144764bb6d43870137d72b99eacf0bc0daaa"
+    },
+    "video/webm": {
+      "path": "media/creature-office-hours.webm",
+      "codec": "vp9",
+      "audio_codec": "opus",
+      "width": 1920,
+      "height": 1080,
+      "duration_seconds": 28.018,
+      "bytes": 2388299,
+      "sha256": "1c3c441cd9b8fae45937cc9950db1902cf027010e40089b5c0ed12875df97691"
+    },
+    "audio_measurement": {
+      "mean_volume_db": -16.3,
+      "max_volume_db": -2.9,
+      "silence_over_2_seconds": false
+    },
+    "visual_measurement": {
+      "black_segment_over_0_5_seconds": false,
+      "contact_sheet": "evidence/contact-sheet.jpg"
+    }
+  },
+  "composition_validation": {
+    "hyperframes_project_pin": "0.8.4",
+    "upgraded_from": "0.7.71",
+    "check": "passed",
+    "lint_errors": 0,
+    "runtime_errors": 0,
+    "layout_errors": 0,
+    "motion_errors": 0,
+    "contrast_checks": "32/32 passed",
+    "animation_map": "reviewed locally; no private diagnostic paths retained",
+    "reviewed_contact_sheet": true
+  },
+  "live_replay": {
+    "app": "live/index.html",
+    "model": "live/model.mjs",
+    "test": "tests/validate-live.mjs",
+    "test_result": "passed",
+    "baseline": {
+      "adults": [
+        { "id": "M-01", "energy": 1 },
+        { "id": "B-02", "energy": 1 }
+      ],
+      "child": null,
+      "inspected": false
+    },
+    "positive_path": {
+      "feed_result": [2, 2],
+      "offspring": "H-03",
+      "parents": ["M-01", "B-02"],
+      "lineage_visible": true
+    },
+    "failure_path": {
+      "requested_trait": "glass antlers",
+      "result": "rejected",
+      "offspring_preserved": true,
+      "parent_links_preserved": ["M-01", "B-02"]
+    },
+    "reset": {
+      "exact_baseline_restored": true,
+      "child_removed": true,
+      "inspection_cleared": true
+    }
+  },
+  "privacy": {
+    "scan": "passed",
+    "public_material": "synthetic authored content only",
+    "external_requests": "none required by live replay",
+    "real_people": "none",
+    "private_paths": "none",
+    "credentials": "none",
+    "private_network_indicators": "none",
+    "copied_or_licensed_media": "none"
+  },
+  "provenance": {
+    "visuals": "authored HTML, CSS, and inline SVG",
+    "voice": "local synthetic system voice",
+    "sound": "locally synthesized ambience",
+    "licensed_or_third_party_media": []
+  }
+}

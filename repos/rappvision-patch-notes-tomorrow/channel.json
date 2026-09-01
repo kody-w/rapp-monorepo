@@ -1,0 +1,67 @@
+{
+  "schema": "rapp-vision-channel/2.0",
+  "id": "patch-notes-tomorrow",
+  "name": "Patch Notes from Tomorrow",
+  "handle": "@kira-voss-synthetic",
+  "tagline": "Deadpan bulletins from futures that did not happen.",
+  "avatar": "◫",
+  "links": [],
+  "fictional": true,
+  "creator": {
+    "name": "Kira Voss",
+    "kind": "synthetic fictional correspondent",
+    "disclosure": "Kira Voss is invented and does not represent a real person or outlet."
+  },
+  "videos": [
+    {
+      "id": "civic-os-12",
+      "title": "Civic OS 12: The Queue Weather Patch",
+      "description": "A fictional 2036 bulletin introduces one synthetic patch event; the paired live replay lets viewers run two invented futures, compare them, and reset.",
+      "published": "2026-08-31",
+      "duration": 26.8,
+      "width": 1920,
+      "height": 1080,
+      "orientation": "landscape",
+      "fictional": true,
+      "tags": ["fiction", "synthetic-media", "future-bulletin", "branching-replay"],
+      "thumb": "thumbs/civic-os-12.svg",
+      "sources": [
+        {"src": "media/civic-os-12.mp4", "type": "video/mp4; codecs=\"avc1.4D401F, mp4a.40.2\""},
+        {"src": "media/civic-os-12.webm", "type": "video/webm; codecs=\"vp9, opus\""}
+      ],
+      "chapters": [
+        {"t": 0, "label": "Fiction bulletin"},
+        {"t": 3.4, "label": "Patch event"},
+        {"t": 8.6, "label": "Outcome A"},
+        {"t": 13.7, "label": "Outcome B"},
+        {"t": 20.2, "label": "Compare and replay"}
+      ],
+      "live": {
+        "kind": "rapp-vision-live/1.0",
+        "duration": 45,
+        "chapters": [
+          {"t": 0, "label": "Briefing"},
+          {"t": 5, "label": "Run Outcome A"},
+          {"t": 15, "label": "Run Outcome B"},
+          {"t": 25, "label": "Compare"},
+          {"t": 35, "label": "Reset"}
+        ],
+        "scenes": [
+          {
+            "t": 0,
+            "dur": 45,
+            "app": "live/index.html",
+            "ready": {"selector": "#run-a"},
+            "lower": {"title": "Civic OS 12 Replay", "bench": "Two deterministic fictional outcomes", "fix": "Run both, compare, reset"},
+            "actions": [
+              {"at": 5, "do": "click", "selector": "#run-a"},
+              {"at": 15, "do": "click", "selector": "#run-b"},
+              {"at": 25, "do": "click", "selector": "#compare-btn"},
+              {"at": 35, "do": "click", "selector": "#reset"}
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

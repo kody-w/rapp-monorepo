@@ -19063,6 +19063,17 @@
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.3"
     },
+    "@kody-w/hologram_dogg": {
+      "canonical_path": "agents/@kody-w/hologram_dogg_agent.py",
+      "latest_receipt": "rar_140ff0b2b441692137fb9d54b46864275e3f231df8d122224c1bc07a14921071",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "community",
+      "sha256": "d775ce5751134da02ee2d825ef0a74d79192691d3f5f8a3621c13c8bddfd8bf2",
+      "status": "active",
+      "updated_at": "2026-08-29T00:35:54.480752+00:00",
+      "version": "1.1.0"
+    },
     "@kody-w/install_rappter_distro_agent": {
       "canonical_path": "agents/@kody-w/install_rappter_distro_agent.py",
       "latest_receipt": "rar_262de93c75c30da0b76c2dd41458776c4b037de387445999425755654b19ed0c",
@@ -19250,6 +19261,17 @@
       "updated_at": "2026-08-11T09:42:00.507093+00:00",
       "version": "0.3.0"
     },
+    "@kody-w/rapp_projects": {
+      "canonical_path": "agents/@kody-w/rapp_projects_agent.py",
+      "latest_receipt": "rar_dd0ccfbbc4782b7cde6b60ae6d2a428374f59dbc2a26ffda172bf0898ae06308",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "community",
+      "sha256": "e994af96f664097a291b4a1446ba8b8e36e911d7ccacd5aa58d984f64fb3afca",
+      "status": "active",
+      "updated_at": "2026-08-31T20:16:05.519450+00:00",
+      "version": "1.0.3"
+    },
     "@kody-w/rapp_sdk_builder": {
       "canonical_path": "agents/@kody-w/rapp_sdk_builder_agent.py",
       "latest_receipt": "rar_91b42d573988f249e25168797f7a7dffc0b8b761db92fd8e8042fefe8673ce66",
@@ -19427,15 +19449,15 @@
       "version": "1.0.0"
     },
     "@kody-w/workiq": {
-      "canonical_path": "agents/@kody-w/workiq_agent.py",
-      "latest_receipt": "rar_d02c4c808e78cc953374cb60f91f81e1fa6824ee84a73f46c537bbdcf6bdfb2d",
+      "status": "active",
+      "version": "1.1.2",
+      "quality_tier": "official",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
-      "quality_tier": "official",
-      "sha256": "52075126c877c38ed9d5f135b74f6a490c1593957f6b8fa2367ff2b7eb5c3949",
-      "status": "active",
-      "updated_at": "2026-07-22T01:05:34.168967+00:00",
-      "version": "1.0.2"
+      "canonical_path": "agents/@kody-w/workiq_agent.py",
+      "sha256": "e5cb90e2a731de05214243cc96ad52946ee5c4ef6c96cb724349469172bd8dc4",
+      "latest_receipt": "rar_e073ff010b46f020a83c8061e4b077b149e687d5715bfdea3b1afca128cb619f",
+      "updated_at": "2026-09-01T04:28:51.985578+00:00"
     },
     "@kody-w/wp_publish": {
       "canonical_path": "agents/@kody-w/wp_publish.py",
@@ -20042,18 +20064,18 @@
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.2"
     },
-    "@kody-w/hologram_dogg": {
+    "@kody-w/rar_installer_troubleshooter_agent": {
       "status": "active",
-      "version": "1.1.0",
+      "version": "1.0.0",
       "quality_tier": "community",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
-      "canonical_path": "agents/@kody-w/hologram_dogg_agent.py",
-      "sha256": "d775ce5751134da02ee2d825ef0a74d79192691d3f5f8a3621c13c8bddfd8bf2",
-      "latest_receipt": "rar_140ff0b2b441692137fb9d54b46864275e3f231df8d122224c1bc07a14921071",
-      "updated_at": "2026-08-29T00:35:54.480752+00:00"
+      "canonical_path": "agents/@kody-w/rar_installer_troubleshooter_agent.py",
+      "sha256": "b638078c3ab5fc119a5cba648640387f3ad8af7ea81b72d501e87f04bc10f8ce",
+      "latest_receipt": "rar_10c9e3f3fda9b2c89e9c11c284bce77ca085eefac02d9c034d0d16291c4122dc",
+      "updated_at": "2026-09-01T04:13:20.524335+00:00"
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-08-29T00:35:54.480752+00:00"
+  "updated_at": "2026-09-01T04:28:51.985578+00:00"
 }

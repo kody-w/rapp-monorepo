@@ -1,0 +1,80 @@
+{
+  "schema": "rapp-vision-channel/2.0",
+  "id": "null-arcade",
+  "name": "Null Arcade",
+  "handle": "@jax-byte",
+  "tagline": "Beat time. Keep trust.",
+  "avatar": "▣",
+  "links": [],
+  "videos": [
+    {
+      "id": "null-arcade-integrity-run",
+      "title": "Trust the Timer",
+      "description": "Jax Byte demonstrates a synthetic integrity speedrun, then hands the same valid route and rejected cheat to the viewer.",
+      "published": "2026-08-31",
+      "duration": 22,
+      "width": 1080,
+      "height": 1920,
+      "orientation": "portrait",
+      "tags": ["synthetic-gameplay", "speedrun", "integrity", "live-replay"],
+      "thumb": "thumbs/null-arcade-integrity-run.svg",
+      "sources": [
+        {
+          "src": "media/null-arcade-integrity-run.mp4",
+          "type": "video/mp4; codecs=\"avc1.640032, mp4a.40.2\""
+        },
+        {
+          "src": "media/null-arcade-integrity-run.webm",
+          "type": "video/webm; codecs=\"vp9, opus\""
+        }
+      ],
+      "chapters": [
+        { "t": 0, "label": "Trust the timer" },
+        { "t": 2.8, "label": "Verified route" },
+        { "t": 9, "label": "Cheat rejected" },
+        { "t": 13.7, "label": "Try live replay" },
+        { "t": 18.6, "label": "Beat time, keep trust" }
+      ],
+      "live": {
+        "kind": "rapp-vision-live/1.0",
+        "duration": 15,
+        "chapters": [
+          { "t": 0, "label": "Replay briefing" },
+          { "t": 2, "label": "Run the valid route" },
+          { "t": 8, "label": "Try the rejected cheat" },
+          { "t": 12, "label": "Reset with score preserved" }
+        ],
+        "scenes": [
+          {
+            "t": 0,
+            "dur": 2,
+            "card": {
+              "title": "The timer only trusts the route",
+              "sub": "Complete Start, Boost, Jump, Finish to record 03.580.",
+              "note": "The film showed both outcomes; this replay lets you drive them."
+            }
+          },
+          {
+            "t": 2,
+            "dur": 13,
+            "app": "live/index.html",
+            "ready": { "selector": "#start-button" },
+            "lower": {
+              "title": "Null Arcade integrity run",
+              "bench": "Valid finish records 03.580",
+              "fix": "Cheat is rejected; reset preserves the verified record"
+            },
+            "actions": [
+              { "at": 0.5, "do": "click", "selector": "#start-button" },
+              { "at": 1.5, "do": "click", "selector": "#boost-button" },
+              { "at": 2.5, "do": "click", "selector": "#jump-button" },
+              { "at": 3.5, "do": "click", "selector": "#finish-button" },
+              { "at": 5.5, "do": "click", "selector": "#cheat-button" },
+              { "at": 8, "do": "click", "selector": "#reset-button" }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

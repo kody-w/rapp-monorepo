@@ -110,9 +110,12 @@ jobs:
   # ─── FULL (all tests) ──────────────────────────────────────────
   full:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     needs: [url-stability, smoke, pipeline, contract]
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'

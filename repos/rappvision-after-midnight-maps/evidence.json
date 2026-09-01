@@ -1,0 +1,122 @@
+{
+  "schema": "rapp-vision-evidence/1.0",
+  "publication": "after-midnight-maps",
+  "status": "accepted",
+  "creator_identity": {
+    "name": "Sol Navarro",
+    "synthetic": true,
+    "statement": "Fictional synthetic nocturnal cartographer; not a real person."
+  },
+  "encodes": {
+    "mp4": {
+      "path": "media/after-midnight-maps.mp4",
+      "sha256": "069d64619509aa8bd769bc92784720bbd87e652cabeb32e95131725b67339a7d",
+      "bytes": 2523487,
+      "duration_seconds": 26.0,
+      "video": {
+        "codec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "pixel_format": "yuv420p"
+      },
+      "audio": {
+        "codec": "aac",
+        "channels": 2,
+        "integrated_loudness_lufs": -22.0,
+        "true_peak_dbfs": -10.1
+      }
+    },
+    "webm": {
+      "path": "media/after-midnight-maps.webm",
+      "sha256": "dc3db70cb17d4443f34eb5a21e48e7285e1abbd35ea76fc4ceadc251a8a52ce4",
+      "bytes": 1779120,
+      "duration_seconds": 26.013,
+      "video": {
+        "codec": "vp9",
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "pixel_format": "yuv420p"
+      },
+      "audio": {
+        "codec": "opus",
+        "sample_rate_hz": 48000,
+        "channels": 2
+      }
+    },
+    "distinct_files": true,
+    "black_tail_detected": false
+  },
+  "original_audio": {
+    "method": "Deterministic local synthesis: seeded filtered rain noise, sine drones, and four decaying tonal marks.",
+    "external_audio_used": false,
+    "source_sha256": "33753bb8a814585ad55b043d156312067294b28283614147d41b698df6cb0857"
+  },
+  "route_math": {
+    "earth_radius_km": 6371.0088,
+    "primary_method": "Haversine",
+    "independent_method": "Spherical law of cosines",
+    "original": {
+      "legs_km": [
+        24.266421,
+        18.289708,
+        27.254919
+      ],
+      "total_km": 69.811048
+    },
+    "moved": {
+      "legs_km": [
+        37.903943,
+        22.214088,
+        27.254919
+      ],
+      "total_km": 87.37295
+    },
+    "agreement_km": 0.000001,
+    "assertions": [
+      "The waypoint coordinates changed.",
+      "Only the two legs adjacent to Lumen Bend changed.",
+      "The final leg, start, destination, and distance rule remained identical.",
+      "The original route remained available as a dashed alternative."
+    ]
+  },
+  "live_replay": {
+    "path": "live/index.html",
+    "sha256": "7d4988acc8e8d333dc839218aee4ed884d22ac80f1da97f34488b8337b8c6e20",
+    "browser_boot": "passed",
+    "runtime_errors": 0,
+    "owned_request_failures": 0,
+    "positive_path": "Move button changed Lumen Bend to 42.045, -87.745 and recomputed 87.372950 km.",
+    "failure_path": "43.250, -89.400 was rejected as outside the fictional survey extent.",
+    "accepted_state_survived_failure": true,
+    "compare": "passed",
+    "reset": "Restored Lumen Bend to 41.865, -87.690 and total to 69.811048 km.",
+    "stable_selectors": [
+      "#move-waypoint",
+      "#compare-routes",
+      "#invalid-move",
+      "#reset",
+      "#waypoint"
+    ],
+    "selftest_record": "proof/live-selftest.json",
+    "screenshot": {
+      "path": "proof/live-replay.png",
+      "sha256": "e36d125043b98779c59be6dc0868090f4c878f1604b94ee9b1a60ac7da82e246"
+    }
+  },
+  "thumbnail": {
+    "path": "thumbs/after-midnight-maps.svg",
+    "sha256": "4abede6365f66839ea6156b1c10083362b508b6fb9b38e0d1eaa58299ffdea93",
+    "truthful": true
+  },
+  "privacy": {
+    "synthetic_places_only": true,
+    "pii_detected": false,
+    "credentials_detected": false,
+    "private_or_local_urls_detected": false,
+    "external_media_requests": 0,
+    "real_person_impersonation": false,
+    "copied_reviews_or_citations": false
+  }
+}

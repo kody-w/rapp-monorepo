@@ -1,0 +1,35 @@
+{
+  "schema": "kitchen-table-physics.audio-normalization/1",
+  "status": "passed",
+  "method": "FFmpeg two-pass EBU R128 loudnorm; video streams copied without re-encoding",
+  "source_measurement": {
+    "integrated_lufs": -34.93,
+    "true_peak_dbfs": -14.23,
+    "loudness_range_lu": 6.8
+  },
+  "target": {
+    "integrated_lufs": -21.5,
+    "true_peak_ceiling_dbfs": -1.5,
+    "loudness_range_lu": 11
+  },
+  "delivery_measurements": [
+    {
+      "path": "media/push-friction-motion.mp4",
+      "codec": "aac",
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "integrated_lufs": -21.5,
+      "true_peak_dbfs": -1.5,
+      "max_sample_peak_dbfs": -1.5
+    },
+    {
+      "path": "media/push-friction-motion.webm",
+      "codec": "opus",
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "integrated_lufs": -21.5,
+      "true_peak_dbfs": -1.5,
+      "max_sample_peak_dbfs": -1.5
+    }
+  ]
+}

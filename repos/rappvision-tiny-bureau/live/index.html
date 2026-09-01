@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tiny Bureau Evidence Desk</title>
+  <style>
+    :root { --paper:#eee7d7; --sheet:#f8f2e4; --ink:#1b1d19; --red:#8b2f27; --blue:#374b5c; --muted:#6a695f; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:var(--paper); font-family:"Courier New",monospace; min-height:100vh; }
+    body::before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.24; background:repeating-linear-gradient(0deg,rgba(20,20,18,.08) 0 1px,transparent 1px 5px); }
+    header { border-bottom:4px solid var(--ink); padding:22px clamp(20px,4vw,64px); display:flex; justify-content:space-between; gap:24px; align-items:center; }
+    header h1 { margin:0; font-family:Impact,"Arial Narrow",sans-serif; font-weight:400; letter-spacing:.04em; text-transform:uppercase; font-size:clamp(30px,5vw,62px); }
+    .fiction { color:var(--red); border:3px solid var(--red); padding:8px 12px; text-transform:uppercase; font-weight:bold; transform:rotate(-1deg); }
+    main { max-width:1500px; margin:auto; padding:34px clamp(20px,4vw,64px) 60px; }
+    .intro { display:grid; grid-template-columns:1.2fr .8fr; gap:28px; margin-bottom:30px; }
+    .panel { background:var(--sheet); border:3px solid var(--ink); box-shadow:9px 10px 0 rgba(25,26,22,.18); padding:28px; }
+    h2,h3 { font-family:Impact,"Arial Narrow",sans-serif; font-weight:400; text-transform:uppercase; letter-spacing:.04em; margin:0 0 14px; }
+    h2 { font-size:34px; } h3 { font-size:26px; }
+    p { line-height:1.55; }
+    .steps { margin:0; padding-left:24px; line-height:1.7; }
+    .desk { display:grid; grid-template-columns:1.15fr .85fr; gap:28px; }
+    .evidence-grid { display:grid; gap:20px; }
+    .evidence { position:relative; }
+    .evidence .meta { color:var(--muted); font-size:13px; text-transform:uppercase; }
+    .evidence .count { font-family:Impact,"Arial Narrow",sans-serif; font-size:74px; color:var(--blue); float:right; line-height:.8; margin-left:18px; }
+    button { appearance:none; background:var(--ink); color:var(--sheet); border:3px solid var(--ink); padding:13px 18px; font:700 15px "Courier New",monospace; text-transform:uppercase; cursor:pointer; box-shadow:4px 4px 0 var(--red); }
+    button:hover,button:focus-visible { background:var(--blue); outline:4px solid #c8a657; outline-offset:3px; }
+    button:disabled { opacity:.48; cursor:not-allowed; box-shadow:none; }
+    .cite-state { display:inline-block; margin-left:12px; font-weight:bold; color:var(--red); }
+    .claim { border-left:14px solid var(--red); }
+    .claim blockquote { font-family:Impact,"Arial Narrow",sans-serif; font-size:34px; line-height:1.12; margin:20px 0 26px; }
+    .status { min-height:320px; }
+    .status-box { border:4px double var(--blue); padding:20px; margin-top:16px; }
+    .status-box strong { color:var(--blue); text-transform:uppercase; }
+    .status-box.rejected { border-color:var(--red); }
+    .status-box.rejected strong { color:var(--red); }
+    .ledger { margin-top:28px; }
+    table { width:100%; border-collapse:collapse; font-size:14px; }
+    th,td { text-align:left; padding:12px; border:2px solid var(--ink); vertical-align:top; }
+    th { background:var(--ink); color:var(--sheet); text-transform:uppercase; }
+    .controls { display:flex; gap:14px; flex-wrap:wrap; margin-top:24px; }
+    .reset { background:var(--sheet); color:var(--ink); }
+    .notice { margin-top:30px; border-top:3px solid var(--ink); padding-top:18px; font-size:14px; }
+    .sr { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    @media (max-width:900px) { .intro,.desk { grid-template-columns:1fr; } header { align-items:flex-start; flex-direction:column; } }
+  </style>
+</head>
+<body>
+  <header><div><div>Tiny Bureau / Imani Reed</div><h1>The Five-Fixture Gap</h1></div><div class="fiction">Entirely fictional</div></header>
+  <main>
+    <section class="intro">
+      <div class="panel">
+        <h2>What you are looking at</h2>
+        <p>This is an interactive evidence desk for a synthetic civic case. The film’s finding is narrow: two invented records support a five-fixture discrepancy, but they do not support blaming a person.</p>
+      </div>
+      <div class="panel">
+        <h2>Your replay</h2>
+        <ol class="steps"><li>Cite both records.</li><li>Challenge the unsupported claim.</li><li>Inspect provenance and rejection.</li><li>Reset to the untouched desk.</li></ol>
+      </div>
+    </section>
+
+    <section class="desk">
+      <div class="evidence-grid">
+        <article class="panel evidence">
+          <span class="count">14</span><h3>E-01 · Delivery receipt</h3>
+          <p class="meta">Synthetic record BC-PW-441 · 12 Frostwane 2031 · invented place and calendar</p>
+          <p>Fourteen plaza-light fixtures marked accepted by fictional clerk Oren Pike.</p>
+          <button type="button" data-cite="E-01">Cite E-01</button><span class="cite-state" id="state-E-01">Not cited</span>
+        </article>
+        <article class="panel evidence">
+          <span class="count">09</span><h3>E-02 · Inspection log</h3>
+          <p class="meta">Synthetic record BC-INSP-118 · 03 Rainmoot 2031 · invented place and calendar</p>
+          <p>Nine installed plaza-light fixtures observed by fictional inspector Leena Moss.</p>
+          <button type="button" data-cite="E-02">Cite E-02</button><span class="cite-state" id="state-E-02">Not cited</span>
+        </article>
+        <article class="panel claim">
+          <h3>Claim C-03 · Unsupported</h3>
+          <blockquote>“Deputy Director Mara Quill diverted five fixtures.”</blockquote>
+          <p>No source is attached. Mara Quill is a fictional person.</p>
+          <button type="button" id="challenge">Challenge claim</button>
+        </article>
+      </div>
+
+      <aside>
+        <section class="panel status" aria-live="polite">
+          <h2>Desk finding</h2>
+          <p id="progress">Cite both records to establish the count discrepancy.</p>
+          <div class="status-box" id="finding">
+            <strong>Pending</strong>
+            <p>The evidence chain is incomplete.</p>
+          </div>
+          <div class="controls"><button type="button" id="reset" class="reset">Reset evidence desk</button></div>
+        </section>
+        <section class="panel ledger">
+          <h2>Provenance ledger</h2>
+          <table>
+            <thead><tr><th>ID</th><th>Origin</th><th>Supports</th></tr></thead>
+            <tbody>
+              <tr><td>E-01</td><td>Author-created synthetic receipt</td><td>Delivered count: 14</td></tr>
+              <tr><td>E-02</td><td>Author-created synthetic inspection</td><td>Observed count: 9</td></tr>
+              <tr><td>C-03</td><td>Deliberately unsupported test claim</td><td>Nothing; challenge target</td></tr>
+            </tbody>
+          </table>
+        </section>
+      </aside>
+    </section>
+    <p class="notice"><strong>Boundary:</strong> Bellwether Crossing, its offices, people, identifiers, dates, records, and events are invented for evidence-literacy training. No real citation or public record is claimed.</p>
+  </main>
+  <script>
+    (() => {
+      const cited = new Set();
+      let challenged = false;
+      const buttons = [...document.querySelectorAll("[data-cite]")];
+      const challenge = document.querySelector("#challenge");
+      const progress = document.querySelector("#progress");
+      const finding = document.querySelector("#finding");
+
+      function render() {
+        buttons.forEach((button) => {
+          const id = button.dataset.cite;
+          const active = cited.has(id);
+          button.disabled = active;
+          document.querySelector(`#state-${id}`).textContent = active ? "Cited" : "Not cited";
+        });
+        const chainComplete = cited.has("E-01") && cited.has("E-02");
+        challenge.disabled = challenged || !chainComplete;
+        if (!chainComplete) {
+          progress.textContent = `Evidence cited: ${cited.size} of 2. Cite both records to compare fourteen delivered with nine observed.`;
+          finding.className = "status-box";
+          finding.innerHTML = "<strong>Pending</strong><p>The evidence chain is incomplete.</p>";
+        } else if (!challenged) {
+          progress.textContent = "Discrepancy established. Now challenge the blame claim.";
+          finding.className = "status-box";
+          finding.innerHTML = "<strong>Supported finding</strong><p>14 delivered − 9 observed = 5 fixtures not reconciled.</p>";
+        } else {
+          progress.textContent = "Replay complete. Provenance supports the discrepancy; the accusation is rejected.";
+          finding.className = "status-box rejected";
+          finding.innerHTML = "<strong>Claim rejected</strong><p>E-01 and E-02 establish only a count mismatch. Neither names Mara Quill, assigns her custody, or explains the fixtures’ location. Outcome: reconcile inventory; do not assign blame.</p>";
+        }
+      }
+      buttons.forEach((button) => button.addEventListener("click", () => { cited.add(button.dataset.cite); render(); }));
+      challenge.addEventListener("click", () => { challenged = true; render(); });
+      document.querySelector("#reset").addEventListener("click", () => { cited.clear(); challenged = false; render(); });
+      render();
+    })();
+  </script>
+</body>
+</html>

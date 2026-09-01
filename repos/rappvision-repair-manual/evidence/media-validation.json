@@ -1,0 +1,46 @@
+{
+  "schema": "rapp-vision-media-evidence/1.0",
+  "status": "passed",
+  "encodes": [
+    {
+      "path": "media/repair-manual.mp4",
+      "duration_seconds": 28.0,
+      "bytes": 7315095,
+      "video": {
+        "codec": "h264",
+        "width": 1920,
+        "height": 1080
+      },
+      "audio": {
+        "codec": "aac",
+        "sample_rate_hz": 48000,
+        "channels": 2,
+        "integrated_loudness_lufs": -17.0,
+        "loudness_range_lu": 2.2,
+        "true_peak_dbfs": -4.3
+      },
+      "black_intervals_at_least_0_5_seconds": 0,
+      "silence_intervals_at_least_2_seconds": 0
+    },
+    {
+      "path": "media/repair-manual.webm",
+      "duration_seconds": 28.018,
+      "bytes": 3838759,
+      "video": {
+        "codec": "vp9",
+        "width": 1920,
+        "height": 1080
+      },
+      "audio": {
+        "codec": "opus",
+        "sample_rate_hz": 48000,
+        "channels": 2,
+        "integrated_loudness_lufs": -17.0,
+        "loudness_range_lu": 2.1,
+        "true_peak_dbfs": -3.7
+      },
+      "black_intervals_at_least_0_5_seconds": 0,
+      "silence_intervals_at_least_2_seconds": 0
+    }
+  ]
+}

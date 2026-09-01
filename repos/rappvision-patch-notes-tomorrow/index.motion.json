@@ -1,0 +1,10 @@
+{
+  "duration": 26.8,
+  "assertions": [
+    { "kind": "appearsBy", "selector": "#open-title", "bySec": 0.8 },
+    { "kind": "appearsBy", "selector": "#patch-card", "bySec": 4.4 },
+    { "kind": "before", "a": "#branch-a-title", "b": "#branch-b-title" },
+    { "kind": "staysInFrame", "selector": "#open .scene-inner" },
+    { "kind": "keepsMoving", "withinSelector": "#root", "maxStaticSec": 2.4 }
+  ]
+}

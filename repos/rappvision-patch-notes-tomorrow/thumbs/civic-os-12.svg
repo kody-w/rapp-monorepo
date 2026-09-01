@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-label="Fictional Patch Notes from Tomorrow bulletin thumbnail">
+  <rect width="1920" height="1080" fill="#12243a"/>
+  <path d="M0 0h1920v90H0z" fill="#d85d4a"/>
+  <text x="55" y="58" fill="#fff8e8" font-family="monospace" font-size="30" font-weight="700">FICTION • SYNTHETIC • 2036 SIMULATION</text>
+  <text x="100" y="300" fill="#f4b942" font-family="monospace" font-size="38" font-weight="700">TOMORROW PUBLIC SERVICE / BULLETIN 12</text>
+  <text x="95" y="455" fill="#f3eedf" font-family="Arial, sans-serif" font-size="148" font-weight="900">PATCH NOTES</text>
+  <text x="95" y="600" fill="#f3eedf" font-family="Arial, sans-serif" font-size="148" font-weight="900">FROM TOMORROW</text>
+  <rect x="1280" y="260" width="510" height="530" fill="#f3eedf"/>
+  <text x="1340" y="420" fill="#182331" font-family="monospace" font-size="36" font-weight="700">CIVIC OS 12</text>
+  <text x="1340" y="510" fill="#d85d4a" font-family="Arial, sans-serif" font-size="105" font-weight="900">2036</text>
+  <text x="1340" y="610" fill="#182331" font-family="monospace" font-size="28">TWO INVENTED FUTURES</text>
+  <text x="1440" y="735" fill="#d85d4a" font-family="Arial, sans-serif" font-size="95">☂</text>
+  <path d="M0 930h1920v150H0z" fill="#08131f"/>
+  <text x="80" y="1025" fill="#f4b942" font-family="monospace" font-size="42" font-weight="700">WATCH THE BULLETIN → TRY THE LIVE REPLAY</text>
+</svg>

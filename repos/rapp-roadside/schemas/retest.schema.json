@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rapp-roadside:retest:1",
+  "title": "RAPP Roadside canonical retest result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "support_system",
+    "maintainer_system",
+    "machine_issue_artifact",
+    "participation",
+    "case_id",
+    "diagnosis_report_id",
+    "status",
+    "assertions",
+    "replay_manifest",
+    "byte_bindings",
+    "report_controls",
+    "wire_preserved",
+    "grail_modified",
+    "credentials_collected",
+    "external_network_used_by_agent",
+    "telemetry",
+    "retest_id"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rar-installer-troubleshooter/retest-1"
+    },
+    "support_system": {
+      "const": "RAPP Roadside"
+    },
+    "maintainer_system": {
+      "const": "RAPP Pit Crew"
+    },
+    "machine_issue_artifact": {
+      "const": "Roadside Frame"
+    },
+    "participation": {
+      "const": "voluntary"
+    },
+    "case_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "diagnosis_report_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "status": {
+      "enum": [
+        "PASS",
+        "FAIL"
+      ]
+    },
+    "assertions": {
+      "type": "array",
+      "minItems": 24,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "expected",
+          "actual",
+          "passed"
+        ],
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "passed": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "replay_manifest": {
+      "type": "object"
+    },
+    "byte_bindings": {
+      "type": "object"
+    },
+    "report_controls": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "quarantined",
+        "quarantine_reasons"
+      ],
+      "properties": {
+        "quarantined": {
+          "type": "boolean"
+        },
+        "quarantine_reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "wire_preserved": {
+      "const": {
+        "method": "POST",
+        "path": "/chat",
+        "request_field": "user_input",
+        "success_keys": [
+          "response",
+          "agent_logs",
+          "session_id"
+        ]
+      }
+    },
+    "grail_modified": {
+      "const": false
+    },
+    "credentials_collected": {
+      "const": false
+    },
+    "external_network_used_by_agent": {
+      "const": false
+    },
+    "telemetry": {
+      "const": false
+    },
+    "retest_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

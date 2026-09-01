@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en" data-resolution="landscape">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    @font-face{font-family:"Repair Display";src:local("Arial Narrow");font-weight:400 900;font-style:normal}
+    *{box-sizing:border-box}html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#e8e0cf}body{font-family:"JetBrains Mono",monospace;color:#20231f}
+    #root{position:relative;width:1920px;height:1080px;overflow:hidden;background:#e8e0cf}
+    .scene{position:absolute;inset:0;overflow:hidden;background:#e8e0cf}
+    .paper-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(32,35,31,.09) 2px,transparent 2px),linear-gradient(90deg,rgba(32,35,31,.09) 2px,transparent 2px);background-size:80px 80px}
+    .paper-dots{position:absolute;inset:0;opacity:.22;background-image:radial-gradient(#5f6258 1px,transparent 1px);background-size:13px 13px}
+    .fold{position:absolute;left:958px;top:0;width:4px;height:1080px;background:rgba(32,35,31,.16);box-shadow:8px 0 18px rgba(32,35,31,.08)}
+    .frame{position:absolute;inset:54px;border:4px solid #20231f}
+    .topbar{position:absolute;left:90px;right:90px;top:72px;height:52px;display:flex;align-items:center;justify-content:space-between;border-bottom:4px solid #20231f;font-size:22px;font-weight:700;letter-spacing:.08em}
+    .section-tab{display:inline-block;background:#f05a28;padding:9px 18px;color:#20231f}
+    .scope{color:#5f6258;font-size:18px}
+    .folio{position:absolute;left:94px;right:94px;bottom:72px;display:flex;justify-content:space-between;border-top:3px solid #20231f;padding-top:12px;color:#5f6258;font-size:17px}
+    .display{font-family:"Repair Display",sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-.035em;line-height:.86}
+    .mono{font-family:"JetBrains Mono",monospace}
+    .orange{color:#dc5325}.red{color:#a63a2a}.green{color:#27735d}.manual-label.orange{color:#a63a2a}
+    .manual-label{font-size:18px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+    .rule{height:5px;background:#20231f;transform-origin:left center}
+    .callout{border:4px solid #20231f;background:#efe6d3;padding:22px 26px;box-shadow:10px 10px 0 rgba(32,35,31,.18)}
+    .callout.orange-fill{background:#f05a28}.callout.green-fill{background:#27735d;color:#f6f0e2}.callout.red-fill{background:#a63a2a;color:#f6f0e2}
+    .grease{fill:none;stroke:#f05a28;stroke-width:9;stroke-linecap:round;stroke-linejoin:round}
+    .ink-path{fill:none;stroke:#20231f;stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
+    .dim{fill:none;stroke:#5f6258;stroke-width:4;stroke-dasharray:11 8}
+    .machine-metal{fill:#bcb4a3;stroke:#20231f;stroke-width:8}.machine-dark{fill:#20231f}.machine-accent{fill:#f05a28;stroke:#20231f;stroke-width:7}
+    .stamp{border:10px double currentColor;padding:15px 22px;font-size:50px;line-height:1;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:#e8e0cf}
+
+    #s1-title{position:absolute;left:112px;top:206px;width:890px;font-size:135px}
+    #s1-sub{position:absolute;left:122px;top:505px;width:700px;font-size:31px;line-height:1.35}
+    #s1-badge{position:absolute;left:118px;top:690px;width:700px;font-size:31px;text-align:center}
+    #s1-machine{position:absolute;right:80px;top:174px;width:900px;height:700px}
+    #s1-pencil{position:absolute;right:170px;top:134px;width:440px;height:180px}
+    .s1-part{position:absolute}
+    #s1-wheel{left:47px;top:223px}#s1-shaft{left:265px;top:336px}#s1-collar{left:435px;top:274px}#s1-drum{left:565px;top:203px}#s1-support{left:742px;top:288px}#s1-base{left:40px;top:500px}
+
+    #s2-head{position:absolute;left:112px;top:174px;width:700px;font-size:88px}
+    #s2-copy{position:absolute;left:122px;top:390px;width:560px;font-size:28px;line-height:1.45}
+    #s2-dial{position:absolute;left:180px;top:632px;width:410px;height:230px}
+    #s2-diagram{position:absolute;right:90px;top:156px;width:1000px;height:720px}
+    #s2-result{position:absolute;right:170px;top:720px;width:545px;font-size:23px}
+    #s2-circle{position:absolute;right:474px;top:336px;width:310px;height:250px}
+
+    #s3-head{position:absolute;left:112px;top:156px;width:1120px;font-size:76px}
+    #s3-deck{position:absolute;left:120px;top:258px;width:700px;font-size:27px;line-height:1.4}
+    #s3-exploded{position:absolute;left:70px;right:70px;top:415px;height:430px;perspective:1400px}
+    .explode-part{position:absolute;top:105px;transform-style:preserve-3d}
+    #part-wheel{left:80px}#part-shaft{left:370px;top:193px}#part-collar{left:745px;top:98px}#part-spacer{left:1035px;top:128px}#part-drum{left:1290px;top:65px}
+    #s3-spec{position:absolute;right:104px;top:252px;width:535px}
+    .spec-row{display:grid;grid-template-columns:1fr 1.45fr;border-top:2px solid #20231f;padding:11px 0;font-size:20px}.spec-row:first-of-type{border-top:4px solid #20231f}
+    #s3-leader{position:absolute;left:815px;top:322px;width:480px;height:190px}
+
+    #s4-head{position:absolute;left:112px;top:154px;width:1660px;font-size:64px}
+    #s4-sub{position:absolute;left:120px;top:242px;font-size:25px}
+    .candidate{position:absolute;top:360px;width:690px;height:430px;border:5px solid #20231f;background:#eee5d2;padding:30px 32px}
+    #wrong-card{left:110px}#correct-card{right:110px}
+    .candidate h3{margin:0;font-size:36px}.candidate .part-drawing{position:absolute;left:40px;top:116px;width:230px;height:230px}
+    .candidate .fields{position:absolute;left:304px;right:28px;top:110px;font-size:20px}
+    .field-line{display:grid;grid-template-columns:1fr 1fr;border-bottom:2px solid #7f7c71;padding:11px 0}.field-line.bad{color:#a63a2a;font-weight:700}.field-line.good{color:#27735d;font-weight:700}
+    #reject-stamp{position:absolute;left:360px;top:676px;color:#a63a2a}#accept-stamp{position:absolute;right:300px;top:676px;color:#27735d}
+    #s4-gauge{position:absolute;left:853px;top:391px;width:214px;height:214px;border:7px solid #20231f;border-radius:50%;background:#d8ceba;z-index:4}
+    #s4-gauge:after{content:"C17 GAUGE";position:absolute;left:32px;top:83px;font-weight:700;font-size:20px}
+
+    #s5-head{position:absolute;left:112px;top:174px;width:780px;font-size:88px}
+    #s5-machine{position:absolute;left:90px;top:470px;width:920px;height:400px}
+    #s5-checks{position:absolute;right:108px;top:168px;width:720px}
+    .check-row{display:grid;grid-template-columns:72px 1fr;gap:20px;align-items:center;border-bottom:3px solid #20231f;padding:17px 0;font-size:24px}
+    .check-box{width:58px;height:58px;border:5px solid #20231f;display:grid;place-items:center;font-size:39px;font-weight:700;background:#27735d;color:#f6f0e2}
+    #s5-cta{margin-top:27px;font-size:51px;text-align:center}
+    #s5-safety{margin-top:20px;border:4px solid #f05a28;padding:18px 20px;font-size:19px;line-height:1.35}
+    #s5-drum{transform-origin:597px 181px}
+  </style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="28" data-width="1920" data-height="1080">
+  <section id="scene-1" class="scene clip" data-start="0" data-duration="4.5" data-track-index="1">
+    <div class="paper-grid"></div><div class="paper-dots"></div><div class="fold"></div><div class="frame"></div>
+    <div class="topbar"><span class="section-tab">THE REPAIR MANUAL / 07</span><span class="scope">FICTIONAL TABLETOP MACHINE · UNPOWERED</span></div>
+    <h1 id="s1-title" class="display">The machine<br><span class="orange">knows the fit.</span></h1>
+    <p id="s1-sub">A broken teaching fixture diagnoses its own C17 drive collar—and refuses the near-match.</p>
+    <div id="s1-badge" class="callout orange-fill manual-label">Wrong collar? Refused by exact specification.</div>
+    <div id="s1-machine" aria-label="Exploded authored diagram of the Pike Bench Winder 7">
+      <svg id="s1-pencil" viewBox="0 0 440 180"><path class="grease draw-path" d="M18 122C74 39 244 22 410 104"/><path class="grease draw-path" d="M394 81l21 25-31 12"/></svg>
+      <svg id="s1-wheel" class="s1-part" width="250" height="250" viewBox="0 0 250 250"><circle cx="125" cy="125" r="102" fill="none" stroke="#20231f" stroke-width="18"/><circle cx="125" cy="125" r="16" fill="#f05a28"/><path d="M125 125L48 63M125 125l98-24M125 125l-21 104" stroke="#20231f" stroke-width="14"/></svg>
+      <svg id="s1-shaft" class="s1-part" width="330" height="80" viewBox="0 0 330 80"><rect x="0" y="28" width="330" height="25" fill="#20231f"/><path d="M46 16v49M286 16v49" stroke="#f05a28" stroke-width="6"/></svg>
+      <svg id="s1-collar" class="s1-part" width="160" height="160" viewBox="0 0 160 160"><circle cx="80" cy="80" r="68" class="machine-accent"/><circle cx="80" cy="80" r="25" fill="#e8e0cf" stroke="#20231f" stroke-width="7"/><path d="M80 55v25h25" fill="none" stroke="#20231f" stroke-width="8"/></svg>
+      <svg id="s1-drum" class="s1-part" width="230" height="310" viewBox="0 0 230 310"><rect x="22" y="20" width="186" height="270" rx="18" class="machine-metal"/><path d="M62 38v232M102 38v232M142 38v232M182 38v232" stroke="#74736a" stroke-width="7"/></svg>
+      <svg id="s1-support" class="s1-part" width="120" height="240" viewBox="0 0 120 240"><rect x="14" y="15" width="92" height="210" class="machine-metal"/></svg>
+      <svg id="s1-base" class="s1-part" width="830" height="80" viewBox="0 0 830 80"><rect x="10" y="15" width="810" height="48" class="machine-dark"/></svg>
+    </div>
+    <div class="folio"><span>ROWAN PIKE · SYNTHETIC MAKER/TECHNICIAN</span><span>RP-BW7 · REV 07A</span></div>
+  </section>
+
+  <section id="scene-2" class="scene clip" data-start="4.5" data-duration="5" data-track-index="1">
+    <div class="paper-grid"></div><div class="paper-dots"></div><div class="fold"></div><div class="frame"></div>
+    <div class="topbar"><span class="section-tab">01 / INSPECT</span><span class="scope">OBSERVE ONLY · SYNTHETIC VALUES</span></div>
+    <h2 id="s2-head" class="display">Follow the<br><span class="orange">witness marks.</span></h2>
+    <p id="s2-copy">Hand rotation reveals a repeating chatter at the C17 collar. The orange grease-pencil trail isolates the fictional fault.</p>
+    <svg id="s2-dial" viewBox="0 0 410 230">
+      <path d="M55 194A150 150 0 0 1 355 194" class="ink-path"/>
+      <path d="M82 176l-19-10M112 125l-16-18M164 92l-7-24M220 86l4-25M275 106l14-22M319 148l21-14" class="ink-path"/>
+      <path id="dial-needle" d="M205 190L125 123" stroke="#a63a2a" stroke-width="9" stroke-linecap="round"/>
+      <circle cx="205" cy="190" r="16" fill="#20231f"/>
+      <text x="86" y="220" font-family="monospace" font-size="18" font-weight="700">SYNTHETIC RUNOUT / 1.8 MM</text>
+    </svg>
+    <svg id="s2-diagram" viewBox="0 0 1000 720">
+      <rect x="95" y="585" width="810" height="45" class="machine-dark"/><rect x="145" y="205" width="95" height="380" class="machine-metal"/>
+      <circle cx="193" cy="390" r="112" fill="none" stroke="#20231f" stroke-width="18"/><path d="M193 390l-75-79M193 390l105-28M193 390l-16 112" stroke="#20231f" stroke-width="13"/>
+      <rect x="238" y="374" width="525" height="30" class="machine-dark"/>
+      <circle cx="478" cy="389" r="78" class="machine-accent"/><circle cx="478" cy="389" r="26" fill="#e8e0cf" stroke="#20231f" stroke-width="8"/><path d="M478 363v26h26" fill="none" stroke="#20231f" stroke-width="8"/>
+      <rect x="652" y="248" width="157" height="282" rx="17" class="machine-metal"/><path d="M690 268v242M731 268v242M772 268v242" stroke="#74736a" stroke-width="7"/>
+      <rect x="808" y="305" width="80" height="165" class="machine-metal"/>
+      <path class="dim" d="M399 278h160M399 265v28M559 265v28"/><text x="420" y="251" font-family="monospace" font-size="22">C17 COLLAR ZONE</text>
+      <path class="grease draw-path" d="M363 258C411 177 554 171 601 267"/><path class="grease draw-path" d="M370 239l-28 32M595 240l30 34"/>
+      <path class="ink-path draw-path" d="M573 352L825 145h105"/><rect x="802" y="84" width="160" height="72" fill="#f05a28" stroke="#20231f" stroke-width="5"/><text x="823" y="129" font-family="monospace" font-size="23" font-weight="700">FAULT / C17</text>
+    </svg>
+    <svg id="s2-circle" viewBox="0 0 310 250"><path class="grease draw-path" d="M25 121C35 42 235 5 285 104C319 174 160 235 60 197C10 178 4 151 25 121Z"/></svg>
+    <div id="s2-result" class="callout"><strong class="orange">OBSERVATION:</strong> chatter repeats once per collar rotation. No powered test required.</div>
+    <div class="folio"><span>DIAGNOSTIC STAGE 01</span><span>WITNESS MARK → C17</span></div>
+  </section>
+
+  <section id="scene-3" class="scene clip" data-start="9.5" data-duration="6" data-track-index="1">
+    <div class="paper-grid"></div><div class="paper-dots"></div><div class="fold"></div><div class="frame"></div>
+    <div class="topbar"><span class="section-tab">02 / MATCH THE PART</span><span class="scope">THREE FIELDS · ZERO GUESSWORK</span></div>
+    <h2 id="s3-head" class="display">Explode. Measure. <span class="orange">Match.</span></h2>
+    <p id="s3-deck">The C17 replacement is accepted only when every authored specification agrees.</p>
+    <div id="s3-spec" class="callout">
+      <div class="manual-label orange">Required / RP-C17-12</div>
+      <div class="spec-row"><span>TOOTH COUNT</span><strong>12</strong></div>
+      <div class="spec-row"><span>BORE</span><strong>17 MM</strong></div>
+      <div class="spec-row"><span>GEOMETRY</span><strong>KEYED-FLAT K3</strong></div>
+    </div>
+    <svg id="s3-leader" viewBox="0 0 480 190"><path class="ink-path draw-path" d="M18 170L218 45h242"/><path class="grease draw-path" d="M5 157l25 25M7 181l23-29"/></svg>
+    <div id="s3-exploded">
+      <svg id="part-wheel" class="explode-part" width="240" height="240" viewBox="0 0 240 240"><circle cx="120" cy="120" r="98" fill="none" stroke="#20231f" stroke-width="17"/><circle cx="120" cy="120" r="15" fill="#f05a28"/><path d="M120 120L48 59M120 120l94-22M120 120l-19 98" stroke="#20231f" stroke-width="13"/></svg>
+      <svg id="part-shaft" class="explode-part" width="390" height="100" viewBox="0 0 390 100"><rect x="5" y="37" width="380" height="26" class="machine-dark"/><path d="M32 22v58M350 22v58" stroke="#5f6258" stroke-width="5"/></svg>
+      <svg id="part-collar" class="explode-part" width="210" height="210" viewBox="0 0 210 210"><g id="collar-teeth"><circle cx="105" cy="105" r="88" class="machine-accent"/><path d="M105 8v24M105 178v24M8 105h24M178 105h24M36 36l18 18M156 156l18 18M174 36l-18 18M54 156l-18 18" stroke="#20231f" stroke-width="13"/></g><circle cx="105" cy="105" r="34" fill="#e8e0cf" stroke="#20231f" stroke-width="8"/><path d="M105 71v34h34" fill="none" stroke="#20231f" stroke-width="10"/></svg>
+      <svg id="part-spacer" class="explode-part" width="160" height="160" viewBox="0 0 160 160"><circle cx="80" cy="80" r="60" fill="#d2c7b2" stroke="#20231f" stroke-width="8"/><circle cx="80" cy="80" r="28" fill="#e8e0cf" stroke="#20231f" stroke-width="7"/></svg>
+      <svg id="part-drum" class="explode-part" width="270" height="330" viewBox="0 0 270 330"><rect x="28" y="20" width="214" height="290" rx="18" class="machine-metal"/><path d="M70 38v252M115 38v252M160 38v252M205 38v252" stroke="#74736a" stroke-width="7"/></svg>
+    </div>
+    <div class="folio"><span>EXPLODED ASSEMBLY / NOT TO SCALE</span><span>C17 EXACT-FIT SPECIFICATION</span></div>
+  </section>
+
+  <section id="scene-4" class="scene clip" data-start="15.5" data-duration="6.5" data-track-index="1">
+    <div class="paper-grid"></div><div class="paper-dots"></div><div class="fold"></div><div class="frame"></div>
+    <div class="topbar"><span class="section-tab">03 / VERIFY</span><span class="scope">NEAR-MATCH IS NOT A MATCH</span></div>
+    <h2 id="s4-head" class="display">The gauge <span class="red">rejects</span>. The spec <span class="green">accepts</span>.</h2>
+    <p id="s4-sub">Same family. Similar silhouette. Three exact differences.</p>
+    <div id="s4-gauge"></div>
+    <article id="wrong-card" class="candidate">
+      <h3 class="red">RP-C17-11 / NEAR-MATCH</h3>
+      <svg class="part-drawing" viewBox="0 0 230 230"><circle cx="115" cy="115" r="90" fill="#d7cbb6" stroke="#20231f" stroke-width="10"/><circle cx="115" cy="115" r="38" fill="#e8e0cf" stroke="#20231f" stroke-width="9"/><path d="M115 14v25M115 191v25M14 115h25M191 115h25M44 44l18 18M168 168l18 18M186 44l-18 18M62 168l-18 18" stroke="#20231f" stroke-width="14"/></svg>
+      <div class="fields">
+        <div class="field-line bad mismatch-row"><span>ID</span><span>RP-C17-11 ≠ 12</span></div>
+        <div class="field-line bad mismatch-row"><span>TEETH</span><span>11 ≠ 12</span></div>
+        <div class="field-line"><span>BORE</span><span>17 MM = 17 MM</span></div>
+        <div class="field-line bad mismatch-row"><span>GEOMETRY</span><span>ROUND ≠ K3</span></div>
+      </div>
+    </article>
+    <article id="correct-card" class="candidate">
+      <h3 class="green">RP-C17-12 / EXACT MATCH</h3>
+      <svg id="correct-part" class="part-drawing" viewBox="0 0 230 230"><circle cx="115" cy="115" r="90" fill="#f05a28" stroke="#20231f" stroke-width="10"/><circle cx="115" cy="115" r="38" fill="#e8e0cf" stroke="#20231f" stroke-width="9"/><path d="M115 77v38h38" fill="none" stroke="#20231f" stroke-width="11"/><path d="M115 14v25M115 191v25M14 115h25M191 115h25M44 44l18 18M168 168l18 18M186 44l-18 18M62 168l-18 18" stroke="#20231f" stroke-width="14"/></svg>
+      <div class="fields">
+        <div class="field-line good"><span>ID</span><span>RP-C17-12</span></div>
+        <div class="field-line good"><span>TEETH</span><span>12</span></div>
+        <div class="field-line good"><span>BORE</span><span>17 MM</span></div>
+        <div class="field-line good"><span>GEOMETRY</span><span>KEYED-FLAT K3</span></div>
+      </div>
+    </article>
+    <div id="reject-stamp" class="stamp">Rejected</div><div id="accept-stamp" class="stamp">Accepted</div>
+    <div class="folio"><span>EXACT COMPARATOR / SYNTHETIC DATA</span><span>FAIL CLOSED → PASS EXACT</span></div>
+  </section>
+
+  <section id="scene-5" class="scene clip" data-start="22" data-duration="6" data-track-index="1">
+    <div class="paper-grid"></div><div class="paper-dots"></div><div class="fold"></div><div class="frame"></div>
+    <div class="topbar"><span class="section-tab">04 / RESTORE + REPLAY</span><span class="scope">CONTROL RETURNS TO YOU</span></div>
+    <h2 id="s5-head" class="display">Correct collar.<br><span class="green">True rotation.</span></h2>
+    <svg id="s5-machine" viewBox="0 0 920 400">
+      <rect x="40" y="326" width="820" height="45" class="machine-dark"/><rect x="102" y="95" width="90" height="231" class="machine-metal"/>
+      <circle cx="147" cy="206" r="92" fill="none" stroke="#20231f" stroke-width="17"/><circle cx="147" cy="206" r="14" fill="#f05a28"/><path d="M147 206L82 144M147 206l88-26M147 206l-16 88" stroke="#20231f" stroke-width="12"/>
+      <rect x="190" y="192" width="560" height="28" class="machine-dark"/><circle cx="408" cy="206" r="66" class="machine-accent"/><circle cx="408" cy="206" r="23" fill="#e8e0cf" stroke="#20231f" stroke-width="7"/><path d="M408 183v23h23" fill="none" stroke="#20231f" stroke-width="8"/>
+      <g id="s5-drum"><rect x="520" y="88" width="155" height="236" rx="14" class="machine-metal"/><path d="M554 105v202M597 105v202M640 105v202" stroke="#74736a" stroke-width="7"/></g>
+      <rect x="675" y="125" width="75" height="163" class="machine-metal"/><path class="grease draw-path" d="M335 96C382 49 455 51 491 101"/><path class="grease draw-path" d="M346 79l-25 28M479 80l25 29"/>
+      <path id="true-line" d="M184 205H752" stroke="#27735d" stroke-width="6" stroke-dasharray="16 10"/>
+      <text x="335" y="46" font-family="monospace" font-size="22" font-weight="700" fill="#27735d">C17-12 LOCKED / RUNOUT 0.2 MM</text>
+    </svg>
+    <div id="s5-checks">
+      <div class="check-row"><div class="check-box">✓</div><div><strong>INSPECT</strong><br><span class="scope">locate the C17 witness marks</span></div></div>
+      <div class="check-row"><div class="check-box">×</div><div><strong>REJECT</strong><br><span class="scope">see the exact RP-C17-11 mismatch</span></div></div>
+      <div class="check-row"><div class="check-box">✓</div><div><strong>ACCEPT + RESTORE</strong><br><span class="scope">fit RP-C17-12 and return to baseline</span></div></div>
+      <div id="s5-cta" class="callout orange-fill manual-label">Try live replay →</div>
+      <div id="s5-safety"><strong>SYNTHETIC / SAFETY SCOPE</strong><br>Fictional, unpowered, hand-cranked tabletop teaching fixture. No real repair procedure is depicted.</div>
+    </div>
+    <div class="folio"><span>ROWAN PIKE · THE REPAIR MANUAL</span><span>WATCH → TRY → RESET</span></div>
+  </section>
+
+  <audio id="repair-audio" class="clip" data-start="0" data-duration="28" data-track-index="9" src="assets/repair-manual-master.wav"></audio>
+</div>
+<script>
+  window.__timelines = window.__timelines || {};
+  const tl = gsap.timeline({paused:true});
+  document.querySelectorAll(".draw-path").forEach((path)=>{
+    const len=path.getTotalLength();
+    path.style.strokeDasharray=String(len);
+    path.style.strokeDashoffset=String(len);
+  });
+
+  tl.fromTo("#s1-title",{x:-150,opacity:0},{x:0,opacity:1,duration:.62,ease:"expo.out"},.15)
+    .fromTo("#s1-sub",{y:60,opacity:0},{y:0,opacity:1,duration:.55,ease:"power3.out"},.62)
+    .fromTo("#s1-badge",{scale:1.35,rotation:-4,opacity:0},{scale:1,rotation:-2,opacity:1,duration:.48,ease:"back.out(1.8)"},1.18);
+  const s1Parts=["#s1-wheel","#s1-shaft","#s1-collar","#s1-drum","#s1-support","#s1-base"];
+  const scatter=[[-280,-160,70],[180,-210,-45],[-40,250,80],[280,-170,-60],[250,150,45],[-120,220,-25]];
+  s1Parts.forEach((sel,i)=>tl.fromTo(sel,{x:scatter[i][0],y:scatter[i][1],rotation:scatter[i][2],opacity:0},{x:0,y:0,rotation:0,opacity:1,duration:.95,ease:"power3.out"},.42+i*.08));
+  tl.to("#s1-pencil .draw-path",{strokeDashoffset:0,duration:.7,ease:"power2.out",stagger:.34},2.05);
+
+  tl.fromTo("#s2-head",{x:-110,opacity:0},{x:0,opacity:1,duration:.58,ease:"power4.out"},4.62)
+    .fromTo("#s2-copy",{y:55,opacity:0},{y:0,opacity:1,duration:.48,ease:"circ.out"},5.02)
+    .fromTo("#s2-diagram",{scale:.88,opacity:0},{scale:1,opacity:1,duration:.76,ease:"power3.out"},4.82)
+    .to("#s2-diagram .draw-path",{strokeDashoffset:0,duration:.72,ease:"power2.out",stagger:.28},5.45)
+    .to("#s2-circle .draw-path",{strokeDashoffset:0,duration:.82,ease:"none"},6.05)
+    .fromTo("#dial-needle",{rotation:-38,transformOrigin:"205px 190px"},{rotation:38,duration:1.45,ease:"power1.inOut"},6.05)
+    .fromTo("#s2-result",{x:130,opacity:0},{x:0,opacity:1,duration:.52,ease:"expo.out"},7.05);
+
+  tl.fromTo("#s3-head",{y:-70,opacity:0},{y:0,opacity:1,duration:.58,ease:"power4.out"},9.62)
+    .fromTo("#s3-deck",{x:-90,opacity:0},{x:0,opacity:1,duration:.52,ease:"power3.out"},10.02)
+    .fromTo("#s3-spec",{x:150,opacity:0},{x:0,opacity:1,duration:.62,ease:"expo.out"},10.18)
+    .to("#s3-leader .draw-path",{strokeDashoffset:0,duration:.68,ease:"power2.out",stagger:.28},10.72);
+  const explode=["#part-wheel","#part-shaft","#part-collar","#part-spacer","#part-drum"];
+  const explodeScatter=[[-180,170,-38],[80,210,14],[-60,-230,52],[190,-150,-46],[250,140,34]];
+  explode.forEach((sel,i)=>tl.fromTo(sel,{x:explodeScatter[i][0],y:explodeScatter[i][1],rotation:explodeScatter[i][2],scale:.7,opacity:0},{x:0,y:0,rotation:0,scale:1,opacity:1,duration:1.1,ease:"power3.out"},10.2+i*.14));
+  tl.fromTo("#collar-teeth",{rotation:-24,transformOrigin:"105px 105px"},{rotation:0,duration:1.15,ease:"power2.inOut"},12.15);
+
+  tl.fromTo("#s4-head",{scale:1.18,opacity:0},{scale:1,opacity:1,duration:.52,ease:"power4.out"},15.62)
+    .fromTo("#s4-sub",{x:-100,opacity:0},{x:0,opacity:1,duration:.45,ease:"expo.out"},15.98)
+    .fromTo("#wrong-card",{x:-180,opacity:0},{x:0,opacity:1,duration:.62,ease:"power3.out"},16.05)
+    .fromTo("#correct-card",{x:180,opacity:0},{x:0,opacity:1,duration:.62,ease:"power3.out"},16.15)
+    .fromTo("#s4-gauge",{scale:0,rotation:-45,opacity:0},{scale:1,rotation:0,opacity:1,duration:.55,ease:"back.out(1.8)"},16.55)
+    .fromTo(".mismatch-row",{x:-24,opacity:0},{x:0,opacity:1,duration:.28,ease:"power2.out",stagger:.3},16.95)
+    .fromTo("#reject-stamp",{scale:1.7,rotation:8,opacity:0},{scale:1,rotation:-5,opacity:1,duration:.38,ease:"power4.out"},18.1)
+    .fromTo("#correct-part",{x:0,rotation:0},{x:-402,rotation:180,duration:1.05,ease:"power2.inOut"},19.05)
+    .fromTo("#accept-stamp",{scale:1.7,rotation:-8,opacity:0},{scale:1,rotation:4,opacity:1,duration:.4,ease:"back.out(1.7)"},20.4);
+
+  tl.fromTo("#s5-head",{x:-130,opacity:0},{x:0,opacity:1,duration:.62,ease:"expo.out"},22.12)
+    .fromTo("#s5-machine",{y:120,opacity:0},{y:0,opacity:1,duration:.7,ease:"power3.out"},22.35)
+    .fromTo(".check-row",{x:120,opacity:0},{x:0,opacity:1,duration:.48,ease:"power3.out",stagger:.36},22.25)
+    .to("#s5-machine .draw-path",{strokeDashoffset:0,duration:.72,ease:"power2.out",stagger:.25},23.0)
+    .to("#s5-drum",{rotation:720,duration:4.5,ease:"none"},23.05)
+    .fromTo("#s5-cta",{scale:1.25,opacity:0},{scale:1,opacity:1,duration:.48,ease:"back.out(1.8)"},24.65)
+    .fromTo("#s5-safety",{y:45,opacity:0},{y:0,opacity:1,duration:.52,ease:"power2.out"},25.05)
+    .fromTo("#true-line",{opacity:.25},{opacity:1,duration:.42,ease:"sine.inOut",repeat:5,yoyo:true},23.35);
+
+  window.__timelines["main"]=tl;
+</script>
+</body>
+</html>

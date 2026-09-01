@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920" role="img" aria-labelledby="title desc">
+  <title id="title">Null Arcade integrity speedrun</title>
+  <desc id="desc">Acid yellow Trust the Timer title inside a magenta CRT cabinet.</desc>
+  <rect width="1080" height="1920" fill="#09050D"/>
+  <defs>
+    <pattern id="grid" width="72" height="72" patternUnits="userSpaceOnUse">
+      <path d="M72 0H0V72" fill="none" stroke="#F72585" stroke-opacity=".22" stroke-width="3"/>
+    </pattern>
+    <pattern id="scan" width="8" height="8" patternUnits="userSpaceOnUse">
+      <rect width="8" height="2" fill="#FFF9D9" opacity=".05"/>
+    </pattern>
+  </defs>
+  <rect width="1080" height="1920" fill="url(#grid)"/>
+  <rect x="40" y="40" width="1000" height="1840" fill="none" stroke="#FFD23F" stroke-width="8"/>
+  <rect x="60" y="60" width="960" height="1800" fill="none" stroke="#F72585" stroke-width="5"/>
+  <text x="80" y="150" fill="#70D6FF" font-family="monospace" font-size="30" font-weight="700">JAX BYTE // NULL ARCADE</text>
+  <text x="80" y="600" fill="#FFD23F" font-family="Arial Black, sans-serif" font-size="185" font-weight="900" letter-spacing="-12">TRUST</text>
+  <text x="80" y="765" fill="#FFD23F" font-family="Arial Black, sans-serif" font-size="185" font-weight="900" letter-spacing="-12">THE TIMER</text>
+  <rect x="80" y="860" width="680" height="82" fill="#F72585"/>
+  <text x="110" y="918" fill="#FFF9D9" font-family="monospace" font-size="34" font-weight="700">TARGET &lt; 40.000</text>
+  <path d="M160 1120 L850 1300 L220 1490 L850 1700" fill="none" stroke="#FFD23F" stroke-width="18" stroke-dasharray="16 20"/>
+  <rect x="125" y="1080" width="90" height="90" fill="#FFD23F" stroke="#F72585" stroke-width="12"/>
+  <rect width="1080" height="1920" fill="url(#scan)"/>
+</svg>

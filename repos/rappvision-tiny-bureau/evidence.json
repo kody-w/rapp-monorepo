@@ -1,0 +1,117 @@
+{
+  "schema": "rapp-vision-evidence/1.0",
+  "publicationId": "tiny-bureau-five-fixture-gap",
+  "status": "verified",
+  "fictionalBoundary": {
+    "allPeoplePlacesDocumentsEventsSynthetic": true,
+    "realWorldCitations": [],
+    "statement": "Bellwether Crossing, Imani Reed, Mara Quill, Oren Pike, Leena Moss, all dates, record identifiers, documents, and events are invented."
+  },
+  "claims": [
+    {
+      "id": "F-01",
+      "text": "The synthetic records contain a five-fixture inventory discrepancy.",
+      "status": "supported",
+      "logic": "14 delivered minus 9 observed equals 5 not reconciled.",
+      "evidence": ["E-01", "E-02"]
+    },
+    {
+      "id": "C-03",
+      "text": "Mara Quill diverted five fixtures.",
+      "status": "rejected",
+      "reason": "No cited record names Mara Quill, assigns her custody, or explains the missing inventory.",
+      "evidence": []
+    }
+  ],
+  "ledger": [
+    {
+      "id": "E-01",
+      "kind": "synthetic-delivery-receipt",
+      "recordId": "BC-PW-441",
+      "origin": "Author-created fictional record for this pilot",
+      "supports": "Fourteen fixtures accepted"
+    },
+    {
+      "id": "E-02",
+      "kind": "synthetic-inspection-log",
+      "recordId": "BC-INSP-118",
+      "origin": "Author-created fictional record for this pilot",
+      "supports": "Nine fixtures observed"
+    }
+  ],
+  "interactionAcceptance": {
+    "positivePath": ["cite E-01", "cite E-02", "observe supported five-fixture discrepancy"],
+    "failurePath": ["challenge C-03", "observe rejected claim and reason"],
+    "reset": "Reset evidence desk returns both citations and the challenge to their initial state.",
+    "browserVerification": {
+      "newcomerGuidanceVisible": true,
+      "completedState": "Both evidence records cited; claim rejected with provenance reason.",
+      "resetState": "Both records not cited; finding pending; challenge locked until provenance is complete."
+    }
+  },
+  "production": [
+    {
+      "path": "index.html",
+      "role": "HyperFrames film composition",
+      "sha256": "88729ed6cad64df623f2a27501b68ab01bd0ad86a82133e7fce3b4e16f9a1025"
+    },
+    {
+      "path": "live/index.html",
+      "role": "interactive evidence desk",
+      "sha256": "8163c4d562e196bfbf08e0582c512056337ed3430e9d4a9e376ac2da77fc976b"
+    },
+    {
+      "path": "thumbs/tiny-bureau-five-fixture-gap.svg",
+      "role": "publication thumbnail",
+      "sha256": "3b2b7ff7b68db507ecf7e9555bc65d2018426d6857ff8add76965b7df7fa6f10"
+    },
+    {
+      "path": "assets/tiny-bureau-narration.wav",
+      "role": "offline system-synthesized narration",
+      "sha256": "175178c11b0ef650087ce75b082d648986e2d7ff4a3b4b77076e7f4c1fffb44b"
+    },
+    {
+      "path": "assets/tiny-bureau-bed.wav",
+      "role": "author-generated deterministic tone and noise bed",
+      "sha256": "580eb0039e968b9c435df6b8ddf5739a4c418f6c26177eeb33cb47e3fed8982a"
+    },
+    {
+      "path": "evidence/render-contact-sheet.jpg",
+      "role": "inspected rendered-film frames at 1, 7, 13, 19, and 25 seconds",
+      "sha256": "a6dddc07171a9626c454adf4b19b055f7d1ad3ff366eea13986cf981fef98712"
+    }
+  ],
+  "media": [
+    {
+      "path": "media/tiny-bureau-five-fixture-gap.mp4",
+      "type": "video/mp4",
+      "codec": "h264",
+      "audioCodec": "aac",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "durationSeconds": 26.0,
+      "bytes": 5623494,
+      "sha256": "c54ef8fe7578116ac65af330f32919d0ff02a4a881d6615c2bd0bd62ff066775"
+    },
+    {
+      "path": "media/tiny-bureau-five-fixture-gap.webm",
+      "type": "video/webm",
+      "codec": "vp9",
+      "audioCodec": "opus",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "durationSeconds": 26.013,
+      "bytes": 2668987,
+      "sha256": "4c510296151b45fd2c724ef0bc23795726a7aa4cade84d32a50d12e9f50ed9e7"
+    }
+  ],
+  "validation": {
+    "hyperframesCheck": "passed: 0 lint, runtime, layout, motion, or contrast errors",
+    "animationMap": "21 total tweens; 20 mapped; 0 flagged",
+    "privacyReview": "Public artifacts contain only synthetic claims and relative paths.",
+    "citationReview": "No real-world citation is asserted or fabricated.",
+    "renderReview": "Five exact-time rendered frames were inspected; all five story beats are present and legible."
+  }
+}

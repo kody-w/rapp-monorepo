@@ -68,6 +68,18 @@ export function Onboarding({
             definition="The underlying organism product system and whole-business thesis."
           />
           <VocabularyCard
+            term="Holo Field"
+            definition="The permissionless offline radar where a player joins one House, discovers nearby Holo signals, and meets Rapters without sharing location or identity."
+          />
+          <VocabularyCard
+            term="Four starting Houses"
+            definition="Overwatch, Scout, Forge, and Sentinel organize community and perspective. Houses never change power, prices, encounters, companion capability, or economic weight."
+          />
+          <VocabularyCard
+            term="Companion / Work"
+            definition="Companion mode contains play, presence, history, and relationship with no commerce. Work mode is a separately entered, non-executing proof-first walkthrough in this build."
+          />
+          <VocabularyCard
             term="Living digital organism"
             definition={`${brand.rapterPositioning} Verified source plus Rolling Core successor mutations are ticks of existence. The host reports Awake, Sleeping, Quarantined, or Unborn. Holo Zoo uses Waking only while checking for the next verified successor.`}
           />
@@ -76,20 +88,23 @@ export function Onboarding({
             definition="Continuous inspectable experience-state across verified ticks. This is a product definition, not biological or scientific proof."
           />
           <VocabularyCard
-            term="Breath key"
-            definition="A securely stored, successfully tested Direct provider key. It permits an explicitly started, bounded foreground breathing loop; it never starts spending by itself."
+            term="Provider key"
+            definition="A securely stored, successfully tested Direct provider key. It permits an explicitly started, bounded foreground update session; saving or testing it never starts a model request."
           />
           <VocabularyCard
             term="The ownership loop"
-            definition="Discover a Rapter, preview and value it, redeem a one-time credit, receive its signed capsule, own it offline, import/export it, then interact and grow its immutable history frame by frame."
+            definition="Discover a Rapter, inspect its signed capsule, keep owned or imported bytes local, import/export them, and grow immutable history frame by frame. This TestFlight creates no purchase or title."
           />
 
           <Text style={styles.note}>
-            Start in free Direct mode with one local Rapter and your own
-            OpenAI-compatible provider. Wild mode adds the managed Brainstem
-            and remote Rapters; 3- and 10-slot plans support a Rappter flock.
-            iOS suspends local Direct breathing away from the app; continuous
-            breathing requires optional bounded Wild cloud compute.
+            Start with one local Rapter and optionally configure your own
+            OpenAI-compatible provider. iOS suspends local Direct updates away
+            from the app. Managed processing, real commerce, production work,
+            public sharing, and external protocol interoperability are
+            unavailable in this internal TestFlight.
+            Private on-device context stays private; only an explicit,
+            DOGG-safe publication can enter public provenance.
+            The relationship and the game always outrank the business model.
           </Text>
           <Button tone="accent" onPress={() => void finish()}>
             Enter Holo Zoo

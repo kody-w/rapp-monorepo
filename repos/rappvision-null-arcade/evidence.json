@@ -1,0 +1,106 @@
+{
+  "schema": "rapp-vision-evidence/1.0",
+  "publication_id": "null-arcade-integrity-run",
+  "status": "verified",
+  "claims": {
+    "creator": "Jax Byte is fictional and synthetic.",
+    "visuals": "Original HTML, CSS, SVG, and geometric gameplay art.",
+    "audio": "Original deterministic chipwave synthesized from mathematical waveforms.",
+    "live_contract": "One valid route records 03.580; cheat rejection preserves it; reset preserves the record."
+  },
+  "media": [
+    {
+      "path": "media/null-arcade-integrity-run.mp4",
+      "sha256": "5de6920c9763386dec10132db9803d82a0e35aa1a6cbc733fdd158836bd32c0e",
+      "bytes": 8826390,
+      "duration_seconds": 22.0,
+      "video": {
+        "codec": "h264",
+        "width": 1080,
+        "height": 1920,
+        "fps": "30/1"
+      },
+      "audio": {
+        "codec": "aac",
+        "sample_rate": 48000,
+        "channels": 2
+      }
+    },
+    {
+      "path": "media/null-arcade-integrity-run.webm",
+      "sha256": "6e54b6dffc1c53a0c783f67343e8b7eeec1d7c8d0728dda765a519cb5308ec9d",
+      "bytes": 3736404,
+      "duration_seconds": 22.024,
+      "video": {
+        "codec": "vp9",
+        "width": 1080,
+        "height": 1920,
+        "fps": "30/1"
+      },
+      "audio": {
+        "codec": "opus",
+        "sample_rate": 48000,
+        "channels": 2
+      }
+    }
+  ],
+  "live_tests": [
+    {
+      "name": "state-machine-contract",
+      "status": "passed",
+      "evidence": "PASS valid route, rejected cheat, score preservation, and reset",
+      "covers": [
+        "valid route",
+        "rejected cheat",
+        "score preservation",
+        "reset"
+      ]
+    },
+    {
+      "name": "controls-and-guidance",
+      "status": "passed",
+      "controls": [
+        "START",
+        "BOOST",
+        "JUMP",
+        "FINISH",
+        "CHEAT",
+        "RESET"
+      ],
+      "newcomer_label": "What you are looking at"
+    },
+    {
+      "name": "served-replay-boot",
+      "status": "passed",
+      "evidence": "Replay document and game logic returned successfully from a local ephemeral test server."
+    }
+  ],
+  "hyperframes": {
+    "version": "0.8.4",
+    "check": "passed with zero errors and zero warnings",
+    "contrast": "55 of 55 sampled text checks passed WCAG AA",
+    "motion_assertions": "4 of 4 passed",
+    "animation_map": "35 of 38 tweens audited; 3 micro-tweens skipped",
+    "inspected_snapshots": [
+      "snapshots/frame-00-at-1.2s.png",
+      "snapshots/frame-01-at-6.1s.png",
+      "snapshots/frame-02-at-11.0s.png",
+      "snapshots/frame-03-at-15.9s.png",
+      "snapshots/frame-04-at-20.8s.png"
+    ]
+  },
+  "source_bindings": {
+    "composition_sha256": "478c27206563bd194b0da6407264c112ce923ed8f3341eff9530b08a8819b494",
+    "live_html_sha256": "057f8f2774cbf347a8b4456d0f9b924f44a7cca5d53dc6fa5fbd410c9e71489c",
+    "live_logic_sha256": "6af3c9bc93c8d4dfa45e1b8100a499b45b0661ee639ddec59bbf3a1bd460b212",
+    "channel_sha256": "33305627724198dc6662ea235169d82c57e7eeca03db771b75589a58fd60674b",
+    "thumbnail_sha256": "c7c0b3775e9af1319b19b3ce3c2d9382b74446fbc956d46cb76229572ac789c8"
+  },
+  "privacy": {
+    "public_local_paths": false,
+    "private_network_references": false,
+    "credentials": false,
+    "pii": false,
+    "scan": "passed"
+  }
+}

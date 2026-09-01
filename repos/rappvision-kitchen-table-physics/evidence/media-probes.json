@@ -1,0 +1,56 @@
+{
+  "schema": "kitchen-table-physics.media-probes/2",
+  "status": "passed",
+  "normalization_target": {
+    "integrated_lufs": -21.5,
+    "true_peak_ceiling_dbfs": -1.5
+  },
+  "files": [
+    {
+      "path": "media/push-friction-motion.mp4",
+      "sha256": "4da3bf91e717a73e12d0da204c8effa98d00146861ea5e43a87ccf0b2449611d",
+      "bytes": 7591179,
+      "duration_seconds": 24.0,
+      "video": {
+        "codec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "fps": "30/1",
+        "frames_read": 720
+      },
+      "audio": {
+        "codec": "aac",
+        "sample_rate_hz": 48000,
+        "channels": 2,
+        "integrated_lufs": -21.5,
+        "true_peak_dbfs": -1.5,
+        "max_sample_peak_dbfs": -1.5
+      },
+      "black_segments_0_5s_or_longer": [],
+      "silence_segments_below_minus_50_db_for_2s": []
+    },
+    {
+      "path": "media/push-friction-motion.webm",
+      "sha256": "76c5e5561c3c35bf793589fc6b8f5326971f6f4247884a849abfc0881fc7c476",
+      "bytes": 2375667,
+      "duration_seconds": 24.008,
+      "video": {
+        "codec": "vp9",
+        "width": 1920,
+        "height": 1080,
+        "fps": "30/1",
+        "frames_read": 720
+      },
+      "audio": {
+        "codec": "opus",
+        "sample_rate_hz": 48000,
+        "channels": 2,
+        "integrated_lufs": -21.5,
+        "true_peak_dbfs": -1.5,
+        "max_sample_peak_dbfs": -1.5
+      },
+      "black_segments_0_5s_or_longer": [],
+      "silence_segments_below_minus_50_db_for_2s": []
+    }
+  ]
+}

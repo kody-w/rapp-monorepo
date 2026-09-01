@@ -1,6 +1,6 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-29T00:45:58Z",
+  "generated": "2026-09-01T04:39:27Z",
   "categories": [
     {
       "name": "integrations",
@@ -12,7 +12,7 @@
     },
     {
       "name": "productivity",
-      "count": 43
+      "count": 44
     },
     {
       "name": "core",
@@ -20,7 +20,7 @@
     },
     {
       "name": "devtools",
-      "count": 25
+      "count": 26
     },
     {
       "name": "pipeline",
@@ -66,7 +66,7 @@
     },
     {
       "name": "@kody-w",
-      "count": 65
+      "count": 67
     },
     {
       "name": "@rapp",
@@ -104,7 +104,7 @@
   "quality_tiers": [
     {
       "name": "community",
-      "count": 1271
+      "count": 1273
     },
     {
       "name": "verified",
@@ -254,7 +254,7 @@
     },
     {
       "name": "productivity",
-      "count": 40
+      "count": 41
     },
     {
       "name": "advanced",
@@ -293,6 +293,10 @@
       "count": 14
     },
     {
+      "name": "rapplication",
+      "count": 13
+    },
+    {
       "name": "documents",
       "count": 12
     },
@@ -302,10 +306,6 @@
     },
     {
       "name": "pipeline",
-      "count": 12
-    },
-    {
-      "name": "rapplication",
       "count": 12
     },
     {
@@ -353,6 +353,10 @@
       "count": 8
     },
     {
+      "name": "rapp",
+      "count": 8
+    },
+    {
       "name": "copilot-studio",
       "count": 7
     },
@@ -366,10 +370,6 @@
     },
     {
       "name": "sharepoint",
-      "count": 7
-    },
-    {
-      "name": "rapp",
       "count": 7
     },
     {
@@ -474,6 +474,10 @@
     },
     {
       "name": "commons",
+      "count": 5
+    },
+    {
+      "name": "local-first",
       "count": 5
     },
     {
@@ -717,10 +721,6 @@
       "count": 3
     },
     {
-      "name": "local-first",
-      "count": 3
-    },
-    {
       "name": "protocol",
       "count": 3
     },
@@ -733,7 +733,15 @@
       "count": 3
     },
     {
+      "name": "installer",
+      "count": 3
+    },
+    {
       "name": "organism",
+      "count": 3
+    },
+    {
+      "name": "rapp-1",
       "count": 3
     },
     {
@@ -742,6 +750,10 @@
     },
     {
       "name": "engine",
+      "count": 3
+    },
+    {
+      "name": "deterministic",
       "count": 3
     },
     {
@@ -961,6 +973,10 @@
       "count": 2
     },
     {
+      "name": "project-management",
+      "count": 2
+    },
+    {
       "name": "interactive",
       "count": 2
     },
@@ -1065,10 +1081,6 @@
       "count": 2
     },
     {
-      "name": "installer",
-      "count": 2
-    },
-    {
       "name": "rappter",
       "count": 2
     },
@@ -1133,19 +1145,11 @@
       "count": 2
     },
     {
-      "name": "deterministic",
-      "count": 2
-    },
-    {
       "name": "moment-pipeline",
       "count": 2
     },
     {
       "name": "rappterbook-engine",
-      "count": 2
-    },
-    {
-      "name": "rapp-1",
       "count": 2
     },
     {
@@ -1318,10 +1322,6 @@
     },
     {
       "name": "adventure",
-      "count": 1
-    },
-    {
-      "name": "game",
       "count": 1
     }
   ]

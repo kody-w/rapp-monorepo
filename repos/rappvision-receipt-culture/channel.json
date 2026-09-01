@@ -1,0 +1,81 @@
+{
+  "schema": "rapp-vision-channel/2.0",
+  "id": "receipt-culture",
+  "name": "Receipt Culture",
+  "tagline": "Design criticism for objects that can show their work.",
+  "avatar": "▣",
+  "creator": {
+    "name": "Emi Chen",
+    "role": "fictional design critic",
+    "synthetic": true
+  },
+  "videos": [
+    {
+      "id": "receipt-culture-one-receipt",
+      "title": "One Receipt, End to End",
+      "description": "A silent luxury editorial essay reveals a synthetic provenance receipt, compares one counterfeit field, rejects it, and resets to the canonical baseline.",
+      "published": "2026-08-31",
+      "duration": 24,
+      "width": 1920,
+      "height": 1080,
+      "orientation": "landscape",
+      "tags": ["design-criticism", "provenance", "synthetic-evidence", "live-replay"],
+      "thumb": "thumbs/receipt-culture-one-receipt.svg",
+      "sources": [
+        {
+          "src": "media/receipt-culture-one-receipt.mp4",
+          "type": "video/mp4; codecs=\"avc1.640028\""
+        },
+        {
+          "src": "media/receipt-culture-one-receipt.webm",
+          "type": "video/webm; codecs=\"vp9\""
+        }
+      ],
+      "chapters": [
+        { "t": 0, "label": "What a receipt proves" },
+        { "t": 3.5, "label": "Reveal the canonical receipt" },
+        { "t": 8.5, "label": "Compare canonical and counterfeit" },
+        { "t": 13.5, "label": "Identify the exact changed field" },
+        { "t": 17, "label": "Reject the counterfeit" },
+        { "t": 21, "label": "Reset to canonical" }
+      ],
+      "live": {
+        "kind": "rapp-vision-live/1.0",
+        "duration": 24,
+        "chapters": [
+          { "t": 0, "label": "Replay briefing" },
+          { "t": 4, "label": "Audit the receipt" }
+        ],
+        "scenes": [
+          {
+            "t": 0,
+            "dur": 4,
+            "card": {
+              "title": "Audit one receipt",
+              "sub": "Reveal the canonical payload, compare the counterfeit, name its one changed field, reject it, then reset.",
+              "note": "All evidence is authored and synthetic."
+            }
+          },
+          {
+            "t": 4,
+            "dur": 20,
+            "app": "live/index.html",
+            "ready": { "selector": "#reveal" },
+            "lower": {
+              "title": "Receipt Culture Audit",
+              "bench": "One changed field must be named exactly",
+              "fix": "Reject counterfeit, preserve canonical, reset cleanly"
+            },
+            "actions": [
+              { "at": 1, "do": "click", "selector": "#reveal" },
+              { "at": 5, "do": "click", "selector": "#compare" },
+              { "at": 9, "do": "click", "selector": "#identify" },
+              { "at": 13, "do": "click", "selector": "#reject" },
+              { "at": 17, "do": "click", "selector": "#reset" }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
