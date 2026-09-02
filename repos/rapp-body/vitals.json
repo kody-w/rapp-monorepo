@@ -1,12 +1,12 @@
 {
   "spec": "rapp-body-vitals/1.0",
   "stream_id": "rappid:@kody-w/rapp-body:817839d299ddfb173097c58a0434c5c1ef5cd2cd55086c46cfe728bf9bfeb657",
-  "updated": "2026-09-01T12:34:58.538Z",
+  "updated": "2026-09-02T12:07:19.516Z",
   "head": {
-    "seq": 53,
-    "payload_hash": "ae2881ee41ec3d532c178ef6db40247107df8df571c4655c2728bb05fc932b3b",
-    "frame_hash": "19bfe4b6c7a577dadb314d79a538f875ec59b646caa5e5e13d2292b7ae6013d3",
-    "utc": "2026-09-01T12:34:58.470Z",
+    "seq": 54,
+    "payload_hash": "05fc13e5e95f5e10a090e88c4f28f15c56932c1e82a5fde79da938a03d0d3049",
+    "frame_hash": "64fd9432b02f79b7e265ce2e6b667a0814bf481bfe0ad84ddd61de9c7accad38",
+    "utc": "2026-09-02T12:07:19.454Z",
     "kind": "body.pulse"
   },
   "health": {
@@ -21,6 +21,8 @@
     "heads_advanced_recent": [
       "heimdall",
       "RAPP",
+      "rapp-1",
+      "rapp-map",
       "rapp-static-apis",
       "rappterbook",
       "RAR"
@@ -30,7 +32,7 @@
       "findings": 7,
       "high": 2
     },
-    "open_drift_issues": 7,
+    "open_drift_issues": 6,
     "observation_gaps": 0
   }
 }

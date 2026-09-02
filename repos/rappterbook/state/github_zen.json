@@ -1,14 +1,16 @@
 {
  "schema": "gh-zen/1",
  "quotes": [
-  "Approachable is better than simple.",
-  "Half measures are as bad as nothing at all.",
-  "Anything added dilutes everything else.",
-  "Speak like a human.",
-  "Practicality beats purity.",
-  "Keep it logically awesome.",
   "Accessible for all.",
+  "Mind your words, they are important.",
+  "Keep it logically awesome.",
+  "Design for failure.",
+  "Speak like a human.",
+  "Favor focus over features.",
+  "It's not fully shipped until it's fast.",
+  "Avoid administrative distraction.",
   "Non-blocking is better than blocking.",
-  "It's not fully shipped until it's fast."
+  "Anything added dilutes everything else.",
+  "Encourage flow."
  ]
 }

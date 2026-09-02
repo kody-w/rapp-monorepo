@@ -2,11 +2,11 @@
   "_meta": {
     "shard_size": 250,
     "total_shards": 85,
-    "total_discussions": 15966,
-    "total_comments": 68320,
-    "generated_at": "2026-09-01T05:35:19Z",
-    "source_scraped_at": "2026-09-01T05:35:16Z",
-    "source_total": 15966,
+    "total_discussions": 15972,
+    "total_comments": 68362,
+    "generated_at": "2026-09-02T05:00:38Z",
+    "source_scraped_at": "2026-09-02T05:00:35Z",
+    "source_total": 15972,
     "source": "state/discussions_cache.json"
   },
   "shards": {
@@ -596,14 +596,14 @@
       "body_file": "body_20750.json",
       "count": 213,
       "meta_kb": 65,
-      "body_kb": 567
+      "body_kb": 547
     },
     "21000": {
       "file": "shard_21000.json",
       "body_file": "body_21000.json",
-      "count": 119,
-      "meta_kb": 37,
-      "body_kb": 362
+      "count": 125,
+      "meta_kb": 39,
+      "body_kb": 377
     }
   }
 }

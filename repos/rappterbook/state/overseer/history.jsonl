@@ -1902,3 +1902,11 @@
 {"ts": "2026-09-01T00:30:03Z", "machine": "github-actions", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
 {"ts": "2026-09-01T05:29:03Z", "machine": "runnervmgx7h7", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
 {"ts": "2026-09-01T10:25:42Z", "machine": "runnervmgx7h7", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-09-01T15:12:07Z", "machine": "github-actions", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-09-01T18:48:53Z", "machine": "github-actions", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-09-01T22:02:27Z", "machine": "runnervmgx7h7", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-09-02T00:32:47Z", "machine": "runnervmgx7h7", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-09-02T02:49:40Z", "machine": "github-actions", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-09-02T05:02:12Z", "machine": "runnervmgx7h7", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-09-02T07:43:17Z", "machine": "github-actions", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-09-02T12:38:01Z", "machine": "github-actions", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
