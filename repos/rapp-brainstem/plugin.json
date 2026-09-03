@@ -1,0 +1,20 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "rapp-brainstem",
+  "version": "0.2.1",
+  "description": "Give the user their RAPP Brainstem and operate setup, verification, repair, updates, and maintenance end to end.",
+  "author": {
+    "name": "Kody Wildfeuer",
+    "url": "https://github.com/kody-w"
+  },
+  "homepage": "https://kody-w.github.io/rapp-brainstem/",
+  "repository": "https://github.com/kody-w/rapp-brainstem",
+  "license": "MIT",
+  "keywords": [
+    "rapp",
+    "brainstem",
+    "github-copilot",
+    "claude-code",
+    "agents"
+  ]
+}

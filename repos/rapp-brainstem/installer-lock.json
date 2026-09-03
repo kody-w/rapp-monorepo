@@ -1,0 +1,52 @@
+{
+  "artifacts": {
+    "macos-linux": {
+      "sha256": "1b65de71288b203a8ab6b6f10db3402a3ec1f42889eb3eee6036b7f061c695e2",
+      "url": "https://raw.githubusercontent.com/microsoft/aibast-agents-library/c60521e2cacbcbfa585a118c1275093d7bb15b74/install.sh"
+    },
+    "windows": {
+      "sha256": "0821162f6c1961d4037a9d0b591db5aca468864d2bb50b5c4ca409c506d7d3ca",
+      "url": "https://raw.githubusercontent.com/microsoft/aibast-agents-library/c60521e2cacbcbfa585a118c1275093d7bb15b74/install.ps1"
+    }
+  },
+  "bootstrap": {
+    "envelope_schema": "rapp-brainstem-bootstrap-envelope/2",
+    "state_home": "~/.rapp/brainstem-bootstrap",
+    "target_ref_kind": "rolling-tag",
+    "required_installer_arguments": [
+      "--no-launch",
+      "--version",
+      "installers"
+    ],
+    "verification": "A successful reconcile records installation only. Live verification requires a later real POST /chat canary."
+  },
+  "lifecycle": {
+    "exact_commit_installer_arguments": [
+      "--no-launch"
+    ],
+    "historical_rollback_target_ref_kind": "exact-commit",
+    "preferred_target_ref_kind": "exact-commit",
+    "repair_fallback_target_ref_kind": "rolling-tag",
+    "rolling_tag_installer_arguments": [
+      "--no-launch",
+      "--version",
+      "installers"
+    ]
+  },
+  "policy": {
+    "drift": "fail-closed",
+    "execution": "fresh bootstrap uses the currently verified rolling tag; ongoing lifecycle uses the exact target commit whenever the existing installer path supports it",
+    "kernel": "upstream Grail remains authoritative",
+    "remote_manifest_trust": "forbidden"
+  },
+  "schema": "rapp-brainstem-installer-lock/3",
+  "target": {
+    "commit": "c60521e2cacbcbfa585a118c1275093d7bb15b74",
+    "repository": "https://github.com/microsoft/aibast-agents-library.git",
+    "tag": "installers",
+    "tree": "3c5bb0d55ca4a5aff8872d30b8108e2438ef808d",
+    "version": "0.6.16",
+    "version_url": "https://raw.githubusercontent.com/microsoft/aibast-agents-library/c60521e2cacbcbfa585a118c1275093d7bb15b74/rapp_brainstem/VERSION"
+  },
+  "upstream": "https://github.com/microsoft/aibast-agents-library"
+}

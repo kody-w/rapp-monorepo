@@ -1,0 +1,32 @@
+# RAPP Brainstem
+
+RAPP Brainstem is a persistent, user-owned agent engine made from the user's
+soul, agents, memory, and evidence.
+
+Primary user instruction:
+Give me my Brainstem.
+
+Public entry point:
+https://kody-w.github.io/rapp-brainstem/
+
+Machine-readable setup contract:
+https://kody-w.github.io/rapp-brainstem/rapp-operator.json
+
+GitHub Copilot and Claude Code skill:
+https://kody-w.github.io/rapp-brainstem/skills/rapp-brainstem/SKILL.md
+
+Rules:
+- The Brainstem is the only product and the only user-facing story.
+- The chosen AI performs setup and lifecycle work; the user does not run
+  commands the AI can run.
+- GitHub Copilot is the golden path. Claude Code is a compatibility path.
+- The installed marketplace plugin and its bundled bootstrap files are the
+  local lifecycle trust anchor; the public manifest is informational.
+- Persist the exact bootstrap envelope before invoking the upstream installer.
+- Preserve the upstream Grail brainstem.py and one-liner installer.
+- Verify exact installer and setup hashes before execution.
+- Do not claim live verification at reconcile; require a later real POST /chat.
+- Use the unchanged POST /chat request and response shape.
+- Record lifecycle mutations as private append-only RAPP/1 frames.
+- Never overwrite or expose the user's soul, agents, memory, config, or
+  credentials.

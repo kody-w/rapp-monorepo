@@ -1,0 +1,8 @@
+{
+  "frames": "frames/",
+  "kind": "project",
+  "name": "AI-operated setup and lifecycle for RAPP Brainstem",
+  "rappid": "rappid:@kody-w/rapp-brainstem:f56c68c1a09fab3174912b19b244269c2366e80cb8e610944cd5871d3564d5cf",
+  "schema": "rapp/1",
+  "uuid_anchor": "587d4fa5-2bdd-4a32-acc7-c22c2c7d6591"
+}

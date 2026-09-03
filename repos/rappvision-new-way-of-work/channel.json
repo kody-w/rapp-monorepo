@@ -1,0 +1,166 @@
+{
+  "schema": "rapp-vision-channel/2.0",
+  "id": "new-way-of-work",
+  "name": "The New Way of Work",
+  "handle": "@kody-w",
+  "tagline": "Production drafts for building, testing, and launching practical AI workers.",
+  "avatar": "NW",
+  "links": [
+    {
+      "label": "GitHub",
+      "url": "https://github.com/kody-w/rappvision-new-way-of-work"
+    }
+  ],
+  "videos": [
+    {
+      "id": "s1e01-scout-builds-an-ai-worker-that-connects-to-the-outside-world",
+      "title": "Scout Builds an AI Worker That Connects to the Outside World",
+      "description": "Narration-neutral production draft. The paired live mode lets the viewer drive the storyboard scene by scene.",
+      "published": "2026-09-02",
+      "duration": 70,
+      "width": 1920,
+      "height": 1080,
+      "orientation": "landscape",
+      "tags": [
+        "ai-workers",
+        "local-first",
+        "github-api",
+        "production-draft"
+      ],
+      "thumb": "thumbs/s1e01.jpg",
+      "sources": [
+        {
+          "src": "media/s1e01.mp4",
+          "type": "video/mp4"
+        },
+        {
+          "src": "media/s1e01.webm",
+          "type": "video/webm"
+        }
+      ],
+      "chapters": [
+        {
+          "t": 0,
+          "label": "Workshop, runtime, product"
+        },
+        {
+          "t": 20,
+          "label": "The public GitHub reader"
+        },
+        {
+          "t": 45,
+          "label": "Validation and useful errors"
+        },
+        {
+          "t": 60,
+          "label": "Point of view and next episode"
+        }
+      ],
+      "live": {
+        "kind": "rapp-vision-live/1.0",
+        "duration": 76,
+        "chapters": [
+          {
+            "t": 0,
+            "label": "Replay briefing"
+          },
+          {
+            "t": 6,
+            "label": "Drive the editable storyboard"
+          }
+        ],
+        "scenes": [
+          {
+            "t": 0,
+            "dur": 6,
+            "card": {
+              "title": "This draft is also a live storyboard",
+              "sub": "The replay advances the same public, synthetic production cards.",
+              "note": "Pause and use Previous, Next, or Reset to take control."
+            }
+          },
+          {
+            "t": 6,
+            "dur": 70,
+            "app": "storyboard.html",
+            "ready": {
+              "selector": "#next-button"
+            },
+            "lower": {
+              "title": "Episode 1 Storyboard",
+              "bench": "14 concise production cards",
+              "fix": "Pause and take control"
+            },
+            "actions": [
+              {
+                "at": 4,
+                "do": "click",
+                "selector": "#next-button"
+              },
+              {
+                "at": 9,
+                "do": "click",
+                "selector": "#next-button"
+              },
+              {
+                "at": 14,
+                "do": "click",
+                "selector": "#next-button"
+              },
+              {
+                "at": 19,
+                "do": "click",
+                "selector": "#next-button"
+              },
+              {
+                "at": 24,
+                "do": "click",
+                "selector": "#next-button"
+              },
+              {
+                "at": 29,
+                "do": "click",
+                "selector": "#next-button"
+              },
+              {
+                "at": 34,
+                "do": "click",
+                "selector": "#next-button"
+              },
+              {
+                "at": 39,
+                "do": "click",
+                "selector": "#next-button"
+              },
+              {
+                "at": 44,
+                "do": "click",
+                "selector": "#next-button"
+              },
+              {
+                "at": 49,
+                "do": "click",
+                "selector": "#next-button"
+              },
+              {
+                "at": 54,
+                "do": "click",
+                "selector": "#next-button"
+              },
+              {
+                "at": 59,
+                "do": "click",
+                "selector": "#next-button"
+              },
+              {
+                "at": 64,
+                "do": "click",
+                "selector": "#next-button"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -5,6 +5,7 @@
 
 const VAULT = {
   manifest: null,
+  aliases: new Map(),       // lowercased historical alias -> repository target
   notes: new Map(),         // path -> { meta, body, html, title, section, status }
   byTitle: new Map(),       // lowercased title -> path
   backlinks: new Map(),     // path -> [{from, anchor}]
@@ -45,15 +46,35 @@ async function loadManifest() {
   if (local && local.manifest) {
     VAULT.manifest = local.manifest;
     VAULT.mode = 'local';
+    await loadAliases();
     showModeBanner();
     return;
   }
   // The manifest sits next to the viewer in pages/vault/. Same-origin relative
   // fetch works on GitHub Pages and on any local static server.
-  const res = await fetch('./_manifest.json', { cache: 'no-cache' });
+  const res = await fetch('./manifest.json', { cache: 'no-cache' });
   if (!res.ok) throw new Error(`manifest fetch failed: ${res.status}`);
   VAULT.manifest = await res.json();
+  await loadAliases();
   $('#subtitle').textContent = VAULT.manifest.subtitle || 'Second-brain wiki';
+}
+
+async function loadAliases() {
+  const res = await fetch('./wikilink-aliases.json', { cache: 'no-cache' });
+  if (!res.ok) throw new Error(`alias fetch failed: ${res.status}`);
+  const payload = await res.json();
+  if (
+    payload.schema !== 'vault-wikilink-aliases/1.0'
+    || !Array.isArray(payload.aliases)
+  ) {
+    throw new Error('alias table has an invalid schema');
+  }
+  VAULT.aliases = new Map(
+    payload.aliases.map((entry) => [
+      String(entry.alias || '').trim().toLowerCase(),
+      String(entry.target || '').trim(),
+    ]),
+  );
 }
 
 function rawUrlFor(path) {
@@ -144,12 +165,35 @@ function rewriteWikilinks(md) {
     if (target) {
       return `[${display}](#${encodeURIComponent(target)} "wikilink")`;
     }
+    const aliasTarget = VAULT.aliases.get(title.trim().toLowerCase());
+    if (aliasTarget) {
+      return `[${display}](${repositoryUrlFor(aliasTarget)} "wikilink alias")`;
+    }
     return `[${display}](#__broken__ "broken wikilink")`;
   });
 }
 
 function resolveTitle(title) {
-  return VAULT.byTitle.get(title.toLowerCase()) || null;
+  const key = title.toLowerCase();
+  const direct = VAULT.byTitle.get(key);
+  if (direct) return direct;
+
+  const aliasTarget = VAULT.aliases.get(key);
+  if (!aliasTarget || aliasTarget.includes('#')) return null;
+  const vaultPrefix = `${VAULT.manifest.github.vault_path || 'pages/vault'}/`;
+  if (!aliasTarget.startsWith(vaultPrefix)) return null;
+  const relative = aliasTarget.slice(vaultPrefix.length);
+  return VAULT.notes.has(relative) ? relative : null;
+}
+
+function repositoryUrlFor(target) {
+  const [path, heading = ''] = target.split('#', 2);
+  const github = VAULT.manifest.github;
+  const encodedPath = path.split('/').map(encodeURIComponent).join('/');
+  const anchor = heading
+    ? '#' + heading.toLowerCase().replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '-')
+    : '';
+  return `https://github.com/${github.owner}/${github.repo}/blob/${github.branch}/${encodedPath}${anchor}`;
 }
 
 // ── Backlinks ────────────────────────────────────────────────────────────────
@@ -345,7 +389,6 @@ function wireUI() {
   $('#randomBtn').addEventListener('click', openRandom);
   $('#readingBtn').addEventListener('click', toggleReadingMode);
   $('#graphBtn').addEventListener('click', toggleGraph);
-  $('#obsidianBtn').addEventListener('click', openInObsidian);
   $('#navToggle')?.addEventListener('click', () => {
     document.body.classList.toggle('nav-open');
   });
@@ -392,10 +435,6 @@ function wireUI() {
       case 'm':
         e.preventDefault();
         toggleReadingMode();
-        break;
-      case 'o':
-        e.preventDefault();
-        openInObsidian();
         break;
       case 'g':
         chord = 'g';
@@ -461,19 +500,6 @@ function navigateRelative(delta) {
   }
 }
 
-// ── Open in Obsidian ─────────────────────────────────────────────────────────
-
-function openInObsidian() {
-  if (!VAULT.current) return;
-  // Best-effort URI — assumes the user has a local vault named "RAPP Vault" or
-  // similar. Obsidian falls back to a vault picker if the named vault isn't
-  // found; a fully-portable variant would let the user configure the vault name.
-  const vaultName = (VAULT.manifest.title || 'RAPP Vault').replace(/\s+/g, '%20');
-  const file = encodeURIComponent(VAULT.current);
-  const url = `obsidian://open?vault=${vaultName}&file=${file}`;
-  window.location.href = url;
-}
-
 // ── Export ───────────────────────────────────────────────────────────────────
 
 async function exportZip() {
@@ -499,7 +525,7 @@ async function exportZip() {
   }, null, 2));
 
   // Manifest comes along for the ride so re-imports round-trip cleanly.
-  root.file('_manifest.json', JSON.stringify(VAULT.manifest, null, 2));
+  root.file('manifest.json', JSON.stringify(VAULT.manifest, null, 2));
 
   // README at the top so opening the zip is self-explanatory.
   root.file('HOW TO OPEN.md',
@@ -543,14 +569,14 @@ async function importZip(file) {
       if (entry.dir) return;
       // Strip the top-level "RAPP Vault/" folder if present.
       const stripped = relPath.replace(/^RAPP Vault\//, '');
-      if (stripped === '_manifest.json') {
+      if (stripped === 'manifest.json') {
         promises.push(entry.async('string').then((s) => { manifest = JSON.parse(s); }));
       } else if (stripped.endsWith('.md') && !stripped.startsWith('.obsidian/')) {
         promises.push(entry.async('string').then((s) => { notes[stripped] = s; }));
       }
     });
     await Promise.all(promises);
-    if (!manifest) throw new Error('no _manifest.json in zip');
+    if (!manifest) throw new Error('no manifest.json in zip');
 
     localStorage.setItem(LS_KEY, JSON.stringify({ manifest, notes }));
     alert(`Imported ${Object.keys(notes).length} notes. Reloading in local mode.`);

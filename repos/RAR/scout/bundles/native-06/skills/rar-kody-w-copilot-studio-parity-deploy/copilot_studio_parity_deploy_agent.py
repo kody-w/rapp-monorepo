@@ -22,8 +22,10 @@ import json
 import os
 import re
 import shutil
+import stat
 import subprocess
 import sys
+import sysconfig
 import tempfile
 import time
 import urllib.error
@@ -49,7 +51,7 @@ except ModuleNotFoundError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/copilot_studio_parity_deploy",
-    "version": "1.0.2",
+    "version": "1.0.6",
     "display_name": "Copilot Studio Parity Deploy",
     "description": (
         "Compiles caller-selected local RAPP agents into a provisioned, "
@@ -73,7 +75,9 @@ __manifest__ = {
 PLUGIN_REPOSITORY = "https://github.com/microsoft/copilot-studio-plugin.git"
 PLUGIN_REVISION = "882aa4ee2a0dfa0d98b490057e5e907b7ab38eeb"
 MINIMUM_PAC_VERSION = (2, 9, 3)
-SUBAGENT_MODEL = "gpt-5.6-sol"
+SUBAGENT_MODEL = "gpt-5.6-sol-fast"
+SUBAGENT_CONTEXT = "long_context"
+SUBAGENT_EFFORT = "max"
 PLUGIN_AGENTS = {
     "architect": "mcs-assistant:copilot-studio-architect",
 }
@@ -155,6 +159,10 @@ def _subprocess_env(executable: str) -> dict[str, str]:
                 env.setdefault("DOTNET_ROOT_ARM64", str(candidate))
                 break
     return env
+
+
+def _seatbelt_escape(value: str | Path) -> str:
+    return str(value).replace("\\", "\\\\").replace('"', '\\"')
 
 
 def _run(
@@ -806,17 +814,14 @@ print("RAPP_RUNTIME_CONTRACT=" + json.dumps(payload, ensure_ascii=True))
         }
         read_rules = "".join(
             "(allow file-read* (subpath \""
-            + str(read_path).replace("\\", "\\\\").replace('"', '\\"')
+            + _seatbelt_escape(read_path)
             + "\"))\n"
             for read_path in sorted(read_paths, key=str)
         )
-        home_path = str(Path.home().resolve()).replace(
-            "\\",
-            "\\\\",
-        ).replace('"', '\\"')
+        home_path = _seatbelt_escape(Path.home().resolve())
         home_read_rules = "".join(
             "(allow file-read-data (subpath \""
-            + str(read_path).replace("\\", "\\\\").replace('"', '\\"')
+            + _seatbelt_escape(read_path)
             + "\"))\n"
             for read_path in sorted(
                 (
@@ -826,20 +831,17 @@ print("RAPP_RUNTIME_CONTRACT=" + json.dumps(payload, ensure_ascii=True))
                 key=str,
             )
         )
-        root_directory = str(
+        root_directory = _seatbelt_escape(
             Path(__file__).resolve().parents[1]
-        ).replace("\\", "\\\\").replace('"', '\\"')
-        escaped_sandbox = str(sandbox).replace(
-            "\\",
-            "\\\\",
-        ).replace('"', '\\"')
+        )
+        escaped_sandbox = _seatbelt_escape(sandbox)
         executable_paths = {
             Path(sys.executable).resolve(),
             Path(sys.executable),
         }
         executable_rules = "".join(
             "(allow process-exec (literal \""
-            + str(executable).replace("\\", "\\\\").replace('"', '\\"')
+            + _seatbelt_escape(executable)
             + "\"))\n"
             for executable in sorted(executable_paths, key=str)
         )
@@ -1733,6 +1735,8 @@ def _doctor() -> dict:
         "plugin_revision": PLUGIN_REVISION,
         "plugin_agents": PLUGIN_AGENTS,
         "subagent_model": SUBAGENT_MODEL,
+        "subagent_context": SUBAGENT_CONTEXT,
+        "subagent_effort": SUBAGENT_EFFORT,
         "copilot_cli": copilot_cli,
     }
 
@@ -1942,7 +1946,10 @@ def _invoke_plugin_agent(
             f"RAPP_COPILOT_STUDIO_MODEL must be {SUBAGENT_MODEL}, got {model!r}"
         )
     cwd = cwd.resolve()
-    file_tools = "view,glob,grep,rg,edit,create,write,task_complete"
+    file_tools = (
+        "view,glob,rg,bash,apply_patch,edit,create,write,"
+        "update_todo,task_complete"
+    )
     command = [
         "copilot",
         "--agent",
@@ -1956,21 +1963,34 @@ def _invoke_plugin_agent(
         "--mode",
         "autopilot",
         "--max-autopilot-continues",
-        "10",
+        "20",
         f"--available-tools={file_tools}",
         f"--allow-tool={file_tools}",
         "--add-dir",
         str(cwd),
         "--model",
         model,
+        "--context",
+        SUBAGENT_CONTEXT,
         "-C",
         str(cwd),
         "-p",
-        prompt,
+        (
+            "Perform this implementation directly with the available file "
+            "tools. Do not invoke a skill or delegate to another agent. "
+            + prompt
+        ),
     ]
-    effort = os.getenv("RAPP_COPILOT_STUDIO_EFFORT", "high").strip()
-    if effort:
-        command[command.index("-C"):command.index("-C")] = ["--effort", effort]
+    effort = os.getenv(
+        "RAPP_COPILOT_STUDIO_EFFORT",
+        SUBAGENT_EFFORT,
+    ).strip()
+    if effort != SUBAGENT_EFFORT:
+        raise ValueError(
+            "RAPP_COPILOT_STUDIO_EFFORT must be "
+            f"{SUBAGENT_EFFORT}, got {effort!r}"
+        )
+    command[command.index("-C"):command.index("-C")] = ["--effort", effort]
     completed = _run(command, cwd=cwd, timeout=3600)
     output = "\n".join(
         part.strip()
@@ -3701,6 +3721,65 @@ def _component_tree_digest(project: Path) -> dict:
     }
 
 
+def _write_no_infrastructure_receipts(
+    run_dir: Path,
+    manifest: dict,
+) -> dict:
+    manifest_path = run_dir / "rapp-deploy-manifest.json"
+    project = run_dir / "project"
+    if not manifest_path.is_file():
+        raise RuntimeError(
+            f"deployment manifest is missing: {manifest_path}"
+        )
+    if not project.is_dir():
+        raise RuntimeError(f"Copilot Studio project is missing: {project}")
+    persisted_manifest = json.loads(
+        manifest_path.read_text(encoding="utf-8")
+    )
+    normalized_manifest = json.loads(json.dumps(manifest))
+    if persisted_manifest != normalized_manifest:
+        raise RuntimeError(
+            "deployment manifest changed before infrastructure receipts"
+        )
+    if persisted_manifest.get("infrastructure_requests") != []:
+        raise RuntimeError(
+            "empty infrastructure receipts require zero infrastructure requests"
+        )
+    contracts = _contracts_by_tool(
+        persisted_manifest.get("source_agents", [])
+    )
+    receipts = {
+        "schema": "rapp-to-copilot-studio-infrastructure-receipts/1.0",
+        "captured_at": _utc_now(),
+        "status": "no_infrastructure_required",
+        "infrastructure_status": "not_required",
+        "provisioning_status": "not_performed",
+        "resolved_source_agents": sorted(contracts),
+        "resolved_requests": [],
+        "request_resolutions": [],
+        "deployment_manifest_sha256": _sha256(manifest_path),
+        "project_tree_sha256": _component_tree_digest(project)["sha256"],
+        "connectors": [],
+        "workflows": [],
+        "connection_references": [],
+        "connection_reference_files": [],
+        "actions": [],
+        "workflow_components": [],
+        "bot_component_associations": [],
+        "connection_associations": [],
+        "action_connection_associations": [],
+        "tools": [],
+        "published": False,
+    }
+    infrastructure_manifest = run_dir / "infrastructure" / "manifest.json"
+    if infrastructure_manifest.is_file():
+        receipts["infrastructure_manifest_sha256"] = _sha256(
+            infrastructure_manifest
+        )
+    _write_json(run_dir / "infrastructure-receipts.json", receipts)
+    return receipts
+
+
 def _target_identity(project: Path) -> dict:
     connection = project / ".mcs" / "conn.json"
     try:
@@ -4173,11 +4252,265 @@ def _mutation_is_caught(
     return not _compare_parity_values(local, mutated, kind)
 
 
+def _resolve_snapshot_path(
+    path: Path,
+    label: str,
+    *,
+    directory: bool,
+) -> Path:
+    lexical = Path(os.path.abspath(os.fspath(path.expanduser())))
+    current = Path(lexical.anchor)
+    for part in lexical.parts[1:]:
+        current /= part
+        try:
+            metadata = current.lstat()
+        except OSError as error:
+            raise RuntimeError(f"{label} is unavailable: {current}") from error
+        if stat.S_ISLNK(metadata.st_mode):
+            raise RuntimeError(f"{label} contains a symlink: {current}")
+    resolved = lexical.resolve(strict=True)
+    valid = resolved.is_dir() if directory else resolved.is_file()
+    if not valid:
+        kind = "directory" if directory else "regular file"
+        raise RuntimeError(f"{label} is not a {kind}: {resolved}")
+    return resolved
+
+
+def _local_parity_runtime_read_paths(
+    python_executable: Path,
+) -> set[Path]:
+    paths = {
+        python_executable,
+        Path(sys.executable),
+        Path(sys.prefix),
+        Path(sys.base_prefix),
+        Path(sys.exec_prefix),
+        Path(getattr(sys, "base_exec_prefix", sys.base_prefix)),
+    }
+    configured = sysconfig.get_paths()
+    for key in ("stdlib", "platstdlib", "purelib", "platlib"):
+        value = configured.get(key)
+        if value:
+            paths.add(Path(value))
+    paths.update({
+        Path("/System/Library"),
+        Path("/Library/Frameworks"),
+        Path("/usr/lib"),
+        Path("/usr/share"),
+        Path("/usr/local/lib"),
+        Path("/opt/homebrew/lib"),
+        Path("/private/etc"),
+        Path("/private/var/db/timezone"),
+    })
+    expanded = set()
+    for path in paths:
+        try:
+            if path.exists():
+                expanded.add(path)
+                expanded.add(path.resolve())
+        except OSError:
+            continue
+    return expanded
+
+
+def _local_parity_python_executable() -> Path:
+    for prefix in (Path(sys.prefix), Path(sys.base_prefix)):
+        framework_runtime = (
+            prefix
+            / "Resources"
+            / "Python.app"
+            / "Contents"
+            / "MacOS"
+            / "Python"
+        )
+        if framework_runtime.is_file() and os.access(framework_runtime, os.X_OK):
+            return framework_runtime.resolve()
+    return Path(sys.executable).resolve(strict=True)
+
+
+def _minimal_local_parity_environment(
+    sandbox_root: Path,
+    python_executable: Path,
+) -> dict[str, str]:
+    home = sandbox_root / "home"
+    temporary = sandbox_root / "tmp"
+    path = os.pathsep.join((
+        str(python_executable.parent),
+        "/usr/bin",
+        "/bin",
+    ))
+    return {
+        "HOME": str(home),
+        "TMPDIR": str(temporary),
+        "TMP": str(temporary),
+        "TEMP": str(temporary),
+        "PATH": path,
+        "LANG": "C",
+        "LC_ALL": "C",
+        "USER": "rapp-sandbox",
+        "LOGNAME": "rapp-sandbox",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONNOUSERSITE": "1",
+        "PYTHONSAFEPATH": "1",
+        "PYTHONHASHSEED": "0",
+        "PYTHONUTF8": "1",
+    }
+
+
+def _write_local_parity_seatbelt_profile(
+    profile: Path,
+    *,
+    snapshot_root: Path,
+    sandbox_root: Path,
+    python_executable: Path,
+) -> None:
+    read_paths = _local_parity_runtime_read_paths(python_executable)
+    read_paths.update({snapshot_root, sandbox_root})
+    read_rules = []
+    for path in sorted(read_paths, key=str):
+        operation = "subpath" if path.is_dir() else "literal"
+        read_rules.append(
+            f'(allow file-read* ({operation} "{_seatbelt_escape(path)}"))'
+        )
+    for device in (Path("/dev/null"), Path("/dev/random"), Path("/dev/urandom")):
+        if device.exists():
+            read_rules.append(
+                f'(allow file-read* (literal "{_seatbelt_escape(device)}"))'
+            )
+            read_rules.append(
+                f'(allow file-write* (literal "{_seatbelt_escape(device)}"))'
+            )
+    executable_rules = [
+        '(allow process-exec (literal "'
+        + _seatbelt_escape(executable)
+        + '"))'
+        for executable in (python_executable,)
+    ]
+    home = Path.home().resolve()
+    profile.write_text(
+        "\n".join([
+            "(version 1)",
+            "(deny default)",
+            "(deny network*)",
+            "(deny process-fork)",
+            "(deny file-write*)",
+            f'(deny file-read* (subpath "{_seatbelt_escape(home)}"))',
+            '(allow file-read* (literal "/"))',
+            *read_rules,
+            (
+                '(allow file-write* (subpath "'
+                + _seatbelt_escape(sandbox_root)
+                + '"))'
+            ),
+            *executable_rules,
+            "(allow sysctl-read)",
+            "",
+        ]),
+        encoding="utf-8",
+    )
+    profile.chmod(0o400)
+
+
+def _copy_local_parity_snapshot(
+    contract: dict,
+    oracle_root: Path,
+    destination: Path,
+) -> Path:
+    rows = contract.get("_oracle_files")
+    if not isinstance(rows, list) or not rows:
+        raise RuntimeError("local parity requires an immutable snapshot closure")
+    destination.mkdir(mode=0o700)
+    source_relative = None
+    copied = {}
+    for row in rows:
+        relative = Path(str(row.get("relative_path") or ""))
+        if (
+            not relative.parts
+            or relative.is_absolute()
+            or ".." in relative.parts
+            or any(part in {"", "."} for part in relative.parts)
+        ):
+            raise RuntimeError(
+                f"local parity snapshot path escapes its root: {relative}"
+            )
+        expected_sha256 = str(row.get("sha256") or "")
+        if not re.fullmatch(r"[0-9a-f]{64}", expected_sha256):
+            raise RuntimeError(
+                f"local parity snapshot has no valid digest: {relative}"
+            )
+        source = _resolve_snapshot_path(
+            oracle_root / relative,
+            "local parity snapshot file",
+            directory=False,
+        )
+        if not _is_relative_to(source, oracle_root):
+            raise RuntimeError(
+                f"local parity snapshot path escapes its root: {relative}"
+            )
+        data = source.read_bytes()
+        if hashlib.sha256(data).hexdigest() != expected_sha256:
+            raise RuntimeError(
+                f"local parity snapshot changed before execution: {source}"
+            )
+        prior = copied.get(relative)
+        if prior is not None and prior != expected_sha256:
+            raise RuntimeError(
+                f"local parity snapshot has conflicting files: {relative}"
+            )
+        target = destination / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        if prior is None:
+            target.write_bytes(data)
+            target.chmod(0o444)
+        copied[relative] = expected_sha256
+        if row.get("kind") == "source":
+            if source_relative is not None and source_relative != relative:
+                raise RuntimeError(
+                    "local parity snapshot has multiple source files"
+                )
+            source_relative = relative
+    if source_relative is None:
+        raise RuntimeError("local parity snapshot has no selected source file")
+    expected_source = _resolve_snapshot_path(
+        Path(str(contract.get("_oracle_source_path") or "")),
+        "local parity source snapshot",
+        directory=False,
+    )
+    if expected_source != oracle_root / source_relative:
+        raise RuntimeError(
+            "local parity source does not match its immutable snapshot closure"
+        )
+    packaged_basic_agent = destination / "agents" / "basic_agent.py"
+    top_level_basic_agent = destination / "basic_agent.py"
+    if packaged_basic_agent.is_file() and not top_level_basic_agent.exists():
+        top_level_basic_agent.write_bytes(packaged_basic_agent.read_bytes())
+        top_level_basic_agent.chmod(0o444)
+    directories = [destination, *(
+        path for path in destination.rglob("*") if path.is_dir()
+    )]
+    for directory in sorted(
+        directories,
+        key=lambda path: len(path.parts),
+        reverse=True,
+    ):
+        directory.chmod(0o555)
+    copied_source = destination / source_relative
+    if _sha256(copied_source) != contract.get("source_sha256"):
+        raise RuntimeError(
+            "local parity source digest does not match the selected contract"
+        )
+    return copied_source
+
+
 def _run_local_agent_case(
     selector: str,
     arguments: dict,
     contract: dict | None = None,
 ) -> str:
+    if sys.platform != "darwin":
+        raise RuntimeError(
+            "local Draft parity requires the macOS Seatbelt sandbox"
+        )
     if contract is None:
         path = _resolve_agent_paths([selector])[0]
         contracts = _agent_contracts(path)
@@ -4196,30 +4529,48 @@ def _run_local_agent_case(
             raise ValueError(
                 f"{selector!r} is ambiguous in multi-agent file {path}"
             )
-    strict_snapshot = bool(contract.get("_oracle_source_path"))
-    if strict_snapshot:
-        path = Path(contract["_oracle_source_path"])
-        snapshot_root = Path(contract["_oracle_root"])
-    else:
-        path = Path(contract["source_path"])
-        snapshot_root = path.parent.parent
+    if not contract.get("_oracle_source_path") or not contract.get("_oracle_root"):
+        raise RuntimeError(
+            "local parity refuses to execute without an immutable source snapshot"
+        )
+    oracle_root = _resolve_snapshot_path(
+        Path(contract["_oracle_root"]),
+        "local parity oracle root",
+        directory=True,
+    )
     script = r"""
-import importlib.util, json, pathlib, sys
-root = pathlib.Path(sys.argv[1])
+import importlib.util, json, os, pathlib, sys
+snapshot_root = pathlib.Path(sys.argv[1])
 source = pathlib.Path(sys.argv[2])
-snapshot_root = pathlib.Path(sys.argv[3])
-class_name = sys.argv[4]
-arguments = json.loads(sys.argv[5])
-strict_snapshot = sys.argv[6] == "1"
-if strict_snapshot:
-    sys.path = [
-        item for item in sys.path
-        if item and pathlib.Path(item).resolve() != root.resolve()
-    ]
-    sys.path.insert(0, str(snapshot_root))
-else:
-    sys.path.insert(0, str(snapshot_root))
-    sys.path.insert(0, str(root))
+class_name = sys.argv[3]
+arguments = json.loads(sys.argv[4])
+if (
+    not snapshot_root.is_absolute()
+    or not source.is_absolute()
+    or source == snapshot_root
+    or snapshot_root not in source.parents
+):
+    raise RuntimeError("invalid local parity snapshot path")
+sys.dont_write_bytecode = True
+sys.path.insert(0, str(snapshot_root))
+
+def audit(event, args):
+    if event in {
+        "subprocess.Popen",
+        "os.system",
+        "os.fork",
+        "os.forkpty",
+        "os.posix_spawn",
+        "os.exec",
+        "socket.bind",
+        "socket.connect",
+        "socket.getaddrinfo",
+        "socket.gethostbyaddr",
+        "socket.gethostbyname",
+    }:
+        raise PermissionError("local parity sandbox blocks " + event)
+
+sys.addaudithook(audit)
 import types
 try:
     from local_storage import AzureFileStorageManager
@@ -4239,33 +4590,86 @@ agent_class = getattr(module, class_name)
 result = agent_class().perform(**arguments)
 print(json.dumps({"result": result}, ensure_ascii=True))
 """
-    completed = _run(
-        [
-            sys.executable,
+    python_executable = _local_parity_python_executable()
+    sandbox_exec = _resolve_executable("sandbox-exec")
+    with tempfile.TemporaryDirectory(
+        prefix="rapp-local-parity-",
+        dir=oracle_root.parent,
+    ) as disposable:
+        disposable_root = Path(disposable).resolve()
+        snapshot_root = disposable_root / "snapshot"
+        sandbox_root = disposable_root / "sandbox"
+        home = sandbox_root / "home"
+        temporary = sandbox_root / "tmp"
+        for directory in (sandbox_root, home, temporary):
+            directory.mkdir(mode=0o700)
+        path = _copy_local_parity_snapshot(
+            contract,
+            oracle_root,
+            snapshot_root,
+        )
+        profile = sandbox_root / "local-parity.sb"
+        _write_local_parity_seatbelt_profile(
+            profile,
+            snapshot_root=snapshot_root,
+            sandbox_root=sandbox_root,
+            python_executable=python_executable,
+        )
+        clean_env = _minimal_local_parity_environment(
+            sandbox_root,
+            python_executable,
+        )
+        command = [
+            sandbox_exec,
+            "-f",
+            str(profile),
+            str(python_executable),
+            "-I",
+            "-B",
             "-c",
             script,
-            str(Path(__file__).resolve().parents[1]),
-            str(path),
             str(snapshot_root),
+            str(path),
             contract["class_name"],
             json.dumps(arguments, ensure_ascii=True),
-            "1" if strict_snapshot else "0",
-        ],
-        cwd=snapshot_root if strict_snapshot else None,
-        timeout=300,
-    )
-    lines = [
-        line for line in completed.stdout.splitlines() if line.strip()
-    ]
-    if not lines:
-        raise RuntimeError(f"local agent {selector} produced no result")
-    try:
-        envelope = json.loads(lines[-1])
-    except json.JSONDecodeError as error:
-        raise RuntimeError(
-            f"local agent {selector} did not emit a result envelope"
-        ) from error
-    return envelope["result"]
+        ]
+        completed = subprocess.run(
+            command,
+            cwd=str(snapshot_root),
+            stdin=subprocess.DEVNULL,
+            capture_output=True,
+            text=True,
+            timeout=300,
+            check=False,
+            close_fds=True,
+            env=clean_env,
+        )
+        if completed.returncode:
+            output = "\n".join(
+                part.strip()
+                for part in (
+                    completed.stdout[-4000:],
+                    completed.stderr[-4000:],
+                )
+                if part.strip()
+            )
+            raise RuntimeError(
+                "sandboxed local agent failed with exit code "
+                f"{completed.returncode}"
+                + (f"\n{output}" if output else "")
+            )
+        lines = [
+            line for line in completed.stdout.splitlines() if line.strip()
+        ]
+        if not lines:
+            raise RuntimeError(f"local agent {selector} produced no result")
+        try:
+            envelope = json.loads(lines[-1])
+        except json.JSONDecodeError as error:
+            raise RuntimeError(
+                f"local agent {selector} did not emit a result envelope"
+            ) from error
+        return envelope["result"]
 
 
 def _run_studio_case(
@@ -4616,6 +5020,7 @@ def _build_parity_oracle(
                 f"{contract['tool_name']} has no immutable snapshot closure"
             )
         source_relative = None
+        oracle_files = []
         for row in snapshot_rows:
             snapshot = Path(row["snapshot_path"]).resolve()
             original = Path(row["original_path"]).resolve()
@@ -4651,6 +5056,11 @@ def _build_parity_oracle(
                 shutil.copy2(snapshot, target)
                 target.chmod(0o444)
             copied[str(relative)] = row["sha256"]
+            oracle_files.append({
+                "relative_path": str(relative),
+                "sha256": row["sha256"],
+                "kind": row.get("kind", "dependency"),
+            })
             if row.get("kind") == "source":
                 source_relative = relative
         if source_relative is None:
@@ -4661,6 +5071,7 @@ def _build_parity_oracle(
             **contract,
             "_oracle_source_path": str(oracle_root / source_relative),
             "_oracle_root": str(oracle_root),
+            "_oracle_files": oracle_files,
         }
     packaged_basic_agent = oracle_root / "agents" / "basic_agent.py"
     top_level_basic_agent = oracle_root / "basic_agent.py"
@@ -5228,6 +5639,51 @@ def _completion_evidence(
         for request in manifest.get("infrastructure_requests", [])
         if isinstance(request, dict) and request.get("id")
     }
+    if manifest.get("infrastructure_requests") == []:
+        if (
+            receipts.get("schema")
+            != "rapp-to-copilot-studio-infrastructure-receipts/1.0"
+        ):
+            raise RuntimeError("unsupported infrastructure receipts schema")
+        if receipts.get("published") is not False:
+            raise RuntimeError(
+                "infrastructure receipts must describe an unpublished Draft"
+            )
+        if (
+            receipts.get("status") != "no_infrastructure_required"
+            or receipts.get("infrastructure_status") != "not_required"
+            or receipts.get("provisioning_status") != "not_performed"
+        ):
+            raise RuntimeError(
+                "zero-infrastructure receipts must record that infrastructure "
+                "was not required and provisioning was not performed"
+            )
+        if (
+            receipts.get("deployment_manifest_sha256")
+            != expected_manifest_sha256
+        ):
+            raise RuntimeError(
+                "zero-infrastructure receipts are bound to a different "
+                "deployment manifest"
+            )
+        empty_fields = (
+            "resolved_requests",
+            "request_resolutions",
+            "connectors",
+            "workflows",
+            "connection_references",
+            "connection_reference_files",
+            "actions",
+            "workflow_components",
+            "bot_component_associations",
+            "connection_associations",
+            "action_connection_associations",
+            "tools",
+        )
+        if any(receipts.get(field) != [] for field in empty_fields):
+            raise RuntimeError(
+                "zero-infrastructure receipts contain provisioned resources"
+            )
     resolution_rows = receipts.get("request_resolutions")
     if not isinstance(resolution_rows, list):
         raise RuntimeError(
@@ -6710,6 +7166,25 @@ def _deploy(
         "stage": "pushed" if pac_result["pushed"] else "up-to-date",
     })
     _write_json(state_path, state)
+    no_infrastructure_receipts = None
+    if not infrastructure_pending:
+        no_infrastructure_receipts = _write_no_infrastructure_receipts(
+            run_dir,
+            manifest,
+        )
+        receipts_path = run_dir / "infrastructure-receipts.json"
+        state.update({
+            "updated_at": _utc_now(),
+            "infrastructure_status": no_infrastructure_receipts[
+                "infrastructure_status"
+            ],
+            "provisioning_status": no_infrastructure_receipts[
+                "provisioning_status"
+            ],
+            "infrastructure_receipts": str(receipts_path),
+            "infrastructure_receipts_sha256": _sha256(receipts_path),
+        })
+        _write_json(state_path, state)
 
     result = {
         "status": (
@@ -6774,6 +7249,12 @@ def _push_existing(project_dir: str, publisher_prefix: str) -> dict:
             include_file_hashes=False,
         ),
     )
+    manifest = None
+    manifest_path = run_dir / "rapp-deploy-manifest.json"
+    if manifest_path.is_file():
+        candidate = json.loads(manifest_path.read_text(encoding="utf-8"))
+        if candidate.get("infrastructure_requests") == []:
+            manifest = candidate
     state_path = project.parent / "state.json"
     if state_path.is_file():
         state = json.loads(state_path.read_text(encoding="utf-8"))
@@ -6783,6 +7264,27 @@ def _push_existing(project_dir: str, publisher_prefix: str) -> dict:
             "published": False,
         })
         _write_json(state_path, state)
+    no_infrastructure_receipts = None
+    if manifest is not None:
+        no_infrastructure_receipts = _write_no_infrastructure_receipts(
+            run_dir,
+            manifest,
+        )
+        if state_path.is_file():
+            state = json.loads(state_path.read_text(encoding="utf-8"))
+            receipts_path = run_dir / "infrastructure-receipts.json"
+            state.update({
+                "updated_at": _utc_now(),
+                "infrastructure_status": no_infrastructure_receipts[
+                    "infrastructure_status"
+                ],
+                "provisioning_status": no_infrastructure_receipts[
+                    "provisioning_status"
+                ],
+                "infrastructure_receipts": str(receipts_path),
+                "infrastructure_receipts_sha256": _sha256(receipts_path),
+            })
+            _write_json(state_path, state)
     return {
         "status": "success",
         "project_dir": str(project),

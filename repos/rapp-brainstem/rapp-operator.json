@@ -1,0 +1,225 @@
+{
+  "artifacts": {
+    "bootstrap": {
+      "macos-linux": {
+        "path": "scripts/bootstrap.sh",
+        "sha256": "6f2914329d64613d01a218966900c9ec882a14cbc8f5d816252c0ceff0de6e24",
+        "url": "https://kody-w.github.io/rapp-brainstem/scripts/bootstrap.sh"
+      },
+      "windows": {
+        "path": "scripts/bootstrap.ps1",
+        "sha256": "98eb737db2fc5cc8c706eb844197c48b4f8b7e0385155ff4693a23cf055e76e7",
+        "url": "https://kody-w.github.io/rapp-brainstem/scripts/bootstrap.ps1"
+      }
+    },
+    "contracts": {
+      "claude-code": {
+        "path": "skills/rapp-brainstem/CLAUDE.md",
+        "sha256": "c42568634373a3dda9d9c3377ca66da364032cb55518530a30c6013d53338194",
+        "url": "https://kody-w.github.io/rapp-brainstem/skills/rapp-brainstem/CLAUDE.md"
+      },
+      "github-copilot": {
+        "path": "skills/rapp-brainstem/SKILL.md",
+        "sha256": "1e8bfbdb8ac5d0d5b5e43cc54d00e2ce2ac36c3beef1a3f4d1ba7c2285389074",
+        "url": "https://kody-w.github.io/rapp-brainstem/skills/rapp-brainstem/SKILL.md"
+      }
+    },
+    "installers": {
+      "macos-linux": {
+        "sha256": "1b65de71288b203a8ab6b6f10db3402a3ec1f42889eb3eee6036b7f061c695e2",
+        "url": "https://raw.githubusercontent.com/microsoft/aibast-agents-library/c60521e2cacbcbfa585a118c1275093d7bb15b74/install.sh"
+      },
+      "windows": {
+        "sha256": "0821162f6c1961d4037a9d0b591db5aca468864d2bb50b5c4ca409c506d7d3ca",
+        "url": "https://raw.githubusercontent.com/microsoft/aibast-agents-library/c60521e2cacbcbfa585a118c1275093d7bb15b74/install.ps1"
+      }
+    },
+    "operator": {
+      "init": {
+        "path": "rapp_operator/__init__.py",
+        "sha256": "4da21ba688c0d6306dddc09f0db442993139b6906e0732b6ed48da184546aba3",
+        "url": "https://kody-w.github.io/rapp-brainstem/rapp_operator/__init__.py"
+      },
+      "installer_lock": {
+        "path": "installer-lock.json",
+        "sha256": "e699ad5978cb91b7014011392c3e0619169e239d3418b9e8bdc2098588badf55",
+        "url": "https://kody-w.github.io/rapp-brainstem/installer-lock.json"
+      },
+      "rapp1": {
+        "path": "rapp_operator/rapp1.py",
+        "sha256": "c3a30e448eb7b9ebfa7cca3b5b1e8cfa67486a0f78de8add7efb330b7efa9779",
+        "url": "https://kody-w.github.io/rapp-brainstem/rapp_operator/rapp1.py"
+      },
+      "rappctl": {
+        "path": "rapp_operator/rappctl.py",
+        "sha256": "c6cea66c4e695f844b187ef4568a9cd0b5dc65909a4557d398165cbb52b36115",
+        "url": "https://kody-w.github.io/rapp-brainstem/rapp_operator/rappctl.py"
+      }
+    },
+    "reviewed_target": {
+      "commit": "c60521e2cacbcbfa585a118c1275093d7bb15b74",
+      "repository": "https://github.com/microsoft/aibast-agents-library.git",
+      "tag": "installers",
+      "tree": "3c5bb0d55ca4a5aff8872d30b8108e2438ef808d",
+      "version": "0.6.16",
+      "version_url": "https://raw.githubusercontent.com/microsoft/aibast-agents-library/c60521e2cacbcbfa585a118c1275093d7bb15b74/rapp_brainstem/VERSION"
+    }
+  },
+  "bootstrap": {
+    "failure_recovery": "Fresh setup records PID plus process creation identity in its lock and restores the pre-bootstrap absent state on failure.",
+    "plan_contract": {
+      "macos-linux": "scripts/bootstrap.sh --actor github-copilot",
+      "rule": "Persist an envelope binding actor, local lock digest, exact installer, target release, and operator bundle hashes before the upstream installer mutates the machine.",
+      "schema": "rapp-brainstem-bootstrap-envelope/2",
+      "windows": "scripts/bootstrap.ps1 -Actor github-copilot"
+    },
+    "python": {
+      "macos-linux": "~/.brainstem/venv/bin/python",
+      "windows": "~/.brainstem/venv/Scripts/python.exe"
+    },
+    "reconcile_result": "Installation evidence only; live verification remains pending until a later real POST /chat canary.",
+    "sequence": [
+      "resolve the bootstrap script inside the installed marketplace plugin",
+      "verify the adjacent local installer lock and operator bundle",
+      "persist the exact bootstrap envelope before Brainstem mutation",
+      "download the commit-addressed upstream installer from the local lock",
+      "verify the exact installer SHA-256 from the local lock",
+      "run the unchanged installer with --no-launch and the currently verified rolling tag",
+      "restore the absent ~/.brainstem state into private quarantine on any failed mutation",
+      "use the newly installed Brainstem Python to run the current plugin operator and reconcile the exact envelope",
+      "plan and apply start, then verify public health and a real POST /chat canary"
+    ],
+    "state_home": "~/.rapp/brainstem-bootstrap",
+    "trust_anchor": "The installed marketplace plugin and its bundled bootstrap script, operator files, and installer-lock.json on every use. No copied operator is lifecycle authority; the remote manifest is informational only."
+  },
+  "consent": {
+    "identity_or_privilege": "The user completes unavoidable GitHub, operating-system, or tenant authorization directly.",
+    "machine_mutation": "The user's natural-language request is intent. Apply only the exact plan or bootstrap-envelope hash derived from it.",
+    "read_only": "No additional confirmation."
+  },
+  "distribution": {
+    "claude_code": {
+      "install": [
+        "claude plugin marketplace add kody-w/rapp-brainstem",
+        "claude plugin install rapp-brainstem@rapp"
+      ]
+    },
+    "github_copilot": {
+      "install": [
+        "copilot plugin marketplace add kody-w/rapp-brainstem",
+        "copilot plugin install rapp-brainstem@rapp"
+      ]
+    },
+    "marketplace": {
+      "name": "rapp",
+      "plugin": "rapp-brainstem",
+      "source": "kody-w/rapp-brainstem"
+    },
+    "rule": "The AI performs marketplace registration and plugin installation. Do not hand these commands to the user."
+  },
+  "lifecycle": {
+    "actions": [
+      "bootstrap",
+      "start",
+      "restart",
+      "verify",
+      "update",
+      "repair",
+      "rollback"
+    ],
+    "evidence": {
+      "append_only": true,
+      "location": "~/.brainstem/evidence",
+      "private_by_default": true,
+      "spec": "rapp/1"
+    },
+    "existing_manual_install": "A healthy externally started Brainstem remains immediately usable through /chat without process adoption. Lifecycle mutation waits for sidecar ownership.",
+    "protected_user_zone": "Every operation verifies the complete post-operation manifest digest and count. New paths require explicit plan-bound enumeration; bootstrap initialization is separate.",
+    "rollback": "Restore the exact prior source, ~/.brainstem/venv identity, protected user state, and prior running/stopped state on every apply failure.",
+    "serialization": "one cross-process lifecycle operation at a time",
+    "targets": {
+      "fresh_bootstrap": "currently verified rolling tag",
+      "repair": "exact reviewed commit when Git metadata supports it; the current verified rolling tag only for broken-source repair",
+      "rollback": "historical exact commit from verified evidence",
+      "update": "exact reviewed commit"
+    },
+    "transaction": "inspect -> plan -> locked apply -> live verify"
+  },
+  "operators": {
+    "compatibility": [
+      {
+        "contract_url": "https://kody-w.github.io/rapp-brainstem/skills/rapp-brainstem/CLAUDE.md",
+        "id": "claude-code",
+        "prompt": "Open https://kody-w.github.io/rapp-brainstem/ and give me my RAPP Brainstem using the Claude Code compatibility path. Follow the same RAPP/1 operator contract and verify the real /chat path.",
+        "status": "compatibility"
+      }
+    ],
+    "golden_path": {
+      "contract_url": "https://kody-w.github.io/rapp-brainstem/skills/rapp-brainstem/SKILL.md",
+      "id": "github-copilot",
+      "prompt": "Open https://kody-w.github.io/rapp-brainstem/ and give me my RAPP Brainstem. Own the complete setup, use the installed marketplace plugin as the local trust anchor, verify the real /chat path, and leave me only unavoidable sign-in or consent.",
+      "status": "golden"
+    }
+  },
+  "ownership": {
+    "agents": "user-owned",
+    "memory": "user-owned",
+    "runtime": "operator-managed",
+    "secrets": "never copied into plans, frames, prompts, or logs",
+    "soul": "user-owned"
+  },
+  "product": {
+    "entrypoint": "https://kody-w.github.io/rapp-brainstem/",
+    "name": "RAPP Brainstem",
+    "operating_model": "The person steers their chosen AI; the AI performs the operational work.",
+    "operator": "AI-operated setup and lifecycle",
+    "promise": "Teach your AI once. Keep the capability across assistants."
+  },
+  "rapp_spec": "rapp/1",
+  "runtime": {
+    "chat_request": {
+      "conversation_history": "optional array",
+      "session_id": "optional string",
+      "user_input": "string"
+    },
+    "chat_response": {
+      "agent_logs": "string",
+      "response": "string",
+      "session_id": "string"
+    },
+    "chat_url": "http://127.0.0.1:7071/chat",
+    "environment": {
+      "binding": "Plans contain names, sources, presence, and value hashes only; values are never written to plans or evidence.",
+      "mode": "minimal-child-environment",
+      "supported_overrides": [
+        "PORT",
+        "SOUL_PATH",
+        "AGENTS_PATH",
+        "GITHUB_MODEL",
+        "BRAINSTEM_LAN_MODE",
+        "BRAINSTEM_ALLOWED_HOSTS",
+        "GITHUB_TOKEN",
+        "VOICE_MODE",
+        "VOICE_ZIP_PASSWORD"
+      ]
+    },
+    "health_url": "http://127.0.0.1:7071/health/public",
+    "kernel_rule": "The upstream Grail brainstem.py and one-liner remain the runtime authorities. The operator wraps them; it does not vendor, edit, or fork them."
+  },
+  "schema": "rapp-operator/1",
+  "support_matrix": {
+    "claude_code": {
+      "role": "compatibility backup",
+      "surfaces": [
+        "Claude Code"
+      ]
+    },
+    "github_copilot": {
+      "role": "golden path",
+      "surfaces": [
+        "Copilot CLI",
+        "VS Code Agent mode"
+      ]
+    }
+  }
+}

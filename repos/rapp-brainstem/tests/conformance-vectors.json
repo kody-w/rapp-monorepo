@@ -1,0 +1,38 @@
+{
+  "source_commit": "d2cd5abed48d3f52b86bbb975ac3558286d1db41",
+  "canonical": [
+    {
+      "value": {
+        "b": 1,
+        "a": [3, 2],
+        "c": {
+          "y": 1,
+          "x": 2
+        }
+      },
+      "bytes_utf8": "{\"a\":[3,2],\"b\":1,\"c\":{\"x\":2,\"y\":1}}",
+      "particle": "85c13ca5c247067bc4493341d4fd3fc0811ea0cdfc2bd609b10e005a490daa28"
+    },
+    {
+      "value": {
+        "hello": "world"
+      },
+      "bytes_utf8": "{\"hello\":\"world\"}",
+      "particle": "dccd124a460d7f7a6ab23b15df476f1f65fa19b8979f0ab70c656e55c67beb05"
+    }
+  ],
+  "frame": {
+    "kind": "body.pulse",
+    "stream_id": "rappid:@aibast/test-organism:c395d99b32ff1289fcfb0a24f5574849eaa336acc58b9ed05c837ae1d398487d",
+    "seq": 0,
+    "utc": "2026-08-11T00:00:00.000Z",
+    "payload": {
+      "hello": "world"
+    },
+    "prev": null,
+    "prev_wave": null,
+    "sig": null,
+    "payload_hash": "dccd124a460d7f7a6ab23b15df476f1f65fa19b8979f0ab70c656e55c67beb05",
+    "frame_hash": "6b5ddaa1cc0f7ca28d5607a0d758669950fe170cbd978826f12127beeecb04ac"
+  }
+}

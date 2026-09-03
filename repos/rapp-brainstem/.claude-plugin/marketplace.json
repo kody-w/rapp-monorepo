@@ -1,0 +1,28 @@
+{
+  "name": "rapp",
+  "owner": {
+    "name": "Kody Wildfeuer",
+    "url": "https://github.com/kody-w"
+  },
+  "metadata": {
+    "description": "RAPP Brainstem",
+    "version": "0.2.1"
+  },
+  "plugins": [
+    {
+      "name": "rapp-brainstem",
+      "displayName": "RAPP Brainstem",
+      "description": "Give the user their Brainstem and operate it through the AI they already use.",
+      "version": "0.2.1",
+      "source": "./",
+      "category": "productivity",
+      "tags": [
+        "rapp",
+        "brainstem",
+        "agents",
+        "setup",
+        "maintenance"
+      ]
+    }
+  ]
+}

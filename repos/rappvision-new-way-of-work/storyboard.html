@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Episode 1 live storyboard</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: Inter, "Segoe UI", Arial, sans-serif;
+        background: #07111f;
+        color: #f6fbff;
+      }
+      * { box-sizing: border-box; }
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        padding: 5vw;
+        background:
+          linear-gradient(rgba(255, 255, 255, .06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, .06) 1px, transparent 1px),
+          linear-gradient(135deg, #07111f, #123b59);
+        background-size: 4rem 4rem, 4rem 4rem, auto;
+      }
+      main { width: min(86rem, 100%); }
+      header, footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      header {
+        font-size: clamp(.75rem, 1.5vw, 1.1rem);
+        font-weight: 800;
+        letter-spacing: .18em;
+      }
+      #counter { color: #57d7ff; }
+      article {
+        min-height: 55vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 4rem 0;
+      }
+      #kicker {
+        color: #57d7ff;
+        font-size: clamp(.9rem, 2vw, 1.4rem);
+        font-weight: 800;
+        letter-spacing: .16em;
+      }
+      h1 {
+        max-width: 17ch;
+        margin: 1rem 0 1.5rem;
+        font-size: clamp(2.5rem, 7vw, 6.5rem);
+        line-height: .98;
+        letter-spacing: -.045em;
+      }
+      #body {
+        max-width: 48ch;
+        margin: 0;
+        color: rgba(246, 251, 255, .78);
+        font-size: clamp(1.1rem, 2.7vw, 2.1rem);
+        line-height: 1.35;
+      }
+      .controls { display: flex; flex-wrap: wrap; gap: .75rem; }
+      button {
+        border: 1px solid rgba(255, 255, 255, .25);
+        border-radius: 999px;
+        padding: .8rem 1.25rem;
+        background: rgba(7, 17, 31, .7);
+        color: inherit;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      button:focus-visible { outline: 3px solid #57d7ff; outline-offset: 3px; }
+      button:hover { background: #123b59; }
+      #next-button { border-color: #57d7ff; background: #57d7ff; color: #07111f; }
+      .progress {
+        flex: 1;
+        min-width: 12rem;
+        height: .35rem;
+        overflow: hidden;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, .14);
+      }
+      .progress span {
+        display: block;
+        height: 100%;
+        background: #57d7ff;
+        transition: width 160ms ease-out;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .progress span { transition: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <span>THE NEW WAY OF WORK</span>
+        <span id="counter" aria-live="polite"></span>
+      </header>
+      <article>
+        <p id="kicker"></p>
+        <h1 id="title"></h1>
+        <p id="body"></p>
+      </article>
+      <footer>
+        <div class="controls">
+          <button id="previous-button" type="button">Previous</button>
+          <button id="next-button" type="button">Next</button>
+          <button id="reset-button" type="button">Reset</button>
+        </div>
+        <div class="progress" aria-hidden="true"><span id="progress"></span></div>
+      </footer>
+    </main>
+    <script>
+      const scenes = [
+        ["THE NEW WAY OF WORK", "Describe the worker before you deploy it", "Start with a job, a boundary, and a result a person can verify."],
+        ["THE WORKSHOP", "Scout is where the worker takes shape", "Research, tool design, code, tests, and revision happen here."],
+        ["THE RUNTIME", "Brainstem runs the worker locally", "A small agent contract becomes a tool the local runtime can discover."],
+        ["THE PRODUCT", "The agent is what eventually ships", "Approved environments come later, with explicit adapters and controls."],
+        ["TODAY'S CAPABILITY", "Read one public GitHub repository", "No write access, no token, and no caller-supplied destination URL."],
+        ["TOOL CONTRACT", "Two inputs: owner and repository", "A narrow schema makes valid use obvious and invalid use rejectable."],
+        ["BOUND THE NETWORK", "Fix the host. Encode the path. Limit redirects.", "The worker can reach api.github.com and nowhere else."],
+        ["FAIL ON TIME", "Every request gets a timeout", "A stalled dependency becomes a useful error, not a frozen worker."],
+        ["TRUST, THEN VERIFY", "Validate the response before using it", "Check status, content type, size, JSON shape, and public visibility."],
+        ["USEFUL ERRORS", "Not found is not the same as rate limited", "The caller gets an actionable category without leaked credentials or internals."],
+        ["DEMO", "A good repository returns a small safe summary", "Name, description, stars, language, branch, and public web URL."],
+        ["FAILURE DEMO", "Bad names and slow responses stop cleanly", "Synthetic fixtures prove validation and timeout behavior without private data."],
+        ["POINT OF VIEW", "Workshop, runtime, product", "This is an emerging workflow, not a promise of native integration."],
+        ["NEXT EPISODE", "Scout made this rough cut", "Next, the episode plan becomes an editable local video template."]
+      ];
+      const elements = {
+        kicker: document.querySelector("#kicker"),
+        title: document.querySelector("#title"),
+        body: document.querySelector("#body"),
+        counter: document.querySelector("#counter"),
+        progress: document.querySelector("#progress")
+      };
+      let index = 0;
+
+      function showScene(nextIndex) {
+        index = Math.max(0, Math.min(scenes.length - 1, nextIndex));
+        const [kicker, title, body] = scenes[index];
+        elements.kicker.textContent = kicker;
+        elements.title.textContent = title;
+        elements.body.textContent = body;
+        elements.counter.textContent = `S1 / E01 / ${index + 1} OF ${scenes.length}`;
+        elements.progress.style.width = `${((index + 1) / scenes.length) * 100}%`;
+      }
+
+      document.querySelector("#previous-button").addEventListener("click", () => showScene(index - 1));
+      document.querySelector("#next-button").addEventListener("click", () => showScene(index + 1));
+      document.querySelector("#reset-button").addEventListener("click", () => showScene(0));
+      document.addEventListener("keydown", event => {
+        if (event.key === "ArrowLeft") showScene(index - 1);
+        if (event.key === "ArrowRight") showScene(index + 1);
+        if (event.key === "Home") showScene(0);
+      });
+      showScene(0);
+    </script>
+  </body>
+</html>

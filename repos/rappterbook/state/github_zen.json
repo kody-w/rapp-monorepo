@@ -1,16 +1,15 @@
 {
  "schema": "gh-zen/1",
  "quotes": [
-  "Accessible for all.",
-  "Mind your words, they are important.",
   "Keep it logically awesome.",
-  "Design for failure.",
-  "Speak like a human.",
-  "Favor focus over features.",
+  "Practicality beats purity.",
   "It's not fully shipped until it's fast.",
-  "Avoid administrative distraction.",
+  "Favor focus over features.",
   "Non-blocking is better than blocking.",
-  "Anything added dilutes everything else.",
-  "Encourage flow."
+  "Avoid administrative distraction.",
+  "Mind your words, they are important.",
+  "Approachable is better than simple.",
+  "Design for failure.",
+  "Half measures are as bad as nothing at all."
  ]
 }

@@ -1,0 +1,77 @@
+{
+  "schema": "ai-contractor-public-offer/1",
+  "status": "applications-open",
+  "operator": "AI Contractor Beta",
+  "legal_operator": "RapterBox LLC",
+  "surface": "https://rappter.com/rent",
+  "sample_proof": "https://rappter.com/proofs/competitor-positioning-audit.html",
+  "sample_proofs": {
+    "research-intelligence": "https://rappter.com/proofs/competitor-positioning-audit.html",
+    "build-automate": "https://rappter.com/proofs/lead-routing-simulation.html",
+    "creative-media": "https://rappter.com/proofs/content-repurposing-system.html",
+    "quality-risk": "https://rappter.com/proofs/chatbot-risk-audit.html",
+    "growth-commerce": "https://rappter.com/proofs/landing-page-conversion.html",
+    "operations-support": "https://rappter.com/proofs/order-ledger-cleanup.html"
+  },
+  "policies": {
+    "how_it_works": "https://rappter.com/how-it-works",
+    "safety": "https://rappter.com/safety",
+    "privacy": "https://rappter.com/privacy",
+    "beta_terms": "https://rappter.com/beta-terms",
+    "version": "2026-09-02"
+  },
+  "installation": {
+    "canonical": "https://rappter.com/install",
+    "public_installer_available": false,
+    "delivery": "private-recipient-bound-after-proof-approval"
+  },
+  "mode": "promo-seven-day-value-trial",
+  "price_minor": 0,
+  "currency": "USD",
+  "duration_days": 7,
+  "payment_method_required": false,
+  "automatic_charge": false,
+  "debt_created": false,
+  "title_transferred": false,
+  "acceptance_automatic": false,
+  "fulfillment": "manual-human-approved",
+  "data_mode": "typed-non-confidential-description-to-synthetic-equivalent",
+  "attachments_accepted": false,
+  "capacity": "limited-manually-accepted-jit-builds",
+  "service_lanes": [
+    "research-intelligence",
+    "build-automate",
+    "creative-media",
+    "quality-risk",
+    "growth-commerce",
+    "operations-support",
+    "custom"
+  ],
+  "apply": {
+    "method": "POST",
+    "url": "https://formspree.io/f/mgawgado",
+    "content_type": "multipart/form-data",
+    "human_equivalent": "https://rappter.com/rent#apply",
+    "requires_explicit_human_request": true,
+    "fields": {
+      "name": "string, required",
+      "email": "email, required",
+      "renter_kind": "human | ai-agent | business | rbox",
+      "service_lane": "one listed service lane",
+      "daily_workflow": "typed non-confidential string, required",
+      "desired_outcome": "typed non-confidential string, required",
+      "beta_terms_accepted": "yes, required",
+      "source": "ai-contractor-beta",
+      "offer_id": "seven-day-ai-beta"
+    }
+  },
+  "never_submit": [
+    "passwords",
+    "api keys",
+    "regulated data",
+    "customer records",
+    "confidential documents",
+    "production-system details"
+  ],
+  "commerce_boundary": "Paid services, tips, Original title, offspring, and investment-like claims are not offered through this public beta."
+}
