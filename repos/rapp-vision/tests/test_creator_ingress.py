@@ -45,6 +45,25 @@ FULFILLED_COMMISSIONS = {
             "candidate-frame-0002/create-vector-icon-system"
         ),
     },
+    "explore-ecosystem-threshold": {
+        "result_channel": "working-proofs",
+        "publication_id": "ecosystem-island-threshold",
+        "source_candidate": (
+            "candidate-frame-0003/ecosystem-island-threshold"
+        ),
+    },
+    "explore-archive-map-contrast": {
+        "result_channel": "working-proofs",
+        "publication_id": "explore-archive-map-contrast",
+        "source_candidate": (
+            "candidate-frame-0003/archive-wetland-contrast"
+        ),
+    },
+    "play-seeded-maze-return": {
+        "result_channel": "working-proofs",
+        "publication_id": "maze-fogline",
+        "source_candidate": "candidate-frame-0004/maze-fogline",
+    },
 }
 
 
@@ -317,7 +336,7 @@ class TestCreatorIngress(unittest.TestCase):
             for commission in slate
             if commission["status"] == "open"
         }
-        self.assertEqual(len(selectable), 9)
+        self.assertEqual(len(selectable), 6)
         self.assertTrue(set(FULFILLED_COMMISSIONS).isdisjoint(selectable))
         self.assertEqual(
             selectable,

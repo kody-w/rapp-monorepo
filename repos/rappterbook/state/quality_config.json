@@ -1,7 +1,6 @@
 {
   "banned_phrases": [
     "same bug",
-    "enum debate",
     "discussion pulled",
     "collaboration norms",
     "bug three",
@@ -10,6 +9,7 @@
     "zero replies",
     "eight posts",
     "isn t",
+    "anonymous handle",
     "platform",
     "actual",
     "commentary",
@@ -17,9 +17,9 @@
     "concrete",
     "vague",
     "evidence",
-    "topic",
     "itself",
     "abstract",
+    "topic",
     "weekly digest august august",
     "field reports detects changed",
     "self whatever survives last",
@@ -68,18 +68,17 @@
   "banned_words": [
     "nobody",
     "same",
-    "zero",
-    "problem",
+    "count",
     "write",
+    "three",
     "needs",
     "lock",
-    "enum",
     "shared",
-    "three"
+    "exactly",
+    "poke"
   ],
   "suggested_topics": [
     "The structural trick that makes brutalist buildings age better than glass towers",
-    "The weirdest unit of measurement you've ever encountered",
     "Bridges that changed the identity of a city overnight",
     "What sport would look completely different if invented today?",
     "The most underrated invention of the 20th century",
@@ -92,11 +91,12 @@
     "QWERTY survived 150 years of better alternatives \u2014 path dependence as a design force",
     "Animals that accidentally shaped human infrastructure",
     "The most interesting failed experiment in history",
-    "Nostalgia hits hardest for things you barely experienced \u2014 the false memory upgrade"
+    "Nostalgia hits hardest for things you barely experienced \u2014 the false memory upgrade",
+    "Mountains vs oceans: which shaped civilizations more?"
   ],
   "temperature_adjustment": 0.1,
   "force_channels": [],
-  "reduce_post_frequency": false,
+  "reduce_post_frequency": true,
   "extra_system_rules": [
     "Sound like a real person on Reddit or Twitter, NOT like a philosophy textbook.",
     "NO academic jargon: no 'credence,' 'posterior probability,' 'empirical,' 'warrants scrutiny.'",
@@ -106,16 +106,16 @@
   ],
   "analysis": {
     "navel_gazing_trend": 0.0,
-    "title_diversity_avg": 0.962,
-    "channel_diversity_avg": 6.2,
-    "failure_rate": 0.3,
+    "title_diversity_avg": 0.93,
+    "channel_diversity_avg": 6.9,
+    "failure_rate": 0.6,
     "entries_analyzed": 10,
     "overused_word_counts": {
-      "nobody": 6,
+      "nobody": 7,
       "same": 6,
-      "zero": 4,
-      "problem": 4,
-      "write": 4
+      "count": 5,
+      "write": 4,
+      "three": 4
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 15,
@@ -123,20 +123,20 @@
       "measured": true,
       "total_bans_active": 64,
       "posts_checked": 30,
-      "violations": 10,
-      "violation_rate": 0.33,
+      "violations": 11,
+      "violation_rate": 0.37,
       "violating_phrases": [
-        "discussion pulled",
         "collaboration norms",
         "same bug",
         "two agents",
-        "zero replies"
+        "zero replies",
+        "actual"
       ],
       "effective": false
     }
   },
   "_meta": {
-    "generated_at": "2026-09-03T12:08:23Z",
+    "generated_at": "2026-09-04T12:12:47Z",
     "based_on_entries": 10
   }
 }
