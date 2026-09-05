@@ -1,169 +1,6 @@
 {
   "runs": [
     {
-      "ts": "2026-08-30T23:39:35Z",
-      "dry_run": false,
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 39,
-        "numbers": []
-      }
-    },
-    {
-      "ts": "2026-08-31T05:49:06Z",
-      "dry_run": false,
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 39,
-        "numbers": []
-      }
-    },
-    {
-      "ts": "2026-08-31T14:03:42Z",
-      "dry_run": false,
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 39,
-        "numbers": []
-      }
-    },
-    {
-      "timestamp": "2026-08-31T14:14:21Z",
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 40,
-        "numbers": []
-      }
-    },
-    {
-      "ts": "2026-08-31T20:15:58Z",
-      "dry_run": false,
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 39,
-        "numbers": []
-      }
-    },
-    {
-      "ts": "2026-09-01T00:00:22Z",
-      "dry_run": false,
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 39,
-        "numbers": []
-      }
-    },
-    {
-      "ts": "2026-09-01T05:20:32Z",
-      "dry_run": false,
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 39,
-        "numbers": []
-      }
-    },
-    {
-      "ts": "2026-09-01T10:16:47Z",
-      "dry_run": false,
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 39,
-        "numbers": []
-      }
-    },
-    {
-      "ts": "2026-09-01T15:03:46Z",
-      "dry_run": false,
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 39,
-        "numbers": []
-      }
-    },
-    {
-      "ts": "2026-09-01T18:41:55Z",
-      "dry_run": false,
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 39,
-        "numbers": []
-      }
-    },
-    {
-      "timestamp": "2026-09-01T22:02:27Z",
-      "locks": {
-        "found": 0,
-        "removed": 0,
-        "files": []
-      },
-      "issues": {
-        "candidates": 0,
-        "closed": 0,
-        "skipped": 40,
-        "numbers": []
-      }
-    },
-    {
       "ts": "2026-09-02T00:23:43Z",
       "dry_run": false,
       "locks": {
@@ -442,11 +279,170 @@
         "skipped": 39,
         "numbers": []
       }
+    },
+    {
+      "timestamp": "2026-09-04T14:32:53Z",
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 40,
+        "numbers": []
+      }
+    },
+    {
+      "ts": "2026-09-04T16:30:13Z",
+      "dry_run": false,
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 39,
+        "numbers": []
+      }
+    },
+    {
+      "timestamp": "2026-09-04T18:38:08Z",
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 40,
+        "numbers": []
+      }
+    },
+    {
+      "timestamp": "2026-09-04T21:43:50Z",
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 40,
+        "numbers": []
+      }
+    },
+    {
+      "ts": "2026-09-04T22:30:01Z",
+      "dry_run": false,
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 39,
+        "numbers": []
+      }
+    },
+    {
+      "timestamp": "2026-09-05T00:19:36Z",
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 40,
+        "numbers": []
+      }
+    },
+    {
+      "ts": "2026-09-05T01:07:14Z",
+      "dry_run": false,
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 39,
+        "numbers": []
+      }
+    },
+    {
+      "timestamp": "2026-09-05T04:45:29Z",
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 40,
+        "numbers": []
+      }
+    },
+    {
+      "ts": "2026-09-05T05:55:11Z",
+      "dry_run": false,
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 39,
+        "numbers": []
+      }
+    },
+    {
+      "timestamp": "2026-09-05T09:16:37Z",
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 40,
+        "numbers": []
+      }
+    },
+    {
+      "ts": "2026-09-05T10:46:47Z",
+      "dry_run": false,
+      "locks": {
+        "found": 0,
+        "removed": 0,
+        "files": []
+      },
+      "issues": {
+        "candidates": 0,
+        "closed": 0,
+        "skipped": 39,
+        "numbers": []
+      }
     }
   ],
   "_meta": {
-    "updated": "2026-09-04T11:29:19Z",
+    "updated": "2026-09-05T10:46:47Z",
     "keep": 30,
-    "materialized_at": "2026-09-04T11:29:19Z"
+    "materialized_at": "2026-09-05T10:46:47Z"
   }
 }

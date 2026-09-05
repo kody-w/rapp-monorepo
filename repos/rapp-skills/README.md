@@ -1,217 +1,98 @@
-# RAPP Skills
+# rapp-skills
 
-Portable Agent Skills backed by RAPP single-file agents.
+Skills you can use, share as one file, and take anywhere. Why: [CHARTER.md](CHARTER.md).
 
-Each capability is a pair:
+- **Use one.** Put a skill's folder, or just its `SKILL.md`, where your AI tool reads skills, then
+  ask for it in plain words. It carries its own code and a small launcher, so it just runs.
+- **Share one.** The `SKILL.md` file is the whole thing. Send it. Nothing to install.
+- **Take one somewhere else.** When a skill needs to run on a server or be shared with a team as
+  one Python file, make it one. Nothing is lost, and it turns back into a skill any time.
 
-```text
-<skill>/
-├── SKILL.md
-└── <slug>_agent.py
+Works in Claude Code and GitHub Copilot CLI today, and in anything else that reads
+[Agent Skills](https://agentskills.io). There is nothing to install, and nothing to uninstall:
+delete a skill's folder and your AI is back to exactly how it was.
+
+## Use a skill
+
+| Your tool | Put the skill here |
+|---|---|
+| Claude Code | `~/.claude/skills/<name>/` or `<project>/.claude/skills/<name>/` |
+| GitHub Copilot CLI | `~/.copilot/skills/<name>/` or `<project>/.github/skills/<name>/` |
+| Anything else that reads skills | its skills folder |
+
+Try it with [`skills/hello-world`](skills/hello-world): copy the folder, then ask your tool to
+"use the hello-world skill to greet me".
+
+## Let your AI make and move skills
+
+Give your AI this one file and it can do the conversions for you:
+
+```
+https://raw.githubusercontent.com/kody-w/rapp-skills/main/skills/rapp-skills/SKILL.md
 ```
 
-The Python file is the executable cartridge. The `SKILL.md` is its Agent Skill
-projection: complete Python inline, a checksum-verified capsule carrying the
-byte-exact original, and instructions for hosts that can or cannot execute the
-linked file. One pair moves unchanged between Copilot Studio, Cowork, Scout,
-RAPP Brainstem, and other Agent Skill hosts.
+Tell it, for example, "get that file and turn my_agent.py into a skill I can send to a colleague".
+The file carries its own code. Tools that fetch abilities on their own can also pick this
+repository up directly; that just happens, and you never need to know how.
 
-## One engine
+## Make and move skills yourself
 
-The repository vendors the exact
-[`rapp-agent-converter`](engine/rapp-agent-converter/SKILL.md) skill submitted
-to the CAT Agent Skills gallery:
-
-```text
-engine/rapp-agent-converter/
-├── SKILL.md
-├── scripts/toast.py
-├── references/
-└── assets/hello_rapp_agent.py
-```
-
-All conversion logic lives there. The root [`toast.py`](toast.py) is only a
-launcher, so this repository cannot drift into a second implementation.
+Python 3.11 or newer, nothing else.
 
 ```bash
-python3 toast.py convert <agent.py> --to skill -o out/SKILL.md
-python3 toast.py convert <SKILL.md> --to agent
-python3 toast.py roundtrip <agent.py>
-python3 toast.py inspect <path>
-python3 toast.py selftest
+python3 rapp_skills.py to-skill path/to/my_agent.py     # a skill anyone can use, from a Python agent file
+python3 rapp_skills.py to-agent skills/my-agent          # one Python file for a server; the original comes back unchanged
+python3 rapp_skills.py to-agent path/to/steps-skill      # a skill written as steps becomes a Python file that hands those steps to the AI running it
+python3 rapp_skills.py check skills/*                    # find problems before sharing
+python3 rapp_skills.py prove path/to/my_agent.py         # shows nothing is lost there and back: PASS or FAIL
+python3 rapp_skills.py run skills/hello-world --json '{"name": "Ada"}'
 ```
 
-Python 3.9+, standard library only, fully offline. The converter parses agents
-with `ast`; it never imports or executes a file to read it.
+## Lock a file for travel
 
-## What the pair guarantees
-
-- `agent.py → SKILL.md → agent.py` restores the exact original bytes.
-- The generated skill ships a byte-exact linked agent beside it.
-- The complete Python also travels inside `SKILL.md`, so the skill remains
-  self-contained if the linked file is separated.
-- A checksum mismatch or edit inside the generated Python fence is an explicit
-  refusal, not a best-effort recovery.
-- Hosts with Python run the linked agent directly. Instruction-only hosts use
-  the same code and parameter schema as the exact specification.
-
-The old repo-wide "toast/soak/capability-id" laboratory is not the contract
-here. Fidelity is the concrete property the submitted skill proves: the
-canonical agent leaves and returns byte-identical.
-
-## Verify the repository
+When a private file has to cross something public (a message, a shared drive), lock it. The
+header stays readable so a host knows what it is; everything else is encrypted with a passphrase
+only you know. Needs the `openssl` command, present on macOS, Linux, and Git for Windows.
 
 ```bash
-python3 scripts/validate_skills.py
-python3 scripts/roundtrip_fidelity.py
+SKILL_PASSPHRASE='...' python3 rapp_skills.py lock   my-skills/vbrainstem --out locked
+SKILL_PASSPHRASE='...' python3 rapp_skills.py unlock locked/vbrainstem     --out unlocked   # byte-identical
 ```
 
-`roundtrip_fidelity.py` uses only the converter's public CLI. For every
-committed capability it:
+The better lock for a person's own file is a private GitHub repository linked from their public
+front door; see https://github.com/kody-w/vbrainstem. Use the passphrase lock when there is no
+GitHub in the loop.
 
-1. proves the agent round trip is byte-identical;
-2. restores the agent from the companion `SKILL.md` and compares bytes;
-3. runs `--tool` and validates the emitted function contract.
+## Back up or restore a whole Brainstem
 
-CI ([`verify.yml`](.github/workflows/verify.yml)) runs both scripts on every
-push and pull request, plus the converter selftest, the CAT catalog
-provenance oracle ([`scripts/verify_cat_catalog.py`](scripts/verify_cat_catalog.py),
-also under `python3 -O`), the importer selftest, and a guard that the root
-launcher carries no converter implementation.
-[`scripts/vbrainstem_probe.py`](scripts/vbrainstem_probe.py) is a manual
-extra: it drives a pair inside the live browser runtime at
-<https://kody-w.github.io/vbrainstem/> (requires Playwright) to prove the
-pairs execute with no local Python at all.
-
-There are **107 verified capability pairs**: 31 RAPP-native pairs at the
-repository root and 76 assimilated CAT Agent Skills under
-[`cat-agent-skills/`](cat-agent-skills/). The one additional `SKILL.md` under
-`engine/` is infrastructure and is not counted as a converted capability pair.
-
-## CAT Agent Skills catalog
-
-[`cat-agent-skills/`](cat-agent-skills/) is the worked demonstration of this
-pattern at ecosystem scale. It imports every actual Agent Skill from
-`microsoft/cat-agent-skills`, preserves the complete agent-facing bundle, and
-places the synthesized RAPP cartridge beside the final capsule-bearing
-`SKILL.md`.
-
-```text
-cat-agent-skills/
-├── catalog.json
-├── README.md
-└── <76 skill directories>/
-    ├── SKILL.md
-    ├── <slug>_agent.py
-    └── scripts/ references/ assets/ ... when present
-```
-
-The catalog records source commit/path/hash, final skill and agent hashes,
-tool-contract counts, supporting files, and the five non-skill submissions
-that were deliberately excluded. All 76 source skills currently lack an
-explicit `## Parameters` schema, so their agents are honestly recorded as
-untyped launchpads instead of receiving invented contracts. Each launchpad was
-also executed with `{}` and returned the preserved source instructions for its
-host to follow. Rebuild it with:
+A Brainstem's agents are ordinary Python files in its `agents/` folder, and a skill dropped in
+becomes one of them with no restart. So plain skill files are a complete backup of everything a
+Brainstem knows how to do, readable by any AI, and a Brainstem can be rebuilt from them:
 
 ```bash
-python3 scripts/import_cat_agent_skills.py \
-  --source /path/to/cat-agent-skills
+python3 rapp_skills.py to-skill ~/.brainstem/src/rapp_brainstem/agents --out ~/my-skills     # back up: every agent becomes a skill
+python3 rapp_skills.py to-agent ~/my-skills --out ~/.brainstem/src/rapp_brainstem/agents      # restore: every skill is an agent again, unchanged
 ```
 
-## Skills
+## What is inside a skill file
 
-### RAPP and agent pipeline
+A short header your tool reads (name, description, what it needs). How to run it. Then the code
+that does the work, unchanged, with its checksum, and the small launcher that runs it. The
+launcher writes nothing anywhere. If a skill's code saves something, it goes under one folder,
+`~/.agent-storage`, and deleting that folder erases it. Nothing in
+the file names this project or any other platform. Open
+[`skills/hello-world/SKILL.md`](skills/hello-world/SKILL.md) to see one.
 
-- [`rapp-agent-bridge`](rapp-agent-bridge/SKILL.md) — consume a linked-agent
-  pair without paraphrasing it.
-- [`rapp-brainstem`](rapp-brainstem/SKILL.md) — drive the local brainstem over
-  its single `/chat` endpoint.
-- [`rapp-pipeline`](rapp-pipeline/SKILL.md) — transcript-to-agent pipeline and
-  promotion outputs.
-- [`rapp1-compliance-sweep`](rapp1-compliance-sweep/SKILL.md) — RAPP/1 estate
-  compliance and remediation.
-- [`brainstem-reset`](brainstem-reset/SKILL.md) — first-user clean-install
-  verification.
-- [`rapplication-egg`](rapplication-egg/SKILL.md) — pack a RAPPlication as a
-  `.egg` and prove it by hatching on a clean path.
-- [`usecase-to-showcase`](usecase-to-showcase/SKILL.md) — customer use-case
-  brief to data plane, grounded agents, deployed app, Copilot Studio suite,
-  films, deck, and catalog entry.
-- [`prototype-lock-factory`](prototype-lock-factory/SKILL.md) — freeze an
-  accepted transcript into one canonical project, enforce local-before-cloud
-  causal evidence and immutable transport, and export a no-PII handoff.
-- [`ecosystem-audit`](ecosystem-audit/SKILL.md) — audit a multi-repo GitHub
-  ecosystem against the invariants its own docs assert.
+## For builders
 
-### Research and knowledge
+`hosts/<tool>.json` describes each AI tool this works in: where it reads skills, how it fetches
+abilities on its own, and the version it was verified on with evidence. Supporting a new tool is
+adding a file; `python3 rapp_skills.py sync` rewrites every tool-specific file from it, including the
+converter skill's embedded copy of its own code, and CI fails if anything drifts. See
+[HOSTS.md](HOSTS.md).
 
-- [`deep-research`](deep-research/SKILL.md)
-- [`transcript-miner`](transcript-miner/SKILL.md)
-- [`obsidian-vault-steward`](obsidian-vault-steward/SKILL.md)
-- [`harvest`](harvest/SKILL.md)
-- [`digital-twin-builder`](digital-twin-builder/SKILL.md)
-- [`kody-twin`](kody-twin/SKILL.md)
+Deeper capabilities (verifiable packaging, a server runtime) exist in the wider
+[RAPP](https://github.com/kody-w/RAPP) project and are reached from the one Python file
+`to-agent` makes. They are never required, and nothing here mentions them to a user.
 
-### Build, deploy, and prove
-
-- [`demo-ship`](demo-ship/SKILL.md)
-- [`mcs-deploy`](mcs-deploy/SKILL.md)
-- [`ship`](ship/SKILL.md)
-- [`exec-proof`](exec-proof/SKILL.md)
-- [`flex-unbrick`](flex-unbrick/SKILL.md)
-- [`film-m365`](film-m365/SKILL.md)
-- [`estate-sweep`](estate-sweep/SKILL.md)
-- [`cs-agent-live`](cs-agent-live/SKILL.md)
-- [`tab-film`](tab-film/SKILL.md)
-- [`showcase-film`](showcase-film/SKILL.md)
-
-### Working style
-
-- [`msft-deck`](msft-deck/SKILL.md)
-- [`muscle`](muscle/SKILL.md)
-- [`overnight`](overnight/SKILL.md)
-- [`wow`](wow/SKILL.md)
-- [`blindspot`](blindspot/SKILL.md)
-- [`fy27-priority-agents`](fy27-priority-agents/SKILL.md)
-
-## Use
-
-Clone the repository and install or symlink the skill directory your host
-should discover:
-
-```bash
-git clone https://github.com/kody-w/rapp-skills.git
-ln -s "$PWD/rapp-skills/deep-research" ~/.claude/skills/deep-research
-```
-
-Install `engine/rapp-agent-converter` as a skill when the host should be able to
-convert RAPP cartridges and Agent Skills itself.
-
-## Add a capability
-
-1. Write the canonical agent at `foo/foo_agent.py`. Pair files live only in
-   their pair directory: a `*_agent.py` left anywhere else fails the
-   fidelity gate.
-2. Project it with the repository engine:
-
-   ```bash
-   python3 toast.py convert foo/foo_agent.py \
-     --to skill -o foo/SKILL.md
-   ```
-
-3. Commit both files in `foo/`.
-4. Run:
-
-   ```bash
-   python3 scripts/validate_skills.py
-   python3 scripts/roundtrip_fidelity.py
-   ```
-
-Never hand-edit generated content or the capsule. Edit the canonical agent and
-project it again, adding `--force` — the converter refuses to overwrite an
-existing `SKILL.md` whose content changed without it.
-
-## License
-
-MIT
+MIT.

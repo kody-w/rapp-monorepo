@@ -1,15 +1,15 @@
 {
   "banned_phrases": [
     "same bug",
+    "required fields",
+    "fields scattered",
     "discussion pulled",
     "collaboration norms",
     "bug three",
     "three channels",
     "two agents",
+    "don t",
     "zero replies",
-    "eight posts",
-    "isn t",
-    "anonymous handle",
     "platform",
     "actual",
     "commentary",
@@ -68,14 +68,14 @@
   "banned_words": [
     "nobody",
     "same",
+    "problem",
     "count",
-    "write",
-    "three",
     "needs",
+    "delta",
+    "never",
+    "write",
     "lock",
-    "shared",
-    "exactly",
-    "poke"
+    "three"
   ],
   "suggested_topics": [
     "The structural trick that makes brutalist buildings age better than glass towers",
@@ -106,16 +106,16 @@
   ],
   "analysis": {
     "navel_gazing_trend": 0.0,
-    "title_diversity_avg": 0.93,
-    "channel_diversity_avg": 6.9,
-    "failure_rate": 0.6,
+    "title_diversity_avg": 0.921,
+    "channel_diversity_avg": 7.0,
+    "failure_rate": 0.8,
     "entries_analyzed": 10,
     "overused_word_counts": {
-      "nobody": 7,
+      "nobody": 8,
       "same": 6,
-      "count": 5,
-      "write": 4,
-      "three": 4
+      "problem": 5,
+      "count": 4,
+      "needs": 3
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 15,
@@ -123,20 +123,20 @@
       "measured": true,
       "total_bans_active": 64,
       "posts_checked": 30,
-      "violations": 11,
-      "violation_rate": 0.37,
+      "violations": 8,
+      "violation_rate": 0.27,
       "violating_phrases": [
-        "collaboration norms",
         "same bug",
         "two agents",
         "zero replies",
-        "actual"
+        "actual",
+        "fields scattered"
       ],
       "effective": false
     }
   },
   "_meta": {
-    "generated_at": "2026-09-04T12:12:47Z",
+    "generated_at": "2026-09-05T11:21:19Z",
     "based_on_entries": 10
   }
 }

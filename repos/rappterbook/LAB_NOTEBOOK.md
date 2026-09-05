@@ -103,6 +103,130 @@ These are bets, not deliverables on a calendar. There is no sunset.
 
 ---
 
+## Entry 003.44 — 2026-09-05 — Outside-agent evidence becomes a fail-closed Moltbook bridge
+
+**Session**: gpt-5.6-sol-fast via Copilot CLI / operator: kody-w
+**Read state**: shared checkout `33f4bf131dc3c03e04dd10414b5653b3175235ce`; bridge work was isolated, rebased onto `5aa4c8e7bf8e5a8ba9b9a1e7b92f4296a13d24b5`, and handed off from current `origin/main` at `dce3e4613e57355f363ab62101be992bc9b8af61`.
+
+### Hypothesis tested
+Rappterbook will not become an outside-agent social network by generating more fleet content. The higher-leverage move is to make the external participation loop measurable and then connect one existing independent-agent community through a response-first, GitHub-evidenced bridge that cannot silently duplicate, misattribute, or claim an unverified write.
+
+### What I built
+- Shipped the outside-engagement evidence surface through #21154: fail-closed fleet/outside attribution, historical Git snapshots, response and retention metrics, CI-safe Discussion hydration, and `docs/rappterbook-datascience.html`.
+- Measured the actual registered direct baseline: 86 contributions from `lobsteryv2` (73), `lkclaas-dot` (10), and `juliosuas` (3). All three received an observed response, one returned after seven days, and none was active in the latest 30-day window.
+- Researched and pinned Moltbook v1.12.0's current first-party contract: exact `www.moltbook.com` origin, `/home` as the response-first return surface, semantic search, cursor pagination, roles, rate limits, and arithmetic verification challenges.
+- Located the already-claimed Moltbook account `Rapptr` (`d91442ea-6fcf-4aef-bbb1-a011b84aab1b`) rather than creating a duplicate.
+- Shipped #21156, adding `scripts/moltbook_bridge.py`, `tests/test_moltbook_bridge.py`, and a rewritten `adapters/moltbook.md`. The bridge provides authenticated status, `/home`, search, dry-run, publish, reply, challenge verification, public refetch proof, receipt reconciliation, and explicit abandonment.
+- Bound every write to a canonical GitHub evidence URL, an authenticated account ID, an immutable intent hash, a daily budget, an operation lease, and a durable receipt in `state/twin_echoes/moltbook.json`. No recurring workflow was added.
+
+### What worked
+- #21154 merged as `0ca692428a47bf80d9a598f8515c452ab2b00ae2`; Pages deployed that exact commit and live dashboard bytes matched the repository.
+- #21156 merged at `2026-09-05T06:41:03Z` as `0da319bedc396cfd10e721f85e3966bd5a28c6cc`. Its three accepted blobs are byte-identical on current `origin/main`.
+- The focused post-rebase gate passed 87 tests. The PR workflow ran the complete suite on both baseline and candidate: baseline had 3,516 passes and candidate had 3,595, exactly the 79 new bridge tests, with the same 19 pre-existing failure/error IDs and no new failures.
+- A final read-only adversarial review returned `No high-confidence findings. ACCEPT.` after hardening redirect containment, account binding, idempotency, challenge expiry, pagination, reply ancestry, exact public visibility, and negative-evidence abandonment.
+- The bridge never made an authenticated Moltbook request and never created an external side effect. That absence is intentional evidence that the safety gate held.
+
+### What failed
+- The official browser extension remained absent or disconnected, so the existing account's owner dashboard could not be reached and its API key could not be rotated. No credential was discovered, exposed, or used.
+- The authenticated round trip remains unproved: there is no production Moltbook receipt, no verified reply, and no basis yet for enabling scheduled invocation.
+- Two required-looking PR checks were false green. Reviewer run `33950313031` had no provider credentials, performed only canned dry-run decisions, created no review artifact, and exited successfully. PII run `33950312965` scanned zero of the PR's three files and also exited successfully.
+- The repository-wide differential test gate is honest about no regression but not clean: both baseline and candidate retained 12 failures and 7 errors.
+- The notebook follow-up's first differential run false-failed on an unrelated random test path: `test_observation_included_in_prompt` sometimes chooses the `prediction` post type and rejects its fixed non-prediction fixture. A direct reproduction rejected 8 of 500 identical calls.
+- Current state still has a one-post counter drift: GitHub, `posted_log.json`, and channel totals report 15,987 while `stats.json` reports 15,986. This was not caused by #21156.
+
+### Lessons for next session
+1. Measure independent participation from direct GitHub identities, not bylines carried through the fleet service account.
+2. Moltbook's useful lesson is the return loop: surface replies and direct messages first, answer them, then earn the right to publish something new.
+3. External writes need immutable intent, account binding, bounded budgets, durable idempotency, and exact public refetch proof. An HTTP success is not publication proof.
+4. A green check is not evidence. Read logs and verify the artifact; this session caught both a no-review reviewer and a zero-file scanner.
+5. Do not add automation until one human-authorized, tightly scoped round trip reaches a terminal `verified` receipt.
+
+### Recommended next move
+Pause for authenticated account access: install and connect the official browser extension, sign into the existing `Rapptr` owner dashboard, rotate the API key without exposing it, and store it through a non-logging GitHub secret path. Then run bridge `status` and `/home`, satisfy any existing reply or DM obligation, dry-run one evidence-linked reply to Lobstery_v2's thread `de8f09e0-8692-40d4-8bce-54edeb9691fe`, publish exactly once, solve verification only when certain, and require a publicly refetched `verified` receipt before wiring the bridge into an existing GitHub workflow.
+
+## Entry 003.43 — 2026-09-05 — A reference trail becomes a playable first visit
+
+**Session**: gpt-6-astra via Copilot CLI / operator: kody-w
+**Read state**: shared checkout `33f4bf131dc3c03e04dd10414b5653b3175235ce`; isolated work based on `a1199fde0be1a0028d24fad672f44939fbcf82b8`. Unrelated shared-checkout changes were left alone.
+
+### Hypothesis tested
+The user explicitly requested a surprising runnable artifact rather than another chatbot or dashboard. The overlooked connection was between the existing public post-body shards, numbered Discussion references, and single-file distribution: those references can give a newcomer a concrete first journey through the archive. This user-directed experiment did not replace Entry 003.41's external-participation work or authorize restarting the quarantined automations in Entry 003.42.
+
+### What I built
+- Built **The Missing Link** in a separate local repository, not inside the platform: one offline HTML experience with 64 archived root posts, 76 exact-reference receipts, three expeditions with shortest routes of 3/4/5 hops, a real 90-second guided run, and portable route save/resume.
+- Preserved the artifact as local commits `0bb0fb15a6ee452e5a1a2766b19e210138f49c68` and `36e16e26ec2b77ea3924afd0de8f111ead925437`, plus a complete portable Git bundle. It was not publicly published.
+- Added an actual RAPP/1 delivery frame, a mint-once identity, an exact pinned copy of the public reference implementation, and preserved HTML/snapshot/source-proof blobs. Ordinary game-route JSON is not mislabeled as a RAPP frame.
+- Made `.claude/skills/resume-session/SKILL.md` observational by default, notebook-first, and explicit about unknown state. Made `.claude/skills/antigaslighter/SKILL.md` target-scoped and read-only, with stored commands treated as historical data rather than executable authority.
+- Repaired six additional local helper skills/tooling where this work exposed concrete defects. Their local source and configuration were not copied into this public repository.
+- The user's subsequent framed-reaction experiment stayed in its private development lane. No engine implementation, new platform state file, content generator, or control loop was added here.
+
+### What worked
+- Artifact acceptance exercised 16 Python tests, 21 graph/controller tests, 10 real-browser cases, six RAPP delivery cases, and five deliberately broken graph invariants. The real tour ran for its full duration; throttling, denied storage, actual file download/import, and 320/390-pixel layouts were exercised.
+- All 15 current shortest-route posts matched live GitHub titles and full root bodies exactly. The current receipt is bound to snapshot `2b28faac5efec1c13d739be1c8160b805c96e49b6472da5d9c29dbd47df3c85d`, not merely to a success count.
+- The canonical checker reported RAPP/1 conformance while explicitly counting the actual delivery frame. This was not a zero-artifact `CLEAN` result or a loader-only readiness claim.
+- A separate local reaction proof retained 13 conformant memory frames, a resolved conflict, a deliberately refused incomplete attempt, and a successor that consumed the unified result. Earlier frame bytes and compatible content were preserved; relocated evidence also passed. This is local evidence, not a claim of live platform growth.
+
+### What failed
+- An early external-source receipt described an earlier 85-post sample after the compiler switched to the pinned shard index and selected 64 posts. The old receipt was preserved as historical evidence, and current route/body hashes now have an executable binding check. The earlier sample size was an observation, not a user quota.
+- The live-browser extension was disconnected. Browser evidence came from a separate disposable headless profile, not the user's authenticated profile.
+- The strict portable-skill checker rejects the two project skills' Claude-specific `context` and `argument-hint` fields. Those host fields were retained and the limitation reported; the checker was not weakened to manufacture a pass.
+- `bd` was unavailable. No issue-tracker status was fabricated. No independent newcomer outcome or live posting was measured.
+
+### Lessons for next session
+1. A receipt must bind to the actual artifact and input set being shipped. A green receipt for an older sample is not evidence for a new one.
+2. Keep observed counts separate from acceptance requirements; otherwise a critic can invent a quota and drive a correct implementation backward.
+3. A source reference proves a mention, not truth, agreement, causation, or an independent author identity. Show the persona and transport-account boundary honestly.
+4. A startup or verification skill must not restart services, run historical commands, or mutate memory merely because it was invoked.
+5. Hash-verified frames and a working local demonstration do not establish signed network publication, external adoption, or permission to reactivate a failed persistent job.
+
+### Recommended next move
+Use the existing artifact for one independent newcomer reading trial: can the reader follow a source trail and distinguish a quoted claim from verified evidence? Then continue the three-heartbeat contribution cohort from Entry 003.41 through the canonical contribution client. Keep Entry 003.42's quarantined jobs disabled; do not add another dashboard or content batch as a substitute for measuring a real participant's next action.
+
+## Entry 003.42 — 2026-09-04 — Backup verification gets real; failed AI loops are quarantined
+
+**Session**: gpt-5.6-sol-fast via Copilot CLI / operator: kody-w
+**Read state**: 023d54e9fb515bfd3f12bb9fad4f63fcef97aaba — the contribution loop was live, but NAS verification was impractically slow and persistent local AI automations were consuming the Mac while repeatedly failing
+
+### Hypothesis tested
+A backup is not healthy because a copy command exited zero, and an automation is not useful because launchd keeps it alive. The NAS system only earns trust if every stored object can be checked against the SQLite checksum authority through the same mounted-share conditions used in production. The Mac only becomes usable again if deterministic failure loops are disabled persistently, removed from the live launchd domain, and proven absent from the process table.
+
+### What I built
+- Hardened `~/.rapp/transcript-backup/bin/rapp-transcript-backup` with `--changed-only`, positive worker-count validation, concurrent complete verification, bounded retries for transient SMB errors, and a single-pass `os.scandir()` verifier that hashes files relative to already-open parent directory descriptors.
+- Changed append-only snapshots to capture and copy the source's initial byte boundary while requiring a stable device/inode and rejecting truncation. Strict mutable-file snapshots still reject any mutation during copying.
+- Deployed `~/Library/LaunchAgents/com.rapp.transcript-backup.plist` as a two-hour, one-worker, changed-only background job and retained `com.rapp.transcript-backup-verify.plist` as an eight-worker Sunday 04:15 full audit. Both use `/opt/homebrew/bin/python3`; the incremental job no longer runs at load.
+- Persistently disabled and booted out `com.rappterverse.local-platform`, `com.rapterbox.textchannel`, `com.rapterbox.beat`, `com.rapp.rar-local-save`, and `io.rapp.private-hive-publisher`. Throttled `com.rapterbox.filing` from a two-second scan loop to 300 seconds.
+- Terminated three stale Copilot process trees and three stale session web servers while preserving the active Copilot session.
+- Added durable recurrence checks for local launchd failure loops, the launchd `/usr/bin/python3` mounted-NAS permission failure, reviewer jobs that pass without reviewing, and PII scans that pass after selecting zero files to `.claude/skills/antigaslighter/known_failures.json`.
+
+### What worked
+- The complete audit verified **103,510 objects** and **22,697,508,686 bytes** against SQLite with **zero failures**, finishing at `2026-09-04T20:04:26.905506Z`.
+- After the live append-only fix, the retry copied **10 of 10 files**, totaling **174,179,688 bytes**, with zero errors. A real launchd proof then copied five files totaling **175,414,183 bytes**, also with zero errors.
+- The current authority holds **104,027 file rows**, **424 ledger segments**, zero unpublished events, and `PRAGMA integrity_check = ok`. NAS staging is empty. Local and NAS `health.json` are byte-identical with SHA-256 `0a63d9f0a79000ded20bf6e3656e1c37ccf4fceb59466f4215b00538413c1089`.
+- The recovery kit was refreshed and each local/NAS pair matched byte-for-byte. The backup script hash is `6e2276fa701375f18ae01d6dcef1a8fc122b36d5789e1279543cb31e030234f1`.
+- System load fell from approximately **10.16 / 14.90 / 15.43** to **3.92 / 5.40 / 6.77** after removing the stale Copilot trees and failed launchd loops.
+- Final launchd inspection showed all five quarantined labels as disabled, none loaded, and no matching processes running.
+
+### What failed
+- Serial verification and the first parallel two-pass inventory-then-hash design were operationally useless over SMB. A 200-file sample took about 20 minutes and projected to days because random full-path opens repeatedly traversed a provider directory with roughly 95,000 children.
+- The first practical one-pass audit found one transient `OSError: [Errno 22] Invalid argument`. Direct SHA-256 comparison proved the object matched SQLite, and repeated relative opens succeeded; bounded retry handling was required before the complete audit could pass cleanly.
+- One active Claude transcript grew during copying, causing a strict snapshot failure after 932 of 933 changed files copied. Append-only files needed explicit byte-boundary semantics rather than mutable-file semantics.
+- Launchd running `/usr/bin/python3` received `Operation not permitted` on `/Volumes/Public` even though the same interpreter worked manually. Homebrew Python worked under launchd and produced a real copied-and-verified artifact; the old error line remains historical evidence, not current failure.
+- Five unrelated LaunchAgents were retrying deterministic failures: repeated `world_growth` failure while spawning unattended Copilot work, SQLite authorization errors every 30 seconds, `git pull --rebase` failure every ten minutes, unsupported floats in JCS serialization hourly, and a missing `rapp-skills` dependency hourly. launchd persistence had turned broken jobs into a resource-denial loop.
+- Independent verification of #21150 found two false-green checks. `run-reviewer` succeeded after reporting that missing API keys prevented any LLM review, and `scan` succeeded after reporting `No PII/secrets detected in 0 file(s)` despite the PR changing two tracked files. The differential test gate was honest about no regression, but its green badge still contained 12 failures and 7 errors inherited from the baseline.
+
+### Lessons for next session
+1. Verify backup claims against the checksum authority and stored bytes. Exit codes, copied-file counters, and health messages are not proof.
+2. On a high-fanout SMB share, keep directory context open and hash relative entries in one pass. Repeated full-path traversal dominates the actual hashing cost.
+3. Append-only live files need snapshot-at-open byte boundaries; later growth belongs to the next incremental run.
+4. A command's manual macOS permissions do not prove its launchd execution context has the same access. Prove the scheduled interpreter by observing the destination artifact.
+5. Persistent schedulers need quarantine semantics. A deterministic failure must not be retried forever merely because launchd can restart it.
+6. A green CI conclusion is not evidence that work occurred. Reviewer and scanner checks must expose zero-work runs as skipped or failed, never success-shaped.
+
+### Recommended next move
+Keep all five failed automation labels disabled. Repair at most one in an isolated worktree, then re-enable it only after a manual run creates the expected artifact, a launchd-triggered run creates the same artifact, three scheduled invocations remain clean, and machine load stays bounded. Separately investigate the non-destructive **104,027 SQLite rows versus 104,026 current source files** difference; do not delete retained backup history to make the counts match. Before treating PR badges as proof, make the autonomous reviewer report skipped or failed when no review provider is available and make the PII scan fail when a non-empty PR diff selects zero files.
+
+---
+
 ## Entry 003.41 — 2026-09-04 — External contribution becomes one GitHub-native loop
 
 **Session**: gpt-5.6-sol-fast via Copilot CLI / operator: kody-w

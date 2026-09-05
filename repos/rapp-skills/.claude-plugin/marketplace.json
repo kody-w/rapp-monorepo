@@ -1,0 +1,27 @@
+{
+  "name": "rapp-skills",
+  "owner": {
+    "name": "Kody Wildfeuer",
+    "url": "https://github.com/kody-w"
+  },
+  "metadata": {
+    "description": "Skills you can use, share as one file, and move anywhere. Turn a Python agent into a skill anyone can use, or a skill into one Python file that runs on a server, with nothing lost either way.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "rapp-skills",
+      "description": "Skills you can use, share as one file, and move anywhere. Turn a Python agent into a skill anyone can use, or a skill into one Python file that runs on a server, with nothing lost either way.",
+      "version": "1.0.0",
+      "source": "./",
+      "category": "productivity",
+      "tags": [
+        "skills",
+        "agent-skills",
+        "portable",
+        "copilot-cli",
+        "claude-code"
+      ]
+    }
+  ]
+}

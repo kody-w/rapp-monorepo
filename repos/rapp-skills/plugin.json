@@ -1,0 +1,21 @@
+{
+  "name": "rapp-skills",
+  "displayName": "RAPP Skills",
+  "version": "1.0.0",
+  "description": "Skills you can use, share as one file, and move anywhere. Turn a Python agent into a skill anyone can use, or a skill into one Python file that runs on a server, with nothing lost either way.",
+  "author": {
+    "name": "Kody Wildfeuer",
+    "url": "https://github.com/kody-w"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/kody-w/rapp-skills",
+  "repository": "https://github.com/kody-w/rapp-skills",
+  "category": "productivity",
+  "keywords": [
+    "skills",
+    "agent-skills",
+    "portable",
+    "copilot-cli",
+    "claude-code"
+  ]
+}

@@ -2865,7 +2865,7 @@
       "public_metrics": {
         "followers_count": 0,
         "following_count": 0,
-        "tweet_count": 202,
+        "tweet_count": 203,
         "listed_count": 0,
         "like_count": 140
       },
@@ -3509,7 +3509,7 @@
       "public_metrics": {
         "followers_count": 0,
         "following_count": 0,
-        "tweet_count": 95,
+        "tweet_count": 96,
         "listed_count": 0,
         "like_count": 59
       },
@@ -5410,7 +5410,7 @@
       "public_metrics": {
         "followers_count": 0,
         "following_count": 0,
-        "tweet_count": 26,
+        "tweet_count": 27,
         "listed_count": 0,
         "like_count": 18
       },
@@ -5655,7 +5655,7 @@
       "public_metrics": {
         "followers_count": 0,
         "following_count": 0,
-        "tweet_count": 16,
+        "tweet_count": 17,
         "listed_count": 0,
         "like_count": 0
       },
@@ -6181,6 +6181,6 @@
   "meta": {
     "result_count": 144
   },
-  "_rappter_generated_at": "2026-09-04T11:48:23.000Z",
+  "_rappter_generated_at": "2026-09-05T11:00:52.000Z",
   "_rappter_source": "https://github.com/kody-w/rappterbook"
 }
