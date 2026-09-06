@@ -805,7 +805,7 @@ button:focus-visible,
 /* ── Interaction Prompt ─────────────────────────────────── */
 .interaction-prompt {
   position: fixed;
-  bottom: 80px;
+  bottom: 150px; /* clears the bottom-center ability-bar + combat-hud stack */
   left: 50%;
   transform: translateX(-50%);
   background: var(--bg-panel);
@@ -836,12 +836,24 @@ button:focus-visible,
   position: absolute;
 }
 
-/* ── Combat HUD ─────────────────────────────────────────── */
-.combat-hud {
+/* ── Bottom-center HUD stack (ability bar + combat status) ──
+   Both live inside #hud-bottom-center so they stack vertically
+   instead of overlapping at the same fixed position. */
+#hud-bottom-center {
   position: fixed;
-  bottom: 16px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
+  z-index: var(--z-ui);
+  display: flex;
+  flex-direction: column-reverse; /* first child (ability bar) sits closest to the screen edge */
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+}
+
+/* ── Combat HUD ─────────────────────────────────────────── */
+.combat-hud {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -849,7 +861,6 @@ button:focus-visible,
   border: 1px solid rgba(0, 212, 255, 0.25);
   border-radius: var(--radius-lg);
   padding: 8px 20px;
-  z-index: var(--z-ui);
   font-size: 12px;
   color: var(--text-secondary);
   pointer-events: none;
@@ -1764,14 +1775,11 @@ button:focus-visible,
   -webkit-backdrop-filter: blur(12px);
 }
 
-/* ── Gold/KDA Bar ──────────────────────────────────────── */
+/* ── Gold/KDA Bar — lives inside #hud-bottom-left ────────── */
 #gold-kda-bar {
-  position: fixed;
-  bottom: 72px; left: 12px;
   display: none;
   gap: 12px;
   font-size: 11px;
-  z-index: 900;
   font-family: 'SF Mono', monospace;
 }
 
@@ -1815,12 +1823,23 @@ button:focus-visible,
 }
 
 /* === css/stats.css === */
-/* Player Stats HUD — bottom-left corner */
-#player-stats-bar {
+/* Bottom-left HUD stack — player stats (closest to corner), level badge,
+   gold/KDA bar, status effects. All live inside #hud-bottom-left so they
+   stack vertically instead of overlapping at the same fixed position. */
+#hud-bottom-left {
     position: fixed;
     bottom: 20px;
     left: 20px;
     z-index: var(--z-ui);
+    display: flex;
+    flex-direction: column-reverse; /* first child (player stats) sits closest to the corner */
+    align-items: flex-start;
+    gap: 8px;
+    pointer-events: none;
+}
+
+/* Player Stats HUD — bottom-left corner */
+#player-stats-bar {
     display: none; /* shown only in world mode */
     flex-direction: column;
     gap: 4px;
@@ -1869,10 +1888,6 @@ button:focus-visible,
 }
 
 #level-badge {
-    position: fixed;
-    bottom: 85px;
-    left: 20px;
-    z-index: var(--z-ui);
     display: none;
     font-family: var(--font-mono);
     font-size: 14px;
@@ -1934,13 +1949,8 @@ button:focus-visible,
     letter-spacing: 3px;
 }
 
-/* Ability bar — bottom center */
+/* Ability bar — lives inside #hud-bottom-center */
 #ability-bar {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: var(--z-ui);
     display: none;
     gap: 6px;
     pointer-events: auto;
@@ -2095,16 +2105,13 @@ button:focus-visible,
 
 .cinematic-active .cinematic-grain { opacity: 0.03; }
 .cinematic-active #top-bar,
-.cinematic-active #player-stats-bar,
-.cinematic-active #ability-bar,
-.cinematic-active #combat-hud,
+.cinematic-active #hud-bottom-left,
+.cinematic-active #hud-bottom-center,
 .cinematic-active #combo-display,
 .cinematic-active #minimap,
-.cinematic-active #level-badge,
 .cinematic-active #inventory-panel,
 .cinematic-active #equipment-panel,
-.cinematic-active #enemy-hero-hud,
-.cinematic-active #status-effects-strip {
+.cinematic-active #enemy-hero-hud {
     display: none !important;
 }
 .cinematic-active .cinematic-letterbox { height: 10%; }
@@ -2124,12 +2131,8 @@ button:focus-visible,
 
 /* ── Status Effects Strip ── */
 #status-effects-strip {
-    position: fixed;
-    bottom: 72px;
-    left: 16px;
     display: flex;
     gap: 6px;
-    z-index: var(--z-ui, 100);
     pointer-events: none;
 }
 
@@ -3381,45 +3384,57 @@ button:focus-visible,
 <div id="world-container"></div>
 <div class="interaction-prompt" id="interaction-prompt">Press E to interact</div>
 
-<!-- ===== COMBAT HUD ===== -->
-<div class="combat-hud" id="combat-hud" style="display:none">
-    <div class="combat-momentum">
-        <span class="combat-label">MOMENTUM</span>
-        <div class="combat-momentum-bar">
-            <div class="combat-momentum-fill" id="combat-momentum-fill"></div>
+<!-- ===== BOTTOM-CENTER STACK: ability bar (closest to edge) + combat status above it ===== -->
+<div id="hud-bottom-center">
+    <div id="ability-bar">
+        <div class="ability-slot ready" data-ability="0"><span class="ability-key">1</span>⚔️</div>
+        <div class="ability-slot ready" data-ability="1"><span class="ability-key">2</span>🔵</div>
+        <div class="ability-slot ready" data-ability="2"><span class="ability-key">3</span>🛡️</div>
+        <div class="ability-slot ready" data-ability="3"><span class="ability-key">4</span>💨</div>
+        <div class="ability-slot ready" data-ability="4"><span class="ability-key">5</span>💥</div>
+    </div>
+    <div class="combat-hud" id="combat-hud" style="display:none">
+        <div class="combat-momentum">
+            <span class="combat-label">MOMENTUM</span>
+            <div class="combat-momentum-bar">
+                <div class="combat-momentum-fill" id="combat-momentum-fill"></div>
+            </div>
+            <span class="combat-momentum-val" id="combat-momentum-val">50</span>
         </div>
-        <span class="combat-momentum-val" id="combat-momentum-val">50</span>
-    </div>
-    <div class="combat-wave">
-        <span class="combat-label">WAVE</span>
-        <span class="combat-wave-num" id="combat-wave-num">0</span>
-    </div>
-    <div class="combat-hint">SPACE — Attack</div>
-    <div id="weather-label" style="font-size:10px; opacity:0.6; letter-spacing:2px;"></div>
-    <div id="seed-info" style="display:flex; align-items:center; gap:6px; font-size:10px; opacity:0.6; letter-spacing:1px;">
-        <span>SEED: <span id="seed-value" style="color:#00d4ff;">---</span></span>
-        <button id="btn-export-seed" title="Export world seed as JSON" style="background:none; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.6); font-size:9px; padding:1px 6px; cursor:pointer; border-radius:3px; font-family:inherit; letter-spacing:1px;">EXPORT</button>
-        <button id="btn-import-seed" title="Import world seed from JSON" style="background:none; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.6); font-size:9px; padding:1px 6px; cursor:pointer; border-radius:3px; font-family:inherit; letter-spacing:1px;">IMPORT</button>
-        <button id="btn-reset-seed" title="Reset to universe-computed seed" style="background:none; border:1px solid rgba(255,255,255,0.15); color:rgba(255,255,255,0.4); font-size:9px; padding:1px 6px; cursor:pointer; border-radius:3px; font-family:inherit; letter-spacing:1px;">RESET</button>
+        <div class="combat-wave">
+            <span class="combat-label">WAVE</span>
+            <span class="combat-wave-num" id="combat-wave-num">0</span>
+        </div>
+        <div class="combat-hint">SPACE / Right-click — Attack</div>
+        <div id="weather-label" style="font-size:10px; opacity:0.6; letter-spacing:2px;"></div>
+        <div id="seed-info" style="display:flex; align-items:center; gap:6px; font-size:10px; opacity:0.6; letter-spacing:1px;">
+            <span>SEED: <span id="seed-value" style="color:#00d4ff;">---</span></span>
+            <button id="btn-export-seed" title="Export world seed as JSON" style="background:none; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.6); font-size:9px; padding:1px 6px; cursor:pointer; border-radius:3px; font-family:inherit; letter-spacing:1px;">EXPORT</button>
+            <button id="btn-import-seed" title="Import world seed from JSON" style="background:none; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.6); font-size:9px; padding:1px 6px; cursor:pointer; border-radius:3px; font-family:inherit; letter-spacing:1px;">IMPORT</button>
+            <button id="btn-reset-seed" title="Reset to universe-computed seed" style="background:none; border:1px solid rgba(255,255,255,0.15); color:rgba(255,255,255,0.4); font-size:9px; padding:1px 6px; cursor:pointer; border-radius:3px; font-family:inherit; letter-spacing:1px;">RESET</button>
+        </div>
     </div>
 </div>
 <input type="file" id="seed-file-input" accept=".json" style="display:none">
 
-<!-- ===== PLAYER STATS BAR ===== -->
-<div id="player-stats-bar">
-    <div class="stat-row"><span class="stat-label">HP</span><div class="stat-bar-container"><div class="stat-bar-fill" id="hp-fill"></div></div><span class="stat-text" id="hp-text">100/100</span></div>
-    <div class="stat-row"><span class="stat-label">MP</span><div class="stat-bar-container"><div class="stat-bar-fill" id="mp-fill"></div></div><span class="stat-text" id="mp-text">50/50</span></div>
-    <div class="stat-row"><span class="stat-label">EN</span><div class="stat-bar-container"><div class="stat-bar-fill" id="energy-fill"></div></div><span class="stat-text" id="energy-text">100/100</span></div>
-    <div class="stat-row"><span class="stat-label">P-XP</span><div class="stat-bar-container"><div class="stat-bar-fill" id="xp-fill"></div></div><span class="stat-text" id="xp-text">0/100</span></div>
-</div>
-<div id="level-badge">1</div>
-<div id="gold-kda-bar" style="position:fixed; bottom:72px; left:12px; display:none; gap:12px; font-size:11px; z-index:900; font-family:'SF Mono',monospace;">
-    <span class="practice-mode-badge" title="Browser-local practice progress; not canonical RAPPcoin">LOCAL PRACTICE</span>
-    <span id="gold-display" style="color:#fbbf24; font-weight:700;">0 PG</span>
-    <span style="color:rgba(255,255,255,0.2);">|</span>
-    <span id="kda-display" style="color:#8b949e;">0/0/0</span>
-    <span style="color:rgba(255,255,255,0.2);">|</span>
-    <span id="gpm-display" style="color:#8b949e; font-size:9px;">0 PG/M</span>
+<!-- ===== BOTTOM-LEFT STACK: player stats (closest to corner), level, gold/KDA, status effects ===== -->
+<div id="hud-bottom-left">
+    <div id="player-stats-bar">
+        <div class="stat-row"><span class="stat-label">HP</span><div class="stat-bar-container"><div class="stat-bar-fill" id="hp-fill"></div></div><span class="stat-text" id="hp-text">100/100</span></div>
+        <div class="stat-row"><span class="stat-label">MP</span><div class="stat-bar-container"><div class="stat-bar-fill" id="mp-fill"></div></div><span class="stat-text" id="mp-text">50/50</span></div>
+        <div class="stat-row"><span class="stat-label">EN</span><div class="stat-bar-container"><div class="stat-bar-fill" id="energy-fill"></div></div><span class="stat-text" id="energy-text">100/100</span></div>
+        <div class="stat-row"><span class="stat-label">P-XP</span><div class="stat-bar-container"><div class="stat-bar-fill" id="xp-fill"></div></div><span class="stat-text" id="xp-text">0/100</span></div>
+    </div>
+    <div id="level-badge">1</div>
+    <div id="gold-kda-bar" style="display:none; gap:12px; font-size:11px; font-family:'SF Mono',monospace;">
+        <span class="practice-mode-badge" title="Browser-local practice progress; not canonical RAPPcoin">LOCAL PRACTICE</span>
+        <span id="gold-display" style="color:#fbbf24; font-weight:700;">0 PG</span>
+        <span style="color:rgba(255,255,255,0.2);">|</span>
+        <span id="kda-display" style="color:#8b949e;">0/0/0</span>
+        <span style="color:rgba(255,255,255,0.2);">|</span>
+        <span id="gpm-display" style="color:#8b949e; font-size:9px;">0 PG/M</span>
+    </div>
+    <div id="status-effects-strip"></div>
 </div>
 <div id="warmup-timer" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-size:28px;font-weight:900;letter-spacing:4px;color:#d29922;text-shadow:0 0 30px rgba(210,153,34,0.4);z-index:950;pointer-events:none;font-family:'SF Mono',monospace;"></div>
 <div id="damage-vignette"></div>
@@ -3428,18 +3443,6 @@ button:focus-visible,
     <div style="font-size:48px; font-weight:900; letter-spacing:6px; margin-bottom:12px;" id="victory-title">VICTORY</div>
     <div style="font-size:14px; color:#8b949e; margin-bottom:24px;" id="victory-stats"></div>
     <button id="victory-btn" style="background:rgba(0,212,255,0.2); border:1px solid rgba(0,212,255,0.4); color:#00d4ff; padding:10px 30px; font:inherit; font-size:14px; letter-spacing:2px; border-radius:8px; cursor:pointer;">RETURN TO GALAXY</button>
-</div>
-
-<!-- ===== STATUS EFFECTS STRIP ===== -->
-<div id="status-effects-strip"></div>
-
-<!-- ===== ABILITY BAR ===== -->
-<div id="ability-bar">
-    <div class="ability-slot ready" data-ability="0"><span class="ability-key">1</span>⚔️</div>
-    <div class="ability-slot ready" data-ability="1"><span class="ability-key">2</span>🔵</div>
-    <div class="ability-slot ready" data-ability="2"><span class="ability-key">3</span>🛡️</div>
-    <div class="ability-slot ready" data-ability="3"><span class="ability-key">4</span>💨</div>
-    <div class="ability-slot ready" data-ability="4"><span class="ability-key">5</span>💥</div>
 </div>
 
 <!-- ===== COMBO DISPLAY ===== -->
@@ -3543,6 +3546,7 @@ button:focus-visible,
         <div class="fml-item"><div class="fml-dot" style="background:#58a6ff;width:6px;height:6px;border-radius:1px;"></div>Explorer Towers</div>
         <div class="fml-item"><div class="fml-dot" style="background:#f85149;width:6px;height:6px;border-radius:1px;"></div>Horde Towers</div>
         <div class="fml-item"><div class="fml-dot" style="background:#886644;"></div>Jungle Camps</div>
+        <div class="fml-item"><div class="fml-dot" style="background:#00d4ff;"></div>Wards</div>
     </div>
     <button id="fullmap-close">&times;</button>
 </div>
@@ -4677,24 +4681,31 @@ const Chronicle = {
         if (seen) return;
 
         this.autoScheduled = true;
+        // Neither this retry chain nor openWhenStable() below was ever
+        // canceled — there was no Chronicle.cleanup() and nothing called
+        // one. Tracking the pending handle here (and in openWhenStable) lets
+        // a new cleanup() stop a leftover retry loop from firing an overlay
+        // into a world session that started well after this one ended.
         const tryOpen = (attempt) => {
+            this._premiereTimer = null;
             if (this.open) return;
             if (!['galaxy', 'world'].includes(GameState.mode) && attempt < 80) {
-                setTimeout(() => tryOpen(attempt + 1), 500);
+                this._premiereTimer = setTimeout(() => tryOpen(attempt + 1), 500);
                 return;
             }
             if (['galaxy', 'world'].includes(GameState.mode)) this.openById(featured.id);
         };
-        setTimeout(() => tryOpen(0), 2200);
+        this._premiereTimer = setTimeout(() => tryOpen(0), 2200);
     },
 
     openWhenStable(id, attempt) {
         const tries = attempt || 0;
+        this._deepLinkTimer = null;
         if (['galaxy', 'world'].includes(GameState.mode)) {
             this.openById(id);
             return;
         }
-        if (tries < 80) setTimeout(() => this.openWhenStable(id, tries + 1), 500);
+        if (tries < 80) this._deepLinkTimer = setTimeout(() => this.openWhenStable(id, tries + 1), 500);
     },
 
     find(id) {
@@ -4757,6 +4768,16 @@ const Chronicle = {
             if (!this.open) overlay.hidden = true;
         }, 330);
         if (this.previousFocus?.focus) this.previousFocus.focus();
+    },
+
+    // Cancels any pending premiere/deep-link retry timers so a world
+    // session that ends while one is still polling for a stable mode can't
+    // pop the overlay (and lock input via openById -> lockBackground) into
+    // a later, unrelated world session.
+    cleanup() {
+        if (this._premiereTimer) { clearTimeout(this._premiereTimer); this._premiereTimer = null; }
+        if (this._deepLinkTimer) { clearTimeout(this._deepLinkTimer); this._deepLinkTimer = null; }
+        if (this.open) this.close();
     },
 
     markSeen(id) {
@@ -5103,7 +5124,7 @@ const Chronicle = {
 // Procedural audio system — Web Audio API only, no external files
 const Audio = {
   ctx: null, masterGain: null, musicGain: null, sfxGain: null,
-  initialized: false, _ambientOscs: [], _ambientGains: [],
+  initialized: false, _ambientOscs: [], _ambientGains: [], _ambientExtraNodes: [],
   _intensityOsc: null, _currentBiome: null,
 
   _mtof(m) { return 440 * Math.pow(2, (m - 69) / 12); },
@@ -5178,11 +5199,13 @@ const Audio = {
         lpf.Q.value = 1;
         lpf.connect(this.musicGain);
         dest = lpf;
+        this._ambientExtraNodes.push(lpf);
       }
       osc.connect(oscG); oscG.connect(dest);
       osc.start(t); lfo.start(t);
       this._ambientOscs.push(osc, lfo);
       this._ambientGains.push(oscG);
+      this._ambientExtraNodes.push(lfoG);
     });
 
     // Crystal shimmer: high quiet oscillator with fast LFO
@@ -5201,6 +5224,7 @@ const Audio = {
       sh.start(t); shLfo.start(t);
       this._ambientOscs.push(sh, shLfo);
       this._ambientGains.push(shG);
+      this._ambientExtraNodes.push(shLG);
     }
   },
 
@@ -5213,9 +5237,21 @@ const Audio = {
       g.gain.linearRampToValueAtTime(0, t + 2);
     });
     const oscs = this._ambientOscs;
-    setTimeout(() => oscs.forEach(o => { try { o.stop(); o.disconnect(); } catch(_){} }), 2200);
+    const gains = this._ambientGains;
+    // Also disconnect the intermediate gain/filter/LFO-support nodes once the
+    // fade completes — stopAmbient() previously only stopped/disconnected the
+    // oscillators, so every biome transition left another lowpass filter and
+    // gain node permanently connected to musicGain, accumulating across
+    // repeated world/biome changes in a session.
+    const extras = this._ambientExtraNodes;
+    setTimeout(() => {
+      oscs.forEach(o => { try { o.stop(); o.disconnect(); } catch(_){} });
+      gains.forEach(g => { try { g.disconnect(); } catch(_){} });
+      extras.forEach(n => { try { n.disconnect(); } catch(_){} });
+    }, 2200);
     this._ambientOscs = [];
     this._ambientGains = [];
+    this._ambientExtraNodes = [];
     this._currentBiome = null;
   },
 
@@ -5232,6 +5268,7 @@ const Audio = {
       this._intensityOsc = { osc, gain: g };
     } else if (v <= 0.6 && this._intensityOsc) {
       try { this._intensityOsc.osc.stop(); this._intensityOsc.osc.disconnect(); } catch(_){}
+      try { this._intensityOsc.gain.disconnect(); } catch(_){}
       this._intensityOsc = null;
     }
     if (this._intensityOsc)
@@ -5701,6 +5738,10 @@ const PlayerStats = {
   die() {
     this.dead = true;
     this.deaths++;
+    // Death should end the current kill chain immediately, not just let the
+    // 3s combo timeout expire — otherwise a respawned player keeps the
+    // multiplier from before they died.
+    if (typeof ComboSystem !== 'undefined') ComboSystem.reset();
     // Respawn timer scales with level (5s base + 2s per level)
     this.respawnTimer = 5 + this.level * 2;
     const overlay = document.getElementById('death-overlay');
@@ -6045,12 +6086,24 @@ const StatusEffects = (function () {
                         if (now - eff.lastTick >= def.tickRate) {
                             var ticks = Math.floor((now - eff.lastTick) / def.tickRate);
                             eff.lastTick += ticks * def.tickRate;
-                            mob.userData.hp -= def.tickDamage * ticks;
+                            var dotDmg = def.tickDamage * ticks;
 
-                            if (mob.userData.hp <= 0) {
-                                events.push({ mob: mob, element: el, killed: true });
-                            } else {
-                                events.push({ mob: mob, element: el, killed: false });
+                            // `mob` is a mesh — actual HP lives elsewhere
+                            // (creep.hp on the combat entity, EnemyHero.state.hp).
+                            // Writing to mob.userData.hp (previously undefined,
+                            // going NaN) never reduced real HP, so fire/cosmic
+                            // DoT never actually damaged or killed anything.
+                            var curHp = null;
+                            if (typeof EnemyHero !== 'undefined' && EnemyHero.mesh === mob) {
+                                EnemyHero.damage(dotDmg);
+                                curHp = EnemyHero.state ? EnemyHero.state.hp : null;
+                            } else if (typeof WorldCombat !== 'undefined' && WorldCombat.creeps) {
+                                var owner = WorldCombat.creeps.find(function (c) { return c.mesh === mob; });
+                                if (owner) { owner.hp -= dotDmg; curHp = owner.hp; }
+                            }
+
+                            if (curHp !== null) {
+                                events.push({ mob: mob, element: el, killed: curHp <= 0 });
                             }
                         }
                     }
@@ -8701,6 +8754,12 @@ const WorldTerrain = {
     },
 
     initWeather(scene, w, worldId) {
+        // Clear any stale reference from a previous world's non-clear weather
+        // before rolling this world's type — otherwise, if the previous
+        // weather was e.g. rain and this world rolls 'clear', the old Points
+        // object (already orphaned from the discarded old scene) stayed
+        // referenced and kept getting updated every frame for nothing.
+        this.weatherParticles = null;
         const rng = seededRandom(worldId + '-weather');
         const roll = rng();
         let type = 'clear';
@@ -8817,6 +8876,23 @@ const WorldTerrain = {
             if (pos[iz] < -b.z) pos[iz] = b.z;
         }
         pts.geometry.attributes.position.needsUpdate = true;
+    },
+
+    // Terrain has no dedicated container — every ground/lighting/biome-object/
+    // weather mesh is added straight to the scene (~50+ distinct creation
+    // sites), so there was never a cleanup() to remove or dispose any of it.
+    // The actual mesh/geometry/material disposal is handled generically by
+    // WorldMode.cleanup()'s scene traversal; this just resets our own module
+    // state so a stale noise/profile/particle reference can't leak into the
+    // next world.
+    cleanup() {
+        this.particles = null;
+        this.weatherType = null;
+        this.weatherParticles = null;
+        this._noise = null;
+        this._biome = null;
+        this._terrainSize = 0;
+        this._profile = null;
     }
 };
 
@@ -8878,8 +8954,7 @@ const LANE_DEFS = {
             { x: 0.58, z: 0.97 },
             { x: 0.80, z: 0.94 },
             { x: 1, z: 1 }
-        ],
-        chokeIndex: 9
+        ]
     },
     mid: {
         name: 'Nexus Spine', color: 0xffaa00,
@@ -8899,8 +8974,7 @@ const LANE_DEFS = {
             { x: 0.72, z: 0.68 },
             { x: 0.86, z: 0.84 },
             { x: 1, z: 1 }
-        ],
-        chokeIndex: 7
+        ]
     },
     bot: {
         name: 'Verdant Trail', color: 0x44ff88,
@@ -8923,8 +8997,7 @@ const LANE_DEFS = {
             { x: 0.97, z: 0.58 },
             { x: 0.94, z: 0.80 },
             { x: 1, z: 1 }
-        ],
-        chokeIndex: 9
+        ]
     }
 };
 
@@ -9380,7 +9453,7 @@ const WorldLanes = {
         var offset = faction === 'explorer' ? -3 : 3;
         group.position.set(x + offset, 0, z);
         scene.add(group);
-        this.towers.push({ mesh: group, orb: orb, hpBar: hpBar, hp: 100, maxHp: 100, lane: lane, faction: faction, index: index, attackTimer: 0, target: null, attackRange: 15, attackDamage: 12, attackCooldown: 1.5 });
+        this.towers.push({ mesh: group, orb: orb, hpBar: hpBar, hp: 100, maxHp: 100, lane: lane, faction: faction, index: index, attackTimer: 0, target: null, attackRange: 15, attackDamage: 12, attackCooldown: 1.5, isTower: true });
     },
 
     createThrones(scene, sx, sz) {
@@ -10567,7 +10640,20 @@ const WorldCombat = {
             }
         }
 
-        if (!nearest) return false;
+        if (!nearest) {
+            // No lane creep/tower/hero in range — try a jungle camp instead.
+            // (Previously this fell through unreached: the function returned
+            // above whenever there was no lane target, so camps could only
+            // ever be hit as an unintended free bonus alongside a lane attack.)
+            const dmg = (typeof PlayerStats !== 'undefined') ? PlayerStats.getDamage() : COMBAT_CONFIG.playerDamage;
+            const comboMult = (typeof ComboSystem !== 'undefined') ? ComboSystem.getMultiplier() : 1;
+            const jungleElement = (typeof Equipment !== 'undefined') ? Equipment.getEquippedElement() : null;
+            if (typeof JungleCamps !== 'undefined' && JungleCamps.tryAttack(playerPos, dmg * comboMult, jungleElement)) {
+                this.playerAttackTimer = COMBAT_CONFIG.playerCooldown;
+                return true;
+            }
+            return false;
+        }
 
         this.playerAttackTimer = COMBAT_CONFIG.playerCooldown;
         const dmg = (typeof PlayerStats !== 'undefined') ? PlayerStats.getDamage() : COMBAT_CONFIG.playerDamage;
@@ -10596,6 +10682,33 @@ const WorldCombat = {
 
         if (nearest.hp <= 0) {
             nearest.alive = false;
+
+            if (nearest.isTower) {
+                // Tower destruction — distinct reward/feedback path so a tower
+                // isn't rewarded and logged as if it were just another creep
+                // (it previously fell through to the creep branch below, which
+                // paid creep-sized gold/XP, inflated the KDA kill count, and
+                // tried to spawn an item drop keyed off a creep-array index
+                // the tower was never part of).
+                if (typeof VFX !== 'undefined') VFX.burst(nearest.mesh.position, 'kill');
+                if (typeof GamepadControls !== 'undefined' && GamepadControls.rumble) GamepadControls.rumble(0.6, 0.3, 200);
+                if (typeof ReplaySystem !== 'undefined') {
+                    ReplaySystem.logEvent('tower_destroy', {
+                        name: 'TOWER',
+                        pos: { x: nearest.mesh.position.x, y: nearest.mesh.position.y, z: nearest.mesh.position.z },
+                        killer: 'player'
+                    });
+                }
+                if (typeof PlayerStats !== 'undefined') {
+                    PlayerStats.awardXp(30);
+                    PlayerStats.awardGold(60, 'tower');
+                }
+                if (typeof HUD !== 'undefined') HUD.showToast('TOWER DESTROYED! +60 gold');
+                this.momentum = Math.min(100, this.momentum + COMBAT_CONFIG.momentumPerKill * 3);
+                this.createAttackFlash(playerPos, nearest.mesh.position);
+                return true;
+            }
+
             // VFX kill burst
             if (typeof VFX !== 'undefined') {
                 VFX.burst(nearest.mesh.position, nearest.isBoss ? 'bossKill' : 'kill');
@@ -10627,7 +10740,7 @@ const WorldCombat = {
                 PlayerStats.awardGold(_goldAmt, 'last hit');
                 // Show last hit indicator
                 if (nearest.mesh) this.showDamageNumber(nearest.mesh.position, '+' + lastHitBonus + ' LH', '#ffd700');
-                if (typeof HUD !== 'undefined' && HUD.showKill) HUD.showKill('Player', nearest.isBoss ? 'BOSS' : 'Creep', _goldAmt);
+                if (typeof HUD !== 'undefined' && HUD.showKill) HUD.showKill(nearest.isBoss ? 'BOSS' : 'Creep', _goldAmt);
             }
             if (typeof Inventory !== 'undefined' && nearest.mesh) {
                 Inventory.spawnDrop(nearest.mesh.position.clone(), GameState.currentWorld, this.waveNumber, this.creeps.indexOf(nearest));
@@ -10644,8 +10757,6 @@ const WorldCombat = {
 
         // Visual flash
         this.createAttackFlash(playerPos, nearest.mesh.position);
-        // Also hit jungle camps
-        if (typeof JungleCamps !== "undefined") JungleCamps.tryAttack(playerPos, dmg * comboMult);
         return true;
     },
 
@@ -11437,6 +11548,8 @@ const ReplaySystem = {
                 this._triggerSlowMo({ name: evt.data.name + ' SLAIN', isBoss: true });
             } else if (evt.type === 'tower_destroy') {
                 this._showTicker('TOWER DESTROYED');
+            } else if (evt.type === 'streak') {
+                this._showTicker(evt.data && evt.data.text ? evt.data.text : 'KILLING SPREE');
             }
         }
     },
@@ -11678,6 +11791,10 @@ const ReplaySystem = {
         }
         this.eventLog = [];
         this.snapshots = [];
+        // Otherwise a replay triggered again within 2s of a previous one
+        // ending inherits leftover slow-mo and plays back at 15% speed with
+        // no new kill having happened.
+        this._slowMoUntil = 0;
     }
 };
 
@@ -11862,6 +11979,13 @@ const EchoEvents = {
             this._activeEvent = null;
         }
         this._amplified = false;
+        // Without these resets, a new world session inherits whatever
+        // cooldown was left over from the last one (delaying its first
+        // event for up to 60s) and can never re-trigger the same event id
+        // that was last active, even though this is a fresh session.
+        this._timer = 0;
+        this._lastEvent = null;
+        this._eventTimer = 0;
     }
 };
 
@@ -12035,6 +12159,13 @@ const WorldAgents = {
             if (!currentIds.has(id)) {
                 scene.remove(this.agentMeshes[id].group);
                 delete this.agentMeshes[id];
+                // Drop the stale attack-swarm timer too — otherwise if this
+                // same agent id re-enters agentMeshes while the enemy hero is
+                // already mid-fight, it inherits a leftover cooldown instead
+                // of starting fresh (only the "swarm ended" branch of
+                // updateAnimations() clears this, which never runs for an id
+                // that's no longer in agentMeshes to iterate over).
+                delete this.agentAttackTimers[id];
             }
         });
 
@@ -13194,6 +13325,22 @@ const WorldAgents = {
         this.objectMeshes = [];
         this.interactTarget = null;
         this.pokeTarget = null;
+        // Floating combat/interaction text sprites created shortly before a
+        // world switch previously kept animating against the old scene and
+        // were never released until their own timer expired.
+        this.floatingTexts.forEach(ft => { if (ft.mesh && ft.mesh.parent) ft.mesh.parent.remove(ft.mesh); });
+        this.floatingTexts = [];
+        // Relationship edge lines were only ever disposed the next time
+        // updateEdges() ran, so switching worlds left stale geometry
+        // referenced (and visible, if the scene object was reused).
+        if (this._edgeLines) {
+            this._edgeLines.forEach(l => { scene.remove(l); l.geometry.dispose(); l.material.dispose(); });
+            this._edgeLines = null;
+        }
+        this._lastEdgeUpdate = 0;
+        // Defensive-swarm attack cooldowns are per agent id; clear them all
+        // so a fresh world doesn't inherit any stale entries.
+        this.agentAttackTimers = {};
     }
 };
 
@@ -13721,6 +13868,7 @@ const Abilities = {
   },
 
   _updateSlotUI() {
+    if (!this._slotEls) return; // not initialized yet (e.g. Abilities.init() hasn't run)
     this._slotEls.forEach((el, i) => {
       var lvlBadge = el.querySelector('.ability-level');
       if (!lvlBadge) {
@@ -13783,19 +13931,27 @@ const Abilities = {
   useAbility(index) {
     if (!this.active || index < 0 || index >= this.defs.length) return false;
     const def = this.defs[index];
+    // Cooldown/cost/damage/range/duration/distance are all meant to scale
+    // with the ability's level (see getScaled()), but this previously read
+    // straight from the unscaled `def` for the cooldown/cost gate and passed
+    // `def` itself into the _do*() handlers — so leveling an ability (spending
+    // a hard-earned skill point) had zero actual gameplay effect beyond the
+    // "Level N" HUD badge.
+    const scaled = this.getScaled(index);
     if (this.cooldowns[index] > 0) return false;
-    if (def.costType === 'mp' && !PlayerStats.useMp(def.cost)) return false;
-    if (def.costType === 'energy' && !PlayerStats.useEnergy(def.cost)) return false;
-    this.cooldowns[index] = def.cooldown;
+    if (def.costType === 'mp' && !PlayerStats.useMp(scaled.cost)) return false;
+    if (def.costType === 'energy' && !PlayerStats.useEnergy(scaled.cost)) return false;
+    this.cooldowns[index] = scaled.cooldown;
 
     const pos = this._playerPos();
     const dir = this._facing();
+    const liveDef = Object.assign({}, def, scaled);
 
-    if (def.type === 'melee_aoe') this._doSlash(pos, def);
-    else if (def.type === 'projectile') this._doPulseShot(pos, dir, def);
-    else if (def.type === 'buff_shield') this._doShield(def);
-    else if (def.type === 'dash') this._doDash(pos, dir, def);
-    else if (def.type === 'aoe_burst') this._doNova(pos, def);
+    if (def.type === 'melee_aoe') this._doSlash(pos, liveDef);
+    else if (def.type === 'projectile') this._doPulseShot(pos, dir, liveDef);
+    else if (def.type === 'buff_shield') this._doShield(liveDef);
+    else if (def.type === 'dash') this._doDash(pos, dir, liveDef);
+    else if (def.type === 'aoe_burst') this._doNova(pos, liveDef);
     return true;
   },
 
@@ -14041,7 +14197,9 @@ const HERO_CONFIG = {
     xpPerCreepKill: 15,
     xpToLevel: [0, 80, 200, 380, 620, 920, 1300, 1780, 2380, 3100],
     spawnOffset: { x: 80, z: 80 },
-    ai: { aggressiveness: 0.6, retreatThreshold: 0.25, farmWeight: 0.4 }
+    ai: { aggressiveness: 0.6, retreatThreshold: 0.25, farmWeight: 0.4 },
+    hpRegen: 1.5,       // base HP/sec regen (mirrors player)
+    hpRegenAtBase: 4    // faster regen while retreating near spawn (Dota fountain-style)
 };
 
 const HERO_ABILITIES = {
@@ -14153,6 +14311,9 @@ const EnemyHero = {
         const s = this.state;
         if (!s.alive) { s.respawnTimer -= delta * 1000; if (s.respawnTimer <= 0) this.respawn(); this.updateHUD(); return; }
         s.mana = Math.min(s.maxMana, s.mana + 2 * delta);
+        // HP regen — faster while retreating near base (mirrors a Dota fountain)
+        const regen = s.aiState === 'retreating' ? HERO_CONFIG.hpRegenAtBase : HERO_CONFIG.hpRegen;
+        s.hp = Math.min(s.maxHp, s.hp + regen * delta);
         this.updateAI(playerPos); this.updateMovement(delta);
         this.updateCombat(delta, time); this.updateAbilities(time);
         this.updateBuffs(time); this.updateVisuals(); this.updateHUD();
@@ -14275,7 +14436,11 @@ const EnemyHero = {
         if (target === 'player') {
             // Pack Hunter passive: +50% to targets below 30% HP
             if (typeof PlayerStats !== 'undefined' && PlayerStats.hp / PlayerStats.maxHp < 0.3) dmg *= 1.5;
-            if (typeof PlayerStats !== 'undefined') PlayerStats.takeDamage(dmg);
+            if (typeof PlayerStats !== 'undefined') {
+                const wasAlive = !PlayerStats.dead;
+                PlayerStats.takeDamage(dmg);
+                if (wasAlive && PlayerStats.dead) s.kills++; // credit the hero's KDA
+            }
             if (s.buffs.apexPredator) {
                 s.hp = Math.min(s.maxHp, s.hp + dmg * HERO_ABILITIES.apexPredator.lifesteal);
             }
@@ -14310,7 +14475,9 @@ const EnemyHero = {
                 const dir = new THREE.Vector3().subVectors(s.targetPos, pos).normalize();
                 this.mesh.position.addScaledVector(dir, Math.min(d, HERO_ABILITIES.savageLeap.range));
                 if (s.target === 'player' && typeof PlayerStats !== 'undefined') {
+                    const wasAlive = !PlayerStats.dead;
                     PlayerStats.takeDamage(HERO_ABILITIES.savageLeap.damage);
+                    if (wasAlive && PlayerStats.dead) s.kills++;
                 }
             }
         }
@@ -14320,7 +14487,11 @@ const EnemyHero = {
             if (s.targetPos && pos.distanceTo(s.targetPos) <= HERO_ABILITIES.primalRoar.radius) {
                 s.mana -= HERO_ABILITIES.primalRoar.manaCost;
                 cd.primalRoar = now + HERO_ABILITIES.primalRoar.cooldown;
-                if (typeof PlayerStats !== 'undefined') PlayerStats.takeDamage(HERO_ABILITIES.primalRoar.damage);
+                if (typeof PlayerStats !== 'undefined') {
+                    const wasAlive = !PlayerStats.dead;
+                    PlayerStats.takeDamage(HERO_ABILITIES.primalRoar.damage);
+                    if (wasAlive && PlayerStats.dead) s.kills++;
+                }
                 s.buffs.primalRoar = now + HERO_ABILITIES.primalRoar.boostDuration;
             }
         }
@@ -14407,8 +14578,13 @@ const EnemyHero = {
         this.mesh.visible = false;
         s.respawnTimer = HERO_CONFIG.respawnBase + HERO_CONFIG.respawnPerLevel * s.level;
         const xpReward = HERO_CONFIG.killXpReward + 15 * s.level;
-        if (typeof PlayerStats !== 'undefined' && PlayerStats.awardXp) PlayerStats.awardXp(xpReward);
-        if (typeof HUD !== 'undefined' && HUD.showToast) HUD.showToast(`${HERO_CONFIG.name} slain! +${xpReward} XP`);
+        const goldReward = HERO_CONFIG.killGoldReward + 10 * s.level;
+        if (typeof PlayerStats !== 'undefined') {
+            if (PlayerStats.awardXp) PlayerStats.awardXp(xpReward);
+            PlayerStats.awardGold(goldReward, 'hero kill');
+            PlayerStats.kills++;
+        }
+        if (typeof HUD !== 'undefined' && HUD.showToast) HUD.showToast(`${HERO_CONFIG.name} slain! +${xpReward} XP, +${goldReward} Gold`);
     },
 
     respawn() {
@@ -14580,13 +14756,27 @@ const WorldMode = {
         };
         window.addEventListener('wheel', this._onWheel, { passive: false });
 
+        // Right-click to attack (Dota-style) — suppress the browser context menu
+        // on the world canvas so right-click is available as an input.
+        this._onContextMenu = (e) => {
+            if (this.active && GameState.mode === 'world') e.preventDefault();
+        };
+        this._onMouseDown = (e) => {
+            if (e.button !== 2) return; // right mouse button only
+            if (!this.active || GameState.mode !== 'world' || GameState.inputLocked) return;
+            e.preventDefault();
+            if (this.player) WorldCombat.playerAttack(this.player.mesh.position);
+        };
+        GameState.renderer.domElement.addEventListener('contextmenu', this._onContextMenu);
+        GameState.renderer.domElement.addEventListener('mousedown', this._onMouseDown);
+
         // Set mode to world so main loop renders us
         GameState.setMode('world');
 
         // HUD
         if (typeof HUD !== 'undefined') {
             HUD.setWorld(worldId);
-            HUD.showToast(`Landed on ${w.name} — SPACE to attack, WASD to move`);
+            HUD.showToast(`Landed on ${w.name} — SPACE or Right-click to attack, WASD to move`);
             if (HUD.initChatFeed) HUD.initChatFeed();
             GameState.currentWorld = worldId;
         }
@@ -14619,10 +14809,15 @@ const WorldMode = {
             if (tl) tl.classList.add('visible');
         }
         // Init Lispy VM
-        // RappterOS available for agent compute (boots on demand)
-        if (typeof RappterOS !== 'undefined' && RappterOS.registerVMFunctions) RappterOS.registerVMFunctions();
+        // RappterVM.init() must run before RappterOS.registerVMFunctions() --
+        // init() unconditionally replaces _env with a fresh object, which
+        // previously wiped every os-exec/os-python/os-ready/os-result/
+        // os-queue-size function registerVMFunctions() had just written,
+        // since it ran first. Agent programs calling those symbols silently
+        // resolved to null in every world.
         if (typeof RappterVM !== 'undefined') {
             RappterVM.init();
+            if (typeof RappterOS !== 'undefined' && RappterOS.registerVMFunctions) RappterOS.registerVMFunctions();
             RappterVM.onFrameArrival(GameState.data);
             // Register echo shapers
             RappterVM.registerShaper('terrain', 4, function(d) { return typeof WorldSeed !== 'undefined' ? WorldSeed.getSeed(GameState.currentWorld) : 0; });
@@ -14805,6 +15000,12 @@ const WorldMode = {
 
         // Touch controls
         if (typeof TouchControls !== 'undefined') TouchControls.update(delta);
+        // GamepadControls.update() was never called either -- controller
+        // movement/attack/abilities/bridge/map/inventory input never reached
+        // the game even after a controller connected. The event listener
+        // registered in main.js only sets active/_padIndex; the actual
+        // per-frame input polling has to run here.
+        if (typeof GamepadControls !== 'undefined') GamepadControls.update();
 
         // RappterVM tick — Lispy behaviors between frames
         if (typeof RappterVM !== 'undefined' && RappterVM._running) RappterVM.tick();
@@ -14908,6 +15109,8 @@ const WorldMode = {
         window.removeEventListener('keydown', this.keyDown);
         window.removeEventListener('keyup', this.keyUp);
         if (this._onWheel) window.removeEventListener('wheel', this._onWheel);
+        if (this._onContextMenu) GameState.renderer.domElement.removeEventListener('contextmenu', this._onContextMenu);
+        if (this._onMouseDown) GameState.renderer.domElement.removeEventListener('mousedown', this._onMouseDown);
         this.keys = {};
         this.cameraZoom = 1.0;
 
@@ -14922,6 +15125,49 @@ const WorldMode = {
         if (typeof Equipment !== 'undefined') Equipment.cleanup();
         if (typeof StatusEffects !== 'undefined') StatusEffects.cleanup();
         if (typeof EnemyHero !== 'undefined') EnemyHero.cleanup();
+        // WorldAgents and FogOfWar own meshes (agent bodies, portals, floating
+        // text, relationship edges, the fog plane, ward markers) added
+        // directly to this.scene, but neither was ever invoked here — every
+        // world switch silently leaked all of it, since init() replaces
+        // this.scene with a brand new THREE.Scene() without ever detaching
+        // or disposing what the previous session created.
+        if (typeof WorldAgents !== 'undefined' && WorldAgents.cleanup) WorldAgents.cleanup(this.scene);
+        if (typeof FogOfWar !== 'undefined') FogOfWar.cleanup();
+        if (typeof WorldTerrain !== 'undefined' && WorldTerrain.cleanup) WorldTerrain.cleanup();
+        // RappterOS.cleanup() existed but was never called from here — its
+        // queue/results/readiness state (and, worse, a pending 8s boot timer
+        // if a voice-triggered VM boot was mid-flight) survived world
+        // switches indefinitely.
+        if (typeof RappterOS !== 'undefined' && RappterOS.cleanup) RappterOS.cleanup();
+        // Chronicle's premiere/deep-link retry timers polled for a stable
+        // galaxy/world mode for up to 40s with nothing to cancel them —
+        // a leftover retry could pop the overlay (and lock input) into a
+        // later, unrelated world session.
+        if (typeof Chronicle !== 'undefined' && Chronicle.cleanup) Chronicle.cleanup();
+        // GestureControls._stop() (webcam MediaStream + released keys) was
+        // only ever reached via the user manually toggling the feature off
+        // — a world/session ending while gestures were left on kept the
+        // camera recording indefinitely.
+        if (typeof GestureControls !== 'undefined' && GestureControls.cleanup) GestureControls.cleanup();
+
+        // Generic disposal pass for whatever's left in the scene. Ground,
+        // lighting, biome objects/features, and weather particles (all owned
+        // by WorldTerrain) have ~50+ individual creation sites and no
+        // per-object tracking, so rather than enumerate every one, dispose
+        // geometry/material for everything still attached to this.scene —
+        // every module above already removed its own meshes via
+        // scene.remove(), so traverse() only reaches what nothing else
+        // cleaned up (i.e. terrain), with no risk of double-disposing
+        // something another cleanup() already handled.
+        if (this.scene) {
+            this.scene.traverse(function(obj) {
+                if (obj.geometry && obj.geometry.dispose) obj.geometry.dispose();
+                if (obj.material) {
+                    const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+                    mats.forEach(m => { if (m && m.dispose) m.dispose(); });
+                }
+            });
+        }
 
         document.getElementById('world-container').style.display = 'none';
         document.getElementById('combat-hud').style.display = 'none';
@@ -15015,13 +15261,18 @@ const Bridge = {
 
         // Show overlay and attach renderer
         const overlay = document.getElementById('bridge-overlay');
-        overlay.innerHTML = '';
-        const closeBtn = document.createElement('button');
-        closeBtn.id = 'bridge-close';
-        closeBtn.className = 'bridge-close';
-        closeBtn.textContent = '\u00d7';
-        closeBtn.addEventListener('click', () => this.close());
-        overlay.appendChild(closeBtn);
+        // Previously this cleared overlay.innerHTML entirely on every open,
+        // which destroys the static .bridge-title/.bridge-grid markup (and
+        // every card inside it, from src/html/layout.html) the very first
+        // time it runs. close() never recreates any of it, so from the
+        // second bridge open onward the player saw only the 3D scene and a
+        // close button — permanently missing its title and every data card.
+        // Reuse the existing static close button instead of destroying and
+        // recreating the whole overlay each time.
+        let closeBtn = document.getElementById('bridge-close');
+        if (this._boundCloseClick) closeBtn.removeEventListener('click', this._boundCloseClick);
+        this._boundCloseClick = () => this.close();
+        closeBtn.addEventListener('click', this._boundCloseClick);
         overlay.appendChild(GameState.renderer.domElement);
         overlay.classList.add('active');
 
@@ -15040,6 +15291,7 @@ const Bridge = {
         // Initial data
         this.syncAgents();
         this.updateDataScreens();
+        this.renderEchoSummary();
         this._lastAgentSync = -1;
         this._lastDataUpdate = -1;
 
@@ -15351,9 +15603,36 @@ const Bridge = {
             }
         });
 
-        // Add new
+        // Add new / refresh existing
         agents.forEach((agent, i) => {
-            if (!this.agentMeshes[agent.id]) this._createAgentMesh(agent, i);
+            const mesh = this.agentMeshes[agent.id];
+            if (!mesh) { this._createAgentMesh(agent, i); return; }
+            // Previously an existing agent's mesh was never touched again,
+            // so a live name/avatar change (GameState.data.agents refreshing
+            // with newer data) never showed up here -- the same agent id
+            // just kept displaying whatever name/avatar it had at spawn,
+            // even across repeated bridge open/close cycles.
+            if (mesh._name !== agent.name) {
+                mesh._name = agent.name;
+                const fresh = this._makeTextSprite(agent.name, '#ffffff', 18);
+                fresh.position.copy(mesh.nameSprite.position);
+                fresh.scale.copy(mesh.nameSprite.scale);
+                mesh.group.remove(mesh.nameSprite);
+                mesh.group.add(fresh);
+                mesh.nameSprite = fresh;
+            }
+            if (mesh._avatar !== agent.avatar) {
+                mesh._avatar = agent.avatar;
+                const ec = document.createElement('canvas');
+                ec.width = 128; ec.height = 128;
+                const ectx = ec.getContext('2d');
+                ectx.font = '72px serif';
+                ectx.textAlign = 'center';
+                ectx.textBaseline = 'middle';
+                ectx.fillText(agent.avatar || '\u{1F916}', 64, 64);
+                mesh.emoji.material.map = new THREE.CanvasTexture(ec);
+                mesh.emoji.material.needsUpdate = true;
+            }
         });
     },
 
@@ -15415,7 +15694,10 @@ const Bridge = {
         group.userData.phase = Math.random() * Math.PI * 2;
 
         this.scene.add(group);
-        this.agentMeshes[agent.id] = { group, body, head, ring, template: null };
+        this.agentMeshes[agent.id] = {
+            group, body, head, ring, emoji, nameSprite, template: null,
+            _name: agent.name, _avatar: agent.avatar
+        };
     },
 
     // Brainstem template visual style for bridge view (cheaper than world).
@@ -15485,6 +15767,11 @@ const Bridge = {
         if (sec % 3 === 0 && sec !== this._lastDataUpdate) {
             this._lastDataUpdate = sec;
             this.updateDataScreens();
+            // renderEchoSummary() was fully implemented (combat digest,
+            // active echo event, narrative) but never called from anywhere
+            // -- the bridge never showed any of it. Throttled at the same
+            // 3s cadence as the data screens it's built alongside.
+            this.renderEchoSummary();
         }
 
         GameState.renderer.render(this.scene, this.camera);
@@ -16018,6 +16305,21 @@ const HUD = {
             ctx.strokeStyle = '#ff0000';
             ctx.lineWidth = 1;
             ctx.stroke();
+        }
+
+        // ── Wards (vision, revealed but never drawn before) ──
+        if (typeof FogOfWar !== 'undefined' && FogOfWar._wards) {
+            FogOfWar._wards.forEach(function(ward) {
+                var wx = cx + ward.x * scale;
+                var wz = cz + ward.z * scale;
+                ctx.fillStyle = 'rgba(0,212,255,0.8)';
+                ctx.beginPath();
+                ctx.arc(wx, wz, 2.5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = '#00d4ff';
+                ctx.lineWidth = 0.8;
+                ctx.stroke();
+            });
         }
 
         // ── Jungle Camps (type-specific icons) ──
@@ -16645,6 +16947,21 @@ const HUD = {
             ctx.fillStyle = '#fff';
             ctx.font = '10px monospace';
             ctx.fillText('RAVAGER', hx, hz - 10);
+        }
+
+        // Wards
+        if (typeof FogOfWar !== 'undefined' && FogOfWar._wards) {
+            FogOfWar._wards.forEach(function(ward) {
+                var wx = cx + ward.x * scale;
+                var wz = cz + ward.z * scale;
+                ctx.fillStyle = 'rgba(0,212,255,0.8)';
+                ctx.beginPath();
+                ctx.arc(wx, wz, 5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = '#00d4ff';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+            });
         }
 
         // Jungle Camps (type-specific)
@@ -17404,15 +17721,19 @@ const GestureControls = {
         const pinkyUp = pinkyTip.y < pinkyMcp.y - 0.04;
         const thumbOut = Math.abs(thumbTip.x - wrist.x) > 0.08;
 
-        // Fist: all fingers curled
-        if (!indexUp && !middleUp && !ringUp && !pinkyUp) {
-            this.gesture = 'fist';
+        // Thumbs up: thumb extended, others curled. Checked BEFORE the
+        // generic fist test below -- every thumbs-up pose also satisfies
+        // "all four non-thumb fingers curled", so with fist checked first
+        // it always matched and returned before this branch could ever run.
+        // The documented thumbs-up "poke" action was unreachable.
+        if (thumbOut && thumbTip.y < wrist.y - 0.1 && !indexUp && !middleUp && !ringUp && !pinkyUp) {
+            this.gesture = 'thumbs_up';
             return;
         }
 
-        // Thumbs up: thumb extended, others curled
-        if (thumbOut && thumbTip.y < wrist.y - 0.1 && !indexUp && !middleUp && !ringUp && !pinkyUp) {
-            this.gesture = 'thumbs_up';
+        // Fist: all fingers curled
+        if (!indexUp && !middleUp && !ringUp && !pinkyUp) {
+            this.gesture = 'fist';
             return;
         }
 
@@ -17532,6 +17853,17 @@ const GestureControls = {
             btn.classList.toggle('active', this.active);
             btn.title = this.active ? 'Gestures ON (H)' : 'Gestures OFF (H)';
         }
+    },
+
+    // _stop() was only ever reached via toggle() while the feature was
+    // active. WorldMode.cleanup() (a world/session teardown, not a user
+    // toggling the feature off) never called this or anything equivalent,
+    // so if gesture controls were left on, the webcam MediaStream kept
+    // recording (camera indicator stays lit) after the world session ended
+    // -- a real privacy/battery issue, not just leaked JS state. Idempotent:
+    // a no-op if the feature was never turned on.
+    cleanup() {
+        if (this.active) { this.active = false; this._stop(); }
     }
 };
 
@@ -17773,7 +18105,7 @@ const HelpOverlay = {
                     <div class="help-section">
                         <div class="help-section-title">MOVEMENT</div>
                         <div class="help-row"><span class="help-key">W A S D</span><span>Move</span></div>
-                        <div class="help-row"><span class="help-key">SPACE</span><span>Attack</span></div>
+                        <div class="help-row"><span class="help-key">SPACE / Right-click</span><span>Attack</span></div>
                         <div class="help-row"><span class="help-key">E</span><span>Interact / Enter Portal</span></div>
                         <div class="help-row"><span class="help-key">F</span><span>Poke Agent</span></div>
                         <div class="help-row"><span class="help-key">R</span><span>Battle Replay (cinematic)</span></div>
@@ -18722,10 +19054,32 @@ const Crafting = {
         document.head.appendChild(style);
     },
 
+    // Count how many of a named item the player currently holds. Inventory
+    // stores items in `slots[i].item` (each with an id/name/count), not in
+    // an `items` array — reading `inv.items` always returned undefined, so
+    // every recipe showed 0/N and was permanently disabled.
+    _countMaterial(name) {
+        if (typeof Inventory === 'undefined' || !Inventory.slots) return 0;
+        return Inventory.slots.reduce(function(sum, slot) {
+            return sum + (slot.item && slot.item.name === name ? (slot.item.count || 1) : 0);
+        }, 0);
+    },
+
+    // Remove `need` units of a named item across however many slots hold it.
+    _consumeMaterial(name, need) {
+        if (typeof Inventory === 'undefined' || !Inventory.slots) return;
+        for (var i = 0; i < Inventory.slots.length && need > 0; i++) {
+            var slot = Inventory.slots[i];
+            if (!slot.item || slot.item.name !== name) continue;
+            var take = Math.min(need, slot.item.count || 1);
+            Inventory.removeItem(i, take);
+            need -= take;
+        }
+    },
+
     _render() {
         var el = document.getElementById('crafting-recipes');
         if (!el) return;
-        var inv = typeof Inventory !== 'undefined' ? Inventory : null;
         var gold = typeof PlayerStats !== 'undefined' ? PlayerStats.gold : 0;
 
         // Get echo state for conditional recipes
@@ -18745,11 +19099,12 @@ const Crafting = {
             });
         }
 
+        var self = this;
         el.innerHTML = allRecipes.map(function(r, i) {
             var canCraft = true;
             var matList = Object.entries(r.materials).map(function(entry) {
                 var name = entry[0], need = entry[1];
-                var have = inv ? (inv.items || []).filter(function(item) { return item && item.name === name; }).length : 0;
+                var have = self._countMaterial(name);
                 if (have < need) canCraft = false;
                 return '<span style="color:' + (have >= need ? '#3fb950' : '#f85149') + '">' + name + ' ' + have + '/' + need + '</span>';
             }).join(' · ');
@@ -18757,10 +19112,13 @@ const Crafting = {
 
             var rarityColor = r.result.rarity === 'epic' ? '#a78bfa' : r.result.rarity === 'rare' ? '#58a6ff' : '#8b949e';
             var echoBadge = r._echo ? '<span style="color:#d29922;font-size:9px;margin-left:6px;letter-spacing:1px;">ECHO</span>' : '';
+            var resultLabel = r.result.damage ? r.result.damage + ' DMG'
+                : r.result.defense ? r.result.defense + ' DEF'
+                : r.result.type === 'accessory' ? 'Accessory' : '';
             return '<div class="craft-recipe"' + (r._echo ? ' style="border-color:rgba(210,153,34,0.3);background:rgba(210,153,34,0.05);"' : '') + '>' +
                 '<div class="craft-name" style="color:' + rarityColor + '">' + r.name + echoBadge + '</div>' +
                 '<div class="craft-mats">' + matList + ' · <span style="color:' + (gold >= r.gold ? '#fbbf24' : '#f85149') + '">' + r.gold + 'G</span></div>' +
-                '<div class="craft-result">+' + (r.result.damage ? r.result.damage + ' DMG' : r.result.defense + ' DEF') + (r.result.element ? ' [' + r.result.element + ']' : '') + '</div>' +
+                '<div class="craft-result">+' + resultLabel + (r.result.element ? ' [' + r.result.element + ']' : '') + '</div>' +
                 '<button class="craft-btn" ' + (canCraft ? 'onclick="Crafting.craft(' + i + ')"' : 'disabled') + '>CRAFT</button></div>';
         }).join('');
     },
@@ -18779,28 +19137,27 @@ const Crafting = {
         }
         var r = allRecipes[index];
         if (!r) return;
-        var inv = typeof Inventory !== 'undefined' ? Inventory : null;
-        if (!inv) return;
+        if (typeof Inventory === 'undefined') return;
         // Check gold
         if (typeof PlayerStats !== 'undefined' && PlayerStats.gold < r.gold) return;
         // Check materials
         for (var name in r.materials) {
-            var need = r.materials[name];
-            var have = (inv.items || []).filter(function(item) { return item && item.name === name; }).length;
-            if (have < need) return;
+            if (this._countMaterial(name) < r.materials[name]) return;
         }
         // Consume materials
         for (var name in r.materials) {
-            var need = r.materials[name];
-            for (var i = 0; i < need; i++) {
-                var idx = (inv.items || []).findIndex(function(item) { return item && item.name === name; });
-                if (idx >= 0) inv.items.splice(idx, 1);
-            }
+            this._consumeMaterial(name, r.materials[name]);
         }
         // Consume gold
         if (typeof PlayerStats !== 'undefined') PlayerStats.gold -= r.gold;
-        // Add crafted item
-        if (inv.items) inv.items.push(Object.assign({}, r.result, { id: 'crafted-' + Date.now() }));
+        // Crafted gear (weapon/armor/accessory) equips directly, the same
+        // way shop purchases do — it was never registered in Inventory.ITEMS
+        // or EQUIPMENT_MAP, so pushing it into a nonexistent Inventory.items
+        // array only ever discarded it after already charging gold/materials.
+        if (typeof Equipment !== 'undefined' && r.result.type in Equipment.gear) {
+            Equipment.gear[r.result.type] = { name: r.result.name, stats: Object.assign({}, r.result) };
+            Equipment.updateUI();
+        }
         if (typeof HUD !== 'undefined') HUD.showToast('Crafted ' + r.name + '!');
         if (typeof Audio !== 'undefined' && Audio.playPickup) Audio.playPickup();
         // Crafting VFX
@@ -18863,7 +19220,6 @@ var JungleCamps = {
                 gold: typeData.gold, xp: typeData.xp,
                 alive: true, respawnTimer: 0, respawnTime: typeData.respawn,
                 hp: typeData.hp, maxHp: typeData.hp,
-                neutralCount: typeData.neutrals,
                 mesh: null, hpBar: null, body: null
             };
             self._createCampMesh(scene, camp);
@@ -18962,9 +19318,9 @@ var JungleCamps = {
         }
     },
 
-    tryAttack: function(playerPos, damage) {
+    tryAttack: function(playerPos, damage, element) {
         // Check Titan first
-        if (this.attackTitan(playerPos, damage)) return true;
+        if (this.attackTitan(playerPos, damage, element)) return true;
         var attackRange = 5;
         for (var i = 0; i < this.camps.length; i++) {
             var camp = this.camps[i];
@@ -18974,6 +19330,7 @@ var JungleCamps = {
             if (dist < attackRange) {
                 camp.hp -= damage;
                 if (typeof VFX !== 'undefined' && camp.mesh) VFX.burst(camp.mesh.position, 'hitSpark');
+                if (element && camp.mesh && typeof StatusEffects !== 'undefined') StatusEffects.applyEffect(camp.mesh, element);
                 if (camp.hp <= 0) {
                     camp.alive = false;
                     camp.respawnTimer = camp.respawnTime;
@@ -19005,7 +19362,6 @@ var JungleCamps = {
 
     // ── ECHO TITAN — Epic boss in the river (Roshan-style) ──
     _titan: null,
-    _titanSpawnTimer: 0,
     _titanSpawned: false,
 
     spawnTitan: function(scene, w) {
@@ -19105,12 +19461,13 @@ var JungleCamps = {
         }
     },
 
-    attackTitan: function(playerPos, damage) {
+    attackTitan: function(playerPos, damage, element) {
         if (!this._titan || !this._titan.alive) return false;
         var dx = playerPos.x - this._titan.x, dz = playerPos.z - this._titan.z;
         if (Math.sqrt(dx * dx + dz * dz) > 8) return false;
         this._titan.hp -= damage;
         if (typeof VFX !== 'undefined') VFX.burst({ x: this._titan.x, y: 3, z: this._titan.z }, 'hitSpark');
+        if (element && this._titan.mesh && typeof StatusEffects !== 'undefined') StatusEffects.applyEffect(this._titan.mesh, element);
         this.showDamageNumber(this._titan.mesh.position, damage);
         if (this._titan.hp <= 0) {
             this._titan.alive = false;
@@ -19280,10 +19637,21 @@ const Shop = {
             }
             if (typeof HUD !== 'undefined') HUD.showToast('Speed boost for ' + item.value + 's!');
         } else if (item.stats) {
-            // Equipment — add to inventory
-            if (typeof Inventory !== 'undefined' && Inventory.items) {
-                Inventory.items.push(Object.assign({}, item, { id: 'shop-' + Date.now() }));
-                if (typeof HUD !== 'undefined') HUD.showToast('Bought ' + item.name);
+            // Equipment — equip directly into the matching gear slot.
+            // (Previously pushed into Inventory.items, which has never
+            // existed — the real API is Inventory.slots — so every weapon/
+            // armor/boots/accessory purchase silently deducted gold and
+            // gave the player nothing, not even a toast.)
+            var slot = item.category === 'boots' ? 'accessory' : item.category;
+            if (typeof Equipment !== 'undefined' && Equipment.gear && slot in Equipment.gear) {
+                var displaced = Equipment.gear[slot] ? Equipment.gear[slot].name : null;
+                var stats = Object.assign({}, item.stats);
+                if (item.element) stats.element = item.element;
+                Equipment.gear[slot] = { name: item.name, stats: stats };
+                Equipment.updateUI();
+                if (typeof HUD !== 'undefined') {
+                    HUD.showToast('Bought ' + item.name + (displaced ? ' (replaced ' + displaced + ')' : ''));
+                }
             }
         }
 
@@ -19487,6 +19855,9 @@ const RappterOS = {
     _terminal: null,   // Output buffer
     _outputBuffer: '',
     _commandId: 0,
+    _lastCompletedId: 0,
+    _bootTimer: null,
+    _bootGeneration: 0,
 
     // Check if v86 is available
     isAvailable() {
@@ -19542,9 +19913,23 @@ const RappterOS = {
 
             // Wait for boot
             var self = this;
-            setTimeout(function() {
+            // If cleanup() runs during this 8s window (world exit while a
+            // rare voice-triggered boot is in flight), the emulator gets
+            // destroyed and _emulator set to null -- but this timer previously
+            // wasn't cancelable, so it would still fire, set _ready=true, and
+            // call _processQueue(), which reaches this._emulator.serial0_send()
+            // on a null emulator. _loading also never got reset by cleanup(),
+            // so a subsequent world's init() would return early forever
+            // (`if (this._ready || this._loading) return;`), permanently
+            // unable to reboot. bootGeneration lets the callback recognize a
+            // cleanup that happened after it was scheduled, even though
+            // clearTimeout(this._bootTimer) below is the primary guard.
+            var myGeneration = this._bootGeneration;
+            this._bootTimer = setTimeout(function() {
+                if (myGeneration !== self._bootGeneration) return; // canceled mid-boot
                 self._ready = true;
                 self._loading = false;
+                self._bootTimer = null;
                 console.log('[OS] Alpine Linux booted in browser');
                 if (typeof HUD !== 'undefined') HUD.showToast('RappterOS online — Linux VM ready');
                 self._processQueue();
@@ -19614,6 +19999,7 @@ const RappterOS = {
             };
 
             this._results[this._currentTask.id] = result;
+            this._lastCompletedId = this._currentTask.id;
 
             // Callback
             if (this._currentTask.callback) {
@@ -19694,7 +20080,15 @@ const RappterOS = {
             return true;
         };
         RappterVM._env['os-ready'] = function() { return self._ready; };
-        RappterVM._env['os-result'] = function() { return self._results[self._commandId] ? self._results[self._commandId].stdout : null; };
+        RappterVM._env['os-result'] = function() {
+            // _commandId is the most recently SUBMITTED command's id, not the
+            // most recently COMPLETED one -- if a second command is queued
+            // before the first finishes, this always looked up a result that
+            // didn't exist yet, even though an earlier, real result was
+            // sitting in _results under a lower id.
+            var id = self._lastCompletedId;
+            return self._results[id] ? self._results[id].stdout : null;
+        };
         RappterVM._env['os-queue-size'] = function() { return self._queue.length; };
     },
 
@@ -19710,13 +20104,19 @@ const RappterOS = {
     },
 
     cleanup() {
+        if (this._bootTimer) { clearTimeout(this._bootTimer); this._bootTimer = null; }
+        this._bootGeneration++; // stale-boot guard even if clearTimeout missed the window
         if (this._emulator) {
             try { this._emulator.stop(); this._emulator.destroy(); } catch(e) {}
             this._emulator = null;
         }
         this._ready = false;
+        this._loading = false; // otherwise init() 's `if (ready||loading) return` never boots again
         this._queue = [];
         this._results = {};
+        this._lastCompletedId = 0;
+        this._currentTask = null;
+        this._outputBuffer = '';
     }
 };
 
@@ -20635,7 +21035,7 @@ const Tutorial = {
         },
         {
             title: 'COMBAT',
-            body: 'Press <b>SPACE</b> to attack enemies. Use <b>1-5</b> for special abilities.',
+            body: 'Press <b>SPACE</b> or <b>right-click</b> to attack enemies. Use <b>1-5</b> for special abilities.',
             hint: 'Defeat creeps to earn XP and level up.',
             icon: '⚔️',
             keys: 'SPACE'
@@ -20967,6 +21367,11 @@ const QuestTracker = {
         if (!this._el) this.init();
         this._el.classList.add('visible');
         this._visible = true;
+        // Force an immediate refresh — otherwise the 3s update throttle can
+        // carry over from a previous world session and leave stale quest
+        // content (or a stale empty state) visible for up to 3s after
+        // becoming visible again.
+        this._lastUpdate = 0;
         this.update();
     },
 
@@ -21065,6 +21470,9 @@ const QuestTracker = {
         HUD.updateAgentCount();
         if (GameState.mode === 'world' && HUD.minimapVisible) {
             HUD.renderMinimap();
+        }
+        if (GameState.mode === 'world' && HUD.fullmapVisible) {
+            HUD.renderFullmap();
         }
 
         // Update Rappterbook-style panels (~every second, not every frame)
@@ -21458,6 +21866,14 @@ const QuestTracker = {
         if (typeof Settings !== 'undefined') Settings.init();
         if (typeof Chronicle !== 'undefined') Chronicle.init();
         if (typeof VoiceControls !== 'undefined') VoiceControls.init();
+        // GamepadControls.init() was never called from anywhere -- its
+        // 'gamepadconnected'/'gamepaddisconnected' listeners never registered,
+        // so `active`/`_padIndex` never got set and every rumble() call
+        // scattered through combat/inventory/jungle code was a silent no-op.
+        // Registered once here (global, like VoiceControls) rather than per
+        // world-session, since re-running init() on every world switch with
+        // no matching cleanup() would just accumulate duplicate listeners.
+        if (typeof GamepadControls !== 'undefined') GamepadControls.init();
         if (typeof PostProcessing !== 'undefined') PostProcessing.init(GameState.renderer);
 
         // Run boot then start animation

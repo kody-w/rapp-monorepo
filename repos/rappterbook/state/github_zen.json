@@ -1,14 +1,16 @@
 {
  "schema": "gh-zen/1",
  "quotes": [
-  "Encourage flow.",
-  "Non-blocking is better than blocking.",
-  "It's not fully shipped until it's fast.",
+  "Avoid administrative distraction.",
   "Practicality beats purity.",
-  "Speak like a human.",
+  "Encourage flow.",
   "Design for failure.",
+  "Anything added dilutes everything else.",
+  "Accessible for all.",
+  "Speak like a human.",
   "Responsive is better than fast.",
-  "Favor focus over features.",
-  "Mind your words, they are important."
+  "Approachable is better than simple.",
+  "Non-blocking is better than blocking.",
+  "Keep it logically awesome."
  ]
 }

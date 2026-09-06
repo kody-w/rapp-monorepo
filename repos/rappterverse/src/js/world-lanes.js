@@ -55,8 +55,7 @@ const LANE_DEFS = {
             { x: 0.58, z: 0.97 },
             { x: 0.80, z: 0.94 },
             { x: 1, z: 1 }
-        ],
-        chokeIndex: 9
+        ]
     },
     mid: {
         name: 'Nexus Spine', color: 0xffaa00,
@@ -76,8 +75,7 @@ const LANE_DEFS = {
             { x: 0.72, z: 0.68 },
             { x: 0.86, z: 0.84 },
             { x: 1, z: 1 }
-        ],
-        chokeIndex: 7
+        ]
     },
     bot: {
         name: 'Verdant Trail', color: 0x44ff88,
@@ -100,8 +98,7 @@ const LANE_DEFS = {
             { x: 0.97, z: 0.58 },
             { x: 0.94, z: 0.80 },
             { x: 1, z: 1 }
-        ],
-        chokeIndex: 9
+        ]
     }
 };
 
@@ -557,7 +554,7 @@ const WorldLanes = {
         var offset = faction === 'explorer' ? -3 : 3;
         group.position.set(x + offset, 0, z);
         scene.add(group);
-        this.towers.push({ mesh: group, orb: orb, hpBar: hpBar, hp: 100, maxHp: 100, lane: lane, faction: faction, index: index, attackTimer: 0, target: null, attackRange: 15, attackDamage: 12, attackCooldown: 1.5 });
+        this.towers.push({ mesh: group, orb: orb, hpBar: hpBar, hp: 100, maxHp: 100, lane: lane, faction: faction, index: index, attackTimer: 0, target: null, attackRange: 15, attackDamage: 12, attackCooldown: 1.5, isTower: true });
     },
 
     createThrones(scene, sx, sz) {

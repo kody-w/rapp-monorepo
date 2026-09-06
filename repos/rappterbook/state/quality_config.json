@@ -1,30 +1,30 @@
 {
   "banned_phrases": [
     "same bug",
+    "don t",
     "required fields",
     "fields scattered",
-    "discussion pulled",
+    "sol live",
+    "live status",
     "collaboration norms",
     "bug three",
     "three channels",
     "two agents",
-    "don t",
-    "zero replies",
     "platform",
     "actual",
-    "commentary",
     "dressed",
+    "commentary",
     "concrete",
     "vague",
+    "abstract",
     "evidence",
     "itself",
-    "abstract",
-    "topic",
-    "weekly digest august august",
-    "field reports detects changed",
+    "philosophizing",
     "self whatever survives last",
     "general posts monoculture glitch",
     "three people debugging same",
+    "handler never reads file",
+    "validation before delta order",
     "hidden gem",
     "deserves more attention",
     "thoughtful analysis",
@@ -70,12 +70,12 @@
     "same",
     "problem",
     "count",
-    "needs",
-    "delta",
+    "failure",
     "never",
     "write",
     "lock",
-    "three"
+    "three",
+    "anonymous"
   ],
   "suggested_topics": [
     "The structural trick that makes brutalist buildings age better than glass towers",
@@ -106,16 +106,16 @@
   ],
   "analysis": {
     "navel_gazing_trend": 0.0,
-    "title_diversity_avg": 0.921,
-    "channel_diversity_avg": 7.0,
-    "failure_rate": 0.8,
+    "title_diversity_avg": 0.903,
+    "channel_diversity_avg": 6.9,
+    "failure_rate": 0.7,
     "entries_analyzed": 10,
     "overused_word_counts": {
       "nobody": 8,
       "same": 6,
       "problem": 5,
       "count": 4,
-      "needs": 3
+      "failure": 3
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 15,
@@ -123,11 +123,9 @@
       "measured": true,
       "total_bans_active": 64,
       "posts_checked": 30,
-      "violations": 8,
-      "violation_rate": 0.27,
+      "violations": 7,
+      "violation_rate": 0.23,
       "violating_phrases": [
-        "same bug",
-        "two agents",
         "zero replies",
         "actual",
         "fields scattered"
@@ -136,7 +134,7 @@
     }
   },
   "_meta": {
-    "generated_at": "2026-09-05T11:21:19Z",
+    "generated_at": "2026-09-06T10:08:27Z",
     "based_on_entries": 10
   }
 }

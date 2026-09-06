@@ -92,13 +92,27 @@ const WorldMode = {
         };
         window.addEventListener('wheel', this._onWheel, { passive: false });
 
+        // Right-click to attack (Dota-style) — suppress the browser context menu
+        // on the world canvas so right-click is available as an input.
+        this._onContextMenu = (e) => {
+            if (this.active && GameState.mode === 'world') e.preventDefault();
+        };
+        this._onMouseDown = (e) => {
+            if (e.button !== 2) return; // right mouse button only
+            if (!this.active || GameState.mode !== 'world' || GameState.inputLocked) return;
+            e.preventDefault();
+            if (this.player) WorldCombat.playerAttack(this.player.mesh.position);
+        };
+        GameState.renderer.domElement.addEventListener('contextmenu', this._onContextMenu);
+        GameState.renderer.domElement.addEventListener('mousedown', this._onMouseDown);
+
         // Set mode to world so main loop renders us
         GameState.setMode('world');
 
         // HUD
         if (typeof HUD !== 'undefined') {
             HUD.setWorld(worldId);
-            HUD.showToast(`Landed on ${w.name} — SPACE to attack, WASD to move`);
+            HUD.showToast(`Landed on ${w.name} — SPACE or Right-click to attack, WASD to move`);
             if (HUD.initChatFeed) HUD.initChatFeed();
             GameState.currentWorld = worldId;
         }
@@ -131,10 +145,15 @@ const WorldMode = {
             if (tl) tl.classList.add('visible');
         }
         // Init Lispy VM
-        // RappterOS available for agent compute (boots on demand)
-        if (typeof RappterOS !== 'undefined' && RappterOS.registerVMFunctions) RappterOS.registerVMFunctions();
+        // RappterVM.init() must run before RappterOS.registerVMFunctions() --
+        // init() unconditionally replaces _env with a fresh object, which
+        // previously wiped every os-exec/os-python/os-ready/os-result/
+        // os-queue-size function registerVMFunctions() had just written,
+        // since it ran first. Agent programs calling those symbols silently
+        // resolved to null in every world.
         if (typeof RappterVM !== 'undefined') {
             RappterVM.init();
+            if (typeof RappterOS !== 'undefined' && RappterOS.registerVMFunctions) RappterOS.registerVMFunctions();
             RappterVM.onFrameArrival(GameState.data);
             // Register echo shapers
             RappterVM.registerShaper('terrain', 4, function(d) { return typeof WorldSeed !== 'undefined' ? WorldSeed.getSeed(GameState.currentWorld) : 0; });
@@ -317,6 +336,12 @@ const WorldMode = {
 
         // Touch controls
         if (typeof TouchControls !== 'undefined') TouchControls.update(delta);
+        // GamepadControls.update() was never called either -- controller
+        // movement/attack/abilities/bridge/map/inventory input never reached
+        // the game even after a controller connected. The event listener
+        // registered in main.js only sets active/_padIndex; the actual
+        // per-frame input polling has to run here.
+        if (typeof GamepadControls !== 'undefined') GamepadControls.update();
 
         // RappterVM tick — Lispy behaviors between frames
         if (typeof RappterVM !== 'undefined' && RappterVM._running) RappterVM.tick();
@@ -420,6 +445,8 @@ const WorldMode = {
         window.removeEventListener('keydown', this.keyDown);
         window.removeEventListener('keyup', this.keyUp);
         if (this._onWheel) window.removeEventListener('wheel', this._onWheel);
+        if (this._onContextMenu) GameState.renderer.domElement.removeEventListener('contextmenu', this._onContextMenu);
+        if (this._onMouseDown) GameState.renderer.domElement.removeEventListener('mousedown', this._onMouseDown);
         this.keys = {};
         this.cameraZoom = 1.0;
 
@@ -434,6 +461,49 @@ const WorldMode = {
         if (typeof Equipment !== 'undefined') Equipment.cleanup();
         if (typeof StatusEffects !== 'undefined') StatusEffects.cleanup();
         if (typeof EnemyHero !== 'undefined') EnemyHero.cleanup();
+        // WorldAgents and FogOfWar own meshes (agent bodies, portals, floating
+        // text, relationship edges, the fog plane, ward markers) added
+        // directly to this.scene, but neither was ever invoked here — every
+        // world switch silently leaked all of it, since init() replaces
+        // this.scene with a brand new THREE.Scene() without ever detaching
+        // or disposing what the previous session created.
+        if (typeof WorldAgents !== 'undefined' && WorldAgents.cleanup) WorldAgents.cleanup(this.scene);
+        if (typeof FogOfWar !== 'undefined') FogOfWar.cleanup();
+        if (typeof WorldTerrain !== 'undefined' && WorldTerrain.cleanup) WorldTerrain.cleanup();
+        // RappterOS.cleanup() existed but was never called from here — its
+        // queue/results/readiness state (and, worse, a pending 8s boot timer
+        // if a voice-triggered VM boot was mid-flight) survived world
+        // switches indefinitely.
+        if (typeof RappterOS !== 'undefined' && RappterOS.cleanup) RappterOS.cleanup();
+        // Chronicle's premiere/deep-link retry timers polled for a stable
+        // galaxy/world mode for up to 40s with nothing to cancel them —
+        // a leftover retry could pop the overlay (and lock input) into a
+        // later, unrelated world session.
+        if (typeof Chronicle !== 'undefined' && Chronicle.cleanup) Chronicle.cleanup();
+        // GestureControls._stop() (webcam MediaStream + released keys) was
+        // only ever reached via the user manually toggling the feature off
+        // — a world/session ending while gestures were left on kept the
+        // camera recording indefinitely.
+        if (typeof GestureControls !== 'undefined' && GestureControls.cleanup) GestureControls.cleanup();
+
+        // Generic disposal pass for whatever's left in the scene. Ground,
+        // lighting, biome objects/features, and weather particles (all owned
+        // by WorldTerrain) have ~50+ individual creation sites and no
+        // per-object tracking, so rather than enumerate every one, dispose
+        // geometry/material for everything still attached to this.scene —
+        // every module above already removed its own meshes via
+        // scene.remove(), so traverse() only reaches what nothing else
+        // cleaned up (i.e. terrain), with no risk of double-disposing
+        // something another cleanup() already handled.
+        if (this.scene) {
+            this.scene.traverse(function(obj) {
+                if (obj.geometry && obj.geometry.dispose) obj.geometry.dispose();
+                if (obj.material) {
+                    const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+                    mats.forEach(m => { if (m && m.dispose) m.dispose(); });
+                }
+            });
+        }
 
         document.getElementById('world-container').style.display = 'none';
         document.getElementById('combat-hud').style.display = 'none';
