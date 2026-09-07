@@ -3651,10 +3651,6 @@ const REPO = 'kody-w/rappterverse';
 const BRANCH = 'main';            // Canonical world state and Pages source
 const RAW = `https://raw.githubusercontent.com/${REPO}/${BRANCH}`;
 const POLL_INTERVAL = 15000;
-const CLIENT_AUTHORITY = Object.freeze({
-    world: 'canonical-main',
-    gameplay: 'local-practice'
-});
 
 function escapeHTML(value) {
     return String(value == null ? '' : value).replace(/[&<>"']/g, function(char) {
@@ -3710,6 +3706,18 @@ const WORLD_IDS = ['hub', 'arena', 'marketplace', 'gallery', 'dungeon'];
 
 // Deterministic seeded random (used for procedural generation)
 function seededRandom(seed) {
+    // inventory.js's spawnDrop() calls this with `worldId * 10000 + waveNumber
+    // * 100 + creepIndex` where worldId is a world id STRING (GameState.
+    // currentWorld, e.g. "arena") -- `string * number` is NaN, and
+    // `NaN.length` is undefined, so the hash loop below never ran and every
+    // single call started from the same s=0 state. That made rng()'s first
+    // value always ~0.0000057 -- always under the "30% chance no drop"
+    // threshold -- so no creep or jungle camp ever dropped an item, in any
+    // world, on any wave, since this function was written. createNoise2D()
+    // already defends against this itself (`seededRandom(String(seed))`);
+    // normalizing here instead protects every current and future caller,
+    // numeric or not, the same way.
+    seed = String(seed);
     let s = 0;
     for (let i = 0; i < seed.length; i++) s = ((s << 5) - s + seed.charCodeAt(i)) | 0;
     return function() {
@@ -6996,6 +7004,20 @@ const Warp = {
 
     /* ── Initialise 400 stars and begin the tunnel ── */
     start(callback) {
+        // GameState.mode stays 'galaxy' for the whole 1.8s tunnel -- it only
+        // becomes 'approach' inside `callback` (Approach.start()), which
+        // fires after the warp completes. That means galaxy.js's click
+        // handler and main.js's Enter-key handler are both still reachable
+        // mid-warp (neither checks Warp.active), and a second call here
+        // would silently overwrite `this.callback` (discarding the first
+        // destination) and reset `this.stars`/`this.progress` out from under
+        // the still-pending requestAnimationFrame loop the first call
+        // scheduled -- its animFrameId is lost the moment this call
+        // overwrites it, so cleanup() could never cancel it, leaving two
+        // animate() loops racing the same mutable state. Matches the same
+        // "ignore a second start while one is already in flight" guard
+        // DataManager.fetchAllState() already uses for the same reason.
+        if (this.active) return;
         this.canvas = document.getElementById('warp-canvas');
         if (!this.canvas) return;
         this.ctx = this.canvas.getContext('2d');
@@ -7142,6 +7164,7 @@ const Approach = {
     startPos: null,        // camera position when approach began
     startLookAt: null,     // initial lookAt target
     animFrame: null,
+    letterboxTimer: null,
     orbitRadius: 20,
     orbitHeight: 8,
 
@@ -7165,6 +7188,22 @@ const Approach = {
     },
 
     start(worldId) {
+        // voice-controls.js's "travel to X" handler calls Approach.start()
+        // unconditionally, with no GameState.mode guard (voice commands are
+        // a persistent, mode-agnostic toggle by design -- see Round 12) --
+        // so saying a second travel command while already mid-approach
+        // re-entered this function while `this.active` was still true from
+        // the first call. Every field below is shared mutable state, and
+        // animate() re-schedules itself via requestAnimationFrame every
+        // frame, so the old rAF chain kept running alongside the new one --
+        // two overlapping loops racing the same progress/phase/camera state,
+        // with only the newer one's animFrame ever recorded (so cleanup()
+        // could only ever cancel one of them). Clean up any approach
+        // already in flight before starting a new one, same fix shape as
+        // Warp.start()'s concurrent-start guard, but redirecting (not
+        // ignoring) the new destination -- unlike a warp tunnel, changing
+        // your mind mid-approach is a reasonable thing to let happen.
+        if (this.active) this.cleanup();
         this.targetWorld = worldId;
         this.active = true;
         this.phase = 'approaching';
@@ -7193,9 +7232,20 @@ const Approach = {
         var gs = GameState.data.gameState || {};
         var ws = gs.worlds && gs.worlds[worldId] ? gs.worlds[worldId] : {};
         var apStatLine = document.getElementById('approach-stats');
+        // #approach-stats also holds 3 permanent stat divs (distance/
+        // velocity/eta) that animate() depends on by id, so only remove a
+        // PRIOR live-population stat this same code injected -- not the
+        // whole container's contents. Without this, repeated approaches
+        // (approach world A, abort, approach world B, ...) kept appending
+        // another "AGENTS" row, leaving stale population numbers from
+        // every previously-approached world visible at once.
+        if (apStatLine) {
+            var oldLive = apStatLine.querySelector('.approach-stat-live');
+            if (oldLive) oldLive.remove();
+        }
         if (apStatLine && ws.population) {
             var echoDiv = document.createElement('div');
-            echoDiv.className = 'approach-stat';
+            echoDiv.className = 'approach-stat approach-stat-live';
             echoDiv.innerHTML = '<div class="approach-stat-value">' + escapeHTML(Number(ws.population) || 0) + '</div><div class="approach-stat-label">AGENTS</div>';
             apStatLine.appendChild(echoDiv);
         }
@@ -7227,9 +7277,19 @@ const Approach = {
         // Show overlay and letterbox
         const approachOverlay = document.getElementById('approach-overlay');
         if (approachOverlay) approachOverlay.classList.add('active');
-        setTimeout(() => {
-            document.getElementById('letterbox-top').classList.add('active');
-            document.getElementById('letterbox-bottom').classList.add('active');
+        // Stored + cancelled in cleanup() -- previously this timer wasn't
+        // tracked at all, so aborting (or redirecting to a new destination,
+        // see the guard added at the top of start()) within this 200ms
+        // window let it fire later regardless: after abort() it silently
+        // turned the letterbox bars back on while already back in galaxy
+        // mode, and after a redirect it could fire mid-way through the NEW
+        // approach for no reason tied to its own state.
+        this.letterboxTimer = setTimeout(() => {
+            this.letterboxTimer = null;
+            const lbTop = document.getElementById('letterbox-top');
+            const lbBottom = document.getElementById('letterbox-bottom');
+            if (lbTop) lbTop.classList.add('active');
+            if (lbBottom) lbBottom.classList.add('active');
         }, 200);
 
         // Hide landing button until ready phase
@@ -7337,6 +7397,8 @@ const Approach = {
         this.active = false;
         if (this.animFrame) cancelAnimationFrame(this.animFrame);
         this.animFrame = null;
+        if (this.letterboxTimer) clearTimeout(this.letterboxTimer);
+        this.letterboxTimer = null;
         this.phase = null;
         const approachOvl = document.getElementById('approach-overlay');
         if (approachOvl) approachOvl.classList.remove('active');
@@ -7385,6 +7447,7 @@ const Landing = {
     lastTime: 0,
     beaconTimer: 0,
     beaconOn: true,
+    resolveTimer: null,
 
     start(worldId) {
         this.targetWorld = worldId;
@@ -7403,7 +7466,14 @@ const Landing = {
         const overlay = document.getElementById('landing-overlay');
         overlay.classList.add('active');
         const landingStatusEl = document.getElementById('landing-status');
-        if (landingStatusEl) landingStatusEl.textContent = typeof WorldSeed !== 'undefined' ? 'SEED ' + WorldSeed.getSeed(this.worldId || GameState.currentWorld) + ' — AUTOPILOT ENGAGED' : 'AUTOPILOT ENGAGED';
+        // `this.worldId` is never assigned anywhere in this file (dead
+        // reference) -- this coincidentally still showed the right seed
+        // because Landing.start() is only ever reached via approach.js's
+        // initiateLanding(), which runs after Approach.start() already set
+        // GameState.currentWorld to the same target. `this.targetWorld`,
+        // set two lines above, is this object's own authoritative value and
+        // doesn't depend on that caller-ordering coincidence.
+        if (landingStatusEl) landingStatusEl.textContent = typeof WorldSeed !== 'undefined' ? 'SEED ' + WorldSeed.getSeed(this.targetWorld) + ' — AUTOPILOT ENGAGED' : 'AUTOPILOT ENGAGED';
 
         // Scene
         this.scene = new THREE.Scene();
@@ -7669,7 +7739,7 @@ const Landing = {
             status.textContent = 'MANUAL CONTROL';
         } else {
             btn.textContent = 'TAKE CONTROL';
-            status.textContent = typeof WorldSeed !== 'undefined' ? 'SEED ' + WorldSeed.getSeed(this.worldId || GameState.currentWorld) + ' — AUTOPILOT ENGAGED' : 'AUTOPILOT ENGAGED';
+            status.textContent = typeof WorldSeed !== 'undefined' ? 'SEED ' + WorldSeed.getSeed(this.targetWorld) + ' — AUTOPILOT ENGAGED' : 'AUTOPILOT ENGAGED';
         }
         // Thrust light color: green = autopilot, orange = manual
         if (this.thrustLight) {
@@ -7868,7 +7938,18 @@ const Landing = {
             HUD.showToast('Crash landing!');
         }
 
-        setTimeout(() => {
+        // Stored + cancelled in cleanup() -- GameState.mode stays 'landing'
+        // for this entire 2s result screen, so pressing Escape (which calls
+        // Landing.abort() whenever mode === 'landing', per main.js) is
+        // reachable during it. Left untracked, this timer used to fire
+        // regardless: it called cleanup() a second time and then
+        // WorldMode.init(this.targetWorld) even though the player had
+        // already backed out to the galaxy -- silently dragging them back
+        // into the world they'd just declined, or (if they'd since started
+        // a new landing) tearing down the NEW landing and initializing the
+        // OLD target world instead.
+        this.resolveTimer = setTimeout(() => {
+            this.resolveTimer = null;
             if (!success) {
                 HUD.showToast('Hull damage sustained');
             }
@@ -7880,6 +7961,8 @@ const Landing = {
     cleanup() {
         this.active = false;
         if (this.animFrame) cancelAnimationFrame(this.animFrame);
+        if (this.resolveTimer) clearTimeout(this.resolveTimer);
+        this.resolveTimer = null;
 
         window.removeEventListener('keydown', this.keyDown);
         window.removeEventListener('keyup', this.keyUp);
@@ -8477,6 +8560,34 @@ const WorldTerrain = {
     // ──────────────────────────────────────────────────────
     //  BIOME FEATURES — large-scale unique landmarks
     // ──────────────────────────────────────────────────────
+    // `w.bounds.x`/`w.bounds.z` is the canonical playable half-extent used
+    // everywhere else in the game (the player's own position is hard-clamped
+    // to exactly this range in world-core.js, and the fog-of-war minimap maps
+    // its view to it with only a +5-unit margin). Placement here uses
+    // `(rng()-0.5) * bounds * M`, i.e. a half-range of `0.5*M*bounds` -- so
+    // M=2 reaches exactly the true edge, and the M=1.2/1.4 used below reach
+    // only 60%/70% of the way there. Worked out precisely per biome/world
+    // below: every STATIC circular/box placement (Crystal, Abyss, Desert,
+    // Terra) turns out to already have a 30-50+ unit safety margin even at
+    // each feature's own worst-case radius, so it was never actually
+    // capable of exceeding bounds. The one placement that genuinely can is
+    // the Volcanic lava river: its center starts safely inset, but then
+    // random-walks via noise for 15 steps at up to ~6 units/step -- up to
+    // ~90 units of *unbounded* drift against only a ~35-unit starting
+    // margin, which easily carries it past the true edge. clampToBounds
+    // re-pins a point (accounting for the feature's own radius/half-extent)
+    // to stay inside the real playable rectangle; used only where the math
+    // shows it's actually needed (the river's per-step drift), not applied
+    // reflexively to every placement.
+    clampToBounds(x, z, w, extent) {
+        const mx = Math.max(0, w.bounds.x - extent);
+        const mz = Math.max(0, w.bounds.z - extent);
+        return {
+            x: Math.max(-mx, Math.min(mx, x)),
+            z: Math.max(-mz, Math.min(mz, z)),
+        };
+    },
+
     spawnBiomeFeatures(scene, w, worldId) {
         const seed = WorldSeed.getSeed(worldId);
         const rng = seededRandom(seed + '-features');
@@ -8485,10 +8596,13 @@ const WorldTerrain = {
         if (w.biome === 'Volcanic') {
             // Lava rivers following noise valleys
             for (let i = 0; i < 6; i++) {
+                const tubeR = 0.4 + rng() * 0.8;
                 const pts = [];
-                let px = (rng() - 0.5) * w.bounds.x * 1.4;
-                let pz = (rng() - 0.5) * w.bounds.z * 1.4;
+                let start = this.clampToBounds((rng() - 0.5) * w.bounds.x, (rng() - 0.5) * w.bounds.z, w, tubeR);
+                let px = start.x, pz = start.z;
                 for (let j = 0; j < 15; j++) {
+                    const clamped = this.clampToBounds(px, pz, w, tubeR);
+                    px = clamped.x; pz = clamped.z;
                     pts.push(new THREE.Vector3(px, 0.08, pz));
                     px += (n.noise(px * 0.02, pz * 0.02)) * 6;
                     pz += (n.noise(px * 0.02 + 50, pz * 0.02)) * 6;
@@ -8496,7 +8610,7 @@ const WorldTerrain = {
                 if (pts.length > 3) {
                     const curve = new THREE.CatmullRomCurve3(pts);
                     const tube = new THREE.Mesh(
-                        new THREE.TubeGeometry(curve, 24, 0.4 + rng() * 0.8, 6, false),
+                        new THREE.TubeGeometry(curve, 24, tubeR, 6, false),
                         new THREE.MeshBasicMaterial({ color: 0xff4400, transparent: true, opacity: 0.65 })
                     );
                     scene.add(tube);
@@ -8505,7 +8619,12 @@ const WorldTerrain = {
         }
 
         if (w.biome === 'Crystal') {
-            // Frozen lake patches
+            // Frozen lake patches. Worst case (bounds 120x150, r up to 9):
+            // half-range (72,90) + r(9) = (81,99) vs bounds (120,150) --
+            // margins of 39 (x) and 51 (z). Never actually capable of
+            // exceeding bounds despite the *1.2 looking similar to the lava
+            // river's *1.4 (which genuinely can, via unbounded noise drift
+            // -- see the Volcanic clamp above). No clamp needed here.
             for (let i = 0; i < 5; i++) {
                 const x = (rng() - 0.5) * w.bounds.x * 1.2;
                 const z = (rng() - 0.5) * w.bounds.z * 1.2;
@@ -8522,7 +8641,9 @@ const WorldTerrain = {
         }
 
         if (w.biome === 'Abyss') {
-            // Floating platforms
+            // Floating platforms. Worst case (bounds 120x120, half-extent up
+            // to s/2=3 by (s*1.3)/2=3.9): half-range 84 + 3.9 = 87.9 vs 120 --
+            // 32-unit margin. Never actually capable of exceeding bounds.
             for (let i = 0; i < 10; i++) {
                 const x = (rng() - 0.5) * w.bounds.x * 1.4;
                 const z = (rng() - 0.5) * w.bounds.z * 1.4;
@@ -8539,7 +8660,8 @@ const WorldTerrain = {
                 plat.position.set(x, y, z); plat.rotation.y = rng() * Math.PI;
                 scene.add(plat);
             }
-            // Void energy beams
+            // Void energy beams. Worst case: half-range 72 + radius 0.1 =
+            // 72.1 vs 120 -- a 48-unit margin. Never at risk.
             for (let i = 0; i < 5; i++) {
                 const x = (rng() - 0.5) * w.bounds.x * 1.2;
                 const z = (rng() - 0.5) * w.bounds.z * 1.2;
@@ -8554,7 +8676,9 @@ const WorldTerrain = {
         }
 
         if (w.biome === 'Desert') {
-            // Oasis patches with palm trees
+            // Oasis patches with palm trees. Worst case (bounds 150x150):
+            // half-range 90 + palm offset r*0.8(4) + palm canopy radius(~1.05)
+            // = ~95 vs 150 -- a 55-unit margin. Never at risk.
             for (let i = 0; i < 3; i++) {
                 const x = (rng() - 0.5) * w.bounds.x * 1.2;
                 const z = (rng() - 0.5) * w.bounds.z * 1.2;
@@ -8590,7 +8714,8 @@ const WorldTerrain = {
         }
 
         if (w.biome === 'Terra') {
-            // Ponds
+            // Ponds. Worst case (bounds 150x150, r up to 6): half-range 90 +
+            // 6 = 96 vs 150 -- a 54-unit margin. Never at risk.
             for (let i = 0; i < 4; i++) {
                 const x = (rng() - 0.5) * w.bounds.x * 1.2;
                 const z = (rng() - 0.5) * w.bounds.z * 1.2;
@@ -13721,7 +13846,13 @@ const Inventory = {
     },
 
     spawnDrop(position, worldId, waveNumber, creepIndex) {
-        const rng = seededRandom(worldId * 10000 + waveNumber * 100 + creepIndex);
+        // worldId is a world id STRING (GameState.currentWorld, e.g.
+        // "arena"), so `worldId * 10000` was NaN -- every call collapsed to
+        // the same constant seed regardless of world/wave/creep, instead of
+        // the per-kill varying seed clearly intended here. Build a real
+        // string seed the same way every other seededRandom() call site in
+        // this codebase does (e.g. world-combat.js's 'wave-'+waveNumber+...).
+        const rng = seededRandom(worldId + '-' + waveNumber + '-' + creepIndex);
         if (rng() < 0.3) return; // 30% chance no drop
 
         // Weighted selection
@@ -14792,6 +14923,10 @@ const WorldMode = {
         }
         // Show mobile touch controls
         if (typeof TouchControls !== 'undefined') { TouchControls.init(); TouchControls.show(); }
+        // Reset voice's 1s command debounce so a command repeated right
+        // across a world switch isn't dropped as a stale duplicate of the
+        // previous session's last command.
+        if (typeof VoiceControls !== 'undefined' && VoiceControls.resetSession) VoiceControls.resetSession();
         // First-time tutorial
         if (typeof Tutorial !== 'undefined') Tutorial.start();
         // Quest tracker
@@ -14819,14 +14954,6 @@ const WorldMode = {
             RappterVM.init();
             if (typeof RappterOS !== 'undefined' && RappterOS.registerVMFunctions) RappterOS.registerVMFunctions();
             RappterVM.onFrameArrival(GameState.data);
-            // Register echo shapers
-            RappterVM.registerShaper('terrain', 4, function(d) { return typeof WorldSeed !== 'undefined' ? WorldSeed.getSeed(GameState.currentWorld) : 0; });
-            RappterVM.registerShaper('weather', 4, function(d) { return typeof WorldTerrain !== 'undefined' ? WorldTerrain.weatherType : 'clear'; });
-            RappterVM.registerShaper('mood-lighting', 4, function(d) {
-                var gs = d.gameState || {};
-                var trend = gs.economy ? gs.economy.market_trend : 'stable';
-                return trend === 'bull' ? 1.2 : trend === 'bear' ? 0.7 : 1.0;
-            });
         }
     },
 
@@ -15193,8 +15320,10 @@ const WorldMode = {
         if (typeof RappterVM !== 'undefined') RappterVM._running = false;
         // Hide quest tracker
         if (typeof QuestTracker !== 'undefined') QuestTracker.hide();
-        // Hide touch controls
-        if (typeof TouchControls !== 'undefined') TouchControls.hide();
+        // TouchControls.cleanup() (not just hide()) -- hide() only sets
+        // display:none; the touchmove/touchend/button listeners and
+        // `active` flag previously survived every world exit.
+        if (typeof TouchControls !== 'undefined' && TouchControls.cleanup) TouchControls.cleanup();
     },
 
     onResize() {
@@ -17502,6 +17631,22 @@ const VoiceControls = {
         }
         const indicator = document.getElementById('voice-indicator');
         if (indicator) indicator.classList.toggle('visible', this.active);
+    },
+
+    // Voice is a persistent, mode-agnostic toggle (init() once globally,
+    // like GamepadControls) -- world-specific commands already self-gate
+    // correctly via `const inWorld = GameState.mode === 'world';` in
+    // _processCommand(), so stopping recognition on every world exit would
+    // be a UX regression (it would also silence mode-agnostic commands
+    // like "travel to arena" said from the galaxy). What DOES need
+    // resetting per world session is the 1s command debounce: lastCommand/
+    // lastCommandTime previously survived a world switch, so saying the
+    // same command again (e.g. "attack") within 1s of the switch had its
+    // first repetition in the new session silently dropped as a duplicate
+    // of the old session's last command.
+    resetSession() {
+        this.lastCommand = '';
+        this.lastCommandTime = 0;
     }
 };
 
@@ -17876,7 +18021,6 @@ const TouchControls = {
     _joystickOrigin: null,
     _moveVector: { x: 0, z: 0 },
     _touchId: null,
-    _actionTouchId: null,
     _isMobile: false,
 
     init() {
@@ -17910,8 +18054,26 @@ const TouchControls = {
         this._onAttack = null;
         this._onPoke = null;
         this._onMap = null;
+        this._touchId = null;
+        this._joystickOrigin = null;
+        this._moveVector.x = 0;
+        this._moveVector.z = 0;
         const el = document.getElementById('touch-controls');
         if (el) el.remove();
+    },
+
+    // WorldMode.cleanup() previously only called hide() (display:none) on
+    // world exit, never disable() -- the touchmove/touchend window
+    // listeners and every button's touchstart listener stayed bound, and
+    // `active` stayed true so the next world's init()->enable() call
+    // no-opped on its "already active" guard instead of freshly binding.
+    // The DOM elements weren't removed either, so this was latent rather
+    // than visibly broken, but any bound handler firing while no world
+    // session is active (e.g. WorldMode.pokeAgent()/HUD.toggleMinimap()
+    // from a touch that lands on a hidden button) bypassed the session
+    // boundary entirely. cleanup() is a no-op if never enabled.
+    cleanup() {
+        if (this.active) this.disable();
     },
 
     _createUI() {
@@ -17932,8 +18094,16 @@ const TouchControls = {
             </div>
         `;
 
-        const style = document.createElement('style');
-        style.textContent = `
+        // disable() only ever removed #touch-controls, never this <style>
+        // element -- every disable()/enable() cycle (which cleanup() below
+        // now triggers on every world exit that had touch controls active)
+        // left one more orphaned <style> tag in <head> forever. Reuse an
+        // existing one if present instead of creating a duplicate.
+        let style = document.getElementById('touch-controls-style');
+        if (!style) {
+            style = document.createElement('style');
+            style.id = 'touch-controls-style';
+            style.textContent = `
             #touch-controls { position: fixed; inset: 0; pointer-events: none; z-index: 800; display: none; }
             #joystick-zone {
                 position: absolute; bottom: 20px; left: 20px;
@@ -17970,7 +18140,8 @@ const TouchControls = {
             .touch-btn-poke { border-color: rgba(0,255,136,0.3); color: rgba(0,255,136,0.7); }
             .touch-btn-jump { border-color: rgba(255,187,0,0.3); color: rgba(255,187,0,0.7); }
         `;
-        document.head.appendChild(style);
+            document.head.appendChild(style);
+        }
         document.body.appendChild(container);
 
         this._joystickOuter = document.getElementById('joystick-outer');
@@ -20958,25 +21129,6 @@ const RappterVM = {
             }
         }
     },
-
-    // ── Echo Shaper Registry ──
-    _shapers: {},
-
-    registerShaper(name, level, fn) {
-        this._shapers[name] = { name: name, level: level, fn: fn };
-    },
-
-    // Run a shaper on frame data
-    shape(name, frameData) {
-        var shaper = this._shapers[name];
-        if (!shaper) return null;
-        return shaper.fn(frameData);
-    },
-
-    // List registered shapers
-    getShapers() {
-        return Object.values(this._shapers);
-    }
 };
 
 // === js/tutorial.js ===

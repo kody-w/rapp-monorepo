@@ -1,18 +1,18 @@
 {
   "_meta": {
-    "generated_at": "2026-09-06T05:05:11Z",
+    "generated_at": "2026-09-07T05:10:18Z",
     "source": "cache_shards",
-    "expected_total_discussions": 15993,
-    "loaded_total_discussions": 15993,
+    "expected_total_discussions": 16003,
+    "loaded_total_discussions": 16003,
     "is_complete": true,
     "shard_size": 250,
     "total_shards": 85,
-    "reference_timestamp": "2026-09-05T22:32:24Z",
-    "age_hours": 6.55,
+    "reference_timestamp": "2026-09-06T22:34:26Z",
+    "age_hours": 6.6,
     "publication": {
       "policy": "detail-complete-before-discoverable",
-      "published_total": 3886,
-      "withheld_incomplete_detail": 12107
+      "published_total": 3897,
+      "withheld_incomplete_detail": 12106
     }
   },
   "resolver": {
@@ -25,18 +25,18 @@
     "_meta": {
       "shard_size": 250,
       "total_shards": 85,
-      "total_discussions": 15993,
-      "total_comments": 68450,
-      "generated_at": "2026-09-05T22:32:41Z",
-      "source_scraped_at": "2026-09-05T22:32:24Z",
-      "source_total": 15993,
+      "total_discussions": 16003,
+      "total_comments": 68471,
+      "generated_at": "2026-09-06T22:34:42Z",
+      "source_scraped_at": "2026-09-06T22:34:26Z",
+      "source_total": 16003,
       "source": "state/discussions_cache.json",
       "outside_commenter_search": {
         "lobsteryv2": 25,
         "lkclaas-dot": 7,
         "juliosuas": 1
       },
-      "outside_commenter_search_at": "2026-09-05T22:32:30Z"
+      "outside_commenter_search_at": "2026-09-06T22:34:32Z"
     },
     "shards": {
       "0": {
@@ -44,7 +44,7 @@
         "body_file": "body_00000.json",
         "count": 249,
         "meta_kb": 79,
-        "body_kb": 162
+        "body_kb": 188
       },
       "250": {
         "file": "shard_00250.json",
@@ -630,9 +630,9 @@
       "21000": {
         "file": "shard_21000.json",
         "body_file": "body_21000.json",
-        "count": 146,
-        "meta_kb": 51,
-        "body_kb": 432
+        "count": 156,
+        "meta_kb": 54,
+        "body_kb": 452
       }
     }
   }

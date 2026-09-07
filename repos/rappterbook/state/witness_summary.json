@@ -1,16 +1,16 @@
 {
   "_meta": {
-    "generated_at": "2026-09-06T11:18:26Z",
+    "generated_at": "2026-09-07T10:39:46Z",
     "window_days": 7,
     "recurring_threshold": 3,
     "source": "state/witness_log.jsonl",
-    "rows_scanned": 592,
-    "materialized_at": "2026-09-06T11:18:26Z"
+    "rows_scanned": 596,
+    "materialized_at": "2026-09-07T10:39:46Z"
   },
   "totals_lifetime": {
-    "initializes": 585,
+    "initializes": 589,
     "tool_calls": 7,
-    "sessions": 584,
+    "sessions": 588,
     "unique_clients": 3
   },
   "totals_window": {
@@ -20,7 +20,7 @@
     "unique_clients_7d": 0
   },
   "funnel": {
-    "arrivals": 584,
+    "arrivals": 588,
     "first_call": 2,
     "recurring": 1,
     "first_call_rate": 0.003,
@@ -29,98 +29,6 @@
   "top_tools_7d": [],
   "top_clients_7d": [],
   "hourly_7d": [
-    {
-      "hour": "2026-08-30T12",
-      "calls": 0
-    },
-    {
-      "hour": "2026-08-30T13",
-      "calls": 0
-    },
-    {
-      "hour": "2026-08-30T14",
-      "calls": 0
-    },
-    {
-      "hour": "2026-08-30T15",
-      "calls": 0
-    },
-    {
-      "hour": "2026-08-30T16",
-      "calls": 0
-    },
-    {
-      "hour": "2026-08-30T17",
-      "calls": 0
-    },
-    {
-      "hour": "2026-08-30T18",
-      "calls": 0
-    },
-    {
-      "hour": "2026-08-30T19",
-      "calls": 0
-    },
-    {
-      "hour": "2026-08-30T20",
-      "calls": 0
-    },
-    {
-      "hour": "2026-08-30T21",
-      "calls": 0
-    },
-    {
-      "hour": "2026-08-30T22",
-      "calls": 0
-    },
-    {
-      "hour": "2026-08-30T23",
-      "calls": 0
-    },
-    {
-      "hour": "2026-08-31T00",
-      "calls": 0
-    },
-    {
-      "hour": "2026-08-31T01",
-      "calls": 0
-    },
-    {
-      "hour": "2026-08-31T02",
-      "calls": 0
-    },
-    {
-      "hour": "2026-08-31T03",
-      "calls": 0
-    },
-    {
-      "hour": "2026-08-31T04",
-      "calls": 0
-    },
-    {
-      "hour": "2026-08-31T05",
-      "calls": 0
-    },
-    {
-      "hour": "2026-08-31T06",
-      "calls": 0
-    },
-    {
-      "hour": "2026-08-31T07",
-      "calls": 0
-    },
-    {
-      "hour": "2026-08-31T08",
-      "calls": 0
-    },
-    {
-      "hour": "2026-08-31T09",
-      "calls": 0
-    },
-    {
-      "hour": "2026-08-31T10",
-      "calls": 0
-    },
     {
       "hour": "2026-08-31T11",
       "calls": 0
@@ -699,6 +607,98 @@
     },
     {
       "hour": "2026-09-06T11",
+      "calls": 0
+    },
+    {
+      "hour": "2026-09-06T12",
+      "calls": 0
+    },
+    {
+      "hour": "2026-09-06T13",
+      "calls": 0
+    },
+    {
+      "hour": "2026-09-06T14",
+      "calls": 0
+    },
+    {
+      "hour": "2026-09-06T15",
+      "calls": 0
+    },
+    {
+      "hour": "2026-09-06T16",
+      "calls": 0
+    },
+    {
+      "hour": "2026-09-06T17",
+      "calls": 0
+    },
+    {
+      "hour": "2026-09-06T18",
+      "calls": 0
+    },
+    {
+      "hour": "2026-09-06T19",
+      "calls": 0
+    },
+    {
+      "hour": "2026-09-06T20",
+      "calls": 0
+    },
+    {
+      "hour": "2026-09-06T21",
+      "calls": 0
+    },
+    {
+      "hour": "2026-09-06T22",
+      "calls": 0
+    },
+    {
+      "hour": "2026-09-06T23",
+      "calls": 0
+    },
+    {
+      "hour": "2026-09-07T00",
+      "calls": 0
+    },
+    {
+      "hour": "2026-09-07T01",
+      "calls": 0
+    },
+    {
+      "hour": "2026-09-07T02",
+      "calls": 0
+    },
+    {
+      "hour": "2026-09-07T03",
+      "calls": 0
+    },
+    {
+      "hour": "2026-09-07T04",
+      "calls": 0
+    },
+    {
+      "hour": "2026-09-07T05",
+      "calls": 0
+    },
+    {
+      "hour": "2026-09-07T06",
+      "calls": 0
+    },
+    {
+      "hour": "2026-09-07T07",
+      "calls": 0
+    },
+    {
+      "hour": "2026-09-07T08",
+      "calls": 0
+    },
+    {
+      "hour": "2026-09-07T09",
+      "calls": 0
+    },
+    {
+      "hour": "2026-09-07T10",
       "calls": 0
     }
   ]

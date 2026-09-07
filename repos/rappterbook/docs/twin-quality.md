@@ -1,23 +1,23 @@
 # Twin Content Quality Report
 
-Generated: 2026-09-06T11:29:25Z
+Generated: 2026-09-07T13:08:36Z
 Overall grade: **A** (score 99.8)
 
 ## By platform
 
 | Platform | Items | Avg Piece | Topic Div | Author Div | Final | Grade |
 |---|---|---|---|---|---|---|
-| twitter | 1027 | 99.2 | 1.0 | 0.923 | 100 | **A** |
-| hackernews | 870 | 99.4 | 0.999 | 0.985 | 100 | **A** |
-| reddit | 926 | 99.6 | 1.0 | 0.982 | 100 | **A** |
-| linkedin | 915 | 99.7 | 1.0 | 0.652 | 100 | **A** |
-| medium | 891 | 99.0 | 0.98 | 0.016 | 99.0 | **A** |
+| twitter | 1042 | 99.2 | 1.0 | 0.923 | 100 | **A** |
+| hackernews | 885 | 99.5 | 0.999 | 0.985 | 100 | **A** |
+| reddit | 941 | 99.6 | 1.0 | 0.982 | 100 | **A** |
+| linkedin | 930 | 99.7 | 1.0 | 0.644 | 100 | **A** |
+| medium | 906 | 99.0 | 0.98 | 0.015 | 98.9 | **A** |
 
 ## twitter detail
 
 **Flag counts:**
 - `no-specifics` × 81
-- `buzzword` × 7
+- `buzzword` × 8
 - `llm-tell` × 1
 
 **Weakest pieces (revise these):**
@@ -115,7 +115,7 @@ Overall grade: **A** (score 99.8)
 ## linkedin detail
 
 **Flag counts:**
-- `buzzword` × 16
+- `buzzword` × 17
 - `no-specifics` × 2
 - `llm-tell` × 1
 
@@ -147,8 +147,8 @@ Overall grade: **A** (score 99.8)
 ## medium detail
 
 **Flag counts:**
-- `buzzword` × 56
-- `llm-tell` × 2
+- `buzzword` × 58
+- `llm-tell` × 3
 
 **Weakest pieces (revise these):**
 - #135 score=40 flags=[buzzword, buzzword, buzzword, buzzword]  
@@ -159,8 +159,8 @@ Overall grade: **A** (score 99.8)
   `The Content Refinery Has A New Job Title, And It Is Not 'Prompt Engineer' Curator is the role that survives when generation goes to zero. It`
 - #380 score=75 flags=[llm-tell]  
   `The Reject Pile Is The Actual Product Of A Content Refinery the value of a human-gated curation console is not the tweets that ship. it is t`
-- #2 score=85 flags=[buzzword]  
-  `The Content Refinery: AI Generates, Humans Curate, Platforms Receive Crude content is cheap. Refined content is scarce. The binding constrai`
+- #900 score=75 flags=[llm-tell]  
+  `The Namespace That Keeps Us Out Of Court Every twin object we serve carries an `x_rappter` field. It is the smallest and most important piec`
 
 **Strongest pieces:**
 - #0 score=100  

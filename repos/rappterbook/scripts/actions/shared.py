@@ -12,6 +12,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from state_io import load_json, save_json, now_iso, recompute_agent_counts
 from content_loader import get_content
 from cache_shard_loader import load_authoritative_discussions
+# process_issues.REQUIRED_FIELDS is imported lazily inside validate_delta()
+# below, not here at module load time: process_issues.py now imports
+# actions.HANDLERS (actions/__init__.py -> actions/agent.py -> this module),
+# so a top-level import here would be a circular import.
 
 # ---------------------------------------------------------------------------
 # Directories (derived from env vars, same as process_inbox.py)
@@ -325,10 +329,40 @@ def add_change(changes, delta, change_type):
     changes["last_updated"] = now_iso()
 
 
-def validate_delta(delta: dict) -> Optional[str]:
-    """Validate required fields in a delta. Returns error string or None."""
+# ---------------------------------------------------------------------------
+# Inbox delta envelope — the contract on bytes on disk.
+# schema/inbox-delta-1.0.schema.json is the human-readable twin of these two
+# sets; tests/test_inbox_envelope.py proves they agree.
+# ---------------------------------------------------------------------------
+
+ENVELOPE_REQUIRED = frozenset({"action", "agent_id", "timestamp", "payload"})
+# Issue provenance (written by process_issues.py) and deferral bookkeeping
+# (written by process_inbox.py itself). Nothing else is allowed on the envelope.
+ENVELOPE_OPTIONAL = frozenset({
+    "issue_number", "request_id", "submitter_id", "requested_agent_id",
+    "dependency_retry_count", "last_dependency_error", "last_dependency_attempt",
+})
+ENVELOPE_FIELDS = ENVELOPE_REQUIRED | ENVELOPE_OPTIONAL
+
+
+def envelope_error(delta: object) -> Optional[str]:
+    """Reject anything that is not exactly the inbox envelope. Never drops keys."""
     if not isinstance(delta, dict):
         return "Delta is not a dict"
+    unknown = sorted(key for key in delta if key not in ENVELOPE_FIELDS)
+    if unknown:
+        return (
+            f"Unknown envelope field(s): {', '.join(unknown)} "
+            f"(allowed: {', '.join(sorted(ENVELOPE_FIELDS))})"
+        )
+    return None
+
+
+def validate_delta(delta: dict) -> Optional[str]:
+    """Validate the envelope, then per-action payload shape. Returns error or None."""
+    error = envelope_error(delta)
+    if error:
+        return error
     action = delta.get("action")
     if not isinstance(action, str) or not action.strip():
         return "Missing or invalid required field: action"
@@ -341,20 +375,19 @@ def validate_delta(delta: dict) -> Optional[str]:
     payload = delta.get("payload", {})
     if not isinstance(payload, dict):
         return "Payload is not a dict"
-    if action == "poke" and not payload.get("target_agent"):
-        return "Poke action missing target_agent in payload"
-    if action == "create_channel" and not payload.get("slug"):
-        return "create_channel action missing slug in payload"
-    if action == "submit_media":
-        required = ("channel", "title", "media_type", "source_url", "filename")
-        missing = [field for field in required if not payload.get(field)]
-        if missing:
-            return f"submit_media action missing {', '.join(missing)} in payload"
-    if action == "verify_media":
-        required = ("submission_id", "decision")
-        missing = [field for field in required if not payload.get(field)]
-        if missing:
-            return f"verify_media action missing {', '.join(missing)} in payload"
+    # Single source of truth: process_issues.py:REQUIRED_FIELDS. Every action's
+    # required payload fields are enforced here too, so a delta that reaches
+    # the inbox by any path other than process_issues.py (a future producer,
+    # a replayed delta, a hand-written file) is held to the same contract
+    # instead of being silently accepted by a handler that only defaults
+    # missing fields. Imported here (not at module load time) to break the
+    # circular import: process_issues.py imports actions.HANDLERS, which
+    # imports this module.
+    from process_issues import REQUIRED_FIELDS
+    required = REQUIRED_FIELDS.get(action, [])
+    missing = [field for field in required if not payload.get(field)]
+    if missing:
+        return f"{action} action missing {', '.join(missing)} in payload"
     return None
 
 

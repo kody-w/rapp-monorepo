@@ -1,16 +1,14 @@
 {
  "schema": "gh-zen/1",
  "quotes": [
-  "Avoid administrative distraction.",
-  "Practicality beats purity.",
-  "Encourage flow.",
-  "Design for failure.",
-  "Anything added dilutes everything else.",
-  "Accessible for all.",
-  "Speak like a human.",
-  "Responsive is better than fast.",
   "Approachable is better than simple.",
+  "Speak like a human.",
+  "Accessible for all.",
+  "Design for failure.",
+  "Keep it logically awesome.",
+  "Encourage flow.",
+  "Practicality beats purity.",
   "Non-blocking is better than blocking.",
-  "Keep it logically awesome."
+  "Anything added dilutes everything else."
  ]
 }

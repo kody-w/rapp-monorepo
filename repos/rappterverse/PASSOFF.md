@@ -1,6 +1,6 @@
 # Shift Passoff — 2026-09-05
 
-## Status: FRONTEND BUG-HUNT LOOP (11 rounds, ongoing)
+## Status: FRONTEND BUG-HUNT LOOP (16 rounds, ongoing — regression suite 14/14)
 
 Not a feature session. A fan-out audit-and-fix loop targeting real
 correctness bugs in the DOTA-mode frontend (`src/js/`), run via the
@@ -223,6 +223,286 @@ the same code path as the already-working fist/peace/open/point-up/left/
 right classifications — a change I can't behaviorally verify without a
 live camera and real hand poses, so it's logged here rather than guessed at.
 
+### Round 12 — `touch-controls.js`, `voice-controls.js` + `world-core.js` (fourth autonomous-schedule round, completes the input-modality sweep)
+- **`TouchControls` had no `cleanup()`** — `WorldMode.cleanup()` only ever
+  called `hide()` (display:none), never anything that unbound the
+  touchmove/touchend window listeners or each button's touchstart
+  listener, and `active` stayed true so the next world's `init()` no-opped
+  on its "already active" guard instead of freshly binding. Added
+  `cleanup()` (calls the existing `disable()`, idempotent) and wired it in.
+- **Every `disable()`→`enable()` cycle leaked an orphaned `<style>` tag.**
+  `_createUI()`'s "already exists" guard only checked `#touch-controls`
+  (the container), but `disable()` only removed the container, not the
+  `<style>` element `_createUI()` unconditionally created on every call —
+  each cycle (now more frequent once `cleanup()` above runs on every world
+  exit) added one more permanent stale style block to `<head>`. Fixed by
+  giving the style tag a stable id and reusing it if present.
+- Removed `_actionTouchId`, a field declared but never read or written
+  anywhere in the codebase.
+- **`VoiceControls`'s 1s command debounce survived world switches.**
+  Voice is a deliberate persistent, mode-agnostic toggle (world-specific
+  commands already self-gate via `GameState.mode === 'world'` inside
+  `_processCommand()`, so recognition itself correctly does *not* stop on
+  world exit — doing so would silence mode-agnostic commands like "travel
+  to arena" said from the galaxy). But `lastCommand`/`lastCommandTime`
+  weren't reset per session, so repeating the same command (e.g. "attack")
+  within 1s of a world switch had its first repetition in the new session
+  silently dropped as a stale duplicate. Added `resetSession()`, called
+  from `WorldMode.init()`.
+
+This completes the full input-modality sweep started in Round 11
+(gamepad, gesture) — all four alternate input systems (gamepad, gesture,
+touch, voice) have now had a dedicated audit round.
+
+### Round 13 — `state.js`, `data.js` (audited clean) → root-caused the regression suite's 7/14 baseline, all fixes to `scripts/test-harness.js` (not game code)
+
+Started this round on the next two files in the backlog, `state.js` and
+`data.js`. Both audit subagents reported zero genuine bugs after tracing
+every field/consumer across the codebase — `state.js`'s `GameState`
+singleton and `data.js`'s `DataManager` snapshot-fetching layer are both
+consumed consistently everywhere they're read. That's an honest "audited,
+clean" result, not a skipped file — trimmed from the not-yet-audited list
+below.
+
+With that round otherwise empty, pivoted to root-causing the regression
+suite's 7/14 baseline. Every prior round treated the suite's 7 failing tests
+(`Init`, `Warmup`,
+`Wave spawn`, `Player attack`, `Death + respawn`, `Creep variety`, `Full
+session`) as an open question — "look like harness/timing gaps... haven't
+been individually root-caused yet." This round root-caused all seven down
+to one real cause: `WorldMode.init()` was silently crashing partway through
+on every single test run, and the harness's own init call swallows any
+exception (`// Init may partially fail on some subsystems — that's OK for
+testing`), so nothing ever surfaced it. Every fix below is to the mock
+THREE.js/DOM layer in `scripts/test-harness.js`, not to game code — the
+real browser always had a real `THREE.Euler`, a real `<canvas>`, a real
+`Element.firstChild`, etc.; only the headless mock was missing them.
+
+Root-caused by temporarily removing the harness's own try/catch around
+`WorldMode.init()` and re-running to see the real, unswallowed stack trace
+each time — repeated four times as each fix exposed the next crash further
+down the same init chain:
+
+1. **`mesh.rotation` had no `.set()`.** `world-lanes.js`'s `buildRiver()`
+   calls `rock.rotation.set(...)`; the mock's plain `{x,y,z}` object has no
+   such method (real `THREE.Euler` does). This crashed `WorldLanes.init()`
+   on literally the first world load, before `WorldCombat.init()` — which
+   sets `_warmupActive = true` — ever ran. That's the exact cause of every
+   `warmup=undefined`/`thrones=0/0` reading every previous round noted but
+   didn't chase down.
+2. **`geometry.parameters` didn't exist.** `world-lanes.js`'s Volcanic-biome
+   rock placement reads `rock.geometry.parameters.radius` (real
+   `DodecahedronGeometry` stores its ctor args there); the mock geometry
+   factory ignored its arguments entirely.
+3. **`renderer.domElement` had no `addEventListener`/`removeEventListener`.**
+   `world-core.js`'s `WorldMode.init()`/`cleanup()` wire the real
+   right-click-to-attack (`contextmenu`) and `mousedown` handlers onto it.
+4. **`MockColor` had no `.clone()`.** `vfx.js`'s particle burst clones a
+   base color per-particle so each particle can fade independently.
+5. **`Vector3` had no `.setScalar()`.** Used by `vfx.js`'s particle scale
+   and several ambient scale-pulse effects (`chronicle.js`, `galaxy.js`,
+   `approach.js`).
+6. **Mock DOM elements had no `.firstChild` — a genuine infinite loop.**
+   `HUD.showToast()`'s "keep at most 5 toasts visible" cleanup is
+   `while (container.children.length > 5) container.removeChild(container.firstChild)`.
+   With `firstChild` always `undefined`, `removeChild(undefined)` never
+   finds a match to splice out, `children.length` never drops, and the loop
+   never exits — this hung the T4/T9 tests solid the moment more than 5
+   toasts could ever really fire in one session (i.e. exactly once fix #1
+   above stopped `WorldMode.init()` from crashing before real gameplay ever
+   ran long enough to reach it).
+7. **`MockColor` had no `.lerpColors()`.** `vfx.js`'s per-frame particle
+   update fades each particle's color and emissive from `startColor` to
+   `endColor` via `lerpColors()` every tick a particle is alive. Missing
+   entirely, this threw inside `VFX.update()` — called early in
+   `WorldMode.update()`, well before `PlayerStats.update()` — so the
+   *entire rest of that tick's `WorldMode.update()`* silently aborted every
+   single tick after the first VFX burst (e.g. every kill or death),
+   because `tick()` also wraps its call in a bare `catch(e){}`. This is
+   specifically why T9 (Death + respawn) never saw `respawnTimer` count
+   down: the death VFX burst on tick 1 permanently broke every tick after it.
+
+Implemented a real RGB-channel interpolation for `lerpColors` (decompose
+hex to r/g/b, lerp each channel, recompose) rather than a stub, since a
+future test asserting on actual particle fade colors should get correct
+values, not a no-op.
+
+**Verification:** `node scripts/test-cases.js` went from the 12-round-old
+baseline of 7/14 to a clean **14/14**, confirmed stable across 3 repeated
+runs (not flaky/order-dependent). No game code (`src/js/`) was touched this
+round — every change is confined to the dev-only, unbundled
+`scripts/test-harness.js` (confirmed via `grep test-harness scripts/bundle.sh`
+— it's never referenced there), so `docs/index.html` did not need
+rebuilding.
+
+### Round 14 — `config.js`, `boot.js`
+
+- **`seededRandom()`/`inventory.js`'s `spawnDrop()`: item drops were
+  completely broken in every world, on every wave, since this function was
+  written.** `spawnDrop(position, worldId, waveNumber, creepIndex)` built
+  its seed as `worldId * 10000 + waveNumber * 100 + creepIndex` — but every
+  real caller (`world-combat.js`, `jungle-camps.js`) passes
+  `GameState.currentWorld`, a world id STRING like `"arena"`. `string *
+  number` is `NaN`, and `seededRandom(NaN)`'s hash loop reads `seed.length`
+  — `NaN.length` is `undefined`, so the loop never runs and every call
+  started from the exact same `s = 0` state. The very first `rng()` call
+  from that state is always `≈0.0000057`, permanently under the "30%
+  chance no drop" threshold — so **every single creep kill and jungle camp
+  kill in the entire game silently never dropped an item.** Fixed two
+  layers: `seededRandom()` now coerces its seed to a string first
+  (matching `createNoise2D()`'s own existing defensive `String(seed)`
+  wrapping, so any current or future non-string caller is protected), and
+  `spawnDrop()`'s seed is now built as a real string
+  (`worldId + '-' + waveNumber + '-' + creepIndex`), matching the
+  string-concatenation convention every other `seededRandom()` call site in
+  the codebase already uses. Verified behaviorally in the test harness:
+  simulating 25 drop rolls across 5 waves × 5 creep indices now produces an
+  18/25 (72%) drop rate — matching the intended ~70% design — versus 0/25
+  before the fix.
+- Removed `CLIENT_AUTHORITY`, a frozen config object defined in `config.js`
+  but never read anywhere in `src/js/*.js` — confirmed dead via repo-wide
+  grep.
+- `boot.js` audited with three findings from the sub-agent, all
+  investigated and found not to be real bugs after verification: (1) a
+  theoretical `skip()`-vs-in-flight-fetch race degrades gracefully by
+  design (the deep-link agent lookup already falls back to a sensible
+  default world if the agent isn't found yet) and matches "skip means
+  skip" UX intent, not a bug; (2) the claim that a failed required boot
+  fetch is "silently" treated as success is false — `data.js`'s
+  `_fetchAndApply()` never throws to its caller by design, but it already
+  visibly reports failure via its own status UI
+  (`_showStatus`/`_setLiveState`, e.g. "Offline — state unavailable"),
+  which *is* this codebase's established failure-reporting convention,
+  just implemented one layer down from where the sub-agent looked; (3) the
+  claim that `Boot.run()`'s skip-button listener could be registered more
+  than once is unreachable in practice — `Boot.run()` is called exactly
+  once, from `main()`'s IIFE, with no other call site. Honest zero
+  findings in `boot.js` itself.
+
+**Verification:** `node --check` on both edited files, `bash
+scripts/bundle.sh`, `node scripts/test-cases.js` still 14/14 (no
+regressions), plus the direct behavioral drop-rate simulation above.
+
+### Round 15 — `galaxy.js`, `warp.js`
+
+- **`Warp.start()` had no guard against a second warp starting while one
+  was already in flight — real and reachable, unlike most "no idempotency
+  guard" theories this loop has run into.** `GameState.mode` stays
+  `'galaxy'` for the entire 1.8s tunnel animation — it only becomes
+  `'approach'` inside the warp's own completion callback
+  (`Approach.start()`, which calls `GameState.setMode('approach')`), so
+  both galaxy.js's planet click handler and main.js's Enter-key handler
+  are still reachable for the whole warp duration (neither checks
+  `Warp.active`). A second click or Enter-press mid-warp called
+  `Warp.start()` again, which silently overwrote `this.callback`
+  (discarding the first selected destination for whatever the second
+  click landed on) and reset `this.stars`/`this.progress`/`this.startTime`
+  out from under the still-pending `requestAnimationFrame` loop the first
+  call had scheduled — its `animFrameId` was lost the instant the second
+  call overwrote it, so `cleanup()` could never cancel that first loop,
+  leaving two `animate()` calls racing the same mutable canvas/progress
+  state until the first one's own progress naturally reached 1 and
+  self-cleaned. Fixed by adding `if (this.active) return;` at the top of
+  `start()` — the same "ignore a second start while one is already in
+  flight" guard `DataManager.fetchAllState()` already uses elsewhere in
+  this codebase for the identical class of problem. Verified behaviorally
+  in the test harness: calling `Warp.start(cbA)` then `Warp.start(cbB)`
+  while still active now correctly leaves `Warp.callback` as `cbA` (was
+  silently replaced by `cbB` before the fix); calling `Warp.start()` again
+  *after* `Warp.cleanup()` runs (simulating warp completion) still
+  correctly succeeds.
+- `galaxy.js` audited with 4 findings from the sub-agent, all investigated
+  and found not reachable in the actual codebase: (1)/(2) `Galaxy.init()`
+  non-idempotency / GPU resource leak on repeated init — `Galaxy.init()`
+  is called exactly once, from `boot.js`, with every real "return to
+  galaxy" flow using `Galaxy.show()`/`Galaxy.hide()` instead (confirmed via
+  repo-wide grep), so this never actually happens; (3) click raycasting
+  using `window.innerWidth`/`innerHeight` instead of the canvas's own
+  bounding rect — `#galaxy-container`'s CSS is `position: fixed; inset: 0`,
+  so it is mathematically always exactly viewport-sized with zero offset,
+  making the two equivalent in every real case; (4) `Galaxy.onResize()`
+  not calling `renderer.setSize()` — it doesn't need to, because
+  `main.js`'s single global `window.resize` listener already calls
+  `GameState.renderer.setSize(...)` once, centrally, immediately before
+  calling `Galaxy.onResize()`/`WorldMode.onResize()`/
+  `PostProcessing.onResize()` in sequence. Honest zero findings in
+  `galaxy.js` itself.
+
+**Verification:** `node --check` on `warp.js`, `bash scripts/bundle.sh`,
+`node scripts/test-cases.js` still 14/14 (no regressions), plus direct
+behavioral verification of the guard in the test harness (described above).
+
+### Round 16 — `approach.js`, `landing.js`
+
+Both files turned out to have exactly the same *class* of bug found in
+`warp.js` last round -- a mode-transition window where the "in-flight"
+mode stays active far longer than intuition suggests, making a second
+call to `start()`/a stale delayed callback genuinely reachable via a real
+input path, not just a hypothetical.
+
+**approach.js** — 3 real, verified findings:
+- **`Approach.start()` had no guard against re-entry while an approach was
+  already active.** `voice-controls.js`'s "travel to X" handler calls
+  `Approach.start(worldId)` completely unconditionally (voice is a
+  persistent, mode-agnostic toggle by design, see Round 12), so saying a
+  second travel command mid-approach re-entered `start()` while the first
+  call's `animate()` rAF chain was still running. Since `animate()`
+  re-schedules itself every frame, the old loop kept running alongside the
+  new one, both racing the same `progress`/`phase`/`orbitAngle`/camera
+  state, with only the newer one's `animFrame` ever recorded. Fixed with
+  `if (this.active) this.cleanup();` at the top of `start()` -- but unlike
+  `Warp.start()`'s "ignore the second call" fix, this one *redirects* to
+  the new destination after cleaning up the old loop, since changing your
+  mind mid-approach (unlike mid-warp-tunnel) is a reasonable thing to
+  allow.
+- **The letterbox-bars `setTimeout` was never tracked or cancelled.**
+  Aborting (or redirecting, per the fix above) within its 200ms window
+  left it scheduled; it later fired regardless, silently re-activating the
+  letterbox bars while already back in galaxy mode (or partway through an
+  unrelated new approach). Now stored as `this.letterboxTimer` and
+  cancelled in `cleanup()`.
+- **The live population stat row was never deduplicated.** Every
+  `Approach.start()` call appended another `.approach-stat` "AGENTS" div
+  to `#approach-stats` without removing a prior one, so repeated
+  approaches (approach A, abort, approach B, ...) left every
+  previously-approached world's stale population number visible at once.
+  Gave the dynamically-injected div its own `.approach-stat-live` class
+  and remove any existing one before appending a new one -- the container
+  also holds 3 permanent distance/velocity/eta stat divs `animate()`
+  depends on by id, so a blanket "clear the container" approach would have
+  broken those.
+
+**landing.js** — 2 findings, 1 fix + 1 low-risk defensive cleanup:
+- **`resolveLanding()`'s 2-second result-screen `setTimeout` was never
+  tracked or cancelled.** `GameState.mode` stays `'landing'` for that
+  entire window, so pressing Escape (which calls `Landing.abort()`
+  whenever mode is `'landing'`, per `main.js`) is genuinely reachable
+  during it. The stale callback fired regardless: it called `cleanup()` a
+  second time and then `WorldMode.init(this.targetWorld)` even though the
+  player had already backed out to the galaxy -- silently dragging them
+  back into the world they'd just declined (or, if they'd since started a
+  new landing, tearing down the *new* one and initializing the *old*
+  target world instead). Fixed the same way as the two findings above:
+  stored as `this.resolveTimer`, cancelled in `cleanup()`.
+- `this.worldId` (read in two places for the landing-status seed display)
+  is never assigned anywhere in the file -- confirmed dead via grep. It
+  coincidentally still showed the correct seed today only because
+  `Landing.start()` has exactly one real caller (`approach.js`'s
+  `initiateLanding()`), which runs after `Approach.start()` already set
+  `GameState.currentWorld` to the same target -- not a currently-observable
+  bug, but a fragile landmine relying on caller-ordering coincidence.
+  Replaced both reads with `this.targetWorld`, this object's own
+  authoritative field, removing the dependency on that coincidence.
+
+**Verification:** `node --check` on both edited files, `bash
+scripts/bundle.sh`, `node scripts/test-cases.js` still 14/14 (no
+regressions). Direct behavioral verification in the test harness for all
+three approach.js fixes (concurrent-start redirect, letterbox timer
+tracked/cleared, stat dedup verified against realistic DOM `querySelector`
+semantics since the harness's own mock always returns a dummy element
+regardless of selector) and the landing.js `resolveTimer` fix (set after
+`resolveLanding()`, correctly nulled by `cleanup()`).
+
 ---
 
 ## Known Issues / Tech Debt (not yet fixed — lower confidence or higher risk)
@@ -233,32 +513,50 @@ live camera and real hand poses, so it's logged here rather than guessed at.
    despite the blog docs describing "8 jungle spots for hiding." Fixing this
    properly means designing real brush-zone geometry and wiring it into
    enemy AI targeting — a feature addition, not a bug fix.
-2. **Some biome-feature placement can exceed world bounds.** Lava paths,
-   crystal lakes, abyss platforms/beams, desert oases, and Terra ponds use
-   `bounds * 1.2`/`* 1.4` center-point multipliers with no clamp on the
-   feature's own radius/path drift — cosmetic-only, cheap to spot-check via
-   live inspection but requires per-biome-specific clamping math to fix
-   without visual regressions. Deprioritized this session.
-3. **`RappterVM.shape()` is orphaned.** Three shapers (`terrain`, `weather`,
-   `mood-lighting`) are registered every world load but nothing ever calls
-   `RappterVM.shape(name, frameData)` — not the game engine, not the Lisp
-   stdlib exposed to agent programs. Either wire a real consumer (and
-   decide what it should do with the returned value) or remove the
-   registration + registry. Needs a design decision, not a mechanical fix.
-4. Files not yet given a dedicated audit round: `state.js`, `data.js`,
-   `config.js`, `boot.js`, `galaxy.js`, `warp.js`, `approach.js`,
-   `landing.js`, `settings.js`, `debug.js`, `touch-controls.js`,
-   `voice-controls.js`, `help-overlay.js`, `tutorial.js`,
-   `post-processing.js`. Many of these are pre-world-mode / meta systems
-   rather than core DOTA gameplay, but haven't been ruled out.
+2. ~~**Some biome-feature placement can exceed world bounds.**~~
+   **Resolved, with the actual math worked through precisely** (not
+   guessed at, and not skipped for lack of a renderer): `w.bounds.x`/`.z` is
+   the canonical playable half-extent (the player's own position is
+   hard-clamped to exactly this range in `world-core.js`); a placement of
+   `(rng()-0.5) * bounds * M` has half-range `0.5*M*bounds`, so `M=2` reaches
+   the true edge and the `M=1.2`/`1.4` used here reach only 60%/70% of the
+   way there. Computed the worst-case footprint (center half-range + each
+   feature's own max radius/half-extent) against every world's real
+   `bounds` values: Crystal lakes (39-51 unit margin), Abyss platforms
+   (32-unit) and beams (48-unit), Desert oases (55-unit), and Terra ponds
+   (54-unit) all turned out to already have large safety margins under
+   their own worst-case parameters — none of them was ever actually capable
+   of exceeding bounds, despite looking suspicious next to the lava river's
+   similar-looking multiplier. Left all four completely untouched and added
+   a one-line comment with the exact numbers at each, so a future audit
+   round doesn't need to re-derive this.
+   The ONE placement that genuinely could exceed bounds is the Volcanic
+   lava river: its start point is safely inset, but it then random-walks
+   via Perlin noise for 15 steps at up to ~6 units/step of *unbounded*
+   drift against only a ~35-unit starting margin. Simulated both the
+   original and fixed algorithm across 5,000 seeded worlds using the game's
+   own real noise function: the original code exceeded bounds in 2/5,000
+   seeds (up to ~1.2 units over) — rare and small, but real; the fixed
+   version (`WorldTerrain.clampToBounds()`, re-pinning every drifted point
+   to stay within `bounds - tubeRadius`) showed **zero** exceedances across
+   the same 5,000 seeds. `node scripts/test-cases.js` still 14/14 after the
+   fix.
+3. ~~**`RappterVM.shape()` is orphaned.**~~ **Resolved (Round 13, follow-up):**
+   confirmed via repo-wide grep there was truly no consumer anywhere (not
+   the game engine, not a Lisp stdlib primitive — no such primitive
+   mechanism for exposing VM functions to agent programs even exists yet).
+   Removed the three `registerShaper()` calls in `world-core.js` and the
+   entire `_shapers`/`registerShaper`/`shape`/`getShapers` registry in
+   `rappter-vm.js`, rather than inventing a speculative new consumer for
+   code nothing was calling. Verified: 14/14 regression suite still passes
+   after removal.
+4. Files not yet given a dedicated audit round: `settings.js`, `debug.js`,
+   `help-overlay.js`, `tutorial.js`, `post-processing.js`. Many of these
+   are pre-world-mode / meta systems rather than core DOTA gameplay, but
+   haven't been ruled out.
 5. **Point-down gesture is likely unreachable** (see Round 11) — needs a
    direction-agnostic finger-extension geometry change I can't verify
    without a live camera.
-6. Regression suite is still 7/14 — remaining failures (`Init`, `Warmup`,
-   `Wave spawn`, `Player attack`, `Death + respawn`, `Creep variety`, `Full
-   session`) look like harness/timing gaps (e.g. `warmup=undefined`
-   suggests the harness never reaches `_warmupActive` becoming true) rather
-   than gameplay bugs, but haven't been individually root-caused yet.
 
 ## Build / Test
 
