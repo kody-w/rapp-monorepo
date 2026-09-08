@@ -1,25 +1,24 @@
 {
-  "schema": "openrappter-ring/v1",
+  "artifact": {
+    "install_url": "https://raw.githubusercontent.com/kody-w/openrappter/1441d8bf8227f4d9a20ac10cd4609f4a99496c7d/candidates/2241544be7229e9c480c983e569a712280f1bd0a/release/tag-djEuMTMuMQ/e65da0b8faabbb735a7e152876519af31f56b94e9bc30a015f9767828b7c16b8.tar.gz",
+    "provenance": "github-candidate-bundle-sha256",
+    "sha256": "e65da0b8faabbb735a7e152876519af31f56b94e9bc30a015f9767828b7c16b8",
+    "url": "https://raw.githubusercontent.com/kody-w/openrappter/1441d8bf8227f4d9a20ac10cd4609f4a99496c7d/candidates/2241544be7229e9c480c983e569a712280f1bd0a/release/tag-djEuMTMuMQ/e65da0b8faabbb735a7e152876519af31f56b94e9bc30a015f9767828b7c16b8.tar.gz"
+  },
+  "channel_version": "0.1.0-beta.11",
+  "intended_release_tag": "v1.13.1",
+  "predecessor": "alpha",
+  "promoted_at": "2026-09-07T17:38:06Z",
+  "promotion_id": "ab5b65acc96f6502f41926bdd560a9474bae8a6691850881191daddcc89a60c7",
+  "reason": null,
+  "receipt": null,
   "ring": "canary",
+  "schema": "openrappter-ring/v1",
   "source": {
+    "commit": "2241544be7229e9c480c983e569a712280f1bd0a",
     "repository": "kody-w/openrappter",
-    "commit": "9913ca2e5237c44620f5422644cbe6060f2c8c18",
     "tag": null
   },
-  "version": "1.13.0-canary.0+g9913ca2",
-  "artifact": {
-    "url": "https://github.com/kody-w/openrappter/archive/9913ca2e5237c44620f5422644cbe6060f2c8c18.tar.gz",
-    "install_url": null,
-    "sha256": "96162c003da42118290b48df71bcb3aa6a940f1ac7d5e3ec304f757f2c0a719c",
-    "provenance": "github-commit-archive-sha256"
-  },
-  "promoted_at": "2026-08-23T14:38:58Z",
-  "predecessor": "alpha",
-  "status": "disabled",
-  "reason": "No successful real smoke test or limited-rollout receipt exists for this source commit.",
-  "receipt": null,
-  "promotion_id": "b4b0ff0fa4bbb79b637f8682966ab54942bd3060798beb3c397e9b350392061a",
-  "intended_release_tag": null,
-  "channel_version": null,
-  "intended_release_tag": null
+  "status": "published",
+  "version": "1.13.1"
 }

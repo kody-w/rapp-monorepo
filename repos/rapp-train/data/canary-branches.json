@@ -40,6 +40,14 @@
   "protected": false
  },
  {
+  "name": "feat/astra-model-adapter-20260907",
+  "commit": {
+   "sha": "88c2f78082356c3cbbfd87fcf331585b612f98f1",
+   "url": "https://api.github.com/repos/kody-w/rapp-canary/commits/88c2f78082356c3cbbfd87fcf331585b612f98f1"
+  },
+  "protected": false
+ },
+ {
   "name": "feat/cartridge-ref",
   "commit": {
    "sha": "8726b0f09ac731221fbc723d12cc25b4426e2750",
@@ -52,6 +60,14 @@
   "commit": {
    "sha": "864d7c6e973db1fa13e0e7aae2b410de12170386",
    "url": "https://api.github.com/repos/kody-w/rapp-canary/commits/864d7c6e973db1fa13e0e7aae2b410de12170386"
+  },
+  "protected": false
+ },
+ {
+  "name": "feat/persistent-markdown-skills-20260907",
+  "commit": {
+   "sha": "97550dfd25ccaeb53cad1ed3e44655ebbd4c2fe9",
+   "url": "https://api.github.com/repos/kody-w/rapp-canary/commits/97550dfd25ccaeb53cad1ed3e44655ebbd4c2fe9"
   },
   "protected": false
  },
@@ -92,6 +108,14 @@
   "commit": {
    "sha": "1bdc113b21012276eec90e66f7658b60a50fc6de",
    "url": "https://api.github.com/repos/kody-w/rapp-canary/commits/1bdc113b21012276eec90e66f7658b60a50fc6de"
+  },
+  "protected": false
+ },
+ {
+  "name": "fix/canary-skill-setup-20260907",
+  "commit": {
+   "sha": "029433c638310a48d4ed4e5e08e593a46ff7c9e7",
+   "url": "https://api.github.com/repos/kody-w/rapp-canary/commits/029433c638310a48d4ed4e5e08e593a46ff7c9e7"
   },
   "protected": false
  },
@@ -226,8 +250,8 @@
  {
   "name": "main",
   "commit": {
-   "sha": "ddfdddc9adea874c02a0a9bd3a99485e90d484e3",
-   "url": "https://api.github.com/repos/kody-w/rapp-canary/commits/ddfdddc9adea874c02a0a9bd3a99485e90d484e3"
+   "sha": "da91e66df702965d03a1ca6fa6d955d0d78d4ebd",
+   "url": "https://api.github.com/repos/kody-w/rapp-canary/commits/da91e66df702965d03a1ca6fa6d955d0d78d4ebd"
   },
   "protected": true
  },

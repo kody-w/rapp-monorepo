@@ -1,17 +1,17 @@
 {
- "sha": "ddfdddc9adea874c02a0a9bd3a99485e90d484e3",
- "html_url": "https://github.com/kody-w/rapp-canary/commit/ddfdddc9adea874c02a0a9bd3a99485e90d484e3",
+ "sha": "da91e66df702965d03a1ca6fa6d955d0d78d4ebd",
+ "html_url": "https://github.com/kody-w/rapp-canary/commit/da91e66df702965d03a1ca6fa6d955d0d78d4ebd",
  "commit": {
-  "message": "release(canary): publish agent-led onboarding only\n\nPreserve prior Canary work, re-seed the shared payload from production, and publish only the approved five-file onboarding layer. Include the explicitly approved ring-owned matrix repair without changing installer or Brainstem runtime bytes. No downstream or production promotion.\n\nCo-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>\nCopilot-Session: 03b13af4-cc91-4e8a-bc90-27c534c44333",
+  "message": "merge: replace LearnNew with stable aibast agent, drop skills entirely (preflight green: run 34167731544)",
   "author": {
    "name": "Kody Wildfeuer",
    "email": "kwildfeuer@me.com",
-   "date": "2026-09-06T16:38:01-04:00"
+   "date": "2026-09-07T18:48:10-04:00"
   },
   "committer": {
    "name": "Kody Wildfeuer",
    "email": "kwildfeuer@me.com",
-   "date": "2026-09-06T16:38:01-04:00"
+   "date": "2026-09-07T18:48:10-04:00"
   }
  }
 }

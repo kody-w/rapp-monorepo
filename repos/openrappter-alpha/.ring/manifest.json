@@ -1,25 +1,24 @@
 {
-  "schema": "openrappter-ring/v1",
+  "artifact": {
+    "install_url": "https://raw.githubusercontent.com/kody-w/openrappter/1441d8bf8227f4d9a20ac10cd4609f4a99496c7d/candidates/2241544be7229e9c480c983e569a712280f1bd0a/release/tag-djEuMTMuMQ/e65da0b8faabbb735a7e152876519af31f56b94e9bc30a015f9767828b7c16b8.tar.gz",
+    "provenance": "github-candidate-bundle-sha256",
+    "sha256": "e65da0b8faabbb735a7e152876519af31f56b94e9bc30a015f9767828b7c16b8",
+    "url": "https://raw.githubusercontent.com/kody-w/openrappter/1441d8bf8227f4d9a20ac10cd4609f4a99496c7d/candidates/2241544be7229e9c480c983e569a712280f1bd0a/release/tag-djEuMTMuMQ/e65da0b8faabbb735a7e152876519af31f56b94e9bc30a015f9767828b7c16b8.tar.gz"
+  },
+  "channel_version": "0.1.0-beta.11",
+  "intended_release_tag": "v1.13.1",
+  "predecessor": "nightly",
+  "promoted_at": "2026-09-07T17:38:06Z",
+  "promotion_id": "01d3028d55c1cd92c74faf680a63e6c8f3c16aedc78bf22f24817be98e898d91",
+  "reason": null,
+  "receipt": null,
   "ring": "alpha",
+  "schema": "openrappter-ring/v1",
   "source": {
+    "commit": "2241544be7229e9c480c983e569a712280f1bd0a",
     "repository": "kody-w/openrappter",
-    "commit": "9913ca2e5237c44620f5422644cbe6060f2c8c18",
     "tag": null
   },
-  "version": "1.13.0-alpha.0+g9913ca2",
-  "artifact": {
-    "url": "https://github.com/kody-w/openrappter/archive/9913ca2e5237c44620f5422644cbe6060f2c8c18.tar.gz",
-    "install_url": null,
-    "sha256": "96162c003da42118290b48df71bcb3aa6a940f1ac7d5e3ec304f757f2c0a719c",
-    "provenance": "github-commit-archive-sha256"
-  },
-  "promoted_at": "2026-08-23T14:38:58Z",
-  "predecessor": "nightly",
-  "status": "disabled",
-  "reason": "No explicit nightly-to-alpha promotion receipt exists. This source snapshot is recorded but is not an alpha release.",
-  "receipt": null,
-  "promotion_id": "adfd022545dce9ddea8eff1f533158cc59e0925802a3cc91e9a5b61266dda4c6",
-  "intended_release_tag": null,
-  "channel_version": null,
-  "intended_release_tag": null
+  "status": "published",
+  "version": "1.13.1"
 }

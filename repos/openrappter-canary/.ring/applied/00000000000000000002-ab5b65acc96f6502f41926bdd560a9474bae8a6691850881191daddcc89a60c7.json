@@ -1,0 +1,12 @@
+{
+  "request_authority_commit": "dd5af25fe731174b5b618bd367efb4df5141ebe2",
+  "request_id": "ab5b65acc96f6502f41926bdd560a9474bae8a6691850881191daddcc89a60c7",
+  "request_path": "requests/canary/00000000000000000002-ab5b65acc96f6502f41926bdd560a9474bae8a6691850881191daddcc89a60c7.json",
+  "request_sequence": 2,
+  "request_sha256": "a2a00a7c424ef0f4cc952bccf898e5dfed18eb60068271dbff3082ae127530a0",
+  "schema": "openrappter-applied-request/v1",
+  "target_manifest_commit": "1da88f16ebb86fc3facbbccf1183344565f6f64a",
+  "target_manifest_sha256": "2a05190e1f698c5d665281d6d17830e3fcc42eb0b433a9b215ac7044c98c8f60",
+  "target_repository": "kody-w/openrappter-canary",
+  "target_ring": "canary"
+}

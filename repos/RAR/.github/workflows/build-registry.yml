@@ -21,6 +21,7 @@ on:
       - 'build_registry.py'
       - 'scripts/apply_maintainer_migrations.py'
       - 'scripts/mint_maintainer_receipts.py'
+      - 'scripts/check_near_duplicates.py'
       - 'rar.config.json'
       - 'marketplaces.json'
       - '.github/workflows/build-registry.yml'
@@ -51,6 +52,12 @@ jobs:
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
         run: python scripts/check_notarized_changes.py --base "$BASE_SHA"
+
+      - name: Rhyme check changed agents (near-duplicate gate)
+        if: github.event_name == 'push'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: python scripts/check_near_duplicates.py --base "$BASE_SHA"
 
       - name: Apply pinned maintainer migrations
         id: legacy
