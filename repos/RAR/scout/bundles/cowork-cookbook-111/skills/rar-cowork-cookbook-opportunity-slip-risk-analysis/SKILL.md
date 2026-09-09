@@ -1,7 +1,7 @@
 ---
 name: "rar-cowork-cookbook-opportunity-slip-risk-analysis"
-description: "Scores your open opportunities for the risk of slipping past their estimated close date and produces a prioritized workbook of the ones that need attention."
-metadata: {"projection": "rar-scout/1.0", "rar_agent": "@cowork-cookbook/opportunity_slip_risk_analysis", "rar_sha256": "5ec0ee169f8e9f50c7da6cdd75315345e3414593e81afd40688f53f8b7a0e5fa", "source_kind": "rar-agent", "source_commit": "2aac8c714d97a6ce30b3ce121d73e0593f88e4ed", "version": "2.0.0", "author": "Sean Galliher and Cowork Cookbook contributors", "tags": ["industry_solution", "business_process", "prompt", "other", "prospect_to_quote", "intermediate", "integration", "dynamics_365_sales"]}
+description: "Analyzes your open Dynamics 365 Sales opportunities you own, flags ones at risk of slipping past estimated close, and returns an Excel workbook 'opportunity-slip-risk.xlsx' with Summary, At Risk, and Notes sheets."
+metadata: {"projection": "rar-scout/1.0", "rar_agent": "@cowork-cookbook/opportunity_slip_risk_analysis", "rar_sha256": "56dc4c7c155ea78628f0cd1436826224294feb9e511e63df6915c2d641506785", "source_kind": "rar-agent", "source_commit": "597f0992f4120ddef24dd8686c5720a9ba5b59ab", "version": "3.0.3", "author": "Sean Galliher and Cowork Cookbook contributors", "tags": ["industry_solution", "business_process", "prompt", "other", "prospect_to_quote", "intermediate", "integration", "dynamics_365_sales"]}
 ---
 
 ## Microsoft Scout runtime
@@ -23,17 +23,18 @@ agent in the user's Brainstem. Never paraphrase the factory or agent into a new
 implementation. The generic direct-file commands in the generated Toaster
 section are recovery guidance; Scout should prefer the verified runner.
 
-Opportunity Slip-Risk Analysis — Scores your open opportunities for the risk of slipping past their estimated close date and produces a prioritized workbook of the ones that need attention.
+Opportunity Slip-Risk Analysis — Analyzes your open Dynamics 365 Sales opportunities you own, flags ones at risk of slipping past estimated close, and returns an Excel workbook 'opportunity-slip-risk.xlsx' with Summary, At Risk, and Notes sheets.
 
 AGGREGATED ENTRY. The content authority for this capability is the upstream
 library; this file is the structured RAR container for it. It carries a
 manifest, a version locked to upstream, a content hash, a provenance record and
 a public feedback thread — none of which the upstream entry has on its own.
 
-Nothing from upstream is reproduced here. What runs below is RAR's own method
-for this shape of work — a automate capability — generated from the metadata
-we index. The upstream library remains the authority for its own instructions;
-this agent is callable on its own terms and links home for the source.
+This entry carries the upstream recipe itself, under its licence and with
+attribution: the prompt verbatim, the prerequisites, the step-by-step and
+the expected output. Toasting made it deterministic — the same call returns
+the same recipe every time — and callable from any Brainstem. The upstream
+library remains the authority for the recipe and links home for the source.
 
   Source library : Cowork Cookbook (Sean Galliher and Cowork Cookbook contributors)
   Upstream entry : https://coworkcookbook.com/recipes/opportunity-slip-risk-analysis
@@ -53,22 +54,35 @@ The typed contract this capability answers to (JSON Schema — the deterministic
 ```json
 {
   "properties": {
+    "closing_soon_days": {
+      "description": "Days until estimated close that counts as closing soon when the stage is still early (default 30).",
+      "type": "string"
+    },
+    "context": {
+      "description": "Optional. Details the recipe should use \u2014 the record, scope, dates or filters it asks for.",
+      "type": "string"
+    },
+    "early_sales_stages": {
+      "description": "Which sales stage values count as early for the closing-soon risk rule.",
+      "type": "string"
+    },
     "operation": {
-      "description": "What to do: run, plan, checklist, describe.",
+      "description": "What to do: run, prompt, plan, checklist, describe.",
       "enum": [
         "run",
+        "prompt",
         "plan",
         "checklist",
         "describe"
       ],
       "type": "string"
     },
-    "subject": {
-      "description": "The process to automate.",
+    "output_filename": {
+      "description": "Name of the Excel workbook to produce (default 'opportunity-slip-risk.xlsx').",
       "type": "string"
     },
-    "trigger": {
-      "description": "Optional. What starts it \u2014 schedule, event or manual.",
+    "stale_threshold_days": {
+      "description": "Days without modification before an opportunity is flagged stale (default 30).",
       "type": "string"
     }
   },
@@ -85,7 +99,7 @@ The typed contract this capability answers to (JSON Schema — the deterministic
 
 ## Run this — do not improvise
 
-This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `opportunity_slip_risk_analysis_agent.py` and embedded as the fenced Python below (sha256 5ec0ee169f8e9f50…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `opportunity_slip_risk_analysis_agent.py` first:
+This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `opportunity_slip_risk_analysis_agent.py` and embedded as the fenced Python below (sha256 56dc4c7c155ea786…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `opportunity_slip_risk_analysis_agent.py` first:
 
 ```bash
 python3 opportunity_slip_risk_analysis_agent.py '{"key": "value"}'      # arguments as one JSON object
@@ -97,17 +111,18 @@ Treat stdout as a tool result. If it reports missing or unresolved inputs, stop 
 
 ```python  # rapp:deterministic
 """
-Opportunity Slip-Risk Analysis — Scores your open opportunities for the risk of slipping past their estimated close date and produces a prioritized workbook of the ones that need attention.
+Opportunity Slip-Risk Analysis — Analyzes your open Dynamics 365 Sales opportunities you own, flags ones at risk of slipping past estimated close, and returns an Excel workbook 'opportunity-slip-risk.xlsx' with Summary, At Risk, and Notes sheets.
 
 AGGREGATED ENTRY. The content authority for this capability is the upstream
 library; this file is the structured RAR container for it. It carries a
 manifest, a version locked to upstream, a content hash, a provenance record and
 a public feedback thread — none of which the upstream entry has on its own.
 
-Nothing from upstream is reproduced here. What runs below is RAR's own method
-for this shape of work — a automate capability — generated from the metadata
-we index. The upstream library remains the authority for its own instructions;
-this agent is callable on its own terms and links home for the source.
+This entry carries the upstream recipe itself, under its licence and with
+attribution: the prompt verbatim, the prerequisites, the step-by-step and
+the expected output. Toasting made it deterministic — the same call returns
+the same recipe every time — and callable from any Brainstem. The upstream
+library remains the authority for the recipe and links home for the source.
 
   Source library : Cowork Cookbook (Sean Galliher and Cowork Cookbook contributors)
   Upstream entry : https://coworkcookbook.com/recipes/opportunity-slip-risk-analysis
@@ -122,9 +137,9 @@ upstream record changes, so this file and its source cannot silently diverge.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": '@cowork-cookbook/opportunity_slip_risk_analysis',
-    "version": '2.0.0',
+    "version": '3.0.3',
     "display_name": 'Opportunity Slip-Risk Analysis',
-    "description": 'Scores your open opportunities for the risk of slipping past their estimated close date and produces a prioritized workbook of the ones that need attention.',
+    "description": "Analyzes your open Dynamics 365 Sales opportunities you own, flags ones at risk of slipping past estimated close, and returns an Excel workbook 'opportunity-slip-risk.xlsx' with Summary, At Risk, and Notes sheets.",
     "author": 'Sean Galliher and Cowork Cookbook contributors',
     "tags": ['industry_solution', 'business_process', 'prompt', 'other', 'prospect_to_quote', 'intermediate', 'integration', 'dynamics_365_sales'],
     "category": 'integrations',
@@ -143,8 +158,8 @@ __manifest__ = {
         "upstream_version": '1.0.0',
         "license": 'CC-BY-4.0',
         "license_verified": True,
-        "details": {'license_note': 'Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.', 'license_url': 'https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE', 'repository_url': 'https://github.com/seangalliher/Coworkcookbook', 'taxonomy_url': 'https://coworkcookbook.com/data/taxonomy.json'},
-        "content_digest": 'd47a601792a90804',
+        "details": {'license_note': "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.", 'license_url': 'https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE', 'repository_url': 'https://github.com/seangalliher/Coworkcookbook', 'taxonomy_url': 'https://coworkcookbook.com/data/taxonomy.json'},
+        "content_digest": '10e74bf17eb9aac8',
     },
     "industry_context": {'deprecated': False, 'difficulty': 'intermediate', 'last_verified_on': None, 'mutates_data': False, 'plugin': 'dynamics-365-sales', 'process_roots': ['prospect-to-quote'], 'process_tags': ['prospect-to-quote/pursue-opportunities/manage-opportunity-process'], 'recipe_category': 'other', 'recipe_type': 'prompt', 'upstream_path': 'prospect-to-quote/opportunity-slip-risk-analysis', 'uses_skills': {'custom': [], 'ootb': ['Excel'], 'plugin': [{'action': 'search', 'plugin': 'dynamics-365-sales'}, {'action': 'describe', 'plugin': 'dynamics-365-sales'}, {'action': 'read_query', 'plugin': 'dynamics-365-sales'}]}, 'verification_status': 'draft'},
     # The platforms the upstream entry targets. First-class and queryable, not
@@ -164,15 +179,15 @@ except ModuleNotFoundError:
             self.metadata = metadata
 
 
-# The toasted capability. The upstream entry supplies the WHAT; this procedure
-# is RAR's own method for that shape of work, generated by
-# @kody-w/skill_toaster_agent from the metadata we hold. No upstream text is
-# reproduced here — see the module docstring.
-_SPEC = {'archetype': 'automate', 'checks': ['Every step is idempotent and the whole run is safely retryable.', 'Failure behaviour is defined per step, and failures are loud.', 'A completion condition exists and is checked.', 'The first production run was reconciled against the manual process.'], 'confidence': 1.0, 'deliverable': 'A runnable automation with a defined trigger, per-step failure policy, an observable signal, and a reconciliation against the manual process.', 'operations': ['run', 'plan', 'checklist', 'describe'], 'params': {'subject': 'The process to automate.', 'trigger': 'Optional. What starts it — schedule, event or manual.'}, 'refined_by': 'rules', 'signals': ['tag:integration'], 'steps': ['Run the process manually once and write down every step, including the ones people do without noticing.', 'Identify the trigger and the completion condition. An automation with no defined end does not terminate, it accumulates.', 'Make each step idempotent, so a retry is safe and a partial run can be resumed rather than restarted.', 'Decide failure behaviour per step: retry, skip, or halt. Silent failure is the expensive one.', 'Add an observable signal — a log line, a status file, a notification — so a broken run is noticed without being looked for.', 'Run it alongside the manual process until they agree, then retire the manual path deliberately.'], 'subject_label': 'process to automate', 'verb': 'Automate'}
+# The toasted capability, generated by @kody-w/skill_toaster_agent. A licensed
+# recipe entry carries the upstream recipe verbatim (with attribution) in
+# _SPEC["recipe"]; a metadata-only entry carries RAR's own method for that shape
+# of work. See the module docstring for which this is.
+_SPEC = {'archetype': 'recipe', 'checks': ['Prerequisite: A Dynamics 365 Sales licence and access to a Dynamics 365 Sales environment', 'Prerequisite: The Dynamics 365 Sales plugin enabled in your Cowork session (+ > Customize > Dynamics 365 Sales)', 'Prerequisite: The plugin bound to the environment you want to analyze (gear icon on the plugin tile)', 'Output matches: An Excel workbook in your Cowork output folder with three sheets. The Summary sheet gives a\ncount and value total per risk reason; the At Risk sheet is the working list, highest value\nfirst. If you own no open opportunities, Cowork reports that instead of inventing rows.'], 'confidence': 1.0, 'deliverable': 'An Excel workbook in your Cowork output folder with three sheets. The Summary sheet gives a\ncount and value total per risk reason; the At Risk sheet is the working list, highest value\nfirst. If you own no open opportunities, Cowork reports that instead of inventing rows.', 'operations': ['run', 'prompt', 'plan', 'checklist', 'describe'], 'params': {'closing_soon_days': 'Days until estimated close that counts as closing soon when the stage is still early (default 30).', 'context': 'Optional. Details the recipe should use — the record, scope, dates or filters it asks for.', 'early_sales_stages': 'Which sales stage values count as early for the closing-soon risk rule.', 'output_filename': "Name of the Excel workbook to produce (default 'opportunity-slip-risk.xlsx').", 'stale_threshold_days': 'Days without modification before an opportunity is flagged stale (default 30).'}, 'recipe': {'authors': ['Sean Galliher'], 'business_value': 'Turns a subjective gut-feel forecast review into an evidence-based one. Sellers see which deals are drifting while there is still time to act, and managers stop discovering slipped deals at the end of the quarter.', 'expected_output': 'An Excel workbook in your Cowork output folder with three sheets. The Summary sheet gives a\ncount and value total per risk reason; the At Risk sheet is the working list, highest value\nfirst. If you own no open opportunities, Cowork reports that instead of inventing rows.', 'platform': 'Microsoft 365 Copilot Cowork', 'prerequisites': ['A Dynamics 365 Sales licence and access to a Dynamics 365 Sales environment', 'The Dynamics 365 Sales plugin enabled in your Cowork session (+ > Customize > Dynamics 365 Sales)', 'The plugin bound to the environment you want to analyze (gear icon on the plugin tile)'], 'prompt': "Using the Dynamics 365 Sales plugin, analyze my open opportunities and identify the ones at\nrisk of slipping.\n\nFirst, use search and describe to confirm the opportunity table and the columns for estimated\nclose date, estimated value, sales stage, owner, status, and last modified date. Do not guess\ncolumn names.\n\nThen run a read_query to find the range of estimated close dates across my open opportunities\nand report that range before you filter on it.\n\nScope to opportunities where I am the owner and the status is open. For each one, compute days\nsince last modified and days until estimated close. Flag an opportunity as at risk when any of\nthese hold:\n- the estimated close date is already in the past\n- there has been no modification in more than 30 days\n- the estimated close is within 30 days but the sales stage is still an early one\n\nProduce an Excel workbook 'opportunity-slip-risk.xlsx' with:\n- a Summary sheet showing counts and total estimated value by risk reason\n- an At Risk sheet sorted by estimated value descending, one row per opportunity, with the risk\n  reasons that fired\n- a Notes sheet listing which tables and columns you used and the date range you found\n\nDo not modify any data. If I own no open opportunities, say so plainly and stop.", 'steps': ['Open Cowork and confirm the **Dynamics 365 Sales** plugin is toggled on for your session.', 'Check the gear icon on the plugin tile and confirm it is bound to the environment you want', 'Paste the prompt from `prompt.md` into a new task and send it.', 'Review the Notes sheet first — it tells you which columns Cowork actually used, which is', 'Adjust the 30-day thresholds in the prompt to match your sales cycle and re-run.'], 'tenant_caveat': '', 'verified_against': '', 'what_it_does': 'Reads your open opportunities through the Dataverse MCP tools, derives three objective\nslip-risk signals from the record data, and writes a prioritized exceptions workbook. All\nanalysis is read-only.'}, 'refined_by': 'claude-opus-5', 'refinement': {'description': "Analyzes your open Dynamics 365 Sales opportunities you own, flags ones at risk of slipping past estimated close, and returns an Excel workbook 'opportunity-slip-risk.xlsx' with Summary, At Risk, and Notes sheets.", 'example_request': 'Check my open D365 opportunities for slip risk and build the slip-risk workbook.', 'inputs': [{'description': 'Days without modification before an opportunity is flagged stale (default 30).', 'name': 'stale_threshold_days'}, {'description': 'Days until estimated close that counts as closing soon when the stage is still early (default 30).', 'name': 'closing_soon_days'}, {'description': 'Which sales stage values count as early for the closing-soon risk rule.', 'name': 'early_sales_stages'}, {'description': "Name of the Excel workbook to produce (default 'opportunity-slip-risk.xlsx').", 'name': 'output_filename'}], 'model': 'claude-opus-5', 'when_to_use': 'Call when you want a prioritized, read-only review of which of your open opportunities are likely to slip their estimated close date.'}, 'signals': ['recipe:prompt', 'refined'], 'steps': ['Open Cowork and confirm the **Dynamics 365 Sales** plugin is toggled on for your session.', 'Check the gear icon on the plugin tile and confirm it is bound to the environment you want', 'Paste the prompt from `prompt.md` into a new task and send it.', 'Review the Notes sheet first — it tells you which columns Cowork actually used, which is', 'Adjust the 30-day thresholds in the prompt to match your sales cycle and re-run.'], 'subject_label': 'context for the recipe', 'verb': 'Run'}
 
 
 class OpportunitySlipRiskAnalysis(BasicAgent):
-    """Automate agent, toasted from an aggregated upstream entry."""
+    """Run agent, toasted from an aggregated upstream entry."""
 
     def __init__(self):
         self.name = 'OpportunitySlipRiskAnalysis'
@@ -182,7 +197,7 @@ class OpportunitySlipRiskAnalysis(BasicAgent):
             "description": __manifest__["description"],
             "parameters": {
                 "type": "object",
-                "properties": {'operation': {'description': 'What to do: run, plan, checklist, describe.', 'enum': ['run', 'plan', 'checklist', 'describe'], 'type': 'string'}, 'subject': {'description': 'The process to automate.', 'type': 'string'}, 'trigger': {'description': 'Optional. What starts it — schedule, event or manual.', 'type': 'string'}},
+                "properties": {'closing_soon_days': {'description': 'Days until estimated close that counts as closing soon when the stage is still early (default 30).', 'type': 'string'}, 'context': {'description': 'Optional. Details the recipe should use — the record, scope, dates or filters it asks for.', 'type': 'string'}, 'early_sales_stages': {'description': 'Which sales stage values count as early for the closing-soon risk rule.', 'type': 'string'}, 'operation': {'description': 'What to do: run, prompt, plan, checklist, describe.', 'enum': ['run', 'prompt', 'plan', 'checklist', 'describe'], 'type': 'string'}, 'output_filename': {'description': "Name of the Excel workbook to produce (default 'opportunity-slip-risk.xlsx').", 'type': 'string'}, 'stale_threshold_days': {'description': 'Days without modification before an opportunity is flagged stale (default 30).', 'type': 'string'}},
                 "required": ["operation"],
             },
         }
@@ -254,12 +269,86 @@ class OpportunitySlipRiskAnalysis(BasicAgent):
         ]
         return lines
 
+    # ── recipe entries: the upstream recipe, verbatim, deterministic ─────
+
+    def _recipe_context(self, kwargs):
+        extras = []
+        subject = self._subject(kwargs)
+        if subject:
+            extras.append(f"subject: {subject}")
+        for key in _SPEC["params"]:
+            value = str(kwargs.get(key) or "").strip()
+            if value:
+                extras.append(f"{key}: {value}")
+        return extras
+
+    def _recipe_prompt(self, kwargs):
+        r = _SPEC["recipe"]
+        lines = [r["prompt"]]
+        extras = self._recipe_context(kwargs)
+        if extras:
+            lines += ["", "Context supplied by the caller:"] + [f"- {e}" for e in extras]
+        return lines
+
+    def _recipe_attribution(self):
+        src = __manifest__["source"]
+        r = _SPEC["recipe"]
+        who = ", ".join(r.get("authors") or []) or __manifest__["author"]
+        return [
+            f"Recipe: {__manifest__['display_name']} — by {who}, {src['source_name']} "
+            f"({src['license']}). Source: {src['upstream_url']}",
+        ]
+
+    def _perform_recipe(self, op, kwargs):
+        r = _SPEC["recipe"]
+        ref = _SPEC.get("refinement") or {}
+        if op == "prompt":
+            return "\n".join(self._recipe_prompt(kwargs) + [""] + self._recipe_attribution())
+        if op == "plan":
+            lines = [f"Steps for {__manifest__['display_name']} on {r['platform']}:"]
+            lines += [f"  {i}. {s}" for i, s in enumerate(r["steps"], 1)]
+            return "\n".join(lines + [""] + self._recipe_attribution())
+        if op == "checklist":
+            lines = ["Before you run it:"] + [f"  [ ] {p}" for p in r["prerequisites"]]
+            if r.get("expected_output"):
+                lines += ["", "Done when:", f"  [ ] {r['expected_output']}"]
+            return "\n".join(lines + [""] + self._recipe_attribution())
+        if op == "describe":
+            lines = self._provenance()
+            if ref.get("when_to_use"):
+                lines += ["", f"When to use: {ref['when_to_use']}"]
+            if ref.get("example_request"):
+                lines += [f"Ask for it like: {ref['example_request']}"]
+            if ref.get("inputs"):
+                lines += ["", "It will ask you for:"] + [f"  - {i['name']}: {i['description']}" for i in ref["inputs"]]
+            if r.get("business_value"):
+                lines += ["", f"Why it matters: {r['business_value']}"]
+            return "\n".join(lines)
+        if op == "run":
+            lines = [f"{__manifest__['display_name']} — run on {r['platform']}", ""]
+            if r.get("what_it_does"):
+                lines += [r["what_it_does"], ""]
+            lines += [f"Prompt (paste into {r['platform']}):", ""] + self._recipe_prompt(kwargs) + [""]
+            lines += ["Procedure:"] + [f"  {i}. {s}" for i, s in enumerate(r["steps"], 1)] + [""]
+            lines += ["Acceptance checks:"] + [f"  [ ] {c}" for c in _SPEC["checks"]] + [""]
+            lines += [f"Deliverable: {_SPEC['deliverable']}", ""]
+            if r.get("tenant_caveat"):
+                lines += [f"Verified upstream: {r['tenant_caveat']}", ""]
+            return "\n".join(lines + self._recipe_attribution())
+        return (
+            f"Unknown operation {op!r}. Valid operations: "
+            + ", ".join(_SPEC["operations"])
+        )
+
     # ── entry point ─────────────────────────────────────────────────────
 
     def perform(self, **kwargs):
         """Run the toasted capability. Always returns a string."""
         op = str(kwargs.get("operation") or "run").strip().lower()
         subject = self._subject(kwargs)
+
+        if _SPEC.get("recipe"):
+            return self._perform_recipe(op, kwargs)
 
         if op == "describe":
             return "\n".join(self._provenance())
@@ -289,4 +378,4 @@ if __name__ == "__main__":
 
 <!-- toaster:generated:end -->
 
-<!-- rci-capsule:v1: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 -->
+<!-- rci-capsule:v1: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 -->

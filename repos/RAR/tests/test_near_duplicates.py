@@ -93,6 +93,32 @@ def test_dependencies_and_same_stack_are_designed_together():
     assert all(why and why.startswith("same stack") for _, why in rhymes_with(m))
 
 
+def test_aggregated_family_is_designed_together():
+    reg = REGISTRY + [entry("@cowork-cookbook/inventory_heatmap", "Generates a 3D HTML heatmap of warehouse bins.", ["dashboard"],
+                            source={"aggregated": True, "source_id": "cowork-cookbook"})]
+    m = entry("@cowork-cookbook/inventory_heatmap_by_value", "Generates a 3D HTML heatmap of warehouse bins by value.", ["dashboard"],
+              source={"aggregated": True, "source_id": "cowork-cookbook"})
+    hits = rhymes_with(m, reg)
+    assert hits and all(why == "same aggregated library @cowork-cookbook" for _, why in hits)
+    stranger = entry("@someone/inventory_heatmap_clone", "Generates a 3D HTML heatmap of warehouse bins.", ["dashboard"])
+    assert any(why is None for _, why in rhymes_with(stranger, reg))
+
+
+def test_aggregated_mirror_rhyming_across_libraries_warns_instead_of_blocking(tmp_path):
+    root, base = _repo(tmp_path, REGISTRY)
+    (root / "agents" / "@cowork-cookbook").mkdir()
+    (root / "agents" / "@cowork-cookbook" / "copilot_studio_deploy_recipe_agent.py").write_text(
+        '__manifest__ = {\n    "schema": "rapp-agent/1.0",\n    "name": "@cowork-cookbook/copilot_studio_deploy_recipe",\n'
+        '    "version": "3.0.0",\n    "display_name": "X",\n'
+        '    "description": "Deploys Copilot Studio agents into Dataverse via pac CLI and solution zip.",\n'
+        '    "author": "t",\n    "tags": ["copilot-studio", "deploy", "dataverse"],\n    "category": "devtools",\n'
+        '    "source": {"aggregated": True, "source_id": "cowork-cookbook"},\n}\nclass X:\n    def perform(self, **kw):\n        return "x"\n')
+    _git(root, "add", "."); _git(root, "commit", "-q", "-m", "mirror")
+    code, doc = rc.gate(root, base, REGISTRY)
+    assert code == 0 and not doc["findings"]
+    assert [w["rhymes_with"] for w in doc["warnings"]] == ["@kody-w/copilot_studio_deploy_agent"]
+
+
 def test_report_clusters_the_family():
     doc = rc.report(REGISTRY)
     assert doc["agents"] == len(REGISTRY)

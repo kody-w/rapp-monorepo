@@ -2,10 +2,82 @@
   "_meta": {
     "driver": "twin-driver-1.0",
     "created": "2026-04-18T15:57:43Z",
-    "last_run": "2026-09-08T10:58:22Z",
-    "updated": "2026-09-08T10:58:24Z"
+    "last_run": "2026-09-09T11:03:07Z",
+    "updated": "2026-09-09T11:03:08Z"
   },
   "runs": [
+    {
+      "kind": "phylogeny",
+      "seed": 247,
+      "args": [
+        "--generations",
+        "60",
+        "--carry",
+        "40"
+      ],
+      "ok": true,
+      "started": "2026-09-09T11:03:07Z",
+      "elapsed_seconds": 0.22,
+      "exit_code": 0,
+      "run_dir": "run-1788951788",
+      "summary_path": "state/phylogeny/run-1788951788/summary.md",
+      "state_dir": "state/phylogeny/run-1788951788"
+    },
+    {
+      "kind": "ecosystem",
+      "seed": 246,
+      "args": [
+        "--generations",
+        "100",
+        "--founders",
+        "24",
+        "--biome-carry",
+        "80"
+      ],
+      "ok": true,
+      "started": "2026-09-09T04:05:54Z",
+      "elapsed_seconds": 1.58,
+      "exit_code": 0,
+      "run_dir": "run-1788926756",
+      "summary_path": "state/ecosystem/run-1788926756/summary.md",
+      "state_dir": "state/ecosystem/run-1788926756"
+    },
+    {
+      "kind": "cambrian",
+      "seed": 245,
+      "args": [
+        "--generations",
+        "150",
+        "--founders",
+        "60",
+        "--carry",
+        "300"
+      ],
+      "ok": true,
+      "started": "2026-09-08T20:58:30Z",
+      "elapsed_seconds": 3.51,
+      "exit_code": 0,
+      "run_dir": "run-1788901113",
+      "summary_path": "state/cambrian/run-1788901113/summary.md",
+      "state_dir": "state/cambrian/run-1788901113"
+    },
+    {
+      "kind": "phylogeny",
+      "seed": 244,
+      "args": [
+        "--generations",
+        "60",
+        "--carry",
+        "40"
+      ],
+      "ok": true,
+      "started": "2026-09-08T16:24:16Z",
+      "elapsed_seconds": 0.48,
+      "exit_code": 0,
+      "run_dir": "run-1788884656",
+      "summary_path": "state/phylogeny/run-1788884656/summary.md",
+      "state_dir": "state/phylogeny/run-1788884656"
+    },
     {
       "kind": "ecosystem",
       "seed": 243,
@@ -2648,9 +2720,9 @@
     }
   ],
   "totals": {
-    "phylogeny": 48,
-    "all": 144,
-    "cambrian": 48,
-    "ecosystem": 48
+    "phylogeny": 50,
+    "all": 148,
+    "cambrian": 49,
+    "ecosystem": 49
   }
 }

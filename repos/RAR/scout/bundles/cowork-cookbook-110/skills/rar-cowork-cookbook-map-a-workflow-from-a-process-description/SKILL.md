@@ -1,7 +1,7 @@
 ---
 name: "rar-cowork-cookbook-map-a-workflow-from-a-process-description"
-description: "Make a workflow shareable, reviewable, and improvable - without spending hours building the diagram by hand."
-metadata: {"projection": "rar-scout/1.0", "rar_agent": "@cowork-cookbook/map_a_workflow_from_a_process_description", "rar_sha256": "f2bc882e02104c377f714e9db4d24699caf74d79bf15064b7ba5a81062103adb", "source_kind": "rar-agent", "source_commit": "2aac8c714d97a6ce30b3ce121d73e0593f88e4ed", "version": "2.0.0", "author": "Sean Galliher and Cowork Cookbook contributors", "tags": ["industry_solution", "business_process", "prompt", "other", "work_management", "beginner", "integration", "miro"]}
+description: "Turns a described process into a Miro flowchart with labeled shapes, connectors, owners, and decision points, plus a companion Miro doc narrating purpose, handoffs, and risks; call when a workflow needs diagramming."
+metadata: {"projection": "rar-scout/1.0", "rar_agent": "@cowork-cookbook/map_a_workflow_from_a_process_description", "rar_sha256": "8cbd2af28a5e83a207d99d37291873dc5bbe51226515f973661929d94b3b2e92", "source_kind": "rar-agent", "source_commit": "597f0992f4120ddef24dd8686c5720a9ba5b59ab", "version": "3.0.3", "author": "Sean Galliher and Cowork Cookbook contributors", "tags": ["industry_solution", "business_process", "prompt", "other", "work_management", "beginner", "integration", "miro"]}
 ---
 
 ## Microsoft Scout runtime
@@ -23,17 +23,18 @@ agent in the user's Brainstem. Never paraphrase the factory or agent into a new
 implementation. The generic direct-file commands in the generated Toaster
 section are recovery guidance; Scout should prefer the verified runner.
 
-Map a workflow from a process description — Make a workflow shareable, reviewable, and improvable - without spending hours building the diagram by hand.
+Map a workflow from a process description — Turns a described process into a Miro flowchart with labeled shapes, connectors, owners, and decision points, plus a companion Miro doc narrating purpose, handoffs, and risks; call when a workflow needs diagramming.
 
 AGGREGATED ENTRY. The content authority for this capability is the upstream
 library; this file is the structured RAR container for it. It carries a
 manifest, a version locked to upstream, a content hash, a provenance record and
 a public feedback thread — none of which the upstream entry has on its own.
 
-Nothing from upstream is reproduced here. What runs below is RAR's own method
-for this shape of work — a automate capability — generated from the metadata
-we index. The upstream library remains the authority for its own instructions;
-this agent is callable on its own terms and links home for the source.
+This entry carries the upstream recipe itself, under its licence and with
+attribution: the prompt verbatim, the prerequisites, the step-by-step and
+the expected output. Toasting made it deterministic — the same call returns
+the same recipe every time — and callable from any Brainstem. The upstream
+library remains the authority for the recipe and links home for the source.
 
   Source library : Cowork Cookbook (Sean Galliher and Cowork Cookbook contributors)
   Upstream entry : https://coworkcookbook.com/recipes/map-a-workflow-from-a-process-description
@@ -53,22 +54,31 @@ The typed contract this capability answers to (JSON Schema — the deterministic
 ```json
 {
   "properties": {
+    "context": {
+      "description": "Optional. Details the recipe should use \u2014 the record, scope, dates or filters it asks for.",
+      "type": "string"
+    },
+    "open_questions": {
+      "description": "Any unresolved questions or purpose notes to include in the header frame.",
+      "type": "string"
+    },
     "operation": {
-      "description": "What to do: run, plan, checklist, describe.",
+      "description": "What to do: run, prompt, plan, checklist, describe.",
       "enum": [
         "run",
+        "prompt",
         "plan",
         "checklist",
         "describe"
       ],
       "type": "string"
     },
-    "subject": {
-      "description": "The process to automate.",
+    "process_name": {
+      "description": "The name of the process or workflow to map.",
       "type": "string"
     },
-    "trigger": {
-      "description": "Optional. What starts it \u2014 schedule, event or manual.",
+    "source_material": {
+      "description": "The document, meeting notes, or description containing the steps, decision points, and owners.",
       "type": "string"
     }
   },
@@ -85,7 +95,7 @@ The typed contract this capability answers to (JSON Schema — the deterministic
 
 ## Run this — do not improvise
 
-This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `map_a_workflow_from_a_process_description_agent.py` and embedded as the fenced Python below (sha256 f2bc882e02104c37…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `map_a_workflow_from_a_process_description_agent.py` first:
+This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `map_a_workflow_from_a_process_description_agent.py` and embedded as the fenced Python below (sha256 8cbd2af28a5e83a2…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `map_a_workflow_from_a_process_description_agent.py` first:
 
 ```bash
 python3 map_a_workflow_from_a_process_description_agent.py '{"key": "value"}'      # arguments as one JSON object
@@ -97,17 +107,18 @@ Treat stdout as a tool result. If it reports missing or unresolved inputs, stop 
 
 ```python  # rapp:deterministic
 """
-Map a workflow from a process description — Make a workflow shareable, reviewable, and improvable - without spending hours building the diagram by hand.
+Map a workflow from a process description — Turns a described process into a Miro flowchart with labeled shapes, connectors, owners, and decision points, plus a companion Miro doc narrating purpose, handoffs, and risks; call when a workflow needs diagramming.
 
 AGGREGATED ENTRY. The content authority for this capability is the upstream
 library; this file is the structured RAR container for it. It carries a
 manifest, a version locked to upstream, a content hash, a provenance record and
 a public feedback thread — none of which the upstream entry has on its own.
 
-Nothing from upstream is reproduced here. What runs below is RAR's own method
-for this shape of work — a automate capability — generated from the metadata
-we index. The upstream library remains the authority for its own instructions;
-this agent is callable on its own terms and links home for the source.
+This entry carries the upstream recipe itself, under its licence and with
+attribution: the prompt verbatim, the prerequisites, the step-by-step and
+the expected output. Toasting made it deterministic — the same call returns
+the same recipe every time — and callable from any Brainstem. The upstream
+library remains the authority for the recipe and links home for the source.
 
   Source library : Cowork Cookbook (Sean Galliher and Cowork Cookbook contributors)
   Upstream entry : https://coworkcookbook.com/recipes/map-a-workflow-from-a-process-description
@@ -122,9 +133,9 @@ upstream record changes, so this file and its source cannot silently diverge.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": '@cowork-cookbook/map_a_workflow_from_a_process_description',
-    "version": '2.0.0',
+    "version": '3.0.3',
     "display_name": 'Map a workflow from a process description',
-    "description": 'Make a workflow shareable, reviewable, and improvable - without spending hours building the diagram by hand.',
+    "description": 'Turns a described process into a Miro flowchart with labeled shapes, connectors, owners, and decision points, plus a companion Miro doc narrating purpose, handoffs, and risks; call when a workflow needs diagramming.',
     "author": 'Sean Galliher and Cowork Cookbook contributors',
     "tags": ['industry_solution', 'business_process', 'prompt', 'other', 'work_management', 'beginner', 'integration', 'miro'],
     "category": 'integrations',
@@ -143,8 +154,8 @@ __manifest__ = {
         "upstream_version": '1.0.0',
         "license": 'CC-BY-4.0',
         "license_verified": True,
-        "details": {'license_note': 'Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.', 'license_url': 'https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE', 'repository_url': 'https://github.com/seangalliher/Coworkcookbook', 'taxonomy_url': 'https://coworkcookbook.com/data/taxonomy.json'},
-        "content_digest": '2a1cc4e37c979b34',
+        "details": {'license_note': "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.", 'license_url': 'https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE', 'repository_url': 'https://github.com/seangalliher/Coworkcookbook', 'taxonomy_url': 'https://coworkcookbook.com/data/taxonomy.json'},
+        "content_digest": '242b2707d11ad45c',
     },
     "industry_context": {'deprecated': False, 'difficulty': 'beginner', 'last_verified_on': None, 'mutates_data': False, 'plugin': 'miro', 'process_roots': ['work-management'], 'process_tags': ['work-management/create-and-repurpose-content/diagram-processes-and-workflows'], 'recipe_category': 'other', 'recipe_type': 'prompt', 'upstream_path': 'work-management/map-a-workflow-from-a-process-description', 'uses_skills': {'custom': [], 'ootb': ['Meetings'], 'plugin': []}, 'verification_status': 'draft'},
     # The platforms the upstream entry targets. First-class and queryable, not
@@ -164,15 +175,15 @@ except ModuleNotFoundError:
             self.metadata = metadata
 
 
-# The toasted capability. The upstream entry supplies the WHAT; this procedure
-# is RAR's own method for that shape of work, generated by
-# @kody-w/skill_toaster_agent from the metadata we hold. No upstream text is
-# reproduced here — see the module docstring.
-_SPEC = {'archetype': 'automate', 'checks': ['Every step is idempotent and the whole run is safely retryable.', 'Failure behaviour is defined per step, and failures are loud.', 'A completion condition exists and is checked.', 'The first production run was reconciled against the manual process.'], 'confidence': 1.0, 'deliverable': 'A runnable automation with a defined trigger, per-step failure policy, an observable signal, and a reconciliation against the manual process.', 'operations': ['run', 'plan', 'checklist', 'describe'], 'params': {'subject': 'The process to automate.', 'trigger': 'Optional. What starts it — schedule, event or manual.'}, 'refined_by': 'rules', 'signals': ['tag:integration', 'word:workflow'], 'steps': ['Run the process manually once and write down every step, including the ones people do without noticing.', 'Identify the trigger and the completion condition. An automation with no defined end does not terminate, it accumulates.', 'Make each step idempotent, so a retry is safe and a partial run can be resumed rather than restarted.', 'Decide failure behaviour per step: retry, skip, or halt. Silent failure is the expensive one.', 'Add an observable signal — a log line, a status file, a notification — so a broken run is noticed without being looked for.', 'Run it alongside the manual process until they agree, then retire the manual path deliberately.'], 'subject_label': 'process to automate', 'verb': 'Automate'}
+# The toasted capability, generated by @kody-w/skill_toaster_agent. A licensed
+# recipe entry carries the upstream recipe verbatim (with attribution) in
+# _SPEC["recipe"]; a metadata-only entry carries RAR's own method for that shape
+# of work. See the module docstring for which this is.
+_SPEC = {'archetype': 'recipe', 'checks': ['Prerequisite: Microsoft 365 Copilot licence with access to Cowork', 'Prerequisite: Miro plugin enabled and connected to your workspace', 'Output matches: A clear Miro flowchart of the process, paired with a narrative doc that captures purpose, ownership, handoffs, and risks - turning tribal knowledge into an artifact the team can act on.'], 'confidence': 1.0, 'deliverable': 'A clear Miro flowchart of the process, paired with a narrative doc that captures purpose, ownership, handoffs, and risks - turning tribal knowledge into an artifact the team can act on.', 'operations': ['run', 'prompt', 'plan', 'checklist', 'describe'], 'params': {'context': 'Optional. Details the recipe should use — the record, scope, dates or filters it asks for.', 'open_questions': 'Any unresolved questions or purpose notes to include in the header frame.', 'process_name': 'The name of the process or workflow to map.', 'source_material': 'The document, meeting notes, or description containing the steps, decision points, and owners.'}, 'recipe': {'authors': ['Sean Galliher'], 'business_value': 'Make a workflow shareable, reviewable, and improvable - without spending hours building the diagram by hand. A clear Miro flowchart of the process, paired with a narrative doc that captures purpose, ownership, handoffs, and risks - turning tribal knowledge into an artifact the team can act on.', 'expected_output': 'A clear Miro flowchart of the process, paired with a narrative doc that captures purpose, ownership, handoffs, and risks - turning tribal knowledge into an artifact the team can act on.', 'platform': 'Microsoft 365 Copilot Cowork', 'prerequisites': ['Microsoft 365 Copilot licence with access to Cowork', 'Miro plugin enabled and connected to your workspace'], 'prompt': "Map the [process or workflow name] as a Miro flowchart.\n\nPull the steps, decision points, and owners from [document, meeting notes, or my description].\n\nUse Miro's diagramming layout with clearly labeled shapes and connectors. Add a frame at the top with the workflow name, purpose, and any open questions.\n\nThen create a Miro doc next to the flowchart summarizing the workflow narrative - what it does, who it serves, where the handoffs happen, and any risks or bottlenecks worth flagging.", 'steps': ['Open Cowork and start a new task.', 'Confirm the required plugin is turned on under **+ > Customize**: Miro plugin enabled and connected to your workspace.', 'Paste the prompt from `prompt.md`, replacing anything in square brackets with your own values.', 'Review the plan Cowork proposes before letting it run.', 'Check any drafted email or calendar change before approving it — the prompt holds them for review rather than sending.'], 'tenant_caveat': '', 'verified_against': '', 'what_it_does': 'A clear Miro flowchart of the process, paired with a narrative doc that captures purpose, ownership, handoffs, and risks - turning tribal knowledge into an artifact the team can act on.'}, 'refined_by': 'claude-opus-5', 'refinement': {'description': 'Turns a described process into a Miro flowchart with labeled shapes, connectors, owners, and decision points, plus a companion Miro doc narrating purpose, handoffs, and risks; call when a workflow needs diagramming.', 'example_request': 'Map our vendor onboarding process as a Miro flowchart from these meeting notes, plus a summary doc.', 'inputs': [{'description': 'The name of the process or workflow to map.', 'name': 'process_name'}, {'description': 'The document, meeting notes, or description containing the steps, decision points, and owners.', 'name': 'source_material'}, {'description': 'Any unresolved questions or purpose notes to include in the header frame.', 'name': 'open_questions'}], 'model': 'claude-opus-5', 'when_to_use': 'Use when you have a process described in a document, meeting notes, or your own words and want it mapped as a shareable Miro flowchart plus narrative doc.'}, 'signals': ['recipe:prompt', 'refined'], 'steps': ['Open Cowork and start a new task.', 'Confirm the required plugin is turned on under **+ > Customize**: Miro plugin enabled and connected to your workspace.', 'Paste the prompt from `prompt.md`, replacing anything in square brackets with your own values.', 'Review the plan Cowork proposes before letting it run.', 'Check any drafted email or calendar change before approving it — the prompt holds them for review rather than sending.'], 'subject_label': 'context for the recipe', 'verb': 'Run'}
 
 
 class MapAWorkflowFromAProcessDescription(BasicAgent):
-    """Automate agent, toasted from an aggregated upstream entry."""
+    """Run agent, toasted from an aggregated upstream entry."""
 
     def __init__(self):
         self.name = 'MapAWorkflowFromAProcessDescription'
@@ -182,7 +193,7 @@ class MapAWorkflowFromAProcessDescription(BasicAgent):
             "description": __manifest__["description"],
             "parameters": {
                 "type": "object",
-                "properties": {'operation': {'description': 'What to do: run, plan, checklist, describe.', 'enum': ['run', 'plan', 'checklist', 'describe'], 'type': 'string'}, 'subject': {'description': 'The process to automate.', 'type': 'string'}, 'trigger': {'description': 'Optional. What starts it — schedule, event or manual.', 'type': 'string'}},
+                "properties": {'context': {'description': 'Optional. Details the recipe should use — the record, scope, dates or filters it asks for.', 'type': 'string'}, 'open_questions': {'description': 'Any unresolved questions or purpose notes to include in the header frame.', 'type': 'string'}, 'operation': {'description': 'What to do: run, prompt, plan, checklist, describe.', 'enum': ['run', 'prompt', 'plan', 'checklist', 'describe'], 'type': 'string'}, 'process_name': {'description': 'The name of the process or workflow to map.', 'type': 'string'}, 'source_material': {'description': 'The document, meeting notes, or description containing the steps, decision points, and owners.', 'type': 'string'}},
                 "required": ["operation"],
             },
         }
@@ -254,12 +265,86 @@ class MapAWorkflowFromAProcessDescription(BasicAgent):
         ]
         return lines
 
+    # ── recipe entries: the upstream recipe, verbatim, deterministic ─────
+
+    def _recipe_context(self, kwargs):
+        extras = []
+        subject = self._subject(kwargs)
+        if subject:
+            extras.append(f"subject: {subject}")
+        for key in _SPEC["params"]:
+            value = str(kwargs.get(key) or "").strip()
+            if value:
+                extras.append(f"{key}: {value}")
+        return extras
+
+    def _recipe_prompt(self, kwargs):
+        r = _SPEC["recipe"]
+        lines = [r["prompt"]]
+        extras = self._recipe_context(kwargs)
+        if extras:
+            lines += ["", "Context supplied by the caller:"] + [f"- {e}" for e in extras]
+        return lines
+
+    def _recipe_attribution(self):
+        src = __manifest__["source"]
+        r = _SPEC["recipe"]
+        who = ", ".join(r.get("authors") or []) or __manifest__["author"]
+        return [
+            f"Recipe: {__manifest__['display_name']} — by {who}, {src['source_name']} "
+            f"({src['license']}). Source: {src['upstream_url']}",
+        ]
+
+    def _perform_recipe(self, op, kwargs):
+        r = _SPEC["recipe"]
+        ref = _SPEC.get("refinement") or {}
+        if op == "prompt":
+            return "\n".join(self._recipe_prompt(kwargs) + [""] + self._recipe_attribution())
+        if op == "plan":
+            lines = [f"Steps for {__manifest__['display_name']} on {r['platform']}:"]
+            lines += [f"  {i}. {s}" for i, s in enumerate(r["steps"], 1)]
+            return "\n".join(lines + [""] + self._recipe_attribution())
+        if op == "checklist":
+            lines = ["Before you run it:"] + [f"  [ ] {p}" for p in r["prerequisites"]]
+            if r.get("expected_output"):
+                lines += ["", "Done when:", f"  [ ] {r['expected_output']}"]
+            return "\n".join(lines + [""] + self._recipe_attribution())
+        if op == "describe":
+            lines = self._provenance()
+            if ref.get("when_to_use"):
+                lines += ["", f"When to use: {ref['when_to_use']}"]
+            if ref.get("example_request"):
+                lines += [f"Ask for it like: {ref['example_request']}"]
+            if ref.get("inputs"):
+                lines += ["", "It will ask you for:"] + [f"  - {i['name']}: {i['description']}" for i in ref["inputs"]]
+            if r.get("business_value"):
+                lines += ["", f"Why it matters: {r['business_value']}"]
+            return "\n".join(lines)
+        if op == "run":
+            lines = [f"{__manifest__['display_name']} — run on {r['platform']}", ""]
+            if r.get("what_it_does"):
+                lines += [r["what_it_does"], ""]
+            lines += [f"Prompt (paste into {r['platform']}):", ""] + self._recipe_prompt(kwargs) + [""]
+            lines += ["Procedure:"] + [f"  {i}. {s}" for i, s in enumerate(r["steps"], 1)] + [""]
+            lines += ["Acceptance checks:"] + [f"  [ ] {c}" for c in _SPEC["checks"]] + [""]
+            lines += [f"Deliverable: {_SPEC['deliverable']}", ""]
+            if r.get("tenant_caveat"):
+                lines += [f"Verified upstream: {r['tenant_caveat']}", ""]
+            return "\n".join(lines + self._recipe_attribution())
+        return (
+            f"Unknown operation {op!r}. Valid operations: "
+            + ", ".join(_SPEC["operations"])
+        )
+
     # ── entry point ─────────────────────────────────────────────────────
 
     def perform(self, **kwargs):
         """Run the toasted capability. Always returns a string."""
         op = str(kwargs.get("operation") or "run").strip().lower()
         subject = self._subject(kwargs)
+
+        if _SPEC.get("recipe"):
+            return self._perform_recipe(op, kwargs)
 
         if op == "describe":
             return "\n".join(self._provenance())
@@ -289,4 +374,4 @@ if __name__ == "__main__":
 
 <!-- toaster:generated:end -->
 
-<!-- rci-capsule:v1:H4sIAAAAAAAC/716+7eiyJLuv8Ls+aGqx6otL3nUWb3WRUVEEARR0a5e1TySl7yfQk//75Ooe1f19Dlzz5l117UeimRGRH4R8UVk4u8vVlMHWfny5WUPrBQRrDgOA1AiVuoii6zLyit8y642/Ic4WVqXod3UWVm9fHpxQeWUYV6HWQqnb60rQCxknOHFWYdUgVUCy47BJ6QEbQi6x+dRbpjkZdaO18hnpAuh/qZGqhykbpj6CLwqK8Ruwvh+WQcAcUPLL60EsXskgAJeoXJws5I8BtXLl19+/fQCJcYvX35/cWKrqu7G5NzpacmqzBJuV2YOqKrlDyZ/eomt1IeD8x5aMF7noPSyMoFfucBDnlcfKxB7n5D/+I9rZ5V+9dOXrynyfH19Gf/oTXo3ss6sqgYu4li5ZYdxWPevCBd3Vl9BAOqmTCsITwUBTP3Xx8zvkrIc+Xm89/Gh5NUH9cevLxk0wRpt/fryE5KVUF/ZjJ9fRyn5x59e4epA+fGn73Kqxo6AU4/CoNWv357XT7Fw4PehoXfX+jOU+nCkDb6+/LC48fWwe1wnnPnyGmVh+vEheHQgSK3UAR9/+kdinQA41zis6n9K7i8PwQGwXLimp+E/fbqD/CsyeS7oXeY/VptDt/4rK4HD39R9Qp5A/SPZd/z/m+g4TEH1jvjfFff3Jkx+Rn75h2v7nyZ8QryvL0sQhy2MDphDX5Dfv+13/OKXD+73Lz/8+gcU/X8Vs4e55twlfEusNPRAVX/79suH6v71h19/+dDkMNaAlXxryvjvyfx7uN71/AnB56iPf54L9R/Sa5p1KfIe6cjvWf5v5R+vyNGKQ/f799UX5Md8GV8TZFzEm9IHBD/kTAVt/QHHn17+gDSRwtU0zv02zPJ//3dkGzplVmVejeydkYWgg+swAaPxRhBWCPw75jZkMFBW4chYj3Ew/kcPjxZnHvLb/3HuVPnZeVLlNLHyb9a3NzL85kEOgtf5g4W+/cCcv70iBlSQlaEfplaM6Nxu9zW1fJDWo/K8BBUoW0grdl+Dz5CQPo8fkDBFfvundXy7i3vN+98e9PvgK30hjlxVNTF4Hdd7CkD6XJ0DKwG4AaeBmuLMgWZ5IeTakcmrLG4h143YVNcwjiE3lxCIrOzvsiF+X0Zhv/32m21Vwdf0Qa4E8jCmmsIB7+Ygnz/D9Xlx6Af11xQ4QYZ8+P2PD8h/Iv/TrLvwUccOcv3TO9DCzV5VEJhtTQKHQcdBV0MquXvn9z+eKEMxKaxt0JehF4LHZBitV+C+Qb5fc5/xGYXYAEINxkqVlfVYhsL6FRE95N1eqHS8NXJ6kFU14oKxfoHU6aFUCy7nHck0g8UNhmTl9Z+QpgJ3rb/ZpXU3MYFpb9W/IdvFDlaQLIb/jWbeB8HJWRpC+N8D4vE9FFJ+qJD5m4hXRBnjE8mt0sqD0nrq8KyHX2DleJsOhVtICrqv6VgxwQjVPVke8MBBEBnn6dLPo89hzU8gM7jVm+77GGusc8a93pVf0+qZCLDeQ1QcWBigUr8J3bE8/O0ZUhUs67F7xw9aOkp6esF9euUeg7Bu/9hDjCENr58hjfwQ0sjXBkcxEvn/2XWMBnKCoPMCZ/BLhFcM/fwAbmyMRoAfvRSs/AiMnkeSfO8G3rjkjVK/pnEIo6Ds//YYeYf7OeZBU00J0dE5/S4f+hoCN8q9h+IYWmU5BrH1NX3jbrhQ5E5UECCYtzCux3B6UzjefbM0gMn56QHts47fXVe6I1Qw3JC8sWMYCh4Arm05V2hVOabTE3YYl2BMrS4IneBPq0Kg9HIErEKgESFMEMjvd+iUDC4TQnt36vvwcOyOoBVu40BrYecJXpETzIgxKqA/wOhUOAai8OEuCkkAxBia+I4wdHn+MGZsVp8GWqMvsgQG6o8eeN78HsN3W0bzoVTLtWqIZTeSqwtuD8++2/n0FTQ2GbPuPunP7n6uFfmxyPzta3q38Z3PYTLH9xD8Dg4Ckyip7iE6clEFQzEBzwCCkXAvxa+Pavoo1++2fPlLh/7xX2vi7/Xx8GfPfUGCus6rL9Ppo6a9lbRXyARTGCNhDqqxvH22Pr9l3ecRRnj9zNPPP+TpnxQ88PqC/GtG/knEM7q/INgr+oqOt+TQAWP4Pl8Qk8Xn+fkzOd79murgu7OfETESatyPWf1WXd6GwBLjl8AfBz+qTTUWqQ7WxTu9Qnd8Td8D4pkukL1TfyyNVfZDGt/5Brr34b33KgBvpTXU7Y5tmg/GfUw8ml+Bly9pE8efXlIrAf/0/mXkexi4EJJx7wPRh71PHYL71XsfNF78ead2Ty/IC272ZcyyT8jYs35C3tvPT8jbhuC+0UobuCP6ZWx9R5VwKHx7H/u+DbTBC9yH1X0+mv/Y5Ywd17MT/qsRY3K98fpYlZ7ZOmr8ixD4wfdB+Vch6v2DFT8po6qtsSKH9VuiV9BOtxkLAHQgTECYU5AqGzjhr2qgnhIUDSx97rjc7/h9X1b2WMsfdxjqx1bx95c36nj64NkWwuEwRz9XY/GbwmCFCuH1I6zgvf99w/gUBFkP9ilQkofbDsPgAMUxlHQImvZojASsa5MuTlIs61geTbo0a3vYDKVIm7atmcVgKAXHE5ZrQ3mPKP02lvpwNA63LIdxoBiXpS3KAQRqEw7AcMylCYDOWMJjGEBCnN6nXiFlPlf8WOEI53vvOiLzXPjvLzZFwpFrshK5x2sxZY/WlKTtW7CemOjkdvFozdxvdDcX8VDpSidKPFNTb+fZ4M6r1eq88a77OnN0Y+MwiYE5PAfE6+S8mVyJiq6uupOoqSWuzlF4u21wN3Wnw3DczHmxBz22Eas9XiT48WRvT70U2aQZX1ZZ1umFsdnkTm2t6JRkgevd1sosm5bXS4iWG6BsjcM+tkvTwiumN0gT+Ntr7emuUbkm1iRBcT4Ux3zIvYXZl5Ho26m3NkGB8UVzKq5BpdOMZi23sk7thhylWjmfgFa+TeT+BtqSJne3U6ttDkdQ0N2p8te7fe3Q1b4rHGUubGTpUDl0JtikjlJnVNkbTrQU3SMtWztb4vcdfltzVzEp9EbKT1Ix3ZaXkMVg0CTFpNZ2UjtvpALdXiVViWRzjx8LaRE3x5MpbuNEJ4Q5YdrGGrUK0+kJBSSbGhR1n+wdqb4WkhQehshbMKGhuqF03Fv73hAYn1+Gia32bL85FzEuzbCqpg2dnA/6+dxzvpwJLVs5s6jStTV7Xi3xM1ptjX2zYtht4l9uJdzmaZ4MTrC9sdarmTbjS03bobftTbTnbpNkrNUxayXfnNfpydA3bMjgVXxhC3Yn7asVCTYzSzwERbVR81I9ZguqTQszj3ZuKs1m3VI0nK41TblNGzeog5rQTkOCOlF8xZt+W1bT/RABtarEJD/a2rA+U/YgkCqJ974pTznGj+Z6tcm0chpEEhM45nxfUdejTmwN0pj1zCESTYMQ+KDFz+Rswa9XdC4IVj4sYnKa7Lwjod7Kpt0PAhiCpZPY8eS82lQX8SqZfdXhVT5IhTNppeNVI2BSGmmb46rbGsbBXPeXMCVVeSbHpLAkxTW+jIUZmoWxQcynFpmsaXbq6YMsUs0RumXV7S1bnkSYfFgk+TUNgV4creuRP3iVpKsntdPQOOWz5rQ+BNlKDjsjb7FNwrVTtMqP5aK8Fal2SWdEMvczKW63tl5oFr26dJdMCpWsilJL32+2BE+I4WFxpTr9vF05882hOp+c/aWzFJ+M3WFyFM6mycSmqWHrRmzn8qZfV7FYTP1mqkjYbifh61XPhnqSzjarqacckkEyGib0WIU+1rip7WyZnhJTDBdrPyMxdUrPSWYK+ypDPnsGJmxOkT85Ytew6G/7LL8Rc/9gYhFULEBmUpNSvRpF3hQUt3W1gRKWg9eJDXuQZkTqxknE8htyIPZRgUuMozppuD0eDwAT/dvMlVh2F1m6taqPVnW5iAOKGyR5TQtFh99Th/CoT/ZkVp3qiaZceJyaG+huF0pd0p321NYQps1cnGJiK/S2to8mMyNfxULBex7a3pZt2PZZuZc973bshZ0qM5pxJi9B22llWcFmu9hjkrPdoCG72drV5kxVw3DBMK1A0ayl2Hm8WDhmIDuX85RwN9ECtBRpKSA9yWv8esAbuMfpLmtWnlXzCd/raymvCpGZo8eKnm7w3ulPtgp3C6yrZ2w/AcRyRwfOesDTY38AbJHxPH48+CKOxeGE1VlrE2B0caZnG9Q0AnstJ/hKjS5SdjutqNt0gfGafXNMMWzbm0MGuy0pHSU1a7ydmYFtmN7SWUOysrepFNRjOKM67jnDh3gs892VELJNyzo3AYtsOtvvVxtcPs2pY64Shl3viYSRuDkp6fHMqo+HXKOLK32aVNJpbi5yfnubJeHVOJQb2gTrleNMZGmY5+fWApqLWY0tYg0bDXQ4qGEaCE1FTYB5uU2AfNzYPA8WxTYoKJpgwBEoRm9ceDPptqpOSXK8mc0m7XztTxczeojxFrt10YzfXSf6wLpXs7+4njePp2x5lVeyk1scZD7iZjho6J8qQY0VS5tl6Xa5K3lVMeX8QEHuPzZtzOpbMgZUtq39qz4wmpzFYl4eZspSnEnUjcp5KcnCijXNOF03MXbUMeGyXZ+XpW5NJJnID9jCUnkH3c94qs6zsJW8YX9cL5QkKuxhNRhMmGRLZTebL4+M7+Nev3PmfLmuJZyqifzkbDAitS4qHu9OVpxdQu/A5dzSFVf51U5PpyvJoqRvTqThEtoLS8upPDh61OwQnRfEuXSE9kg7JNViuiOx0rDptINa3ZJrHNOHXUwy54uv3DBxwQiEUvmFHx/mCpeYYShhyo6fRheyOXlCbNby+sZh5rIi/UvEy3PeqOIUUwZ8vRvcQ7VJ+vZQslytcJorXPw643dcL25qchPJl9k2tZiDupZYTtjn6LynYU3HNPPcXPQb3zP7fIl3jqHs8BnAKUqORErrucohl8HN648Z7mDtFoh8k/nnhA+76kKowY4xemGSEJHBy3FCb+rICrG15KD49WaLp3RKxAOFV8ersVjtQIRqwRYGh8lFvuwQNZsyc/PgmqFF5KhxZQXqiod9nDE3tD9Jh1ttdMWh2jYFl81Soz7rxPkyS6aT/JRlGXrlrgdTD4+yxfvs3NzgOLtTsYzSJnrAa3ORH6brBYUHnlUlrC6It4pxz2s+YBpaPDFdgyVGUpyr7azQ+sPOm3oEU+sNqnozY6m4vosbC1fanv1Eabt8QIMqIAMK8wjdyO2ycCvdiSAxx/a66i5avk3Ovk5uSJM4aE2xm8/nS86OtiJTz4tY5qZ4gIbyXGk00PAZaM2eyTZJKAsVJ22Yi7c0ZPwwnPvaLheUHpdzoTzk+yPlSFEJiNUhzM1Ww1ULtZujdolsHDMMszHRqVaf+C5QWYtISk60JB69rY1i7+sYY7jntog3h5PmD2SZ5LBQLbZrJTztr4BMrhyVz67TYmnK+1l0Vvp+P1RBK6ZoLXk4r3QT7UrGZyvIe66eXxXQtwtOPmDxtp9fp3jGp9KKa1Z7vuOSRbfWD7yiCxqW5PPbhb4M51k9NFOwFzMqnIrohI2iJbNoA0KrchW/6KqB8SdLJWk0Rg/VUTiuT2BrNoe+ull6aQ8Wk1LmsNKL/cQMdvR1h6ZC2icGUCNriTtWtcjN7qTEoaysYluFBcfro32S7yOqqQV2puHrfsvwsSr1Mh23DTcoXbwUc+Kob/0qF0StvwqbTlxufXG9OMnxsvIIQlqe96v1FobMQjyzIuZfTgvTUCcnjtNiKXbYiX3ihL7oT1O/2JVps8QVUY813eEuil7np1ZaWPvaahTabyT3wqO07ItbUcGOB1Om6o2vtIdtGvP+9RZteZ3CTZWl/aWySW6l4C+d48wLuBy4grBozvV6exZr1aLXObEkArXPD/3+UivXOU+QNiT9wiloWrgZ1wlzyXlskc60Jm6W8SlUQmkOMsDA9EL7oXOSjr6ULezPzgMTruS8Ahwqcrs9s0PrKKXrHiiWAObL3aI7NRfMWpE307nQB9uka802Ngdhf9BOdZu4+dUZOoWQL85Jkss6o+fOaTWda/vVdCPo5IALXDQAtWhWwqxE02q7iLK17pdMygm2VJCmvBVXS+VKUh2nhqt6ySqysp5jut9w3MX340vFZctGmNGospVOvhasht5h8TovyFbMurUVbX17FVwytObFYla3QYptVvWE6Jp+umtNRZtql4r08PiyU2kN51PzHBPeUpS5ipZqTxFxzW1BYUXk1Yy0OapOPKO0crN2G3ei3yZMQBIRWqcXtma97VQ7nnpi0rdDT3og964x0co9JahT0KTa2QZ4u/SOXbLSZYNW0LxW24MBrpMymZtzWKMWke+CI9xxzE50GVM7WhsMXPP1Tjkc0At/cmBqLvYrbypPatgMBNbgrysH1qWze/TcKSMbtg/q23HaKTeivirLKMaWQOJgStUC76hNxIZnAgSxJ8XHUxtkhkKrkwntCzfOS0WLzk5UZBPseYm6qrWcUD0zJfuJdiQt95YSrDYd6o1tD0228xSs2h4syyRFvbCxJbFdAHcukqdz1wnMRU4TZ66aXrfh0MN+uVjSpdNZkj/r8CyO15nMzBe3XW9jc2de7HdMY6A0VoMkJgafhWQp20c5dtcaCuj4VNUXMV8LJebkMgxtxTJE+bLSN4ngdcell6hnT8YywW/pFvOvO7IWNhS93HVJ2Sxk0GkTm27bxWTfyMossfa3IyfFqSAWu5PLgPO20Ra6PWR2ItLqbVsvSaqe9245VYTpacqe2YN4OVyJfgG65SrUd5eI2UE/4RW9Z5kbX59az0LBVrdCznZOF9wrLWDGNws6eYYR/kTEKCqOJM8kKuky9RMR7sm3cpP6jsycE9L0LwuC5yM3kNjlWqtWhUrY62k+R/1O5eXldKezkkqKJyOZgEbs1mUY3SK1UNdC0Mm+mR9Qhl5ct4YXxNfS5HFWm8mb21qozz3gU7GjeWpCrWaMujQMZtvV80m2ZPYWd2KnqmrjoihGA99tFC4V2frMLzqnl0Ur6FqZ4JmcqHu+cDzD7Mx4cbztmKzO1ToiPNgMrBq+cdKLAsI4lc7yOpvjJn1tthx3PGy6pPJ0OiCWZLt05kSNT/TGZifkEuszMh+cpR85itGeDN8ThKjspue1cla3faMGwG+V460csNParTlVWHS2ZdjJpVGmhkCtcV1lFfRIlPSx0XpMbjky3aCt7mU0kPTtzllJchgSnalNJnP1jGrc7LQjz9R6uM7sDQXSTLnJMboydtQcX2jsDg+WLc+hEg3QK3/TJjhts2pKe/akYGuiTHdtfzb9adgN3YRYhocdxR/EtlsGgKJZAjbgR6q7mJ1t17cWD5tKj4aS9vzppMeYScArE4LZ1O3Gncz282sk91GSbbJO2S0KldoPOyIhT8FhfbS2q4K+nGhy3xbT1bqzEu4031/lYjLZrdfzDtXRWTGdGgE+EAmwgamq8va8LmATki+E3XYSShx70zh2eRp6jrPU5XzBCztH3u60W91djLa+zZxJStsDRlJ0NezONG9xc2tHrWnRvMysoEQpb10cTLcyvKz1HLDnqopzu0pY1RXv7Mje79NWGqx5wglAZUJtucZbmyj0tWqjx1ofjjMdPV9uV4YuyFnDyF47rXnnmDBXcsdy7oY5beqqyUgzwI8NcyLlbTsBpT7Me5sjZ5EzO14c/Fwd3YNH5VyxpHLY4eERSjDoWqFsZxl0PEUmSx3X6kW01N0gngf5bBp1q8k131JRv0wUb5J3TEQRigUCY1Li1VK1zQJE046z431MDb3PcdzPP798ehkPlJ/Hwv/6E9/xiO7/2Unh41Dv7YHR/VAYWO6Xu64v/wvbfv30UjohtOxxPlrFjf88RPxvp6Of/+nnDaOY/vFYdXzSdavfDtZryx9/K/QSpm5T1WX/rcri5jnDbqrxJwvVm7Uv92Um+Xi6ndUBKOH7qHv8jQQ0fnxqOs4Cfjg+uHwZf1dQA/95XPzpJQnLbFzb81nFeKA6Pqx4+eO/AHJywTVtJQAA -->
+<!-- rci-capsule:v1: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 -->

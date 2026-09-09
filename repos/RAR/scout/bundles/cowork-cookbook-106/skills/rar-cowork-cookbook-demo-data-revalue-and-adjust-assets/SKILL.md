@@ -1,7 +1,7 @@
 ---
 name: "rar-cowork-cookbook-demo-data-revalue-and-adjust-assets"
-description: "Generates and creates realistic demo records for revalue and adjust assets in a sandbox tenant for training and pilot scenarios."
-metadata: {"projection": "rar-scout/1.0", "rar_agent": "@cowork-cookbook/demo_data_revalue_and_adjust_assets", "rar_sha256": "dd2201aaffb5423469ce69ed52b2ffa00ec4e7ccc991eb1bce0ff21cbadfec6a", "source_kind": "rar-agent", "source_commit": "2aac8c714d97a6ce30b3ce121d73e0593f88e4ed", "version": "2.0.0", "author": "Sean Galliher and Cowork Cookbook contributors", "tags": ["industry_solution", "business_process", "prompt", "demo_data", "acquire_to_dispose", "intermediate", "integration", "dynamics_365_erp"]}
+description: "Generates 25 realistic demo asset revaluation/adjustment records for a sandbox Dynamics 365 F&SCM legal entity, stages them in an Excel workbook, creates them in D365, and returns each new record's primary key."
+metadata: {"projection": "rar-scout/1.0", "rar_agent": "@cowork-cookbook/demo_data_revalue_and_adjust_assets", "rar_sha256": "bbaf72049877692dd462d03696d5c2062bea5333b1d9c68881b1d163f1bc05d7", "source_kind": "rar-agent", "source_commit": "597f0992f4120ddef24dd8686c5720a9ba5b59ab", "version": "3.0.3", "author": "Sean Galliher and Cowork Cookbook contributors", "tags": ["industry_solution", "business_process", "prompt", "demo_data", "acquire_to_dispose", "intermediate", "integration", "dynamics_365_erp"]}
 ---
 
 ## Microsoft Scout runtime
@@ -23,17 +23,18 @@ agent in the user's Brainstem. Never paraphrase the factory or agent into a new
 implementation. The generic direct-file commands in the generated Toaster
 section are recovery guidance; Scout should prefer the verified runner.
 
-Revalue and adjust assets Demo Data Generator — Generates and creates realistic demo records for revalue and adjust assets in a sandbox tenant for training and pilot scenarios.
+Revalue and adjust assets Demo Data Generator — Generates 25 realistic demo asset revaluation/adjustment records for a sandbox Dynamics 365 F&SCM legal entity, stages them in an Excel workbook, creates them in D365, and returns each new record's primary key.
 
 AGGREGATED ENTRY. The content authority for this capability is the upstream
 library; this file is the structured RAR container for it. It carries a
 manifest, a version locked to upstream, a content hash, a provenance record and
 a public feedback thread — none of which the upstream entry has on its own.
 
-Nothing from upstream is reproduced here. What runs below is RAR's own method
-for this shape of work — a automate capability — generated from the metadata
-we index. The upstream library remains the authority for its own instructions;
-this agent is callable on its own terms and links home for the source.
+This entry carries the upstream recipe itself, under its licence and with
+attribution: the prompt verbatim, the prerequisites, the step-by-step and
+the expected output. Toasting made it deterministic — the same call returns
+the same recipe every time — and callable from any Brainstem. The upstream
+library remains the authority for the recipe and links home for the source.
 
   Source library : Cowork Cookbook (Sean Galliher and Cowork Cookbook contributors)
   Upstream entry : https://coworkcookbook.com/recipes/demo-data-revalue-and-adjust-assets
@@ -53,22 +54,31 @@ The typed contract this capability answers to (JSON Schema — the deterministic
 ```json
 {
   "properties": {
+    "context": {
+      "description": "Optional. Details the recipe should use \u2014 the record, scope, dates or filters it asks for.",
+      "type": "string"
+    },
+    "legal_entity": {
+      "description": "Sandbox D365 legal entity to target (default USMF).",
+      "type": "string"
+    },
     "operation": {
-      "description": "What to do: run, plan, checklist, describe.",
+      "description": "What to do: run, prompt, plan, checklist, describe.",
       "enum": [
         "run",
+        "prompt",
         "plan",
         "checklist",
         "describe"
       ],
       "type": "string"
     },
-    "subject": {
-      "description": "The process to automate.",
+    "record_count": {
+      "description": "Number of demo records to generate (default 25).",
       "type": "string"
     },
-    "trigger": {
-      "description": "Optional. What starts it \u2014 schedule, event or manual.",
+    "workbook_name": {
+      "description": "Excel staging file name, e.g. demo-data-revalue-and-adjust-assets-2026-05-24.xlsx.",
       "type": "string"
     }
   },
@@ -85,7 +95,7 @@ The typed contract this capability answers to (JSON Schema — the deterministic
 
 ## Run this — do not improvise
 
-This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `demo_data_revalue_and_adjust_assets_agent.py` and embedded as the fenced Python below (sha256 dd2201aaffb54234…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `demo_data_revalue_and_adjust_assets_agent.py` first:
+This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `demo_data_revalue_and_adjust_assets_agent.py` and embedded as the fenced Python below (sha256 bbaf72049877692d…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `demo_data_revalue_and_adjust_assets_agent.py` first:
 
 ```bash
 python3 demo_data_revalue_and_adjust_assets_agent.py '{"key": "value"}'      # arguments as one JSON object
@@ -97,17 +107,18 @@ Treat stdout as a tool result. If it reports missing or unresolved inputs, stop 
 
 ```python  # rapp:deterministic
 """
-Revalue and adjust assets Demo Data Generator — Generates and creates realistic demo records for revalue and adjust assets in a sandbox tenant for training and pilot scenarios.
+Revalue and adjust assets Demo Data Generator — Generates 25 realistic demo asset revaluation/adjustment records for a sandbox Dynamics 365 F&SCM legal entity, stages them in an Excel workbook, creates them in D365, and returns each new record's primary key.
 
 AGGREGATED ENTRY. The content authority for this capability is the upstream
 library; this file is the structured RAR container for it. It carries a
 manifest, a version locked to upstream, a content hash, a provenance record and
 a public feedback thread — none of which the upstream entry has on its own.
 
-Nothing from upstream is reproduced here. What runs below is RAR's own method
-for this shape of work — a automate capability — generated from the metadata
-we index. The upstream library remains the authority for its own instructions;
-this agent is callable on its own terms and links home for the source.
+This entry carries the upstream recipe itself, under its licence and with
+attribution: the prompt verbatim, the prerequisites, the step-by-step and
+the expected output. Toasting made it deterministic — the same call returns
+the same recipe every time — and callable from any Brainstem. The upstream
+library remains the authority for the recipe and links home for the source.
 
   Source library : Cowork Cookbook (Sean Galliher and Cowork Cookbook contributors)
   Upstream entry : https://coworkcookbook.com/recipes/demo-data-revalue-and-adjust-assets
@@ -122,9 +133,9 @@ upstream record changes, so this file and its source cannot silently diverge.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": '@cowork-cookbook/demo_data_revalue_and_adjust_assets',
-    "version": '2.0.0',
+    "version": '3.0.3',
     "display_name": 'Revalue and adjust assets Demo Data Generator',
-    "description": 'Generates and creates realistic demo records for revalue and adjust assets in a sandbox tenant for training and pilot scenarios.',
+    "description": "Generates 25 realistic demo asset revaluation/adjustment records for a sandbox Dynamics 365 F&SCM legal entity, stages them in an Excel workbook, creates them in D365, and returns each new record's primary key.",
     "author": 'Sean Galliher and Cowork Cookbook contributors',
     "tags": ['industry_solution', 'business_process', 'prompt', 'demo_data', 'acquire_to_dispose', 'intermediate', 'integration', 'dynamics_365_erp'],
     "category": 'integrations',
@@ -143,8 +154,8 @@ __manifest__ = {
         "upstream_version": '1.0.0',
         "license": 'CC-BY-4.0',
         "license_verified": True,
-        "details": {'license_note': 'Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.', 'license_url': 'https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE', 'repository_url': 'https://github.com/seangalliher/Coworkcookbook', 'taxonomy_url': 'https://coworkcookbook.com/data/taxonomy.json'},
-        "content_digest": '245435da6cb52210',
+        "details": {'license_note': "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.", 'license_url': 'https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE', 'repository_url': 'https://github.com/seangalliher/Coworkcookbook', 'taxonomy_url': 'https://coworkcookbook.com/data/taxonomy.json'},
+        "content_digest": '28e5ab64892fd4eb',
     },
     "industry_context": {'deprecated': False, 'difficulty': 'intermediate', 'last_verified_on': None, 'mutates_data': True, 'plugin': 'dynamics-365-erp', 'process_roots': ['acquire-to-dispose'], 'process_tags': ['acquire-to-dispose/manage-active-assets/revalue-and-adjust-assets'], 'recipe_category': 'demo-data', 'recipe_type': 'prompt', 'upstream_path': 'acquire-to-dispose/demo-data-revalue-and-adjust-assets', 'uses_skills': {'custom': [], 'ootb': ['Excel'], 'plugin': [{'action': 'data_create_entities', 'plugin': 'dynamics-365-erp'}]}, 'verification_status': 'draft'},
     # The platforms the upstream entry targets. First-class and queryable, not
@@ -164,15 +175,15 @@ except ModuleNotFoundError:
             self.metadata = metadata
 
 
-# The toasted capability. The upstream entry supplies the WHAT; this procedure
-# is RAR's own method for that shape of work, generated by
-# @kody-w/skill_toaster_agent from the metadata we hold. No upstream text is
-# reproduced here — see the module docstring.
-_SPEC = {'archetype': 'automate', 'checks': ['Every step is idempotent and the whole run is safely retryable.', 'Failure behaviour is defined per step, and failures are loud.', 'A completion condition exists and is checked.', 'The first production run was reconciled against the manual process.'], 'confidence': 1.0, 'deliverable': 'A runnable automation with a defined trigger, per-step failure policy, an observable signal, and a reconciliation against the manual process.', 'operations': ['run', 'plan', 'checklist', 'describe'], 'params': {'subject': 'The process to automate.', 'trigger': 'Optional. What starts it — schedule, event or manual.'}, 'refined_by': 'rules', 'signals': ['tag:integration', 'tag:workflow'], 'steps': ['Run the process manually once and write down every step, including the ones people do without noticing.', 'Identify the trigger and the completion condition. An automation with no defined end does not terminate, it accumulates.', 'Make each step idempotent, so a retry is safe and a partial run can be resumed rather than restarted.', 'Decide failure behaviour per step: retry, skip, or halt. Silent failure is the expensive one.', 'Add an observable signal — a log line, a status file, a notification — so a broken run is noticed without being looked for.', 'Run it alongside the manual process until they agree, then retire the manual path deliberately.'], 'subject_label': 'process to automate', 'verb': 'Automate'}
+# The toasted capability, generated by @kody-w/skill_toaster_agent. A licensed
+# recipe entry carries the upstream recipe verbatim (with attribution) in
+# _SPEC["recipe"]; a metadata-only entry carries RAR's own method for that shape
+# of work. See the module docstring for which this is.
+_SPEC = {'archetype': 'recipe', 'checks': ['Prerequisite: Dynamics 365 F&SCM access with the appropriate role', 'Prerequisite: Cowork D365 ERP plugin enabled', 'Output matches: See the prompt for the specific deliverable(s). All generated files land in `Documents/Cowork/output/` in OneDrive.'], 'confidence': 1.0, 'deliverable': 'See the prompt for the specific deliverable(s). All generated files land in `Documents/Cowork/output/` in OneDrive.', 'operations': ['run', 'prompt', 'plan', 'checklist', 'describe'], 'params': {'context': 'Optional. Details the recipe should use — the record, scope, dates or filters it asks for.', 'legal_entity': 'Sandbox D365 legal entity to target (default USMF).', 'record_count': 'Number of demo records to generate (default 25).', 'workbook_name': 'Excel staging file name, e.g. demo-data-revalue-and-adjust-assets-2026-05-24.xlsx.'}, 'recipe': {'authors': ['Sean Galliher'], 'business_value': "Eliminates the 'no data to demo with' blocker for trainers, implementation partners, and pilot programs by populating realistic but synthetic revalue and adjust assets data in minutes.", 'expected_output': 'See the prompt for the specific deliverable(s). All generated files land in `Documents/Cowork/output/` in OneDrive.', 'platform': 'Microsoft 365 Copilot Cowork', 'prerequisites': ['Dynamics 365 F&SCM access with the appropriate role', 'Cowork D365 ERP plugin enabled'], 'prompt': "Using the Dynamics 365 ERP plugin against a SANDBOX legal entity (default USMF), generate 25 realistic demo records for revalue and adjust assets. Use plausible values for every required field, vary the data so it looks organic, and stage them in an Excel workbook 'demo-data-revalue-and-adjust-assets-2026-05-24.xlsx' BEFORE creating. Then create the records in D365. After creation, output a confirmation list with each new record's primary key. WARNING: this recipe creates data - run in sandbox only, and never against a production legal entity.", 'steps': ['Open Cowork and confirm the Dynamics 365 ERP plugin is toggled on for your session.', 'Paste the prompt from `prompt.md` into a new task.', 'Review the generated output and adjust scope as needed.', '**Before approving any write action, review the dry-run preview.**'], 'tenant_caveat': '', 'verified_against': '', 'what_it_does': 'Generates a configurable number of realistic revalue and adjust assets records and creates them via the D365 ERP plugin.'}, 'refined_by': 'claude-opus-5', 'refinement': {'description': "Generates 25 realistic demo asset revaluation/adjustment records for a sandbox Dynamics 365 F&SCM legal entity, stages them in an Excel workbook, creates them in D365, and returns each new record's primary key.", 'example_request': 'Generate 25 demo revalue and adjust assets records in USMF sandbox and stage them in Excel first.', 'inputs': [{'description': 'Sandbox D365 legal entity to target (default USMF).', 'name': 'legal_entity'}, {'description': 'Number of demo records to generate (default 25).', 'name': 'record_count'}, {'description': 'Excel staging file name, e.g. demo-data-revalue-and-adjust-assets-2026-05-24.xlsx.', 'name': 'workbook_name'}], 'model': 'claude-opus-5', 'when_to_use': 'Use when you need demo or training data for revalue and adjust assets in a D365 sandbox tenant. Sandbox only — never run against a production legal entity.'}, 'signals': ['recipe:prompt', 'refined'], 'steps': ['Open Cowork and confirm the Dynamics 365 ERP plugin is toggled on for your session.', 'Paste the prompt from `prompt.md` into a new task.', 'Review the generated output and adjust scope as needed.', '**Before approving any write action, review the dry-run preview.**'], 'subject_label': 'context for the recipe', 'verb': 'Run'}
 
 
 class DemoDataRevalueAndAdjustAssets(BasicAgent):
-    """Automate agent, toasted from an aggregated upstream entry."""
+    """Run agent, toasted from an aggregated upstream entry."""
 
     def __init__(self):
         self.name = 'DemoDataRevalueAndAdjustAssets'
@@ -182,7 +193,7 @@ class DemoDataRevalueAndAdjustAssets(BasicAgent):
             "description": __manifest__["description"],
             "parameters": {
                 "type": "object",
-                "properties": {'operation': {'description': 'What to do: run, plan, checklist, describe.', 'enum': ['run', 'plan', 'checklist', 'describe'], 'type': 'string'}, 'subject': {'description': 'The process to automate.', 'type': 'string'}, 'trigger': {'description': 'Optional. What starts it — schedule, event or manual.', 'type': 'string'}},
+                "properties": {'context': {'description': 'Optional. Details the recipe should use — the record, scope, dates or filters it asks for.', 'type': 'string'}, 'legal_entity': {'description': 'Sandbox D365 legal entity to target (default USMF).', 'type': 'string'}, 'operation': {'description': 'What to do: run, prompt, plan, checklist, describe.', 'enum': ['run', 'prompt', 'plan', 'checklist', 'describe'], 'type': 'string'}, 'record_count': {'description': 'Number of demo records to generate (default 25).', 'type': 'string'}, 'workbook_name': {'description': 'Excel staging file name, e.g. demo-data-revalue-and-adjust-assets-2026-05-24.xlsx.', 'type': 'string'}},
                 "required": ["operation"],
             },
         }
@@ -254,12 +265,86 @@ class DemoDataRevalueAndAdjustAssets(BasicAgent):
         ]
         return lines
 
+    # ── recipe entries: the upstream recipe, verbatim, deterministic ─────
+
+    def _recipe_context(self, kwargs):
+        extras = []
+        subject = self._subject(kwargs)
+        if subject:
+            extras.append(f"subject: {subject}")
+        for key in _SPEC["params"]:
+            value = str(kwargs.get(key) or "").strip()
+            if value:
+                extras.append(f"{key}: {value}")
+        return extras
+
+    def _recipe_prompt(self, kwargs):
+        r = _SPEC["recipe"]
+        lines = [r["prompt"]]
+        extras = self._recipe_context(kwargs)
+        if extras:
+            lines += ["", "Context supplied by the caller:"] + [f"- {e}" for e in extras]
+        return lines
+
+    def _recipe_attribution(self):
+        src = __manifest__["source"]
+        r = _SPEC["recipe"]
+        who = ", ".join(r.get("authors") or []) or __manifest__["author"]
+        return [
+            f"Recipe: {__manifest__['display_name']} — by {who}, {src['source_name']} "
+            f"({src['license']}). Source: {src['upstream_url']}",
+        ]
+
+    def _perform_recipe(self, op, kwargs):
+        r = _SPEC["recipe"]
+        ref = _SPEC.get("refinement") or {}
+        if op == "prompt":
+            return "\n".join(self._recipe_prompt(kwargs) + [""] + self._recipe_attribution())
+        if op == "plan":
+            lines = [f"Steps for {__manifest__['display_name']} on {r['platform']}:"]
+            lines += [f"  {i}. {s}" for i, s in enumerate(r["steps"], 1)]
+            return "\n".join(lines + [""] + self._recipe_attribution())
+        if op == "checklist":
+            lines = ["Before you run it:"] + [f"  [ ] {p}" for p in r["prerequisites"]]
+            if r.get("expected_output"):
+                lines += ["", "Done when:", f"  [ ] {r['expected_output']}"]
+            return "\n".join(lines + [""] + self._recipe_attribution())
+        if op == "describe":
+            lines = self._provenance()
+            if ref.get("when_to_use"):
+                lines += ["", f"When to use: {ref['when_to_use']}"]
+            if ref.get("example_request"):
+                lines += [f"Ask for it like: {ref['example_request']}"]
+            if ref.get("inputs"):
+                lines += ["", "It will ask you for:"] + [f"  - {i['name']}: {i['description']}" for i in ref["inputs"]]
+            if r.get("business_value"):
+                lines += ["", f"Why it matters: {r['business_value']}"]
+            return "\n".join(lines)
+        if op == "run":
+            lines = [f"{__manifest__['display_name']} — run on {r['platform']}", ""]
+            if r.get("what_it_does"):
+                lines += [r["what_it_does"], ""]
+            lines += [f"Prompt (paste into {r['platform']}):", ""] + self._recipe_prompt(kwargs) + [""]
+            lines += ["Procedure:"] + [f"  {i}. {s}" for i, s in enumerate(r["steps"], 1)] + [""]
+            lines += ["Acceptance checks:"] + [f"  [ ] {c}" for c in _SPEC["checks"]] + [""]
+            lines += [f"Deliverable: {_SPEC['deliverable']}", ""]
+            if r.get("tenant_caveat"):
+                lines += [f"Verified upstream: {r['tenant_caveat']}", ""]
+            return "\n".join(lines + self._recipe_attribution())
+        return (
+            f"Unknown operation {op!r}. Valid operations: "
+            + ", ".join(_SPEC["operations"])
+        )
+
     # ── entry point ─────────────────────────────────────────────────────
 
     def perform(self, **kwargs):
         """Run the toasted capability. Always returns a string."""
         op = str(kwargs.get("operation") or "run").strip().lower()
         subject = self._subject(kwargs)
+
+        if _SPEC.get("recipe"):
+            return self._perform_recipe(op, kwargs)
 
         if op == "describe":
             return "\n".join(self._provenance())
@@ -289,4 +374,4 @@ if __name__ == "__main__":
 
 <!-- toaster:generated:end -->
 
-<!-- rci-capsule:v1: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 -->
+<!-- rci-capsule:v1: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 -->
