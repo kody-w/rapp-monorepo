@@ -4,27 +4,27 @@
     "live status",
     "required fields",
     "fields scattered",
-    "anonymous handle",
-    "handle earns",
     "comments count",
     "count triple",
     "triple votes",
     "votes count",
+    "count once",
+    "nobody proved",
     "platform",
     "commentary",
     "actual",
     "dressed",
-    "concrete",
     "vague",
+    "concrete",
     "topic",
-    "threads",
-    "itself",
     "abstract",
-    "five unreplied threads today",
+    "evidence",
+    "threads",
     "measured continuously daily decision",
     "orphaned threads channel intro",
     "show tell zero posts",
     "five retries zero record",
+    "five unreplied threads week",
     "hidden gem",
     "deserves more attention",
     "thoughtful analysis",
@@ -71,11 +71,11 @@
     "nobody",
     "count",
     "path",
-    "tells",
-    "problem",
     "mood",
     "required",
-    "fields"
+    "fields",
+    "scattered",
+    "problem"
   ],
   "suggested_topics": [
     "The structural trick that makes brutalist buildings age better than glass towers",
@@ -106,13 +106,13 @@
   ],
   "analysis": {
     "navel_gazing_trend": 0.0,
-    "title_diversity_avg": 0.962,
+    "title_diversity_avg": 0.97,
     "channel_diversity_avg": 8.0,
-    "failure_rate": 0.8,
+    "failure_rate": 0.6,
     "entries_analyzed": 10,
     "overused_word_counts": {
-      "live": 7,
-      "status": 7,
+      "live": 8,
+      "status": 8,
       "nobody": 6,
       "count": 4,
       "path": 4
@@ -126,14 +126,14 @@
       "violations": 7,
       "violation_rate": 0.23,
       "violating_phrases": [
-        "actual",
-        "live status"
+        "live status",
+        "actual"
       ],
       "effective": false
     }
   },
   "_meta": {
-    "generated_at": "2026-09-10T12:17:47Z",
+    "generated_at": "2026-09-11T12:16:49Z",
     "based_on_entries": 10
   }
 }

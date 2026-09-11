@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brainstem Copilot</title>
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("scoutTheme");
+      const theme = ["light", "dark"].includes(param) ? param :
+        (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #f7f4ef;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #dedede;
+      --cp-border-strong: #919191;
+      --cp-text: #242424;
+      --cp-text-muted: #5c5c5c;
+      --cp-text-soft: #6f6f6f;
+      --cp-accent: #b11f4b;
+      --cp-accent-hover: #9a1a41;
+      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #16a34a;
+      --cp-danger: #dc2626;
+      --cp-warning: #f59e0b;
+      --cp-link: #0078d4;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: rgba(177, 31, 75, 0.12);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #3d3b3a;
+      --cp-bg-elevated: #343231;
+      --cp-surface: #292929;
+      --cp-surface-soft: #2e2e2e;
+      --cp-border: #474747;
+      --cp-border-strong: #5f5f5f;
+      --cp-text: #dedede;
+      --cp-text-muted: #919191;
+      --cp-text-soft: #b0b0b0;
+      --cp-accent: #fd8ea1;
+      --cp-accent-hover: #fb7b91;
+      --cp-accent-soft: rgba(253, 142, 161, 0.14);
+      --cp-accent-fg: #1a1a1a;
+      --cp-success: #4ade80;
+      --cp-danger: #f87171;
+      --cp-warning: #fbbf24;
+      --cp-link: #4da6ff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      --cp-overlay: rgba(41, 41, 41, 0.88);
+      --cp-panel: rgba(41, 41, 41, 0.72);
+      --cp-panel-strong: rgba(41, 41, 41, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.04);
+      --cp-highlight: rgba(253, 142, 161, 0.12);
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html, body { margin: 0; width: 100%; height: 100%; }
+    body {
+      display: flex; flex-direction: column; overflow: hidden;
+      background: var(--cp-bg); color: var(--cp-text);
+      font: 14px/1.55 "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    button, input, textarea, select { font: inherit; }
+    button {
+      min-height: 36px; padding: 6px 12px; border: 1px solid var(--cp-border);
+      border-radius: 0.625rem; background: var(--cp-surface-soft); color: var(--cp-text);
+      cursor: pointer; font-weight: 600;
+    }
+    button:hover { border-color: var(--cp-border-strong); background: var(--cp-bg-elevated); }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    button.primary, .send { background: var(--cp-accent); border-color: var(--cp-accent); color: var(--cp-accent-fg); }
+    button.primary:hover, .send:hover { background: var(--cp-accent-hover); color: var(--cp-accent-fg); }
+    :focus-visible { outline: 3px solid var(--cp-link); outline-offset: 3px; }
+    .icon { width: 36px; padding: 6px; flex-shrink: 0; display: inline-grid; place-items: center; }
+    .icon svg, .brand svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+    .brand { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 0.625rem; background: var(--cp-accent); color: var(--cp-accent-fg); flex-shrink: 0; font-weight: 700; }
+    .brand.surgeon { background: var(--cp-surface-soft); color: var(--cp-text); border: 1px solid var(--cp-border); }
+    .workspace { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr); flex: 1; min-height: 0; }
+    .workspace.surgeon-hidden { grid-template-columns: minmax(0, 1fr); }
+    .pane { display: flex; flex-direction: column; min-width: 0; min-height: 0; background: var(--cp-surface); }
+    .surgeon-pane { border-left: 1px solid var(--cp-border); background: var(--cp-surface-soft); }
+    .pane-header { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; min-height: 64px; padding: 12px 16px; border-bottom: 1px solid var(--cp-border); background: var(--cp-bg-elevated); flex-shrink: 0; }
+    .title { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+    h1, h2, p { margin: 0; }
+    .title h1, .title h2 { font-size: 17px; font-weight: 650; }
+    .version, .subtle { color: var(--cp-text-soft); font-size: 11px; }
+    .toolbar { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+    .connection { font-size: 11px; display: inline-flex; align-items: center; gap: 6px; color: var(--cp-text-soft); }
+    .dot { width: 7px; height: 7px; background: var(--cp-success); border-radius: 50%; flex-shrink: 0; }
+    .dot.warning { background: var(--cp-warning); }
+    .model { max-width: 190px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; padding: 4px 8px; border: 1px solid var(--cp-border); border-radius: 0.625rem; color: var(--cp-text-soft); }
+    .shared-strip { padding: 8px 16px; border-bottom: 1px solid var(--cp-border); color: var(--cp-text-soft); font-size: 11px; flex-shrink: 0; }
+    .chat-body { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; padding: 24px; scrollbar-gutter: stable; }
+    .welcome { width: 80%; max-width: 760px; margin: 24px auto; padding: 0 4px; color: var(--cp-text-soft); }
+    .welcome h2 { color: var(--cp-text); font-size: 20px; line-height: 1.35; margin-bottom: 12px; }
+    .welcome p { margin-bottom: 16px; }
+    .welcome ul { padding-left: 22px; margin: 20px 0; }
+    .welcome li { margin: 8px 0; }
+    .welcome strong { color: var(--cp-text); }
+    .tour { border-radius: 24px; color: var(--cp-accent); padding: 8px 18px; }
+    .surgeon-welcome { margin-top: 40px; }
+    .surgeon-welcome h2 { font-size: 17px; }
+    .messages { display: flex; flex-direction: column; gap: 16px; }
+    .message { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
+    .message.user { align-items: flex-end; }
+    .bubble { max-width: min(92%, 760px); padding: 12px 16px; border: 1px solid var(--cp-border); border-radius: 18px; background: var(--cp-bg-elevated); min-width: 0; }
+    .user .bubble { background: var(--cp-accent); color: var(--cp-accent-fg); border-color: var(--cp-accent); border-bottom-right-radius: 6px; }
+    .assistant .bubble { border-bottom-left-radius: 6px; }
+    .bubble-text { white-space: pre-wrap; overflow-wrap: anywhere; }
+    .message-meta { color: var(--cp-text-soft); font-size: 10px; margin: 4px 6px 0; }
+    .thinking { color: var(--cp-text-soft); font-size: 12px; padding: 16px 4px; }
+    .composer-area { border-top: 1px solid var(--cp-border); padding: 14px 20px 16px; background: var(--cp-bg-elevated); flex-shrink: 0; }
+    .suggestions { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .suggestions button { border-radius: 24px; font-size: 12px; color: var(--cp-accent); font-weight: 500; padding: 6px 12px; }
+    .composer-tools { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
+    .text-button { background: var(--cp-bg-elevated); padding: 0; border: 0; min-height: 24px; font-size: 11px; font-weight: 500; color: var(--cp-text-soft); }
+    .text-button:hover { color: var(--cp-accent); }
+    .composer { display: flex; align-items: flex-end; gap: 10px; }
+    textarea, input, select {
+      color: var(--cp-text); background: var(--cp-surface); border: 1px solid var(--cp-border);
+      border-radius: 0.625rem; padding: 10px 12px; min-width: 0; font: inherit;
+    }
+    .composer textarea { flex: 1; width: 100%; resize: none; min-height: 46px; max-height: 120px; border-radius: 24px; padding: 12px 18px; }
+    textarea::placeholder, input::placeholder { color: var(--cp-text-soft); }
+    .send { width: 46px; height: 46px; border-radius: 50%; font-size: 26px; line-height: 1; padding: 0; flex-shrink: 0; }
+    .surgeon-composer { border: 1px solid var(--cp-border); border-radius: 24px; padding: 12px; background: var(--cp-surface); }
+    .surgeon-composer textarea { border: 0; border-radius: 12px; min-height: 72px; background: var(--cp-surface); }
+    .composer-hint { color: var(--cp-text-soft); font-size: 10px; padding-top: 7px; text-align: center; }
+    .queue-status { color: var(--cp-text-soft); font-size: 11px; min-height: 0; }
+    .queue-status:not(:empty) { margin-bottom: 8px; }
+    .notice { flex-shrink: 0; max-height: 120px; overflow: auto; padding: 8px 16px; border-bottom: 1px solid var(--cp-border); background: var(--cp-bg-elevated); color: var(--cp-text-soft); font-size: 12px; overflow-wrap: anywhere; }
+    .error { color: var(--cp-danger); }
+    dialog { width: min(720px, calc(100vw - 24px)); max-height: calc(100dvh - 32px); border: 1px solid var(--cp-border); border-radius: 16px; padding: 0; background: var(--cp-surface); color: var(--cp-text); }
+    dialog::backdrop { background: var(--cp-overlay); }
+    .dialog-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--cp-border); }
+    .dialog-head h2 { font-size: 18px; }
+    .tabs { display: flex; gap: 4px; padding: 12px 16px 0; flex-wrap: wrap; }
+    .tabs button[aria-selected="true"] { color: var(--cp-accent); background: var(--cp-accent-soft); border-color: var(--cp-accent); }
+    .drawer-panel { padding: 20px; }
+    .drawer-panel p { margin-bottom: 12px; }
+    .actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 16px 0 0; }
+    .actions.end { justify-content: flex-end; }
+    .inline-field { display: flex; gap: 8px; }
+    .inline-field input, .inline-field select { flex: 1; width: 100%; }
+    label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px; }
+    .capabilities { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+    .capabilities li { border: 1px solid var(--cp-border); border-radius: 0.625rem; padding: 6px 10px; font-size: 12px; overflow-wrap: anywhere; }
+    .empty { color: var(--cp-text-soft); border: 1px dashed var(--cp-border); border-radius: 0.625rem; padding: 16px; margin: 12px 0; }
+    .muted { color: var(--cp-text-soft); }
+    .small { font-size: 12px; }
+    pre, code { font-family: Consolas, "Courier New", Courier, monospace; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow: auto; max-height: 360px; padding: 12px; background: var(--cp-bg-elevated); border: 1px solid var(--cp-border); border-radius: 0.625rem; font-size: 12px; }
+    #source-content { white-space: pre; }
+    .activity-row { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--cp-border); font-size: 12px; overflow-wrap: anywhere; }
+    #confirmation { padding: 24px; max-width: 480px; }
+    #confirmation p { margin-top: 12px; }
+    @media (min-width: 1400px) { .welcome { margin-top: 36px; } .chat-body { padding: 28px 36px; } }
+    @media (max-width: 900px) {
+      .pane-header { padding: 10px 12px; gap: 8px; }
+      .title h1, .title h2 { font-size: 15px; }
+      .model { max-width: 120px; }
+      .chat-body { padding: 16px; }
+      .composer-area { padding: 12px; }
+    }
+    @media (max-width: 700px) {
+      body { overflow: auto; height: auto; min-height: 100dvh; }
+      .workspace { grid-template-columns: minmax(0, 1fr); flex: auto; }
+      .pane { height: max(460px, 65dvh); }
+      .surgeon-pane { height: max(400px, 55dvh); border-left: 0; border-top: 1px solid var(--cp-border-strong); }
+      .welcome { width: 100%; margin: 12px auto; }
+      .welcome h2 { font-size: 18px; }
+      .welcome ul { margin: 12px 0; }
+      .version { display: none; }
+      .pane-header .connection { margin-left: auto; }
+      .toolbar { width: 100%; justify-content: flex-end; }
+      .surgeon-pane .toolbar { width: auto; }
+      .suggestions { gap: 5px; }
+      .suggestions button { font-size: 11px; padding: 5px 8px; }
+      .inline-field { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+  <div id="preview-notice" class="notice" hidden>Interactive preview. Sample data only; no real agent actions or account access.</div>
+  <div id="error" class="notice error" role="alert" hidden></div>
+  <div id="history-notice" class="notice" hidden></div>
+  <main class="workspace" id="workspace">
+    <section class="pane" id="brainstem-pane" aria-labelledby="brainstem-title">
+      <header class="pane-header">
+        <span class="brand" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v16M9 3a4 4 0 0 0-5 4 4 4 0 0 0-1 7 4 4 0 0 0 6 6M15 3a4 4 0 0 1 5 4 4 4 0 0 1 1 7 4 4 0 0 1-6 6M6 8l3 2M18 8l-3 2M5 15l4-1M19 15l-4-1"/></svg></span>
+        <div class="title"><h1 id="brainstem-title">Brainstem</h1><span class="version">v__BRAINSTEM_VERSION__</span></div>
+        <span class="connection"><span id="status-dot" class="dot"></span><span id="status-text">Native Copilot</span></span>
+        <div class="toolbar" aria-label="Brainstem tools">
+          <span class="model" id="model-label" title="The model selected in your Copilot conversation">Copilot model</span>
+          <button class="icon" id="theme" type="button" aria-label="Toggle Canvas theme" title="Toggle Canvas theme"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 1v3m0 16v3M1 12h3m16 0h3M4 4l2 2m12 12 2 2M20 4l-2 2M6 18l-2 2"/></svg></button>
+          <button class="icon" type="button" data-drawer="memory" aria-label="Open soul and memory" title="Soul and memory"><svg viewBox="0 0 24 24"><path d="M5 3h14v18l-7-4-7 4z"/></svg></button>
+          <button class="icon" type="button" data-drawer="capabilities" aria-label="Open capabilities" title="Capabilities and source"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M7 12h10"/></svg></button>
+          <button class="icon" type="button" data-drawer="activity" aria-label="Open workbench settings" title="Activity and settings"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/><circle cx="8" cy="7" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="10" cy="17" r="2"/></svg></button>
+          <button class="icon" id="show-surgeon" type="button" aria-label="Show Brain Surgeon pane" hidden title="Show Brain Surgeon">&#8594;</button>
+        </div>
+      </header>
+      <div class="chat-body" id="brainstem-body">
+        <section class="welcome" id="brainstem-welcome">
+          <h2>Welcome to your Brainstem.</h2>
+          <p>I am your assistant powered by native Copilot. Here is a quick tour to get started:</p>
+          <ul>
+            <li><strong>Chat:</strong> ask questions below and use your learned capabilities.</li>
+            <li><strong>Capabilities:</strong> open the + button above to inspect your skills and their source.</li>
+            <li><strong>Teach:</strong> talk to Brain Surgeon alongside me to build something you can keep.</li>
+          </ul>
+          <p id="shared-description">Both panes share this Copilot conversation, soul, and memory.</p>
+          <button type="button" class="tour" id="setup" aria-label="Give me my Brainstem">New here? Take a guided tour</button>
+        </section>
+        <div class="messages" id="brainstem-messages" role="log" aria-label="Brainstem messages"></div>
+        <div class="thinking" id="brainstem-wait" role="status" hidden>Brainstem is working in Copilot...</div>
+      </div>
+      <footer class="composer-area">
+        <div class="suggestions" aria-label="Brainstem starter prompts">
+          <button type="button" data-prompt="What can you do?">What can you do?</button>
+          <button type="button" data-prompt="What do you remember? Read our approved notes without saving anything.">What do you remember?</button>
+          <button type="button" data-prompt="What should I do next?">What should I do next?</button>
+        </div>
+        <div class="composer-tools">
+          <button class="text-button" type="button" data-intent="export">Export</button>
+          <button class="text-button" type="button" data-intent="import">Import skill</button>
+          <button class="text-button" id="clear-view" type="button">Clear view</button>
+          <button class="text-button" type="button" data-intent="help">Get help</button>
+        </div>
+        <div class="queue-status" id="brainstem-queue" role="status"></div>
+        <form class="composer" id="brainstem-form">
+          <textarea id="prompt" rows="1" maxlength="31960" required aria-label="Message Brainstem" placeholder="Message Brainstem..."></textarea>
+          <button class="send" id="brainstem-send" type="submit" aria-label="Send to Brainstem" title="Send to Brainstem">&#8593;</button>
+        </form>
+      </footer>
+    </section>
+    <section class="pane surgeon-pane" id="surgeon-pane" aria-labelledby="surgeon-title">
+      <header class="pane-header">
+        <span class="brand surgeon" aria-hidden="true">C</span>
+        <div><div class="title"><h2 id="surgeon-title">Brain Surgeon</h2></div><div class="subtle">GitHub Copilot &middot; same conversation</div></div>
+        <div class="toolbar">
+          <button class="icon" type="button" data-drawer="activity" aria-label="Open native activity" title="Native activity">&#9638;</button>
+          <button class="icon" type="button" id="refresh-chat" aria-label="Refresh conversation" title="Refresh conversation">&#8635;</button>
+          <button class="icon" type="button" id="hide-surgeon" aria-label="Hide Brain Surgeon pane" title="Hide pane, not conversation">&#215;</button>
+        </div>
+      </header>
+      <div class="shared-strip" id="shared-strip">One shared chat &middot; no agent-picker switching</div>
+      <div class="chat-body" id="surgeon-body">
+        <section class="welcome surgeon-welcome" id="surgeon-welcome">
+          <h2>Let's build something you can keep.</h2>
+          <p>I help you understand, teach, and improve your Brainstem. I can see what we do together in this same conversation.</p>
+          <button type="button" id="teach" class="tour">Teach a new capability</button>
+        </section>
+        <div class="messages" id="surgeon-messages" role="log" aria-label="Brain Surgeon messages"></div>
+        <div class="thinking" id="surgeon-wait" role="status" hidden>Brain Surgeon is working in Copilot...</div>
+      </div>
+      <footer class="composer-area">
+        <div class="queue-status" id="surgeon-queue" role="status"></div>
+        <form class="composer surgeon-composer" id="surgeon-form">
+          <textarea id="surgeon-prompt" rows="2" maxlength="31960" required aria-label="Message Brain Surgeon" placeholder="Describe what to build or improve..."></textarea>
+          <button class="send" id="surgeon-send" type="submit" aria-label="Send to Brain Surgeon" title="Send to Brain Surgeon">&#8593;</button>
+        </form>
+        <div class="composer-hint">Native tools and approvals &middot; Enter to send, Shift+Enter for a new line</div>
+      </footer>
+    </section>
+  </main>
+
+  <dialog id="drawer" aria-labelledby="drawer-title">
+    <header class="dialog-head"><h2 id="drawer-title">Shared workbench</h2><button class="icon" id="close-drawer" type="button" aria-label="Close workbench">&#215;</button></header>
+    <div id="drawer-error" class="notice error" role="alert" hidden></div>
+    <nav class="tabs" role="tablist" aria-label="Workbench sections">
+      <button type="button" role="tab" data-tab="capabilities" id="tab-capabilities" aria-controls="panel-capabilities" aria-selected="true">Capabilities</button>
+      <button type="button" role="tab" data-tab="memory" id="tab-memory" aria-controls="panel-memory" aria-selected="false" tabindex="-1">Soul &amp; memory</button>
+      <button type="button" role="tab" data-tab="activity" id="tab-activity" aria-controls="panel-activity" aria-selected="false" tabindex="-1">Activity</button>
+      <button type="button" role="tab" data-tab="frontier" id="tab-frontier" aria-controls="panel-frontier" aria-selected="false" tabindex="-1">Frontier</button>
+    </nav>
+    <section class="drawer-panel" id="panel-capabilities" role="tabpanel" aria-labelledby="tab-capabilities">
+      <p class="muted small" id="agent-count"></p><ul class="capabilities" id="capabilities"></ul>
+      <p class="empty" id="capabilities-empty">No skill sources discovered yet.</p>
+      <label for="source-file" id="source-label">Copilot skill source</label>
+      <div class="inline-field"><select id="source-file"><option value="">Loading sources</option></select><button id="show-source" type="button">Show source</button></div>
+      <p class="small muted" id="source-help">Your skills are ordinary portable files. Source discovery is not proof that a skill has been exercised.</p>
+      <div id="source-section" hidden><h3 id="source-title"></h3><pre id="source-content" tabindex="0" aria-label="Agent source code"></pre><button type="button" id="keep">Keep this capability</button></div>
+      <details id="source-warnings" hidden><summary>Source inspection notices</summary><div id="source-warning-list"></div></details>
+      <div class="actions"><button type="button" id="refresh-native">Refresh skill sources</button><button type="button" data-intent="import">Import a skill in chat</button></div>
+    </section>
+    <section class="drawer-panel" id="panel-memory" role="tabpanel" aria-labelledby="tab-memory" hidden>
+      <p class="muted small">Both panes use this soul and these explicitly approved notes. Copilot's own Memory is separate.</p>
+      <pre id="soul-content" tabindex="0" aria-label="Shared soul"></pre>
+      <div id="memory-notes"></div><button type="button" id="review-profile">Review in chat</button>
+    </section>
+    <section class="drawer-panel" id="panel-activity" role="tabpanel" aria-labelledby="tab-activity" hidden>
+      <p class="muted small">Real native tool-event metadata. Full requests, approvals, and output remain in Copilot chat.</p>
+      <div class="empty" id="activity-empty">No tool activity yet.</div><div id="activity"></div>
+      <div id="frontier-runs" hidden></div>
+      <div class="actions"><button type="button" id="new-conversation">Clear activity</button><button type="button" id="cancel" hidden>Stop waiting</button></div>
+    </section>
+    <section class="drawer-panel" id="panel-frontier" role="tabpanel" aria-labelledby="tab-frontier" hidden>
+      <p><strong>Optional external engine.</strong> Native Brainstem and Brain Surgeon need no RAPP server.</p>
+      <p class="muted small">Frontier connects a separate engine in the left pane. Brain Surgeon remains in your native Copilot conversation. Nothing is installed or started automatically.</p>
+      <div class="actions"><button type="button" id="enable-frontier">Enable Frontier</button><button type="button" id="return-native" hidden>Return to native Copilot</button></div>
+      <div id="connection" hidden>
+        <form id="connection-form">
+          <label for="base-url">Local Brainstem URL</label>
+          <div class="inline-field"><input id="base-url" type="url" value="http://127.0.0.1:7071" required><button id="connect" type="submit">Connect</button></div>
+        </form>
+        <p id="connection-meta" class="muted small"></p><p id="auth-notice" class="small"></p>
+        <button type="button" id="open-engine">Open Frontier engine</button>
+      </div>
+    </section>
+  </dialog>
+  <dialog id="confirmation" aria-labelledby="confirmation-title">
+    <h2 id="confirmation-title"></h2><p id="confirmation-description"></p><pre id="confirmation-preview"></pre>
+    <div class="actions end"><button type="button" id="confirmation-cancel">Cancel</button><button type="button" class="primary" id="confirmation-accept">Continue</button></div>
+  </dialog>
+  <script>/*__BRAINSTEM_BRIDGE__*/</script>
+  <script>
+    (() => {
+      const host = window.brainstemHost;
+      const $ = (id) => document.getElementById(id);
+      const names = { brainstem: "Brainstem", "brain-surgeon": "Brain Surgeon" };
+      const paneIds = { brainstem: "brainstem", "brain-surgeon": "surgeon" };
+      const nodes = { brainstem: new Map(), "brain-surgeon": new Map() };
+      const hiddenMessages = new Set();
+      const pending = new Set();
+      let current = null;
+      let lastFiles = "";
+      let confirmAction = null;
+      let savedFocus = null;
+      let actionError = null;
+
+      function text(parent, tag, content, className) {
+        const node = document.createElement(tag);
+        node.textContent = content;
+        if (className) node.className = className;
+        parent.append(node);
+        return node;
+      }
+      function showError(error) {
+        const message = error.message || String(error);
+        actionError = message;
+        $("error").textContent = message; $("error").hidden = false;
+        $("drawer-error").textContent = message; $("drawer-error").hidden = !$("drawer").open;
+      }
+      function section(name) {
+        document.querySelectorAll("[data-tab]").forEach((tab) => {
+          const selected = tab.dataset.tab === name;
+          tab.setAttribute("aria-selected", String(selected)); tab.tabIndex = selected ? 0 : -1;
+          $(`panel-${tab.dataset.tab}`).hidden = !selected;
+        });
+      }
+      function openDrawer(name) {
+        section(name);
+        if (!$("drawer").open) { savedFocus = document.activeElement; $("drawer").showModal(); }
+        $(`tab-${name}`).focus();
+      }
+      function closeDrawer() {
+        $("drawer").close();
+        savedFocus?.focus();
+      }
+      function confirm(title, description, preview, label, action) {
+        $("confirmation-title").textContent = title;
+        $("confirmation-description").textContent = description;
+        $("confirmation-preview").textContent = preview; $("confirmation-preview").hidden = !preview;
+        $("confirmation-accept").textContent = label;
+        confirmAction = action; $("confirmation").showModal(); $("confirmation-cancel").focus();
+      }
+      async function act(action, args = {}) {
+        actionError = null;
+        try {
+          const result = await host.request(action, args);
+          return result;
+        } catch (error) {
+          showError(error);
+          return null;
+        }
+      }
+      async function intent(value) {
+        const result = await act("ask", { intent: value });
+        if (result) {
+          if ($("drawer").open) closeDrawer();
+          $("surgeon-queue").textContent = "Sent to this same Copilot conversation.";
+        }
+      }
+      function frontierMessages(state) {
+        return (state.frontier?.runs || []).flatMap((run) => {
+          const entries = [{ id: `frontier-user:${run.id}`, author: "user", role: "brainstem", content: run.prompt }];
+          if (run.response || run.error) entries.push({
+            id: `frontier-result:${run.id}`, author: "assistant", role: "brainstem",
+            content: run.response || run.error, incomplete: run.status === "unknown",
+          });
+          return entries;
+        });
+      }
+      function renderMessages(role, messages) {
+        const prefix = paneIds[role];
+        const scroll = $(`${prefix}-body`), log = $(`${prefix}-messages`);
+        const stick = scroll.scrollHeight - scroll.scrollTop - scroll.clientHeight < 90;
+        const visible = messages.filter((message) => message.role === role && !hiddenMessages.has(message.id));
+        const keep = new Set(visible.map((message) => message.id));
+        for (const [id, node] of nodes[role]) if (!keep.has(id)) { node.remove(); nodes[role].delete(id); }
+        visible.forEach((message, index) => {
+          let node = nodes[role].get(message.id);
+          if (!node) {
+            node = document.createElement("article"); node.className = `message ${message.author}`;
+            const bubble = text(node, "div", "", "bubble");
+            text(bubble, "div", "", "bubble-text");
+            text(node, "div", "", "message-meta");
+            nodes[role].set(message.id, node);
+          }
+          const body = node.querySelector(".bubble-text");
+          if (body.textContent !== message.content) body.textContent = message.content;
+          const note = message.incomplete ? "Incomplete response - see Copilot chat" :
+            message.truncated ? "Display shortened - full text is in Copilot chat" :
+            message.streaming ? "Responding..." : message.author === "user" ? "You" : names[role];
+          node.querySelector(".message-meta").textContent = note;
+          if (log.children[index] !== node) log.insertBefore(node, log.children[index] || null);
+        });
+        $(`${prefix}-welcome`).hidden = visible.length > 0;
+        if (stick) requestAnimationFrame(() => { scroll.scrollTop = scroll.scrollHeight; });
+      }
+      function render(state) {
+        if (!state.conversation || !Array.isArray(state.conversation.messages)) throw new Error("Reload the updated plugin to enable the split chat view.");
+        current = state;
+        const frontier = state.mode === "frontier", engine = state.frontier;
+        const conversation = state.conversation;
+        $("shared-description").textContent = frontier ? "Frontier uses your explicitly connected external engine. Brain Surgeon stays in Copilot." : "Both panes share this Copilot conversation, soul, and memory.";
+        $("shared-strip").textContent = frontier ? "Brain Surgeon stays in Copilot - Frontier is separate" : "One shared chat - no agent-picker switching";
+        renderMessages("brainstem", frontier ? frontierMessages(state) : conversation.messages);
+        renderMessages("brain-surgeon", conversation.messages);
+        $("model-label").textContent = (frontier ? engine?.health?.model : conversation.model) || "Copilot model";
+        $("status-text").textContent = frontier ? (engine?.health ? "Frontier connected" : "Frontier not connected") : "Native Copilot";
+        $("status-dot").className = frontier && !engine?.health ? "dot warning" : "dot";
+        $("brainstem-wait").hidden = frontier ? !engine?.busy : !(conversation.busy && conversation.activeRole === "brainstem");
+        $("surgeon-wait").hidden = !(conversation.busy && conversation.activeRole === "brain-surgeon");
+        const error = actionError || state.error || conversation.error || (frontier && engine?.error);
+        $("error").hidden = !error; $("error").textContent = error || "";
+        $("drawer-error").hidden = !error; $("drawer-error").textContent = error || "";
+        $("history-notice").hidden = !state.historyError && !conversation.truncated;
+        $("history-notice").textContent = state.historyError || (conversation.truncated ? "Showing recent messages. The full shared conversation remains in Copilot chat." : "");
+        $("brainstem-send").disabled = pending.has("brainstem") || (frontier && (!engine?.health || engine.busy || engine.health.status === "unauthenticated" || engine.health.copilot === "no_access"));
+        $("surgeon-send").disabled = pending.has("brain-surgeon");
+        $("brainstem-send").title = frontier ? "Review and run in the optional Frontier engine" : "Send to Brainstem";
+
+        const sources = frontier ? engine?.files || [] : state.capabilities;
+        $("capabilities").replaceChildren();
+        const labels = frontier ? engine?.health?.agents || [] : state.capabilities.map((item) => item.name);
+        labels.forEach((name) => text($("capabilities"), "li", name));
+        $("agent-count").textContent = frontier ? `${labels.length} Frontier capabilities` : `${sources.length} skill sources`;
+        $("capabilities-empty").hidden = sources.length > 0;
+        $("source-label").textContent = frontier ? "Frontier Python agent" : "Copilot skill source";
+        const key = `${state.mode}:${JSON.stringify(sources)}`;
+        if (key !== lastFiles) {
+          const selected = $("source-file").value;
+          $("source-file").replaceChildren();
+          if (!sources.length) text($("source-file"), "option", "No source files").value = "";
+          sources.forEach((file) => { text($("source-file"), "option", file.filename).value = frontier ? file.filename : file.id; });
+          if (sources.some((file) => (frontier ? file.filename : file.id) === selected)) $("source-file").value = selected;
+          lastFiles = key;
+        }
+        const selected = sources.find((file) => (frontier ? file.filename : file.id) === $("source-file").value);
+        $("show-source").disabled = !selected || selected.sourceAvailable === false || Boolean(frontier && engine?.busy);
+        const source = frontier ? engine?.source : state.source;
+        $("source-section").hidden = !source;
+        $("source-title").textContent = source?.filename || "";
+        $("source-content").textContent = source?.content || "";
+        $("source-warnings").hidden = !state.warnings.length;
+        $("source-warning-list").replaceChildren();
+        state.warnings.forEach((warning) => text($("source-warning-list"), "p", warning, "small muted"));
+        $("soul-content").textContent = state.context?.soul || "";
+        $("memory-notes").replaceChildren();
+        const notes = state.context?.notes || [];
+        if (!notes.length) text($("memory-notes"), "p", "No durable notes saved.", "small muted");
+        notes.forEach((note) => text($("memory-notes"), "p", note.text));
+        $("activity").replaceChildren();
+        [...state.activity].reverse().forEach((event) => {
+          const row = text($("activity"), "div", "", "activity-row");
+          text(row, "span", event.tool);
+          text(row, "span", ({ done: "Completed", running: "Running", error: "Failed", unknown: "Unknown" })[event.status]);
+        });
+        $("activity-empty").hidden = state.activity.length > 0;
+        $("frontier-runs").hidden = !frontier;
+        $("frontier-runs").replaceChildren();
+        if (frontier) {
+          if (!engine.runs.length) text($("frontier-runs"), "p", "No Frontier runs yet.", "empty");
+          engine.runs.forEach((run) => {
+            text($("frontier-runs"), "h3", run.prompt);
+            text($("frontier-runs"), "pre", run.agent_logs || run.error || (run.status === "done" ? "No agent tool calls were reported." : "Waiting for the engine."));
+          });
+        }
+        $("new-conversation").textContent = frontier ? "New Frontier conversation" : "Clear activity";
+        $("new-conversation").disabled = Boolean(engine?.busy) || state.activity.some((event) => event.status === "running");
+        $("cancel").hidden = !frontier || engine?.busy !== "running a capability";
+        $("enable-frontier").hidden = frontier; $("return-native").hidden = !frontier; $("connection").hidden = !frontier;
+        if (frontier) {
+          if (document.activeElement !== $("base-url")) $("base-url").value = engine.baseUrl;
+          $("connect").textContent = engine.health ? "Refresh connection" : "Connect";
+          $("connect").disabled = Boolean(engine.busy);
+          $("connection-meta").textContent = engine.health ? `Connected to ${engine.baseUrl}` : "No external engine is connected.";
+          $("auth-notice").textContent = engine.health?.status === "unauthenticated" ? "Sign in through the engine's own UI." :
+            engine.health?.copilot === "pending" ? "Engine running; Copilot authorization is pending its first request." :
+            engine.health?.copilot === "no_access" ? "This account needs Copilot access." : "";
+        }
+      }
+      async function send(role, prompt) {
+        if (!prompt.trim()) return showError(new Error("Enter a message first."));
+        if (pending.has(role)) return showError(new Error("A message is already being queued."));
+        const recipient = window.brainstemRoleForPrompt(prompt) || role;
+        const external = role === "brainstem" && recipient === "brainstem" && current?.mode === "frontier";
+        const perform = async () => {
+          $(`${paneIds[role]}-queue`).textContent = "";
+          pending.add(role); if (current) render(current);
+          const result = await act(external ? "frontier_run" : "native_chat", external ? { prompt } : { role: recipient, prompt });
+          pending.delete(role);
+          if (current) render(current);
+          if (result) {
+            $(role === "brainstem" ? "prompt" : "surgeon-prompt").value = "";
+            $(`${paneIds[role]}-queue`).textContent = external ? "The Frontier result appears above." : "Sent to the same Copilot conversation. Approvals remain in native chat.";
+          }
+        };
+        if (external) confirm("Run in the optional Frontier engine?", "This is a separate RAPP engine. Its agents may act on files or connected accounts and use additional model calls. Native confirmation is still required.", prompt, "Run request", perform);
+        else await perform();
+      }
+
+      document.querySelectorAll("[data-drawer]").forEach((button) => button.addEventListener("click", () => openDrawer(button.dataset.drawer)));
+      document.querySelectorAll("[data-tab]").forEach((button) => {
+        button.addEventListener("click", () => section(button.dataset.tab));
+        button.addEventListener("keydown", (event) => {
+          if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return;
+          event.preventDefault();
+          const tabs = [...document.querySelectorAll("[data-tab]")];
+          const next = tabs[(tabs.indexOf(button) + (event.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length];
+          section(next.dataset.tab); next.focus();
+        });
+      });
+      $("close-drawer").addEventListener("click", closeDrawer);
+      $("theme").addEventListener("click", () => document.documentElement.setAttribute("data-theme", document.documentElement.dataset.theme === "dark" ? "light" : "dark"));
+      $("hide-surgeon").addEventListener("click", () => { $("surgeon-pane").hidden = true; $("workspace").classList.add("surgeon-hidden"); $("show-surgeon").hidden = false; });
+      $("show-surgeon").addEventListener("click", () => { $("surgeon-pane").hidden = false; $("workspace").classList.remove("surgeon-hidden"); $("show-surgeon").hidden = true; $("surgeon-prompt").focus(); });
+      for (const [role, form, field] of [["brainstem", "brainstem-form", "prompt"], ["brain-surgeon", "surgeon-form", "surgeon-prompt"]]) {
+        $(form).addEventListener("submit", (event) => { event.preventDefault(); send(role, $(field).value); });
+        $(field).addEventListener("keydown", (event) => {
+          if (event.key === "Enter" && !event.shiftKey && !event.isComposing) { event.preventDefault(); $(form).requestSubmit(); }
+        });
+      }
+      document.querySelectorAll("[data-prompt]").forEach((button) => button.addEventListener("click", () => send("brainstem", button.dataset.prompt)));
+      document.querySelectorAll("[data-intent]").forEach((button) => button.addEventListener("click", () => intent(button.dataset.intent)));
+      $("setup").addEventListener("click", () => intent("setup"));
+      $("teach").addEventListener("click", () => intent("teach"));
+      $("review-profile").addEventListener("click", () => intent("soul"));
+      $("refresh-native").addEventListener("click", () => act("refresh"));
+      $("refresh-chat").addEventListener("click", () => act("refresh"));
+      $("source-file").addEventListener("change", () => { if (current) render(current); });
+      $("show-source").addEventListener("click", () => act("source", current.mode === "frontier" ? { filename: $("source-file").value } : { id: $("source-file").value }));
+      $("keep").addEventListener("click", async () => {
+        const result = await act("ask", { intent: "keep", filename: (current.mode === "frontier" ? current.frontier.source : current.source)?.filename });
+        if (result) closeDrawer();
+      });
+      $("clear-view").addEventListener("click", () => confirm("Clear this Brainstem view?", "This only hides the currently displayed left-pane messages. It does not delete or reset the shared Copilot conversation, agent files, or memory.", "", "Clear view", () => {
+        const messages = current.mode === "frontier" ? frontierMessages(current) : current.conversation.messages;
+        messages.filter((message) => message.role === "brainstem").forEach((message) => hiddenMessages.add(message.id));
+        render(current);
+      }));
+      $("new-conversation").addEventListener("click", () => confirm(current.mode === "frontier" ? "Start a new Frontier conversation?" : "Clear activity?",
+        current.mode === "frontier" ? "Reset only the external engine's workbench history. Your native Copilot chat, soul, and memory are unchanged." : "Clear only the workbench tool-event metadata, not either role's conversation.",
+        "", current.mode === "frontier" ? "Start new" : "Clear activity", () => act("new")));
+      $("enable-frontier").addEventListener("click", () => confirm("Enable optional Frontier?", "Native Copilot needs no RAPP server. This explicitly enables a separate engine in the left pane; it does not install or start one.", "", "Enable Frontier", () => act("mode", { mode: "frontier" })));
+      $("return-native").addEventListener("click", () => act("mode", { mode: "copilot" }));
+      $("connection-form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const connect = () => act("connect", { baseUrl: $("base-url").value });
+        if (current.frontier.runs.length && $("base-url").value.replace(/\/$/, "") !== current.frontier.baseUrl) confirm("Change Frontier engine?", "This starts a new external-engine conversation, not a new native Copilot chat.", "", "Connect", connect);
+        else connect();
+      });
+      $("open-engine").addEventListener("click", () => act("open"));
+      $("cancel").addEventListener("click", () => act("cancel"));
+      $("confirmation-cancel").addEventListener("click", () => { confirmAction = null; $("confirmation").close(); });
+      $("confirmation").addEventListener("cancel", () => { confirmAction = null; });
+      $("confirmation-accept").addEventListener("click", async () => { const action = confirmAction; confirmAction = null; $("confirmation").close(); if (action) await action(); });
+      if (!host) return showError(new Error("Open this Canvas through Brainstem Copilot or its documented preview."));
+      $("preview-notice").hidden = host.mode !== "preview";
+      host.subscribe(render);
+      host.request("state").then(render).catch(showError);
+    })();
+  </script>
+</body>
+</html>

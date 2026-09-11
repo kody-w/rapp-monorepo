@@ -1,0 +1,13 @@
+{
+  "name": "brainstem-copilot",
+  "version": "0.3.0",
+  "description": "A split chat Canvas: Brainstem on the left, Brain Surgeon on the right, one native Copilot conversation underneath. Real messages, shared context and capabilities, optional Frontier, no Brainstem server required.",
+  "author": {
+    "name": "RAPP Brainstem contributors"
+  },
+  "repository": "https://github.com/kody-w/brainstem-copilot",
+  "license": "MIT",
+  "agents": "agents",
+  "skills": "skills",
+  "extensions": "extensions"
+}

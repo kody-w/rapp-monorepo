@@ -1,0 +1,17 @@
+{
+  "name": "brainstem-copilot",
+  "owner": {
+    "name": "kody-w"
+  },
+  "metadata": {
+    "description": "The native Copilot Brainstem experience, with optional Frontier engine support."
+  },
+  "plugins": [
+    {
+      "name": "brainstem-copilot",
+      "description": "Brainstem and Brain Surgeon side by side in a split chat Canvas, sharing one native Copilot conversation. No Brainstem server required.",
+      "version": "0.3.0",
+      "source": "./"
+    }
+  ]
+}
