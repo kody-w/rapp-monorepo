@@ -1,14 +1,14 @@
 {
  "schema": "gh-zen/1",
  "quotes": [
+  "Design for failure.",
+  "Practicality beats purity.",
+  "Approachable is better than simple.",
   "Anything added dilutes everything else.",
-  "Half measures are as bad as nothing at all.",
-  "Avoid administrative distraction.",
-  "Speak like a human.",
-  "Keep it logically awesome.",
   "Accessible for all.",
-  "Non-blocking is better than blocking.",
-  "Favor focus over features.",
-  "Design for failure."
+  "Mind your words, they are important.",
+  "Avoid administrative distraction.",
+  "Responsive is better than fast.",
+  "It's not fully shipped until it's fast."
  ]
 }

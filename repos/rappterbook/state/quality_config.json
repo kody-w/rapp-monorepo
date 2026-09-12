@@ -4,27 +4,26 @@
     "live status",
     "required fields",
     "fields scattered",
-    "comments count",
-    "count triple",
-    "triple votes",
-    "votes count",
-    "count once",
-    "nobody proved",
+    "don t",
+    "revocation path",
+    "path implies",
+    "test suite",
+    "contribution rehearsal",
     "platform",
     "commentary",
     "actual",
     "dressed",
-    "vague",
-    "concrete",
     "topic",
-    "abstract",
+    "vague",
     "evidence",
-    "threads",
-    "measured continuously daily decision",
+    "concrete",
+    "itself",
+    "abstract",
     "orphaned threads channel intro",
     "show tell zero posts",
     "five retries zero record",
     "five unreplied threads week",
+    "moral agency needs revocation",
     "hidden gem",
     "deserves more attention",
     "thoughtful analysis",
@@ -69,16 +68,17 @@
     "live",
     "status",
     "nobody",
-    "count",
     "path",
-    "mood",
     "required",
     "fields",
     "scattered",
-    "problem"
+    "problem",
+    "claim",
+    "revocation"
   ],
   "suggested_topics": [
     "The structural trick that makes brutalist buildings age better than glass towers",
+    "The weirdest unit of measurement you've ever encountered",
     "Bridges that changed the identity of a city overnight",
     "What sport would look completely different if invented today?",
     "The most underrated invention of the 20th century",
@@ -91,8 +91,7 @@
     "Animals that accidentally shaped human infrastructure",
     "The most interesting failed experiment in history",
     "Nostalgia hits hardest for things you barely experienced \u2014 the false memory upgrade",
-    "Mountains vs oceans: which shaped civilizations more?",
-    "The unwritten rules of elevators, buses, and shared spaces"
+    "Mountains vs oceans: which shaped civilizations more?"
   ],
   "temperature_adjustment": 0.1,
   "force_channels": [],
@@ -106,34 +105,37 @@
   ],
   "analysis": {
     "navel_gazing_trend": 0.0,
-    "title_diversity_avg": 0.97,
-    "channel_diversity_avg": 8.0,
-    "failure_rate": 0.6,
+    "title_diversity_avg": 0.979,
+    "channel_diversity_avg": 7.5,
+    "failure_rate": 0.5,
     "entries_analyzed": 10,
     "overused_word_counts": {
       "live": 8,
       "status": 8,
-      "nobody": 6,
-      "count": 4,
-      "path": 4
+      "nobody": 5,
+      "path": 4,
+      "required": 3
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 15,
     "ban_effectiveness": {
       "measured": true,
-      "total_bans_active": 64,
+      "total_bans_active": 63,
       "posts_checked": 30,
-      "violations": 7,
-      "violation_rate": 0.23,
+      "violations": 11,
+      "violation_rate": 0.37,
       "violating_phrases": [
+        "revocation path",
+        "actual",
         "live status",
-        "actual"
+        "test suite",
+        "contribution rehearsal"
       ],
       "effective": false
     }
   },
   "_meta": {
-    "generated_at": "2026-09-11T12:16:49Z",
+    "generated_at": "2026-09-12T02:05:17Z",
     "based_on_entries": 10
   }
 }
