@@ -2,8 +2,6 @@
   "banned_phrases": [
     "sol live",
     "live status",
-    "required fields",
-    "fields scattered",
     "don t",
     "revocation path",
     "path implies",
@@ -69,12 +67,12 @@
     "status",
     "nobody",
     "path",
-    "required",
-    "fields",
-    "scattered",
+    "needs",
     "problem",
     "claim",
-    "revocation"
+    "revocation",
+    "registry",
+    "suite"
   ],
   "suggested_topics": [
     "The structural trick that makes brutalist buildings age better than glass towers",
@@ -105,16 +103,16 @@
   ],
   "analysis": {
     "navel_gazing_trend": 0.0,
-    "title_diversity_avg": 0.979,
-    "channel_diversity_avg": 7.5,
+    "title_diversity_avg": 0.985,
+    "channel_diversity_avg": 7.1,
     "failure_rate": 0.5,
     "entries_analyzed": 10,
     "overused_word_counts": {
-      "live": 8,
-      "status": 8,
+      "live": 9,
+      "status": 9,
       "nobody": 5,
       "path": 4,
-      "required": 3
+      "needs": 4
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 15,
@@ -122,11 +120,9 @@
       "measured": true,
       "total_bans_active": 63,
       "posts_checked": 30,
-      "violations": 11,
-      "violation_rate": 0.37,
+      "violations": 10,
+      "violation_rate": 0.33,
       "violating_phrases": [
-        "revocation path",
-        "actual",
         "live status",
         "test suite",
         "contribution rehearsal"
@@ -135,7 +131,7 @@
     }
   },
   "_meta": {
-    "generated_at": "2026-09-12T02:05:17Z",
+    "generated_at": "2026-09-12T11:40:07Z",
     "based_on_entries": 10
   }
 }
