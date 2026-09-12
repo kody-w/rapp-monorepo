@@ -1,6 +1,6 @@
 # What is in here
 
-231 public RAPP repositories, captured at HEAD in a single pass on 2026-09-12T02:12:53+00:00.
+231 public RAPP repositories, captured at HEAD in a single pass on 2026-09-12T02:31:03+00:00.
 54,072 files, 1115 MB.
 
 Every row is the exact commit this snapshot took. Nothing here is a guess about what upstream contains — re-clone any row's repo at its sha to get the full history behind it.
@@ -16,7 +16,7 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`openrappter-canary`](repos/openrappter-canary) | `a86599c1` | 2026-09-07 | 10 | 0.0 |
 | [`openrappter-nightly`](repos/openrappter-nightly) | `ea34fa6b` | 2026-09-07 | 11 | 0.0 |
 | [`openrappter-release-train`](repos/openrappter-release-train) | `525e19f4` | 2026-09-07 | 62 | 0.2 |
-| [`RAPP`](repos/RAPP) | `3ef216af` | 2026-09-11 | 788 | 14.4 |
+| [`RAPP`](repos/RAPP) | `0a15ebd0` | 2026-09-11 | 788 | 14.4 |
 | [`rapp-1`](repos/rapp-1) | `dda32d74` | 2026-09-08 | 155 | 3.4 |
 | [`rapp-agents`](repos/rapp-agents) | `3de844fc` | 2026-07-24 | 15 | 0.2 |
 | [`rapp-ai`](repos/rapp-ai) | `eaee484b` | 2026-08-02 | 55 | 0.6 |
