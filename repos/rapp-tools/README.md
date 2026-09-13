@@ -1,6 +1,50 @@
 # RAPP Tools
 
-One catalogue and one command for the local-first RAPP tools.
+Discovery and build infrastructure for four independent local-first macOS apps.
+
+## Native application downloads
+
+| Application | Native release |
+|---|---|
+| RAPP Voice | [1.1.0 - Apple silicon and Intel](https://github.com/kody-w/rapp-voice/releases/tag/v1.1.0) |
+| RAPP Crispy | [1.5.0 - Apple silicon and Intel](https://github.com/kody-w/rapp-crispy/releases/tag/v1.5.0) |
+| RAPP Rewind | [1.2.0 - Apple silicon and Intel](https://github.com/kody-w/rapp-rewind/releases/tag/v1.2.0) |
+| RAPP Shot | [1.3.0 - Apple silicon and Intel](https://github.com/kody-w/rapp-shot/releases/tag/v1.3.0) |
+
+Requires macOS 14 or newer. Unzip the architecture-specific download in Finder
+and move the app to Applications. Released apps are Developer ID-signed,
+notarized and stapled; each release provides immutable verification reports.
+No Brainstem, Homebrew, Hammerspoon, Python or terminal is required for normal
+native use. First-run setup controls speech-model downloads and OS permissions;
+optional cloud processing is disabled until explicit consent.
+
+The public [RAPP Store](https://kody-w.github.io/RAPP_Store/) is the app catalog.
+RAPP Tools is shared infrastructure, **not a fifth application**. Native release
+metadata lives in each catalog entry's `native_release`; the older top-level
+versions, engine requirements and egg hashes describe the retained CLI/twin
+compatibility path, not the native downloads.
+
+## Native macOS build support
+
+The root Swift package, `RAPPDesktopSupport`, is shared build-time source for
+the four independent macOS applications. It provides bundled-helper discovery,
+cancellable process execution, checksum-verified model installation, and local
+whisper.cpp transcription. It is not a fifth application or a required
+separate installation.
+
+Run its tests with `swift test -j 2`. Native dependencies are pinned under
+`native/dependencies/`. Speech models download only after the application
+asks the user; the approved model files have immutable source revisions,
+declared sizes, SHA-256 values, and license links. Captured audio is never
+uploaded by this package.
+
+Consumer apps resolve executables inside their signed application bundle.
+`RAPP_RUNTIME_BIN` is an explicit development/test override, not a consumer
+Homebrew or shell-PATH requirement. Native release availability must be
+established from verified published artifacts, not inferred from a passing
+Swift build or the historical cartridges below.
+
+## Historical CLI and twin integration
 
 Every tool here is a **hatchable rapplication**: it boots into its own brainstem
 on its own port carrying only its own agent, and is driven **headlessly** over the
@@ -120,7 +164,7 @@ do not crowd one tool list.
 Each is also a uniform neighbour on the wire — the neighbourhood-protocol
 twin-chat adapter reaches every one of them unchanged.
 
-## Install
+## Legacy CLI installation (not required for native apps)
 
 ```bash
 git clone https://github.com/kody-w/rapp-tools.git
@@ -142,10 +186,13 @@ port is unique.
 ## Tests
 
 ```bash
+./tools/dryrun.sh --safe                # native catalog only: no services, capture, private repos
 ./tools/dryrun.sh
 ```
 
-9 assertions: catalogue integrity, unique ports, every URL live, argument and
+The unflagged command is the historical integration suite and may contact
+configured services/private repositories; it is not needed for native app
+installation. Its assertions cover catalogue integrity, unique ports, every URL live, argument and
 action validation, a real headless call against whatever is hatched, and that
 nothing has been vendored.
 

@@ -4,7 +4,7 @@
   "description": "Static catalog API for cataloged rapplications. PokeAPI-style: predictable JSON URLs hosted via raw.githubusercontent.com, no backend. Each rapplication is browsable as an organism \u2014 sprite, lineage, stats, downloadable .egg cartridge. Updated by pushing to main; the rebuild is a static script (scripts/build_pokedex_api.py).",
   "version": "1.0.0",
   "generated_at": "2026-08-24T20:31:37Z",
-  "count": 22,
+  "count": 26,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/api/v1/index.json",
   "rapplications": [
     {
@@ -292,6 +292,263 @@
       "sprite": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/api/v1/sprite/wildhaven_ceo.svg",
       "egg": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/api/v1/egg/wildhaven_ceo.egg",
       "install_one_liner": null
+    },
+    {
+      "id": "rapp_voice",
+      "name": "RAPP Voice",
+      "kind": "rapplication",
+      "publisher": "@kody-w",
+      "category": "productivity",
+      "version": "1.1.0",
+      "has_skin": true,
+      "distribution": "desktop",
+      "desktop": {
+        "schema": "rapp-desktop/1.0",
+        "platform": "macos",
+        "minimum_os": "14.0",
+        "bundle_id": "io.rapp.voice",
+        "source": {
+          "repo": "kody-w/rapp-voice",
+          "commit_sha": "45e5529509c04b2b346e27b8b8a82c59cb5ec32d"
+        },
+        "release_tag": "v1.1.0",
+        "artifacts": [
+          {
+            "arch": "arm64",
+            "bytes": 1467143,
+            "evidence": {
+              "bytes": 2715,
+              "sha256": "ad6dc775592c074cc52b1df95835e60d18e6ca4122fbdf9337230e02195e271c",
+              "url": "https://github.com/kody-w/rapp-voice/releases/download/v1.1.0/rapp_voice-1.1.0-arm64.zip.evidence.ad6dc775592c074cc52b1df95835e60d18e6ca4122fbdf9337230e02195e271c.json"
+            },
+            "format": "zip",
+            "sha256": "2b32c75c7530b51e58666c55eae5b0bddd3dd134f286a7ea01fc38fd164ed741",
+            "url": "https://github.com/kody-w/rapp-voice/releases/download/v1.1.0/rapp_voice-1.1.0-arm64.zip"
+          },
+          {
+            "arch": "x86_64",
+            "bytes": 1684556,
+            "evidence": {
+              "bytes": 2719,
+              "sha256": "a988b9a0de46b5e45a92f980b116ea387785442c600a92561bbe004d5392ddcf",
+              "url": "https://github.com/kody-w/rapp-voice/releases/download/v1.1.0/rapp_voice-1.1.0-x86_64.zip.evidence.a988b9a0de46b5e45a92f980b116ea387785442c600a92561bbe004d5392ddcf.json"
+            },
+            "format": "zip",
+            "sha256": "e90ef0da386c9d4b1017bbce8179d112b4c6be222688cad1651bc955b432d2e0",
+            "url": "https://github.com/kody-w/rapp-voice/releases/download/v1.1.0/rapp_voice-1.1.0-x86_64.zip"
+          }
+        ],
+        "prerequisites": [
+          "macOS 14.0 or later; choose the arm64 ZIP for Apple Silicon or the x86_64 ZIP for an Intel Mac.",
+          "Microphone permission is required for recording that you explicitly start.",
+          "Internet access is needed to download a verified Base English or Small English speech model in Setup. Model weights are not included in the application ZIP; recognition works offline afterward.",
+          "Accessibility enables automatic cross-app input; Accessibility plus Input Monitoring enable the global shortcut. App buttons and Copy/manual-paste remain available without those grants.",
+          "No Hammerspoon, Homebrew, ffmpeg, localhost speech server, account, or API key is required for native local dictation. Optional polish needs a separately reviewed executable hook and explicit provider consent."
+        ],
+        "privacy": "Capture starts only when you hold the shortcut or press Start. The app records through its own microphone permission, transcribes audio locally with bundled whisper.cpp, and deletes its audio work files after completion, errors, or cancellation. Native diagnostics retain counts and status, not transcripts. Settings, verified models, and work files use ~/Library/Application Support/io.rapp.voice; the existing ~/.rappvoice dictionary and legacy state are preserved. Downloads fetch model weights, not voice data. Secure Input, protected or changed fields, and missing permissions prevent automatic insertion and offer manual copy instead. Optional polish is off by default; only after reviewing the executable and named recipient and explicitly consenting can a triggered transcript be passed to that hook, which may send text to a provider such as Claude/Anthropic and incur charges. Audio is not passed to the polish hook. The secondary twin chat may separately use its host's LLM.",
+        "setup": [
+          "Download the ZIP matching your Mac, expand it in Finder, and drag the extracted RAPPVoice.app into Applications.",
+          "Launch RAPP Voice from Applications and open Setup. Launching the app or granting a permission does not start a recording.",
+          "Enable Microphone when ready, choose Base English or Small English, and use Download / retry. Wait for model size and SHA-256 verification and save the selection.",
+          "For shortcuts across other apps and automatic insertion, grant Accessibility and Input Monitoring to RAPP Voice in System Settings, then refresh grants or reopen the app if macOS requests it.",
+          "Focus a normal text field, hold Right Command, speak, and release. Double-tap for hands-free recording; use Stop or Cancel as needed. Without suitable permissions or focus, review the transcript and choose Copy/manual-paste.",
+          "Change the shortcut, dictionary, or insertion method in the GUI. Keep optional polish disabled unless you have reviewed its hook and recipient and explicitly consented."
+        ],
+        "agent_integration": "The Python singleton and existing twin/UI are secondary integration, not a native installer. In a compatible RAPP/BasicAgent host they discover the installed RAPPVoice.app or the explicit RAPPVOICE_NATIVE_CLI path and send typed JSON to RAPPVoice --action. The existing doctor, dictionary, add_term, stats, and process actions inspect readiness, manage vocabulary, summarize status-only logs, or clean supplied text; none can record, inject input, or invoke polish. A .py drop does not install the app, its speech model, or macOS permissions. When no native executable is present, the existing Hammerspoon/localhost backend remains a legacy fallback; native failures are not replayed through that fallback."
+      },
+      "url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/api/v1/rapplication/rapp_voice.json"
+    },
+    {
+      "id": "rapp_rewind",
+      "name": "RAPP Rewind",
+      "kind": "rapplication",
+      "publisher": "@kody-w",
+      "category": "productivity",
+      "version": "1.2.0",
+      "has_skin": true,
+      "distribution": "desktop",
+      "desktop": {
+        "schema": "rapp-desktop/1.0",
+        "platform": "macos",
+        "minimum_os": "14.0",
+        "bundle_id": "io.rapp.rewind",
+        "source": {
+          "repo": "kody-w/rapp-rewind",
+          "commit_sha": "34361996042c0548065dbd7e3ba5456b6cfffaee"
+        },
+        "release_tag": "v1.2.0",
+        "artifacts": [
+          {
+            "arch": "arm64",
+            "bytes": 442745,
+            "evidence": {
+              "bytes": 2625,
+              "sha256": "050cf6198819cc141db10caea09c935039f8ac2226c174fecabb08c92fa21c2d",
+              "url": "https://github.com/kody-w/rapp-rewind/releases/download/v1.2.0/rapp_rewind-1.2.0-arm64.zip.evidence.050cf6198819cc141db10caea09c935039f8ac2226c174fecabb08c92fa21c2d.json"
+            },
+            "format": "zip",
+            "sha256": "04367fa6c12a709c90562262d52f249268b8144e0e2db785e2a88c2d13447128",
+            "url": "https://github.com/kody-w/rapp-rewind/releases/download/v1.2.0/rapp_rewind-1.2.0-arm64.zip"
+          },
+          {
+            "arch": "x86_64",
+            "bytes": 470073,
+            "evidence": {
+              "bytes": 2629,
+              "sha256": "e4dcebb30d544f67a49587921574a905b2229e6685f27c546749e343f04d5b5c",
+              "url": "https://github.com/kody-w/rapp-rewind/releases/download/v1.2.0/rapp_rewind-1.2.0-x86_64.zip.evidence.e4dcebb30d544f67a49587921574a905b2229e6685f27c546749e343f04d5b5c.json"
+            },
+            "format": "zip",
+            "sha256": "124d4e9d30b7f116a88fe0997a64a52e17dbae961dbf7a4937c1a39bf0aa1e96",
+            "url": "https://github.com/kody-w/rapp-rewind/releases/download/v1.2.0/rapp_rewind-1.2.0-x86_64.zip"
+          }
+        ],
+        "prerequisites": [
+          "macOS 14.0 or later; choose arm64 for Apple silicon or x86_64 for Intel.",
+          "Screen Recording permission must be granted to RAPP Rewind itself after pressing Start; Terminal and Python grants are not inherited.",
+          "No additional tools, models, cloud account, Python, ffmpeg, Homebrew, microphone permission, or Accessibility permission are required for the native app.",
+          "Optional singleton/twin integration requires a Python-compatible RAPP host plus the separately installed native app, or an explicitly selected compatibility rewind CLI with its own dependencies."
+        ],
+        "privacy": "Capture is opt-in: RAPP Rewind requests its own Screen Recording grant only after Start and never records automatically at launch or login. ScreenCaptureKit capture, Vision OCR, fingerprints, SQLite indexing, and search stay on this Mac; no audio is captured and this processing path makes no network upload. Images, OCR text, and the index remain in ~/.rapprewind or an explicit REWIND_HOME. Visible content can include passwords and private messages; configure and save bundle-ID/window-title exclusions or pause before sensitive work. Rewind does not encrypt its files; protect the account and use FileVault. Image retention is off until enabled, and pruning keeps indexed text. Background operation and idle-at-login launch are separate explicit opt-ins. The optional RAPP host conversation may forward text returned by its agent to that host's LLM; use the native app or direct CLI when that conversation is not appropriate.",
+        "setup": [
+          "Download the versioned ZIP matching your Mac: arm64 for Apple silicon or x86_64 for Intel.",
+          "Double-click the ZIP in Finder to extract RAPPRewind.app, then drag the application to Applications.",
+          "Launch RAPP Rewind from Applications. No Terminal installer, Python setup, signing credentials, or security bypass is required.",
+          "Review Privacy & Settings, add and save exclusions if needed, then press Start to request Screen Recording for RAPP Rewind. If macOS requests a restart, quit and reopen the app before pressing Start again.",
+          "Use the visible Pause/Stop controls to stop collection. Search or select moments in the native timeline. Preview and confirm image pruning yourself; indexed text remains searchable.",
+          "Open at Login opens idle. Keep running when the last window closes is a separate setting; both options are off by default and require explicit opt-in."
+        ],
+        "agent_integration": "The native application is the primary download. The Python singleton/twin and web UI are secondary allowlisted integration for an existing RAPP host; dropping a .py file into a host does not install the macOS application. Install the native app separately. The adapter discovers it in Applications or through REWIND_NATIVE_APP and requires a successful Gatekeeper assessment; REWIND_CLI explicitly selects the legacy CLI instead. Native capture only reveals Start/Pause/Stop controls, doctor takes no screenshot, prune is always a preview, and bench uses generated pixels. The host's LLM conversation may receive agent search output. Existing twin port and protocol behavior are unchanged."
+      },
+      "url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/api/v1/rapplication/rapp_rewind.json"
+    },
+    {
+      "id": "rapp_crispy",
+      "name": "RAPP Crispy",
+      "kind": "rapplication",
+      "publisher": "@kody-w",
+      "category": "productivity",
+      "version": "1.5.0",
+      "has_skin": true,
+      "distribution": "desktop",
+      "desktop": {
+        "schema": "rapp-desktop/1.0",
+        "platform": "macos",
+        "minimum_os": "14.0",
+        "bundle_id": "io.rapp.crispy",
+        "source": {
+          "repo": "kody-w/rapp-crispy",
+          "commit_sha": "656537dacb605d0298a9552ffc882936cec41cc3"
+        },
+        "release_tag": "v1.5.0",
+        "artifacts": [
+          {
+            "arch": "arm64",
+            "bytes": 1678209,
+            "evidence": {
+              "bytes": 2991,
+              "sha256": "2fcc4bd0806156f06cdfaf2bbe485753a73840e5befac564415459074b3ab7a9",
+              "url": "https://github.com/kody-w/rapp-crispy/releases/download/v1.5.0/rapp_crispy-1.5.0-arm64.zip.evidence.2fcc4bd0806156f06cdfaf2bbe485753a73840e5befac564415459074b3ab7a9.json"
+            },
+            "format": "zip",
+            "sha256": "1462693b958fa170f178d01a3e531b8eaee544f6dd7813df46ab9d3698ea5e35",
+            "url": "https://github.com/kody-w/rapp-crispy/releases/download/v1.5.0/rapp_crispy-1.5.0-arm64.zip"
+          },
+          {
+            "arch": "x86_64",
+            "bytes": 1908949,
+            "evidence": {
+              "bytes": 2995,
+              "sha256": "142cbda70a2fb49bb05fb97cc30353e6b5de805ecc9eac8cc1121a3b9075941d",
+              "url": "https://github.com/kody-w/rapp-crispy/releases/download/v1.5.0/rapp_crispy-1.5.0-x86_64.zip.evidence.142cbda70a2fb49bb05fb97cc30353e6b5de805ecc9eac8cc1121a3b9075941d.json"
+            },
+            "format": "zip",
+            "sha256": "80b4650ad805ac9735fc48a6e4163ea50b6e684266e81b1c120967faf3cd7dfe",
+            "url": "https://github.com/kody-w/rapp-crispy/releases/download/v1.5.0/rapp_crispy-1.5.0-x86_64.zip"
+          }
+        ],
+        "prerequisites": [
+          "macOS 14.0 or later. Choose arm64 for Apple Silicon or x86_64 for Intel. The native app includes the local CPU whisper-cli runtime; no Homebrew, Terminal, Python or local ASR server is required for native capture/transcription.",
+          "Grant Microphone access to RAPP Crispy only when starting a recording. Screen Recording access is optional and requested only when explicitly selecting a display or window. Obtain participants' permission before recording.",
+          "Select and download a verified Base English or Small English speech model in Settings. Internet access is needed for that model-data download; meeting content is not uploaded to the model host.",
+          "Native enhancement is Apple AVFoundation voice processing, not DeepFilterNet or RNNoise. Optional advanced paths require a separately selected trusted deep-filter 0.5.6 executable or ffmpeg with arnndn and a .rnnn model; those components are not bundled.",
+          "A compatible existing loopback device is optional only for separately configured legacy crispy live routing. The native app neither installs a driver nor implements live virtual-microphone routing or system/far-end audio capture.",
+          "A notes-provider executable is optional. Missing provider or consent does not block local audio/transcription; cloud-capable providers receive transcripts only after explicit approval and a notes request."
+        ],
+        "privacy": "Nothing records on launch. The app captures only the selected microphone after Record; stop/cancel and active state are visible. Optional explicitly selected screen/window capture is silent video, not remote-participant or system audio. Apple voice processing and Whisper transcription run locally. Existing meetings, audio and transcripts remain under ~/.rappcrispy/meetings; interrupted jobs preserve completed files. Model downloads fetch checksum-verified public model data without uploading meeting content. Notes are disabled until a provider and destination are reviewed, approved and requested; the example Claude hook sends authorized transcripts to Anthropic. Consent is bound to the provider configuration/executable and can be revoked, but already transmitted content cannot be recalled. A user-selected local hook is not a network sandbox. Native Apple processing is not labeled RNNoise/DeepFilterNet, and legacy benchmark results are not attributed to it. Publisher release reports bind the downloadable bytes and app checks; they are not independent Apple certification or RAPP/1 acceptance by the Store.",
+        "setup": [
+          "Download the architecture-specific ZIP from the v1.5.0 release. Double-click it in Finder and drag RAPPCrispy.app to Applications.",
+          "Launch RAPP Crispy from Applications and let normal macOS/Gatekeeper checks run; do not bypass system protections. Nothing captures automatically.",
+          "In Settings, choose a speech model and click Download verified model. Recording can proceed before a model is available; saved audio can be transcribed later.",
+          "Choose the microphone and enhancement mode, then click Record. Approve the app's Microphone permission when prompted; use Stop & process or Cancel job to finish.",
+          "For optional screen video, enable it and explicitly choose the display/window before recording. This does not add system or far-end audio.",
+          "Browse Meetings to play audio and read actual transcripts/notes. Configure and approve a notes provider only if desired, then explicitly request notes."
+        ],
+        "agent_integration": "The Python singleton and local UI are secondary integrations, not native installers. Installing a .py file does not install RAPPCrispy.app, Whisper or macOS permissions. With a native app installed, record/run actions prepare visible controls and require the user to press Record; doctor/live_status use read-only native diagnostics. File-based list/read and legacy commands remain available. CRISPY_BACKEND=legacy explicitly selects old headless capture, which needs its own ffmpeg, models and local whisper server. DeepFilterNet/RNNoise and loopback paths remain optional, unbundled legacy/developer dependencies. Native notes approval is separate from legacy CRISPY_NOTES_CONSENT=1; neither path enables cloud notes by default. The immutable native-build source differs from this later metadata/integration commit; federation must pin integration URLs to the published metadata commit. Retired eggs are not part of the native install."
+      },
+      "url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/api/v1/rapplication/rapp_crispy.json"
+    },
+    {
+      "id": "rapp_shot",
+      "name": "RAPP Shot",
+      "kind": "rapplication",
+      "publisher": "@kody-w",
+      "category": "productivity",
+      "version": "1.3.0",
+      "has_skin": true,
+      "distribution": "desktop",
+      "desktop": {
+        "schema": "rapp-desktop/1.0",
+        "platform": "macos",
+        "minimum_os": "14.0",
+        "bundle_id": "io.rapp.shot",
+        "source": {
+          "repo": "kody-w/rapp-shot",
+          "commit_sha": "6f354f463b9d59ae308d7ab7b40f3f0704685873"
+        },
+        "release_tag": "v1.3.0",
+        "artifacts": [
+          {
+            "arch": "arm64",
+            "bytes": 421141,
+            "evidence": {
+              "bytes": 2587,
+              "sha256": "3400b5d80cb27ef59cd42ccb1045a06c0d3213eb9cb49ddb20b7fbd2d5be17ff",
+              "url": "https://github.com/kody-w/rapp-shot/releases/download/v1.3.0/rapp_shot-1.3.0-arm64.zip.evidence.3400b5d80cb27ef59cd42ccb1045a06c0d3213eb9cb49ddb20b7fbd2d5be17ff.json"
+            },
+            "format": "zip",
+            "sha256": "2c745e86a615699f8c0d6c543f524556c8c59aa6af0606020647e47fabec3e76",
+            "url": "https://github.com/kody-w/rapp-shot/releases/download/v1.3.0/rapp_shot-1.3.0-arm64.zip"
+          },
+          {
+            "arch": "x86_64",
+            "bytes": 450992,
+            "evidence": {
+              "bytes": 2591,
+              "sha256": "de1d205e5fd958129e007c2b2e621cc9353ab07761ca37e3455a36402d59b865",
+              "url": "https://github.com/kody-w/rapp-shot/releases/download/v1.3.0/rapp_shot-1.3.0-x86_64.zip.evidence.de1d205e5fd958129e007c2b2e621cc9353ab07761ca37e3455a36402d59b865.json"
+            },
+            "format": "zip",
+            "sha256": "226ef8bd164bb043383c74ba5122b782c02fe29a700cb3de377749591a223e3d",
+            "url": "https://github.com/kody-w/rapp-shot/releases/download/v1.3.0/rapp_shot-1.3.0-x86_64.zip"
+          }
+        ],
+        "prerequisites": [
+          "macOS 14.0 or later. Choose arm64 for Apple Silicon or x86_64 for Intel.",
+          "Screen Recording permission for the RAPP Shot application is needed only for requested display, window or region capture. Importing an existing image needs no screen permission.",
+          "The native app needs no compiler, Python, Homebrew, Hammerspoon, downloaded model, helper server or account. Optional Python integration requires a compatible RAPP host and an installed native app or separately installed legacy shot CLI."
+        ],
+        "privacy": "Nothing is captured on launch. Capture begins only after a user action. ScreenCaptureKit capture, Vision OCR, annotation, crop and redaction run on this Mac; RAPP Shot does not upload screenshots or OCR text and requests no microphone, camera or Accessibility permission. Editable captures remain in memory until export; the default save location is ~/Library/Application Support/io.rapp.shot/Exports/, or a folder the user chooses. Existing images and ~/.rappshot history/rules are not overwritten. Copy and export use the reviewed flattened preview; automatic redaction failures never fall back to copying the original. OCR is per line and English-tuned credential labels can miss split, obscured or unrecognized secrets, while long digests can be over-redacted. Re-reading detected text is not an all-clear: inspect every pixel. Automatic detection can be explicitly disabled for an unverified manual-edit preview. Clipboard use or a user-selected synced folder may be governed by the user's macOS settings.",
+        "setup": [
+          "Download the architecture-specific ZIP from the v1.3.0 GitHub release; this is the native app, not the Python integration bundle.",
+          "In Finder, double-click the ZIP to expand it, then drag RAPPShot.app to Applications (or ~/Applications). Keep existing screenshots, rules and settings; no CLI installer is needed.",
+          "Open RAPP Shot from Finder. No capture starts automatically; Open Image works without Screen Recording permission.",
+          "For capture, click Enable Screen Recording, enable RAPP Shot in System Settings > Privacy & Security > Screen Recording (Screen & System Audio Recording on newer macOS), and quit/reopen if macOS requests it. Do not disable Gatekeeper or reset TCC.",
+          "Choose a display/window/region and click Capture. Edit locally, prepare the final export/OCR preview, inspect it and acknowledge the limitations before copying or exporting."
+        ],
+        "agent_integration": "The singleton/twin Python adapters and browser UI are optional secondary integration for a compatible RAPP host; dropping in a .py file does not install the native application. Adapters discover RAPPShot.app or RAPP Shot.app in /Applications or ~/Applications, or an explicit RAPP_SHOT_APP path. Native doctor is a no-capture current-process diagnostic, and list reads existing PNGs. Native capture, ocr, redact and annotate requests are staged for Review & Apply in the app: a user still starts capture and approves the final preview before copy/export; staging is not a completed capture, OCR response or export. An explicit SHOT_CLI selects the separately installed legacy CLI, whose runtime and terminal Screen Recording permissions remain separate. No new network service or RAPP wire fields are introduced."
+      },
+      "url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/api/v1/rapplication/rapp_shot.json"
     }
   ]
 }

@@ -1,8 +1,32 @@
 # RAPP Shot
 
-Capture, annotate and redact screenshots entirely on-device. Finds credentials in the pixels with Apple's Vision OCR and paints them out opaquely BEFORE the image is shared. Redaction is a solid fill, never a blur, because blur and pixelation are reversible often enough to have leaked real credentials.
+RAPP Shot 1.3.0 is a native macOS capture/editor with local Vision OCR and opaque
+credential redaction. Automatic detection can miss secrets; inspect the final
+preview before copying or exporting. Pixelation is cosmetic, not redaction.
 
-A `runtime: "twin"` rapplication: it hatches into its own brainstem on port 7093 carrying only its own agent, and the host brainstem reaches it over twin-chat.
+This folder supplies **optional secondary integration**: Python singleton/twin
+adapters and a browser UI for a compatible RAPP host. The existing twin
+configuration uses port 7093. A Python drop or browser UI is not a native app
+installer, and no retired hatch artifact is needed to install RAPP Shot.
+
+## Native installation in Finder
+
+1. Download the [v1.3.0 release](https://github.com/kody-w/rapp-shot/releases/tag/v1.3.0)
+   ZIP for Apple Silicon (`arm64`) or Intel (`x86_64`).
+2. Double-click the ZIP in Finder and drag `RAPPShot.app` to `/Applications` or
+   `~/Applications`. The released app is Developer ID signed, notarized and
+   stapled; do not disable Gatekeeper or reset TCC.
+3. Open the app normally. No capture starts on launch. Importing an image needs
+   no screen permission.
+4. For display/window/region capture, click Enable Screen Recording and grant
+   it to **RAPP Shot itself** in System Settings. Quit/reopen only if macOS asks.
+   The native app does not request microphone, camera or Accessibility access.
+5. Capture or import, edit locally, prepare the final preview, then review it
+   before copy/export.
+
+The manifest pins the exact native-build commit, final ZIPs and immutable
+content-addressed publisher evidence reports. Those reports are not independent
+Apple authentication or RAPP/1 acceptance by the Store.
 
 ## Actions
 
@@ -15,8 +39,40 @@ A `runtime: "twin"` rapplication: it hatches into its own brainstem on port 7093
 
 ## Requires
 
-The `rapp-shot` CLI and its on-device engines. See https://github.com/kody-w/rapp-shot
+**Native:** macOS 14+ and `RAPPShot.app` in `/Applications` or `~/Applications`
+(the spaced `RAPP Shot.app` name is also recognized). `RAPP_SHOT_APP` can select
+another explicit application path. The app uses ScreenCaptureKit, local Vision
+OCR, and a real SwiftUI/AppKit editor; no end-user compiler or Hammerspoon is needed.
 
-Nothing is uploaded.
+**Compatibility:** the existing `shot` CLI and its on-device engines remain the
+fallback. Set `SHOT_CLI` to explicitly keep that backend even when the native app
+is installed. See https://github.com/kody-w/rapp-shot for developer installation.
+
+## Native action behavior
+
+`doctor` runs a no-capture diagnostic; `list` reads existing PNGs (1–100 rows).
+`capture`, `ocr`, `redact`, and `annotate` stage a native request for **Review &
+Apply**, using the existing action fields. Capture still requires clicking
+Capture; copy and export still require reviewing the final flattened preview.
+The adapter reports that it staged a request, not that an unperformed capture,
+OCR result, or export succeeded. For scripted CLI results, explicitly use
+`SHOT_CLI` and the legacy backend.
+
+The app never captures on launch. Grant Screen Recording to RAPP Shot itself.
+Detection is per OCR line and can miss split or unreadable secrets. Inspect the
+preview; successful re-OCR is not an all-clear. Automatic redacted exports fail
+closed on zero-line OCR, recognition errors, invalid custom rules, or surviving
+credentials. The clipboard never falls back to the unredacted original.
+
+English-tuned credential labels can miss other formats; long content digests may
+be over-redacted. Disabling automatic detection explicitly selects an unverified
+manual-edit preview. Native captures remain in memory until export; the default
+folder is `~/Library/Application Support/io.rapp.shot/Exports/`. Existing images,
+`~/.rappshot` history, custom rules and Hammerspoon settings are preserved.
+
+Capture, OCR and editing stay local. RAPP Shot does not upload screenshots or
+text; clipboard/synced-folder behavior outside the app follows the user's macOS
+settings. Native `doctor` reports current-process preflight, not proof of the
+normally launched GUI's permission.
 
 MIT.
