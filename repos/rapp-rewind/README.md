@@ -2,7 +2,7 @@
 
 A local, searchable memory of everything that has been on your screen.
 
-**Native macOS app:** [`native/`](native/README.md) contains RAPP Rewind **1.2.0**
+**Native macOS app:** [`native/`](native/README.md) contains RAPP Rewind **1.2.1**
 for macOS 14+, with a real SwiftUI/AppKit window and menu-bar controls, app-owned
 ScreenCaptureKit capture, Vision OCR, system SQLite/FTS5, privacy exclusions,
 image-only retention, and optional idle-at-login/background lifecycle. It never
@@ -35,14 +35,18 @@ screen ──► screencapture ──► downscale 1280px ──► fingerprint 
 
 ## Install the native app
 
-**[RAPP Rewind 1.2.0 is available](https://github.com/kody-w/rapp-rewind/releases/tag/v1.2.0)**
+**[RAPP Rewind 1.2.1 is available](https://github.com/kody-w/rapp-rewind/releases/tag/v1.2.1)**
 for macOS 14+. Both architecture-specific apps are Developer ID signed,
 notarized, stapled, and Gatekeeper accepted:
 
-- **Apple silicon:** [arm64 ZIP](https://github.com/kody-w/rapp-rewind/releases/download/v1.2.0/rapp_rewind-1.2.0-arm64.zip)
-  · [release evidence](https://github.com/kody-w/rapp-rewind/releases/download/v1.2.0/rapp_rewind-1.2.0-arm64.zip.evidence.json)
-- **Intel:** [x86_64 ZIP](https://github.com/kody-w/rapp-rewind/releases/download/v1.2.0/rapp_rewind-1.2.0-x86_64.zip)
-  · [release evidence](https://github.com/kody-w/rapp-rewind/releases/download/v1.2.0/rapp_rewind-1.2.0-x86_64.zip.evidence.json)
+- **Apple silicon:** [arm64 ZIP](https://github.com/kody-w/rapp-rewind/releases/download/v1.2.1/rapp_rewind-1.2.1-arm64.zip)
+  (`443,434` bytes, SHA-256 `0df4bdb7bf900b26ab98551ae1600cc81c38e732bb2290bdce780f412a656dff`)
+  · [evidence](https://github.com/kody-w/rapp-rewind/releases/download/v1.2.1/rapp_rewind-1.2.1-arm64.zip.evidence.9d9436546d1620ec6c346b250523270e2e4340fcec762122f23711e428be2e28.json)
+  · [provenance](https://github.com/kody-w/rapp-rewind/releases/download/v1.2.1/rapp_rewind-1.2.1-arm64.release-result.json)
+- **Intel:** [x86_64 ZIP](https://github.com/kody-w/rapp-rewind/releases/download/v1.2.1/rapp_rewind-1.2.1-x86_64.zip)
+  (`470,750` bytes, SHA-256 `f82e33162715eec567917641d075b287a2a7ce29be4ba3c5c600a94c2cb4d51b`)
+  · [evidence](https://github.com/kody-w/rapp-rewind/releases/download/v1.2.1/rapp_rewind-1.2.1-x86_64.zip.evidence.5fac5cc67ed4ab024eb61915703fa149faae8644cd6e24508dfff8f20d7209c4.json)
+  · [provenance](https://github.com/kody-w/rapp-rewind/releases/download/v1.2.1/rapp_rewind-1.2.1-x86_64.release-result.json)
 
 Double-click the downloaded ZIP in **Finder**, drag the extracted
 **RAPPRewind.app** to **Applications**, and launch it there. No Terminal installer,
@@ -52,10 +56,12 @@ Screen Recording grant. Terminal/Python permission is not inherited. Capture,
 search, and retention remain local; launch and login never start recording.
 
 The release is built from native source
-[`34361996042c0548065dbd7e3ba5456b6cfffaee`](https://github.com/kody-w/rapp-rewind/tree/34361996042c0548065dbd7e3ba5456b6cfffaee),
-with [matching-source CI](https://github.com/kody-w/rapp-rewind/actions/runs/34734085666).
+[`461e54a49d2ed5422511f271a473bfa7e4112d77`](https://github.com/kody-w/rapp-rewind/tree/461e54a49d2ed5422511f271a473bfa7e4112d77),
+with [matching-source CI](https://github.com/kody-w/rapp-rewind/actions/runs/34767506975).
 Source builds remain available through the [native instructions](native/README.md);
 an unsigned development build is not the published notarized application.
+There are no bundled helper executables; stapling and Gatekeeper assessment
+apply to the enclosing application.
 
 ## Install the compatibility CLI
 
@@ -173,6 +179,11 @@ rewind prune --days 30 --yes  # drop the images, KEEP the text
 Pruning is deliberately asymmetric: pixels are big and text is tiny, so old
 screenshots go while the words stay searchable forever. A test asserts that
 search still works on pruned frames.
+
+Both native and compatibility pruning validate stored image paths. Metadata is
+committed before an image is removed, and a failed removal restores its path and
+byte count. OCR infrastructure failures stop the compatibility capture instead
+of indexing an empty-text success.
 
 ---
 

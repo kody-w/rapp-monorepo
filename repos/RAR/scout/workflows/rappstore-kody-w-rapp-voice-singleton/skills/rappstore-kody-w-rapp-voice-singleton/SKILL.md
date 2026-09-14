@@ -1,7 +1,7 @@
 ---
 name: "rappstore-kody-w-rapp-voice-singleton"
 description: "Local hold-to-talk dictation. Speech recognition runs on-device via whisper.cpp; audio never leaves the machine. Actions: doctor, dictionary, add_term, stats, process."
-metadata: {"projection": "rar-scout/1.0", "rar_agent": "@kody-w/rapp-voice-singleton", "rar_sha256": "cc241dc84953742d1e6925db17f4b20065573687c7d4b71e53699a3c0df2618c", "source_kind": "federated-rapplication", "source_commit": null, "author": "@kody-w", "tags": ["dictation", "speech", "whisper", "local-first", "privacy"]}
+metadata: {"projection": "rar-scout/1.0", "rar_agent": "@kody-w/rapp-voice-singleton", "rar_sha256": "39028adae65b34b524fc615ca4bb7a135d4bf5720c7a5bccb51328891f52b398", "source_kind": "federated-rapplication", "source_commit": null, "version": "1.1.1", "author": "@kody-w", "tags": ["dictation", "speech", "whisper", "local-first", "privacy"]}
 ---
 
 ## Microsoft Scout runtime
@@ -23,21 +23,13 @@ agent in the user's Brainstem. Never paraphrase the factory or agent into a new
 implementation. The generic direct-file commands in the generated Toaster
 section are recovery guidance; Scout should prefer the verified runner.
 
-RAPP Voice — hold a key, speak, release, and cleaned text appears at your cursor.
+RAPP Voice: native typed actions first, legacy Hammerspoon fallback.
 
-Speech recognition is whisper.cpp bound to 127.0.0.1. Audio is captured to a
-temporary file, transcribed and discarded; it is never uploaded and never kept.
-
-Unlike the other RAPP apps this one has no CLI — the hotkey, capture and
-insertion live in Hammerspoon. So this agent talks to the running Hammerspoon
-over its local `hs` IPC socket, and to the speech server over HTTP on localhost.
-Both are on-machine.
-
-Every Lua call is a fixed, parameterless entry point on the module. The agent
-never builds Lua from user input, so it cannot be talked into evaluating
-arbitrary code inside Hammerspoon.
-
-Stdlib only.
+The native executable accepts the existing five actions as JSON on stdin. None
+can record audio, inject keys, or invoke a polish provider. When no native app
+is installed, the legacy hs / localhost backend remains available. A native
+failure is reported, not retried through a second backend with side effects.
+Stdlib only; no protocol, manifest identity, or egg changes.
 
 <!-- toaster:generated:begin -->
 
@@ -83,7 +75,7 @@ The typed contract this capability answers to (JSON Schema — the deterministic
 
 ## Run this — do not improvise
 
-This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `rapp_voice_agent.py` and embedded as the fenced Python below (sha256 cc241dc84953742d…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `rapp_voice_agent.py` first:
+This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `rapp_voice_agent.py` and embedded as the fenced Python below (sha256 39028adae65b34b5…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `rapp_voice_agent.py` first:
 
 ```bash
 python3 rapp_voice_agent.py '{"key": "value"}'      # arguments as one JSON object
@@ -94,21 +86,13 @@ python3 rapp_voice_agent.py --tool                      # emit the JSON tool con
 Treat stdout as a tool result. If it reports missing or unresolved inputs, stop and collect them. If it returns `steps`, execute those steps in order exactly as returned; if it returns `instructions`, follow them with the supplied inputs. Otherwise use the result verbatim. Do not invent behavior beyond that output. On a host without code execution, treat the Parameters schema and the code below as the exact specification and never paraphrase a step. Never edit inside the generated markers; a converter-equipped host can instead restore the original file checksum-verified with the installed `rapp-agent-converter/scripts/toast.py convert SKILL.md --to agent`.
 
 ```python  # rapp:deterministic
-"""RAPP Voice — hold a key, speak, release, and cleaned text appears at your cursor.
+"""RAPP Voice: native typed actions first, legacy Hammerspoon fallback.
 
-Speech recognition is whisper.cpp bound to 127.0.0.1. Audio is captured to a
-temporary file, transcribed and discarded; it is never uploaded and never kept.
-
-Unlike the other RAPP apps this one has no CLI — the hotkey, capture and
-insertion live in Hammerspoon. So this agent talks to the running Hammerspoon
-over its local `hs` IPC socket, and to the speech server over HTTP on localhost.
-Both are on-machine.
-
-Every Lua call is a fixed, parameterless entry point on the module. The agent
-never builds Lua from user input, so it cannot be talked into evaluating
-arbitrary code inside Hammerspoon.
-
-Stdlib only.
+The native executable accepts the existing five actions as JSON on stdin. None
+can record audio, inject keys, or invoke a polish provider. When no native app
+is installed, the legacy hs / localhost backend remains available. A native
+failure is reported, not retried through a second backend with side effects.
+Stdlib only; no protocol, manifest identity, or egg changes.
 """
 
 import json
@@ -123,7 +107,7 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "rapp_voice",
-    "version": "1.0.0",
+    "version": "1.1.1",
     "description": ("Local hold-to-talk dictation. whisper.cpp on-device, filler "
                     "stripping, app-aware formatting, weighted personal dictionary."),
     "author": "@kody-w",
@@ -137,6 +121,54 @@ VOICE_HOME = os.environ.get("RAPPVOICE_HOME", os.path.join(HOME, ".rappvoice"))
 DICT = os.path.join(VOICE_HOME, "dictionary.txt")
 LOG = os.path.join(VOICE_HOME, "logs", "rappvoice.log")
 ASR_PORT = int(os.environ.get("ASR_PORT", "8765"))
+
+
+def _native():
+    override = os.environ.get("RAPPVOICE_NATIVE_CLI")
+    if override:
+        return override if os.path.isfile(override) and os.access(override, os.X_OK) else None
+    candidates = [
+        "/Applications/RAPPVoice.app/Contents/MacOS/RAPPVoice",
+        "/Applications/RAPP Voice.app/Contents/MacOS/RAPPVoice",
+        os.path.join(HOME, "Applications/RAPPVoice.app/Contents/MacOS/RAPPVoice"),
+        os.path.join(HOME, "Applications/RAPP Voice.app/Contents/MacOS/RAPPVoice"),
+        shutil.which("RAPPVoice"),
+    ]
+    return next((path for path in candidates if path and os.path.isfile(path)
+                 and os.access(path, os.X_OK)), None)
+
+
+def _native_action(action, kwargs):
+    executable = _native()
+    if not executable:
+        if os.environ.get("RAPPVOICE_NATIVE_CLI"):
+            return "Native RAPP Voice override is not executable; legacy fallback was not invoked."
+        return None
+    request = {"action": action}
+    if action == "process":
+        request["text"] = kwargs.get("text")
+        request["app"] = kwargs.get("app") or "TextEdit"
+    elif action == "add_term":
+        request["term"] = kwargs.get("term")
+    try:
+        encoded = json.dumps(request)
+        if len(encoded.encode("utf-8")) > 65536:
+            return "Native action refused: request exceeds 64 KiB."
+        result = subprocess.run(
+            [executable, "--action"], input=encoded, capture_output=True,
+            text=True, timeout=30,
+        )
+        response = json.loads(result.stdout)
+        if (not isinstance(response, dict) or response.get("runtime") != "native"
+                or response.get("action") != action
+                or not isinstance(response.get("text"), str)
+                or not isinstance(response.get("ok"), bool)):
+            return "Invalid native response; legacy fallback was not invoked."
+        if result.returncode != 0 or not response["ok"]:
+            return "Native RAPP Voice action failed: " + response["text"]
+        return response["text"]
+    except (OSError, subprocess.SubprocessError, ValueError, TypeError) as exc:
+        return f"Native RAPP Voice action failed: {type(exc).__name__}: {exc}. Legacy fallback was not invoked."
 
 
 def _hs():
@@ -193,7 +225,7 @@ def _read_dict():
 
 
 class RappVoiceAgent(BasicAgent):
-    """Local hold-to-talk dictation, driven through Hammerspoon."""
+    """Local dictation actions, preferring the native app over legacy hs."""
 
     ACTIONS = ("doctor", "dictionary", "add_term", "stats", "process")
 
@@ -330,6 +362,11 @@ class RappVoiceAgent(BasicAgent):
     def perform(self, **kwargs):
         action = (kwargs.get("action") or "doctor").strip().lower()
         try:
+            if action not in self.ACTIONS:
+                return "unknown action '%s'. Try: %s" % (action, ", ".join(self.ACTIONS))
+            native = _native_action(action, kwargs)
+            if native is not None:
+                return native
             if action == "doctor":
                 return self._doctor()
             if action == "dictionary":
@@ -347,4 +384,4 @@ class RappVoiceAgent(BasicAgent):
 
 <!-- toaster:generated:end -->
 
-<!-- rci-capsule:v1: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 -->
+<!-- rci-capsule:v1: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 -->

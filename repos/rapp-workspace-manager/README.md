@@ -2,99 +2,345 @@
 
 [![CI](https://github.com/kody-w/rapp-workspace-manager/actions/workflows/ci.yml/badge.svg)](https://github.com/kody-w/rapp-workspace-manager/actions/workflows/ci.yml)
 
-A private, local-first manager for all of your local Git and RAPP workspaces.
-It scans folders you choose, stores a registry of pointers, generates a
-Markdown dashboard, and opens a selected workspace with the local operating
-system.
+A private, pointer-only routing manager for independent workspaces and native
+AI workspace metadata. The manager is the **first editor root, not a container**.
 
-The manager never copies source files, notes, credentials, or workspace
-content into its registry. Each routed workspace stays inside its own
-`world_id` boundary.
+- `registry.json` owns routing selection and suppression only.
+- `HOME.md` and `.code-workspace` files are disposable projections.
+- Source projects retain their files, Git history, identity, worlds and RAPP/1
+  frames. Native providers retain their own storage models and authority.
+- Discovery is **not** selection. A native session catalog never automatically
+  becomes a list of editor roots.
+- Clear/forget never delete, disconnect, close, move or edit anything native.
 
-## Requirements
+There is no new estate protocol, common AI session store, transcript index,
+copied project content, or competing task system.
 
-- Python 3.10 or newer.
-- A local checkout of [`kody-w/rapp-1`](https://github.com/kody-w/rapp-1).
-- macOS, Linux, or Windows.
+## Requirements and privacy
 
-No Python packages are required.
+Python 3.10+, no third-party Python packages, and a local canonical
+[`rapp-1`](https://github.com/kody-w/rapp-1) checkout for initialization and RAPP
+identity validation. Safe filesystem operations currently require POSIX
+descriptor-relative no-follow I/O and locking (macOS/Linux). Unsupported
+platforms fail closed rather than fall back to following links. Hermes metadata
+queries additionally require SQLite 3.37+ and the OS `/dev/fd` interface.
 
-## Quick start
+Only explicit owner-approved roots are inspected. There is no automatic home
+scan, native-store search, provider process launch, or network call. Public
+fixtures and examples are synthetic. Real roots, native IDs, membership,
+registries and generated editor views belong in the **private manager**, never
+in this repository.
+
+## Initialize and select the exact estate
 
 ```bash
-git clone https://github.com/kody-w/rapp-1 ~/src/rapp-1
-git clone https://github.com/kody-w/rapp-workspace-manager
-cd rapp-workspace-manager
-
 python3 tools/workspace_manager.py init \
-  --workspace ~/RAPP-Workspace-Manager \
-  --owner your-handle \
+  --workspace ~/local-workspaces \
+  --owner example \
   --rapp1-path ~/src/rapp-1
 
-python3 ~/RAPP-Workspace-Manager/tools/workspace_manager.py scan \
-  --workspace ~/RAPP-Workspace-Manager \
-  --root ~/Documents/GitHub \
+python3 ~/local-workspaces/tools/workspace_manager.py estate \
+  --workspace ~/local-workspaces \
+  --root ~/src/global-estate \
+  --root ~/src/project-01 \
+  --root ~/notes/project-02 \
   --rapp1-path ~/src/rapp-1
 ```
 
-Open `~/RAPP-Workspace-Manager/HOME.md` for the generated dashboard.
+`estate` (also `scan --mode exact`) replaces the **local** selection with
+exactly the supplied directories, in owner-supplied order. Non-Git directories
+are valid pointers. It does not discover nested repositories. Suppressed roots
+remain suppressed until `re-add`; native provider partitions are unchanged.
+Supplying the manager itself is harmless: it appears exactly once, first.
 
-## Manage workspaces
+The synthetic [13-root fixture](examples/estate-13.synthetic.json) demonstrates:
+
+```text
+RAPP Workspace Manager
+RAPP Global Estate
+Project 01
+…
+Project 11
+```
+
+These are independent sibling directories, not repositories copied inside the
+manager. A name containing “RAPP” does not establish identity or conformance.
+Only canonical validation of an allowlisted root `rappid.json` earns the
+`rapp-workspace` label.
+
+Recursive Git discovery still exists:
 
 ```bash
-# Refresh from one or more roots
-python3 ~/RAPP-Workspace-Manager/tools/workspace_manager.py scan \
-  --workspace ~/RAPP-Workspace-Manager \
-  --root ~/Documents/GitHub \
-  --root ~/src \
-  --rapp1-path ~/src/rapp-1
-
-# List registered pointers
-python3 ~/RAPP-Workspace-Manager/tools/workspace_manager.py list \
-  --workspace ~/RAPP-Workspace-Manager
-
-# Open a workspace in the operating system
-python3 ~/RAPP-Workspace-Manager/tools/workspace_manager.py open \
-  --workspace ~/RAPP-Workspace-Manager \
-  --name my-project
+python3 ~/local-workspaces/tools/workspace_manager.py scan \
+  --workspace ~/local-workspaces --root ~/src --rapp1-path ~/src/rapp-1
 ```
 
-Duplicate names are refused rather than guessed. Use `--print-path` to resolve
-a unique workspace without opening it.
+It replaces the Git-discovered local partition while retaining exact selections
+and all native partitions. Nested Git roots and worktree `.git` **markers** are
+discovered without reading `.git` contents. Home, native-store roots, symlinks,
+pruned build directories and the manager subtree are not traversed.
 
-## What gets stored
+## Explicit native adapters
 
-`registry.json` stores only:
+| Provider ID | Read-only metadata surface | Native identity and limitations |
+|---|---|---|
+| `copilot` | `PROFILE/session-state/UUID/workspace.yaml` | Profile root + native session UUID. Only `id,cwd,git_root,repository,host_type,branch,client_name,created_at,updated_at`. Non-repository, nested and worktree cwd values remain distinct. Scalar YAML only; no `data.db` fallback. |
+| `claude` | `PROFILE/projects/NATIVE-KEY/sessions-index.json`, version 1 | Profile/native projects root + unchanged bucket key. Retains originalPath/projectPath associations, including multiple paths in one bucket. Missing indexes remain unresolved; keys are never reverse-decoded into paths. |
+| `hermes` | `PROFILE/state.db`, gated metadata tables/columns | Native table + native project/folder/session ID. Conditional metadata columns only, not a reconstructed common project model. Missing cwd stays unknown; terminal-session breadcrumbs are not read. See the WAL limitation below. |
+| `scout` | `PROFILE/m-sessions/workspaces.json`, version 3 | Native version, workspace ID, provider ID and rootId. Only `providerId: local` can yield a verified filesystem path. ODSP and other provider references remain opaque, even if rootId looks like an existing path. |
+| `grokbot` | Existence of explicit `Grokbot.app`, `.grokbot` or `Grokbot` roots | `app-detected / workspace-mapping-unavailable` observation only. No durable bot→workspace mapping is claimed or inferred. No persistence files are opened. |
 
-- local path and directory name;
-- whether the path is a Git repository or a verified RAPP Workspace;
-- valid root-level RAPP identity, mode, world, and tags when present;
-- scan roots and generation time.
+The [synthetic native metadata examples](examples/native/) show the supported
+shapes. Schema changes are refused, not guessed.
 
-Root-level `rappid.json` symlinks and invalid identities are ignored. Routed
-workspace files are never ingested.
+**Hermes gate:** only `user_version = 0` and ordinary tables with a declared
+`TEXT` or `INTEGER` `id` are supported. The exact table/column allowlists are in
+[SPEC.md](SPEC.md#5-hermes-read-only-snapshot-gate). Tables may be absent; unknown
+columns are never selected. These conditional shapes are not a claim that
+every installed Hermes release has a native project/folder model.
 
-## RAPP/1 guarantees
+**Hermes WAL limitation:** the adapter pins a no-follow-opened database inode,
+uses `mode=ro&immutable=1`, connection-only query restrictions and a short shared
+read lock. A nonempty WAL or rollback journal, busy writer, changed file, unknown
+schema, or unavailable safe reader causes a stale/error result. It does **not**
+ignore the WAL, open SHM for writing, checkpoint the provider, or copy a database
+containing chats. Retry after the native owner has made the store quiescent.
+Active-WAL live ingestion is intentionally unavailable.
 
-- The private manager gets a canonical, mint-once `rappid`.
-- Registry and dashboard writes are local and atomic.
-- The manager has one routing `world_id` and never merges routed content.
-- Its bundled project writer builds and verifies append-only RAPP/1 frames
-  through the canonical `rapp.py` implementation.
-- The owner remains sovereign; the tool does not delete, move, publish, clone,
-  commit, or modify a routed workspace.
+Hermes source checkouts can be selected independently with `estate`; they are
+not its session store. Scout's fallback `PROFILE/workspace` is protected from
+editor-root selection. Grokbot app/support/runtime/cache/skills/settings paths
+are never workspaces. An owner can select a real project directory separately;
+a future documented native export would need its own reviewed adapter.
 
-See [`SPEC.md`](SPEC.md) for the checkable manager profile.
+## Inspect, refresh, select
 
-Public tool identity:
-`rappid:@kody-w/rapp-workspace-manager:98439b87ffb132681bf9bbaa50c65f01bb29373a38ffd17c310119a05d9f5ee5`.
+These commands use explicit profile roots; none of the examples run
+automatically:
 
-## Development
+```bash
+python3 tools/workspace_manager.py provider inspect \
+  --provider copilot --profile-root ~/.copilot --batch-size 250
+
+python3 tools/workspace_manager.py provider refresh \
+  --workspace ~/local-workspaces --provider copilot \
+  --profile-root ~/.copilot --batch-size 1000
+
+python3 tools/workspace_manager.py provider list \
+  --workspace ~/local-workspaces --provider copilot
+
+python3 tools/workspace_manager.py provider select \
+  --workspace ~/local-workspaces --provider copilot \
+  --pointer 'copilot:HASH_FROM_PROVIDER_LIST'
+```
+
+Substitute `claude --profile-root ~/.claude`, `hermes --profile-root ~/.hermes`,
+`scout --profile-root ~/.scout`, or `grokbot --profile-root /Applications/Grokbot.app`
+when explicitly authorized. Repeat `--profile-root` to supply a provider's
+complete approved profile set. Omitting it on later refreshes reuses the last
+requested set. A failed change of profile set preserves all last-good pointers.
+
+`inspect` writes nothing. An incomplete inspection returns a bounded preview,
+not active routes. `list` reads the private registry only.
+
+Copilot refresh inventories **one level of directory names**, then parses at
+most `--batch-size` session metadata files per invocation. Repeat refresh until
+`status: fresh`; manager-owned `pending` metadata checkpoints resume the work.
+Unchanged file fingerprints reuse prior metadata without reopening YAML files.
+Directory membership changes invalidate staging and require a retry.
+
+A complete successful scan replaces **only that provider partition**. Until
+then, the old catalog and owner selections remain active. Errors discard
+incomplete staging, set `status: stale` plus a content-free error code, and keep
+the last successful catalog and timestamp. CLI refresh exits nonzero on stale
+errors; `refreshing` is successful bounded progress, not a completed scan.
+
+## Clear-cache versus forget
+
+```bash
+# Remove known manager pointers/caches and selections. Refresh may rediscover.
+python3 tools/workspace_manager.py provider clear-cache \
+  --workspace ~/local-workspaces --provider copilot
+
+# Remove and durably suppress one native identity.
+python3 tools/workspace_manager.py provider forget \
+  --workspace ~/local-workspaces --provider copilot \
+  --pointer 'copilot:HASH_FROM_PROVIDER_LIST'
+
+# Explicitly lift suppression and select the identity on its next rediscovery.
+python3 tools/workspace_manager.py provider re-add \
+  --workspace ~/local-workspaces --provider copilot \
+  --pointer 'copilot:HASH_FROM_PROVIDER_LIST'
+python3 tools/workspace_manager.py provider refresh \
+  --workspace ~/local-workspaces --provider copilot
+
+# Local pointers use their exact paths, including non-Git roots.
+python3 tools/workspace_manager.py forget \
+  --workspace ~/local-workspaces --path ~/notes/project-02
+python3 tools/workspace_manager.py re-add \
+  --workspace ~/local-workspaces --path ~/notes/project-02 \
+  --rapp1-path ~/src/rapp-1
+```
+
+`clear` and `clear-cache` are aliases. For providers, omit `--pointer` to clear
+the whole known catalog; `forget` without a pointer suppresses all **currently
+known** IDs, not future unknown identities. Native suppression keeps opaque
+identifiers; local suppression keeps an identifier, original location and
+filesystem identity so aliases, renames and directory replacement cannot undo
+forget. Clear-cache does not remove tombstones. Re-add does not create a
+session, infer a path or touch the native store. Rediscovered candidates are
+unselected unless the owner explicitly selected/re-added their IDs.
+
+All these operations rebuild manager-owned projections. A shared filesystem
+root remains visible if another selected pointer still references it.
+
+Grokbot observations have manager-owned `observation_id` keys for the same
+clear/forget/re-add lifecycle (pass the key with `--pointer`). These keys
+identify observations only, not bots or workspaces. Re-add lifts observation
+suppression on the next refresh; `select` still refuses a workspace mapping.
+
+## Editor and dashboard projections
+
+```bash
+python3 tools/workspace_manager.py editor-view --workspace ~/local-workspaces
+python3 tools/workspace_manager.py list --workspace ~/local-workspaces
+python3 tools/workspace_manager.py open \
+  --workspace ~/local-workspaces --name project-01 --print-path
+```
+
+The default is `estate.code-workspace` **inside the private manager**. Optional
+`--output selected.code-workspace` must also stay inside that directory. The
+registry tracks generated view filenames so clear/forget also update older
+manager-generated views. Up to sixteen views are supported.
+
+Generation is deterministic, manager-first, deduplicated by device/inode identity,
+and atomic per file. It preserves unrelated JSON/JSONC settings, extensions and
+other top-level values; comments/formatting may be rewritten. Invalid existing
+editor files fail closed. Only selected, existing, no-follow local directories
+become folders. Missing, unresolved, protected and nonlocal provider roots
+remain in the dashboard/catalog, never fabricated filesystem paths.
+
+`open` operates on unique local pointer names only. Duplicate names and
+unavailable paths are refused; it never invokes a provider lifecycle API.
+The dashboard caps its native preview at 100 candidates per provider.
+
+## Filesystem identity and legacy cache safety
+
+Pointer version 2 retains native shapes and adds no-follow filesystem identity:
+`filesystemIdentity: [device, inode]` on local pointers and `profileIdentity`
+on native pointers. Grokbot observations use the same profile identity and
+`observation_version: 2`. Display paths are locators, not identity.
+
+Leading slash aliases normalize to one ordinary `/` root. Home (including its
+ancestors), manager and registered native-profile boundaries use pinned
+directory identities and kernel parent links, not lexical path prefixes.
+Case aliases collapse only when the filesystem resolves them to the same
+device/inode; distinct names on case-sensitive volumes stay distinct.
+Symlink traversal and multiply-linked metadata/output/lock files are refused.
+Local projections also verify the saved identity, so replacing a directory at
+the same spelling does not silently retarget a selected pointer.
+
+Legacy v1 metadata stays readable, but Copilot v1 caches and checkpoints are
+untrusted for routing until a complete refresh through the structural reader.
+Multiline quoted values, flow collections, aliases, tags, unsupported indentation
+or document forms fail closed even under ignored keys. Ignored indented block
+scalars remain opaque; their continuation text never becomes metadata.
+
+Provider namespace history (bounded to 64 entries per provider) preserves
+suppression and selection while v1 keys upgrade and profile aliases change.
+Different saved device/inode identities are never aliases, even at the same
+spelling: their original suppressions remain intact and selection requires
+explicit re-add. Ambiguous v1 suppression stays stale with
+`native-identity-ambiguous` rather than being guessed or discarded.
+Migration planning checks the complete candidate/observation set against
+immutable original selection and suppression sets before applying changes.
+Competing target claims are refused, and catalog ordering cannot consume a
+tombstone before another candidate proves it ambiguous.
+Cached Copilot metadata is rebound to the current verified locator without
+changing its stable pointer identity. Historical protection follows remembered
+objects through verified current locators; inaccessible, symlinked or reused
+obsolete names cannot hide unrelated healthy routes.
+
+Old local identifier-only tombstones lack recoverable filesystem provenance:
+new local scans fail closed with `legacy-suppression-readd-required` until
+explicit re-add using the original recorded path spelling. Unrecoverable or
+unsafe old locations require owner review of **manager metadata only**, never
+native-data deletion or automatic tombstone loss.
+
+## Bounds and exclusions
+
+Default scan limits (CLI-overridable only up to fixed ceilings):
+
+| Bound | Default | Hard ceiling |
+|---|---:|---:|
+| Enumerated entries / metadata rows | 150,000 | 200,000 |
+| Copilot metadata records per invocation | 1,000 | 10,000 |
+| Single metadata file | 2 MiB | 8 MiB |
+| Metadata bytes per invocation | 16 MiB | 64 MiB |
+| Cooperative scan deadline | 10 seconds | 60 seconds |
+
+There are also fixed caps: 16 native profile roots, 128 exact/recursive scan
+roots, recursion depth 64, 128 kernel ancestry steps, 64 saved namespaces per
+provider, 4 KiB metadata strings, 128 MiB compact metadata per
+provider catalog/stage, 512 MiB manager registry, 8 MiB existing editor files,
+64 KiB local RAPP identity files, and 2 GiB Hermes database file size (not a
+database-copy budget). Editor projection allows 10,000 folders, with a
+10-second cooperative directory-verification deadline. No directory inventory
+is recursive for native stores.
+
+Bounds include ignored directory entries. File reads are bounded and stable
+across before/after stat checks. Time limits are cooperative: Python cannot
+preempt an individual stalled filesystem/OS call. Batched file observations
+are not an instantaneous transactional snapshot of an active native store.
+
+Never opened: Copilot events/session DB/files/checkpoints/research/rewind/
+summaries/todos/search, Claude transcripts/memory/history/plans/instructions/
+attachments, Hermes messages/titles/previews/prompts/config blobs/memory or
+terminal pane content, Scout sessions/browser/auth, or Grokbot persistence.
+Only root RAPP identity metadata is read from selected source projects.
+
+## RAPP/1 authority and verification
+
+This is the existing `rapp-workspace-manager/1` profile with a closed versioned
+**pointer union**, not a new wire protocol or identity system. Pointer hashes
+are local routing keys, not RAPPIDs, signatures or acceptance evidence.
+Source-owned RAPP/1 frames remain at their source; views do not confer compliance.
+Structural verification is not authenticated acceptance, authorization,
+publication or deployment. No owner signatures are inferred.
+
+The repository's existing project stream is checked without inventing a new
+estate event. Where project history is required, the bundled canonical writer
+uses existing `body.pulse` / `work.status`, never a new estate protocol.
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -v
-python3 -m py_compile tools/workspace_manager.py tools/append_frame.py
+python3 -m py_compile tools/*.py
 python3 /path/to/rapp-1/rapp_check.py . --json
+PYTHONDONTWRITEBYTECODE=1 python3 tools/check_conformance.py . \
+  --rapp1-path /path/to/rapp-1
 ```
+
+Tests use only repository-local synthetic fixtures, native/source read canaries,
+before/after native byte-and-metadata snapshots, an actual SQLite WAL and busy
+writer, 257 filesystem-backed Copilot sessions, and a virtual 99,000-name
+inventory. They do not access live native profiles. Conformance evidence must
+include scanned **existing frames**, not a zero-artifact pass.
+
+Some canonical `rapp_check.py` revisions only discover numeric frame filenames
+and skip this repository's sequence-plus-hash filenames. `check_conformance.py`
+combines that unchanged canonical checker with the existing writer's canonical
+`verify_chain`, counts verified source frames, and fails on zero-frame evidence.
+It does not rename, copy or rewrite frames. CI uses this combined check rather
+than treating an identity-only linter verdict as full frame conformance.
+
+The future Workspaces Librarian interaction remains agent-first: explain the
+organization, inspect approved metadata, propose bounded pointer changes, and
+apply owner-selected routes. The UI is a passive projection, not another
+control plane.
+
+See [SPEC.md](SPEC.md) for the checkable contract and Python API.
+
+Public tool identity:
+`rappid:@kody-w/rapp-workspace-manager:98439b87ffb132681bf9bbaa50c65f01bb29373a38ffd17c310119a05d9f5ee5`.
 
 MIT licensed.

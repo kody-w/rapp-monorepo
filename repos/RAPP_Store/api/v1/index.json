@@ -299,7 +299,7 @@
       "kind": "rapplication",
       "publisher": "@kody-w",
       "category": "productivity",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "has_skin": true,
       "distribution": "desktop",
       "desktop": {
@@ -309,33 +309,33 @@
         "bundle_id": "io.rapp.voice",
         "source": {
           "repo": "kody-w/rapp-voice",
-          "commit_sha": "45e5529509c04b2b346e27b8b8a82c59cb5ec32d"
+          "commit_sha": "75d10cc14819573f6d771231a0677aa21e157c47"
         },
-        "release_tag": "v1.1.0",
+        "release_tag": "v1.1.1",
         "artifacts": [
           {
             "arch": "arm64",
-            "bytes": 1467143,
+            "bytes": 1473621,
             "evidence": {
               "bytes": 2715,
-              "sha256": "ad6dc775592c074cc52b1df95835e60d18e6ca4122fbdf9337230e02195e271c",
-              "url": "https://github.com/kody-w/rapp-voice/releases/download/v1.1.0/rapp_voice-1.1.0-arm64.zip.evidence.ad6dc775592c074cc52b1df95835e60d18e6ca4122fbdf9337230e02195e271c.json"
+              "sha256": "0146c5d9e0f77a6714362188b6204da6ca7217d571415dcec23581c94b045876",
+              "url": "https://github.com/kody-w/rapp-voice/releases/download/v1.1.1/rapp_voice-1.1.1-arm64.zip.evidence.0146c5d9e0f77a6714362188b6204da6ca7217d571415dcec23581c94b045876.json"
             },
             "format": "zip",
-            "sha256": "2b32c75c7530b51e58666c55eae5b0bddd3dd134f286a7ea01fc38fd164ed741",
-            "url": "https://github.com/kody-w/rapp-voice/releases/download/v1.1.0/rapp_voice-1.1.0-arm64.zip"
+            "sha256": "cb84d4178ba383a788fc5b6ade05bde6f751eeb1e680c4d6d8b6c5ce2f262afa",
+            "url": "https://github.com/kody-w/rapp-voice/releases/download/v1.1.1/rapp_voice-1.1.1-arm64.zip"
           },
           {
             "arch": "x86_64",
-            "bytes": 1684556,
+            "bytes": 1691382,
             "evidence": {
               "bytes": 2719,
-              "sha256": "a988b9a0de46b5e45a92f980b116ea387785442c600a92561bbe004d5392ddcf",
-              "url": "https://github.com/kody-w/rapp-voice/releases/download/v1.1.0/rapp_voice-1.1.0-x86_64.zip.evidence.a988b9a0de46b5e45a92f980b116ea387785442c600a92561bbe004d5392ddcf.json"
+              "sha256": "f84632710dd8fa94273120514cb498e053be11cf9dc5669ede97e1d1e5ef5002",
+              "url": "https://github.com/kody-w/rapp-voice/releases/download/v1.1.1/rapp_voice-1.1.1-x86_64.zip.evidence.f84632710dd8fa94273120514cb498e053be11cf9dc5669ede97e1d1e5ef5002.json"
             },
             "format": "zip",
-            "sha256": "e90ef0da386c9d4b1017bbce8179d112b4c6be222688cad1651bc955b432d2e0",
-            "url": "https://github.com/kody-w/rapp-voice/releases/download/v1.1.0/rapp_voice-1.1.0-x86_64.zip"
+            "sha256": "f25ca135afd819f957d86316b0b01ffabffa402119616213f8b56d16481ccf9f",
+            "url": "https://github.com/kody-w/rapp-voice/releases/download/v1.1.1/rapp_voice-1.1.1-x86_64.zip"
           }
         ],
         "prerequisites": [
@@ -364,7 +364,7 @@
       "kind": "rapplication",
       "publisher": "@kody-w",
       "category": "productivity",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "has_skin": true,
       "distribution": "desktop",
       "desktop": {
@@ -374,33 +374,33 @@
         "bundle_id": "io.rapp.rewind",
         "source": {
           "repo": "kody-w/rapp-rewind",
-          "commit_sha": "34361996042c0548065dbd7e3ba5456b6cfffaee"
+          "commit_sha": "461e54a49d2ed5422511f271a473bfa7e4112d77"
         },
-        "release_tag": "v1.2.0",
+        "release_tag": "v1.2.1",
         "artifacts": [
           {
             "arch": "arm64",
-            "bytes": 442745,
+            "bytes": 443434,
             "evidence": {
               "bytes": 2625,
-              "sha256": "050cf6198819cc141db10caea09c935039f8ac2226c174fecabb08c92fa21c2d",
-              "url": "https://github.com/kody-w/rapp-rewind/releases/download/v1.2.0/rapp_rewind-1.2.0-arm64.zip.evidence.050cf6198819cc141db10caea09c935039f8ac2226c174fecabb08c92fa21c2d.json"
+              "sha256": "9d9436546d1620ec6c346b250523270e2e4340fcec762122f23711e428be2e28",
+              "url": "https://github.com/kody-w/rapp-rewind/releases/download/v1.2.1/rapp_rewind-1.2.1-arm64.zip.evidence.9d9436546d1620ec6c346b250523270e2e4340fcec762122f23711e428be2e28.json"
             },
             "format": "zip",
-            "sha256": "04367fa6c12a709c90562262d52f249268b8144e0e2db785e2a88c2d13447128",
-            "url": "https://github.com/kody-w/rapp-rewind/releases/download/v1.2.0/rapp_rewind-1.2.0-arm64.zip"
+            "sha256": "0df4bdb7bf900b26ab98551ae1600cc81c38e732bb2290bdce780f412a656dff",
+            "url": "https://github.com/kody-w/rapp-rewind/releases/download/v1.2.1/rapp_rewind-1.2.1-arm64.zip"
           },
           {
             "arch": "x86_64",
-            "bytes": 470073,
+            "bytes": 470750,
             "evidence": {
               "bytes": 2629,
-              "sha256": "e4dcebb30d544f67a49587921574a905b2229e6685f27c546749e343f04d5b5c",
-              "url": "https://github.com/kody-w/rapp-rewind/releases/download/v1.2.0/rapp_rewind-1.2.0-x86_64.zip.evidence.e4dcebb30d544f67a49587921574a905b2229e6685f27c546749e343f04d5b5c.json"
+              "sha256": "5fac5cc67ed4ab024eb61915703fa149faae8644cd6e24508dfff8f20d7209c4",
+              "url": "https://github.com/kody-w/rapp-rewind/releases/download/v1.2.1/rapp_rewind-1.2.1-x86_64.zip.evidence.5fac5cc67ed4ab024eb61915703fa149faae8644cd6e24508dfff8f20d7209c4.json"
             },
             "format": "zip",
-            "sha256": "124d4e9d30b7f116a88fe0997a64a52e17dbae961dbf7a4937c1a39bf0aa1e96",
-            "url": "https://github.com/kody-w/rapp-rewind/releases/download/v1.2.0/rapp_rewind-1.2.0-x86_64.zip"
+            "sha256": "f82e33162715eec567917641d075b287a2a7ce29be4ba3c5c600a94c2cb4d51b",
+            "url": "https://github.com/kody-w/rapp-rewind/releases/download/v1.2.1/rapp_rewind-1.2.1-x86_64.zip"
           }
         ],
         "prerequisites": [
@@ -428,7 +428,7 @@
       "kind": "rapplication",
       "publisher": "@kody-w",
       "category": "productivity",
-      "version": "1.5.0",
+      "version": "1.5.1",
       "has_skin": true,
       "distribution": "desktop",
       "desktop": {
@@ -438,33 +438,33 @@
         "bundle_id": "io.rapp.crispy",
         "source": {
           "repo": "kody-w/rapp-crispy",
-          "commit_sha": "656537dacb605d0298a9552ffc882936cec41cc3"
+          "commit_sha": "873c06fd2930c8948e61e800abbf10af691ffb2d"
         },
-        "release_tag": "v1.5.0",
+        "release_tag": "v1.5.1",
         "artifacts": [
           {
             "arch": "arm64",
-            "bytes": 1678209,
+            "bytes": 1678896,
             "evidence": {
               "bytes": 2991,
-              "sha256": "2fcc4bd0806156f06cdfaf2bbe485753a73840e5befac564415459074b3ab7a9",
-              "url": "https://github.com/kody-w/rapp-crispy/releases/download/v1.5.0/rapp_crispy-1.5.0-arm64.zip.evidence.2fcc4bd0806156f06cdfaf2bbe485753a73840e5befac564415459074b3ab7a9.json"
+              "sha256": "a8477a9c55b4a04b8c057e5be15bf0f24c157d09e6a74ae25e5212692cf2b53b",
+              "url": "https://github.com/kody-w/rapp-crispy/releases/download/v1.5.1/rapp_crispy-1.5.1-arm64.zip.evidence.a8477a9c55b4a04b8c057e5be15bf0f24c157d09e6a74ae25e5212692cf2b53b.json"
             },
             "format": "zip",
-            "sha256": "1462693b958fa170f178d01a3e531b8eaee544f6dd7813df46ab9d3698ea5e35",
-            "url": "https://github.com/kody-w/rapp-crispy/releases/download/v1.5.0/rapp_crispy-1.5.0-arm64.zip"
+            "sha256": "be33ca8fa8ac00f482d35ba143920717f47c94bc480765278344f8161930dd5f",
+            "url": "https://github.com/kody-w/rapp-crispy/releases/download/v1.5.1/rapp_crispy-1.5.1-arm64.zip"
           },
           {
             "arch": "x86_64",
-            "bytes": 1908949,
+            "bytes": 1909638,
             "evidence": {
               "bytes": 2995,
-              "sha256": "142cbda70a2fb49bb05fb97cc30353e6b5de805ecc9eac8cc1121a3b9075941d",
-              "url": "https://github.com/kody-w/rapp-crispy/releases/download/v1.5.0/rapp_crispy-1.5.0-x86_64.zip.evidence.142cbda70a2fb49bb05fb97cc30353e6b5de805ecc9eac8cc1121a3b9075941d.json"
+              "sha256": "78ba17ed51dfbe92c4acb8ed7805a2beaf9bc8fc9a4838b84edffe7f69ef8d81",
+              "url": "https://github.com/kody-w/rapp-crispy/releases/download/v1.5.1/rapp_crispy-1.5.1-x86_64.zip.evidence.78ba17ed51dfbe92c4acb8ed7805a2beaf9bc8fc9a4838b84edffe7f69ef8d81.json"
             },
             "format": "zip",
-            "sha256": "80b4650ad805ac9735fc48a6e4163ea50b6e684266e81b1c120967faf3cd7dfe",
-            "url": "https://github.com/kody-w/rapp-crispy/releases/download/v1.5.0/rapp_crispy-1.5.0-x86_64.zip"
+            "sha256": "88f11969bccd0e4d957e34d00912199288e15a6e707689176c966de2fabd2110",
+            "url": "https://github.com/kody-w/rapp-crispy/releases/download/v1.5.1/rapp_crispy-1.5.1-x86_64.zip"
           }
         ],
         "prerequisites": [
@@ -477,7 +477,7 @@
         ],
         "privacy": "Nothing records on launch. The app captures only the selected microphone after Record; stop/cancel and active state are visible. Optional explicitly selected screen/window capture is silent video, not remote-participant or system audio. Apple voice processing and Whisper transcription run locally. Existing meetings, audio and transcripts remain under ~/.rappcrispy/meetings; interrupted jobs preserve completed files. Model downloads fetch checksum-verified public model data without uploading meeting content. Notes are disabled until a provider and destination are reviewed, approved and requested; the example Claude hook sends authorized transcripts to Anthropic. Consent is bound to the provider configuration/executable and can be revoked, but already transmitted content cannot be recalled. A user-selected local hook is not a network sandbox. Native Apple processing is not labeled RNNoise/DeepFilterNet, and legacy benchmark results are not attributed to it. Publisher release reports bind the downloadable bytes and app checks; they are not independent Apple certification or RAPP/1 acceptance by the Store.",
         "setup": [
-          "Download the architecture-specific ZIP from the v1.5.0 release. Double-click it in Finder and drag RAPPCrispy.app to Applications.",
+          "Download the architecture-specific ZIP from the v1.5.1 release. Double-click it in Finder and drag RAPPCrispy.app to Applications.",
           "Launch RAPP Crispy from Applications and let normal macOS/Gatekeeper checks run; do not bypass system protections. Nothing captures automatically.",
           "In Settings, choose a speech model and click Download verified model. Recording can proceed before a model is available; saved audio can be transcribed later.",
           "Choose the microphone and enhancement mode, then click Record. Approve the app's Microphone permission when prompted; use Stop & process or Cancel job to finish.",
@@ -494,7 +494,7 @@
       "kind": "rapplication",
       "publisher": "@kody-w",
       "category": "productivity",
-      "version": "1.3.0",
+      "version": "1.3.1",
       "has_skin": true,
       "distribution": "desktop",
       "desktop": {
@@ -504,33 +504,33 @@
         "bundle_id": "io.rapp.shot",
         "source": {
           "repo": "kody-w/rapp-shot",
-          "commit_sha": "6f354f463b9d59ae308d7ab7b40f3f0704685873"
+          "commit_sha": "3310780e800da97c6c9cf4b1e3c489158de0e2ed"
         },
-        "release_tag": "v1.3.0",
+        "release_tag": "v1.3.1",
         "artifacts": [
           {
             "arch": "arm64",
-            "bytes": 421141,
+            "bytes": 421154,
             "evidence": {
               "bytes": 2587,
-              "sha256": "3400b5d80cb27ef59cd42ccb1045a06c0d3213eb9cb49ddb20b7fbd2d5be17ff",
-              "url": "https://github.com/kody-w/rapp-shot/releases/download/v1.3.0/rapp_shot-1.3.0-arm64.zip.evidence.3400b5d80cb27ef59cd42ccb1045a06c0d3213eb9cb49ddb20b7fbd2d5be17ff.json"
+              "sha256": "38ed2c96f1bfd6217ec8034c4901f3386a01a5d8592f1e5413912d035d2e3686",
+              "url": "https://github.com/kody-w/rapp-shot/releases/download/v1.3.1/rapp_shot-1.3.1-arm64.zip.evidence.38ed2c96f1bfd6217ec8034c4901f3386a01a5d8592f1e5413912d035d2e3686.json"
             },
             "format": "zip",
-            "sha256": "2c745e86a615699f8c0d6c543f524556c8c59aa6af0606020647e47fabec3e76",
-            "url": "https://github.com/kody-w/rapp-shot/releases/download/v1.3.0/rapp_shot-1.3.0-arm64.zip"
+            "sha256": "a9b0356c22e90b6af24fb4dbd386030fa45582f8152552b2a7aed391bdb8ec77",
+            "url": "https://github.com/kody-w/rapp-shot/releases/download/v1.3.1/rapp_shot-1.3.1-arm64.zip"
           },
           {
             "arch": "x86_64",
-            "bytes": 450992,
+            "bytes": 450998,
             "evidence": {
               "bytes": 2591,
-              "sha256": "de1d205e5fd958129e007c2b2e621cc9353ab07761ca37e3455a36402d59b865",
-              "url": "https://github.com/kody-w/rapp-shot/releases/download/v1.3.0/rapp_shot-1.3.0-x86_64.zip.evidence.de1d205e5fd958129e007c2b2e621cc9353ab07761ca37e3455a36402d59b865.json"
+              "sha256": "e37f64f6199ec55975bcb0db90dc7b4aa45ac7bbc9017dc83d5827b49943fbbe",
+              "url": "https://github.com/kody-w/rapp-shot/releases/download/v1.3.1/rapp_shot-1.3.1-x86_64.zip.evidence.e37f64f6199ec55975bcb0db90dc7b4aa45ac7bbc9017dc83d5827b49943fbbe.json"
             },
             "format": "zip",
-            "sha256": "226ef8bd164bb043383c74ba5122b782c02fe29a700cb3de377749591a223e3d",
-            "url": "https://github.com/kody-w/rapp-shot/releases/download/v1.3.0/rapp_shot-1.3.0-x86_64.zip"
+            "sha256": "8db8340dfd6597c6ae8b3edf476b67c05cf229295aaffe017b7925f52ae91d4f",
+            "url": "https://github.com/kody-w/rapp-shot/releases/download/v1.3.1/rapp_shot-1.3.1-x86_64.zip"
           }
         ],
         "prerequisites": [
@@ -540,7 +540,7 @@
         ],
         "privacy": "Nothing is captured on launch. Capture begins only after a user action. ScreenCaptureKit capture, Vision OCR, annotation, crop and redaction run on this Mac; RAPP Shot does not upload screenshots or OCR text and requests no microphone, camera or Accessibility permission. Editable captures remain in memory until export; the default save location is ~/Library/Application Support/io.rapp.shot/Exports/, or a folder the user chooses. Existing images and ~/.rappshot history/rules are not overwritten. Copy and export use the reviewed flattened preview; automatic redaction failures never fall back to copying the original. OCR is per line and English-tuned credential labels can miss split, obscured or unrecognized secrets, while long digests can be over-redacted. Re-reading detected text is not an all-clear: inspect every pixel. Automatic detection can be explicitly disabled for an unverified manual-edit preview. Clipboard use or a user-selected synced folder may be governed by the user's macOS settings.",
         "setup": [
-          "Download the architecture-specific ZIP from the v1.3.0 GitHub release; this is the native app, not the Python integration bundle.",
+          "Download the architecture-specific ZIP from the v1.3.1 GitHub release; this is the native app, not the Python integration bundle.",
           "In Finder, double-click the ZIP to expand it, then drag RAPPShot.app to Applications (or ~/Applications). Keep existing screenshots, rules and settings; no CLI installer is needed.",
           "Open RAPP Shot from Finder. No capture starts automatically; Open Image works without Screen Recording permission.",
           "For capture, click Enable Screen Recording, enable RAPP Shot in System Settings > Privacy & Security > Screen Recording (Screen & System Audio Recording on newer macOS), and quit/reopen if macOS requests it. Do not disable Gatekeeper or reset TCC.",

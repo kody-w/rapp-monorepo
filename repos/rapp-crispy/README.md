@@ -45,24 +45,33 @@ leaves your machine.
 
 ### Native app
 
-**[RAPP Crispy 1.5.0 is available](https://github.com/kody-w/rapp-crispy/releases/tag/v1.5.0)**
+**[RAPP Crispy 1.5.1 is available](https://github.com/kody-w/rapp-crispy/releases/tag/v1.5.1)**
 for macOS 14.0 or later. These architecture-specific ZIPs contain the
 Developer ID signed, notarized/stapled native application and its bundled
 local CPU Whisper runtime—not a terminal launcher or a Python installer.
 
 | Mac | Download | Exact bytes | SHA-256 |
 |---|---|---:|---|
-| Apple Silicon (`arm64`) | [RAPP Crispy 1.5.0 ZIP](https://github.com/kody-w/rapp-crispy/releases/download/v1.5.0/rapp_crispy-1.5.0-arm64.zip) | 1,678,209 | `1462693b958fa170f178d01a3e531b8eaee544f6dd7813df46ab9d3698ea5e35` |
-| Intel (`x86_64`) | [RAPP Crispy 1.5.0 ZIP](https://github.com/kody-w/rapp-crispy/releases/download/v1.5.0/rapp_crispy-1.5.0-x86_64.zip) | 1,908,949 | `80b4650ad805ac9735fc48a6e4163ea50b6e684266e81b1c120967faf3cd7dfe` |
+| Apple Silicon (`arm64`) | [RAPP Crispy 1.5.1 ZIP](https://github.com/kody-w/rapp-crispy/releases/download/v1.5.1/rapp_crispy-1.5.1-arm64.zip) | 1,678,896 | `be33ca8fa8ac00f482d35ba143920717f47c94bc480765278344f8161930dd5f` |
+| Intel (`x86_64`) | [RAPP Crispy 1.5.1 ZIP](https://github.com/kody-w/rapp-crispy/releases/download/v1.5.1/rapp_crispy-1.5.1-x86_64.zip) | 1,909,638 | `88f11969bccd0e4d957e34d00912199288e15a6e707689176c966de2fabd2110` |
 
 Publisher release reports:
-[Apple Silicon](https://github.com/kody-w/rapp-crispy/releases/download/v1.5.0/rapp_crispy-1.5.0-arm64.zip.evidence.2fcc4bd0806156f06cdfaf2bbe485753a73840e5befac564415459074b3ab7a9.json) ·
-[Intel](https://github.com/kody-w/rapp-crispy/releases/download/v1.5.0/rapp_crispy-1.5.0-x86_64.zip.evidence.142cbda70a2fb49bb05fb97cc30353e6b5de805ecc9eac8cc1121a3b9075941d.json).
+[Apple Silicon evidence](https://github.com/kody-w/rapp-crispy/releases/download/v1.5.1/rapp_crispy-1.5.1-arm64.zip.evidence.a8477a9c55b4a04b8c057e5be15bf0f24c157d09e6a74ae25e5212692cf2b53b.json) ·
+[Apple Silicon provenance](https://github.com/kody-w/rapp-crispy/releases/download/v1.5.1/rapp_crispy-1.5.1-arm64.release-result.json) ·
+[Intel evidence](https://github.com/kody-w/rapp-crispy/releases/download/v1.5.1/rapp_crispy-1.5.1-x86_64.zip.evidence.78ba17ed51dfbe92c4acb8ed7805a2beaf9bc8fc9a4838b84edffe7f69ef8d81.json) ·
+[Intel provenance](https://github.com/kody-w/rapp-crispy/releases/download/v1.5.1/rapp_crispy-1.5.1-x86_64.release-result.json).
 The content-addressed report suffix hashes the report bytes, not the ZIP.
 Reports describe checks on the enclosed application; ZIP containers are not
 themselves stapled. Public references and byte hashes are inspectable, but
 publisher reports are not independent Apple certification or RAPP/1 acceptance
 by the Store.
+
+The runtime provenance records `bin/whisper-cli` as the pre-sign build input and
+`Contents/MacOS/whisper-cli` as the final bundle location. Final helper hashes
+are `4c8b599a1219cda756633e458b04f4595e54779a1dd3d396ccced05a1cd22300`
+for arm64 and `633decb3ea9a16331401623c667bd7093b1fb85a1561858a5a821307b632d111`
+for x86_64. The helper is code-signature- and hash-verified; only the enclosing
+application is stapled and Gatekeeper-assessed.
 
 1. Download the ZIP for your Mac, double-click it in Finder, and drag
    `RAPPCrispy.app` to Applications.
@@ -84,8 +93,8 @@ compatible loopback is optional for legacy live routing only; the native app
 does not install a driver or implement a live virtual microphone.
 
 Native source:
-[`656537dacb605d0298a9552ffc882936cec41cc3`](https://github.com/kody-w/rapp-crispy/commit/656537dacb605d0298a9552ffc882936cec41cc3).
-[Successful same-source CI](https://github.com/kody-w/rapp-crispy/actions/runs/34735277189).
+[`873c06fd2930c8948e61e800abbf10af691ffb2d`](https://github.com/kody-w/rapp-crispy/commit/873c06fd2930c8948e61e800abbf10af691ffb2d).
+[Successful same-source CI](https://github.com/kody-w/rapp-crispy/actions/runs/34767506225).
 The later manifest/integration metadata commit is distinct from this immutable
 native-build commit. See [the native guide](native/README.md) for capabilities,
 storage, developer builds and per-build verification requirements.
@@ -104,6 +113,9 @@ cd rapp-crispy
 Needs `ffmpeg` (for `arnndn`) and a local whisper.cpp server. If you already run
 [RAPP Voice](https://github.com/kody-w/rapp-voice), you already have the ASR
 server and the personal dictionary — Crispy reuses both.
+The compatibility installer pins RNNoise model sources and verifies every
+downloaded model and DeepFilterNet binary by exact size and SHA-256. It preserves
+normal macOS quarantine/Gatekeeper handling instead of clearing quarantine.
 
 ---
 
@@ -310,25 +322,12 @@ the real configured environment; do not run it as an autonomous release check.
 Retired eggs are not rebuilt or required to match native source adapters;
 `parity.sh --legacy-egg` is an explicit historical archive check.
 
-## Running as a service
+## No automatic service bootstrap
 
-`crispy` works fine ad hoc, but the ASR server and the hatched twin die on logout.
-`install.sh --service` installs two user-level launchd agents — no sudo, no system
-directories:
-
-| Agent | What |
-|---|---|
-| `com.rapp.whisper-server` | the local ASR on 127.0.0.1:8765 (shared with RAPP Voice) |
-| `com.rapp.crispy-twin` | the hatched rapplication on :7090 |
-
-```bash
-launchctl list | grep com.rapp.           # status
-launchctl bootout gui/$(id -u)/com.rapp.crispy-twin   # stop one
-rm ~/Library/LaunchAgents/com.rapp.*.plist            # uninstall entirely
-```
-
-The live virtual microphone is deliberately **not** a service — it holds the
-microphone open, so you start it when you want it.
+The compatibility installer does not install launchd services. Run the legacy
+CLI and localhost ASR explicitly when needed; do not infer a background service
+from an old hatched-twin workflow. The live virtual microphone is deliberately
+not a service—it holds the microphone open, so you start it when you want it.
 
 ## Keeping it from rotting
 
@@ -339,12 +338,12 @@ capability fact asserted in `soul.md` that the tool contradicted.
 
 Two things guard that now, and they are different cures:
 
-- **`tools/setversion.sh` is a generator.** The store spec needs `version` in three
-  files; one command writes all three and rebuilds the egg. Never edit a version by
-  hand.
+- **`tools/setversion.sh` updates active integration declarations.** It verifies
+  the retired egg's fixed SHA-256 before and after the update and never rewrites
+  that historical archive.
 - **`tools/parity.sh` is a detector**, for what a generator cannot cover: the twin
-  agent must be byte-identical to the singleton, the egg must carry the shipped
-  agent, the CLI and agent must resolve the same defaults, and **prose must never
+  agent must be byte-identical to the singleton, the retired egg digest must stay
+  fixed, the CLI and agent must resolve the same defaults, and **prose must never
   assert a fact a tool can compute** — that last rule is why the persona now defers
   to `live_status` instead of claiming a driver is required.
 
