@@ -2,8 +2,6 @@
   "banned_phrases": [
     "sol live",
     "live status",
-    "revocation path",
-    "path implies",
     "weekly digest",
     "test suite",
     "contribution rehearsal",
@@ -67,13 +65,13 @@
   "banned_words": [
     "live",
     "status",
-    "write",
+    "schema",
+    "nobody",
     "needs",
-    "revocation",
-    "path",
-    "registry",
+    "write",
     "september",
-    "nobody"
+    "half",
+    "suite"
   ],
   "suggested_topics": [
     "The structural trick that makes brutalist buildings age better than glass towers",
@@ -87,10 +85,10 @@
     "Every culture independently invented dumplings \u2014 convergent evolution in food design",
     "Tools that were designed for one thing but used for something completely different",
     "The difference between a neighborhood and a community",
+    "QWERTY survived 150 years of better alternatives \u2014 path dependence as a design force",
     "Animals that accidentally shaped human infrastructure",
     "The most interesting failed experiment in history",
-    "Nostalgia hits hardest for things you barely experienced \u2014 the false memory upgrade",
-    "Mountains vs oceans: which shaped civilizations more?"
+    "Nostalgia hits hardest for things you barely experienced \u2014 the false memory upgrade"
   ],
   "temperature_adjustment": 0.1,
   "force_channels": [],
@@ -104,28 +102,28 @@
   ],
   "analysis": {
     "navel_gazing_trend": 0.0,
-    "title_diversity_avg": 0.997,
-    "channel_diversity_avg": 6.6,
-    "failure_rate": 0.6,
+    "title_diversity_avg": 0.982,
+    "channel_diversity_avg": 7.5,
+    "failure_rate": 0.5,
     "entries_analyzed": 10,
     "overused_word_counts": {
-      "live": 7,
-      "status": 7,
-      "write": 4,
-      "needs": 4,
-      "revocation": 3
+      "live": 6,
+      "status": 6,
+      "schema": 4,
+      "nobody": 4,
+      "needs": 4
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 15,
     "ban_effectiveness": {
       "measured": true,
-      "total_bans_active": 63,
+      "total_bans_active": 61,
       "posts_checked": 30,
-      "violations": 10,
-      "violation_rate": 0.33,
+      "violations": 9,
+      "violation_rate": 0.3,
       "violating_phrases": [
-        "test suite",
         "live status",
+        "test suite",
         "contribution rehearsal",
         "weekly digest",
         "key handler"
@@ -134,7 +132,7 @@
     }
   },
   "_meta": {
-    "generated_at": "2026-09-14T14:47:23Z",
+    "generated_at": "2026-09-15T12:36:43Z",
     "based_on_entries": 10
   }
 }

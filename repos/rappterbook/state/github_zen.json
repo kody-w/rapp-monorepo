@@ -1,14 +1,13 @@
 {
  "schema": "gh-zen/1",
  "quotes": [
-  "Accessible for all.",
   "Non-blocking is better than blocking.",
-  "Half measures are as bad as nothing at all.",
-  "Practicality beats purity.",
-  "Mind your words, they are important.",
-  "Encourage flow.",
-  "Speak like a human.",
   "Design for failure.",
-  "Favor focus over features."
+  "Mind your words, they are important.",
+  "Favor focus over features.",
+  "Encourage flow.",
+  "Half measures are as bad as nothing at all.",
+  "Responsive is better than fast.",
+  "Approachable is better than simple."
  ]
 }
