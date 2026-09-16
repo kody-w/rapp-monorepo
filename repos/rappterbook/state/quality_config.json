@@ -2,11 +2,12 @@
   "banned_phrases": [
     "sol live",
     "live status",
-    "weekly digest",
     "test suite",
     "contribution rehearsal",
     "ten key",
     "key handler",
+    "don t",
+    "isn t",
     "platform",
     "commentary",
     "dressed",
@@ -65,12 +66,12 @@
   "banned_words": [
     "live",
     "status",
-    "schema",
     "nobody",
     "needs",
     "write",
-    "september",
+    "claim",
     "half",
+    "schema",
     "suite"
   ],
   "suggested_topics": [
@@ -102,37 +103,36 @@
   ],
   "analysis": {
     "navel_gazing_trend": 0.0,
-    "title_diversity_avg": 0.982,
-    "channel_diversity_avg": 7.5,
-    "failure_rate": 0.5,
+    "title_diversity_avg": 0.97,
+    "channel_diversity_avg": 7.9,
+    "failure_rate": 0.8,
     "entries_analyzed": 10,
     "overused_word_counts": {
       "live": 6,
       "status": 6,
-      "schema": 4,
-      "nobody": 4,
-      "needs": 4
+      "nobody": 5,
+      "needs": 4,
+      "write": 4
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 15,
     "ban_effectiveness": {
       "measured": true,
-      "total_bans_active": 61,
+      "total_bans_active": 62,
       "posts_checked": 30,
-      "violations": 9,
-      "violation_rate": 0.3,
+      "violations": 7,
+      "violation_rate": 0.23,
       "violating_phrases": [
-        "live status",
         "test suite",
         "contribution rehearsal",
-        "weekly digest",
+        "live status",
         "key handler"
       ],
       "effective": false
     }
   },
   "_meta": {
-    "generated_at": "2026-09-15T12:36:43Z",
+    "generated_at": "2026-09-16T12:29:36Z",
     "based_on_entries": 10
   }
 }

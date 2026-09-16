@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kody-w/rapp-workspace/raw/main/protocols/rapp-workspace/1/schemas/workspace-binding.schema.json",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "rapp-workspace/1/workspace-binding"
+    },
+    "instance_rappid": {
+      "$ref": "common.schema.json#/$defs/rappid"
+    },
+    "world_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[^\\u0000-\\u001f\\u007f]*$(?![\\s\\S])"
+    },
+    "activation_mode": {
+      "enum": [
+        "live",
+        "synthetic"
+      ]
+    },
+    "activation": {
+      "$ref": "common.schema.json#/$defs/particle"
+    },
+    "native_subject": {
+      "$ref": "common.schema.json#/$defs/subject"
+    },
+    "restrictions": {
+      "$ref": "common.schema.json#/$defs/restrictions"
+    },
+    "assessment": {
+      "$ref": "common.schema.json#/$defs/wave"
+    },
+    "entry_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "pattern": "^[^\\u0000-\\u001f\\u007f]*$(?![\\s\\S])"
+    },
+    "child_rappid": {
+      "$ref": "common.schema.json#/$defs/rappid"
+    },
+    "child_world_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[^\\u0000-\\u001f\\u007f]*$(?![\\s\\S])"
+    },
+    "source_metadata_sha256": {
+      "$ref": "common.schema.json#/$defs/hash"
+    },
+    "verification_status": {
+      "const": "verified-external-binding"
+    },
+    "verification_method": {
+      "const": "external-host-metadata-verifier"
+    },
+    "evidence": {
+      "$ref": "common.schema.json#/$defs/particle"
+    },
+    "grants_authority": {
+      "const": false
+    }
+  },
+  "required": [
+    "schema",
+    "instance_rappid",
+    "world_id",
+    "activation_mode",
+    "activation",
+    "native_subject",
+    "restrictions",
+    "assessment",
+    "entry_id",
+    "child_rappid",
+    "child_world_id",
+    "source_metadata_sha256",
+    "verification_status",
+    "verification_method",
+    "evidence",
+    "grants_authority"
+  ],
+  "additionalProperties": false
+}

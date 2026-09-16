@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kody-w/rapp-workspace/raw/main/protocols/rapp-workspace/1/schemas/workspace-composite.schema.json",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "rapp-workspace/1/workspace-composite"
+    },
+    "instance_rappid": {
+      "$ref": "common.schema.json#/$defs/rappid"
+    },
+    "world_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[^\\u0000-\\u001f\\u007f]*$(?![\\s\\S])"
+    },
+    "activation_mode": {
+      "enum": [
+        "live",
+        "synthetic"
+      ]
+    },
+    "activation": {
+      "$ref": "common.schema.json#/$defs/particle"
+    },
+    "native_subject": {
+      "$ref": "common.schema.json#/$defs/subject"
+    },
+    "restrictions": {
+      "$ref": "common.schema.json#/$defs/restrictions"
+    },
+    "assessment": {
+      "$ref": "common.schema.json#/$defs/wave"
+    },
+    "composite_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[^\\u0000-\\u001f\\u007f]*$(?![\\s\\S])"
+    },
+    "selected_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 512,
+        "pattern": "^[^\\u0000-\\u001f\\u007f]*$(?![\\s\\S])"
+      },
+      "minItems": 0,
+      "maxItems": 1024,
+      "uniqueItems": true
+    },
+    "child_composites": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/wave"
+      },
+      "minItems": 0,
+      "maxItems": 128,
+      "uniqueItems": true
+    },
+    "member_count": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10000
+    },
+    "members_sha256": {
+      "$ref": "common.schema.json#/$defs/hash"
+    },
+    "depth": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 32
+    },
+    "recursive": {
+      "const": true
+    },
+    "routing_only": {
+      "const": true
+    },
+    "workspace_bindings": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/workspace_binding"
+      },
+      "minItems": 0,
+      "maxItems": 1024,
+      "uniqueItems": true
+    },
+    "bindings_sha256": {
+      "$ref": "common.schema.json#/$defs/hash"
+    },
+    "verified_binding_count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10000
+    },
+    "unverified_binding_count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10000
+    },
+    "child_identity_status": {
+      "enum": [
+        "verified-external-bindings",
+        "preserved-by-reference-unverified"
+      ]
+    },
+    "child_world_status": {
+      "enum": [
+        "verified-external-bindings",
+        "preserved-by-reference-unverified"
+      ]
+    },
+    "content_copied": {
+      "const": false
+    },
+    "grants_authority": {
+      "const": false
+    }
+  },
+  "required": [
+    "schema",
+    "instance_rappid",
+    "world_id",
+    "activation_mode",
+    "activation",
+    "native_subject",
+    "restrictions",
+    "assessment",
+    "composite_id",
+    "selected_ids",
+    "child_composites",
+    "member_count",
+    "members_sha256",
+    "depth",
+    "recursive",
+    "routing_only",
+    "workspace_bindings",
+    "bindings_sha256",
+    "verified_binding_count",
+    "unverified_binding_count",
+    "child_identity_status",
+    "child_world_status",
+    "content_copied",
+    "grants_authority"
+  ],
+  "additionalProperties": false
+}

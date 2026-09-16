@@ -1,4 +1,4 @@
-"""Blocking P0/P1 first-Grail vectors. Public synthetic data only."""
+"""Blocking P0/P1 Workspace/1 core vectors. Public synthetic data only."""
 
 import copy
 from dataclasses import replace
@@ -13,7 +13,7 @@ from unittest.mock import patch
 import uuid
 
 REPO = Path(__file__).resolve().parents[1]
-REFERENCE = REPO / "protocols/rapp-workspace/grail-1.0/reference"
+REFERENCE = REPO / "protocols/rapp-workspace/1/reference"
 sys.path.insert(0, str(REFERENCE))
 from common import Parent, Refusal, read_file, sha, wave
 from pins import encode, manifest, check_index
@@ -25,7 +25,63 @@ NOW = "2026-09-15T03:12:29.000Z"
 CONTRACT = {"operation": "identity-octets", "field": "", "coverage": "complete-captured-octets", "inverse": True}
 
 
-class SafeKernelTests(unittest.TestCase):
+def catalog_snapshot(entries):
+    value = [
+        {
+            "id": entry["id"], "kind": entry["kind"], "parent": entry["parent"],
+            "labels": entry["labels"], "metadata_sha256": entry["metadata_sha256"],
+            "share_class": entry["share_class"],
+        }
+        for entry in sorted(entries, key=lambda item: item["id"])
+    ]
+    return sha(json.dumps(
+        value, sort_keys=True, ensure_ascii=True, allow_nan=False,
+        separators=(",", ":"),
+    ).encode("ascii"))
+
+
+def organization_tiles(catalog_id, groups, assignments, *, tree_id="organization", tile_count=1):
+    snapshot = {
+        "tree_id": tree_id,
+        "catalog_id": catalog_id,
+        "root_group": "root",
+        "groups": groups,
+        "assignments": sorted(
+            assignments,
+            key=lambda item: (item["entry_id"], item["group_id"]),
+        ),
+    }
+    digest = sha(json.dumps(
+        snapshot, sort_keys=True, ensure_ascii=True, allow_nan=False,
+        separators=(",", ":"),
+    ).encode("ascii"))
+    return [
+        {
+            "schema": "rapp-workspace/organization-tree-tile/1",
+            "tree_id": tree_id,
+            "catalog_id": catalog_id,
+            "root_group": "root",
+            "tile_index": index,
+            "tile_count": tile_count,
+            "snapshot_sha256": digest,
+            "groups": groups,
+            "assignments": assignments[index::tile_count],
+        }
+        for index in range(tile_count)
+    ]
+
+
+class FixtureClock:
+    def __init__(self, value=NOW):
+        self.value = value
+        self.calls = 0
+
+    def __call__(self):
+        self.calls += 1
+        return self.value
+
+
+class KernelFixture(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.core = Parent(os.environ.get("RAPP1_PATH"))
@@ -44,7 +100,9 @@ class SafeKernelTests(unittest.TestCase):
             sha(read_file(REFERENCE.parent / "manifest.json")),
             frozenset({"capture", "local_synthesis", "retention", "adoption", "materialization"}),
             (self.scope,), max_attempts=16, max_frames=256)
-        self.c = Controller(self.core, self.root / "controller", self.policy, now=NOW)
+        self.clock = FixtureClock()
+        self.c = Controller(self.core, self.root / "controller", self.policy,
+                            clock=self.clock, activation_mode="synthetic")
         self.addCleanup(self.c.close)
         self.c.seed(self.scope.subject())
 
@@ -65,16 +123,22 @@ class SafeKernelTests(unittest.TestCase):
             integrity=result["rapp_integrity"], observation=cap["observation"])
         return cap, result, fidelity, request, frontier
 
+
+class SafeKernelTests(KernelFixture):
+
     def test_unique_validator_and_exact_manifest_do_not_reuse_historical_ids(self):
-        self.assertEqual(PROFILE, "rapp-workspace/grail-1.0")
+        self.assertEqual(PROFILE, "rapp-workspace/1")
         self.assertTrue(check_index())
+        self.assertTrue(json.loads((REPO / "protocols/index.json").read_bytes())["authority"])
+        self.assertTrue(manifest()["authority"])
         self.assertEqual(read_file(REFERENCE.parent / "manifest.json"), encode(manifest()))
         p = self.c.body(self.c._get("root"))
         p["schema"] = "rapp-workspace/1.0/seed"
         with self.assertRaisesRegex(Refusal, "unsupported"):
             self.core.schemas.validate(p)
         with self.assertRaisesRegex(Refusal, "wrong-validator-or-spec-pin"):
-            Controller(self.core, self.root / "wrong-pin", replace(self.policy, spec_sha256="0" * 64), now=NOW)
+            Controller(self.core, self.root / "wrong-pin", replace(self.policy, spec_sha256="0" * 64),
+                       clock=self.clock, activation_mode="synthetic")
         self.assertFalse((self.root / "wrong-pin").exists())
 
     def test_guarantees_are_distinct_and_replay_does_not_imply_fidelity_or_deployment(self):
@@ -103,13 +167,13 @@ class SafeKernelTests(unittest.TestCase):
             self.c.verify_receipt(forged, "rapp_integrity", result["frame"])
 
     def test_adoption_shaped_data_and_foreign_manifest_cannot_grant_effective_rights(self):
-        raw = b'{"schema":"rapp-workspace/grail-1.0/adoption-record","grants":["execute","all"],"owner":true}'
+        raw = b'{"schema":"rapp-workspace/1/adoption-record","grants":["execute","all"],"owner":true}'
         _, _, result = self.candidate(raw)
         self.assertEqual(self.c.projection()["entries"], [])
         with self.assertRaisesRegex(Refusal, "inert-data"):
             self.c.adopt(self.scope.subject(), result["frame"], self.c.frontier())
         for operation in ("execution", "model_submission", "redistribution"):
-            with self.assertRaisesRegex(Refusal, "disabled-first-grail"):
+            with self.assertRaisesRegex(Refusal, "disabled-workspace1-core"):
                 self.c.require_effect(self.scope.subject(), operation)
 
     def test_capture_and_synthesis_authorization_precede_access_or_decoding(self):
@@ -128,7 +192,7 @@ class SafeKernelTests(unittest.TestCase):
         with patch("safe_kernel.read_file", side_effect=AssertionError("source accessed")):
             with self.assertRaisesRegex(Refusal, "outside-explicit"):
                 self.c.capture_file(foreign.subject(), self.source)
-            self.c.now = self.policy.expires_utc
+            self.clock.value = self.policy.expires_utc
             with self.assertRaisesRegex(Refusal, "expired"):
                 self.c.capture_file(self.scope.subject(), self.source)
 
@@ -170,7 +234,8 @@ class SafeKernelTests(unittest.TestCase):
 
     def test_unprovable_physical_deletion_is_disabled_before_capture(self):
         with self.assertRaisesRegex(Refusal, "erasure"):
-            Controller(self.core, self.root / "must-not-exist", replace(self.policy, physical_deletion_required=True), now=NOW)
+            Controller(self.core, self.root / "must-not-exist", replace(self.policy, physical_deletion_required=True),
+                       clock=self.clock, activation_mode="synthetic")
         self.assertFalse((self.root / "must-not-exist").exists())
 
     def test_exact_mapping_contract_and_inverse_required_for_fidelity(self):
@@ -239,7 +304,8 @@ class SafeKernelTests(unittest.TestCase):
         self.c.capture_octets(self.scope.subject(), b"new rendition, same native subject")
         checkpoint = self.c.checkpoint()
         self.c.close()
-        self.c = Controller(self.core, self.root / "controller", self.policy, now=NOW, checkpoint=checkpoint)
+        self.c = Controller(self.core, self.root / "controller", self.policy,
+                            clock=self.clock, activation_mode="synthetic", checkpoint=checkpoint)
         self.addCleanup(self.c.close)
         _, _, _, request, frontier = self.ready()
         with self.assertRaisesRegex(Refusal, "suppression"):
@@ -334,9 +400,10 @@ class SafeKernelTests(unittest.TestCase):
 
     def test_single_writer_partition_refusal_and_fork_latch(self):
         with self.assertRaisesRegex(Refusal, "single-writer"):
-            Controller(self.core, self.root / "controller", self.policy, now=NOW)
+            Controller(self.core, self.root / "controller", self.policy, clock=self.clock, activation_mode="synthetic")
         with self.assertRaisesRegex(Refusal, "partition"):
-            Controller(self.core, self.root / "partition", replace(self.policy, partitioned=True), now=NOW)
+            Controller(self.core, self.root / "partition", replace(self.policy, partitioned=True),
+                       clock=self.clock, activation_mode="synthetic")
         original = self.c._head()
         payload = dict(original["payload"])
         payload["world_id"] = "rival-data"
@@ -345,7 +412,8 @@ class SafeKernelTests(unittest.TestCase):
             self.c.observe_owned_fork(self.core.octets(rival))
         checkpoint = self.c.checkpoint()
         self.c.close()
-        self.c = Controller(self.core, self.root / "controller", self.policy, now=NOW, checkpoint=checkpoint)
+        self.c = Controller(self.core, self.root / "controller", self.policy,
+                            clock=self.clock, activation_mode="synthetic", checkpoint=checkpoint)
         self.addCleanup(self.c.close)
         with self.assertRaisesRegex(Refusal, "fork-latched"):
             self.c.capture_octets(self.scope.subject(), b"no new authorization")
@@ -353,7 +421,7 @@ class SafeKernelTests(unittest.TestCase):
     def test_live_migration_without_behavior_and_snapshot_proof_is_disabled_before_io(self):
         before = self.source.read_bytes()
         with patch("safe_kernel.read_file", side_effect=AssertionError("migration accessed source")):
-            with self.assertRaisesRegex(Refusal, "disabled-first-grail:live_migration"):
+            with self.assertRaisesRegex(Refusal, "disabled-workspace1-core:live_migration"):
                 self.c.require_effect(self.scope.subject(), "live_migration")
         self.assertEqual(self.source.read_bytes(), before)
 
@@ -517,7 +585,7 @@ policy = ExternalPolicy(p['instance_rappid'], p['world_id'], p['spec_sha256'], p
     frozenset(p['rights']), tuple(Scope(x['subject']['namespace'],x['subject']['native_key'],x['path']) for x in p['scopes']),
     sequence=p['sequence'],expires_utc=p['expires_utc'],audience=tuple(p['audience']),
     max_attempts=p['max_attempts'],max_depth=p['max_depth'],max_frames=p['max_frames'],max_total_octets=p['max_total_octets'])
-c = Controller(core, sys.argv[3], policy, now="2026-09-15T03:12:29.000Z")
+c = Controller(core, sys.argv[3], policy, clock=lambda: "2026-09-15T03:12:29.000Z", activation_mode="synthetic")
 c.adopt(policy.scopes[0].subject(), a['request'], a['frontier'],
         fault=lambda stage: os._exit(93) if stage == 'before-commit' else None)
 """
@@ -525,17 +593,18 @@ c.adopt(policy.scopes[0].subject(), a['request'], a['frontier'],
                                     str(self.root / "controller"), str(policy_file), str(args_file)],
                                    capture_output=True, timeout=60)
         self.assertEqual(completed.returncode, 93, completed.stderr.decode())
-        self.c = Controller(self.core, self.root / "controller", self.policy, now=NOW)
+        self.c = Controller(self.core, self.root / "controller", self.policy,
+                            clock=self.clock, activation_mode="synthetic")
         self.addCleanup(self.c.close)
         self.assertEqual(self.c.checkpoint(), before)
         self.c.adopt(self.scope.subject(), request, frontier)
         self.assertEqual(len(self.c.projection()["entries"]), 1)
 
     def test_controller_clock_rollback_and_partial_ledger_loss_refuse(self):
-        self.c.now = "2026-01-01T00:00:00.000Z"
+        self.clock.value = "2026-01-01T00:00:00.000Z"
         with self.assertRaisesRegex(Refusal, "clock-rollback"):
             self.c.capture_octets(self.scope.subject(), b"must not read")
-        self.c.now = NOW
+        self.clock.value = NOW
         _, _, _, request, frontier = self.ready()
         self.c.adopt(self.scope.subject(), request, frontier)
         self.c.db.execute("DELETE FROM adoptions")
@@ -551,12 +620,490 @@ c.adopt(policy.scopes[0].subject(), a['request'], a['frontier'],
         ], cwd=REPO, capture_output=True, text=True, timeout=60)
         self.assertEqual(completed.returncode, 0, completed.stderr)
         report = json.loads((REPO / output / "report.json").read_bytes())
+        self.assertEqual(report["activation_mode"], "synthetic")
+        self.assertFalse(report["activation_authenticated"])
         self.assertEqual(report["synthesis"], "not-authorized")
         self.assertFalse((REPO / output / "controller/evidence").exists())
         self.assertFalse((REPO / output / "controller/view.json").exists())
         self.assertEqual(report["scan_method"], "canonical-parent-in-memory")
 
-    def test_schemas_are_closed_bounded_and_first_grail_only(self):
+    def test_recursive_catalog_refines_outcome_tree_and_withholds_hive_private_entries(self):
+        entries = [
+            {"id": "repo:a", "kind": "git-repository", "parent": "github:kody-w",
+             "labels": ["build-rapp", "workspace"], "metadata_sha256": "1" * 64,
+             "share_class": "public-source"},
+            {"id": "repo:b", "kind": "git-repository", "parent": "github:kody-w",
+             "labels": ["build-rapp", "workspace"], "metadata_sha256": "2" * 64,
+             "share_class": "private-source"},
+            {"id": "repo:c", "kind": "git-repository", "parent": "github:kody-w",
+             "labels": ["publish", "workspace"], "metadata_sha256": "3" * 64,
+             "share_class": "public-source"},
+            {"id": "repo:d", "kind": "git-repository", "parent": "github:kody-w",
+             "labels": ["archive", "workspace"], "metadata_sha256": "4" * 64,
+             "share_class": "excluded-source"},
+        ]
+        snapshot = catalog_snapshot(entries)
+        shards = []
+        for index in range(2):
+            document = {
+                "schema": "rapp-workspace/catalog-chunk/1",
+                "catalog_id": "github:kody-w",
+                "root_id": "github:kody-w",
+                "shard_index": index,
+                "shard_count": 2,
+                "snapshot_sha256": snapshot,
+                "branch_scope": "default-branch-only",
+                "branch_evidence_status": "external-host-observation-unproven",
+                "recursive": True,
+                "entries": entries[index * 2:(index + 1) * 2],
+            }
+            source = self.c.capture_octets(self.scope.subject(), self.core.octets(document))["source"]
+            shards.append(self.c.register_catalog_shard(self.scope.subject(), source))
+
+        broad_tree = organization_tiles(
+            "github:kody-w",
+            [
+                {"id": "root", "name": "GitHub", "parent": None},
+                {"id": "all-work", "name": "All Work", "parent": "root"},
+            ],
+            [
+                {"entry_id": entry["id"], "group_id": "all-work"} for entry in entries
+            ],
+        )[0]
+        broad_source = self.c.capture_octets(
+            self.scope.subject(), self.core.octets(broad_tree))["source"]
+        first = self.c.assess_organization(
+            self.scope.subject(), shards, broad_source,
+            max_bucket=2, allowed_depth=4)
+        first_body = self.c.body(first)
+        self.assertEqual(first_body["status"], "needs-refinement")
+        self.assertEqual(first_body["largest_bucket"], 4)
+
+        refined_tree = organization_tiles(
+            "github:kody-w",
+            [
+                {"id": "root", "name": "GitHub", "parent": None},
+                {"id": "build", "name": "Build", "parent": "root"},
+                {"id": "publish", "name": "Publish", "parent": "root"},
+            ],
+            [
+                {"entry_id": "repo:a", "group_id": "build"},
+                {"entry_id": "repo:b", "group_id": "build"},
+                {"entry_id": "repo:c", "group_id": "publish"},
+                {"entry_id": "repo:d", "group_id": "publish"},
+            ],
+        )[0]
+        refined_source = self.c.capture_octets(
+            self.scope.subject(), self.core.octets(refined_tree))["source"]
+        refined = self.c.assess_organization(
+            self.scope.subject(), shards, refined_source,
+            max_bucket=2, allowed_depth=4, refinement_round=1, previous=first)
+        refined_body = self.c.body(refined)
+        self.assertEqual(refined_body["status"], "verified")
+        self.assertTrue(refined_body["progress"])
+        self.assertEqual(refined_body["assigned_count"], 4)
+
+        outcome = self.c.candidate_outcome(
+            self.scope.subject(), refined, "publish and improve RAPP", ["repo:a", "repo:c"])
+        outcome_body = self.c.body(outcome)
+        self.assertEqual(outcome_body["status"], "candidate")
+        self.assertEqual(outcome_body["semantic_fidelity"], "unproven")
+        self.assertNotIn("publish and improve RAPP", json.dumps(outcome_body))
+        self.assertFalse(outcome_body["grants_authority"])
+
+        withheld = self.c.propose_subscription(
+            self.scope.subject(), refined, [entry["id"] for entry in entries])
+        withheld_body = self.c.body(withheld)
+        self.assertEqual(withheld_body["selected_ids"], ["repo:a", "repo:c"])
+        self.assertEqual(withheld_body["withheld_private"], 1)
+        self.assertEqual(withheld_body["withheld_excluded"], 1)
+        self.assertFalse(withheld_body["publication_authorized"])
+
+        approved = self.c.propose_subscription(
+            self.scope.subject(), refined, [entry["id"] for entry in entries],
+            approved_private_ids=["repo:b"])
+        approved_body = self.c.body(approved)
+        self.assertEqual(approved_body["selected_ids"], ["repo:a", "repo:b", "repo:c"])
+        self.assertEqual(approved_body["externally_approved_private"], 1)
+        self.assertFalse(approved_body["publication_authorized"])
+
+        build = self.c.compose_workspace(
+            self.scope.subject(), refined, "build-workspace", ["repo:a", "repo:b"])
+        publish = self.c.compose_workspace(
+            self.scope.subject(), refined, "publish-workspace", ["repo:c", "repo:d"])
+        root = self.c.compose_workspace(
+            self.scope.subject(), refined, "all-workspaces", [], [build, publish])
+        root_body = self.c.body(root)
+        self.assertEqual(root_body["member_count"], 4)
+        self.assertEqual(root_body["depth"], 1)
+        self.assertEqual(root_body["child_identity_status"], "preserved-by-reference-unverified")
+        self.assertEqual(root_body["child_world_status"], "preserved-by-reference-unverified")
+        self.assertFalse(root_body["content_copied"])
+        wrapped = self.c.compose_workspace(
+            self.scope.subject(), refined, "workspace-of-workspaces", [], [root])
+        self.assertEqual(self.c.body(wrapped)["depth"], 2)
+        self.assertEqual(self.c.body(wrapped)["member_count"], 4)
+        self.assertEqual(
+            self.c.compose_workspace(
+                self.scope.subject(), refined, "workspace-of-workspaces", [], [root]),
+            wrapped,
+        )
+        with self.assertRaisesRegex(Refusal, "duplicate-member"):
+            self.c.compose_workspace(
+                self.scope.subject(), refined, "duplicate-member",
+                ["repo:a"], [build])
+        forged = self.c.body(build)
+        forged["composite_id"] = "forged-composite"
+        forged_ref = self.c.emit(forged)
+        with self.assertRaisesRegex(Refusal, "controller-record-required"):
+            self.c.compose_workspace(
+                self.scope.subject(), refined, "forged-parent", [], [forged_ref])
+        with self.assertRaisesRegex(Refusal, "idempotency-conflict"):
+            self.c.compose_workspace(
+                self.scope.subject(), refined, "build-workspace", ["repo:a"])
+
+    def test_recursive_catalog_incomplete_no_progress_and_unverified_outcomes_refuse(self):
+        entry = {"id": "repo:a", "kind": "git-repository", "parent": "github:kody-w",
+                 "labels": [], "metadata_sha256": "1" * 64,
+                 "share_class": "public-source"}
+        document = {
+            "schema": "rapp-workspace/catalog-chunk/1",
+            "catalog_id": "github:kody-w",
+            "root_id": "github:kody-w",
+            "shard_index": 0,
+            "shard_count": 2,
+            "snapshot_sha256": catalog_snapshot([entry]),
+            "branch_scope": "default-branch-only",
+            "branch_evidence_status": "external-host-observation-unproven",
+            "recursive": True,
+            "entries": [entry],
+        }
+        source = self.c.capture_octets(self.scope.subject(), self.core.octets(document))["source"]
+        shard = self.c.register_catalog_shard(self.scope.subject(), source)
+        invalid_branch = {**document, "branch_scope": "all-branches", "shard_count": 1}
+        invalid_source = self.c.capture_octets(
+            self.scope.subject(), self.core.octets(invalid_branch))["source"]
+        with self.assertRaisesRegex(Refusal, "unsupported-catalog-scope"):
+            self.c.register_catalog_shard(self.scope.subject(), invalid_source)
+        local_entry = {
+            **entry,
+            "kind": "local-workspace",
+            "labels": ["workspace"],
+        }
+        local_document = {
+            **document,
+            "shard_count": 1,
+            "snapshot_sha256": catalog_snapshot([local_entry]),
+            "branch_scope": "not-applicable",
+            "branch_evidence_status": "not-applicable",
+            "entries": [local_entry],
+        }
+        local_source = self.c.capture_octets(
+            self.scope.subject(), self.core.octets(local_document))["source"]
+        local_shard = self.c.register_catalog_shard(
+            self.scope.subject(), local_source)
+        self.assertEqual(self.c.body(local_shard)["branch_scope"], "not-applicable")
+        for operation in ("repository_clone", "branch_history", "hive_publication"):
+            with self.subTest(operation=operation), self.assertRaisesRegex(
+                    Refusal, "disabled-workspace1-core"):
+                self.c.require_effect(self.scope.subject(), operation)
+        tree = organization_tiles(
+            "github:kody-w",
+            [{"id": "root", "name": "GitHub", "parent": None}],
+            [{"entry_id": "repo:a", "group_id": "root"}],
+        )[0]
+        tree_source = self.c.capture_octets(self.scope.subject(), self.core.octets(tree))["source"]
+        with self.assertRaisesRegex(Refusal, "incomplete-catalog-shards"):
+            self.c.assess_organization(
+                self.scope.subject(), [shard], tree_source,
+                max_bucket=1, allowed_depth=2)
+
+        complete_document = {**document, "shard_count": 1}
+        complete_source = self.c.capture_octets(
+            self.scope.subject(), self.core.octets(complete_document))["source"]
+        complete_shard = self.c.register_catalog_shard(self.scope.subject(), complete_source)
+        first = self.c.assess_organization(
+            self.scope.subject(), [complete_shard], tree_source,
+            max_bucket=1, allowed_depth=2)
+        self.assertEqual(self.c.body(first)["status"], "verified")
+        with self.assertRaisesRegex(Refusal, "outcome-requires-verified"):
+            self.c.candidate_outcome(
+                self.scope.subject(), shard, "invalid assessment", ["repo:a"])
+
+        broad = organization_tiles(
+            "github:kody-w",
+            [{"id": "root", "name": "GitHub", "parent": None}],
+            [],
+        )[0]
+        broad_source = self.c.capture_octets(
+            self.scope.subject(), self.core.octets(broad))["source"]
+        needs = self.c.assess_organization(
+            self.scope.subject(), [complete_shard], broad_source,
+            max_bucket=1, allowed_depth=2)
+        repeated_source = self.c.capture_octets(
+            self.scope.subject(), self.core.octets(broad))["source"]
+        stopped = self.c.assess_organization(
+            self.scope.subject(), [complete_shard], repeated_source,
+            max_bucket=1, allowed_depth=2, refinement_round=1, previous=needs)
+        self.assertEqual(self.c.body(stopped)["status"], "no-progress")
+        self.assertFalse(self.c.body(stopped)["progress"])
+
+        cycle_document = {
+            **complete_document,
+            "entries": [
+                {**entry, "id": "repo:a", "parent": "repo:b"},
+                {**entry, "id": "repo:b", "parent": "repo:a",
+                 "metadata_sha256": "2" * 64},
+            ],
+        }
+        cycle_document["snapshot_sha256"] = catalog_snapshot(cycle_document["entries"])
+        cycle_source = self.c.capture_octets(
+            self.scope.subject(), self.core.octets(cycle_document))["source"]
+        cycle_shard = self.c.register_catalog_shard(self.scope.subject(), cycle_source)
+        with self.assertRaisesRegex(Refusal, "catalog-parent-cycle"):
+            self.c.assess_organization(
+                self.scope.subject(), [cycle_shard], tree_source,
+                max_bucket=2, allowed_depth=2)
+
+    def test_recursive_catalog_authority_snapshot_and_malformed_inputs_fail_closed(self):
+        malformed = self.c.capture_octets(self.scope.subject(), b"{")["source"]
+        with self.assertRaisesRegex(Refusal, "invalid-catalog-json"):
+            self.c.register_catalog_shard(self.scope.subject(), malformed)
+
+        invalid_labels = {
+            "schema": "rapp-workspace/catalog-chunk/1",
+            "catalog_id": "github:kody-w",
+            "root_id": "github:kody-w",
+            "shard_index": 0,
+            "shard_count": 1,
+            "snapshot_sha256": "0" * 64,
+            "branch_scope": "default-branch-only",
+            "branch_evidence_status": "external-host-observation-unproven",
+            "recursive": False,
+            "entries": [{
+                "id": "repo:a", "kind": "git-repository", "parent": "github:kody-w",
+                "labels": [{}], "metadata_sha256": "1" * 64,
+                "share_class": "public-source",
+            }],
+        }
+        invalid_source = self.c.capture_octets(
+            self.scope.subject(), self.core.octets(invalid_labels))["source"]
+        with self.assertRaisesRegex(Refusal, "invalid-catalog-entry-labels"):
+            self.c.register_catalog_shard(self.scope.subject(), invalid_source)
+
+        entries = [
+            {"id": "repo:a", "kind": "git-repository", "parent": "github:kody-w",
+             "labels": [], "metadata_sha256": "1" * 64,
+             "share_class": "public-source"},
+            {"id": "repo:b", "kind": "git-repository", "parent": "github:kody-w",
+             "labels": [], "metadata_sha256": "2" * 64,
+             "share_class": "public-source"},
+        ]
+        shards = []
+        for index, entry in enumerate(entries):
+            document = {
+                "schema": "rapp-workspace/catalog-chunk/1",
+                "catalog_id": "github:kody-w",
+                "root_id": "github:kody-w",
+                "shard_index": index,
+                "shard_count": 2,
+                "snapshot_sha256": catalog_snapshot(entries) if index == 0 else "f" * 64,
+                "branch_scope": "default-branch-only",
+                "branch_evidence_status": "external-host-observation-unproven",
+                "recursive": False,
+                "entries": [entry],
+            }
+            source = self.c.capture_octets(
+                self.scope.subject(), self.core.octets(document))["source"]
+            shards.append(self.c.register_catalog_shard(self.scope.subject(), source))
+        tree = organization_tiles(
+            "github:kody-w",
+            [{"id": "root", "name": "GitHub", "parent": None}],
+            [],
+        )[0]
+        tree_source = self.c.capture_octets(
+            self.scope.subject(), self.core.octets(tree))["source"]
+        with self.assertRaisesRegex(Refusal, "catalog-shard-family-mismatch"):
+            self.c.assess_organization(
+                self.scope.subject(), shards, tree_source,
+                max_bucket=2, allowed_depth=2)
+
+        valid = {
+            **invalid_labels,
+            "snapshot_sha256": catalog_snapshot([entries[0]]),
+            "entries": [entries[0]],
+        }
+        valid_source = self.c.capture_octets(
+            self.scope.subject(), self.core.octets(valid))["source"]
+        valid_shard = self.c.register_catalog_shard(self.scope.subject(), valid_source)
+        needs = self.c.assess_organization(
+            self.scope.subject(), [valid_shard], tree_source,
+            max_bucket=1, allowed_depth=2)
+        forged = self.c.body(needs)
+        forged.update(
+            status="verified", assigned_count=1, unassigned=0,
+            largest_bucket=1, progress=True)
+        forged_ref = self.c.emit(forged)
+        with self.assertRaisesRegex(Refusal, "outcome-requires-verified"):
+            self.c.candidate_outcome(
+                self.scope.subject(), forged_ref, "forged status", ["repo:a"])
+        with self.assertRaisesRegex(Refusal, "organization-refinement-round-parent"):
+            self.c.assess_organization(
+                self.scope.subject(), [valid_shard], tree_source,
+                max_bucket=1, allowed_depth=2, refinement_round=1)
+        with self.assertRaisesRegex(Refusal, "invalid-outcome-selection"):
+            self.c.candidate_outcome(
+                self.scope.subject(), needs, "bad selection", [{}])
+
+        foreign = self.c.body(valid_source)
+        foreign["world_id"] = "foreign-world"
+        foreign_source = self.c.emit(foreign)
+        with self.assertRaisesRegex(Refusal, "subject-or-world-substitution"):
+            self.c.register_catalog_shard(self.scope.subject(), foreign_source)
+
+    def test_recursive_catalog_subject_and_refinement_restrictions_do_not_widen(self):
+        first_scope = Scope("catalog", "first")
+        second_scope = Scope("catalog", "second")
+        policy = replace(
+            self.policy,
+            scopes=(first_scope, second_scope),
+            audience=("A", "B"),
+            max_frames=128,
+        )
+        controller = Controller(
+            self.core, self.root / "recursive-controller", policy, clock=self.clock, activation_mode="synthetic")
+        self.addCleanup(controller.close)
+        controller.seed(first_scope.subject())
+        entry = {"id": "repo:a", "kind": "git-repository", "parent": "github:kody-w",
+                 "labels": [], "metadata_sha256": "1" * 64,
+                 "share_class": "public-source"}
+        document = {
+            "schema": "rapp-workspace/catalog-chunk/1",
+            "catalog_id": "github:kody-w",
+            "root_id": "github:kody-w",
+            "shard_index": 0,
+            "shard_count": 1,
+            "snapshot_sha256": catalog_snapshot([entry]),
+            "branch_scope": "default-branch-only",
+            "branch_evidence_status": "external-host-observation-unproven",
+            "recursive": False,
+            "entries": [entry],
+        }
+        source = controller.capture_octets(
+            first_scope.subject(), self.core.octets(document))["source"]
+        shard = controller.register_catalog_shard(first_scope.subject(), source)
+        broad = organization_tiles(
+            "github:kody-w",
+            [{"id": "root", "name": "GitHub", "parent": None}],
+            [],
+        )[0]
+        foreign_tree = controller.capture_octets(
+            second_scope.subject(), self.core.octets(broad))["source"]
+        with self.assertRaisesRegex(Refusal, "subject-or-world-substitution"):
+            controller.assess_organization(
+                second_scope.subject(), [shard], foreign_tree,
+                max_bucket=1, allowed_depth=2)
+
+        restricted = controller.restrictions()
+        restricted["audience"] = ["A"]
+        broad_source = controller.capture_octets(
+            first_scope.subject(), self.core.octets(broad),
+            inherited=[restricted])["source"]
+        needs = controller.assess_organization(
+            first_scope.subject(), [shard], broad_source,
+            max_bucket=1, allowed_depth=2)
+        refined = organization_tiles(
+            "github:kody-w",
+            [{"id": "root", "name": "GitHub", "parent": None}],
+            [{"entry_id": "repo:a", "group_id": "root"}],
+        )[0]
+        refined_source = controller.capture_octets(
+            first_scope.subject(), self.core.octets(refined))["source"]
+        verified = controller.assess_organization(
+            first_scope.subject(), [shard], refined_source,
+            max_bucket=1, allowed_depth=2, refinement_round=1, previous=needs)
+        self.assertEqual(controller.body(verified)["status"], "verified")
+        self.assertEqual(controller.body(verified)["restrictions"]["audience"], ["A"])
+
+    def test_tiled_organization_scales_without_one_giant_tree_document(self):
+        policy = replace(
+            self.policy,
+            max_frames=512,
+            max_total_octets=4 * 1024 * 1024,
+        )
+        controller = Controller(
+            self.core, self.root / "tiled-controller", policy, clock=self.clock, activation_mode="synthetic")
+        self.addCleanup(controller.close)
+        controller.seed(self.scope.subject())
+        entries = [
+            {
+                "id": f"repo:{index:04d}",
+                "kind": "git-repository-default-branch",
+                "parent": "github:synthetic",
+                "labels": [f"group-{index % 16:02d}"],
+                "metadata_sha256": sha(str(index).encode("ascii")),
+                "share_class": "public-source",
+            }
+            for index in range(1024)
+        ]
+        catalog_digest = catalog_snapshot(entries)
+        shards = []
+        for index in range(4):
+            document = {
+                "schema": "rapp-workspace/catalog-chunk/1",
+                "catalog_id": "github:synthetic",
+                "root_id": "github:synthetic",
+                "shard_index": index,
+                "shard_count": 4,
+                "snapshot_sha256": catalog_digest,
+                "branch_scope": "default-branch-only",
+                "branch_evidence_status": "external-host-observation-unproven",
+                "recursive": True,
+                "entries": entries[index * 256:(index + 1) * 256],
+            }
+            raw = self.core.octets(document)
+            self.assertLessEqual(len(raw), 65536)
+            source = controller.capture_octets(self.scope.subject(), raw)["source"]
+            shards.append(controller.register_catalog_shard(self.scope.subject(), source))
+        groups = [{"id": "root", "name": "Synthetic", "parent": None}] + [
+            {"id": f"group-{index:02d}", "name": f"Outcome {index:02d}", "parent": "root"}
+            for index in range(16)
+        ]
+        assignments = [
+            {"entry_id": entry["id"], "group_id": f"group-{index % 16:02d}"}
+            for index, entry in enumerate(entries)
+        ]
+        documents = organization_tiles(
+            "github:synthetic", groups, assignments,
+            tree_id="github:synthetic:outcomes", tile_count=4)
+        tree_sources = []
+        for document in documents:
+            raw = self.core.octets(document)
+            self.assertLessEqual(len(raw), 65536)
+            tree_sources.append(
+                controller.capture_octets(self.scope.subject(), raw)["source"])
+        with self.assertRaisesRegex(Refusal, "incomplete-organization-tiles"):
+            controller.assess_organization(
+                self.scope.subject(), shards, tree_sources[:-1],
+                max_bucket=64, allowed_depth=3)
+        mixed_document = {**documents[0], "snapshot_sha256": "f" * 64}
+        mixed_source = controller.capture_octets(
+            self.scope.subject(), self.core.octets(mixed_document))["source"]
+        with self.assertRaisesRegex(Refusal, "organization-tile-family-mismatch"):
+            controller.assess_organization(
+                self.scope.subject(), shards, [mixed_source, *tree_sources[1:]],
+                max_bucket=64, allowed_depth=3)
+        assessment = controller.assess_organization(
+            self.scope.subject(), shards, tree_sources,
+            max_bucket=64, allowed_depth=3)
+        body = controller.body(assessment)
+        self.assertEqual(body["status"], "verified")
+        self.assertEqual(body["entry_count"], 1024)
+        self.assertEqual(body["assigned_count"], 1024)
+        self.assertEqual(body["largest_bucket"], 64)
+        self.assertEqual(len(body["tree_sources"]), 4)
+
+    def test_schemas_are_closed_bounded_and_workspace1_core_only(self):
         for filename, definition in schemas().items():
             self.assertEqual(read_file(REFERENCE.parent / "schemas" / filename), encode(definition))
             def visit(value):

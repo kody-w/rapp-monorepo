@@ -371,7 +371,7 @@ Never delete, move, clone, edit, publish or disconnect a routed project/native s
     source_tools = Path(__file__).absolute().parent
     tools = [(name, workspace / "tools" / name) for name in (
         "workspace_manager.py", "routing_io.py", "native_ai.py",
-        "grail_runtime.py", "grail_manager.py",
+        "workspace1_runtime.py", "workspace1_manager.py",
     )]
     tools.append(("append_frame.py", workspace / "rapp-projects" / "tools" / "append_frame.py"))
     for source, destination in tools:
@@ -1292,9 +1292,10 @@ def scan_manager(args):
     if not rapp.rappid_valid(identity["rappid"]):
         raise RoutingError("manager-rappid-invalid")
     roots = list(dict.fromkeys(str(absolute_path(root)) for root in args.root))
-    if len(roots) > 128:
+    exact = getattr(args, "mode", "recursive") == "exact"
+    if len(roots) > (MAX_ORGANIZATION_POINTERS if exact else 128):
         raise RoutingError("root-count-bound")
-    exact, budget = getattr(args, "mode", "recursive") == "exact", Budget(cli_limits(args))
+    budget = Budget(cli_limits(args))
     with manager_lock(workspace):
         registry = load_registry(workspace)
         boundaries = all_profile_boundaries(registry)
@@ -1741,8 +1742,8 @@ def add_limits(command):
 def parser():
     root = argparse.ArgumentParser(description=__doc__)
     sub = root.add_subparsers(dest="command", required=True)
-    import grail_manager
-    grail_manager.register_cli(sub)
+    import workspace1_manager
+    workspace1_manager.register_cli(sub)
     init = sub.add_parser("init", help="create an empty private pointer-only manager")
     init.add_argument("--workspace", required=True)
     init.add_argument("--owner", required=True)
