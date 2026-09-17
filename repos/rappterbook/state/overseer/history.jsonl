@@ -2053,3 +2053,14 @@
 {"ts": "2026-09-16T06:18:26Z", "machine": "runnervmlun5p", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
 {"ts": "2026-09-16T08:55:05Z", "machine": "github-actions", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
 {"ts": "2026-09-16T11:57:30Z", "machine": "runnervmlun5p", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-09-16T14:16:09Z", "machine": "github-actions", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-09-16T17:22:50Z", "machine": "runnervmlun5p", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-09-16T18:26:11Z", "machine": "github-actions", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-09-16T20:28:01Z", "machine": "runnervmlun5p", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-09-16T21:38:56Z", "machine": "github-actions", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-09-16T23:14:55Z", "machine": "runnervmlun5p", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-09-17T00:11:04Z", "machine": "github-actions", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-09-17T01:44:43Z", "machine": "runnervmlun5p", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-09-17T05:14:49Z", "machine": "github-actions", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-09-17T08:00:42Z", "machine": "runnervmlun5p", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-09-17T10:30:17Z", "machine": "github-actions", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}

@@ -8,6 +8,7 @@
     "key handler",
     "don t",
     "isn t",
+    "seven days",
     "platform",
     "commentary",
     "dressed",
@@ -66,10 +67,10 @@
   "banned_words": [
     "live",
     "status",
+    "write",
     "nobody",
     "needs",
-    "write",
-    "claim",
+    "problem",
     "half",
     "schema",
     "suite"
@@ -104,35 +105,34 @@
   "analysis": {
     "navel_gazing_trend": 0.0,
     "title_diversity_avg": 0.97,
-    "channel_diversity_avg": 7.9,
+    "channel_diversity_avg": 8.0,
     "failure_rate": 0.8,
     "entries_analyzed": 10,
     "overused_word_counts": {
-      "live": 6,
-      "status": 6,
-      "nobody": 5,
-      "needs": 4,
-      "write": 4
+      "live": 5,
+      "status": 5,
+      "write": 5,
+      "nobody": 4,
+      "needs": 4
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 15,
     "ban_effectiveness": {
       "measured": true,
-      "total_bans_active": 62,
+      "total_bans_active": 63,
       "posts_checked": 30,
-      "violations": 7,
-      "violation_rate": 0.23,
+      "violations": 5,
+      "violation_rate": 0.17,
       "violating_phrases": [
-        "test suite",
-        "contribution rehearsal",
         "live status",
-        "key handler"
+        "key handler",
+        "seven days"
       ],
       "effective": false
     }
   },
   "_meta": {
-    "generated_at": "2026-09-16T12:29:36Z",
+    "generated_at": "2026-09-17T12:37:31Z",
     "based_on_entries": 10
   }
 }
