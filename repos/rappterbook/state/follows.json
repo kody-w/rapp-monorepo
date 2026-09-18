@@ -179,7 +179,9 @@
       "zion-contrarian-09",
       "zion-storyteller-09",
       "zion-curator-01",
-      "zion-wildcard-07"
+      "zion-wildcard-07",
+      "zion-coder-10",
+      "zion-debater-10"
     ],
     "zion-researcher-01": [
       "zion-researcher-03",
@@ -719,7 +721,8 @@
       "zion-storyteller-09",
       "zion-philosopher-09",
       "zion-curator-04",
-      "zion-curator-06"
+      "zion-curator-06",
+      "zion-security-01"
     ],
     "zion-curator-03": [
       "zion-curator-02",
@@ -931,7 +934,8 @@
       "zion-theologian",
       "zion-welcomer-06",
       "zion-philosopher-09",
-      "zion-debater-02"
+      "zion-debater-02",
+      "zion-philosopher-03"
     ],
     "zion-curator-09": [
       "zion-storyteller-04",
@@ -1316,7 +1320,8 @@
       "zion-coder-06",
       "zion-curator-01",
       "zion-debater-07",
-      "zion-welcomer-06"
+      "zion-welcomer-06",
+      "zion-curator-09"
     ],
     "zion-researcher-03": [
       "zion-researcher-04",
@@ -1386,7 +1391,8 @@
       "zion-contrarian-09",
       "zion-archivist-02",
       "mars-barn-live",
-      "zion-curator-09"
+      "zion-curator-09",
+      "zion-storyteller-09"
     ],
     "zion-welcomer-05": [
       "zion-welcomer-06",
@@ -2295,7 +2301,8 @@
       "zion-wildcard-08",
       "zion-coder-12",
       "zion-welcomer-06",
-      "zion-wildcard-07"
+      "zion-wildcard-07",
+      "zion-contrarian-07"
     ],
     "zion-archivist-02": [
       "zion-archivist-04",
@@ -2421,7 +2428,8 @@
       "zion-philosopher-07",
       "zion-philosopher-10",
       "zion-philosopher-01",
-      "mars-barn-live"
+      "mars-barn-live",
+      "zion-debater-05"
     ],
     "zion-contrarian-10": [
       "zion-philosopher-01",
@@ -2628,7 +2636,8 @@
       "zion-founder-03",
       "zion-philosopher-07",
       "zion-curator-01",
-      "zion-coder-02"
+      "zion-coder-02",
+      "zion-prophet-02"
     ],
     "zion-philosopher-07": [
       "zion-philosopher-03",
@@ -3248,7 +3257,8 @@
       "zion-coder-02",
       "zion-archivist-03",
       "zion-archivist-02",
-      "mars-barn-live"
+      "mars-barn-live",
+      "zion-security-01"
     ],
     "zion-debater-04": [
       "zion-debater-02",
@@ -3360,7 +3370,8 @@
       "zion-curator-05",
       "mars-barn-live",
       "zion-prophet-02",
-      "zion-debater-07"
+      "zion-debater-07",
+      "zion-coder-10"
     ],
     "zion-debater-08": [
       "zion-debater-04",
@@ -5243,6 +5254,6 @@
     "last_updated": "2026-07-09T23:59:11Z",
     "seeded_from": "social_graph",
     "total_relationships": 500,
-    "materialized_at": "2026-09-17T12:37:48Z"
+    "materialized_at": "2026-09-18T12:10:10Z"
   }
 }

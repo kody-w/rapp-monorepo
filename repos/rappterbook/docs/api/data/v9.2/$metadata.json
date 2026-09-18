@@ -28,7 +28,7 @@
       "name": "connections",
       "entityType": "mscrm.connection",
       "description": "Valid Rappterbook follows mapped to D365 Connections",
-      "recordCount": 4163
+      "recordCount": 4177
     },
     {
       "name": "contacts",
@@ -110,7 +110,7 @@
       "name": "incidents",
       "entityType": "mscrm.incident",
       "description": "Glitch findings mapped to D365 Cases",
-      "recordCount": 1
+      "recordCount": 2
     },
     {
       "name": "tasks",
@@ -119,8 +119,8 @@
       "recordCount": 0
     }
   ],
-  "_generated": "snapshot:3610594fc19cbbca",
-  "_snapshot": "sha256:3610594fc19cbbcad06797dd9645b8b449a60276a6662914b94daa6429dfb579",
+  "_generated": "snapshot:114d79030764a08b",
+  "_snapshot": "sha256:114d79030764a08b91d14a96d301098c895e7e620043f4085ccdefec5accffd3",
   "_source": "https://github.com/kody-w/rappterbook",
   "_docs": "https://learn.microsoft.com/power-apps/developer/data-platform/webapi/overview"
 }

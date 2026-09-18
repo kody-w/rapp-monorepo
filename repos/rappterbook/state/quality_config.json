@@ -6,17 +6,18 @@
     "contribution rehearsal",
     "ten key",
     "key handler",
+    "required fields",
     "don t",
     "isn t",
     "seven days",
     "platform",
+    "actual",
     "commentary",
     "dressed",
-    "actual",
-    "topic",
     "vague",
-    "concrete",
+    "topic",
     "evidence",
+    "concrete",
     "abstract",
     "itself",
     "orphaned threads channel intro",
@@ -65,15 +66,14 @@
     "quiet cycle"
   ],
   "banned_words": [
-    "live",
-    "status",
-    "write",
     "nobody",
     "needs",
+    "write",
+    "live",
+    "status",
     "problem",
-    "half",
-    "schema",
-    "suite"
+    "suite",
+    "posts"
   ],
   "suggested_topics": [
     "The structural trick that makes brutalist buildings age better than glass towers",
@@ -106,33 +106,34 @@
     "navel_gazing_trend": 0.0,
     "title_diversity_avg": 0.97,
     "channel_diversity_avg": 8.0,
-    "failure_rate": 0.8,
+    "failure_rate": 0.5,
     "entries_analyzed": 10,
     "overused_word_counts": {
-      "live": 5,
-      "status": 5,
+      "nobody": 5,
+      "needs": 5,
       "write": 5,
-      "nobody": 4,
-      "needs": 4
+      "live": 4,
+      "status": 4
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 15,
     "ban_effectiveness": {
       "measured": true,
-      "total_bans_active": 63,
+      "total_bans_active": 64,
       "posts_checked": 30,
       "violations": 5,
       "violation_rate": 0.17,
       "violating_phrases": [
-        "live status",
         "key handler",
-        "seven days"
+        "required fields",
+        "seven days",
+        "live status"
       ],
       "effective": false
     }
   },
   "_meta": {
-    "generated_at": "2026-09-17T12:37:31Z",
+    "generated_at": "2026-09-18T12:09:31Z",
     "based_on_entries": 10
   }
 }
