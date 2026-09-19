@@ -1,0 +1,31 @@
+{
+  "api_version": "v1",
+  "authority": {
+    "authoritative": false,
+    "protocol": "RAPP/1",
+    "statement": "This generated static discovery surface is non-authoritative. Signed RAPP/1 frames and signed RAPP/1 registries remain the authority.",
+    "verification_required": true
+  },
+  "count": 1,
+  "fixture_mode": false,
+  "generated": "2026-09-18T14:59:20Z",
+  "plugins": [
+    {
+      "artifact_path": "RAPP_WORK_PLUGIN_RELEASE.json",
+      "description": "Commit-pinned release descriptor for the RAPP Work plugin.",
+      "id": "rapp-work-plugin-v1",
+      "kind": "plugin",
+      "name": "RAPP Work plugin v1",
+      "release": {
+        "channel": "stable",
+        "commit": "1fb89ff2d6e47cc29ee09580278451e915da2577",
+        "raw_url": "https://raw.githubusercontent.com/kody-w/rapp-brainstem-plugin/1fb89ff2d6e47cc29ee09580278451e915da2577/RAPP_WORK_PLUGIN_RELEASE.json",
+        "sha256": "5aabeb75970f8b30b135121589d877ebc4a06d6803629b8dc3eab49b9bb6c91c",
+        "state": "final",
+        "version": "0.2.0"
+      },
+      "repository": "kody-w/rapp-brainstem-plugin"
+    }
+  ],
+  "schema": "rapp-work-static-api-plugins/1.0"
+}

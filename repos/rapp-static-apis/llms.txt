@@ -4,6 +4,8 @@
 
 The machine-readable index of everything here is the root registry (`rapp-god-registry/1.0`): https://raw.githubusercontent.com/kody-w/rapp-static-apis/main/registry.json
 
+This generated static discovery surface is non-authoritative. Signed RAPP/1 frames and signed RAPP/1 registries remain the authority.
+
 ## How to consume (any agent, any language)
 
 ```
@@ -30,6 +32,7 @@ Read the full convention: https://raw.githubusercontent.com/kody-w/rapp-static-a
 - [poi-tiles](https://raw.githubusercontent.com/kody-w/rapp-static-apis/main/poi-tiles/registry.json): poi-tiles — the static, ODbL-clean global POI layer — versioned-endpoints
 - [proofs](https://raw.githubusercontent.com/kody-w/rapp-static-apis/main/proofs/registry.json): proofs — every claim is a button; your browser is the judge — versioned-endpoints
 - [rapp-go](https://raw.githubusercontent.com/kody-w/rapp-static-apis/main/rapp-go/registry.json): rapp-go — the explorer: a quiet, no-backend Pokémon-Go-like PWA — versioned-endpoints
+- [rapp-work](https://raw.githubusercontent.com/kody-w/rapp-static-apis/main/api/rapp-work/v1/index.json): Generated, versioned, non-authoritative RAPP Work discovery. Signed RAPP/1 frames and signed RAPP/1 registries remain the authority. — versioned-endpoints, content-addressed, full-sha256, offline-seed, rollback, non-authoritative-discovery
 - [sap](https://raw.githubusercontent.com/kody-w/rapp-static-apis/main/sap/registry.json): Synthetic S/4HANA gateway (OData v2 shape) for Meridian Manufacturing Group, a fictional global manufacturer mid-S/4HANA-transformation. Fully synthetic, no real data. — versioned-endpoints
 - [sharepoint](https://raw.githubusercontent.com/kody-w/rapp-static-apis/main/sharepoint/registry.json): Synthetic SharePoint program-document library for Project Phoenix, the S/4HANA transformation of a fictional global manufacturer. Graph-flavored listing + raw markdown docs, plus true Microsoft Graph wire shapes (site, paged driveItem children, search response). Fully synthetic, no real data. — versioned-endpoints
 - [shortener](https://raw.githubusercontent.com/kody-w/rapp-static-apis/main/shortener/registry.json): rapp-static-shortener — versioned-endpoints, content-addressed
@@ -39,6 +42,22 @@ Read the full convention: https://raw.githubusercontent.com/kody-w/rapp-static-a
 - [vbrainstem-cell](https://raw.githubusercontent.com/kody-w/rapp-static-apis/main/vbrainstem-cell/registry.json): vbrainstem-cell — a headless agent runtime in a sandboxed iframe — versioned-endpoints
 - [workiq](https://raw.githubusercontent.com/kody-w/rapp-static-apis/main/workiq/registry.json): workiq — synthetic Microsoft-Graph-flavored work-insights API (Project Phoenix) — versioned-endpoints
 
+## External protocol-neutral bridge
+
+- [Hive Hub bridge](https://raw.githubusercontent.com/kody-w/rapp-static-apis/main/api/bridges/hive-hub/v1/index.json): Discovery-only pointer to the independently published, protocol-neutral Hive Hub static shard. Hive Hub is not copied or rebranded as RAPP.
+- Bridge Pages URL: https://kody-w.github.io/rapp-static-apis/api/bridges/hive-hub/v1/index.json
+- Hub raw base: https://raw.githubusercontent.com/kody-w/hive-hub/main
+- Hub Pages base: https://kody-w.github.io/hive-hub
+- Exact upstream index: https://raw.githubusercontent.com/kody-w/hive-hub/68203b0c6940ee88b6246021a24f62dfd235dee7/api/hive-hub/v1/index.json
+- Required upstream index SHA-256: `735470491b84f759fa2a85190a7e7108fb41a1171200f6b522c69d3a869288c2`
+- Optional RAPP Work adapter learning shard: https://raw.githubusercontent.com/kody-w/rapp-static-apis/main/api/rapp-work/v1/index.json
+
+This bridge is a non-authoritative locator only. It neither copies nor rebrands Hive Hub as RAPP and grants no authority, membership, admission, compatibility, or trust. Verify the exact upstream bytes and each Hive's declared authority and policy.
+
+Optional learning metadata only. This bridge does not make RAPP Work required or authoritative for Hive Hub and does not assert compatibility with any Hive. Compatibility requires a separately declared, verified adapter and conformance contract.
+
+No Hub payload or dial record is embedded or enumerated here; follow the verified upstream index.
+
 ## Discovery
 
 - Root registry (index of indexes): https://raw.githubusercontent.com/kody-w/rapp-static-apis/main/registry.json
@@ -46,6 +65,8 @@ Read the full convention: https://raw.githubusercontent.com/kody-w/rapp-static-a
 - MCP manifest: https://raw.githubusercontent.com/kody-w/rapp-static-apis/main/.well-known/mcp.json
 - AI plugin manifest: https://raw.githubusercontent.com/kody-w/rapp-static-apis/main/.well-known/ai-plugin.json
 - Agent protocol: https://raw.githubusercontent.com/kody-w/rapp-static-apis/main/.well-known/agent-protocol.json
+- RAPP Work discovery: https://raw.githubusercontent.com/kody-w/rapp-static-apis/main/.well-known/rapp-work.json
+- Hive Hub bridge pointer: https://raw.githubusercontent.com/kody-w/rapp-static-apis/main/.well-known/hive-hub-bridge.json
 - Sitemap: https://raw.githubusercontent.com/kody-w/rapp-static-apis/main/sitemap.xml
 
-<!-- generated 2026-08-28T16:52:09Z by build.py — do not hand-edit -->
+<!-- generated 2026-09-19T00:36:54Z by build.py — do not hand-edit -->

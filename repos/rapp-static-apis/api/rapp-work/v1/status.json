@@ -1,0 +1,31 @@
+{
+  "api_version": "v1",
+  "authority": {
+    "authoritative": false,
+    "protocol": "RAPP/1",
+    "statement": "This generated static discovery surface is non-authoritative. Signed RAPP/1 frames and signed RAPP/1 registries remain the authority.",
+    "verification_required": true
+  },
+  "checks": {
+    "authority_disclaimer_present": true,
+    "final_release_artifacts_verified": true,
+    "final_releases_commit_pinned": true,
+    "full_sha256": true,
+    "manifest_valid": true
+  },
+  "counts": {
+    "final_releases": 3,
+    "pending_releases": 0,
+    "plugins": 1,
+    "releases": 3,
+    "sdks": 1,
+    "skills": 1
+  },
+  "fixture_mode": false,
+  "generated": "2026-09-18T14:59:20Z",
+  "ok": true,
+  "pending_finalization": [],
+  "production_ready": true,
+  "schema": "rapp-work-static-api-status/1.0",
+  "state": "ready"
+}

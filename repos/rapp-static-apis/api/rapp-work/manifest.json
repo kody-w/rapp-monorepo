@@ -1,0 +1,111 @@
+{
+  "$schema": "schemas/manifest.schema.json",
+  "api": {
+    "pages_base": "https://kody-w.github.io/rapp-static-apis/api/rapp-work/v1",
+    "raw_base": "https://raw.githubusercontent.com/kody-w/rapp-static-apis/main/api/rapp-work/v1",
+    "version": "v1"
+  },
+  "authority": {
+    "authoritative": false,
+    "protocol": "RAPP/1",
+    "statement": "This generated static discovery surface is non-authoritative. Signed RAPP/1 frames and signed RAPP/1 registries remain the authority.",
+    "verification_required": true
+  },
+  "boundary": {
+    "generated": [
+      "api/rapp-work/v1/"
+    ],
+    "inputs": [
+      "api/rapp-work/manifest.json",
+      "api/rapp-work/schemas/"
+    ],
+    "root_build": "build.py"
+  },
+  "catalogs": {
+    "plugins": [
+      {
+        "artifact_path": "RAPP_WORK_PLUGIN_RELEASE.json",
+        "description": "Commit-pinned release descriptor for the RAPP Work plugin.",
+        "id": "rapp-work-plugin-v1",
+        "kind": "plugin",
+        "name": "RAPP Work plugin v1",
+        "release": {
+          "channel": "stable",
+          "commit": "1fb89ff2d6e47cc29ee09580278451e915da2577",
+          "raw_url": "https://raw.githubusercontent.com/kody-w/rapp-brainstem-plugin/1fb89ff2d6e47cc29ee09580278451e915da2577/RAPP_WORK_PLUGIN_RELEASE.json",
+          "sha256": "5aabeb75970f8b30b135121589d877ebc4a06d6803629b8dc3eab49b9bb6c91c",
+          "state": "final",
+          "version": "0.2.0"
+        },
+        "repository": "kody-w/rapp-brainstem-plugin"
+      }
+    ],
+    "sdks": [
+      {
+        "artifact_path": "RELEASE-INVENTORY.json",
+        "description": "Commit-pinned release descriptor for the RAPP Work SDK.",
+        "id": "rapp-work-sdk-v1",
+        "kind": "sdk",
+        "name": "RAPP Work SDK v1",
+        "release": {
+          "channel": "stable",
+          "commit": "29ead23b21645f8d7682ee00414930ffa9ce0ca6",
+          "raw_url": "https://raw.githubusercontent.com/kody-w/rapp-work/29ead23b21645f8d7682ee00414930ffa9ce0ca6/RELEASE-INVENTORY.json",
+          "sha256": "3b52880b89532d7a6d0e3de78d699d73f200a69f17efe21305130d155bf90e48",
+          "state": "final",
+          "version": "1.0.0"
+        },
+        "repository": "kody-w/rapp-work"
+      }
+    ],
+    "skills": [
+      {
+        "artifact_path": "skills/rapp-work/agent.lock",
+        "description": "Commit-pinned release descriptor for the RAPP Work skill collection.",
+        "id": "rapp-work-skills-v1",
+        "kind": "skill",
+        "name": "RAPP Work skills v1",
+        "release": {
+          "channel": "stable",
+          "commit": "db63836e2811838795ba75c182aee85c952a83a7",
+          "raw_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/db63836e2811838795ba75c182aee85c952a83a7/skills/rapp-work/agent.lock",
+          "sha256": "aeef37d3e998c465a71158064bc01062a3169c5255cb6e50293afdb7cb2f4bdc",
+          "state": "final",
+          "version": "1.0.0"
+        },
+        "repository": "kody-w/rapp-skills"
+      }
+    ]
+  },
+  "generated": "2026-09-18T14:59:20Z",
+  "mode": "production",
+  "offline_seed": {
+    "format": "json",
+    "verification": "sha256-required"
+  },
+  "profile": {
+    "description": "Generated discovery profile for RAPP Work SDK, plugin, skill, release, offline, and rollback metadata.",
+    "id": "rapp-work",
+    "name": "RAPP Work",
+    "protocol": "RAPP/1",
+    "role": "non-authoritative-discovery"
+  },
+  "release_policy": {
+    "commit_pattern": "^[0-9a-f]{40}$",
+    "final_state": "final",
+    "hash_algorithm": "sha256",
+    "pending_state": "awaiting-downstream-commit",
+    "raw_url_template": "https://raw.githubusercontent.com/{owner}/{repo}/{commit}/{artifact_path}",
+    "require_commit_pinned_raw_url": true
+  },
+  "rollback": {
+    "rules": [
+      "Verify the immutable receipt by its full SHA-256 before use.",
+      "Select only a final release with a 40-hex commit pin and matching commit-pinned raw URL.",
+      "Verify the downstream artifact full SHA-256 before loading it.",
+      "Signed RAPP/1 frames and signed RAPP/1 registries remain the authority."
+    ],
+    "strategy": "receipt-plus-commit-pin"
+  },
+  "schema": "rapp-work-static-api-manifest/1.0"
+}
