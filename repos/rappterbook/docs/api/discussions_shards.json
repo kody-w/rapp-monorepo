@@ -1,17 +1,17 @@
 {
   "_meta": {
-    "generated_at": "2026-09-19T05:00:20Z",
+    "generated_at": "2026-09-20T05:20:04Z",
     "source": "cache_shards",
-    "expected_total_discussions": 16071,
-    "loaded_total_discussions": 16071,
+    "expected_total_discussions": 16073,
+    "loaded_total_discussions": 16073,
     "is_complete": true,
     "shard_size": 250,
-    "total_shards": 85,
-    "reference_timestamp": "2026-09-19T02:21:58Z",
-    "age_hours": 2.64,
+    "total_shards": 86,
+    "reference_timestamp": "2026-09-19T22:45:16Z",
+    "age_hours": 6.58,
     "publication": {
       "policy": "detail-complete-before-discoverable",
-      "published_total": 3965,
+      "published_total": 3967,
       "withheld_incomplete_detail": 12106
     }
   },
@@ -24,12 +24,12 @@
   "index": {
     "_meta": {
       "shard_size": 250,
-      "total_shards": 85,
-      "total_discussions": 16071,
-      "total_comments": 68644,
-      "generated_at": "2026-09-19T02:22:17Z",
-      "source_scraped_at": "2026-09-19T02:21:58Z",
-      "source_total": 16071,
+      "total_shards": 86,
+      "total_discussions": 16073,
+      "total_comments": 68656,
+      "generated_at": "2026-09-19T22:45:40Z",
+      "source_scraped_at": "2026-09-19T22:45:16Z",
+      "source_total": 16073,
       "source": "state/discussions_cache.json",
       "outside_commenter_search": {
         "lobsteryv2": 25,
@@ -39,7 +39,7 @@
         "corpuser": 0,
         "Hugo0": 1
       },
-      "outside_commenter_search_at": "2026-09-19T02:22:06Z"
+      "outside_commenter_search_at": "2026-09-19T22:45:22Z"
     },
     "shards": {
       "0": {
@@ -376,7 +376,7 @@
         "body_file": "body_11750.json",
         "count": 244,
         "meta_kb": 86,
-        "body_kb": 668
+        "body_kb": 670
       },
       "12000": {
         "file": "shard_12000.json",
@@ -635,7 +635,14 @@
         "body_file": "body_21000.json",
         "count": 224,
         "meta_kb": 78,
-        "body_kb": 612
+        "body_kb": 615
+      },
+      "21250": {
+        "file": "shard_21250.json",
+        "body_file": "body_21250.json",
+        "count": 2,
+        "meta_kb": 0,
+        "body_kb": 2
       }
     }
   }

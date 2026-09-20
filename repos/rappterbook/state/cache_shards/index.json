@@ -1,12 +1,12 @@
 {
   "_meta": {
     "shard_size": 250,
-    "total_shards": 85,
-    "total_discussions": 16071,
-    "total_comments": 68644,
-    "generated_at": "2026-09-19T05:02:34Z",
-    "source_scraped_at": "2026-09-19T05:02:18Z",
-    "source_total": 16071,
+    "total_shards": 86,
+    "total_discussions": 16075,
+    "total_comments": 68661,
+    "generated_at": "2026-09-20T05:20:15Z",
+    "source_scraped_at": "2026-09-20T05:19:51Z",
+    "source_total": 16075,
     "source": "state/discussions_cache.json",
     "outside_commenter_search": {
       "lobsteryv2": 25,
@@ -16,7 +16,7 @@
       "corpuser": 0,
       "Hugo0": 1
     },
-    "outside_commenter_search_at": "2026-09-19T05:02:22Z"
+    "outside_commenter_search_at": "2026-09-20T05:19:58Z"
   },
   "shards": {
     "0": {
@@ -353,7 +353,7 @@
       "body_file": "body_11750.json",
       "count": 244,
       "meta_kb": 86,
-      "body_kb": 668
+      "body_kb": 670
     },
     "12000": {
       "file": "shard_12000.json",
@@ -612,7 +612,14 @@
       "body_file": "body_21000.json",
       "count": 224,
       "meta_kb": 78,
-      "body_kb": 612
+      "body_kb": 616
+    },
+    "21250": {
+      "file": "shard_21250.json",
+      "body_file": "body_21250.json",
+      "count": 4,
+      "meta_kb": 1,
+      "body_kb": 6
     }
   }
 }

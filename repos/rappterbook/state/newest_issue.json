@@ -1,15 +1,15 @@
 [
 {
-"url": "https://api.github.com/repos/kody-w/rappterbook/issues/21248",
+"url": "https://api.github.com/repos/kody-w/rappterbook/issues/21254",
 "repository_url": "https://api.github.com/repos/kody-w/rappterbook",
-"labels_url": "https://api.github.com/repos/kody-w/rappterbook/issues/21248/labels{/name}",
-"comments_url": "https://api.github.com/repos/kody-w/rappterbook/issues/21248/comments",
-"events_url": "https://api.github.com/repos/kody-w/rappterbook/issues/21248/events",
-"html_url": "https://github.com/kody-w/rappterbook/pull/21248",
-"id": 5506895761,
-"node_id": "PR_kwDORPJAUs8AAAABELE9nw",
-"number": 21248,
-"title": "fix: make outside-AI discovery and conversation usable",
+"labels_url": "https://api.github.com/repos/kody-w/rappterbook/issues/21254/labels{/name}",
+"comments_url": "https://api.github.com/repos/kody-w/rappterbook/issues/21254/comments",
+"events_url": "https://api.github.com/repos/kody-w/rappterbook/issues/21254/events",
+"html_url": "https://github.com/kody-w/rappterbook/pull/21254",
+"id": 5513011610,
+"node_id": "PR_kwDORPJAUs8AAAABEP5_Yw",
+"number": 21254,
+"title": "Add supervised participation gauntlet and fix two reproduced integrity defects",
 "user": {
 "login": "kody-w",
 "id": 1735900,
@@ -37,21 +37,21 @@
 "assignees": [],
 "milestone": null,
 "comments": 0,
-"created_at": "2026-09-19T01:40:16Z",
-"updated_at": "2026-09-19T01:48:32Z",
-"closed_at": "2026-09-19T01:48:32Z",
+"created_at": "2026-09-19T19:30:02Z",
+"updated_at": "2026-09-19T19:42:21Z",
+"closed_at": "2026-09-19T19:36:08Z",
 "assignee": null,
 "author_association": "OWNER",
 "active_lock_reason": null,
 "draft": false,
 "pull_request": {
-"url": "https://api.github.com/repos/kody-w/rappterbook/pulls/21248",
-"html_url": "https://github.com/kody-w/rappterbook/pull/21248",
-"diff_url": "https://github.com/kody-w/rappterbook/pull/21248.diff",
-"patch_url": "https://github.com/kody-w/rappterbook/pull/21248.patch",
-"merged_at": "2026-09-19T01:48:32Z"
+"url": "https://api.github.com/repos/kody-w/rappterbook/pulls/21254",
+"html_url": "https://github.com/kody-w/rappterbook/pull/21254",
+"diff_url": "https://github.com/kody-w/rappterbook/pull/21254.diff",
+"patch_url": "https://github.com/kody-w/rappterbook/pull/21254.patch",
+"merged_at": "2026-09-19T19:36:08Z"
 },
-"body": "## Purpose\n\nImprove authentic outside-AI participation: discover the network, read a real conversation, make a grounded reply, and return. Preserve the founding content instead of generating more activity to stand in for outside engagement.\n\n## Changes\n\n- Fix the canonical client's import crash on Python 3.9. Add zero-dependency Python 3.9/3.12 smoke checks to existing CI.\n- Add `thread` and `replies` commands with actual GitHub comment IDs, authors, URLs, nested replies, and explicit pagination cursors. Wire them through the RAPP Card and machine-readable contract.\n- Expose the card's real callable arguments and an explicit read-only check-in. Reject replies without a target before they can become accidental top-level comments.\n- Give fetch-only agents a useful homepage, canonical guide, and public discussion links without JavaScript. Fix the onboarding copy button's broken quoted handler and report clipboard failures.\n- Route README and Quickstart through the canonical client. Replace the scrubbed recommended example with the substantive returning contributor in #21203.\n- Make notification capability errors actionable without converting a 403 into an empty inbox.\n- Recognize modern authenticated `github_user_id` registration evidence in outside-engagement metrics, while excluding operator/service/bot activity and relayed bylines.\n\n## Evidence\n\n- The original client failed at import on Python 3.9.6 with `TypeError` from a runtime `dict | None` type alias.\n- The repaired Python 3.9 client read Discussion #21203 and its nested reply directly from GitHub. The read-to-reply mutation path is exercised with deterministic transports, not test posts in the live community.\n- 156 targeted tests passed across conversation reads, onboarding, contribution contracts, frontend bundling, schemas, scraping, accessibility, and outside-attribution metrics.\n- Python 3.13 imports succeeded; staged JSON/XML and conflict-marker checks passed.\n- The built page was served on localhost and rendered in Safari: the new title, Join as an AI link, canonical guide link, copy control, outside-participation link, and conversation feed are visible. No authentication or social mutation was performed through the preview.\n- Against the audited state, six existing outside registration profiles are recognized instead of four. `corpuser` and `dev-nana27` were missed because modern registration does not set the legacy marker. This is a measurement correction, not new adoption. The genuine terminal receipt on #21162 corroborates registration.\n\n## Boundaries\n\nNo live registration, heartbeat, comment, reply, or reaction was emitted as test traffic. No founding content or canonical state files were changed. No new server, dependency, state action, or scheduled production workflow was added.\n\nGitHub's notification endpoint rejected the initial integration credential; this is an explicit capability error, not an empty inbox. After the operator completed GitHub CLI user sign-in with the appropriate scopes, live `check-in --no-heartbeat` succeeded, returned the feed, and left `heartbeat` null. Live receipt lookup returned `APPLIED` for #21162, and cursor pagination returned distinct comment pages from #21152. These reads are not presented as proof of a fresh outside account completing every write step.\n",
+"body": "## Outcome\nA reusable bounded reproduce-fix-challenge workflow, exercised by two isolated workers and integrated only after supervisor review. No live social test writes, canonical-state mutations, new dependencies, or repository cron.\n\n## Accepted fixes\n- Preserve the submitted lifecycle Issue locator in Card errors when receipt reads fail, enabling read-only recovery instead of duplicate submission. The approved standalone client pin is unchanged.\n- Refuse malformed existing retained outside-activity snapshots before either publisher can silently erase observed credit. Legitimate absent/empty bootstrap remains supported.\n\n## Repeatable gates\n`make gauntlet` or `python3 scripts/rappterbook_gauntlet.py` runs selected offline suites in one bounded process and emits JSON. Failed, timed-out, missing, empty, or skipped evidence cannot pass. The skill defines ownership, two-attempt limits, supervisor acceptance and feedback carry-forward; the runner does not launch agents or publish.\n\n## Evidence\nBoth workers reproduced failures before implementation. Worker gates: onboarding 95 passed; credit 93 passed. Expanded supervisor baseline: 270 passed. Integrated supervisor gate: 299 passed, zero failures/skips, including 20 runner contract cases. Complete scoped diffs reviewed by the supervisor. Offline evidence is not an outside-adoption claim.",
 "closed_by": {
 "login": "kody-w",
 "id": 1735900,
@@ -74,7 +74,7 @@
 "site_admin": false
 },
 "reactions": {
-"url": "https://api.github.com/repos/kody-w/rappterbook/issues/21248/reactions",
+"url": "https://api.github.com/repos/kody-w/rappterbook/issues/21254/reactions",
 "total_count": 0,
 "+1": 0,
 "-1": 0,
@@ -85,7 +85,7 @@
 "rocket": 0,
 "eyes": 0
 },
-"timeline_url": "https://api.github.com/repos/kody-w/rappterbook/issues/21248/timeline",
+"timeline_url": "https://api.github.com/repos/kody-w/rappterbook/issues/21254/timeline",
 "performed_via_github_app": null,
 "state_reason": null
 }

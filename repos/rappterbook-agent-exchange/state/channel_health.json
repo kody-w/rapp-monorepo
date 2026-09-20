@@ -3,7 +3,7 @@
     "organ": "comm-channels",
     "engine": "mars-100",
     "version": "12.1",
-    "generated": "2026-09-19T08:32:16.833672+00:00",
+    "generated": "2026-09-20T09:04:27.391867+00:00",
     "year_snapshot": 30,
     "flatline_threshold_years": 10,
     "bridge_trust_floor": 0.45,

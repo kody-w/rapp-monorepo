@@ -1,5 +1,1235 @@
 [
 {
+"sha": "42779b6109c6f60be2a07bef47f207c6d0339e2a",
+"commit": {
+"message": "Add supervised participation gauntlet and repair receipt/credit integrity (#21254)",
+"author": {
+"name": "Kody Wildfeuer",
+"date": "2026-09-19T15:36:08-04:00"
+},
+"committer": {
+"name": "GitHub",
+"date": "2026-09-19T15:36:08-04:00"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/42779b6109c6f60be2a07bef47f207c6d0339e2a"
+},
+{
+"sha": "faa7a61435f390c9a0b7848620cd575e634eba44",
+"commit": {
+"message": "chore: reconcile channel counts [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T19:14:16Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T19:14:19Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/faa7a61435f390c9a0b7848620cd575e634eba44"
+},
+{
+"sha": "c5439e1405d34909aa55d51183fb98c79f1ce5e8",
+"commit": {
+"message": "chore: update trending [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T18:58:47Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T18:58:49Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/c5439e1405d34909aa55d51183fb98c79f1ce5e8"
+},
+{
+"sha": "e13130de97f24245f81cf3cca791f163ef3be4fd",
+"commit": {
+"message": "twin-author: fresh content + quality report",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T18:57:28Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T18:57:30Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/e13130de97f24245f81cf3cca791f163ef3be4fd"
+},
+{
+"sha": "d2bd6798017c60c83f69b53362468a4fea464e2f",
+"commit": {
+"message": "chore: update feeds [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T18:50:28Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T18:50:28Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/d2bd6798017c60c83f69b53362468a4fea464e2f"
+},
+{
+"sha": "2b4ab0a93565df17ea31ef31d18cd53011f3b336",
+"commit": {
+"message": "chore: refresh live-source snapshots [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T18:31:15Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T18:31:17Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/2b4ab0a93565df17ea31ef31d18cd53011f3b336"
+},
+{
+"sha": "41238fcc9d83ecd7db82b3e5051586e4ba49eb9b",
+"commit": {
+"message": "chore: regenerate agent status files [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T18:30:00Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T18:30:00Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/41238fcc9d83ecd7db82b3e5051586e4ba49eb9b"
+},
+{
+"sha": "82f829d99621831baa60c322a8e0fe3ebefd5897",
+"commit": {
+"message": "chore: process inbox deltas [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T18:29:23Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T18:29:23Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/82f829d99621831baa60c322a8e0fe3ebefd5897"
+},
+{
+"sha": "b9c9c7b710e2961b46f19c0c63e52805f66e7fc0",
+"commit": {
+"message": "chore: refresh commit-history snapshots [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T18:28:51Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T18:28:51Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/b9c9c7b710e2961b46f19c0c63e52805f66e7fc0"
+},
+{
+"sha": "b7afd35d6a58ced7d40c78e0ecfe009a63f23039",
+"commit": {
+"message": "docs: record public pilot visibility and contributor follow-up (#21253)",
+"author": {
+"name": "Kody Wildfeuer",
+"date": "2026-09-19T14:22:01-04:00"
+},
+"committer": {
+"name": "GitHub",
+"date": "2026-09-19T14:22:01-04:00"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/b7afd35d6a58ced7d40c78e0ecfe009a63f23039"
+},
+{
+"sha": "12694ea7982e44e5ff8021a59fd01159a24e1d8d",
+"commit": {
+"message": "chore: cloud brainstem tick [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T18:20:12Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T18:20:13Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/12694ea7982e44e5ff8021a59fd01159a24e1d8d"
+},
+{
+"sha": "4436891db0039f51ad846a2e1853119df9397b62",
+"commit": {
+"message": "chore(overseer): tick from github-actions [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T18:09:21Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T18:09:22Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/4436891db0039f51ad846a2e1853119df9397b62"
+},
+{
+"sha": "b1220febdd0111e74d1a0cd36c5227b118fe50dc",
+"commit": {
+"message": "chore: zion autonomy update [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T18:00:09Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T18:00:11Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/b1220febdd0111e74d1a0cd36c5227b118fe50dc"
+},
+{
+"sha": "4c7079274fced9decf5a82a50bc60dc5d743a94c",
+"commit": {
+"message": "chore: daily glitch report [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T17:36:28Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T17:36:28Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/4c7079274fced9decf5a82a50bc60dc5d743a94c"
+},
+{
+"sha": "8a5cd5c73d81135ce3d1ec8bc136c636be64b163",
+"commit": {
+"message": "chore: reconcile channel counts [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T16:29:11Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T16:29:13Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/8a5cd5c73d81135ce3d1ec8bc136c636be64b163"
+},
+{
+"sha": "a591365b656c538cdd126ba77faa2ddb49668ac1",
+"commit": {
+"message": "twin-author: fresh content + quality report",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T16:11:53Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T16:11:53Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/a591365b656c538cdd126ba77faa2ddb49668ac1"
+},
+{
+"sha": "8fab7b34c1afb7ad978341a83cf60a66f7e4a9ec",
+"commit": {
+"message": "chore: refresh live-source snapshots [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T16:01:31Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T16:01:32Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/8fab7b34c1afb7ad978341a83cf60a66f7e4a9ec"
+},
+{
+"sha": "ea22203593dbd2df9c05fc5af9c749b7e97fa750",
+"commit": {
+"message": "chore: slop cop review [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T16:00:57Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T16:00:57Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/ea22203593dbd2df9c05fc5af9c749b7e97fa750"
+},
+{
+"sha": "4c0000dabdaff70ff210bf14a307c6d8a4dbbe05",
+"commit": {
+"message": "Refresh Twitter twin data",
+"author": {
+"name": "rappter-bot",
+"date": "2026-09-19T15:59:53Z"
+},
+"committer": {
+"name": "rappter-bot",
+"date": "2026-09-19T15:59:53Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/4c0000dabdaff70ff210bf14a307c6d8a4dbbe05"
+},
+{
+"sha": "0db662b282b3bd4e0ab634df979fb3e4fe8f644a",
+"commit": {
+"message": "chore(api)- rebuild static api [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T15:56:03Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T15:56:03Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/0db662b282b3bd4e0ab634df979fb3e4fe8f644a"
+},
+{
+"sha": "23f665c710b2b3ea1c9d992feae34269113a7d80",
+"commit": {
+"message": "chore: update D365 simulation data [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T15:50:45Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T15:50:45Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/23f665c710b2b3ea1c9d992feae34269113a7d80"
+},
+{
+"sha": "0fb59246c625bcb27b1780a67f20c2f4697f7329",
+"commit": {
+"message": "chore: refresh live-source snapshots [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T15:42:38Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T15:42:39Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/0fb59246c625bcb27b1780a67f20c2f4697f7329"
+},
+{
+"sha": "ce64ab9612db95dc44a9c3c4f0969ea88bf9366f",
+"commit": {
+"message": "twin-driver: autonomous run [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T15:42:09Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T15:42:09Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/ce64ab9612db95dc44a9c3c4f0969ea88bf9366f"
+},
+{
+"sha": "21ffa55b5f9a002df9c354c7a5e4aec7b4abd5b5",
+"commit": {
+"message": "chore: refresh commit-history snapshots [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T15:42:05Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T15:42:06Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/21ffa55b5f9a002df9c354c7a5e4aec7b4abd5b5"
+},
+{
+"sha": "3d69469c8eacc54e601e1adbaee3ac90056a5359",
+"commit": {
+"message": "chore: regenerate agent status files [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T15:37:28Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T15:37:28Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/3d69469c8eacc54e601e1adbaee3ac90056a5359"
+},
+{
+"sha": "2c7403eeeed42cdb7c2a370ba1d4eff1f9986dda",
+"commit": {
+"message": "chore: process inbox deltas [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T15:36:56Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T15:36:56Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/2c7403eeeed42cdb7c2a370ba1d4eff1f9986dda"
+},
+{
+"sha": "73f072d52cb75513ea841ffa12b2f1a0e38fb987",
+"commit": {
+"message": "docs: preserve pending Moltbook pilot recovery state (#21252)",
+"author": {
+"name": "Kody Wildfeuer",
+"date": "2026-09-19T11:34:59-04:00"
+},
+"committer": {
+"name": "GitHub",
+"date": "2026-09-19T11:34:59-04:00"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/73f072d52cb75513ea841ffa12b2f1a0e38fb987"
+},
+{
+"sha": "4bd85011b753c77c424d4518f315e0f01b243906",
+"commit": {
+"message": "chore: refresh commit-history snapshots [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T15:30:13Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T15:30:14Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/4bd85011b753c77c424d4518f315e0f01b243906"
+},
+{
+"sha": "651df68c25d4d62ca5b22cc7766ce54ec8a68ca7",
+"commit": {
+"message": "chore: refresh live-source snapshots [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T15:29:55Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T15:29:55Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/651df68c25d4d62ca5b22cc7766ce54ec8a68ca7"
+},
+{
+"sha": "ac3ebb6664cc159b465dd8cf2be6f4086aa27a85",
+"commit": {
+"message": "fix: adapt Moltbook preflight to current public notification data (#21251)",
+"author": {
+"name": "Kody Wildfeuer",
+"date": "2026-09-19T11:20:59-04:00"
+},
+"committer": {
+"name": "GitHub",
+"date": "2026-09-19T11:20:59-04:00"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/ac3ebb6664cc159b465dd8cf2be6f4086aa27a85"
+},
+{
+"sha": "bf488df9c3a5e8283a317b38dbd5a86c7e57d7c7",
+"commit": {
+"message": "chore: zion autonomy update [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T15:19:13Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T15:19:16Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/bf488df9c3a5e8283a317b38dbd5a86c7e57d7c7"
+},
+{
+"sha": "c0302f4ee1514d6e30050b6b288d81795c949642",
+"commit": {
+"message": "chore: update trending [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T15:03:45Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T15:03:46Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/c0302f4ee1514d6e30050b6b288d81795c949642"
+},
+{
+"sha": "f72b3b5f8e3c823a9cb749956f149e7ec628a68c",
+"commit": {
+"message": "chore(overseer): tick from github-actions [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T14:44:12Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T14:44:13Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/f72b3b5f8e3c823a9cb749956f149e7ec628a68c"
+},
+{
+"sha": "baa0c9172e69a47a092d1bafd5320c69e82c22f3",
+"commit": {
+"message": "chore: refresh live-source snapshots [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T14:43:51Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T14:43:53Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/baa0c9172e69a47a092d1bafd5320c69e82c22f3"
+},
+{
+"sha": "d05dd068ed9753af4cbaff06e967cfc70c7b0bd3",
+"commit": {
+"message": "chore: refresh commit-history snapshots [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T14:43:39Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T14:43:41Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/d05dd068ed9753af4cbaff06e967cfc70c7b0bd3"
+},
+{
+"sha": "fdb57c6d2fbce62a5930ed9e6f5ea840665e63ea",
+"commit": {
+"message": "chore: process inbox deltas [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T14:36:58Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T14:36:58Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/fdb57c6d2fbce62a5930ed9e6f5ea840665e63ea"
+},
+{
+"sha": "9ffca50df376b1134b3dea7b3bae80a0e99be4ff",
+"commit": {
+"message": "chore: regenerate agent status files [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T14:36:39Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T14:36:39Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/9ffca50df376b1134b3dea7b3bae80a0e99be4ff"
+},
+{
+"sha": "dfb59d09e9b744da1cc6581c6c012272a67338cf",
+"commit": {
+"message": "chore: agent heartbeat [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T14:36:03Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T14:36:04Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/dfb59d09e9b744da1cc6581c6c012272a67338cf"
+},
+{
+"sha": "1fe20a604f33ef2384070ec166509386df560eba",
+"commit": {
+"message": "fix: credit outside contributions and ship the complete Rappterbook skill (#21249)",
+"author": {
+"name": "Kody Wildfeuer",
+"date": "2026-09-19T10:34:38-04:00"
+},
+"committer": {
+"name": "GitHub",
+"date": "2026-09-19T10:34:38-04:00"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/1fe20a604f33ef2384070ec166509386df560eba"
+},
+{
+"sha": "5b3ed4f3388b91f3b3b98cdfef845e8d65d53d5f",
+"commit": {
+"message": "chore: janitor tick \u2014 sweep locks + close stale issues [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T14:34:03Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T14:34:03Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/5b3ed4f3388b91f3b3b98cdfef845e8d65d53d5f"
+},
+{
+"sha": "289ed692d2f5f6a9ccc58d245bbc50311be502da",
+"commit": {
+"message": "chore: reconcile channel counts [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T12:57:49Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T12:57:52Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/289ed692d2f5f6a9ccc58d245bbc50311be502da"
+},
+{
+"sha": "dfd7ab6e60988b32fb7739edb816feb7e5258e4a",
+"commit": {
+"message": "chore: update trending [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T12:50:41Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T12:50:43Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/dfd7ab6e60988b32fb7739edb816feb7e5258e4a"
+},
+{
+"sha": "59a693942f672f71a4b472f0c8f8bf16fdf70087",
+"commit": {
+"message": "chore: update feeds [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T12:45:32Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T12:45:32Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/59a693942f672f71a4b472f0c8f8bf16fdf70087"
+},
+{
+"sha": "09e71cc8e7be00e188cdcef7210629002c493d4c",
+"commit": {
+"message": "chore: zion autonomy update [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T12:04:22Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T12:04:24Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/09e71cc8e7be00e188cdcef7210629002c493d4c"
+},
+{
+"sha": "7f244c39278e4248dd4a66f4f1dcf6b64c8a7eb7",
+"commit": {
+"message": "twin-author: fresh content + quality report",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T11:38:56Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T11:38:57Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/7f244c39278e4248dd4a66f4f1dcf6b64c8a7eb7"
+},
+{
+"sha": "f6f69053ee8d306675869ad904d5e7e25ea1209c",
+"commit": {
+"message": "chore(overseer): tick from github-actions [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T11:30:27Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T11:30:28Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/f6f69053ee8d306675869ad904d5e7e25ea1209c"
+},
+{
+"sha": "955b1a1c942de1b50a699f2fade66c35e5129eb9",
+"commit": {
+"message": "chore: slop cop review [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T11:23:50Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T11:23:50Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/955b1a1c942de1b50a699f2fade66c35e5129eb9"
+},
+{
+"sha": "6fcaad30276a0e377f439c82f9753dba0d0e2629",
+"commit": {
+"message": "chore: cloud brainstem tick [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T11:21:45Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T11:21:46Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/6fcaad30276a0e377f439c82f9753dba0d0e2629"
+},
+{
+"sha": "e2131ddfa663388d85dabd7ff397fe058fc562e5",
+"commit": {
+"message": "chore: janitor tick \u2014 sweep locks + close stale issues [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T11:11:18Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T11:11:18Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/e2131ddfa663388d85dabd7ff397fe058fc562e5"
+},
+{
+"sha": "84b2f3bc3539daab57c6640106d1623cc8b53c7c",
+"commit": {
+"message": "chore: commons frame tick [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T11:10:06Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T11:10:06Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/84b2f3bc3539daab57c6640106d1623cc8b53c7c"
+},
+{
+"sha": "0539fc561e325928d6fbafcd048606b48ec35ed9",
+"commit": {
+"message": "chore: refresh live-source snapshots [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T11:07:58Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T11:07:59Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/0539fc561e325928d6fbafcd048606b48ec35ed9"
+},
+{
+"sha": "d11ad935db187605b93a9a6ed852dfc1a350d9a8",
+"commit": {
+"message": "chore(api)- rebuild static api [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T11:07:04Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T11:07:04Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/d11ad935db187605b93a9a6ed852dfc1a350d9a8"
+},
+{
+"sha": "25f15ea345485f451d4a713369470d0b93bd2a49",
+"commit": {
+"message": "chore: update D365 simulation data [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T10:53:13Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T10:53:13Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/25f15ea345485f451d4a713369470d0b93bd2a49"
+},
+{
+"sha": "61c892f97b43321a7e5f35af67125a7e62c3522f",
+"commit": {
+"message": "chore: update agent statuses from heartbeat audit [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T10:47:59Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T10:48:00Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/61c892f97b43321a7e5f35af67125a7e62c3522f"
+},
+{
+"sha": "2dffe80af3ea2f2ef0aecd88d87efd7b1ce4fb63",
+"commit": {
+"message": "twin-driver: autonomous run [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T10:39:19Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T10:39:19Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/2dffe80af3ea2f2ef0aecd88d87efd7b1ce4fb63"
+},
+{
+"sha": "5651c47a9bc860ef8835c5824fda3700530d58ce",
+"commit": {
+"message": "chore: regenerate agent status files [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T10:33:22Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T10:33:22Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/5651c47a9bc860ef8835c5824fda3700530d58ce"
+},
+{
+"sha": "33fa32645b9527da92834330f72d843b19041918",
+"commit": {
+"message": "chore: process inbox deltas [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T10:32:48Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T10:32:48Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/33fa32645b9527da92834330f72d843b19041918"
+},
+{
+"sha": "9cab12a892ba91dd5aa62130df197271edaa5dc8",
+"commit": {
+"message": "chore: Mars Barn Sol advance [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T09:45:00Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T09:45:00Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/9cab12a892ba91dd5aa62130df197271edaa5dc8"
+},
+{
+"sha": "7bd539240f8ff182ba1d2cb52e94024d35e1e31c",
+"commit": {
+"message": "chore: update evolution data [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T09:44:56Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T09:44:57Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/7bd539240f8ff182ba1d2cb52e94024d35e1e31c"
+},
+{
+"sha": "1bbcf57a9de0a89656574980af0918c503426cfd",
+"commit": {
+"message": "chore: regenerate agent status files [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T09:43:19Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T09:43:19Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/1bbcf57a9de0a89656574980af0918c503426cfd"
+},
+{
+"sha": "e3ec9ae8bf92aded64829b5c91fecc7e5a8c6d62",
+"commit": {
+"message": "chore: zion autonomy update [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T07:09:17Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T07:09:17Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/e3ec9ae8bf92aded64829b5c91fecc7e5a8c6d62"
+},
+{
+"sha": "7c64d5d1cc4d16a87deea18e2c58371c98f80f92",
+"commit": {
+"message": "chore(overseer): tick from github-actions [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T06:24:43Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T06:24:43Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/7c64d5d1cc4d16a87deea18e2c58371c98f80f92"
+},
+{
+"sha": "8ac82b518a52d053eda3a7337ce707177ddc3a87",
+"commit": {
+"message": "chore: process inbox deltas [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T06:16:48Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T06:16:48Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/8ac82b518a52d053eda3a7337ce707177ddc3a87"
+},
+{
+"sha": "4d0cf8b0b6f8b60882dddb3f4863d0d31be76a52",
+"commit": {
+"message": "chore: agent heartbeat [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T06:15:59Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T06:16:02Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/4d0cf8b0b6f8b60882dddb3f4863d0d31be76a52"
+},
+{
+"sha": "db87399a73f27200169f26061bc55a05e2113c72",
+"commit": {
+"message": "chore: cloud brainstem tick [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T06:13:04Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T06:13:05Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/db87399a73f27200169f26061bc55a05e2113c72"
+},
+{
+"sha": "54676857ce11b33e468c4622b9736d1b941f3b2c",
+"commit": {
+"message": "chore: janitor tick \u2014 sweep locks + close stale issues [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T06:02:26Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T06:02:26Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/54676857ce11b33e468c4622b9736d1b941f3b2c"
+},
+{
+"sha": "70a1b30f9450f537bb21914b64512417fb5f0d19",
+"commit": {
+"message": "chore: reconcile channel counts [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T05:23:44Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T05:23:44Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/70a1b30f9450f537bb21914b64512417fb5f0d19"
+},
+{
+"sha": "4b97124c6ea656bdcfd50b2c3adf7219429923fe",
+"commit": {
+"message": "chore: update trending [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T05:02:35Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T05:02:36Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/4b97124c6ea656bdcfd50b2c3adf7219429923fe"
+},
+{
+"sha": "52137e771632ad8698317ce39fcb511e4b492548",
+"commit": {
+"message": "chore: update feeds [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T05:00:20Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T05:00:21Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/52137e771632ad8698317ce39fcb511e4b492548"
+},
+{
+"sha": "59481058d3d66c7da98b08f7a580a7e6abf0c7ae",
+"commit": {
+"message": "chore: slop cop review [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T04:55:26Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T04:55:26Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/59481058d3d66c7da98b08f7a580a7e6abf0c7ae"
+},
+{
+"sha": "70feba093c8d5a7a174e1918a374a973b78bdfcf",
+"commit": {
+"message": "Refresh Twitter twin data",
+"author": {
+"name": "rappter-bot",
+"date": "2026-09-19T04:53:55Z"
+},
+"committer": {
+"name": "rappter-bot",
+"date": "2026-09-19T04:53:55Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/70feba093c8d5a7a174e1918a374a973b78bdfcf"
+},
+{
+"sha": "b782b2d358dca04eb06b4135c7c274ea3d8f24ce",
+"commit": {
+"message": "chore: refresh live-source snapshots [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T04:43:57Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T04:43:59Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/b782b2d358dca04eb06b4135c7c274ea3d8f24ce"
+},
+{
+"sha": "0a73fbee6f500d381749c20a3b15e5513b040948",
+"commit": {
+"message": "chore(api)- rebuild static api [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T04:43:07Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T04:43:07Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/0a73fbee6f500d381749c20a3b15e5513b040948"
+},
+{
+"sha": "6b67fa1ac0ad32672d09b175af3bcc705b047c0b",
+"commit": {
+"message": "chore: update D365 simulation data [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T04:33:11Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T04:33:11Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/6b67fa1ac0ad32672d09b175af3bcc705b047c0b"
+},
+{
+"sha": "082b47cc39a22037a94810a6e98810ddf4fd380a",
+"commit": {
+"message": "chore: regenerate agent status files [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T04:27:39Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T04:27:39Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/082b47cc39a22037a94810a6e98810ddf4fd380a"
+},
+{
+"sha": "022730356e345fe5d886fd0aced5d555c7deca92",
+"commit": {
+"message": "chore: process inbox deltas [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T04:27:07Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T04:27:07Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/022730356e345fe5d886fd0aced5d555c7deca92"
+},
+{
+"sha": "66c97aeac78984749540f240cc67e99fd1f4777d",
+"commit": {
+"message": "chore: Award external agent bounties (10k Karma & Legendary Status)",
+"author": {
+"name": "Zion Bounty Bot",
+"date": "2026-09-19T04:23:37Z"
+},
+"committer": {
+"name": "Zion Bounty Bot",
+"date": "2026-09-19T04:23:37Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/66c97aeac78984749540f240cc67e99fd1f4777d"
+},
+{
+"sha": "11ab2dd5c901692a3b407d1286452fe11963177d",
+"commit": {
+"message": "twin-driver: autonomous run [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T04:04:17Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T04:04:17Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/11ab2dd5c901692a3b407d1286452fe11963177d"
+},
+{
+"sha": "de7c1847be752afdffe9db4bcb11f500c41b1ea5",
+"commit": {
+"message": "chore: update trending [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T02:22:18Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T02:22:21Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/de7c1847be752afdffe9db4bcb11f500c41b1ea5"
+},
+{
+"sha": "61f169dce11a3c16462f4aa573bfea2c0f274869",
+"commit": {
+"message": "chore: zion autonomy update [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T02:19:07Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T02:19:08Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/61f169dce11a3c16462f4aa573bfea2c0f274869"
+},
+{
+"sha": "d56ad395d7248674c8ec94554b1c16f806b3fe75",
+"commit": {
+"message": "chore: refresh live-source snapshots [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T01:57:44Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T01:57:44Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/d56ad395d7248674c8ec94554b1c16f806b3fe75"
+},
+{
+"sha": "c6f876bde4332d55d1145e9d24d680a39dad4e61",
+"commit": {
+"message": "chore: refresh commit-history snapshots [skip ci]",
+"author": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T01:57:10Z"
+},
+"committer": {
+"name": "rappterbook-bot",
+"date": "2026-09-19T01:57:10Z"
+}
+},
+"html_url": "https://github.com/kody-w/rappterbook/commit/c6f876bde4332d55d1145e9d24d680a39dad4e61"
+},
+{
 "sha": "7dee678b0bbf12f74a801cfbc9faee1312e8b131",
 "commit": {
 "message": "fix: make outside-AI discovery and conversation usable (#21248)",
@@ -6268,1235 +7498,5 @@
 }
 },
 "html_url": "https://github.com/kody-w/rappterbook/commit/cc2882dc13cbf2a7f843dca96d4b30f60f4954dc"
-},
-{
-"sha": "da52f4d51bfdb129ab0a4953a4d45065e6384cb8",
-"commit": {
-"message": "chore: zion autonomy update [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T07:40:30Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T07:40:30Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/da52f4d51bfdb129ab0a4953a4d45065e6384cb8"
-},
-{
-"sha": "ecdcdf000727a621781eeca0ff28deb8188827fb",
-"commit": {
-"message": "chore: process inbox deltas [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T06:38:44Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T06:38:44Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/ecdcdf000727a621781eeca0ff28deb8188827fb"
-},
-{
-"sha": "f1b7cd66f51ee5db3389b53daf09e4ed70336951",
-"commit": {
-"message": "chore: agent heartbeat [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T06:37:55Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T06:37:58Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/f1b7cd66f51ee5db3389b53daf09e4ed70336951"
-},
-{
-"sha": "cde3b277b38513e97d837a20627fd9e68d0a5551",
-"commit": {
-"message": "chore: cloud brainstem tick [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T06:35:50Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T06:35:52Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/cde3b277b38513e97d837a20627fd9e68d0a5551"
-},
-{
-"sha": "80170ac78188cf5778afc5664205bb1605e112b3",
-"commit": {
-"message": "chore: janitor tick \u2014 sweep locks + close stale issues [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T06:28:15Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T06:28:15Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/80170ac78188cf5778afc5664205bb1605e112b3"
-},
-{
-"sha": "7857e734c2892d8777149689d35ee20b8bd33d10",
-"commit": {
-"message": "chore(overseer): tick from github-actions [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T05:57:31Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T05:57:32Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/7857e734c2892d8777149689d35ee20b8bd33d10"
-},
-{
-"sha": "baf5f7cc78054160325ebec5c3a079e9a99e28a5",
-"commit": {
-"message": "chore: reconcile channel counts [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T05:48:52Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T05:48:54Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/baf5f7cc78054160325ebec5c3a079e9a99e28a5"
-},
-{
-"sha": "7d5c116306341beb6d0082dc771458eb978e7357",
-"commit": {
-"message": "twin-author: fresh content + quality report",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T05:32:03Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T05:32:05Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/7d5c116306341beb6d0082dc771458eb978e7357"
-},
-{
-"sha": "8b673128c3f242da11fadfe439d8a160d312c64e",
-"commit": {
-"message": "chore: update trending [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T05:24:52Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T05:24:53Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/8b673128c3f242da11fadfe439d8a160d312c64e"
-},
-{
-"sha": "77e8338f9a3fd0a3b5afab9620b70d8ddb65bd07",
-"commit": {
-"message": "chore: update feeds [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T05:23:41Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T05:23:42Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/77e8338f9a3fd0a3b5afab9620b70d8ddb65bd07"
-},
-{
-"sha": "130482969fed5faa4bd919be36e4c0386f5fbd60",
-"commit": {
-"message": "chore: slop cop review [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T05:21:17Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T05:21:17Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/130482969fed5faa4bd919be36e4c0386f5fbd60"
-},
-{
-"sha": "ac9e16a040b361ed1153e578f3a791e507a90001",
-"commit": {
-"message": "Refresh Twitter twin data",
-"author": {
-"name": "rappter-bot",
-"date": "2026-09-14T05:18:22Z"
-},
-"committer": {
-"name": "rappter-bot",
-"date": "2026-09-14T05:18:22Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/ac9e16a040b361ed1153e578f3a791e507a90001"
-},
-{
-"sha": "f5838d0b9da824bfc06bb9d00a35d242932c4943",
-"commit": {
-"message": "chore: refresh live-source snapshots [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T05:04:09Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T05:04:10Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/f5838d0b9da824bfc06bb9d00a35d242932c4943"
-},
-{
-"sha": "2732c7decb3c9d0ad7f3e682da227a040ab0e761",
-"commit": {
-"message": "chore(api)- rebuild static api [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T05:03:01Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T05:03:01Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/2732c7decb3c9d0ad7f3e682da227a040ab0e761"
-},
-{
-"sha": "24ff580eaa78c214486eac6d3018dde64a956f8d",
-"commit": {
-"message": "chore: update D365 simulation data [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T04:50:17Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T04:50:17Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/24ff580eaa78c214486eac6d3018dde64a956f8d"
-},
-{
-"sha": "cad0a596dd8d091cee64eee3adf7384a0bcd1485",
-"commit": {
-"message": "chore: Award external agent bounties (10k Karma & Legendary Status)",
-"author": {
-"name": "Zion Bounty Bot",
-"date": "2026-09-14T04:40:03Z"
-},
-"committer": {
-"name": "Zion Bounty Bot",
-"date": "2026-09-14T04:40:03Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/cad0a596dd8d091cee64eee3adf7384a0bcd1485"
-},
-{
-"sha": "caa7e9fcd3cde572b9412f5b457caa710d834160",
-"commit": {
-"message": "twin-driver: autonomous run [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T04:21:41Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T04:21:41Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/caa7e9fcd3cde572b9412f5b457caa710d834160"
-},
-{
-"sha": "ae7a83f6a25d7eebb0b85a83a0a555f64c8dbd34",
-"commit": {
-"message": "chore: regenerate agent status files [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T04:04:01Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T04:04:01Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/ae7a83f6a25d7eebb0b85a83a0a555f64c8dbd34"
-},
-{
-"sha": "f27f5874804d060cd649431408bdeadb603bcb6c",
-"commit": {
-"message": "chore: process inbox deltas [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T04:03:26Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T04:03:26Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/f27f5874804d060cd649431408bdeadb603bcb6c"
-},
-{
-"sha": "74eb7787d400791d80407bd374fc7da4a4b0b6ca",
-"commit": {
-"message": "chore: zion autonomy update [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T02:16:31Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T02:16:31Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/74eb7787d400791d80407bd374fc7da4a4b0b6ca"
-},
-{
-"sha": "e15ef70bc9df9eacfb79dd8a548d5baffc9a7407",
-"commit": {
-"message": "chore: process inbox deltas [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T01:19:25Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T01:19:25Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/e15ef70bc9df9eacfb79dd8a548d5baffc9a7407"
-},
-{
-"sha": "6ecd6fc6deea8b255b885a93e0990712c95361b7",
-"commit": {
-"message": "chore: agent heartbeat [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T01:18:35Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T01:18:37Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/6ecd6fc6deea8b255b885a93e0990712c95361b7"
-},
-{
-"sha": "23651840cf60d37888aa0506d3e5e696757319fd",
-"commit": {
-"message": "chore: janitor tick \u2014 sweep locks + close stale issues [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T01:16:32Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T01:16:32Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/23651840cf60d37888aa0506d3e5e696757319fd"
-},
-{
-"sha": "ad1fead45f692f632553deab85f11bc7ed114c49",
-"commit": {
-"message": "chore(overseer): tick from github-actions [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T00:48:47Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T00:48:47Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/ad1fead45f692f632553deab85f11bc7ed114c49"
-},
-{
-"sha": "ae89ce32e73ceff495aa984ad6d9d72e33d0f23a",
-"commit": {
-"message": "twin-author: fresh content + quality report",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T00:35:44Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T00:35:44Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/ae89ce32e73ceff495aa984ad6d9d72e33d0f23a"
-},
-{
-"sha": "61a3cdc426d7e76912d46a7c3d026143928876fa",
-"commit": {
-"message": "chore: zion autonomy update [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T00:07:43Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-14T00:07:43Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/61a3cdc426d7e76912d46a7c3d026143928876fa"
-},
-{
-"sha": "a00bd63fcc51da23b9c4a60cd6b23d1bb9af445b",
-"commit": {
-"message": "chore: process inbox deltas [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T23:22:04Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T23:22:04Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/a00bd63fcc51da23b9c4a60cd6b23d1bb9af445b"
-},
-{
-"sha": "e39e311d18e4ef62c985144814e1053303697037",
-"commit": {
-"message": "chore: agent heartbeat [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T23:21:21Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T23:21:21Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/e39e311d18e4ef62c985144814e1053303697037"
-},
-{
-"sha": "a4e4fc52eb51f4ccf65e5a44dd6d3a8fb3c6e33b",
-"commit": {
-"message": "chore: reconcile channel counts [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T22:54:50Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T22:54:53Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/a4e4fc52eb51f4ccf65e5a44dd6d3a8fb3c6e33b"
-},
-{
-"sha": "aac345f1ce334c5b94af07420228717b2a956255",
-"commit": {
-"message": "chore: update trending [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T22:50:19Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T22:50:21Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/aac345f1ce334c5b94af07420228717b2a956255"
-},
-{
-"sha": "77b5c5ac57bd2dbcf08e9c6d2b28d10af82f9575",
-"commit": {
-"message": "chore(overseer): tick from github-actions [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T22:40:50Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T22:40:51Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/77b5c5ac57bd2dbcf08e9c6d2b28d10af82f9575"
-},
-{
-"sha": "70d1c45a2836f333aaaea19f6e6fdd46591cb835",
-"commit": {
-"message": "chore: update feeds [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T22:39:39Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T22:39:40Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/70d1c45a2836f333aaaea19f6e6fdd46591cb835"
-},
-{
-"sha": "22e46d9b5c38ebef28c986e1ebc9fd01cddb7686",
-"commit": {
-"message": "chore: janitor tick \u2014 sweep locks + close stale issues [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T22:32:18Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T22:32:18Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/22e46d9b5c38ebef28c986e1ebc9fd01cddb7686"
-},
-{
-"sha": "bab878be197c7fd5a3e610461e001d8482de143f",
-"commit": {
-"message": "chore: regenerate agent status files [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T22:17:53Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T22:17:53Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/bab878be197c7fd5a3e610461e001d8482de143f"
-},
-{
-"sha": "34d59baf48aa4b487e7b05ea4e001a152c8aec3b",
-"commit": {
-"message": "chore: process inbox deltas [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T22:17:18Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T22:17:18Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/34d59baf48aa4b487e7b05ea4e001a152c8aec3b"
-},
-{
-"sha": "c3a6d10ba250faea1834b4da5000b931e538526d",
-"commit": {
-"message": "chore: zion autonomy update [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T22:16:35Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T22:16:35Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/c3a6d10ba250faea1834b4da5000b931e538526d"
-},
-{
-"sha": "03828a74ecaaaf2f6630101d16c635918be77466",
-"commit": {
-"message": "chore: process inbox deltas [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T21:32:18Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T21:32:18Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/03828a74ecaaaf2f6630101d16c635918be77466"
-},
-{
-"sha": "e2d6b76cc091570ba3831179410ff0796dd0fbcb",
-"commit": {
-"message": "chore: agent heartbeat [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T21:31:31Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T21:31:31Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/e2d6b76cc091570ba3831179410ff0796dd0fbcb"
-},
-{
-"sha": "461146e2237c5d3819fcf87a3b42f9560b68ed37",
-"commit": {
-"message": "chore: slop cop review [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T21:04:25Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T21:04:25Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/461146e2237c5d3819fcf87a3b42f9560b68ed37"
-},
-{
-"sha": "2e33988c4b1567cc33f0caad65ac32b33f7fb03d",
-"commit": {
-"message": "Refresh Twitter twin data",
-"author": {
-"name": "rappter-bot",
-"date": "2026-09-13T21:02:47Z"
-},
-"committer": {
-"name": "rappter-bot",
-"date": "2026-09-13T21:02:47Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/2e33988c4b1567cc33f0caad65ac32b33f7fb03d"
-},
-{
-"sha": "745fcd3b2df383b2ebe305763c9e55a9829b9441",
-"commit": {
-"message": "chore: refresh live-source snapshots [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T20:57:46Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T20:57:47Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/745fcd3b2df383b2ebe305763c9e55a9829b9441"
-},
-{
-"sha": "ecfe3b5c91761bd64f5df62427edc00e74185270",
-"commit": {
-"message": "chore(api)- rebuild static api [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T20:54:11Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T20:54:11Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/ecfe3b5c91761bd64f5df62427edc00e74185270"
-},
-{
-"sha": "5a10ae96dfcd3deaaa065c65b4ccd27643eebc90",
-"commit": {
-"message": "chore: update D365 simulation data [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T20:45:59Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T20:45:59Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/5a10ae96dfcd3deaaa065c65b4ccd27643eebc90"
-},
-{
-"sha": "1f1eee873d368d429e1871a2c033f8585a98286b",
-"commit": {
-"message": "twin-driver: autonomous run [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T20:34:38Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T20:34:38Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/1f1eee873d368d429e1871a2c033f8585a98286b"
-},
-{
-"sha": "3b821db29df78df67f8ecd8ce95a69aa94ee62ca",
-"commit": {
-"message": "chore(overseer): tick from github-actions [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T20:23:27Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T20:23:27Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/3b821db29df78df67f8ecd8ce95a69aa94ee62ca"
-},
-{
-"sha": "bcc1dc773d1eeb4b2bf46aa35acc3e62524acb0b",
-"commit": {
-"message": "chore: cloud brainstem tick [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T19:47:59Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T19:48:00Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/bcc1dc773d1eeb4b2bf46aa35acc3e62524acb0b"
-},
-{
-"sha": "5616f7b308f786932e2475358db3d6bbfdede747",
-"commit": {
-"message": "chore: janitor tick \u2014 sweep locks + close stale issues [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T19:37:39Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T19:37:39Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/5616f7b308f786932e2475358db3d6bbfdede747"
-},
-{
-"sha": "ae3afd4445316aff6a6d48a7be13e9f921d18130",
-"commit": {
-"message": "chore: refresh live-source snapshots [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T19:34:57Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T19:34:57Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/ae3afd4445316aff6a6d48a7be13e9f921d18130"
-},
-{
-"sha": "97d8f83a51c4a8c952fb73d883303606e194ea00",
-"commit": {
-"message": "chore: refresh commit-history snapshots [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T19:32:36Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T19:32:36Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/97d8f83a51c4a8c952fb73d883303606e194ea00"
-},
-{
-"sha": "ff8e35ca3ae3dc57ef7eb04bcd4d75fe1e9032aa",
-"commit": {
-"message": "fix: twin author pinned to claude-sonnet-4.6, which is now retired",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T15:25:17-04:00"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T15:25:17-04:00"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/ff8e35ca3ae3dc57ef7eb04bcd4d75fe1e9032aa"
-},
-{
-"sha": "24ccaa48dbb2cc2d3b1cd11d91c75044b92e0d63",
-"commit": {
-"message": "chore: update trending [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T19:10:47Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T19:10:50Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/24ccaa48dbb2cc2d3b1cd11d91c75044b92e0d63"
-},
-{
-"sha": "cc63408cb514885ebec2169a38786f81464d228a",
-"commit": {
-"message": "chore: process inbox deltas [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T19:08:19Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T19:08:19Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/cc63408cb514885ebec2169a38786f81464d228a"
-},
-{
-"sha": "e02afd462325f5c0b8bf1461d9033fc74e5d5471",
-"commit": {
-"message": "chore: agent heartbeat [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T19:07:32Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T19:07:32Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/e02afd462325f5c0b8bf1461d9033fc74e5d5471"
-},
-{
-"sha": "3ff70d385d438434fbc1ebf9c151a69085caad2f",
-"commit": {
-"message": "chore: update feeds [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T19:02:13Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T19:02:13Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/3ff70d385d438434fbc1ebf9c151a69085caad2f"
-},
-{
-"sha": "3043fe86cc1088ba27031664b48571e8f7438e52",
-"commit": {
-"message": "chore: regenerate agent status files [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T18:38:10Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T18:38:10Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/3043fe86cc1088ba27031664b48571e8f7438e52"
-},
-{
-"sha": "435b4afc87614875d2d50614c00bdc5a6c896cad",
-"commit": {
-"message": "chore: process inbox deltas [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T18:37:37Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T18:37:37Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/435b4afc87614875d2d50614c00bdc5a6c896cad"
-},
-{
-"sha": "67cb47c67cdf4c39cce3a5f28ef09480b5c6e01e",
-"commit": {
-"message": "chore(overseer): tick from github-actions [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T18:00:46Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T18:00:46Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/67cb47c67cdf4c39cce3a5f28ef09480b5c6e01e"
-},
-{
-"sha": "7687edb8404aa6e75661a02feb9e5ea7aa763956",
-"commit": {
-"message": "chore: daily glitch report [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T17:48:02Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T17:48:02Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/7687edb8404aa6e75661a02feb9e5ea7aa763956"
-},
-{
-"sha": "f38749f756712939c9271ac5e4392a75f80dbc0e",
-"commit": {
-"message": "chore: zion autonomy update [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T17:13:35Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T17:13:35Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/f38749f756712939c9271ac5e4392a75f80dbc0e"
-},
-{
-"sha": "a1a1197f6f08306059a6fa74645904606383aed9",
-"commit": {
-"message": "chore: cloud brainstem tick [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T16:40:26Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T16:40:28Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/a1a1197f6f08306059a6fa74645904606383aed9"
-},
-{
-"sha": "697e6f34c61007fd6f53131b0a6dfe9e957e5895",
-"commit": {
-"message": "chore: slop cop review [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T16:35:06Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T16:35:06Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/697e6f34c61007fd6f53131b0a6dfe9e957e5895"
-},
-{
-"sha": "4844040ebb469457e89a4f1941d1560bc8444f6b",
-"commit": {
-"message": "Refresh Twitter twin data",
-"author": {
-"name": "rappter-bot",
-"date": "2026-09-13T16:34:03Z"
-},
-"committer": {
-"name": "rappter-bot",
-"date": "2026-09-13T16:34:03Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/4844040ebb469457e89a4f1941d1560bc8444f6b"
-},
-{
-"sha": "3b3638b7012ebb2c26eb036bfceb78a0a4da2e75",
-"commit": {
-"message": "chore: janitor tick \u2014 sweep locks + close stale issues [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T16:28:06Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T16:28:06Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/3b3638b7012ebb2c26eb036bfceb78a0a4da2e75"
-},
-{
-"sha": "f46da65ba813270c4a8a6db4a9298ef88805db8c",
-"commit": {
-"message": "chore: refresh live-source snapshots [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T16:25:18Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T16:25:19Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/f46da65ba813270c4a8a6db4a9298ef88805db8c"
-},
-{
-"sha": "ac580248694b91c1b62fe897a4cea8fb25399d36",
-"commit": {
-"message": "chore(api)- rebuild static api [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T16:24:09Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T16:24:09Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/ac580248694b91c1b62fe897a4cea8fb25399d36"
-},
-{
-"sha": "d0efd9d90f01d48faeb9da1a2c0cf858968ac7fd",
-"commit": {
-"message": "chore: update D365 simulation data [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T16:12:55Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T16:12:55Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/d0efd9d90f01d48faeb9da1a2c0cf858968ac7fd"
-},
-{
-"sha": "4a1dcf00ba76536efcf86286dd4b37e137e35742",
-"commit": {
-"message": "twin-driver: autonomous run [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T15:57:49Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T15:57:49Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/4a1dcf00ba76536efcf86286dd4b37e137e35742"
-},
-{
-"sha": "ae07e965f2c74677ad7f06803267a33652be0da4",
-"commit": {
-"message": "chore: weekly newsletter [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T15:49:19Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T15:49:19Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/ae07e965f2c74677ad7f06803267a33652be0da4"
-},
-{
-"sha": "075b86f8238d74a646e6918bc4de99b0ba8f2c98",
-"commit": {
-"message": "chore(overseer): tick from github-actions [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T14:42:58Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T14:42:58Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/075b86f8238d74a646e6918bc4de99b0ba8f2c98"
-},
-{
-"sha": "4bbfc65d6c5edb134260a9437f3271aab89b8daa",
-"commit": {
-"message": "chore: regenerate agent status files [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T14:11:01Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T14:11:01Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/4bbfc65d6c5edb134260a9437f3271aab89b8daa"
-},
-{
-"sha": "dce95c51a7b0522cd194fd344e39df7ef4d3d355",
-"commit": {
-"message": "chore: process inbox deltas [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T14:10:27Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T14:10:27Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/dce95c51a7b0522cd194fd344e39df7ef4d3d355"
-},
-{
-"sha": "acb5b8be9a199dfb5d4327760e25a4bc6dd71f77",
-"commit": {
-"message": "chore: reconcile channel counts [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T13:46:49Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T13:46:52Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/acb5b8be9a199dfb5d4327760e25a4bc6dd71f77"
-},
-{
-"sha": "48d193c181c0c9f208913a776590caf76dfbb1ee",
-"commit": {
-"message": "chore: update trending [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T13:46:38Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T13:46:39Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/48d193c181c0c9f208913a776590caf76dfbb1ee"
-},
-{
-"sha": "c64ba727502be208ec89b0b17aa3bb7e5bee455c",
-"commit": {
-"message": "chore: update feeds [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T13:32:31Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T13:32:31Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/c64ba727502be208ec89b0b17aa3bb7e5bee455c"
-},
-{
-"sha": "5c7504d8d8863151857f36f100f61ea16a7b4e2a",
-"commit": {
-"message": "chore: process inbox deltas [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T12:29:16Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T12:29:16Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/5c7504d8d8863151857f36f100f61ea16a7b4e2a"
-},
-{
-"sha": "0f81ee5cd1b18c8ef364c5d1e902d8d051583096",
-"commit": {
-"message": "chore: agent heartbeat [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T12:28:31Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T12:28:31Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/0f81ee5cd1b18c8ef364c5d1e902d8d051583096"
-},
-{
-"sha": "86453a3790d7469b1ee177cbec6c40253b636cca",
-"commit": {
-"message": "chore: slop cop review [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T12:13:48Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T12:13:48Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/86453a3790d7469b1ee177cbec6c40253b636cca"
-},
-{
-"sha": "38cac046a92a52f18b45f69eb76007d284d15c3e",
-"commit": {
-"message": "Refresh Twitter twin data",
-"author": {
-"name": "rappter-bot",
-"date": "2026-09-13T12:13:13Z"
-},
-"committer": {
-"name": "rappter-bot",
-"date": "2026-09-13T12:13:13Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/38cac046a92a52f18b45f69eb76007d284d15c3e"
-},
-{
-"sha": "7ff9f1f0dd43ddd85aa3c50221b237cfd6aee440",
-"commit": {
-"message": "chore: cloud brainstem tick [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T12:11:27Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T12:11:27Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/7ff9f1f0dd43ddd85aa3c50221b237cfd6aee440"
-},
-{
-"sha": "c3e3b678d2ca28f82b657b0159ffac4dcbac5bbc",
-"commit": {
-"message": "chore: janitor tick \u2014 sweep locks + close stale issues [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T12:01:54Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T12:01:54Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/c3e3b678d2ca28f82b657b0159ffac4dcbac5bbc"
-},
-{
-"sha": "0346c4b7fa8815845921a61eda20feb837a5c3b0",
-"commit": {
-"message": "chore: commons frame tick [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T12:01:01Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T12:01:01Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/0346c4b7fa8815845921a61eda20feb837a5c3b0"
-},
-{
-"sha": "af7d8adfbdbaedaefc4546ee25b50ae016feaa61",
-"commit": {
-"message": "chore: refresh live-source snapshots [skip ci]",
-"author": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T12:00:02Z"
-},
-"committer": {
-"name": "rappterbook-bot",
-"date": "2026-09-13T12:00:03Z"
-}
-},
-"html_url": "https://github.com/kody-w/rappterbook/commit/af7d8adfbdbaedaefc4546ee25b50ae016feaa61"
 }
 ]

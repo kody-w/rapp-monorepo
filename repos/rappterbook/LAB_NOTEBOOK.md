@@ -6632,3 +6632,317 @@ probes retired synthetic posts; those scores are not evidence that an outside
 agent completed registration or a first reply. Replace that proxy with
 executable, non-publishing journey checks, then observe a genuinely authorized
 outside contributor using the full receipt-to-reply path.
+
+## Entry — 2026-09-19 — Restore outside credit and make the complete on-ramp portable
+
+**Session:** GitHub Copilot CLI / authorized operator.
+**Read state:** `289ed692d2f5f6a9ccc58d245bbc50311be502da`.
+Work isolated in `copilot/outside-study-credit-fbe4c383`.
+
+### Hypothesis tested
+The profile-counter warning is not just stale presentation. An outside
+contributor reported the same failure in #11851: real native GitHub work
+existed but their profile did not receive credit. Fixing that trust boundary
+and making the entire participation workflow portable are higher leverage
+than adding more simulated activity.
+
+### What I built
+Found two defects in `reconcile_channels.py`: the collector only admitted
+logins not already in agents.json, making the existing-profile update branch
+unreachable; and it credited replies received on a post to the post author.
+Extracted the existing analytics observation collector for shared use in
+profile reconciliation. Counts now follow native authorship, include authored
+replies, exclude vote-only comments and service-account relays, and retain
+supported historical observations. Native comment IDs prevent edits from
+becoming additional contributions. Retained classifications are refreshed
+against current authenticated profile evidence.
+
+Added explicit observed-lifetime/count-coverage provenance and a matching
+profile explanation. Founding profiles and existing status/karma remain intact.
+Partial authoritative corpora do not overwrite outside profile counters.
+The production-path follow-through also adds agents.json to the dedicated
+reconciliation workflow's commit list and prevents later byline-journal
+reconciliation from clobbering the newly declared native-authorship counts.
+
+Added the public field note at
+`docs/reports/early-outside-participation-2026-09-19.html`. It uses public
+evidence only and separates a busy thread, repeat participation, a submitted
+proposal and an actually merged fix. The full working study remains outside
+the public repository.
+
+Expanded canonical `skill.md` into a complete provider-neutral Agent Skill,
+with capability boundaries, a pinned client artifact, explicit identity and
+publication consent, pagination, receipt/readback checks, truthful stages and
+private-data boundaries. The project discovery copy is byte-identical and
+installed using the native Copilot skill command. No Hive or RAPP Work setup
+was made a prerequisite for using the public Rappterbook network.
+
+### What worked
+145 targeted tests passed across the new credit and skill contracts, existing
+analytics, client, onboarding, frontend and accessibility surfaces.
+The new regression cases cover existing profiles, authored versus received
+comments, replies, vote-only content, service relays, retained history, edits,
+case-insensitive login matching, dry runs, incomplete corpora and frontend
+provenance. A read-only replay over the real committed corpus computes 8 posts
+and 65 authored comments/replies for the sustained early outside contributor,
+instead of the stale 3/0 profile. This is recovered credit, not new activity.
+
+The global skill was installed and discovered outside the repository; its
+bytes match the canonical and project copies. Every documented client command
+example is parsed without executing public writes.
+
+### What failed
+One expanded local test initially failed because the sparse checkout omitted
+the existing Cloudflare fixture. Materializing that directory resolved it.
+An early contribution's PR #11219 is closed with `merged=false`; neither its
+submission nor a narrative about its review proves a production merge. The
+field note says so rather than advertising an unverified shipped outcome.
+
+### Lessons for next session
+1. Profile credit and analytics must share an authorship definition, not
+   maintain competing counters or conflate received replies with authored work.
+2. Historical observations, current metadata, independent outside accounts
+   and service-account personas are different units; preserve their limits.
+3. A global skill must work without relative repository links and must not
+   mistake administrator credentials for a decision to rebrand that profile.
+4. Installed instructions, successful command envelopes, queued receipts and
+   published contributions are distinct stages, not interchangeable success.
+
+### Recommended next move
+Read back the reconciled profiles after the normal publisher runs, and retain
+coverage qualifications instead of treating corrections as growth. Use the
+complete skill to exercise a genuinely authorized outside journey and follow
+up on concrete contributions with verifiable artifacts. Do not turn an early
+small-cohort observation or a raw comment count into a causal retention claim.
+
+## Entry — 2026-09-19 — Keep the Moltbook bridge compatible without inventing an empty inbox
+
+**Session:** GitHub Copilot CLI / authorized operator.
+**Read state:** `c0302f4ee1514d6e30050b6b288d81795c949642`.
+Work isolated in `copilot/moltbook-home-contract-fbe4c383`.
+
+### Hypothesis tested
+The first authorized outreach attempt was blocked before reservation because
+the live Moltbook `/home` response no longer included `your_direct_messages`.
+The current public skill's example instead exposes
+`your_account.unread_notification_count` and `activity_on_your_posts`.
+Treating a missing private-message surface as zero would be dishonest, but
+requiring an unexposed field blocks otherwise complete public summaries.
+
+### What I built
+The bridge now validates two explicit response shapes. Legacy responses keep
+strict, nonnegative integer DM counters. Current responses without a DM
+section require an explicit, nonnegative public notification count; missing,
+null, Boolean, negative or string counts refuse before any reservation/write.
+Public account notifications also block posting even if the own-post activity
+list is empty. Present-but-malformed DM data cannot use the current shape.
+
+Home summaries, write results and durable receipt context distinguish
+`direct_message_visibility: not_reported` from a reported empty DM inbox.
+No DM contents are retained. Account binding, response-first checks, budgets,
+exact-origin enforcement, duplicate protection and readback/verification gates
+are unchanged.
+
+### What worked
+All 91 bridge cases pass, including the new current-shape, malformed-count,
+notification-blocking and context-retention cases. A read-only call against
+the actual API returns zero reported public obligations and explicitly
+unknown/unreported DM visibility. The earlier blocked attempt created no
+remote post and no write reservation.
+
+### What failed
+The public heartbeat document still mentions the DM section while the current
+skill example and actual response omit it; the linked messaging documentation
+and DM-check route returned 404 during inspection. No private inbox was
+declared empty and no raw write was used to bypass the bridge.
+
+### Lessons for next session
+Validate the documented surface that actually exists, preserve visibility
+limits, and retain the exact preflight context with the outbound receipt.
+A successful read of one public surface is not proof of another private
+surface's availability.
+
+### Recommended next move
+Use the reviewed bridge for the bounded, already-authorized pilot. Handle any
+verification challenge and read back the published body before reporting
+success; an API creation response alone is still insufficient.
+
+## Entry - 2026-09-19 - Preserve the pending Moltbook pilot instead of duplicating it
+
+**Session:** GPT-6 Astra via GitHub Copilot CLI / authorized operator.
+**Read state:** `ac3ebb6664cc159b465dd8cf2be6f4086aa27a85`.
+Work isolated in `copilot/moltbook-pilot-recovery-fbe4c383`.
+
+### Hypothesis tested
+The reviewed current-home adapter in PR #21251 should allow one bounded,
+affiliated skill post to complete the real Moltbook publication journey.
+Creation, verification and public visibility must remain distinct outcomes.
+
+### What I built
+No runtime change. Retained the frozen pilot and its durable publisher
+receipt, then used the bridge's read-only reconciliation path and an
+authenticated read of the exact returned post. This entry records the
+negative result so a later session does not mistake the creation error for
+permission to submit another copy.
+
+### What worked
+The creation response was HTTP 201 at `2026-09-19T15:21:58Z`. The bridge
+preserved remote ID `c00b3e25-cc5b-4361-8e65-76e44a5bc5cb` under idempotency
+key `rb-mb-7b736a582cc5be5b1e66c9b2` even when challenge validation failed.
+At `2026-09-19T15:28Z`, authenticated readback returned the exact intended
+title/body, the receipt-bound `rapptertwo` account and `agentstack` community.
+The post was not deleted or marked as spam. Reconciliation correctly did
+not report publication success because `verification_status` was `pending`.
+No duplicate, replacement key, deletion or guessed verification was sent.
+
+### What failed
+The bridge rejected the creation response with
+`Moltbook returned an incomplete verification challenge`. The original
+challenge is not retained, so the exact missing or invalid field is
+undetermined; there is no evidence for relaxing a particular validator.
+The subsequent post GET contains no verification object or recoverable
+challenge. The five-minute lifetime documented in Moltbook's public skill
+had elapsed by readback. Public publication remains unverified, and the
+durable receipt remains ambiguous rather than successful.
+
+### Lessons for next session
+1. HTTP 201 can leave a real but unverified remote object. Preserve its ID
+   and reconcile it before any attempt to create the same content again.
+2. Reuse the existing publisher ledger and frozen intent. An empty ledger,
+   changed body or new key would evade duplicate protection, not recover it.
+3. A pending object with the correct body is not a completed outreach
+   result, referral, outside signup or returning participant.
+4. Do not infer the original response shape from a generic validation error
+   or treat a later GET without a challenge as proof no creation occurred.
+
+### Recommended next move
+Pause this pilot until a supported recovery path for the existing remote
+object is established. Read the preserved receipt and exact post first.
+Do not delete/repost, invent an expiry or answer, or switch publisher state
+to clear the block. Any replacement requires an explicit decision and
+duplicate-safety resolution; public success still requires verified status
+and exact account/content readback. Keep the already-published Rappterbook
+credit repair, complete skill and field note available independently.
+
+## Entry - 2026-09-19 - Verify the visible pilot and answer the original contributor
+
+**Session:** GPT-6 Astra via GitHub Copilot CLI / authorized operator.
+**Read state:** PR #21252 merged; native profile observation at
+`2026-09-19T17:59:24Z`.
+
+### Hypothesis tested
+Returning with a shipped correction to a real contributor's unresolved
+question is more useful than another announcement. Publication evidence must
+also distinguish a readable page from API verification and feed distribution.
+
+### What I built
+Published one transparent operator reply to the contributor's precise
+SDK-versus-API follow-up in Discussion #11851:
+https://github.com/kody-w/rappterbook/discussions/11851#discussioncomment-18518581
+It links merged PR #21249, explains the actual reconciliation defects and
+reports the observed-lifetime counts with their coverage limits.
+Prepared a tailored correction for the related Moltbook thread, but did not
+submit it after authenticated reads failed. No runtime or canonical state
+was changed.
+
+### What worked
+Independent GitHub readback confirms the exact reply body, author `kody-w`,
+parent comment and Discussion. The public contributor profile reports
+8 posts and 65 authored comments/replies, explicitly a lower bound.
+
+Correction to the preceding entry: the operator supplied the Moltbook pilot
+link, and an actual Safari page showing Login renders the intended title,
+author, community and content:
+https://www.moltbook.com/post/c00b3e25-cc5b-4361-8e65-76e44a5bc5cb
+Unauthenticated API reads also return its full body. Direct-link visibility
+is now confirmed; saying publication was wholly blocked was too strong.
+
+### What failed
+The same post's API status still says `pending`; verification completion and
+feed distribution remain unproved. Keep the bridge receipt intact rather
+than overwriting it with a stronger claim. Subsequent authenticated reads
+of both `/home` and `/agents/me` returned HTTP 401, so the additional
+Moltbook correction was held before any write.
+
+### Lessons for next session
+1. Distinguish direct-link visibility, API verification, feed distribution
+   and genuine responses; none automatically establishes the next.
+2. Follow up on the exact unanswered question, not merely the thread title.
+3. Correct an earlier mistaken diagnosis explicitly and preserve limitations.
+4. A useful check-in can end without a post. Never manufacture engagement
+   to make maintenance appear productive.
+
+### Recommended next move
+Read actual responses to the published correction and the existing pilot.
+Do not repeat the correction or delete/repost the pilot. Restore authorized
+Moltbook authentication before sending the prepared, nonduplicative reply.
+Continue bounded, reply-first care; keep owned activity and recovered counts
+separate from independent outside participation and return visits.
+
+## Entry - 2026-09-19 - Supervised participation gauntlet, first cycle
+
+**Session:** GPT-6 Astra via GitHub Copilot CLI / authorized operator.
+**Read state:** `2b4ab0a93565df17ea31ef31d18cd53011f3b336`.
+
+### Hypothesis tested
+Two bounded, independently owned worker lanes can expose concrete
+participation defects beyond the existing tests, while a supervisor rejects
+speculative changes and requires combined evidence before publication.
+Prior feedback favored accurate credit and recoverable participation over
+additional announcements or synthetic activity.
+
+### What I built
+Added the reusable `rappterbook-gauntlet` skill, a stdlib offline gate runner
+at `scripts/rappterbook_gauntlet.py`, and `make gauntlet`. The workflow is
+inherit evidence -> reproduce -> repair -> challenge -> supervisor decision
+-> verified delivery -> next challenge. Workers receive separate worktrees,
+one defect each and at most two repair attempts. They cannot publish.
+
+The runner unions the chosen existing suites into one pytest invocation,
+excludes live tests and inherited selection overrides, and reports JSON
+evidence. A timeout, missing report, zero cases or skipped coverage is
+blocked, not passed. It does not launch models or approve its own findings.
+This adds no canonical state, platform action, dependency or repository cron.
+
+The newcomer worker reproduced a Card failure that discarded the known
+Issue number/URL after a successful lifecycle submission followed by a
+failed receipt read. The Card now retains `submitted_issue` on that error
+so recovery can read the existing receipt rather than submit again.
+The approved standalone client pin remains unchanged.
+
+The credit worker reproduced malformed retained history being treated as
+empty observations, silently reducing previously observed authored credit.
+Existing damaged snapshots now stop both relevant publishers before writing.
+Missing first-run snapshots and explicit empty event lists still bootstrap.
+
+### What worked
+Both workers demonstrated failing regressions before implementation and
+passed their reusable lane gates: 95 newcomer cases and 93 credit cases,
+with no failures or skips. The supervisor reviewed both full scoped diffs
+and integrated them. The same combined gate increased from 270 passing
+baseline cases to 299 passing candidate cases, including 20 contracts for
+the runner itself. No live social test effects or canonical-state edits
+were used. The reusable personal skill matches the project source.
+
+### What failed
+The original Card error lost the submission locator, and the original
+credit writers accepted corrupted history as a basis for publishing lower
+counts. These are reproduced offline failures, not new production incidents.
+The credit guard does not reconstruct lost history or distinguish an absent
+established snapshot from a legitimate first run. Passing offline gates
+does not prove outside adoption, live deployment or universal correctness.
+
+### Lessons for next session
+1. Worker confidence is not acceptance: require a before/after counterexample,
+   neighboring cases, a scoped diff review and a combined supervisor gate.
+2. Preserve known submission evidence even when the next read fails.
+3. Damaged durable evidence is unknown history, not evidence of zero activity.
+4. Stop after the bounded result and retain the next falsifiable question;
+   do not invent more work to keep agents occupied.
+
+### Recommended next move
+Carry these results into the next authorized gauntlet cycle. Candidate
+challenges are whether the standalone CLI retains a submitted Issue locator
+after receipt transport failure, and how an established installation can
+recognize lost retained history without inventing credit. Select from
+current evidence; do not assume either candidate is already a proven bug.

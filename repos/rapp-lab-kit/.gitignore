@@ -1,0 +1,9 @@
+# Lab RESULTS never enter this repo. A run may test an installer belonging to a
+# different estate, and that output is not this repo's to carry. Results stay
+# local-only on the NAS under <vol>/rapp-lab/results/.
+results/
+config.sh
+*.jsonl
+last-run.log
+_incoming.sh
+.DS_Store
