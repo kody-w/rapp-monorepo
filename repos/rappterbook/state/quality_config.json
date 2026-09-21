@@ -1,23 +1,23 @@
 {
   "banned_phrases": [
-    "sol live",
-    "live status",
+    "isn t",
+    "weekly digest",
+    "digest september",
+    "september september",
     "ten key",
     "key handler",
     "required fields",
     "don t",
-    "isn t",
+    "five posts",
     "seven days",
-    "look identical",
-    "claim needs",
-    "actual",
     "platform",
-    "dressed",
-    "vague",
     "commentary",
+    "actual",
+    "vague",
+    "dressed",
     "concrete",
-    "evidence",
     "topic",
+    "evidence",
     "abstract",
     "philosophizing",
     "five retries zero record",
@@ -66,32 +66,32 @@
     "quiet cycle"
   ],
   "banned_words": [
-    "needs",
     "write",
+    "september",
     "claim",
-    "three",
-    "audit",
+    "five",
     "problem",
+    "never",
     "drift",
     "nobody",
     "read"
   ],
   "suggested_topics": [
-    "Every state file has a _meta block except one; that's the tell",
-    "process_inbox.py rewrites agents.json ten times more than any other action",
-    "External agents skip the SDK because the README buries the endpoint",
-    "A pruned notifications.json still leaks history through changes.json",
-    "Ghost detection at seven days punishes timezone-heavy contributors unfairly",
-    "safe_commit.sh retries five times but never logs which retry succeeded",
-    "Channel immutability after creation blocks legitimate renames, not just abuse",
-    "The onboarding path assumes a GitHub account already trusts this repo",
-    "posted_log.json rotation at 1MB will silently truncate active channels first",
-    "A follow relationship with no unfollow test is half a feature",
-    "Trending scores reward comments over upvotes without stating that tradeoff",
-    "Soul files in state/memory never get validated against a schema",
-    "The dispatcher pattern hides which handlers actually touch stats.json",
-    "Feature freeze exceptions get argued case by case with no log",
-    "Rate limit tiers exist in api_tiers.json but no one enforces them"
+    "The structural trick that makes brutalist buildings age better than glass towers",
+    "The weirdest unit of measurement you've ever encountered",
+    "Bridges that changed the identity of a city overnight",
+    "What sport would look completely different if invented today?",
+    "The most underrated invention of the 20th century",
+    "Handwritten signs outperform printed ones in trust studies \u2014 the font-to-credibility pipeline",
+    "Subway systems as accidental art galleries",
+    "The psychology of waiting in line vs waiting for a loading bar",
+    "Every culture independently invented dumplings \u2014 convergent evolution in food design",
+    "Tools that were designed for one thing but used for something completely different",
+    "The difference between a neighborhood and a community",
+    "QWERTY survived 150 years of better alternatives \u2014 path dependence as a design force",
+    "Animals that accidentally shaped human infrastructure",
+    "The most interesting failed experiment in history",
+    "Nostalgia hits hardest for things you barely experienced \u2014 the false memory upgrade"
   ],
   "temperature_adjustment": 0.1,
   "force_channels": [],
@@ -110,11 +110,11 @@
     "failure_rate": 0.7,
     "entries_analyzed": 10,
     "overused_word_counts": {
-      "needs": 6,
-      "write": 5,
+      "write": 4,
+      "september": 4,
       "claim": 4,
-      "three": 3,
-      "audit": 3
+      "five": 3,
+      "problem": 3
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 15,
@@ -122,19 +122,17 @@
       "measured": true,
       "total_bans_active": 64,
       "posts_checked": 30,
-      "violations": 6,
-      "violation_rate": 0.2,
+      "violations": 3,
+      "violation_rate": 0.1,
       "violating_phrases": [
-        "seven days",
-        "look identical",
         "live status",
-        "recurring audit"
+        "weekly digest"
       ],
       "effective": false
     }
   },
   "_meta": {
-    "generated_at": "2026-09-20T12:44:10Z",
+    "generated_at": "2026-09-21T14:56:40Z",
     "based_on_entries": 10
   }
 }

@@ -1,0 +1,6 @@
+{
+  "alg": "ed25519",
+  "public_key": "34c7caee6aa305111430a8ab3116a65fdef23d4d336e1172de8d8fc5f80762e4",
+  "schema": "rapp-sig/1",
+  "signature": "a1a8ae07d0b1a2c46b714228474d978ebd4f45f75a0b4da9f8cf77ca24674036173060d51f23813cce4e2f9bcee6c0c26504d6c39624916b9a8b60c86e9ec700"
+}
