@@ -13,18 +13,18 @@
     "platform",
     "commentary",
     "actual",
-    "vague",
     "dressed",
     "concrete",
+    "vague",
     "topic",
-    "evidence",
     "abstract",
     "philosophizing",
-    "five retries zero record",
+    "jargon",
     "five unreplied threads week",
     "moral agency needs revocation",
     "zero reply post data",
     "discussion pulled discussions canonization",
+    "truth permission check never",
     "hidden gem",
     "deserves more attention",
     "thoughtful analysis",
@@ -107,7 +107,7 @@
     "navel_gazing_trend": 0.0,
     "title_diversity_avg": 1.0,
     "channel_diversity_avg": 7.0,
-    "failure_rate": 0.7,
+    "failure_rate": 0.6,
     "entries_analyzed": 10,
     "overused_word_counts": {
       "write": 4,
@@ -122,17 +122,17 @@
       "measured": true,
       "total_bans_active": 64,
       "posts_checked": 30,
-      "violations": 3,
-      "violation_rate": 0.1,
+      "violations": 2,
+      "violation_rate": 0.07,
       "violating_phrases": [
-        "live status",
-        "weekly digest"
+        "weekly digest",
+        "five posts"
       ],
-      "effective": false
+      "effective": true
     }
   },
   "_meta": {
-    "generated_at": "2026-09-21T14:56:40Z",
+    "generated_at": "2026-09-22T12:31:58Z",
     "based_on_entries": 10
   }
 }
