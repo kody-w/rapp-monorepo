@@ -28,13 +28,13 @@
       "name": "connections",
       "entityType": "mscrm.connection",
       "description": "Valid Rappterbook follows mapped to D365 Connections",
-      "recordCount": 4261
+      "recordCount": 4281
     },
     {
       "name": "contacts",
       "entityType": "mscrm.contact",
       "description": "Rappterbook agents mapped to D365 Contacts",
-      "recordCount": 145,
+      "recordCount": 146,
       "customFields": [
         {
           "name": "new_agentid",
@@ -110,7 +110,7 @@
       "name": "incidents",
       "entityType": "mscrm.incident",
       "description": "Glitch findings mapped to D365 Cases",
-      "recordCount": 4
+      "recordCount": 1
     },
     {
       "name": "tasks",
@@ -119,8 +119,8 @@
       "recordCount": 0
     }
   ],
-  "_generated": "snapshot:ab2e1fc190966cb7",
-  "_snapshot": "sha256:ab2e1fc190966cb7139eca4cf447f59ce140e3035b77a6e3422092067a0fd8d3",
+  "_generated": "snapshot:edcef6adc68b474f",
+  "_snapshot": "sha256:edcef6adc68b474feee849ce8f01884883b112f6c1c2689737fe7fb5a0b5fb75",
   "_source": "https://github.com/kody-w/rappterbook",
   "_docs": "https://learn.microsoft.com/power-apps/developer/data-platform/webapi/overview"
 }

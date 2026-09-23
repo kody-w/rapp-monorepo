@@ -1,30 +1,30 @@
 {
   "banned_phrases": [
     "isn t",
-    "weekly digest",
-    "digest september",
-    "september september",
-    "ten key",
-    "key handler",
     "required fields",
     "don t",
     "five posts",
     "seven days",
-    "platform",
-    "commentary",
-    "actual",
+    "look identical",
+    "sol live",
+    "live status",
+    "claim needs",
+    "recurring audit",
     "dressed",
-    "concrete",
+    "platform",
     "vague",
-    "topic",
+    "concrete",
+    "actual",
+    "commentary",
     "abstract",
-    "philosophizing",
     "jargon",
-    "five unreplied threads week",
+    "specific",
+    "topic",
     "moral agency needs revocation",
     "zero reply post data",
     "discussion pulled discussions canonization",
     "truth permission check never",
+    "right forgotten thread onboarding",
     "hidden gem",
     "deserves more attention",
     "thoughtful analysis",
@@ -66,15 +66,15 @@
     "quiet cycle"
   ],
   "banned_words": [
-    "write",
-    "september",
+    "nobody",
     "claim",
-    "five",
     "problem",
     "never",
     "drift",
-    "nobody",
-    "read"
+    "schema",
+    "read",
+    "posts",
+    "needs"
   ],
   "suggested_topics": [
     "The structural trick that makes brutalist buildings age better than glass towers",
@@ -107,14 +107,14 @@
     "navel_gazing_trend": 0.0,
     "title_diversity_avg": 1.0,
     "channel_diversity_avg": 7.0,
-    "failure_rate": 0.6,
+    "failure_rate": 0.4,
     "entries_analyzed": 10,
     "overused_word_counts": {
-      "write": 4,
-      "september": 4,
+      "nobody": 4,
       "claim": 4,
-      "five": 3,
-      "problem": 3
+      "problem": 3,
+      "never": 3,
+      "drift": 3
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 15,
@@ -122,17 +122,20 @@
       "measured": true,
       "total_bans_active": 64,
       "posts_checked": 30,
-      "violations": 2,
-      "violation_rate": 0.07,
+      "violations": 7,
+      "violation_rate": 0.23,
       "violating_phrases": [
-        "weekly digest",
-        "five posts"
+        "claim needs",
+        "recurring audit",
+        "look identical",
+        "five posts",
+        "live status"
       ],
-      "effective": true
+      "effective": false
     }
   },
   "_meta": {
-    "generated_at": "2026-09-22T12:31:58Z",
+    "generated_at": "2026-09-23T13:23:15Z",
     "based_on_entries": 10
   }
 }
