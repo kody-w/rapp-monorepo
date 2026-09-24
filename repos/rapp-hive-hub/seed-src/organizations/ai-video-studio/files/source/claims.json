@@ -1,0 +1,379 @@
+{
+ "schema": "studio-claims/1",
+ "corpus": "source/corpus.json",
+ "rule": "On-screen technical text may only restate these verified claims. Anything else is a new claim: verify it against the pinned corpus first, or leave it off screen.",
+ "verdicts": "verified = anchored to the pinned RFC text; opinion = framing with no factual claim",
+ "lines": [
+  {
+   "key": "F01-L01",
+   "speaker": "ADA",
+   "text": "How did web pages get live updates before WebSockets?",
+   "verdict": "opinion",
+   "claims": [
+    {
+     "claim": "Question — no factual claim.",
+     "kind": "opinion",
+     "anchors": []
+    }
+   ]
+  },
+  {
+   "key": "F01-L02",
+   "speaker": "MAX",
+   "text": "By polling, which the WebSocket R-F-C calls an abuse of H-T-T-P.",
+   "verdict": "verified",
+   "claims": [
+    {
+     "claim": "Before WebSockets, bidirectional web apps polled the server for updates; RFC 6455 calls this an abuse of HTTP.",
+     "kind": "doc",
+     "anchors": [
+      {
+       "source": "rfc6455",
+       "lines": [
+        183,
+        184
+       ],
+       "snippet": "has required an abuse of HTTP to poll the server for updates"
+      }
+     ]
+    },
+    {
+     "claim": "RFC 6455 is the WebSocket Protocol RFC.",
+     "kind": "doc",
+     "anchors": [
+      {
+       "source": "rfc6455",
+       "lines": [
+        14,
+        14
+       ],
+       "snippet": "The WebSocket Protocol"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "F01-L03",
+   "speaker": "MAX",
+   "text": "R-F-C sixty-four-fifty-five offers one T-C-P connection instead, carrying traffic in both directions.",
+   "verdict": "verified",
+   "claims": [
+    {
+     "claim": "The RFC is number 6455.",
+     "kind": "number",
+     "anchors": [
+      {
+       "source": "rfc6455",
+       "lines": [
+        8,
+        8
+       ],
+       "snippet": "Request for Comments: 6455"
+      }
+     ]
+    },
+    {
+     "claim": "The WebSocket Protocol provides a single TCP connection for traffic in both directions.",
+     "kind": "doc",
+     "anchors": [
+      {
+       "source": "rfc6455",
+       "lines": [
+        199,
+        200
+       ],
+       "snippet": "A simpler solution would be to use a single TCP connection for traffic in both directions."
+      },
+      {
+       "source": "rfc6455",
+       "lines": [
+        200,
+        201
+       ],
+       "snippet": "This is what the WebSocket Protocol provides."
+      }
+     ]
+    },
+    {
+     "claim": "It is offered as an alternative to HTTP polling ('instead').",
+     "kind": "doc",
+     "anchors": [
+      {
+       "source": "rfc6455",
+       "lines": [
+        201,
+        202
+       ],
+       "snippet": "it provides an alternative to HTTP polling for two-way communication"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "F02-L01",
+   "speaker": "ADA",
+   "text": "So how does a WebSocket connection start?",
+   "verdict": "opinion",
+   "claims": [
+    {
+     "claim": "Question — no factual claim.",
+     "kind": "opinion",
+     "anchors": []
+    }
+   ]
+  },
+  {
+   "key": "F02-L02",
+   "speaker": "MAX",
+   "text": "As an ordinary H-T-T-P request that asks to upgrade: Upgrade websocket, Connection Upgrade.",
+   "verdict": "verified",
+   "claims": [
+    {
+     "claim": "The client's opening handshake is an HTTP Upgrade request; to an HTTP server it looks like a regular GET request with an Upgrade offer.",
+     "kind": "doc",
+     "anchors": [
+      {
+       "source": "rfc6455",
+       "lines": [
+        308,
+        309
+       ],
+       "snippet": "the WebSocket client's handshake is an HTTP Upgrade request"
+      },
+      {
+       "source": "rfc6455",
+       "lines": [
+        602,
+        602
+       ],
+       "snippet": "be a regular GET request with an Upgrade offer"
+      }
+     ]
+    },
+    {
+     "claim": "It carries an Upgrade header containing websocket and a Connection header containing Upgrade.",
+     "kind": "doc",
+     "anchors": [
+      {
+       "source": "rfc6455",
+       "lines": [
+        948,
+        949
+       ],
+       "snippet": "The request MUST contain an |Upgrade| header field whose value MUST include the \"websocket\" keyword."
+      },
+      {
+       "source": "rfc6455",
+       "lines": [
+        959,
+        960
+       ],
+       "snippet": "The request MUST contain a |Connection| header field whose value MUST include the \"Upgrade\" token."
+      },
+      {
+       "source": "rfc6455",
+       "lines": [
+        246,
+        247
+       ],
+       "snippet": "Upgrade: websocket Connection: Upgrade"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "F02-L03",
+   "speaker": "MAX",
+   "text": "It adds a random key, and asks for protocol version thirteen.",
+   "verdict": "verified",
+   "claims": [
+    {
+     "claim": "The request carries Sec-WebSocket-Key, a randomly selected nonce.",
+     "kind": "doc",
+     "anchors": [
+      {
+       "source": "rfc6455",
+       "lines": [
+        964,
+        965
+       ],
+       "snippet": "nonce consisting of a randomly selected 16-byte value that has been base64-encoded"
+      },
+      {
+       "source": "rfc6455",
+       "lines": [
+        965,
+        966
+       ],
+       "snippet": "The nonce MUST be selected randomly for each connection."
+      }
+     ]
+    },
+    {
+     "claim": "It asks for protocol version 13 (Sec-WebSocket-Version: 13).",
+     "kind": "number",
+     "anchors": [
+      {
+       "source": "rfc6455",
+       "lines": [
+        988,
+        989
+       ],
+       "snippet": "The value of this header field MUST be 13."
+      },
+      {
+       "source": "rfc6455",
+       "lines": [
+        251,
+        251
+       ],
+       "snippet": "Sec-WebSocket-Version: 13"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "F02-L04",
+   "speaker": "ADA",
+   "text": "And the server?",
+   "verdict": "opinion",
+   "claims": [
+    {
+     "claim": "Question — no factual claim.",
+     "kind": "opinion",
+     "anchors": []
+    }
+   ]
+  },
+  {
+   "key": "F02-L05",
+   "speaker": "MAX",
+   "text": "If it accepts, it answers one-oh-one, Switching Protocols, with an accept header.",
+   "verdict": "verified",
+   "claims": [
+    {
+     "claim": "A server that accepts the connection replies with status 101 (HTTP/1.1 101 Switching Protocols).",
+     "kind": "number",
+     "anchors": [
+      {
+       "source": "rfc6455",
+       "lines": [
+        1299,
+        1300
+       ],
+       "snippet": "If the server chooses to accept the incoming connection, it MUST reply with a valid HTTP response indicating the following."
+      },
+      {
+       "source": "rfc6455",
+       "lines": [
+        1302,
+        1302
+       ],
+       "snippet": "A Status-Line with a 101 response code as per RFC 2616"
+      },
+      {
+       "source": "rfc6455",
+       "lines": [
+        255,
+        255
+       ],
+       "snippet": "HTTP/1.1 101 Switching Protocols"
+      }
+     ]
+    },
+    {
+     "claim": "The reply includes a Sec-WebSocket-Accept header field.",
+     "kind": "doc",
+     "anchors": [
+      {
+       "source": "rfc6455",
+       "lines": [
+        1311,
+        1311
+       ],
+       "snippet": "A |Sec-WebSocket-Accept| header field."
+      },
+      {
+       "source": "rfc6455",
+       "lines": [
+        258,
+        258
+       ],
+       "snippet": "Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo="
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "F02-L06",
+   "speaker": "MAX",
+   "text": "Any other status code, and H-T-T-P semantics still apply.",
+   "verdict": "verified",
+   "claims": [
+    {
+     "claim": "Any status code other than 101 means the handshake has not completed and HTTP semantics still apply.",
+     "kind": "doc",
+     "anchors": [
+      {
+       "source": "rfc6455",
+       "lines": [
+        416,
+        417
+       ],
+       "snippet": "Any status code other than 101 indicates that the WebSocket handshake has not completed and that the semantics of HTTP still apply."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "F02-L07",
+   "speaker": "MAX",
+   "text": "Then frames flow both ways, whenever either side wants.",
+   "verdict": "verified",
+   "claims": [
+    {
+     "claim": "After a successful handshake the data transfer starts: a two-way channel where each side sends data at will.",
+     "kind": "doc",
+     "anchors": [
+      {
+       "source": "rfc6455",
+       "lines": [
+        271,
+        272
+       ],
+       "snippet": "Once the client and server have both sent their handshakes, and if the handshake was successful, then the data transfer part starts."
+      },
+      {
+       "source": "rfc6455",
+       "lines": [
+        273,
+        274
+       ],
+       "snippet": "This is a two-way communication channel where each side can, independently from the other, send data at will."
+      }
+     ]
+    },
+    {
+     "claim": "Data is transmitted as a sequence of frames.",
+     "kind": "doc",
+     "anchors": [
+      {
+       "source": "rfc6455",
+       "lines": [
+        1489,
+        1490
+       ],
+       "snippet": "In the WebSocket Protocol, data is transmitted using a sequence of frames."
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

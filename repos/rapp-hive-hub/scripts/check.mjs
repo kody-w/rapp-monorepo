@@ -294,7 +294,14 @@ export async function checkStaticSurface({ root, manifestPath }) {
       fileList.map(async (candidate) => (await readPublicFile(resolvedRoot, candidate)).toString("utf8"))
     )
   ).join("\n");
-  assert(!/microsol/i.test(allPublicText), "Public output names prohibited private-network material");
+  // Keep the legacy substring exclusion without publishing the private label itself.
+  for (const match of allPublicText.matchAll(/(?=([a-z]{8}))/gi)) {
+    assert(
+      sha256Bytes(Buffer.from(match[1].toLowerCase())) !==
+        "0b24a7ee068ba47cf54d9c895b60a96943bfb019e3d572def70e36bd57bbf16e",
+      "Public output names prohibited private-network material"
+    );
+  }
   const hubIndex = jsonDocuments.get(`${manifest.build.apiPath}/index.json`);
   assert(
     hubIndex.semantics.authority === "locators-never-authority" &&
@@ -487,9 +494,9 @@ export async function checkStaticSurface({ root, manifestPath }) {
     "Join instructions do not select the canonical laboratory camera card"
   );
   const seedsIndex = jsonDocuments.get(`${manifest.build.apiPath}/organization-seeds.json`);
-  assert(seedsIndex?.count === 10 && seedsIndex.seeds.length === 10, "Expected exactly ten seeds");
+  assert(seedsIndex?.count === 12 && seedsIndex.seeds.length === 12, "Expected exactly twelve seeds");
   assert(
-    new Set(seedsIndex.seeds.map((seed) => seed.slug)).size === 10,
+    new Set(seedsIndex.seeds.map((seed) => seed.slug)).size === 12,
     "Organization seed identities are not unique"
   );
   const homeHtml = (await readPublicFile(resolvedRoot, "hub/index.html")).toString("utf8");

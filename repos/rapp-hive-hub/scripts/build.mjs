@@ -23,6 +23,7 @@ import { loadPublicInputs } from "./lib/public-inputs.mjs";
 import { projectCoreRecord } from "./lib/core-record.mjs";
 import { createQrSvg } from "./lib/qr.mjs";
 import { writeOrganizationSeeds } from "./lib/organization-seeds.mjs";
+import { writeOrganizationSeedBoots } from "./lib/organization-seed-boots.mjs";
 import {
   renderHomeHtml,
   renderHubCss,
@@ -49,6 +50,7 @@ const OPTIONAL_ENTRY_KINDS = new Set([
   "historical-object",
   "historical-receipt",
   "organization-seed",
+  "organization-seed-boot",
   "release",
   "source-archive",
   "skill-declaration"
@@ -465,6 +467,26 @@ export async function buildStaticSurface({ manifestPath, outDir }) {
   const networkSkillDescriptor = descriptorFor(
     networkSkillPath, networkSkill.sha256, siteBaseUrl
   );
+  const hatcherEntry = grouped.get("source-archive").find(
+    (entry) => entry.declaration.id === "seed-boot-hatcher"
+  );
+  assert(hatcherEntry, "The seed boot hatcher is missing");
+  const hatcherDocument = hatcherEntry.document;
+  const hatcherBytes = Buffer.from(hatcherDocument.content, "utf8");
+  assert(
+    hatcherDocument.kind === "boot-hatcher-document" &&
+    hatcherDocument.name === "hatch_seed.py" &&
+    hatcherBytes.length === hatcherDocument.bytes &&
+    sha256Bytes(hatcherBytes) === hatcherDocument.sha256,
+    "The seed boot hatcher byte commitment is invalid"
+  );
+  const hatcherPath = "hub/boot/hatch_seed.py";
+  await writer.write(hatcherPath, hatcherBytes);
+  const hatcher = { ...descriptorFor(hatcherPath, hatcherDocument.sha256, siteBaseUrl), sha256: hatcherDocument.sha256 };
+  const seedBoots = await writeOrganizationSeedBoots(
+    writer, grouped.get("organization-seed-boot"), { apiPath, siteBaseUrl, seeds: organizationSeeds, hatcher }
+  );
+  immutableObjects.push(...seedBoots.values());
 
   for (const entry of grouped.get("historical-receipt")) {
     assert(entry.document.kind === "receipt", `${entry.path} is not a historical receipt`);
@@ -1001,7 +1023,13 @@ export async function buildStaticSurface({ manifestPath, outDir }) {
         qr: card.qr,
         chant: card.document.chant.value,
         joinUrl: card.qrUrl,
-        page: publicUrl(siteBaseUrl, `hub/seeds/${seed.document.slug}/`)
+        page: publicUrl(siteBaseUrl, `hub/seeds/${seed.document.slug}/`),
+        boot: {
+          document: seedBoots.get(seed.document.slug).descriptor,
+          egg: seedBoots.get(seed.document.slug).egg,
+          hatcher,
+          status: "boot-not-hatched"
+        }
       }))
     },
     siteBaseUrl
@@ -1466,7 +1494,7 @@ export async function buildStaticSurface({ manifestPath, outDir }) {
   for (const { seed, card } of seedCards) {
     await writer.write(
       `hub/seeds/${seed.document.slug}/index.html`,
-      renderOrganizationSeedHtml({ seed: seed.document, card, generatedAt })
+      renderOrganizationSeedHtml({ seed: seed.document, card, boot: seedBoots.get(seed.document.slug), hatcher, generatedAt })
     );
   }
   await writer.write("index.html", renderRootIndexHtml());

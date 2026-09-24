@@ -145,7 +145,19 @@
         </ol>
         <p>No private membership, signing, spending, external communication, publication, or federation activation is granted by this seed.</p>
       </section>
+      <section aria-labelledby="boot-title">
+        <h2 id="boot-title">Or boot it in a RAPP Brainstem.</h2>
+        <p>This seed also ships as a boot Egg: a RAPP/1 organism Egg holding the exact seed record, a soul written from it, and the generic SeedRunner organ. A standard RAPP Brainstem hatches it and runs the same seed flow for you, with the same pinned SDK and the same owner approvals.</p>
+        <ol class="steps">
+          <li>Install the standard Brainstem: <code>curl -fsSL https://kody-w.github.io/rapp-installer/install.sh | bash</code></li>
+          <li>Download the <a href="https://kody-w.github.io/rapp-hive-hub/api/hive-hub/v1/seed-boots/downloads/sha256/3a/3a7ff62216a0e87a311224d772baa5d0119a99bb679ecad3abceed8b01143d9e.egg" download="federation-prime-contractor.boot.egg">boot Egg</a> (SHA-256 <code>3a7ff62216a0e87a311224d772baa5d0119a99bb679ecad3abceed8b01143d9e</code>) and the <a href="https://kody-w.github.io/rapp-hive-hub/hub/boot/hatch_seed.py" download="hatch_seed.py">hatcher</a> (SHA-256 <code>49b210e0c762eefad2602c3c1db93ab00d73d7edd5cd353c703fb408352a07d0</code>). Check both hashes before running anything.</li>
+          <li>Plan the hatch: <code>python3 hatch_seed.py --egg federation-prime-contractor.boot.egg</code>. It verifies the Egg with the pinned RAPP/1 reference and prints every effect, how to reverse it, and a plan digest. Nothing changes yet.</li>
+          <li>Hatch with that exact digest: <code>python3 hatch_seed.py --egg federation-prime-contractor.boot.egg --apply &lt;plan_digest&gt;</code>. Your Brainstem gets its own instance identity, grown from Egg <code>c036f753f3d714d8…</code>, and the SeedRunner organ.</li>
+          <li>Ask your Brainstem to run the seed. SeedRunner verifies it, plans the Organization and its Workspaces, and shows you an activation digest; nothing is created until you approve that exact digest.</li>
+        </ol>
+        <p class="muted">The boot Egg grants no authority and runs nothing by itself. <a href="https://kody-w.github.io/rapp-hive-hub/api/hive-hub/v1/seed-boots/sha256/f9/f9452a29a86457183b19fe45e9d95b1a65c31252972b25dbd22aef9ea541c340.json">Boot record JSON</a>.</p>
+      </section>
     </main>
-    <footer><p>Static public seed snapshot: <time datetime="2026-09-18T23:29:19Z">2026-09-18T23:29:19Z</time>. <a href="../../#organizations">Back to all organization seeds</a>.</p></footer>
+    <footer><p>Reproducibility/build epoch: <time datetime="2026-09-18T23:29:19Z">2026-09-18T23:29:19Z</time>. This fixed value is not a verification or publication time. <a href="../../#organizations">Back to all organization seeds</a>.</p></footer>
   </body>
 </html>

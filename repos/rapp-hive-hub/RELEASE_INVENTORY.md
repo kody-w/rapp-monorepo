@@ -133,7 +133,7 @@
 - isolated wheel install
 - import, version, CLI, metadata, schema-data, and zero-dependency verification
 - deterministic static rebuild and QR SVG validation
-- all ten seed file inventories, exact ZIP bytes, task ownership/dependencies,
+- all eleven seed file inventories, exact ZIP bytes, task ownership/dependencies,
   and native RAPP Work SDK initialization
 - public/private input isolation and private-locator/secret scan
 - core CLI plus skill dial/card/join subscription end to end

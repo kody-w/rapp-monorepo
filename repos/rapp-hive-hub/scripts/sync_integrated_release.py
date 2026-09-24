@@ -82,11 +82,11 @@ def write_or_check(path: Path, data: bytes, *, check: bool) -> None:
     path.write_bytes(data)
 
 
-def source_reference(relative: str) -> dict[str, Any]:
+def source_reference(relative: str, *, site_base_url: str = SITE_BASE_URL) -> dict[str, Any]:
     path = ROOT / "public-src" / relative
     data = canonical(json.loads(read_regular_bytes(path).decode("utf-8")))
     return {
-        "url": f"{SITE_BASE_URL}/{API_PATH}/source/{relative}",
+        "url": f"{site_base_url}/{API_PATH}/source/{relative}",
         "sha256": sha(data),
         "bytes": len(data),
     }
@@ -216,9 +216,16 @@ def build_core_card(locator: str, issued_at: str = CORE_CARD_ISSUED_AT) -> dict[
 
 def seed_contracts(seed: dict[str, Any], *, check: bool) -> dict[str, Any]:
     slug = seed["slug"]
+    seed_base_url = (
+        "https://kody-w.github.io/rapp-hive-hub"
+        if slug == "first-party-rapplication-company"
+        else SITE_BASE_URL
+    )
     protocol = source_reference("protocols/rapp-work-organization-seed-v1.json")
     conformance = source_reference("conformance/rapp-work-organization-seed-v1.json")
-    seed_reference = source_reference(f"organization-seeds/{slug}.json")
+    seed_reference = source_reference(
+        f"organization-seeds/{slug}.json", site_base_url=seed_base_url
+    )
     learning = {
         "schema": "hive-hub-learning-bundle/1",
         "artifacts": [
@@ -269,7 +276,9 @@ def seed_contracts(seed: dict[str, Any], *, check: bool) -> dict[str, Any]:
         canonical(declaration),
         check=check,
     )
-    reference = source_reference(f"skill-declarations/seed-{slug}.json")
+    reference = source_reference(
+        f"skill-declarations/seed-{slug}.json", site_base_url=seed_base_url
+    )
     body = {"chants": [slug], "locator": reference["url"], "declaration": reference}
     dial_id = "dial:sha256:" + digest(body)
     dial_record = {
@@ -395,6 +404,7 @@ def update_manifest(
         "release",
         "skill-declaration",
         "organization-seed",
+        "organization-seed-boot",
     }
     entries = [
         entry
@@ -402,6 +412,7 @@ def update_manifest(
         if entry["kind"] not in generated_kinds
         and entry["id"] != "hive-hub-public-lab-learning-example"
         and entry["id"] != "hive-network-global-skill"
+        and entry["id"] != "seed-boot-hatcher"
         and entry["id"] not in {f"seed-{slug}" for slug in SEED_SLUGS}
         and not entry["id"].startswith("rapp-work-organization-seed-")
     ]
@@ -410,6 +421,7 @@ def update_manifest(
             manifest_entry(
                 "hive-network-global-skill", "source-archive", "skills/hive-network.json"
             ),
+            manifest_entry("seed-boot-hatcher", "source-archive", "boot/hatch-seed.json"),
             manifest_entry(
                 "hive-hub-release-0.1.1",
                 "release",
@@ -463,6 +475,11 @@ def update_manifest(
                     f"organization-seed-{slug}",
                     "organization-seed",
                     f"organization-seeds/{slug}.json",
+                ),
+                manifest_entry(
+                    f"organization-seed-boot-{slug}",
+                    "organization-seed-boot",
+                    f"organization-seed-boots/{slug}.json",
                 ),
                 manifest_entry(f"seed-{slug}", "record", f"records/seed-{slug}.json"),
                 manifest_entry(

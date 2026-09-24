@@ -8,13 +8,19 @@ The RAPP-focused version of [Hive Hub](https://github.com/kody-w/hive-hub):
 find a RAPP Work organization starter, verify its exact package and protocol,
 then plan native Organizations and Workspaces with the AI you already use.
 
-Ten downloadable starters include the One-Person Conglomerate, Enterprise
+Twelve downloadable starters include the One-Person Conglomerate, Enterprise
 Transformation Firm, Product Launch Company, Open-Source Infrastructure
 Foundation, Applied Invention Lab, Independent Game Studio, Micro-Manufacturing
-Company, Public-Source Intelligence Bureau, Turnaround Firm, and Federation
-Prime Contractor. Each includes scoped teams, a synthetic case, original
-artifacts, dependency-linked tasks, a deterministic ZIP, and a verified join card.
+Company, Public-Source Intelligence Bureau, Turnaround Firm, Federation
+Prime Contractor, AI Video Studio, and First-Party Rapplication Company. Each includes scoped
+teams, a synthetic case, original artifacts, dependency-linked tasks, a
+deterministic ZIP, and a verified join card.
 These are **starter packages, not running agents or activated companies**.
+
+The [First-Party Rapplication Company](https://kody-w.github.io/rapp-hive-hub/hub/seeds/first-party-rapplication-company/)
+adds seven teams, a configurable founder-CEO charter, a chat-operated checklist
+reference, and an evidence-gated internal-use-to-public-PR pipeline. Independent
+verification and a separate decision are required; only the owner merges.
 
 ## Start with an outcome
 
@@ -31,6 +37,29 @@ These are **starter packages, not running agents or activated companies**.
 Reading a skill, downloading a seed, scanning a QR, or saving a local
 subscription never approves execution, initializes an organization, or grants
 source access. Browser-only AI clients can inspect but cannot claim local setup.
+
+### Or boot a seed in a RAPP Brainstem
+
+Every catalog seed also ships as a boot Egg: a RAPP/1 organism Egg holding the
+exact seed record, a soul written from it, and the generic SeedRunner organ
+(`seed-src/boot/rapp_seed_runner_agent.py`). A standard RAPP Brainstem hatches
+it and then runs the same seed flow with the same pinned SDK and approvals.
+
+1. Install the Brainstem: `curl -fsSL https://kody-w.github.io/rapp-installer/install.sh | bash`.
+2. From the seed's page, download its boot Egg and `hub/boot/hatch_seed.py`,
+   and check both SHA-256 values against the page and the seed index.
+3. `python3 hatch_seed.py --egg <slug>.boot.egg` verifies the Egg with the
+   pinned RAPP/1 reference and prints every effect, how to reverse it, and a
+   `plan_digest`. Nothing changes until you repeat the command with
+   `--apply <plan_digest>`, which gives the Brainstem its own instance RAPPID
+   (grown from the Egg) and imports SeedRunner with its SHA-256.
+4. Ask the Brainstem to run the seed. SeedRunner verifies the package, plans
+   the Organization and Workspaces, and shows an activation digest; nothing is
+   created until you approve that exact digest.
+
+Boot identities are minted once (`seed-src/boot/BOOT_PINS.json`), so builds
+pack byte-identical Eggs. A boot Egg grants no authority and runs nothing on its
+own.
 
 ## RAPP by composition, not by rewriting the core
 
@@ -81,6 +110,11 @@ npm run build:site
 ```
 
 Author public inputs and templates, not generated `hub/` or `api/` files.
+After changing a seed, the SeedRunner organ, or the hatcher, rebuild the boot
+documents first: `python3 -B scripts/seed_boot.py build` (a new catalog seed
+needs `python3 -B scripts/seed_boot.py pin` once). `python3 -B scripts/seed_boot.py prove`
+hatches every boot Egg into scratch roots with the pinned SDK and RAPP/1
+checkouts under `.hive-hub/deps/` and walks each seed to a live case board.
 After intentional source changes, run `npm run sync:release`, `npm run build`,
 and `python3 -B scripts/build_release_manifest.py`, then verify. Review generated
 changes and immutable receipts before committing.

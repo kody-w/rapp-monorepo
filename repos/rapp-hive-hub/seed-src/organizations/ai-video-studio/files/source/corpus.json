@@ -1,0 +1,14 @@
+{
+  "schema": "studio-corpus/1",
+  "sources": {
+    "rfc6455": {
+      "title": "RFC 6455: The WebSocket Protocol",
+      "url": "https://www.rfc-editor.org/rfc/rfc6455.txt",
+      "sha256": "765775326aee0ecca9b04bde3fd1f52932d498e33e34e428bd61b8a24da0fa3b",
+      "bytes": 162067,
+      "lines": 3979,
+      "line_numbers": "1-based lines of the exact bytes above"
+    }
+  },
+  "verify": "Fetch the URL, confirm the sha256, then confirm each claim anchor's snippet appears within its line range (whitespace-insensitive). A mismatch means the corpus changed: re-verify before any claim goes on screen."
+}

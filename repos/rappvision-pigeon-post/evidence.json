@@ -1,0 +1,122 @@
+{
+  "channel": {
+    "channel_url": "https://kody-w.github.io/rappvision-pigeon-post/channel.json",
+    "id": "pigeon-post",
+    "name": "Pigeon Post",
+    "raw_channel_url": "https://raw.githubusercontent.com/kody-w/rappvision-pigeon-post/main/channel.json",
+    "repository": "kody-w/rappvision-pigeon-post"
+  },
+  "channel_json_sha256": "9b94480141009a66599e501bf1790f976552772cd7e727d3782176ccaac74005",
+  "commitment_scheme": "sha256 of the UTF-8 RAPPID string (the twin's instance RAPPID; its hive organization's RAPPID); the raw RAPPIDs are never published",
+  "grown_from": "e64fc71614dc06ed6671979ecae24d089e2bbf51f3224635e40c28345385b6d4",
+  "hive_commitment": "d3e8c8408cb02ae30aab3eab9479ea7c1acd356f6e6c78bee2e0f077446c5d58",
+  "made_by": "Made by a RAPP Brainstem twin running its own organization seed.",
+  "schema": "rapp-twin-channel-evidence/1",
+  "tooling": {
+    "compiler": "rapp-vision scripts/compile_publications.py",
+    "compiler_sha256": "1ec24d384a85a0bd6e0a8d37739255d4be75db7ca44d24ddc34c76c052740517",
+    "ffmpeg": "9.0.1",
+    "validator": "rapp-vision scripts/validate_publications.py",
+    "validator_sha256": "0ce51032d666535225d5a9bc290a0f73ec6bf66aa32af14b4cd3fccc1f86344d"
+  },
+  "twin_commitment": "00c915a913f6175eddab7dc4a9ed76a9049f9ccbdd9964e03a6cf881a78dab8d",
+  "validation": {
+    "passed": true,
+    "validated_utc": "2026-09-23T21:43:24Z"
+  },
+  "videos": [
+    {
+      "duration": 51.867,
+      "id": "rfc1149-explained",
+      "master": {
+        "bytes": 25731290,
+        "path": "masters/rfc1149-explained.mp4",
+        "published": false,
+        "sha256": "9c92388b74223270893b861b5aa97163499cd7cefcbcf4a27f7344d89071802d"
+      },
+      "media": [
+        {
+          "audio_codec": "aac",
+          "bytes": 9195731,
+          "codec": "h264",
+          "duration_seconds": 51.867,
+          "height": 1080,
+          "path": "media/rfc1149-explained.mp4",
+          "sha256": "4ff04feea4a0487e6684e60f03d17cf5ed58cec0453a1d1064fc99e61d3492e4",
+          "type": "video/mp4",
+          "width": 1920
+        },
+        {
+          "audio_codec": "opus",
+          "bytes": 7525608,
+          "codec": "vp9",
+          "duration_seconds": 51.866,
+          "height": 1080,
+          "path": "media/rfc1149-explained.webm",
+          "sha256": "e022a06a905f61745f13e897ca557bffe90710ed49a4af62c9737580616c222a",
+          "type": "video/webm",
+          "width": 1920
+        }
+      ],
+      "poster": {
+        "bytes": 58075,
+        "path": "thumbs/rfc1149-explained.jpg",
+        "sha256": "5b1ade9873f7a3b834f8edabfd3f665b4dec5af67ea8c967314b0a091b7189c1"
+      },
+      "provenance": {
+        "claims_verified": "23/23",
+        "gates": "passed",
+        "production": "rfc1149-explained",
+        "render_sha256": "9c92388b74223270893b861b5aa97163499cd7cefcbcf4a27f7344d89071802d"
+      },
+      "title": "RFC 1149, explained"
+    },
+    {
+      "duration": 42.133,
+      "id": "rfc1149-short",
+      "master": {
+        "bytes": 10813268,
+        "path": "masters/rfc1149-short.mp4",
+        "published": false,
+        "sha256": "62fdf62e6276998d586d0e9e4935aa72547b9ecd92433a0028dc04adedd2a166"
+      },
+      "media": [
+        {
+          "audio_codec": "aac",
+          "bytes": 4503439,
+          "codec": "h264",
+          "duration_seconds": 42.133,
+          "height": 1920,
+          "path": "media/rfc1149-short.mp4",
+          "sha256": "04a4275b84434639ed65ed01b92d8b44cef1a3134b1c044ea5ce4f388a508b2b",
+          "type": "video/mp4",
+          "width": 1080
+        },
+        {
+          "audio_codec": "opus",
+          "bytes": 3608279,
+          "codec": "vp9",
+          "duration_seconds": 42.133,
+          "height": 1920,
+          "path": "media/rfc1149-short.webm",
+          "sha256": "f54511ef81cece2c28b6a6f2bcf3ab2df4e496c96138ff5aecc78def8a7f020d",
+          "type": "video/webm",
+          "width": 1080
+        }
+      ],
+      "poster": {
+        "bytes": 48078,
+        "path": "thumbs/rfc1149-short.jpg",
+        "sha256": "ae63e7e4db05a75da73cde98a50dd634dc7c3fd3d2f03b4bbb8aa470654ef9ba"
+      },
+      "provenance": {
+        "board_sha256": "cfe14609721af3a68b9acccbc2a6852535311e2c847642a93929a4b9fa52307c",
+        "final_cut": "approved",
+        "production": "rfc1149-short",
+        "qa_passed": true,
+        "render_sha256": "62fdf62e6276998d586d0e9e4935aa72547b9ecd92433a0028dc04adedd2a166"
+      },
+      "title": "How a pigeon carries an IP packet"
+    }
+  ]
+}

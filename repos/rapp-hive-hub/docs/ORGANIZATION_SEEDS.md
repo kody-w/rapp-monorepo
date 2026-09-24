@@ -22,6 +22,16 @@ claim to create local files or submit changes without those capabilities.
 | The Public-Source Intelligence Bureau | [Open](https://kody-w.github.io/hive-hub/hub/seeds/public-source-intelligence-bureau/) |
 | The Turnaround Firm | [Open](https://kody-w.github.io/hive-hub/hub/seeds/turnaround-firm/) |
 | The Federation Prime Contractor | [Open](https://kody-w.github.io/hive-hub/hub/seeds/federation-prime-contractor/) |
+| The AI Video Studio | [Open](https://kody-w.github.io/rapp-hive-hub/hub/seeds/ai-video-studio/) |
+| The First-Party Rapplication Company | [Open](https://kody-w.github.io/rapp-hive-hub/hub/seeds/first-party-rapplication-company/) |
+
+The First-Party Rapplication Company is an additional seed in the RAPP-focused
+distribution. It contains seven team workspaces plus casework, an unconfigured
+founder-CEO persona slot, a craftsmanship rubric, and a pipeline from idea to
+internal use, critique, iteration, independent verification, and an owner-merged
+public promotion PR. Its runnable checklist reference uses a fixed command
+grammar; unit tests do not claim live chat qualification. The supplied forms
+are unsigned templates, not approval receipts or activated authority.
 
 ## Package contents
 

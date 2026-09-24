@@ -29,7 +29,7 @@ export function renderHomeHtml({ card, generatedAt, record, qrPath, seedCards = 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     ${SECURITY_META}
-    <meta name="description" content="Find your RAPP Work organization. Ten verified starters with scoped teams, real artifacts, and native RAPP/1 plans for the AI you already use.">
+    <meta name="description" content="Find your RAPP Work organization. Twelve verified starters with scoped teams, real artifacts, and native RAPP/1 plans for the AI you already use.">
     <title>RAPP Hive Hub</title>
     <link rel="stylesheet" href="./assets/hub.css">
     <link rel="alternate" type="text/plain" href="../llms.txt" title="RAPP Hive Hub instructions for AI clients">
@@ -154,7 +154,7 @@ ${seedCards.map(({ seed, card: seedCard }) => `
 `;
 }
 
-export function renderOrganizationSeedHtml({ seed, card, generatedAt }) {
+export function renderOrganizationSeedHtml({ seed, card, boot, hatcher, generatedAt }) {
   const teams = seed.workspaces.filter((workspace) => workspace.id !== "casework");
   const starterFiles = seed.files.filter((file) => file.path.includes("/starter/"));
   return `<!doctype html>
@@ -233,8 +233,20 @@ export function renderOrganizationSeedHtml({ seed, card, generatedAt }) {
         </ol>
         <p>No private membership, signing, spending, external communication, publication, or federation activation is granted by this seed.</p>
       </section>
+      <section aria-labelledby="boot-title">
+        <h2 id="boot-title">Or boot it in a RAPP Brainstem.</h2>
+        <p>This seed also ships as a boot Egg: a RAPP/1 organism Egg holding the exact seed record, a soul written from it, and the generic SeedRunner organ. A standard RAPP Brainstem hatches it and runs the same seed flow for you, with the same pinned SDK and the same owner approvals.</p>
+        <ol class="steps">
+          <li>Install the standard Brainstem: <code>curl -fsSL https://kody-w.github.io/rapp-installer/install.sh | bash</code></li>
+          <li>Download the <a href="${escapeHtml(boot.egg.url)}" download="${escapeHtml(seed.slug)}.boot.egg">boot Egg</a> (SHA-256 <code>${escapeHtml(boot.egg.sha256)}</code>) and the <a href="${escapeHtml(hatcher.url)}" download="hatch_seed.py">hatcher</a> (SHA-256 <code>${escapeHtml(hatcher.sha256)}</code>). Check both hashes before running anything.</li>
+          <li>Plan the hatch: <code>python3 hatch_seed.py --egg ${escapeHtml(seed.slug)}.boot.egg</code>. It verifies the Egg with the pinned RAPP/1 reference and prints every effect, how to reverse it, and a plan digest. Nothing changes yet.</li>
+          <li>Hatch with that exact digest: <code>python3 hatch_seed.py --egg ${escapeHtml(seed.slug)}.boot.egg --apply &lt;plan_digest&gt;</code>. Your Brainstem gets its own instance identity, grown from Egg <code>${escapeHtml(boot.egg.address.slice(0, 16))}…</code>, and the SeedRunner organ.</li>
+          <li>Ask your Brainstem to run the seed. SeedRunner verifies it, plans the Organization and its Workspaces, and shows you an activation digest; nothing is created until you approve that exact digest.</li>
+        </ol>
+        <p class="muted">The boot Egg grants no authority and runs nothing by itself. <a href="${escapeHtml(boot.descriptor.url)}">Boot record JSON</a>.</p>
+      </section>
     </main>
-    <footer><p>Static public seed snapshot: <time datetime="${escapeHtml(generatedAt)}">${escapeHtml(generatedAt)}</time>. <a href="../../#organizations">Back to all organization seeds</a>.</p></footer>
+    <footer><p>Reproducibility/build epoch: <time datetime="${escapeHtml(generatedAt)}">${escapeHtml(generatedAt)}</time>. This fixed value is not a verification or publication time. <a href="../../#organizations">Back to all organization seeds</a>.</p></footer>
   </body>
 </html>
 `;
@@ -713,7 +725,7 @@ a:focus-visible,
 button:focus-visible,
 summary:focus-visible,
 [tabindex]:focus-visible {
-  outline: 3px solid #ffbf47;
+  outline: 3px solid #ac7a00;
   outline-offset: 3px;
 }
 
@@ -1097,7 +1109,7 @@ export function renderLlmsText({
 Canonical Pages API index: ${apiIndexUrl}
 Raw Git API index: ${rawIndexUrl}
 Public dialbook: ${dialbookUrl}
-Ten RAPP Work organization seeds: ${organizationSeedsUrl}
+Twelve RAPP Work organization seeds: ${organizationSeedsUrl}
 Standalone global network skill: ${globalSkillUrl}
 Machine join instructions: ${joinAiUrl}
 Inherited Hive Hub 0.1.1 implementation: ${release.url} (${release.ref})
@@ -1143,7 +1155,7 @@ Generic upstream: https://github.com/kody-w/hive-hub
 - hashes.json validates generated public files.
 - offline-seed.json carries immutable essentials for offline inspection.
 - receipts/index.json names an append-only content-addressed receipt chain.
-- organization-seeds.json lists ten real downloadable organization starter packages with team workspaces, case inputs, task dependencies, and original artifacts.
+- organization-seeds.json lists twelve real downloadable organization starter packages with team workspaces, case inputs, task dependencies, and original artifacts.
 - Seed JSON and ZIP contents are inert. A seed is not an activated organization or running agent. Initialize only with the exact locally trusted RAPP Work SDK and owner-approved native plans.
 - The hive-network SKILL.md is a complete host-operated workflow for discovery, local work, and separately approved public contributions. It grants no authority and cannot add capabilities to a browser-only AI.
 

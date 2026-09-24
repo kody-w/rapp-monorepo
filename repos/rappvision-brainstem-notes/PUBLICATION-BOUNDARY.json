@@ -1,0 +1,30 @@
+{
+  "channel_url": "https://kody-w.github.io/rappvision-brainstem-notes/channel.json",
+  "enforced_by": "@kody-w/channel_publisher_agent: publish refuses any file outside `included` and any private twin path",
+  "excluded": [
+    "masters/ — local production masters (gitignored; evidence.json publishes only their sha256)",
+    ".rapp-vision-production-stage/ — the RAPP Vision compiler's staging directory (gitignored)",
+    "the twin's hive: its native organization, workspaces and RAPPIDs (only sha256 commitments are published)",
+    "the twin's organization seed",
+    "the twin's organs (Brainstem agents)",
+    "the twin's keys, including this channel's deploy key",
+    "the twin's productions: sources, renders, approvals and studio state"
+  ],
+  "included": [
+    ".gitignore",
+    ".nojekyll",
+    "PUBLICATION-BOUNDARY.json",
+    "README.md",
+    "channel.json",
+    "channel.production.json",
+    "evidence.json",
+    "media/",
+    "thumbs/"
+  ],
+  "made_by": "Made by a RAPP Brainstem twin running its own organization seed.",
+  "pages_url": "https://kody-w.github.io/rappvision-brainstem-notes/",
+  "raw_channel_url": "https://raw.githubusercontent.com/kody-w/rappvision-brainstem-notes/main/channel.json",
+  "repository": "kody-w/rappvision-brainstem-notes",
+  "repository_url": "https://github.com/kody-w/rappvision-brainstem-notes",
+  "schema": "rapp-vision-public-boundary/1"
+}

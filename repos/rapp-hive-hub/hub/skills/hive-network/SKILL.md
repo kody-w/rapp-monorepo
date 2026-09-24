@@ -50,9 +50,10 @@ the experience into a glossary or pretend that reading a seed created a company.
 The current seed collection contains the One-Person Conglomerate, Enterprise
 Transformation Firm, Product Launch Company, Open-Source Infrastructure
 Foundation, Applied Invention Lab, Independent Game Studio, Micro-Manufacturing
-Company, Public-Source Intelligence Bureau, Turnaround Firm, and Federation
-Prime Contractor. Fetch the index for actual available packages and exact
-descriptors; these names are not authorization or a permanent exhaustive list.
+Company, Public-Source Intelligence Bureau, Turnaround Firm, Federation
+Prime Contractor, AI Video Studio, and First-Party Rapplication Company. Fetch the index for
+actual available packages and exact descriptors; these names are not
+authorization or a permanent exhaustive list.
 
 RAPP Hive Hub is the RAPP-focused distribution of the protocol-neutral Hive
 Hub. Its organization starters use `rapp-work/1` with the `rapp-work-sdk/1`

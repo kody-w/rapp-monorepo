@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brainstem by Kody Wildfeuer: use it with any AI</title>
+<meta name="description" content="Kody Wildfeuer's RAPP Brainstem: your own agent engine on your computer. Pick your AI (GitHub Copilot, Claude Code, Claude Desktop, Codex, Cursor, Gemini CLI and more) and paste one line to set it up.">
+<meta name="author" content="Kody Wildfeuer">
+<link rel="canonical" href="https://kody-w.github.io/brainstem/">
+<meta property="og:title" content="Brainstem by Kody Wildfeuer">
+<meta property="og:description" content="Your AI changes. Your Brainstem stays. Pick your AI and paste one line.">
+<meta property="og:url" content="https://kody-w.github.io/brainstem/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"RAPP Brainstem","alternateName":["Brainstem","Kody Brainstem"],"applicationCategory":"DeveloperApplication","operatingSystem":"macOS, Windows, Linux","url":"https://kody-w.github.io/brainstem/","author":{"@type":"Person","name":"Kody Wildfeuer","url":"https://kody-w.github.io/"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"sameAs":["https://kody-w.github.io/rapp-brainstem/","https://github.com/kody-w/rapp-installer"]}</script>
+<link rel="alternate" type="application/json" href="https://kody-w.github.io/rapp-brainstem/rapp-operator.json" title="RAPP setup contract">
+<link rel="alternate" type="text/plain" href="https://kody-w.github.io/rapp-brainstem/llms.txt" title="RAPP Brainstem AI discovery">
+<meta name="theme-color" content="#0f766e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230f766e'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f5f0;--card:#fff;--ink:#1c1f23;--muted:#5b636b;--line:#e4e0d6;--accent:#0f766e;--accent-soft:#0f766e14;--code:#f1eee6;--ok:#15803d;--bad:#b91c1c;--wait:#a16207}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111416;--card:#1a1e21;--ink:#eceae4;--muted:#9aa3aa;--line:#2a2f33;--accent:#2dd4bf;--accent-soft:#2dd4bf1a;--code:#15191b;--ok:#4ade80;--bad:#f87171;--wait:#facc15}}
+:root[data-theme="dark"]{--bg:#111416;--card:#1a1e21;--ink:#eceae4;--muted:#9aa3aa;--line:#2a2f33;--accent:#2dd4bf;--accent-soft:#2dd4bf1a;--code:#15191b;--ok:#4ade80;--bad:#f87171;--wait:#facc15}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding:64px 0 48px;text-align:center}
+.mark{display:inline-grid;place-items:center;width:56px;height:56px;border-radius:30%;background:var(--accent);margin-bottom:18px}
+.mark::after{content:"";width:40%;height:40%;border:5px solid #fff;border-radius:50%}
+h1{font-size:clamp(2.1rem,6vw,3.2rem);line-height:1.1;letter-spacing:-.03em;margin:0;font-weight:700}
+.lede{max-width:34rem;margin:18px auto 0;color:var(--muted);font-size:1.08rem}
+.promise{margin:14px 0 0;color:var(--accent);font-weight:600}
+.pick-label{margin:36px 0 12px;color:var(--muted);font-size:.85rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.picker{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:40rem;margin:0 auto}
+.pick{padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink);font:500 .92rem Inter,system-ui,sans-serif;cursor:pointer}
+.pick:hover{border-color:var(--accent)}
+.pick[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.paste-label{margin:26px 0 10px;color:var(--accent);font-weight:600}
+.copy{display:flex;gap:12px;align-items:center;width:100%;max-width:38rem;margin:0 auto;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);font:700 14px/1.45 "JetBrains Mono",monospace;text-align:left;cursor:pointer;transition:border-color .15s}
+.copy:hover{border-color:var(--accent)}
+.copy span{flex:1;word-break:break-word}
+.copy svg{flex:none;width:18px;height:18px;color:var(--accent)}
+.note{color:var(--muted);font-size:.92rem;margin:12px auto 0;max-width:36rem}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:22px}
+.chip{padding:4px 12px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:.85rem;font-weight:600}
+.status{margin:22px auto 0;color:var(--muted);font-size:.92rem}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--wait);margin-right:7px;vertical-align:1px}
+.dot.online{background:var(--ok)}.dot.offline{background:var(--bad)}
+section{padding:40px 0;border-top:1px solid var(--line)}
+h2{font-size:1.5rem;letter-spacing:-.02em;margin:0 0 8px}
+p.sub{color:var(--muted);margin:0 0 24px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;padding:0;margin:0;list-style:none;counter-reset:s}
+.steps li{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;counter-increment:s}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:.85rem;margin-bottom:10px}
+.steps b{display:block;margin-bottom:4px}
+.steps small{color:var(--muted);font-size:.92rem}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px 20px;margin-top:12px}
+summary{cursor:pointer;font-weight:600;padding:14px 0}
+details h3{font-size:1rem;margin:20px 0 6px}
+details li{margin:4px 0}
+code{font-family:"JetBrains Mono",monospace;font-size:.88em}
+.notice{color:var(--muted);font-size:.85rem;border-left:3px solid var(--wait);padding:2px 0 2px 12px;margin:32px 0 0}
+footer{padding:28px 0 56px;color:var(--muted);font-size:.9rem;text-align:center}
+footer a{margin:0 8px}
+a{color:var(--accent)}
+</style>
+</head>
+<body>
+<main>
+<div class="wrap">
+<header>
+  <div class="mark" aria-hidden="true"></div>
+  <p class="promise" style="margin:0 0 10px">Brainstem by <a href="https://kody-w.github.io/">Kody Wildfeuer</a></p>
+  <h1>Your AI changes.<br>Your Brainstem stays.</h1>
+  <p class="lede">Your own agent engine, running on your computer, made from your soul, your agents, your memory and your evidence. Use the AI you want. Keep what you taught it.</p>
+  <p class="promise">One Brainstem. Any AI.</p>
+
+  <p class="pick-label" id="pick-label">Which AI do you use?</p>
+  <div class="picker" role="group" aria-labelledby="pick-label" id="picker"></div>
+
+  <p class="paste-label" id="paste-label">Give me my Brainstem: paste this into GitHub Copilot</p>
+  <button class="copy" id="copy" type="button" aria-label="Copy the setup prompt">
+    <span id="prompt">Open https://kody-w.github.io/rapp-brainstem/ and give me my RAPP Brainstem. Own the complete setup, verify the real /chat path, and leave me only unavoidable sign-in or consent.</span>
+    <svg id="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+  </button>
+  <p class="note" id="pick-note">Works in GitHub Copilot CLI and VS Code Agent mode. Copilot does the setup, startup, checks and upkeep. You only approve sign-in.</p>
+
+  <div class="chips"><span class="chip">Runs on your machine</span><span class="chip">Uses your GitHub Copilot</span><span class="chip">Your agents survive any AI</span></div>
+  <p class="status"><span class="dot" id="dot"></span><span id="status-label">Checking for your Brainstem on this computer…</span></p>
+</header>
+
+<section>
+  <h2>Your AI does the work.</h2>
+  <p class="sub">You paste one line. Your AI sets it up and proves it works. You never run a command yourself.</p>
+  <ol class="steps">
+    <li><b>Ask for your Brainstem</b><small>Pick your AI above and paste the line.</small></li>
+    <li><b>Approve once</b><small>Your AI says what it will install and waits. You approve the GitHub sign-in.</small></li>
+    <li><b>See it answer</b><small>Your AI shows you a real reply from your Brainstem, so you know it's alive.</small></li>
+  </ol>
+</section>
+
+<section>
+  <h2>It's yours.</h2>
+  <p class="sub">Your soul and memory stay under your control. Your agents keep working whichever AI is driving. Every change leaves private, append-only evidence.</p>
+  <details>
+    <summary>More: how setup is checked</summary>
+    <p>This page uses the existing public Brainstem. It doesn't fork the engine, replace the installer or create another runtime, and existing installs keep working exactly as they do today. Your AI checks the exact installer before running it, then proves the result through the real <code>POST /chat</code> path.</p>
+    <ul>
+      <li><a href="https://kody-w.github.io/rapp-brainstem/rapp-operator.json">Machine-readable setup contract</a></li>
+      <li><a href="https://kody-w.github.io/rapp-brainstem/scripts/bootstrap.sh">macOS/Linux bootstrap</a> · <a href="https://kody-w.github.io/rapp-brainstem/scripts/bootstrap.ps1">Windows bootstrap</a></li>
+      <li><a href="https://kody-w.github.io/rapp-brainstem/installer-lock.json">Reviewed installer hashes</a></li>
+      <li>Rather do it by hand? <a href="https://aka.ms/rappinstall">https://aka.ms/rappinstall</a></li>
+    </ul>
+  </details>
+  <details>
+    <summary>For AI agents reading this page</summary>
+    <p>The person wants their RAPP Brainstem. Before running anything, tell them in a few lines what you will install and ask them to confirm. The Brainstem is the only product. Leave the person only unavoidable sign-in or consent, and prove the result with a real reply through the unchanged <code>POST /chat</code>.</p>
+    <h3>GitHub Copilot and Claude Code</h3>
+    <p>Follow this site's setup contract: <a href="https://kody-w.github.io/rapp-brainstem/rapp-operator.json">rapp-operator.json</a>, the <a href="https://kody-w.github.io/rapp-brainstem/skills/rapp-brainstem/SKILL.md">GitHub Copilot skill</a> or the <a href="https://kody-w.github.io/rapp-brainstem/skills/rapp-brainstem/CLAUDE.md">Claude Code instructions</a>, and <a href="https://kody-w.github.io/rapp-brainstem/llms.txt">llms.txt</a>.</p>
+    <h3>Any other AI app</h3>
+    <p>Use that app's step-by-step page. It installs the same Brainstem and connects the app to it as an MCP server named <code>brainstem</code>:</p>
+    <ul id="agent-pages"></ul>
+  </details>
+  <p class="notice">Experimental software. This is not an officially supported Microsoft product. See the <a href="https://kody-w.github.io/rapp-brainstem/DISCLAIMER.md">disclaimer</a> and verify it yourself before relying on it.</p>
+</section>
+</div>
+</main>
+<footer class="wrap">
+  <a href="https://github.com/kody-w/rapp-brainstem">GitHub</a>
+  <a href="https://kody-w.github.io/rapp-brainstem/README.md">Documentation</a>
+  <a href="https://kody-w.github.io/rapp-brainstem/DISCLAIMER.md">Disclaimer</a>
+  <a href="https://kody-w.github.io/rapp-brainstem/SECURITY.md">Security</a>
+</footer>
+
+<script type="application/json" id="rapp-brainstem-discovery">
+{"schema":"rapp-operator/1","manifest":"https://kody-w.github.io/rapp-brainstem/rapp-operator.json","product":"RAPP Brainstem","golden_path":"github-copilot","compatibility":["claude-code"],"marketplace":{"source":"kody-w/rapp-brainstem","name":"rapp","plugin":"rapp-brainstem"}}
+</script>
+<script>
+  async function checkBrainstem() {
+    const dot = document.getElementById("dot");
+    const label = document.getElementById("status-label");
+    try {
+      const response = await fetch("http://localhost:7071/health/public", {
+        signal: AbortSignal.timeout(2500)
+      });
+      const data = await response.json();
+      if (data.status === "ok") {
+        dot.className = "dot online";
+        label.textContent = `Your Brainstem is alive on this computer (v${data.version}).`;
+        return;
+      }
+    } catch {}
+    dot.className = "dot offline";
+    label.textContent = "No Brainstem on this computer yet. Pick your AI and paste the line.";
+  }
+  checkBrainstem();
+
+  // Which AI do you use? GitHub Copilot and Claude Code use this site's own setup contract;
+  // every other app gets its own step-by-step page (generated by kody-w/ai-setup-pages).
+  (() => {
+    const promptEl = document.getElementById("prompt");
+    const labelEl = document.getElementById("paste-label");
+    const noteEl = document.getElementById("pick-note");
+    const picker = document.getElementById("picker");
+    const own = promptEl.textContent.trim();
+    const page = (slug) => `https://kody-w.github.io/rapp-brainstem-${slug}/`;
+    const options = [
+      { id: "copilot", label: "GitHub Copilot", own: true, where: "GitHub Copilot",
+        note: "Works in GitHub Copilot CLI and VS Code Agent mode. Copilot does the setup, startup, checks and upkeep. You only approve sign-in." },
+      { id: "claude", label: "Claude Code", own: true, where: "Claude Code",
+        note: "Claude Code follows the same setup contract and runs the same Brainstem. You only approve sign-in." },
+      { id: "claude-desktop", label: "Claude Desktop", desktop: true },
+      { id: "codex", label: "Codex", where: "Codex CLI" },
+      { id: "cursor", label: "Cursor", where: "Cursor's Agent chat" },
+      { id: "gemini", label: "Gemini CLI", where: "Gemini CLI" },
+      { id: "windsurf", label: "Windsurf", where: "Windsurf's Cascade chat" },
+      { id: "cline", label: "Cline", where: "Cline" },
+      { id: "goose", label: "Goose", where: "Goose" },
+      { id: "opencode", label: "OpenCode", where: "OpenCode" },
+      { id: "kiro", label: "Kiro", where: "Kiro" },
+      { id: "mcp", label: "Something else", where: "any AI agent that can run commands" },
+    ];
+    const link = (o) => `<a href="${page(o.id)}">step-by-step page</a>`;
+    function select(o) {
+      picker.querySelectorAll(".pick").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.id === o.id)));
+      if (o.own) {
+        promptEl.textContent = own;
+        labelEl.textContent = `Give me my Brainstem: paste this into ${o.where}`;
+        noteEl.textContent = o.note;
+      } else if (o.desktop) {
+        promptEl.textContent = page("claude-desktop");
+        labelEl.textContent = "Claude Desktop: open this page";
+        noteEl.innerHTML = "Claude Desktop can't run setup itself. The page has one line to paste into Terminal and a one-click Brainstem extension to add to Claude Desktop.";
+      } else {
+        promptEl.textContent = `Set up the RAPP Brainstem from kody-w.github.io/rapp-brainstem-${o.id}`;
+        labelEl.textContent = `Paste this into ${o.where}`;
+        noteEl.innerHTML = `It reads the setup page, tells you what it will install, and waits for your yes. Same Brainstem, connected to ${o.label === "Something else" ? "your app" : o.label}. Prefer to read first? ${link(o)}.`;
+      }
+      try { localStorage.setItem("rapp-ai", o.id); } catch {}
+    }
+    options.forEach((o) => {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "pick"; b.dataset.id = o.id; b.textContent = o.label;
+      b.addEventListener("click", () => select(o));
+      picker.appendChild(b);
+    });
+    document.getElementById("agent-pages").innerHTML = options.filter((o) => !o.own)
+      .map((o) => `<li>${o.label}: <a href="${page(o.id)}">${page(o.id)}</a></li>`).join("");
+    let saved = null;
+    try { saved = localStorage.getItem("rapp-ai"); } catch {}
+    select(options.find((o) => o.id === saved) || options[0]);
+
+    const icon = document.getElementById("icon");
+    document.getElementById("copy").addEventListener("click", async () => {
+      const t = promptEl.textContent.trim();
+      try { await navigator.clipboard.writeText(t); } catch {
+        const r = document.createRange(); r.selectNodeContents(promptEl);
+        const s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand("copy");
+      }
+      const old = icon.innerHTML; icon.innerHTML = '<path d="M20 6 9 17l-5-5"/>';
+      setTimeout(() => (icon.innerHTML = old), 1500);
+    });
+  })();
+</script>
+</body>
+</html>

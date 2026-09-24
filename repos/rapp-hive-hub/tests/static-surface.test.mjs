@@ -123,7 +123,69 @@ test("generated surface passes links, hashes, security, and accessibility gates"
   const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
   assert.equal(result.inputCount, manifest.entries.length);
   assert.ok(result.immutableObjectCount >= 9);
-  assert.equal(result.qrCount, 22);
+  assert.equal(result.qrCount, 26);
+});
+
+test("shared keyboard focus contrast is at least 3:1 on light and dark adjacent surfaces", async () => {
+  const css = await readFile(path.join(buildA, "hub/assets/hub.css"), "utf8");
+  const focusRules = [...css.matchAll(/([^{}]+:focus-visible[^{}]*)\{([^{}]*)\}/g)];
+  assert.equal(focusRules.length, 1, "Keep one shared, visible keyboard-focus rule");
+  const [, selectors, declarations] = focusRules[0];
+  assert.deepEqual(selectors.trim().split(",").map((selector) => selector.trim()), [
+    "a:focus-visible", "button:focus-visible", "summary:focus-visible", "[tabindex]:focus-visible"
+  ]);
+  const outline = declarations.match(/\boutline:\s*3px solid (#[0-9a-f]{6});/i);
+  assert.ok(outline, "Keep the visible 3px solid focus outline");
+  assert.match(declarations, /outline-offset:\s*3px;/);
+
+  function luminance(hex) {
+    const channels = [1, 3, 5].map((offset) => Number.parseInt(hex.slice(offset, offset + 2), 16) / 255);
+    return channels.reduce((sum, channel, index) => {
+      const linear = channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
+      return sum + linear * [0.2126, 0.7152, 0.0722][index];
+    }, 0);
+  }
+  function contrast(left, right) {
+    const [high, low] = [luminance(left), luminance(right)].sort((a, b) => b - a);
+    return (high + 0.05) / (low + 0.05);
+  }
+  assert.equal(contrast("#000000", "#ffffff"), 21);
+  const roots = [...css.matchAll(/:root\s*\{([^{}]*)\}/g)];
+  assert.equal(roots.length, 2);
+  assert.match(css, /@media\s*\(prefers-color-scheme:\s*dark\)\s*\{\s*:root/);
+  for (const [index, root] of roots.entries()) {
+    const theme = index === 0 ? "light" : "dark";
+    const backgrounds = [...root[1].matchAll(/--(background|surface|accent-soft|danger-soft):\s*(#[0-9a-f]{6});/gi)];
+    assert.deepEqual(backgrounds.map((match) => match[1]), [
+      "background", "surface", "accent-soft", "danger-soft"
+    ]);
+    for (const [, name, background] of backgrounds) {
+      const ratio = contrast(outline[1], background);
+      assert.ok(ratio >= 3, `${theme} --${name}: focus contrast ${ratio.toFixed(3)}:1 is below 3:1`);
+    }
+  }
+  // The retained offset places the ring on surrounding surfaces, not the control fill.
+  for (const pattern of [
+    /\.qr-card\s*\{\s*background:\s*(#[0-9a-f]{6});/i,
+    /\npre\s*\{\s*background:\s*(#[0-9a-f]{6});/i
+  ]) {
+    const background = css.match(pattern);
+    assert.ok(background);
+    assert.ok(contrast(outline[1], background[1]) >= 3, `Fixed surface ${background[1]} fails focus contrast`);
+  }
+});
+
+test("seed detail pages label the fixed build epoch without implying fresh verification", async () => {
+  const index = JSON.parse(await readFile(path.join(buildA, "api/hive-hub/v1/organization-seeds.json"), "utf8"));
+  for (const seed of index.seeds) {
+    const html = await readFile(path.join(buildA, "hub/seeds", seed.slug, "index.html"), "utf8");
+    const footer = html.match(/<footer>([\s\S]*?)<\/footer>/)?.[1];
+    assert.ok(footer);
+    assert.match(footer, /Reproducibility\/build epoch:/);
+    assert.ok(footer.includes(`<time datetime="${publicManifest.build.generatedAt}">${publicManifest.build.generatedAt}</time>`));
+    assert.match(footer, /This fixed value is not a verification or publication time\./);
+    assert.doesNotMatch(footer, /Static public seed snapshot/);
+  }
 });
 
 test("RAPP distribution leads with a real seed and publishes its own entry points", async () => {
@@ -560,7 +622,7 @@ test("organization join verifies the exact package and refuses a different seed"
     document: JSON.parse(await readFile(path.join(buildA, card.descriptor.path), "utf8"))
   })));
   const seedCards = publishedCards.filter((card) => card.document.seed);
-  assert.equal(seedCards.length, 10);
+  assert.equal(seedCards.length, 12);
   const selected = seedCards[0];
   const joinScript = await readFile(path.join(buildA, "hub/join/join.js"), "utf8");
   for (const tampered of [false, true]) {

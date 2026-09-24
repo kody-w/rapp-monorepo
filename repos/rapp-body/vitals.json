@@ -1,12 +1,12 @@
 {
   "spec": "rapp-body-vitals/1.0",
   "stream_id": "rappid:@kody-w/rapp-body:817839d299ddfb173097c58a0434c5c1ef5cd2cd55086c46cfe728bf9bfeb657",
-  "updated": "2026-09-23T12:46:03.613Z",
+  "updated": "2026-09-24T12:44:16.241Z",
   "head": {
-    "seq": 78,
-    "payload_hash": "994759b64ea83a9f08745a6de4e8cbf7fb57d4f1c94e1c4151a6bb84ea82a1e9",
-    "frame_hash": "8fa4ba02d44032aec3bef974f5a93c1b2eda75211830e0af342187882e434e7d",
-    "utc": "2026-09-23T12:46:03.545Z",
+    "seq": 79,
+    "payload_hash": "0ccb1f57a49e63e5b1beb135499724ac28e35e0822e65a0bf005550f876174f4",
+    "frame_hash": "7a5c867d2987fb16cad1eaadbc09997b1a7a009019838eb8d83518850591a9d1",
+    "utc": "2026-09-24T12:44:16.183Z",
     "kind": "body.pulse"
   },
   "health": {
@@ -21,6 +21,7 @@
     "heads_advanced_recent": [
       "heimdall",
       "rapp-static-apis",
+      "RAPP_Store",
       "rappterbook",
       "RAR"
     ],

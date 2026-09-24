@@ -31,6 +31,8 @@ SEED_SLUGS = (
     "public-source-intelligence-bureau",
     "turnaround-firm",
     "federation-prime-contractor",
+    "ai-video-studio",
+    "first-party-rapplication-company",
 )
 LABEL = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 MAX_FILE_BYTES = 262_144

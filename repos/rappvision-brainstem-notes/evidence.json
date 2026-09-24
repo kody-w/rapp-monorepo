@@ -1,0 +1,122 @@
+{
+  "channel": {
+    "channel_url": "https://kody-w.github.io/rappvision-brainstem-notes/channel.json",
+    "id": "brainstem-notes",
+    "name": "Brainstem Notes",
+    "raw_channel_url": "https://raw.githubusercontent.com/kody-w/rappvision-brainstem-notes/main/channel.json",
+    "repository": "kody-w/rappvision-brainstem-notes"
+  },
+  "channel_json_sha256": "df22768d95909faa11b65d2336aa62fb581cd9f769175dd6b5aefb2c53379029",
+  "commitment_scheme": "sha256 of the UTF-8 RAPPID string (the twin's instance RAPPID; its hive organization's RAPPID); the raw RAPPIDs are never published",
+  "grown_from": "eb8995d8e6ae2a6361847d23ea8216f52e9a3a6f9b360fb9718050e4cde4c741",
+  "hive_commitment": "fe269beee942e383d98b5436e98afe3b9d9f2108470464733b10b683ba62e333",
+  "made_by": "Made by a RAPP Brainstem twin running its own organization seed.",
+  "schema": "rapp-twin-channel-evidence/1",
+  "tooling": {
+    "compiler": "rapp-vision scripts/compile_publications.py",
+    "compiler_sha256": "1ec24d384a85a0bd6e0a8d37739255d4be75db7ca44d24ddc34c76c052740517",
+    "ffmpeg": "9.0.1",
+    "validator": "rapp-vision scripts/validate_publications.py",
+    "validator_sha256": "0ce51032d666535225d5a9bc290a0f73ec6bf66aa32af14b4cd3fccc1f86344d"
+  },
+  "twin_commitment": "fb4efff1398761187b64e74b8b6149207afe2a6a89a30978c3c8764b6aa4e6a1",
+  "validation": {
+    "passed": true,
+    "validated_utc": "2026-09-23T21:55:51Z"
+  },
+  "videos": [
+    {
+      "duration": 155.067,
+      "id": "brainstem-explained",
+      "master": {
+        "bytes": 80390647,
+        "path": "masters/brainstem-explained.mp4",
+        "published": false,
+        "sha256": "ece703f3a976eb53e3fb6148d8786814e7bb69f14e28f78ff0903b7883ff870a"
+      },
+      "media": [
+        {
+          "audio_codec": "aac",
+          "bytes": 29998710,
+          "codec": "h264",
+          "duration_seconds": 155.067,
+          "height": 1080,
+          "path": "media/brainstem-explained.mp4",
+          "sha256": "c4d76c92d5939db8fc4f40fac2e67887c4db367ada04b30b1de95dc407ce2e3e",
+          "type": "video/mp4",
+          "width": 1920
+        },
+        {
+          "audio_codec": "opus",
+          "bytes": 22695450,
+          "codec": "vp9",
+          "duration_seconds": 155.066,
+          "height": 1080,
+          "path": "media/brainstem-explained.webm",
+          "sha256": "ecb93071b2f37ab4083e0e5e81d7546f82063442a901456f9b211169964c753f",
+          "type": "video/webm",
+          "width": 1920
+        }
+      ],
+      "poster": {
+        "bytes": 71156,
+        "path": "thumbs/brainstem-explained.jpg",
+        "sha256": "12f62b73cb6e3a4b87b508309e0b6a2310e6f0c58d3b293b669742936b099035"
+      },
+      "provenance": {
+        "claims_verified": "83/83",
+        "gates": "passed",
+        "production": "brainstem-explained",
+        "render_sha256": "ece703f3a976eb53e3fb6148d8786814e7bb69f14e28f78ff0903b7883ff870a"
+      },
+      "title": "Brainstem, explained"
+    },
+    {
+      "duration": 33.767,
+      "id": "brainstem-short",
+      "master": {
+        "bytes": 14248723,
+        "path": "masters/brainstem-short.mp4",
+        "published": false,
+        "sha256": "1864c21e2d6ac446d9fb4975cdcbfbe0f0350b81dbc5bc742df5ab61e292d3bf"
+      },
+      "media": [
+        {
+          "audio_codec": "aac",
+          "bytes": 5687270,
+          "codec": "h264",
+          "duration_seconds": 33.767,
+          "height": 1920,
+          "path": "media/brainstem-short.mp4",
+          "sha256": "abbbb3aa3a9e96dfac7dafc219a58fe5ed149ce5e6db706a3237802951b2f9ee",
+          "type": "video/mp4",
+          "width": 1080
+        },
+        {
+          "audio_codec": "opus",
+          "bytes": 5026700,
+          "codec": "vp9",
+          "duration_seconds": 33.766,
+          "height": 1920,
+          "path": "media/brainstem-short.webm",
+          "sha256": "22c407e44f30e1651e5ecfdc46f97e5ed7cd4e14b3e91d18453773f50317e151",
+          "type": "video/webm",
+          "width": 1080
+        }
+      ],
+      "poster": {
+        "bytes": 55411,
+        "path": "thumbs/brainstem-short.jpg",
+        "sha256": "5d3bb6e7e770fbd172dcff801e3508356d9c9454f6b386875cf5322955cffad6"
+      },
+      "provenance": {
+        "board_sha256": "f278a56e2e5a53aaddefe32bb15006ac3545e4e26b0c8267675d4eb6886572ad",
+        "final_cut": "approved",
+        "production": "brainstem-short",
+        "qa_passed": true,
+        "render_sha256": "1864c21e2d6ac446d9fb4975cdcbfbe0f0350b81dbc5bc742df5ab61e292d3bf"
+      },
+      "title": "Why Brainstem freezes its core"
+    }
+  ]
+}

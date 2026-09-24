@@ -1,0 +1,13 @@
+id,gate,check,how,pass_when
+Q01,build,HyperFrames lint,npx hyperframes lint,0 errors
+Q02,build,HyperFrames check,npx hyperframes check,0 errors
+Q03,timing,Duration,ffprobe on the render,30 to 45 s for this case
+Q04,timing,Hook on screen early,the hook beat in the approved board,starts at or before 0.5 s and holds at least 2.5 s
+Q05,captions,Caption trace,node tools/caption-phraser.mjs <words> <tokens> --verify <captions.json>,every caption word appears in words.json in order
+Q06,captions,Caption style,same command,1 to 4 words per phrase and no punctuation
+Q07,placement,Zones,every overlay's data-zone against brand/tokens.json,no overlay or caption in the face zone or the platform-safe areas
+Q08,claims,Claim carryover,deliverables/claims/carryover.json,0 unmapped on-screen statements
+Q09,audio,Loudness,ffmpeg -af ebur128=peak=true on the render,integrated -16 to -12 LUFS and true peak at or below -1 dBTP
+Q10,review,Contact sheet,one snapshot per board beat tiled into one image,every beat matches the approved board
+Q11,review,Board match,side by side with the approved motion board,no unapproved beats
+Q12,release,No external effects,release log,no upload or publication happened

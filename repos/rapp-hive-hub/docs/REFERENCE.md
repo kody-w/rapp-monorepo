@@ -362,14 +362,14 @@ privacy withdrawal requires the old receipt sources and generated receipt
 URLs to be absent, not rewritten at their old content addresses. It does not
 erase Git history, existing downloads, or third-party caches.
 
-## Ten public RAPP Work organization seeds
+## Twelve public RAPP Work organization seeds
 
-The [Hub catalog](https://kody-w.github.io/hive-hub/hub/#organizations) contains
-ten real, downloadable starter packages: a One-Person Conglomerate, Enterprise
+The [RAPP Hub catalog](https://kody-w.github.io/rapp-hive-hub/hub/#organizations) contains
+twelve real, downloadable starter packages: a One-Person Conglomerate, Enterprise
 Transformation Firm, Product Launch Company, Open-Source Infrastructure
 Foundation, Applied Invention Lab, Independent Game Studio, Micro-Manufacturing
-Company, Public-Source Intelligence Bureau, Turnaround Firm, and Federation
-Prime Contractor.
+Company, Public-Source Intelligence Bureau, Turnaround Firm, Federation
+Prime Contractor, AI Video Studio, and First-Party Rapplication Company.
 
 Each has scoped team workspaces, an original synthetic intake case, a task DAG
 with ownership and acceptance criteria, usable starter artifacts, an exact file

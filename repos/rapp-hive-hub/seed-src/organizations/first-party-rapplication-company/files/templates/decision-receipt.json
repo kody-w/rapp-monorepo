@@ -1,0 +1,18 @@
+{
+  "template_kind": "external-decision-request",
+  "status": "awaiting-separate-decision",
+  "candidate_manifest_sha256": null,
+  "review_reference": null,
+  "verification_references": [],
+  "owner_policy_reference": null,
+  "decider_role_reference": null,
+  "requested_decision": "ship-or-refuse",
+  "decision": null,
+  "reason": null,
+  "issued_at": null,
+  "separate_decision_record_reference": null,
+  "decision_requires_separate_receipt": true,
+  "ceo_self_approval_allowed": false,
+  "authenticated_acceptance": false,
+  "instructions": "This is not a receipt. Obtain the actual separately issued external decision through the trusted native host, after independent verification. Never fabricate signatures or approvals."
+}

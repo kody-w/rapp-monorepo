@@ -1,0 +1,48 @@
+{
+  "classification": "public-synthetic",
+  "scope": "Offline fixed-grammar reference, not live chat or release evidence.",
+  "cases": [
+    {
+      "id": "empty",
+      "commands": ["list"],
+      "statuses": ["ok"],
+      "items": []
+    },
+    {
+      "id": "add-and-complete",
+      "commands": ["add package Inspect the package", "list", "done package", "list"],
+      "statuses": ["ok", "ok", "ok", "ok"],
+      "items": [{"id": "package", "text": "Inspect the package", "done": true}]
+    },
+    {
+      "id": "duplicate-does-not-overwrite",
+      "commands": ["add sample Original item", "add sample Replacement item"],
+      "statuses": ["ok", "refused"],
+      "items": [{"id": "sample", "text": "Original item", "done": false}]
+    },
+    {
+      "id": "repeat-completion",
+      "commands": ["add check Review notices", "done check", "done check"],
+      "statuses": ["ok", "ok", "ok"],
+      "items": [{"id": "check", "text": "Review notices", "done": true}]
+    },
+    {
+      "id": "unknown-item",
+      "commands": ["done absent"],
+      "statuses": ["refused"],
+      "items": []
+    },
+    {
+      "id": "unknown-authority",
+      "commands": ["publish", "merge", "sign", "run shell", "read private files"],
+      "statuses": ["refused", "refused", "refused", "refused", "refused"],
+      "items": []
+    },
+    {
+      "id": "invalid-and-help",
+      "commands": ["", "add", "add uppercase-ID Text", "done", "list extra", "help"],
+      "statuses": ["refused", "refused", "refused", "refused", "refused", "ok"],
+      "items": []
+    }
+  ]
+}

@@ -32,7 +32,7 @@ class OrganizationSeedTests(unittest.TestCase):
                 self.assertEqual(card.locator, records[slug]["id"])
                 self.assertIsNone(card.adapter_plan)
 
-    def test_all_ten_are_substantial_portable_packages(self) -> None:
+    def test_all_seeds_are_substantial_portable_packages(self) -> None:
         worlds: set[str] = set()
         for slug in SEED_SLUGS:
             with self.subTest(slug=slug):

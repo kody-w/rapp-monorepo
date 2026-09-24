@@ -18,6 +18,7 @@ const ALLOWED_KINDS = new Set([
   "historical-receipt",
   "learning-bundle",
   "organization-seed",
+  "organization-seed-boot",
   "protocol",
   "receipt",
   "release",

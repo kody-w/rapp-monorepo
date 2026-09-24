@@ -1,0 +1,206 @@
+{
+  "schema": "hive-hub-organization-blueprint/1",
+  "slug": "first-party-rapplication-company",
+  "name": "The First-Party Rapplication Company",
+  "tagline": "Craft chat-operated products; earn every internal and public release.",
+  "mission": "Design, build, internally release, dogfood, critique, and iterate small first-party rapplications. Promote only independently verified, separately approved, sanitized releases through public pull requests merged by the owner.",
+  "world_id": "demo-first-party-rapplication-company",
+  "teams": [
+    {"slug": "ceo-office", "name": "ceo-office", "role": "Founder-CEO office", "purpose": "Own focus, configurable persona, mission and evidence-specific craftsmanship critique. Recommend, never self-approve or merge."},
+    {"slug": "product", "name": "product", "role": "Product scope and acceptance", "purpose": "Own the useful outcome, exclusions, acceptance criteria, and bounded iteration plan without inventing user validation."},
+    {"slug": "design", "name": "design", "role": "Conversation and interaction design", "purpose": "Own clear chat journeys, error recovery, copy and observed accessibility of the intended host."},
+    {"slug": "engineering", "name": "engineering", "role": "Rapplication engineering", "purpose": "Build a small reproducible candidate with explicit dependencies, tests and exact artifact bindings; never act as its independent verifier."},
+    {"slug": "quality", "name": "quality", "role": "Independent quality and verification", "purpose": "Reproduce actual behavior, inspect hidden details, and verify exact candidates and public projections with identities distinct from builders and the CEO."},
+    {"slug": "release", "name": "release", "role": "Internal release and public promotion", "purpose": "Prepare authorized internal distributions, request separate external decisions, and hand sanitized checked PRs to the owner without self-granting publication or merge authority."},
+    {"slug": "support", "name": "support", "role": "Support and product learning", "purpose": "Maintain honest help and consent-aware minimal feedback, prefer synthetic reproduction, and retain unresolved product observations."}
+  ],
+  "case": {
+    "id": "session-checklist-first-release",
+    "title": "Ship a small chat-operated checklist rapplication, one proven journey at a time",
+    "brief": "This SYNTHETIC case starts with an original offline, fixed-grammar checklist reference. It supports add, list and completion in process memory only. The company must select an authorized chat host, build and qualify an integration, use an internal release, gather actual feedback, critique and iterate, obtain independent verification plus a separate decision, and prepare a sanitized public PR for owner merge. No live adapter, users, company activation, signed authority, completed task, or release is supplied.",
+    "inputs": ["README.md", "docs/operating-model.md", "docs/pipeline.md", "templates/founder-ceo.json", "templates/product-spec.md", "data/acceptance-cases.json", "reference/checklist.py"],
+    "success_criteria": [
+      "The native Organization remains pointer-only with seven same-world team Workspaces and separate casework; setup requires exact pinned SDK plans and owner approval.",
+      "The founder-CEO persona is owner-configurable and can recommend, not self-approve, publish or merge.",
+      "The fixed-grammar reference works offline with bounded inputs, deterministic responses, no hidden effects and no false durability claim.",
+      "Actual chat use of the exact candidate is distinguished from unit tests and must occur before release qualification.",
+      "Changed candidate, dependencies, support, tests or projection invalidates carried qualification and requires fresh evidence.",
+      "Independent verifiers are distinct from builders and CEO; a separate external decision follows and binds verification and review.",
+      "Only an owner-approved sanitized public projection with zero nested privacy findings, completed license review and passing current checks reaches a PR.",
+      "A ready PR is not a release; completion requires observing the owner's merge of its checked head."
+    ]
+  },
+  "tasks": [
+    {
+      "id": "configure-company", "team": "ceo-office", "title": "Prepare the owner-configurable company charter",
+      "instructions": "Read the operating model and templates. Propose an original persona label, one product focus, role separation and effect boundaries. Obtain configuration review through the owner's existing environment; unfilled identities and permissions remain explicit blockers, not made-up authority.",
+      "inputs": ["docs/operating-model.md", "docs/pipeline.md", "templates/founder-ceo.json", "templates/ceo-charter.md"],
+      "outputs": ["deliverables/company-configuration.json"], "depends_on": [],
+      "acceptance": ["Seven team roles plus separate casework are preserved without copying team content into the Organization.", "CEO self-approval, direct publication and merge remain disallowed.", "Real role bindings and owner decisions are private, externally validated references or visibly unfilled; no identity is fabricated."]
+    },
+    {
+      "id": "specify-product", "team": "product", "title": "Specify the smallest useful checklist product",
+      "instructions": "Turn the synthetic proposal into a reviewable product boundary. Select the intended authorized chat host or record it as unavailable; state adapter work, exclusions, acceptance, budgets and a disconfirmation criterion. Do not claim research or runtime access.",
+      "inputs": ["deliverables/company-configuration.json", "templates/product-spec.md", "docs/chat-acceptance.md", "data/acceptance-cases.json"],
+      "outputs": ["deliverables/product-spec.md"], "depends_on": ["configure-company"],
+      "acceptance": ["Fixed grammar and any proposed host intent translation are distinct.", "Persistence, external effects and release authority are not silently added.", "Missing host access and unperformed user research remain explicit."]
+    },
+    {
+      "id": "design-chat", "team": "design", "title": "Design understandable chat and recovery journeys",
+      "instructions": "Define empty, add, list, completion, duplicate, refusal and restart behavior. Specify host keyboard and announcement checks without claiming they were observed. Keep every action inside the product scope.",
+      "inputs": ["deliverables/product-spec.md", "docs/chat-acceptance.md", "docs/craftsmanship-rubric.md"],
+      "outputs": ["deliverables/chat-design.md"], "depends_on": ["specify-product"],
+      "acceptance": ["Each journey has expected output, failure behavior and a verification method.", "Reference process memory is never presented as durable storage.", "Unobserved host accessibility is labeled not observed."]
+    },
+    {
+      "id": "prepare-support", "team": "support", "title": "Prepare a minimal help and reproduction kit",
+      "instructions": "Write help and failure/restart guidance consistent with the proposed product. Define consent-aware intake using synthetic reproductions and minimum necessary data. Do not promise a staffed service.",
+      "inputs": ["deliverables/product-spec.md", "deliverables/chat-design.md", "docs/support-playbook.md", "templates/feedback.json"],
+      "outputs": ["deliverables/support-kit.md"], "depends_on": ["design-chat"],
+      "acceptance": ["Unknown commands, duplicate IDs, limits and session loss have actionable explanations.", "No credential, full transcript, real checklist or private path is required by default.", "Any service level, retention or outreach commitment awaits owner approval."]
+    },
+    {
+      "id": "reference-baseline", "team": "engineering", "title": "Reproduce the bounded offline reference",
+      "instructions": "After separate local execution approval, run the authored Python standard-library suite and command examples. Record exact commands, source hashes and observed results, including negative cases. This is source-level evidence, not live chat qualification.",
+      "inputs": ["deliverables/product-spec.md", "deliverables/chat-design.md", "README.md", "reference/checklist.py", "reference/test_checklist.py", "data/acceptance-cases.json"],
+      "outputs": ["deliverables/reference-evidence.json"], "depends_on": ["design-chat"],
+      "acceptance": ["Acceptance fixtures and mutation/refusal/determinism tests actually pass or retain their failures.", "Only process memory changes; no external runtime or publication is claimed.", "Blocked execution is reported honestly instead of inventing results."]
+    },
+    {
+      "id": "build-candidate", "team": "engineering", "title": "Build and freeze a complete candidate",
+      "instructions": "Implement the approved host integration using existing native interfaces only if authorized capabilities exist. Bind source, candidate, dependencies, support, suite and proposed public distribution with exact relative-path inventories and hashes. Run local checks and list every unproven gate.",
+      "inputs": ["deliverables/reference-evidence.json", "deliverables/support-kit.md", "deliverables/chat-design.md", "deliverables/product-spec.md", "templates/candidate-manifest.json", "docs/pipeline.md", "data/pipeline-gates.json"],
+      "outputs": ["deliverables/candidate-manifest.json", "deliverables/build-evidence.json"], "depends_on": ["reference-baseline", "prepare-support"],
+      "acceptance": ["All six subject components are bound, including an explicit dependency lock even when empty.", "The selected chat adapter is implemented and tested or the task stays blocked.", "Canonical record checks use pinned native tools; structural success is not authenticated acceptance."]
+    },
+    {
+      "id": "internal-release", "team": "release", "title": "Distribute the exact candidate internally",
+      "instructions": "Request and verify owner permission for a specific internal channel. Distribute only the bound candidate with support and recovery instructions using trusted native tooling. Record the actual result and whether the channel is signed; an unsigned channel requires explicit policy.",
+      "inputs": ["deliverables/candidate-manifest.json", "deliverables/build-evidence.json", "deliverables/support-kit.md", "docs/pipeline.md"],
+      "outputs": ["deliverables/internal-release.json"], "depends_on": ["build-candidate"],
+      "acceptance": ["Actual internal artifact hashes match the complete candidate subject.", "Unsigned delivery is never labeled a signed Hive release.", "No public write, authority grant or channel access is inferred from the seed."]
+    },
+    {
+      "id": "dogfood-chat", "team": "quality", "title": "Observe real internal chat journeys",
+      "instructions": "Using an authorized observer distinct from builders and CEO, run the candidate through its intended chat host. Cover normal, negative, duplicate and recovery journeys. Record evidence and timings with minimal synthetic content; stop if the host or authority is absent.",
+      "inputs": ["deliverables/internal-release.json", "deliverables/candidate-manifest.json", "deliverables/chat-design.md", "docs/chat-acceptance.md", "templates/dogfood-scorecard.json"],
+      "outputs": ["deliverables/dogfood-scorecard.json"], "depends_on": ["internal-release"],
+      "acceptance": ["Every observation binds candidate, internal artifact, runtime and qualification suite.", "Not-observed and failed journeys are not converted into passes.", "A unit run or mocked chat cannot satisfy the actual chat-use gate."]
+    },
+    {
+      "id": "triage-feedback", "team": "support", "title": "Synthesize observations without copying conversations",
+      "instructions": "Turn observed dogfood issues into minimal reproducible feedback. Preserve failures, separate hypotheses from observations, and request no additional private data without need and consent.",
+      "inputs": ["deliverables/dogfood-scorecard.json", "deliverables/support-kit.md", "templates/feedback.json", "docs/support-playbook.md"],
+      "outputs": ["deliverables/feedback.json"], "depends_on": ["dogfood-chat"],
+      "acceptance": ["Each finding has a candidate binding, reproduction, expected/observed behavior and evidence reference.", "No feedback or customer satisfaction is fabricated.", "Raw chats, identities and private locations stay outside public artifacts."]
+    },
+    {
+      "id": "review-craftsmanship", "team": "ceo-office", "title": "Critique the visible and hidden details",
+      "instructions": "Review actual evidence with the craftsmanship rubric. Produce a recommendation and a preserved punch list with concrete loci, severity, ownership, expected behavior and evidence. Name one focus; a ship recommendation has no approval force.",
+      "inputs": ["deliverables/feedback.json", "deliverables/dogfood-scorecard.json", "deliverables/candidate-manifest.json", "docs/craftsmanship-rubric.md", "templates/punch-list.json", "templates/ceo-charter.md"],
+      "outputs": ["deliverables/review.json", "deliverables/punch-list.json"], "depends_on": ["triage-feedback"],
+      "acceptance": ["Unobserved dimensions remain not-observed; criticism targets the work, not people.", "The review inspects recovery, test quality, claims, licenses and simplicity as well as chat copy.", "The recommendation is ship/iterate/stop, never a self-issued release approval."]
+    },
+    {
+      "id": "plan-iteration", "team": "product", "title": "Plan only evidence-earned iteration",
+      "instructions": "Prioritize the review's one focus and required repairs. Plan bounded changes with acceptance and disjoint ownership. If no change is justified, record no-change explicitly; do not invent a defect or pretend that an iteration happened.",
+      "inputs": ["deliverables/review.json", "deliverables/punch-list.json", "deliverables/product-spec.md", "docs/pipeline.md"],
+      "outputs": ["deliverables/iteration-plan.md"], "depends_on": ["review-craftsmanship"],
+      "acceptance": ["Every proposed repair links to an observed finding and verification method.", "Blocker/major findings cannot be deferred through shipment.", "A changed subject requires new internal release, dogfood, review and verification."]
+    },
+    {
+      "id": "revise-candidate", "team": "engineering", "title": "Prepare the reviewed successor or exact no-change candidate",
+      "instructions": "Apply approved repairs and rerun affected and regression checks. Freeze the new complete subject and link its predecessor without editing old evidence. For an approved no-change assessment, preserve every subject hash and explicitly record that no successor was built.",
+      "inputs": ["deliverables/iteration-plan.md", "deliverables/candidate-manifest.json", "deliverables/build-evidence.json", "deliverables/support-kit.md", "templates/candidate-manifest.json", "docs/pipeline.md"],
+      "outputs": ["deliverables/final-candidate.json", "deliverables/iteration-evidence.json"], "depends_on": ["plan-iteration"],
+      "acceptance": ["All changed bindings invalidate previous qualification; none is inherited by version label.", "Failed observations and predecessor artifacts remain available privately.", "The result is build evidence, not independent approval."]
+    },
+    {
+      "id": "final-internal-release", "team": "release", "title": "Re-establish the final candidate's internal channel",
+      "instructions": "Repeat authorized internal distribution for changed bytes. Reference an earlier distribution only if every subject binding is unchanged and its authority remains current. Keep the signed/unsigned qualification visible.",
+      "inputs": ["deliverables/final-candidate.json", "deliverables/iteration-evidence.json", "deliverables/internal-release.json", "docs/pipeline.md"],
+      "outputs": ["deliverables/final-internal-release.json"], "depends_on": ["revise-candidate"],
+      "acceptance": ["Final internal artifact and full subject hashes match exactly.", "Any absent permission or failed delivery blocks dogfood.", "No public channel or fabricated signed receipt substitutes for internal evidence."]
+    },
+    {
+      "id": "final-dogfood", "team": "quality", "title": "Qualify the final candidate through real chat",
+      "instructions": "Repeat actual chat qualification for every changed candidate and the final suite. Compare earlier failures without erasing them. Unchanged evidence can be referenced only with exact current bindings; unobserved work stays blocked.",
+      "inputs": ["deliverables/final-internal-release.json", "deliverables/final-candidate.json", "deliverables/dogfood-scorecard.json", "docs/chat-acceptance.md", "templates/dogfood-scorecard.json"],
+      "outputs": ["deliverables/final-dogfood.json"], "depends_on": ["final-internal-release"],
+      "acceptance": ["All mandatory final journeys have actual pass evidence or shipment remains blocked.", "Identity separation from builders and CEO is validated by the trusted host.", "Reference fixtures are never represented as live qualification."]
+    },
+    {
+      "id": "final-review", "team": "ceo-office", "title": "Review final evidence and preserve every finding",
+      "instructions": "Review the final subject, dogfood and iteration evidence. Carry every prior finding forward with an evidenced disposition. Recommend ship only with mandatory criteria met; otherwise request successor tasks and retain the blocked gate.",
+      "inputs": ["deliverables/final-dogfood.json", "deliverables/final-candidate.json", "deliverables/iteration-evidence.json", "deliverables/review.json", "deliverables/punch-list.json", "docs/craftsmanship-rubric.md", "templates/punch-list.json"],
+      "outputs": ["deliverables/final-review.json", "deliverables/final-punch-list.json"], "depends_on": ["final-dogfood"],
+      "acceptance": ["No open blocker/major finding is hidden, deleted, or relabeled to allow shipment.", "Current-subject evidence supports every resolution.", "A favorable recommendation still requires independent verification and a separate decision."]
+    },
+    {
+      "id": "prepare-projection", "team": "release", "title": "Prepare a separately reviewed public distribution",
+      "instructions": "Select only the authorized public payload, matching the final subject's intended projection inventory. Prepare truthful PR copy and a reversible publication proposal, not a public write. Never use a private organization or Hive root as the input distribution.",
+      "inputs": ["deliverables/final-candidate.json", "deliverables/final-review.json", "docs/promotion-checklist.md", "templates/promotion-request.json"],
+      "outputs": ["deliverables/public-projection.json", "deliverables/pr-draft.md"], "depends_on": ["final-review"],
+      "acceptance": ["Outgoing filenames and byte hashes match the frozen public-projection inventory.", "The proposal excludes private records, identities, native stores and conversations.", "No submission, merge or publication is claimed."]
+    },
+    {
+      "id": "review-projection", "team": "quality", "title": "Verify nested privacy and redistribution rights",
+      "instructions": "Scan every outgoing filename and byte, decoded form, nested archive and draft PR text with bounded fail-closed tooling. Supply private denylist values only at runtime. Review all source/dependency/asset licenses and required notices.",
+      "inputs": ["deliverables/public-projection.json", "deliverables/pr-draft.md", "deliverables/final-candidate.json", "docs/promotion-checklist.md"],
+      "outputs": ["deliverables/privacy-report.json", "deliverables/license-review.json"], "depends_on": ["prepare-projection"],
+      "acceptance": ["Zero findings cover complete contents and archive members; unreadable or unscanned inputs block.", "Reports bind exact projection and PR text without including private denylist values.", "Licenses and notices are complete with no unresolved redistribution conflict."]
+    },
+    {
+      "id": "independent-verification", "team": "quality", "title": "Issue current-subject independent verification",
+      "instructions": "Have authorized verifiers distinct from all builders and CEO independently reproduce acceptance, inspect final findings, verify public safety and record real evidence through the existing trusted native mechanism. Filling the template is not issuing an authenticated record.",
+      "inputs": ["deliverables/final-candidate.json", "deliverables/final-dogfood.json", "deliverables/final-review.json", "deliverables/final-punch-list.json", "deliverables/privacy-report.json", "deliverables/license-review.json", "templates/independent-verification.json", "docs/pipeline.md"],
+      "outputs": ["deliverables/verification.json"], "depends_on": ["review-projection"],
+      "acceptance": ["Distinct verifier identities and current grants are actually checked; duplicate labels do not increase the count.", "Verification binds all subject components, review and actual checks.", "A structural RAPP/1 pass is labeled separately from authenticated acceptance; failed verification cannot approve."]
+    },
+    {
+      "id": "request-separate-decision", "team": "release", "title": "Obtain an external decision, never issue one for the CEO",
+      "instructions": "Assemble a request for the owner-selected external decider. Obtain a separate actual decision after verification through the trusted native host. The decider is neither a builder nor the CEO; release merely retains the reference and cannot fill an approval on their behalf.",
+      "inputs": ["deliverables/verification.json", "deliverables/final-review.json", "deliverables/final-candidate.json", "deliverables/company-configuration.json", "templates/decision-receipt.json", "docs/pipeline.md"],
+      "outputs": ["deliverables/decision-reference.json"], "depends_on": ["independent-verification"],
+      "acceptance": ["A real separate decision references the exact review, verification and subject, and follows them.", "No template, CEO statement or failed verification is accepted as approval.", "Absent or refused decisions leave promotion blocked."]
+    },
+    {
+      "id": "ready-public-pr", "team": "release", "title": "Hand a sanitized checked PR to its owner",
+      "instructions": "After exact publication approval, revalidate the decision, outgoing bytes, PR copy, privacy/licenses, all local suites and current required CI. Use existing authorized access to prepare a non-draft PR. If submission is unavailable or unapproved, retain only the local proposal and report the blocker.",
+      "inputs": ["deliverables/decision-reference.json", "deliverables/public-projection.json", "deliverables/pr-draft.md", "deliverables/privacy-report.json", "deliverables/license-review.json", "templates/promotion-request.json", "docs/promotion-checklist.md"],
+      "outputs": ["deliverables/ready-pr.json"], "depends_on": ["request-separate-decision"],
+      "acceptance": ["The actual PR's exact head, diff and text match owner-reviewed artifacts and current passing required checks.", "Changed bytes or text trigger fresh affected checks; pending/missing/skipped/failed required checks block.", "The handoff says ready for owner merge, not published or shipped."]
+    },
+    {
+      "id": "record-owner-merge", "team": "release", "title": "Observe the owner's merge and verify the publication",
+      "instructions": "Wait for the owner's separate merge decision and action; do not merge or infer consent. After an actual merge, verify the checked head and published artifact against the approved projection and record a sanitized reference plus withdrawal procedure.",
+      "inputs": ["deliverables/ready-pr.json", "deliverables/public-projection.json", "templates/promotion-request.json", "docs/promotion-checklist.md"],
+      "outputs": ["deliverables/owner-merge-reference.json"], "depends_on": ["ready-public-pr"],
+      "acceptance": ["Completion requires an observed owner-merged PR and verification of the resulting artifact.", "Release does not perform automated merge or claim a still-open PR as shipped.", "Missing authority, head drift or publication mismatch is retained as a blocker."]
+    }
+  ],
+  "files": [
+    "README.md",
+    "docs/operating-model.md",
+    "docs/pipeline.md",
+    "docs/craftsmanship-rubric.md",
+    "docs/promotion-checklist.md",
+    "docs/chat-acceptance.md",
+    "docs/support-playbook.md",
+    "templates/founder-ceo.json",
+    "templates/ceo-charter.md",
+    "templates/product-spec.md",
+    "templates/candidate-manifest.json",
+    "templates/dogfood-scorecard.json",
+    "templates/feedback.json",
+    "templates/punch-list.json",
+    "templates/independent-verification.json",
+    "templates/decision-receipt.json",
+    "templates/promotion-request.json",
+    "data/pipeline-gates.json",
+    "data/acceptance-cases.json",
+    "reference/checklist.py",
+    "reference/test_checklist.py"
+  ],
+  "related_seeds": ["product-launch-company", "open-source-infrastructure-foundation"]
+}

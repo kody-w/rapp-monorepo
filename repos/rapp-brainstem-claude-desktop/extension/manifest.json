@@ -1,0 +1,38 @@
+{
+  "manifest_version": "0.3",
+  "name": "rapp-brainstem",
+  "display_name": "RAPP Brainstem",
+  "version": "1.0.0",
+  "description": "Talk to the RAPP Brainstem running on your computer.",
+  "long_description": "Connects Claude Desktop to your local RAPP Brainstem (localhost:7071). Install the Brainstem first: https://kody-w.github.io/rapp-brainstem-claude-desktop/",
+  "author": { "name": "Kody Wildfeuer", "url": "https://github.com/kody-w" },
+  "homepage": "https://kody-w.github.io/rapp-brainstem-claude-desktop/",
+  "repository": { "type": "git", "url": "https://github.com/kody-w/rapp-brainstem-claude-desktop" },
+  "license": "MIT",
+  "server": {
+    "type": "node",
+    "entry_point": "server/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/server/index.js"],
+      "env": { "BRAINSTEM_URL": "${user_config.brainstem_url}" }
+    }
+  },
+  "tools": [
+    { "name": "chat", "description": "Send a plain-language message to your Brainstem and get its answer." },
+    { "name": "capabilities", "description": "What your Brainstem can do right now." }
+  ],
+  "user_config": {
+    "brainstem_url": {
+      "type": "string",
+      "title": "Brainstem address",
+      "description": "Where your Brainstem is running. Leave as is unless you changed the port.",
+      "default": "http://localhost:7071",
+      "required": false
+    }
+  },
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": { "node": ">=18.0.0" }
+  }
+}

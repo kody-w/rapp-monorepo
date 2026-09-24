@@ -1,0 +1,122 @@
+{
+  "channel": {
+    "channel_url": "https://kody-w.github.io/rappvision-protocol-minute/channel.json",
+    "id": "protocol-minute",
+    "name": "Protocol Minute",
+    "raw_channel_url": "https://raw.githubusercontent.com/kody-w/rappvision-protocol-minute/main/channel.json",
+    "repository": "kody-w/rappvision-protocol-minute"
+  },
+  "channel_json_sha256": "38cadcd76364874953b755e35add107ac81aba11f0805b84886ed6d5fd300dd5",
+  "commitment_scheme": "sha256 of the UTF-8 RAPPID string (the twin's instance RAPPID; its hive organization's RAPPID); the raw RAPPIDs are never published",
+  "grown_from": "dfa2add35284a48e4febe4b2d674f1f295bade8089cbd39f229ae374fe3c44a5",
+  "hive_commitment": "620ab2fcd7f1ac5654e516a5eb9e742dcb2566de4a703bcd0fca447b5f17fbde",
+  "made_by": "Made by a RAPP Brainstem twin running its own organization seed.",
+  "schema": "rapp-twin-channel-evidence/1",
+  "tooling": {
+    "compiler": "rapp-vision scripts/compile_publications.py",
+    "compiler_sha256": "1ec24d384a85a0bd6e0a8d37739255d4be75db7ca44d24ddc34c76c052740517",
+    "ffmpeg": "9.0.1",
+    "validator": "rapp-vision scripts/validate_publications.py",
+    "validator_sha256": "0ce51032d666535225d5a9bc290a0f73ec6bf66aa32af14b4cd3fccc1f86344d"
+  },
+  "twin_commitment": "4b511493409fcf2cda7b2e6623c40d092931a7d601b51ff42710f36e8120ccee",
+  "validation": {
+    "passed": true,
+    "validated_utc": "2026-09-23T21:38:14Z"
+  },
+  "videos": [
+    {
+      "duration": 150,
+      "id": "websockets-explained",
+      "master": {
+        "bytes": 70085495,
+        "path": "masters/websockets-explained.mp4",
+        "published": false,
+        "sha256": "586b631eba8857e6fce22bb9952e106a52d263effaf723f418071617f10c928f"
+      },
+      "media": [
+        {
+          "audio_codec": "aac",
+          "bytes": 25936316,
+          "codec": "h264",
+          "duration_seconds": 150,
+          "height": 1080,
+          "path": "media/websockets-explained.mp4",
+          "sha256": "58dcf4e4251afcb1e98649c8a9970de94e75a3ab7408758ff6d664dc0755406a",
+          "type": "video/mp4",
+          "width": 1920
+        },
+        {
+          "audio_codec": "opus",
+          "bytes": 20652281,
+          "codec": "vp9",
+          "duration_seconds": 150.002,
+          "height": 1080,
+          "path": "media/websockets-explained.webm",
+          "sha256": "a1159848aa34974f939f433966b2333392fea74e45f35eeb2ff80658fc663d9d",
+          "type": "video/webm",
+          "width": 1920
+        }
+      ],
+      "poster": {
+        "bytes": 73904,
+        "path": "thumbs/websockets-explained.jpg",
+        "sha256": "78b9ad8d7e4b97a2b2244f19a426de71ca322c089d2f19c7fcc3566942d24c65"
+      },
+      "provenance": {
+        "claims_verified": "71/71",
+        "gates": "passed",
+        "production": "websockets-explained",
+        "render_sha256": "586b631eba8857e6fce22bb9952e106a52d263effaf723f418071617f10c928f"
+      },
+      "title": "WebSockets, explained"
+    },
+    {
+      "duration": 40.267,
+      "id": "websockets-short",
+      "master": {
+        "bytes": 12760753,
+        "path": "masters/websockets-short.mp4",
+        "published": false,
+        "sha256": "189424371387bab81320eab6ae0f5b5ca899ae118fb172dec9537da9c722c94b"
+      },
+      "media": [
+        {
+          "audio_codec": "aac",
+          "bytes": 4990814,
+          "codec": "h264",
+          "duration_seconds": 40.267,
+          "height": 1920,
+          "path": "media/websockets-short.mp4",
+          "sha256": "2e89bc16b94220bf5535e04c66eff8832b352dcba4d64b1d7994239dfdd3113b",
+          "type": "video/mp4",
+          "width": 1080
+        },
+        {
+          "audio_codec": "opus",
+          "bytes": 4042920,
+          "codec": "vp9",
+          "duration_seconds": 40.266,
+          "height": 1920,
+          "path": "media/websockets-short.webm",
+          "sha256": "4f72568d2947d4efac16abcb5af92c5a4df5d81555e6a373f3be9438b3f130e1",
+          "type": "video/webm",
+          "width": 1080
+        }
+      ],
+      "poster": {
+        "bytes": 53971,
+        "path": "thumbs/websockets-short.jpg",
+        "sha256": "ab1e1fcc9e3017c1ea800bbd13193ed0151707920ef8e76487cbe9979e84c9a4"
+      },
+      "provenance": {
+        "board_sha256": "235228d72801f106f6edd4959422ab2308e97b6ad9739138cc50d48784d42da8",
+        "final_cut": "approved",
+        "production": "websockets-short",
+        "qa_passed": true,
+        "render_sha256": "189424371387bab81320eab6ae0f5b5ca899ae118fb172dec9537da9c722c94b"
+      },
+      "title": "WebSockets: from polling to two-way traffic"
+    }
+  ]
+}

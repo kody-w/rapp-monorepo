@@ -1,0 +1,84 @@
+<!--
+  hook-card: the first line of a short. A kicker fades up, the hook rises into place, a thin rule draws under it.
+  HyperFrames sub-composition. Host it from your root index.html, for example:
+    <div id="el-hook" class="scene" data-composition-id="hook-card" data-composition-src="compositions/overlays/hook-card.html"
+         data-start="0" data-duration="3" data-track-index="30"></div>
+  Edit CONFIG below (keep CONFIG.duration equal to the host's data-duration). Colours, fonts and the zone box come
+  from your kit's CSS variables when your project defines them, with the house kit as fallback.
+  Seek-safe: one paused GSAP timeline, fixed times, no callbacks. Expects GSAP at assets/vendor/gsap.min.js.
+  To use a second copy in one project, change the composition id in both places (template attribute and timeline key).
+-->
+<template id="hook-card-template">
+  <script src="assets/vendor/gsap.min.js"></script>
+  <style>
+    #hook-card-root {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    #hook-card-root .box {
+      position: absolute;
+      left: var(--zone-top-x, 60px);
+      top: var(--zone-top-y, 80px);
+      width: var(--zone-top-w, 960px);
+      height: var(--zone-top-h, 200px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+      pointer-events: none;
+    }
+    #hook-card-root .kicker {
+      font-family: var(--font-kicker, "EB Garamond", serif);
+      font-size: 36px;
+      color: var(--muted, #9a98a6);
+      opacity: 0;
+    }
+    #hook-card-root .hook {
+      font-family: var(--font-display, "Inter", system-ui, sans-serif);
+      font-weight: 700;
+      font-size: 62px;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--paper, #f7f5f0);
+      text-shadow: 0 4px 18px rgba(11, 11, 15, 0.55);
+      opacity: 0;
+    }
+    #hook-card-root .rule {
+      flex: none;
+      width: 180px;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--signal, #5b4bff);
+      transform-origin: left center;
+      transform: scaleX(0);
+    }
+  </style>
+  <div id="hook-card-root" data-composition-id="hook-card" data-width="1080" data-height="1920">
+    <div class="box" data-zone="top">
+    <div class="kicker" id="hook-card-kicker"></div>
+    <div class="hook" id="hook-card-hook"></div>
+    <div class="rule" id="hook-card-rule"></div>
+  </div>
+  </div>
+  <script>
+    (function () {
+      var CONFIG = {
+        duration: 3.0,
+        kicker: "Before WebSockets",
+        hook: "How did pages get live updates?",
+        exitAt: 2.7
+      };
+      document.getElementById("hook-card-kicker").textContent = CONFIG.kicker;
+      document.getElementById("hook-card-hook").textContent = CONFIG.hook;
+      var tl = gsap.timeline({ paused: true });
+      tl.fromTo("#hook-card-kicker", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 0.05);
+      tl.fromTo("#hook-card-hook", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.15);
+      tl.fromTo("#hook-card-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "power3.out" }, 0.5);
+      tl.to("#hook-card-root .box", { opacity: 0, duration: CONFIG.duration - CONFIG.exitAt, ease: "power2.in" }, CONFIG.exitAt);
+      tl.to({}, { duration: CONFIG.duration }, 0);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["hook-card"] = tl;
+    })();
+  </script>
+</template>

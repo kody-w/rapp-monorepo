@@ -1,0 +1,76 @@
+{
+  "classification": "public-synthetic-specification",
+  "executable": false,
+  "authority": "none",
+  "recording": {
+    "protocol": "rapp/1",
+    "workspace_profile": "rapp-work-sdk/1",
+    "envelope_extensions": false,
+    "new_identity_or_approval_ledger": false,
+    "instruction": "Use existing trusted native records and the package's pinned checker. This document and its forms are not frames."
+  },
+  "subject_fields": [
+    "source_inventory",
+    "candidate_inventory",
+    "dependency_lock",
+    "support_inventory",
+    "qualification_suite",
+    "public_projection_inventory"
+  ],
+  "subject_change_invalidates": [
+    "internal-release",
+    "dogfood",
+    "feedback",
+    "independent-verification",
+    "separate-decision",
+    "promote"
+  ],
+  "separation": {
+    "minimum_distinct_verifiers": 1,
+    "verifiers_distinct_from": ["builders", "founder_ceo"],
+    "decider_distinct_from": ["builders", "founder_ceo"],
+    "separate_decision_record_required": true,
+    "decision_after_verification": true
+  },
+  "gates": {
+    "intake": "Owner-scoped outcome and bounded effects; no inferred grant.",
+    "specification": "Acceptance, exclusions, failure behavior, design and measurement budgets.",
+    "build-checks": "Reproducible tests and the complete frozen subject.",
+    "internal-distribution": "Actual authorized internal distribution of exact bytes; truthful signed/unsigned label.",
+    "real-chat-use": "Observed use through the intended authorized chat host; source tests are insufficient.",
+    "founder-review": "Current-subject recommendation, one focus, rubric and preserved punch-list history.",
+    "iteration-plan": "Bounded response to actual findings; changed bytes require requalification.",
+    "independent-verification": "Current-subject checks by authorized identities distinct from builders and CEO.",
+    "separate-decision": "Distinct external approve/refuse record after verification, bound to review and verification.",
+    "owner-policy": "Current native permission for the exact effect, destination and candidate.",
+    "privacy": "Zero findings across outgoing names/content, encoded forms, nested archives and PR text.",
+    "licenses": "Complete provenance, redistribution permission and notices; no unresolved conflicts.",
+    "local-and-ci-checks": "All applicable local tests and all required checks pass on the current PR head.",
+    "public-pr": "Exact owner-approved sanitized diff and text; non-draft PR for owner-only merge."
+  },
+  "stages": [
+    {"id": "idea", "owner": "ceo-office", "gates": ["intake"], "next": ["spec"]},
+    {"id": "spec", "owner": "product", "gates": ["specification"], "next": ["build"]},
+    {"id": "build", "owner": "engineering", "gates": ["build-checks"], "next": ["internal-release"]},
+    {"id": "internal-release", "owner": "release", "gates": ["internal-distribution"], "next": ["dogfood"]},
+    {"id": "dogfood", "owner": "quality", "gates": ["real-chat-use"], "next": ["feedback"]},
+    {"id": "feedback", "owner": "ceo-office", "gates": ["founder-review"], "next": ["feedback", "iterate", "ship-decision"]},
+    {"id": "iterate", "owner": "product", "gates": ["iteration-plan"], "next": ["build"]},
+    {"id": "ship-decision", "owner": "release", "gates": ["independent-verification", "separate-decision", "owner-policy"], "next": ["iterate", "promote"]},
+    {"id": "promote", "owner": "release", "gates": ["privacy", "licenses", "local-and-ci-checks", "public-pr", "owner-policy"], "next": []}
+  ],
+  "promotion_outcomes": ["ready-pr-for-owner", "owner-merged-pr"],
+  "terminal_completion": {
+    "event": "owner-merged-pr",
+    "actor": "owner",
+    "requires_observed_merge_of_checked_head": true,
+    "automated_merge": false
+  },
+  "claims": {
+    "source_tests_are_live_dogfood": false,
+    "structural_validity_is_authenticated_acceptance": false,
+    "templates_are_receipts": false,
+    "company_activated": false,
+    "agents_running": false
+  }
+}
