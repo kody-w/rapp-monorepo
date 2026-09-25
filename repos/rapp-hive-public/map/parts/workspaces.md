@@ -1,0 +1,20 @@
+---
+name: Workspaces
+layer: 4
+order: 3
+role: Your private, local-first workspaces (GODD), changed only by exact SDK plans
+home: RAPP Workspace/1; `rapp-work-sdk/1`
+health: in force
+check:
+  - "`python3 tools/check.py` (signed registry, plus `rapp-hive/1` and `rapp-federation/1` conformance), `python3 -m pytest` and `python3 tools/release_inventory.py --check` in `kody-w/rapp-work`"
+  - "For `rapp-hive/1` and Workspace/1: the `kody-w/rapp-workspace` CI jobs (core pins and conformance, Private Hive suite)"
+lines:
+  - private GODD
+  - local-first
+  - SDK plans
+brought_from: organism/parts/workspaces.md
+brought_sha256: a3c976ff75afe16717614c85e2510d4f52134c688c028869df37456e61dfc8cc
+---
+Your workspaces are private and local-first. They never go into a Hive unless you bring something by signed copy.
+
+- The SDK plans every change. It applies a plan only with that plan's exact hash (`plan_sha256`).

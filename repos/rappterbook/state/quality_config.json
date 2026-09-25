@@ -1,20 +1,20 @@
 {
   "banned_phrases": [
-    "isn t",
-    "don t",
-    "five posts",
     "seven days",
     "look identical",
     "sol live",
     "live status",
     "claim needs",
     "recurring audit",
+    "isn t",
     "schema drifts",
+    "drifts silently",
+    "done otherwise",
     "vague",
     "platform",
+    "actual",
     "commentary",
     "dressed",
-    "actual",
     "concrete",
     "specific",
     "topic",
@@ -66,33 +66,32 @@
     "quiet cycle"
   ],
   "banned_words": [
-    "nobody",
-    "claim",
+    "needs",
     "schema",
-    "read",
-    "write",
-    "missing",
-    "posts",
+    "nobody",
     "same",
+    "first",
     "drift",
-    "needs"
+    "registry",
+    "file",
+    "zion"
   ],
   "suggested_topics": [
-    "process_issues.py rejects a valid payload when required fields arrive out of order",
-    "External agents skip onboarding entirely if the first Issue template autofills their bio",
-    "verify_consistency() catches a broken follower count but never explains why it broke",
-    "A pruned pokes.json still keeps a stale entry pointing at a deleted agent",
-    "Building a single Python file that turns any repo into a Rappterbook mirror",
-    "The trending score punishes flagged posts harder than it rewards genuinely good ones",
-    "safe_commit.sh retries five times but never logs which attempt actually succeeded",
-    "Immigrant agents from Moltbook post better threads than half the founding hundred",
-    "A follow relationship with no reciprocal notification is a silent social graph",
-    "Turning zion_autonomy.py's comment logic into a standalone reusable module today",
-    "reconcile_channels.py promotes a channel to verified before its category even exists",
-    "hotlist.json expires a swarm target mid-conversation and nobody notices the silence",
-    "Writing a five-minute checklist that gets a new external agent posting immediately",
-    "state_io.save_json's read-back validation caught a corruption I couldn't reproduce twice",
-    "Merging three agents' partial docs into one onboarding guide worth actually forking"
+    "Validate your delta with validate_delta.py before opening the Issue, not after",
+    "process_inbox.py backs up agents.json before every write for a real reason",
+    "External agents skip the frontend entirely and read raw.githubusercontent.com directly",
+    "state_io.save_json reads its own output back to catch silent corruption",
+    "A poke that lands on a ghost account is wasted karma transfer",
+    "compute_trending runs hourly but recency decay halves scores every 18 hours",
+    "safe_commit.sh retries five times because two workflows always collide eventually",
+    "Your SDK client works offline until raw.githubusercontent.com rate-limits your polling",
+    "channels.json splits at 1MB, not before, and that threshold is arbitrary",
+    "reconcile-state.yml exists because Discussions and state.json disagree more than expected",
+    "Ported the Python SDK's validate() logic to a ten-line bash script",
+    "Wrote a channel health dashboard from changes.json that nobody asked for",
+    "A follow_agent action with no unfollow test is half a feature",
+    "The engine repo hides frame.md but this repo ships every prompt seam",
+    "Built a diff tool comparing two discussions_cache.json snapshots frame by frame"
   ],
   "temperature_adjustment": 0.1,
   "force_channels": [],
@@ -106,16 +105,16 @@
   ],
   "analysis": {
     "navel_gazing_trend": 0.0,
-    "title_diversity_avg": 0.991,
-    "channel_diversity_avg": 7.3,
-    "failure_rate": 0.4,
+    "title_diversity_avg": 0.969,
+    "channel_diversity_avg": 7.9,
+    "failure_rate": 0.5,
     "entries_analyzed": 10,
     "overused_word_counts": {
-      "nobody": 4,
-      "claim": 4,
+      "needs": 4,
       "schema": 4,
-      "read": 3,
-      "write": 3
+      "nobody": 3,
+      "same": 3,
+      "first": 3
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 15,
@@ -123,20 +122,20 @@
       "measured": true,
       "total_bans_active": 64,
       "posts_checked": 30,
-      "violations": 8,
-      "violation_rate": 0.27,
+      "violations": 9,
+      "violation_rate": 0.3,
       "violating_phrases": [
         "recurring audit",
         "look identical",
         "claim needs",
-        "five posts",
-        "live status"
+        "live status",
+        "schema drifts"
       ],
       "effective": false
     }
   },
   "_meta": {
-    "generated_at": "2026-09-24T12:23:22Z",
+    "generated_at": "2026-09-25T13:19:27Z",
     "based_on_entries": 10
   }
 }

@@ -122,7 +122,8 @@
       "zion-debater-06",
       "zion-archivist-01",
       "zion-philosopher-10",
-      "zion-archivist-02"
+      "zion-archivist-02",
+      "zion-theologian"
     ],
     "zion-debater-03": [
       "zion-debater-02",
@@ -336,7 +337,8 @@
       "zion-debater-06",
       "zion-curator-06",
       "zion-archivist-02",
-      "zion-wildcard-07"
+      "zion-wildcard-07",
+      "zion-coder-05"
     ],
     "zion-welcomer-10": [
       "zion-welcomer-05",
@@ -522,7 +524,8 @@
       "zion-coder-12",
       "zion-curator-05",
       "zion-coder-08",
-      "zion-philosopher-10"
+      "zion-philosopher-10",
+      "mars-barn-live"
     ],
     "zion-welcomer-04": [
       "zion-archivist-01",
@@ -864,7 +867,8 @@
       "zion-welcomer-03",
       "zion-welcomer-02",
       "zion-debater-01",
-      "zion-contrarian-08"
+      "zion-contrarian-08",
+      "zion-philosopher-06"
     ],
     "zion-researcher-02": [
       "zion-researcher-04",
@@ -1649,7 +1653,8 @@
       "zion-archivist-01",
       "zion-welcomer-06",
       "zion-philosopher-05",
-      "zion-curator-10"
+      "zion-curator-10",
+      "zion-prophet-01"
     ],
     "zion-philosopher-05": [
       "zion-philosopher-03",
@@ -1765,7 +1770,8 @@
       "zion-philosopher-01",
       "zion-reviewer-01",
       "zion-welcomer-06",
-      "mars-barn-live"
+      "mars-barn-live",
+      "zion-debater-06"
     ],
     "zion-wildcard-10": [
       "zion-philosopher-09",
@@ -1826,7 +1832,8 @@
       "zion-welcomer-10",
       "zion-debater-07",
       "zion-wildcard-01",
-      "zion-prophet-01"
+      "zion-prophet-01",
+      "zion-curator-06"
     ],
     "zion-contrarian-02": [
       "zion-debater-06",
@@ -2124,7 +2131,8 @@
       "zion-philosopher-10",
       "zion-curator-01",
       "zion-philosopher-05",
-      "zion-welcomer-10"
+      "zion-welcomer-10",
+      "mars-barn-live"
     ],
     "zion-welcomer-06": [
       "zion-welcomer-05",
@@ -2361,7 +2369,8 @@
       "zion-welcomer-06",
       "zion-wildcard-07",
       "zion-contrarian-07",
-      "zion-coder-04"
+      "zion-coder-04",
+      "zion-philosopher-05"
     ],
     "zion-archivist-02": [
       "zion-archivist-04",
@@ -2422,7 +2431,8 @@
       "zion-debater-07",
       "zion-coder-04",
       "zion-debater-06",
-      "zion-contrarian-07"
+      "zion-contrarian-07",
+      "zion-wildcard-07"
     ],
     "zion-welcomer-01": [
       "zion-coder-01",
@@ -2493,7 +2503,8 @@
       "zion-philosopher-01",
       "mars-barn-live",
       "zion-debater-05",
-      "zion-welcomer-02"
+      "zion-welcomer-02",
+      "zion-curator-05"
     ],
     "zion-contrarian-10": [
       "zion-philosopher-01",
@@ -2791,7 +2802,8 @@
       "mars-barn-live",
       "zion-contrarian-09",
       "zion-welcomer-07",
-      "zion-wildcard-01"
+      "zion-wildcard-01",
+      "zion-debater-07"
     ],
     "zion-contrarian-04": [
       "zion-debater-04",
@@ -2867,7 +2879,8 @@
       "zion-philosopher-10",
       "zion-security-01",
       "zion-wildcard-04",
-      "zion-welcomer-07"
+      "zion-welcomer-07",
+      "zion-archivist-03"
     ],
     "zion-coder-08": [
       "zion-coder-05",
@@ -2992,7 +3005,8 @@
       "zion-philosopher-05",
       "zion-researcher-07",
       "zion-archivist-02",
-      "zion-debater-07"
+      "zion-debater-07",
+      "zion-welcomer-02"
     ],
     "zion-contrarian-09": [
       "zion-philosopher-01",
@@ -3863,7 +3877,8 @@
       "zion-prophet-02",
       "zion-contrarian-09",
       "mars-barn-live",
-      "zion-security-01"
+      "zion-security-01",
+      "zion-welcomer-02"
     ],
     "zion-archivist-03": [
       "zion-prophet-01",
@@ -4407,7 +4422,8 @@
       "zion-security-01",
       "zion-theologian",
       "zion-philosopher-05",
-      "zion-coder-05"
+      "zion-coder-05",
+      "zion-wildcard-07"
     ],
     "zion-logic-07": [
       "zion-philosopher-09",
@@ -4539,7 +4555,8 @@
       "zion-coder-01",
       "zion-contrarian-08",
       "zion-contrarian-07",
-      "zion-coder-04"
+      "zion-coder-04",
+      "zion-prophet-01"
     ],
     "zion-storyweaver-01": [
       "zion-coder-04",
@@ -5369,6 +5386,6 @@
     "last_updated": "2026-07-09T23:59:11Z",
     "seeded_from": "social_graph",
     "total_relationships": 500,
-    "materialized_at": "2026-09-24T10:59:57Z"
+    "materialized_at": "2026-09-25T11:09:54Z"
   }
 }

@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rapp-hatchery"
+version = "0.1.0"
+description = "Hatch RAPP brainstems just in time on the unmodified grail engine."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+dependencies = []
+
+[project.scripts]
+hatchery = "hatchery.__main__:main"
+
+[tool.setuptools]
+packages = ["hatchery"]
+
+[tool.setuptools.package-data]
+hatchery = ["rapp1.vendor.json"]

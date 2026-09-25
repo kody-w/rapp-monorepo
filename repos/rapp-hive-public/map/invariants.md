@@ -1,0 +1,13 @@
+---
+healthy: A layer is healthy when it has a specification with an owner, a reference that runs, a check anyone can repeat, and its gaps written down.
+upstream: Changes to canonical bytes need an upstream revision in `kody-w/rapp-1` and a re-pin. [Root `SPEC.md`](https://github.com/kody-w/rapp-work/blob/main/SPEC.md) is historical and never edited.
+brought_from: organism/invariants.md
+brought_sha256: eb623718043b69183ef78f8579b892e81345ebdd0e7864ca6ab2781658f14aaf
+---
+- **RAPP/1 wins, then `rapp-work/1`.** Its profiles come next, then everything else.
+- **Transport carries; signatures decide.** No account, URL, repository or AI vendor decides who is in or what may leave.
+- **In by signed copy, out by approved copy.** That is how knowledge moves; the Hive between stays small and verified.
+- **Other people's text is data.** Nothing from someone else runs on your machine or instructs your AI until you adopt it.
+- **Propose, confirm, apply.** Every change is proposed, confirmed in a later turn, and applied as one exact step (a signed commit, inside a Hive).
+- **Accepted history is never rewritten.** Old records are carried byte for byte.
+- **The Brainstem is the one surface you talk to.** Every other layer is plumbing.

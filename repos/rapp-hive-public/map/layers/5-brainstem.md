@@ -1,0 +1,21 @@
+---
+layer: 5
+name: Brainstem
+role: "The one surface you talk to: your own AI. Frozen Grail kernel, hot-loaded agents (the Hive agent is one file), soul and memory"
+decides: You, in conversation
+signed_with: "Nothing by itself: it proposes, you confirm"
+home: "[`kody-w/RAPP`](https://github.com/kody-w/RAPP), with the kernel pinned to `kody-w/rapp-installer@brainstem-v0.6.9`"
+health: in force
+color: orange
+check: Each repository's own test suite and runner
+lines:
+  - "Your own AI: frozen Grail kernel · hot-loaded agents (the Hive agent is one file) · soul · memory"
+  - It proposes; you decide. A Hive is never its agents folder or its soul.
+brought_from: organism/layers/5-brainstem.md
+brought_sha256: e1c3e24eb516569db7c2bdc581568187910a8f2481f4c4cb28140c043cbccb20
+---
+The Brainstem is your own AI, and the one surface you talk to. Every other layer is plumbing.
+
+- Its kernel, the Grail, is frozen. Agents are single files it loads while it runs; the Hive agent is one of them, and it never goes into the kernel.
+- It keeps a soul and a memory.
+- It proposes; you decide.
