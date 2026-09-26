@@ -27,6 +27,14 @@ Inputs that drive computation (numbers that change the result, free text that is
 searched), a clock that changes the output, output that depends on call order, and hash-seed
 nondeterminism are reported, never materialized: they need a hand translation (a translation spec
 in expressions) or the MCP fallback.
+
+Pinned data. An agent that reads a dataset (files it loads by path) is a function of its arguments and that
+dataset, so ``data={"ENV_VAR": folder}`` pins it: the folder's digest goes into the spec, the agent runs on a
+private copy (the variable points at it, and anything it writes lands there), and every later proof refuses a
+folder whose digest differs. The flow then serves the dataset as it was; new data means materializing again.
+``values={"input": [...]}`` names an input's values when they come from the data rather than the code (a
+project or item id), so every one is tried; without them such an input would look unknown and be proven only
+on probes. ``env`` sets fixed variables (a mode switch).
 """
 import ast
 import base64
@@ -39,6 +47,8 @@ import shutil
 import string
 import subprocess
 import sys
+import tempfile
+import weakref
 from pathlib import Path
 
 ABSENT = "\u2205"            # ∅: the input was omitted
@@ -255,16 +265,89 @@ def _b64(text):
 # ── the sandboxed runner ─────────────────────────────────────────────────────
 
 RUNNER = r'''
-import datetime as _dt, importlib.util, json, os, socket, sys, time as _time, types
+import builtins, datetime as _dt, importlib.abc, importlib.util, io, json, os, socket, subprocess, sys, time as _time, types
 
 agent_file, basic_file, clock_iso, class_name = sys.argv[1:5]
+_PINNED = json.loads(sys.argv[5]) if len(sys.argv) > 5 else []
+
+# What the agent reaches beyond its arguments. A table can only stand in for a function of the arguments, so an agent
+# that reads files, calls the network, calls an LLM or starts processes is refused (and the report says which).
+_EFFECTS = set()
+_OWN = {os.path.realpath(agent_file), os.path.realpath(basic_file)}
 
 def _blocked(*a, **k):
+    _EFFECTS.add("network")
     raise OSError("network is off while this agent is materialized")
 socket.socket.connect = _blocked
 socket.socket.connect_ex = _blocked
 socket.create_connection = _blocked
 socket.getaddrinfo = _blocked
+
+# pinned data folders are part of the agent's input, and with them the interpreter's own library files (a
+# library reading its bundled template) are too; nothing else is
+_ROOTS = [os.path.realpath(p) for p in _PINNED]
+if _ROOTS:
+    import sysconfig
+    _ROOTS += sorted({os.path.realpath(p) for p in [sys.prefix, sys.base_prefix]
+                      + [sysconfig.get_paths().get(k) for k in ("stdlib", "purelib", "platlib")] if p})
+
+def _is_own(path):
+    try:
+        real = os.path.realpath(os.fspath(path))
+    except TypeError:
+        return True
+    return real in _OWN or any(real == r or real.startswith(r + os.sep) for r in _ROOTS)
+
+_real_open = builtins.open
+def _open(file, mode="r", *a, **k):
+    if not isinstance(file, int) and not _is_own(file):
+        _EFFECTS.add("files")
+    return _real_open(file, mode, *a, **k)
+builtins.open = io.open = _open
+
+def _fs(fn):
+    def wrapper(path=".", *a, **k):
+        if not _is_own(path):
+            _EFFECTS.add("files")
+        return fn(path, *a, **k)
+    return wrapper
+for _mod, _names in ((os.path, ("exists", "isfile", "isdir", "getsize", "getmtime")),
+                     (os, ("listdir", "scandir", "makedirs", "mkdir", "remove", "unlink", "rename", "replace", "walk"))):
+    for _n in _names:
+        if hasattr(_mod, _n):
+            setattr(_mod, _n, _fs(getattr(_mod, _n)))
+
+def _no_process(*a, **k):
+    _EFFECTS.add("processes")
+    raise OSError("starting processes is off while this agent is materialized")
+subprocess.Popen.__init__ = _no_process
+os.system = _no_process
+
+class _Watch(importlib.abc.MetaPathFinder):
+    LLM = ("openai", "anthropic", "copilot", "github_copilot_sdk")
+    NET = ("requests", "httpx", "urllib3", "aiohttp")
+    def find_spec(self, name, path=None, target=None):
+        top = name.split(".")[0]
+        if top in self.LLM:
+            _EFFECTS.add("llm")
+        elif top in self.NET:
+            _EFFECTS.add("network")
+        elif name == "utils.azure_file_storage":
+            _EFFECTS.add("files")
+        elif name.startswith("utils."):
+            _EFFECTS.add("host")
+        return None
+sys.meta_path.insert(0, _Watch())
+
+# the brainstem host's utils package: an agent that asks it for an LLM is recorded, then refused
+_utils = types.ModuleType("utils"); _utils.__path__ = []
+_llm = types.ModuleType("utils.llm")
+def _call_llm(*a, **k):
+    _EFFECTS.add("llm")
+    raise RuntimeError("LLM calls are off while this agent is materialized")
+_llm.call_llm = _call_llm
+_utils.llm = _llm
+sys.modules["utils"], sys.modules["utils.llm"] = _utils, _llm
 
 _FROZEN = _dt.datetime.fromisoformat(clock_iso)
 _real_dt, _real_date = _dt.datetime, _dt.date
@@ -296,6 +379,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(agent_file)))
 
 spec = importlib.util.spec_from_file_location("agent_under_test", agent_file)
 mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+_AT_IMPORT = set(_EFFECTS)
 classes = [v for v in vars(mod).values() if isinstance(v, type) and issubclass(v, basic.BasicAgent)
            and v is not basic.BasicAgent and v.__module__ == "agent_under_test"]
 if class_name:
@@ -324,11 +408,14 @@ for line in sys.stdin:
                           "description": md.get("description", ""), "parameters": md.get("parameters") or {},
                           "dicts": _dicts()}, default=str), flush=True)
         continue
+    _EFFECTS.clear()
     try:
         out = agent.perform(**req["args"])
-        print(json.dumps({"ok": True, "out": out if isinstance(out, str) else json.dumps(out, default=str)}), flush=True)
+        print(json.dumps({"ok": True, "out": out if isinstance(out, str) else json.dumps(out, default=str),
+                          "effects": sorted(_EFFECTS | _AT_IMPORT)}), flush=True)
     except Exception as e:
-        print(json.dumps({"ok": False, "out": f"{type(e).__name__}: {e}"}), flush=True)
+        print(json.dumps({"ok": False, "out": f"{type(e).__name__}: {e}", "effects": sorted(_EFFECTS | _AT_IMPORT)}),
+              flush=True)
 '''
 
 
@@ -350,14 +437,43 @@ def agent_python(version=None):
     return sys.executable
 
 
-class Runner:
-    """Runs one agent file's perform() in a sandboxed subprocess, a batch of cases at a time."""
+EFFECTS = {"files": "reads or writes files (SharePoint plus connector code instead)",
+           "network": "calls the network (a custom connector instead)",
+           "llm": "calls an LLM (the harness agent reasons instead)",
+           "processes": "starts processes (the MCP fallback instead)",
+           "host": "needs services its brainstem host provides (the MCP fallback instead)"}
 
-    def __init__(self, agent_file, basic_file, class_name="", python=None, timeout=600):
+
+def dataset_digest(folder):
+    """What pins a dataset: the SHA-256 over every file's relative path and bytes, with the count and size."""
+    root = Path(folder)
+    h, files, size = hashlib.sha256(), 0, 0
+    for f in sorted(p for p in root.rglob("*") if p.is_file()):
+        data = f.read_bytes()
+        h.update(f.relative_to(root).as_posix().encode("utf-8") + b"\0" + hashlib.sha256(data).digest())
+        files, size = files + 1, size + len(data)
+    return {"sha256": h.hexdigest(), "files": files, "bytes": size}
+
+
+class Runner:
+    """Runs one agent file's perform() in a sandboxed subprocess, a batch of cases at a time. `env` sets fixed
+    variables; `data` ({variable: folder}) gives the agent a private copy of each pinned folder."""
+
+    def __init__(self, agent_file, basic_file, class_name="", python=None, timeout=600, env=None, data=None):
         self.agent_file, self.basic_file = str(agent_file), str(basic_file)
         self.class_name, self.python, self.timeout = class_name or "", python or sys.executable, timeout
         self.calls = 0
         self._version = None
+        self.effects = set()     # what perform() reached beyond its arguments, over every call
+        self.env, self.pinned = {k: str(v) for k, v in (env or {}).items()}, []
+        if data:
+            work = tempfile.mkdtemp(prefix="bfs-pinned-")
+            weakref.finalize(self, shutil.rmtree, work, True)
+            for name, folder in data.items():
+                copy = Path(work) / re.sub(r"[^A-Za-z0-9_]", "_", name)
+                shutil.copytree(folder, copy)
+                self.env[name] = str(copy)
+                self.pinned.append(str(copy))
 
     def python_version(self):
         if self._version is None:
@@ -366,10 +482,13 @@ class Runner:
         return self._version
 
     def _exchange(self, requests, clock=CLOCKS[0], hashseed="0"):
-        env = {"PYTHONHASHSEED": str(hashseed), "PATH": "/usr/bin:/bin", "HOME": str(Path(self.agent_file).parent)}
+        env = {**self.env, "PYTHONHASHSEED": str(hashseed), "PATH": "/usr/bin:/bin",
+               "HOME": str(Path(self.agent_file).parent)}
         payload = "".join(json.dumps(r) + "\n" for r in requests)
-        proc = subprocess.run([self.python, "-c", RUNNER, self.agent_file, self.basic_file, clock, self.class_name],
-                              input=payload, capture_output=True, text=True, timeout=self.timeout, env=env)
+        argv = [self.python, "-c", RUNNER, self.agent_file, self.basic_file, clock, self.class_name]
+        if self.pinned:
+            argv.append(json.dumps(self.pinned))
+        proc = subprocess.run(argv, input=payload, capture_output=True, text=True, timeout=self.timeout, env=env)
         lines = [l for l in proc.stdout.splitlines() if l.strip()]
         if proc.returncode != 0 or len(lines) != len(requests):
             raise MaterializeError(f"{Path(self.agent_file).name}: runner failed "
@@ -385,6 +504,8 @@ class Runner:
         if not cases:
             return []
         answers = self._exchange([{"op": "perform", "args": c} for c in cases], clock, hashseed)
+        for a in answers:
+            self.effects.update(a.get("effects") or ())
         return [a["out"] if a["ok"] else "\u26a0 " + a["out"] for a in answers]
 
 
@@ -456,8 +577,9 @@ def _norm(rule, raw):
 class Discovery:
     """What each input of one agent does, learned from the real Python."""
 
-    def __init__(self, runner, source):
+    def __init__(self, runner, source, values=None):
         self.r, self.source = runner, source
+        self.values = {k: [str(v) for v in vs] for k, vs in (values or {}).items()}
         self.contract = runner.contract()
         params = self.contract.get("parameters") or {}
         self.props = params.get("properties") or {}
@@ -539,7 +661,8 @@ class Discovery:
         s = sentinel(name)
         enum = [str(v) for v in schema.get("enum") or []]
         table = {}
-        first = list(dict.fromkeys([None, s] + enum + self.constants + _random_strings(name) + ["", "   "]))
+        first = list(dict.fromkeys([None, s] + enum + self.values.get(name, []) + self.constants
+                                   + _random_strings(name) + ["", "   "]))
         self._fill(name, contexts, first, table)
         n = range(len(contexts))
         firsts = [v for v in first[2:] if any(table[(ci, v)] != table[(ci, s)].replace(s, v) for ci in n)]
@@ -713,7 +836,8 @@ def _sub(out, keyed, states, args):
 
 
 def materialize(agent_file, basic_file, *, class_name="", flow_name=None, component=None, python=None,
-                check_clock=True, check_order=True, samples=600, allow_hash_variation=False, hand=None):
+                check_clock=True, check_order=True, samples=600, allow_hash_variation=False, hand=None,
+                env=None, data=None, values=None, timeout=600):
     """Learn, run and verify one agent. Returns (spec, report); spec is None when it cannot be materialized.
 
     The table is per operation: for each state of the primary input (the required selector, usually
@@ -728,8 +852,10 @@ def materialize(agent_file, basic_file, *, class_name="", flow_name=None, compon
         raise MaterializeError(f"{agent_file.name}: its hand translation was written for a different source "
                                f"({hand['source_sha256'][:12]}, now {source_sha[:12]})")
     hand_ops = hand.get("operations") or {}
-    runner = Runner(agent_file, basic_file, class_name, python)
-    disc = Discovery(runner, source).learn()
+    pinned = {name: {**dataset_digest(folder), "path": str(Path(folder).expanduser().resolve())}
+              for name, folder in (data or {}).items()}
+    runner = Runner(agent_file, basic_file, class_name, python, timeout=timeout, env=env, data=data)
+    disc = Discovery(runner, source, values=values).learn()
     c = disc.contract
     report = {"agent": c.get("name"), "class": c.get("class"), "file": agent_file.name,
               "inputs": {n: {k: v for k, v in i.items() if k in ("kind", "rule", "why", "canon", "dict", "echo",
@@ -807,7 +933,9 @@ def materialize(agent_file, basic_file, *, class_name="", flow_name=None, compon
             rows = {"|".join([pst] + sts): o for (sts, _), o in zip(combos, outs)}
             # verify on random samples over every keyed input (not just the relevant ones)
             sample_cases, sample_keys = [], []
-            for _ in range(max(1, samples // max(1, len(pstates)))):
+            # with no other input to vary every sample is the same call: one is enough (determinism across repeated
+            # calls, call order and hash seeds is checked on its own)
+            for _ in range(max(1, samples // max(1, len(pstates))) if rest else 1):
                 asg, key_states, subst = {}, [], []
                 for i in rest:
                     st, v = rng.choice(full_states(i))
@@ -865,6 +993,11 @@ def materialize(agent_file, basic_file, *, class_name="", flow_name=None, compon
     blocked_ops = {p: o["blocked_by"] for p, o in ops.items() if o["blocked_by"]}
     if blocked_ops and len(blocked_ops) == len(ops):
         blockers.append("every operation depends on " + ", ".join(sorted({n for v in blocked_ops.values() for n in v})))
+    if runner.effects:
+        # the sandbox answered those calls with errors (no files, no network, no LLM), so a table of its answers would
+        # be a table of errors; these agents need a translation that reaches the same things in Power Platform
+        report["effects"] = sorted(runner.effects)
+        blockers.insert(0, "reaches beyond its arguments: " + ", ".join(EFFECTS[e] for e in sorted(runner.effects)))
     if blockers:
         report.update(reasons=list(dict.fromkeys(blockers)), runner_calls=runner.calls, operations=ops)
         return None, report
@@ -970,6 +1103,9 @@ def materialize(agent_file, basic_file, *, class_name="", flow_name=None, compon
         "hand_operations": {op: h.get("why", "") for op, h in hand_ops.items() if ops.get(op, {}).get("hand")},
         "clock_formats": clock_formats, "caveats": caveats,
         "source_sha256": source_sha,
+        **({"env": {k: str(v) for k, v in env.items()}} if env else {}),
+        **({"data": pinned} if pinned else {}),
+        **({"values": {k: len(v) for k, v in values.items()}} if values else {}),
         "materialized_with": {"clock": CLOCKS[0], "python": runner.python_version(),
                               "checked_clock": CLOCKS[1] if check_clock else None,
                               "checked_clocks": list(CLOCKS[1:]) if check_clock else [],

@@ -1,5 +1,9 @@
 # RAPP drift lint
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-drift-lint.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-drift-lint.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 Per-commit reflexes for invariant drift across the RAPP estate. The linter is
 regex-grade, deterministic, zero-LLM, and has no package dependencies.
 

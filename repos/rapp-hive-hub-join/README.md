@@ -1,5 +1,9 @@
 # Connect RAPP Hive Hub from any AI app
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-hive-hub-join.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-hive-hub-join.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 One page per AI app: paste one line, the app adds the read-only [Hive Hub MCP server](https://github.com/kody-w/hive-hub-mcp) and can pull seeds down, verified.
 
 Start here: https://kody-w.github.io/rapp-hive-hub-join/

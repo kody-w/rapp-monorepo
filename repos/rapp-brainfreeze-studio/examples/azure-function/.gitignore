@@ -3,3 +3,6 @@ brainfreeze_studio/
 sdk/
 .python_packages/
 __pycache__/
+codeapp-host.js
+codeapp-host.js.sources
+translations/

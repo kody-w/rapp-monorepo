@@ -205,8 +205,15 @@ def read_workspace(workspace):
     prov = ws.parent / "provenance.json"
     if prov.is_file():
         env_vars = json.loads(prov.read_text(encoding="utf-8")).get("environment_variables") or []
+    connectors = []
+    for d in sorted((ws / "connectors").iterdir()) if (ws / "connectors").is_dir() else []:
+        if (d / "connector.json").is_file():
+            connectors.append({**json.loads((d / "connector.json").read_text(encoding="utf-8")),
+                               "openapi": json.loads((d / "openapi.json").read_text(encoding="utf-8")),
+                               "properties": json.loads((d / "apiProperties.json").read_text(encoding="utf-8"))["properties"],
+                               "script": (d / "script.csx").read_text(encoding="utf-8")})
     return {"settings": settings, "components": components, "connection_references": refs,
-            "workflows": workflows, "environment_variables": env_vars}
+            "workflows": workflows, "environment_variables": env_vars, "connectors": connectors}
 
 
 def component_schema_name(schema_name, c):
@@ -230,14 +237,17 @@ def bot_configuration(settings, instructions=None):
 
 # ── the steps ────────────────────────────────────────────────────────────────
 
-def ensure_connection_reference(dv, logical, connector_id, display_name, connections=None):
+def ensure_connection_reference(dv, logical, connector_id, display_name, connections=None, find_connection=None):
     """An agent-scoped reference bound to a connection this user can use: an explicit map entry, else the reference
-    itself if already bound, else any bound reference for the same connector in the environment."""
+    itself if already bound, else one of the user's own (find_connection, when given), else any bound reference for
+    the same connector in the environment."""
     existing = dv.value(f"connectionreferences?$filter=connectionreferencelogicalname eq '{_q(logical)}'"
                         "&$select=connectionreferenceid,connectionid,connectorid")
     connection = (connections or {}).get(logical) or (connections or {}).get(connector_id or "")
     if not connection and existing and existing[0].get("connectionid"):
         return {"logicalName": logical, "operation": "existing", "connectionId": existing[0]["connectionid"]}
+    if not connection and find_connection and connector_id:
+        connection = find_connection(connector_id)
     if not connection and connector_id:
         rows = dv.value(f"connectionreferences?$filter=connectorid eq '{_q(connector_id)}' and connectionid ne null"
                         "&$select=connectionid,connectionreferencelogicalname&$orderby=createdon asc&$top=1")
@@ -255,9 +265,16 @@ def ensure_connection_reference(dv, logical, connector_id, display_name, connect
 
 
 def ensure_environment_variable(dv, var):
+    """Create the variable with the workspace's default; an existing one is left alone, except that a missing
+    default is filled in (or replaced when var["replace"] says so)."""
     rows = dv.value(f"environmentvariabledefinitions?$filter=schemaname eq '{_q(var['schemaName'])}'"
-                    "&$select=environmentvariabledefinitionid")
+                    "&$select=environmentvariabledefinitionid,defaultvalue")
     if rows:
+        value = str(var.get("defaultValue", ""))
+        if value and (not rows[0].get("defaultvalue") or var.get("replace")) and rows[0].get("defaultvalue") != value:
+            dv("PATCH", f"environmentvariabledefinitions({rows[0]['environmentvariabledefinitionid']})",
+               {"defaultvalue": value})
+            return {"schemaName": var["schemaName"], "operation": "updated"}
         return {"schemaName": var["schemaName"], "operation": "existing"}
     dv("POST", "environmentvariabledefinitions", {
         "schemaname": var["schemaName"], "displayname": var.get("displayName") or var["schemaName"],
@@ -274,6 +291,196 @@ def _stored_definition(clientdata):
         if isinstance(ref, dict) and isinstance(ref.get("api"), dict):
             ref["api"].pop("logicalName", None)
     return stored
+
+
+def ensure_connector(dv, c):
+    """A custom connector with its code, as the Dataverse `connectors` row pac writes: created, updated when its
+    definition or code changed, else left alone. Returns (its internal id, the operation)."""
+    props = c["properties"]
+    body = {"displayname": c["displayName"], "description": c["openapi"]["info"].get("description", "")[:1000],
+            "connectortype": 1, "openapidefinition": json.dumps(c["openapi"]),
+            "connectionparameters": json.dumps(props.get("connectionParameters") or {}),
+            "policytemplateinstances": json.dumps(props.get("policyTemplateInstances") or []),
+            "scriptoperations": json.dumps(props.get("scriptOperations") or []),
+            "customcodeblobcontent": c["script"], "iconbrandcolor": props.get("iconBrandColor") or "#5a4fcf"}
+    rows = dv.value(f"connectors?$filter=name eq '{_q(c['name'])}'&$select=connectorid,connectorinternalid,displayname,"
+                    "openapidefinition,customcodeblobcontent,scriptoperations")
+    if rows:
+        cur = rows[0]
+        try:
+            same = (json.loads(cur.get("openapidefinition") or "null") == c["openapi"]
+                    and cur.get("customcodeblobcontent") == c["script"]
+                    and json.loads(cur.get("scriptoperations") or "[]") == (props.get("scriptOperations") or [])
+                    and cur.get("displayname") == c["displayName"])
+        except ValueError:
+            same = False
+        if not same:
+            dv("PATCH", f"connectors({cur['connectorid']})", body)
+        return cur["connectorinternalid"], "unchanged" if same else "updated"
+    created, headers = dv("POST", "connectors", {"name": c["name"], **body}, prefer="return=representation")
+    internal = (created or {}).get("connectorinternalid")
+    if not internal:
+        rows = dv.value(f"connectors?$filter=name eq '{_q(c['name'])}'&$select=connectorinternalid")
+        internal = rows[0]["connectorinternalid"] if rows else None
+    if not internal:
+        raise DeployError(f"Dataverse did not return the internal id of connector {c['name']}")
+    return internal, "created"
+
+
+def ensure_code_connection(get_powerapps_token, environment_id, internal, display_name, opener=None, wait=10):
+    """A connection to a connector that needs no sign-in (it runs its own code), made as the user through the Power
+    Apps resource provider; a connected one of theirs is reused. Returns (its name, the operation)."""
+    import uuid
+    from .codeapp_publish import PublishError, _Api
+    api = _Api(get_powerapps_token, opener)
+    where = urllib.parse.quote(f"environment eq '{environment_id}'")
+    body = {"properties": {"environment": {"id": f"/providers/Microsoft.PowerApps/environments/{environment_id}",
+                                           "name": environment_id}, "displayName": display_name}}
+    for attempt in range(6):                  # a connector made a moment ago can take a little while to appear
+        try:
+            listed = api.call("GET", f"/apis/{internal}/connections?api-version=2016-11-01&$filter={where}") or {}
+            for conn in listed.get("value") or []:
+                if any(st.get("status") == "Connected" for st in (conn.get("properties") or {}).get("statuses") or []):
+                    return conn["name"], "existing"
+            name = uuid.uuid4().hex
+            api.call("PUT", f"/apis/{internal}/connections/{name}?api-version=2016-11-01&$filter={where}", body)
+            return name, "created"
+        except PublishError as e:
+            if attempt == 5 or "404" not in str(e) and "NotFound" not in str(e):
+                raise DeployError(f"could not connect to {display_name}: {e}")
+            time.sleep(wait)
+
+
+POWERAPPS_APIS = "/providers/Microsoft.PowerApps/apis/"
+
+
+def _token_claims(token):
+    import base64
+    try:
+        part = token.split(".")[1]
+        return json.loads(base64.urlsafe_b64decode(part + "=" * (-len(part) % 4)))
+    except (IndexError, ValueError):
+        return {}
+
+
+def _cloud(param):
+    capability = ((param.get("uiDefinition") or {}).get("constraints") or {}).get("capability")
+    return not capability or "cloud" in [c.lower() for c in capability]
+
+
+def _signs_in_alone(params):
+    """A connection parameter set that needs nothing but the user's sign-in, on their behalf (pa's check): an OAuth
+    setting that supports on-behalf-of login, and every other cloud parameter hidden and optional."""
+    if not params:
+        return True
+    oauth = [p for p in params.values() if p.get("type") == "oauthSetting"]
+    if not any(((p.get("oAuthSettings") or {}).get("properties") or {}).get("IsOnbehalfofLoginSupported") is True
+               for p in oauth):
+        return False
+    for p in params.values():
+        if p.get("type") == "oauthSetting" or not _cloud(p):
+            continue
+        c = (p.get("uiDefinition") or {}).get("constraints") or {}
+        if c.get("hidden") != "true" or c.get("required") != "false":
+            return False
+    return True
+
+
+def silent_sign_in(connector):
+    """Whether a connector's connections can be made with the user's sign-in alone, and the parameter set to use
+    (None: the connector has no sets). Returns (eligible, set name)."""
+    props = connector.get("properties") or {}
+    sets = (props.get("connectionParameterSets") or {}).get("values") or []
+    if sets:
+        chosen = next((v for v in sets if _signs_in_alone(v.get("parameters") or {})), None)
+        return bool(chosen), (chosen or {}).get("name")
+    return _signs_in_alone(props.get("connectionParameters") or {}), None
+
+
+def _connected(conn):
+    return any(st.get("status") == "Connected" for st in (conn.get("properties") or {}).get("statuses") or [])
+
+
+def user_connection(get_powerapps_token, environment_id, api, get_apihub_token=None, opener=None, wait=3):
+    """A connection of the user's own to a Microsoft connector (SharePoint, Dataverse, ...): a connected one they
+    made, else a new one made with their sign-in alone when the connector allows it. That is the Power Apps
+    first-party login: the connection offers a login address and API Hub exchanges the user's token (for
+    https://apihub.azure.com) on their behalf, with no browser and no consent page. Returns (its name, the
+    operation), or (None, why not)."""
+    import uuid
+    from .codeapp_publish import PublishError, _Api
+    rp = _Api(get_powerapps_token, opener)
+    where = urllib.parse.quote(f"environment eq '{environment_id}'")
+    me = _token_claims(get_powerapps_token()).get("oid")
+    listed = rp.call("GET", f"/apis/{api}/connections?api-version=2016-11-01&$filter={where}") or {}
+    mine = [c for c in listed.get("value") or []
+            if me and ((c.get("properties") or {}).get("createdBy") or {}).get("id") == me and _connected(c)]
+    if mine:
+        mine.sort(key=lambda c: (c.get("properties") or {}).get("lastModifiedTime") or "", reverse=True)
+        return mine[0]["name"], "existing"
+    if not get_apihub_token:
+        return None, "you have no connected connection, and there is no API Hub token to make one with"
+    connector = rp.call("GET", f"/apis/{api}?api-version=2016-11-01&$filter={where}") or {}
+    eligible, parameter_set = silent_sign_in(connector)
+    if not eligible:
+        return None, "its connections need an interactive sign-in"
+    name = str(uuid.uuid4())
+    display = f"{(connector.get('properties') or {}).get('displayName') or api} (RAPP)"
+    props = {"displayName": display, "consentInfo": {"redirectUrl": "https://www.microsoft.com/"},
+             "environment": {"id": f"/providers/Microsoft.PowerApps/environments/{environment_id}",
+                             "name": environment_id}}
+    props.update({"connectionParametersSet": {"name": parameter_set, "values": {}}} if parameter_set
+                 else {"connectionParameters": {}})
+    path = f"/apis/{api}/connections/{name}?api-version=2016-11-01&$filter={where}"
+    try:
+        made = rp.call("PUT", path + "&$expand=ConsentLink", {"properties": props}) or {}
+        login = ((made.get("properties") or {}).get("consentInfo") or {}).get("firstPartyLoginUri")
+        if not login:
+            raise PublishError("the connection offered no first-party login")
+        _Api(get_apihub_token, opener).call("POST", login, {"accessToken": get_apihub_token()}, retries=1)
+        for _ in range(10):
+            if _connected(rp.call("GET", path) or {}):
+                return name, "created"
+            time.sleep(wait)
+        raise PublishError("the connection was made but never connected")
+    except PublishError as e:
+        try:
+            rp.call("DELETE", path, ok404=True)
+        except PublishError:
+            pass
+        return None, str(e)
+
+
+def sharepoint_sites(get_powerapps_token, get_apihub_token, environment_id, connection, opener=None):
+    """The SharePoint sites a connection reaches, [{"url", "name"}], through the connector's own runtime."""
+    from .codeapp_publish import _Api
+    where = urllib.parse.quote(f"environment eq '{environment_id}'")
+    connector = _Api(get_powerapps_token, opener).call(
+        "GET", f"/apis/shared_sharepointonline?api-version=2016-11-01&$filter={where}") or {}
+    runtime = ((connector.get("properties") or {}).get("runtimeUrls") or [None])[0]
+    if not runtime:
+        return []
+    listed = _Api(get_apihub_token, opener).call("GET", f"{runtime.rstrip('/')}/{connection}/datasets") or {}
+    return [{"url": d.get("Name"), "name": d.get("DisplayName")} for d in listed.get("value") or [] if d.get("Name")]
+
+
+def root_site(sites):
+    """The tenant's root site among them (a URL with no path), else the first."""
+    for s in sites:
+        if not urllib.parse.urlsplit(s["url"]).path.strip("/"):
+            return s["url"]
+    return sites[0]["url"] if sites else None
+
+
+def apply_files_home(definition, home):
+    """A flow with the files site and folder as its parameters' defaults, the values their environment variables
+    got. home is {"site", "folder", "schemas": {variable schema name: "site" | "folder"}}."""
+    params = ((definition.get("properties") or {}).get("definition") or {}).get("parameters") or {}
+    for p in params.values():
+        key = (home.get("schemas") or {}).get((p.get("metadata") or {}).get("schemaName") or "")
+        if key:
+            p["defaultValue"] = home[key]
+    return definition
 
 
 def ensure_workflow(dv, wf):
@@ -396,6 +603,35 @@ def publish(dv, bot_id, timeout=600):
     raise DeployError("publish did not finish in time")
 
 
+def files_home(dv, ws, references, site, folder, get_powerapps_token, get_apihub_token, env, opener=None):
+    """Where the workspace's file-reading agents find their files, filled into its files environment variables:
+    the site and folder given, else the environment's existing values, else the build's, else the tenant's root
+    site (through the user's SharePoint connection) and the build's folder. None when no agent reads files."""
+    variables = {v["files"]: v for v in ws["environment_variables"] if v.get("files")}
+    if not variables:
+        return None
+    chosen = {"site": site, "folder": folder}
+    for key, v in variables.items():
+        rows = dv.value(f"environmentvariabledefinitions?$filter=schemaname eq '{_q(v['schemaName'])}'"
+                        "&$select=defaultvalue")
+        existing = rows[0].get("defaultvalue") if rows else None
+        if chosen.get(key):
+            v["replace"] = True
+        chosen[key] = chosen.get(key) or existing or v.get("defaultValue") or None
+    if not chosen["site"]:
+        sp = next((r for r in references if r["logicalName"].endswith(".shared_sharepointonline")), None)
+        if sp and get_powerapps_token and get_apihub_token:
+            chosen["site"] = root_site(sharepoint_sites(get_powerapps_token, get_apihub_token, env(), sp["connectionId"],
+                                                        opener))
+    if not chosen["site"]:
+        raise DeployError("an agent here reads files from SharePoint, and no site was given or found: give the site "
+                          "(files_site, for example https://contoso.sharepoint.com/sites/team)")
+    for key, v in variables.items():
+        v["defaultValue"] = chosen[key] or ""
+    return {"site": chosen["site"], "folder": chosen.get("folder") or "",
+            "schemas": {v["schemaName"]: key for key, v in variables.items()}}
+
+
 def environment_id(dv):
     try:
         body, _ = dv("GET", "RetrieveCurrentOrganization(AccessType=@p)?@p=Microsoft.Dynamics.CRM.EndpointAccessType'Default'")
@@ -405,8 +641,13 @@ def environment_id(dv):
 
 
 def deploy(workspace, environment, get_token, *, schema_name=None, display_name=None, connections=None,
-           keep_extra_components=False, do_publish=True, log=print, dataverse=None):
-    """Deploy a harness workspace as the user whose token get_token() returns. Returns a summary dict."""
+           keep_extra_components=False, do_publish=True, log=print, dataverse=None, get_powerapps_token=None,
+           powerapps_opener=None, get_apihub_token=None, files_site=None, files_folder=None):
+    """Deploy a harness workspace as the user whose token get_token() returns. Returns a summary dict. A workspace
+    with connector code (workspace/connectors/) also needs get_powerapps_token, for the connectors' connections.
+    With it, a flow's Microsoft connector (SharePoint, Dataverse, ...) is bound to a connection of the user's own,
+    made with their sign-in alone when they have none and get_apihub_token is given. Agents that read files find
+    them in files_site/files_folder (default: the build's, else the environment's, else the tenant's root site)."""
     ws = read_workspace(workspace)
     settings = ws["settings"]
     schema = schema_name or settings["schemaName"]
@@ -418,10 +659,52 @@ def deploy(workspace, environment, get_token, *, schema_name=None, display_name=
     dv = dataverse or Dataverse(environment, get_token)
     result = {"schemaName": schema, "displayName": name, "environment": dv.environment}
 
+    code = []
+    if ws["connectors"]:
+        from .connector_code import fill_connectors
+        log("0/7 custom connectors (the agents' logic, as connector code)")
+        if not get_powerapps_token:
+            raise DeployError("this workspace runs agent logic as connector code; its connections are made with your "
+                              "Power Apps token (https://service.powerapps.com/), which wasn't given")
+        env_id = environment_id(dv)
+        ids, connections = {}, dict(connections or {})
+        for c in ws["connectors"]:
+            internal, op = ensure_connector(dv, c)
+            conn, conn_op = ensure_code_connection(get_powerapps_token, env_id, internal, c["displayName"],
+                                                   opener=powerapps_opener)
+            ids[c["displayName"]] = internal
+            connections[c["referenceLogicalName"]] = conn
+            code.append({"displayName": c["displayName"], "internalId": internal, "operation": op,
+                         "connection": conn, "connectionOperation": conn_op})
+            log(f"   {c['displayName']}: {op} ({internal}); connection {conn_op}")
+            if op == "created":
+                log("   (a new connector's code can take a few minutes to answer; until then its calls fail with 404)")
+        for wf in ws["workflows"]:
+            wf["definition"] = fill_connectors(wf["definition"], ids)
+        ws["connection_references"] = {k: fill_connectors(v, ids) for k, v in ws["connection_references"].items()}
+    result["connectors"] = code
+
     log("1/7 connection references")
+    env_cache = {}
+
+    def env():
+        if "id" not in env_cache:
+            env_cache["id"] = environment_id(dv)
+        return env_cache["id"]
+
+    def find_connection(connector_id):
+        api = connector_id[len(POWERAPPS_APIS):] if connector_id.startswith(POWERAPPS_APIS) else ""
+        if not api.startswith("shared_"):
+            return None
+        conn, how = user_connection(get_powerapps_token, env(), api, get_apihub_token, powerapps_opener)
+        log(f"   {api}: {'your connection, ' + how if conn else 'no connection of yours: ' + how}")
+        return conn
+
     references = []
     for logical, connector in sorted(ws["connection_references"].items()):
-        references.append(ensure_connection_reference(dv, logical, connector, f"{name} - {logical.split('.')[-1]}", connections))
+        references.append(ensure_connection_reference(dv, logical, connector, f"{name} - {logical.split('.')[-1]}",
+                                                      connections,
+                                                      find_connection=find_connection if get_powerapps_token else None))
         log(f"   {logical}: {references[-1]['operation']}")
     reference_ids = {}
     for r in references:
@@ -430,6 +713,13 @@ def deploy(workspace, environment, get_token, *, schema_name=None, display_name=
         reference_ids[r["logicalName"]] = rows[0]["connectionreferenceid"] if rows else None
 
     log("2/7 environment variables")
+    home = files_home(dv, ws, references, files_site, files_folder, get_powerapps_token, get_apihub_token, env,
+                      powerapps_opener)
+    if home:
+        log(f"   files: {home['site']} {home['folder']}")
+        for wf in ws["workflows"]:
+            apply_files_home(wf["definition"], home)
+    result["files_home"] = home
     variables = [ensure_environment_variable(dv, v) for v in ws["environment_variables"]]
     for v in variables:
         log(f"   {v['schemaName']}: {v['operation']}")

@@ -3,20 +3,20 @@
     "organ": "rumors",
     "engine": "mars-100",
     "version": "13.0",
-    "generated": "2026-09-25T09:23:08.183928+00:00",
+    "generated": "2026-09-26T09:07:28.609124+00:00",
     "year_snapshot": 30
   },
-  "active_rumors": 5,
+  "active_rumors": 8,
   "largest_carrier_count": 12,
-  "mutation_chains": 3,
-  "fragmentation": 0.0,
-  "archived_total": 8,
+  "mutation_chains": 5,
+  "fragmentation": 0.4622,
+  "archived_total": 9,
   "rumors": [
     {
       "id": "r10",
-      "text": "the archivist found a buried message from the first crew",
-      "origin_id": "grove-ash",
-      "origin_year": 25,
+      "text": "imm-12 saw something move in the storm beyond the perimeter",
+      "origin_id": "pax-stone",
+      "origin_year": 23,
       "carriers": [
         "aura-kai",
         "child-14",
@@ -32,7 +32,49 @@
         "pax-stone"
       ],
       "carrier_count": 12,
-      "born_year": 25,
+      "born_year": 23,
+      "last_growth_year": 25,
+      "mutated_from": null,
+      "mutation_depth": 0,
+      "dead": false,
+      "death_year": null,
+      "carrier_names": [
+        "Aura Kai",
+        "Cinder Ash",
+        "Dax Iron",
+        "Fen Marsh",
+        "Grove Ash",
+        "Coral Mist",
+        "Nova Sol",
+        "Nova Sol",
+        "Bloom Peak",
+        "Kira Sol",
+        "Ora Flame",
+        "Pax Stone"
+      ],
+      "origin_name": "Pax Stone"
+    },
+    {
+      "id": "r11",
+      "text": "a child was born with a third blood type",
+      "origin_id": "imm-10",
+      "origin_year": 26,
+      "carriers": [
+        "aura-kai",
+        "child-14",
+        "dax-iron",
+        "fen-marsh",
+        "grove-ash",
+        "imm-10",
+        "imm-11",
+        "imm-12",
+        "imm-13",
+        "kira-sol",
+        "ora-flame",
+        "pax-stone"
+      ],
+      "carrier_count": 12,
+      "born_year": 26,
       "last_growth_year": 27,
       "mutated_from": null,
       "mutation_depth": 0,
@@ -52,55 +94,13 @@
         "Ora Flame",
         "Pax Stone"
       ],
-      "origin_name": "Grove Ash"
-    },
-    {
-      "id": "r11",
-      "text": "someone's been burning names on the airlock wall",
-      "origin_id": "ora-flame",
-      "origin_year": 26,
-      "carriers": [
-        "aura-kai",
-        "child-14",
-        "dax-iron",
-        "fen-marsh",
-        "grove-ash",
-        "imm-10",
-        "imm-11",
-        "imm-12",
-        "imm-13",
-        "kira-sol",
-        "ora-flame",
-        "pax-stone"
-      ],
-      "carrier_count": 12,
-      "born_year": 26,
-      "last_growth_year": 28,
-      "mutated_from": "r3",
-      "mutation_depth": 1,
-      "dead": false,
-      "death_year": null,
-      "carrier_names": [
-        "Aura Kai",
-        "Cinder Ash",
-        "Dax Iron",
-        "Fen Marsh",
-        "Grove Ash",
-        "Coral Mist",
-        "Nova Sol",
-        "Nova Sol",
-        "Bloom Peak",
-        "Kira Sol",
-        "Ora Flame",
-        "Pax Stone"
-      ],
-      "origin_name": "Ora Flame"
+      "origin_name": "Coral Mist"
     },
     {
       "id": "r12",
-      "text": "kira-sol hoarded extra fuel during the last fast",
+      "text": "someone's been burning names on the airlock wall",
       "origin_id": "imm-12",
-      "origin_year": 26,
+      "origin_year": 27,
       "carriers": [
         "aura-kai",
         "child-14",
@@ -116,9 +116,9 @@
         "pax-stone"
       ],
       "carrier_count": 12,
-      "born_year": 26,
-      "last_growth_year": 28,
-      "mutated_from": "r6",
+      "born_year": 27,
+      "last_growth_year": 29,
+      "mutated_from": "r3",
       "mutation_depth": 1,
       "dead": false,
       "death_year": null,
@@ -140,8 +140,8 @@
     },
     {
       "id": "r13",
-      "text": "kira-sol hoarded extra fuel during the last fast (or so they say)",
-      "origin_id": "imm-10",
+      "text": "imm-13 has been sending unencrypted messages back to Earth",
+      "origin_id": "kira-sol",
       "origin_year": 28,
       "carriers": [
         "aura-kai",
@@ -159,49 +159,7 @@
       ],
       "carrier_count": 12,
       "born_year": 28,
-      "last_growth_year": 30,
-      "mutated_from": "r8",
-      "mutation_depth": 2,
-      "dead": false,
-      "death_year": null,
-      "carrier_names": [
-        "Aura Kai",
-        "Cinder Ash",
-        "Dax Iron",
-        "Fen Marsh",
-        "Grove Ash",
-        "Coral Mist",
-        "Nova Sol",
-        "Nova Sol",
-        "Bloom Peak",
-        "Kira Sol",
-        "Ora Flame",
-        "Pax Stone"
-      ],
-      "origin_name": "Coral Mist"
-    },
-    {
-      "id": "r9",
-      "text": "the lispy logs show a sub-sim that nobody started",
-      "origin_id": "imm-13",
-      "origin_year": 22,
-      "carriers": [
-        "aura-kai",
-        "child-14",
-        "dax-iron",
-        "fen-marsh",
-        "grove-ash",
-        "imm-10",
-        "imm-11",
-        "imm-12",
-        "imm-13",
-        "kira-sol",
-        "ora-flame",
-        "pax-stone"
-      ],
-      "carrier_count": 12,
-      "born_year": 22,
-      "last_growth_year": 25,
+      "last_growth_year": 29,
       "mutated_from": null,
       "mutation_depth": 0,
       "dead": false,
@@ -220,7 +178,123 @@
         "Ora Flame",
         "Pax Stone"
       ],
-      "origin_name": "Bloom Peak"
+      "origin_name": "Kira Sol"
+    },
+    {
+      "id": "r14",
+      "text": "the archivist found a buried weapon from the first crew (or so they say)",
+      "origin_id": "kira-sol",
+      "origin_year": 28,
+      "carriers": [
+        "aura-kai",
+        "child-14",
+        "dax-iron",
+        "fen-marsh",
+        "imm-10",
+        "imm-11",
+        "imm-12",
+        "imm-13",
+        "kira-sol",
+        "ora-flame",
+        "pax-stone"
+      ],
+      "carrier_count": 11,
+      "born_year": 28,
+      "last_growth_year": 30,
+      "mutated_from": "r5",
+      "mutation_depth": 2,
+      "dead": false,
+      "death_year": null,
+      "carrier_names": [
+        "Aura Kai",
+        "Cinder Ash",
+        "Dax Iron",
+        "Fen Marsh",
+        "Coral Mist",
+        "Nova Sol",
+        "Nova Sol",
+        "Bloom Peak",
+        "Kira Sol",
+        "Ora Flame",
+        "Pax Stone"
+      ],
+      "origin_name": "Kira Sol"
+    },
+    {
+      "id": "r15",
+      "text": "an new amendment is being quietly enforced again",
+      "origin_id": "pax-stone",
+      "origin_year": 29,
+      "carriers": [
+        "imm-12",
+        "imm-13",
+        "pax-stone"
+      ],
+      "carrier_count": 3,
+      "born_year": 29,
+      "last_growth_year": 30,
+      "mutated_from": "r2",
+      "mutation_depth": 1,
+      "dead": false,
+      "death_year": null,
+      "carrier_names": [
+        "Nova Sol",
+        "Bloom Peak",
+        "Pax Stone"
+      ],
+      "origin_name": "Pax Stone"
+    },
+    {
+      "id": "r16",
+      "text": "someone's been burning names on the airlock wall (or so they say)",
+      "origin_id": "ora-flame",
+      "origin_year": 29,
+      "carriers": [
+        "dax-iron",
+        "fen-marsh",
+        "imm-11",
+        "imm-12",
+        "imm-13",
+        "kira-sol",
+        "ora-flame"
+      ],
+      "carrier_count": 7,
+      "born_year": 29,
+      "last_growth_year": 30,
+      "mutated_from": "r7",
+      "mutation_depth": 2,
+      "dead": false,
+      "death_year": null,
+      "carrier_names": [
+        "Dax Iron",
+        "Fen Marsh",
+        "Nova Sol",
+        "Nova Sol",
+        "Bloom Peak",
+        "Kira Sol",
+        "Ora Flame"
+      ],
+      "origin_name": "Ora Flame"
+    },
+    {
+      "id": "r17",
+      "text": "an new amendment is being quietly enforced again (or so they say)",
+      "origin_id": "imm-12",
+      "origin_year": 30,
+      "carriers": [
+        "imm-12"
+      ],
+      "carrier_count": 1,
+      "born_year": 30,
+      "last_growth_year": 30,
+      "mutated_from": "r15",
+      "mutation_depth": 2,
+      "dead": false,
+      "death_year": null,
+      "carrier_names": [
+        "Nova Sol"
+      ],
+      "origin_name": "Nova Sol"
     }
   ],
   "archive_recent": [
@@ -306,9 +380,9 @@
       "death_year": 29
     },
     {
-      "id": "r5",
-      "text": "an new amendment is being quietly enforced again",
-      "origin_id": "pax-stone",
+      "id": "r4",
+      "text": "the archivist found a buried message from the first crew",
+      "origin_id": "luna-tide",
       "origin_year": 19,
       "carriers": [
         "aura-kai",
@@ -327,7 +401,34 @@
       "carrier_count": 12,
       "born_year": 19,
       "last_growth_year": 23,
-      "mutated_from": "r2",
+      "mutated_from": null,
+      "mutation_depth": 0,
+      "dead": true,
+      "death_year": 29
+    },
+    {
+      "id": "r5",
+      "text": "the archivist found a buried weapon from the first crew",
+      "origin_id": "dax-iron",
+      "origin_year": 19,
+      "carriers": [
+        "aura-kai",
+        "child-14",
+        "dax-iron",
+        "fen-marsh",
+        "grove-ash",
+        "imm-10",
+        "imm-11",
+        "imm-12",
+        "imm-13",
+        "kira-sol",
+        "ora-flame",
+        "pax-stone"
+      ],
+      "carrier_count": 12,
+      "born_year": 19,
+      "last_growth_year": 23,
+      "mutated_from": "r4",
       "mutation_depth": 1,
       "dead": true,
       "death_year": 29
@@ -360,33 +461,6 @@
       "death_year": 29
     },
     {
-      "id": "r4",
-      "text": "the archivist found a buried message from the first crew",
-      "origin_id": "luna-tide",
-      "origin_year": 19,
-      "carriers": [
-        "aura-kai",
-        "child-14",
-        "dax-iron",
-        "fen-marsh",
-        "grove-ash",
-        "imm-10",
-        "imm-11",
-        "imm-12",
-        "imm-13",
-        "kira-sol",
-        "ora-flame",
-        "pax-stone"
-      ],
-      "carrier_count": 12,
-      "born_year": 19,
-      "last_growth_year": 24,
-      "mutated_from": null,
-      "mutation_depth": 0,
-      "dead": true,
-      "death_year": 30
-    },
-    {
       "id": "r7",
       "text": "someone's been burning names on the airlock wall",
       "origin_id": "imm-11",
@@ -407,11 +481,11 @@
       ],
       "carrier_count": 12,
       "born_year": 21,
-      "last_growth_year": 24,
+      "last_growth_year": 23,
       "mutated_from": "r3",
       "mutation_depth": 1,
       "dead": true,
-      "death_year": 30
+      "death_year": 29
     },
     {
       "id": "r8",
@@ -434,9 +508,36 @@
       ],
       "carrier_count": 12,
       "born_year": 21,
-      "last_growth_year": 24,
+      "last_growth_year": 23,
       "mutated_from": "r6",
       "mutation_depth": 1,
+      "dead": true,
+      "death_year": 29
+    },
+    {
+      "id": "r9",
+      "text": "the lispy logs show a sub-sim that nobody started",
+      "origin_id": "imm-13",
+      "origin_year": 22,
+      "carriers": [
+        "aura-kai",
+        "child-14",
+        "dax-iron",
+        "fen-marsh",
+        "grove-ash",
+        "imm-10",
+        "imm-11",
+        "imm-12",
+        "imm-13",
+        "kira-sol",
+        "ora-flame",
+        "pax-stone"
+      ],
+      "carrier_count": 12,
+      "born_year": 22,
+      "last_growth_year": 24,
+      "mutated_from": null,
+      "mutation_depth": 0,
       "dead": true,
       "death_year": 30
     }
@@ -512,64 +613,81 @@
       ],
       "mutated": [],
       "died": [],
-      "transmissions": 17,
+      "transmissions": 18,
       "blocks": 0
     },
     {
-      "year": 25,
+      "year": 23,
       "born": [
         "r10"
       ],
       "mutated": [],
       "died": [],
-      "transmissions": 8,
+      "transmissions": 29,
       "blocks": 0
     },
     {
       "year": 26,
+      "born": [
+        "r11"
+      ],
+      "mutated": [],
+      "died": [],
+      "transmissions": 6,
+      "blocks": 0
+    },
+    {
+      "year": 27,
       "born": [],
       "mutated": [
-        "r11",
         "r12"
       ],
       "died": [],
-      "transmissions": 3,
+      "transmissions": 5,
       "blocks": 0
     },
     {
       "year": 28,
-      "born": [],
-      "mutated": [
+      "born": [
         "r13"
       ],
+      "mutated": [
+        "r14"
+      ],
       "died": [],
-      "transmissions": 12,
+      "transmissions": 13,
       "blocks": 0
     },
     {
       "year": 29,
       "born": [],
-      "mutated": [],
+      "mutated": [
+        "r15",
+        "r16"
+      ],
       "died": [
         "r1",
         "r2",
         "r3",
+        "r4",
         "r5",
-        "r6"
+        "r6",
+        "r7",
+        "r8"
       ],
-      "transmissions": 6,
+      "transmissions": 14,
       "blocks": 0
     },
     {
       "year": 30,
       "born": [],
-      "mutated": [],
-      "died": [
-        "r4",
-        "r7",
-        "r8"
+      "mutated": [
+        "r17"
       ],
-      "transmissions": 5,
+      "died": [
+        "r9"
+      ],
+      "transmissions": 13,
       "blocks": 0
     }
   ]

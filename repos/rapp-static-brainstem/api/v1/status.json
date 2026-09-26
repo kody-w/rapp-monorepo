@@ -1,0 +1,12 @@
+{
+  "schema": "rapp-static-brainstem-status/1.0",
+  "generated": "2026-09-26T01:38:53Z",
+  "status": "ok",
+  "agents": 4,
+  "versions": 5,
+  "drift": [],
+  "stale": [],
+  "errors": [],
+  "notes": [],
+  "registry": "https://raw.githubusercontent.com/kody-w/rapp-static-brainstem/main/registry.json"
+}

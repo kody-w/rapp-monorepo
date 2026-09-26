@@ -1,5 +1,9 @@
 # RAPP Hive Hub
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-hive-hub.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-hive-hub.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 **[Open RAPP Hive Hub](https://kody-w.github.io/rapp-hive-hub/hub/)** ·
 [Give your AI the skill](https://kody-w.github.io/rapp-hive-hub/hub/skills/hive-network/SKILL.md) ·
 [Static API](https://kody-w.github.io/rapp-hive-hub/api/hive-hub/v1/index.json)

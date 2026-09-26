@@ -28,6 +28,7 @@ Power Automate, the proof report says the result still needs one live confirmati
 import base64
 import hashlib
 import json
+import os
 import math
 import re
 import subprocess
@@ -189,6 +190,15 @@ def _substring(text, start, length=None):
     return text[start:] if length is None else text[start:start + int(length)]
 
 
+def _set_property(obj, key, value):
+    """setProperty(), with its runtime's checks: an object to set on, and a name without '.', '[' or ']'."""
+    if not isinstance(obj, dict):
+        raise StudioBuildError(f"setProperty expects an object; got {type(obj).__name__}")
+    if any(c in _str(key) for c in ".[]"):
+        raise StudioBuildError(f"setProperty: the property name {key!r} can't contain '.', '[' or ']'")
+    return {**obj, _str(key): value}
+
+
 FUNCTIONS = {
     "concat": lambda *a: "".join(_str(x) for x in a),
     "createArray": lambda *a: list(a),
@@ -212,6 +222,9 @@ FUNCTIONS = {
     "toUpper": lambda s: _str(s).upper(), "toLower": lambda s: _str(s).lower(), "trim": lambda s: _str(s).strip(),
     "empty": lambda v: v in (None, "", [], {}), "coalesce": lambda *a: next((x for x in a if x is not None), None),
     "formatNumber": lambda v, f, loc="en-US": _format_number(v, f, loc),
+    "json": lambda v: json.loads(v) if isinstance(v, str) else v,
+    "setProperty": lambda obj, key, value: _set_property(obj, key, value),
+    "startsWith": lambda text, prefix: _str(text).lower().startswith(_str(prefix).lower()),   # not case-sensitive
     "mod": lambda a, b: math.fmod(a, b) if isinstance(a, float) or isinstance(b, float) else int(math.fmod(a, b)),
 }
 
@@ -237,12 +250,16 @@ def _serialize(node):
     return f"{node[1]}({', '.join(_serialize(a) for a in node[2])})"
 
 
-# pyFormatNumber(x, 'N<d>'): Python's f"{x:,.<d>f}" (round half to even) in plain expressions.
-# At an exact midpoint whose truncated digit is even, nudge x toward zero so formatNumber's
-# away-from-zero rounding lands where Python's half-to-even does.
-_PY_FORMAT = ("formatNumber(if(and(equals(mod(mul(<X>, <S>), 1), 0.5), equals(mod(sub(mul(<X>, <S>), 0.5), 2), 0)), "
-              "sub(<X>, <E>), if(and(equals(mod(mul(<X>, <S>), 1), -0.5), equals(mod(add(mul(<X>, <S>), 0.5), 2), 0)), "
-              "add(<X>, <E>), <X>)), <F>, 'en-US')")
+# pyFormatNumber(x, 'N<d>'): Python's f"{x:,.<d>f}" in plain expressions. Both round the double's exact binary
+# value, so they differ only on an exact tie, where formatNumber rounds away from zero and Python to even. A double
+# is an exact tie at <d> decimals only when x * 2^(d+1) is an odd integer (x = 0.125 at two decimals), and that
+# product is exact because the factor is a power of two. Testing x * 10^d for a .5 fraction is not enough: 11.005 is
+# 11.00500000000000078… in binary, so Python prints 11.01, yet 11.005 * 100 rounds to exactly 1100.5. At a true tie
+# whose truncated digit is even, the flow formats the truncated value instead (x * 10^d is exact there too), keeping
+# the sign of a negative value that truncates to zero, as Python prints -0.
+_PY_FORMAT = ("formatNumber(if(and(equals(mod(mul(<X>, <P>), 2), 1.0), equals(mod(sub(mul(<X>, <S>), 0.5), 2), 0)), "
+              "div(sub(mul(<X>, <S>), 0.5), <S>), if(and(equals(mod(mul(<X>, <P>), 2), -1.0), "
+              "equals(mod(add(mul(<X>, <S>), 0.5), 2), 0)), mul(div(sub(mul(<X>, -<S>), 0.5), <S>), -1.0), <X>)), <F>, 'en-US')")
 
 
 def _macro(node):
@@ -257,7 +274,7 @@ def _macro(node):
         if not m:
             raise StudioBuildError("pyFormatNumber needs a literal 'N<digits>' format")
         d = int(m.group(1))
-        text = (_PY_FORMAT.replace("<S>", str(10 ** d)).replace("<E>", f"{10.0 ** -(d + 3):.{d + 3}f}")
+        text = (_PY_FORMAT.replace("<S>", f"{10 ** d}.0").replace("<P>", str(2 ** (d + 1)))
                 .replace("<F>", _serialize(args[1])).replace("<X>", _serialize(args[0])))
         return _Parser(text).expr()
     return ("call", node[1], args)
@@ -292,6 +309,8 @@ def _eval(node, ctx):
         return ctx["outputs"][_eval(args[0], ctx)]
     if name == "parameters":
         return ctx["parameters"][_eval(args[0], ctx)]
+    if name == "actions":                          # an action's run record: its status, and outputs once it ran
+        return (ctx.get("actions") or {}).get(_eval(args[0], ctx))
     fn = FUNCTIONS.get(name)
     if fn is None:
         raise StudioBuildError(f"function {name}() is not modeled by the evaluator")
@@ -587,8 +606,16 @@ def tool_description(spec):
         k = keying[name]
         if k.get("rule") in ("exact", "ci", "canonical") and k.get("values") and not k.get("boolean"):
             values = [str(v) for v in k["values"]]
-            parts.append(f"Set `{name}` to exactly one of: {', '.join(values)}." if name == primary
-                         else f"`{name}` values: {', '.join(values[:15])}{', …' if len(values) > 15 else ''}.")
+            if name == primary:
+                parts.append(f"Set `{name}` to exactly one of: {', '.join(values)}.")
+                continue
+            # the input's own words, since the orchestrator doesn't read input descriptions: without them an optional
+            # scope ("Optional project to scope to") reads as a list of values to call the tool with one by one
+            own = re.sub(r"\s*Values: .*$", "", ((spec.get("inputs") or {}).get(name) or {}).get("description", ""))
+            own = _clip(own.strip().rstrip("."), 160)
+            optional = name not in (spec.get("required") or []) and "optional" not in own.lower()
+            parts.append(f"`{name}`" + (f": {own}" if own else "") + (" (optional)" if optional else "")
+                         + f"; values: {', '.join(values[:15])}{', …' if len(values) > 15 else ''}.")
     suffix = ""
     for part in parts:                     # the operation list first; later lists only while they fit
         if len(suffix) + len(part) + 1 <= TOOL_DESCRIPTION_LIMIT // 2 or not suffix:
@@ -658,9 +685,69 @@ for line in sys.stdin:
 """
 
 
+def pinned_data(spec):
+    """The folders a materialized spec's data was pinned to, checked: ({variable: folder}, None), or (None, why).
+    A folder comes from BFS_DATA_<variable> when set, else the path the spec recorded; its digest must match."""
+    from .materialize import dataset_digest
+    found = {}
+    for name, meta in (spec.get("data") or {}).items():
+        folder = os.environ.get(f"BFS_DATA_{name}") or meta.get("path")
+        if not folder or not os.path.isdir(folder):
+            return None, f"its pinned dataset {name} isn't here (set BFS_DATA_{name} to the folder)"
+        digest = dataset_digest(folder)
+        if digest["sha256"] != meta["sha256"]:
+            return None, (f"its dataset {name} changed since it was materialized ({meta['files']} files, "
+                          f"{meta['sha256'][:12]}; now {digest['files']}, {digest['sha256'][:12]}): materialize again")
+        found[name] = folder
+    return found, None
+
+
+def materialized_record_file(spec):
+    """Where a materialized spec's recorded proof lives: beside the spec, <spec file stem>.proof.json."""
+    return Path(spec["_dir"]) / (Path(spec.get("_file") or f"{spec['flow_name']}.json").stem + ".proof.json")
+
+
+def record_materialized(spec, report, basic_sha256, when):
+    """What a passing materialized proof leaves behind, pinned to the exact bytes it held for: the agent's source, its
+    BasicAgent, the spec (which pins the dataset's digest). A build that can't run the proof (no dataset there, or no
+    agent code may run, as in a hosted service) lays the flow only on this record."""
+    from .connector_code import spec_sha256
+    if not report.get("parity"):
+        raise StudioBuildError(f"only a passing proof is recorded ({report.get('passed')}/{report.get('cases')})")
+    return {"agent": spec["agent"], "mode": "materialized", "source_sha256": spec["source_sha256"],
+            "basic_sha256": basic_sha256, "spec_sha256": spec_sha256(spec),
+            "data": {k: v["sha256"] for k, v in (spec.get("data") or {}).items()},
+            "cases": report["cases"], "passed": report["passed"], "clocks": report.get("clocks"),
+            "python": report.get("python"), "parity": True, "proven": when}
+
+
+def recorded_materialized_proof(spec, source_sha256, basic_sha256):
+    """The proof recorded for these exact bytes, as a report like prove_materialized's (with `recorded`: its date), or
+    None when there is none or it was for other code, another BasicAgent or another spec (or dataset)."""
+    from .connector_code import spec_sha256
+    f = materialized_record_file(spec)
+    if not f.is_file():
+        return None
+    rec = json.loads(f.read_text(encoding="utf-8"))
+    if not (rec.get("parity") and rec.get("mode") == "materialized" and rec.get("source_sha256") == source_sha256
+            and rec.get("basic_sha256") == basic_sha256 and rec.get("spec_sha256") == spec_sha256(spec)):
+        return None
+    return {"agent": spec["agent"], "flow": spec["flow_name"], "cases": rec["cases"], "passed": rec["passed"],
+            "parity": True, "mode": "materialized", "recorded": rec["proven"], "clocks": rec.get("clocks"),
+            "python": rec.get("python"), "mismatches": [], "blocked_operations": spec.get("blocked_operations") or {},
+            "approximated_inputs": [k["input"] for k in spec["keying"] if k.get("approximated")],
+            **({"data": rec["data"]} if rec.get("data") else {})}
+
+
 def prove_materialized(spec, agent_file, basic_file, schema_name=None):
-    """Every vector through the real agent.py (sandboxed, same frozen clock) and through the compiled flow."""
+    """Every vector through the real agent.py (sandboxed, same frozen clock) and through the compiled flow. A spec
+    materialized over pinned data is proven on that exact data, or refused."""
     from .materialize import CLOCKS, Runner, agent_python
+    data, why = pinned_data(spec)
+    if why:
+        return {"agent": spec["agent"], "flow": spec["flow_name"], "cases": 0, "passed": 0, "parity": False,
+                "mode": "materialized", "reason": why, "mismatches": [], "blocked_operations": {},
+                "approximated_inputs": []}
     flow = compile_materialized(spec, schema_name)
     blocked = set(spec.get("blocked_operations") or {})
     primary = spec.get("primary")
@@ -669,7 +756,8 @@ def prove_materialized(spec, agent_file, basic_file, schema_name=None):
     first = (spec.get("materialized_with") or {}).get("clock") or CLOCKS[0]
     clocks = [first] + ([c for c in CLOCKS if c != first] if spec.get("clock_formats") else [])
     runner = Runner(agent_file, basic_file, spec.get("class") or "",
-                    python=agent_python((spec.get("materialized_with") or {}).get("python")))
+                    python=agent_python((spec.get("materialized_with") or {}).get("python")),
+                    env=spec.get("env"), data=data)
     results = []
     for clock in clocks:
         for vec, py in zip(vectors, runner.run(vectors, clock=clock)):
@@ -681,6 +769,7 @@ def prove_materialized(spec, agent_file, basic_file, schema_name=None):
     passed = sum(r["match"] for r in results)
     return {"agent": spec["agent"], "flow": spec["flow_name"], "cases": len(results), "passed": passed,
             "clocks": clocks, "python": runner.python_version(),
+            **({"data": {k: v["sha256"] for k, v in spec["data"].items()}} if spec.get("data") else {}),
             "parity": passed == len(results) and len(results) > 0, "mode": "materialized",
             "blocked_operations": spec.get("blocked_operations") or {},
             "approximated_inputs": [k["input"] for k in spec["keying"] if k.get("approximated")],
