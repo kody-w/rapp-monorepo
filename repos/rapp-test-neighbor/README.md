@@ -1,5 +1,9 @@
 # 🧪 Test Neighbor
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-test-neighbor.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-test-neighbor.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 The canonical test front door — verify your twin can mint a key, turn the lights on, and join a
 sealed neighborhood.
 

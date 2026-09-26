@@ -36,7 +36,7 @@ Implements the **Doorman** role of the
 [rapp-kite](https://github.com/kody-w/rapp-kite) string tools.
 
 An MCP host is just another sealed caller of `/chat`:
-[rapp-mcp](https://github.com/kody-w/rapp-mcp) (`rapp-mcp-spec/1.0`, static profile
+[rapp-mcp](https://github.com/kody-w/rapp-mcp) (`rapp-mcp-spec/2.0`, static profile
 `rapp-static-mcp/1.0`) is the transport layer that lets MCP clients reach a brainstem over the
 same wire the doorman fronts — Layer-2 of "Chat Is The Only Wire", not a new unit.
 

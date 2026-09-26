@@ -37,7 +37,7 @@ On the map: the **Hive** line ([subway map](https://kody-w.github.io/rapp-hive-p
 ## Links
 
 Links to 1 portfolio repo(s): [hive-hub-mcp](hive-hub-mcp.md) (markdown).
-Linked from 1: [hive-hub-mcp](hive-hub-mcp.md).
+Linked from 2: [hive-hub-mcp](hive-hub-mcp.md), [rapp-monorepo](rapp-monorepo.md).
 
 Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<repo>`, pin files, workflow `uses:` and `repository:` lines, and submodules, at the evidence commit; only public repos in this portfolio count.
 

@@ -59,7 +59,8 @@ jobs:
             git push -u origin "$BRANCH"
             gh pr create --title "Nightly sync $(date -u +%Y-%m-%d)" \
               --body "Automated: re-mirror from upstream, regenerate repo pages." \
-              --base main --head "$BRANCH" || true
+              --base main --head "$BRANCH" \
+              || echo "::warning::Could not open a pull request for $BRANCH (GitHub Actions may not be allowed to create pull requests in this repository); open one from that branch by hand."
           else
             echo "No drift detected."
           fi

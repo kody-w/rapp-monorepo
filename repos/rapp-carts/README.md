@@ -1,5 +1,9 @@
 # 🎴 rapp-carts
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-carts.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-carts.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 **The cartridge spec.** The one thing a user ever has to understand about installing a RAPP
 rapplication:
 
@@ -30,7 +34,7 @@ what's hidden, and the insert→boot→run→eject contract.
 - The first cartridge: **[cowork-cookbook-rapp](https://github.com/kody-w/cowork-cookbook-rapp)**.
 - The experience / north‑star (incl. RACon Kited): **[racon](https://github.com/kody-w/racon)**.
 - Drive a running cartridge from any AI host: **[rapp-mcp](https://github.com/kody-w/rapp-mcp)** —
-  the MCP gateway (`rapp-mcp-spec/1.0`). A non‑RACon way to reach the same cartridge: MCP is
+  the MCP gateway (`rapp-mcp-spec/2.0`). A non‑RACon way to reach the same cartridge: MCP is
   **transport** onto `/chat` (*Chat Is The Only Wire*), not another unit.
 - Under the hood: [RAPP Store SPEC §13](https://github.com/kody-w/RAPP_Store/blob/main/SPEC.md) ·
   [rapp-neighborhood-protocol](https://github.com/kody-w/rapp-neighborhood-protocol) ·

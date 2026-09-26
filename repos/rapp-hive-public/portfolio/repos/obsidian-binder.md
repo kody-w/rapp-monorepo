@@ -35,6 +35,7 @@ On the map: the **Agents (RAR)** line ([subway map](https://kody-w.github.io/rap
 ## Links
 
 Links to 2 portfolio repo(s): [RAPPcards](RAPPcards.md) (markdown), [twin-binder](twin-binder.md) (markdown).
+Linked from 1: [rapp-monorepo](rapp-monorepo.md).
 
 Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<repo>`, pin files, workflow `uses:` and `repository:` lines, and submodules, at the evidence commit; only public repos in this portfolio count.
 

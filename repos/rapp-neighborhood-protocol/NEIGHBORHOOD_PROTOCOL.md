@@ -85,8 +85,8 @@ A *tether* is the live link between two neighbors. Transports are interchangeabl
 - **`5a-http`** — direct HTTP `POST /chat` (on‑LAN / on‑WAN brainstems).
 - **`5a-mcp`** — the **Model Context Protocol** transport (stdio / streamable‑HTTP). An MCP client
   is a **Layer‑2 caller of `/chat`** — it carries the §6 envelope, it is not a new unit or taxonomy
-  (**Chat Is The Only Wire**, §3). Profile `rapp-mcp-spec/1.0`: [`rapp_mcp.py`](https://github.com/kody-w/rapp-mcp)
-  serves each `*_agent.py` as an MCP tool and `rapp_brainstem_mcp.py` bridges a running brainstem
+  (**Chat Is The Only Wire**, §3). Profile `rapp-mcp-spec/2.0`: [`rapp_mcp.py`](https://github.com/kody-w/rapp-mcp)
+  serves each top-level `*_agent.py` of its agents folder as an MCP tool and `rapp_brainstem_mcp.py` bridges a running brainstem
   over `/chat`. A read‑only static surface is `rapp-static-mcp/1.0`.
 - **`5a-tether`** — **WebRTC** browser↔browser. A public broker (e.g. PeerJS) carries *signaling
   only* (SDP/ICE); data flows **DTLS‑encrypted peer‑to‑peer** — the broker never sees it.

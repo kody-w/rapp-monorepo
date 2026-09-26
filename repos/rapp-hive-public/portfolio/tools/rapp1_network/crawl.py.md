@@ -2,7 +2,7 @@
 
 The crawl: every portfolio repo checked by rapp-1's own rapp_check.py at the canon pin, outside the Hive.
 
-Source: `rapp1_network/crawl.py` (rapp1-network 0.1.5). SHA-256 of the source below: `3041e2d46d9bae48616ee7e2e0efd2382d4cd6097f57a9d95fe665480c985b98` (31550 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/crawl.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/crawl.py` (rapp1-network 0.1.6). SHA-256 of the source below: `3041e2d46d9bae48616ee7e2e0efd2382d4cd6097f57a9d95fe665480c985b98` (31550 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/crawl.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python

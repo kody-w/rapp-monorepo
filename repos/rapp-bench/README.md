@@ -1,5 +1,9 @@
 # rapp-bench
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-bench.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-bench.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 Latency + behavioral regression harness for a **running** RAPP brainstem
 (`localhost:7071`). Nothing here talks to any API except your own local server.
 

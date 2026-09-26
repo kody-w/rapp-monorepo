@@ -1,5 +1,9 @@
 # RAPP Plant Smoke Test
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-plant-smoke-20260505-233637.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-plant-smoke-20260505-233637.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 > A RAPP front door on the public internet. Real estate, not software.
 
 - **Address:** `kody-w.github.io/rapp-plant-smoke-20260505-233637`

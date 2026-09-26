@@ -2,7 +2,7 @@
 
 Draw the RAPP/1 network as a subway map, from the portfolio files alone.
 
-Source: `rapp1_network/subway.py` (rapp1-network 0.1.5). SHA-256 of the source below: `0cc14f9f53790e1a1ed0b74db3274ac49a63d3e766dcc3f9bd5c9b113fedc3b7` (71066 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/subway.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/subway.py` (rapp1-network 0.1.6). SHA-256 of the source below: `0cc14f9f53790e1a1ed0b74db3274ac49a63d3e766dcc3f9bd5c9b113fedc3b7` (71066 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/subway.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python

@@ -1,5 +1,9 @@
 # rapp-support
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-support.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-support.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 Support home for the [RAPP Brainstem](https://github.com/kody-w/rapp-installer).
 File issues here — the grail repo's tracker stays reserved for engineering work
 on the kernel and installers.

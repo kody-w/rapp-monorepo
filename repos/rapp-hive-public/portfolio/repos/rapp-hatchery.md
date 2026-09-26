@@ -36,6 +36,7 @@ On the map: the **Agents (RAR)** line ([subway map](https://kody-w.github.io/rap
 ## Links
 
 Links to 3 portfolio repo(s): [rapp-brainfreeze](rapp-brainfreeze.md) (markdown), [rapp-brainfreeze-studio](rapp-brainfreeze-studio.md) (markdown), [rapp-installer](rapp-installer.md) (markdown).
+Linked from 1: [rapp-monorepo](rapp-monorepo.md).
 
 Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<repo>`, pin files, workflow `uses:` and `repository:` lines, and submodules, at the evidence commit; only public repos in this portfolio count.
 

@@ -1,5 +1,9 @@
 # Rapp Hive Support
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-hive-app.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-hive-app.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 Rapp Hive is a voice-first mirror for the RAPP Brainstem you run yourself, for iPhone. This first release is the **Founders Edition**, and every feature is free.
 
 - [Rapp Hive on the App Store](https://apps.apple.com/app/id6816163757)

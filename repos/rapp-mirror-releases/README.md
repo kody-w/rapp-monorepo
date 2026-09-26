@@ -1,5 +1,9 @@
 # RAPP Mirror — Releases
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-mirror-releases.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-mirror-releases.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 **Talk to your brainstem.** Download the app; it plants and wakes your RAPP
 brainstem itself — no terminal, no one-liner. Voice out is Microsoft VibeVoice,
 hearing is whisper.cpp, eyes and hands are MediaPipe — each a one-click install

@@ -1,5 +1,9 @@
 # RAPP Spinal Cord
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-spinal-cord.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-spinal-cord.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 > The RAPP Spinal Cord is Tier 2 of RAPP: the same agent runtime on Azure Functions and Azure OpenAI, carrying signals from the local Brainstem to cloud scale.
 
 Self-contained cloud tier of the RAPP platform.

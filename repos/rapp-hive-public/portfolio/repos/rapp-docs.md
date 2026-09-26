@@ -42,6 +42,7 @@ On the map: the **Learn & Docs** line ([subway map](https://kody-w.github.io/rap
 ## Links
 
 Links to 9 portfolio repo(s): [openrappter](openrappter.md) (markdown), [rapp-1](rapp-1.md) (markdown), [rapp-flight-deck](rapp-flight-deck.md) (markdown), [rapp-installer](rapp-installer.md) (markdown), [rapp-keyring](rapp-keyring.md) (markdown), [rapp-light](rapp-light.md) (markdown), [rapp-rings](rapp-rings.md) (markdown), [rapp-train](rapp-train.md) (markdown), [rapp-twin](rapp-twin.md) (markdown).
+Linked from 1: [rapp-monorepo](rapp-monorepo.md).
 
 Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<repo>`, pin files, workflow `uses:` and `repository:` lines, and submodules, at the evidence commit; only public repos in this portfolio count.
 

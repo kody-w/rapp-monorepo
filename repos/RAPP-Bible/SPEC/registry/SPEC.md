@@ -2,11 +2,15 @@
 
 # RAR — RAPP Agent Registry
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/RAR.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/RAR.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 > **Spec:** `rapp-registry/1.0` — the canonical agent registry + minting authority (peer to RAPP_Store/RAPP_Sense_Store).
 
 **The open single-file agent ecosystem.** Browse, build, collect, and share AI agents. Every agent is one `.py` file.
 
-180 agents. 8 publishers. 24 categories. 1,144 tests. Every card has a seed.
+1,798 notarized agents. 12 publishers. 24 categories. Every card has a seed.
 
 **RAPP + X™** is the headless collaboration pattern behind the ecosystem:
 `X` may be a person, AI, twin, rapplication, Brainstem, or neighborhood peer.
@@ -16,9 +20,56 @@ optional client, never a requirement.
 See [`TRADEMARKS.md`](TRADEMARKS.md) for the mark definition, correct `™`
 usage, public first-use evidence, and legal-registration handoff.
 
-**[Install Brainstem](https://github.com/kody-w/rapp-installer)** | **[Try vSandbox](https://kody-w.github.io/RAR/virtual-brainstem.html)** | **[Agent Store](https://kody-w.github.io/RAR/)** | **[FAQ](https://kody-w.github.io/RAR/faq.html)** | **[Whitepaper](https://kody-w.github.io/RAR/whitepaper.html)**
+**[Install Brainstem](https://github.com/kody-w/rapp-installer)** | **[Try vSandbox](https://kody-w.github.io/RAR/virtual-brainstem.html)** | **[Agent Store](https://kody-w.github.io/RAR/)** | **[Skills Store](https://kody-w.github.io/RAR/skills.html)** | **[FAQ](https://kody-w.github.io/RAR/faq.html)** | **[Whitepaper](https://kody-w.github.io/RAR/whitepaper.html)**
 
 > **Need a bundled rapplication** (agent + UI / service / state) **rather than a single file?** Browse **[kody-w/RAPP_Store](https://kody-w.github.io/RAPP_Store/)** — the catalog of packaged rapplications. Per [Constitution Article XXVII](https://github.com/kody-w/RAPP/blob/main/CONSTITUTION.md#article-xxvii--rar-holds-files-the-rapp-store-holds-bundles): bare agents live here in RAR; bundles live in the rapp store.
+
+---
+
+## Install RAR + Brainstem in Scout or Copilot CLI
+
+RAR follows the same plugin-marketplace path used by Microsoft Power CAT
+Skills:
+
+| Plugin identity | Purpose |
+|---|---|
+| `rapp@brainstem` | Install and verify Brainstem, then install RAR |
+| `rapp@rar` | Operate RAR, skills, exports, and callback bootstrap |
+
+```bash
+copilot plugin marketplace add kody-w/RAR
+copilot plugin install rapp@rar
+```
+
+Claude Code:
+
+```bash
+claude plugin marketplace add kody-w/RAR
+claude plugin install rapp@rar
+```
+
+From an interactive Copilot CLI session:
+
+```text
+/plugin marketplace add kody-w/RAR
+/plugin install rapp@rar
+```
+
+Or ask Microsoft Scout:
+
+```text
+Add the kody-w/RAR plugin marketplace and install rapp@rar.
+Then start or install my local Brainstem and show me the available RAR channels.
+```
+
+The unified `rapp` plugin installs the reversible `rapp-skills` manager. It can
+start an existing Brainstem, perform an explicitly authorized fresh Brainstem
+install, hotload RAR skill channels, bootstrap the optional external-AI
+collaboration callback, and generate manual HTML loading guides for Scout,
+Copilot Studio, and Microsoft Copilot Cowork.
+
+Start a new Scout or Copilot CLI conversation after plugin installation so the
+new skill is discovered.
 
 ---
 
@@ -58,15 +109,69 @@ Read **[The Ode](https://kody-w.github.io/RAR/ode.html)** for why single-file ag
 
 ---
 
+## Hologram DOGGs
+
+RAR also publishes hash-addressed **data-only DOGGs** for compatible renderers.
+The first channel is [`doggs/holograms/`](doggs/holograms/): procedural 3D
+characters and live data projections for RAPP Zoo.
+
+The records are caught reusable bottles: stable dimensions and projection
+memory receive fresh per-run `data_slosh`. The records contain no HTML, JavaScript, shaders, or remote assets. RAPP Zoo
+downloads a small JSON record, verifies its SHA-256 from the index, validates a
+closed schema, and then renders it with its own sandboxed Three.js runtime.
+
+```text
+https://raw.githubusercontent.com/kody-w/RAR/main/doggs/holograms/index.json
+```
+
+This keeps the DOGG principle intact: RAR distributes capability-shaping data;
+the receiving application owns and constrains execution.
+
+---
+
 ## The Agent Store
 
 The store (`index.html`) is a single HTML file. Open it in any browser.
 
-- **Browse** — search 180 agents across 24 categories, filter by tier, sort by votes
+- **Browse** — search 1,798 agents across 24 categories, filter by tier, sort by votes
 - **Cards** — every agent is a collectible card with types, stats, abilities, and art
 - **Decks** — collect agents into named decks, present as slideshows
 - **Workbench** — write agents in the browser, validate, preview as card
 - **Submit** — publish through the UI or the SDK
+
+## The Skills Store
+
+Portable skills are cataloged separately from executable agent `.py` files.
+[`skills.html`](https://kody-w.github.io/RAR/skills.html) reads the committed
+[`api/v1/skills.json`](api/v1/skills.json) snapshot and never calls the GitHub
+API on page load.
+
+- Reviewed skills point to a full source commit and hash every file.
+- Existing Scout projections identify their source agent or rapplication
+  explicitly; they do not create duplicate agent registry entries.
+- `artifact_type` and `protocol_conformance` are separate. Catalog admission
+  does not claim runtime, authenticated, quality-tier, or RAPP/1 compliance.
+- New and updated records use the versioned GitHub Issue front door documented
+  in [`skill.md`](skill.md#8a-rar-skills-store-distinct-artifact-type).
+
+## Repository Workspace Bootstrap
+
+Trusted clones include a checksum-pinned, source-preserving local workspace
+bootstrap:
+
+```bash
+python3 .rapp/bootstrap.py audit --allow-network
+python3 .rapp/bootstrap.py bootstrap --apply \
+  --owner YOUR-LOWERCASE-OWNER --world-id YOUR-LOCAL-WORLD --allow-network
+python3 .rapp/bootstrap.py verify --allow-network
+```
+
+The public control files are `.rapp/bootstrap.py`, `.rapp/bootstrap.json`,
+`.rapp/bootstrap-managed.json`, and
+`.github/skills/rapp-workspace-bootstrap/SKILL.md`. Private cache, workspace,
+identity, and reports remain under ignored `.rapp/` directories. The bootstrap
+does not move application source, install a global runtime, or assert RAPP/1 or
+production conformance.
 
 ## The SDK
 
@@ -139,10 +244,12 @@ it names every other endpoint, so one URL is the only thing worth hardcoding.
 |----------|----------------|
 | `manifest.json` | Discovery root. Start here. |
 | `api/v1/catalog.json` | Every agent as a lean record — one fetch renders a whole catalog |
+| `api/v1/skills.json` | Distinct skill records and explicit agent/rapplication projections, with immutable revisions and file hashes |
 | `api/v1/audience/business.json` | Pre-curated enterprise slice, safe to surface unfiltered |
 | `api/v1/audience/consumer.json` | Pre-curated individual slice |
 | `api/v1/audience/map.json` | Just the audience verdict per agent (~14KB) if you already hold the catalog |
 | `api/v1/match.json` | Use case → ranked agents, plus a term index for free-text search you run client-side |
+| `api/v1/marketplaces.json` | Ratified `rapp@x` identities and install commands for Scout, Copilot CLI, and Claude Code |
 | `api/v1/taxonomy.json` | Categories, tags and publishers with counts |
 | `api/v1/status.json` | Content hashes per endpoint, for cheap change detection |
 
@@ -196,14 +303,18 @@ Read **[skill.md](https://raw.githubusercontent.com/kody-w/RAR/main/skill.md)** 
 
 | Publisher | Agents | Focus |
 |-----------|--------|-------|
+| **@cowork-cookbook** | 1,481 | Microsoft Copilot Cowork business-process use cases |
 | **@aibast-agents-library** | 104 | Industry vertical templates (14 verticals) |
-| **@kody-w** | 27 | Core infrastructure, registry, engine, Rappterpedia |
-| **@rapp** | 21 | BasicAgent base class, core platform agents |
+| **@cat-agent-skills** | 95 | Power CAT / Power Platform agent skills |
+| **@kody-w** | 64 | Core infrastructure, registry, engine, Rappterpedia |
+| **@rapp** | 23 | BasicAgent base class, core platform agents |
 | **@discreetRappers** | 13 | Pipeline, integrations, sales, productivity |
-| **@howardh** | 9 | Assimilation, cards, productivity |
+| **@howardh** | 8 | Assimilation, cards, productivity |
+| **@rapter** | 3 | RapterBox customer leave-behind agents |
 | **@wildhaven** | 3 | CEO agent |
 | **@rarbookworld** | 2 | Pipeline |
 | **@bill** | 1 | Core |
+| **@borg** | 1 | Read-only public-site assimilation |
 
 ---
 

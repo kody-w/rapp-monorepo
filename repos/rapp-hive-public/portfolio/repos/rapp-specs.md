@@ -37,6 +37,7 @@ On the map: the **Learn & Docs** line ([subway map](https://kody-w.github.io/rap
 ## Links
 
 Links to 4 portfolio repo(s): [dogg](dogg.md) (markdown), [dogg-markets](dogg-markets.md) (markdown), [dogg-planet](dogg-planet.md) (markdown), [rapp-1](rapp-1.md) (markdown).
+Linked from 1: [rapp-monorepo](rapp-monorepo.md).
 
 Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<repo>`, pin files, workflow `uses:` and `repository:` lines, and submodules, at the evidence commit; only public repos in this portfolio count.
 

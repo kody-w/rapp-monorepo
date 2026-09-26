@@ -1,5 +1,9 @@
 # rapp-neighborhood-protocol
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-neighborhood-protocol.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-neighborhood-protocol.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 **The canonical specification of the RAPP kited neighborhood** — `rapp-neighborhood-protocol/1.0`.
 
 This repo is the **single source of truth** for the protocol and its vocabulary. It owns:

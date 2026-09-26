@@ -2,7 +2,7 @@
 
 The RAPP family: which of the owner's repos the network tracks, and on which subway line each one runs.
 
-Source: `rapp1_network/inventory.py` (rapp1-network 0.1.5). SHA-256 of the source below: `3d2d4ea40b3171d463bce72c734e2775f9199bbb09e0ff7d521d24ce6dfcfc04` (7763 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/inventory.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/inventory.py` (rapp1-network 0.1.6). SHA-256 of the source below: `3d2d4ea40b3171d463bce72c734e2775f9199bbb09e0ff7d521d24ce6dfcfc04` (7763 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/inventory.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python

@@ -1,5 +1,9 @@
 # RAPP Nervous System
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-nervous-system.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-nervous-system.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 > The RAPP Nervous System is Tier 3 of RAPP: agents woven into Microsoft 365 via Copilot Studio and Teams — the platform reaching every endpoint.
 
 Self-contained enterprise tier of the RAPP platform.

@@ -37,6 +37,7 @@ On the map: the **Rappvision** line, and also Worlds & Play ([subway map](https:
 ## Links
 
 Links to 2 portfolio repo(s): [rapp-vision](rapp-vision.md) (markdown), [rappid](rappid.md) (markdown).
+Linked from 1: [rapp-monorepo](rapp-monorepo.md).
 
 Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<repo>`, pin files, workflow `uses:` and `repository:` lines, and submodules, at the evidence commit; only public repos in this portfolio count.
 

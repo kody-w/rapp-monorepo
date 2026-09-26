@@ -2,7 +2,7 @@
 
 The pipeline: cut the next version into the RAPP Hive, save it, publish it, check what Pages serves, and the one command that reruns it all (`crawl`: discover, sweep, cut, publish, the Pages check, status).
 
-Source: `rapp1_network/pipeline.py` (rapp1-network 0.1.5). SHA-256 of the source below: `6807003cd7e817dfff055cfd4a8daa8876175fd9694f7ad70c738a5c9fde0be8` (41498 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/pipeline.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/pipeline.py` (rapp1-network 0.1.6). SHA-256 of the source below: `1051d34efb455f9d6e59471ef19c8313dddbceef9f64eb8223e5b23fdf4bce53` (41730 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/pipeline.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python
@@ -280,7 +280,9 @@ def build(settings: Settings, hive: Hive, *, utc: str | None = None, printer=Non
         raise SystemExit(f"versions/{vid}/ exists already; a version folder never changes")
     version = {"number": number, "utc": crawl["finished_utc"], "stream_id": sid, "id": vid}
     previous = frames[-1][0]["payload"] if frames else None
-    room = write_room(folder, portfolio.portfolio_files(recs, prs, exceptions, version, left=left, previous=previous))
+    channel_notices = (folder / portfolio.CHANNEL_NOTICES_MD).is_file()  # saved by hand; linked while it exists
+    room = write_room(folder, portfolio.portfolio_files(recs, prs, exceptions, version, left=left, previous=previous,
+                                                        channel_notices=channel_notices))
     readme = settings.room_dir / "README.md"
     if readme.is_file():
         text = util.read_text(readme)
@@ -634,7 +636,7 @@ def expected_urls(settings: Settings, cut_facts: Mapping | None = None) -> dict[
         if link:
             out[f"https://{OWNER}.github.io/{PUBLIC_REPO}/{link}"] = ("badge", label[1] if label else "")
     out[f"{PAGES}/PORTFOLIO.html"] = ("page", None)
-    for name in (portfolio.NOTICES_MD, portfolio.HOWTO_MD):
+    for name in (portfolio.NOTICES_MD, portfolio.HOWTO_MD, portfolio.CHANNEL_NOTICES_MD):
         if (folder / name).is_file():
             out[f"{PAGES}/{name[:-3]}.html"] = ("page", None)
     return out

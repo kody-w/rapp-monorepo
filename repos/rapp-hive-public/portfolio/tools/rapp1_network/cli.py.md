@@ -2,7 +2,7 @@
 
 The command line: `python -m rapp1_network <command>` (or `rapp1-network <command>`).
 
-Source: `rapp1_network/cli.py` (rapp1-network 0.1.5). SHA-256 of the source below: `be9e096eafd76ded2818bcdf128ee3c469413a0d840f9a18e7591afefa465aa7` (13377 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/cli.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/cli.py` (rapp1-network 0.1.6). SHA-256 of the source below: `be9e096eafd76ded2818bcdf128ee3c469413a0d840f9a18e7591afefa465aa7` (13377 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/cli.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python

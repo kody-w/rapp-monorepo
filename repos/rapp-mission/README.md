@@ -1,5 +1,9 @@
 # The RAPP mission
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-mission.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-mission.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 **AI for everyone, wherever they are, on whatever they have, with whatever AI they already use,
 without going to school for it.**
 

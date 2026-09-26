@@ -1,5 +1,9 @@
 # Brainstem Hatchery
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-hatchery.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-hatchery.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 Hatch a RAPP brainstem just in time.
 
 A **hatchling** is a brainstem hatched on demand. It is the unmodified grail engine at a pinned ref, plus

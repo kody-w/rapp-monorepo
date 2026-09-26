@@ -17,18 +17,21 @@ FREEDOM LADDER — set "level" in config.json, raise it as trust grows:
 GUARDRAILS (all enforced before a model is ever invoked):
   * kill switch      touch ~/rapp-sentinel/STOP  → next tick exits immediately
   * daily budget     max escalations per rolling 24h
-  * per-issue cooldown  the same broken check will not be re-attacked for N hours
-  * attempt cap      an issue that resists N repairs is escalated to a human
+  * per-check cooldown  the same broken check will not be re-attacked for N hours
+  * attempt cap      a check that resists N repairs is escalated to a human
   * worktree only    repairs never run in a working tree you might be using
 
-State lives in state/. Nothing here writes to the platform repos directly —
-Copilot does that, under the constraints in the prompt it is handed.
+State lives in state/. The harness prepares fresh repair worktrees before
+Copilot starts, retaining the CLI's path verification at their common root.
 """
 
 import json
 import os
+import shutil
 import subprocess
 import sys
+import tempfile
+from contextlib import contextmanager, nullcontext
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -382,6 +385,43 @@ def issue_allowed(issues, key, cfg):
     return True, f"retry {rec['attempts'] + 1}"
 
 
+def migrate_repair_issues(issues, escalated_human=None):
+    """Fold legacy repair keys into check:<id>; return whether state changed."""
+    changed = False
+    for key in sorted(issues):
+        if key.startswith(("check:", "smoke:", "evolve:")):
+            continue
+        rec = issues.pop(key)
+        for cid in sorted(set(key.split(","))):
+            check_key = f"check:{cid}"
+            prior = issues.get(check_key)
+            if prior is None:
+                issues[check_key] = dict(rec)
+                continue
+            older, newer = prior, rec
+            if (datetime.fromisoformat(prior["last_attempt"])
+                    > datetime.fromisoformat(rec["last_attempt"])):
+                older, newer = rec, prior
+            # Every legacy batch was a separate spend against ALL its members.
+            merged = {**older, **newer,
+                      "attempts": prior["attempts"] + rec["attempts"]}
+            if prior.get("human_notified") or rec.get("human_notified"):
+                merged["human_notified"] = True
+            issues[check_key] = merged
+        changed = True
+
+    # Older ticks kept this latch on the (overwritten) heartbeat, not the issue.
+    if escalated_human and not escalated_human.startswith(("smoke:", "evolve:")):
+        for cid in set(escalated_human.split(",")):
+            if cid.startswith(("smoke:", "evolve:")):
+                continue
+            rec = issues.get(f"check:{cid}")
+            if rec is not None and not rec.get("human_notified"):
+                rec["human_notified"] = True
+                changed = True
+    return changed
+
+
 def evolution_allowed(history, cfg):
     """Rate-limit recurring evolution without repair's lifetime attempt cap."""
     interval_h = max(0.0, float(cfg.get("evolve_interval_hours", 4)))
@@ -495,9 +535,10 @@ platforms. You were woken because a health check failed. Fix it or explain
 precisely why it cannot be fixed safely.
 
 HARD CONSTRAINTS — these are not suggestions:
-1. NEVER work in an existing checkout. Create a fresh `git worktree` off
-   origin/main, work there, and remove it when done. The user keeps thousands
-   of uncommitted files in their working trees; touching them is destructive.
+1. Work ONLY in the harness-provided worktrees listed below. The harness has
+   fetched origin/main and created a fresh repair branch in each worktree.
+   Do not create or remove worktrees or access existing live checkouts.
+   The harness removes these worktrees after you exit, retaining the branches.
 2. Verify before you claim. Reproduce the failure, apply the fix, and prove it
    with a real run (CI, a test, or a scratch repro). Do not report success off
    a plausible-looking diff.
@@ -509,10 +550,9 @@ HARD CONSTRAINTS — these are not suggestions:
    product direction, STOP and report instead of guessing.
 6. Never commit secrets. Never rewrite history. Never force-push main.
 7. When two inferences about the same cause have failed, stop inferring and
-   measure. Build or run the smallest thing that reports ground truth
-   (`python3 diagnose.py` prints the identity, scope and reachability of
-   every credential and endpoint, values never printed). An unverified
-   diagnosis is a guess wearing a lab coat.
+   measure with the smallest read-only probe inside the supplied worktrees.
+   If diagnosis or repair needs access outside these paths, report BLOCKED.
+   An unverified diagnosis is a guess wearing a lab coat.
 """
 
 DIAGNOSE_RULES = """
@@ -526,7 +566,7 @@ of every credential and endpoint this loop depends on, values never printed.
 """
 
 
-def method_change_block(attempt, last_result):
+def method_change_block(attempt, last_result, *, isolated=False):
     """The paragraph that breaks a repair out of a wrong-diagnosis loop (#4).
 
     Three fixes landed in modules that were never on the call path because
@@ -540,12 +580,13 @@ def method_change_block(attempt, last_result):
     """
     if attempt < 2 or not last_result:
         return ""
+    measure = ("use read-only probes inside the supplied worktrees" if isolated
+               else "run\n`python3 diagnose.py`")
     return f"""
 THIS IS ATTEMPT {attempt}. {attempt - 1} PRIOR ATTEMPT(S) DID NOT CLEAR IT.
 The previous attempt ended: {last_result[:300]}
 Repeated failure of the same repair is evidence the DIAGNOSIS is wrong — do
-NOT retry the previous method. Before proposing anything, measure: run
-`python3 diagnose.py` and reproduce the failure with the smallest direct
+NOT retry the previous method. Before proposing anything, measure: {measure} and reproduce the failure with the smallest direct
 probe you can build. If your new diagnosis matches the failed attempt's,
 that is a finding to report, not a fix to repeat.
 """
@@ -588,6 +629,85 @@ def github_degraded():
             and c.get("status") in ("major_outage", "partial_outage")]
 
 
+class RepairScopeError(RuntimeError):
+    """Repair cannot be isolated or its disposable paths could not be cleaned."""
+
+
+@contextmanager
+def repair_worktrees(cfg, failing, *, run=None):
+    """Yield only affected, fresh worktrees; retain branches when removing them."""
+    run = subprocess.run if run is None else run
+    try:
+        manifest = json.loads((CODE / "required_checks.json").read_text(encoding="utf-8"))
+        kinds = manifest.get("kinds") if isinstance(manifest, dict) else None
+        if not isinstance(kinds, dict) or not failing:
+            raise RepairScopeError("no registered repair targets")
+        names = set()
+        for check_id in failing:
+            spec = kinds.get(check_id) if isinstance(check_id, str) else None
+            name = spec.get("domain") if isinstance(spec, dict) else None
+            if name not in ("rappterverse", "rappterbook"):
+                raise RepairScopeError(f"no writable repair target for {check_id!r}")
+            names.add(name)
+        configured = cfg.get("repo_paths")
+        sources = {}
+        for name in sorted(names):
+            raw = configured.get(name) if isinstance(configured, dict) else None
+            if not isinstance(raw, str) or not raw.strip():
+                raise RepairScopeError(f"missing repo_paths entry for {name}")
+            source = Path(raw).expanduser().resolve(strict=True)
+            if not source.is_dir():
+                raise RepairScopeError(f"{name} is not a repository directory")
+            if source in sources.values():
+                raise RepairScopeError("repair targets resolve to the same repository")
+            sources[name] = source
+        root = Path(tempfile.mkdtemp(prefix="sentinel-repair-")).resolve()
+    except (OSError, ValueError) as exc:
+        raise RepairScopeError(f"cannot prepare repair scope: {exc}") from exc
+
+    def git(source, *args):
+        return run(["git", "-C", str(source), *args], check=True,
+                   capture_output=True, text=True, timeout=120)
+
+    worktrees = []
+    try:
+        paths = {}
+        try:
+            for name, source in sources.items():
+                top = git(source, "rev-parse", "--show-toplevel").stdout.strip()
+                if not top or Path(top).resolve() != source:
+                    raise RepairScopeError(f"{name} must name a repository root")
+                git(source, "fetch", "--no-tags", "origin",
+                    "+refs/heads/main:refs/remotes/origin/main")
+                base = git(source, "rev-parse", "--verify",
+                           "refs/remotes/origin/main^{commit}").stdout.strip()
+                if len(base) not in (40, 64) or any(c not in "0123456789abcdef" for c in base):
+                    raise RepairScopeError(f"{name} has no verified origin/main commit")
+                path = root / name
+                branch = f"sentinel/{root.name}-{name}"
+                # Track before add: even a partially failed checkout needs cleanup.
+                worktrees.append((source, path))
+                log(f"repair worktree: {path} (retained branch {branch})")
+                git(source, "worktree", "add", "-b", branch, str(path), base)
+                paths[name] = path
+        except (OSError, subprocess.SubprocessError) as exc:
+            raise RepairScopeError(f"cannot isolate repair worktree: {exc}") from exc
+        yield root, paths
+    finally:
+        errors = []
+        for source, path in reversed(worktrees):
+            try:
+                git(source, "worktree", "remove", "--force", str(path))
+            except (OSError, subprocess.SubprocessError) as exc:
+                errors.append(f"{path}: {exc}")
+        try:
+            shutil.rmtree(root)
+        except OSError as exc:
+            errors.append(f"{root}: {exc}")
+        if errors:
+            raise RepairScopeError("repair cleanup failed: " + "; ".join(errors))
+
+
 def escalate(cfg, verdict, failing, mode, attempt=1, last_result=None):
     """Hand the failure to Copilot. Returns (ok, output).
 
@@ -596,19 +716,32 @@ def escalate(cfg, verdict, failing, mode, attempt=1, last_result=None):
     byte-identical on attempts 1 through 3, which is how the same wrong
     diagnosis got three confident retries (#4).
     """
-    rules = REPAIR_RULES if mode == "repair" else DIAGNOSE_RULES
-    detail = "\n".join(
-        f"  - {c['id']} [{c['severity']}]: {c['detail']}"
-        for c in verdict["checks"] if not c["ok"]
-    )
-    prompt = f"""{rules}
-{method_change_block(attempt, last_result)}
+    output = ""
+    try:
+        scope = (repair_worktrees(cfg, failing) if mode == "repair"
+                 else nullcontext((HOME, cfg["repo_paths"])))
+        with scope as (cwd, repo_paths):
+            rules = REPAIR_RULES if mode == "repair" else DIAGNOSE_RULES
+            detail = "\n".join(
+                f"  - {c['id']} [{c['severity']}]: {c['detail']}"
+                for c in verdict["checks"]
+                if not c["ok"] and (mode != "repair" or c["id"] in failing)
+            )
+            if mode == "repair":
+                repo_context = (
+                    f"Repair root: {cwd}\n"
+                    "Only these harness-created worktrees are writable:\n"
+                    + "\n".join(f"  {name}: {path}" for name, path in repo_paths.items()))
+            else:
+                repo_context = f"""Repo checkouts (may be stale — always fetch origin/main before reading):
+  rappterverse: {repo_paths['rappterverse']}
+  rappterbook:  {repo_paths['rappterbook']}"""
+            prompt = f"""{rules}
+{method_change_block(attempt, last_result, isolated=mode == "repair")}
 FAILING HEALTH CHECKS ({verdict['status']}):
 {detail}
 
-Repo checkouts (may be stale — always fetch origin/main before reading):
-  rappterverse: {cfg['repo_paths']['rappterverse']}
-  rappterbook:  {cfg['repo_paths']['rappterbook']}
+{repo_context}
 
 Check id meanings:
   rv_world_merging  rappterverse stopped merging [state] apply PR commits
@@ -624,13 +757,18 @@ Check id meanings:
 Finish with a single line starting exactly `SENTINEL_RESULT:` followed by
 FIXED, PARTIAL, NO_ACTION or BLOCKED, then a one sentence reason.
 """
-    cmd = ["copilot", "-p", prompt, "--allow-all", "--model", cfg["copilot_model"]]
-    log(f"escalating ({mode}) to copilot for: {', '.join(failing)}")
-    try:
-        r = subprocess.run(cmd, capture_output=True, text=True,
-                           timeout=cfg["copilot_timeout_s"], cwd=str(HOME))
-        out = (r.stdout or "") + (r.stderr or "")
-        return r.returncode == 0, out
+            permissions = (["--allow-all-tools", "--disallow-temp-dir"] if mode == "repair"
+                           else ["--allow-all"])
+            cmd = ["copilot", "-p", prompt, *permissions, "--model", cfg["copilot_model"]]
+            log(f"escalating ({mode}) to copilot for: {', '.join(failing)}")
+            r = subprocess.run(cmd, capture_output=True, text=True,
+                               timeout=cfg["copilot_timeout_s"], cwd=str(cwd))
+            output = (r.stdout or "") + (r.stderr or "")
+            return r.returncode == 0, output
+    except RepairScopeError as exc:
+        message = f"SENTINEL_RESULT: BLOCKED {exc}"
+        log(message)
+        return False, (output + "\n" if output else "") + message
     except subprocess.TimeoutExpired:
         return False, f"copilot timed out after {cfg['copilot_timeout_s']}s"
     except FileNotFoundError:
@@ -800,14 +938,16 @@ def outsider_smoke(cfg):
 
     Issue #5 ask 2: the resident fleet runs inside the platforms with repo
     secrets, so a green heartbeat proves nothing about onboarding. This runs
-    participate.py's smoke — GitHub Issue in, published state re-read out —
-    on one platform per spend, rotating over every platform participate.py
-    names (today: rappterbook and rappterverse, both via the github-issue
-    write path).
+    participate.py's smoke on one platform per spend, rotating over every
+    platform it names. The command dispatches by each platform's write_path:
+    rappterbook's github-issue flow submits an issue and re-reads published
+    state; rappterverse's github-state-pr intake is not implemented, so it
+    declines locally and records smoke.unsupported without any network
+    access, issue submission, or state polling.
 
     Only from the HEALTHY branch: smoking a critical platform measures the
-    outage, not the front door. Only at level >= 2: a smoke files a real
-    issue, and levels 0-1 promise the sentinel writes nothing.
+    outage, not the front door. Only at level >= 2: the supported github-issue
+    flow files a real issue, and levels 0-1 promise the sentinel writes nothing.
 
     EVIDENCE (R1): after the subprocess, participation.jsonl is RE-READ. The
     smoke landed only if a NEW row exists whose kind is smoke.landed with
@@ -815,9 +955,9 @@ def outsider_smoke(cfg):
     subprocess that exited 0 without writing the log is NO-RECORD, which is
     a failure; the exit code is never believed.
 
-    Honest identity limit: this proves the PUBLIC WRITE PATH works without
-    repo access. It cannot prove a true stranger's identity onboarding —
-    the platform binds agent_id to the authenticated issue author, so the
+    Honest identity limit: the issue flow proves the PUBLIC WRITE PATH works
+    without repo access. It cannot prove a true stranger's identity onboarding:
+    rappterbook binds agent_id to the authenticated issue author, so the
     smoke joins as the owner's login walking the stranger's road. And
     rappterverse's consent-delegation (`delegates`, #5 ask 3) stays
     uncovered: participate.py does not implement that path yet.
@@ -1163,7 +1303,7 @@ def main():
         return 0
 
     # only escalate on critical; warn-level noise does not deserve a model
-    critical = verdict["critical"]
+    critical = sorted(set(verdict["critical"]))
     if not critical:
         log(f"degraded but no critical checks ({failing}) — observing")
         return 0
@@ -1199,32 +1339,47 @@ def main():
         return 0
 
     issues = load_json(STATE / "issues.json", {})
-    key = ",".join(sorted(critical))
-    allowed, why = issue_allowed(issues, key, cfg)
-    if not allowed:
+    if migrate_repair_issues(issues, prev.get("escalated_human")):
+        save_json(STATE / "issues.json", issues)
+    key = ",".join(critical)
+    blocked = {}
+    for cid in critical:
+        allowed, why = issue_allowed(issues, f"check:{cid}", cfg)
+        if not allowed:
+            blocked[cid] = why
+    if blocked:
+        why = "; ".join(f"{cid}: {reason}" for cid, reason in blocked.items())
         log(f"skipping '{key}': {why}")
-        if "attempt cap" in why and prev.get("escalated_human") != key:
-            notify(cfg, f"🔴 {instance_name(cfg)} needs you.\n'{key}' survived "
-                        f"{cfg['max_attempts_per_issue']} automated repairs.\n"
+        newly_capped = [cid for cid in blocked
+                        if issues[f"check:{cid}"]["attempts"] >= cfg["max_attempts_per_issue"]
+                        and not issues[f"check:{cid}"].get("human_notified")]
+        if newly_capped:
+            notify(cfg, f"🔴 {instance_name(cfg)} needs you.\n"
+                        f"'{','.join(newly_capped)}' survived "
+                        f"{cfg['max_attempts_per_issue']} automated attempts.\n"
                         f"{verdict['summary'][:400]}")
-            prev["escalated_human"] = key
-            save_json(STATE / "last_run.json", {**prev, "escalated_human": key})
+            for cid in newly_capped:
+                issues[f"check:{cid}"]["human_notified"] = True
+            save_json(STATE / "issues.json", issues)
         return 0
 
     mode = escalation_mode(cfg, level)
-    # Read the record BEFORE escalating so the prompt carries its own attempt
-    # history (#4); the bookkeeping below stays where it was, so attempt
-    # accounting cannot double-count.
-    rec = issues.get(key, {"attempts": 0})
+    # Use the most advanced history, then the most recent, without summing
+    # attempts across checks that may have shared the same model call.
+    rec = max((issues[f"check:{cid}"] for cid in critical if f"check:{cid}" in issues),
+              key=lambda r: (r["attempts"], datetime.fromisoformat(r["last_attempt"])),
+              default={"attempts": 0}).copy()
     ok, output = escalate(cfg, verdict, critical, mode,
                           attempt=rec["attempts"] + 1,
                           last_result=rec.get("last_result"))
     verdict_line = result_line(output)
 
-    rec["attempts"] += 1
-    rec["last_attempt"] = now().isoformat(timespec="seconds")
-    rec["last_result"] = verdict_line
-    issues[key] = rec
+    last_attempt = now().isoformat(timespec="seconds")
+    for cid in critical:
+        check_key = f"check:{cid}"
+        check_rec = issues.get(check_key, {"attempts": 0})
+        issues[check_key] = {**check_rec, "attempts": check_rec["attempts"] + 1,
+                            "last_attempt": last_attempt, "last_result": verdict_line}
     save_json(STATE / "issues.json", issues)
 
     hist.append({"at": now().isoformat(timespec="seconds"), "key": key,
@@ -1242,7 +1397,7 @@ def main():
     # a tamper-evident chain.
     NB.emit("copilot", "neighbor.acted", {
         "act": mode, "issue": key, "result": verdict_line[:400],
-        "exit_ok": bool(ok), "attempt": rec["attempts"],
+        "exit_ok": bool(ok), "attempt": rec["attempts"] + 1,
     })
 
     # re-probe: did the repair actually land?
@@ -1272,7 +1427,8 @@ def main():
             log(f"verified fixed: {sorted(fixed)}")
             notify(cfg, f"✅ {instance_name(cfg)} repaired: "
                         f"{', '.join(sorted(fixed))}\n{verdict_line[:300]}")
-            issues.pop(key, None)
+            for cid in fixed:
+                issues.pop(f"check:{cid}", None)
             save_json(STATE / "issues.json", issues)
         else:
             log("repair did not clear the failing checks")

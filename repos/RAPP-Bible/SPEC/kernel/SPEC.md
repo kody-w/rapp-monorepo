@@ -11,7 +11,7 @@
 > dated examples as migration history; RAPP/1 §12 requires total migration and
 > retirement rather than perpetual backwards compatibility.
 >
-> **Scope:** the **single-file agent contract**. What `perform()` takes, what it returns, how metadata travels, the delimited slots (`|||VOICE|||`, `|||TWIN|||`). The agent API. **Not** the network protocol — for that read [`specs/SPEC.md`](../../specs/SPEC.md). See [`specs/README.md`](../../specs/README.md) for the spec-directory map.
+> **Scope:** the **single-file agent contract**. What `perform()` takes, what it returns, how metadata travels, the delimited slots (`|||VOICE|||`, `|||TWIN|||`). The agent API. **Not** the network protocol — the superseded network source remains in [`specs/SPEC.md`](https://github.com/kody-w/RAPP/blob/main/specs/SPEC.md). See the historical [`specs/README.md`](https://github.com/kody-w/RAPP/blob/main/specs/README.md) for that excluded source directory's map.
 >
 > **Memorialized:** 2026-04-17
 > **Historical status:** Frozen on 2026-04-17; superseded for protocol matters
@@ -788,6 +788,7 @@ meta-agent. v1.12 formalized a companion verb for **distribution**:
 - **Workshop** — a folder of `*_agent.py` files under
   `agents/workspace_agents/<my_swarm>/` where a user iterates against
   the hotload loop.
+  > **Note (2026-09-24):** the local Brainstem (Tier 1) hot-loads only the top-level `agents/*_agent.py` files, so a workshop folder is organization only and its files are not hot-loaded. To try a workshop agent, move it to the top of `agents/`; move it back into a folder to unload it. See `CONSTITUTION.md` Article XVII (2026-09-24 amendment) and `docs/proposals/0001-only-top-level-agents-are-live.md`.
 - **Singleton** — one `*_agent.py` file produced by
   `swarm_factory_agent.py`, containing the inlined capabilities of the
   entire workshop.

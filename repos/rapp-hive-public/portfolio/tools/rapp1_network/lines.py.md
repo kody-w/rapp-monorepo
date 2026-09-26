@@ -2,7 +2,7 @@
 
 The families, drawn as the subway's lines. A repo belongs to the first line that names it, else to the first line whose token pattern matches one of its name tokens, else to "RAPP Projects". It is also on every other line whose token pattern matches (not the line's parent), which makes it an interchange.
 
-Source: `rapp1_network/lines.py` (rapp1-network 0.1.5). SHA-256 of the source below: `6bf9705b085df39144d13463cd8452c1f9d7400b96027f3bdd8040bfb59f5c40` (10875 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/lines.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/lines.py` (rapp1-network 0.1.6). SHA-256 of the source below: `6bf9705b085df39144d13463cd8452c1f9d7400b96027f3bdd8040bfb59f5c40` (10875 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/lines.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python

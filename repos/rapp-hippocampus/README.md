@@ -1,5 +1,9 @@
 # RAPP Hippocampus
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-hippocampus.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-hippocampus.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 > The RAPP Hippocampus is the memory system of RAPP: durable, shareable agent memory that persists what twins and agents learn.
 
 Complements the Brainstem's local memory with a longer-lived store.

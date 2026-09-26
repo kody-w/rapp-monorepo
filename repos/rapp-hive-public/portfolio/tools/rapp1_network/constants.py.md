@@ -2,7 +2,7 @@
 
 Fixed facts of the RAPP/1 network. Everything here is public; nothing here is a setting.
 
-Source: `rapp1_network/constants.py` (rapp1-network 0.1.5). SHA-256 of the source below: `9fa880a31c823307e460e99a3b86512578b6f8426c86d1d5856d0a69548c3d64` (2482 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/constants.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/constants.py` (rapp1-network 0.1.6). SHA-256 of the source below: `9fa880a31c823307e460e99a3b86512578b6f8426c86d1d5856d0a69548c3d64` (2482 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/constants.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python

@@ -36,7 +36,7 @@ On the map: the **Release Channels** line, and also OpenRappter ([subway map](ht
 ## Links
 
 Links to 1 portfolio repo(s): [openrappter](openrappter.md) (markdown).
-Linked from 4: [openrappter-alpha](openrappter-alpha.md), [openrappter-beta](openrappter-beta.md), [openrappter-canary](openrappter-canary.md), [openrappter-nightly](openrappter-nightly.md).
+Linked from 5: [openrappter-alpha](openrappter-alpha.md), [openrappter-beta](openrappter-beta.md), [openrappter-canary](openrappter-canary.md), [openrappter-nightly](openrappter-nightly.md), [rapp-monorepo](rapp-monorepo.md).
 
 Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<repo>`, pin files, workflow `uses:` and `repository:` lines, and submodules, at the evidence commit; only public repos in this portfolio count.
 

@@ -2,7 +2,7 @@
 
 The portfolio's records: one per family repo, from the crawl's sweep/<repo>.record.json, and the links between them.
 
-Source: `rapp1_network/records.py` (rapp1-network 0.1.5). SHA-256 of the source below: `8137b718ca186fb4a26f50318e6a461b2866ec4a1c1b79e6ff15ed18bcf45604` (1493 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/records.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/records.py` (rapp1-network 0.1.6). SHA-256 of the source below: `8137b718ca186fb4a26f50318e6a461b2866ec4a1c1b79e6ff15ed18bcf45604` (1493 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/records.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python

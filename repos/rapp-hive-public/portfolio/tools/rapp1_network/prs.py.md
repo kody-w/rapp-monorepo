@@ -2,7 +2,7 @@
 
 The wave-1 network-header pull requests, one repo at a time, by hand (from legacy/rapp1_network_pr.py).
 
-Source: `rapp1_network/prs.py` (rapp1-network 0.1.5). SHA-256 of the source below: `9ed0011e202d47f79c04b972e2feb45dc952dae44bd08d7a4ec2b3e2000d3643` (10968 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/prs.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/prs.py` (rapp1-network 0.1.6). SHA-256 of the source below: `9ed0011e202d47f79c04b972e2feb45dc952dae44bd08d7a4ec2b3e2000d3643` (10968 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/prs.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python

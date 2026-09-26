@@ -1,5 +1,9 @@
 # RAPP Platform
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-platform.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-platform.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 > RAPP — the Rapid Agent Prototype Platform — is a progressive AI-agent platform that runs the Microsoft AI stack across three self-contained tiers.
 
 Brainstem (local) → Spinal Cord (Azure) → Nervous System (M365). This is the ecosystem umbrella; start at the [RAPP Installer](https://github.com/kody-w/rapp-installer).

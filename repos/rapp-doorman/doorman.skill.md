@@ -38,7 +38,7 @@ Brainstems meet as **uniform peers** speaking `rapp-twin-chat/1.0` — nobody ca
 
 - **WebRTC tether** (`5a-tether`) — direct browser↔browser P2P. The PeerJS public broker is used for the *handshake only* (SDP/ICE); data flows DTLS-encrypted P2P, the broker never sees it.
 - **Kite tether** (`5a-kite`) — an operator (you) holds the **string**: drives a browser tab's console over the Chrome DevTools Protocol and relays. No broker, no STUN, no CORS — you *are* the transport.
-- **MCP transport** (`rapp-mcp`) — an MCP host is just another caller of `/chat`: `rapp_brainstem_mcp.py` bridges the running local brainstem over the same `/chat` wire to any MCP client. This is **Layer-2 of "Chat Is The Only Wire"** (`rapp-mcp-spec/1.0`; static profile `rapp-static-mcp/1.0`) — a transport that *realizes* the same wire, **not** a new unit or kind. An MCP host that reaches a doorman-fronted brainstem is sealed exactly like any other caller.
+- **MCP transport** (`rapp-mcp`) — an MCP host is just another caller of `/chat`: `rapp_brainstem_mcp.py` bridges the running local brainstem over the same `/chat` wire to any MCP client. This is **Layer-2 of "Chat Is The Only Wire"** (`rapp-mcp-spec/2.0`; static profile `rapp-static-mcp/1.0`) — a transport that *realizes* the same wire, **not** a new unit or kind. An MCP host that reaches a doorman-fronted brainstem is sealed exactly like any other caller.
 
 A **kited twin** is a tab flown on a kite string. It is **tethered** when the string also reaches *this machine's* local brainstem (`5a-kite+tether`) — its turns are answered by that brainstem; otherwise it's **just kited** (answered by the tab's own in-page brainstem).
 

@@ -1,5 +1,9 @@
 # rapp-brainstem-sdk
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-brainstem-sdk.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-brainstem-sdk.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 `vbrainstem_sdk.py` — a single‑file, **stdlib‑only** headless SDK that runs RAPP single‑file agents
 in real CPython and serves the **`brainstem.py` `/chat` contract** over a port. The headless twin of
 the browser [vBrainstem](https://github.com/kody-w/vbrainstem): same agents, same contract, no
@@ -7,7 +11,7 @@ browser — so `curl`, a skill, an agent, CI, or any MCP client can drive a brai
 
 Everything reaches the brainstem through the one wire (`/chat` — "Chat Is The Only Wire"); these
 are all Layer-2 callers of it, not new units. MCP is just another transport on that wire:
-[rapp-mcp](https://github.com/kody-w/rapp-mcp) (`rapp_brainstem_mcp.py`, `rapp-mcp-spec/1.0`)
+[rapp-mcp](https://github.com/kody-w/rapp-mcp) (`rapp_brainstem_mcp.py`, `rapp-mcp-spec/2.0`)
 bridges a running brainstem over the full `/chat` (LLM + memory + agents) to any MCP host — the
 transport-layer sibling of this SDK.
 

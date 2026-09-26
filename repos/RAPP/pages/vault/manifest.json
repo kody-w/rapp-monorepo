@@ -64,8 +64,8 @@
       "title": "Blog Roadmap",
       "section": "Plans & Ledgers",
       "status": "historical",
-      "bytes": 21840,
-      "sha256": "495fdd39812d76f178a6a5fc3acb3f653fb76ae66ab8d5e2e41112d08be288e0"
+      "bytes": 22254,
+      "sha256": "cfc4a76168d219ef16f3690682febe882105898b2acf9e216086dec3a4887214"
     },
     {
       "path": "Plans & Ledgers/Content Strategy.md",
@@ -888,8 +888,8 @@
       "title": "RAPP1 Adaptation Inventory",
       "section": "Plans & Ledgers",
       "status": "living",
-      "bytes": 11565,
-      "sha256": "722a0886114fcfc51783b6b5428510c261f493e7093faad1aa6313136aa28c34"
+      "bytes": 11830,
+      "sha256": "d2f3f5fe63867594dbff0c7ed276952329a9c881acbca36565c73beb90777fd2"
     }
   ],
   "excluded_notes": [

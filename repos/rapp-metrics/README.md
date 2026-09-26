@@ -2,6 +2,10 @@
 
 # rapp-metrics
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-metrics.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-metrics.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 **Real usage numbers for surfaces that have no backend.**
 
 `rapp-metrics/1.0` · normative spec: [SPEC.md](SPEC.md) · builds on `rapp-static-api/1.0`

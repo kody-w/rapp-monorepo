@@ -75,7 +75,6 @@ import subprocess
 import sys
 import time
 import urllib.request
-import urllib.error
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -94,55 +93,17 @@ DELTA_NAME = re.compile(r"^frame-(\d+)-(.*)\.json$")
 BUNDLE_NAME = re.compile(r"^frames-(\d+)-(\d+)(?:-part(\d+))?\.json$")
 
 # Deltas the fold leaves exactly where they are, byte for byte, until their owner
-# has reviewed their text: it quotes local tool output, and folding would copy
-# that into a new file. To redact one, edit it in place or delete it, then remove
-# its name here; an edited delta folds on the next merge.
-HELD_LOOSE = frozenset({
-    "frame-101-review-borg-cardsmith_agent.json",
-    "frame-101-review-discreetRappers-copilot_studio_transpiler.json",
-    "frame-101-review-discreetRappers-rapp_pipeline.json",
-    "frame-101-review-kody-agent_workbench.json",
-    "frame-101-review-kody-rar_remote_agent.json",
-})
+# has reviewed their text (for example text that quotes local tool output, which
+# folding would copy into a new file). To redact one, edit it in place or delete
+# it, then remove its name here in the same change; an edited delta folds on the
+# next merge. The five frame-101 review deltas once held here were deleted by
+# kody-w/RAR#1133: they quoted local tool paths. They remain in git history.
+HELD_LOOSE = frozenset()
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # LLM Backends — multi-stream intelligence
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-def _get_token():
-    token = os.environ.get("GITHUB_TOKEN", "")
-    if not token:
-        try:
-            r = subprocess.run(["gh", "auth", "token"], capture_output=True, text=True, timeout=5)
-            if r.returncode == 0:
-                token = r.stdout.strip()
-        except Exception:
-            pass
-    return token
-
-
-def llm_github(system: str, user: str, max_tokens: int = 500) -> str:
-    """GitHub Models API backend."""
-    token = _get_token()
-    if not token:
-        raise RuntimeError("No GITHUB_TOKEN")
-    model = os.environ.get("RAPPTERVERSE_MODEL", "openai/gpt-4.1-mini")
-    payload = json.dumps({
-        "model": model,
-        "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
-        "temperature": 0.85, "max_tokens": max_tokens,
-    }).encode()
-    req = urllib.request.Request(
-        "https://models.github.ai/inference/chat/completions",
-        data=payload,
-        headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
-        method="POST",
-    )
-    with urllib.request.urlopen(req, timeout=60) as resp:
-        data = json.loads(resp.read())
-    return data["choices"][0]["message"]["content"].strip()
-
 
 def llm_ollama(system: str, user: str, max_tokens: int = 500) -> str:
     """Ollama local backend — Gemma 4, Llama, Mistral, etc."""
@@ -196,11 +157,9 @@ def llm_copilot(system: str, user: str, max_tokens: int = 500) -> str:
 
 
 def llm_generate(system: str, user: str, max_tokens: int = 500) -> str | None:
-    """Try all LLM backends. The GitHub Copilot CLI is tried first (preferred backend).
-    Fallback: Copilot CLI → GitHub Models → Ollama."""
+    """Try configured LLM backends, then return None for rules-as-data fallback."""
     backends = [
-        ("copilot", llm_copilot),    # first (preferred backend)
-        ("github", llm_github),       # Second — rate-limited
+        ("copilot", llm_copilot),
     ]
     if os.environ.get("OLLAMA_MODEL", ""):
         backends.append(("ollama", llm_ollama))
@@ -840,16 +799,27 @@ def print_fold_report(report: dict):
         print(f"  [KEPT LOOSE] {name}: {why}")
 
 
+def _is_or_inside(path, folder: Path) -> bool:
+    """Whether path is folder or inside it, judged by folder identity, not spelling.
+
+    A symlink, a `..`, or other letter case on a case-insensitive file system names
+    the same folder. path need not exist: its nearest existing ancestor decides."""
+    if not folder.is_dir():
+        return False
+    probe = Path(path).resolve()
+    return any(candidate.exists() and os.path.samefile(candidate, folder)
+               for candidate in (probe, *probe.parents))
+
+
 def extract_bundled_deltas(out_dir) -> int:
     """Write every bundled delta back out as its original file, byte for byte.
 
     It never overwrites: a file already there with exactly those bytes is left as
     it is, and a different file of that name stops the extract (FileExistsError).
-    It refuses stream_deltas/ and anything inside it, where the copies would sit
-    beside the bundles as loose duplicates."""
+    It refuses stream_deltas/ and anything inside it, however the path is spelled,
+    where the copies would sit beside the bundles as loose duplicates."""
     out = Path(out_dir)
-    deltas = DELTAS_DIR.resolve()
-    if out.resolve() == deltas or deltas in out.resolve().parents:
+    if _is_or_inside(out, DELTAS_DIR):
         raise ValueError(f"extract writes copies, never into {DELTAS_DIR}; choose another directory")
     out.mkdir(parents=True, exist_ok=True)
     written = 0

@@ -83,7 +83,7 @@ Everything beyond steps 1–4 is the host's business, hidden by RACon.
 
 A running cartridge is reachable beyond RACon, too: because a hatched cartridge is just a brainstem
 twin answering on `/chat`, any MCP host can drive it. [rapp-mcp](https://github.com/kody-w/rapp-mcp)
-(`rapp-mcp-spec/1.0`) bridges a running brainstem to any MCP client via `rapp_brainstem_mcp.py` —
+(`rapp-mcp-spec/2.0`) bridges a running brainstem to any MCP client via `rapp_brainstem_mcp.py` —
 a non‑RACon way to reach the same cartridge. This is **transport, not another unit**: an MCP host is
 just a Layer‑2 caller of `/chat`, the concrete realization of *Chat Is The Only Wire*. The cartridge
 stays the only unit; MCP is one more wire onto it.
@@ -100,6 +100,6 @@ hood.**
 Builds on / hides: [RAPP Store SPEC §13](https://github.com/kody-w/RAPP_Store/blob/main/SPEC.md)
 (twin‑port runtime), [rapp-neighborhood-protocol](https://github.com/kody-w/rapp-neighborhood-protocol)
 (twin‑chat), [rapp-egg-hub](https://github.com/kody-w/rapp-egg-hub) (`.egg`),
-[rapp-mcp](https://github.com/kody-w/rapp-mcp) (`rapp-mcp-spec/1.0` — MCP transport onto `/chat`).
+[rapp-mcp](https://github.com/kody-w/rapp-mcp) (`rapp-mcp-spec/2.0` — MCP transport onto `/chat`).
 First cartridge: [cowork-cookbook-rapp](https://github.com/kody-w/cowork-cookbook-rapp).
 MIT © Kody Wildfeuer.

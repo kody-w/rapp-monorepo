@@ -1,5 +1,9 @@
 # RAPP Brainstem Frontier — Template
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-brainstem-frontier-template.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-brainstem-frontier-template.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 **The grail Electron template.** This is the reference starting point the whole
 ecosystem can point at: grab it, and any repo becomes a Frontier estate: the grail
 Brainstem by reference, the Frontier Electron shell by reference, ambient mode

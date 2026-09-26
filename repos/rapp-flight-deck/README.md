@@ -1,5 +1,9 @@
 # RAPP Flight Deck
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-flight-deck.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-flight-deck.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 > The RAPP Flight Deck is the public launch surface for the RAPP release train: every pre-release ring (Canary → Nightly → Alpha → Beta) is runnable on any machine from a single copy-paste one-liner — no VPN, no signup.
 
 Test-fly a ring sandboxed, or join one as a real install. Backed by the [RAPP Rings](https://github.com/kody-w/rapp-rings) train.

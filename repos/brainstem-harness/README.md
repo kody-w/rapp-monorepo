@@ -1,5 +1,9 @@
 # brainstem-harness
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/brainstem-harness.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/brainstem-harness.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 **Run RAPP `agent.py` files on the [GitHub Copilot harness](https://devblogs.microsoft.com/agent-framework/build-production-ready-agents-with-the-github-copilot-harness-and-agent-framework/) — and prove the port didn't change them.**
 
 ```bash

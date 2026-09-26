@@ -2,11 +2,22 @@
 
 # Rapplication Spec
 
-`schema: rapp-application/1.0`
+Existing simple manifest: `rapp-application/1.0`. Complete chat-operated
+application: `rapp-application/2.0` (§15; proposed extension).
 
-A **rapplication** is a portable, self-describing bundle of one Python agent (and optional UI / state / docs) that drops into any RAPP brainstem and runs. This document defines the bundle layout, the manifest schema, the singleton contract, and the validation rules. Everything in `rapp_store/` conforms to this spec; everything that gets submitted to the store is checked against it.
+A **rapplication** is a portable, self-describing, chat-operated application.
+Its Python agent is the conversational entrypoint; a complete contract can
+also declare components, jobs, providers, owned state, lifecycle and portable
+results. Sections 1–13 retain the existing version-1 integration contract,
+§14 retains native desktop distribution, and §15 adds complete applications
+without rewriting existing catalog entries or artifacts.
 
 A rapplication runs one of two ways. **In‑process** (`runtime: "agent"`, the default): its agent loads into the host brainstem's `agents/` dir — simple, fine for one or two. **Twin‑port** (`runtime: "twin"`): the rapplication **hatches into its own specialized brainstem‑twin on its own port**, carrying only its own agents and persona, and the host brainstem reaches it over **twin‑chat** instead of absorbing it (§13). Twin‑port is the answer to crowding: drop many `.egg`s into one global brainstem and each hatches as its own port‑addressable app — still fully usable from the global `brainstem.py`, but never tangling its agent namespace, tool list, or state.
+
+An optional **native desktop distribution** (§14) supplements the agent/UI
+integration with genuine macOS release downloads. A singleton does not install
+the native application. This extension does not amend the Constitution or
+assert Apple or RAPP/1 trust.
 
 ## 1. Bundle layout
 
@@ -78,8 +89,15 @@ The submission unit is **the `<id>/` directory zipped**. The `.zip` filename SHO
 | `quality_tier` | string | no | `featured` / `official` / `verified` / `community` / `experimental` / `deprecated` / `private`. Submitters cannot self-declare above `community` (or `experimental` / `deprecated` — those are submitter-allowed self-marks). The receiver's `build_index_entry()` downgrades anything higher to `community`. The `private` tier is reserved for gated rapplications (§11); see that section for the rules that govern it. Tier promotions to `verified`, `official`, or `featured` happen via maintainer-merged PR only. |
 | `access` | string | no | `"public"` (default) or `"private"`. When `"private"`, the rapplication is **gated** — its source files live in a private repo and `*_url` fields require an authenticated fetch. See §11. |
 | `private_repo` | string | conditional | Required when `access == "private"`. `"<owner>/<repo>"` of the private repo holding the source. Every `*_url` field on the manifest and `index_entry` MUST point at `raw.githubusercontent.com/<owner>/<repo>/...`. |
+| `desktop` | object | no | Optional `rapp-desktop/1.0` public native-release metadata (§14). Existing singleton/UI requirements remain; native submissions must use public federation. |
 
-Other fields (`tagline`, `manifest_name`, `produced_by`, `optional_dependencies`, `tool`, etc.) are tolerated and pass through to the catalog entry verbatim.
+Other fields (`tagline`, `manifest_name`, `produced_by`, `optional_dependencies`,
+`tool`, `runtime`, etc.) are tolerated and pass through to the catalog entry.
+The manifest, not an unvalidated `index_entry.json` override, is their source
+of truth. Receiver-owned `schema`, authoring paths (`agent`, `service`, `ui`),
+`source`, `singleton_*`, `service_*`, `ui_*`, ID and quality-tier handling are
+excluded or rebuilt. Integrity is recomputed rather than trusted from metadata.
+`desktop` is a validated contract, not an unchecked metadata escape hatch.
 
 ## 3. `index_entry.json`
 
@@ -203,23 +221,56 @@ Mode C inherits Mode B's `source.type = "federation"` block but replaces `commit
 
 ### Submission triggers
 
-Both modes can be triggered any of three ways:
+All future submissions MUST use the `[RAPP]` issue receiver and maintainer
+approval front door. Release uploads and direct catalog PRs alone are not
+submissions. The issue can be created through:
 
 1. **`@rapp/publish-to-rapp-store` agent (local CLI)** — call its `submit_bundle <path>` (mode A) or `submit_repo <github-url>` (mode B). The agent validates locally, then opens a GitHub issue with a structured payload.
 2. **Issue template** — open an issue with the `[RAPP]` template, fill in either *(a)* a bundle attachment or *(b)* a repo URL field. The receiver workflow handles the rest.
-3. **Direct PR** (mode A only) — fork, drop a `<id>/` directory in, regenerate `index.json`, open the PR. The validator runs in CI.
+3. **The Pages submission UI** (`submit.html`) — produces the same structured
+   `[RAPP]` issue. The former direct-PR catalog-edit path is not a submission
+   lane. Native releases use federation, not an inline bundle.
 
 ### Receiver flow
 
 1. Workflow parses the issue payload (bundle attachment OR `repo: <url>` field).
 2. **Mode A:** download the zip, extract, validate per §6.
    **Mode B:** fetch `manifest.json` and the singleton from `raw.githubusercontent.com`, validate per §6 (file existence checks become HTTP GETs).
-3. On pass: comment `Validated. Awaiting maintainer approval.` and label `pending-review`. For mode A, also write the bundle to `staging/<id>/`.
+3. On pass: write pending state (and `staging/<id>/` for mode A), commit and
+   confirm publication to current `main`, **then** comment
+   `Validated. Awaiting maintainer approval.` and label `pending-review`.
 4. Maintainer adds `approved` label.
 5. Approval workflow:
    - **Mode A:** promote `staging/<id>/` → `<id>/`, recompute integrity, merge into `index.json`.
-   - **Mode B:** resolve `commit_sha`, recompute integrity from the fetched files, merge a federation entry into `index.json`. No files copied.
+   - **Mode B:** revalidate against the current catalog, resolve `commit_sha`,
+     recompute integrity from the fetched files, and merge a federation entry
+     into `index.json`. No files copied. Native entries additionally retain
+     the exact staged issue/manifest/metadata pins and refresh scoped v1
+     discovery (§14); a moved source or stale version requires resubmission.
 6. Commit, comment `Approved. Available at <singleton_url>`, close issue.
+
+Both issue mutation workflows share `rapp-store-state` concurrency and
+explicitly check out **current `main` when the serialized job starts**, not
+the issue event's earlier SHA. Pending updates replace only the matching
+issue record; approval removes only that record. Unrelated pending items
+must survive processing, reprocessing and promotion.
+
+Validation/promotion failures fail the workflow. Success reports, labels and
+closure require successful state publication, not merely local validation.
+Push retries retry the same commit without rebasing stale catalog/pending
+JSON; exhausted retries fail explicitly. A non-fast-forward or uncertain push
+requires inspection and a fresh issue event against current main.
+Actions concurrency is not a durable event queue: cancelled pending runs
+also require a normal retrigger.
+
+To recover an unpromoted issue after a failed/lost pending-state publication:
+remove a stale `approved` label, edit or reopen the same `[RAPP]` issue, wait
+for a new successful receiver run and the correct pending record on main,
+then apply `approved` again. Verify the new approval run succeeds, the catalog
+entry is correct, and unrelated pending/catalog entries remain intact.
+Do not patch `index.json` or `staging/_pending.json` by hand. When deploying
+a workflow fix, create fresh issue/label events; rerunning a historical run
+can retain its old workflow definition.
 
 ## 8. Versioning
 
@@ -673,3 +724,448 @@ global brainstem without it degrading into an unnavigable pile of agents. Builds
 §5a transports), [rapp-brainstem-sdk](https://github.com/kody-w/rapp-brainstem-sdk) (the per-twin
 headless brainstem), [rapp-egg-hub](https://github.com/kody-w/rapp-egg-hub) (`.egg` cartridges), and
 [rapp-zoo](https://github.com/kody-w/rapp-zoo) (hatch/start/stop/list).
+
+## 14. Optional native desktop distribution
+
+`desktop.schema == "rapp-desktop/1.0"` is an optional extension for **public
+federated macOS releases**, not a replacement for the required singleton and
+UI. Absence preserves existing validation/install behavior. Presence is
+accepted only with complete, verified public release references. A native
+bundle cannot be submitted inline, copied into `apps/`, or mirrored under
+`api/`; use the existing source repository and existing catalog ID.
+
+The exact structural schemas are
+[`schemas/desktop.schema.json`](./schemas/desktop.schema.json) and
+[`schemas/desktop-evidence.schema.json`](./schemas/desktop-evidence.schema.json).
+`scripts/lib_rapp.py` / `scripts/lib_desktop.py` also enforce the cross-field,
+continuity and network/byte checks below. Unknown keys **inside** these
+versioned contracts are rejected.
+
+### 14.1 Manifest and catalog fields
+
+All fields in this table are required when `desktop` is present:
+
+| Field | Contract |
+|---|---|
+| `schema` | Exactly `rapp-desktop/1.0`. |
+| `platform` | Exactly `macos`. |
+| `minimum_os` | macOS `MAJOR.MINOR[.PATCH]`, canonical numeric components (for example `14.0`). |
+| `bundle_id` | Stable reverse-DNS identifier, at least three components. Cannot change for an existing native ID. |
+| `source` | Exactly `{repo, commit_sha}`. `repo` is the same canonical `owner/repo` as federation; `commit_sha` is the full lowercase 40-hex **native-build** commit. |
+| `release_tag` | Exactly `v<manifest.version>`; version is canonical `MAJOR.MINOR.PATCH`. The public tag must resolve to `desktop.source.commit_sha`. |
+| `artifacts` | One to four objects as below. Each `(arch, format)` pair must be unique; `universal` and implicit architecture are not supported. |
+| `prerequisites` | 1–20 nonempty plain-text items, at most 1,000 characters each. Disclose required tools/models, OS permissions and optional integrations. Use an explicit “none beyond …” item if appropriate. |
+| `privacy` | Nonempty plain text, at most 4,000 characters. Describe capture/permissions, storage and any remote data transfer or optional provider. |
+| `setup` | 1–20 nonempty plain-text steps, at most 1,000 characters each. Explain installing the native application and granting appropriate permissions. |
+| `agent_integration` | Nonempty plain text, at most 4,000 characters. Explain what the secondary singleton/UI does and its prerequisites. It must not claim a `.py` drop installs the native application. |
+
+Each `artifacts[]` object has exactly:
+
+| Field | Contract |
+|---|---|
+| `arch` | `arm64` or `x86_64`. |
+| `format` | `dmg` or `zip`. ZIPs contain a signed, stapled, notarized `.app`; they are not unsigned-source or Python integration bundles. |
+| `url` | Exactly `https://github.com/<source.repo>/releases/download/<release_tag>/<id>-<version>-<arch>.<format>`. |
+| `bytes` | Exact positive integer size of the final downloadable archive, at most 1,073,741,824 bytes (1 GiB). Booleans/floats are not integers here. |
+| `sha256` | SHA-256 of those final bytes: 64 lowercase hex characters. |
+| `evidence` | Exactly `{url, bytes, sha256}` for the public evidence JSON. URL uses the same repo/tag. DMGs accept `<id>-<version>-<arch>.evidence.json` or `<id>-<version>-<arch>.evidence.<sha256>.json`; ZIPs accept `<id>-<version>-<arch>.zip.evidence.json` or `<id>-<version>-<arch>.zip.evidence.<sha256>.json`. If present, the full 64-lowercase-hex filename suffix MUST equal `evidence.sha256`. Exact positive byte count is at most 262,144 (256 KiB); SHA-256 hashes the exact evidence file bytes. |
+
+No URL credentials, HTTP/file/custom schemes, alternate owner/repository,
+mutable `latest` URLs, percent-encoded aliases, traversal, query strings,
+fragments or ports are allowed in these references. Metadata never contains
+tokens or signing credentials. Gated/private native releases are not
+supported by this initial extension.
+
+The singleton's literal `__manifest__.version` must equal the native manifest
+version. On update, version must beat the **current** catalog and the publisher,
+existing federation repository and native bundle ID must remain unchanged.
+An existing native entry cannot silently remove `desktop`.
+
+**Immutable evidence corrections:** never overwrite a published evidence
+asset. If a report needs correction, regenerate the genuine report, serialize
+its final bytes, calculate that file's SHA-256, and upload a **new**
+content-addressed evidence filename in the same release. Update the source
+manifest's evidence URL/bytes/hash through a new metadata commit and the
+`[RAPP]` receiver/approval flow; do not rewrite old reports, the native archive,
+or its tag. The suffix is the evidence digest, not the archive digest or a
+hash of normalized/re-serialized JSON. This does not relax existing catalog
+version rules, staged-entry review, signing checks or exact app-path binding.
+Malformed paths remain invalid even when the file has a valid digest name.
+
+### 14.2 Evidence report (publisher-supplied, inspectable)
+
+The referenced JSON object has exactly:
+
+- **`schema`:** `rapp-desktop-evidence/1.0`.
+- **`subject`:** exactly `{id, version, bundle_id, arch, url, bytes, sha256}`,
+  matching this manifest and the **final** downloadable DMG or ZIP artifact.
+- **`source`:** exactly the manifest's `desktop.source`.
+- **`workflow_run`:** `https://github.com/<source.repo>/actions/runs/<positive-integer>`.
+  The anonymous GitHub run API must report that exact URL/repository,
+  `head_sha == desktop.source.commit_sha`, `status: completed`,
+  `conclusion: success`. This may be a public build or artifact-verification
+  run; signing/notarization can remain local and Xcode-managed. It does not
+  require exporting Apple signing credentials to third-party CI.
+- **`signing`:** exactly `{team_id, authority, architectures, codesign_details,
+  codesign_verify}`. Team ID is ten uppercase alphanumeric characters.
+  Authority is `Developer ID Application: <name> (<team_id>)`.
+  `architectures` is the one-element array matching the artifact's arch.
+  `codesign_details` is actual `codesign -dvvv` output containing matching
+  `Identifier=`, `TeamIdentifier=`, `Authority=` lines and hardened-runtime
+  information (`CodeDirectory` flags must contain the `0x10000` hardened
+  runtime bit and name `runtime`, not merely mention it elsewhere).
+  `codesign_verify` is a command report from
+  `codesign --verify --deep --strict --verbose=2` on the released application;
+  output must include “valid on disk” and “satisfies its Designated Requirement”.
+- **`notarization`:** depends on the archive format:
+  - **DMG:** exactly `{submission_id, submitted_sha256, log}`.
+    Submission ID is the real UUID. `log` is the unmodified JSON from
+    `xcrun notarytool log`, with matching `jobId`, `status: Accepted`,
+    integer `statusCode: 0`, exact DMG `archiveFilename`,
+    `sha256 == submitted_sha256`, and `issues: null` or `[]`.
+    Additional Apple log fields are retained. The submitted hash refers to
+    the **pre-staple upload** and can differ from final `subject.sha256`;
+    never falsify the Apple log to make them equal.
+  - **ZIP:** exactly `{method: "stapled-app", app_path, bundle_id, version,
+    minimum_os}`. `app_path` is the enclosed top-level `.app` basename
+    (for example `RAPP Shot.app`), at most 200 characters, without traversal
+    or path separators. Bundle ID, version and minimum OS must match the
+    manifest and the app's Info.plist. `codesign_details` must name
+    `<app_path>/Contents/MacOS/`; codesign verification and Gatekeeper
+    output must name that same application. Stapler's `Processing:` line
+    must name the exact `.app` basename, not a similarly named `.app.zip`;
+    stapler output must name the
+    **app**, not the ZIP. This path supports an app notarized/stapled by
+    Xcode-managed distribution without requiring a notarytool container log.
+    No ZIP submission UUID, upload hash, fabricated container ticket or ZIP
+    staple is required or permitted.
+- **`gatekeeper`:** command report from `spctl --assess --type execute
+  --verbose=4` on the released application. Requires accepted output,
+  `source=Notarized Developer ID`, and exact application-path binding for
+  ZIP evidence. Some genuine macOS/Xcode versions omit `origin=`; absence
+  is accepted, but an emitted origin must match the codesign authority.
+  Developer ID authority and matching `TeamIdentifier` remain mandatory in
+  the codesign report. Never synthesize an origin line to satisfy validation.
+- **`stapler`:** command report from `xcrun stapler validate` on the
+  final DMG **or the enclosed app for ZIP distribution**, including
+  “The validate action worked!”. ZIP archives cannot themselves be stapled.
+
+Every command report is exactly `{exit_code: 0, output: "<actual combined
+command output>"}`. A success Boolean or an invented string is not evidence.
+The issuer must capture the reports from the actual released build;
+reviewers should independently inspect version, bundle ID, minimum OS and
+architecture from the mounted/unzipped application and reproduce the macOS
+checks. The ZIP's independent `subject.sha256`/`bytes` still bind the final
+download exactly; app-staple evidence does not replace archive integrity.
+
+**Important trust limit:** the receiver verifies public references, report
+bindings, and actual downloaded byte hashes. It does **not** authenticate
+Apple logs cryptographically, mount/unpack/execute native archives, or certify the truth of a
+publisher's reports. The storefront calls these *publisher release reports*;
+macOS/Gatekeeper performs native signature checks. This is neither Apple
+certification by the Store nor RAPP/1 acceptance. Native entries cannot
+self-supply `signed`, `notarized`, `trust`, `rappid`, `parent_rappid`,
+`identity`, `wire_contract`, `ecosystem_acceptance`, `egg_url` or `hatcher_url`
+through this extension.
+
+### 14.3 Validation, staging and approval
+
+1. Local `validate_dir(..., fetcher=..., artifact_fetcher=...)` and public
+   `validate_federation(...)` apply the same native contract and verification.
+   A local `index_entry.desktop`, if present, must equal the manifest.
+   Native `validate_zip` / bundle submissions fail with
+   `E_DESKTOP_FEDERATION_ONLY`. Here `validate_zip` means the inline
+   integration-submission bundle validator, not the native artifact
+   verifier: native release ZIPs are accepted through federation references.
+2. Federation resolves a full **manifest** commit and fetches integration
+   files from it. Failure to resolve is fatal for native entries (legacy
+   federation retains best-effort behavior). A mutable-ref manifest must
+   equal the immutable commit's bytes.
+3. GitHub's public stable release, tag target, asset names/URLs/sizes/SHA256
+   digests and successful build/verification-run references must match. Evidence bytes
+   are fetched and hash/size verified; report subjects and outputs must
+   match. Only then are native archives streamed and checked against exact byte/hash
+   pins. No native files are persisted.
+4. Existing 5 MiB bundle, 200 KiB singleton and 500 KiB UI caps are unchanged.
+   Native DMGs/ZIPs use a separate 1 GiB cap each, at most four artifacts, 64 KiB
+   chunks, 30-second socket timeout and 900-second per-download budget.
+   Evidence is capped at 256 KiB; other metadata fetches at 5 MiB.
+   Fetchers are injectable; unit tests use tiny inert byte fixtures, never
+   network downloads. No tokens are read or forwarded. HTTPS redirects
+   are constrained to GitHub and its release-asset CDN hosts.
+5. The `[RAPP]` receiver stages the validated entry and issue payload
+   fingerprint. Native submission metadata must match fetched
+   ID/version/publisher; the manifest is authoritative for `desktop`.
+6. Approval checks the current catalog, exact issue payload, staged
+   manifest commit and complete entry, and repeats release/evidence/archive
+   verification. Any stale version, changed source/tag/artifact or
+   changed metadata requires resubmission rather than silent promotion.
+
+To avoid self-reference, the native build/release commit and the later
+manifest-metadata commit may differ. `desktop.source.commit_sha` identifies
+the former; catalog `source.commit_sha` identifies the latter. Prefer the
+full latter commit in the issue's `source.ref`. Native `singleton_url`,
+`ui_url` and `service_url` use that immutable manifest commit even when the
+submitted ref was a branch.
+
+### 14.4 Storefront and v1 discovery
+
+Validated native entries show architecture-specific macOS downloads,
+full artifact hashes/bytes, evidence links, prerequisites, privacy and
+setup. ZIP downloads explicitly explain: double-click the ZIP in Finder,
+drag the extracted `.app` to Applications, and launch it from Applications.
+The Python singleton/UI is secondary integration, never a native
+installer. Invalid native metadata offers no download fallback.
+Non-native entries use **explicit** egg/hatcher references only; kind
+`rapp` does not imply generated artifacts exist.
+
+Approval invokes a scoped metadata-only projection into
+`api/v1/rapplication/<id>.json` and that ID's `api/v1/index.json` row.
+These retain existing v1 schemas with `distribution: desktop`, `desktop`,
+source and integration metadata. They intentionally omit invented
+`rappid`, lineage, sprites, eggs, hatchers and install shell commands.
+Existing unrelated records/files and index metadata are preserved.
+
+For an already approved catalog entry, an explicit maintenance refresh is:
+
+```bash
+python3 scripts/build_pokedex_api.py --native-only --ids <approved-native-id>
+```
+
+This command never fetches releases or changes the canonical catalog.
+Do not run the global legacy producer to manufacture missing federation
+artifacts. No Zoo v2 path is involved.
+
+The rationale and owner-approval boundary are in
+[Proposal 0006](./docs/proposals/0006-native-desktop-distribution.md).
+The existing four Fable5 catalog IDs remain `rapp_crispy`, `rapp_rewind`,
+`rapp_shot`, `rapp_voice`; RAPP Tools is infrastructure, not another entry.
+No constitutional amendment is made by this optional extension.
+
+## 15. Complete chat-operated applications
+
+[Proposal 0007](./docs/proposals/0007-chat-operated-rapplications.md) introduces
+the explicit `rapp-application/2.0` contract and mandatory `local-docker/1`
+feature. The root catalog remains `rapp-store/1.0`; existing simple entries,
+native release descriptors, historical artifacts and Zoo v2 remain intact.
+This is an experimental implementation proposed for review, not a catalog
+admission, externally ratified protocol or automatic release.
+
+### 15.1 Complete source contract
+
+[`schemas/application.schema.json`](./schemas/application.schema.json)
+describes the manifest. Version 2 retains `id`, `name`, `version`, `publisher`,
+`summary`, `category`, `tags`, `agent`, and optional `ui`, with:
+
+| Declaration | Meaning |
+|---|---|
+| `agents` | The exact file-locked BasicAgent entrypoints; `agent` names one |
+| `runtime` | Unchanged Grail repository, full commit and version |
+| `files` | Complete safe relative-path → SHA-256 map, not just singleton bytes |
+| `requires` | Mandatory feature versions; unknown features refuse |
+| `profiles`, `permissions`, `capabilities` | Explicit requirements, never silently discarded |
+| `dependencies` | Exact application identity/version/package hash, or `[]` |
+| `services` | Locked definitions and immutable images, or `[]` |
+| `state` | Version, preserving behavior and locked initial seeds |
+| `lifecycle` | Qualified install/upgrade/uninstall/recovery behavior |
+| `providers` | Provider policy and honest spend/egress enforcement |
+| `provenance` | Explicit source, qualification, deployment and job facts |
+| `local_docker` | Required exactly when `requires` includes `local-docker/1` |
+
+The exact runtime is:
+
+```json
+{
+  "repo": "microsoft/aibast-agents-library",
+  "commit": "c60521e2cacbcbfa585a118c1275093d7bb15b74",
+  "version": "0.6.16"
+}
+```
+
+Grail owns chat and agent discovery. The Store does not ship BasicAgent, a
+second inference loop, server, identity system or worker daemon. RAPP Work
+is optional business workflow content, not a technical runtime dependency.
+Version-1 twin metadata does not grant version-2 support for another engine.
+
+Version-2 validation is closed on behavior-bearing fields. All declared
+files must exist and match their hashes; undeclared executable dependencies
+cannot be hidden inside metadata. Portable source/state-declaration paths
+use printable ASCII, bounded to 512 characters, avoiding host-specific Unicode
+case/normalization aliases. This does not restrict end-user job input text or
+input filenames. Relative paths exclude traversal, hidden
+members, ambiguous components, symlinks and case-folded destination
+collisions. Application metadata is generated, not trusted from an
+`index_entry.json` override. README is part of the lock; a UI is optional.
+The 5 MiB package/20 MiB expanded-source limits remain separate from external
+component materialization, which is declared rather than bundled as images.
+
+Byte-length fields marked `x-wire-integer` must use JSON integer tokens,
+not decimal or exponent spellings. The unchanged revision loader and
+materializer read the original locked bytes and reject floating-point
+file/artifact lengths. Other integer annotations use finite, integral,
+safe JSON-number semantics, excluding booleans.
+Browser wire preflight uses `RappStoreContract.parseJSON`, which retains this
+token distinction without modifying the declared data; an already-parsed
+JavaScript object alone cannot recover discarded numeric spelling.
+The gateway's fixed concurrency policy is the numeric value `2` (excluding
+booleans), not a serialized loader byte-count field.
+
+Public federation resolves a full commit, re-reads the manifest at that
+commit and fetches **every** locked file before admission. A source movement
+refuses rather than mixing revisions. Private metadata alone cannot qualify
+this complete installation contract. Native macOS distribution retains its
+own version-1 extension rather than mixing installer semantics.
+
+Complete applications currently use **public federation for Store
+submission**. Their staged `source.ref` is the resolved full commit, so
+approval cannot follow a subsequently moved branch. The existing source-ZIP
+promotion path does not yet provide a qualified publisher-namespaced,
+preserving complete-layout transaction; version-2 source ZIPs therefore
+refuse **before extraction or promotion writes**, with
+`E_APPLICATION_FEDERATION_ONLY`. This does not disable the separately
+verified `rapp-egg/2.0` installation cartridge. Existing version-1 source
+bundle behavior is unchanged.
+
+### 15.2 `local-docker/1`
+
+[`schemas/local-docker.schema.json`](./schemas/local-docker.schema.json) is
+the closed feature contract. It requires `schema: rapp-local-docker/1` and:
+
+- `component_lock`: locked public component/source/image inputs, platforms,
+  dependencies/licenses and honest local build observations.
+- `loader`: `scotty-revision-loader/1` plus locked `entrypoint`, `descriptor`
+  and the complete content-named `support` subtree. `support` is the canonical
+  relative directory path without a trailing slash; member resolution adds
+  the separator rather than accepting multiple path aliases.
+- `requirements_file`: explicit Python/current-Grail/Git/Docker/Compose/Buildx,
+  host/guest architectures, resource observations and adopter login needs.
+  Public image materialization uses Buildx/BuildKit, not the legacy builder;
+  the Buildx plugin is checked only during explicit device preflight/use.
+- `jobs_file`: closed typed job inputs, outputs, modes, providers and
+  limitations. Bounds, enums, typed arrays and closed objects are supported;
+  arbitrary publisher-supplied regular expressions are not part of this
+  feature. There is no command-string execution escape hatch.
+- `state_lifecycle_file`: owned roots/volumes, sealed inputs, preserving
+  start/stop/detach/reinstall/recovery and credential/export exclusions.
+- `intelligence`: official Copilot CLI in Docker, pinned version, model,
+  concurrency, cloud inference, tools disabled, usage disclosure and
+  disabled other paid providers.
+- `exhaust`: canonical RAPP/1 `memory.tool-call` frames, session receipts,
+  selected-output/source rapplication capsules and verification scope.
+- `readiness`: independent package/install/job/health/lifecycle facts plus
+  a locked evidence reference, not a universal “ready” flag.
+
+File references are not arbitrary JSON escape hatches. Python admission,
+embedded installer and browser file preflight dereference and type-check
+them against the same advertised feature. Unknown mandatory declarations
+refuse before installation or bundle extraction writes. Static preflight
+does not invoke Docker, inspect credentials or infer device health.
+Explicit installation/use performs the separate device preflight.
+
+The component reference uses the existing **`rapp-dock-components/1` public
+materializer lock**, not a parallel array projection or a second runtime
+lane. The synthetic authoring fixture uses that same format with explicit
+`blocked-build` entries, null recipes/references and nonempty blockers.
+The lock is preserved losslessly and must match the runtime's scoped
+`deploy/local/components.lock.json` byte-for-byte. Applications reference
+existing component IDs; image environment names are unique. Registry/base
+images are digest-pinned public references. Recipe/helper files resolve inside
+the declared support tree and must match both the application lock and their
+own byte/digest pins.
+Selecting the lock directly inside support does not require an outer copy,
+but an outer `components.lock.json`, when present, must still match the scoped
+runtime bytes; changing the selector cannot hide a contradictory copy.
+
+Public input sets and their wheel/system/model/npm dependency manifests are
+dereferenced and type-checked, including SHA-512/integrity agreement for npm.
+Unknown fields/kinds, unapproved origins, missing pins and contradictory
+counts refuse. Exact dependency lengths may be absent only where the existing
+materializer enforces its declared 2 GiB per-input bound and records the actual
+length after digest verification; absence is not proof of a completed fetch.
+Derived OpenShorts build recipes are also distributed as locked
+`generated/dockerfiles/<component-id>.Dockerfile` files matching the declared
+recipe hash and base-image list. Store validation does not import or execute
+the supplied materializer to derive them.
+
+`blocked-build` cannot qualify installation. Recorded network/transport
+blockers stay explicit and may coexist with an experimental code-only canary;
+cached image observations never establish public replay or fresh-device
+qualification. No fake archive digest or size is synthesized merely to
+translate one data format into the other.
+
+The installer verifies the exact Grail baseline and installs the complete
+bootstrap, descriptor and hash-scoped support layout. It checks ownership,
+collisions and existing receipts before writes, writes the receipt last and
+supports recovery without replaying application jobs. Detach/uninstall
+preserves app data and retained, unqualified container layers. It must not
+delete volumes, daemon-prune, or substitute a bare singleton.
+
+### 15.3 Readiness and truthful listing language
+
+The real, installable RAPP Dock / Scotty application is
+[`apps/@kody-w/dock_scotty/`](./apps/@kody-w/dock_scotty/README.md). The main
+authoring template is
+[`samples/dock_scotty/`](./samples/dock_scotty/README.md). It is **unlisted,
+experimental, synthetic authoring material**, not a deployed app or runnable
+release. Its first-card disclosure is:
+
+> Local application execution; Copilot cloud inference; tested on Apple
+> Silicon with some amd64 guests under emulation.
+
+This describes the development reference profile, not successful fresh
+installation of the public candidate, a minimum resource specification, or
+whole-bundle Intel/amd64 qualification. Resource observations, source/package
+verification, fresh install, each job/mode, timestamped current health,
+restart and full recreation are separate facts. Fresh install and Dify/
+OpenShorts recreation remain pending in this sample. Missing evidence stays
+pending/unknown; synthetic evidence never certifies runtime outcomes.
+
+The separately scoped, sanitized `metrics.reference_readiness` disclosure
+records updated **reference-profile**, not candidate, facts. Dify full
+recreation is qualified on the tested Apple Silicon profile: all 15 roles
+read-only with explicit custody, preserved datasets/documents/indexing/
+credentials, and a fresh answer afterward. OpenShorts recreation is qualified
+for drained completed state: read-only renderer, authenticated ingress,
+preserved completed clip hashes and a fresh render. In-flight renderer memory
+is not recoverable. Fresh-machine installation remains pending; public
+OpenShorts cold rebuild remains blocked on npm/PyPI retrieval. This optional
+reported-metrics disclosure never changes installation gates or grants a
+synthetic/new candidate a runtime pass.
+
+The shipped development modes are native Scrapling collection;
+gateway-authored, Presenton-exported editable PPTX/PDF; actual OpenSEO
+projects with paid data disabled; Dify economy retrieval with gateway-grounded
+cited answers; and AI-selected/native-rendered OpenShorts. Native Presenton
+generation is not the default and a native Dify model plugin is not claimed.
+
+The adopter supplies their own Copilot entitlement/authentication. Copilot
+consumes usage/credits; other paid providers stay disabled. Process, byte,
+time and concurrency bounds are not a hard monetary spend cap or guaranteed
+generation-token ceiling. App-window usage is not exact per-job billing.
+Unmeasured monetary cost and hard spend cap remain `null`.
+
+RAPP/1 receipt verification is unsigned and structural-only. A capsule
+carries selected outputs and producing source, **not** full database state,
+Docker images, secrets or a complete backup. Installation cartridges
+(`rapp-egg/2.0`) and canonical RAPP/1 eggs are different artifacts.
+
+### 15.4 Discovery, browsers and admission
+
+Complete catalog/discovery rows retain `application_schema`, the full
+`application`, `requires`, runtime and readiness. They default to
+`installable: false` until a complete reviewed content-addressed package and
+installer are published and applicable readiness gates pass. No
+`singleton_url`, `service_url`, legacy egg, shell command or browser-run
+fallback may bypass feature, closure or device checks.
+
+The scoped `--application-only --ids <approved-id>` projection preserves
+unrelated v1/native records, index metadata and immutable artifacts; it
+does not alter the root catalog or Zoo. Global legacy producers must refuse
+complete applications rather than generate partial eggs.
+
+Browser validation is a static preflight, never execution authority.
+Unknown, malformed or pending rich-app cards show blockers and disclosures,
+not an “install” or “run in browser” shortcut. Existing simple and native UI
+behavior is unchanged. New applications still require the `[RAPP]` receiver
+and maintainer approval. Opening a draft plumbing PR does not admit the
+unlisted template or authorize publication of private evidence.

@@ -1,5 +1,9 @@
 # RAPP Rings
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-rings.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-rings.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 > RAPP Rings is the staged release train for the RAPP platform: changes enter at Canary and are promoted ring by ring — Nightly, Alpha, Beta — earning a human-gated Grail production release.
 
 Each ring is an audience, qualified by CI and an attestation chain before promotion. Surfaced by the [RAPP Flight Deck](https://github.com/kody-w/rapp-flight-deck).

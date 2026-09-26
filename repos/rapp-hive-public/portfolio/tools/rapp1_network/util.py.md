@@ -2,7 +2,7 @@
 
 Small helpers every module shares. Standard library only; text is always UTF-8 with LF line endings.
 
-Source: `rapp1_network/util.py` (rapp1-network 0.1.5). SHA-256 of the source below: `0fd970b5ffe990b46b155718b74605048c552dcd5a98f75269e648a15a0a80d4` (2865 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/util.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/util.py` (rapp1-network 0.1.6). SHA-256 of the source below: `0fd970b5ffe990b46b155718b74605048c552dcd5a98f75269e648a15a0a80d4` (2865 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/util.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python

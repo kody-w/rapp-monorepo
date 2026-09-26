@@ -2,7 +2,7 @@
 
 The badge: a small self-made SVG, "RAPP/1 | <status>" (certified green, not yet amber, unchecked grey), kept in the Hive as `badges/<repo>.svg.md` and served by GitHub Pages as `badges/<repo>.svg` (image/svg+xml).
 
-Source: `rapp1_network/badges.py` (rapp1-network 0.1.5). SHA-256 of the source below: `0f0d801576069c8557ba94d15701605bd07f14a19544905843b5edd7fb39bde3` (9808 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/badges.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/badges.py` (rapp1-network 0.1.6). SHA-256 of the source below: `0f0d801576069c8557ba94d15701605bd07f14a19544905843b5edd7fb39bde3` (9808 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/badges.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python

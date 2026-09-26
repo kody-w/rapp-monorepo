@@ -1,5 +1,9 @@
 # 🚂 rapp-train — the RAPP release-train flight deck
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-train.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-train.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 **https://kody-w.github.io/rapp-train/** — every ring of the RAPP Brainstem
 release train, joinable or sandbox-testable from any machine with one pasted
 line. Feature branches on [rapp-canary](https://github.com/kody-w/rapp-canary)
@@ -79,3 +83,17 @@ release act — the tooling is structurally incapable of it.
 This repo is only the deck: the actual install endpoints are each ring repo's
 own GitHub Pages (rendered ring identity — never the raw-URL copies, which
 carry grail identity by design and install the wrong repo).
+
+## Offline flight checks
+
+Run these manual checks from the repository root with Bash and Python 3:
+
+```bash
+bash -n flight.sh
+bash -n scripts/test_flight.sh
+bash scripts/test_flight.sh
+```
+
+The regression harness mocks commands, sockets, and PID liveness. It makes no
+network requests, starts no real flights or listeners, and sends no host-process
+signals. These offline checks are not wired into CI.

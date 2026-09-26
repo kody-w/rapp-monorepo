@@ -2,7 +2,7 @@
 
 rapp-1 at the canon pin: its checker (rapp_check.py), its reference implementation (rapp.py), its registry of stream forms (rapp_registry.py) and its conformance suite. They are always run or imported from the pinned checkout, never re-typed (RAPP/1 SPEC §4, note C4).
 
-Source: `rapp1_network/checker.py` (rapp1-network 0.1.5). SHA-256 of the source below: `914b298cac4c04abe45829653f6334d0ddf2f0a042a62097e2afa344b51b5fb5` (4094 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/checker.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/checker.py` (rapp1-network 0.1.6). SHA-256 of the source below: `914b298cac4c04abe45829653f6334d0ddf2f0a042a62097e2afa344b51b5fb5` (4094 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/checker.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python

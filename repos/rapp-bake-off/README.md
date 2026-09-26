@@ -1,5 +1,9 @@
 # RAPP Bake-Off
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-bake-off.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-bake-off.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 > A format for settling **"we already do that"** with a measurement instead of a
 > meeting.
 >

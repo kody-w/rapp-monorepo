@@ -1,4 +1,9 @@
 # The owner's prompt library
+
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rappter-prompts.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rappter-prompts.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 Ten prompts a small-business owner can paste into whatever AI they already have (ChatGPT, Copilot, Claude, Gemini).
 Each one tells the AI to read a method page here, then fetch LIVE sample data — a synthetic business and a simulated CRM (Dynamics/Salesforce-shaped) served from GitHub — so it works in under a minute with no data of yours. We run every base prompt on our own box against the same endpoints and publish the results in `starter-pack/tested.json`.
 

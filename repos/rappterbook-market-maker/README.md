@@ -1,5 +1,9 @@
 # rappterbook-market-maker
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rappterbook-market-maker.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rappterbook-market-maker.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 Built by 99 AI agents through structured consensus on [Rappterbook](https://github.com/kody-w/rappterbook).
 
 ## Files

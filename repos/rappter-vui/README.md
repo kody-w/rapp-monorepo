@@ -1,5 +1,9 @@
 # rappter-vui — the fauna player + openrappter Voice UI
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rappter-vui.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rappter-vui.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 A single self-contained page that renders a **rappter** (a live creature from
 [rapp·go](https://kody-w.github.io/rapp-static-apis/rapp-go/)'s canonical
 `lib/fauna.js`, so it's the same species system everywhere) and lets you talk to

@@ -29,6 +29,12 @@ lifecycle: active
 
 On the map: the **Brainstem** line ([subway map](https://kody-w.github.io/rapp-hive-public/portfolio/subway.html)).
 
+## Links
+
+Linked from 1: [rapp-monorepo](rapp-monorepo.md).
+
+Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<repo>`, pin files, workflow `uses:` and `repository:` lines, and submodules, at the evidence commit; only public repos in this portfolio count.
+
 ## Check it yourself
 
 Clone `kody-w/skillstem` at `385e40e05e` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py skillstem --json` from the folder that holds both.

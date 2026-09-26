@@ -2,7 +2,7 @@
 
 The portfolio room (`<hive>/shared/organism/portfolio/`, published as `portfolio/`): one file per repo (`repos/<repo>.md`), its badge (`badges/<repo>.svg.md`), one file per line (`lines/<line>.md`) and `PORTFOLIO.md`, plus the public README's portfolio bullet. The subway map and the pulses are drawn from these files.
 
-Source: `rapp1_network/portfolio.py` (rapp1-network 0.1.5). SHA-256 of the source below: `8e80519fa73633df6ab1a34698bcd1c56298155a1fa50098fd9c5c489879bba5` (48628 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/portfolio.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/portfolio.py` (rapp1-network 0.1.6). SHA-256 of the source below: `c646b4d0832e6364ef2ce0339b7de57f12d220f70c49a9b1b833a58178b09f4c` (49656 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/portfolio.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python
@@ -46,6 +46,8 @@ EDITIONS = ((1, 1), (2, 2))  # (the first version number it writes, edition)
 EDITION = EDITIONS[-1][1]  # the current edition; it also writes a portfolio that carries no version
 NOTICES_MD = "NOTICES.md"  # the notice board, served as NOTICES.html
 HOWTO_MD = "lifecycle.md"  # how to deprecate, move or version a repo, served as lifecycle.html
+CHANNEL_NOTICES_MD = "channel-notices.md"  # open channel questions, saved by hand in the room; channel-notices.html
+CHANNEL_NOTICES_LINK = f"[channel notices]({PAGES}/channel-notices.html)"
 
 
 def edition_for(version: dict | None) -> int:
@@ -360,12 +362,14 @@ def linked_from(recs: dict) -> dict[str, list[str]]:
 
 
 def portfolio_files(recs: dict, prs: dict, exceptions: dict | None, version: dict | None = None, *,
-                    left: dict | None = None, previous: dict | None = None, edition: int | None = None) -> dict[str, str]:
+                    left: dict | None = None, previous: dict | None = None, edition: int | None = None,
+                    channel_notices: bool = False) -> dict[str, str]:
     """{path in the portfolio room: text}: repo files, badges, lines and PORTFOLIO.md (the maps are drawn from them);
     from edition 2 also the repo files and badges of the repos that left (`left`, lifecycle.left_repos), the notice
     board NOTICES.md (its changes against `previous`, the head pulse's payload) and the how-to lifecycle.md.
     `version` is {number, utc, stream_id, id}, or None for a portfolio outside the pulse chain; it picks the edition
-    (`edition` overrides it). Refused when a path or a text would not fit the Hive."""
+    (`edition` overrides it). With `channel_notices` (the room holds channel-notices.md, saved by hand), edition 2's
+    NOTICES.md and PORTFOLIO.md link that page. Refused when a path or a text would not fit the Hive."""
     edition = edition_for(version) if edition is None else edition
     back = linked_from(recs)
     if edition < 2:
@@ -385,8 +389,8 @@ def portfolio_files(recs: dict, prs: dict, exceptions: dict | None, version: dic
     if edition < 2:
         want["PORTFOLIO.md"] = portfolio_md(recs, prs, exceptions, version)
     else:
-        want["PORTFOLIO.md"] = portfolio_md2(recs, prs, exceptions, version, left)
-        want[NOTICES_MD] = notices_md(recs, left, version, previous)
+        want["PORTFOLIO.md"] = portfolio_md2(recs, prs, exceptions, version, left, channel_notices=channel_notices)
+        want[NOTICES_MD] = notices_md(recs, left, version, previous, channel_notices=channel_notices)
         want[HOWTO_MD] = HOWTO
     for rel_path, text in want.items():
         check_hive_path(rel_path)
@@ -584,7 +588,7 @@ def lifecycle_counts(recs: dict, left: dict | None) -> dict[str, int]:
 
 
 def portfolio_md2(recs: dict, prs: dict, exceptions: dict | None = None, version: dict | None = None,
-                  left: dict | None = None) -> str:
+                  left: dict | None = None, *, channel_notices: bool = False) -> str:
     """PORTFOLIO.md of edition 2: edition 1's, with the Notices paragraph near the top, the channel legend, the map
     drawn by the package, and a Version column; the Status cell names the lifecycle first when it is not active."""
     text = portfolio_md(recs, prs, exceptions, version)
@@ -600,7 +604,10 @@ def portfolio_md2(recs: dict, prs: dict, exceptions: dict | None = None, version
         "- **unchecked**: it could not be cloned or checked (for example, an empty repository); its file says why.\n"
         "- **rapp1-lts**: the repo has a long-term-support pin (the network's built-in known pins, until the estate "
         "publishes its LTS pins; the Version column shows `LTS` and its label); **newest**: no pin, so its newest "
-        "commit is the one in use. **deprecated**, **superseded** and **archived** come first in the Status column; "
+        "commit is the one in use."
+        + (f" Open questions about a repo's channel are on the {CHANNEL_NOTICES_LINK} page; they change no channel."
+           if channel_notices else "")
+        + " **deprecated**, **superseded** and **archived** come first in the Status column; "
         "each repo's file says since when and why.\n"), 1)
     text = text.replace("Each repo's README carries one marked line:",
                         f"Each repo's README gets one marked line ({header_counts(recs, prs, exceptions)}):", 1)
@@ -660,7 +667,8 @@ def _changes_lines(recs: dict, left: dict, previous: dict | None) -> list[str]:
             ) + [""]
 
 
-def notices_md(recs: dict, left: dict | None, version: dict | None = None, previous: dict | None = None) -> str:
+def notices_md(recs: dict, left: dict | None, version: dict | None = None, previous: dict | None = None, *,
+               channel_notices: bool = False) -> str:
     """NOTICES.md, the notice board (served as NOTICES.html): every repo that is not active and every repo that left,
     with its lifecycle, since, notice and successor; then what changed in this version against the previous pulse;
     and the how-to."""
@@ -677,6 +685,9 @@ def notices_md(recs: dict, left: dict | None, version: dict | None = None, previ
         lines += [f"**Version {version['number']}**, crawled {version['utc'][:10]} {version['utc'][11:16]} UTC: "
                   f"{counts['active']} active, {counts['deprecated']} deprecated, {counts['superseded']} superseded, "
                   f"{counts['archived']} archived, {counts['left']} left the network.", ""]
+    if channel_notices:
+        lines += [f"**Channel notices:** open questions about a repo's release channel are on the "
+                  f"{CHANNEL_NOTICES_LINK} page. A channel notice changes no channel; the LTS pins do.", ""]
     not_active = sorted(((n, r) for n, r in recs.items() if (r.get("lifecycle") or "active") != "active"), key=order)
     lines += [f"## Not active ({len(not_active)})", ""]
     if not_active:
@@ -706,7 +717,8 @@ def notices_md(recs: dict, left: dict | None, version: dict | None = None, previ
     lines += _changes_lines(recs, left, previous)
     lines += [f"[How to deprecate, move or version a RAPP/1 repo]({PAGES}/lifecycle.html) · "
               f"[Portfolio]({PAGES}/PORTFOLIO.html) · [Subway map]({PAGES}/subway.html) · "
-              f"[Timeline]({PAGES}/timeline.html)", ""]
+              f"[Timeline]({PAGES}/timeline.html)"
+              + (f" · [Channel notices]({PAGES}/channel-notices.html)" if channel_notices else ""), ""]
     return "\n".join(lines)
 
 

@@ -1,12 +1,12 @@
 # Release copy
 
-Package `rapp1_network`, rapp1-network 0.1.5 (tag `v0.1.5`), made from rapp1-network commit `227f8a574548175bf22882472771101815b5ed57`.
+Package `rapp1_network`, rapp1-network 0.1.6 (tag `v0.1.6`), made from rapp1-network commit `818c6d18927ee3fb5f78ef767d58e36bc8000bce`.
 
 Its 27 source file(s), each in one markdown file of `rapp1_network/` (linked below), with the SHA-256 and size of the source as the extractor in [README.md](README.md) writes it back:
 
 | Source | Markdown | SHA-256 | Bytes |
 |---|---|---|---|
-| `rapp1_network/__init__.py` | [`package-__init__.py.md`](rapp1_network/package-__init__.py.md) | `c2fbdb397cbfca1861c210a3db58d8bd881fe7d54419b8f9e164967b89e05f23` | 327 |
+| `rapp1_network/__init__.py` | [`package-__init__.py.md`](rapp1_network/package-__init__.py.md) | `9ed2daa3fc035aacad3da719f33c4102565ec63b5f0844434f71a026ca2c9c39` | 327 |
 | `rapp1_network/__main__.py` | [`package-__main__.py.md`](rapp1_network/package-__main__.py.md) | `ff528a493dcc20b88b404b21872ee8f98887698eb6c4a5a7f8f6927c834951ab` | 122 |
 | `rapp1_network/badges.py` | [`badges.py.md`](rapp1_network/badges.py.md) | `0f0d801576069c8557ba94d15701605bd07f14a19544905843b5edd7fb39bde3` | 9808 |
 | `rapp1_network/checker.py` | [`checker.py.md`](rapp1_network/checker.py.md) | `914b298cac4c04abe45829653f6334d0ddf2f0a042a62097e2afa344b51b5fb5` | 4094 |
@@ -22,8 +22,8 @@ Its 27 source file(s), each in one markdown file of `rapp1_network/` (linked bel
 | `rapp1_network/lines.py` | [`lines.py.md`](rapp1_network/lines.py.md) | `6bf9705b085df39144d13463cd8452c1f9d7400b96027f3bdd8040bfb59f5c40` | 10875 |
 | `rapp1_network/pdf.py` | [`pdf.py.md`](rapp1_network/pdf.py.md) | `fecf69df6223dfde098bf04b94c787a60d2c6ccef4a6eb7f93c3e890b0704f76` | 16539 |
 | `rapp1_network/pins.py` | [`pins.py.md`](rapp1_network/pins.py.md) | `4790b4f20a847a0619ba95f952fb6b147f7bc858a7dada9dc18751c4268e4e48` | 1176 |
-| `rapp1_network/pipeline.py` | [`pipeline.py.md`](rapp1_network/pipeline.py.md) | `6807003cd7e817dfff055cfd4a8daa8876175fd9694f7ad70c738a5c9fde0be8` | 41498 |
-| `rapp1_network/portfolio.py` | [`portfolio.py.md`](rapp1_network/portfolio.py.md) | `8e80519fa73633df6ab1a34698bcd1c56298155a1fa50098fd9c5c489879bba5` | 48628 |
+| `rapp1_network/pipeline.py` | [`pipeline.py.md`](rapp1_network/pipeline.py.md) | `1051d34efb455f9d6e59471ef19c8313dddbceef9f64eb8223e5b23fdf4bce53` | 41730 |
+| `rapp1_network/portfolio.py` | [`portfolio.py.md`](rapp1_network/portfolio.py.md) | `c646b4d0832e6364ef2ce0339b7de57f12d220f70c49a9b1b833a58178b09f4c` | 49656 |
 | `rapp1_network/privacy.py` | [`privacy.py.md`](rapp1_network/privacy.py.md) | `2118cc57d14d89933a1860d2c895f7e9122dba3e05f96adc92eba9ecacf73e10` | 3731 |
 | `rapp1_network/prs.py` | [`prs.py.md`](rapp1_network/prs.py.md) | `9ed0011e202d47f79c04b972e2feb45dc952dae44bd08d7a4ec2b3e2000d3643` | 10968 |
 | `rapp1_network/pulses.py` | [`pulses.py.md`](rapp1_network/pulses.py.md) | `b856462583fdb5ed61804259084f902817c42170b776456ae5fd1d6bb0baa653` | 59511 |
@@ -38,7 +38,7 @@ Every pulse this release cuts records exactly this `generator` in its payload:
 
 ```json
 {
- "rapp1_network/__init__.py": "c2fbdb397cbfca1861c210a3db58d8bd881fe7d54419b8f9e164967b89e05f23",
+ "rapp1_network/__init__.py": "9ed2daa3fc035aacad3da719f33c4102565ec63b5f0844434f71a026ca2c9c39",
  "rapp1_network/__main__.py": "ff528a493dcc20b88b404b21872ee8f98887698eb6c4a5a7f8f6927c834951ab",
  "rapp1_network/badges.py": "0f0d801576069c8557ba94d15701605bd07f14a19544905843b5edd7fb39bde3",
  "rapp1_network/checker.py": "914b298cac4c04abe45829653f6334d0ddf2f0a042a62097e2afa344b51b5fb5",
@@ -54,8 +54,8 @@ Every pulse this release cuts records exactly this `generator` in its payload:
  "rapp1_network/lines.py": "6bf9705b085df39144d13463cd8452c1f9d7400b96027f3bdd8040bfb59f5c40",
  "rapp1_network/pdf.py": "fecf69df6223dfde098bf04b94c787a60d2c6ccef4a6eb7f93c3e890b0704f76",
  "rapp1_network/pins.py": "4790b4f20a847a0619ba95f952fb6b147f7bc858a7dada9dc18751c4268e4e48",
- "rapp1_network/pipeline.py": "6807003cd7e817dfff055cfd4a8daa8876175fd9694f7ad70c738a5c9fde0be8",
- "rapp1_network/portfolio.py": "8e80519fa73633df6ab1a34698bcd1c56298155a1fa50098fd9c5c489879bba5",
+ "rapp1_network/pipeline.py": "1051d34efb455f9d6e59471ef19c8313dddbceef9f64eb8223e5b23fdf4bce53",
+ "rapp1_network/portfolio.py": "c646b4d0832e6364ef2ce0339b7de57f12d220f70c49a9b1b833a58178b09f4c",
  "rapp1_network/privacy.py": "2118cc57d14d89933a1860d2c895f7e9122dba3e05f96adc92eba9ecacf73e10",
  "rapp1_network/prs.py": "9ed0011e202d47f79c04b972e2feb45dc952dae44bd08d7a4ec2b3e2000d3643",
  "rapp1_network/pulses.py": "b856462583fdb5ed61804259084f902817c42170b776456ae5fd1d6bb0baa653",

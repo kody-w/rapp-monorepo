@@ -2,6 +2,10 @@
 
 # RAPP Claude Skills
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-claude-skills.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-claude-skills.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 **Make Claude Code compatible with the RAPP Pattern**
 
 This repo provides Claude Code skills, agents, and configurations that integrate with the RAPP (Rapid Agent Prototype Platform) ecosystem.

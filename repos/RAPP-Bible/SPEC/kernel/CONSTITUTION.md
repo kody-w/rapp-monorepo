@@ -895,6 +895,8 @@ The two roots — repo and `rapp_brainstem/` — share one discipline:
 
 ## Article XVII — `agents/` IS the User's Workspace
 
+> **Amendment (2026-09-24) — only top-level agents are live; additive per Article XXVI.** In the local Brainstem (Tier 1), live agents come only from the top-level `*_agent.py` files in `agents/` (the `AGENTS_PATH` folder), hot-loaded on every `/chat` request. The grail's `load_agents()` (`rapp_brainstem/brainstem.py` at `kody-w/rapp-installer@brainstem-v0.6.9`, lines 1202-1205) does `pattern = os.path.join(AGENTS_PATH, "*_agent.py")` and then `glob.glob(pattern)`: one level, no recursion, no `rglob`. Every subfolder of `agents/` is organization only and never loads, whatever its name; `experimental_agents/`, `disabled_agents/`, `local_agents/` and `workspace_agents/` are conventions with no engine meaning, and an agent kept in any folder, such as `swarm_factory_agent.py` under `workspace_agents/`, is parked, not live. Loading or unloading an agent is a plain file move, meaning drag and drop: move `weather_agent.py` to the top of `agents/` to load it, or into any folder to unload it. Any agent that should be live belongs at the top level, whatever the curriculum rule below says. The recursive-tree, reserved-name, curriculum-only, `rglob` and Tier 2 mirroring wording below is preserved (Article XXVI: additive-only, no removals) but does not govern; this note governs, together with the amendment of the same date at the end of this file. Tier 2 (`rapp_swarm/`) loads differently; [proposal 0001](./docs/proposals/0001-only-top-level-agents-are-live.md) records how, as of 2026-09-25.
+
 `rapp_brainstem/agents/` is **the user's entire operational workspace**
 for setting up and managing their brainstem. To add a capability,
 organize a swarm, group a project's agents, turn something off — all
@@ -1015,6 +1017,8 @@ see files, paths, or Python.
 > `agents/`. No UI-only concepts that don't exist on disk.**
 
 ### The mapping
+
+> **Amendment (2026-09-24) — load and unload are file moves; additive per Article XXVI.** Only top-level `agents/*_agent.py` files are live (Article XVII amendment), and the engine discovers nothing below the top level. **Load** = move the file to the top level of `agents/`. **Unload** = move it into any folder, or delete it. A plain file move, such as drag and drop in a file manager, is all it takes. The "Disable", "Enable" and "Mark experimental" rows below are such moves and remain UI conventions, but `experimental_agents/` and `disabled_agents/` have no engine meaning: any folder unloads, and only a move to the top level loads. Where the text below gives those folders engine semantics ("experimental won't auto-load, disabled is off"), this note governs.
 
 | UI action                 | Filesystem operation                                |
 |---------------------------|-----------------------------------------------------|
@@ -1144,6 +1148,7 @@ detail is revealed only when the user asks for it.
   of `GITHUB_TOKEN: set`.
 - **Reserved folders hidden.** `experimental_agents/` and
   `disabled_agents/` are filtered out of the tree view entirely.
+  > **Amendment (2026-09-24) — no engine-reserved folders; additive per Article XXVI.** The engine reserves no folder names: every folder under `agents/` is organization only, and nothing in a folder is live (Article XVII amendment). Whether a view shows or hides a folder is a display choice and changes nothing about what loads. Where this article calls those names "engine-internal", this note governs.
 - **Folders collapsed on load.** Users expand what they want to
   explore, not drown in a wall of nested paths.
 - **Curated field set.** Only the settings a learner needs — model,
@@ -1415,7 +1420,7 @@ was articulated. One directory, two faces — see
   root. The right home for that content is a vault note, with a
   hook line, frontmatter, and wikilinks.
 - ❌ Letting the viewer drift from the vault. If you rename or move
-  a note, update `_manifest.json` in the same change.
+  a note, update `manifest.json` in the same change.
 - ❌ Skipping the stub. If a topic deserves a post but the post
   isn't ready, ship the stub. The slot in the index is itself a
   forcing function.
@@ -4022,8 +4027,8 @@ last split between the reference spec and the constitutional-era naming.
 
 The target-owned machine record [`RAPP1_AUTHORITY.json`](./RAPP1_AUTHORITY.json)
 pins `kody-w/rapp-1` commit
-`6723c7add2aed36bb68992fc71a56b0a4bd5ad81`, path `SPEC.md`, SHA-256
-`6d06daba65d7c045716f3d6e95db8401ab58e727820e4114466d847f62cae49b`,
+`d2cd5abed48d3f52b86bbb975ac3558286d1db41`, path `SPEC.md`, SHA-256
+`cea7847f98f9751734995f46fd4e1bde211c8eb9d03dbbb477934213865bb91a`,
 wire tag `rapp/1`, revision `rev-5`. The immutable canonical and retrieval URLs
 in that record name the same commit and path. A mismatch fails closed.
 
@@ -4102,11 +4107,10 @@ standard.
 
 The current status is [`RAPP1_STATUS.md`](./RAPP1_STATUS.md):
 **NOT YET FULLY RAPP/1 CONFORMANT**. No full-compliance claim is permitted while
-any of these owner dependencies remains open: the signed monotonic registry and
-out-of-band anchor, lawful root re-anchor, signed replacement invite, or
-external mirror correction. Audit coverage and structural gates are evidence
-of work performed; neither substitutes for those authenticated governance
-actions.
+any of these three owner dependencies remains open: the signed monotonic
+registry and out-of-band anchor, lawful root re-anchor, or signed replacement
+invite. Audit coverage and structural gates are evidence of work performed;
+neither substitutes for those authenticated governance actions.
 
 ---
 
@@ -4295,3 +4299,61 @@ numbering.**
 - **`kody-w/rapp-dog-hub`** — the DOG layer: the admission gate, the splitter, the public chain. Houses no GOD layer by construction.
 - **`kody-w/openrappter`** — `src/twin/` — the GOD layer: the vault, the audience projections, the leak guard.
 - **`kody-w/rapp-second-brain`** / **`-private`** — the prior two-face precedent this article generalizes.
+
+---
+
+## Article LVII — RAPP Lives Here; RAPP/1 Is the Protocol (2026-08-30)
+
+The main **`kody-w/RAPP`** repository remains the canonical home of the public
+RAPP foundation, product authority, organism model, public reference
+implementation, philosophy, and product constitution. It is the tree that
+grows around the Grail.
+
+**`kody-w/rapp-1`** is the canonical home of the interoperable protocol:
+canonical bytes, addresses, identity, frames, wire, eggs, trust, registries,
+and protocol-level operational profiles. RAPP/1 governs RAPP's wire; it does
+not absorb or replace the RAPP foundation.
+
+### LVII.1 — Scope is explicit
+
+- Foundation architecture, organism anatomy, reference interfaces, public
+  reference components, and public philosophy belong here.
+- Protocol bytes and cross-implementation conformance belong in `rapp-1`.
+- A protocol profile may be specified in `rapp-1`; a downstream product remains
+  in its own distinctly identified repository.
+- Rappter is the singular LLC brand. RapterBox is the company name and a
+  separate sub-product. Their private doctrine and product code do not become
+  RAPP foundation IP merely because they use RAPP.
+- Downstream implementations such as Rappter distribution surfaces may remain
+  in their own repositories. They consume and extend the RAPP foundation; they
+  do not become a competing canonical home for RAPP.
+- A mirror or explanatory copy never silently becomes the authority.
+
+Moving a document does not move the thing it describes. Any future scope change
+must amend this article explicitly.
+
+### LVII.2 — Rights are not inferred from repository topology
+
+Repository ownership, administration, commits, and technical authority do not
+by themselves determine legal ownership allocation. Applicable agreements
+govern those rights. [`RIGHTS-NOTICE.md`](./RIGHTS-NOTICE.md) states the public
+boundary without inventing a percentage or assignment.
+
+This article resolves technical scope only. It grants, assigns, and waives no
+legal right.
+
+---
+
+## Amendment (2026-09-24) — Only top-level agents are live
+
+> **Additive per Article XXVI; see [proposal 0001](./docs/proposals/0001-only-top-level-agents-are-live.md).**
+> Articles XVII, XVIII and XX sit inside the historical section above, but
+> the rule for which agent files the local Brainstem (Tier 1) loads is
+> current guidance, so it is stated here as well. Live agents come only from
+> the top-level `*_agent.py` files in `agents/` (the `AGENTS_PATH` folder),
+> hot-loaded on every `/chat` request. Every folder under `agents/` is
+> organization only and never loads, whatever its name. Loading or unloading
+> an agent is a plain file move: to the top of `agents/` to load it, into any
+> folder to unload it. The notes of the same date in Articles XVII, XVIII
+> and XX apply this rule to their text, and they govern how those articles
+> are read.

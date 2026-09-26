@@ -2,7 +2,7 @@
 
 The known LTS pins: the long-term-support commits RAPP/1 already names in public, used until the estate publishes its LTS pins file (passed with --lts-pins / RAPP1_LTS_PINS). Each pin is {commit, version?}: `version` is the label when the pin is a tag; otherwise the label is the commit's first seven characters. Public facts only.
 
-Source: `rapp1_network/pins.py` (rapp1-network 0.1.5). SHA-256 of the source below: `4790b4f20a847a0619ba95f952fb6b147f7bc858a7dada9dc18751c4268e4e48` (1176 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/pins.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/pins.py` (rapp1-network 0.1.6). SHA-256 of the source below: `4790b4f20a847a0619ba95f952fb6b147f7bc858a7dada9dc18751c4268e4e48` (1176 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/pins.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python

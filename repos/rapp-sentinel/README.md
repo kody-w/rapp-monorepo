@@ -1,5 +1,9 @@
 # rapp-sentinel
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-sentinel.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-sentinel.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 > **Why this exists:** [RAPP and the new way of working: above AI, not beside it](https://kody-w.github.io/rapp-sentinel/) — the argument for the pattern, with every figure traceable to a public repo.
 
 **A watchdog that can't quietly lie to you, and a repair arm that only spends money when something is actually broken.**
@@ -59,6 +63,19 @@ python3 neighborhood.py peers     # fetch peers, check they're still advancing
 An outside neighbor is trusted exactly as far as its published head can be
 checked against what it published before: you can catch a peer that **stalled**,
 and you cannot catch a peer that **lied**. Build only on the first.
+
+## Exercising a platform's outsider path
+
+`python3 participate.py smoke --platform rappterbook` uses its supported
+`github-issue` intake to register or heartbeat, then verifies published state.
+`--dry-run` previews the issue without submitting it or polling for a landing.
+
+Rappterverse accepts validated state pull requests (`github-state-pr`), not
+issues. That smoke path is not implemented: `--platform rappterverse` exits 1,
+including with `--dry-run`, before any network access and records exactly one
+`smoke.unsupported` row with `ok: false` in `state/participation.jsonl`.
+This is missing tool support, not evidence of a platform outage, and cannot
+count as a successful smoke.
 
 ## Growing it from the hub
 
@@ -169,6 +186,24 @@ cadence. Evolution has its own rolling daily budget and does not inherit the
 repair arm's lifetime attempt cap. Set `repair_enabled: false` when an instance
 may contribute to its allowlisted commons but must only diagnose watched
 platforms.
+
+Repair isolation is created by the harness, not by the model. Each requested
+failure must map through `required_checks.json`'s `kinds` domain to
+`rappterverse` or `rappterbook`, with an existing repository root in
+`repo_paths`. Other watched repositories, watcher failures, unknown check ids,
+and missing targets block the entire repair without invoking Copilot.
+
+Before launch, the harness fetches each affected repository's `origin/main`
+and creates a fresh branch and worktree under one private `sentinel-repair-*`
+temporary directory. Only affected worktrees enter that directory or the repair prompt.
+Copilot starts there with `--allow-all-tools`, **not** `--allow-all` or
+`--allow-all-paths`, retaining its default path and URL verification, with
+`--disallow-temp-dir` preventing a grant to the entire system temp directory.
+This is CLI path verification, not an OS sandbox. No live checkout is a model working
+directory. The harness removes the worktrees and root on success, failure,
+timeout, or exception; cleanup failures are reported. Repair branches and
+their commits are retained (their names are logged), so cleanup cannot discard
+a pushed repair or its recovery reference. Diagnose and evolve are unchanged.
 
 ### Level 3 in its own job: the evolve worker
 
@@ -623,13 +658,29 @@ All enforced **before** a model is invoked.
 |---|---|
 | kill switch (`touch STOP`) | not being able to stop a runaway loop fast enough |
 | daily budget (rolling 24h) | a flapping check burning credits all night |
-| per-issue cooldown | re-attacking the same failure every tick |
-| attempt cap → escalate to human | infinite retry on something unfixable |
+| per-check cooldown | re-attacking the same failure by changing its failing companions |
+| per-check attempt cap → escalate to human | infinite retry or repeated cap alerts on something unfixable |
 | worktree isolation | destroying a working tree with uncommitted work |
 | notify on **state change only** | alert fatigue — a muted watcher is no watcher |
 | **re-probe after repair** | believing a fix landed when it didn't |
 
 That last one is the difference between self-healing and self-reporting. It re-runs the *same* check and only claims `verified fixed` when what failed now passes.
+
+Repair and diagnose share `check:<id>` records in `state/issues.json`.
+`issue_cooldown_hours` and `max_attempts_per_issue` apply to **every** included
+check: if any is blocked, the whole batch waits and the log names each blocker.
+One escalation charges each included check once, but still uses only one daily
+budget slot. Retry prompts use the highest attempt count, then the most recent
+history on a tie. Human cap alerts are deduped per check, and a repair re-probe
+resets only checks explicitly observed `ok=True`; missing or unresolved checks
+keep their history.
+
+Legacy single-check or comma-separated records migrate once on the next repair/diagnose
+decision. Each record's attempts count against every member, overlapping counts
+add together, and the newest attempt timestamp and result survive.
+Existing `check:` records are not re-migrated; `smoke:` and `evolve:` records stay untouched.
+Sorted batch keys remain in logs and events for correlation, not throttling.
+Offline proof: `python3 prove_per_check_throttle.py`.
 
 ---
 

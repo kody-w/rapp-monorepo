@@ -2,7 +2,7 @@
 
 The network header: one marked line in a portfolio repo's README, the same on every repo.
 
-Source: `rapp1_network/headers.py` (rapp1-network 0.1.5). SHA-256 of the source below: `ab1416ed8b3c167009762762769ca596f97068e378269fc06b74fe3f1c12de17` (9903 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/headers.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/headers.py` (rapp1-network 0.1.6). SHA-256 of the source below: `ab1416ed8b3c167009762762769ca596f97068e378269fc06b74fe3f1c12de17` (9903 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/headers.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python

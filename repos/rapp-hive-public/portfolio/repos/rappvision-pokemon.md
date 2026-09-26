@@ -31,6 +31,12 @@ also_on:
 
 On the map: the **Rappvision** line, and also Worlds & Play ([subway map](https://kody-w.github.io/rapp-hive-public/portfolio/subway.html)).
 
+## Links
+
+Linked from 1: [rapp-monorepo](rapp-monorepo.md).
+
+Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<repo>`, pin files, workflow `uses:` and `repository:` lines, and submodules, at the evidence commit; only public repos in this portfolio count.
+
 ## Check it yourself
 
 Clone `kody-w/rappvision-pokemon` at `3c693cf3d0` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py rappvision-pokemon --json` from the folder that holds both.

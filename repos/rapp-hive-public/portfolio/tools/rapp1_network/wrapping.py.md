@@ -2,7 +2,7 @@
 
 The Hive's wrappers: a Hive holds only markdown, so every served file is a .md file whose Jekyll front matter tells GitHub Pages where to serve it, and whose body passes through untouched inside a kramdown {::nomarkdown} block.
 
-Source: `rapp1_network/wrapping.py` (rapp1-network 0.1.5). SHA-256 of the source below: `05012bd906de43409181b4ade23e6ee0cbb0fd32954287af0f5dd8da70db4539` (4709 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/wrapping.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/wrapping.py` (rapp1-network 0.1.6). SHA-256 of the source below: `05012bd906de43409181b4ade23e6ee0cbb0fd32954287af0f5dd8da70db4539` (4709 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/wrapping.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python

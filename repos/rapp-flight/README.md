@@ -1,5 +1,9 @@
 # RAPP Flight
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-flight.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-flight.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 > A RAPP Flight is an isolated experimental feature build that runs on-device without touching a real install and can never ride the promotion train until it graduates.
 
 Flights are how new capabilities are tested in the wild while the mainline stays pristine.

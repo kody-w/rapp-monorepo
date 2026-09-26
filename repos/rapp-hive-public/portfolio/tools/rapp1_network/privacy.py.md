@@ -2,7 +2,7 @@
 
 The optional private denylist, used strictly as a black box.
 
-Source: `rapp1_network/privacy.py` (rapp1-network 0.1.5). SHA-256 of the source below: `2118cc57d14d89933a1860d2c895f7e9122dba3e05f96adc92eba9ecacf73e10` (3731 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/privacy.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/privacy.py` (rapp1-network 0.1.6). SHA-256 of the source below: `2118cc57d14d89933a1860d2c895f7e9122dba3e05f96adc92eba9ecacf73e10` (3731 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/privacy.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python

@@ -2,7 +2,7 @@
 
 The RAPP Hive client: everything the pipeline asks of the Hive goes through the Hive's own agent.
 
-Source: `rapp1_network/hive.py` (rapp1-network 0.1.5). SHA-256 of the source below: `f5b0e4c178e532ee91a02d349555cdca4dfa7985b02e20c21ed941e43d291c92` (16013 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/hive.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/hive.py` (rapp1-network 0.1.6). SHA-256 of the source below: `f5b0e4c178e532ee91a02d349555cdca4dfa7985b02e20c21ed941e43d291c92` (16013 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/hive.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python

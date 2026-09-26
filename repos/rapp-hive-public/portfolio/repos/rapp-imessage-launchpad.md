@@ -34,6 +34,7 @@ On the map: the **Tools & Apps** line ([subway map](https://kody-w.github.io/rap
 ## Links
 
 Links to 1 portfolio repo(s): [rapp-sentinel](rapp-sentinel.md) (markdown).
+Linked from 1: [rapp-monorepo](rapp-monorepo.md).
 
 Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<repo>`, pin files, workflow `uses:` and `repository:` lines, and submodules, at the evidence commit; only public repos in this portfolio count.
 

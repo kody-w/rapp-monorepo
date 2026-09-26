@@ -2,7 +2,7 @@
 
 The poster PDF: headless Chrome prints the poster page, and the print is rewritten as 7-bit text.
 
-Source: `rapp1_network/pdf.py` (rapp1-network 0.1.5). SHA-256 of the source below: `fecf69df6223dfde098bf04b94c787a60d2c6ccef4a6eb7f93c3e890b0704f76` (16539 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/pdf.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/pdf.py` (rapp1-network 0.1.6). SHA-256 of the source below: `fecf69df6223dfde098bf04b94c787a60d2c6ccef4a6eb7f93c3e890b0704f76` (16539 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/pdf.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python

@@ -40,6 +40,7 @@ On the map: the **Learn & Docs** line, and also Brainstem ([subway map](https://
 ## Links
 
 Links to 5 portfolio repo(s): [copilot-harness-sdk](copilot-harness-sdk.md) (markdown), [rapp-installer](rapp-installer.md) (markdown), [rapp-mission](rapp-mission.md) (markdown), [rapp-skills](rapp-skills.md) (markdown), [RAR](RAR.md) (markdown).
+Linked from 1: [rapp-monorepo](rapp-monorepo.md).
 
 Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<repo>`, pin files, workflow `uses:` and `repository:` lines, and submodules, at the evidence commit; only public repos in this portfolio count.
 

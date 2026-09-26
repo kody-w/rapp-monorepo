@@ -5,7 +5,7 @@ line: DOGG & Commons
 wave: 2
 status: not yet
 verdict: DRIFT
-evidence_commit: 83bd051ab954e845477e8c7bc192b399814af833
+evidence_commit: d72ba3a0b0eaa231daee79be88eaf2dd27d537da
 checked: 2026-09-26
 checker: kody-w/rapp-1 rapp_check.py at 591e014
 experimental_mentions: 0
@@ -28,7 +28,7 @@ links_to:
 
 **Version:** none recorded (no root VERSION file and no GitHub release). **Channel:** `newest`: it has no long-term-support pin, so its newest commit is the one in use.
 
-- Evidence: [`kody-w/dogg` at `83bd051ab9`](https://github.com/kody-w/dogg/tree/83bd051ab954e845477e8c7bc192b399814af833) on `main`, checked 2026-09-26.
+- Evidence: [`kody-w/dogg` at `d72ba3a0b0`](https://github.com/kody-w/dogg/tree/d72ba3a0b0eaa231daee79be88eaf2dd27d537da) on `main`, checked 2026-09-26.
 - Checker: [`rapp_check.py` at `591e014`](https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp_check.py), verdict **DRIFT**, 3 finding(s), 37 passing artifact(s). The raw output stays in the maintainer's sweep folder, outside the Hive; its SHA-256 is `e4bfa3609054f89280c50e5b08083e1a4683d742a37bc46eb0b5e4238bc79b0d`.
 - "experimental" mentions: 0 (whole word, any case, in tracked text files at the evidence commit, leaving out the network's own files: the repo's card `.rapp/member.md` and, in the network's public copy, `portfolio/`, `members/`, `notices/` and `PUBLISHED.md`; tracked, not a gate).
 - Network header: not yet added.
@@ -50,4 +50,4 @@ Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<
 
 ## Check it yourself
 
-Clone `kody-w/dogg` at `83bd051ab9` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py dogg --json` from the folder that holds both.
+Clone `kody-w/dogg` at `d72ba3a0b0` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py dogg --json` from the folder that holds both.

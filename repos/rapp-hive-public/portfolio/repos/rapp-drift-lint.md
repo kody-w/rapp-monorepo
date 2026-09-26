@@ -34,7 +34,7 @@ On the map: the **RAPP/1 Core** line ([subway map](https://kody-w.github.io/rapp
 
 ## Links
 
-Linked from 2: [RAPP](RAPP.md), [rapp-egg-hub](rapp-egg-hub.md).
+Linked from 3: [RAPP](RAPP.md), [rapp-egg-hub](rapp-egg-hub.md), [rapp-monorepo](rapp-monorepo.md).
 
 Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<repo>`, pin files, workflow `uses:` and `repository:` lines, and submodules, at the evidence commit; only public repos in this portfolio count.
 

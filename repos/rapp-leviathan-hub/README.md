@@ -1,5 +1,9 @@
 # RAPP Leviathan Hub
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-leviathan-hub.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-leviathan-hub.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 A public registry of **Wrapped-Organism Leviathans** — multicellular digital beings, packaged as portable `.leviathan.egg` files, that you can hatch into any local brainstem.
 
 > **A Leviathan is one operator's full digital AI entity** — composed of up to five estates (Sanctum, Polity, Works, Press, Commons), each unfolding into industries → neighborhoods → factories → soul personas. A Leviathan with all five organs can think, decide, do, see, and speak.

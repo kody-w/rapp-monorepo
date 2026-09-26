@@ -35,8 +35,8 @@ Edit it here, in this repo. These are written-here-not-mirrored:
 - `index.html`
 - `CONTRIBUTING.md`
 - `quickstart/*.md`
-- `repos/*.md` (regenerate via `scripts/build_repo_pages.py`)
-- `repos/_index.md` (regenerated)
+- `repos/*.md` (regenerate via `scripts/build_repo_pages.py`; Bible-authored notes and roles live in its `HAND_KEPT_NOTES` and `HAND_KEPT_ROLES`, so edit them there)
+- `repos/_index.md` (the historical v1.2.0 index, kept by hand; the script leaves it alone)
 - `SPEC/_index.md`
 
 ### To add a customer reference, a private-repo link, or an engagement name

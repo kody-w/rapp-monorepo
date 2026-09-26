@@ -4,7 +4,7 @@
 
 **The law the RAPP ecosystem is governed by.**
 
-57 articles · `Article 0` through `Article LVI` · public, citable, drift-checked
+58 articles · `Article 0` through `Article LVII` · public, citable, drift-checked
 
 </div>
 
@@ -55,7 +55,7 @@ The **public, citable home** of the Constitution. Articles are stable
 identifiers — `Article XLVIII.2`, `Article LVI.3` — so specs, PRs, and review
 comments can point at law rather than restate it.
 
-- **[`CONSTITUTION.md`](CONSTITUTION.md)** — all 57 articles.
+- **[`CONSTITUTION.md`](CONSTITUTION.md)** — all 58 articles.
 - **[`ARTICLE-LVI-EMISSION-DAY.md`](ARTICLE-LVI-EMISSION-DAY.md)** — the founding article, standalone.
 
 ### It is a mirror, and it says so

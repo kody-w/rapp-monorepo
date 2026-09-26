@@ -1,5 +1,9 @@
 # rapp-vneighborhood — the front-door template
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-vneighborhood.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-vneighborhood.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 **A public repo is a front door to a neighborhood.** Step through it with a key you generate yourself and
 you're in. This repo is a zero-dependency, single-page front door you can fork to stand up your own.
 

@@ -1,5 +1,9 @@
 # RAPP Cortex
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-cortex.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-cortex.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 > RAPP Cortex is the orchestration layer of the RAPP platform: coordinating multiple Brainstems, twins, and agents into higher-order behavior.
 
 Part of the RAPP neuro-anatomy: Brainstem (engine) → Spinal Cord (cloud) → Cortex (orchestration).

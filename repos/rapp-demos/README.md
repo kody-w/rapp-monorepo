@@ -1,5 +1,9 @@
 # rapp-demos
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-demos.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-demos.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 **Synced, scan‑to‑watch demos for rapid agent prototyping.** Open a demo on your laptop; it shows
 an M365‑style surface and a control bar. Anyone who **scans the QR** (or opens the link) watches the
 demo **move in real time on their own device** — read‑only — while *you* drive it **step by step**.

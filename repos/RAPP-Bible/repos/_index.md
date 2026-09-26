@@ -1,5 +1,7 @@
 # Repos Index
 
+<!-- hand-kept: scripts/build_repo_pages.py does not rewrite this file -->
+
 Every RAPP-ecosystem repo in the Bible's historical v1.2.0 snapshot, grouped
 by that snapshot's `repos` families. This is not a current registry or
 authority inventory; see [`RAPP1_STATUS.md`](../RAPP1_STATUS.md).
