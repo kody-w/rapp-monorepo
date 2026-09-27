@@ -2,7 +2,7 @@
 
 The pipeline: cut the next version into the RAPP Hive, save it, publish it, check what Pages serves, and the one command that reruns it all (`crawl`: discover, sweep, cut, publish, the Pages check, status).
 
-Source: `rapp1_network/pipeline.py` (rapp1-network 0.1.6). SHA-256 of the source below: `1051d34efb455f9d6e59471ef19c8313dddbceef9f64eb8223e5b23fdf4bce53` (41730 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/pipeline.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/pipeline.py` (rapp1-network 0.1.9). SHA-256 of the source below: `11316452ef86e7a3ca58947ca7e16b5f7a4d800350eb9067be09a714be305845` (48619 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/pipeline.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python
@@ -51,6 +51,8 @@ STABLE = (*MAPS, "timeline.html.md")  # the latest map and the timeline, served 
 IMMUTABLE = (f"{PORTFOLIO}/versions/", *(f"{PORTFOLIO}/tools/{name}.md" for name in export.LEGACY_TOOLS))
 LEAVES = (f"{PORTFOLIO}/repos/", f"{PORTFOLIO}/badges/", f"{PORTFOLIO}/lines/")  # go when their repo or line goes
 PAGES_STATE = '.status + " " + .commit'
+POINTER_TOOL = "member_cards.py"
+CARD_TOOLS_COMMIT = "e991c135b7a94e62c215422eaf07fa8a98b7db22"
 
 
 # ---- one writer ------------------------------------------------------------------------------------------------
@@ -230,6 +232,131 @@ def merge_facts(recs: Mapping[str, dict], facts: Mapping[str, Mapping]) -> dict[
     return out
 
 
+# ---- member pointers --------------------------------------------------------------------------------------------
+
+def _pointer_tools(settings: Settings) -> Path | None:
+    """The folder that holds member_cards.py, from settings or the worktree's refs copy."""
+    folder = settings.card_tools or settings.work / "refs" / "rapp1-distributed-hive"
+    folder = Path(folder).expanduser()
+    if not (folder / POINTER_TOOL).is_file():
+        return None
+    if (folder / ".git").exists():
+        head = util.run("git", "-C", str(folder), "rev-parse", "HEAD").stdout.strip()
+        if head != CARD_TOOLS_COMMIT:
+            raise SystemExit(f"{folder}: card tools must be pinned to {CARD_TOOLS_COMMIT}, not {head or 'unknown'}")
+    return folder
+
+
+def _pins_file(settings: Settings, pins: Mapping[str, Mapping], source: str) -> Path:
+    """The LTS pins file passed to member_cards.py pointers: the real one, or a generated known-pins file."""
+    if source == "lts-pins" and settings.lts_pins:
+        return settings.lts_pins
+    path = settings.cache / "pointer-known-lts-pins.json"
+    util.dump(path, {"schema": "rapp1-network-known-lts-pins/1",
+                     "pins": {f"{OWNER}/{name}": {"commit": pin["commit"]} for name, pin in sorted(pins.items())}})
+    return path
+
+
+def _ensure_pointer_clones(settings: Settings, names: Iterable[str], pins: Mapping[str, Mapping]) -> Path:
+    """A local clone per station, holding HEAD to decide card presence and each pinned commit for LTS manifests."""
+    clones = settings.cache / "pointer-clones"
+    clones.mkdir(parents=True, exist_ok=True)
+    family = {entry["repo"]: entry for entry in inventory.family(settings)}
+
+    def placeholder_empty(clone: Path) -> None:
+        util.remove_tree(clone)
+        clone.mkdir(parents=True, exist_ok=True)
+        util.run("git", "-C", str(clone), "init", "-q", "-b", "main", check=True)
+        util.run("git", "-C", str(clone), "-c", "user.name=rapp1-network",
+                 "-c", "user.email=rapp1-network@invalid", "commit", "--allow-empty", "-q", "-m",
+                 "empty repository placeholder", check=True)
+
+    for repo in sorted(set(names) | set(pins)):
+        clone = clones / repo
+        if not (clone / ".git").exists():
+            done = util.run("git", "clone", "-q", "--filter=blob:none", "--no-tags", f"{REPO_URL}{repo}.git",
+                            str(clone), env={"GIT_LFS_SKIP_SMUDGE": "1", "GIT_TERMINAL_PROMPT": "0"},
+                            timeout=1800)
+            if done.returncode:
+                if family.get(repo, {}).get("empty"):
+                    placeholder_empty(clone)
+                else:
+                    raise SystemExit(f"{repo}: cannot clone for member pointer generation: "
+                                     f"{done.stderr.strip()[-300:]}")
+        elif family.get(repo, {}).get("empty") and util.run(
+                "git", "-C", str(clone), "rev-parse", "-q", "--verify", "HEAD").returncode:
+            placeholder_empty(clone)
+        pin = pins.get(repo)
+        if pin:
+            commit = pin["commit"]
+            has = util.run("git", "-C", str(clone), "rev-parse", "-q", "--verify", f"{commit}^{{commit}}")
+            if has.returncode:
+                fetched = util.run("git", "-C", str(clone), "fetch", "-q", "--depth", "1", "origin", commit,
+                                   timeout=1800)
+                if fetched.returncode:
+                    raise SystemExit(f"{repo}: clone does not hold LTS commit {commit}: "
+                                     f"{fetched.stderr.strip()[-300:]}")
+    return clones
+
+
+def _front_value(value):
+    return subway.unquote(value) if isinstance(value, str) else value
+
+
+def check_member_pointers(room: Path) -> list[str]:
+    """Problems where a member pointer's channel/lts fields disagree with its portfolio row."""
+    room = Path(room)
+    problems = []
+    for repo_file in sorted((room / "portfolio" / "repos").glob("*.md")):
+        station = repo_file.name[:-3]
+        meta, _ = subway.front(util.read_text(repo_file))
+        channel = _front_value(meta.get("channel")) or "newest"
+        lts = _front_value(meta.get("lts_commit")) if channel == "rapp1-lts" else None
+        pointer_file = room / "members" / f"{station}.md"
+        if not pointer_file.is_file():
+            problems.append(f"members/{station}.md: missing pointer")
+            continue
+        pointer, _ = subway.front(util.read_text(pointer_file))
+        got_channel, got_lts = _front_value(pointer.get("channel")), _front_value(pointer.get("lts"))
+        if got_channel != channel:
+            problems.append(f"members/{station}.md: channel {got_channel or 'missing'} != portfolio {channel}")
+        if (got_lts or None) != (lts or None):
+            problems.append(f"members/{station}.md: lts {got_lts or 'none'} != portfolio {lts or 'none'}")
+    return problems
+
+
+def regenerate_member_pointers(settings: Settings, recs: Mapping[str, dict]) -> dict[str, list[str]]:
+    """Regenerate `shared/organism/members/` from the just-built portfolio, using the same LTS pins as the portfolio."""
+    tools = _pointer_tools(settings)
+    existing = settings.room_dir / "members"
+    if tools is None:
+        if existing.exists():
+            raise SystemExit("member pointer regeneration needs member_cards.py: pass --card-tools or put "
+                             "refs/rapp1-distributed-hive under the work folder")
+        return {"added": [], "changed": [], "unchanged": [], "removed": []}
+    pins, source = lifecycle.pins_for(settings)
+    pins_file = _pins_file(settings, pins, source)
+    clone_names = recs if (tools / ".git").exists() else pins
+    clones = _ensure_pointer_clones(settings, clone_names, pins)
+    out = settings.cache / "member-pointers"
+    util.remove_tree(out)
+    done = util.run(sys.executable, "-B", str(tools / POINTER_TOOL), "pointers",
+                    "--portfolio", str(settings.portfolio_dir),
+                    "--family", str(settings.data / "family.json"),
+                    "--lts-pins", str(pins_file),
+                    "--clones", str(clones),
+                    "--out", str(out),
+                    timeout=1800)
+    if done.returncode:
+        raise SystemExit("member pointer generation failed:\n" + (done.stderr or done.stdout).strip()[-1200:])
+    want = {p.relative_to(out).as_posix(): util.read_text(p) for p in sorted((out / "members").glob("*.md"))}
+    room = write_room(settings.room_dir, want, generated=("members/",), prefix=ROOM)
+    problems = check_member_pointers(settings.room_dir)
+    if problems:
+        raise SystemExit("member pointers disagree with portfolio rows:\n" + "\n".join(problems[:20]))
+    return room
+
+
 # ---- the cut -----------------------------------------------------------------------------------------------------
 
 def _chain_paths(folder: Path) -> list[Path]:
@@ -283,6 +410,7 @@ def build(settings: Settings, hive: Hive, *, utc: str | None = None, printer=Non
     channel_notices = (folder / portfolio.CHANNEL_NOTICES_MD).is_file()  # saved by hand; linked while it exists
     room = write_room(folder, portfolio.portfolio_files(recs, prs, exceptions, version, left=left, previous=previous,
                                                         channel_notices=channel_notices))
+    pointers = regenerate_member_pointers(settings, recs)
     readme = settings.room_dir / "README.md"
     if readme.is_file():
         text = util.read_text(readme)
@@ -332,7 +460,7 @@ def build(settings: Settings, hive: Hive, *, utc: str | None = None, printer=Non
                     timeline.timeline_file(sid, record, frames, placement == "public", facts))
     return {"sid": sid, "minted": minted, "frame": frame, "frames": frames, "vid": vid, "number": number,
             "placement": placement, "public": placement == "public", "facts": facts, "stations": len(L["repos"]),
-            "interchanges": len(L["interchange"]), "room": room, "tools": written, "version": version,
+            "interchanges": len(L["interchange"]), "room": room, "pointers": pointers, "tools": written, "version": version,
             "left": sorted(left)}
 
 

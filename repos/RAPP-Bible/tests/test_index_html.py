@@ -38,3 +38,10 @@ def test_index_html_parses_and_has_content():
                  "RAR.md", "RAPP_Sense_Store.md", "rapp-installer.md",
                  "rapp-mcp.md"):
         assert f"repos/{repo}" in text, f"index.html missing link to repos/{repo}"
+
+
+def test_index_html_uses_canonical_rapp_expansion():
+    text = (REPO_ROOT / "index.html").read_text(encoding="utf-8")
+
+    assert "Rapid Agent Prototype Platform" in text
+    assert "Rapid Agent Prototyping Platform" not in text

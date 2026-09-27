@@ -105,6 +105,22 @@ cp config.example.json config.json    # start at level 0
 ./morning                             # read the overnight shift report
 ```
 
+If GitHub reads should run as a specific account from the local `gh` keyring,
+set `"gh_user": "account-name"`. The checks resolve
+`gh auth token --user <account-name>` once per process and pass only `GH_TOKEN`
+to `gh`, so GraphQL-backed checks do not silently use the machine's active
+account. `gh_identity` warns when that identity cannot be resolved or has no
+GraphQL quota, naming the checks it blinds.
+
+`config_integrity` warns when `config.json` is invalid, repeats a key at any
+depth (JSON silently keeps the last value), or sets a `notification_mode` other
+than `all` / `art-only` / `off` (unknown modes fail closed to off).
+
+`"current_grace_hours"` (default 72) controls `w_sentinel_current`: ahead and
+freshly-diverged local work stay ok, but a running checkout that lacks older
+commits already merged to `origin/main` warns that repairs are not reaching the
+process.
+
 The installer also loads an Aqua-session outbox drainer every five minutes.
 Background reporters remain queue-only; the drainer is the single serialized
 process allowed to drive Messages, so reports survive both producer failures
@@ -237,7 +253,7 @@ The worker (`evolve_worker.py`, `com.rapp.evolve-worker`, every 30 min):
 | nonblocking `flock` | two passes never overlap; a killed pass leaves no stale lock |
 | global cadence + rolling daily budget | shared across roles, in its own ledger, never repair's |
 | fail-closed ledgers | a corrupt or truncated history **stops the pass**; it is never read as "no spend" |
-| health at start, before the push, before the merge | any **critical** check aborts; degraded proceeds only when *every* failing id is in `degraded_allowlist` — `evolve_on_degraded` is ignored here, and `alert_delivery` / `health_runtime` refuse to be allowlisted at all |
+| health at start, before the push, before the merge | any **critical** check aborts; degraded proceeds only when *every* failing id is in `degraded_allowlist` — `evolve_on_degraded` is ignored here, and `alert_delivery` / `health_runtime` refuse to be allowlisted at all. The worker's own `w_evolve_worker` never gates it: that check describes the worker, and gating on it let a stall warning reset its own clock |
 | confined model | **no `--allow-all`**: the maker gets bounded file tools rooted at `--add-dir` and no shell, git, gh, MCP or network tool; built-in MCPs, custom instructions, `BASH_ENV`, the system temp dir, remote control and auto-update are off; HOME/XDG/TMPDIR/gh/git config live in a runtime directory the tools cannot reach, behind a strict env allowlist; inference auth is one `--secret-env-vars` variable |
 | sanitized staging | the maker never sees a repository — its root holds only its read context and a **precreated** `out/submission/`, with no `.git` and no clone metadata. It writes three files into paths that already exist (it has file tools and no shell, so it cannot create a directory); the slug lives in `meta.json`, and the controller materialises `submissions/<slug>/` in its own private clone from the gated bytes |
 | whole-tree staging check | the controller hashes the entire prepared staging tree before the model runs, and afterwards every baseline path must be byte- and mode-identical, with the only new paths allowed being `out/submission/meta.json`, one `piece.<ext>` and `state-out.json` — no new directories, no hidden files, no drafts, no rewritten context |
@@ -252,7 +268,7 @@ The worker (`evolve_worker.py`, `com.rapp.evolve-worker`, every 30 min):
 | protected reviewed-PNG provenance | an `azure-reviewed-png` PR persists its URL/number before reading exit-zero `gh pr view --json statusCheckRollup,mergeStateStatus,state`; only the exact CheckRun job `Verify controller provenance` from workflow `Reviewed PNG provenance` is classified. After exact success the complete rollup is read again, and only `CLEAN` permits `gh pr merge`; `BLOCKED`, `BEHIND`, pending checks, and inspection/non-JSON failure durably retain the PR in `checks-pending`. Absence is never success; a lone `CANCELLED` gets the same bounded grace for a cancel-in-progress replacement, while a pending exact replacement remains pending. Expired absence/cancellation and explicit failure/timed-out/action-required/stale results abort only after non-merge is proved |
 | reconciliation | a cycle killed between `gh pr merge` and the ledger write is finished (or its PR closed) on the next pass, from the PR and `origin/main` |
 | continuity that migrates | the creative ledger's current cycle is read canonically — `cycle`, else `last_cycle`, else a validated `cycles[]` — and fields that disagree fail closed rather than guessing. History is a strictly ordered contiguous run: a prefix from cycle 1, or a bounded tail that must carry an explicit counter, be exactly `creative_history_limit` long and end at that counter. Reader and writer share one constant, so the state written after cycle 50 is state the worker can still read. A rejected attempt is a failed spend that leaves public continuity alone |
-| liveness | every pass writes a heartbeat, and `w_evolve_worker` reports enabled-but-never-loaded or stale |
+| liveness | every pass writes a heartbeat, and `w_evolve_worker` reports enabled-but-never-loaded or stale; broken repeated skips fail after `max(three intervals, evolve_worker.stall_hours)` while health-gate/budget/child-budget/STOP/cadence skips remain by-design |
 | bounded sub-sentinel fan-out | optional: 3-5 read-only children in separate processes with no repo, no token and no ability to spawn children, aggregated deterministically into exactly 10 finalists — see below |
 | deterministic gate | exactly **two root-level regular files** (`lstat`: no symlink, no hardlink, no fifo, not executable, nothing nested) in one new `submissions/<slug>/`, valid slug/schema/kind/extension/license, piece within the configured bounded cap (50 KB by default), SVG parses with no script, no `on*` handler and no external reference (including CSS), and `_dada_cycle` proving 1-5 rounds of **exactly 10** scored candidates whose round one reproduces the finalist records by digest |
 | one repository, two names | the configured `repo` is normalised once: a validated transport URL for git, and `[HOST/]OWNER/REPO` for gh. `owner/name`, a full `https://` URL and a `.git` suffix all describe the same repository — before this, a URL config passed the auth preflight and then died at `gh pr create --repo https://…` |
@@ -261,7 +277,7 @@ The worker (`evolve_worker.py`, `com.rapp.evolve-worker`, every 30 min):
 | child replies are typed | children run with `--output-format=json` and are read only from the final `assistant.message` event — never reasoning, which contains the same JSON. One unparseable reply earns exactly one format-repair process if the deadline and process cap allow (`format_repair_attempts` is 0 or 1 — anything else is a configuration error, not a clamp); it is debited as a spend, recorded, and every attempt's transcript is kept outside the disposable workspace |
 | controller-owned publish | the branch, commit, PR, PR **file scope as GitHub reports it**, squash merge, and the re-read of `origin/main` and the merge commit afterwards are all done by code |
 | dual public deployment | optional `rapp_vision` mirrors the exact gated bytes into a RAPP Vision channel after the canonical collective merge; success stays pending until both GitHub Pages experiences answer, and reconciliation retries without spending another model. Once their verified routes are persisted in a digest/profile-bound deployment receipt, a notification-only retry reuses those exact URLs and does not re-probe Pages/CDN |
-| Azure visual studio | `azure-reviewed-png` preflights bounded deployment/model identifiers before model spend, rejects credential material recursively from child/maker/final metadata, turns a maker-authored visual brief into a local GPT Image PNG, validates the complete PNG and inflated scanlines, attaches actual pixels to a tool-less Copilot multimodal art director, regenerates rejected images, and issues a versioned digest-bound receipt only after score, publish decision, and zero-failure review clear the captured bar |
+| Azure visual studio | `azure-reviewed-png` preflights bounded deployment/model identifiers before model spend, rejects credential material recursively from child/maker/final metadata, turns a maker-authored visual brief into a local GPT Image PNG using Entra or an API key read from an environment variable/owner-only file (never inline config), validates the complete PNG and inflated scanlines, attaches actual pixels to a tool-less Copilot multimodal art director, regenerates rejected images, and issues a versioned digest-bound receipt only after score, publish decision, and zero-failure review clear the captured bar |
 | honest outcomes | only a re-read merge sends a 🎨; once the canonical merge command is invoked, a timeout/error remains pending until fresh PR and `origin/main` evidence proves merge or non-merge |
 | one text per deployment | a verified dual deployment durably enqueues exactly one idempotent iMessage: title, one sentence, the Public Art Collective Pages experience, and the RAPP Vision watch experience — no private report or LAN URL |
 
@@ -299,7 +315,9 @@ RAPP Vision: https://kody-w.github.io/rapp-vision/#/watch/nine-sworn-assurances
   behalf, because a summary nobody wrote is a claim nobody made.
 - `notification_mode: "art-only"` suppresses nightwatch, health transitions,
   diagnostics, and private static-report links while retaining this one final
-  deployment receipt.
+  deployment receipt. It does **not** suppress
+  [the silence breaker](#the-silence-breaker): quiet mode may hide calm, never
+  trouble.
 
 Nothing else sends it. `SENTINEL_RESULT: CONTRIBUTED` does not; a PR that was
 opened does not; an abort after the PR does not. The message is built inside
@@ -662,6 +680,7 @@ All enforced **before** a model is invoked.
 | per-check attempt cap → escalate to human | infinite retry or repeated cap alerts on something unfixable |
 | worktree isolation | destroying a working tree with uncommitted work |
 | notify on **state change only** | alert fatigue — a muted watcher is no watcher |
+| silence breaker | quiet modes and "state change only" hiding an outage for weeks |
 | **re-probe after repair** | believing a fix landed when it didn't |
 
 That last one is the difference between self-healing and self-reporting. It re-runs the *same* check and only claims `verified fixed` when what failed now passes.
@@ -682,6 +701,55 @@ Existing `check:` records are not re-migrated; `smoke:` and `evolve:` records st
 Sorted batch keys remain in logs and events for correlation, not throttling.
 Offline proof: `python3 prove_per_check_throttle.py`.
 
+### The silence breaker
+
+The tick normally notifies only on status change, because a watcher that texts
+every tick gets muted. A live Dada Collective incident proved the missing case:
+`notification_mode: "art-only"` plus `notify_queue_only: true` produced 36 days
+without an operator-visible message while 3,016/3,484 verdicts were critical,
+"needs a human" was logged 2,903 times, diagnose found root causes, and two
+checks were blind. Silence was not provable because mode-muted operational
+messages never reached the alert ledger; they are now recorded as
+`alert.muted`.
+
+`silence_breaker_hours` (default `24`, `0` disables) runs every tick after the
+ordinary state-change notice, and from the crash handler with a synthetic
+critical `sentinel_tick` verdict, so a tick that crashes every run still
+speaks. Silence is the time since the last send to `notify_handle` that
+Messages accepted: `state/outbox-sent.jsonl` (`sent_at`) or
+`state/outbox-unverified.jsonl` (`attempted_at`; `alert_delivery` reports the
+missing verification itself). Sends to other recipients do not count. If the
+operator has never been sent anything, the grace clock starts at the first
+copilot neighbor chain frame or when the breaker first evaluated on this
+instance (persisted once as `first_seen_at`), whichever is earlier, so even an
+instance that crashes from birth pages after one grace period. It pages after
+that many quiet hours of `critical`, or 3× that many hours of `degraded`.
+
+A breaker is compact plain text (at most 700 characters, no static report):
+how long it has been quiet and unhealthy, the failing checks grouped as
+platforms / blindness / local machinery, why the operator has not heard, and
+how to pause it. It passes in `notification_mode: "all"` and `"art-only"`, and
+under an unrecognized mode too: operational alerts fail closed on a typo, but
+only an explicit `"off"` silences trouble (recorded as `alert.muted`;
+`config_integrity` names the typo).
+
+Cadence lives in `state/silence-breaker.json`: one page per window, doubling
+while the failing check set is unchanged (`24h → 48h → 96h`, capped at 7 days),
+and resetting when the set changes or a healthy tick ends the incident.
+Anything already queued to the operator (a state-change or crash alert from the
+same tick, a prior breaker) defers it, because that message breaks the silence
+itself. Each decision (read, enqueue, persist) runs under
+`state/silence-breaker.lock`; an overlapping tick that finds it held skips
+rather than doubling up. Breakers carry no dedupe key: the window, the
+pending-queue guard and that lock already prevent duplicates, and keyed
+enqueues fail closed during an outbox quarantine incident, exactly when a human
+is most needed. To acknowledge a
+known outage without turning the guard off, set `silence_ack_until` to an ISO
+date/datetime and optionally `silence_ack_reason`; until then each due breaker
+is ledgered as suppressed (once per window, like `off`'s `alert.muted`), and
+reminders resume automatically afterwards. Offline proof:
+`python3 prove_silence_breaker.py`.
+
 ---
 
 ## The morning report
@@ -699,6 +767,9 @@ Periodic Messages updates link to an immutable, tokenized static HTML snapshot
 served only over the Mac's private Tailscale/LAN addresses. The HTML embeds local
 decision transcripts, so it remains readable on a phone that cannot reach
 `localhost:9797`; dashboard and log routes remain loopback-only.
+`serve.py` binds `SENTINEL_DASH_BIND`, defaulting to all interfaces so those
+share links open on a phone; set it to `127.0.0.1` to keep even share links on
+this machine.
 
 ---
 

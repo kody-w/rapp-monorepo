@@ -5,13 +5,15 @@ line: Worlds & Play
 wave: 2
 status: certified
 verdict: CLEAN
-evidence_commit: 10a2c560b8297560a12ea7773a611761a793ad60
-checked: 2026-09-26
+evidence_commit: 9537146657bbbc8d82bf5ce39b48a01b19b976f8
+checked: 2026-09-27
 checker: kody-w/rapp-1 rapp_check.py at 591e014
 experimental_mentions: 1
-header: missing
+header: merged
+header_pr: https://github.com/kody-w/rapp-play-pokemon/pull/2
 channel: newest
 lifecycle: active
+member_card: present
 links_to:
   - RAPP
   - rappter-plays-pokemon
@@ -25,10 +27,11 @@ links_to:
 
 **Version:** none recorded (no root VERSION file and no GitHub release). **Channel:** `newest`: it has no long-term-support pin, so its newest commit is the one in use.
 
-- Evidence: [`kody-w/rapp-play-pokemon` at `10a2c560b8`](https://github.com/kody-w/rapp-play-pokemon/tree/10a2c560b8297560a12ea7773a611761a793ad60) on `main`, checked 2026-09-26.
+- Evidence: [`kody-w/rapp-play-pokemon` at `9537146657`](https://github.com/kody-w/rapp-play-pokemon/tree/9537146657bbbc8d82bf5ce39b48a01b19b976f8) on `main`, checked 2026-09-27.
 - Checker: [`rapp_check.py` at `591e014`](https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp_check.py), verdict **CLEAN**. The raw output stays in the maintainer's sweep folder, outside the Hive; its SHA-256 is `9b628119c2949f3424ba6e1a4ea9306e8d743efdd34cbac42ac3732bd182481b`.
 - "experimental" mentions: 1 (whole word, any case, in tracked text files at the evidence commit, leaving out the network's own files: the repo's card `.rapp/member.md` and, in the network's public copy, `portfolio/`, `members/`, `notices/` and `PUBLISHED.md`; tracked, not a gate).
-- Network header: not yet added.
+- Network header: merged, awaiting the next sweep (https://github.com/kody-w/rapp-play-pokemon/pull/2).
+- Member card: [`.rapp/member.md`](https://github.com/kody-w/rapp-play-pokemon/blob/9537146657bbbc8d82bf5ce39b48a01b19b976f8/.rapp/member.md) at the evidence commit: this repo's card in the RAPP Hive, beside its pointer [`members/rapp-play-pokemon.md`](https://github.com/kody-w/rapp-hive-public/blob/main/members/rapp-play-pokemon.md).
 
 On the map: the **Worlds & Play** line ([subway map](https://kody-w.github.io/rapp-hive-public/portfolio/subway.html)).
 
@@ -41,4 +44,4 @@ Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<
 
 ## Check it yourself
 
-Clone `kody-w/rapp-play-pokemon` at `10a2c560b8` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py rapp-play-pokemon --json` from the folder that holds both.
+Clone `kody-w/rapp-play-pokemon` at `9537146657` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py rapp-play-pokemon --json` from the folder that holds both.

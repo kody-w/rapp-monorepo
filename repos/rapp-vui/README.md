@@ -1,5 +1,9 @@
 # RAPP VUI
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-vui.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-vui.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 A hands-free, spatial **Virtual UI** for talking to a RAPP Brainstem. You **look
 at what you want and pinch to select**; you speak and it answers out loud. An
 immersive 3D scene with a living AI presence, instead of a chat box.

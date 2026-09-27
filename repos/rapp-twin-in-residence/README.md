@@ -1,5 +1,9 @@
 # RAPP Twin In Residence
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-twin-in-residence.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-twin-in-residence.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 > Twin in Residence is the pattern behind [RAPP Twin](https://github.com/kody-w/rapp-twin): every repo carries a resident, project-specialized AI twin that outlives any single tool or session.
 
 The spec defines the `.twin/` layout, the universal `/chat` invocation contract, and how a global engine discovers and drives resident twins.

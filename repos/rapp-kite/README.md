@@ -1,5 +1,9 @@
 # rapp-kite
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-kite.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-kite.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 **The string.** Command‑line + Chrome‑DevTools‑Protocol tools to *fly* and *operate* kited twins —
 the operator half of the [rapp-neighborhood-protocol](https://github.com/kody-w/rapp-neighborhood-protocol)
 (§5a kite transport). Each speaks the [rapp-sealed](https://github.com/kody-w/rapp-sealed) channel.

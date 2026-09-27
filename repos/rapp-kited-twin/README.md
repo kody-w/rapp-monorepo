@@ -1,5 +1,9 @@
 # rapp-kited-twin
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-kited-twin.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-kited-twin.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 The **kited twin** — the visual identity of the RAPP kited neighborhood. A simple **kite**: the smart
 part stays anchored where your data lives, and you hold the string from whatever device you're on.
 When a twin is *kited* (hosting), it shows this mark over a **scan‑to‑join** QR — the canonical sign

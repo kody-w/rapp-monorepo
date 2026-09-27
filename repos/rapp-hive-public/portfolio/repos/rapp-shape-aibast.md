@@ -6,7 +6,7 @@ wave: 2
 status: certified
 verdict: CLEAN
 evidence_commit: e8a66b055d20ec27141ea7d4e6095c6f338d6a8b
-checked: 2026-09-26
+checked: 2026-09-27
 checker: kody-w/rapp-1 rapp_check.py at 591e014
 experimental_mentions: 21
 header: missing
@@ -24,7 +24,7 @@ links_to:
 
 **Version:** none recorded (no root VERSION file and no GitHub release). **Channel:** `newest`: it has no long-term-support pin, so its newest commit is the one in use.
 
-- Evidence: [`kody-w/rapp-shape-aibast` at `e8a66b055d`](https://github.com/kody-w/rapp-shape-aibast/tree/e8a66b055d20ec27141ea7d4e6095c6f338d6a8b) on `main`, checked 2026-09-26.
+- Evidence: [`kody-w/rapp-shape-aibast` at `e8a66b055d`](https://github.com/kody-w/rapp-shape-aibast/tree/e8a66b055d20ec27141ea7d4e6095c6f338d6a8b) on `main`, checked 2026-09-27.
 - Checker: [`rapp_check.py` at `591e014`](https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp_check.py), verdict **CLEAN**. The raw output stays in the maintainer's sweep folder, outside the Hive; its SHA-256 is `eda5d39a3e7e7f4c8032a7972a35de626a4d293eab21b7ab5d54a7305333feb9`.
 - "experimental" mentions: 21 (whole word, any case, in tracked text files at the evidence commit, leaving out the network's own files: the repo's card `.rapp/member.md` and, in the network's public copy, `portfolio/`, `members/`, `notices/` and `PUBLISHED.md`; tracked, not a gate).
 - Network header: not yet added.

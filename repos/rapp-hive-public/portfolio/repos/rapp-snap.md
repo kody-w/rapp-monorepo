@@ -5,13 +5,15 @@ line: Worlds & Play
 wave: 2
 status: certified
 verdict: CLEAN
-evidence_commit: 9fed5a91fbc9c77b948bb580fe4432621f0b2ea5
-checked: 2026-09-26
+evidence_commit: 127de5bab72975da89715a5ac0f5875c4f1c303c
+checked: 2026-09-27
 checker: kody-w/rapp-1 rapp_check.py at 591e014
 experimental_mentions: 0
-header: missing
+header: present
+header_pr: https://github.com/kody-w/rapp-snap/pull/2
 channel: newest
 lifecycle: active
+member_card: present
 links_to:
   - rapp-lantern
   - rapp-static-apis
@@ -25,10 +27,11 @@ links_to:
 
 **Version:** none recorded (no root VERSION file and no GitHub release). **Channel:** `newest`: it has no long-term-support pin, so its newest commit is the one in use.
 
-- Evidence: [`kody-w/rapp-snap` at `9fed5a91fb`](https://github.com/kody-w/rapp-snap/tree/9fed5a91fbc9c77b948bb580fe4432621f0b2ea5) on `main`, checked 2026-09-26.
+- Evidence: [`kody-w/rapp-snap` at `127de5bab7`](https://github.com/kody-w/rapp-snap/tree/127de5bab72975da89715a5ac0f5875c4f1c303c) on `main`, checked 2026-09-27.
 - Checker: [`rapp_check.py` at `591e014`](https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp_check.py), verdict **CLEAN**. The raw output stays in the maintainer's sweep folder, outside the Hive; its SHA-256 is `9041e84d121e03e9cd625d327fb6ee56a004236bd258867585855739cceabea3`.
 - "experimental" mentions: 0 (whole word, any case, in tracked text files at the evidence commit, leaving out the network's own files: the repo's card `.rapp/member.md` and, in the network's public copy, `portfolio/`, `members/`, `notices/` and `PUBLISHED.md`; tracked, not a gate).
-- Network header: not yet added.
+- Network header: present in `README.md`.
+- Member card: [`.rapp/member.md`](https://github.com/kody-w/rapp-snap/blob/127de5bab72975da89715a5ac0f5875c4f1c303c/.rapp/member.md) at the evidence commit: this repo's card in the RAPP Hive, beside its pointer [`members/rapp-snap.md`](https://github.com/kody-w/rapp-hive-public/blob/main/members/rapp-snap.md).
 
 On the map: the **Worlds & Play** line ([subway map](https://kody-w.github.io/rapp-hive-public/portfolio/subway.html)).
 
@@ -41,4 +44,4 @@ Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<
 
 ## Check it yourself
 
-Clone `kody-w/rapp-snap` at `9fed5a91fb` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py rapp-snap --json` from the folder that holds both.
+Clone `kody-w/rapp-snap` at `127de5bab7` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py rapp-snap --json` from the folder that holds both.

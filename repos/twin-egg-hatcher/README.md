@@ -1,5 +1,9 @@
 # twin-egg-hatcher
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/twin-egg-hatcher.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/twin-egg-hatcher.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 > Generic single-file hatcher for any RAPP digital-organism twin.
 > Public mirror — curl-friendly, no auth required.
 

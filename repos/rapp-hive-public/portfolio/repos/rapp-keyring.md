@@ -5,15 +5,17 @@ line: Tools & Apps
 wave: 2
 status: certified
 verdict: CLEAN
-evidence_commit: 89386724e9bf8b365ce3bd2847fbcc06365953d5
-checked: 2026-09-26
+evidence_commit: b7dac71e7730216ae4992ca7dcf349c8fa094c98
+checked: 2026-09-27
 checker: kody-w/rapp-1 rapp_check.py at 591e014
 experimental_mentions: 0
-header: missing
+header: present
+header_pr: https://github.com/kody-w/rapp-keyring/pull/1
 version: "0.1.0"
 version_source: VERSION
 channel: newest
 lifecycle: active
+member_card: present
 links_to:
   - rapp-light
   - rapp-train
@@ -27,10 +29,11 @@ links_to:
 
 **Version:** `v0.1.0`, from its root VERSION file at the evidence commit. **Channel:** `newest`: it has no long-term-support pin, so its newest commit is the one in use.
 
-- Evidence: [`kody-w/rapp-keyring` at `89386724e9`](https://github.com/kody-w/rapp-keyring/tree/89386724e9bf8b365ce3bd2847fbcc06365953d5) on `main`, checked 2026-09-26.
+- Evidence: [`kody-w/rapp-keyring` at `b7dac71e77`](https://github.com/kody-w/rapp-keyring/tree/b7dac71e7730216ae4992ca7dcf349c8fa094c98) on `main`, checked 2026-09-27.
 - Checker: [`rapp_check.py` at `591e014`](https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp_check.py), verdict **CLEAN**. The raw output stays in the maintainer's sweep folder, outside the Hive; its SHA-256 is `cbeec080845a605eac7628a023f99b8ef171d3c73e0d8baafd38732d55569e00`.
 - "experimental" mentions: 0 (whole word, any case, in tracked text files at the evidence commit, leaving out the network's own files: the repo's card `.rapp/member.md` and, in the network's public copy, `portfolio/`, `members/`, `notices/` and `PUBLISHED.md`; tracked, not a gate).
-- Network header: not yet added.
+- Network header: present in `README.md`.
+- Member card: [`.rapp/member.md`](https://github.com/kody-w/rapp-keyring/blob/b7dac71e7730216ae4992ca7dcf349c8fa094c98/.rapp/member.md) at the evidence commit: this repo's card in the RAPP Hive, beside its pointer [`members/rapp-keyring.md`](https://github.com/kody-w/rapp-hive-public/blob/main/members/rapp-keyring.md).
 
 On the map: the **Tools & Apps** line ([subway map](https://kody-w.github.io/rapp-hive-public/portfolio/subway.html)).
 
@@ -43,4 +46,4 @@ Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<
 
 ## Check it yourself
 
-Clone `kody-w/rapp-keyring` at `89386724e9` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py rapp-keyring --json` from the folder that holds both.
+Clone `kody-w/rapp-keyring` at `b7dac71e77` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py rapp-keyring --json` from the folder that holds both.

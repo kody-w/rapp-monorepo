@@ -5,13 +5,15 @@ line: Brainstem
 wave: 2
 status: not yet
 verdict: DRIFT
-evidence_commit: ee5499fed56f4d0e46c94f8be034e073adc55b2b
-checked: 2026-09-26
+evidence_commit: 8c3d1fa4fd71efe9113a58f3242860daf72614f5
+checked: 2026-09-27
 checker: kody-w/rapp-1 rapp_check.py at 591e014
 experimental_mentions: 2
-header: missing
+header: present
+header_pr: https://github.com/kody-w/vbrainstem/pull/5
 channel: newest
 lifecycle: active
+member_card: present
 links_to:
   - CommunityRAPP
   - dogg
@@ -32,10 +34,11 @@ links_to:
 
 **Version:** none recorded (no root VERSION file and no GitHub release). **Channel:** `newest`: it has no long-term-support pin, so its newest commit is the one in use.
 
-- Evidence: [`kody-w/vbrainstem` at `ee5499fed5`](https://github.com/kody-w/vbrainstem/tree/ee5499fed56f4d0e46c94f8be034e073adc55b2b) on `main`, checked 2026-09-26.
+- Evidence: [`kody-w/vbrainstem` at `8c3d1fa4fd`](https://github.com/kody-w/vbrainstem/tree/8c3d1fa4fd71efe9113a58f3242860daf72614f5) on `main`, checked 2026-09-27.
 - Checker: [`rapp_check.py` at `591e014`](https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp_check.py), verdict **DRIFT**, 1 finding(s). The raw output stays in the maintainer's sweep folder, outside the Hive; its SHA-256 is `88c39e270098b50bc4dbd2f1731500fa364dd0588037916bed30e9f271a400e8`.
 - "experimental" mentions: 2 (whole word, any case, in tracked text files at the evidence commit, leaving out the network's own files: the repo's card `.rapp/member.md` and, in the network's public copy, `portfolio/`, `members/`, `notices/` and `PUBLISHED.md`; tracked, not a gate).
-- Network header: not yet added.
+- Network header: present in `README.md`.
+- Member card: [`.rapp/member.md`](https://github.com/kody-w/vbrainstem/blob/8c3d1fa4fd71efe9113a58f3242860daf72614f5/.rapp/member.md) at the evidence commit: this repo's card in the RAPP Hive, beside its pointer [`members/vbrainstem.md`](https://github.com/kody-w/rapp-hive-public/blob/main/members/vbrainstem.md).
 
 ## Findings (1)
 
@@ -52,4 +55,4 @@ Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<
 
 ## Check it yourself
 
-Clone `kody-w/vbrainstem` at `ee5499fed5` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py vbrainstem --json` from the folder that holds both.
+Clone `kody-w/vbrainstem` at `8c3d1fa4fd` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py vbrainstem --json` from the folder that holds both.

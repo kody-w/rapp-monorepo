@@ -4,6 +4,7 @@ repo: kody-w/rapp-installer
 raw: https://raw.githubusercontent.com/kody-w/rapp-installer/
 lts: bded0e1d5044d293f465e3850758f4b012d95078
 newest: HEAD
+card: none
 line: rapp1-core
 channel: rapp1-lts
 lifecycle: active

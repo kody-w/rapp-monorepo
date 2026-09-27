@@ -1,5 +1,9 @@
 # Twin Binder
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/twin-binder.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/twin-binder.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 **A pure view over the RAPPcards federation.** Ships empty. Owns no cards. Rebuilds from memory.
 
 👉 **Live demo:** https://kody-w.github.io/twin-binder/binder.html

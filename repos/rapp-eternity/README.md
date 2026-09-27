@@ -1,5 +1,9 @@
 # rapp-eternity — retired historical repository
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-eternity.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-eternity.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 > **Status: RETIRED · HISTORICAL · NON-NORMATIVE**
 
 This repository no longer defines identity, ownership, migration, or trust rules for

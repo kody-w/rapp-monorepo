@@ -2,7 +2,7 @@
 
 The command line: `python -m rapp1_network <command>` (or `rapp1-network <command>`).
 
-Source: `rapp1_network/cli.py` (rapp1-network 0.1.6). SHA-256 of the source below: `be9e096eafd76ded2818bcdf128ee3c469413a0d840f9a18e7591afefa465aa7` (13377 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/cli.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/cli.py` (rapp1-network 0.1.9). SHA-256 of the source below: `72de045611da7d288c9c927d0d9bf0a0ef2a653dd87783f0c8941867f4466381` (14542 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/cli.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python
@@ -19,8 +19,10 @@ Source: `rapp1_network/cli.py` (rapp1-network 0.1.6). SHA-256 of the source belo
     verify [folder]             every pulse from genesis and every version's files (default: the Hive's chain)
     header <README> <repo> [--check]   add or refresh the network header in one README
     prs start <repo> | prs finish <repo> [--note TEXT] | prs ci [repo...]   the wave-1 header PRs
-    wave2 plan | wave2 open [--owner-approved | --rehearse] [--limit N] [--only a,b] [--pace S]
+    wave2 plan [--cards] | wave2 open [--cards] [--owner-approved | --rehearse] [--limit N] [--only a,b] [--pace S]
+    wave2 status [--only a,b]   the wave-2 PRs: URL, head, files, CI (with --cards: needs --card-tools DIR)
     subway <folder> [--pdf | --check]  draw (or check) the stable maps of a portfolio folder
+    pointers --check        check member pointer channel/lts fields against the portfolio rows
     export-tools <out>          write the release copy (tools/ of the portfolio room) into <out>
     notice <repo> --lifecycle deprecated|superseded --since YYYY-MM-DD --notice TEXT [--superseded-by REPO]
            [--dry-run]          save a repo's notice in the Hive (shared/organism/notices/<repo>.md, signed save);
@@ -33,6 +35,7 @@ Settings, each from its flag, then its environment variable, then <work>/local/s
     --hive NAME (RAPP1_HIVE, default rapp-hive)     --hive-agent PATH (RAPP_HIVE_AGENT)
     --checker PATH (RAPP1_CHECKER, default <work>/checker/rapp-1)   --denylist PATH (RAPP1_DENYLIST)
     --lts-pins PATH (RAPP1_LTS_PINS: the estate's LTS pins; without it, the known pins)
+    --card-tools DIR (RAPP1_CARD_TOOLS: the network's member_cards.py and hive_resolve.py, for wave 2's cards)
 
 Exit codes: 0 done, 1 refused or failed (the reason is printed), 2 usage.
 """
@@ -45,7 +48,7 @@ from . import config, util
 from .wrapping import Refused
 
 COMMANDS = ("crawl", "discover", "sweep", "cut", "publish", "status", "verify", "header", "prs", "wave2", "subway",
-            "export-tools", "notice")
+            "pointers", "export-tools", "notice")
 NOTICE_USAGE = ("notice <repo> --lifecycle deprecated|superseded --since YYYY-MM-DD --notice TEXT [--superseded-by REPO] "
                 "[--dry-run] | notice <repo> --clear [--dry-run] | notice check")
 NOTICE_OPTIONS = ("--lifecycle", "--since", "--notice", "--superseded-by")
@@ -122,16 +125,30 @@ def run_command(command: str, rest: list[str], settings: config.Settings, *, gh=
         else:
             raise Usage(f"prs {action}: use start, finish or ci")
     elif command == "wave2":
-        _need(rest, 1, "wave2 plan | wave2 open [--owner-approved | --rehearse] [--limit N] [--only a,b] [--pace S]")
-        if rest[0] == "plan":
+        _need(rest, 1, "wave2 plan [--cards] | wave2 open [--cards] [--owner-approved | --rehearse] [--limit N] "
+                       "[--only a,b] [--pace S] | wave2 status [--only a,b]")
+        if rest[0] == "plan" and "--cards" in rest[1:]:
+            wave2.plan_cards(settings, say=say)
+        elif rest[0] == "plan":
             wave2.plan(settings, say=say)
+        elif rest[0] == "open" and "--cards" in rest[1:]:
+            wave2.open_card_prs(settings, rest[1:], deny() if settings.denylist else None, gh, say=say)
         elif rest[0] == "open":
             wave2.open_prs(settings, rest[1:], deny() if settings.denylist else None, gh, say=say)
+        elif rest[0] == "status":
+            wave2.status(settings, rest[1:], gh, say=say)
         else:
-            raise Usage(f"wave2 {rest[0]}: use plan or open")
+            raise Usage(f"wave2 {rest[0]}: use plan, open or status")
     elif command == "subway":
         _need(rest, 1, "subway <portfolio folder> [--pdf | --check]")
         return subway.main(rest)
+    elif command == "pointers":
+        if rest != ["--check"]:
+            raise Usage("pointers --check")
+        problems = pipeline.check_member_pointers(settings.room_dir)
+        if problems:
+            raise SystemExit("member pointers disagree with portfolio rows:\n" + "\n".join(problems[:20]))
+        say("member pointers: channel/lts fields match portfolio rows")
     elif command == "export-tools":
         _need(rest, 1, "export-tools <out folder>")
         out = Path(rest[0]).expanduser()

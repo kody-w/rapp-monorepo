@@ -6,10 +6,11 @@ wave: 2
 status: certified
 verdict: CLEAN
 evidence_commit: df8cd1614c2c35b626f7cb8cc9b5a3283615ef5e
-checked: 2026-09-26
+checked: 2026-09-27
 checker: kody-w/rapp-1 rapp_check.py at 591e014
 experimental_mentions: 1
-header: missing
+header: pr-open
+header_pr: https://github.com/kody-w/rapp-cli/pull/1
 channel: newest
 lifecycle: active
 links_to:
@@ -24,10 +25,10 @@ links_to:
 
 **Version:** none recorded (no root VERSION file and no GitHub release). **Channel:** `newest`: it has no long-term-support pin, so its newest commit is the one in use.
 
-- Evidence: [`kody-w/rapp-cli` at `df8cd1614c`](https://github.com/kody-w/rapp-cli/tree/df8cd1614c2c35b626f7cb8cc9b5a3283615ef5e) on `main`, checked 2026-09-26.
+- Evidence: [`kody-w/rapp-cli` at `df8cd1614c`](https://github.com/kody-w/rapp-cli/tree/df8cd1614c2c35b626f7cb8cc9b5a3283615ef5e) on `main`, checked 2026-09-27.
 - Checker: [`rapp_check.py` at `591e014`](https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp_check.py), verdict **CLEAN**. The raw output stays in the maintainer's sweep folder, outside the Hive; its SHA-256 is `df13f187f1c90d401c57f87ea5a9dad2ce9edeac74d79f0daeadc01b3cec3cc2`.
 - "experimental" mentions: 1 (whole word, any case, in tracked text files at the evidence commit, leaving out the network's own files: the repo's card `.rapp/member.md` and, in the network's public copy, `portfolio/`, `members/`, `notices/` and `PUBLISHED.md`; tracked, not a gate).
-- Network header: not yet added.
+- Network header: PR open (https://github.com/kody-w/rapp-cli/pull/1).
 
 On the map: the **Tools & Apps** line ([subway map](https://kody-w.github.io/rapp-hive-public/portfolio/subway.html)).
 

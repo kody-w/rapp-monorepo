@@ -13,7 +13,7 @@ above it. See [`OVERVIEW.md`](../OVERVIEW.md) §2.
 - A GitHub repo that **is** the organism — its identity (`rappid.json`), its
   voice (`soul.md`), its body (`agents/`), its memory (`.brainstem_data/`), its
   skin (`index.html` + the doorman). All committed files; no server runs.
-- Its own **Eternity rappid**, minted once: `rappid:@<owner>/<slug>:<64hex>`.
+- Its own **Eternity rappid**, [minted once](#mint-the-rappid): `rappid:@<owner>/<slug>:<64hex>`.
 - A `parent_rappid` pointing at the species root (or your operator rappid) —
   this is its lineage.
 - An optional `.egg` so others can hatch a copy locally (same rappid, anywhere).
@@ -49,12 +49,33 @@ at `https://your-handle.github.io/your-name-twin/`.
 
 ## Mint the rappid
 
+**Reuse an existing `rappid.json`; mint only for a new identity.** For a new
+keyless identity, run this Python 3 example. It follows
+[RAPP/1 rev-5, sections 5 and 6](https://github.com/kody-w/rapp-1/blob/d2cd5abed48d3f52b86bbb975ac3558286d1db41/SPEC.md)
+as pinned in [`RAPP1_AUTHORITY.json`](../RAPP1_AUTHORITY.json):
+`tail = Hb("rapp/1:rappid", uuid4_octets)`.
+
 ```python
 import hashlib
+import uuid
+
 owner_repo = "your-handle/your-name-twin"
-hex64 = hashlib.sha256(owner_repo.encode()).hexdigest()
+uuid4_octets = uuid.uuid4().bytes
+hex64 = hashlib.sha256(b"rapp/1:rappid\n" + uuid4_octets).hexdigest()
 rappid = f"rappid:@{owner_repo}:{hex64}"
+print(rappid)
 ```
+
+`Hb` hashes the ASCII tag, one LF byte (`0x0A`), then the **16 raw UUIDv4
+bytes** in RFC 9562 byte order. Do not hash UUID text, UUID hex, little-endian
+`.bytes_le`, or the owner/repo name. Save the result in `rappid.json` and reuse
+it: every run of this mint creates a new identity.
+
+The **Eternity form** is `rappid:@<owner>/<slug>:<64hex>`. Its
+`@<owner>/<slug>` prefix locates `github.com/<owner>/<slug>`; it does not
+contribute identity entropy. Use lowercase letters/digits with single
+separating hyphens for both labels (`owner`: 1–39 characters; `slug`: 1–100).
+The tail is exactly 64 lowercase hex characters, minted once and stored.
 
 ## Estate
 

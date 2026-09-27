@@ -2,7 +2,7 @@
 
 The known LTS pins: the long-term-support commits RAPP/1 already names in public, used until the estate publishes its LTS pins file (passed with --lts-pins / RAPP1_LTS_PINS). Each pin is {commit, version?}: `version` is the label when the pin is a tag; otherwise the label is the commit's first seven characters. Public facts only.
 
-Source: `rapp1_network/pins.py` (rapp1-network 0.1.6). SHA-256 of the source below: `4790b4f20a847a0619ba95f952fb6b147f7bc858a7dada9dc18751c4268e4e48` (1176 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/pins.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/pins.py` (rapp1-network 0.1.9). SHA-256 of the source below: `2faa1932e2c61b2472c23de9654e75ec121c895f846db9f85d47f3c91792c820` (1435 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/pins.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python
@@ -20,6 +20,9 @@ KNOWN_PINS = {
     "rapp-work": {"commit": "29ead23b21645f8d7682ee00414930ffa9ce0ca6"},
     # kody-w/rapp-map at 4c8ba6b: the base registry (seq 2) that the estate's kit pins.
     "rapp-map": {"commit": "4c8ba6bbe73125cc980d0c3b38c59c99e4b231c0"},
+    # kody-w/rapp-mcp follows the RAPP/1 LTS lock-in even though its portfolio row previously said newest.
+    # WS-G (estate kit), 2026-09-26: RAPP/1 LTS wins over the channel mismatch.
+    "rapp-mcp": {"commit": "cd22b1e964aabc6a71b8b401deb19d2de1f77086"},
 }
 `````
 {% endraw %}

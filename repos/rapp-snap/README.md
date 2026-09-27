@@ -1,5 +1,9 @@
 # rapp-snap
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-snap.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-snap.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 Open your camera, snap a picture — and **the photo becomes a living 3D creature** you can keep. Entirely in your browser: no photo is uploaded or stored, only the organism it becomes.
 
 **Live:** https://kody-w.github.io/rapp-snap/

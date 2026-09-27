@@ -1,5 +1,9 @@
 # RAPP Twin
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-twin.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-twin.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 > A RAPP Twin is `.claude` for AI twins: a per-repo `.twin/` folder (soul + agents + memory) that runs as a project-specialized Brainstem any AI can invoke over `/chat`.
 
 Public brain versioned with the project; private on-device memory. See the [Twin in Residence](https://github.com/kody-w/rapp-twin-in-residence) spec.

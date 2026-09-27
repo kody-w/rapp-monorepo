@@ -17,23 +17,40 @@ the manual path is shown so you understand what it does.
 
 ## Step 1 — Mint your personal rappid
 
-Your personal rappid is your identity passport — it anchors every door you
-create and proves your membership in every gate you join. The install one-liner
-mints it automatically at `~/.brainstem/rappid.json`. To do it by hand:
+Your personal rappid identifies you across the doors you create and the gates
+you join; a keyless rappid is not proof of authorship. The install one-liner
+mints it automatically at `~/.brainstem/rappid.json`. **Reuse it if it exists;
+mint only for a new identity.**
+
+For a new keyless identity, run this Python 3 example. It follows
+[RAPP/1 rev-5, sections 5 and 6](https://github.com/kody-w/rapp-1/blob/d2cd5abed48d3f52b86bbb975ac3558286d1db41/SPEC.md)
+as pinned in [`RAPP1_AUTHORITY.json`](../RAPP1_AUTHORITY.json):
+`tail = Hb("rapp/1:rappid", uuid4_octets)`.
 
 ```python
 import hashlib
+import uuid
+
 owner_repo = "your-handle/your-handle-twin"
-hex64 = hashlib.sha256(owner_repo.encode()).hexdigest()
+uuid4_octets = uuid.uuid4().bytes
+hex64 = hashlib.sha256(b"rapp/1:rappid\n" + uuid4_octets).hexdigest()
 rappid = f"rappid:@{owner_repo}:{hex64}"
-print(rappid)   # rappid:@your-handle/your-handle-twin:5f3c...e21a
+print(rappid)
 ```
 
-This is the **Eternity form** `rappid:@<owner>/<slug>:<64hex>` (CONSTITUTION
-Art. XXXIV.1). The `@<owner>/<slug>` segment self-locates to
-`github.com/<owner>/<slug>`; the kind lives in your `rappid.json`, not the
-string. Any legacy `rappid:v2:…` you hold is canonicalized on read, never
-re-minted.
+`Hb` hashes the ASCII tag, one LF byte (`0x0A`), then the **16 raw UUIDv4
+bytes** in RFC 9562 byte order. Do not hash UUID text, UUID hex, little-endian
+`.bytes_le`, or the owner/repo name. Save the result in `rappid.json` and reuse
+it: every run of this mint creates a new identity.
+
+This is the **Eternity form** `rappid:@<owner>/<slug>:<64hex>`. The
+`@<owner>/<slug>` segment self-locates to `github.com/<owner>/<slug>` but is
+not identity entropy; the kind lives in your `rappid.json`, not the string.
+Use lowercase letters/digits with single separating hyphens for both labels
+(`owner`: 1–39 characters; `slug`: 1–100). The tail is exactly 64 lowercase
+hex characters, minted once and stored. Legacy identifiers follow the pinned
+RAPP/1 section 6.3 canonicalization/re-anchor rules; do not use this new-identity
+snippet to migrate or silently replace an existing rappid.
 
 > Agent: *"who am I"* → reads your rappid + estate.
 

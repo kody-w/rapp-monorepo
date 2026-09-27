@@ -4,6 +4,7 @@ repo: kody-w/rapp-work
 raw: https://raw.githubusercontent.com/kody-w/rapp-work/
 lts: 29ead23b21645f8d7682ee00414930ffa9ce0ca6
 newest: HEAD
+card: none
 line: rapp1-core
 channel: rapp1-lts
 lifecycle: active

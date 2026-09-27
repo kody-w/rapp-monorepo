@@ -2,7 +2,7 @@
 
 Settings: each one from its flag, then its environment variable, then <work>/local/settings.json, then a default.
 
-Source: `rapp1_network/config.py` (rapp1-network 0.1.6). SHA-256 of the source below: `0c6612a7adf95f0cbe43ebb6d447314a7f19eb22b59081e6c10d08be053ee2e6` (4269 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/config.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/config.py` (rapp1-network 0.1.9). SHA-256 of the source below: `a81286d8c4acf08ae369187ac1678e0b912c474c84fb9c735470f08d7856ce6f` (4515 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/config.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python
@@ -30,6 +30,7 @@ FLAGS = {
     "checker": "RAPP1_CHECKER",
     "denylist": "RAPP1_DENYLIST",
     "lts-pins": "RAPP1_LTS_PINS",
+    "card-tools": "RAPP1_CARD_TOOLS",
 }
 
 
@@ -42,6 +43,7 @@ class Settings:
     checker: Path  # a kody-w/rapp-1 checkout at CANON_RAPP1
     denylist: Path | None  # an optional private scanner (tree/diff/commits modes); never copied anywhere
     lts_pins: Path | None = None  # the estate's LTS pins file (lts-pins.json); without it, the known pins (pins.py)
+    card_tools: Path | None = None  # the folder of the network's member_cards.py and hive_resolve.py (wave 2 cards)
 
     @property
     def data(self) -> Path:
@@ -120,7 +122,7 @@ def resolve(flags: Mapping[str, str] | None = None, env: Mapping[str, str] | Non
         value = flags.get(name) or env.get(FLAGS[name]) or local.get(name.replace("-", "_")) or default
         return str(value) if value is not None else None
 
-    agent, deny, lts = pick("hive-agent"), pick("denylist"), pick("lts-pins")
+    agent, deny, lts, cards = pick("hive-agent"), pick("denylist"), pick("lts-pins"), pick("card-tools")
     return Settings(
         work=work,
         hives=Path(pick("hives", "~/Hives")).expanduser(),
@@ -129,6 +131,7 @@ def resolve(flags: Mapping[str, str] | None = None, env: Mapping[str, str] | Non
         checker=Path(pick("checker", str(work / "checker" / "rapp-1"))).expanduser(),
         denylist=Path(deny).expanduser() if deny else None,
         lts_pins=Path(lts).expanduser() if lts else None,
+        card_tools=Path(cards).expanduser() if cards else None,
     )
 `````
 {% endraw %}

@@ -1,5 +1,9 @@
 # RAPP Moment — the standard
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-moment.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-moment.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 **A serverless, cryptographic, *alive* social-media primitive.** A **Moment** is at once a **post**, an
 exact **moment in time**, and a **living holographic organism** — 100 frames, one heartbeat each. All
 state is static data on a CDN; identity is a keypair; ownership is a signature; there is no backend.

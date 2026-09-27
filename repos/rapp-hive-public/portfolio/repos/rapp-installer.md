@@ -5,8 +5,8 @@ line: RAPP/1 Core
 wave: 1
 status: certified
 verdict: CLEAN
-evidence_commit: 49db80c8c6b6caa7647369beaf477d374a8f293c
-checked: 2026-09-26
+evidence_commit: 0e43ee580e78c150b1c59002456822d2e779388e
+checked: 2026-09-27
 checker: kody-w/rapp-1 rapp_check.py at 591e014
 experimental_mentions: 11
 header: held
@@ -31,7 +31,7 @@ links_to:
 
 **Version:** `v1.0.0`, from the tag of its latest GitHub release. **LTS:** [`brainstem-v0.6.9`](https://github.com/kody-w/rapp-installer/tree/bded0e1d5044d293f465e3850758f4b012d95078) (commit `bded0e1d50`, from the network's built-in known pins, until the estate publishes its LTS pins). **Channel:** `rapp1-lts`: it has a long-term-support pin, so the network builds on that commit; its newer commits are the newest channel.
 
-- Evidence: [`kody-w/rapp-installer` at `49db80c8c6`](https://github.com/kody-w/rapp-installer/tree/49db80c8c6b6caa7647369beaf477d374a8f293c) on `main`, checked 2026-09-26.
+- Evidence: [`kody-w/rapp-installer` at `0e43ee580e`](https://github.com/kody-w/rapp-installer/tree/0e43ee580e78c150b1c59002456822d2e779388e) on `main`, checked 2026-09-27.
 - Checker: [`rapp_check.py` at `591e014`](https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp_check.py), verdict **CLEAN**. The raw output stays in the maintainer's sweep folder, outside the Hive; its SHA-256 is `cc5f82f00d3b6c37e663e985ab947441b5460d676ab2bfd6e6104f2ea571f6b3`.
 - "experimental" mentions: 11 (whole word, any case, in tracked text files at the evidence commit, leaving out the network's own files: the repo's card `.rapp/member.md` and, in the network's public copy, `portfolio/`, `members/`, `notices/` and `PUBLISHED.md`; tracked, not a gate).
 - Network header: held back: the owner holds every change to kody-w/rapp-installer, the grail repo that carries the Brainstem kernel, so its header PR (https://github.com/kody-w/rapp-installer/pull/48) stays open and unmerged until the owner decides. Every other repo's Start here link still works: it opens the installer's README at the top.
@@ -47,4 +47,4 @@ Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<
 
 ## Check it yourself
 
-Clone `kody-w/rapp-installer` at `49db80c8c6` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py rapp-installer --json` from the folder that holds both.
+Clone `kody-w/rapp-installer` at `0e43ee580e` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py rapp-installer --json` from the folder that holds both.

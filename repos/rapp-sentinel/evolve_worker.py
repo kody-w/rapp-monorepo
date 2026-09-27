@@ -115,6 +115,9 @@ WORKER_DEFAULTS = {
     "azure_image": {
         "enabled": False,
         "endpoint": "",
+        "auth_mode": "entra",
+        "api_key_env_var": "AZURE_OPENAI_API_KEY",
+        "api_key_file": "",
         "deployment": "gpt-image-2",
         "fallback_deployment": "gpt-image",
         "api_version": "2025-04-01-preview",
@@ -534,7 +537,8 @@ def assert_visual_pipeline_ready(wcfg):
         return "Azure visual generation disabled"
     if "png" not in allowed_kinds(wcfg):
         raise AbortError("azure_image is enabled but png is not allowed")
-    if not shutil.which("az"):
+    auth_mode = str(cfg.get("auth_mode") or "entra").strip().lower()
+    if auth_mode == "entra" and not shutil.which("az"):
         raise AbortError("Azure CLI is not installed")
     if not shutil.which("copilot"):
         raise AbortError("Copilot CLI is not installed for visual review")
@@ -544,12 +548,11 @@ def assert_visual_pipeline_ready(wcfg):
         raise AbortError(
             f"{auth_var} is not available to the multimodal reviewer")
     try:
-        token = azure_art._access_token(
-            str(cfg.get("az_binary") or "az"),
-            int(cfg.get("auth_timeout_s") or 60))
+        _, auth_mode = azure_art.auth_headers(cfg)
     except azure_art.AzureArtError as exc:
         raise AbortError(str(exc)) from exc
-    return f"Azure image auth ready ({len(token)} token chars); visual reviewer ready"
+    auth_name = "API key" if auth_mode == "api_key" else "Entra"
+    return f"Azure image {auth_name} auth ready; visual reviewer ready"
 
 
 def _visual_review_prompt(brief, minimum):
@@ -1577,6 +1580,13 @@ def cadence_ready(history, wcfg):
 #                   and "unknown" must never be allowlisted into "fine".
 NEVER_ALLOWLISTABLE = frozenset({"alert_delivery", "health_runtime"})
 
+# Checks that describe THIS worker rather than the estate it gates on. Gating
+# on them is circular: once w_evolve_worker warned about a stalled broken skip,
+# the next pass skipped as "degraded … w_evolve_worker", which is by design,
+# so the stall clock reset and the warning turned itself green — then the
+# broken skip returned with a fresh clock. It flapped instead of reporting.
+SELF_CHECKS = frozenset({"w_evolve_worker"})
+
 # health.py emits exactly these three. Anything else is a verdict this worker
 # cannot reason about, and an unreadable verdict is never a green light.
 KNOWN_STATUSES = frozenset({"healthy", "degraded", "critical"})
@@ -1613,11 +1623,15 @@ def health_gate(wcfg, verdict, phase="start"):
     critical = list(verdict.get("critical") or [])
     if critical:
         return False, f"critical checks failing at {phase}: {', '.join(sorted(critical))}"
-    failing = list(verdict.get("failed") or [])
-    if status != "healthy" and not failing:
+    reported = list(verdict.get("failed") or [])
+    if status != "healthy" and not reported:
         return False, (f"health verdict at {phase} says {status!r} but names no "
                        f"failing check — the two disagree, so neither is trusted")
+    failing = [c for c in reported if c not in SELF_CHECKS]
     if not failing:
+        if reported:
+            return True, (f"healthy at {phase} apart from this worker's own "
+                          f"liveness check: {', '.join(sorted(set(reported)))}")
         return True, f"healthy at {phase}"
     unskippable = sorted(set(failing) & NEVER_ALLOWLISTABLE)
     if unskippable:
@@ -5459,12 +5473,28 @@ def write_status(outcome, reason="", **extra):
 
     A job that runs and skips and a job launchd never loaded look identical
     from outside — both produce no art and no log line anybody reads. This
-    file is what lets w_evolve_worker tell those two apart (#6).
+    file is what lets w_evolve_worker tell those two apart (#6). The `since`
+    field is the first time the current (outcome, reason) pair was written
+    consecutively; it is what lets health tell a normal skip from weeks of the
+    same broken preflight.
     """
+    at = sentinel.now().isoformat(timespec="seconds")
+    reason_text = str(reason)[:400]
+    since = at
+    try:
+        previous = json.loads(STATUS_PATH.read_text(encoding="utf-8"))
+        if (previous.get("outcome") == outcome
+                and str(previous.get("reason") or "") == reason_text
+                and isinstance(previous.get("since"), str)
+                and previous.get("since")):
+            since = previous["since"]
+    except Exception:
+        pass
     payload = {
-        "at": sentinel.now().isoformat(timespec="seconds"),
+        "at": at,
+        "since": since,
         "outcome": outcome,
-        "reason": str(reason)[:400],
+        "reason": reason_text,
         "pid": os.getpid(),
         "depth": SS.current_depth(),
         **extra,

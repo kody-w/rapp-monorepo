@@ -3,6 +3,7 @@ station: rapp-spine
 repo: kody-w/rapp-spine
 raw: https://raw.githubusercontent.com/kody-w/rapp-spine/
 newest: HEAD
+card: none
 line: learn
 channel: newest
 lifecycle: active
@@ -10,4 +11,4 @@ lifecycle: active
 
 # rapp-spine
 
-The RAPP Hive reads it at `HEAD` only.
+The RAPP Hive lists this station, but it has no card yet; readers do not fetch `.rapp/member.md` until `card: present`.

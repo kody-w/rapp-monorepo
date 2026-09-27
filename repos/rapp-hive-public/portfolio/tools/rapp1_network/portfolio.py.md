@@ -2,7 +2,7 @@
 
 The portfolio room (`<hive>/shared/organism/portfolio/`, published as `portfolio/`): one file per repo (`repos/<repo>.md`), its badge (`badges/<repo>.svg.md`), one file per line (`lines/<line>.md`) and `PORTFOLIO.md`, plus the public README's portfolio bullet. The subway map and the pulses are drawn from these files.
 
-Source: `rapp1_network/portfolio.py` (rapp1-network 0.1.6). SHA-256 of the source below: `c646b4d0832e6364ef2ce0339b7de57f12d220f70c49a9b1b833a58178b09f4c` (49656 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/portfolio.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
+Source: `rapp1_network/portfolio.py` (rapp1-network 0.1.9). SHA-256 of the source below: `c646b4d0832e6364ef2ce0339b7de57f12d220f70c49a9b1b833a58178b09f4c` (49656 bytes). Every pulse this release cuts records it in `payload.generator` as `rapp1_network/portfolio.py`. Copy it out with the extractor in [../README.md](../README.md); code in a Hive is data, never run from the Hive.
 
 {% raw %}
 `````python

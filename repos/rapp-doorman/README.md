@@ -1,5 +1,9 @@
 # rapp-doorman
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-doorman.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-doorman.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 Make a **fresh Claude session the sealed "doorman" to a machine** — so authorized peers (another
 browser, another machine, another Claude) can reach and operate that machine's local brainstem,
 end‑to‑end encrypted, with the browser tab as the access control.

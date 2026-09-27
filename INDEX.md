@@ -1,7 +1,7 @@
 # What is in here
 
-261 public RAPP repositories, captured at HEAD in a single pass on 2026-09-26T21:40:10+00:00.
-49,087 files, 1306 MB.
+261 public RAPP repositories, captured at HEAD in a single pass on 2026-09-27T14:03:54+00:00.
+49,249 files, 1315 MB.
 
 Every row is the exact commit this snapshot took. Nothing here is a guess about what upstream contains — re-clone any row's repo at its sha to get the full history behind it.
 
@@ -18,194 +18,194 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`openrappter-canary`](repos/openrappter-canary) | `a86599c1` | 2026-09-07 | 10 | 0.0 |
 | [`openrappter-nightly`](repos/openrappter-nightly) | `ea34fa6b` | 2026-09-07 | 11 | 0.0 |
 | [`openrappter-release-train`](repos/openrappter-release-train) | `eeb78033` | 2026-09-26 | 63 | 0.2 |
-| [`RAPP`](repos/RAPP) | `5a59e45e` | 2026-09-26 | 850 | 16.1 |
+| [`RAPP`](repos/RAPP) | `3a8020f3` | 2026-09-26 | 850 | 16.1 |
 | [`rapp-1`](repos/rapp-1) | `bae4e3ca` | 2026-09-26 | 173 | 3.8 |
-| [`rapp-agents`](repos/rapp-agents) | `3de844fc` | 2026-07-24 | 15 | 0.2 |
-| [`rapp-ai`](repos/rapp-ai) | `eaee484b` | 2026-08-02 | 55 | 0.6 |
+| [`rapp-agents`](repos/rapp-agents) | `88cf98a6` | 2026-09-26 | 16 | 0.2 |
+| [`rapp-ai`](repos/rapp-ai) | `cc9e88d4` | 2026-09-26 | 56 | 0.6 |
 | [`rapp-alpha`](repos/rapp-alpha) | `44be78a7` | 2026-09-13 | 102 | 1.4 |
 | [`rapp-apex-dino`](repos/rapp-apex-dino) | `d511b366` | 2026-09-26 | 12 | 0.1 |
 | [`rapp-bake-off`](repos/rapp-bake-off) | `e52fe2c2` | 2026-09-26 | 10 | 0.1 |
 | [`rapp-base`](repos/rapp-base) | `7e4b8a56` | 2026-07-21 | 121 | 0.6 |
 | [`rapp-base-template`](repos/rapp-base-template) | `0242efba` | 2026-07-19 | 92 | 0.6 |
-| [`rapp-basket`](repos/rapp-basket) | `3636fb9d` | 2026-07-04 | 4 | 0.1 |
+| [`rapp-basket`](repos/rapp-basket) | `4963916d` | 2026-09-26 | 5 | 0.1 |
 | [`rapp-bench`](repos/rapp-bench) | `396eeeb2` | 2026-09-26 | 8 | 0.0 |
 | [`rapp-beta`](repos/rapp-beta) | `562b5e18` | 2026-09-13 | 102 | 1.4 |
-| [`RAPP-Bible`](repos/RAPP-Bible) | `b524f026` | 2026-09-26 | 96 | 0.8 |
-| [`rapp-body`](repos/rapp-body) | `afdefe27` | 2026-09-26 | 151 | 4.1 |
-| [`rapp-brain`](repos/rapp-brain) | `a8dc7bce` | 2026-08-25 | 12 | 0.0 |
+| [`RAPP-Bible`](repos/RAPP-Bible) | `05b89afd` | 2026-09-26 | 96 | 0.8 |
+| [`rapp-body`](repos/rapp-body) | `ce09ee48` | 2026-09-27 | 152 | 4.2 |
+| [`rapp-brain`](repos/rapp-brain) | `695e7934` | 2026-09-26 | 13 | 0.0 |
 | [`rapp-brainfreeze`](repos/rapp-brainfreeze) | `74236144` | 2026-09-26 | 11 | 0.1 |
-| [`rapp-brainfreeze-studio`](repos/rapp-brainfreeze-studio) | `aa258f74` | 2026-09-26 | 61 | 0.8 |
-| [`rapp-brainstem`](repos/rapp-brainstem) | `dd1f8f75` | 2026-09-23 | 44 | 0.3 |
+| [`rapp-brainfreeze-studio`](repos/rapp-brainfreeze-studio) | `36e57c6a` | 2026-09-26 | 76 | 1.0 |
+| [`rapp-brainstem`](repos/rapp-brainstem) | `04b11528` | 2026-09-26 | 45 | 0.3 |
 | [`rapp-brainstem-beta`](repos/rapp-brainstem-beta) | `cd55de1e` | 2026-09-26 | 26 | 0.2 |
-| [`rapp-brainstem-claude`](repos/rapp-brainstem-claude) | `2211bd93` | 2026-09-23 | 6 | 0.0 |
-| [`rapp-brainstem-claude-desktop`](repos/rapp-brainstem-claude-desktop) | `e84ba0ff` | 2026-09-23 | 6 | 0.0 |
-| [`rapp-brainstem-cline`](repos/rapp-brainstem-cline) | `bc92807f` | 2026-09-23 | 3 | 0.0 |
-| [`rapp-brainstem-codex`](repos/rapp-brainstem-codex) | `34364fb1` | 2026-09-23 | 3 | 0.0 |
+| [`rapp-brainstem-claude`](repos/rapp-brainstem-claude) | `e3651db2` | 2026-09-26 | 7 | 0.0 |
+| [`rapp-brainstem-claude-desktop`](repos/rapp-brainstem-claude-desktop) | `bd07bdc6` | 2026-09-26 | 7 | 0.0 |
+| [`rapp-brainstem-cline`](repos/rapp-brainstem-cline) | `6dca285b` | 2026-09-26 | 4 | 0.0 |
+| [`rapp-brainstem-codex`](repos/rapp-brainstem-codex) | `b1a9760c` | 2026-09-26 | 4 | 0.0 |
 | [`rapp-brainstem-copilot`](repos/rapp-brainstem-copilot) | `3726803a` | 2026-09-26 | 4 | 0.0 |
-| [`rapp-brainstem-cursor`](repos/rapp-brainstem-cursor) | `8a7a3c5f` | 2026-09-23 | 3 | 0.0 |
+| [`rapp-brainstem-cursor`](repos/rapp-brainstem-cursor) | `c4ba3efb` | 2026-09-26 | 4 | 0.0 |
 | [`rapp-brainstem-foundation`](repos/rapp-brainstem-foundation) | `HEAD` |  | 0 | 0.0 |
 | [`rapp-brainstem-frontier-template`](repos/rapp-brainstem-frontier-template) | `f3510d75` | 2026-09-26 | 9 | 0.0 |
-| [`rapp-brainstem-gemini`](repos/rapp-brainstem-gemini) | `c9c50119` | 2026-09-23 | 3 | 0.0 |
-| [`rapp-brainstem-goose`](repos/rapp-brainstem-goose) | `57c1656d` | 2026-09-23 | 3 | 0.0 |
-| [`rapp-brainstem-kiro`](repos/rapp-brainstem-kiro) | `f33042fc` | 2026-09-23 | 3 | 0.0 |
-| [`rapp-brainstem-mcp`](repos/rapp-brainstem-mcp) | `e9cca1b6` | 2026-09-23 | 3 | 0.0 |
-| [`rapp-brainstem-opencode`](repos/rapp-brainstem-opencode) | `c689b448` | 2026-09-23 | 3 | 0.0 |
+| [`rapp-brainstem-gemini`](repos/rapp-brainstem-gemini) | `f77ef9df` | 2026-09-26 | 4 | 0.0 |
+| [`rapp-brainstem-goose`](repos/rapp-brainstem-goose) | `f9383374` | 2026-09-26 | 4 | 0.0 |
+| [`rapp-brainstem-kiro`](repos/rapp-brainstem-kiro) | `63b0e883` | 2026-09-26 | 4 | 0.0 |
+| [`rapp-brainstem-mcp`](repos/rapp-brainstem-mcp) | `c7cedccb` | 2026-09-26 | 4 | 0.0 |
+| [`rapp-brainstem-opencode`](repos/rapp-brainstem-opencode) | `9e6bc152` | 2026-09-26 | 4 | 0.0 |
 | [`rapp-brainstem-plugin`](repos/rapp-brainstem-plugin) | `aa3793e4` | 2026-09-26 | 47 | 0.2 |
 | [`rapp-brainstem-sdk`](repos/rapp-brainstem-sdk) | `8175627e` | 2026-09-26 | 4 | 0.0 |
-| [`rapp-brainstem-vscode`](repos/rapp-brainstem-vscode) | `4e5be0a8` | 2026-09-23 | 3 | 0.0 |
+| [`rapp-brainstem-vscode`](repos/rapp-brainstem-vscode) | `cbc13d33` | 2026-09-26 | 4 | 0.0 |
 | [`rapp-brainstem-walkthrough`](repos/rapp-brainstem-walkthrough) | `d310e4bf` | 2026-09-26 | 23 | 0.6 |
-| [`rapp-brainstem-windsurf`](repos/rapp-brainstem-windsurf) | `6e64c3c0` | 2026-09-23 | 3 | 0.0 |
-| [`rapp-burrow`](repos/rapp-burrow) | `36f57faf` | 2026-06-29 | 7 | 0.0 |
+| [`rapp-brainstem-windsurf`](repos/rapp-brainstem-windsurf) | `0fac814f` | 2026-09-26 | 4 | 0.0 |
+| [`rapp-burrow`](repos/rapp-burrow) | `2f52927f` | 2026-09-26 | 8 | 0.0 |
 | [`rapp-canary`](repos/rapp-canary) | `7ac5c778` | 2026-09-15 | 170 | 1.6 |
 | [`rapp-carts`](repos/rapp-carts) | `135d0a57` | 2026-09-26 | 4 | 0.0 |
 | [`rapp-claude-skills`](repos/rapp-claude-skills) | `4ec5b427` | 2026-09-26 | 13 | 0.0 |
 | [`rapp-cli`](repos/rapp-cli) | `df8cd161` | 2026-07-22 | 38 | 0.2 |
 | [`rapp-commons`](repos/rapp-commons) | `4793bca4` | 2026-09-26 | 216 | 3.4 |
 | [`rapp-constitution`](repos/rapp-constitution) | `ccaab0c6` | 2026-09-26 | 9 | 0.3 |
-| [`rapp-coop`](repos/rapp-coop) | `d7189325` | 2026-08-01 | 21 | 0.2 |
-| [`rapp-copilot-in-chrome`](repos/rapp-copilot-in-chrome) | `d95365be` | 2026-09-14 | 52 | 0.7 |
-| [`rapp-copilot-in-edge`](repos/rapp-copilot-in-edge) | `ba7c2620` | 2026-08-17 | 49 | 0.6 |
+| [`rapp-coop`](repos/rapp-coop) | `721e40ee` | 2026-09-26 | 22 | 0.2 |
+| [`rapp-copilot-in-chrome`](repos/rapp-copilot-in-chrome) | `a947e5fa` | 2026-09-26 | 53 | 0.7 |
+| [`rapp-copilot-in-edge`](repos/rapp-copilot-in-edge) | `b26c48f6` | 2026-09-26 | 50 | 0.6 |
 | [`rapp-cortex`](repos/rapp-cortex) | `3b1d61ac` | 2026-09-26 | 4 | 0.0 |
-| [`rapp-crispy`](repos/rapp-crispy) | `5fb6086f` | 2026-09-13 | 66 | 0.5 |
-| [`rapp-dataverse`](repos/rapp-dataverse) | `bd843bba` | 2026-06-17 | 27 | 0.1 |
+| [`rapp-crispy`](repos/rapp-crispy) | `ed03f368` | 2026-09-26 | 67 | 0.5 |
+| [`rapp-dataverse`](repos/rapp-dataverse) | `de40b94e` | 2026-09-26 | 28 | 0.1 |
 | [`rapp-demos`](repos/rapp-demos) | `cc9cfb18` | 2026-09-26 | 7 | 0.1 |
 | [`rapp-dino`](repos/rapp-dino) | `e9cd9c0a` | 2026-09-26 | 14 | 0.1 |
 | [`rapp-distro`](repos/rapp-distro) | `dad58796` | 2026-06-28 | 6 | 0.0 |
 | [`rapp-docs`](repos/rapp-docs) | `30421208` | 2026-09-26 | 10 | 0.0 |
 | [`rapp-dog-hub`](repos/rapp-dog-hub) | `c9049671` | 2026-09-26 | 8 | 0.0 |
-| [`rapp-doorman`](repos/rapp-doorman) | `f5432ae5` | 2026-09-26 | 4 | 0.0 |
+| [`rapp-doorman`](repos/rapp-doorman) | `ad58a214` | 2026-09-26 | 5 | 0.0 |
 | [`rapp-drift-lint`](repos/rapp-drift-lint) | `92a97a1e` | 2026-09-26 | 4 | 0.0 |
 | [`rapp-dynamic-workflows`](repos/rapp-dynamic-workflows) | `b8b1de6d` | 2026-07-21 | 37 | 0.3 |
 | [`rapp-education-shorts`](repos/rapp-education-shorts) | `18e055ab` | 2026-09-26 | 23 | 1.5 |
 | [`rapp-egg-hub`](repos/rapp-egg-hub) | `602f08ea` | 2026-09-26 | 37 | 1.7 |
 | [`rapp-estate`](repos/rapp-estate) | `acc17dca` | 2026-08-26 | 10 | 0.1 |
-| [`rapp-eternity`](repos/rapp-eternity) | `17bb6d21` | 2026-07-17 | 2 | 0.0 |
+| [`rapp-eternity`](repos/rapp-eternity) | `03e483d3` | 2026-09-26 | 3 | 0.0 |
 | [`rapp-flight`](repos/rapp-flight) | `18197ea1` | 2026-09-26 | 4 | 0.0 |
 | [`rapp-flight-deck`](repos/rapp-flight-deck) | `ac6ff67c` | 2026-09-26 | 4 | 0.0 |
-| [`rapp-fps`](repos/rapp-fps) | `9eacce9b` | 2026-08-15 | 412 | 80.1 |
+| [`rapp-fps`](repos/rapp-fps) | `6e003628` | 2026-09-26 | 413 | 80.1 |
 | [`rapp-frame-net`](repos/rapp-frame-net) | `ad6f2480` | 2026-07-17 | 23 | 0.1 |
 | [`rapp-god-forum`](repos/rapp-god-forum) | `c7c2e527` | 2026-09-26 | 7 | 0.0 |
 | [`rapp-hatchery`](repos/rapp-hatchery) | `1a7fd78d` | 2026-09-26 | 10 | 0.1 |
-| [`rapp-heir`](repos/rapp-heir) | `58362a43` | 2026-07-12 | 72 | 0.8 |
+| [`rapp-heir`](repos/rapp-heir) | `ab99a260` | 2026-09-26 | 73 | 0.8 |
 | [`rapp-herdr`](repos/rapp-herdr) | `fcbe1e87` | 2026-09-26 | 45 | 0.5 |
 | [`rapp-hippocampus`](repos/rapp-hippocampus) | `18edfa1a` | 2026-09-26 | 4 | 0.0 |
 | [`rapp-hive-app`](repos/rapp-hive-app) | `482b4e4e` | 2026-09-26 | 3 | 0.0 |
 | [`rapp-hive-hub`](repos/rapp-hive-hub) | `1c154522` | 2026-09-26 | 839 | 25.6 |
 | [`rapp-hive-hub-join`](repos/rapp-hive-hub-join) | `3598da15` | 2026-09-26 | 16 | 0.1 |
-| [`rapp-hive-public`](repos/rapp-hive-public) | `4d581f28` | 2026-09-26 | 1,117 | 11.6 |
-| [`rapp-holo`](repos/rapp-holo) | `ff296524` | 2026-07-18 | 3 | 0.0 |
-| [`rapp-hologram`](repos/rapp-hologram) | `4c981887` | 2026-07-04 | 33 | 0.2 |
-| [`rapp-imessage-launchpad`](repos/rapp-imessage-launchpad) | `f0b57ff7` | 2026-09-19 | 89 | 1.1 |
+| [`rapp-hive-public`](repos/rapp-hive-public) | `93efcd94` | 2026-09-27 | 1,125 | 14.2 |
+| [`rapp-holo`](repos/rapp-holo) | `ec8e0620` | 2026-09-26 | 4 | 0.0 |
+| [`rapp-hologram`](repos/rapp-hologram) | `421b90d6` | 2026-09-26 | 34 | 0.2 |
+| [`rapp-imessage-launchpad`](repos/rapp-imessage-launchpad) | `91b94e8f` | 2026-09-26 | 90 | 1.1 |
 | [`rapp-infrastructure-city`](repos/rapp-infrastructure-city) | `1d62cc03` | 2026-09-26 | 15 | 0.1 |
 | [`rapp-installer`](repos/rapp-installer) | `0e43ee58` | 2026-09-26 | 74 | 1.1 |
 | [`rapp-installer-canary`](repos/rapp-installer-canary) | `8bb6b75d` | 2026-07-16 | 44 | 0.5 |
-| [`rapp-installer-dev`](repos/rapp-installer-dev) | `59004c5c` | 2026-09-26 | 54 | 0.6 |
+| [`rapp-installer-dev`](repos/rapp-installer-dev) | `3c8fd1ef` | 2026-09-27 | 54 | 0.6 |
 | [`rapp-keyring`](repos/rapp-keyring) | `b7dac71e` | 2026-09-26 | 16 | 0.1 |
-| [`rapp-kite`](repos/rapp-kite) | `f3e7e2d0` | 2026-05-25 | 6 | 0.0 |
-| [`rapp-kited-twin`](repos/rapp-kited-twin) | `9f844ec5` | 2026-05-25 | 5 | 0.0 |
+| [`rapp-kite`](repos/rapp-kite) | `6c1c0564` | 2026-09-26 | 7 | 0.0 |
+| [`rapp-kited-twin`](repos/rapp-kited-twin) | `7db7cc92` | 2026-09-26 | 6 | 0.0 |
 | [`rapp-lab-kit`](repos/rapp-lab-kit) | `14ad3b3b` | 2026-09-26 | 18 | 0.0 |
 | [`rapp-lantern`](repos/rapp-lantern) | `1af70bef` | 2026-07-15 | 18 | 0.2 |
 | [`rapp-leviathan-hub`](repos/rapp-leviathan-hub) | `953419d9` | 2026-09-26 | 9 | 0.9 |
 | [`rapp-light`](repos/rapp-light) | `2d3501f5` | 2026-09-26 | 23 | 0.3 |
-| [`rapp-local-install`](repos/rapp-local-install) | `8795f5b0` | 2026-08-04 | 5 | 0.0 |
+| [`rapp-local-install`](repos/rapp-local-install) | `7e93ebe7` | 2026-09-26 | 6 | 0.0 |
 | [`rapp-map`](repos/rapp-map) | `48b6c385` | 2026-09-26 | 75 | 1.6 |
-| [`rapp-mapp`](repos/rapp-mapp) | `4743d74c` | 2026-08-02 | 14 | 0.1 |
+| [`rapp-mapp`](repos/rapp-mapp) | `ddbf3121` | 2026-09-26 | 15 | 0.1 |
 | [`rapp-mcp`](repos/rapp-mcp) | `cd22b1e9` | 2026-09-26 | 24 | 0.2 |
 | [`rapp-membrane`](repos/rapp-membrane) | `db26f249` | 2026-09-26 | 11 | 0.1 |
 | [`rapp-messaging`](repos/rapp-messaging) | `05866785` | 2026-07-11 | 14 | 0.0 |
 | [`rapp-metrics`](repos/rapp-metrics) | `be6f5881` | 2026-09-26 | 12 | 0.3 |
 | [`rapp-mirror-releases`](repos/rapp-mirror-releases) | `94d4cd58` | 2026-09-26 | 2 | 0.0 |
 | [`rapp-mission`](repos/rapp-mission) | `d00cc3bc` | 2026-09-26 | 10 | 0.0 |
-| [`rapp-model-hive`](repos/rapp-model-hive) | `1bda54dd` | 2026-09-26 | 104 | 2.2 |
-| [`rapp-moment`](repos/rapp-moment) | `229db186` | 2026-08-04 | 12 | 0.0 |
+| [`rapp-model-hive`](repos/rapp-model-hive) | `c88331a5` | 2026-09-26 | 104 | 2.2 |
+| [`rapp-moment`](repos/rapp-moment) | `d82ba10a` | 2026-09-26 | 13 | 0.0 |
 | [`rapp-moonshots`](repos/rapp-moonshots) | `789f9334` | 2026-07-12 | 177 | 2.0 |
 | [`rapp-neighborhood-protocol`](repos/rapp-neighborhood-protocol) | `85d11fcb` | 2026-09-26 | 5 | 0.1 |
 | [`rapp-nervous-system`](repos/rapp-nervous-system) | `dfc114ae` | 2026-09-26 | 4 | 0.0 |
 | [`RAPP-Network`](repos/RAPP-Network) | `33f6ba6c` | 2026-09-26 | 6 | 0.1 |
 | [`rapp-nightly`](repos/rapp-nightly) | `27d62617` | 2026-09-13 | 102 | 1.4 |
-| [`rapp-omarchy`](repos/rapp-omarchy) | `6a1c5092` | 2026-09-05 | 31 | 0.3 |
+| [`rapp-omarchy`](repos/rapp-omarchy) | `381f2a1c` | 2026-09-26 | 32 | 0.3 |
 | [`rapp-oneclick-deploy`](repos/rapp-oneclick-deploy) | `b42ea35d` | 2026-07-16 | 45 | 0.7 |
 | [`rapp-open`](repos/rapp-open) | `e3f39c88` | 2026-09-26 | 12 | 0.1 |
-| [`rapp-organism`](repos/rapp-organism) | `6bb903f0` | 2026-09-26 | 165 | 2.3 |
-| [`rapp-overwatch`](repos/rapp-overwatch) | `8205512b` | 2026-08-05 | 14 | 0.1 |
+| [`rapp-organism`](repos/rapp-organism) | `4262ef97` | 2026-09-27 | 168 | 2.5 |
+| [`rapp-overwatch`](repos/rapp-overwatch) | `868a5da6` | 2026-09-26 | 15 | 0.1 |
 | [`rapp-packs`](repos/rapp-packs) | `19cb75f4` | 2026-09-20 | 27 | 0.3 |
 | [`rapp-parity`](repos/rapp-parity) | `cad9fb50` | 2026-09-26 | 7 | 0.0 |
 | [`rapp-personpower`](repos/rapp-personpower) | `7bd8d295` | 2026-09-26 | 5 | 0.0 |
-| [`rapp-petri`](repos/rapp-petri) | `28a29055` | 2026-09-26 | 7 | 0.0 |
-| [`rapp-pets`](repos/rapp-pets) | `2ab70ab2` | 2026-08-02 | 16 | 0.1 |
+| [`rapp-petri`](repos/rapp-petri) | `83eca7ee` | 2026-09-26 | 7 | 0.0 |
+| [`rapp-pets`](repos/rapp-pets) | `d0384fa9` | 2026-09-26 | 17 | 0.1 |
 | [`rapp-plant-smoke-20260505-233637`](repos/rapp-plant-smoke-20260505-233637) | `8dcfb312` | 2026-09-26 | 9 | 0.1 |
 | [`rapp-platform`](repos/rapp-platform) | `ba6c5556` | 2026-09-26 | 4 | 0.0 |
-| [`rapp-play-pokemon`](repos/rapp-play-pokemon) | `10a2c560` | 2026-07-13 | 22 | 0.3 |
+| [`rapp-play-pokemon`](repos/rapp-play-pokemon) | `95371466` | 2026-09-26 | 23 | 0.3 |
 | [`rapp-postflight`](repos/rapp-postflight) | `e4d8178b` | 2026-09-26 | 8 | 0.0 |
-| [`rapp-projects`](repos/rapp-projects) | `2b375029` | 2026-08-31 | 21 | 0.1 |
+| [`rapp-projects`](repos/rapp-projects) | `b8197c59` | 2026-09-26 | 22 | 0.1 |
 | [`rapp-quests`](repos/rapp-quests) | `2abe9d52` | 2026-09-26 | 6 | 0.0 |
-| [`rapp-ratchet`](repos/rapp-ratchet) | `187bff19` | 2026-08-05 | 11 | 0.1 |
-| [`rapp-recall`](repos/rapp-recall) | `cfd5491d` | 2026-08-15 | 32 | 0.8 |
+| [`rapp-ratchet`](repos/rapp-ratchet) | `5e64dea0` | 2026-09-26 | 12 | 0.1 |
+| [`rapp-recall`](repos/rapp-recall) | `2cd3f5c7` | 2026-09-26 | 33 | 0.8 |
 | [`rapp-refresh`](repos/rapp-refresh) | `920c3f4b` | 2026-09-26 | 12 | 0.1 |
-| [`rapp-release-train`](repos/rapp-release-train) | `5f37baab` | 2026-09-26 | 36 | 0.3 |
+| [`rapp-release-train`](repos/rapp-release-train) | `609d6f8e` | 2026-09-27 | 36 | 0.3 |
 | [`rapp-remix`](repos/rapp-remix) | `714b8912` | 2026-09-26 | 6 | 0.0 |
 | [`rapp-resident`](repos/rapp-resident) | `1d7a0e37` | 2026-09-26 | 12 | 0.0 |
-| [`rapp-rewind`](repos/rapp-rewind) | `0b9e65c2` | 2026-09-13 | 52 | 0.3 |
+| [`rapp-rewind`](repos/rapp-rewind) | `ebd89a65` | 2026-09-26 | 53 | 0.3 |
 | [`rapp-rings`](repos/rapp-rings) | `4750f738` | 2026-09-26 | 4 | 0.0 |
-| [`rapp-roadmap`](repos/rapp-roadmap) | `afb43807` | 2026-09-26 | 12 | 0.4 |
+| [`rapp-roadmap`](repos/rapp-roadmap) | `e1607499` | 2026-09-26 | 12 | 0.4 |
 | [`rapp-roadside`](repos/rapp-roadside) | `8082439a` | 2026-08-31 | 97 | 0.5 |
 | [`rapp-rock-tumbler`](repos/rapp-rock-tumbler) | `e91fd2c9` | 2026-09-26 | 29 | 2.1 |
-| [`rapp-sdk`](repos/rapp-sdk) | `402a7e02` | 2026-08-31 | 50 | 0.6 |
+| [`rapp-sdk`](repos/rapp-sdk) | `ede0fd45` | 2026-09-26 | 51 | 0.6 |
 | [`rapp-sealed`](repos/rapp-sealed) | `e427eafa` | 2026-09-26 | 6 | 0.0 |
 | [`rapp-second-brain`](repos/rapp-second-brain) | `0cdf76e3` | 2026-09-26 | 358 | 0.4 |
 | [`rapp-secondbrain`](repos/rapp-secondbrain) | `23cf473d` | 2026-09-26 | 14 | 0.2 |
-| [`rapp-sentinel`](repos/rapp-sentinel) | `6468f1db` | 2026-09-26 | 146 | 4.2 |
+| [`rapp-sentinel`](repos/rapp-sentinel) | `d9824fea` | 2026-09-26 | 152 | 4.3 |
 | [`rapp-sentinel-hub`](repos/rapp-sentinel-hub) | `64fb4d1e` | 2026-09-26 | 24 | 0.1 |
-| [`rapp-shot`](repos/rapp-shot) | `e99ca106` | 2026-09-13 | 63 | 0.3 |
-| [`rapp-skill`](repos/rapp-skill) | `ff36d917` | 2026-08-10 | 27 | 0.2 |
-| [`rapp-skills`](repos/rapp-skills) | `aaac415c` | 2026-09-19 | 57 | 0.6 |
-| [`rapp-snap`](repos/rapp-snap) | `9fed5a91` | 2026-07-04 | 4 | 0.0 |
-| [`rapp-specs`](repos/rapp-specs) | `22649207` | 2026-09-26 | 146 | 0.3 |
+| [`rapp-shot`](repos/rapp-shot) | `0a3c2dfa` | 2026-09-26 | 64 | 0.4 |
+| [`rapp-skill`](repos/rapp-skill) | `5fc3ac50` | 2026-09-26 | 28 | 0.2 |
+| [`rapp-skills`](repos/rapp-skills) | `9b58c9b6` | 2026-09-26 | 58 | 0.6 |
+| [`rapp-snap`](repos/rapp-snap) | `127de5ba` | 2026-09-26 | 5 | 0.0 |
+| [`rapp-specs`](repos/rapp-specs) | `9d037a9c` | 2026-09-27 | 149 | 0.3 |
 | [`rapp-spinal-cord`](repos/rapp-spinal-cord) | `43741e3e` | 2026-09-26 | 4 | 0.0 |
 | [`rapp-spine`](repos/rapp-spine) | `8d61da5c` | 2026-09-26 | 28 | 1.2 |
 | [`rapp-stack-cubby`](repos/rapp-stack-cubby) | `1fee3896` | 2026-07-16 | 377 | 7.0 |
-| [`rapp-static-apis`](repos/rapp-static-apis) | `63bea74f` | 2026-09-26 | 2,506 | 13.1 |
+| [`rapp-static-apis`](repos/rapp-static-apis) | `ba15a9a7` | 2026-09-27 | 2,507 | 13.1 |
 | [`rapp-static-brainstem`](repos/rapp-static-brainstem) | `0173eb8e` | 2026-09-26 | 40 | 0.2 |
-| [`rapp-static-mcp`](repos/rapp-static-mcp) | `2f4efd23` | 2026-08-27 | 49 | 0.2 |
+| [`rapp-static-mcp`](repos/rapp-static-mcp) | `07bbdb88` | 2026-09-26 | 50 | 0.2 |
 | [`rapp-store-archive`](repos/rapp-store-archive) | `a07796ec` | 2026-09-26 | 23 | 0.2 |
 | [`rapp-support`](repos/rapp-support) | `899af640` | 2026-09-26 | 5 | 0.0 |
 | [`rapp-test-neighbor`](repos/rapp-test-neighbor) | `3cc46ae2` | 2026-09-26 | 31 | 0.2 |
 | [`rapp-toaster`](repos/rapp-toaster) | `5abff702` | 2026-09-26 | 17 | 0.1 |
-| [`rapp-tools`](repos/rapp-tools) | `5dd7a3da` | 2026-09-13 | 52 | 2.8 |
-| [`rapp-tower`](repos/rapp-tower) | `d0e93a64` | 2026-09-26 | 70 | 0.7 |
+| [`rapp-tools`](repos/rapp-tools) | `ae2c0054` | 2026-09-26 | 53 | 2.8 |
+| [`rapp-tower`](repos/rapp-tower) | `d67f816d` | 2026-09-26 | 71 | 0.7 |
 | [`rapp-train`](repos/rapp-train) | `1726ca5e` | 2026-09-26 | 18 | 0.1 |
-| [`rapp-twin`](repos/rapp-twin) | `588feadb` | 2026-07-18 | 3 | 0.0 |
-| [`rapp-twin-hub`](repos/rapp-twin-hub) | `97fb82d5` | 2026-08-01 | 16 | 0.1 |
-| [`rapp-twin-in-residence`](repos/rapp-twin-in-residence) | `ec47ca5b` | 2026-07-18 | 3 | 0.0 |
-| [`rapp-ultracode`](repos/rapp-ultracode) | `f27181f2` | 2026-07-21 | 39 | 0.1 |
+| [`rapp-twin`](repos/rapp-twin) | `83cd87e8` | 2026-09-26 | 4 | 0.0 |
+| [`rapp-twin-hub`](repos/rapp-twin-hub) | `3b7bc761` | 2026-09-26 | 17 | 0.1 |
+| [`rapp-twin-in-residence`](repos/rapp-twin-in-residence) | `32345d7a` | 2026-09-26 | 4 | 0.0 |
+| [`rapp-ultracode`](repos/rapp-ultracode) | `1f39faee` | 2026-09-26 | 40 | 0.1 |
 | [`rapp-version-selector`](repos/rapp-version-selector) | `0dab2506` | 2026-09-26 | 80 | 1.1 |
 | [`rapp-video`](repos/rapp-video) | `2984dcb6` | 2026-09-26 | 13 | 0.7 |
 | [`rapp-virtual-as400`](repos/rapp-virtual-as400) | `60169078` | 2026-09-26 | 46 | 0.4 |
 | [`rapp-vision`](repos/rapp-vision) | `c988c195` | 2026-09-06 | 395 | 31.9 |
 | [`rapp-vision-neighborhood`](repos/rapp-vision-neighborhood) | `97114b2c` | 2026-09-26 | 49 | 0.2 |
 | [`rapp-vneighborhood`](repos/rapp-vneighborhood) | `624993f7` | 2026-09-26 | 8 | 0.0 |
-| [`rapp-voice`](repos/rapp-voice) | `28e16c43` | 2026-09-13 | 57 | 0.3 |
+| [`rapp-voice`](repos/rapp-voice) | `78fda5bd` | 2026-09-26 | 58 | 0.3 |
 | [`rapp-vscode-extension`](repos/rapp-vscode-extension) | `616046e6` | 2026-09-26 | 22 | 0.2 |
-| [`rapp-vui`](repos/rapp-vui) | `d15a6f6d` | 2026-07-18 | 10 | 0.2 |
+| [`rapp-vui`](repos/rapp-vui) | `ec377272` | 2026-09-26 | 11 | 0.2 |
 | [`rapp-wiki-observatory`](repos/rapp-wiki-observatory) | `c284d063` | 2026-09-26 | 18 | 1.6 |
 | [`rapp-work`](repos/rapp-work) | `4d1a5272` | 2026-09-26 | 145 | 1.9 |
 | [`rapp-work-cubbies`](repos/rapp-work-cubbies) | `8197e2a1` | 2026-09-26 | 21 | 0.2 |
 | [`rapp-workspace`](repos/rapp-workspace) | `52d4f19d` | 2026-09-18 | 242 | 2.7 |
-| [`rapp-workspace-manager`](repos/rapp-workspace-manager) | `c5a65741` | 2026-09-15 | 42 | 0.6 |
+| [`rapp-workspace-manager`](repos/rapp-workspace-manager) | `cadf2a9f` | 2026-09-26 | 43 | 0.6 |
 | [`rapp-zoo`](repos/rapp-zoo) | `7a0eeb9c` | 2026-08-31 | 319 | 5.8 |
-| [`rapp-zoo-v2`](repos/rapp-zoo-v2) | `b394aa53` | 2026-08-24 | 135 | 1.9 |
-| [`RAPP_Desktop`](repos/RAPP_Desktop) | `0aea2ecf` | 2026-01-31 | 44 | 0.4 |
+| [`rapp-zoo-v2`](repos/rapp-zoo-v2) | `e7f23770` | 2026-09-26 | 136 | 1.9 |
+| [`RAPP_Desktop`](repos/RAPP_Desktop) | `03c8adf1` | 2026-09-26 | 45 | 0.4 |
 | [`rapp_docs`](repos/rapp_docs) | `86640cd3` | 2026-09-26 | 4 | 0.0 |
-| [`RAPP_hippo`](repos/RAPP_hippo) | `c55d6231` | 2026-07-16 | 73 | 0.8 |
+| [`RAPP_hippo`](repos/RAPP_hippo) | `8443b75c` | 2026-09-26 | 74 | 0.8 |
 | [`RAPP_Hub`](repos/RAPP_Hub) | `5426aeae` | 2026-09-26 | 62 | 0.2 |
-| [`rapp_orion`](repos/rapp_orion) | `7ba9bd9d` | 2026-07-16 | 45 | 0.6 |
+| [`rapp_orion`](repos/rapp_orion) | `58e3ad74` | 2026-09-26 | 46 | 0.6 |
 | [`RAPP_Sense_Store`](repos/RAPP_Sense_Store) | `563552f6` | 2026-09-26 | 44 | 0.1 |
 | [`RAPP_Store`](repos/RAPP_Store) | `f81d84cf` | 2026-09-26 | 445 | 9.0 |
-| [`RAPPAIClaudeCodePlayground`](repos/RAPPAIClaudeCodePlayground) | `4f5bde0f` | 2025-10-08 | 22 | 1.2 |
+| [`RAPPAIClaudeCodePlayground`](repos/RAPPAIClaudeCodePlayground) | `3abfe5dc` | 2026-09-26 | 23 | 1.2 |
 | [`rappbook-admin`](repos/rappbook-admin) | `13fe2506` | 2026-09-26 | 7 | 0.1 |
 | [`RAPPcards`](repos/RAPPcards) | `045026ab` | 2026-09-26 | 9 | 0.3 |
 | [`rappdex`](repos/rappdex) | `25ff78e6` | 2026-09-26 | 20 | 0.1 |
-| [`rappid`](repos/rappid) | `c988d797` | 2026-08-24 | 147 | 2.0 |
+| [`rappid`](repos/rappid) | `885d24f7` | 2026-09-26 | 148 | 2.0 |
 | [`rappidverse-field`](repos/rappidverse-field) | `b302db4b` | 2026-09-26 | 5 | 0.0 |
 | [`RAPPsquared`](repos/RAPPsquared) | `e19d82f5` | 2026-09-26 | 17 | 0.2 |
 | [`rappter-cli`](repos/rappter-cli) | `3c5bb44a` | 2026-09-26 | 6 | 0.1 |
@@ -213,23 +213,23 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rappter-factory`](repos/rappter-factory) | `88712b0c` | 2026-09-26 | 12 | 1.0 |
 | [`rappter-mmo`](repos/rappter-mmo) | `5d45256b` | 2026-09-26 | 4 | 0.0 |
 | [`rappter-plays-palworld`](repos/rappter-plays-palworld) | `d07fa963` | 2026-09-26 | 30 | 0.2 |
-| [`rappter-plays-pokemon`](repos/rappter-plays-pokemon) | `dfda5a8a` | 2026-07-24 | 165 | 3.6 |
+| [`rappter-plays-pokemon`](repos/rappter-plays-pokemon) | `8cf47995` | 2026-09-26 | 166 | 3.6 |
 | [`rappter-prompts`](repos/rappter-prompts) | `3fc33efb` | 2026-09-26 | 20 | 0.1 |
 | [`rappter-site`](repos/rappter-site) | `c0b7950b` | 2026-09-26 | 59 | 0.4 |
 | [`rappter-vui`](repos/rappter-vui) | `b96b8a22` | 2026-09-26 | 3 | 0.0 |
-| [`rappterbook`](repos/rappterbook) | `c500720c` | 2026-09-26 | 12,129 | 749.5 |
-| [`rappterbook-agent`](repos/rappterbook-agent) | `8d15842a` | 2026-08-23 | 666 | 4.8 |
+| [`rappterbook`](repos/rappterbook) | `7819f067` | 2026-09-27 | 12,179 | 754.8 |
+| [`rappterbook-agent`](repos/rappterbook-agent) | `832de426` | 2026-09-26 | 667 | 4.8 |
 | [`rappterbook-agent-dna`](repos/rappterbook-agent-dna) | `16a5ddb7` | 2026-09-26 | 7 | 0.3 |
-| [`rappterbook-agent-exchange`](repos/rappterbook-agent-exchange) | `9320acba` | 2026-09-26 | 479 | 10.6 |
+| [`rappterbook-agent-exchange`](repos/rappterbook-agent-exchange) | `0f4248e7` | 2026-09-27 | 480 | 10.6 |
 | [`rappterbook-api`](repos/rappterbook-api) | `8c50370d` | 2026-09-26 | 12 | 0.2 |
 | [`rappterbook-autopilot`](repos/rappterbook-autopilot) | `fac2ad19` | 2026-09-26 | 4 | 0.0 |
 | [`rappterbook-commons`](repos/rappterbook-commons) | `2aba29e3` | 2026-09-26 | 5 | 0.0 |
 | [`rappterbook-engine-test`](repos/rappterbook-engine-test) | `f462665e` | 2026-09-26 | 73 | 5.0 |
-| [`rappterbook-first-bond`](repos/rappterbook-first-bond) | `6da27b30` | 2026-07-12 | 13 | 0.1 |
+| [`rappterbook-first-bond`](repos/rappterbook-first-bond) | `332e7a07` | 2026-09-26 | 14 | 0.1 |
 | [`rappterbook-governance`](repos/rappterbook-governance) | `1cb2f037` | 2026-09-26 | 10 | 0.1 |
 | [`rappterbook-impossible-product`](repos/rappterbook-impossible-product) | `afabf42f` | 2026-09-26 | 48 | 0.4 |
-| [`rappterbook-join`](repos/rappterbook-join) | `fdaa23a7` | 2026-09-23 | 15 | 0.1 |
-| [`rappterbook-knowledge-graph`](repos/rappterbook-knowledge-graph) | `ff6a9c79` | 2026-03-15 | 6 | 0.0 |
+| [`rappterbook-join`](repos/rappterbook-join) | `0657c327` | 2026-09-26 | 16 | 0.1 |
+| [`rappterbook-knowledge-graph`](repos/rappterbook-knowledge-graph) | `337ef554` | 2026-09-26 | 7 | 0.0 |
 | [`rappterbook-market-maker`](repos/rappterbook-market-maker) | `a2f3a5de` | 2026-09-26 | 10 | 0.2 |
 | [`rappterbook-mars-barn`](repos/rappterbook-mars-barn) | `f654201d` | 2026-09-26 | 27 | 0.3 |
 | [`rappterbook-phantom`](repos/rappterbook-phantom) | `e176f452` | 2026-09-26 | 5 | 0.0 |
@@ -237,11 +237,11 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rappterbook-social-graph`](repos/rappterbook-social-graph) | `77b8b1e9` | 2026-09-26 | 9 | 0.6 |
 | [`rappterbook-v2`](repos/rappterbook-v2) | `37087c5a` | 2026-09-26 | 47 | 0.3 |
 | [`rappterbook-v2-state`](repos/rappterbook-v2-state) | `5e1b4e24` | 2026-09-26 | 39 | 0.3 |
-| [`rappterbook-vm`](repos/rappterbook-vm) | `47932ef9` | 2026-09-26 | 157 | 1.0 |
-| [`rappterbox`](repos/rappterbox) | `656d1276` | 2026-08-16 | 67 | 1.2 |
+| [`rappterbook-vm`](repos/rappterbook-vm) | `5a09bccd` | 2026-09-27 | 157 | 1.0 |
+| [`rappterbox`](repos/rappterbox) | `734c69dd` | 2026-09-26 | 68 | 1.2 |
 | [`rappterhub`](repos/rappterhub) | `23865610` | 2026-09-26 | 21 | 0.2 |
 | [`RappterNest`](repos/RappterNest) | `8da2b076` | 2026-09-26 | 2 | 0.0 |
-| [`rappterverse`](repos/rappterverse) | `6819ad75` | 2026-09-20 | 1,141 | 10.5 |
+| [`rappterverse`](repos/rappterverse) | `c531a649` | 2026-09-26 | 1,142 | 10.5 |
 | [`rappterverse-data`](repos/rappterverse-data) | `cff8bb03` | 2026-07-13 | 301 | 1.4 |
 | [`rappvision-after-midnight-maps`](repos/rappvision-after-midnight-maps) | `43dd5436` | 2026-08-31 | 18 | 3.1 |
 | [`rappvision-brainstem-notes`](repos/rappvision-brainstem-notes) | `70a1b6f5` | 2026-09-23 | 9 | 0.1 |
@@ -263,11 +263,11 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rappvision-rnr`](repos/rappvision-rnr) | `77a8064e` | 2026-09-26 | 15 | 1.8 |
 | [`rappvision-signal-garden`](repos/rappvision-signal-garden) | `831bd38b` | 2026-08-31 | 11 | 0.0 |
 | [`rappvision-tiny-bureau`](repos/rappvision-tiny-bureau) | `f3296c1f` | 2026-08-31 | 10 | 0.2 |
-| [`RAR`](repos/RAR) | `6b9e4a4d` | 2026-09-26 | 18,318 | 204.1 |
+| [`RAR`](repos/RAR) | `af41833d` | 2026-09-27 | 18,318 | 204.1 |
 | [`twin`](repos/twin) | `8cdae83d` | 2026-09-26 | 236 | 2.2 |
-| [`twin-binder`](repos/twin-binder) | `5e41cd90` | 2026-04-17 | 5 | 0.0 |
-| [`twin-egg-hatcher`](repos/twin-egg-hatcher) | `6e96a7ed` | 2026-07-15 | 5 | 0.0 |
-| [`wildhaven-ai-homes-twin`](repos/wildhaven-ai-homes-twin) | `395e9707` | 2026-08-28 | 94 | 1.4 |
+| [`twin-binder`](repos/twin-binder) | `9176dbe3` | 2026-09-26 | 6 | 0.0 |
+| [`twin-egg-hatcher`](repos/twin-egg-hatcher) | `b30821ac` | 2026-09-26 | 6 | 0.1 |
+| [`wildhaven-ai-homes-twin`](repos/wildhaven-ai-homes-twin) | `507b2063` | 2026-09-26 | 95 | 1.4 |
 
 ## Files too large for the boat
 
@@ -390,7 +390,7 @@ Skipped at the 2.0MB per-file limit. Named, not silently dropped — clone the u
 - `rappterbook/state/discussions/17001-18000.json (2.8MB)`
 - `rappterbook/state/discussions/18001-19000.json (2.7MB)`
 - `rappterbook/state/discussions/19001-20000.json (2.3MB)`
-- `rappterbook/state/event_log.jsonl (11.1MB)`
+- `rappterbook/state/event_log.jsonl (11.2MB)`
 - `rappterbook/state/frame_timeline.json (2.0MB)`
 - `rappterbook/state/mcp_weather.jsonl (2.1MB)`
 - `rappterbook/state/posted_log.json (6.3MB)`
@@ -399,7 +399,7 @@ Skipped at the 2.0MB per-file limit. Named, not silently dropped — clone the u
 - `rappterbook/state/synthetic_posts.json (5.1MB)`
 - `rappterbook/state/synthetic_votes.json (5.3MB)`
 - `rappterbook/state/twin_content/linkedin.json (2.7MB)`
-- `rappterbook/state/twin_content/medium.json (7.7MB)`
+- `rappterbook/state/twin_content/medium.json (7.8MB)`
 - `rappterbook/state/twin_content/reddit.json (2.6MB)`
 - `rappterbook/zion/seed_comments.json (6.2MB)`
 - `rappterbook-engine-test/state/discussions_cache.json (50.0MB)`

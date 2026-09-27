@@ -6,7 +6,7 @@ wave: 2
 status: certified
 verdict: CLEAN
 evidence_commit: a2133bd4c6bb367afb38cad8a0dade454fd82af9
-checked: 2026-09-26
+checked: 2026-09-27
 checker: kody-w/rapp-1 rapp_check.py at 591e014
 experimental_mentions: 0
 header: missing
@@ -24,7 +24,7 @@ links_to:
 
 **Version:** none recorded (no root VERSION file and no GitHub release). **Channel:** `newest`: it has no long-term-support pin, so its newest commit is the one in use.
 
-- Evidence: [`kody-w/rappvision-kitchen-table-physics` at `a2133bd4c6`](https://github.com/kody-w/rappvision-kitchen-table-physics/tree/a2133bd4c6bb367afb38cad8a0dade454fd82af9) on `main`, checked 2026-09-26.
+- Evidence: [`kody-w/rappvision-kitchen-table-physics` at `a2133bd4c6`](https://github.com/kody-w/rappvision-kitchen-table-physics/tree/a2133bd4c6bb367afb38cad8a0dade454fd82af9) on `main`, checked 2026-09-27.
 - Checker: [`rapp_check.py` at `591e014`](https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp_check.py), verdict **CLEAN**. The raw output stays in the maintainer's sweep folder, outside the Hive; its SHA-256 is `f518a34ca1b34c996a5691fca261932db299be1d547272ce1d88c77b81990295`.
 - "experimental" mentions: 0 (whole word, any case, in tracked text files at the evidence commit, leaving out the network's own files: the repo's card `.rapp/member.md` and, in the network's public copy, `portfolio/`, `members/`, `notices/` and `PUBLISHED.md`; tracked, not a gate).
 - Network header: not yet added.

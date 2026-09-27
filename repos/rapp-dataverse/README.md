@@ -1,5 +1,9 @@
 # 🧠 rapp-dataverse
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-dataverse.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-dataverse.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 **Run RAPP on out-of-the-box Dataverse — no custom tables, no custom fields, no solution import.**
 A public static **vTwin** so you're never blocked by lacking an environment, and a **CLI** that
 hatches the brainstem into a real instance by twin sync, ready to chat in **Copilot Studio**.

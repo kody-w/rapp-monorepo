@@ -1,5 +1,9 @@
 # rapp-copilot-in-edge
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-copilot-in-edge.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-copilot-in-edge.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 **Drive your real, logged-in Microsoft Edge from GitHub Copilot CLI.**
 
 Not a headless throwaway browser — *your* browser, with your profile, your cookies, and your

@@ -1,4 +1,9 @@
 # Copilot Agent 365 - Enterprise AI Assistant
+
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/RAPPAIClaudeCodePlayground.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/RAPPAIClaudeCodePlayground.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 <a href='https://codespaces.new/kody-w/Copilot-Agent-365?quickstart=1'><img src='https://github.com/codespaces/badge.svg' alt='Open in GitHub Codespaces' style='max-width: 100%;'></a>
 
 ## 🚀 One-Click Setup - Fully Automated!

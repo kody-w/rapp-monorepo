@@ -5,13 +5,15 @@ line: DOGG & Commons
 wave: 2
 status: not yet
 verdict: DRIFT
-evidence_commit: d72ba3a0b0eaa231daee79be88eaf2dd27d537da
-checked: 2026-09-26
+evidence_commit: 6c131295071a9d1ae3e36c6e0d766910b4a6fced
+checked: 2026-09-27
 checker: kody-w/rapp-1 rapp_check.py at 591e014
 experimental_mentions: 0
-header: missing
+header: present
+header_pr: https://github.com/kody-w/dogg/pull/11
 channel: newest
 lifecycle: active
+member_card: present
 links_to:
   - dogg-markets
   - dogg-planet
@@ -28,10 +30,11 @@ links_to:
 
 **Version:** none recorded (no root VERSION file and no GitHub release). **Channel:** `newest`: it has no long-term-support pin, so its newest commit is the one in use.
 
-- Evidence: [`kody-w/dogg` at `d72ba3a0b0`](https://github.com/kody-w/dogg/tree/d72ba3a0b0eaa231daee79be88eaf2dd27d537da) on `main`, checked 2026-09-26.
+- Evidence: [`kody-w/dogg` at `6c13129507`](https://github.com/kody-w/dogg/tree/6c131295071a9d1ae3e36c6e0d766910b4a6fced) on `main`, checked 2026-09-27.
 - Checker: [`rapp_check.py` at `591e014`](https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp_check.py), verdict **DRIFT**, 3 finding(s), 37 passing artifact(s). The raw output stays in the maintainer's sweep folder, outside the Hive; its SHA-256 is `e4bfa3609054f89280c50e5b08083e1a4683d742a37bc46eb0b5e4238bc79b0d`.
 - "experimental" mentions: 0 (whole word, any case, in tracked text files at the evidence commit, leaving out the network's own files: the repo's card `.rapp/member.md` and, in the network's public copy, `portfolio/`, `members/`, `notices/` and `PUBLISHED.md`; tracked, not a gate).
-- Network header: not yet added.
+- Network header: present in `README.md`.
+- Member card: [`.rapp/member.md`](https://github.com/kody-w/dogg/blob/6c131295071a9d1ae3e36c6e0d766910b4a6fced/.rapp/member.md) at the evidence commit: this repo's card in the RAPP Hive, beside its pointer [`members/dogg.md`](https://github.com/kody-w/rapp-hive-public/blob/main/members/dogg.md).
 
 ## Findings (3)
 
@@ -50,4 +53,4 @@ Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<
 
 ## Check it yourself
 
-Clone `kody-w/dogg` at `d72ba3a0b0` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py dogg --json` from the folder that holds both.
+Clone `kody-w/dogg` at `6c13129507` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py dogg --json` from the folder that holds both.

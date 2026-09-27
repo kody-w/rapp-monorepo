@@ -4,6 +4,7 @@ repo: kody-w/rapp-map
 raw: https://raw.githubusercontent.com/kody-w/rapp-map/
 lts: 4c8ba6bbe73125cc980d0c3b38c59c99e4b231c0
 newest: HEAD
+card: none
 line: learn
 channel: rapp1-lts
 lifecycle: active

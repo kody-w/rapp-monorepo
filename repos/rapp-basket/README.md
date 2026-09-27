@@ -1,5 +1,9 @@
 # rapp-basket
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-basket.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-basket.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 Your eggs, kept in this browser — **offline, private, yours**. A personal collection of every holographic organism you catch or make; **import and export** the whole basket to move it between devices or back it up.
 
 **Live:** https://kody-w.github.io/rapp-basket/

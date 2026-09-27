@@ -1,5 +1,9 @@
 # RAPP Hologram — the engine
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-hologram.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-hologram.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 The **reference engine** for [**RAPP Moment**](https://github.com/kody-w/rapp-moment): living, 100-frame
 holographic organisms you can walk, grow, own, and embed. Pure, dependency-free libraries + a serverless
 browser **player** + the **resolve Gateway** that makes a Moment render in-place anywhere (NFT marketplace,
