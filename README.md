@@ -1,5 +1,9 @@
 # rapp-monorepo
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-monorepo.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-monorepo.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 **Every public RAPP repository, in one place, captured in a single pass.**
 
 Clone this one repo and you have the whole estate as it stood at the last
