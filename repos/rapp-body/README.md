@@ -1,5 +1,9 @@
 # rapp-body — the RAPP organism's biography
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-body.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-body.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 `kody-w/rapp-body` is the RAPP ecosystem's own **frames repo**: the whole organism recorded
 as a public, rapp/1 hash-chained sequence of frames — cradle to grave — plus **`player.html`**, a
 flip book that plays the frames so you can watch the body be born, grow, and transform.

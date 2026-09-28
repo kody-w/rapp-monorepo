@@ -11,7 +11,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from rapp_operator.rapp1 import rappid_valid, verify_frame  # noqa: E402
+from rapp_operator.rapp1 import (  # noqa: E402
+    parse_json,
+    rappid_valid,
+    verify_frame,
+)
 
 
 def main() -> int:
@@ -31,7 +35,11 @@ def main() -> int:
         return 1
     head = None
     for path in paths:
-        frame = json.loads(path.read_text(encoding="utf-8"))
+        try:
+            frame = parse_json(path.read_bytes())
+        except ValueError as exc:
+            print(f"{path.name}: unreadable RAPP/1 frame: {exc}")
+            return 1
         expected = f"{frame['seq']:020d}-{frame['frame_hash']}.json"
         if path.name != expected:
             print(f"filename mismatch: {path.name}")

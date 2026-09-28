@@ -10,7 +10,7 @@ layout: null
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'sha256-EdLbDBprUsQ/fyUmX2gpSAQB7ULPqVwLstG/hJ3S3nw='; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
-<title>RAPP/1 network: timeline of 9 version(s)</title>
+<title>RAPP/1 network: timeline of 10 version(s)</title>
 <style>body{margin:0;background:#f6f8fa;color:#1b1f24;font:16px/1.5 Helvetica,Arial,sans-serif}
 header{background:#fff;border-bottom:1px solid #d0d7de;padding:14px 24px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
 header h1{font-size:22px;margin:0;flex:1}
@@ -40,8 +40,8 @@ footer{color:#57606a;font-size:13px;margin-top:24px}</style>
 <dl>
 <dt>Stream</dt><dd><code>rappid:@kody-w/rapp1-network:71216534f9d362c7af054e773d546dfd996f769b08bd38c1b90b9e36760c2def</code><br>Keyless, minted once (2026-09-25T17:36:08.797Z); <a href="https://kody-w.github.io/rapp-hive-public/portfolio/rappid.json">rappid.json</a> · <a href="https://kody-w.github.io/rapp-hive-public/portfolio/rapp-frame-index.json">frame index</a></dd>
 <dt>Genesis</dt><dd>payload_hash <code>15530d4785bea042a87b06c7dcfe15fec6ede0b0041299bbd4e80e9e8a5b0894</code><br>frame_hash <code>d765d2698582e937af9cf75e6cb2851d6d1c10e546db1b4e5fe640c591b8b833</code></dd>
-<dt>Head</dt><dd>version 9 (seq 8), payload_hash <code>8df7c0cdad7a1410cc48f76ae427663e297feb997582aa085380a0994fd70bb1</code></dd>
-<dt>Checked</dt><dd>Every pulse passes RAPP/1 §7.5 steps 1–5 with the reference <code>rapp.py</code>, and rapp-1's own <code>rapp_check.py</code> at <code>591e014</code> gives the chain COMPLIANT (9 frame(s) passing, no findings). The reference implementation passes rapp-1's <code>conformance.py</code> (22 controlled checks | 22 PASS | 0 FAIL).</dd>
+<dt>Head</dt><dd>version 10 (seq 9), payload_hash <code>438b6206fdfef6bb7cd665647e23b205993ff5472a48606fb7e1ff59d38496e7</code></dd>
+<dt>Checked</dt><dd>Every pulse passes RAPP/1 §7.5 steps 1–5 with the reference <code>rapp.py</code>, and rapp-1's own <code>rapp_check.py</code> at <code>591e014</code> gives the chain COMPLIANT (10 frame(s) passing, no findings). The reference implementation passes rapp-1's <code>conformance.py</code> (22 controlled checks | 22 PASS | 0 FAIL).</dd>
 </dl>
 </section>
 <section class="note">
@@ -50,12 +50,20 @@ footer{color:#57606a;font-size:13px;margin-top:24px}</style>
 <pre>{&quot;type&quot;: &quot;genesis&quot;, &quot;stream_id&quot;: &quot;rappid:@kody-w/rapp1-network:71216534f9d362c7af054e773d546dfd996f769b08bd38c1b90b9e36760c2def&quot;, &quot;frame_hash&quot;: &quot;d765d2698582e937af9cf75e6cb2851d6d1c10e546db1b4e5fe640c591b8b833&quot;, &quot;deprecated&quot;: false}</pre>
 <p>Where the pulses live: in public. Every pulse is served as JSON beside its maps, and rapp_check.py still certifies this public copy: CLEAN on its files as they are (the Hive holds only markdown) and COMPLIANT on the files as GitHub Pages serves them, where each unsigned pulse passes the §7 envelope, hash and chain checks (a body stream permits sig null).</p>
 </section>
-<h2>Versions (9)</h2>
+<h2>Versions (10)</h2>
+<article>
+<h3>Version 10 · 2026-09-27 14:07 UTC <span class="seq">seq 9</span></h3>
+<p class="totals"><span>317 stations</span><span class="c">293 certified</span><span class="n">23 not yet</span><span class="u">1 unchecked</span></p>
+<p>payload_hash <code>438b6206fdfef6bb7cd665647e23b205993ff5472a48606fb7e1ff59d38496e7</code><br>frame_hash <code>067401b9ac70d6224771158b5154f9c59fe3e70b0a81a38546e09c6292f8df92</code><br>prev <code>8df7c0cdad7a1410cc48f76ae427663e297feb997582aa085380a0994fd70bb1</code></p>
+<p><a href="https://kody-w.github.io/rapp-hive-public/portfolio/versions/2026-09-27-9/subway.html">map</a> · <a href="https://kody-w.github.io/rapp-hive-public/portfolio/versions/2026-09-27-9/subway.pdf">poster</a> · <a href="https://kody-w.github.io/rapp-hive-public/portfolio/versions/2026-09-27-9/subway.svg">SVG</a> · <a href="https://kody-w.github.io/rapp-hive-public/portfolio/versions/2026-09-27-9/pulse.json">pulse</a> · published with this page</p>
+<p><b>Since version 9:</b> 0 status change(s), 0 new repo(s), 0 removed, 18 repo(s) at a new commit.</p>
+<p>0 lifecycle change(s), 0 version change(s), 0 channel change(s), 0 repo(s) left the network.</p>
+</article>
 <article>
 <h3>Version 9 · 2026-09-27 01:06 UTC <span class="seq">seq 8</span></h3>
 <p class="totals"><span>317 stations</span><span class="c">293 certified</span><span class="n">23 not yet</span><span class="u">1 unchecked</span></p>
 <p>payload_hash <code>8df7c0cdad7a1410cc48f76ae427663e297feb997582aa085380a0994fd70bb1</code><br>frame_hash <code>588c2489647994104fa3b348388ec9bafdadbcb0e02dfc44b9f8b559e3e68b02</code><br>prev <code>d3dec8beab406ee7e996efb1067ac375457e667c7d07fe59e1a58c16addc9388</code></p>
-<p><a href="https://kody-w.github.io/rapp-hive-public/portfolio/versions/2026-09-27-8/subway.html">map</a> · <a href="https://kody-w.github.io/rapp-hive-public/portfolio/versions/2026-09-27-8/subway.pdf">poster</a> · <a href="https://kody-w.github.io/rapp-hive-public/portfolio/versions/2026-09-27-8/subway.svg">SVG</a> · <a href="https://kody-w.github.io/rapp-hive-public/portfolio/versions/2026-09-27-8/pulse.json">pulse</a> · published with this page</p>
+<p><a href="https://kody-w.github.io/rapp-hive-public/portfolio/versions/2026-09-27-8/subway.html">map</a> · <a href="https://kody-w.github.io/rapp-hive-public/portfolio/versions/2026-09-27-8/subway.pdf">poster</a> · <a href="https://kody-w.github.io/rapp-hive-public/portfolio/versions/2026-09-27-8/subway.svg">SVG</a> · <a href="https://kody-w.github.io/rapp-hive-public/portfolio/versions/2026-09-27-8/pulse.json">pulse</a> · first published in <a href="https://github.com/kody-w/rapp-hive-public/commit/93efcd94a4791a363371f88e7e8e2e1e4eba81f1">93efcd9</a></p>
 <p><b>Since version 8:</b> 0 status change(s), 0 new repo(s), 0 removed, 14 repo(s) at a new commit.</p>
 <p>0 lifecycle change(s), 0 version change(s), 0 channel change(s), 0 repo(s) left the network.</p>
 </article>

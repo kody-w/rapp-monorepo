@@ -821,8 +821,20 @@ let runError = null;
 
 try {
   const port = await activePort(45000);
-  const targets = await readJson(`http://127.0.0.1:${port}/json/list`);
-  const page = targets.find(target => target.type === "page");
+  let page = null;
+  for (let attempt = 0; attempt < 5; attempt += 1) {
+    const targets = await readJson(`http://127.0.0.1:${port}/json/list`);
+    page = targets.find(target => target.type === "page" && target.webSocketDebuggerUrl && target.webSocketDebuggerUrl);
+    if (page?.webSocketDebuggerUrl) break;
+    if (attempt === 0) {
+      try {
+        await fetch(`http://127.0.0.1:${port}/json/new?about:blank`, { method: "PUT" });
+      } catch (error) {
+        void error;
+      }
+    }
+    if (attempt < 4) await delay(75);
+  }
   assert.ok(page?.webSocketDebuggerUrl, "browser exposed no page target");
   cdp = new Cdp(page.webSocketDebuggerUrl);
   await cdp.connect();

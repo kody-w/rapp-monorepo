@@ -173,6 +173,54 @@ class TestAssimilation(unittest.TestCase):
         self.assertEqual(god.load_public_state()["card.json"],
                          {"hp": 100, "atk": 5})
 
+    def test_rapp1_feed_shape_assimilates_by_payload_hash_chain(self):
+        f0 = _frame(self.twin, 0, None,
+                    {"card.json": {"op": "set", "value": {"hp": 100}}})
+        f1 = _frame(self.twin, 1, f0["sha256"],
+                    {"card.json": {"op": "merge", "value": {"atk": 5}}})
+        feed = {
+            "spec": "rapp/1",
+            "kind": tp.FEED_KIND,
+            "twin_id": self.twin,
+            "head_hash": "frame-stream-head",
+            "count": 2,
+            "frames": [
+                {
+                    "spec": "rapp/1",
+                    "kind": tp.FRAME_KIND,
+                    "stream_id": self.twin,
+                    "seq": f0["seq"],
+                    "utc": f0["ts"],
+                    "payload": f0["payload"],
+                    "payload_hash": tp._rapp1_hash("rapp/1:particle", f0["payload"]),
+                    "prev": None,
+                    "frame_hash": "frame-0",
+                    "sig": None,
+                },
+                {
+                    "spec": "rapp/1",
+                    "kind": tp.FRAME_KIND,
+                    "stream_id": self.twin,
+                    "seq": f1["seq"],
+                    "utc": f1["ts"],
+                    "payload": f1["payload"],
+                    "payload_hash": tp._rapp1_hash("rapp/1:particle", f1["payload"]),
+                    "prev": tp._rapp1_hash("rapp/1:particle", f0["payload"]),
+                    "frame_hash": "frame-1",
+                    "sig": None,
+                },
+            ],
+        }
+        god = self._god("rapp1")
+        res = assimilate_feed(god, feed, "file:///x", self.pub,
+                              allow_backfill=False)
+        self.assertEqual(res["assimilated"], [0, 1])
+        self.assertEqual(res["rejected"], [])
+        self.assertTrue(res["in_sync"])
+        self.assertEqual(res["head_sha"], tp._rapp1_hash("rapp/1:particle", f1["payload"]))
+        self.assertEqual(god.load_public_state()["card.json"],
+                         {"hp": 100, "atk": 5})
+
     def test_tampered_frame_rejected_and_quarantined(self):
         f0 = _frame(self.twin, 0, None,
                     {"card.json": {"op": "set", "value": {"hp": 100}}})

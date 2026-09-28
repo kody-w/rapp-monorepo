@@ -2,6 +2,10 @@
 
 # ✦ RAPPDEX
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-mapp.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-mapp.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 **Open the RAPP map wherever you are.**
 
 `mapp` · one map, one opener, every surface

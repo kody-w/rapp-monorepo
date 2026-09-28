@@ -1,5 +1,9 @@
 # The RAPP Bible
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/RAPP-Bible.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/RAPP-Bible.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 **One repo you can read if it's the only thing you have, and understand the entire RAPP ecosystem end-to-end** — what it is, why it exists, how every piece fits, how to use it, the one agent, the schemas, the repos, the journeys.
 
 > **Authority/status note.** This Bible preserves a **historical v1.2.0

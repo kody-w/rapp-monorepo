@@ -1,5 +1,9 @@
 # 🧠 RAPP Hippocampus
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-ai.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-ai.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 The memory center for your AI agents. Built on Azure Functions — local-first, deploy to Azure when ready.
 
 > In the brain, the **hippocampus** is responsible for forming and recalling memories. In the RAPP anatomy, it's the next evolution above the [Brainstem](https://github.com/microsoft/aibast-agents-library) — adding persistent memory, Azure Functions runtime, and cloud deployment.

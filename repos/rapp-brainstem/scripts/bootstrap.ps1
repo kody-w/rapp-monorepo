@@ -185,8 +185,8 @@ $BrainstemHome = Join-Path $UserHome '.brainstem'
 
 Assert-Hash $LockPath 'e699ad5978cb91b7014011392c3e0619169e239d3418b9e8bdc2098588badf55'
 Assert-Hash (Join-Path $PluginRoot 'rapp_operator/__init__.py') '4da21ba688c0d6306dddc09f0db442993139b6906e0732b6ed48da184546aba3'
-Assert-Hash (Join-Path $PluginRoot 'rapp_operator/rapp1.py') 'c3a30e448eb7b9ebfa7cca3b5b1e8cfa67486a0f78de8add7efb330b7efa9779'
-Assert-Hash (Join-Path $PluginRoot 'rapp_operator/rappctl.py') 'c6cea66c4e695f844b187ef4568a9cd0b5dc65909a4557d398165cbb52b36115'
+Assert-Hash (Join-Path $PluginRoot 'rapp_operator/rapp1.py') '84ea721301525a2cde6e757f902b0aebfdb44e2d8a3f2062cf7c9a7fa9cb2850'
+Assert-Hash (Join-Path $PluginRoot 'rapp_operator/rappctl.py') 'e6406811f3bfbf8f53b2ddad1226e5a54c5ccba9cd095bf37690c38b8dd765cb'
 
 if (Test-Path -LiteralPath $BrainstemHome) {
     Fail "$BrainstemHome already exists; fresh bootstrap refuses existing state"
@@ -268,15 +268,15 @@ try {
       },
       {
         "name": "rapp1.py",
-        "sha256": "c3a30e448eb7b9ebfa7cca3b5b1e8cfa67486a0f78de8add7efb330b7efa9779"
+        "sha256": "84ea721301525a2cde6e757f902b0aebfdb44e2d8a3f2062cf7c9a7fa9cb2850"
       },
       {
         "name": "rappctl.py",
-        "sha256": "c6cea66c4e695f844b187ef4568a9cd0b5dc65909a4557d398165cbb52b36115"
+        "sha256": "e6406811f3bfbf8f53b2ddad1226e5a54c5ccba9cd095bf37690c38b8dd765cb"
       }
     ],
     "schema": "rapp-brainstem-operator-bundle/1",
-    "sha256": "d007f602e1429f04aa60bd40bb63ba6756a1f1fc684fd8b8f469bd393dcb8e77"
+    "sha256": "9e2d7d7ab6205ad19f58b1f699b4730266b4133c0b0fdeb314d6793e5b10689b"
   },
   "postconditions": {
     "brainstem_release": "exact-target",

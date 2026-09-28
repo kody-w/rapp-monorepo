@@ -1,0 +1,103 @@
+{
+  "schema": "brainfreeze-studio-setup/3",
+  "product": "brainfreeze studio",
+  "site": "https://kody-w.github.io/rapp-brainfreeze-studio/",
+  "repository": "https://github.com/kody-w/rapp-brainfreeze-studio",
+  "skill": "https://kody-w.github.io/rapp-brainfreeze-studio/skills/brainfreeze-studio/SKILL.md",
+  "claude_code": "https://kody-w.github.io/rapp-brainfreeze-studio/CLAUDE.md",
+  "llms": "https://kody-w.github.io/rapp-brainfreeze-studio/llms.txt",
+  "golden_path": "github-copilot",
+  "compatibility": ["claude-code", "any AI agent that can run commands"],
+  "requirements": {
+    "python": ">=3.9",
+    "git": "any",
+    "azure_cli": "for the person's own sign-in (az login)",
+    "node_and_npm": "only for a RAPP Store app's Power Apps code app (leave out --no-app)"
+  },
+  "work_folder": "~/brainfreeze-work",
+  "setup": [
+    "mkdir -p ~/brainfreeze-work && cd ~/brainfreeze-work",
+    "git clone https://github.com/kody-w/rapp-brainfreeze-studio.git"
+  ],
+  "update": "git -C ~/brainfreeze-work/rapp-brainfreeze-studio pull --ff-only",
+  "cwd": "~/brainfreeze-work/rapp-brainfreeze-studio",
+  "run": "python3 -m brainfreeze_studio",
+  "windows": {
+    "python3": "py -3",
+    "../.venv/bin/python": "..\\.venv\\Scripts\\python.exe",
+    "~/": "$HOME\\",
+    "work_folder": "New-Item -ItemType Directory -Force \"$HOME\\brainfreeze-work\"; Set-Location \"$HOME\\brainfreeze-work\"",
+    "store_ids": "quote them: '@rapp/markdown_medic'"
+  },
+  "sign_in": {
+    "person_runs": "az login --allow-no-subscriptions",
+    "other_tenant": "add --tenant <their tenant domain>",
+    "separate_profile": "AZURE_CONFIG_DIR=~/.azure-brainfreeze, set before az login",
+    "list_environments": "python3 -m brainfreeze_studio environments",
+    "prefer": "a Developer or Sandbox environment; Production only when the person confirms"
+  },
+  "sources": {
+    "brainstem": {
+      "tools": [
+        "python3 -m venv ../.venv",
+        "../.venv/bin/python -m pip install \"git+https://github.com/kody-w/rapp-brainfreeze.git\"",
+        "git -C .. clone https://github.com/kody-w/copilot-harness-sdk.git"
+      ],
+      "freeze": "../.venv/bin/python -m brainfreeze egg ~/.brainstem/src/rapp_brainstem --owner <github-login> --slug <short-name> --no-memory --out ../eggs",
+      "build": "python3 -m brainfreeze_studio build ../eggs/<github-login>--<short-name>.egg --name \"<Agent name>\" --publisher-prefix rapp --sdk-dir ../copilot-harness-sdk --translations translations/ --environment <environment> --out ../build/<short-name>",
+      "plan": "python3 -m brainfreeze_studio deploy ../build/<short-name>/workspace --environment <environment> --draft --plan",
+      "deploy": "python3 -m brainfreeze_studio deploy ../build/<short-name>/workspace --environment <environment> --draft --expect <digest>"
+    },
+    "rapp_store_app": {
+      "catalog": "https://kody-w.github.io/RAPP_Store/",
+      "index": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/index.json",
+      "id": "<publisher>/<id> from the index, for example @rapp/markdown_medic",
+      "cannot_build": "entries whose access is private, and complete applications with no singleton_url",
+      "build": "python3 -m brainfreeze_studio rapplication <@publisher/id> --translations translations/ --no-app --out ../build/<id>",
+      "plan": "python3 -m brainfreeze_studio deploy ../build/<id>/workspace --environment <environment> --draft --plan",
+      "deploy": "python3 -m brainfreeze_studio deploy ../build/<id>/workspace --environment <environment> --draft --expect <digest>"
+    },
+    "sample": {
+      "build": "python3 -m brainfreeze_studio rapplication examples/rapplications/invoice_router --translations translations/ --no-app --out ../build/invoice-router",
+      "plan": "python3 -m brainfreeze_studio deploy ../build/invoice-router/workspace --environment <environment> --draft --plan",
+      "deploy": "python3 -m brainfreeze_studio deploy ../build/invoice-router/workspace --environment <environment> --draft --expect <digest>",
+      "parity": "parity:       InvoiceRouter 72/72 PROVEN",
+      "question": "Route an invoice from Fabrikam for $18,750.",
+      "check": "expand the agent's Route an invoice step: its Output is exactly the answer below",
+      "answer": "Fabrikam $18,750.00: queue APPROVAL, needs AP manager sign-off (limit $10,000)."
+    }
+  },
+  "open_link": {
+    "macos": "open \"<link>\"",
+    "windows": "start \"\" \"<link>\"",
+    "windows_powershell": "Start-Process \"<link>\"",
+    "linux": "xdg-open \"<link>\""
+  },
+  "verify": [
+    "the build's parity lines: each translated agent matches its Python on every test case, or is refused and stays a skill",
+    "the plan (--plan): what the deploy would create, update or remove, whether the agent is already published, which connection each flow uses, and the build's digest, read without changing anything",
+    "the deploy (--expect <digest>): exactly the build that was planned",
+    "the deploy's read-back: the components and their content, the flows, their links and their connections, stopping on any difference",
+    "a reply in Copilot Studio's test chat, opened from the deploy's maker: link"
+  ],
+  "verification": {
+    "with_the_persons_browser": "an AI that can drive the person's signed-in browser asks the question in a new test chat and reports the reply it saw",
+    "without_a_browser": "the AI gives the person the link and the question, and says it has not seen the reply; a link alone is not a verified answer"
+  },
+  "consent": {
+    "before_install": "say what you will set up and where, and wait for yes",
+    "before_build": "say the build runs the agents' Python on this computer to prove translations (a clean environment and a temporary home and working folder, not a sandbox); build only code the person trusts",
+    "before_deploy": "plan the build (--plan), show what it would create, update or remove and whether the agent is already published, and wait for yes",
+    "publish": "only when the person asks: plan again without --draft, show it, then deploy without --draft with that plan's --expect <digest>"
+  },
+  "never": [
+    "publish without the person asking",
+    "deploy to an environment the person did not pick",
+    "rebuild between the plan and the deploy",
+    "update an agent the person didn't make with brainfreeze studio: choose a new --name",
+    "remove what the person wants to keep: add --keep-extra to the plan and the deploy",
+    "use a service account, a client secret, an app-only token or someone else's connection (--use-shared-connection)",
+    "delete or change agents, flows, connections or data beyond what the plan lists, or change environment settings",
+    "print, paste or save a token"
+  ]
+}

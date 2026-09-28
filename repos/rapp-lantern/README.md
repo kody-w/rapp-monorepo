@@ -1,5 +1,9 @@
 # rapp-lantern
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-lantern.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-lantern.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 The universal player for **holographic organisms**. Drop in *any* `.egg` and orbit it in genuine 3D — regardless of source or species. Self-contained, no CDN, no backend; nothing leaves your device.
 
 **Live:** https://kody-w.github.io/rapp-lantern/

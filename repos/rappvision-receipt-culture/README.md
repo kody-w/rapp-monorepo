@@ -1,5 +1,9 @@
 # Receipt Culture
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rappvision-receipt-culture.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rappvision-receipt-culture.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 One Receipt, End to End is a constitutionally paired RAPP Vision publication: the encoded film is the default newcomer orientation layer and the live replay is the deterministic take-the-wheel proof.
 
 - Channel: `receipt-culture`

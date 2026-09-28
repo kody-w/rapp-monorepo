@@ -3016,9 +3016,21 @@ async function main() {
   try {
     if (launchError) throw launchError;
     await waitForDevTools(child, port, launchLog, 45000);
-    const targetsResponse = await fetch(`http://127.0.0.1:${port}/json/list`);
-    const targets = await targetsResponse.json();
-    const page = targets.find(target => target.type === "page");
+    let page = null;
+    for (let attempt = 0; attempt < 5; attempt += 1) {
+      const targetsResponse = await fetch(`http://127.0.0.1:${port}/json/list`);
+      const targets = await targetsResponse.json();
+      page = targets.find(target => target.type === "page" && target.webSocketDebuggerUrl && target.webSocketDebuggerUrl);
+      if (page?.webSocketDebuggerUrl) break;
+      if (attempt === 0) {
+        try {
+          await fetch(`http://127.0.0.1:${port}/json/new?about:blank`, { method: "PUT" });
+        } catch (error) {
+          void error;
+        }
+      }
+      if (attempt < 4) await delay(75);
+    }
     assert(page && page.webSocketDebuggerUrl, "browser page target is missing");
     cdp = new CdpClient(page.webSocketDebuggerUrl);
     await cdp.connect();

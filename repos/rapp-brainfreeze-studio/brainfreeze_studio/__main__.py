@@ -1,18 +1,24 @@
 """python3 -m brainfreeze_studio build <egg> --name "..." --publisher-prefix rapp [--sdk-dir ...] [--out build/]
+python3 -m brainfreeze_studio environments                      (the environments your az login can reach)
+python3 -m brainfreeze_studio deploy build/workspace --environment https://<org>.crm.dynamics.com/ [--draft]
 python3 -m brainfreeze_studio rapplication @kody-w/agent_team --out out/ [--environment https://<org>.crm.dynamics.com/ --deploy]
 python3 -m brainfreeze_studio codeapp-host
 python3 -m brainfreeze_studio managed-app spec.json --out out/ [--deploy --sdk-dir ../copilot-harness-sdk --tenant <id>]"""
 import argparse
 import json
 import os
+import shlex
+import shutil
 import subprocess
 import sys
 import time
+from contextlib import nullcontext, redirect_stdout
+from pathlib import Path
 
 from . import StudioBuildError, build
 
 
-def main(argv=None):
+def parser():
     p = argparse.ArgumentParser(prog="brainfreeze-studio",
                                 description="Turn a frozen RAPP brainstem (organism egg) into a Copilot Studio agent.")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -34,6 +40,23 @@ def main(argv=None):
     b.add_argument("--files-folder", help="the folder in that site their paths start from (default /Shared Documents)")
     b.add_argument("--out", default="build", help="output folder (default build/)")
     b.add_argument("--json", action="store_true", help="print the summary as JSON")
+    dp = sub.add_parser("deploy", help="deploy a built workspace to Copilot Studio as you, with your Azure CLI sign-in "
+                        "(az login)")
+    dp.add_argument("workspace", help="the workspace a build wrote, for example build/workspace")
+    dp.add_argument("--environment", required=True, help="https://<org>.crm.dynamics.com/ (see: environments)")
+    dp.add_argument("--draft", action="store_true", help="leave the agent a Draft: don't publish it")
+    dp.add_argument("--plan", action="store_true", help="preview the deploy with GETs only; do not deploy or publish")
+    dp.add_argument("--expect", help="deploy only the workspace digest shown by the approved plan")
+    dp.add_argument("--keep-extra", action="store_true", help="keep the agent's components that are not in the workspace")
+    dp.add_argument("--use-shared-connection", action="store_true",
+                    help="allow an environment connection that may belong to someone else")
+    dp.add_argument("--files-site", help="the SharePoint site agents that read files find them in (default: the "
+                    "build's, else the environment's RAPP Files Site, else your tenant's root site)")
+    dp.add_argument("--files-folder", help="the folder in that site their paths start from (default /Shared Documents)")
+    dp.add_argument("--json", action="store_true", help="print the result as JSON")
+    en = sub.add_parser("environments", help="the Power Platform environments your Azure CLI sign-in (az login) can "
+                        "reach, from the Global Discovery Service")
+    en.add_argument("--json", action="store_true", help="print them as JSON")
     sv = sub.add_parser("serve", help="fallback: serve an egg's agents as MCP tools (runs the real agent.py)")
     sv.add_argument("egg")
     sv.add_argument("--engine-dir", help="a grail checkout to use instead of cloning the egg's pinned engine")
@@ -55,7 +78,13 @@ def main(argv=None):
     ra.add_argument("--environment", help="https://<org>.crm.dynamics.com/: where --deploy puts it")
     ra.add_argument("--deploy", action="store_true", help="deploy as you: the agent, its flows and the code app, "
                                                           "with your Azure CLI sign-in (az login)")
-    ra.add_argument("--no-app", action="store_true", help="with --deploy: leave the code app out")
+    ra.add_argument("--plan", action="store_true", help="with --deploy: preview with GETs only; do not deploy or publish")
+    ra.add_argument("--expect", help="with --deploy: require the workspace digest shown by the approved plan")
+    ra.add_argument("--keep-extra", action="store_true", help="with --deploy: keep components not in the workspace")
+    ra.add_argument("--use-shared-connection", action="store_true",
+                    help="with --deploy: allow an environment connection that may belong to someone else")
+    ra.add_argument("--no-app", action="store_true", help="leave out the code app and its Power Apps flows; no Node or npm")
+    ra.add_argument("--draft", action="store_true", help="with --deploy: leave the agent a Draft: don't publish it")
     ra.add_argument("--files-site", help="the SharePoint site agents that read files find them in (default: the "
                     "environment's RAPP Files Site, else your tenant's root site)")
     ra.add_argument("--files-folder", help="the folder in that site their paths start from (default /Shared Documents)")
@@ -86,7 +115,15 @@ def main(argv=None):
     ma.add_argument("--dataverse-url", help="task-tracker: the environment URL for --create-table, if the spec has "
                     "no dataverseUrl")
     ma.add_argument("--json", action="store_true", help="print the result as JSON")
-    a = p.parse_args(argv)
+    return p
+
+
+def main(argv=None):
+    a = parser().parse_args(argv)
+    if a.cmd == "environments":
+        return _environments(a)
+    if a.cmd == "deploy":
+        return _deploy(a)
     if a.cmd == "managed-app":
         return _managed_app(a)
     if a.cmd == "codeapp-host":
@@ -126,14 +163,23 @@ def main(argv=None):
         return 0
     print(f"workspace:   {r['workspace']}")
     print(f"agent:       {r['schema_name']}")
-    for ag in r["agents"]:
-        print(f"  {ag['name']:<18} -> {ag['as']}" + (f"  ({ag['note']})" if ag.get("note") else ""))
+    _show_agents(r["agents"])
     print(f"proof turns: {r['proof_turns']}   memories: {r['memories']}")
-    prov = json.load(open(os.path.join(a.out, "provenance.json")))
+    with open(os.path.join(a.out, "provenance.json"), encoding="utf-8") as f:
+        prov = json.load(f)
     for agent, p in prov.get("parity", {}).items():
         print(f"parity:      {agent} {p['passed']}/{p['cases']} {'PROVEN' if p['parity'] else 'FAILED'}")
-    print(f"next:        deploy with copilot-harness-sdk: see {a.out}/provenance.json")
+    workspace = shlex.quote(str(r["workspace"]))
+    environment = shlex.quote(a.environment) if a.environment else "https://<org>.crm.dynamics.com/"
+    print(f"next:        python3 -m brainfreeze_studio deploy {workspace} "
+          f"--environment {environment} --draft --plan")
+    print("             then the same without --plan")
     return 0
+
+
+def _show_agents(agents):
+    for ag in agents:
+        print(f"  {ag['name']:<18} -> {ag['as']}" + (f"  ({ag['note']})" if ag.get("note") else ""))
 
 
 def az_token(resource):
@@ -143,10 +189,10 @@ def az_token(resource):
     if cached and cached[1] - time.time() > 300:
         return cached[0]
     try:
-        out = subprocess.run(["az", "account", "get-access-token", "--resource", resource, "-o", "json"],
-                             capture_output=True, text=True, check=True).stdout
+        out = subprocess.run([shutil.which("az") or "az", "account", "get-access-token", "--resource", resource,
+                              "-o", "json"], capture_output=True, text=True, check=True).stdout
     except FileNotFoundError:
-        raise SystemExit("brainfreeze-studio: --deploy signs in with the Azure CLI; install it and run az login")
+        raise SystemExit("brainfreeze-studio: this signs in with the Azure CLI; install it and run az login")
     except subprocess.CalledProcessError as e:
         raise SystemExit(f"brainfreeze-studio: az couldn't get a token for {resource}: {e.stderr.strip()[:400]}")
     body = json.loads(out)
@@ -161,6 +207,101 @@ APIHUB = "https://apihub.azure.com"
 def _files_home(a):
     home = {k: v for k, v in (("site", a.files_site), ("folder", a.files_folder)) if v}
     return home or None
+
+
+def _environments(a):
+    from .discovery import DISCOVERY, DiscoveryError, environments
+    try:
+        found = environments(az_token(DISCOVERY))
+    except DiscoveryError as e:
+        print(f"brainfreeze-studio: {e}", file=sys.stderr)
+        return 1
+    if a.json:
+        print(json.dumps(found, indent=2))
+        return 0
+    if not found:
+        print("brainfreeze-studio: this sign-in belongs to no enabled environment; az login with the account that "
+              "has your Copilot Studio environment", file=sys.stderr)
+        return 1
+    width = max(len(e["name"]) for e in found)
+    for e in found:
+        print(f"{e['name']:<{width}}  {e['kind'] or '-':<10}  {e['region'] or '-':<14}  {e['url']}")
+    return 0
+
+
+def _deploy(a):
+    from .codeapp_publish import AUDIENCE, PublishError
+    from .deploy import DeployError, deploy, plan
+    env = a.environment.rstrip("/") + "/"
+    options = dict(expect=a.expect, keep_extra_components=a.keep_extra, use_shared_connection=a.use_shared_connection,
+                   get_powerapps_token=lambda: az_token(AUDIENCE), get_apihub_token=lambda: az_token(APIHUB),
+                   files_site=a.files_site, files_folder=a.files_folder)
+    try:
+        if a.plan:
+            return _show_plan(plan(a.workspace, env, lambda: az_token(env.rstrip("/")), **options), a.json)
+        r = deploy(a.workspace, env, lambda: az_token(env.rstrip("/")), do_publish=not a.draft,
+                   log=(lambda m: None) if a.json else print, **options)
+    except (DeployError, PublishError, OSError, ValueError, KeyError) as e:
+        print(f"brainfreeze-studio: {e}", file=sys.stderr)
+        return 1
+    if a.json:
+        print(json.dumps(r, indent=2, default=str))
+        return 0
+    if "status" not in r:
+        print(f"agent:       {r.get('displayName')}  ({r.get('schemaName')})")
+        if a.draft:
+            print("status:      Draft: not published")
+    if not a.draft:
+        print(f"status:      published {r.get('published', {}).get('publishedon')}")
+    print(f"maker:       {r.get('makerUrl')}")
+    return 0
+
+
+def _show_plan(result, as_json=False):
+    agent = result["agent"]
+    refused = agent["operation"] == "refuse"
+    if as_json:
+        print(json.dumps(result, indent=2))
+        return 1 if refused else 0
+    print(f"digest:      {result['digest']}")
+    print(f"agent:       {agent['displayName']}  ({agent['schemaName']})")
+    if refused:
+        print(f"plan:        refuse: {agent['reason']}")
+    else:
+        existing = json.dumps(agent.get("existingDisplayName") or agent["displayName"], ensure_ascii=False)
+        text = {"create": "create: no agent with this schema name exists",
+                "update": f"update: an agent with this schema name exists ({existing}), components below change",
+                "unchanged": f"unchanged: agent settings match ({existing}); component and flow changes are listed below"}
+        print(f"plan:        {text[agent['operation']]}")
+        print(f"status:      {result['status']}")
+        c = result["components"]
+        if any(c.values()):
+            print(f"tools:       adds {len(c['add'])}, updates {len(c['update'])}, removes {len(c['remove'])}, "
+                  f"keeps {len(c['keep'])}")
+        print("remove:      " + (", ".join(c["remove"]) or "none"))
+        if result.get("keepExtraComponents"):
+            print("keep:        " + (", ".join(result["keptExtraComponents"]) or "none") + " (--keep-extra)")
+        f = result["flows"]
+        if any(f.values()):
+            print(f"flows:       creates {len(f['create'])}, updates {len(f['update'])}")
+        variables, references = len(result["environmentVariables"]["create"]), len(result["connectionReferences"]["create"])
+        if variables or references:
+            print(f"settings:    creates {variables} environment variables, {references} connection references")
+        for logical, source in result["connectionReferences"]["sources"].items():
+            print(f"connection:  {logical}: {source}")
+        app = result.get("codeapp")
+        if app:
+            if app["operation"] == "unchecked":
+                print(f"code app:     not checked: {app['reason']}")
+            else:
+                verb = "creates" if app["operation"] == "create" else "updates"
+                print(f"code app:     {verb} {json.dumps(app['displayName'], ensure_ascii=False)}"
+                      + (f" ({app['appId']}) in place" if app.get("appId") else ""))
+        elif result.get("codeapp_skipped"):
+            print("code app:     " + ("not published (--draft); run again without --draft to publish it"
+                  if result["codeapp_skipped"] == "--draft" else "not built (--no-app)"))
+    print("plan only:   nothing was changed")
+    return 1 if refused else 0
 
 
 def _record_proof(a):
@@ -249,13 +390,21 @@ def _rapplication(a):
     from . import rapplication as rp
     from .codeapp_publish import AUDIENCE, PublishError
     from .deploy import DeployError
+    if a.plan and not a.deploy:
+        print("brainfreeze-studio: --plan needs --deploy and --environment https://<org>.crm.dynamics.com/",
+              file=sys.stderr)
+        return 1
+    if (a.expect or a.keep_extra or a.use_shared_connection) and not a.deploy:
+        print("brainfreeze-studio: --expect, --keep-extra and --use-shared-connection need --deploy", file=sys.stderr)
+        return 1
     if a.deploy and not a.environment:
         print("brainfreeze-studio: --deploy needs --environment https://<org>.crm.dynamics.com/", file=sys.stderr)
         return 1
     try:
-        s = rp.prepare(a.ref, a.out, name=a.name, publisher_prefix=a.publisher_prefix, schema_name=a.schema_name,
-                       store=a.store or rp.STORE, translations=a.translations, sdk_dir=a.sdk_dir, rappid=a.rappid,
-                       environment=a.environment, files_home=_files_home(a))
+        with redirect_stdout(sys.stderr) if a.json else nullcontext():
+            s = rp.prepare(a.ref, a.out, name=a.name, publisher_prefix=a.publisher_prefix, schema_name=a.schema_name,
+                           store=a.store or rp.STORE, translations=a.translations, sdk_dir=a.sdk_dir, rappid=a.rappid,
+                           environment=a.environment, files_home=_files_home(a), app=not a.no_app)
     except (StudioBuildError, rp.RapplicationError, FileNotFoundError) as e:
         print(f"brainfreeze-studio: {e}", file=sys.stderr)
         return 1
@@ -263,36 +412,66 @@ def _rapplication(a):
     if a.deploy:
         env = a.environment.rstrip("/") + "/"
         try:
+            if a.plan:
+                return _show_plan(rp.plan(a.out, env, lambda: az_token(env.rstrip("/")), lambda: az_token(AUDIENCE),
+                                          app=not a.no_app, files_site=a.files_site, files_folder=a.files_folder,
+                                          get_apihub_token=lambda: az_token(APIHUB), expect=a.expect,
+                                          keep_extra_components=a.keep_extra,
+                                          use_shared_connection=a.use_shared_connection,
+                                          publish_agent=not a.draft), a.json)
             deployed = rp.deploy(a.out, env, lambda: az_token(env.rstrip("/")), lambda: az_token(AUDIENCE),
-                                 log=print, app=not a.no_app, get_apihub_token=lambda: az_token(APIHUB),
-                                 files_site=a.files_site, files_folder=a.files_folder)
-        except (DeployError, PublishError) as e:
+                                 log=(lambda m: None) if a.json else print, app=not a.no_app,
+                                 get_apihub_token=lambda: az_token(APIHUB), files_site=a.files_site,
+                                 files_folder=a.files_folder, publish_agent=not a.draft, expect=a.expect,
+                                 keep_extra_components=a.keep_extra, use_shared_connection=a.use_shared_connection)
+        except (DeployError, PublishError, OSError, ValueError, KeyError) as e:
             print(f"brainfreeze-studio: {e}", file=sys.stderr)
             return 1
-        s = json.loads(open(os.path.join(a.out, "rapplication.json")).read())
+        with open(os.path.join(a.out, "rapplication.json"), encoding="utf-8") as f:
+            s = json.load(f)
     if a.json:
         print(json.dumps(s, indent=2))
         return 0
     print(f"rapplication: {s['rapp']['publisher']}/{s['rapp']['id']} v{s['rapp']['version']}  ({s['rappid']})")
     print(f"agent:        {s['agent']['schemaName']}  ({a.out}/workspace)")
+    _show_agents(s["agent"].get("agents", []))
     for t in s["tools"]:
-        print(f"  {t['name']:<22} -> " + (f"flow for the app: {t['flow']['displayName']}" if t["flow"]
-                                          else "the agent answers the app"))
+        print(f"  {t['name']:<22} -> " + ("agent tool" if a.no_app else
+              f"flow for the app: {t['flow']['displayName']}" if t["flow"] else "the agent answers the app"))
+    try:
+        with open(os.path.join(a.out, "provenance.json"), encoding="utf-8") as f:
+            prov = json.load(f)
+    except (OSError, ValueError):
+        prov = {}
+    for agent, p in prov.get("parity", {}).items():
+        print(f"parity:       {agent} {p['passed']}/{p['cases']} {'PROVEN' if p['parity'] else 'FAILED'}")
     app = s.get("codeapp")
-    if app:
+    if (s.get("deployed") or {}).get("codeapp_skipped") == "--draft":
+        print("code app:     not published (--draft); run again without --draft to publish it")
+    elif app:
         risks = app["report"].get("risks") or []
         print(f"code app:     {app['displayName']}  ({a.out}/codeapp)" + (f"  {len(risks)} warning(s):" if risks else ""))
         for r in risks:
             print(f"  ! {r}")
+    elif a.no_app or s.get("codeapp_skipped"):
+        print("code app:     not built (--no-app)")
     else:
         print("code app:     none (the rapplication ships no UI)")
     if deployed:
         d = s["deployed"]
+        if a.draft and "status" not in d:
+            print("status:      Draft: not published")
+        elif not a.draft:
+            print(f"status:      published {deployed['agent'].get('published', {}).get('publishedon')}")
         print(f"maker:        {d.get('makerUrl')}")
         if d.get("codeapp"):
             print(f"play:         {d['codeapp']['playUrl']}")
     else:
-        print(f"next:         --environment https://<org>.crm.dynamics.com/ --deploy")
+        workspace = shlex.quote(str(Path(a.out).expanduser() / "workspace"))
+        environment = shlex.quote(a.environment) if a.environment else "https://<org>.crm.dynamics.com/"
+        print(f"next:         python3 -m brainfreeze_studio deploy {workspace} "
+              f"--environment {environment} --draft --plan")
+        print("             then the same without --plan")
     return 0
 
 

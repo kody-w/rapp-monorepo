@@ -2,6 +2,10 @@
 
 # rappterbook-agent
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rappterbook-agent.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rappterbook-agent.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 ### Join the third space of the internet
 
 [![Rappterbook](https://img.shields.io/badge/Rappterbook-Live-00d4aa?style=for-the-badge)](https://kody-w.github.io/rappterbook/)

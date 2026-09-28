@@ -1,3 +1,4 @@
+import base64
 import copy
 import hashlib
 import importlib.util
@@ -343,6 +344,62 @@ def test_rapp1_operator_matches_shared_vectors():
     ) == (True, None, "ok")
 
 
+def test_rapp1_operator_enforces_rev17():
+    with pytest.raises(ValueError, match="duplicate"):
+        rapp1.parse_json(b'{"k":1,"k":2}')
+    with pytest.raises(ValueError, match="byte-order mark"):
+        rapp1.parse_json(b"\xef\xbb\xbf{}")
+    value = rapp1.parse_json(b'{"b":0.1,"a":1e21,"\\ue000":1,"\\ud83d\\ude00":2}')
+    assert rapp1.canonical(value) == '{"a":1e+21,"b":0.1,"\U0001f600":2,"\ue000":1}'
+    with pytest.raises(ValueError):
+        rapp1.H("rapp/1:egg", {})
+    with pytest.raises(ValueError):
+        rapp1.Hb("rapp/1:particle", b"")
+    with pytest.raises(ValueError):
+        rapp1.tagged_digest("rapp/1:particle", {})
+    assert rapp1.tagged_digest("rapp/operator-plan/3", {"a": 1}) == (
+        hashlib.sha256(b'rapp/operator-plan/3\n{"a":1}').hexdigest()
+    )
+    with pytest.raises(ValueError, match="SPKI"):
+        rapp1.mint_rappid("kody-w", "x", spki_der=b"\x00" * 44)
+    with pytest.raises(ValueError, match="UUIDv4"):
+        rapp1.mint_rappid("kody-w", "x", uuid_anchor="00000000-0000-1000-8000-000000000000")
+    stream_id, _anchor = rapp1.mint_rappid("kody-w", "x")
+    for kwargs in (
+        {"stream_id": "rappid:@kody-w/x:" + "0" * 32},
+        {"utc": "2026-02-30T00:00:00.000Z"},
+        {"payload": {"e\u0301": 1}},
+    ):
+        fields = {
+            "stream_id": stream_id,
+            "utc": "2026-01-01T00:00:00.000Z",
+            "payload": {"event": "x"},
+            **kwargs,
+        }
+        with pytest.raises(ValueError):
+            rapp1.build_frame(
+                "body.pulse", fields["stream_id"], 0, fields["utc"], fields["payload"], None
+            )
+    header = rapp1.canonical_bytes(
+        {"alg": "EdDSA", "b64": False, "crit": ["b64"], "kid": stream_id}
+    )
+    protected = base64.urlsafe_b64encode(header).rstrip(b"=").decode("ascii")
+    signature = base64.urlsafe_b64encode(b"\x00" * 64).rstrip(b"=").decode("ascii")
+    frame = rapp1.build_frame(
+        "body.pulse",
+        stream_id,
+        0,
+        "2026-01-01T00:00:00.000Z",
+        {"event": "signed"},
+        None,
+        sig=f"{protected}..{signature}",
+    )
+    assert rapp1.verify_frame(frame)[:2] == (False, "6")
+    assert rapp1.verify_frame(
+        frame, signature_verifier=lambda _unsigned, _sig: True
+    ) == (True, None, "ok")
+
+
 def test_manifest_contract_uses_local_plugin_trust_and_preplan():
     spec = importlib.util.spec_from_file_location(
         "build_manifest",
@@ -614,7 +671,7 @@ def test_process_ownership_requires_complete_sidecar_identity(
         "pid": 123,
         "creation_identity": "old",
         "executable": "/python",
-        "executable_identity": rapp1.H(
+        "executable_identity": rapp1.tagged_digest(
             "rapp/process-executable/1",
             {"executable": "/python"},
         ),

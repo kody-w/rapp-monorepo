@@ -3,6 +3,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
+import { execFileSync } from 'node:child_process';
 import { qr } from './qr.mjs';
 
 const root = path.dirname(new URL(import.meta.url).pathname);
@@ -164,8 +165,24 @@ check('canonical rejection vectors', () => {
   }
 });
 
+function readEgg(file) {
+  try {
+    return JSON.parse(read(path.join('eggs', file)));
+  } catch (error) {
+    const script = 'import sys, zipfile; sys.stdout.buffer.write(zipfile.ZipFile(sys.argv[1]).read("organism.json"))';
+    for (const python of ['python', 'python3']) {
+      try {
+        return JSON.parse(execFileSync(python, ['-c', script, path.join(root, 'eggs', file)], { encoding: 'utf8' }));
+      } catch (zipError) {
+        if (zipError.code !== 'ENOENT') throw zipError;
+      }
+    }
+    throw error;
+  }
+}
+
 const eggFiles = fs.readdirSync(path.join(root, 'eggs')).filter(file => file.endsWith('.egg')).sort();
-const eggs = eggFiles.map(file => [file, JSON.parse(read(path.join('eggs', file)))]);
+const eggs = eggFiles.map(file => [file, readEgg(file)]);
 check('both gates accept every bundled egg', () => {
   for (const [file, cart] of eggs) {
     assert.doesNotThrow(() => playerGate(structuredClone(cart)), `player: ${file}`);
@@ -286,7 +303,7 @@ const registry = JSON.parse(read('registry.json'));
 check('registry structure, aliases, ids, and content hashes', () => {
   validateRegistry(structuredClone(registry));
   for (const entry of registry.entries) {
-    const cart = JSON.parse(read(entry.pin_path));
+    const cart = readEgg(path.basename(entry.pin_path));
     const hash = crypto.createHash('sha256').update(canonicalJson(cart)).digest('hex');
     const genomeId = crypto.createHash('sha256').update(canonicalJson(cart.genome)).digest('hex').slice(0, 12);
     assert.equal(hash, entry.content_sha256, entry.name);
@@ -300,7 +317,7 @@ check('registry structure, aliases, ids, and content hashes', () => {
 check('embedded defaults match the cataloged Lumina egg', () => {
   const indexDefault = JSON.parse(index.match(/const FALLBACK_CART = (\{.*\});/)[1]);
   const playerDefault = JSON.parse(player.match(/const DEFAULT_CART = (\{.*\});/)[1]);
-  const lumina = JSON.parse(read('eggs/lumina.egg'));
+  const lumina = readEgg('lumina.egg');
   assert.equal(canonicalJson(indexDefault), canonicalJson(lumina));
   assert.equal(canonicalJson(playerDefault), canonicalJson(lumina));
 });

@@ -1,5 +1,9 @@
 # RAPP CLI
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-cli.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-cli.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 The headless terminal control surface for RAPP. It operates an existing
 Brainstem provider, chats through that provider's `/chat` endpoint, manages
 integrity-checked agent cartridges, inspects release-train observations, and

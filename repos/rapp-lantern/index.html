@@ -192,6 +192,34 @@ function decodeUtf8Bytes(bytes, label = 'Cartridge') {
   catch { throw new Error(`${label} is not valid UTF-8.`); }
 }
 
+function storedZipText(bytes, wanted = 'organism.json') {
+  if (bytes.length < 4 || bytes[0] !== 0x50 || bytes[1] !== 0x4b || bytes[2] !== 0x03 || bytes[3] !== 0x04) return null;
+  let offset = 0;
+  while (offset + 30 <= bytes.length) {
+    if (bytes[offset] !== 0x50 || bytes[offset + 1] !== 0x4b || bytes[offset + 2] !== 0x03 || bytes[offset + 3] !== 0x04) break;
+    const method = bytes[offset + 8] | (bytes[offset + 9] << 8);
+    const size = bytes[offset + 18] | (bytes[offset + 19] << 8) | (bytes[offset + 20] << 16) | (bytes[offset + 21] << 24);
+    const nameLength = bytes[offset + 26] | (bytes[offset + 27] << 8);
+    const extraLength = bytes[offset + 28] | (bytes[offset + 29] << 8);
+    const nameStart = offset + 30;
+    const dataStart = nameStart + nameLength + extraLength;
+    const dataEnd = dataStart + size;
+    if (dataEnd > bytes.length) throw new Error('Egg ZIP is truncated.');
+    const name = decodeUtf8Bytes(bytes.slice(nameStart, nameStart + nameLength), 'Egg ZIP path');
+    if (name === wanted) {
+      if (method !== 0) throw new Error('Egg ZIP uses compression this browser gate does not accept.');
+      return decodeUtf8Bytes(bytes.slice(dataStart, dataEnd));
+    }
+    offset = dataEnd;
+  }
+  throw new Error('Egg ZIP has no organism.json.');
+}
+
+function parseEggBytes(bytes) {
+  const zipped = storedZipText(bytes);
+  return parseEggText(zipped ?? decodeUtf8Bytes(bytes));
+}
+
 function parseKeepFragment(fragment) {
   const encoded = String(fragment);
   if (!encoded || !/^[A-Za-z0-9_-]+$/.test(encoded) || encoded.length % 4 === 1)
@@ -716,7 +744,7 @@ function beginLoad({ restore = true } = {}) {
   return loadSequence;
 }
 
-async function readBounded(response) {
+async function readBoundedBytes(response) {
   const declared = Number(response.headers.get('content-length'));
   if (Number.isFinite(declared) && declared > MAX_CART_BYTES)
     throw new Error('Cartridge exceeds the 2 MiB limit.');
@@ -724,7 +752,7 @@ async function readBounded(response) {
     const bytes = new Uint8Array(await response.arrayBuffer());
     if (bytes.byteLength > MAX_CART_BYTES)
       throw new Error('Cartridge exceeds the 2 MiB limit.');
-    return decodeUtf8Bytes(bytes);
+    return bytes;
   }
   const reader = response.body.getReader();
   const chunks = [];
@@ -742,7 +770,7 @@ async function readBounded(response) {
   const merged = new Uint8Array(bytes);
   let offset = 0;
   for (const chunk of chunks) { merged.set(chunk, offset); offset += chunk.byteLength; }
-  return decodeUtf8Bytes(merged);
+  return merged;
 }
 
 async function fetchEgg(input, sequence) {
@@ -759,9 +787,9 @@ async function fetchEgg(input, sequence) {
       referrerPolicy: url.origin === location.origin ? 'strict-origin-when-cross-origin' : 'no-referrer'
     });
     if (!response.ok) throw new Error(`HTTP ${response.status} while fetching the egg.`);
-    const text = (await readBounded(response)).replace(/^\uFEFF/, '');
+    const bytes = await readBoundedBytes(response);
     if (sequence !== loadSequence) return null;
-    try { return JSON.parse(text); }
+    try { return parseEggBytes(bytes); }
     catch (error) { throw new Error(`Egg JSON is invalid: ${error.message}`); }
   } catch (error) {
     if (error.name === 'AbortError')

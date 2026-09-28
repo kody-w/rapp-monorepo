@@ -1,14 +1,14 @@
 {
   "schema": "rapp-ring-promotion/1",
   "source": {
-    "commit": "44be78a718cab332937a4fe5fd8c99c7e8bc573e",
+    "commit": "63dcd397f5722231977585f4cd6171c115a3809b",
     "repository": "kody-w/rapp-alpha",
     "ring": "alpha",
-    "shared_sha256": "a2c2d5e781884defa7a7cee3f2f09ae1d0219244c810df2f41c23b94cd0874a0",
-    "tree": "945217269612d8556eb16e640859166c2b842c04"
+    "shared_sha256": "c072f08e0e14c8a149df7a57c4d8b0dea5faf3586823cea9694b6155755ecb06",
+    "tree": "025ce7d04435c239b621c24253c902dd2cad445c"
   },
   "target": {
-    "base_commit": "b7f43591a728fe6b0d9f0bda46046817d4f6f098",
+    "base_commit": "562b5e18f0e6f9dd63d95d8691c3ed1e9afabd52",
     "repository": "kody-w/rapp-beta",
     "ring": "beta"
   }

@@ -3,12 +3,12 @@
     "bootstrap": {
       "macos-linux": {
         "path": "scripts/bootstrap.sh",
-        "sha256": "6f2914329d64613d01a218966900c9ec882a14cbc8f5d816252c0ceff0de6e24",
+        "sha256": "04230ea9aa15cfe5510ab4a63e8b45d896c04322c733f585c19ca8df7fa12bf4",
         "url": "https://kody-w.github.io/rapp-brainstem/scripts/bootstrap.sh"
       },
       "windows": {
         "path": "scripts/bootstrap.ps1",
-        "sha256": "98eb737db2fc5cc8c706eb844197c48b4f8b7e0385155ff4693a23cf055e76e7",
+        "sha256": "7abf4b78a16d9807cfc59c132d68b47d0b9ecae332ed85f78523002dfa773c7a",
         "url": "https://kody-w.github.io/rapp-brainstem/scripts/bootstrap.ps1"
       }
     },
@@ -47,12 +47,12 @@
       },
       "rapp1": {
         "path": "rapp_operator/rapp1.py",
-        "sha256": "c3a30e448eb7b9ebfa7cca3b5b1e8cfa67486a0f78de8add7efb330b7efa9779",
+        "sha256": "84ea721301525a2cde6e757f902b0aebfdb44e2d8a3f2062cf7c9a7fa9cb2850",
         "url": "https://kody-w.github.io/rapp-brainstem/rapp_operator/rapp1.py"
       },
       "rappctl": {
         "path": "rapp_operator/rappctl.py",
-        "sha256": "c6cea66c4e695f844b187ef4568a9cd0b5dc65909a4557d398165cbb52b36115",
+        "sha256": "e6406811f3bfbf8f53b2ddad1226e5a54c5ccba9cd095bf37690c38b8dd765cb",
         "url": "https://kody-w.github.io/rapp-brainstem/rapp_operator/rappctl.py"
       }
     },

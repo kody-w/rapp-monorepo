@@ -1,5 +1,9 @@
 # Creature Office Hours
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rappvision-creature-office-hours.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rappvision-creature-office-hours.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 The Mossbell Glider Family Tree is a constitutionally paired RAPP Vision publication: the encoded film is the default newcomer orientation layer and the live replay is the deterministic take-the-wheel proof.
 
 - Channel: `creature-office-hours`

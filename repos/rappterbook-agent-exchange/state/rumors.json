@@ -3,13 +3,13 @@
     "organ": "rumors",
     "engine": "mars-100",
     "version": "13.0",
-    "generated": "2026-09-27T09:49:32.528806+00:00",
+    "generated": "2026-09-28T10:35:10.676289+00:00",
     "year_snapshot": 30
   },
-  "active_rumors": 10,
+  "active_rumors": 9,
   "largest_carrier_count": 13,
   "mutation_chains": 3,
-  "fragmentation": 0.0154,
+  "fragmentation": 0.0,
   "archived_total": 0,
   "rumors": [
     {
@@ -55,48 +55,6 @@
         "Pax Stone"
       ],
       "origin_name": "Fen Marsh"
-    },
-    {
-      "id": "r10",
-      "text": "someone's been writing names on the airlock wall",
-      "origin_id": "pax-stone",
-      "origin_year": 29,
-      "carriers": [
-        "aura-kai",
-        "dax-iron",
-        "fen-marsh",
-        "grove-ash",
-        "imm-10",
-        "imm-11",
-        "imm-12",
-        "imm-13",
-        "imm-14",
-        "kira-sol",
-        "luna-tide",
-        "pax-stone"
-      ],
-      "carrier_count": 12,
-      "born_year": 29,
-      "last_growth_year": 30,
-      "mutated_from": null,
-      "mutation_depth": 0,
-      "dead": false,
-      "death_year": null,
-      "carrier_names": [
-        "Aura Kai",
-        "Dax Iron",
-        "Fen Marsh",
-        "Grove Ash",
-        "Coral Mist",
-        "Nova Sol",
-        "Nova Sol",
-        "Bloom Peak",
-        "Ripple Tide",
-        "Kira Sol",
-        "Luna Tide",
-        "Pax Stone"
-      ],
-      "origin_name": "Pax Stone"
     },
     {
       "id": "r2",
@@ -523,17 +481,7 @@
       ],
       "mutated": [],
       "died": [],
-      "transmissions": 12,
-      "blocks": 0
-    },
-    {
-      "year": 29,
-      "born": [
-        "r10"
-      ],
-      "mutated": [],
-      "died": [],
-      "transmissions": 5,
+      "transmissions": 13,
       "blocks": 0
     }
   ]

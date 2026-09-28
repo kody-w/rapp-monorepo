@@ -28,20 +28,22 @@ from typing import Any, Iterator
 
 try:
     from rapp1 import (
-        H,
         build_frame,
         canonical_bytes,
         mint_rappid,
+        parse_json,
         rappid_valid,
+        tagged_digest,
         verify_frame,
     )
 except ImportError:  # pragma: no cover - package import path
     from .rapp1 import (
-        H,
         build_frame,
         canonical_bytes,
         mint_rappid,
+        parse_json,
         rappid_valid,
+        tagged_digest,
         verify_frame,
     )
 
@@ -536,7 +538,7 @@ def _operator_bundle_identity() -> dict[str, Any]:
         "schema": "rapp-brainstem-operator-bundle/1",
         "files": entries,
     }
-    identity["sha256"] = H("rapp/operator-bundle/1", identity)
+    identity["sha256"] = tagged_digest("rapp/operator-bundle/1", identity)
     return identity
 
 
@@ -826,7 +828,7 @@ def _windows_process_snapshot(pid: int) -> dict[str, Any] | None:
         "pid": pid,
         "creation_identity": f"windows-filetime:{creation_ticks}",
         "executable": os.path.normcase(executable),
-        "command_identity": H(
+        "command_identity": tagged_digest(
             "rapp/process-command/1",
             {"command": command},
         ),
@@ -891,7 +893,7 @@ def _posix_process_snapshot(pid: int) -> dict[str, Any] | None:
         "pid": pid,
         "creation_identity": creation_identity,
         "executable": str(Path(executable).resolve(strict=False)),
-        "command_identity": H(
+        "command_identity": tagged_digest(
             "rapp/process-command/1",
             {"command": command},
         ),
@@ -917,7 +919,7 @@ def _process_record(
         "pid": snapshot["pid"],
         "creation_identity": snapshot["creation_identity"],
         "executable": executable,
-        "executable_identity": H(
+        "executable_identity": tagged_digest(
             "rapp/process-executable/1",
             {"executable": executable},
         ),
@@ -988,7 +990,7 @@ def _record_matches_snapshot(
 ) -> bool:
     if snapshot is None:
         return False
-    executable_identity = H(
+    executable_identity = tagged_digest(
         "rapp/process-executable/1",
         {"executable": snapshot["executable"]},
     )
@@ -1497,7 +1499,7 @@ def _environment_value_hash(
     *,
     present: bool = True,
 ) -> str:
-    return H(
+    return tagged_digest(
         "rapp/runtime-environment-value/1",
         {
             "name": name,
@@ -1603,7 +1605,7 @@ def runtime_environment(
     }
     binding = {
         **base,
-        "sha256": H("rapp/runtime-environment/1", base),
+        "sha256": tagged_digest("rapp/runtime-environment/1", base),
     }
     return environment, binding
 
@@ -1674,7 +1676,7 @@ def managed_environment_identity(
             **base,
             "status": "managed-python-missing",
         }
-        identity["sha256"] = H("rapp/managed-environment/1", identity)
+        identity["sha256"] = tagged_digest("rapp/managed-environment/1", identity)
         if required:
             raise OperatorError("Brainstem-managed Python is missing")
         return identity
@@ -1740,7 +1742,7 @@ print(json.dumps({
                 "requirements-missing"
             ),
             "interpreter": interpreter,
-            "interpreter_sha256": H(
+            "interpreter_sha256": tagged_digest(
                 "rapp/managed-interpreter/1",
                 interpreter,
             ),
@@ -1762,7 +1764,7 @@ print(json.dumps({
             **base,
             "status": "managed-python-unusable",
         }
-    identity["sha256"] = H("rapp/managed-environment/1", identity)
+    identity["sha256"] = tagged_digest("rapp/managed-environment/1", identity)
     if required and not identity["ready"]:
         raise OperatorError(
             "Brainstem-managed Python or its runtime requirements are unusable"
@@ -1840,7 +1842,7 @@ def release_identity(layout: Layout) -> dict[str, Any]:
         "managed_environment": managed_environment,
     }
     identity["release_hash"] = (
-        H("rapp/brainstem-release/2", identity) if installed else None
+        tagged_digest("rapp/brainstem-release/2", identity) if installed else None
     )
     return identity
 
@@ -1955,7 +1957,7 @@ def managed_runtime_state(
     listening = _port_listening(health["port"])
     if record is not None:
         state = "running"
-        record_hash = H("rapp/process-record/1", record)
+        record_hash = tagged_digest("rapp/process-record/1", record)
     elif health["reachable"] or listening:
         state = "unknown-process"
         record_hash = None
@@ -2483,8 +2485,8 @@ class EvidenceLog:
         frames = []
         for path in sorted(self.layout.frames_dir.glob("*.json")):
             try:
-                frame = json.loads(path.read_text(encoding="utf-8"))
-            except (OSError, json.JSONDecodeError) as exc:
+                frame = parse_json(path.read_bytes())
+            except (OSError, ValueError) as exc:
                 raise OperatorError(
                     f"Unreadable RAPP/1 frame {path.name}"
                 ) from exc
@@ -2987,7 +2989,7 @@ def create_plan(layout: Layout, action: str, actor: str) -> dict[str, Any]:
         "user_zone_writes": False,
     }
     plan = dict(base)
-    plan["plan_hash"] = H("rapp/operator-plan/3", base)
+    plan["plan_hash"] = tagged_digest("rapp/operator-plan/3", base)
     _atomic_write(
         layout.plans_dir / f"{plan['plan_hash']}.json",
         canonical_bytes(plan),
@@ -3027,7 +3029,7 @@ def _load_plan(layout: Layout, plan_hash: str) -> dict[str, Any]:
     except (OSError, json.JSONDecodeError) as exc:
         raise OperatorError("Stored plan is unreadable") from exc
     actual_hash = plan.pop("plan_hash", None)
-    expected_hash = H("rapp/operator-plan/3", plan)
+    expected_hash = tagged_digest("rapp/operator-plan/3", plan)
     plan["plan_hash"] = actual_hash
     if (
         plan.get("schema") != PLAN_SCHEMA

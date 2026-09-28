@@ -1,16 +1,14 @@
 {
  "schema": "gh-zen/1",
  "quotes": [
-  "Approachable is better than simple.",
-  "Encourage flow.",
-  "Practicality beats purity.",
-  "Non-blocking is better than blocking.",
-  "Favor focus over features.",
   "Avoid administrative distraction.",
-  "Anything added dilutes everything else.",
+  "Practicality beats purity.",
+  "Speak like a human.",
+  "Keep it logically awesome.",
+  "Favor focus over features.",
   "Design for failure.",
-  "It's not fully shipped until it's fast.",
-  "Accessible for all.",
-  "Speak like a human."
+  "Responsive is better than fast.",
+  "Approachable is better than simple.",
+  "Accessible for all."
  ]
 }

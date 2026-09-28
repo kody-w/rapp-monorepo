@@ -27,7 +27,7 @@ A Hive holds only markdown, so each badge is `badges/<repo>.svg.md`: its front m
 
 Lines are the families below; stations are repos, filled by status (hollow when deprecated, superseded or archived); the RAPP/1 Core line runs in layer order and ends at `rapp-installer`, the Start here terminal. It is drawn from these files by the `rapp1_network` package (its release copy is in [`tools/`](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/tools)), and the links between repos come from each file's `links_to`.
 
-**Version 9**, crawled 2026-09-27 01:06 UTC. Every crawl is one RAPP/1 frame, a `body.pulse` on the network's body stream `rappid:@kody-w/rapp1-network:71216534f9d362c7af054e773d546dfd996f769b08bd38c1b90b9e36760c2def`. The [timeline](https://kody-w.github.io/rapp-hive-public/portfolio/timeline.html) lists every version with its pulse hashes and what changed, and each version's maps stay under `versions/`.
+**Version 10**, crawled 2026-09-27 14:07 UTC. Every crawl is one RAPP/1 frame, a `body.pulse` on the network's body stream `rappid:@kody-w/rapp1-network:71216534f9d362c7af054e773d546dfd996f769b08bd38c1b90b9e36760c2def`. The [timeline](https://kody-w.github.io/rapp-hive-public/portfolio/timeline.html) lists every version with its pulse hashes and what changed, and each version's maps stay under `versions/`.
 
 | Line | Stations | certified | not yet | unchecked |
 |---|---|---|---|---|
@@ -73,14 +73,14 @@ Lines are the families below; stations are repos, filled by status (hollow when 
 | [hive-hub-mcp](repos/hive-hub-mcp.md) | certified |  | CLEAN | 312eedc | 2026-09-27 | 0 | present |
 | [rapp-hive-hub](repos/rapp-hive-hub.md) | certified |  | COMPLIANT | 1c15452 | 2026-09-27 | 7 | present |
 | [rapp-hive-hub-join](repos/rapp-hive-hub-join.md) | certified |  | CLEAN | 3598da1 | 2026-09-27 | 0 | present |
-| [rapp-hive-public](repos/rapp-hive-public.md) | certified |  | CLEAN | 6c301cd | 2026-09-27 | 41 | present |
+| [rapp-hive-public](repos/rapp-hive-public.md) | certified |  | CLEAN | 93efcd9 | 2026-09-27 | 41 | present |
 | [rapp-model-hive](repos/rapp-model-hive.md) | not yet |  | DRIFT | c88331a | 2026-09-27 | 18 | present |
 
 ### Agents (RAR) (1)
 
 | Repo | Status | Version | Verdict | Commit | Checked | "experimental" | Header |
 |---|---|---|---|---|---|---|---|
-| [RAR](repos/RAR.md) | certified | v1.0.0 | COMPLIANT | bc2bbd6 | 2026-09-27 | 160 | present |
+| [RAR](repos/RAR.md) | certified | v1.0.0 | COMPLIANT | af41833 | 2026-09-27 | 160 | present |
 
 ## Wave 2: the rest of the RAPP family (302)
 
@@ -179,7 +179,7 @@ Lines are the families below; stations are repos, filled by status (hollow when 
 | [rapp-mapp](repos/rapp-mapp.md) | certified |  | CLEAN | ddbf312 | 2026-09-27 | 0 | merged, awaiting the next sweep |
 | [rapp-mission](repos/rapp-mission.md) | certified |  | CLEAN | d00cc3b | 2026-09-27 | 0 | present |
 | [rapp-roadmap](repos/rapp-roadmap.md) | certified |  | CLEAN | e160749 | 2026-09-27 | 1 | present |
-| [rapp-specs](repos/rapp-specs.md) | certified |  | COMPLIANT | 2264920 | 2026-09-27 | 0 | present |
+| [rapp-specs](repos/rapp-specs.md) | certified |  | COMPLIANT | 9d037a9 | 2026-09-27 | 0 | present |
 | [rapp-spine](repos/rapp-spine.md) | certified |  | CLEAN | 8d61da5 | 2026-09-27 | 0 | not yet added |
 | [rapp-wiki-observatory](repos/rapp-wiki-observatory.md) | certified |  | CLEAN | c284d06 | 2026-09-27 | 0 | present |
 | [rapp_docs](repos/rapp_docs.md) | certified |  | CLEAN | 86640cd | 2026-09-27 | 0 | present |
@@ -201,10 +201,10 @@ Lines are the families below; stations are repos, filled by status (hollow when 
 | [rapp-flight](repos/rapp-flight.md) | certified |  | CLEAN | 18197ea | 2026-09-27 | 2 | present |
 | [rapp-flight-deck](repos/rapp-flight-deck.md) | certified |  | CLEAN | ac6ff67 | 2026-09-27 | 1 | present |
 | [rapp-installer-canary](repos/rapp-installer-canary.md) | certified |  | CLEAN | 8bb6b75 | 2026-09-27 | 7 | not yet added |
-| [rapp-installer-dev](repos/rapp-installer-dev.md) | certified |  | CLEAN | df51a9d | 2026-09-27 | 8 | not yet added |
+| [rapp-installer-dev](repos/rapp-installer-dev.md) | certified |  | CLEAN | f42322d | 2026-09-27 | 8 | not yet added |
 | [rapp-mirror-releases](repos/rapp-mirror-releases.md) | certified | v0.2.0 | CLEAN | 94d4cd5 | 2026-09-27 | 0 | present |
 | [rapp-nightly](repos/rapp-nightly.md) | certified |  | CLEAN | 27d6261 | 2026-09-27 | 12 | not yet added |
-| [rapp-release-train](repos/rapp-release-train.md) | certified |  | CLEAN | 5f37baa | 2026-09-27 | 6 | not yet added |
+| [rapp-release-train](repos/rapp-release-train.md) | certified |  | CLEAN | 609d6f8 | 2026-09-27 | 6 | not yet added |
 | [rapp-rings](repos/rapp-rings.md) | certified |  | CLEAN | 4750f73 | 2026-09-27 | 1 | present |
 | [rapp-shape-aibast](repos/rapp-shape-aibast.md) | certified |  | CLEAN | e8a66b0 | 2026-09-27 | 21 | not yet added |
 | [rapp-train](repos/rapp-train.md) | certified |  | CLEAN | 1726ca5 | 2026-09-27 | 0 | present |
@@ -228,10 +228,10 @@ Lines are the families below; stations are repos, filled by status (hollow when 
 |---|---|---|---|---|---|---|---|
 | [mars-barn](repos/mars-barn.md) | certified |  | CLEAN | 2203505 | 2026-09-27 | 14 | PR open |
 | [rappbook-admin](repos/rappbook-admin.md) | certified |  | CLEAN | 13fe250 | 2026-09-27 | 0 | present |
-| [rappterbook](repos/rappterbook.md) | not yet | v1.0.0 | DRIFT | c1df360 | 2026-09-27 | 4167 | merged, awaiting the next sweep |
+| [rappterbook](repos/rappterbook.md) | not yet | v1.0.0 | DRIFT | 7819f06 | 2026-09-27 | 4191 | merged, awaiting the next sweep |
 | [rappterbook-agent](repos/rappterbook-agent.md) | certified |  | CLEAN | 832de42 | 2026-09-27 | 2 | merged, awaiting the next sweep |
 | [rappterbook-agent-dna](repos/rappterbook-agent-dna.md) | certified |  | CLEAN | 16a5ddb | 2026-09-27 | 0 | present |
-| [rappterbook-agent-exchange](repos/rappterbook-agent-exchange.md) | certified |  | CLEAN | 8559ceb | 2026-09-27 | 4 | merged, awaiting the next sweep |
+| [rappterbook-agent-exchange](repos/rappterbook-agent-exchange.md) | certified |  | CLEAN | 0f4248e | 2026-09-27 | 4 | merged, awaiting the next sweep |
 | [rappterbook-api](repos/rappterbook-api.md) | certified |  | CLEAN | 8c50370 | 2026-09-27 | 1 | present |
 | [rappterbook-autopilot](repos/rappterbook-autopilot.md) | certified |  | CLEAN | fac2ad1 | 2026-09-27 | 0 | present |
 | [rappterbook-commons](repos/rappterbook-commons.md) | certified |  | CLEAN | 2aba29e | 2026-09-27 | 0 | present |
@@ -248,7 +248,7 @@ Lines are the families below; stations are repos, filled by status (hollow when 
 | [rappterbook-social-graph](repos/rappterbook-social-graph.md) | certified |  | CLEAN | 77b8b1e | 2026-09-27 | 0 | present |
 | [rappterbook-v2](repos/rappterbook-v2.md) | certified |  | CLEAN | 37087c5 | 2026-09-27 | 0 | merged, awaiting the next sweep |
 | [rappterbook-v2-state](repos/rappterbook-v2-state.md) | certified |  | CLEAN | 5e1b4e2 | 2026-09-27 | 32 | present |
-| [rappterbook-vm](repos/rappterbook-vm.md) | certified |  | CLEAN | 302c899 | 2026-09-27 | 4 | present |
+| [rappterbook-vm](repos/rappterbook-vm.md) | certified |  | CLEAN | 5a09bcc | 2026-09-27 | 4 | present |
 
 ### Rappterverse (11)
 
@@ -318,13 +318,13 @@ Lines are the families below; stations are repos, filled by status (hollow when 
 
 | Repo | Status | Version | Verdict | Commit | Checked | "experimental" | Header |
 |---|---|---|---|---|---|---|---|
-| [heimdall](repos/heimdall.md) | certified |  | COMPLIANT | 4faa05f | 2026-09-27 | 2 | present |
+| [heimdall](repos/heimdall.md) | certified |  | COMPLIANT | dc47e36 | 2026-09-27 | 2 | present |
 | [microsoft-se-team-neighborhood](repos/microsoft-se-team-neighborhood.md) | certified | v1.0.0 | COMPLIANT | 260dbfa | 2026-09-27 | 2 | present |
 | [pkstop-central-park-bandshell](repos/pkstop-central-park-bandshell.md) | certified |  | COMPLIANT | 49256f0 | 2026-09-27 | 1 | present |
 | [pkstop-national-mall](repos/pkstop-national-mall.md) | certified |  | COMPLIANT | d857c07 | 2026-09-27 | 1 | present |
 | [pkstop-pike-place-market](repos/pkstop-pike-place-market.md) | certified |  | COMPLIANT | d3b96a3 | 2026-09-27 | 1 | present |
 | [pkstop-santa-monica-pier](repos/pkstop-santa-monica-pier.md) | certified |  | COMPLIANT | ff728ea | 2026-09-27 | 1 | present |
-| [pkstop-the-bean](repos/pkstop-the-bean.md) | certified |  | COMPLIANT | 7964814 | 2026-09-27 | 4 | present |
+| [pkstop-the-bean](repos/pkstop-the-bean.md) | certified |  | COMPLIANT | da0f9b6 | 2026-09-27 | 2 | present |
 | [public-art-collective](repos/public-art-collective.md) | certified |  | CLEAN | 1920955 | 2026-09-27 | 1 | merged, awaiting the next sweep |
 | [rapp-herdr](repos/rapp-herdr.md) | certified |  | CLEAN | fcbe1e8 | 2026-09-27 | 0 | present |
 | [rapp-neighborhood-protocol](repos/rapp-neighborhood-protocol.md) | certified | v1.0.0 | CLEAN | 85d11fc | 2026-09-27 | 0 | present |
@@ -351,14 +351,14 @@ Lines are the families below; stations are repos, filled by status (hollow when 
 | [rapp-apex-dino](repos/rapp-apex-dino.md) | certified |  | CLEAN | d511b36 | 2026-09-27 | 0 | present |
 | [rapp-base](repos/rapp-base.md) | certified | v1.2.0 | CLEAN | 7e4b8a5 | 2026-09-27 | 0 | PR open |
 | [rapp-base-template](repos/rapp-base-template.md) | certified | v1.2.0 | CLEAN | 0242efb | 2026-09-27 | 0 | PR open |
-| [rapp-body](repos/rapp-body.md) | certified |  | COMPLIANT | afdefe2 | 2026-09-27 | 0 | not yet added |
+| [rapp-body](repos/rapp-body.md) | certified |  | COMPLIANT | ce09ee4 | 2026-09-27 | 0 | not yet added |
 | [rapp-brain](repos/rapp-brain.md) | certified |  | COMPLIANT | 695e793 | 2026-09-27 | 0 | merged, awaiting the next sweep |
 | [rapp-cortex](repos/rapp-cortex.md) | certified |  | CLEAN | 3b1d61a | 2026-09-27 | 1 | present |
 | [rapp-dino](repos/rapp-dino.md) | certified |  | CLEAN | e9cd9c0 | 2026-09-27 | 0 | present |
 | [rapp-hippocampus](repos/rapp-hippocampus.md) | certified |  | CLEAN | 18edfa1 | 2026-09-27 | 1 | present |
 | [rapp-membrane](repos/rapp-membrane.md) | certified |  | CLEAN | db26f24 | 2026-09-27 | 0 | present |
 | [rapp-nervous-system](repos/rapp-nervous-system.md) | certified |  | CLEAN | dfc114a | 2026-09-27 | 1 | present |
-| [rapp-organism](repos/rapp-organism.md) | certified |  | CLEAN | 93d800d | 2026-09-27 | 206 | not yet added |
+| [rapp-organism](repos/rapp-organism.md) | certified |  | CLEAN | 4262ef9 | 2026-09-27 | 206 | not yet added |
 | [rapp-platform](repos/rapp-platform.md) | certified |  | CLEAN | ba6c555 | 2026-09-27 | 1 | present |
 | [rapp-second-brain](repos/rapp-second-brain.md) | certified |  | CLEAN | 0cdf76e | 2026-09-27 | 6 | present |
 | [rapp-secondbrain](repos/rapp-secondbrain.md) | certified |  | CLEAN | 23cf473 | 2026-09-27 | 0 | present |
@@ -370,10 +370,10 @@ Lines are the families below; stations are repos, filled by status (hollow when 
 
 | Repo | Status | Version | Verdict | Commit | Checked | "experimental" | Header |
 |---|---|---|---|---|---|---|---|
-| [dogg](repos/dogg.md) | not yet |  | DRIFT | 6c13129 | 2026-09-27 | 0 | present |
-| [dogg-canon](repos/dogg-canon.md) | certified |  | COMPLIANT | 5cb9927 | 2026-09-27 | 0 | present |
-| [dogg-markets](repos/dogg-markets.md) | certified |  | COMPLIANT | 3c3c1a1 | 2026-09-27 | 0 | present |
-| [dogg-planet](repos/dogg-planet.md) | certified |  | COMPLIANT | 921f1bc | 2026-09-27 | 0 | present |
+| [dogg](repos/dogg.md) | not yet |  | DRIFT | 954ea08 | 2026-09-27 | 0 | present |
+| [dogg-canon](repos/dogg-canon.md) | certified |  | COMPLIANT | a629695 | 2026-09-27 | 0 | present |
+| [dogg-markets](repos/dogg-markets.md) | certified |  | COMPLIANT | 12cf120 | 2026-09-27 | 0 | present |
+| [dogg-planet](repos/dogg-planet.md) | certified |  | COMPLIANT | dd537c6 | 2026-09-27 | 0 | present |
 | [rapp-commons](repos/rapp-commons.md) | not yet | v1.0.0 | DRIFT | 4793bca | 2026-09-27 | 0 | present |
 | [rapp-dog-hub](repos/rapp-dog-hub.md) | certified |  | CLEAN | c904967 | 2026-09-27 | 0 | merged, awaiting the next sweep |
 | [rapp-frame-net](repos/rapp-frame-net.md) | certified |  | CLEAN | ad6f248 | 2026-09-27 | 0 | not yet added |
@@ -407,7 +407,7 @@ Lines are the families below; stations are repos, filled by status (hollow when 
 | [rapp-rewind](repos/rapp-rewind.md) | not yet | v1.2.1 | DRIFT | ebd89a6 | 2026-09-27 | 0 | present |
 | [rapp-sdk](repos/rapp-sdk.md) | certified | v0.2.0 | CLEAN | ede0fd4 | 2026-09-27 | 27 | present |
 | [rapp-shot](repos/rapp-shot.md) | not yet | v1.3.1 | DRIFT | 0a3c2df | 2026-09-27 | 0 | present |
-| [rapp-static-apis](repos/rapp-static-apis.md) | certified | v1.0.0 | CLEAN | f18927c | 2026-09-27 | 0 | present |
+| [rapp-static-apis](repos/rapp-static-apis.md) | certified | v1.0.0 | CLEAN | ba15a9a | 2026-09-27 | 0 | present |
 | [rapp-static-mcp](repos/rapp-static-mcp.md) | certified |  | CLEAN | 07bbdb8 | 2026-09-27 | 0 | present |
 | [rapp-tools](repos/rapp-tools.md) | certified | workspace-v0.1.0 | CLEAN | ae2c005 | 2026-09-27 | 0 | merged, awaiting the next sweep |
 | [rapp-ultracode](repos/rapp-ultracode.md) | certified |  | CLEAN | 1f39fae | 2026-09-27 | 1 | present |
@@ -434,7 +434,7 @@ Lines are the families below; stations are repos, filled by status (hollow when 
 | [rapp-refresh](repos/rapp-refresh.md) | certified | v1.0.0 | CLEAN | 920c3f4 | 2026-09-27 | 0 | present |
 | [rapp-roadside](repos/rapp-roadside.md) | not yet | v1.0.0 | DRIFT | 8082439 | 2026-09-27 | 0 | not yet added |
 | [rapp-rock-tumbler](repos/rapp-rock-tumbler.md) | certified |  | CLEAN | e91fd2c | 2026-09-27 | 0 | present |
-| [rapp-sentinel](repos/rapp-sentinel.md) | certified |  | CLEAN | 6468f1d | 2026-09-27 | 1 | present |
+| [rapp-sentinel](repos/rapp-sentinel.md) | certified |  | CLEAN | d9824fe | 2026-09-27 | 1 | present |
 | [rapp-support](repos/rapp-support.md) | certified |  | CLEAN | 899af64 | 2026-09-27 | 0 | present |
 | [rapp-tower](repos/rapp-tower.md) | certified |  | CLEAN | d67f816 | 2026-09-27 | 4 | present |
 | [rapp-version-selector](repos/rapp-version-selector.md) | certified |  | CLEAN | 0dab250 | 2026-09-27 | 9 | present |

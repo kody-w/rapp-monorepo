@@ -561,6 +561,12 @@ def _content_hash(path, value):
     return hashlib.sha256(canonicalize(value)).hexdigest()
 
 
+def _rapp1_hash(domain, value):
+    return hashlib.sha256(
+        (domain + "\n").encode("utf-8") + canonicalize(value)
+    ).hexdigest()
+
+
 class OpReject(Exception):
     """Raised when a bones op is malformed or fails its post-apply hash."""
 
@@ -908,7 +914,10 @@ def _verify_frame(frame, running_head, pubkey):
     if frame.get("kind") != FRAME_KIND:
         return False, "kind != %s" % FRAME_KIND
     try:
-        recomputed = payload_sha256(frame["payload"])
+        if frame.get("_rapp1_particle"):
+            recomputed = _rapp1_hash("rapp/1:particle", frame["payload"])
+        else:
+            recomputed = payload_sha256(frame["payload"])
     except Exception as e:
         return False, "payload not canonicalizable: %s" % e
     if recomputed != frame.get("sha256"):
@@ -921,6 +930,53 @@ def _verify_frame(frame, running_head, pubkey):
         if pubkey is None or not verify_frame_sig(frame, pubkey):
             return False, "signature invalid"
     return True, None
+
+
+def _normalize_rapp1_frame(frame):
+    """Map the current RAPP/1 twin feed shape onto the original payload-chain contract.
+
+    The live kody-w/twin feed uses spec ``rapp/1`` with ``payload_hash`` and
+    ``prev`` as the payload hash chain, while this agent's original internal
+    contract names those fields ``sha256`` and ``parent_sha``. Only the known
+    twin.pulse shape is translated; unknown specs still fail closed.
+    """
+    if not isinstance(frame, dict):
+        return frame
+    if frame.get("spec") == SPEC:
+        return frame
+    if frame.get("spec") != "rapp/1" or frame.get("kind") != FRAME_KIND:
+        return frame
+    if not isinstance(frame.get("payload"), dict):
+        return frame
+    if _rapp1_hash("rapp/1:particle", frame["payload"]) != frame.get("payload_hash"):
+        return frame
+    normalized = copy.deepcopy(frame)
+    normalized["spec"] = SPEC
+    normalized["sha256"] = frame.get("payload_hash")
+    normalized["parent_sha"] = frame.get("prev")
+    normalized["ts"] = frame.get("utc")
+    normalized["rapp1_frame_hash"] = frame.get("frame_hash")
+    normalized["_rapp1_particle"] = True
+    return normalized
+
+
+def _normalize_feed(feed):
+    if not isinstance(feed, dict):
+        return feed
+    if feed.get("spec") == SPEC:
+        return feed
+    if feed.get("spec") != "rapp/1" or feed.get("kind") != FEED_KIND:
+        return feed
+    frames = [_normalize_rapp1_frame(frame) for frame in feed.get("frames", [])]
+    normalized = copy.deepcopy(feed)
+    normalized["spec"] = SPEC
+    normalized["frames"] = frames
+    if frames:
+        normalized["head_sha"] = frames[-1].get("sha256")
+    else:
+        normalized["head_sha"] = feed.get("head_sha") or feed.get("head_hash")
+    normalized["rapp1_head_hash"] = feed.get("head_hash")
+    return normalized
 
 
 def _backfill_chain(base_url, from_seq, expected_child_parent, pubkey,
@@ -961,6 +1017,7 @@ def assimilate_feed(god, feed, base_url, pubkey, allow_backfill=True,
                     timeout=FETCH_TIMEOUT):
     """Core §3 loop over an already-fetched feed dict. Never touches the
     network unless a backfill is required and allow_backfill is True."""
+    feed = _normalize_feed(feed)
     result = {
         "ok": True,
         "twin_id": god.twin_id,
@@ -1543,8 +1600,11 @@ def run_selftest(quiet=False, feed_url=None):
     # --- (a) full-chain verify passes against the REAL branch feed --------
     real_feed = None
     real_twin = None
+    expected_head = None
     try:
         real_feed, src = fetch_json(feed_url, timeout=FETCH_TIMEOUT)
+        normalized_real_feed = _normalize_feed(real_feed)
+        expected_head = normalized_real_feed.get("head_sha")
         real_twin = real_feed.get("twin_id")
         god_a = God(real_twin, state_root=os.path.join(tmp, "a"))
         res_a = assimilate_feed(god_a, real_feed, _base_url(feed_url),
@@ -1553,7 +1613,7 @@ def run_selftest(quiet=False, feed_url=None):
         signed = sum(1 for f in real_feed.get("frames", []) if f.get("sig"))
         ok_a = (res_a["ok"]
                 and not res_a["rejected"]
-                and res_a["head_sha"] == real_feed.get("head_sha")
+                and res_a["head_sha"] == expected_head
                 and res_a["in_sync"]
                 and len(res_a["assimilated"]) == n_frames)
         # prove every present signature verified (assimilate would have
@@ -1564,7 +1624,7 @@ def run_selftest(quiet=False, feed_url=None):
             "frames": n_frames,
             "assimilated_seq_range": res_a["assimilated_seq_range"],
             "head_sha": res_a["head_sha"],
-            "feed_head_sha": real_feed.get("head_sha"),
+            "feed_head_sha": expected_head,
             "in_sync": res_a["in_sync"],
             "rejected": res_a["rejected"],
             "signed_frames_verified": "%d/%d" % (signed, signed),
@@ -1634,17 +1694,17 @@ def run_selftest(quiet=False, feed_url=None):
         ok_c = (status_out.get("ok") is True
                 and status_out.get("offline") is True
                 and status_out.get("drift", {}).get("status") == "offline"
-                and status_out.get("echo_head") == real_feed.get("head_sha")
+                and status_out.get("echo_head") == expected_head
                 and assim_out.get("ok") is True
                 and assim_out.get("offline") is True
-                and echo_head == real_feed.get("head_sha"))
+                and echo_head == expected_head)
         _check(results, "c_echo_survives_offline", ok_c, {
             "unreachable_url": unreachable,
             "status_offline": status_out.get("offline"),
             "status_ok_exit0": status_out.get("ok"),
             "drift_status": status_out.get("drift", {}).get("status"),
             "served_echo_head": echo_head,
-            "expected_head": real_feed.get("head_sha"),
+            "expected_head": expected_head,
             "assimilate_degraded_ok": assim_out.get("ok"),
         })
     except Exception as e:

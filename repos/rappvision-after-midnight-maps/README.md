@@ -1,5 +1,9 @@
 # After Midnight Maps
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rappvision-after-midnight-maps.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rappvision-after-midnight-maps.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 The waypoint moves. The proof rules remain. is a constitutionally paired RAPP Vision publication: the encoded film is the default newcomer orientation layer and the live replay is the deterministic take-the-wheel proof.
 
 - Channel: `after-midnight-maps`

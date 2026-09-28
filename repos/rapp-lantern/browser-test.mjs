@@ -7,11 +7,32 @@ import { chromium, firefox, webkit } from 'playwright';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const mime = {
-  '.egg': 'application/json',
+  '.egg': 'application/octet-stream',
   '.html': 'text/html; charset=utf-8',
   '.json': 'application/json',
   '.mjs': 'text/javascript; charset=utf-8'
 };
+function readEggJson(file) {
+  const data = fs.readFileSync(file);
+  if (data[0] !== 0x50 || data[1] !== 0x4b) return JSON.parse(data.toString('utf8'));
+  let offset = 0;
+  while (offset + 30 <= data.length) {
+    const nameLength = data.readUInt16LE(offset + 26);
+    const extraLength = data.readUInt16LE(offset + 28);
+    const size = data.readUInt32LE(offset + 18);
+    const method = data.readUInt16LE(offset + 8);
+    const nameStart = offset + 30;
+    const dataStart = nameStart + nameLength + extraLength;
+    const dataEnd = dataStart + size;
+    const name = data.subarray(nameStart, nameStart + nameLength).toString('utf8');
+    if (name === 'organism.json') {
+      if (method !== 0) throw new Error('test fixture egg is compressed');
+      return JSON.parse(data.subarray(dataStart, dataEnd).toString('utf8'));
+    }
+    offset = dataEnd;
+  }
+  throw new Error('test fixture egg has no organism.json');
+}
 const server = http.createServer((request, response) => {
   const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
   if (pathname === '/invalid-utf8.egg') {
@@ -91,7 +112,7 @@ try {
   assert.equal(overlap, false);
 
   await page.setViewportSize({ width: 800, height: 600 });
-  const mismatch = JSON.parse(fs.readFileSync(path.join(root, moon.pin_path), 'utf8'));
+  const mismatch = readEggJson(path.join(root, moon.pin_path));
   mismatch.id = '000000000000';
   const fragment = Buffer.from(JSON.stringify(mismatch), 'utf8').toString('base64url');
   await page.goto(`${base}/player.html#${fragment}`);

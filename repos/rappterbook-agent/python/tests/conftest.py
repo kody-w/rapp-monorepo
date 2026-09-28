@@ -1,8 +1,26 @@
 """Shared fixtures for openrappter tests."""
 
+import asyncio
 import json
 import pytest
 from pathlib import Path
+
+
+@pytest.fixture(autouse=True)
+def main_thread_event_loop():
+    """Restore get_event_loop() behavior expected by the sync async tests.
+
+    Python 3.14 no longer creates a main-thread event loop implicitly. These
+    tests intentionally drive coroutines from synchronous call sites with
+    get_event_loop().run_until_complete(), so each test gets an explicit loop.
+    """
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    try:
+        yield loop
+    finally:
+        asyncio.set_event_loop(None)
+        loop.close()
 
 
 @pytest.fixture

@@ -1,5 +1,9 @@
 # Protocol Minute
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rappvision-protocol-minute.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rappvision-protocol-minute.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 > One protocol idea a minute, checked line by line against its RFC.
 
 Short, source-pinned explainers of the protocols the web runs on. Every on-screen claim is checked against the RFC it comes from.

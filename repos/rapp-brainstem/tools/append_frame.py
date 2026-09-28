@@ -20,6 +20,7 @@ from rapp_operator.rapp1 import (  # noqa: E402
     build_frame,
     canonical_bytes,
     mint_rappid,
+    parse_json,
     verify_frame,
 )
 
@@ -55,7 +56,7 @@ def load_frames(stream_id: str) -> list[dict]:
     frames = []
     head = None
     for path in sorted((ROOT / "frames").glob("*.json")):
-        frame = json.loads(path.read_text(encoding="utf-8"))
+        frame = parse_json(path.read_bytes())
         ok, step, reason = verify_frame(
             frame,
             head=head,

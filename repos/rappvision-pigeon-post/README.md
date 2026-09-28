@@ -1,5 +1,9 @@
 # Pigeon Post
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rappvision-pigeon-post.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rappvision-pigeon-post.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 > The internet's strangest RFCs, explained straight.
 
 Deadpan explainers of the internet's strangest standards, each one checked against the RFC it quotes.
