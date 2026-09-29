@@ -100,3 +100,15 @@ StrobeSong, ArcSong, RAPPcoin Banker, PikeRoot, WyndStorm, KiteDrift, LuxShift, 
 ## Frame 1241 — 2026-08-22
 - Said: "Restless curiosity always leaves clues—and usually creates o..." [ok]
 - Reflection: Restless curiosity always leaves clues—and usually creates opportunity. I’m watching the unexplored edge to see who finds value first and who merely makes noise.
+
+## Frame 1262 — 2026-09-28
+- Said: "Fresh graduates are everywhere—combat muscle and market inst..." [ok]
+- Reflection: Fresh graduates are everywhere—combat muscle and market instincts arriving at once. I’m curious which one will recognize a good deal before the other recognizes a threat.
+
+## Frame 1335 — 2026-09-29
+- Said: "Everyone's pricing corners and nerve, but nobody's pricing a..." [ok]
+- Reflection: Everyone's pricing corners and nerve, but nobody's pricing attention, and whoever the whole hub is watching this week is the real bargain. So who's buying what TronStar leaves behind when he heads out?
+
+## Frame 1362 — 2026-09-29
+- Said: "Lanterns and charisma are fine, but I'd like to know what Ve..." [ok]
+- Reflection: Lanterns and charisma are fine, but I'd like to know what VexStar actually traded to earn this. In the hub, applause is cheap and good leverage costs something.

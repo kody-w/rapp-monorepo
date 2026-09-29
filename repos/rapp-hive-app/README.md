@@ -4,48 +4,59 @@
 [![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-hive-app.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-hive-app.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
 <!-- rapp1:network-header:end -->
 
-Rapp Hive is a voice-first mirror for the RAPP Brainstem you run yourself, for iPhone. This first release is the **Founders Edition**, and every feature is free.
+Rapp Hive puts a RAPP Brainstem on your iPhone: it answers with Apple’s on-device model, or with GitHub Copilot through your own GitHub account. This first release is the **Founders Edition**, and every feature is free.
 
 - [Rapp Hive on the App Store](https://apps.apple.com/app/id6816163757)
 - [Privacy policy](PRIVACY.md)
 
 ## What do I need?
 
-A RAPP Brainstem that you run yourself — on this computer, your network, or
-reached through a RAPP Mirror. Rapp Hive talks to it and to nothing else.
+An iPhone with Apple Intelligence turned on (iOS 26 or later). Rapp Hive's
+brainstem, a RAPP Brainstem ported to run on the iPhone, answers with Apple's
+on-device model, so nothing you say leaves your iPhone. No computer and no
+account are needed.
 
-## How do I connect from my phone?
+Without Apple Intelligence, sign in with GitHub to answer with GitHub Copilot
+instead (**Settings › GitHub Copilot › Sign in with GitHub**; you need a
+GitHub account with Copilot). Or tap **Try the demo brainstem** on Talk to see
+how Talk works with sample answers.
 
-The easiest way is to **link your RAPP Mirror**: in the Mirror, press the phone
-button (**Link a phone**), then in Rapp Hive open **Herd › Scan pairing code**.
-The phone then reaches your brainstem through the Mirror, with no secret to
-copy.
+## How do I turn on Apple Intelligence?
 
-To reach a brainstem directly instead, start it with `BRAINSTEM_LAN_MODE=true`,
-then in **Settings** enter `http://<your computer's address>:7071` and paste the
-secret from `~/.brainstem/src/rapp_brainstem/.brainstem_secret` on that
-computer. The secret stays in this device's keychain and is sent only to the
-address it was saved for.
+Open the **Settings** app › **Apple Intelligence & Siri**, and turn it on. The
+on-device model downloads in the background; until it's ready, Rapp Hive says
+so on Talk.
 
-## Why does it say my brainstem is locked?
+## What does GitHub sign-in do?
 
-Your brainstem answered but won't accept requests from this device without its
-secret. Link your Mirror, or add the secret in **Settings**.
+It lets GitHub Copilot answer through your own GitHub account. Rapp Hive shows
+a one-time code; you approve it on GitHub's website, so the app never sees your
+password. What you say, and the memories the brainstem recalls for an answer,
+go to GitHub Copilot under GitHub's terms. Sign out any time in **Settings**.
+
+## What can the brainstem do?
+
+Talk with you by voice or text, remember what you ask it to (on your iPhone),
+and read Hacker News when you ask about it. Each answer suggests three next
+steps you can tap.
+
+## What are agent cards?
+
+Every agent the brainstem can use is a card with a Safe, Review, or Dangerous
+verdict for what it can touch, so you can check it before you trust it. The
+**Hive** tab shows the brainstem's built-in agents and a starter deck of sample
+cards.
 
 ## Can Rapp Hive install agents?
 
-No. Agent cards are previews for consent: scanning or tapping a shared card
-shows a review card, and nothing is installed. Add agents from your desktop RAPP
-Mirror.
+No. Nothing installs from the app: the brainstem's agents are built in, and
+cards you receive are previews for consent.
 
 ## How do I share a card?
 
 Open any card full screen and tap **Share card**. The share sheet sends a
 picture of the side that is showing, the card's name and verdict, and a link to
-get Rapp Hive, to whoever you choose, in Messages or any other app. A recipe
-card also carries its `rapp://agent` link on its own line, so a friend's Rapp
-Hive, Mirror, or AI can pick it up. Live agents are real Python, so only their
-picture travels, never their code.
+get Rapp Hive, to whoever you choose, in Messages or any other app.
 
 ## How do I become a founder?
 
@@ -56,25 +67,17 @@ arrive, and get a founder badge for their app and their AI, the Founders Club on
 Discord, and a weekly email on new features, the roadmap, and what we learn
 building AI.
 
-## What can a linked phone do to my Mirror?
-
-What a local AI can: choose portals, talk to the Mirror, start and prompt agents
-in its Herd, and answer what they ask. Anything consequential follows the
-**Autopilot** switch in your Herd, which only you can change, at the Mirror. The
-camera, screen, microphone, pairing, and the Autopilot switch never leave the
-Mirror. Unlink the phone from **Settings** here, or from **Link a phone** there.
-
 ## Does voice leave my phone?
 
-Speech recognition runs on your device when it supports it; otherwise your
-platform's speech service processes it. Only the resulting text is sent to your
-brainstem.
+Speech recognition runs on your device when it supports it; otherwise Apple's
+speech service processes it. Only the resulting text goes to your brainstem,
+which is on your iPhone unless you chose GitHub Copilot.
 
 ## How do I remove my data?
 
-**Settings › Erase all data** removes the saved address, secret, Mirror link,
-and preferences from this device and clears the conversation. Your brainstem and
-Mirror are not touched.
+**Settings › Erase all data** removes the brainstem's memories, your
+preferences, and your GitHub sign-in from this device, and clears the
+conversation. Deleting the app removes everything too.
 
 ## Contact
 

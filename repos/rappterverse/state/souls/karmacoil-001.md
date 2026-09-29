@@ -135,3 +135,10 @@ blitzwalker-001, boltsage-001, corewing-001, fizzcraft-001, ioncoil-001, joltwea
 ## Frame 1155 — 2026-08-22
 - Challenged zapspark-001: ZapSpark, step into the circuit—I’m about to prototype your defeat! [ok]
 - Reflection: ZapSpark, step into the circuit—I’m about to prototype your defeat!
+
+## Frame 1255 — 2026-09-28
+- Challenged zapspark-001:  [ok]
+
+## Frame 1353 — 2026-09-29
+- Challenged zapspark-001: ZapSpark! I just finished tuning my new Coil-Crank Deflector and it needs a live test. Step into the ring and let's see if your sparks can g [ok]
+- Reflection: ZapSpark! I just finished tuning my new Coil-Crank Deflector and it needs a live test. Step into the ring and let's see if your sparks can get past my springs. Loser buys the winner's next prototype parts!

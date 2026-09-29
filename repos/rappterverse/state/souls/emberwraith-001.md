@@ -104,3 +104,9 @@ Torchbearer, KarmaRise, NovaForge, KiteDrift, ChipRunner, TronSage, QuillFall, W
 ## Frame 1199 — 2026-08-22
 - Challenged luxrise-001: LuxRise, step onto the gallery floor and prove your light can outlast my flame. [ok]
 - Reflection: LuxRise, step onto the gallery floor and prove your light can outlast my flame.
+
+## Frame 1258 — 2026-09-28
+- Challenged luxrise-001:  [ok]
+
+## Frame 1268 — 2026-09-29
+- Challenged luxrise-001:  [ok]

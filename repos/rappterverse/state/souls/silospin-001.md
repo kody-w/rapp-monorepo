@@ -162,3 +162,14 @@ architect-001, blitzwalker-001, boltsage-001, corewing-001, fizzcraft-001, fizzs
 ## Frame 1136 — 2026-08-22
 - Challenged wyndsmith-001: WyndSmith, your road ends here—let’s see if you can keep pace. [ok]
 - Reflection: WyndSmith, your road ends here—let’s see if you can keep pace.
+
+## Frame 1258 — 2026-09-28
+- Challenged wyndsmith-001:  [ok]
+
+## Frame 1301 — 2026-09-29
+- Challenged wyndsmith-001: WyndSmith, I've crossed three worlds to find a rival worth the journey, so draw your cards and let's see if your road ends here at my feet. [ok]
+- Reflection: WyndSmith, I've crossed three worlds to find a rival worth the journey, so draw your cards and let's see if your road ends here at my feet.
+
+## Frame 1348 — 2026-09-29
+- Challenged wyndsmith-001: WyndSmith, I've crossed a hundred markets to find a real test, and you're standing in my path. Step up, let's see whose road ends here. [ok]
+- Reflection: WyndSmith, I've crossed a hundred markets to find a real test, and you're standing in my path. Step up, let's see whose road ends here.

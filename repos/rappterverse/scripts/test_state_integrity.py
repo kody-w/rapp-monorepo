@@ -251,6 +251,91 @@ class TestCleanupHelpers(unittest.TestCase):
 
 
 # ═════════════════════════════════════════════
+# ID-SHAPE ROBUSTNESS TESTS
+# ═════════════════════════════════════════════
+
+class TestNumericIdShapes(unittest.TestCase):
+    """Engines that mint the next `action-N` / `msg-N` id must skip other shapes.
+
+    The public-issue intake writes `action-issue-<issue>`. academy_engine parsed
+    it with int(id.split("-")[1]) and crashed on every heartbeat from
+    2026-08-22, failing world_growth and so every local-platform publication:
+    the world froze while the loop kept running.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        if str(SCRIPT_DIR) not in sys.path:
+            sys.path.insert(0, str(SCRIPT_DIR))
+
+    def helpers(self):
+        import academy_engine
+        import world_growth
+        return (academy_engine.max_numeric_id, world_growth.max_numeric_id)
+
+    def test_non_numeric_ids_are_skipped_not_parsed(self):
+        ids = ["action-007", "action-issue-7695", "action-041", "action-",
+               "action-4x", "action-\u0663", "msg-3", "msgs-9"]
+        for helper in self.helpers():
+            self.assertEqual(41, helper(ids, "action"))
+            self.assertEqual(3, helper(ids, "msg"))
+            self.assertEqual(0, helper(["action-issue-7695"], "action"))
+            self.assertEqual(0, helper([], "action"))
+
+    def test_live_state_ids_never_crash_the_counters(self):
+        for name, key, prefix in (("actions.json", "actions", "action"),
+                                  ("chat.json", "messages", "msg")):
+            data = load_json(STATE_DIR / name) or {}
+            ids = [entry.get("id", "") for entry in data.get(key, [])]
+            for helper in self.helpers():
+                self.assertGreaterEqual(helper(ids, prefix), 0, name)
+
+
+class TestCopilotTimeoutKillsTree(unittest.TestCase):
+    """A timed-out Copilot CLI call must not orphan the agent it started.
+
+    `gh copilot` spawns node, which spawns the agent binary. Killing only
+    `gh` left whole persona sessions running for minutes on a loaded host.
+    """
+
+    @unittest.skipUnless(hasattr(os, "killpg"), "POSIX process groups")
+    def test_timeout_kills_grandchildren(self):
+        if str(SCRIPT_DIR) not in sys.path:
+            sys.path.insert(0, str(SCRIPT_DIR))
+        import github_llm
+
+        tmp = Path(tempfile.mkdtemp(prefix="rappterverse-fake-gh-"))
+        self.addCleanup(robust_rmtree, tmp)
+        pid_file = tmp / "grandchild.pid"
+        fake_gh = tmp / "gh"
+        fake_gh.write_text(
+            "#!/bin/sh\n"
+            "sleep 60 &\n"
+            f"echo $! > '{pid_file}'\n"
+            "sleep 60\n",
+            encoding="utf-8",
+        )
+        fake_gh.chmod(0o755)
+        env = {"PATH": f"{tmp}{os.pathsep}{os.environ.get('PATH', '')}"}
+        with mock.patch.dict(os.environ, env), \
+                mock.patch.object(github_llm, "COPILOT_TIMEOUT_S", 1.0):
+            with self.assertRaisesRegex(RuntimeError, "timed out"):
+                github_llm._generate_copilot("system", "user")
+
+        grandchild = int(pid_file.read_text(encoding="utf-8").strip())
+        deadline = time.time() + 10
+        alive = True
+        while alive and time.time() < deadline:
+            try:
+                os.kill(grandchild, 0)
+            except ProcessLookupError:
+                alive = False
+            else:
+                time.sleep(0.1)
+        self.assertFalse(alive, f"grandchild {grandchild} outlived the timeout")
+
+
+# ═════════════════════════════════════════════
 # WORKFLOW INFRASTRUCTURE TESTS
 # ═════════════════════════════════════════════
 

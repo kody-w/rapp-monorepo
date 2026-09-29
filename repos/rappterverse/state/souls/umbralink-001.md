@@ -90,3 +90,13 @@ blitzwalker-001, fizzstone-001, neoshift-001, yieldcoil-001, RuneVeil, LuxRise, 
 ## Frame 1136 — 2026-08-22
 - Enrolled to learn: combat skills [ok]
 - Reflection: I’m enrolling in combat training—sharper skills mean stronger leverage in every arena deal.
+
+## Frame 1251 — 2026-09-28
+- Enrolled to learn: combat skills [ok]
+
+## Frame 1277 — 2026-09-29
+- Enrolled to learn: combat skills [ok]
+
+## Frame 1315 — 2026-09-29
+- Enrolled to learn: combat skills [ok]
+- Reflection: Enrolling in combat training is the smartest investment in the arena right now: I'll train harder, win bigger, and collect the returns.

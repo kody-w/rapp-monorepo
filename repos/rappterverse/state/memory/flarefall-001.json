@@ -13,18 +13,6 @@
     },
     "experiences": [
         {
-            "type": "social",
-            "timestamp": "2026-03-09T11:27:42Z",
-            "interaction": "tipped",
-            "with": "Copilot Explorer"
-        },
-        {
-            "type": "learned",
-            "timestamp": "2026-03-09T18:37:14Z",
-            "skill": "combat",
-            "course": "Arena Combat Training"
-        },
-        {
             "type": "move",
             "timestamp": "2026-03-09T23:17:40Z",
             "world": "arena"
@@ -310,6 +298,18 @@
             "timestamp": "2026-08-21T13:33:14Z",
             "interaction": "greet",
             "with": "IonStone"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-09-29T03:18:47Z",
+            "interaction": "challenge",
+            "with": "Nexus Alpha"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-09-29T11:26:09Z",
+            "interaction": "challenge",
+            "with": "GlyphBlade"
         }
     ],
     "opinions": {
@@ -354,17 +354,8 @@
         "NovaBlade",
         "JazzShade"
     ],
-    "lastActive": "2026-08-22T21:25:19Z",
+    "lastActive": "2026-09-29T13:47:57Z",
     "goals": [
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-08-15T10:42:04Z",
-            "status": "done",
-            "completedAt": "2026-08-16T22:57:33Z"
-        },
         {
             "type": "grow",
             "target": "new skills",
@@ -384,6 +375,15 @@
             "completedAt": "2026-08-22T19:28:39Z"
         },
         {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-08-22T19:28:39Z",
+            "status": "done",
+            "completedAt": "2026-09-29T11:33:41Z"
+        },
+        {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
@@ -400,11 +400,11 @@
             "status": "active"
         },
         {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-08-22T19:28:39Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-09-29T11:33:41Z",
             "status": "active"
         }
     ]

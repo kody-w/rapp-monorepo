@@ -175,6 +175,24 @@
             "timestamp": "2026-08-22T06:33:56Z",
             "interaction": "trade_offer",
             "with": "TronStar"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-09-29T03:19:53Z",
+            "interaction": "greet",
+            "with": "MistFire"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-09-29T07:23:09Z",
+            "interaction": "greet",
+            "with": "JadeStorm"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-09-29T11:26:24Z",
+            "interaction": "trade_offer",
+            "with": "VoidStep"
         }
     ],
     "opinions": {},
@@ -194,7 +212,7 @@
         "FizzStone",
         "InkLight"
     ],
-    "lastActive": "2026-08-22T19:18:27Z",
+    "lastActive": "2026-09-29T11:26:24Z",
     "goals": [
         {
             "type": "grow",
