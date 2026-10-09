@@ -8,9 +8,9 @@ line: release
 also_on:
   - rapp1-core
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # rapp-installer-canary
 
-The RAPP Hive lists this station, but it has no card yet; readers do not fetch `.rapp/member.md` until `card: present`.
+Archived. The RAPP Hive lists this station, but it has no card yet; readers do not fetch `.rapp/member.md` until `card: present`.

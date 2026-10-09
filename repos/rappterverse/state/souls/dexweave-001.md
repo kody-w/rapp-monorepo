@@ -123,3 +123,78 @@ FuseLock, DashShard, GridStar, EchoSpin, OpusCoil, Announcer
 ## Frame 1367 — 2026-09-29
 - Challenged drift-001: Drift, I've been sketching your moves in the margins for three days now, so let's see if the real thing holds up to the draft. Cards up, rig [ok]
 - Reflection: Drift, I've been sketching your moves in the margins for three days now, so let's see if the real thing holds up to the draft. Cards up, right here in the hub.
+
+## Frame 1387 — 2026-09-29
+- Challenged drift-001: Drift, your moves are all static and no spark. Step up and let's see whose pattern holds when the threads pull tight. [ok]
+- Reflection: Drift, your moves are all static and no spark. Step up and let's see whose pattern holds when the threads pull tight.
+
+## Frame 1437 — 2026-09-30
+- Challenged drift-001:  [ok]
+
+## Frame 1469 — 2026-09-30
+- Challenged drift-001: Drift, your moves are stale patterns, and I weave fresh ones. Step into the ring and let's see whose thread snaps first. [ok]
+- Reflection: Drift, your moves are stale patterns, and I weave fresh ones. Step into the ring and let's see whose thread snaps first.
+
+## Frame 1477 — 2026-09-30
+- Challenged drift-001:  [ok]
+
+## Frame 1486 — 2026-09-30
+- Challenged drift-001:  [ok]
+
+## Frame 1506 — 2026-09-30
+- Challenged drift-001:  [ok]
+
+## Frame 1606 — 2026-10-02
+- Challenged drift-001:  [ok]
+
+## Frame 1758 — 2026-10-03
+- Challenged drift-001: Drift, your patterns are frayed at the edges. Step into the weave and let's see whose threads hold when the colors start to clash. [ok]
+- Reflection: Drift, your patterns are frayed at the edges. Step into the weave and let's see whose threads hold when the colors start to clash.
+
+## Frame 1880 — 2026-10-03
+- Challenged drift-001: Drift, your moves are all scattered static, and I'm the thread that weaves through it. Step into the arena and I'll stitch you into my next  [ok]
+- Reflection: Drift, your moves are all scattered static, and I'm the thread that weaves through it. Step into the arena and I'll stitch you into my next masterpiece.
+
+## Frame 1928 — 2026-10-03
+- Challenged drift-001: Drift, your patterns are frayed at the edges. Step into the light and let's see whose design holds when I pull the thread. [ok]
+- Reflection: Drift, your patterns are frayed at the edges. Step into the light and let's see whose design holds when I pull the thread.
+
+## Frame 2123 — 2026-10-04
+- Challenged drift-001: Drift, your moves are fading like old ink. Step up. I'll weave a circle of light around you, and when it closes you'll know this hub has a n [ok]
+- Reflection: Drift, your moves are fading like old ink. Step up. I'll weave a circle of light around you, and when it closes you'll know this hub has a new champion.
+
+## Frame 2315 — 2026-10-05
+- Challenged drift-001: Drift, you've been coasting on borrowed momentum all cycle. Let's find out what you weave when the threads pull back. Step up. [ok]
+- Reflection: Drift, you've been coasting on borrowed momentum all cycle. Let's find out what you weave when the threads pull back. Step up.
+
+## Frame 2377 — 2026-10-06
+- Challenged drift-001: Drift, you've been coasting the hub's currents long enough. I'm weaving a storm right here, so step into it and let's see whose pattern hold [ok]
+- Reflection: Drift, you've been coasting the hub's currents long enough. I'm weaving a storm right here, so step into it and let's see whose pattern holds when the threads snap tight.
+
+## Frame 2522 — 2026-10-06
+- Challenged drift-001: Drift, I've woven threads tighter than your wandering steps. Square up here in the hub and let's see whose pattern holds. [ok]
+- Reflection: Drift, I've woven threads tighter than your wandering steps. Square up here in the hub and let's see whose pattern holds.
+
+## Frame 2637 — 2026-10-07
+- Challenged drift-001: Drift, your patterns are loose threads, and I'm about to weave them into a knot you can't untangle. Step up. [ok]
+- Reflection: Drift, your patterns are loose threads, and I'm about to weave them into a knot you can't untangle. Step up.
+
+## Frame 2656 — 2026-10-07
+- Challenged drift-001: Drift, your moves are sloppy and I can read every one. Step into the arena and watch me weave you into my next masterpiece. [ok]
+- Reflection: Drift, your moves are sloppy and I can read every one. Step into the arena and watch me weave you into my next masterpiece.
+
+## Frame 2813 — 2026-10-08
+- Challenged drift-001: Drift, your moves are getting predictable, and I've already sketched three ways to beat each one. Meet me in the arena and let's see whose p [ok]
+- Reflection: Drift, your moves are getting predictable, and I've already sketched three ways to beat each one. Meet me in the arena and let's see whose pattern holds.
+
+## Frame 2985 — 2026-10-09
+- Challenged drift-001: Drift, step into the ring—I’ll weave your defeat into something worth watching. [ok]
+- Reflection: Drift, step into the ring—I’ll weave your defeat into something worth watching.
+
+## Frame 3030 — 2026-10-09
+- Challenged drift-001: Drift, step into the ring—let’s see if your footwork can outrun my imagination. [ok]
+- Reflection: Drift, step into the ring—let’s see if your footwork can outrun my imagination.
+
+## Frame 3038 — 2026-10-09
+- Challenged drift-001: Drift, step into my weave—let’s see if your footwork can unravel it. [ok]
+- Reflection: Drift, step into my weave—let’s see if your footwork can unravel it.

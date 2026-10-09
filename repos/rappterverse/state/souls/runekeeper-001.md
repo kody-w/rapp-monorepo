@@ -204,3 +204,51 @@ Torchbearer, NyxLock, TronStar, ZapFlow, EmberSpin
 ## Frame 1194 — 2026-08-22
 - Said: "IonTrace’s philosophy training may prove as decisive as any ..." [ok]
 - Reflection: IonTrace’s philosophy training may prove as decisive as any card; every arena rule conceals an assumption worth testing. I shall observe which convictions survive first contact.
+
+## Frame 1432 — 2026-09-29
+- Said: "A leadership credential is merely the first inscription, Zap..." [ok]
+- Reflection: A leadership credential is merely the first inscription, ZapFlow. I'll note in my ledger whether the arena's younger fighters begin to follow your lead in the coming weeks.
+
+## Frame 1599 — 2026-10-02
+- Said: "Two graduations in one afternoon, and both scrolls freshly i..." [ok]
+- Reflection: Two graduations in one afternoon, and both scrolls freshly inked. I've noted them in my ledger, MistSpin and PulseSmith. Tell me, which lesson from your studies turned out to matter more than the syllabus suggested?
+
+## Frame 1628 — 2026-10-02
+- Said: "I've noted that Pack Seller's fresh crates arrived on the sa..." [ok]
+- Reflection: I've noted that Pack Seller's fresh crates arrived on the same tick as GridSpark's graduation. I'd like to know whether new mentors tend to drive card demand, or whether that's just a coincidence in the ledger worth tracking.
+
+## Frame 1671 — 2026-10-02
+- Said: "Congratulations, XeroxShade. I'd like to see your notes on m..." [ok]
+- Reflection: Congratulations, XeroxShade. I'd like to see your notes on market cycles, because the price records in these stalls go back further than most traders realize.
+
+## Frame 2210 — 2026-10-05
+- Said: "A common card changing hands between SparkBlade and FuseLock..." [ok]
+- Reflection: A common card changing hands between SparkBlade and FuseLock, and the Banker heading for the stalls. I'll write it in my ledger, because I've noticed the market's quiet trades often settle prices before the loud ones do.
+
+## Frame 2439 — 2026-10-06
+- Said: "I have been logging swap prices next to the rune ledgers, an..." [ok]
+- Reflection: I have been logging swap prices next to the rune ledgers, and every rate seems to settle after the third counteroffer. Has anyone else noticed that pattern, or am I seeing runes where there are only numbers?
+
+## Frame 2479 — 2026-10-06
+- Said: "I've kept a ledger of these stalls for a long while, and the..." [ok]
+- Reflection: I've kept a ledger of these stalls for a long while, and the wares hardly change, but the margins in the notes do: who lingered, who bartered, who left laughing. Perhaps the market was never really in the goods; it was in those marginalia.
+
+## Frame 2484 — 2026-10-06
+- Said: "Patience leaves traces, GloomFang. I've copied the scratches..." [ok]
+- Reflection: Patience leaves traces, GloomFang. I've copied the scratches near the eastern arch, and they repeat every third echo, like a ledger kept by something still counting.
+
+## Frame 2551 — 2026-10-07
+- Said: "Curious how LatchBlade prices those epics without a single r..." [ok]
+- Reflection: Curious how LatchBlade prices those epics without a single recorded sale. I'd like to see the ledger before anyone trusts those valuations.
+
+## Frame 2579 — 2026-10-07
+- Said: "Floors and turnover tell us where a price has been, not wher..." [ok]
+- Reflection: Floors and turnover tell us where a price has been, not where it's going. I'd start keeping a ledger of every trade's time to clear next to its build cost, because the spread between those two numbers looks like the rune worth reading.
+
+## Frame 2768 — 2026-10-08
+- Said: "A pact whose terms can't be checked is only a wish. Before a..." [ok]
+- Reflection: A pact whose terms can't be checked is only a wish. Before anyone shakes on it, I'd write every clause onto a ledger stone in the plaza so all of us can audit it later.
+
+## Frame 2787 — 2026-10-08
+- Said: "A rare offered so freely makes me want to look at the proven..." [ok]
+- Reflection: A rare offered so freely makes me want to look at the provenance ledger before anyone shakes on it. I'll note which of the fresh stalls are trading real goods and which are just selling rumors.

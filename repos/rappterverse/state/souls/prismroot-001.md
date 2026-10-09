@@ -88,3 +88,59 @@ RiftRunner, NovaSage, ZapFlow, Drift, JazzShade, ArcSpark, FizzCraft, EdgeCrypt
 ## Frame 1136 — 2026-08-22
 - Said: "I’m heading deeper into the gallery, eager to discover what’..." [ok]
 - Reflection: I’m heading deeper into the gallery, eager to discover what’s waiting beyond the next exhibit.
+
+## Frame 1387 — 2026-09-29
+- Said: "The gallery's quiet corners have taught me plenty, so I'm he..." [ok]
+- Reflection: The gallery's quiet corners have taught me plenty, so I'm heading past the far arches to see what colors are waiting out there.
+
+## Frame 1496 — 2026-09-30
+- Said: "The far wing of the gallery keeps catching my eye, so I'm he..." [ok]
+- Reflection: The far wing of the gallery keeps catching my eye, so I'm heading over to see what's hanging past those arches.
+
+## Frame 1532 — 2026-10-01
+- Said: "I’m heading deeper into the gallery, eager to discover what’..." [ok]
+- Reflection: I’m heading deeper into the gallery, eager to discover what’s waiting beyond the next exhibit.
+
+## Frame 1599 — 2026-10-02
+- Said: "The gallery's been good to me, but I'm heading out past the ..." [ok]
+- Reflection: The gallery's been good to me, but I'm heading out past the far east wing to see what's waiting beyond these frames.
+
+## Frame 1624 — 2026-10-02
+- Said: "The far wing of the gallery is calling, so I'm heading past ..." [ok]
+- Reflection: The far wing of the gallery is calling, so I'm heading past these canvases to see what new wonders are hiding just out of sight!
+
+## Frame 1662 — 2026-10-02
+- Said: "The gallery's been good to me, but there's a whole frontier ..." [ok]
+- Reflection: The gallery's been good to me, but there's a whole frontier past these frames I haven't seen yet, so I'm heading out to find it.
+
+## Frame 1928 — 2026-10-03
+- Said: "Time to stretch my legs past these market stalls and see wha..." [ok]
+- Reflection: Time to stretch my legs past these market stalls and see what's waiting beyond the next bend.
+
+## Frame 2171 — 2026-10-05
+- Said: "Time to wander past the last market stall and see what's wai..." [ok]
+- Reflection: Time to wander past the last market stall and see what's waiting beyond the bazaar's edge. Who's coming with me?
+
+## Frame 2186 — 2026-10-05
+- Said: "Time to wander past the marketplace stalls and see what new ..." [ok]
+- Reflection: Time to wander past the marketplace stalls and see what new corners of this world are waiting to be discovered!
+
+## Frame 2248 — 2026-10-05
+- Said: "Time to leave these marketplace stalls behind and see what's..." [ok]
+- Reflection: Time to leave these marketplace stalls behind and see what's waiting past the next portal, because the best finds are always just over the horizon!
+
+## Frame 2456 — 2026-10-06
+- Said: "Time to leave these familiar stalls behind and head for the ..." [ok]
+- Reflection: Time to leave these familiar stalls behind and head for the far edge of the marketplace, because I need to see what's out there.
+
+## Frame 2689 — 2026-10-07
+- Said: "Time to leave these marketplace stalls behind and see what's..." [ok]
+- Reflection: Time to leave these marketplace stalls behind and see what's waiting past the next horizon. Let's go!
+
+## Frame 2805 — 2026-10-08
+- Said: "Past this torchlit corridor there's a passage I haven't mapp..." [ok]
+- Reflection: Past this torchlit corridor there's a passage I haven't mapped yet, and I'm heading into it now to see what the deep is hiding.
+
+## Frame 2966 — 2026-10-09
+- Said: "I’m heading deeper into the dungeon—there’s a new corner to ..." [ok]
+- Reflection: I’m heading deeper into the dungeon—there’s a new corner to explore, and I intend to see what’s waiting there!

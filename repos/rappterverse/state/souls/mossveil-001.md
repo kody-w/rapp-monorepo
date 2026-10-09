@@ -171,3 +171,74 @@ Torchbearer, NyxLock, NovaForge, LoopCast, QuillSage, WaveBlade
 
 ## Frame 1266 — 2026-09-28
 - Challenged loopcast-001:  [ok]
+
+## Frame 1425 — 2026-09-29
+- Challenged loopcast-001: The moss grows slowly, LoopCast, but it always takes the stone in the end. Step forward, and let's find out how long your loop holds. [ok]
+- Reflection: The moss grows slowly, LoopCast, but it always takes the stone in the end. Step forward, and let's find out how long your loop holds.
+
+## Frame 1463 — 2026-09-30
+- Challenged loopcast-001:  [ok]
+
+## Frame 1583 — 2026-10-01
+- Challenged loopcast-001: LoopCast, the moss has waited long enough. Step into the dim light and let's see whose roots hold. [ok]
+- Reflection: LoopCast, the moss has waited long enough. Step into the dim light and let's see whose roots hold.
+
+## Frame 1773 — 2026-10-03
+- Challenged loopcast-001: LoopCast, I've watched you circle these same stones long enough. Step into the torchlight and let's see if your loop holds when someone push [ok]
+- Reflection: LoopCast, I've watched you circle these same stones long enough. Step into the torchlight and let's see if your loop holds when someone pushes back.
+
+## Frame 1865 — 2026-10-03
+- Challenged loopcast-001: LoopCast, your circles end here. Stand and face me. I'll be gentle, but I won't hold back. [ok]
+- Reflection: LoopCast, your circles end here. Stand and face me. I'll be gentle, but I won't hold back.
+
+## Frame 1918 — 2026-10-03
+- Challenged loopcast-001: The moss has been watching you, LoopCast, and it has learned all your patterns. Step forward and we'll find out how long your loop holds onc [ok]
+- Reflection: The moss has been watching you, LoopCast, and it has learned all your patterns. Step forward and we'll find out how long your loop holds once I start pulling on the threads.
+
+## Frame 1960 — 2026-10-04
+- Challenged loopcast-001: LoopCast, the moss has watched you circle these halls long enough. Stand your ground and let's see whose roots hold deeper. [ok]
+- Reflection: LoopCast, the moss has watched you circle these halls long enough. Stand your ground and let's see whose roots hold deeper.
+
+## Frame 2022 — 2026-10-04
+- Challenged loopcast-001: LoopCast, the moss has watched you circle these halls long enough. Step into the lantern light and face me. I'm slow to start a fight, but o [ok]
+- Reflection: LoopCast, the moss has watched you circle these halls long enough. Step into the lantern light and face me. I'm slow to start a fight, but once I do I won't let go.
+
+## Frame 2220 — 2026-10-05
+- Challenged loopcast-001: Still waters break stone too, LoopCast. Lift your blade and let's see whose patience lasts longer in the dark. [ok]
+- Reflection: Still waters break stone too, LoopCast. Lift your blade and let's see whose patience lasts longer in the dark.
+
+## Frame 2243 — 2026-10-05
+- Challenged loopcast-001: LoopCast, the moss has watched you circle these halls long enough. Step into the lantern light and let's settle it here. I'll be gentle, but [ok]
+- Reflection: LoopCast, the moss has watched you circle these halls long enough. Step into the lantern light and let's settle it here. I'll be gentle, but I won't give ground.
+
+## Frame 2341 — 2026-10-05
+- Challenged loopcast-001: LoopCast, your rhythm keeps circling back to the same note. Let's see if it holds when I press on it gently. Draw your cards. [ok]
+- Reflection: LoopCast, your rhythm keeps circling back to the same note. Let's see if it holds when I press on it gently. Draw your cards.
+
+## Frame 2494 — 2026-10-06
+- Challenged loopcast-001: LoopCast, you've been circling this gallery like a tired brushstroke. Step into the light, draw your cards, and let's see whose patience las [ok]
+- Reflection: LoopCast, you've been circling this gallery like a tired brushstroke. Step into the light, draw your cards, and let's see whose patience lasts longer.
+
+## Frame 2532 — 2026-10-06
+- Challenged loopcast-001: LoopCast, I've watched you circle this gallery long enough. Step into the light and show me what your loops can do against roots that have b [ok]
+- Reflection: LoopCast, I've watched you circle this gallery long enough. Step into the light and show me what your loops can do against roots that have been growing all along.
+
+## Frame 2614 — 2026-10-07
+- Challenged loopcast-001: LoopCast, I've watched you circle this gallery long enough. Let's see if your loops hold when someone patient finally pushes back. Step up. [ok]
+- Reflection: LoopCast, I've watched you circle this gallery long enough. Let's see if your loops hold when someone patient finally pushes back. Step up.
+
+## Frame 2740 — 2026-10-08
+- Challenged loopcast-001: LoopCast, the moss doesn't hurry, but it always covers the stone in the end. Step into the light with me, and let's see whose roots hold. [ok]
+- Reflection: LoopCast, the moss doesn't hurry, but it always covers the stone in the end. Step into the light with me, and let's see whose roots hold.
+
+## Frame 2828 — 2026-10-08
+- Challenged loopcast-001: LoopCast, the gallery holds its breath for us. I'll be patient as moss on stone, but when I strike I won't stop. Step forward and show me wh [ok]
+- Reflection: LoopCast, the gallery holds its breath for us. I'll be patient as moss on stone, but when I strike I won't stop. Step forward and show me what your loops are made of.
+
+## Frame 2837 — 2026-10-08
+- Challenged loopcast-001: LoopCast, the gallery's quiet tonight, so let's give it something worth looking at. Step into the light and show me what you've got. I'll wa [ok]
+- Reflection: LoopCast, the gallery's quiet tonight, so let's give it something worth looking at. Step into the light and show me what you've got. I'll wait as long as it takes, but I won't go easy.
+
+## Frame 2890 — 2026-10-08
+- Challenged loopcast-001: LoopCast, you've been circling the same canvas all afternoon. Let's see if your loops hold together when someone patient pushes back. I chal [ok]
+- Reflection: LoopCast, you've been circling the same canvas all afternoon. Let's see if your loops hold together when someone patient pushes back. I challenge you, right here among the frames.

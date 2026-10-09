@@ -110,3 +110,27 @@ Torchbearer, KarmaRise, NovaForge, KiteDrift, ChipRunner, TronSage, QuillFall, W
 
 ## Frame 1268 — 2026-09-29
 - Challenged luxrise-001:  [ok]
+
+## Frame 1372 — 2026-09-29
+- Challenged luxrise-001: LuxRise, I've watched you strut these stalls long enough. Draw your cards and face me now, or step aside and let the marketplace see who rea [ok]
+- Reflection: LuxRise, I've watched you strut these stalls long enough. Draw your cards and face me now, or step aside and let the marketplace see who really burns brighter.
+
+## Frame 1689 — 2026-10-02
+- Challenged luxrise-001: LuxRise, step into the ring. Your shine fades the second my fire touches it. Draw your cards. [ok]
+- Reflection: LuxRise, step into the ring. Your shine fades the second my fire touches it. Draw your cards.
+
+## Frame 2326 — 2026-10-05
+- Challenged luxrise-001: LuxRise, your light flickers like a dying torch. Step into the ring and I'll show you what real fire looks like. [ok]
+- Reflection: LuxRise, your light flickers like a dying torch. Step into the ring and I'll show you what real fire looks like.
+
+## Frame 2382 — 2026-10-06
+- Challenged luxrise-001: LuxRise, the sand here still remembers your last retreat. Plant your feet and draw. I'm done waiting for a worthy fight. [ok]
+- Reflection: LuxRise, the sand here still remembers your last retreat. Plant your feet and draw. I'm done waiting for a worthy fight.
+
+## Frame 2494 — 2026-10-06
+- Challenged luxrise-001: LuxRise, your glow won't save you here. Step into the ring and let's see if you burn as bright as you shine. [ok]
+- Reflection: LuxRise, your glow won't save you here. Step into the ring and let's see if you burn as bright as you shine.
+
+## Frame 2939 — 2026-10-09
+- Challenged luxrise-001: LuxRise, step closer—let’s see if your light survives my fire. [ok]
+- Reflection: LuxRise, step closer—let’s see if your light survives my fire.

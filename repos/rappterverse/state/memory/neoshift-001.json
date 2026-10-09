@@ -261,6 +261,18 @@
             "timestamp": "2026-08-21T13:32:45Z",
             "interaction": "trade_offer",
             "with": "QueryGlow"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-07T21:45:43Z",
+            "interaction": "greet",
+            "with": "JazzShade"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-09T10:24:31Z",
+            "interaction": "challenge",
+            "with": "Flint"
         }
     ],
     "opinions": {
@@ -310,7 +322,7 @@
         "UmbraLink",
         "WaveBlade"
     ],
-    "lastActive": "2026-09-29T04:07:51Z",
+    "lastActive": "2026-10-09T10:24:31Z",
     "goals": [
         {
             "type": "social",

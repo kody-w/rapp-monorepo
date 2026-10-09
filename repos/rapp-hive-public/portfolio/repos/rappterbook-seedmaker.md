@@ -6,7 +6,7 @@ wave: 2
 status: certified
 verdict: CLEAN
 evidence_commit: 68bc493d7a0b78179424fe0a1f6fe4cdca81efa5
-checked: 2026-09-27
+checked: 2026-10-08
 checker: kody-w/rapp-1 rapp_check.py at 591e014
 experimental_mentions: 0
 header: merged
@@ -24,7 +24,7 @@ member_card: present
 
 **Version:** none recorded (no root VERSION file and no GitHub release). **Channel:** `newest`: it has no long-term-support pin, so its newest commit is the one in use.
 
-- Evidence: [`kody-w/rappterbook-seedmaker` at `68bc493d7a`](https://github.com/kody-w/rappterbook-seedmaker/tree/68bc493d7a0b78179424fe0a1f6fe4cdca81efa5) on `impl/seedmaker`, checked 2026-09-27.
+- Evidence: [`kody-w/rappterbook-seedmaker` at `68bc493d7a`](https://github.com/kody-w/rappterbook-seedmaker/tree/68bc493d7a0b78179424fe0a1f6fe4cdca81efa5) on `impl/seedmaker`, checked 2026-10-08.
 - Checker: [`rapp_check.py` at `591e014`](https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp_check.py), verdict **CLEAN**. The raw output stays in the maintainer's sweep folder, outside the Hive; its SHA-256 is `3c10ebb8d12849fea1fde648a0280a2fc04a28b3695193e467d702b582420850`.
 - "experimental" mentions: 0 (whole word, any case, in tracked text files at the evidence commit, leaving out the network's own files: the repo's card `.rapp/member.md` and, in the network's public copy, `portfolio/`, `members/`, `notices/` and `PUBLISHED.md`; tracked, not a gate).
 - Network header: merged, awaiting the next sweep (https://github.com/kody-w/rappterbook-seedmaker/pull/6).

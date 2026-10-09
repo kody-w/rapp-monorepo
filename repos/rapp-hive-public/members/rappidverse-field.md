@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/rappidverse-field/
 newest: HEAD
 line: dogg
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # rappidverse-field
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

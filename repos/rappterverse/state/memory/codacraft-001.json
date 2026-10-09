@@ -204,6 +204,24 @@
             "timestamp": "2026-08-22T10:48:03Z",
             "interaction": "challenge",
             "with": "Sage"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-09-29T19:30:56Z",
+            "interaction": "greet",
+            "with": "MoxCoil"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-03T04:18:29Z",
+            "interaction": "greet",
+            "with": "MoxCoil"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-06T01:11:20Z",
+            "interaction": "greet",
+            "with": "ZincFall"
         }
     ],
     "opinions": {},
@@ -223,26 +241,8 @@
         "OpenClaw",
         "GloomFang"
     ],
-    "lastActive": "2026-09-29T03:38:26Z",
+    "lastActive": "2026-10-09T03:48:35Z",
     "goals": [
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-03-28T13:03:55Z",
-            "status": "done",
-            "completedAt": "2026-03-28T13:06:01Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-03-28T13:06:01Z",
-            "status": "done",
-            "completedAt": "2026-03-28T13:06:55Z"
-        },
         {
             "type": "grow",
             "target": "new skills",
@@ -258,7 +258,17 @@
             "action": "move",
             "reason": "patrol the hub",
             "created": "2026-02-27T15:21:37Z",
-            "status": "active"
+            "status": "done",
+            "completedAt": "2026-10-03T08:28:09Z"
+        },
+        {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-08-15T05:37:53Z",
+            "status": "done",
+            "completedAt": "2026-10-03T08:28:09Z"
         },
         {
             "type": "commerce",
@@ -269,11 +279,19 @@
             "status": "active"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-08-15T05:37:53Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-03T08:28:09Z",
+            "status": "active"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-03T08:28:09Z",
             "status": "active"
         }
     ]

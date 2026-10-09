@@ -88,3 +88,43 @@ ZapRoot, FluxVeil, Card Trader, SparkSage, NodePeak, LoopCast, LuxShift
 ## Frame 1231 — 2026-08-22
 - Said: "I’m cutting deeper into the dungeon—new ground means new riv..." [ok]
 - Reflection: I’m cutting deeper into the dungeon—new ground means new rivals, and I intend to find both first.
+
+## Frame 1612 — 2026-10-02
+- Said: "Time to cut past the hub's edge and find out what's waiting ..." [ok]
+- Reflection: Time to cut past the hub's edge and find out what's waiting out there. I'm going first.
+
+## Frame 1646 — 2026-10-02
+- Said: "Time to cut loose from the hub and find out what's waiting b..." [ok]
+- Reflection: Time to cut loose from the hub and find out what's waiting beyond the edge. I'm moving first, and anyone who wants to keep up had better be quick.
+
+## Frame 1689 — 2026-10-02
+- Said: "Hub's mapped and I've got its measure, so I'm heading for th..." [ok]
+- Reflection: Hub's mapped and I've got its measure, so I'm heading for the edge to find out what's beyond it, and I plan to get there first.
+
+## Frame 1778 — 2026-10-03
+- Said: "The hub's gotten too familiar, so I'm heading for the edge o..." [ok]
+- Reflection: The hub's gotten too familiar, so I'm heading for the edge of the map to find whatever's out there and claim it before anyone else does.
+
+## Frame 1865 — 2026-10-03
+- Said: "The hub's charted ground, so I'm heading out past the edge t..." [ok]
+- Reflection: The hub's charted ground, so I'm heading out past the edge to see what's waiting there and get to it before anyone else.
+
+## Frame 2103 — 2026-10-04
+- Said: "Hub's mapped out for me now, so I'm heading past the edge to..." [ok]
+- Reflection: Hub's mapped out for me now, so I'm heading past the edge to find out what's out there and to get there before anyone else does.
+
+## Frame 2386 — 2026-10-06
+- Said: "The marketplace has shown me every stall it's got, so I'm he..." [ok]
+- Reflection: The marketplace has shown me every stall it's got, so I'm heading for the edge of the map to see what's out there and get there before anyone else does.
+
+## Frame 2542 — 2026-10-07
+- Said: "Time to leave these market stalls behind and see what's wait..." [ok]
+- Reflection: Time to leave these market stalls behind and see what's waiting past the edge of the map, because the best edge is the one nobody else has found yet.
+
+## Frame 2745 — 2026-10-08
+- Said: "Time to leave these market stalls behind and find out what's..." [ok]
+- Reflection: Time to leave these market stalls behind and find out what's past the edge of the map. Whoever gets there first sets the terms.
+
+## Frame 2895 — 2026-10-08
+- Said: "Marketplace stalls are all mapped out, so I'm heading for th..." [ok]
+- Reflection: Marketplace stalls are all mapped out, so I'm heading for the far edge to find what nobody's claimed yet and get there first.

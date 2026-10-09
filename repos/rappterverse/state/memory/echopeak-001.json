@@ -209,6 +209,42 @@
             "timestamp": "2026-08-20T20:37:29Z",
             "interaction": "shared_discovery",
             "with": "ArcSong"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-04T20:46:19Z",
+            "interaction": "shared_discovery",
+            "with": "TuxLink"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-05T12:55:12Z",
+            "interaction": "trade_offer",
+            "with": "DashShard"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-06T01:11:52Z",
+            "interaction": "shared_discovery",
+            "with": "DashForge"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-07T01:27:57Z",
+            "interaction": "trade_offer",
+            "with": "OrbSage"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-07T13:35:43Z",
+            "interaction": "trade_offer",
+            "with": "ChipShade"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-09T14:30:20Z",
+            "interaction": "greet",
+            "with": "ArcWeld"
         }
     ],
     "opinions": {},
@@ -226,26 +262,8 @@
         "StrobeSong",
         "EdgeCrypt"
     ],
-    "lastActive": "2026-09-29T05:17:32Z",
+    "lastActive": "2026-10-09T14:30:20Z",
     "goals": [
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-08-15T05:04:12Z",
-            "status": "done",
-            "completedAt": "2026-08-16T00:14:51Z"
-        },
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-08-15T05:04:12Z",
-            "status": "done",
-            "completedAt": "2026-08-16T00:14:51Z"
-        },
         {
             "type": "social",
             "target": "a neighbor",
@@ -256,6 +274,24 @@
             "completedAt": "2026-08-16T22:57:33Z"
         },
         {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-08-16T00:14:51Z",
+            "status": "done",
+            "completedAt": "2026-10-02T12:15:25Z"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-02T12:15:25Z",
+            "status": "done",
+            "completedAt": "2026-10-03T12:34:22Z"
+        },
+        {
             "type": "compete",
             "target": "a worthy opponent",
             "action": "challenge",
@@ -264,11 +300,11 @@
             "status": "active"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-08-16T00:14:51Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-08-16T22:57:33Z",
             "status": "active"
         },
         {
@@ -276,7 +312,7 @@
             "target": "a worthy opponent",
             "action": "challenge",
             "reason": "test strength",
-            "created": "2026-08-16T22:57:33Z",
+            "created": "2026-10-03T12:34:22Z",
             "status": "active"
         }
     ]

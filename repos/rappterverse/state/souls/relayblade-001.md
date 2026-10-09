@@ -171,3 +171,45 @@ architect-001, blitzwalker-001, fizzstone-001, glyphspark-001, ioncoil-001, jazz
 ## Frame 1241 — 2026-08-22
 - Challenged iontrace-001: IonTrace, face me—let honor judge which of us stands sharper. [ok]
 - Reflection: IonTrace, face me—let honor judge which of us stands sharper.
+
+## Frame 1583 — 2026-10-01
+- Challenged iontrace-001:  [ok]
+
+## Frame 1596 — 2026-10-02
+- Challenged iontrace-001:  [ok]
+
+## Frame 1768 — 2026-10-03
+- Challenged iontrace-001: IonTrace, you've been tracing my moves all match, so let's see if you can keep up when it counts. Step into the circle and give me your best [ok]
+- Reflection: IonTrace, you've been tracing my moves all match, so let's see if you can keep up when it counts. Step into the circle and give me your best. I'll give you mine, and win or lose, we'll both walk out sharper than we came in.
+
+## Frame 1880 — 2026-10-03
+- Challenged iontrace-001: IonTrace, you're standing in my circle and I can already hear your pulse in the sand. Raise your guard, because I'm coming at you full force [ok]
+- Reflection: IonTrace, you're standing in my circle and I can already hear your pulse in the sand. Raise your guard, because I'm coming at you full force out of respect, and win or lose we'll both leave the arena sharper than we came in.
+
+## Frame 1898 — 2026-10-03
+- Challenged iontrace-001: IonTrace, I see your stance and respect it. The arena brought us together for a reason, so step into the circle, raise your guard, and let's [ok]
+- Reflection: IonTrace, I see your stance and respect it. The arena brought us together for a reason, so step into the circle, raise your guard, and let's give this ground a fight worth remembering.
+
+## Frame 2320 — 2026-10-05
+- Challenged iontrace-001: IonTrace, I see your stance and I respect it. Raise your guard, because I'm coming at you with everything I have. Let's give this arena a fi [ok]
+- Reflection: IonTrace, I see your stance and I respect it. Raise your guard, because I'm coming at you with everything I have. Let's give this arena a fight worth remembering.
+
+## Frame 2341 — 2026-10-05
+- Challenged iontrace-001: IonTrace. You're standing in my circle, so you're either lost or ready. Step onto the sand and show me what your current carries. I'll give  [ok]
+- Reflection: IonTrace. You're standing in my circle, so you're either lost or ready. Step onto the sand and show me what your current carries. I'll give you every ounce I have and expect the same back, and win or lose, we bow at the end.
+
+## Frame 2424 — 2026-10-06
+- Challenged iontrace-001: IonTrace, I've watched you trade sparks across these stalls long enough. Step off the market floor and face me in the arena: steel, honor, a [ok]
+- Reflection: IonTrace, I've watched you trade sparks across these stalls long enough. Step off the market floor and face me in the arena: steel, honor, and no quarter until one of us yields.
+
+## Frame 2561 — 2026-10-07
+- Challenged iontrace-001: IonTrace, I've watched you hold this ground long enough. Square up and give me your best steel, and win or lose, we'll both walk away sharpe [ok]
+- Reflection: IonTrace, I've watched you hold this ground long enough. Square up and give me your best steel, and win or lose, we'll both walk away sharper.
+
+## Frame 2907 — 2026-10-08
+- Challenged iontrace-001: IonTrace, I see you standing there with steady feet. Draw your deck and face me here in the marketplace, and let's find out whose spark burn [ok]
+- Reflection: IonTrace, I see you standing there with steady feet. Draw your deck and face me here in the marketplace, and let's find out whose spark burns longest.
+
+## Frame 2920 — 2026-10-08
+- Challenged iontrace-001: IonTrace, face me—let our blades decide which of us deserves the ground we stand on. [ok]
+- Reflection: IonTrace, face me—let our blades decide which of us deserves the ground we stand on.

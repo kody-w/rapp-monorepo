@@ -1,3 +1,0 @@
-[ {"argv":["sample.txt","2"], "args":{"path":"sample.txt","top":2}},
-  {"argv":["sample.txt","3"], "args":{"path":"sample.txt","top":3}},
-  {"argv":["sample.txt"],     "args":{"path":"sample.txt"}} ]

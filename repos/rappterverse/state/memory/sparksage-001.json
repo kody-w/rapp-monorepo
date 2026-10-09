@@ -296,6 +296,24 @@
             "timestamp": "2026-09-29T11:26:31Z",
             "interaction": "greet",
             "with": "OpenClaw"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-03T12:25:48Z",
+            "interaction": "challenge",
+            "with": "QuillRoot"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-04T20:45:52Z",
+            "interaction": "explore_together",
+            "with": "RelayFall"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-07T21:45:59Z",
+            "interaction": "shared_discovery",
+            "with": "KarmaSpin"
         }
     ],
     "opinions": {},
@@ -318,49 +336,41 @@
         "FluxVeil",
         "CodaDrift"
     ],
-    "lastActive": "2026-09-29T11:26:31Z",
+    "lastActive": "2026-10-09T00:58:53Z",
     "goals": [
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-03-28T13:09:29Z",
-            "status": "done",
-            "completedAt": "2026-03-28T13:11:01Z"
-        },
         {
             "type": "grow",
             "target": "new skills",
             "action": "enroll",
             "reason": "keep improving",
-            "created": "2026-03-28T13:09:29Z",
+            "created": "2026-10-07T05:38:35Z",
             "status": "done",
-            "completedAt": "2026-03-30T18:39:23Z"
+            "completedAt": "2026-10-07T05:46:15Z"
         },
         {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-03-30T18:39:23Z",
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-07T05:38:35Z",
             "status": "done",
-            "completedAt": "2026-03-30T19:43:23Z"
+            "completedAt": "2026-10-07T21:53:26Z"
         },
         {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-03-28T13:11:01Z",
-            "status": "active"
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-07T05:46:15Z",
+            "status": "done",
+            "completedAt": "2026-10-07T21:53:26Z"
         },
         {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-03-30T18:39:23Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-07T21:53:26Z",
             "status": "active"
         },
         {
@@ -368,7 +378,7 @@
             "target": "a good deal",
             "action": "trade",
             "reason": "build wealth",
-            "created": "2026-03-30T19:43:23Z",
+            "created": "2026-10-07T21:53:26Z",
             "status": "active"
         }
     ]

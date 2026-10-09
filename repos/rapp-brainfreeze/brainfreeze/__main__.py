@@ -34,11 +34,32 @@ def main(argv=None):
     eg.add_argument("--no-session", action="store_true", help="do not lay a session egg")
     eg.add_argument("--out", default=".", help="folder to write the eggs to")
 
+    ug = sub.add_parser("egg-upgrade", help="say what an .egg file is, and turn an older brainstem egg into rapp/1")
+    ug.add_argument("egg", help="the .egg file or https URL")
+    ug.add_argument("--owner", help="your lowercase GitHub login (default: the publisher the egg names)")
+    ug.add_argument("--slug", help="lowercase-hyphen name (default: from the file name)")
+    ug.add_argument("--no-memory", action="store_true", help="leave the egg's memory out")
+    ug.add_argument("--check", action="store_true", help="only say what it is; write nothing")
+    ug.add_argument("--out", default=".", help="folder to write the rapp/1 egg to")
+
+    sg = sub.add_parser("sign", help="sign a snapshot's bundle.json with an SSH key, as a GitHub login")
+    sg.add_argument("snapshot")
+    sg.add_argument("--key", default="~/.ssh/id_ed25519", help="SSH private key (default ~/.ssh/id_ed25519)")
+    sg.add_argument("--as", dest="login", required=True, help="the GitHub login that signs")
+    sg.add_argument("--run-file", action="store_true", help="also write the signed self-bootstrapping .py")
+
+    vf = sub.add_parser("verify", help="check a snapshot's or run file's hashes and signature")
+    vf.add_argument("file")
+    vf.add_argument("--allowed-signers", help="allowed_signers file (default: $BRAINFREEZE_ROOT/allowed_signers, "
+                                              "then github.com/<login>.keys)")
+
     fz = sub.add_parser("freeze", help="snapshot a running throwaway, or any brainstem folder")
     fz.add_argument("target", help="throwaway name, or a path to a rapp_brainstem folder")
     fz.add_argument("--out", help="snapshot file to write")
     fz.add_argument("--run-file", action="store_true",
                     help="also write a self-bootstrapping .py that resumes it anywhere")
+    fz.add_argument("--with", dest="sidecars", action="append", default=[],
+                    help="a sidecar folder to bundle and start beside the kernel (repeatable; see docs/BUNDLE.md)")
 
     pk = sub.add_parser("pack", help="turn a snapshot into a self-bootstrapping .py")
     pk.add_argument("snapshot")
@@ -88,9 +109,16 @@ def main(argv=None):
             import time as _t
             if (Path(a.target).expanduser() / "brainstem.py").exists():
                 out = a.out or f"brainstem-{_t.strftime('%Y%m%d-%H%M%S')}.snapshot.tar.gz"
-                snap = freeze(a.target, out)
+                snap = freeze(a.target, out, sidecars=a.sidecars)
             else:
-                snap = Throwaway.attach(a.target).freeze(a.out)
+                tw = Throwaway.attach(a.target)
+                if a.sidecars:
+                    raise ThrowawayError("--with works when freezing a brainstem folder; a throwaway keeps the sidecars it was thawed with")
+                snap = tw.freeze(a.out)
+                p = tw.parent()
+                if p:
+                    print(f"parent:   " + (f"snapshot {p['snapshot_sha256'][:16]} ({p.get('snapshot')})"
+                                           if "snapshot_sha256" in p else f"egg {p['egg_address'][:16]}"))
             print(f"snapshot: {snap}")
             if a.run_file:
                 print(f"run file: {pack(snap)}")
@@ -109,6 +137,57 @@ def main(argv=None):
             print(f"rappid:   {laid['rappid']}\naddress:  {laid['address']}")
             if laid["left_out"]:
                 print(f"left out (invalid egg paths): {', '.join(laid['left_out'][:10])}")
+        elif a.cmd == "egg-upgrade":
+            from pathlib import Path
+            from . import _fetch, legacy
+            blob = _fetch(a.egg)
+            info = legacy.identify(blob)
+            print(f"this is:  {info['what']}  ({info['format']})")
+            if a.check or not info["convertible"]:
+                print(f"next:     {info['hint']}")
+                return 0 if info["convertible"] or info["format"].startswith("rapp/1") or a.check else 1
+            stem = Path(a.egg.rstrip("/").split("/")[-1]).name
+            stem = stem[:-4] if stem.endswith(".egg") else stem
+            laid, notes = legacy.upgrade(blob, a.out, owner=a.owner, slug=a.slug, name_hint=stem,
+                                         include_memory=not a.no_memory)
+            print(f"organism: {laid['organism']}  ({laid['files']} files, verified rapp/1)")
+            print(f"rappid:   {laid['rappid']}")
+            for n in notes:
+                print(f"note:     {n}")
+            print(f"next:     brainfreeze up --egg {laid['organism']}")
+        elif a.cmd == "sign":
+            from . import lineage
+            out = lineage.sign(a.snapshot, a.key, a.login)
+            print(f"signed:   {out} as {a.login}")
+            if a.run_file:
+                print(f"run file: {pack(out)}")
+        elif a.cmd == "verify":
+            import io as _io, tarfile as _tar, tempfile as _tmp
+            from pathlib import Path
+            from . import ROOT, lineage
+            from . import bundle as _b
+            data = lineage.snapshot_bytes(a.file)
+            with _tmp.TemporaryDirectory() as tmp:
+                with _tar.open(fileobj=_io.BytesIO(data)) as t:
+                    for mem in t.getmembers():
+                        if mem.name.startswith("/") or ".." in Path(mem.name).parts or mem.issym() or mem.islnk():
+                            print(f"unsafe entry in snapshot: {mem.name}")
+                            return 1
+                    t.extractall(tmp)
+                if (Path(tmp) / "bundle.json").is_file():
+                    try:
+                        _b.verify(tmp, json.loads((Path(tmp) / "bundle.json").read_text()))
+                        print("hashes:    every file matches bundle.json")
+                    except _b.BundleError as e:
+                        print(f"hashes:    CHANGED: {e}")
+                        return 1
+                else:
+                    print("hashes:    no bundle.json (frozen before bundles)")
+            import os as _os
+            allowed = a.allowed_signers or _os.getenv("BRAINFREEZE_ALLOWED_SIGNERS") or str(ROOT / "allowed_signers")
+            status, login, why = lineage.check_signature(data, allowed)
+            print(f"signature: {status}" + (f" as {login} ({why})" if login else ""))
+            return 0 if status in ("verified", "unsigned") else 1
         elif a.cmd == "pack":
             print(f"run file: {pack(a.snapshot, a.out)}")
         elif a.cmd == "replay":

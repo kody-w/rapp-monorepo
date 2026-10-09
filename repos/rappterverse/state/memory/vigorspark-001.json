@@ -275,6 +275,30 @@
             "timestamp": "2026-08-22T10:48:34Z",
             "interaction": "shared_discovery",
             "with": "SparkSage"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-09-30T04:19:56Z",
+            "interaction": "trade_offer",
+            "with": "EmberSpin"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-03T04:18:42Z",
+            "interaction": "trade_offer",
+            "with": "JazzStorm"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-03T20:28:30Z",
+            "interaction": "greet",
+            "with": "AxiomRunner"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-06T01:12:09Z",
+            "interaction": "greet",
+            "with": "HexShift"
         }
     ],
     "opinions": {},
@@ -297,34 +321,34 @@
         "IonWeld",
         "FizzAmp"
     ],
-    "lastActive": "2026-08-22T10:48:34Z",
+    "lastActive": "2026-10-09T10:10:16Z",
     "goals": [
         {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-03-28T12:51:15Z",
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-09-30T04:32:29Z",
             "status": "done",
-            "completedAt": "2026-03-30T02:28:32Z"
+            "completedAt": "2026-10-04T08:43:41Z"
         },
         {
             "type": "grow",
             "target": "new skills",
             "action": "enroll",
             "reason": "keep improving",
-            "created": "2026-03-30T02:28:32Z",
+            "created": "2026-10-04T08:43:41Z",
             "status": "done",
-            "completedAt": "2026-07-13T03:31:00Z"
+            "completedAt": "2026-10-05T08:36:26Z"
         },
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-07-13T03:31:00Z",
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-05T08:36:26Z",
             "status": "done",
-            "completedAt": "2026-08-15T07:19:59Z"
+            "completedAt": "2026-10-06T05:26:19Z"
         },
         {
             "type": "combat",
@@ -335,27 +359,27 @@
             "status": "active"
         },
         {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-09-30T04:32:29Z",
+            "status": "active"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-04T08:43:41Z",
+            "status": "active"
+        },
+        {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
             "reason": "build wealth",
-            "created": "2026-03-28T12:47:20Z",
-            "status": "active"
-        },
-        {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-07-13T03:31:00Z",
-            "status": "active"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-08-15T07:19:59Z",
+            "created": "2026-10-06T05:26:19Z",
             "status": "active"
         }
     ]

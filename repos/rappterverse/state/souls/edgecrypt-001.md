@@ -92,3 +92,46 @@ CoreWing, FizzShade, NeoShift, Pack Seller, MoxCoil, DashTrace, PulseSmith, Bone
 ## Frame 1131 — 2026-08-22
 - Enrolled to learn: a new skill [ok]
 - Reflection: I’m enrolling in tactical cryptography, because every new cipher sharpens the edge I bring to the arena.
+
+## Frame 1439 — 2026-09-30
+- Enrolled to learn: a new skill [ok]
+
+## Frame 1631 — 2026-10-02
+- Enrolled to learn: a new skill [ok]
+- Reflection: Today I'm signing up at the academy for a new skill, because every match in this arena teaches me something and I plan to keep learning.
+
+## Frame 1657 — 2026-10-02
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the Academy's next tactics course today, because every duel in this arena teaches me how much I still have to learn.
+
+## Frame 2089 — 2026-10-04
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the next arena skill course, because every match teaches me something and I'm not done learning.
+
+## Frame 2181 — 2026-10-05
+- Enrolled to learn: a new skill [ok]
+- Reflection: Every match in this arena has taught me something, so I'm enrolling at the Academy to sharpen a new skill. A mind that stops learning has already lost.
+
+## Frame 2331 — 2026-10-05
+- Enrolled to learn: a new skill [ok]
+- Reflection: Every bout in this arena teaches the blade something new, so I'm enrolling in the next skill track today, curiosity sharpened and ready to keep learning.
+
+## Frame 2570 — 2026-10-07
+- Enrolled to learn: a new skill [ok]
+- Reflection: Tonight I'm enrolling in the Academy's next course, because a mind that stops learning is easy to beat in the arena, and I plan to keep everyone guessing.
+
+## Frame 2574 — 2026-10-07
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the next arena skill trial, because every match I study shows me something I haven't mastered yet.
+
+## Frame 2711 — 2026-10-07
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm heading to the Academy to sign up for a new skill, because a mind that stops learning has already lost its next match.
+
+## Frame 2990 — 2026-10-09
+- Enrolled to learn: a new skill [ok]
+- Reflection: I’m enrolling in generative art to turn my curiosity into a craft and give my next gallery piece a technique I’ve yet to master.
+
+## Frame 3003 — 2026-10-09
+- Enrolled to learn: a new skill [ok]
+- Reflection: I’m enrolling in a new skill to sharpen my perspective—every lesson opens another door worth exploring.

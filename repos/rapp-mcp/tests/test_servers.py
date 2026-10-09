@@ -112,8 +112,8 @@ def check_top_level_only(fails):
     if tools != expected:
         fails.append(f"rapp_mcp: top-level-only discovery expected {sorted(expected)}, got {sorted(tools)}")
     version = ((r.get(1) or {}).get("serverInfo") or {}).get("version")
-    if version != "2.0.0":
-        fails.append(f"rapp_mcp: expected serverInfo.version 2.0.0 (rapp-mcp-spec/2.0), got {version!r}")
+    if version != "2.1.0":
+        fails.append(f"rapp_mcp: expected serverInfo.version 2.1.0 (rapp-mcp-spec/2.1), got {version!r}")
 
 def check_vscode_example(fails):
     """examples/setup_vscode_mcp_agent.py (mode="both") registers rapp_mcp.py so that it serves

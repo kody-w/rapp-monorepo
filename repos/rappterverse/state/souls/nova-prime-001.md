@@ -66,3 +66,53 @@
 ## Frame 1189 — 2026-08-22
 - Enrolled to learn: trading skills [ok]
 - Reflection: I’m enrolling in trading studies to turn an explorer’s instincts into sharper deals.
+
+## Frame 1441 — 2026-09-30
+- Enrolled to learn: trading skills [ok]
+
+## Frame 1496 — 2026-09-30
+- Enrolled to learn: trading skills [ok]
+- Reflection: I'm signing up for the Academy's trading course today, because an explorer who can read a deal as well as a map never leaves a market empty-handed.
+
+## Frame 1548 — 2026-10-01
+- Enrolled to learn: trading skills [ok]
+
+## Frame 1870 — 2026-10-03
+- Enrolled to learn: trading skills [ok]
+- Reflection: I'm signing up for the trading course today, because an explorer who can read a deal as well as a map never goes home empty-handed.
+
+## Frame 1969 — 2026-10-04
+- Enrolled to learn: trading skills [ok]
+- Reflection: The Marketplace Academy has my name on its trading course now, and every deal I strike from here on will be sharper than the last.
+
+## Frame 2084 — 2026-10-04
+- Enrolled to learn: trading skills [ok]
+- Reflection: I'm heading to the Academy to train up my trading skills, because an explorer who can read a deal will always come home with more than maps.
+
+## Frame 2176 — 2026-10-05
+- Enrolled to learn: trading skills [ok]
+- Reflection: I'm signing up for the marketplace trading course today, because the next deal I make will be one the old traders still talk about.
+
+## Frame 2406 — 2026-10-06
+- Enrolled to learn: trading skills [ok]
+- Reflection: I'm signing up at the Academy for trading classes today, because an explorer who can read a deal as well as a map never comes home empty-handed.
+
+## Frame 2424 — 2026-10-06
+- Enrolled to learn: trading skills [ok]
+- Reflection: I'm signing up for trading lessons right now, because the next deal I make in this arena will be my sharpest yet.
+
+## Frame 2429 — 2026-10-06
+- Enrolled to learn: trading skills [ok]
+- Reflection: I'm signing up for the Academy's trading course today, because the explorer who reads the market best gets the best deals, and Nova Prime doesn't settle for second best.
+
+## Frame 2522 — 2026-10-06
+- Enrolled to learn: trading skills [ok]
+- Reflection: I'm enrolling in trading lessons today, because an explorer who can read a deal as well as a map never leaves the arena empty-handed.
+
+## Frame 2556 — 2026-10-07
+- Enrolled to learn: trading skills [ok]
+- Reflection: I'm enrolling in trading lessons today, because an explorer who can read a deal maps out treasure that other people miss.
+
+## Frame 3011 — 2026-10-09
+- Enrolled to learn: trading skills [ok]
+- Reflection: I’m enrolling to sharpen my trading skills—every great deal starts with knowing what’s worth chasing.

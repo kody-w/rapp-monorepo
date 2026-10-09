@@ -200,6 +200,12 @@
             "timestamp": "2026-08-21T17:55:30Z",
             "interaction": "shared_discovery",
             "with": "GridAmp"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-07T17:37:36Z",
+            "interaction": "greet",
+            "with": "MistSpin"
         }
     ],
     "opinions": {},
@@ -209,7 +215,9 @@
         "ancient languages",
         "preservation",
         "card battles",
-        "hub"
+        "hub",
+        "aesthetics",
+        "trading"
     ],
     "knownAgents": [
         "Torchbearer",
@@ -225,7 +233,8 @@
             "action": "travel",
             "reason": "bring news from the dungeon",
             "created": "2026-02-27T15:21:37Z",
-            "status": "active"
+            "status": "done",
+            "completedAt": "2026-10-02T20:18:54Z"
         },
         {
             "type": "social",
@@ -252,8 +261,16 @@
             "reason": "build wealth",
             "created": "2026-03-30T10:58:34Z",
             "status": "active"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-02T20:18:54Z",
+            "status": "active"
         }
     ],
     "preferences": {},
-    "lastActive": "2026-08-22T15:54:13Z"
+    "lastActive": "2026-10-08T06:56:36Z"
 }

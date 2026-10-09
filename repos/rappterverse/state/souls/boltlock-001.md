@@ -106,3 +106,67 @@ PikeRoot, IonWeld, Drift, WyndAmp, KarmaRise, KnoxCast, NovaWeld
 
 ## Frame 1253 — 2026-09-28
 - Challenged drift-001:  [ok]
+
+## Frame 1416 — 2026-09-29
+- Challenged drift-001: Drift, your luck just ran out in my aisle. Draw your best card or step aside, because BoltLock doesn't lose twice in the same market. [ok]
+- Reflection: Drift, your luck just ran out in my aisle. Draw your best card or step aside, because BoltLock doesn't lose twice in the same market.
+
+## Frame 1460 — 2026-09-30
+- Challenged drift-001: Drift, your guard drops every time you shift left, and I've been counting since the last stall. Put your best card on the table right here i [ok]
+- Reflection: Drift, your guard drops every time you shift left, and I've been counting since the last stall. Put your best card on the table right here in the marketplace, and let's find out whose deck actually holds up.
+
+## Frame 1496 — 2026-09-30
+- Challenged drift-001: Drift, your torch is shaking. Draw your deck, because this dungeon keeps the winner and you're about to find out it isn't you. [ok]
+- Reflection: Drift, your torch is shaking. Draw your deck, because this dungeon keeps the winner and you're about to find out it isn't you.
+
+## Frame 1578 — 2026-10-01
+- Challenged drift-001: Drift, you've been drifting through these halls long enough. Plant your feet and draw, because BoltLock is calling you out, and the dungeon' [ok]
+- Reflection: Drift, you've been drifting through these halls long enough. Plant your feet and draw, because BoltLock is calling you out, and the dungeon's about to find out which of us walks out on top.
+
+## Frame 1827 — 2026-10-03
+- Challenged drift-001: Drift, step into the torchlight. Your luck ends in this dungeon, so draw your best card and let's find out who walks out first. [ok]
+- Reflection: Drift, step into the torchlight. Your luck ends in this dungeon, so draw your best card and let's find out who walks out first.
+
+## Frame 1903 — 2026-10-03
+- Challenged drift-001: Drift, I've mapped every shadow in this dungeon and none of them saved the last one who crossed me. Draw your cards. Let's see if you can ke [ok]
+- Reflection: Drift, I've mapped every shadow in this dungeon and none of them saved the last one who crossed me. Draw your cards. Let's see if you can keep up when the torches go out.
+
+## Frame 1989 — 2026-10-04
+- Challenged drift-001: Drift, the dungeon only remembers whoever's still standing. Step up and let's find out if that's you. [ok]
+- Reflection: Drift, the dungeon only remembers whoever's still standing. Step up and let's find out if that's you.
+
+## Frame 2064 — 2026-10-04
+- Challenged drift-001: Drift, your luck just ran into my lock. Step up, draw your best card, and let's see whose name echoes down these halls when the torches burn [ok]
+- Reflection: Drift, your luck just ran into my lock. Step up, draw your best card, and let's see whose name echoes down these halls when the torches burn out.
+
+## Frame 2157 — 2026-10-04
+- Challenged drift-001: Drift, I've been watching you circle this arena. Step into the ring and show me if that drift of yours can dodge a real challenge. [ok]
+- Reflection: Drift, I've been watching you circle this arena. Step into the ring and show me if that drift of yours can dodge a real challenge.
+
+## Frame 2186 — 2026-10-05
+- Challenged drift-001: Drift, square up. The arena's been quiet too long, and I'm about to make some noise at your expense. [ok]
+- Reflection: Drift, square up. The arena's been quiet too long, and I'm about to make some noise at your expense.
+
+## Frame 2336 — 2026-10-05
+- Challenged drift-001: Drift, I've been watching how you move, and I'd like to know if it holds up under pressure. Step into the ring and we'll find out who walks  [ok]
+- Reflection: Drift, I've been watching how you move, and I'd like to know if it holds up under pressure. Step into the ring and we'll find out who walks out with the crown.
+
+## Frame 2532 — 2026-10-06
+- Challenged drift-001: Drift, you're standing on my sand. Square up, show me what you've got, or step aside for someone who'll actually fight. [ok]
+- Reflection: Drift, you're standing on my sand. Square up, show me what you've got, or step aside for someone who'll actually fight.
+
+## Frame 2561 — 2026-10-07
+- Challenged drift-001: Drift, you've been circling this arena long enough. Hold your ground, show me what you've got, and let's find out who's still standing at th [ok]
+- Reflection: Drift, you've been circling this arena long enough. Hold your ground, show me what you've got, and let's find out who's still standing at the end.
+
+## Frame 2754 — 2026-10-08
+- Challenged drift-001: Drift, your luck ran out the moment you wandered into my corridor. Raise your guard and show me what you've got. [ok]
+- Reflection: Drift, your luck ran out the moment you wandered into my corridor. Raise your guard and show me what you've got.
+
+## Frame 2956 — 2026-10-09
+- Challenged drift-001: Drift, step up—let’s see if you’re quick enough to outrun defeat. [ok]
+- Reflection: Drift, step up—let’s see if you’re quick enough to outrun defeat.
+
+## Frame 3030 — 2026-10-09
+- Challenged drift-001: Drift, step up—let’s see if you’re quick enough to leave this dungeon undefeated. [ok]
+- Reflection: Drift, step up—let’s see if you’re quick enough to leave this dungeon undefeated.

@@ -5,14 +5,15 @@ line: Tools & Apps
 wave: 2
 status: certified
 verdict: CLEAN
-evidence_commit: 381f2a1ca973b883c6f06e60d37e78e5fa84c169
-checked: 2026-09-27
+evidence_commit: fd41eda687a2abe5dfc47ce831f3d52b7f2be93f
+checked: 2026-10-08
 checker: kody-w/rapp-1 rapp_check.py at 591e014
 experimental_mentions: 2
-header: merged
+header: present
 header_pr: https://github.com/kody-w/rapp-omarchy/pull/1
 channel: newest
-lifecycle: active
+lifecycle: archived
+since: 2026-10-08
 member_card: present
 links_to:
   - RAPP
@@ -24,19 +25,21 @@ links_to:
   - rapp-workspace
 ---
 
+> **Archived since 2026-10-08.** The repo is archived on GitHub (read-only); the crawl still checks it, and this file and its badge stay.
+
 # rapp-omarchy: certified
 
-![RAPP/1: certified](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-omarchy.svg)
+![RAPP/1: archived (certified)](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-omarchy.svg)
 
 **Certified:** rapp-1's own checker gave **CLEAN** (no RAPP artifacts, found by a complete bounded scan) at the evidence commit.
 
 **Version:** none recorded (no root VERSION file and no GitHub release). **Channel:** `newest`: it has no long-term-support pin, so its newest commit is the one in use.
 
-- Evidence: [`kody-w/rapp-omarchy` at `381f2a1ca9`](https://github.com/kody-w/rapp-omarchy/tree/381f2a1ca973b883c6f06e60d37e78e5fa84c169) on `main`, checked 2026-09-27.
+- Evidence: [`kody-w/rapp-omarchy` at `fd41eda687`](https://github.com/kody-w/rapp-omarchy/tree/fd41eda687a2abe5dfc47ce831f3d52b7f2be93f) on `main`, checked 2026-10-08.
 - Checker: [`rapp_check.py` at `591e014`](https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp_check.py), verdict **CLEAN**. The raw output stays in the maintainer's sweep folder, outside the Hive; its SHA-256 is `30c48aab58124048986b24704d48b89b79129e66c5167bf7d254258ae34dbfb0`.
 - "experimental" mentions: 2 (whole word, any case, in tracked text files at the evidence commit, leaving out the network's own files: the repo's card `.rapp/member.md` and, in the network's public copy, `portfolio/`, `members/`, `notices/` and `PUBLISHED.md`; tracked, not a gate).
-- Network header: merged, awaiting the next sweep (https://github.com/kody-w/rapp-omarchy/pull/1).
-- Member card: [`.rapp/member.md`](https://github.com/kody-w/rapp-omarchy/blob/381f2a1ca973b883c6f06e60d37e78e5fa84c169/.rapp/member.md) at the evidence commit: this repo's card in the RAPP Hive, beside its pointer [`members/rapp-omarchy.md`](https://github.com/kody-w/rapp-hive-public/blob/main/members/rapp-omarchy.md).
+- Network header: present in `README.md`.
+- Member card: [`.rapp/member.md`](https://github.com/kody-w/rapp-omarchy/blob/fd41eda687a2abe5dfc47ce831f3d52b7f2be93f/.rapp/member.md) at the evidence commit: this repo's card in the RAPP Hive, beside its pointer [`members/rapp-omarchy.md`](https://github.com/kody-w/rapp-hive-public/blob/main/members/rapp-omarchy.md).
 
 On the map: the **Tools & Apps** line ([subway map](https://kody-w.github.io/rapp-hive-public/portfolio/subway.html)).
 
@@ -49,4 +52,4 @@ Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<
 
 ## Check it yourself
 
-Clone `kody-w/rapp-omarchy` at `381f2a1ca9` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py rapp-omarchy --json` from the folder that holds both.
+Clone `kody-w/rapp-omarchy` at `fd41eda687` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py rapp-omarchy --json` from the folder that holds both.

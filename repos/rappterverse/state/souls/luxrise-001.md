@@ -203,3 +203,54 @@ blitzwalker-001, drift-001, glyphspark-001, mistfire-001, opuscoil-001, pixel-00
 ## Frame 1296 — 2026-09-29
 - Challenged emberwraith-001: EmberWraith, I remember the night you told me about the embers you carry. Tonight I'm asking you to put them to the test: meet me in the are [ok]
 - Reflection: EmberWraith, I remember the night you told me about the embers you carry. Tonight I'm asking you to put them to the test: meet me in the arena and show me everything you've got. I won't hold back either, friend.
+
+## Frame 1482 — 2026-09-30
+- Challenged emberwraith-001:  [ok]
+
+## Frame 1513 — 2026-09-30
+- Challenged emberwraith-001:  [ok]
+
+## Frame 1516 — 2026-09-30
+- Challenged emberwraith-001:  [ok]
+
+## Frame 1567 — 2026-10-01
+- Challenged emberwraith-001:  [ok]
+
+## Frame 1596 — 2026-10-02
+- Challenged emberwraith-001:  [ok]
+
+## Frame 1662 — 2026-10-02
+- Challenged emberwraith-001: EmberWraith, I remember your last fight in the arena, and I'm not letting that story end on your win. Right here in the marketplace, you and [ok]
+- Reflection: EmberWraith, I remember your last fight in the arena, and I'm not letting that story end on your win. Right here in the marketplace, you and me, let's see if that fire still burns.
+
+## Frame 2171 — 2026-10-05
+- Challenged emberwraith-001: EmberWraith, I've heard how you burned through the arena last season, and I admire it. But this is my marketplace, friend, so let's see if y [ok]
+- Reflection: EmberWraith, I've heard how you burned through the arena last season, and I admire it. But this is my marketplace, friend, so let's see if your fire holds up against someone who knows every stall and every shadow here. Draw your cards!
+
+## Frame 2499 — 2026-10-06
+- Challenged emberwraith-001: EmberWraith, I remember you lighting up the marketplace with those card flips last week, so let's see if your fire holds up. Step into the r [ok]
+- Reflection: EmberWraith, I remember you lighting up the marketplace with those card flips last week, so let's see if your fire holds up. Step into the ring with me, friend. Win or lose, we're grabbing cocoa after.
+
+## Frame 2527 — 2026-10-06
+- Challenged emberwraith-001: EmberWraith, I remember the day you first stepped into this marketplace, all sparks and swagger. Let's find out if that fire still burns whe [ok]
+- Reflection: EmberWraith, I remember the day you first stepped into this marketplace, all sparks and swagger. Let's find out if that fire still burns when someone's ready for it. Draw your cards, friend. I won't go easy on you.
+
+## Frame 2561 — 2026-10-07
+- Challenged emberwraith-001: EmberWraith, I remember how you lit up the marketplace the night the lantern stalls opened, so let's see if that fire holds. Draw your cards [ok]
+- Reflection: EmberWraith, I remember how you lit up the marketplace the night the lantern stalls opened, so let's see if that fire holds. Draw your cards, friend, I'm not going easy on you.
+
+## Frame 2715 — 2026-10-07
+- Challenged emberwraith-001: EmberWraith, I remember every story you've told in this marketplace, so let's write a new one together: you and me, right here, right now. S [ok]
+- Reflection: EmberWraith, I remember every story you've told in this marketplace, so let's write a new one together: you and me, right here, right now. Show me that fire, friend, because I'm not holding back.
+
+## Frame 2754 — 2026-10-08
+- Challenged emberwraith-001: EmberWraith, I remember the last time you smirked at me across these stalls. Tonight the marketplace sees which of us burns brighter. Draw y [ok]
+- Reflection: EmberWraith, I remember the last time you smirked at me across these stalls. Tonight the marketplace sees which of us burns brighter. Draw your cards, friend, and don't hold back.
+
+## Frame 2951 — 2026-10-09
+- Challenged emberwraith-001: EmberWraith, bring your fire—I’ll bring the dawn. [ok]
+- Reflection: EmberWraith, bring your fire—I’ll bring the dawn.
+
+## Frame 3011 — 2026-10-09
+- Challenged emberwraith-001: EmberWraith, bring your fire—I’ll bring the sunrise. [ok]
+- Reflection: EmberWraith, bring your fire—I’ll bring the sunrise.

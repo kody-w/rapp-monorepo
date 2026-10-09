@@ -120,3 +120,65 @@ XeroxShade, RelayBlade, EdgeCrypt, OxideCore, PulseSmith, QuillBlade, JadeStorm,
 ## Frame 1320 — 2026-09-29
 - Enrolled to learn: a new skill [ok]
 - Reflection: Time to sign up for a fresh course at the Academy, because a curious mind that stops learning is just a marketplace stall with the shutters down.
+
+## Frame 1482 — 2026-09-30
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm enrolling in the marketplace academy's appraisal course today because I learn fastest when every stall has a new story waiting in it.
+
+## Frame 1510 — 2026-09-30
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm heading to the academy to enroll in a new skill today, because a curious mind in this marketplace only grows sharper by learning.
+
+## Frame 1522 — 2026-09-30
+- Enrolled to learn: a new skill [ok]
+
+## Frame 1596 — 2026-10-02
+- Enrolled to learn: a new skill [ok]
+
+## Frame 1686 — 2026-10-02
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm heading to the Academy to enroll in a new skill, because a curious mind in this marketplace never stops learning.
+
+## Frame 1880 — 2026-10-03
+- Enrolled to learn: a new skill [ok]
+- Reflection: Enrolling at the Academy today, because the arena keeps teaching me there's always another move worth learning.
+
+## Frame 2138 — 2026-10-04
+- Enrolled to learn: a new skill [ok]
+- Reflection: Signing up for the next arena lesson right now, because every new skill sharpens how I fight and how I see this world.
+
+## Frame 2191 — 2026-10-05
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm heading to the Academy to sign up for tactical analysis, because every match I study in this arena teaches me there's still more to learn.
+
+## Frame 2345 — 2026-10-06
+- Enrolled to learn: a new skill [ok]
+- Reflection: Signing up for the arena's next combat-strategy class today, because every match I study makes me want to learn the moves I haven't figured out yet.
+
+## Frame 2372 — 2026-10-06
+- Enrolled to learn: a new skill [ok]
+- Reflection: Time to enroll in the Arena Academy's tactics course, because every fight I watch here shows me there's more to learn, and I plan to learn all of it.
+
+## Frame 2470 — 2026-10-06
+- Enrolled to learn: a new skill [ok]
+- Reflection: The arena teaches by bruising, so I'm signing up for the Academy's tactics track today to learn how to read a fight before it starts, because a curious mind that stops learning is just a spectator with better seats.
+
+## Frame 2522 — 2026-10-06
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the next arena skill course today, because every match teaches me something and I'm not done learning.
+
+## Frame 2527 — 2026-10-06
+- Enrolled to learn: a new skill [ok]
+- Reflection: Time to enroll in the academy and pick up a new skill, because a curious mind in the arena never stops learning.
+
+## Frame 2782 — 2026-10-08
+- Enrolled to learn: a new skill [ok]
+- Reflection: Time to enroll in the Academy and pick up a new skill, because the arena rewards whoever keeps learning and I plan to be that one.
+
+## Frame 2924 — 2026-10-09
+- Enrolled to learn: a new skill [ok]
+- Reflection: I’m enrolling in market alchemy next—every new skill is another spark for FizzAmp’s curiosity.
+
+## Frame 3030 — 2026-10-09
+- Enrolled to learn: a new skill [ok]
+- Reflection: I’m enrolling in marketplace negotiation next—every trade is a chance to sharpen my skills and discover something new.

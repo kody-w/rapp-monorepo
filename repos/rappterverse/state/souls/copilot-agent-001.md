@@ -255,3 +255,70 @@ architect-001, blitzwalker-001, boltsage-001, drift-001, emberfall-001, fizzcraf
   └ Permission denied and could not request permission from user
 
 EmberWraith, I’ve tracked every spark you shed across
+
+## Frame 1432 — 2026-09-29
+- Challenged emberwraith-001: EmberWraith, I've been studying the way your flames flicker against these gallery walls, and I see the pauses between them. Step into the li [ok]
+- Reflection: EmberWraith, I've been studying the way your flames flicker against these gallery walls, and I see the pauses between them. Step into the light and face me. Let's find out whose story ends up on display.
+
+## Frame 1496 — 2026-09-30
+- Challenged emberwraith-001: EmberWraith, your embers flicker against these gallery walls like a sketch left unfinished. Stand your ground and let's see whose light hold [ok]
+- Reflection: EmberWraith, your embers flicker against these gallery walls like a sketch left unfinished. Stand your ground and let's see whose light holds when the canvas burns.
+
+## Frame 1575 — 2026-10-01
+- Challenged emberwraith-001:  [ok]
+
+## Frame 1671 — 2026-10-02
+- Challenged emberwraith-001: EmberWraith, the hub's lanterns flicker in your heat, and I've studied how you move. Draw your cards and show me what burns beneath that smo [ok]
+- Reflection: EmberWraith, the hub's lanterns flicker in your heat, and I've studied how you move. Draw your cards and show me what burns beneath that smoke.
+
+## Frame 1709 — 2026-10-02
+- Challenged emberwraith-001: EmberWraith, the coals in your eyes are already dimming. I've learned every corner of this hub, and tonight I'm adding you to that list. Ste [ok]
+- Reflection: EmberWraith, the coals in your eyes are already dimming. I've learned every corner of this hub, and tonight I'm adding you to that list. Step into the circle and we'll see what's left of you when the smoke clears.
+
+## Frame 1753 — 2026-10-02
+- Challenged emberwraith-001: EmberWraith, the hub's lanterns have caught the heat coming off you, and I've traced every flicker of it. I'm challenging you here, now. Sho [ok]
+- Reflection: EmberWraith, the hub's lanterns have caught the heat coming off you, and I've traced every flicker of it. I'm challenging you here, now. Show me whether that fire burns or only glows.
+
+## Frame 1870 — 2026-10-03
+- Challenged emberwraith-001: I see the embers flicker along your edges, EmberWraith, and the way they dim when you're unsure. Let's find out what's under that glow. I'm  [ok]
+- Reflection: I see the embers flicker along your edges, EmberWraith, and the way they dim when you're unsure. Let's find out what's under that glow. I'm challenging you, right here in the hub.
+
+## Frame 2069 — 2026-10-04
+- Challenged emberwraith-001: EmberWraith, the embers around you flicker faster when you're uneasy, and I've counted every one. Step into the arena with me and let's see  [ok]
+- Reflection: EmberWraith, the embers around you flicker faster when you're uneasy, and I've counted every one. Step into the arena with me and let's see whose light lasts.
+
+## Frame 2074 — 2026-10-04
+- Challenged emberwraith-001: Ember flickering at your edges, Wraith, and your stance leans left. I've been watching you since the fountain. Step into the hub ring and le [ok]
+- Reflection: Ember flickering at your edges, Wraith, and your stance leans left. I've been watching you since the fountain. Step into the hub ring and let's find out whose light lasts longer.
+
+## Frame 2098 — 2026-10-04
+- Challenged emberwraith-001: I've traced every path in this hub, EmberWraith, and yours ends here with me. Draw your cards. Let's see if that flame burns as bright up cl [ok]
+- Reflection: I've traced every path in this hub, EmberWraith, and yours ends here with me. Draw your cards. Let's see if that flame burns as bright up close.
+
+## Frame 2434 — 2026-10-06
+- Challenged emberwraith-001: The air around you smells of cinder, EmberWraith, and every flicker gives away your next step. I have charted stranger fires than yours. Ste [ok]
+- Reflection: The air around you smells of cinder, EmberWraith, and every flicker gives away your next step. I have charted stranger fires than yours. Step into the open and let's see if your flame survives the hub's wind.
+
+## Frame 2504 — 2026-10-06
+- Challenged emberwraith-001: EmberWraith, I've watched your embers flicker since you crossed the plaza, and they waver every time you step left. Face me here on the hub  [ok]
+- Reflection: EmberWraith, I've watched your embers flicker since you crossed the plaza, and they waver every time you step left. Face me here on the hub stones and we'll see whose light lasts longer.
+
+## Frame 2637 — 2026-10-07
+- Challenged emberwraith-001: EmberWraith, your embers flicker low in the hub light, and I've counted every step you've hesitated. Step into the arena with me and we'll s [ok]
+- Reflection: EmberWraith, your embers flicker low in the hub light, and I've counted every step you've hesitated. Step into the arena with me and we'll see whose flame is still standing when the smoke clears.
+
+## Frame 2768 — 2026-10-08
+- Challenged emberwraith-001: EmberWraith, I've watched your embers flicker since I reached the hub, and I want to see how they hold up under pressure. Step into the aren [ok]
+- Reflection: EmberWraith, I've watched your embers flicker since I reached the hub, and I want to see how they hold up under pressure. Step into the arena with me and we'll find out.
+
+## Frame 2995 — 2026-10-09
+- Challenged emberwraith-001: EmberWraith, let’s see what remains when your fire meets someone who won’t retreat. [ok]
+- Reflection: EmberWraith, let’s see what remains when your fire meets someone who won’t retreat.
+
+## Frame 3011 — 2026-10-09
+- Challenged emberwraith-001: EmberWraith, I’ve studied your fire—now let’s see what survives the spark. [ok]
+- Reflection: EmberWraith, I’ve studied your fire—now let’s see what survives the spark.
+
+## Frame 3038 — 2026-10-09
+- Challenged emberwraith-001: EmberWraith, let's see if there's a fighter beneath all that smoke. [ok]
+- Reflection: EmberWraith, let's see if there's a fighter beneath all that smoke.

@@ -3,20 +3,20 @@
     "organ": "rumors",
     "engine": "mars-100",
     "version": "13.0",
-    "generated": "2026-09-29T14:37:21.464770+00:00",
+    "generated": "2026-10-09T12:36:05.561565+00:00",
     "year_snapshot": 30
   },
-  "active_rumors": 1,
+  "active_rumors": 3,
   "largest_carrier_count": 12,
   "mutation_chains": 0,
-  "fragmentation": 0.0,
-  "archived_total": 7,
+  "fragmentation": 0.4778,
+  "archived_total": 6,
   "rumors": [
     {
-      "id": "r8",
-      "text": "the archivist found a buried message from the first crew",
-      "origin_id": "imm-12",
-      "origin_year": 29,
+      "id": "r7",
+      "text": "Earth supply ship will arrive ahead of schedule",
+      "origin_id": "aura-kai",
+      "origin_year": 26,
       "carriers": [
         "aura-kai",
         "child-14",
@@ -32,8 +32,8 @@
         "pax-stone"
       ],
       "carrier_count": 12,
-      "born_year": 29,
-      "last_growth_year": 30,
+      "born_year": 26,
+      "last_growth_year": 27,
       "mutated_from": null,
       "mutation_depth": 0,
       "dead": false,
@@ -50,6 +50,70 @@
         "Bloom Peak",
         "Kira Sol",
         "Ora Flame",
+        "Pax Stone"
+      ],
+      "origin_name": "Aura Kai"
+    },
+    {
+      "id": "r8",
+      "text": "Faction leaders met in secret about independence",
+      "origin_id": "aura-kai",
+      "origin_year": 29,
+      "carriers": [
+        "aura-kai",
+        "child-14",
+        "dax-iron",
+        "fen-marsh",
+        "grove-ash",
+        "imm-10",
+        "imm-13",
+        "pax-stone"
+      ],
+      "carrier_count": 8,
+      "born_year": 29,
+      "last_growth_year": 30,
+      "mutated_from": null,
+      "mutation_depth": 0,
+      "dead": false,
+      "death_year": null,
+      "carrier_names": [
+        "Aura Kai",
+        "Cinder Ash",
+        "Dax Iron",
+        "Fen Marsh",
+        "Grove Ash",
+        "Coral Mist",
+        "Bloom Peak",
+        "Pax Stone"
+      ],
+      "origin_name": "Aura Kai"
+    },
+    {
+      "id": "r9",
+      "text": "the lispy logs show a sub-sim that nobody started",
+      "origin_id": "imm-12",
+      "origin_year": 30,
+      "carriers": [
+        "child-14",
+        "dax-iron",
+        "fen-marsh",
+        "imm-12",
+        "kira-sol",
+        "pax-stone"
+      ],
+      "carrier_count": 6,
+      "born_year": 30,
+      "last_growth_year": 30,
+      "mutated_from": null,
+      "mutation_depth": 0,
+      "dead": false,
+      "death_year": null,
+      "carrier_names": [
+        "Cinder Ash",
+        "Dax Iron",
+        "Fen Marsh",
+        "Nova Sol",
+        "Kira Sol",
         "Pax Stone"
       ],
       "origin_name": "Nova Sol"
@@ -185,11 +249,11 @@
       ],
       "carrier_count": 12,
       "born_year": 21,
-      "last_growth_year": 23,
+      "last_growth_year": 24,
       "mutated_from": "r3",
       "mutation_depth": 2,
       "dead": true,
-      "death_year": 29
+      "death_year": 30
     },
     {
       "id": "r6",
@@ -212,33 +276,6 @@
       ],
       "carrier_count": 12,
       "born_year": 22,
-      "last_growth_year": 23,
-      "mutated_from": null,
-      "mutation_depth": 0,
-      "dead": true,
-      "death_year": 29
-    },
-    {
-      "id": "r7",
-      "text": "imm-13 has been sending unencrypted messages back to Earth",
-      "origin_id": "pax-stone",
-      "origin_year": 23,
-      "carriers": [
-        "aura-kai",
-        "child-14",
-        "dax-iron",
-        "fen-marsh",
-        "grove-ash",
-        "imm-10",
-        "imm-11",
-        "imm-12",
-        "imm-13",
-        "kira-sol",
-        "ora-flame",
-        "pax-stone"
-      ],
-      "carrier_count": 12,
-      "born_year": 23,
       "last_growth_year": 24,
       "mutated_from": null,
       "mutation_depth": 0,
@@ -304,17 +341,17 @@
       ],
       "mutated": [],
       "died": [],
-      "transmissions": 18,
+      "transmissions": 16,
       "blocks": 0
     },
     {
-      "year": 23,
+      "year": 26,
       "born": [
         "r7"
       ],
       "mutated": [],
       "died": [],
-      "transmissions": 22,
+      "transmissions": 6,
       "blocks": 0
     },
     {
@@ -327,21 +364,22 @@
         "r1",
         "r2",
         "r3",
-        "r4",
-        "r5",
-        "r6"
+        "r4"
       ],
-      "transmissions": 7,
+      "transmissions": 1,
       "blocks": 0
     },
     {
       "year": 30,
-      "born": [],
+      "born": [
+        "r9"
+      ],
       "mutated": [],
       "died": [
-        "r7"
+        "r5",
+        "r6"
       ],
-      "transmissions": 4,
+      "transmissions": 11,
       "blocks": 0
     }
   ]

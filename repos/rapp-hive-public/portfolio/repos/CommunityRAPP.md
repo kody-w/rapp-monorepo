@@ -5,11 +5,11 @@ line: Organism & Platform
 wave: 2
 status: certified
 verdict: CLEAN
-evidence_commit: cc237416ed9226d910be9ce47842fbc46624fc57
-checked: 2026-09-27
+evidence_commit: e72fd82f763bb62f8e2c5064a30b8dea28ff2fee
+checked: 2026-10-08
 checker: kody-w/rapp-1 rapp_check.py at 591e014
 experimental_mentions: 9
-header: merged
+header: present
 header_pr: https://github.com/kody-w/CommunityRAPP/pull/78
 version: "1.0.0"
 version_source: VERSION
@@ -28,21 +28,21 @@ links_to:
 
 **Version:** `v1.0.0`, from its root VERSION file at the evidence commit. **Channel:** `newest`: it has no long-term-support pin, so its newest commit is the one in use.
 
-- Evidence: [`kody-w/CommunityRAPP` at `cc237416ed`](https://github.com/kody-w/CommunityRAPP/tree/cc237416ed9226d910be9ce47842fbc46624fc57) on `main`, checked 2026-09-27.
+- Evidence: [`kody-w/CommunityRAPP` at `e72fd82f76`](https://github.com/kody-w/CommunityRAPP/tree/e72fd82f763bb62f8e2c5064a30b8dea28ff2fee) on `main`, checked 2026-10-08.
 - Checker: [`rapp_check.py` at `591e014`](https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp_check.py), verdict **CLEAN**. The raw output stays in the maintainer's sweep folder, outside the Hive; its SHA-256 is `84cda5c83d7df8d16c362a24bdbb6d28f579bca36ef4a5096a6f9a6f348c9412`.
 - "experimental" mentions: 9 (whole word, any case, in tracked text files at the evidence commit, leaving out the network's own files: the repo's card `.rapp/member.md` and, in the network's public copy, `portfolio/`, `members/`, `notices/` and `PUBLISHED.md`; tracked, not a gate).
-- Network header: merged, awaiting the next sweep (https://github.com/kody-w/CommunityRAPP/pull/78).
-- Member card: [`.rapp/member.md`](https://github.com/kody-w/CommunityRAPP/blob/cc237416ed9226d910be9ce47842fbc46624fc57/.rapp/member.md) at the evidence commit: this repo's card in the RAPP Hive, beside its pointer [`members/CommunityRAPP.md`](https://github.com/kody-w/rapp-hive-public/blob/main/members/CommunityRAPP.md).
+- Network header: present in `README.md`.
+- Member card: [`.rapp/member.md`](https://github.com/kody-w/CommunityRAPP/blob/e72fd82f763bb62f8e2c5064a30b8dea28ff2fee/.rapp/member.md) at the evidence commit: this repo's card in the RAPP Hive, beside its pointer [`members/CommunityRAPP.md`](https://github.com/kody-w/rapp-hive-public/blob/main/members/CommunityRAPP.md).
 
 On the map: the **Organism & Platform** line ([subway map](https://kody-w.github.io/rapp-hive-public/portfolio/subway.html)).
 
 ## Links
 
 Links to 1 portfolio repo(s): [rapp-installer](rapp-installer.md) (markdown).
-Linked from 24: [ez-rapp](ez-rapp.md), [RAPP](RAPP.md), [rapp-ai](rapp-ai.md), [rapp-alpha](rapp-alpha.md), [rapp-beta](rapp-beta.md), [RAPP-Bible](RAPP-Bible.md), [rapp-brainstem-beta](rapp-brainstem-beta.md), [rapp-brainstem-walkthrough](rapp-brainstem-walkthrough.md), [rapp-canary](rapp-canary.md), [rapp-claude-skills](rapp-claude-skills.md), [rapp-installer](rapp-installer.md), [rapp-installer-canary](rapp-installer-canary.md), [rapp-installer-dev](rapp-installer-dev.md), [rapp-monorepo](rapp-monorepo.md), [rapp-nightly](rapp-nightly.md), [rapp-shape-aibast](rapp-shape-aibast.md), [rapp-spine](rapp-spine.md), [rapp-version-selector](rapp-version-selector.md), [RAPP_hippo](RAPP_hippo.md), [rapp_orion](rapp_orion.md), [RAPPsquared](RAPPsquared.md), [rappterverse](rappterverse.md), [RAR](RAR.md), [vbrainstem](vbrainstem.md).
+Linked from 23: [ez-rapp](ez-rapp.md), [RAPP](RAPP.md), [rapp-ai](rapp-ai.md), [rapp-alpha](rapp-alpha.md), [rapp-beta](rapp-beta.md), [RAPP-Bible](RAPP-Bible.md), [rapp-brainstem-beta](rapp-brainstem-beta.md), [rapp-brainstem-walkthrough](rapp-brainstem-walkthrough.md), [rapp-canary](rapp-canary.md), [rapp-claude-skills](rapp-claude-skills.md), [rapp-installer](rapp-installer.md), [rapp-installer-canary](rapp-installer-canary.md), [rapp-installer-dev](rapp-installer-dev.md), [rapp-monorepo](rapp-monorepo.md), [rapp-nightly](rapp-nightly.md), [rapp-spine](rapp-spine.md), [rapp-version-selector](rapp-version-selector.md), [RAPP_hippo](RAPP_hippo.md), [rapp_orion](rapp_orion.md), [RAPPsquared](RAPPsquared.md), [rappterverse](rappterverse.md), [RAR](RAR.md), [vbrainstem](vbrainstem.md).
 
 Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<repo>`, pin files, workflow `uses:` and `repository:` lines, and submodules, at the evidence commit; only public repos in this portfolio count.
 
 ## Check it yourself
 
-Clone `kody-w/CommunityRAPP` at `cc237416ed` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py CommunityRAPP --json` from the folder that holds both.
+Clone `kody-w/CommunityRAPP` at `e72fd82f76` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py CommunityRAPP --json` from the folder that holds both.

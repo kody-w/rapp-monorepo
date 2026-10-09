@@ -3,7 +3,7 @@ line: brainstem
 name: Brainstem
 color: "#e8590c"
 order: 4
-stations: 19
+stations: 21
 about: "The one surface you talk to: Brainstem engines, strains, harnesses and shells."
 ---
 
@@ -15,7 +15,9 @@ The one surface you talk to: Brainstem engines, strains, harnesses and shells.
 |---|---|---|
 | [brainstem-agent](../repos/brainstem-agent.md) | certified |  |
 | [brainstem-copilot](../repos/brainstem-copilot.md) | certified |  |
+| [brainstem-distro](../repos/brainstem-distro.md) | certified |  |
 | [brainstem-harness](../repos/brainstem-harness.md) | certified |  |
+| [brainstem-mcp](../repos/brainstem-mcp.md) | certified |  |
 | [chat](../repos/chat.md) | certified |  |
 | [ez-rapp](../repos/ez-rapp.md) | certified |  |
 | [rapp-brainfreeze](../repos/rapp-brainfreeze.md) | certified |  |

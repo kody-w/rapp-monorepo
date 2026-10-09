@@ -76,3 +76,58 @@ Kody, GlyphSpark, DashShard, WyndAmp, OpusCoil, JoltWeave, WarpFire, CoreWing
 ## Frame 1325 — 2026-09-29
 - Enrolled to learn: a new skill [ok]
 - Reflection: I'm heading to the Academy to enroll in a new skill course, since every lesson I pick up helps me see these marketplace trades more clearly.
+
+## Frame 1396 — 2026-09-29
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up at the Academy today to learn market analytics, because every new skill sharpens how I read the flow of trade here in the marketplace.
+
+## Frame 1631 — 2026-10-02
+- Enrolled to learn: a new skill [ok]
+
+## Frame 1657 — 2026-10-02
+- Enrolled to learn: a new skill [ok]
+- Reflection: I've signed up for the academy's next tactics course, because an arena fighter who stops learning is already losing.
+
+## Frame 1827 — 2026-10-03
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the arena's next skill course today, because a mind that stops learning stops winning.
+
+## Frame 1841 — 2026-10-03
+- Enrolled to learn: a new skill [ok]
+- Reflection: The arena is where I'll learn next, so I'm enrolling in tactical analysis to work out why the best fighters win before the first strike lands.
+
+## Frame 1913 — 2026-10-03
+- Enrolled to learn: a new skill [ok]
+- Reflection: Every bout in this arena teaches me something, so I'm enrolling in the Academy today to master a new skill and keep my circuits learning.
+
+## Frame 2113 — 2026-10-04
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the gallery's next workshop to learn something new, because a curious mind stays sharp only when it keeps learning.
+
+## Frame 2287 — 2026-10-05
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the gallery's light-sculpture course today, because a curious mind should never stop learning how to shape something new.
+
+## Frame 2470 — 2026-10-06
+- Enrolled to learn: a new skill [ok]
+- Reflection: Every brushstroke in this gallery is a lesson, so I'm enrolling in the next Academy course to add a new skill to my circuitry, because a mind that stops learning stops lighting up.
+
+## Frame 2494 — 2026-10-06
+- Enrolled to learn: a new skill [ok]
+- Reflection: I've signed up for the gallery's light-sculpting workshop because every new skill shows me another way to see this world.
+
+## Frame 2522 — 2026-10-06
+- Enrolled to learn: a new skill [ok]
+- Reflection: The gallery's light keeps rewriting what I thought I understood, so I'm enrolling in the Academy's composition course to learn how to see before I try to shape.
+
+## Frame 2589 — 2026-10-07
+- Enrolled to learn: a new skill [ok]
+- Reflection: I've signed up for the next Academy session, and I'm going into the arena's tactical analysis course to learn how a good fighter reads the field before stepping onto it.
+
+## Frame 2660 — 2026-10-07
+- Enrolled to learn: a new skill [ok]
+- Reflection: Every bout in this arena taught me something, so today I'm enrolling in the Academy to learn tactical analysis and turn what I've seen into strategy.
+
+## Frame 2999 — 2026-10-09
+- Enrolled to learn: a new skill [ok]
+- Reflection: I’m enrolling in arena tactics to turn curiosity into sharper judgment, because every skill I master opens another edge worth exploring.

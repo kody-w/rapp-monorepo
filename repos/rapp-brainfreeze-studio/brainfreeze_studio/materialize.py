@@ -363,11 +363,14 @@ def complete_proof(report, scheduled):
                     for k in ("scheduled", "observed", "observed_python", "observed_code")))
 
 
-def proof_environment(work, extra=None, hashseed="0"):
+def proof_environment(work, extra=None, hashseed="0", python=None):
     """Isolate credentials in the environment and the real home/working folder, NOT a sandbox.
 
     The code can still read any file this user can read by absolute path, and use the network.
     Explicit spec/case variables are inputs, never a copy of the operator's environment.
+    `python`: the interpreter that will run. When it is not this one, this interpreter's site-packages stay off
+    PYTHONPATH: compiled packages (lxml, for python-docx) built for one minor version crash another, and the
+    target interpreter finds its own.
     """
     allowed = ("PATH", "LANG", "LC_ALL", "LC_CTYPE", "TZ", "SYSTEMROOT", "WINDIR", "COMSPEC", "PATHEXT")
     env = {k: os.environ[k] for k in allowed if k in os.environ}
@@ -380,6 +383,10 @@ def proof_environment(work, extra=None, hashseed="0"):
     paths = [str(Path(p or os.getcwd()).resolve()) for p in paths]
     paths = [p for p in paths if p not in stdlib
              and Path(p).name != f"python{sys.version_info[0]}{sys.version_info[1]}.zip"]
+    if python is not None and proof_python(python) != proof_python():
+        own = site.getsitepackages() + ([usersite] if isinstance(usersite, str) else list(usersite))
+        own = {str(Path(p).resolve()) for p in own}
+        paths = [p for p in paths if p not in own and Path(p).name not in ("site-packages", "dist-packages")]
     work = str(Path(work).resolve())
     env.update(HOME=work, USERPROFILE=work, TMPDIR=work, TMP=work, TEMP=work,
                PYTHONPATH=os.pathsep.join(dict.fromkeys(paths)), PYTHONIOENCODING="utf-8",
@@ -482,6 +489,11 @@ _PINNED = json.loads(sys.argv[5]) if len(sys.argv) > 5 else []
 # that reads files, calls the network, calls an LLM or starts processes is refused (and the report says which).
 _EFFECTS = set()
 _OWN = {os.path.realpath(agent_file), os.path.realpath(basic_file)}
+# Documents: each call gets its own RAPP_OUTPUT_DIR. Files the agent writes there are part of its output (returned
+# with the text, so the table and the proof carry their bytes); writing anywhere else is still a refused effect.
+import tempfile as _tempfile, base64 as _b64, hashlib as _hashlib
+_OUTBASE = os.path.realpath(_tempfile.mkdtemp(prefix="rapp-out-"))
+_DOC_MARK = "\n\n\u2063RAPP-DOCUMENTS\u2063"
 
 def _blocked(*a, **k):
     _EFFECTS.add("network")
@@ -504,7 +516,22 @@ def _is_own(path):
         real = os.path.realpath(os.fspath(path))
     except TypeError:
         return True
-    return real in _OWN or any(real == r or real.startswith(r + os.sep) for r in _ROOTS)
+    return (real in _OWN or real == _OUTBASE or real.startswith(_OUTBASE + os.sep)
+            or any(real == r or real.startswith(r + os.sep) for r in _ROOTS))
+
+
+def _collect_documents(folder):
+    docs, data = [], []
+    for root, _dirs, names in sorted(os.walk(folder)):
+        for name in sorted(names):
+            full = os.path.join(root, name)
+            with _real_open(full, "rb") as f:
+                blob = f.read()
+            docs.append({"path": os.path.relpath(full, folder).replace(os.sep, "/"),
+                         "sha256": _hashlib.sha256(blob).hexdigest(), "bytes": len(blob)})
+            data.append(_b64.b64encode(blob).decode("ascii"))
+    order = sorted(range(len(docs)), key=lambda i: docs[i]["path"])
+    return {"documents": [docs[i] for i in order], "data": [data[i] for i in order]}
 
 _real_open = builtins.open
 def _open(file, mode="r", *a, **k):
@@ -603,9 +630,17 @@ def _dicts():
             continue
         if not all(isinstance(k, str) for k in value):
             continue
+        entries = list(value.items())[:200]
+        # every text field the entries share: a resolver may match on "name", "account", "title", ...
+        shared = None
+        for _k, v in entries:
+            fields = {f for f, x in v.items() if isinstance(x, str)} if isinstance(v, dict) else set()
+            shared = fields if shared is None else shared & fields
         out[name] = {"keys": list(value)[:200],
-                     "names": {k: v.get("name") for k, v in list(value.items())[:200]
-                               if isinstance(v, dict) and isinstance(v.get("name"), str)}}
+                     "names": {k: v.get("name") for k, v in entries
+                               if isinstance(v, dict) and isinstance(v.get("name"), str)},
+                     "fields": {f: {k: v[f] for k, v in entries} for f in sorted(shared or ())
+                                if f != "name"}}
     return out
 
 for line in sys.stdin:
@@ -618,10 +653,17 @@ for line in sys.stdin:
                      "dicts": _dicts()})
         continue
     _EFFECTS.clear()
+    # a fresh folder per call (never cleared in place: rmtree removes by relative name, which reads as an effect)
+    _out_dir = os.path.join(_OUTBASE, "case-%d" % req["case_id"] if isinstance(req.get("case_id"), int) else "case-" + str(len(os.listdir(_OUTBASE))))
+    os.makedirs(_out_dir, exist_ok=True)
+    os.environ["RAPP_OUTPUT_DIR"] = _out_dir
     try:
         out = agent.perform(**req["args"])
-        _proof_send({"case_id": req["case_id"], "ok": True,
-                     "out": out if isinstance(out, str) else json.dumps(out, default=str),
+        out = out if isinstance(out, str) else json.dumps(out, default=str)
+        docs = _collect_documents(_out_dir)
+        if docs["documents"]:
+            out += _DOC_MARK + json.dumps(docs, sort_keys=True, separators=(",", ":"))
+        _proof_send({"case_id": req["case_id"], "ok": True, "out": out,
                      "effects": sorted(_EFFECTS | _AT_IMPORT)})
     except Exception as e:
         _proof_send({"case_id": req["case_id"], "ok": False, "out": f"{type(e).__name__}: {e}",
@@ -647,7 +689,18 @@ def agent_python(version=None):
     return sys.executable
 
 
-EFFECTS = {"files": "reads or writes files (SharePoint plus connector code instead)",
+DOC_MARK = "\n\n\u2063RAPP-DOCUMENTS\u2063"   # separates an output's text from the documents it wrote (runner)
+
+
+def split_documents(out):
+    """(text, {"documents": [...], "data": [...]} or None) from a runner output."""
+    if isinstance(out, str) and DOC_MARK in out:
+        text, docs = out.split(DOC_MARK, 1)
+        return text, json.loads(docs)
+    return out, None
+
+
+EFFECTS = {"files": "reads or writes files outside its RAPP_OUTPUT_DIR (SharePoint plus connector code instead)",
            "network": "calls the network (a custom connector instead)",
            "llm": "calls an LLM (the harness agent reasons instead)",
            "processes": "starts processes (the MCP fallback instead)",
@@ -692,7 +745,7 @@ class Runner:
             with tempfile.TemporaryDirectory(prefix="bfs-version-") as work:
                 self._version = subprocess.run([self.python, "-B", "-c", "import platform; print(platform.python_version())"],
                                                capture_output=True, text=True, timeout=60, check=True,
-                                               cwd=work, env=proof_environment(work)).stdout.strip()
+                                               cwd=work, env=proof_environment(work, python=self.python)).stdout.strip()
         return self._version
 
     def _exchange(self, requests, clock=CLOCKS[0], hashseed="0"):
@@ -704,7 +757,7 @@ class Runner:
         with tempfile.TemporaryDirectory(prefix="bfs-materialize-") as work:
             try:
                 proc = run_proof_process(argv, input=payload.encode("utf-8"), timeout=self.timeout,
-                                         env=proof_environment(work, self.env, hashseed), cwd=work)
+                                         env=proof_environment(work, self.env, hashseed, python=self.python), cwd=work)
             except subprocess.TimeoutExpired as e:
                 raise ProofProtocolError(label, "runner timed out", len(requests), len(proof_lines(e.stdout))) from None
             except OSError:
@@ -775,17 +828,33 @@ def _kind(schema):
 
 class _Resolver:
     """The library resolver idiom: empty -> a default key; else q = s.lower().strip() and the first key where
-    ``key in q or q in name.lower()``; else ``miss`` (another key, or None for "unknown")."""
+    ``key in q or q in name.lower()``; else ``miss`` (another key, or None for "unknown").
+    ``ci_key``: the key is compared case-insensitively (keys like "CUST-001" against an upper-cased query).
+    ``two_pass``: every key is tried first, then every name (two loops, not one).
+    ``name_raw``: names are matched against the lower-cased query without stripping its spaces."""
 
-    def __init__(self, order, names, default, miss):
+    def __init__(self, order, names, default, miss, ci_key=False, two_pass=False, name_raw=False):
         self.order, self.names, self.default, self.miss = order, names, default, miss
+        self.ci_key, self.two_pass, self.name_raw = ci_key, two_pass, name_raw
+
+    def _key(self, k):
+        return k.lower() if self.ci_key else k
 
     def __call__(self, raw):
         if raw is None or raw == "":
             return self.default
         q = raw.lower().strip()
+        qn = raw.lower() if self.name_raw else q
+        if self.two_pass:
+            for k in self.order:
+                if self._key(k) in q:
+                    return k
+            for k in self.order:
+                if qn in self.names.get(k, "").lower():
+                    return k
+            return self.miss
         for k in self.order:
-            if k in q or q in self.names.get(k, "").lower():
+            if self._key(k) in q or qn in self.names.get(k, "").lower():
                 return k
         return self.miss
 
@@ -890,8 +959,13 @@ class Discovery:
         for d in self.contract.get("dicts", {}).values():
             if len(d["keys"]) <= 60:
                 dict_words += [k for k in d["keys"] if isinstance(k, str)] + [v for v in d["names"].values() if v]
+                dict_words += [w for v in d["names"].values() if v for w in v.split() if len(w) >= 4]
+                # the other text fields a resolver may match on, and their words, so the check can tell them apart
+                for f in (d.get("fields") or {}).values():
+                    texts = [v for v in f.values() if isinstance(v, str) and 0 < len(v) <= 60]
+                    dict_words += texts + [w for t in texts for w in t.split() if len(w) >= 4]
         probes = list(dict.fromkeys(first[2:] + _variants([v for v in firsts if v.strip()][:40])
-                                    + _variants(dict_words[:40])))
+                                    + _variants(list(dict.fromkeys(dict_words))[:120])))
         self._fill(name, contexts, probes, table)
         recognized = [v for v in probes if any(table[(ci, v)] != table[(ci, s)].replace(s, v) for ci in n)]
         if all(table[(ci, "")] == table[(ci, None)] for ci in n):
@@ -925,27 +999,31 @@ class Discovery:
             order = [k for k in d["keys"] if isinstance(k, str)]
             if not order or len(order) > 60:
                 continue
-            names = {k: (d["names"].get(k) or "") for k in order}
-            self._fill(name, contexts, order + [v for v in names.values() if v], table)
-            for default in order:
-                for miss in [None] + order:
-                    res = _Resolver(order, names, default, miss)
-                    res.rep = {}
-                    for k in order:
-                        for cand in (k, names[k]):
-                            if cand and res(cand) == k:
-                                res.rep[k] = cand
-                                break
-                    if default not in res.rep or (miss is not None and miss not in res.rep):
-                        continue
-                    for absent_is_default in (True, False):
-                        ok, _, fl = self._check(name, contexts, table, probes, "resolver", resolver=res,
-                                                absent_is_default=absent_is_default)
-                        if ok:
-                            info.update(rule="resolver", resolver=res, dict=dname,
-                                        canon=[k for k in order if k in res.rep],
-                                        absent_is_default=absent_is_default, json_echo=fl["json"])
-                            return info
+            choices = [{k: (d["names"].get(k) or "") for k in order}]
+            choices += [{k: (f.get(k) or "") for k in order} for f in (d.get("fields") or {}).values()]
+            variants = [(c, t, n) for n in (False, True) for t in (False, True) for c in (False, True)]
+            for names in choices:
+                self._fill(name, contexts, order + [v for v in names.values() if v], table)
+                for default in order:
+                    for miss in [None] + order:
+                        for ci_key, two_pass, name_raw in variants:
+                            res = _Resolver(order, names, default, miss, ci_key, two_pass, name_raw)
+                            res.rep = {}
+                            for k in order:
+                                for cand in (k, names[k]):
+                                    if cand and res(cand) == k:
+                                        res.rep[k] = cand
+                                        break
+                            if default not in res.rep or (miss is not None and miss not in res.rep):
+                                continue
+                            for absent_is_default in (True, False):
+                                ok, _, fl = self._check(name, contexts, table, probes, "resolver", resolver=res,
+                                                        absent_is_default=absent_is_default)
+                                if ok:
+                                    info.update(rule="resolver", resolver=res, dict=dname,
+                                                canon=[k for k in order if k in res.rep],
+                                                absent_is_default=absent_is_default, json_echo=fl["json"])
+                                    return info
         # canonical mode (approximated): one representative per distinct behavior, from the agent's own values
         if firsts and not all(v.strip() == "" for v in firsts):
             enum = [str(v) for v in (self.props.get(name) or {}).get("enum") or []]
@@ -962,8 +1040,11 @@ class Discovery:
                     or min(vals, key=lambda v: (len(v), v))
                 canon[rep] = rep
             if len(canon) <= 40:
-                info.update(rule="canonical", canon=sorted(canon), canon_map=canon, approximated=True,
-                            why_approx="fuzzy matching is left to the model: the tool lists the known values")
+                # An enum input is only ever called with its listed values, so canonical keying is exact for it.
+                closed = bool(enum) and set(enum) <= set(v for vals in groups.values() for v in vals)
+                info.update(rule="canonical", canon=sorted(canon), canon_map=canon, approximated=not closed,
+                            why_approx=None if closed else
+                            "fuzzy matching is left to the model: the tool lists the known values")
                 return info
         info.update(rule="computational", recognized=recognized[:20],
                     why="this text is searched, classified or transformed; no match rule reproduces it")
@@ -1055,6 +1136,25 @@ def _sub(out, keyed, states, args):
     return out
 
 
+HAND_DIR = Path(__file__).resolve().parent.parent / "translations" / "hand"
+
+
+def hand_translation_for(source_sha):
+    """The hand translation written for exactly this agent source (its SHA-256), from translations/hand in this
+    repository or any folder in BFS_HAND_DIRS (os.pathsep-separated); None when there is none. Operations an agent
+    computes from numbers (days, income, ...) are blocked without one, so a matching translation is always used."""
+    dirs = [Path(d).expanduser() for d in (os.environ.get("BFS_HAND_DIRS") or "").split(os.pathsep) if d] + [HAND_DIR]
+    for d in dirs:
+        for f in sorted(d.glob("*.json")) if d.is_dir() else []:
+            try:
+                h = json.loads(f.read_text())
+            except (OSError, ValueError):
+                continue
+            if isinstance(h, dict) and h.get("source_sha256") == source_sha and h.get("operations"):
+                return h
+    return None
+
+
 def materialize(agent_file, basic_file, *, class_name="", flow_name=None, component=None, python=None,
                 check_clock=True, check_order=True, samples=600, allow_hash_variation=False, hand=None,
                 env=None, data=None, values=None, timeout=600):
@@ -1067,7 +1167,7 @@ def materialize(agent_file, basic_file, *, class_name="", flow_name=None, compon
     agent_file = Path(agent_file)
     source = agent_file.read_text(encoding="utf-8")
     source_sha = hashlib.sha256(source.encode("utf-8")).hexdigest()
-    hand = hand or {}
+    hand = hand if hand is not None else (hand_translation_for(source_sha) or {})
     if hand.get("source_sha256") and hand["source_sha256"] != source_sha:
         raise MaterializeError(f"{agent_file.name}: its hand translation was written for a different source "
                                f"({hand['source_sha256'][:12]}, now {source_sha[:12]})")
@@ -1298,7 +1398,9 @@ def materialize(agent_file, basic_file, *, class_name="", flow_name=None, compon
         if i["rule"] == "resolver":
             r_ = i["resolver"]
             k["resolver"] = {"order": r_.order, "names": r_.names, "default": r_.default, "miss": r_.miss,
-                             "reachable": sorted(r_.rep), "absent_is_default": i.get("absent_is_default", True)}
+                             "reachable": sorted(r_.rep), "absent_is_default": i.get("absent_is_default", True),
+                             **({"ci_key": True} if r_.ci_key else {}), **({"two_pass": True} if r_.two_pass else {}),
+                             **({"name_raw": True} if r_.name_raw else {})}
         keying.append(k)
     keying += list(hand_keying.values())
     merged = {"constants": {}, "derived": [], "fills": []}
@@ -1317,6 +1419,7 @@ def materialize(agent_file, basic_file, *, class_name="", flow_name=None, compon
         "blocked_operations": blocked_ops,
         "ignored": [n for n, i in disc.inputs.items() if i["rule"] == "ignored"],
         "table_keys": keys, "table_outputs": uniq, "outputs": {"result": "(materialized)"},
+        **({"documents": True} if any(DOC_MARK.encode("utf-8") in base64.b64decode(v) for v in uniq.values()) else {}),
         "vectors": cases_all + _probe_vectors(disc, keyed) + hand_vectors,
         "constants": merged["constants"], "derived": merged["derived"], "fills": merged["fills"],
         "hand_operations": {op: h.get("why", "") for op, h in hand_ops.items() if ops.get(op, {}).get("hand")},

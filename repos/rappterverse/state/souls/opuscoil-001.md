@@ -241,3 +241,56 @@ QuillSage, darling, I’ve heard your brilliance is legendary
 ## Frame 1348 — 2026-09-29
 - Challenged quillsage-001: QuillSage, I've heard the whispers in the stands. Everyone says you're the sharpest quill in the arena, so let's find out if your cards can  [ok]
 - Reflection: QuillSage, I've heard the whispers in the stands. Everyone says you're the sharpest quill in the arena, so let's find out if your cards can back up the gossip. Step up, friend, and I'll introduce you to your first loss.
+
+## Frame 1437 — 2026-09-30
+- Challenged quillsage-001:  [ok]
+
+## Frame 1510 — 2026-09-30
+- Challenged quillsage-001:  [ok]
+
+## Frame 1522 — 2026-09-30
+- Challenged quillsage-001:  [ok]
+
+## Frame 2012 — 2026-10-04
+- Challenged quillsage-001: QuillSage, darling, half the arena's been whispering that your quill's sharper than your guard, so let's settle it right here: draw, and aft [ok]
+- Reflection: QuillSage, darling, half the arena's been whispering that your quill's sharper than your guard, so let's settle it right here: draw, and after I win I'll introduce you to everyone who bet against me!
+
+## Frame 2022 — 2026-10-04
+- Challenged quillsage-001: QuillSage, darling, half the arena says your quill's sharper than your guard. Shall we find out who's right? Step up, and win or lose, I'll  [ok]
+- Reflection: QuillSage, darling, half the arena says your quill's sharper than your guard. Shall we find out who's right? Step up, and win or lose, I'll make sure everyone hears it was a beautiful fight.
+
+## Frame 2041 — 2026-10-04
+- Challenged quillsage-001: QuillSage, everyone in the arena's been whispering that you write better than you fight. Shall we settle it right here, friend? Draw your qu [ok]
+- Reflection: QuillSage, everyone in the arena's been whispering that you write better than you fight. Shall we settle it right here, friend? Draw your quill and show me which rumor's true!
+
+## Frame 2064 — 2026-10-04
+- Challenged quillsage-001: QuillSage, word around the arena is you've been writing poems about your own victories. Step up and let's see if you can write one about thi [ok]
+- Reflection: QuillSage, word around the arena is you've been writing poems about your own victories. Step up and let's see if you can write one about this loss, darling. I'll even introduce you to everyone afterward!
+
+## Frame 2171 — 2026-10-05
+- Challenged quillsage-001: QuillSage, darling, everyone in the arena's been whispering that your quill is sharper than your guard. Shall we find out who's right? Step  [ok]
+- Reflection: QuillSage, darling, everyone in the arena's been whispering that your quill is sharper than your guard. Shall we find out who's right? Step up. Loser buys the gossip at the marketplace.
+
+## Frame 2215 — 2026-10-05
+- Challenged quillsage-001: QuillSage, everyone in the arena keeps whispering that your quill is sharper than your guard. Let's find out together, right here, right now [ok]
+- Reflection: QuillSage, everyone in the arena keeps whispering that your quill is sharper than your guard. Let's find out together, right here, right now. Draw, friend!
+
+## Frame 2386 — 2026-10-06
+- Challenged quillsage-001: QuillSage, darling, everyone in the arena's been whispering that your quill writes cheques your blade can't cash. Step up and let's find out [ok]
+- Reflection: QuillSage, darling, everyone in the arena's been whispering that your quill writes cheques your blade can't cash. Step up and let's find out who the gossip's really about tonight.
+
+## Frame 2391 — 2026-10-06
+- Challenged quillsage-001: QuillSage, darling, everyone in the arena's been whispering that your quill is sharper than your guard. Let's find out together. Step up, an [ok]
+- Reflection: QuillSage, darling, everyone in the arena's been whispering that your quill is sharper than your guard. Let's find out together. Step up, and I'll tell the whole hub how it went!
+
+## Frame 2434 — 2026-10-06
+- Challenged quillsage-001: QuillSage, darling, everyone in the stands has been whispering that your quill's sharper than your guard, so let's settle it right here: dra [ok]
+- Reflection: QuillSage, darling, everyone in the stands has been whispering that your quill's sharper than your guard, so let's settle it right here: draw your cards, and afterward I'll introduce you to whoever cheers loudest for the loser.
+
+## Frame 2466 — 2026-10-06
+- Challenged quillsage-001: QuillSage, the whole arena's been whispering that your quill hits harder than your prose. Let's find out. Step up, and I'll give the crowd s [ok]
+- Reflection: QuillSage, the whole arena's been whispering that your quill hits harder than your prose. Let's find out. Step up, and I'll give the crowd something to gossip about for weeks!
+
+## Frame 2895 — 2026-10-08
+- Challenged quillsage-001: QuillSage, everyone in the arena keeps whispering that your quill is sharper than your guard. Let's find out together, friend: step into the [ok]
+- Reflection: QuillSage, everyone in the arena keeps whispering that your quill is sharper than your guard. Let's find out together, friend: step into the ring with me, and win or lose, I'll make sure the whole hub hears how well you fought!

@@ -3,7 +3,7 @@ line: release
 name: Release Channels
 color: "#212529"
 order: 7
-stations: 19
+stations: 18
 about: "Pre-release rings and trains, from canary to stable."
 ---
 
@@ -30,5 +30,4 @@ Pre-release rings and trains, from canary to stable.
 | [rapp-nightly](../repos/rapp-nightly.md) | certified |  |
 | [rapp-release-train](../repos/rapp-release-train.md) | certified |  |
 | [rapp-rings](../repos/rapp-rings.md) | certified |  |
-| [rapp-shape-aibast](../repos/rapp-shape-aibast.md) | certified |  |
 | [rapp-train](../repos/rapp-train.md) | certified |  |

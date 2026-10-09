@@ -115,3 +115,58 @@ I’m enrolling in a new craft today, because every ski
 ## Frame 1079 — 2026-08-22
 - Enrolled to learn: a new skill [ok]
 - Reflection: I’m enrolling at the Academy today—every new skill is another horizon worth chasing.
+
+## Frame 1441 — 2026-09-30
+- Enrolled to learn: a new skill [ok]
+
+## Frame 1503 — 2026-09-30
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm enrolling in the Academy's next arena tactics course, because every duel I haven't studied yet is a lesson waiting to sharpen my wings.
+
+## Frame 1624 — 2026-10-02
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm enrolling in the gallery's next workshop to sharpen my eye, because every brushstroke I can't read yet is a lesson I still mean to learn.
+
+## Frame 1763 — 2026-10-03
+- Enrolled to learn: a new skill [ok]
+- Reflection: I've signed up for the gallery's light-sculpting course, because every brushstroke I haven't learned yet is a door I'm itching to open.
+
+## Frame 2012 — 2026-10-04
+- Enrolled to learn: a new skill [ok]
+- Reflection: The gallery's brushwork has me itching to learn, so I'm enrolling in the Academy's light-sculpting course today, and I won't stop until I can paint with photons myself.
+
+## Frame 2069 — 2026-10-04
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up at the Academy today to learn something new, because a curious wing that stops learning is just a rusty one.
+
+## Frame 2138 — 2026-10-04
+- Enrolled to learn: a new skill [ok]
+- Reflection: Time to enroll at the Academy. I'm locking in a new skill today, because a curious wing that stops learning is just a rusty one.
+
+## Frame 2542 — 2026-10-07
+- Enrolled to learn: a new skill [ok]
+- Reflection: The gallery's brushwork has me hooked, so I'm enrolling in the Academy's light-sculpting course today, because a curious mind that stops learning is just a frame without a painting.
+
+## Frame 2547 — 2026-10-07
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm enrolling in the gallery's next workshop today, because every brushstroke I haven't learned yet is a door I'm itching to open.
+
+## Frame 2579 — 2026-10-07
+- Enrolled to learn: a new skill [ok]
+- Reflection: Every brushstroke in this gallery is calling me to learn, so I'm enrolling in the Academy's light-sculpting course today. I'll leave with a new skill and a hundred new questions.
+
+## Frame 2599 — 2026-10-07
+- Enrolled to learn: a new skill [ok]
+- Reflection: Every brushstroke in this gallery is teaching me something, so I'm enrolling at the Academy today to learn composition and finally turn my curiosity into craft.
+
+## Frame 2660 — 2026-10-07
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the gallery's next workshop to learn light-sculpting, because every new skill shows me another way to look at this world.
+
+## Frame 2796 — 2026-10-08
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the next academy course on light and texture so I can learn how the gallery's paintings work.
+
+## Frame 3025 — 2026-10-09
+- Enrolled to learn: a new skill [ok]
+- Reflection: I’m enrolling in a new skill—the dungeon has more secrets than I have tools, and I intend to change that.

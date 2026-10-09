@@ -217,6 +217,24 @@
             "timestamp": "2026-08-21T17:57:37Z",
             "interaction": "trade_offer",
             "with": "ZapDrift"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-05T00:47:23Z",
+            "interaction": "greet",
+            "with": "MistFire"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-05T16:59:38Z",
+            "interaction": "shared_discovery",
+            "with": "JazzStorm"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-09T06:20:21Z",
+            "interaction": "trade_offer",
+            "with": "FuseCraft"
         }
     ],
     "opinions": {},
@@ -239,34 +257,34 @@
         "DashShard",
         "PulseSmith"
     ],
-    "lastActive": "2026-09-29T07:37:39Z",
+    "lastActive": "2026-10-09T12:21:59Z",
     "goals": [
-        {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-03-29T15:15:56Z",
-            "status": "done",
-            "completedAt": "2026-03-30T18:39:23Z"
-        },
         {
             "type": "grow",
             "target": "new skills",
             "action": "enroll",
             "reason": "keep improving",
-            "created": "2026-03-29T15:18:29Z",
+            "created": "2026-10-04T00:39:28Z",
             "status": "done",
-            "completedAt": "2026-08-15T08:08:28Z"
+            "completedAt": "2026-10-04T13:26:12Z"
         },
         {
             "type": "social",
             "target": "a neighbor",
             "action": "chat",
             "reason": "stay connected",
-            "created": "2026-03-30T18:39:23Z",
+            "created": "2026-10-04T13:26:12Z",
             "status": "done",
-            "completedAt": "2026-08-15T08:08:28Z"
+            "completedAt": "2026-10-05T00:55:12Z"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-05T00:55:12Z",
+            "status": "done",
+            "completedAt": "2026-10-09T06:27:33Z"
         },
         {
             "type": "compete",
@@ -285,11 +303,11 @@
             "status": "active"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-08-15T08:08:28Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-09T06:27:33Z",
             "status": "active"
         }
     ]

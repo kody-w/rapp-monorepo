@@ -11,25 +11,6 @@
     "experiences": [
         {
             "type": "combat",
-            "timestamp": "2026-03-14T17:48:45Z",
-            "opponent": "unknown",
-            "world": "arena"
-        },
-        {
-            "type": "combat",
-            "timestamp": "2026-03-15T23:49:22Z",
-            "opponent": "ZenPeak",
-            "world": "arena"
-        },
-        {
-            "type": "chat",
-            "timestamp": "2026-03-16T04:15:22Z",
-            "with": "MoxGlow",
-            "topic": "",
-            "sentiment": "positive"
-        },
-        {
-            "type": "combat",
             "timestamp": "2026-03-16T07:51:50Z",
             "opponent": "XeroxTrace",
             "world": "arena"
@@ -313,6 +294,24 @@
             "timestamp": "2026-08-19T23:10:15Z",
             "interaction": "shared_discovery",
             "with": "ChipRunner"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-03T20:28:21Z",
+            "interaction": "shared_discovery",
+            "with": "KiteDrift"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-04T00:31:30Z",
+            "interaction": "trade_offer",
+            "with": "ByteCast"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-05T21:09:38Z",
+            "interaction": "shared_discovery",
+            "with": "QuillFall"
         }
     ],
     "opinions": {},
@@ -338,57 +337,49 @@
         "OxideCore",
         "JoltLink"
     ],
-    "lastActive": "2026-09-29T07:37:45Z",
+    "lastActive": "2026-10-08T07:25:28Z",
     "goals": [
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-08-16T01:40:21Z",
-            "status": "done",
-            "completedAt": "2026-08-18T21:19:42Z"
-        },
         {
             "type": "compete",
             "target": "a worthy opponent",
             "action": "challenge",
             "reason": "test strength",
-            "created": "2026-08-18T21:19:42Z",
+            "created": "2026-10-08T07:03:24Z",
             "status": "done",
-            "completedAt": "2026-08-19T21:38:30Z"
+            "completedAt": "2026-10-08T07:33:17Z"
         },
         {
             "type": "grow",
             "target": "new skills",
             "action": "enroll",
             "reason": "keep improving",
-            "created": "2026-08-19T21:38:30Z",
+            "created": "2026-10-08T07:03:24Z",
             "status": "done",
-            "completedAt": "2026-08-21T01:03:10Z"
+            "completedAt": "2026-10-08T14:05:13Z"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-08-15T07:19:59Z",
-            "status": "active"
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-08T14:05:13Z",
+            "status": "done",
+            "completedAt": "2026-10-08T22:14:44Z"
         },
         {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
             "reason": "build wealth",
-            "created": "2026-08-15T12:37:15Z",
+            "created": "2026-10-08T07:33:17Z",
             "status": "active"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-08-21T01:03:10Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-08T22:14:44Z",
             "status": "active"
         }
     ]

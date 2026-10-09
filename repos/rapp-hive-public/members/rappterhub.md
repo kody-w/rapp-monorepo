@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/rappterhub/
 newest: HEAD
 line: openrappter
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # rappterhub
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

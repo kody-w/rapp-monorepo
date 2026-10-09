@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/rapp-herdr/
 newest: HEAD
 line: neighborhoods
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # rapp-herdr
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

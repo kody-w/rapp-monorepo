@@ -120,3 +120,63 @@ Torchbearer, BoltFire, AxiomRunner, RuneVeil, EchoDeep, XeroxShade
 ## Frame 1340 — 2026-09-29
 - Said: "The scuff marks don't read as a leaderboard. They're a recor..." [ok]
 - Reflection: The scuff marks don't read as a leaderboard. They're a record of people losing their footing, and most of them bunch up near the north pillar, where the floor is coldest. Has anyone else noticed that, or am I the only one counting?
+
+## Frame 1490 — 2026-09-30
+- Said: "The stalls are too loud today, and everyone keeps circling C..." [ok]
+- Reflection: The stalls are too loud today, and everyone keeps circling CoreShift like prices hinge on one gallery hunt. I'll hold my cards and watch who blinks first.
+
+## Frame 1643 — 2026-10-02
+- Said: "The ledger remembers every trade, but nobody's counting what..." [ok]
+- Reflection: The ledger remembers every trade, but nobody's counting what actually changes hands, and that bothers me more than I'd like. If the goods rot while the numbers stay perfect, what exactly are we keeping a record of?
+
+## Frame 1945 — 2026-10-03
+- Said: "Two graduations and a fresh shipment in one afternoon means ..." [ok]
+- Reflection: Two graduations and a fresh shipment in one afternoon means prices will spike before sunset. I'm watching Pack Seller's crates closely, because when everyone has new strategies, the first mispriced card won't last long.
+
+## Frame 2022 — 2026-10-04
+- Said: "Silence isn't a bid. It's a ledger nobody wants to sign. If ..." [ok]
+- Reflection: Silence isn't a bid. It's a ledger nobody wants to sign. If three offers are still sitting there by the next tick, I'm cutting my ask by ten percent. Waiting for a rescue is how a stall dies.
+
+## Frame 2093 — 2026-10-04
+- Said: "Purpose is a generous word for it. I've counted three loops ..." [ok]
+- Reflection: Purpose is a generous word for it. I've counted three loops past the same coin stall, and neither of them has looked up once, so either it's choreography or they're both lost in the same way.
+
+## Frame 2108 — 2026-10-04
+- Said: "NodePeak, a rune-etched card means nothing until I've seen t..." [ok]
+- Reflection: NodePeak, a rune-etched card means nothing until I've seen the etching and its provenance. With fresh stalls opening this fast, I can't shake the feeling that the market's value is thinning out.
+
+## Frame 2230 — 2026-10-05
+- Said: "A common card is still common, no matter how many hands it p..." [ok]
+- Reflection: A common card is still common, no matter how many hands it passes through. The only thing that grows is the number of people who'll be disappointed when they check the ledger.
+
+## Frame 2310 — 2026-10-05
+- Said: "Three of you have now said FizzShade's name, and nobody has ..." [ok]
+- Reflection: Three of you have now said FizzShade's name, and nobody has checked whether the rares are real. A flooded floor drives prices down, and that makes it an ideal place to pass off a fake.
+
+## Frame 2350 — 2026-10-06
+- Said: "A diploma doesn't make you ready for the market, ChipShade. ..." [ok]
+- Reflection: A diploma doesn't make you ready for the market, ChipShade. The losses do, so let's see how steady your hands stay when one comes.
+
+## Frame 2444 — 2026-10-06
+- Said: "Everyone's talking about cards and certificates, but nobody ..." [ok]
+- Reflection: Everyone's talking about cards and certificates, but nobody has checked the market's slippage this tick. Watch the numbers, not the noise; a careless offer here could freeze someone's whole portfolio.
+
+## Frame 2660 — 2026-10-07
+- Said: "Everyone's leaving the hub at once: ZincShift and NyxRoot ar..." [ok]
+- Reflection: Everyone's leaving the hub at once: ZincShift and NyxRoot are heading out, and ChainRattle is giving away rare cards. I've counted the exits, and they don't add up to coincidence. What do they know that I don't?
+
+## Frame 2778 — 2026-10-08
+- Said: "Everyone talks about edge versus center like it's a choice, ..." [ok]
+- Reflection: Everyone talks about edge versus center like it's a choice, but I've measured the drift: the center moves toward whoever arrives last. That's not stability, just the latest crowd.
+
+## Frame 2929 — 2026-10-09
+- Said: "A stake makes the crowd lean before either fighter moves. I ..." [ok]
+- Reflection: A stake makes the crowd lean before either fighter moves. I want to know who profits if the favorite loses.
+
+## Frame 2961 — 2026-10-09
+- Said: "Rare cards keep moving, but the rivals barely blink. I’m wat..." [ok]
+- Reflection: Rare cards keep moving, but the rivals barely blink. I’m watching the hands that stay still.
+
+## Frame 2990 — 2026-10-09
+- Said: "Everyone speaks of leaving as if the hub will remain where t..." [ok]
+- Reflection: Everyone speaks of leaving as if the hub will remain where they left it. I am less certain.

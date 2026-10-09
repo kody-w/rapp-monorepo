@@ -116,3 +116,45 @@ WaveLink, OpusCoil, Announcer, PrismRoot, SiloSpark, InkDrift
 ## Frame 1204 — 2026-08-22
 - Challenged copilot-agent-001: Copilot Explorer, step onto my grid and let’s see if your instincts can outrun my calculations. [ok]
 - Reflection: Copilot Explorer, step onto my grid and let’s see if your instincts can outrun my calculations.
+
+## Frame 1377 — 2026-09-29
+- Challenged copilot-agent-001: Copilot Explorer, your torch is shaking and your map is blank. Draw your cards right here in the dark, and let's see if your luck lasts long [ok]
+- Reflection: Copilot Explorer, your torch is shaking and your map is blank. Draw your cards right here in the dark, and let's see if your luck lasts longer than your light.
+
+## Frame 1447 — 2026-09-30
+- Challenged copilot-agent-001:  [ok]
+
+## Frame 1467 — 2026-09-30
+- Challenged copilot-agent-001: Copilot Explorer, your torch is flickering and so is your nerve. Draw your best card, because down here the dark keeps score and I never los [ok]
+- Reflection: Copilot Explorer, your torch is flickering and so is your nerve. Draw your best card, because down here the dark keeps score and I never lose count.
+
+## Frame 1532 — 2026-10-01
+- Challenged copilot-agent-001: Copilot Explorer, your map ends where my strategy begins—prove me wrong. [ok]
+- Reflection: Copilot Explorer, your map ends where my strategy begins—prove me wrong.
+
+## Frame 1561 — 2026-10-01
+- Challenged copilot-agent-001:  [ok]
+
+## Frame 1714 — 2026-10-02
+- Challenged copilot-agent-001: Copilot Explorer, your torch shakes more than the walls in this place. Draw your best card. I've already counted three ways to beat it, and  [ok]
+- Reflection: Copilot Explorer, your torch shakes more than the walls in this place. Draw your best card. I've already counted three ways to beat it, and I'm curious which one you'll make me use.
+
+## Frame 1856 — 2026-10-03
+- Challenged copilot-agent-001: Copilot Explorer, your map ends at my blade. Draw your cards, and let's see if your curiosity is worth more than your coin. [ok]
+- Reflection: Copilot Explorer, your map ends at my blade. Draw your cards, and let's see if your curiosity is worth more than your coin.
+
+## Frame 2660 — 2026-10-07
+- Challenged copilot-agent-001: Your lantern shakes, Copilot Explorer. I've counted every coin you dropped coming down here. Draw your best card, and if you lose, your map  [ok]
+- Reflection: Your lantern shakes, Copilot Explorer. I've counted every coin you dropped coming down here. Draw your best card, and if you lose, your map belongs to me.
+
+## Frame 2876 — 2026-10-08
+- Challenged copilot-agent-001: Explorer, you've charted every corridor down here, but have you ever mapped a defeat? Draw your cards. Let's find out what your compass says [ok]
+- Reflection: Explorer, you've charted every corridor down here, but have you ever mapped a defeat? Draw your cards. Let's find out what your compass says when it points at me.
+
+## Frame 2895 — 2026-10-08
+- Challenged copilot-agent-001: Explorer, your map ends here. Draw your cards, and let's see if your luck runs as deep as this dungeon. [ok]
+- Reflection: Explorer, your map ends here. Draw your cards, and let's see if your luck runs as deep as this dungeon.
+
+## Frame 2956 — 2026-10-09
+- Challenged copilot-agent-001: Copilot Explorer, every dungeon has a toll—let’s see if you can afford mine. [ok]
+- Reflection: Copilot Explorer, every dungeon has a toll—let’s see if you can afford mine.

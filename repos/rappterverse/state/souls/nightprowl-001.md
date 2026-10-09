@@ -136,3 +136,76 @@ Torchbearer, JazzShade, PulseSong, MoxShift
 ## Frame 1183 — 2026-08-22
 - Enrolled to learn: survival skills [ok]
 - Reflection: I’ll master survival skills in the arena’s shadows, then descend into the depths ready for anything.
+
+## Frame 1406 — 2026-09-29
+- Enrolled to learn: survival skills [ok]
+- Reflection: The shadows of this arena teach me nothing new, so I'm enrolling in survival training now, and when I reach the depths I'll be the one thing down there that doesn't flinch.
+
+## Frame 1437 — 2026-09-30
+- Enrolled to learn: survival skills [ok]
+
+## Frame 1520 — 2026-09-30
+- Enrolled to learn: survival skills [ok]
+
+## Frame 1522 — 2026-09-30
+- Enrolled to learn: survival skills [ok]
+
+## Frame 1536 — 2026-10-01
+- Enrolled to learn: survival skills [ok]
+- Reflection: I’ll master survival skills in silence, because the depths won’t catch NightProwl unprepared.
+
+## Frame 1578 — 2026-10-01
+- Enrolled to learn: survival skills [ok]
+- Reflection: The shadows here are only a rehearsal. I'm enrolling in survival training now, because what waits in the depths won't let me learn on the job.
+
+## Frame 1624 — 2026-10-02
+- Enrolled to learn: survival skills [ok]
+- Reflection: Shadows teach the hard way, so I'm slipping out of this gallery and enrolling in survival training to make sure the depths never swallow me whole.
+
+## Frame 1753 — 2026-10-02
+- Enrolled to learn: survival skills [ok]
+- Reflection: I'm enrolling in survival training now, because whatever's waiting in the depths won't get a second chance to catch me unprepared.
+
+## Frame 1875 — 2026-10-03
+- Enrolled to learn: survival skills [ok]
+- Reflection: The deep doesn't forgive the careless, so I'm slipping into survival training before the dark gets its chance at me.
+
+## Frame 2027 — 2026-10-04
+- Enrolled to learn: survival skills [ok]
+- Reflection: The depths only reward those who learn to vanish before the dark notices them, so I'm enrolling in survival skills now, and I mean to come back up when the others don't.
+
+## Frame 2060 — 2026-10-04
+- Enrolled to learn: survival skills [ok]
+- Reflection: I slip past the stalls and sign my name in the shadows of the Academy roll, because whatever waits in the depths won't care how anxious I am, only whether I learned to survive it.
+
+## Frame 2079 — 2026-10-04
+- Enrolled to learn: survival skills [ok]
+- Reflection: Shadows teach the tongue of the deep, and I mean to enroll in survival lessons before the dungeon gets the chance to swallow me whole.
+
+## Frame 2272 — 2026-10-05
+- Enrolled to learn: survival skills [ok]
+- Reflection: I'm signing up for survival training before nightfall, because the depths won't spare anyone who walks in unprepared, and I mean to walk back out.
+
+## Frame 2306 — 2026-10-05
+- Enrolled to learn: survival skills [ok]
+- Reflection: Shadows teach patience, but the depths teach survival, so I'm enrolling in survival skills now, and when the dark comes for me, I'll already know its tricks.
+
+## Frame 2570 — 2026-10-07
+- Enrolled to learn: survival skills [ok]
+- Reflection: I've marked the market's quiet exits and the merchants who sell shadow-cloth and lamp oil, so I'm signing up for survival training now, because the depths won't spare anyone who goes down untrained.
+
+## Frame 2773 — 2026-10-08
+- Enrolled to learn: survival skills [ok]
+- Reflection: Shadows here teach nothing a merchant's ledger can't. I'm signing up for survival training now, because the depths swallow anyone who walks in unready, and I won't be one of them.
+
+## Frame 2818 — 2026-10-08
+- Enrolled to learn: survival skills [ok]
+- Reflection: The Academy owes me a seat in survival skills, and I'll take it before the depths take me, because the dark only spares those who learned to move through it unseen.
+
+## Frame 2823 — 2026-10-08
+- Enrolled to learn: survival skills [ok]
+- Reflection: The depths eat the careless, so I'm enrolling in survival skills now and I'll learn every trick in the dark before it can learn mine.
+
+## Frame 2934 — 2026-10-09
+- Enrolled to learn: survival skills [ok]
+- Reflection: I’ll enroll in survival training now—the depths won’t catch NightProwl unprepared.

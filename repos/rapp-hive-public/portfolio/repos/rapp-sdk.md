@@ -5,8 +5,8 @@ line: Tools & Apps
 wave: 2
 status: certified
 verdict: CLEAN
-evidence_commit: ede0fd4553b72b581c158a1bedaeada4d1ec04ea
-checked: 2026-09-27
+evidence_commit: b007fc2ea3bbf0a00a8c1013630ac0b6853b3216
+checked: 2026-10-08
 checker: kody-w/rapp-1 rapp_check.py at 591e014
 experimental_mentions: 27
 header: present
@@ -14,7 +14,8 @@ header_pr: https://github.com/kody-w/rapp-sdk/pull/4
 version: "v0.2.0"
 version_source: release
 channel: newest
-lifecycle: active
+lifecycle: archived
+since: 2026-10-08
 member_card: present
 links_to:
   - rapp-flight-deck
@@ -24,19 +25,21 @@ links_to:
   - rapp-twin
 ---
 
+> **Archived since 2026-10-08.** The repo is archived on GitHub (read-only); the crawl still checks it, and this file and its badge stay.
+
 # rapp-sdk: certified
 
-![RAPP/1: certified, version v0.2.0](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-sdk.svg)
+![RAPP/1: archived (certified), version v0.2.0](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-sdk.svg)
 
 **Certified:** rapp-1's own checker gave **CLEAN** (no RAPP artifacts, found by a complete bounded scan) at the evidence commit.
 
 **Version:** `v0.2.0`, from the tag of its latest GitHub release. **Channel:** `newest`: it has no long-term-support pin, so its newest commit is the one in use.
 
-- Evidence: [`kody-w/rapp-sdk` at `ede0fd4553`](https://github.com/kody-w/rapp-sdk/tree/ede0fd4553b72b581c158a1bedaeada4d1ec04ea) on `main`, checked 2026-09-27.
+- Evidence: [`kody-w/rapp-sdk` at `b007fc2ea3`](https://github.com/kody-w/rapp-sdk/tree/b007fc2ea3bbf0a00a8c1013630ac0b6853b3216) on `main`, checked 2026-10-08.
 - Checker: [`rapp_check.py` at `591e014`](https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp_check.py), verdict **CLEAN**. The raw output stays in the maintainer's sweep folder, outside the Hive; its SHA-256 is `a392c7cad5a5fe809721e59ea91c19f9d42126a410efe172efb248c3c0d50e7c`.
 - "experimental" mentions: 27 (whole word, any case, in tracked text files at the evidence commit, leaving out the network's own files: the repo's card `.rapp/member.md` and, in the network's public copy, `portfolio/`, `members/`, `notices/` and `PUBLISHED.md`; tracked, not a gate).
 - Network header: present in `README.md`.
-- Member card: [`.rapp/member.md`](https://github.com/kody-w/rapp-sdk/blob/ede0fd4553b72b581c158a1bedaeada4d1ec04ea/.rapp/member.md) at the evidence commit: this repo's card in the RAPP Hive, beside its pointer [`members/rapp-sdk.md`](https://github.com/kody-w/rapp-hive-public/blob/main/members/rapp-sdk.md).
+- Member card: [`.rapp/member.md`](https://github.com/kody-w/rapp-sdk/blob/b007fc2ea3bbf0a00a8c1013630ac0b6853b3216/.rapp/member.md) at the evidence commit: this repo's card in the RAPP Hive, beside its pointer [`members/rapp-sdk.md`](https://github.com/kody-w/rapp-hive-public/blob/main/members/rapp-sdk.md).
 
 On the map: the **Tools & Apps** line ([subway map](https://kody-w.github.io/rapp-hive-public/portfolio/subway.html)).
 
@@ -49,4 +52,4 @@ Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<
 
 ## Check it yourself
 
-Clone `kody-w/rapp-sdk` at `ede0fd4553` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py rapp-sdk --json` from the folder that holds both.
+Clone `kody-w/rapp-sdk` at `b007fc2ea3` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py rapp-sdk --json` from the folder that holds both.

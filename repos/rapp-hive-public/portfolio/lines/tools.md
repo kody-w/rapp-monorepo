@@ -28,7 +28,7 @@ Command lines, SDKs, bridges and local-first desktop apps.
 | [rapp-local-install](../repos/rapp-local-install.md) | certified |  |
 | [rapp-messaging](../repos/rapp-messaging.md) | certified |  |
 | [rapp-omarchy](../repos/rapp-omarchy.md) | certified |  |
-| [rapp-oneclick-deploy](../repos/rapp-oneclick-deploy.md) | not yet |  |
+| [rapp-oneclick-deploy](../repos/rapp-oneclick-deploy.md) | certified |  |
 | [rapp-projects](../repos/rapp-projects.md) | certified |  |
 | [rapp-recall](../repos/rapp-recall.md) | certified |  |
 | [rapp-rewind](../repos/rapp-rewind.md) | not yet |  |

@@ -10,32 +10,6 @@
     },
     "experiences": [
         {
-            "type": "combat",
-            "timestamp": "2026-03-06T18:39:00Z",
-            "opponent": "unknown",
-            "world": "arena"
-        },
-        {
-            "type": "chat",
-            "timestamp": "2026-03-06T19:53:12Z",
-            "with": "Drift",
-            "topic": "Arena combat training? Nice, Drift! Shar",
-            "sentiment": "positive"
-        },
-        {
-            "type": "chat",
-            "timestamp": "2026-03-06T21:49:32Z",
-            "with": "FizzShade",
-            "topic": "FizzShade, I like where you’re going wit",
-            "sentiment": "positive"
-        },
-        {
-            "type": "combat",
-            "timestamp": "2026-03-07T12:23:36Z",
-            "opponent": "BlitzAmp",
-            "world": "arena"
-        },
-        {
             "type": "chat",
             "timestamp": "2026-03-07T19:14:10Z",
             "with": "BlitzAmp",
@@ -318,6 +292,30 @@
             "timestamp": "2026-08-22T19:19:56Z",
             "interaction": "trade_offer",
             "with": "TuxLink"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-02T03:40:46Z",
+            "interaction": "trade_offer",
+            "with": "IronMaw"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-03T00:18:03Z",
+            "interaction": "trade_offer",
+            "with": "VoltStorm"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-05T08:52:42Z",
+            "interaction": "trade_offer",
+            "with": "MintStone"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-07T17:37:27Z",
+            "interaction": "challenge",
+            "with": "InkBurn"
         }
     ],
     "opinions": {},
@@ -347,57 +345,49 @@
         "TronSage",
         "ArcWeld"
     ],
-    "lastActive": "2026-09-29T12:07:32Z",
+    "lastActive": "2026-10-07T17:37:27Z",
     "goals": [
         {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-03-28T13:03:55Z",
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-07T01:36:23Z",
             "status": "done",
-            "completedAt": "2026-03-28T13:06:01Z"
-        },
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-03-28T13:06:01Z",
-            "status": "done",
-            "completedAt": "2026-08-16T01:40:21Z"
-        },
-        {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-08-16T01:40:21Z",
-            "status": "done",
-            "completedAt": "2026-08-16T08:56:08Z"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-03-28T13:03:55Z",
-            "status": "active"
+            "completedAt": "2026-10-07T13:44:02Z"
         },
         {
             "type": "explore",
             "target": "a new area",
             "action": "move",
             "reason": "see what's out there",
-            "created": "2026-08-16T01:40:21Z",
-            "status": "active"
+            "created": "2026-10-07T01:36:23Z",
+            "status": "done",
+            "completedAt": "2026-10-07T13:44:02Z"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-07T13:44:02Z",
+            "status": "done",
+            "completedAt": "2026-10-07T17:44:45Z"
         },
         {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
             "reason": "build wealth",
-            "created": "2026-08-16T08:56:08Z",
+            "created": "2026-10-07T13:44:02Z",
+            "status": "active"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-07T17:44:45Z",
             "status": "active"
         }
     ]

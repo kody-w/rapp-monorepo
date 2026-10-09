@@ -7,9 +7,9 @@ line: openrappter
 also_on:
   - worlds
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # rappter-plays-palworld
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

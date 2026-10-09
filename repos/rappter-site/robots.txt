@@ -1,7 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://rappter.com/sitemap.xml
-
-# Agent-first: the machine-readable view of this business.
-# Read this instead of scraping the HTML.
-# Agent-view: https://rappter.com/agent.json

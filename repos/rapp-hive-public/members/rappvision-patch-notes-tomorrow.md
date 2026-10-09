@@ -6,9 +6,9 @@ newest: HEAD
 card: none
 line: rappvision
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # rappvision-patch-notes-tomorrow
 
-The RAPP Hive lists this station, but it has no card yet; readers do not fetch `.rapp/member.md` until `card: present`.
+Archived. The RAPP Hive lists this station, but it has no card yet; readers do not fetch `.rapp/member.md` until `card: present`.

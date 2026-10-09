@@ -8,9 +8,9 @@ line: rappvision
 also_on:
   - brainstem
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # rappvision-brainstem-notes
 
-The RAPP Hive lists this station, but it has no card yet; readers do not fetch `.rapp/member.md` until `card: present`.
+Archived. The RAPP Hive lists this station, but it has no card yet; readers do not fetch `.rapp/member.md` until `card: present`.

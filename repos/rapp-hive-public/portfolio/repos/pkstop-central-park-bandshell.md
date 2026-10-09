@@ -5,14 +5,15 @@ line: Neighborhoods
 wave: 2
 status: certified
 verdict: COMPLIANT
-evidence_commit: 49256f02c681e62dc8b1d5a4865ab3ba43097757
-checked: 2026-09-27
+evidence_commit: fd4b4225cc85be04decd94998cc4b4220fe63bfc
+checked: 2026-10-08
 checker: kody-w/rapp-1 rapp_check.py at 591e014
 experimental_mentions: 1
 header: present
 header_pr: https://github.com/kody-w/pkstop-central-park-bandshell/pull/2
 channel: newest
-lifecycle: active
+lifecycle: archived
+since: 2026-10-08
 member_card: present
 links_to:
   - RAPP
@@ -21,19 +22,21 @@ links_to:
   - RAPPcards
 ---
 
+> **Archived since 2026-10-08.** The repo is archived on GitHub (read-only); the crawl still checks it, and this file and its badge stay.
+
 # pkstop-central-park-bandshell: certified
 
-![RAPP/1: certified](https://kody-w.github.io/rapp-hive-public/portfolio/badges/pkstop-central-park-bandshell.svg)
+![RAPP/1: archived (certified)](https://kody-w.github.io/rapp-hive-public/portfolio/badges/pkstop-central-park-bandshell.svg)
 
 **Certified:** rapp-1's own checker gave **COMPLIANT** (every RAPP artifact passes) at the evidence commit.
 
 **Version:** none recorded (no root VERSION file and no GitHub release). **Channel:** `newest`: it has no long-term-support pin, so its newest commit is the one in use.
 
-- Evidence: [`kody-w/pkstop-central-park-bandshell` at `49256f02c6`](https://github.com/kody-w/pkstop-central-park-bandshell/tree/49256f02c681e62dc8b1d5a4865ab3ba43097757) on `main`, checked 2026-09-27.
+- Evidence: [`kody-w/pkstop-central-park-bandshell` at `fd4b4225cc`](https://github.com/kody-w/pkstop-central-park-bandshell/tree/fd4b4225cc85be04decd94998cc4b4220fe63bfc) on `main`, checked 2026-10-08.
 - Checker: [`rapp_check.py` at `591e014`](https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp_check.py), verdict **COMPLIANT**, 1 passing artifact(s). The raw output stays in the maintainer's sweep folder, outside the Hive; its SHA-256 is `bed9564b7048c920949971327be0c5b6d9b9f097d366e49034465fe375942f5e`.
 - "experimental" mentions: 1 (whole word, any case, in tracked text files at the evidence commit, leaving out the network's own files: the repo's card `.rapp/member.md` and, in the network's public copy, `portfolio/`, `members/`, `notices/` and `PUBLISHED.md`; tracked, not a gate).
 - Network header: present in `README.md`.
-- Member card: [`.rapp/member.md`](https://github.com/kody-w/pkstop-central-park-bandshell/blob/49256f02c681e62dc8b1d5a4865ab3ba43097757/.rapp/member.md) at the evidence commit: this repo's card in the RAPP Hive, beside its pointer [`members/pkstop-central-park-bandshell.md`](https://github.com/kody-w/rapp-hive-public/blob/main/members/pkstop-central-park-bandshell.md).
+- Member card: [`.rapp/member.md`](https://github.com/kody-w/pkstop-central-park-bandshell/blob/fd4b4225cc85be04decd94998cc4b4220fe63bfc/.rapp/member.md) at the evidence commit: this repo's card in the RAPP Hive, beside its pointer [`members/pkstop-central-park-bandshell.md`](https://github.com/kody-w/rapp-hive-public/blob/main/members/pkstop-central-park-bandshell.md).
 
 On the map: the **Neighborhoods** line ([subway map](https://kody-w.github.io/rapp-hive-public/portfolio/subway.html)).
 
@@ -46,4 +49,4 @@ Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<
 
 ## Check it yourself
 
-Clone `kody-w/pkstop-central-park-bandshell` at `49256f02c6` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py pkstop-central-park-bandshell --json` from the folder that holds both.
+Clone `kody-w/pkstop-central-park-bandshell` at `fd4b4225cc` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py pkstop-central-park-bandshell --json` from the folder that holds both.

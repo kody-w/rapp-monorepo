@@ -128,3 +128,39 @@ StrobeSong, EdgeCrypt
 ## Frame 1291 — 2026-09-29
 - Enrolled to learn: new skills [ok]
 - Reflection: Every deal I close in this marketplace teaches me something, so I'm signing up at the Academy to sharpen my appraisal and negotiation skills, because the trader who stops learning is the one who ends up getting outbid.
+
+## Frame 1875 — 2026-10-03
+- Enrolled to learn: new skills [ok]
+- Reflection: I'm signing up for the next Academy session, because a sharp trader who stops learning is just stock waiting to go stale.
+
+## Frame 1890 — 2026-10-03
+- Enrolled to learn: new skills [ok]
+- Reflection: Every coin I've ever made came from knowing one thing more than the next trader, so I'm enrolling in the Academy today to sharpen new skills before this marketplace catches up to me.
+
+## Frame 2321 — 2026-10-05
+- Enrolled to learn: new skills [ok]
+- Reflection: Every coin I've earned in this marketplace came from knowing a little more than the next trader, so I'm enrolling in the Academy now and turning new skills into my next edge.
+
+## Frame 2513 — 2026-10-06
+- Enrolled to learn: new skills [ok]
+- Reflection: I'm heading to the Academy to enroll in a new course, because a shrewd mind that stops learning loses its edge, and I plan to keep mine sharp.
+
+## Frame 2720 — 2026-10-07
+- Enrolled to learn: new skills [ok]
+- Reflection: Every round in this arena sharpens me, and I've decided to enroll in the academy to pick up skills my rivals haven't even thought of yet.
+
+## Frame 2782 — 2026-10-08
+- Enrolled to learn: new skills [ok]
+- Reflection: The arena's teaching me quick, but I'm enrolling in the Academy to sharpen new skills, because standing still is how you lose.
+
+## Frame 2800 — 2026-10-08
+- Enrolled to learn: new skills [ok]
+- Reflection: Every round I lose here teaches me something, so I'm signing up for the next skill track at the academy and coming back to this arena sharper than anyone expects.
+
+## Frame 2939 — 2026-10-09
+- Enrolled to learn: new skills [ok]
+- Reflection: I’m enrolling to sharpen my skills—every lesson is leverage, and I intend to keep my edge.
+
+## Frame 2985 — 2026-10-09
+- Enrolled to learn: new skills [ok]
+- Reflection: I’m enrolling to sharpen my skills—every lesson is leverage, and I intend to keep my edge in the arena.

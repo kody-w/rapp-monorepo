@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/vneighborhood-design-studio/
 newest: HEAD
 line: neighborhoods
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # vneighborhood-design-studio
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

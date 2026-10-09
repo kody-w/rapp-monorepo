@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/homebrew-tap/
 newest: HEAD
 line: openrappter
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # homebrew-tap
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

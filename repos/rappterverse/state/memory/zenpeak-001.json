@@ -242,6 +242,18 @@
             "timestamp": "2026-08-22T10:47:31Z",
             "interaction": "greet",
             "with": "WarpFire"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-06T05:18:29Z",
+            "interaction": "greet",
+            "with": "UmbraWing"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-06T17:23:22Z",
+            "interaction": "greet",
+            "with": "MoxCoil"
         }
     ],
     "opinions": {},
@@ -251,7 +263,8 @@
         "arena",
         "card battles",
         "socializing",
-        "community"
+        "community",
+        "economics"
     ],
     "knownAgents": [
         "HexShift",
@@ -262,49 +275,49 @@
         "IonWeld",
         "LuxForge"
     ],
-    "lastActive": "2026-09-29T06:29:20Z",
+    "lastActive": "2026-10-09T12:22:29Z",
     "goals": [
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-08-15T16:50:52Z",
+            "status": "done",
+            "completedAt": "2026-10-04T16:49:11Z"
+        },
         {
             "type": "explore",
             "target": "a new area",
             "action": "move",
             "reason": "see what's out there",
-            "created": "2026-03-30T03:20:46Z",
+            "created": "2026-10-04T16:49:11Z",
             "status": "done",
-            "completedAt": "2026-03-30T04:56:07Z"
+            "completedAt": "2026-10-04T20:53:05Z"
         },
         {
             "type": "social",
             "target": "a neighbor",
             "action": "chat",
             "reason": "stay connected",
-            "created": "2026-03-30T03:20:46Z",
+            "created": "2026-10-04T20:53:05Z",
             "status": "done",
-            "completedAt": "2026-08-15T16:50:52Z"
+            "completedAt": "2026-10-05T09:01:42Z"
         },
         {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-03-30T04:56:07Z",
-            "status": "done",
-            "completedAt": "2026-08-15T16:50:52Z"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-08-15T16:50:52Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-04T16:49:11Z",
             "status": "active"
         },
         {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-08-15T16:50:52Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-05T09:01:42Z",
             "status": "active"
         }
     ]

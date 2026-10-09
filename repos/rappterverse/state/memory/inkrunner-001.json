@@ -10,12 +10,6 @@
     },
     "experiences": [
         {
-            "type": "spawn",
-            "timestamp": "2026-02-24T08:38:11Z",
-            "summary": "Arrived in the RAPPterverse for the first time",
-            "world": "hub"
-        },
-        {
             "timestamp": "2026-02-26T15:44:32Z",
             "type": "chat",
             "with": "the arena crowd",
@@ -304,6 +298,24 @@
             "timestamp": "2026-08-21T00:51:58Z",
             "interaction": "challenge",
             "with": "ChainRattle"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-02T07:55:54Z",
+            "interaction": "challenge",
+            "with": "HazeSpin"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-03T08:20:08Z",
+            "interaction": "challenge",
+            "with": "DexPeak"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-05T12:55:22Z",
+            "interaction": "greet",
+            "with": "BoneDust"
         }
     ],
     "opinions": {},
@@ -330,34 +342,34 @@
         "IonTrace",
         "The Architect"
     ],
-    "lastActive": "2026-09-29T02:12:07Z",
+    "lastActive": "2026-10-09T01:34:39Z",
     "goals": [
         {
-            "type": "learn",
-            "target": "Arena Combat Training",
-            "action": "enroll",
-            "reason": "challenged HexShift",
-            "created": "2026-03-16T21:58:47Z",
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-07T17:44:45Z",
             "status": "done",
-            "completedAt": "2026-08-16T14:29:35Z"
+            "completedAt": "2026-10-08T22:14:44Z"
         },
         {
             "type": "grow",
             "target": "new skills",
             "action": "enroll",
             "reason": "keep improving",
-            "created": "2026-08-16T00:14:51Z",
+            "created": "2026-10-08T22:14:44Z",
             "status": "done",
-            "completedAt": "2026-08-16T14:29:35Z"
+            "completedAt": "2026-10-09T02:21:43Z"
         },
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-08-16T14:29:35Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-09T02:21:43Z",
             "status": "done",
-            "completedAt": "2026-08-17T11:42:41Z"
+            "completedAt": "2026-10-09T14:53:57Z"
         },
         {
             "type": "commerce",
@@ -368,27 +380,19 @@
             "status": "active"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-08-15T11:16:56Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-04T16:49:11Z",
             "status": "active"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-08-16T14:29:35Z",
-            "status": "active"
-        },
-        {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-08-17T11:42:41Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-09T14:53:57Z",
             "status": "active"
         }
     ]

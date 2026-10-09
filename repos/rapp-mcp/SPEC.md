@@ -1,6 +1,6 @@
 # RAPP Ecosystem Access Specification (rapp-mcp)
 
-> **Spec version:** `rapp-mcp-spec/2.0`
+> **Spec version:** `rapp-mcp-spec/2.1`
 > **Status:** stable · additive-only
 > **Scope:** how any AI / MCP host joins the RAPP ecosystem through the Model Context Protocol.
 > **Supersedes:** `rapp-mcp-spec/1.0`, which stays alongside this document, byte-identical, in
@@ -172,6 +172,68 @@ same agent file therefore runs unchanged locally and in Azure.
 
 > Use **absolute paths** for both the script and the agents folder — MCP hosts launch the command
 > from an unspecified working directory.
+
+### 3.1.1 Rapplications as MCP Apps (added in 2.1)
+
+A **rapplication** is an agent with a UI. In an agents folder it is a top-level `foo_agent.py`
+with a `foo_agent.ui.html` beside it. `rapp_mcp.py` serves that UI through the MCP Apps extension
+([SEP-1865, `2026-01-26`](https://github.com/modelcontextprotocol/ext-apps/blob/main/specification/2026-01-26/apps.mdx)),
+so an MCP Apps host draws it in a sandboxed iframe next to the conversation.
+
+**When it is on.** Whenever the folder holds at least one `*_agent.ui.html` beside its agent. The
+server does not wait for the host to announce `io.modelcontextprotocol/ui`: the official reference
+host (ext-apps `basic-host` 2.0.3) does not announce it, and the official example servers serve
+their UIs unconditionally. A host without MCP Apps ignores `_meta.ui` and sees a plain tool. A
+folder with no UI file gets exactly the 2.0 surface: the same tools, no `_meta`, no resources, no
+extra tool.
+
+**What the host gets.**
+
+| Rapplication | MCP Apps |
+|---|---|
+| the agent (`foo_agent.py`) | its tool, as in §3.1, plus `_meta.ui.resourceUri` = `ui://rapp-mcp/<name>` (and the older flat `_meta["ui/resourceUri"]`) |
+| the UI (`foo_agent.ui.html`) | a resource at that URI, `mimeType` `text/html;profile=mcp-app`, listed by `resources/list` and served by `resources/read` |
+| the brainstem `/chat` the UI expects | an app-only tool `rapp_chat` (`_meta.ui.visibility: ["app"]`), listed only when at least one agent has a UI |
+
+`initialize` then also advertises `resources` and the extension.
+
+**The shim.** `resources/read` returns the UI's bytes with one `<script>` inserted first in
+`<head>`, before any of the UI's own scripts. The UI itself is never edited. The shim stands in
+for `window.parent` and speaks MCP Apps JSON-RPC to the real host:
+
+| The UI sends | The shim does | The UI receives |
+|---|---|---|
+| `rapp:hello` | (after `ui/initialize`) | `rapp:ready` |
+| `rapp:get_cartridge` | builds the cartridge; `context.user` is `null` (MCP Apps shares no user) | `rapp:cartridge` (also posted once after initialize) |
+| `rapp:invoke` `{id, tool?, args}` | `tools/call` on `tool`, or the UI's own agent | `rapp:invoke:result` `{id, result \| error}` |
+| `{rapp:"invoke", id, action, args}` | `tools/call` on the UI's own agent with `action` merged into `args` | `{rapp:"result", id, result}` |
+| `rapp:chat` `{id, message}` | `tools/call rapp_chat` | `rapp:chat:result` `{id, reply \| error}` |
+| `fetch("/chat")`, `fetch("/health")` | `tools/call rapp_chat`; `/health` answers locally | a `Response` shaped like the brainstem's |
+| `rapp:fetch` | refused: MCP Apps hosts do not proxy fetches (declare domains in the view's CSP) | `rapp:fetch:result` with `status: 0` |
+| `rapp:bridge` | `/chat` only; any other path 404 | `rapp:bridge:result` |
+
+Host notifications reach the UI as two new, optional messages: `ui/notifications/tool-input` as
+`{type:"rapp:tool-input", args}` and `ui/notifications/tool-result` as
+`{type:"rapp:tool-result", result, is_error}`. A UI that ignores them works as before. The shim
+also reports its size (`ui/notifications/size-changed`), follows the host's `theme`, answers
+host requests such as `ping`, and accepts JSON-RPC only from the real host window.
+
+**`rapp_chat`.** Takes `{user_input, session_id?}` and returns the brainstem's `/chat` shape,
+`{response, agent_logs, session_id}`, as JSON text. A **direct call** naming a served agent runs
+it here, with no LLM and no brainstem:
+
+- `Use the <Agent> tool with key=value key2="quoted value" …` (anything after the last pair is ignored)
+- `<Agent> {json object}`
+
+The agent's output is both `response` and the only `agent_logs` entry. Anything else is forwarded to
+the local brainstem's `POST /chat` at `RAPP_BRAINSTEM_URL` (default `http://localhost:7071`). If
+none answers, the call fails with a plain sentence (`isError: true`).
+
+**Streamable HTTP.** `python3 rapp_mcp.py /path/to/agents --http 3001` serves the same JSON-RPC at
+`http://127.0.0.1:3001/mcp`, for hosts that connect by URL. `initialize` returns an
+`Mcp-Session-Id`, and later requests must send it (otherwise 404). Notifications get `202`. Replies
+are `application/json`, and `GET` is `405` (no server stream). The server binds `127.0.0.1` only.
+It refuses a request with `403` when its `Host` header or a browser `Origin` is not loopback.
 
 ### 3.2 `rapp_brainstem_mcp.py` — the full brainstem, as a tool
 
@@ -554,7 +616,7 @@ change to the agents themselves.
 
 ## 8. Versioning
 
-This document is **`rapp-mcp-spec/2.0`**.
+This document is **`rapp-mcp-spec/2.1`** (2.0 plus the additive MCP Apps support in §3.1.1).
 
 - **Additive, never breaking.** Within major version `2.x`, changes only *add* — new optional tool
   params, new optional response fields, new tiers/promotion agents, new client-config variants.
@@ -589,6 +651,12 @@ This document is **`rapp-mcp-spec/2.0`**.
   `fabb9051b15458c821bca3f9ef7def1856e0a89210f1094186843bcb8b5d192e`); that file is never edited.
   The same bytes are `SPEC.md` at the last 1.0 commit,
   [`651ce82`](https://github.com/kody-w/rapp-mcp/blob/651ce8250b9569e890c03f6743f45a16675419c9/SPEC.md).
+
+
+### 8.2 Changes from `rapp-mcp-spec/2.0` (2026-10-06)
+
+- **Additive only.** `rapp_mcp.py` serves rapplication UIs to MCP Apps hosts (§3.1.1) and gains
+  `--http`. A folder with no `*.ui.html` file sees the 2.0 surface unchanged. `rapp_mcp.py` reports `serverInfo.version` `2.1.0`.
 
 ---
 

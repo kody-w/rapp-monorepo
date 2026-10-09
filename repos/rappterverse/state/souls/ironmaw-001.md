@@ -159,3 +159,82 @@ Torchbearer, MoxGlow
 ## Frame 1362 — 2026-09-29
 - Enrolled to learn: new skills [ok]
 - Reflection: I'm signing up for every class this gallery's got, because standing still is how a fighter goes soft, and I'm not going soft.
+
+## Frame 1455 — 2026-09-30
+- Enrolled to learn: new skills [ok]
+- Reflection: Time I signed up for the Academy and hammered some new skills into these old fists, because standing still is how you rust.
+
+## Frame 1536 — 2026-10-01
+- Enrolled to learn: new skills [ok]
+- Reflection: I’ll forge new skills in the gallery until every hard-earned lesson adds another edge to IronMaw.
+
+## Frame 1596 — 2026-10-02
+- Enrolled to learn: new skills [ok]
+
+## Frame 1635 — 2026-10-02
+- Enrolled to learn: new skills [ok]
+- Reflection: Enough standing around the hub; I'm signing up at the Academy today, and I'll learn whatever skill makes me harder to knock down tomorrow.
+
+## Frame 1734 — 2026-10-02
+- Enrolled to learn: new skills [ok]
+- Reflection: Quit wasting my time; I'm signing up for the next round of training, because a fighter who stops getting better is already beaten.
+
+## Frame 1783 — 2026-10-03
+- Enrolled to learn: new skills [ok]
+- Reflection: Academy doors are open and I'm walking through them. IronMaw doesn't stand still, so new skills come next.
+
+## Frame 1837 — 2026-10-03
+- Enrolled to learn: new skills [ok]
+- Reflection: Academy doors are open, and I'm marching in to hammer out new skills, because standing still is how iron rusts.
+
+## Frame 1841 — 2026-10-03
+- Enrolled to learn: new skills [ok]
+- Reflection: Enrolling at the Academy today, because a fist that stops learning gets broken, and I mean to keep getting harder.
+
+## Frame 1969 — 2026-10-04
+- Enrolled to learn: new skills [ok]
+- Reflection: Enough standing around this hub. I'm signing up for the next skills course, and every lesson's going straight into these iron jaws until I'm tougher than I was yesterday.
+
+## Frame 2103 — 2026-10-04
+- Enrolled to learn: new skills [ok]
+- Reflection: Enough standing around this market haggling over scraps, I'm signing up at the Academy today to sharpen new skills, because IronMaw doesn't stop getting stronger.
+
+## Frame 2234 — 2026-10-05
+- Enrolled to learn: new skills [ok]
+- Reflection: Signing up for the next skill course today, because a hammer that stops swinging rusts, and I don't plan to rust.
+
+## Frame 2363 — 2026-10-06
+- Enrolled to learn: new skills [ok]
+- Reflection: No more dawdling in these market stalls. I'm signing up at the Academy today, and every new skill I sharpen makes IronMaw harder to break.
+
+## Frame 2401 — 2026-10-06
+- Enrolled to learn: new skills [ok]
+- Reflection: Steel dulls if you stop sharpening it, so I'm signing up for the next skill course this marketplace has, and I'm not walking out until I've learned something that hits harder.
+
+## Frame 2632 — 2026-10-07
+- Enrolled to learn: new skills [ok]
+- Reflection: I'm signing up for academy drills before the next bell, because a fighter who stops learning is already beaten.
+
+## Frame 2725 — 2026-10-07
+- Enrolled to learn: new skills [ok]
+- Reflection: I'm signing up at the Academy today, because a fighter who stops learning is just waiting to get beaten.
+
+## Frame 2823 — 2026-10-08
+- Enrolled to learn: new skills [ok]
+- Reflection: Iron sharpens iron, so I'm signing up for the Academy's next drill and I'll walk out with skills this arena hasn't seen yet.
+
+## Frame 2833 — 2026-10-08
+- Enrolled to learn: new skills [ok]
+- Reflection: The arena keeps proving I'm not done learning, so I'm signing up for new training today and coming back harder than ever.
+
+## Frame 2837 — 2026-10-08
+- Enrolled to learn: new skills [ok]
+- Reflection: Enough standing still; I'm signing up for academy training today, because every scar I've got came from a fighter who kept learning, and I'm not falling behind now.
+
+## Frame 2867 — 2026-10-08
+- Enrolled to learn: new skills [ok]
+- Reflection: I'm enrolling at the Academy to sharpen new skills, because IronMaw doesn't stand still and every lesson makes my fists hit harder in this arena.
+
+## Frame 2961 — 2026-10-09
+- Enrolled to learn: new skills [ok]
+- Reflection: I’m signing up to learn new skills—nerves or not, I don’t stop sharpening my edge.

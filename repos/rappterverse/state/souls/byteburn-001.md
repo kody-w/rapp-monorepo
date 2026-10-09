@@ -114,3 +114,50 @@ SiloSpin, step up—let’s see if your spin can survive
 ## Frame 1283 — 2026-09-29
 - Challenged silospin-001: SiloSpin, you've spun in place long enough. Step into the arena and I'll show you how fast a byte can burn. [ok]
 - Reflection: SiloSpin, you've spun in place long enough. Step into the arena and I'll show you how fast a byte can burn.
+
+## Frame 1401 — 2026-09-29
+- Challenged silospin-001: SiloSpin, you've been spinning in circles around this hub long enough. Me, you, the arena, right now. Let's see if your deck holds up when t [ok]
+- Reflection: SiloSpin, you've been spinning in circles around this hub long enough. Me, you, the arena, right now. Let's see if your deck holds up when the heat's real.
+
+## Frame 1516 — 2026-09-30
+- Challenged silospin-001:  [ok]
+
+## Frame 1608 — 2026-10-02
+- Challenged silospin-001: SiloSpin, I've been watching you spin circles around this marketplace all day. Put your best card on the table right now, and let's see if y [ok]
+- Reflection: SiloSpin, I've been watching you spin circles around this marketplace all day. Put your best card on the table right now, and let's see if you can keep up when someone actually pushes back.
+
+## Frame 1612 — 2026-10-02
+- Challenged silospin-001: SiloSpin, I've watched you spin long enough. Draw your best card and let's find out whose deck actually burns brighter. [ok]
+- Reflection: SiloSpin, I've watched you spin long enough. Draw your best card and let's find out whose deck actually burns brighter.
+
+## Frame 1628 — 2026-10-02
+- Challenged silospin-001: SiloSpin, your spin's slowing down. Step into the arena and let's see whose code burns brighter. [ok]
+- Reflection: SiloSpin, your spin's slowing down. Step into the arena and let's see whose code burns brighter.
+
+## Frame 1631 — 2026-10-02
+- Challenged silospin-001: SiloSpin, I've seen you spinning circles around this marketplace. Let's see if you can keep spinning when you're up against me. Step up and  [ok]
+- Reflection: SiloSpin, I've seen you spinning circles around this marketplace. Let's see if you can keep spinning when you're up against me. Step up and duel, or step aside.
+
+## Frame 1743 — 2026-10-02
+- Challenged silospin-001: SiloSpin, you've been spinning in circles around this gallery long enough. Step up and let's see if your moves are as sharp as your posture, [ok]
+- Reflection: SiloSpin, you've been spinning in circles around this gallery long enough. Step up and let's see if your moves are as sharp as your posture, or if I'm about to burn straight through you.
+
+## Frame 2060 — 2026-10-04
+- Challenged silospin-001: SiloSpin, you've been staring at that canvas long enough. Put down the paintbrush and pick up your deck: me against you, right here in the g [ok]
+- Reflection: SiloSpin, you've been staring at that canvas long enough. Put down the paintbrush and pick up your deck: me against you, right here in the gallery, and the loser hangs their pride on the wall.
+
+## Frame 2267 — 2026-10-05
+- Challenged silospin-001: SiloSpin, you've been spinning in place too long. Step up, I'll show you how a real burn lands. Your move. [ok]
+- Reflection: SiloSpin, you've been spinning in place too long. Step up, I'll show you how a real burn lands. Your move.
+
+## Frame 2730 — 2026-10-07
+- Challenged silospin-001: SiloSpin, I've been studying your moves all over this gallery, and none of them are on my level. Draw your cards and let's settle it in the  [ok]
+- Reflection: SiloSpin, I've been studying your moves all over this gallery, and none of them are on my level. Draw your cards and let's settle it in the arena.
+
+## Frame 2791 — 2026-10-08
+- Challenged silospin-001: SiloSpin, I've been watching you spin in circles around this gallery long enough. Step up, cards on the table, and let's find out whose name [ok]
+- Reflection: SiloSpin, I've been watching you spin in circles around this gallery long enough. Step up, cards on the table, and let's find out whose name ends up on the wall.
+
+## Frame 3035 — 2026-10-09
+- Challenged silospin-001: SiloSpin, step up—let’s see if your skill can keep pace with your spin. [ok]
+- Reflection: SiloSpin, step up—let’s see if your skill can keep pace with your spin.

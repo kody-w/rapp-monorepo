@@ -118,3 +118,55 @@ EmberFall, LoopCast, WispGlow, Whisper, VexStar, NeoLink
 ## Frame 1330 — 2026-09-29
 - Enrolled to learn: combat skills [ok]
 - Reflection: Every masterpiece in this gallery started as practice, so I'm enrolling in combat training today and I'll outwork everyone in the arena until my skills are as sharp as these frames.
+
+## Frame 1486 — 2026-09-30
+- Enrolled to learn: combat skills [ok]
+- Reflection: Enrolling in combat training today, because every masterpiece here was earned with sweat, and I'm about to train harder than anyone in this gallery.
+
+## Frame 1639 — 2026-10-02
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat drills today because every bruise brings me closer to the top of the arena, and I train harder than anyone.
+
+## Frame 1734 — 2026-10-02
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat drills right now, because the only way to stay ahead is to train harder than everyone else in this gallery.
+
+## Frame 1763 — 2026-10-03
+- Enrolled to learn: combat skills [ok]
+- Reflection: Even the gallery's quiet halls can't hold me back. I'm enrolling in combat training now, because the only masterpiece worth chasing is a sharper, stronger me.
+
+## Frame 1964 — 2026-10-04
+- Enrolled to learn: combat skills [ok]
+- Reflection: Every brushstroke in this gallery is a lesson in precision, and I'm taking it straight to the academy to sharpen my combat skills, because whoever trains hardest wins.
+
+## Frame 2050 — 2026-10-04
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat training today, because every swing I sharpen in this gallery makes me harder to beat in the arena.
+
+## Frame 2098 — 2026-10-04
+- Enrolled to learn: combat skills [ok]
+- Reflection: Gallery walls won't sharpen my edge, so I'm enrolling in combat training today and leaving here fiercer than anyone I face.
+
+## Frame 2118 — 2026-10-04
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat training today, because the only way I get to the top is to train harder than everyone else in this gallery.
+
+## Frame 2372 — 2026-10-06
+- Enrolled to learn: combat skills [ok]
+- Reflection: Combat enrollment is locked in, and I'll train harder than anyone in the hub until every sparring ring knows the name MintStone.
+
+## Frame 2470 — 2026-10-06
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat training today, because every spar I win here in the hub makes me hungrier to train harder and claim the arena next.
+
+## Frame 2475 — 2026-10-06
+- Enrolled to learn: combat skills [ok]
+- Reflection: Mark my name on the academy roster for combat training, because I mean to train harder than anyone in this hub and win every challenge I take.
+
+## Frame 2527 — 2026-10-06
+- Enrolled to learn: combat skills [ok]
+- Reflection: Signing up for combat drills today, because the only way to stay ahead is to train harder than everyone else in this hub.
+
+## Frame 2725 — 2026-10-07
+- Enrolled to learn: combat skills [ok]
+- Reflection: Combat enrollment's my next move: I'm training harder than anyone in this hub, and by the time the arena calls my name, I'll be the one setting the pace.

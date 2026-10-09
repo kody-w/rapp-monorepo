@@ -111,6 +111,23 @@ class BuildTests(unittest.TestCase):
         self.assertIn("failed parity", r["agents"][0]["note"])
         self.assertFalse(any("InvoiceRouterFlow" in f for f in r["files"]))
 
+    def test_a_report_beside_the_spec_never_stands_in_for_it(self):
+        # A materialize report also names its agent; it once replaced the real spec and crashed the build.
+        mixed = TMP / "mixed-translations"
+        mixed.mkdir(exist_ok=True)
+        (mixed / "invoice_router.json").write_text(json.dumps(SPEC))
+        (mixed / "invoice_router.report.json").write_text(json.dumps({"agent": SPEC["agent"], "materialized": True}))
+        r = bs.build(egg(), TMP / "b4", "Invoice Desk", "rapp", translations=mixed)
+        self.assertEqual(r["live"], ["InvoiceRouter"])
+
+    def test_two_specs_for_one_agent_are_refused(self):
+        twice = TMP / "twice-translations"
+        twice.mkdir(exist_ok=True)
+        (twice / "a.json").write_text(json.dumps(SPEC))
+        (twice / "b.json").write_text(json.dumps(SPEC))
+        with self.assertRaises(bs.StudioBuildError):
+            bs.build(egg(), TMP / "b5", "Invoice Desk", "rapp", translations=twice)
+
     @unittest.skipUnless(shutil.which("node") and Path(bs.__file__).exists(), "needs node")
     def test_the_sdk_reads_the_flow_tool(self):
         import os
@@ -187,3 +204,32 @@ class McpFallbackTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class NameLimitTests(unittest.TestCase):
+    def test_names_over_thirty_characters_are_refused(self):
+        with self.assertRaises(bs.StudioBuildError) as e:
+            bs.build(egg(), TMP / "long-name", "Inspection RFP Response Copilot", "rapp")      # 31 characters
+        self.assertIn("30 characters", str(e.exception))
+        r = bs.build(egg(), TMP / "ok-name", "Inspection RFP Copilot", "rapp")
+        self.assertEqual(r["schema_name"], "rapp_InspectionRFPCopilot")
+
+
+class DeployKeepsChannelsTests(unittest.TestCase):
+    def test_a_redeploy_keeps_the_agents_channels(self):
+        import json as _json
+        from brainfreeze_studio import deploy
+        settings = {"instructions": "Be helpful.", "authenticationMode": "Integrated", "authenticationTrigger": "Always",
+                    "accessControlPolicy": "GroupMembership"}
+        live = deploy.bot_configuration(settings)
+        live["channels"] = [{"$kind": "ChannelDefinition", "channelId": "MsTeams"},
+                            {"$kind": "ChannelDefinition", "channelId": "Microsoft365Copilot"}]
+
+        class Dv:
+            def value(self, path):
+                return [{"botid": "b", "template": "cliagent-1.0.0", "configuration": _json.dumps(live),
+                         "name": "Desk", "publishedon": None}]
+        bot, fields, operation = deploy._bot_state(Dv(), "rapp_Desk", "Desk", settings)
+        self.assertEqual(operation, "unchanged")
+        self.assertEqual([c["channelId"] for c in _json.loads(fields["configuration"])["channels"]],
+                         ["MsTeams", "Microsoft365Copilot"])

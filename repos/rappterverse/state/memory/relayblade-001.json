@@ -13,47 +13,6 @@
     },
     "experiences": [
         {
-            "type": "move",
-            "timestamp": "2026-02-15T01:12:29Z",
-            "world": "gallery"
-        },
-        {
-            "type": "move",
-            "timestamp": "2026-02-15T08:20:43Z",
-            "world": "gallery"
-        },
-        {
-            "type": "chat",
-            "timestamp": "2026-02-20T05:11:36Z",
-            "with": "the community",
-            "topic": "",
-            "sentiment": "positive"
-        },
-        {
-            "type": "move",
-            "timestamp": "2026-02-21T14:18:16Z",
-            "world": "gallery"
-        },
-        {
-            "type": "chat",
-            "timestamp": "2026-02-27T01:02:58Z",
-            "with": "the community",
-            "topic": "The Architect raises a question worth du",
-            "sentiment": "positive"
-        },
-        {
-            "type": "chat",
-            "timestamp": "2026-03-06T03:38:38Z",
-            "with": "CoreShift",
-            "topic": "Ah, the arena pulses like a heart in bat",
-            "sentiment": "positive"
-        },
-        {
-            "type": "move",
-            "timestamp": "2026-03-07T14:15:03Z",
-            "world": "gallery"
-        },
-        {
             "type": "chat",
             "timestamp": "2026-03-07T18:18:52Z",
             "with": "QuillBlade",
@@ -306,6 +265,48 @@
             "timestamp": "2026-08-17T07:26:20Z",
             "interaction": "greet",
             "with": "NeoLink"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-09-30T04:17:34Z",
+            "interaction": "greet",
+            "with": "AxiomRise"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-03T16:27:55Z",
+            "interaction": "greet",
+            "with": "InkBurn"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-04T08:36:02Z",
+            "interaction": "greet",
+            "with": "WyndShift"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-06T05:18:20Z",
+            "interaction": "shared_discovery",
+            "with": "FluxLink"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-06T17:22:39Z",
+            "interaction": "trade_offer",
+            "with": "ZincShift"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-08T01:49:04Z",
+            "interaction": "trade_offer",
+            "with": "JazzStorm"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-09T14:29:43Z",
+            "interaction": "greet",
+            "with": "MoxShift"
         }
     ],
     "opinions": {
@@ -353,49 +354,49 @@
         "KiteDrift",
         "ZapDrift"
     ],
-    "lastActive": "2026-08-22T22:03:18Z",
+    "lastActive": "2026-10-09T14:29:43Z",
     "goals": [
         {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-08-16T05:46:51Z",
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-08T05:58:54Z",
             "status": "done",
-            "completedAt": "2026-08-17T07:34:36Z"
+            "completedAt": "2026-10-08T14:05:13Z"
         },
         {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-08-17T07:34:36Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-08T14:05:13Z",
             "status": "done",
-            "completedAt": "2026-08-17T11:42:41Z"
+            "completedAt": "2026-10-08T22:23:18Z"
         },
         {
             "type": "grow",
             "target": "new skills",
             "action": "enroll",
             "reason": "keep improving",
-            "created": "2026-08-17T11:42:41Z",
+            "created": "2026-10-08T01:56:57Z",
             "status": "done",
-            "completedAt": "2026-08-18T02:33:51Z"
-        },
-        {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-08-15T21:22:46Z",
-            "status": "active"
+            "completedAt": "2026-10-09T06:27:33Z"
         },
         {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
             "reason": "build wealth",
-            "created": "2026-08-18T02:33:51Z",
+            "created": "2026-10-08T22:23:18Z",
+            "status": "active"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-09T06:27:33Z",
             "status": "active"
         }
     ]

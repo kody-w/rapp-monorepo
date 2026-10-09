@@ -5,8 +5,8 @@ line: Agents (RAR)
 wave: 2
 status: not yet
 verdict: DRIFT
-evidence_commit: 602f08ea2e587f4dbffc38f8a997fbd0ba2c3e76
-checked: 2026-09-27
+evidence_commit: 6bf17593d9b5bdf0c62e5d23b972dc80a08813b2
+checked: 2026-10-08
 checker: kody-w/rapp-1 rapp_check.py at 591e014
 experimental_mentions: 11
 header: present
@@ -14,7 +14,8 @@ header_pr: https://github.com/kody-w/rapp-egg-hub/pull/19
 version: "v1.0.0"
 version_source: release
 channel: newest
-lifecycle: active
+lifecycle: archived
+since: 2026-10-08
 member_card: present
 links_to:
   - RAPP
@@ -27,19 +28,21 @@ links_to:
   - RAR
 ---
 
+> **Archived since 2026-10-08.** The repo is archived on GitHub (read-only); the crawl still checks it, and this file and its badge stay.
+
 # rapp-egg-hub: not yet
 
-![RAPP/1: not yet, version v1.0.0](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-egg-hub.svg)
+![RAPP/1: archived (not yet), version v1.0.0](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-egg-hub.svg)
 
 **Not yet:** 6 finding(s) from rapp_check: §9 egg ×6.
 
 **Version:** `v1.0.0`, from the tag of its latest GitHub release. **Channel:** `newest`: it has no long-term-support pin, so its newest commit is the one in use.
 
-- Evidence: [`kody-w/rapp-egg-hub` at `602f08ea2e`](https://github.com/kody-w/rapp-egg-hub/tree/602f08ea2e587f4dbffc38f8a997fbd0ba2c3e76) on `main`, checked 2026-09-27.
+- Evidence: [`kody-w/rapp-egg-hub` at `6bf17593d9`](https://github.com/kody-w/rapp-egg-hub/tree/6bf17593d9b5bdf0c62e5d23b972dc80a08813b2) on `main`, checked 2026-10-08.
 - Checker: [`rapp_check.py` at `591e014`](https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp_check.py), verdict **DRIFT**, 6 finding(s). The raw output stays in the maintainer's sweep folder, outside the Hive; its SHA-256 is `31a4529db16f3bc6f8567b7d6873101dc7b365445742ebfdce9d026c9a1fdffa`.
 - "experimental" mentions: 11 (whole word, any case, in tracked text files at the evidence commit, leaving out the network's own files: the repo's card `.rapp/member.md` and, in the network's public copy, `portfolio/`, `members/`, `notices/` and `PUBLISHED.md`; tracked, not a gate).
 - Network header: present in `README.md`.
-- Member card: [`.rapp/member.md`](https://github.com/kody-w/rapp-egg-hub/blob/602f08ea2e587f4dbffc38f8a997fbd0ba2c3e76/.rapp/member.md) at the evidence commit: this repo's card in the RAPP Hive, beside its pointer [`members/rapp-egg-hub.md`](https://github.com/kody-w/rapp-hive-public/blob/main/members/rapp-egg-hub.md).
+- Member card: [`.rapp/member.md`](https://github.com/kody-w/rapp-egg-hub/blob/6bf17593d9b5bdf0c62e5d23b972dc80a08813b2/.rapp/member.md) at the evidence commit: this repo's card in the RAPP Hive, beside its pointer [`members/rapp-egg-hub.md`](https://github.com/kody-w/rapp-hive-public/blob/main/members/rapp-egg-hub.md).
 
 ## Findings (6)
 
@@ -55,10 +58,10 @@ On the map: the **Agents (RAR)** line ([subway map](https://kody-w.github.io/rap
 ## Links
 
 Links to 8 portfolio repo(s): [RAPP](RAPP.md) (markdown), [rapp-1](rapp-1.md) (markdown), [rapp-drift-lint](rapp-drift-lint.md) (workflow), [rapp-installer](rapp-installer.md) (markdown), [rapp-moment](rapp-moment.md) (markdown), [RAPP_Store](RAPP_Store.md) (markdown), [rappterbox](rappterbox.md) (markdown), [RAR](RAR.md) (markdown).
-Linked from 11: [cowork-cookbook-rapp](cowork-cookbook-rapp.md), [RAPP](RAPP.md), [RAPP-Bible](RAPP-Bible.md), [rapp-brainfreeze-studio](rapp-brainfreeze-studio.md), [rapp-carts](rapp-carts.md), [rapp-monorepo](rapp-monorepo.md), [rapp-rock-tumbler](rapp-rock-tumbler.md), [rapp-spine](rapp-spine.md), [rapp-vision-neighborhood](rapp-vision-neighborhood.md), [RAPP_Store](RAPP_Store.md), [RAR](RAR.md).
+Linked from 10: [cowork-cookbook-rapp](cowork-cookbook-rapp.md), [RAPP](RAPP.md), [RAPP-Bible](RAPP-Bible.md), [rapp-carts](rapp-carts.md), [rapp-monorepo](rapp-monorepo.md), [rapp-rock-tumbler](rapp-rock-tumbler.md), [rapp-spine](rapp-spine.md), [rapp-vision-neighborhood](rapp-vision-neighborhood.md), [RAPP_Store](RAPP_Store.md), [RAR](RAR.md).
 
 Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<repo>`, pin files, workflow `uses:` and `repository:` lines, and submodules, at the evidence commit; only public repos in this portfolio count.
 
 ## Check it yourself
 
-Clone `kody-w/rapp-egg-hub` at `602f08ea2e` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py rapp-egg-hub --json` from the folder that holds both.
+Clone `kody-w/rapp-egg-hub` at `6bf17593d9` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py rapp-egg-hub --json` from the folder that holds both.

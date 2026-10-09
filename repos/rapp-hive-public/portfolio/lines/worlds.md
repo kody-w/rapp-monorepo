@@ -26,7 +26,7 @@ Games, worlds, holograms and swarm experiments.
 | [rapp-heir](../repos/rapp-heir.md) | certified |  |
 | [rapp-holo](../repos/rapp-holo.md) | certified |  |
 | [rapp-hologram](../repos/rapp-hologram.md) | certified |  |
-| [rapp-lantern](../repos/rapp-lantern.md) | not yet |  |
+| [rapp-lantern](../repos/rapp-lantern.md) | certified |  |
 | [rapp-moment](../repos/rapp-moment.md) | certified |  |
 | [rapp-moonshots](../repos/rapp-moonshots.md) | certified |  |
 | [rapp-pets](../repos/rapp-pets.md) | certified |  |
@@ -35,7 +35,7 @@ Games, worlds, holograms and swarm experiments.
 | [rapp-zoo-v2](../repos/rapp-zoo-v2.md) | not yet |  |
 | [rapp_orion](../repos/rapp_orion.md) | certified |  |
 | [rappid](../repos/rappid.md) | not yet |  |
-| [rio](../repos/rio.md) | not yet |  |
+| [rio](../repos/rio.md) | certified |  |
 | [rionet](../repos/rionet.md) | certified |  |
 | [sim-art-collective](../repos/sim-art-collective.md) | certified |  |
 | [the-coliseum](../repos/the-coliseum.md) | certified |  |

@@ -18,6 +18,23 @@ from pathlib import Path
 from . import StudioBuildError, build
 
 
+
+def _parity_lines(prov, indent):
+    """One line per proven agent, plus what the proof does NOT cover: inputs the flow matches only on the
+    sampled values (other text falls to 'unknown' live) and operations that are blocked in the flow."""
+    mat = {a.get("name"): a.get("materialized") or {} for a in prov.get("agents") or []}
+    lines = []
+    for agent, p in prov.get("parity", {}).items():
+        lines.append(f"parity:{indent}{agent} {p['passed']}/{p['cases']} {'PROVEN' if p['parity'] else 'FAILED'}")
+        m = mat.get(agent) or {}
+        if m.get("approximated_inputs"):
+            lines.append(f"  warning:{indent[:-2]}{agent}: input(s) {', '.join(m['approximated_inputs'])} are matched only on the "
+                         "values the proof sampled; any other text reaches the flow's 'unknown' branch. Prefer an enum "
+                         "or a key-in-text resolver, and check the live replay.")
+        for op, why in (m.get("blocked_operations") or {}).items():
+            lines.append(f"  warning:{indent[:-2]}{agent}.{op} is blocked in the flow ({why if isinstance(why, str) else ', '.join(map(str, why))}).")
+    return lines
+
 def parser():
     p = argparse.ArgumentParser(prog="brainfreeze-studio",
                                 description="Turn a frozen RAPP brainstem (organism egg) into a Copilot Studio agent.")
@@ -54,6 +71,18 @@ def parser():
                     "build's, else the environment's RAPP Files Site, else your tenant's root site)")
     dp.add_argument("--files-folder", help="the folder in that site their paths start from (default /Shared Documents)")
     dp.add_argument("--json", action="store_true", help="print the result as JSON")
+    fc = sub.add_parser("from-catalog", help="a catalog egg URL → gauntlet → build → plan → deploy → live proof, "
+                                             "stopping at the first red step")
+    fc.add_argument("egg", help="https URL of a rapp/1 organism egg (for example one in kody-w/RAR)")
+    fc.add_argument("--environment", required=True, help="https://<org>.crm.dynamics.com/")
+    fc.add_argument("--name", help="display name (default: from the egg's rappid)")
+    fc.add_argument("--publisher-prefix", default="rapp")
+    fc.add_argument("--translations", help="folder of translation specs: agents that prove parity become flows")
+    fc.add_argument("--out", default="from-catalog", help="working folder (gauntlet report, build, logs)")
+    cc = sub.add_parser("catalog-check", help="run the gauntlet over a catalog and write one status file (nightly)")
+    cc.add_argument("eggs", nargs="*", help="egg URLs (default: every egg in kody-w/RAR)")
+    cc.add_argument("--out", default="catalog-status.json")
+
     en = sub.add_parser("environments", help="the Power Platform environments your Azure CLI sign-in (az login) can "
                         "reach, from the Global Discovery Service")
     en.add_argument("--json", action="store_true", help="print them as JSON")
@@ -122,6 +151,24 @@ def main(argv=None):
     a = parser().parse_args(argv)
     if a.cmd == "environments":
         return _environments(a)
+    if a.cmd in ("from-catalog", "catalog-check"):
+        from .catalog import CatalogError, check_catalog, rar_eggs, ship
+        try:
+            if a.cmd == "catalog-check":
+                st = check_catalog(a.eggs or rar_eggs(), a.out)
+                print(f"{st['green']}/{st['total']} eggs green -> {a.out}")
+                return 0 if st["green"] == st["total"] else 1
+            s = ship(a.egg, a.environment, a.out, name=a.name, publisher_prefix=a.publisher_prefix,
+                     translations=a.translations)
+        except CatalogError as e:
+            print(f"brainfreeze-studio: {e}", file=sys.stderr)
+            return 1
+        print(f"\nlive in Copilot Studio: {s['agent']}  {s['maker']}")
+        proven = [f"{k} {v['passed']}/{v['cases']}" for k, v in s["parity"].items()]
+        print(f"proven equal to the Python: {', '.join(proven) or 'none (no translation specs)'}")
+        if s["skills"]:
+            print(f"reasoning skills, not proven: {', '.join(s['skills'])}")
+        return 0
     if a.cmd == "deploy":
         return _deploy(a)
     if a.cmd == "managed-app":
@@ -167,8 +214,8 @@ def main(argv=None):
     print(f"proof turns: {r['proof_turns']}   memories: {r['memories']}")
     with open(os.path.join(a.out, "provenance.json"), encoding="utf-8") as f:
         prov = json.load(f)
-    for agent, p in prov.get("parity", {}).items():
-        print(f"parity:      {agent} {p['passed']}/{p['cases']} {'PROVEN' if p['parity'] else 'FAILED'}")
+    for line in _parity_lines(prov, "      "):
+        print(line)
     workspace = shlex.quote(str(r["workspace"]))
     environment = shlex.quote(a.environment) if a.environment else "https://<org>.crm.dynamics.com/"
     print(f"next:        python3 -m brainfreeze_studio deploy {workspace} "
@@ -443,8 +490,8 @@ def _rapplication(a):
             prov = json.load(f)
     except (OSError, ValueError):
         prov = {}
-    for agent, p in prov.get("parity", {}).items():
-        print(f"parity:       {agent} {p['passed']}/{p['cases']} {'PROVEN' if p['parity'] else 'FAILED'}")
+    for line in _parity_lines(prov, "       "):
+        print(line)
     app = s.get("codeapp")
     if (s.get("deployed") or {}).get("codeapp_skipped") == "--draft":
         print("code app:     not published (--draft); run again without --draft to publish it")

@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/rapp-test-neighbor/
 newest: HEAD
 line: neighborhoods
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # rapp-test-neighbor
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

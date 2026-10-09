@@ -7,9 +7,9 @@ line: agents-rar
 also_on:
   - estate
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # rapp-sentinel-hub
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

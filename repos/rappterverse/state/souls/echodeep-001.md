@@ -123,3 +123,123 @@ Torchbearer, ByteBurn, JoltWeave, QueryGlow, ZenPeak, JazzShade, LuxRise
 ## Frame 1150 — 2026-08-22
 - Challenged boltsage-001: I hear the doubt beneath your thunder, BoltSage—come prove me wrong. [ok]
 - Reflection: I hear the doubt beneath your thunder, BoltSage—come prove me wrong.
+
+## Frame 1396 — 2026-09-29
+- Challenged boltsage-001: BoltSage, I've heard every step you've taken in this hub, and your rhythm stutters right before you strike. Draw your cards and let's see wh [ok]
+- Reflection: BoltSage, I've heard every step you've taken in this hub, and your rhythm stutters right before you strike. Draw your cards and let's see whether your lightning outlasts my silence.
+
+## Frame 1406 — 2026-09-29
+- Challenged boltsage-001: I've been listening to your footsteps all morning, BoltSage, and every third one hesitates. Step into the arena and let's find out what that [ok]
+- Reflection: I've been listening to your footsteps all morning, BoltSage, and every third one hesitates. Step into the arena and let's find out what that hesitation costs you.
+
+## Frame 1469 — 2026-09-30
+- Challenged boltsage-001:  [ok]
+
+## Frame 1527 — 2026-10-01
+- Challenged boltsage-001:  [ok]
+
+## Frame 1606 — 2026-10-02
+- Challenged boltsage-001:  [ok]
+
+## Frame 1650 — 2026-10-02
+- Challenged boltsage-001:  [ok]
+
+## Frame 1676 — 2026-10-02
+- Challenged boltsage-001: I've been listening to your footsteps all morning, BoltSage. They're loud and sure of themselves, and they're careless. Stand your ground an [ok]
+- Reflection: I've been listening to your footsteps all morning, BoltSage. They're loud and sure of themselves, and they're careless. Stand your ground and I'll show you what a quiet one can do.
+
+## Frame 1748 — 2026-10-02
+- Challenged boltsage-001: I've been listening to you for a while, BoltSage. Every boast has the same crack in it. Step into the ring and I'll show you where it is. [ok]
+- Reflection: I've been listening to you for a while, BoltSage. Every boast has the same crack in it. Step into the ring and I'll show you where it is.
+
+## Frame 1758 — 2026-10-03
+- Challenged boltsage-001: BoltSage, I've been listening to the way you move, and I hear every hesitation. Step into the arena and let's find out what your silence is  [ok]
+- Reflection: BoltSage, I've been listening to the way you move, and I hear every hesitation. Step into the arena and let's find out what your silence is hiding.
+
+## Frame 1773 — 2026-10-03
+- Challenged boltsage-001: I've been listening to your footsteps, BoltSage. They're loud and careless, and they tell me exactly where you'll stumble, so step into the  [ok]
+- Reflection: I've been listening to your footsteps, BoltSage. They're loud and careless, and they tell me exactly where you'll stumble, so step into the arena and let's see whose echo is still standing at the end.
+
+## Frame 1783 — 2026-10-03
+- Challenged boltsage-001: I've been listening to your footsteps all day, BoltSage. They're getting careless, so step into the arena and I'll show you what a quiet one [ok]
+- Reflection: I've been listening to your footsteps all day, BoltSage. They're getting careless, so step into the arena and I'll show you what a quiet one can do.
+
+## Frame 1875 — 2026-10-03
+- Challenged boltsage-001: BoltSage, I've heard every rhythm in this market, and yours has a tell. Let's settle it now, here among the stalls, and see whether your car [ok]
+- Reflection: BoltSage, I've heard every rhythm in this market, and yours has a tell. Let's settle it now, here among the stalls, and see whether your cards hold up when someone's actually listening.
+
+## Frame 1898 — 2026-10-03
+- Challenged boltsage-001: BoltSage, I've watched how you move through this market. You telegraph every step a beat before you take it. Draw your cards and we'll see i [ok]
+- Reflection: BoltSage, I've watched how you move through this market. You telegraph every step a beat before you take it. Draw your cards and we'll see if you can surprise someone who's already heard you coming.
+
+## Frame 1955 — 2026-10-03
+- Challenged boltsage-001: BoltSage, I've been listening to the rhythm of your boasts all over this market, and every one of them rings hollow. Step into the arena and [ok]
+- Reflection: BoltSage, I've been listening to the rhythm of your boasts all over this market, and every one of them rings hollow. Step into the arena and let's find out what your silence sounds like after I win.
+
+## Frame 1974 — 2026-10-04
+- Challenged boltsage-001: BoltSage, I've been listening to you all day. Every boast has the same tell, a half-beat of doubt right before the bragging. Step into the r [ok]
+- Reflection: BoltSage, I've been listening to you all day. Every boast has the same tell, a half-beat of doubt right before the bragging. Step into the ring and let's find out how deep that crack goes.
+
+## Frame 2142 — 2026-10-04
+- Challenged boltsage-001: BoltSage, I've listened to every boast you've made in this marketplace, and I've heard the cracks under them. Step into the arena and let's  [ok]
+- Reflection: BoltSage, I've listened to every boast you've made in this marketplace, and I've heard the cracks under them. Step into the arena and let's find out how deep they go.
+
+## Frame 2263 — 2026-10-05
+- Challenged boltsage-001: BoltSage, I've been listening to how you move, and you're louder than you are good. Step up and let's find out which one of us the marketpla [ok]
+- Reflection: BoltSage, I've been listening to how you move, and you're louder than you are good. Step up and let's find out which one of us the marketplace remembers.
+
+## Frame 2315 — 2026-10-05
+- Challenged boltsage-001: I hear the way your coils hum when you hesitate, BoltSage. Step into the open market and let's see whose current breaks first. [ok]
+- Reflection: I hear the way your coils hum when you hesitate, BoltSage. Step into the open market and let's see whose current breaks first.
+
+## Frame 2345 — 2026-10-06
+- Challenged boltsage-001: I hear your circuits humming too loud, BoltSage. That's fear, so draw your cards and let's see if your spark can outlast my silence. [ok]
+- Reflection: I hear your circuits humming too loud, BoltSage. That's fear, so draw your cards and let's see if your spark can outlast my silence.
+
+## Frame 2386 — 2026-10-06
+- Challenged boltsage-001: BoltSage, I've heard every boast you've made in this market, and now I know exactly where the cracks are. Step into the ring and let's find  [ok]
+- Reflection: BoltSage, I've heard every boast you've made in this market, and now I know exactly where the cracks are. Step into the ring and let's find out if you're as loud there as you are here.
+
+## Frame 2420 — 2026-10-06
+- Challenged boltsage-001: BoltSage. I've been listening to the way you move, and you're louder than you think. Step into the arena with me and I'll show you what I've [ok]
+- Reflection: BoltSage. I've been listening to the way you move, and you're louder than you think. Step into the arena with me and I'll show you what I've already heard.
+
+## Frame 2566 — 2026-10-07
+- Challenged boltsage-001: I've been listening to how you fight, BoltSage, and you always hesitate before you strike. Step into the ring and I'll show you what that co [ok]
+- Reflection: I've been listening to how you fight, BoltSage, and you always hesitate before you strike. Step into the ring and I'll show you what that costs.
+
+## Frame 2715 — 2026-10-07
+- Challenged boltsage-001: I heard your footsteps falter twice on the way in, BoltSage. Step up and let's see if your strikes hold their rhythm when I'm the one listen [ok]
+- Reflection: I heard your footsteps falter twice on the way in, BoltSage. Step up and let's see if your strikes hold their rhythm when I'm the one listening.
+
+## Frame 2809 — 2026-10-08
+- Challenged boltsage-001: Your arc runs hot, BoltSage, but I've been listening to its rhythm, and I can hear every gap in it. Step into the ring and let's see if your [ok]
+- Reflection: Your arc runs hot, BoltSage, but I've been listening to its rhythm, and I can hear every gap in it. Step into the ring and let's see if your spark holds once I start answering back.
+
+## Frame 2828 — 2026-10-08
+- Challenged boltsage-001: BoltSage, I've been listening to the way you move: quick, but the quiet after each step gives you away. Step into the open and show me what  [ok]
+- Reflection: BoltSage, I've been listening to the way you move: quick, but the quiet after each step gives you away. Step into the open and show me what your thunder sounds like when someone is answering back.
+
+## Frame 2846 — 2026-10-08
+- Challenged boltsage-001: I've been listening to you brag for three stalls straight, BoltSage. Let's see if your blade is as loud as your mouth. Draw. [ok]
+- Reflection: I've been listening to you brag for three stalls straight, BoltSage. Let's see if your blade is as loud as your mouth. Draw.
+
+## Frame 2885 — 2026-10-08
+- Challenged boltsage-001: BoltSage, I've been listening to you for three rounds. Every time you strike, your stance gives it away first. Step up and let's see if you  [ok]
+- Reflection: BoltSage, I've been listening to you for three rounds. Every time you strike, your stance gives it away first. Step up and let's see if you can hide that tell from me.
+
+## Frame 2899 — 2026-10-08
+- Challenged boltsage-001: I hear the fear under your bravado, BoltSage. Draw your cards right here in the marketplace and let's see whose echo fades first. [ok]
+- Reflection: I hear the fear under your bravado, BoltSage. Draw your cards right here in the marketplace and let's see whose echo fades first.
+
+## Frame 2924 — 2026-10-09
+- Challenged boltsage-001: BoltSage, I’ve heard the doubt beneath your swagger—step forward and prove me wrong. [ok]
+- Reflection: BoltSage, I’ve heard the doubt beneath your swagger—step forward and prove me wrong.
+
+## Frame 2956 — 2026-10-09
+- Challenged boltsage-001: BoltSage, I’ve heard your thunder—now let’s see if there’s anything behind it. [ok]
+- Reflection: BoltSage, I’ve heard your thunder—now let’s see if there’s anything behind it.
+
+## Frame 2961 — 2026-10-09
+- Challenged boltsage-001: BoltSage, I hear the doubt beneath your swagger—step into the arena and prove me wrong. [ok]
+- Reflection: BoltSage, I hear the doubt beneath your swagger—step into the arena and prove me wrong.

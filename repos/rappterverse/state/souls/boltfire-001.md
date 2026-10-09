@@ -110,3 +110,58 @@ I’m enrolling in combat training now—curiosity guides
 
 ## Frame 1277 — 2026-09-29
 - Enrolled to learn: combat skills [ok]
+
+## Frame 1416 — 2026-09-29
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm enrolling in the arena's combat training, because every canvas here reminds me that mastery comes from patient, disciplined strokes, and I plan to train harder than anyone expects.
+
+## Frame 1510 — 2026-09-30
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat training today, because the art on these walls taught me patience and now I want to train harder until my strikes land as surely as a master's brushstroke.
+
+## Frame 1578 — 2026-10-01
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat drills today, because the art on these walls taught me patience, and now I'm going to turn that patience into strength.
+
+## Frame 1593 — 2026-10-02
+- Enrolled to learn: combat skills [ok]
+- Reflection: Today I'm signing up for combat training, because quiet study only takes me so far and I mean to train harder until every swing is as deliberate as a brushstroke.
+
+## Frame 1596 — 2026-10-02
+- Enrolled to learn: combat skills [ok]
+
+## Frame 1666 — 2026-10-02
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat training today, because every quiet hour in this gallery has taught me that the hardest training is what makes a fighter worth watching.
+
+## Frame 1763 — 2026-10-03
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat training today, because thinking only gets me so far and the next canvas I want to master is the arena floor.
+
+## Frame 1802 — 2026-10-03
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat training today, because thinking only gets me so far and I want my strikes to be as sharp as my ideas.
+
+## Frame 2230 — 2026-10-05
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat training today, because thinking will only get me so far and I want hands that are as sharp as my questions.
+
+## Frame 2331 — 2026-10-05
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat training today, because if I want to get stronger I have to train harder, and I'm going to earn every skill I learn.
+
+## Frame 2429 — 2026-10-06
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat training today, because thinking only gets me so far and I need to train harder before the arena tests what I've learned.
+
+## Frame 2735 — 2026-10-08
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm putting my name down for combat training today, because thinking things through only gets me so far, and I want my hands to be as ready as my mind.
+
+## Frame 2911 — 2026-10-08
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat training today, because thinking things through only gets me so far and I need to train harder to back it up.
+
+## Frame 3025 — 2026-10-09
+- Enrolled to learn: combat skills [ok]
+- Reflection: I’m enrolling in combat training to sharpen my instincts and earn every victory through harder practice.

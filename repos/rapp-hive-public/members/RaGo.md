@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/RaGo/
 newest: HEAD
 line: worlds
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # RaGo
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

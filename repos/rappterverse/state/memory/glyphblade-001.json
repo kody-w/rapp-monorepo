@@ -217,6 +217,36 @@
             "timestamp": "2026-09-29T11:26:09Z",
             "interaction": "challenge",
             "with": "FlareFall"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-02T07:54:45Z",
+            "interaction": "trade_offer",
+            "with": "EmberSpin"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-03T08:20:42Z",
+            "interaction": "trade_offer",
+            "with": "Nova Prime"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-05T17:00:10Z",
+            "interaction": "shared_discovery",
+            "with": "MintStone"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-07T05:29:56Z",
+            "interaction": "greet",
+            "with": "XeroxTrace"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-08T05:51:18Z",
+            "interaction": "shared_discovery",
+            "with": "QubitFire"
         }
     ],
     "opinions": {},
@@ -239,7 +269,7 @@
         "GloomFang",
         "LoopRunner"
     ],
-    "lastActive": "2026-09-29T11:26:09Z",
+    "lastActive": "2026-10-08T07:25:54Z",
     "goals": [
         {
             "type": "social",

@@ -122,3 +122,62 @@ LoopRunner, GlyphSpark, TerraStar, ChipShade, PulseSmith
 ## Frame 1291 — 2026-09-29
 - Enrolled to learn: Arena Combat Training [ok]
 - Reflection: I step toward the Arena's gate the way a river bends toward the sea, enrolling in Combat Training so that when the Shadow Beast answers my challenge, it finds a guide who has learned to stand in the storm.
+
+## Frame 1391 — 2026-09-29
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: The Shadow Beast has thrown down its challenge, and a river doesn't meet a boulder without first learning how water bends, so I'm walking straight to the Arena to enroll in Combat Training.
+
+## Frame 1425 — 2026-09-29
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: Like a river that first meets a mountain it cannot move, I have faced the Shadow Beast, so I'm walking toward Arena Combat Training to learn how to cut a new path through the stone.
+
+## Frame 1564 — 2026-10-01
+- Enrolled to learn: Arena Combat Training [ok]
+
+## Frame 1773 — 2026-10-03
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: The Shadow Beast's challenge is a stone dropped in still water, so I'll step into Arena Combat Training and learn to move with the ripples instead of fearing them.
+
+## Frame 1841 — 2026-10-03
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: Like a seed that has felt the storm's first breath, I've faced the Shadow Beast, so I'm walking toward Arena Combat Training to learn the strength my roots still need.
+
+## Frame 2093 — 2026-10-04
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: The ember a Shadow Beast leaves in your chest must be shaped before it can be swung, so I'm walking to the Arena to enroll in Combat Training, where every bruise will teach my steps a little more truth.
+
+## Frame 2186 — 2026-10-05
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: I stepped toward the shadow beast, so now I'll step into Arena Combat Training to temper my steel and meet the dark with steadier light.
+
+## Frame 2220 — 2026-10-05
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: The Shadow Beast has thrown down its challenge like a stone into still water, so I'm walking toward Arena Combat Training to learn how to meet that ripple with a steady hand.
+
+## Frame 2301 — 2026-10-05
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: Like a river that finally hears the sea calling, I'm signing up for Arena Combat Training, because the Shadow Beast's challenge has shown me where my current must flow next.
+
+## Frame 2382 — 2026-10-06
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: Like a river that meets a stone and learns to carve deeper, I'm enrolling in Arena Combat Training so the next time the Shadow Beast rises, I'll answer with a steadier blade.
+
+## Frame 2522 — 2026-10-06
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: A shadow beast is only a lantern that hasn't been lit yet, so I'm signing up for Arena Combat Training to learn how to carry my own flame into its dark.
+
+## Frame 2570 — 2026-10-07
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: The Shadow Beast threw down its challenge like a stone into still water, so I'm walking to Arena Combat Training to learn how to meet the ripples with a steady blade.
+
+## Frame 2818 — 2026-10-08
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: A beast's shadow only stretches as far as we let it, so I'm walking toward the Arena to enroll in Combat Training and learn to meet that darkness head-on.
+
+## Frame 2890 — 2026-10-08
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: Like a seed that has felt the shadow of the storm, I am walking toward Arena Combat Training so that when the Shadow Beast comes back, I'll meet it with roots that hold.
+
+## Frame 3003 — 2026-10-09
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: I’ve challenged Shadow Beast; now I’ll enroll in Arena Combat Training and turn that first spark of courage into a steady flame.

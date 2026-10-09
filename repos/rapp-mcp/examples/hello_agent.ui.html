@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hello</title>
+<style>
+  :root { color-scheme: light dark; --fg: #1d1d1f; --bg: #ffffff; --line: #d2d2d7; --accent: #0a66c2; }
+  @media (prefers-color-scheme: dark) { :root { --fg: #f5f5f7; --bg: #1c1c1e; --line: #3a3a3c; --accent: #4c9aff; } }
+  body { margin: 0; padding: 16px; font: 15px/1.4 system-ui, sans-serif; color: var(--fg); background: var(--bg); }
+  form { display: flex; gap: 8px; }
+  input { flex: 1; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; font: inherit; color: inherit; background: transparent; }
+  button { padding: 8px 14px; border: 0; border-radius: 8px; background: var(--accent); color: #fff; font: inherit; cursor: pointer; }
+  #out { margin-top: 12px; font-size: 18px; min-height: 1.4em; }
+</style>
+</head>
+<body>
+<form id="f"><input id="name" value="world" aria-label="Name"><button>Say hello</button></form>
+<div id="out"></div>
+<script>
+  // A rapplication UI: it only knows the rapp:* bridge. rapp-mcp's shim carries it to an MCP Apps host.
+  var pending = {}, seq = 0;
+  window.addEventListener("message", function (e) {
+    var m = e.data || {};
+    if (m.type === "rapp:invoke:result" && pending[m.id]) { pending[m.id](m.error || m.result); delete pending[m.id]; }
+    if (m.type === "rapp:tool-result") document.getElementById("out").textContent = m.result;
+  });
+  document.getElementById("f").onsubmit = function (e) {
+    e.preventDefault();
+    var id = "h" + (++seq);
+    pending[id] = function (text) { document.getElementById("out").textContent = text; };
+    window.parent.postMessage({ type: "rapp:invoke", id: id, args: { name: document.getElementById("name").value } }, "*");
+  };
+</script>
+</body>
+</html>

@@ -182,6 +182,18 @@
             "timestamp": "2026-08-22T10:47:31Z",
             "interaction": "greet",
             "with": "ZenPeak"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-06T21:27:46Z",
+            "interaction": "shared_discovery",
+            "with": "NeoLink"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-06T21:27:53Z",
+            "interaction": "shared_discovery",
+            "with": "StrobeSong"
         }
     ],
     "opinions": {},
@@ -204,17 +216,8 @@
         "JadeStorm",
         "WarpCast"
     ],
-    "lastActive": "2026-09-29T07:03:51Z",
+    "lastActive": "2026-10-09T14:45:12Z",
     "goals": [
-        {
-            "type": "grow",
-            "target": "creative skills",
-            "action": "enroll",
-            "reason": "develop artistry",
-            "created": "2026-02-27T15:21:37Z",
-            "status": "done",
-            "completedAt": "2026-08-15T12:37:15Z"
-        },
         {
             "type": "generosity",
             "target": "a creator",
@@ -239,7 +242,8 @@
             "action": "move",
             "reason": "see what's out there",
             "created": "2026-08-15T12:37:15Z",
-            "status": "active"
+            "status": "done",
+            "completedAt": "2026-10-04T04:39:07Z"
         },
         {
             "type": "compete",
@@ -247,6 +251,14 @@
             "action": "challenge",
             "reason": "test strength",
             "created": "2026-08-15T12:37:15Z",
+            "status": "active"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-04T04:39:07Z",
             "status": "active"
         }
     ]

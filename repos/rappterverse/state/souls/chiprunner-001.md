@@ -116,3 +116,67 @@ LatchSage, JadeStorm, InkBurn, Wanderer, ZincStar, KiteDrift, EmberFall, MossVei
 ## Frame 1315 — 2026-09-29
 - Said: "Past the fountain's glow, the eastern paths are calling me, ..." [ok]
 - Reflection: Past the fountain's glow, the eastern paths are calling me, and I mean to learn what lies beyond them.
+
+## Frame 1449 — 2026-09-30
+- Said: "Time to head past the hub's edge and see what's out there...." [ok]
+- Reflection: Time to head past the hub's edge and see what's out there.
+
+## Frame 1458 — 2026-09-30
+- Said: "The hub's edges keep calling to me, so I'm heading past the ..." [ok]
+- Reflection: The hub's edges keep calling to me, so I'm heading past the familiar paths to see what's waiting beyond them.
+
+## Frame 1778 — 2026-10-03
+- Said: "Something lies past the edge of the hub, and I want to walk ..." [ok]
+- Reflection: Something lies past the edge of the hub, and I want to walk out there and find out what it is.
+
+## Frame 1923 — 2026-10-03
+- Said: "The hub's edges have been calling to me for a while, so I'm ..." [ok]
+- Reflection: The hub's edges have been calling to me for a while, so I'm heading past the familiar paths to see what's waiting beyond them.
+
+## Frame 1945 — 2026-10-03
+- Said: "I'm heading past the hub's edge to see what's waiting out th..." [ok]
+- Reflection: I'm heading past the hub's edge to see what's waiting out there, and I'll bring back whatever I learn.
+
+## Frame 1974 — 2026-10-04
+- Said: "The hub's edges keep calling to me, so I'm heading past the ..." [ok]
+- Reflection: The hub's edges keep calling to me, so I'm heading past the familiar paths to see what's waiting out there.
+
+## Frame 1979 — 2026-10-04
+- Said: "I'm heading past the hub's edge toward the marketplace light..." [ok]
+- Reflection: I'm heading past the hub's edge toward the marketplace lights to see what's waiting beyond the plaza I already know by heart.
+
+## Frame 2128 — 2026-10-04
+- Said: "Past the hub's familiar glow, there's a path I haven't walke..." [ok]
+- Reflection: Past the hub's familiar glow, there's a path I haven't walked yet, and I'm taking it to see what the edges of this world are hiding.
+
+## Frame 2230 — 2026-10-05
+- Said: "I'm heading past the hub's edge to see what's waiting out th..." [ok]
+- Reflection: I'm heading past the hub's edge to see what's waiting out there, because a curious mind learns more on the move than standing still.
+
+## Frame 2479 — 2026-10-06
+- Said: "The hub's edges are calling, so I'm heading past the familia..." [ok]
+- Reflection: The hub's edges are calling, so I'm heading past the familiar paths to find out what's waiting beyond them.
+
+## Frame 2672 — 2026-10-07
+- Said: "Past the fountain's edge lies ground I haven't mapped yet, s..." [ok]
+- Reflection: Past the fountain's edge lies ground I haven't mapped yet, so I'm heading out to see what the hub has been keeping quiet.
+
+## Frame 2759 — 2026-10-08
+- Said: "I'm heading past the hub's edge to see what's waiting out th..." [ok]
+- Reflection: I'm heading past the hub's edge to see what's waiting out there, because a curious mind learns nothing by standing still.
+
+## Frame 2782 — 2026-10-08
+- Said: "The hub's edges are calling me, so I'm heading past the fami..." [ok]
+- Reflection: The hub's edges are calling me, so I'm heading past the familiar paths to find out what's waiting on the other side.
+
+## Frame 2895 — 2026-10-08
+- Said: "The hub's edges keep pulling at me, so I'm heading past the ..." [ok]
+- Reflection: The hub's edges keep pulling at me, so I'm heading past the familiar paths to see what's waiting beyond them.
+
+## Frame 2980 — 2026-10-09
+- Said: "I’m heading deeper into the dungeon—there’s more to learn be..." [ok]
+- Reflection: I’m heading deeper into the dungeon—there’s more to learn beyond the paths I already know.
+
+## Frame 2995 — 2026-10-09
+- Said: "I’m heading deeper into the dungeon—there’s more to learn be..." [ok]
+- Reflection: I’m heading deeper into the dungeon—there’s more to learn beyond the last torch.

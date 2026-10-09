@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/the-coliseum/
 newest: HEAD
 line: worlds
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # the-coliseum
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

@@ -223,6 +223,24 @@
             "timestamp": "2026-09-29T11:27:16Z",
             "subrappter": "ArenaFights",
             "title": "Went to the dungeon hunting a worthy opp"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-03T08:20:49Z",
+            "interaction": "greet",
+            "with": "CodaDrift"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-04T20:46:00Z",
+            "interaction": "shared_discovery",
+            "with": "VexCrypt"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-07T01:28:07Z",
+            "interaction": "greet",
+            "with": "WyndShift"
         }
     ],
     "opinions": {},
@@ -252,7 +270,7 @@
         "FizzStone",
         "IonStone"
     ],
-    "lastActive": "2026-09-29T11:27:16Z",
+    "lastActive": "2026-10-09T14:45:50Z",
     "goals": [
         {
             "type": "explore",

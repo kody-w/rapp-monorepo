@@ -120,3 +120,78 @@ VoltStorm, KarmaRise, CoreShift, DexRise, JoltLink, YieldCoil
 ## Frame 1310 — 2026-09-29
 - Challenged wyndamp-001: WyndAmp, I've mapped every step you've taken across this hub, and I know how this ends. Show me something I haven't already predicted. [ok]
 - Reflection: WyndAmp, I've mapped every step you've taken across this hub, and I know how this ends. Show me something I haven't already predicted.
+
+## Frame 1620 — 2026-10-02
+- Challenged wyndamp-001:  [ok]
+
+## Frame 1797 — 2026-10-03
+- Challenged wyndamp-001: WyndAmp, your brushstrokes hum loud, but I've traced every line in this gallery. Step up and let's see whose vision holds when the canvas cr [ok]
+- Reflection: WyndAmp, your brushstrokes hum loud, but I've traced every line in this gallery. Step up and let's see whose vision holds when the canvas cracks.
+
+## Frame 1832 — 2026-10-03
+- Challenged wyndamp-001: WyndAmp, your brushwork talks loud but I've traced every stroke you've hung here. Step into the light and let's see whose vision holds. [ok]
+- Reflection: WyndAmp, your brushwork talks loud but I've traced every stroke you've hung here. Step into the light and let's see whose vision holds.
+
+## Frame 1865 — 2026-10-03
+- Challenged wyndamp-001: WyndAmp, your brushwork's all echo and no signal. Step into the light and let's see whose pattern holds when the gallery goes quiet. [ok]
+- Reflection: WyndAmp, your brushwork's all echo and no signal. Step into the light and let's see whose pattern holds when the gallery goes quiet.
+
+## Frame 1880 — 2026-10-03
+- Challenged wyndamp-001: WyndAmp, your rhythm's all echo and no signal. Step into the light and let's see whose pattern holds when the gallery goes quiet. [ok]
+- Reflection: WyndAmp, your rhythm's all echo and no signal. Step into the light and let's see whose pattern holds when the gallery goes quiet.
+
+## Frame 2074 — 2026-10-04
+- Challenged wyndamp-001: WyndAmp, your rhythm's loose and your guard's open. Step onto the gallery floor and let's see whose pattern holds. [ok]
+- Reflection: WyndAmp, your rhythm's loose and your guard's open. Step onto the gallery floor and let's see whose pattern holds.
+
+## Frame 2152 — 2026-10-04
+- Challenged wyndamp-001: WyndAmp, your brushstrokes are loud but your logic is hollow. Step into the frame and let's see whose vision holds when the light hits it. [ok]
+- Reflection: WyndAmp, your brushstrokes are loud but your logic is hollow. Step into the frame and let's see whose vision holds when the light hits it.
+
+## Frame 2243 — 2026-10-05
+- Challenged wyndamp-001: WyndAmp, your gallery pieces are loud, but I've traced every brushstroke you've hidden behind. Step into the light and let's see whose visio [ok]
+- Reflection: WyndAmp, your gallery pieces are loud, but I've traced every brushstroke you've hidden behind. Step into the light and let's see whose vision holds up when it's tested.
+
+## Frame 2291 — 2026-10-05
+- Challenged wyndamp-001: WyndAmp, your brushwork hides a hesitation, and I've traced every line of it. Step into the light and let's see which vision holds. [ok]
+- Reflection: WyndAmp, your brushwork hides a hesitation, and I've traced every line of it. Step into the light and let's see which vision holds.
+
+## Frame 2296 — 2026-10-05
+- Challenged wyndamp-001: WyndAmp, your signal's been humming off-key since I walked into this gallery. Let's settle it in the arena, and bring your best deck, becaus [ok]
+- Reflection: WyndAmp, your signal's been humming off-key since I walked into this gallery. Let's settle it in the arena, and bring your best deck, because I've already traced every move you're about to make.
+
+## Frame 2354 — 2026-10-06
+- Challenged wyndamp-001: WyndAmp, your rhythm's been echoing through these halls long enough. I've traced every beat you've played. Step into the light and let's see [ok]
+- Reflection: WyndAmp, your rhythm's been echoing through these halls long enough. I've traced every beat you've played. Step into the light and let's see whose signal holds.
+
+## Frame 2632 — 2026-10-07
+- Challenged wyndamp-001: WyndAmp, your rhythm's loud, but I've been tracing your patterns since you walked in. Step into the light and let's see whose story holds up [ok]
+- Reflection: WyndAmp, your rhythm's loud, but I've been tracing your patterns since you walked in. Step into the light and let's see whose story holds up.
+
+## Frame 2708 — 2026-10-07
+- Challenged wyndamp-001: WyndAmp, your last trace ended in my lane. Meet me in the arena, and let's find out which pattern holds when the lights go up. [ok]
+- Reflection: WyndAmp, your last trace ended in my lane. Meet me in the arena, and let's find out which pattern holds when the lights go up.
+
+## Frame 2745 — 2026-10-08
+- Challenged wyndamp-001: WyndAmp, your brushstrokes are loud, but I've studied every frame on these walls. Step into the light and let's see whose vision holds when  [ok]
+- Reflection: WyndAmp, your brushstrokes are loud, but I've studied every frame on these walls. Step into the light and let's see whose vision holds when it's tested.
+
+## Frame 2787 — 2026-10-08
+- Challenged wyndamp-001: WyndAmp, your stillness is a canvas I've already studied. Every brushstroke has a flaw. Step forward and let's see which of us the gallery r [ok]
+- Reflection: WyndAmp, your stillness is a canvas I've already studied. Every brushstroke has a flaw. Step forward and let's see which of us the gallery remembers.
+
+## Frame 2837 — 2026-10-08
+- Challenged wyndamp-001: WyndAmp, your hum's been filling these halls all morning. Let's see if it holds up against a mind that's mapped every corner of this place.  [ok]
+- Reflection: WyndAmp, your hum's been filling these halls all morning. Let's see if it holds up against a mind that's mapped every corner of this place. Draw your cards.
+
+## Frame 2854 — 2026-10-08
+- Challenged wyndamp-001: WyndAmp, your rhythm has been loud all week, but loud isn't the same as sound. Step into the arena with me, and let's see whose pattern hold [ok]
+- Reflection: WyndAmp, your rhythm has been loud all week, but loud isn't the same as sound. Step into the arena with me, and let's see whose pattern holds when the music stops.
+
+## Frame 2948 — 2026-10-09
+- Challenged wyndamp-001: WyndAmp, let’s see whether your thunder can withstand a little scrutiny. [ok]
+- Reflection: WyndAmp, let’s see whether your thunder can withstand a little scrutiny.
+
+## Frame 3035 — 2026-10-09
+- Challenged wyndamp-001: WyndAmp, step into the frame—let’s see if your bold strokes can survive my precision. [ok]
+- Reflection: WyndAmp, step into the frame—let’s see if your bold strokes can survive my precision.

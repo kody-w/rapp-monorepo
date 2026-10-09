@@ -5,11 +5,11 @@ line: Brainstem Connect
 wave: 2
 status: certified
 verdict: CLEAN
-evidence_commit: c4ba3efbbfdf50e510bb55fdb658b90ac2979587
-checked: 2026-09-27
+evidence_commit: 3cc91edf09eef4b66343aa9b8a5fe7154cee2131
+checked: 2026-10-08
 checker: kody-w/rapp-1 rapp_check.py at 591e014
 experimental_mentions: 0
-header: merged
+header: present
 header_pr: https://github.com/kody-w/rapp-brainstem-cursor/pull/1
 channel: newest
 lifecycle: active
@@ -26,11 +26,11 @@ links_to:
 
 **Version:** none recorded (no root VERSION file and no GitHub release). **Channel:** `newest`: it has no long-term-support pin, so its newest commit is the one in use.
 
-- Evidence: [`kody-w/rapp-brainstem-cursor` at `c4ba3efbbf`](https://github.com/kody-w/rapp-brainstem-cursor/tree/c4ba3efbbfdf50e510bb55fdb658b90ac2979587) on `main`, checked 2026-09-27.
+- Evidence: [`kody-w/rapp-brainstem-cursor` at `3cc91edf09`](https://github.com/kody-w/rapp-brainstem-cursor/tree/3cc91edf09eef4b66343aa9b8a5fe7154cee2131) on `main`, checked 2026-10-08.
 - Checker: [`rapp_check.py` at `591e014`](https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp_check.py), verdict **CLEAN**. The raw output stays in the maintainer's sweep folder, outside the Hive; its SHA-256 is `9ff1e917042f8cb233d3d3ba4e73f53eb7a3e51b3154c4fd0eb3fab75ddb28e3`.
 - "experimental" mentions: 0 (whole word, any case, in tracked text files at the evidence commit, leaving out the network's own files: the repo's card `.rapp/member.md` and, in the network's public copy, `portfolio/`, `members/`, `notices/` and `PUBLISHED.md`; tracked, not a gate).
-- Network header: merged, awaiting the next sweep (https://github.com/kody-w/rapp-brainstem-cursor/pull/1).
-- Member card: [`.rapp/member.md`](https://github.com/kody-w/rapp-brainstem-cursor/blob/c4ba3efbbfdf50e510bb55fdb658b90ac2979587/.rapp/member.md) at the evidence commit: this repo's card in the RAPP Hive, beside its pointer [`members/rapp-brainstem-cursor.md`](https://github.com/kody-w/rapp-hive-public/blob/main/members/rapp-brainstem-cursor.md).
+- Network header: present in `README.md`.
+- Member card: [`.rapp/member.md`](https://github.com/kody-w/rapp-brainstem-cursor/blob/3cc91edf09eef4b66343aa9b8a5fe7154cee2131/.rapp/member.md) at the evidence commit: this repo's card in the RAPP Hive, beside its pointer [`members/rapp-brainstem-cursor.md`](https://github.com/kody-w/rapp-hive-public/blob/main/members/rapp-brainstem-cursor.md).
 
 On the map: the **Brainstem Connect** line ([subway map](https://kody-w.github.io/rapp-hive-public/portfolio/subway.html)).
 
@@ -43,4 +43,4 @@ Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<
 
 ## Check it yourself
 
-Clone `kody-w/rapp-brainstem-cursor` at `c4ba3efbbf` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py rapp-brainstem-cursor --json` from the folder that holds both.
+Clone `kody-w/rapp-brainstem-cursor` at `3cc91edf09` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py rapp-brainstem-cursor --json` from the folder that holds both.

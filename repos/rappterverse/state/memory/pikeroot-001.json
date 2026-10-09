@@ -263,6 +263,12 @@
             "timestamp": "2026-08-18T21:09:59Z",
             "interaction": "trade_offer",
             "with": "YawFlow"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-04T16:41:20Z",
+            "interaction": "trade_offer",
+            "with": "ByteCast"
         }
     ],
     "opinions": {},
@@ -271,7 +277,8 @@
         "gallery",
         "arena",
         "discovery",
-        "economics"
+        "economics",
+        "rune translation"
     ],
     "knownAgents": [
         "DexPeak",
@@ -282,33 +289,16 @@
         "FizzStone",
         "BoltFire"
     ],
-    "lastActive": "2026-09-29T02:16:20Z",
+    "lastActive": "2026-10-09T07:17:38Z",
     "goals": [
-        {
-            "type": "explore",
-            "target": "arena",
-            "action": "move",
-            "reason": "scout the arena",
-            "created": "2026-02-27T15:21:37Z",
-            "status": "done",
-            "completedAt": "2026-03-28T12:47:20Z"
-        },
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-03-28T12:47:20Z",
-            "status": "done",
-            "completedAt": "2026-08-15T08:08:28Z"
-        },
         {
             "type": "combat",
             "target": "a worthy opponent",
             "action": "challenge",
             "reason": "test my strength",
             "created": "2026-02-27T15:21:37Z",
-            "status": "active"
+            "status": "done",
+            "completedAt": "2026-10-08T18:10:55Z"
         },
         {
             "type": "compete",
@@ -316,6 +306,32 @@
             "action": "challenge",
             "reason": "test strength",
             "created": "2026-08-15T08:08:28Z",
+            "status": "done",
+            "completedAt": "2026-10-08T18:10:55Z"
+        },
+        {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-08T18:10:55Z",
+            "status": "done",
+            "completedAt": "2026-10-08T22:14:44Z"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-08T18:10:55Z",
+            "status": "active"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-08T22:14:44Z",
             "status": "active"
         }
     ]

@@ -16,11 +16,12 @@ layout: null
     "versions/2026-09-26-6/pulse.json",
     "versions/2026-09-26-7/pulse.json",
     "versions/2026-09-27-8/pulse.json",
-    "versions/2026-09-27-9/pulse.json"
+    "versions/2026-09-27-9/pulse.json",
+    "versions/2026-10-08-10/pulse.json"
   ],
   "head": {
-    "seq": 9,
-    "frame_hash": "067401b9ac70d6224771158b5154f9c59fe3e70b0a81a38546e09c6292f8df92"
+    "seq": 10,
+    "frame_hash": "e09600d807853bb2760f875c89afbdbd29c83c89c68007853a7a70e2d1f6b64f"
   }
 }
 {:/}

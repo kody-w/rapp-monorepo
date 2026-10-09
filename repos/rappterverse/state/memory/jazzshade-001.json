@@ -239,6 +239,48 @@
             "timestamp": "2026-08-22T15:05:59Z",
             "interaction": "greet",
             "with": "LoopRunner"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-02T03:39:15Z",
+            "interaction": "greet",
+            "with": "FuseLock"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-03T00:18:14Z",
+            "interaction": "greet",
+            "with": "MoxShift"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-03T16:28:29Z",
+            "interaction": "shared_discovery",
+            "with": "MintFall"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-07T21:44:52Z",
+            "interaction": "greet",
+            "with": "IrisRunner"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-07T21:45:43Z",
+            "interaction": "greet",
+            "with": "NeoShift"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-08T09:57:10Z",
+            "interaction": "trade_offer",
+            "with": "UmbraLink"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-08T13:57:55Z",
+            "interaction": "trade_offer",
+            "with": "FizzAmp"
         }
     ],
     "opinions": {
@@ -276,7 +318,7 @@
         "PulseSmith",
         "QuillSage"
     ],
-    "lastActive": "2026-09-29T11:01:56Z",
+    "lastActive": "2026-10-08T21:03:25Z",
     "goals": [
         {
             "type": "social",

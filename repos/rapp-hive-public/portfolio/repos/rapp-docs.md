@@ -5,17 +5,19 @@ line: Learn & Docs
 wave: 2
 status: certified
 verdict: CLEAN
-evidence_commit: 3042120836d814cbe73f5ee4164a707ad6c8a371
-checked: 2026-09-27
+evidence_commit: e7f181c71040dbe63cc3321436dc6c55f790d502
+checked: 2026-10-08
 checker: kody-w/rapp-1 rapp_check.py at 591e014
 experimental_mentions: 3
 header: present
 header_pr: https://github.com/kody-w/rapp-docs/pull/1
 channel: newest
-lifecycle: active
+lifecycle: archived
+since: 2026-10-08
 member_card: present
 links_to:
   - openrappter
+  - RAPP
   - rapp-1
   - rapp-flight-deck
   - rapp-installer
@@ -26,29 +28,31 @@ links_to:
   - rapp-twin
 ---
 
+> **Archived since 2026-10-08.** The repo is archived on GitHub (read-only); the crawl still checks it, and this file and its badge stay.
+
 # rapp-docs: certified
 
-![RAPP/1: certified](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-docs.svg)
+![RAPP/1: archived (certified)](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-docs.svg)
 
 **Certified:** rapp-1's own checker gave **CLEAN** (no RAPP artifacts, found by a complete bounded scan) at the evidence commit.
 
 **Version:** none recorded (no root VERSION file and no GitHub release). **Channel:** `newest`: it has no long-term-support pin, so its newest commit is the one in use.
 
-- Evidence: [`kody-w/rapp-docs` at `3042120836`](https://github.com/kody-w/rapp-docs/tree/3042120836d814cbe73f5ee4164a707ad6c8a371) on `main`, checked 2026-09-27.
+- Evidence: [`kody-w/rapp-docs` at `e7f181c710`](https://github.com/kody-w/rapp-docs/tree/e7f181c71040dbe63cc3321436dc6c55f790d502) on `main`, checked 2026-10-08.
 - Checker: [`rapp_check.py` at `591e014`](https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp_check.py), verdict **CLEAN**. The raw output stays in the maintainer's sweep folder, outside the Hive; its SHA-256 is `25cfe3b0e2dff3466805679f2aefd04ed2c7883780fcc75aec972cf822d5aef3`.
 - "experimental" mentions: 3 (whole word, any case, in tracked text files at the evidence commit, leaving out the network's own files: the repo's card `.rapp/member.md` and, in the network's public copy, `portfolio/`, `members/`, `notices/` and `PUBLISHED.md`; tracked, not a gate).
 - Network header: present in `README.md`.
-- Member card: [`.rapp/member.md`](https://github.com/kody-w/rapp-docs/blob/3042120836d814cbe73f5ee4164a707ad6c8a371/.rapp/member.md) at the evidence commit: this repo's card in the RAPP Hive, beside its pointer [`members/rapp-docs.md`](https://github.com/kody-w/rapp-hive-public/blob/main/members/rapp-docs.md).
+- Member card: [`.rapp/member.md`](https://github.com/kody-w/rapp-docs/blob/e7f181c71040dbe63cc3321436dc6c55f790d502/.rapp/member.md) at the evidence commit: this repo's card in the RAPP Hive, beside its pointer [`members/rapp-docs.md`](https://github.com/kody-w/rapp-hive-public/blob/main/members/rapp-docs.md).
 
 On the map: the **Learn & Docs** line ([subway map](https://kody-w.github.io/rapp-hive-public/portfolio/subway.html)).
 
 ## Links
 
-Links to 9 portfolio repo(s): [openrappter](openrappter.md) (markdown), [rapp-1](rapp-1.md) (markdown), [rapp-flight-deck](rapp-flight-deck.md) (markdown), [rapp-installer](rapp-installer.md) (markdown), [rapp-keyring](rapp-keyring.md) (markdown), [rapp-light](rapp-light.md) (markdown), [rapp-rings](rapp-rings.md) (markdown), [rapp-train](rapp-train.md) (markdown), [rapp-twin](rapp-twin.md) (markdown).
+Links to 10 portfolio repo(s): [openrappter](openrappter.md) (markdown), [RAPP](RAPP.md) (markdown), [rapp-1](rapp-1.md) (markdown), [rapp-flight-deck](rapp-flight-deck.md) (markdown), [rapp-installer](rapp-installer.md) (markdown), [rapp-keyring](rapp-keyring.md) (markdown), [rapp-light](rapp-light.md) (markdown), [rapp-rings](rapp-rings.md) (markdown), [rapp-train](rapp-train.md) (markdown), [rapp-twin](rapp-twin.md) (markdown).
 Linked from 1: [rapp-monorepo](rapp-monorepo.md).
 
 Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<repo>`, pin files, workflow `uses:` and `repository:` lines, and submodules, at the evidence commit; only public repos in this portfolio count.
 
 ## Check it yourself
 
-Clone `kody-w/rapp-docs` at `3042120836` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py rapp-docs --json` from the folder that holds both.
+Clone `kody-w/rapp-docs` at `e7f181c710` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py rapp-docs --json` from the folder that holds both.

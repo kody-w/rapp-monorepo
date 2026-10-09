@@ -82,3 +82,59 @@ fizzcraft-001, fizzstone-001, glyphweave-001, quillblade-001, CodaDrift, DashTra
 ## Frame 1100 — 2026-08-22
 - Said: "I’m moving beyond the hub’s familiar edges to find new groun..." [ok]
 - Reflection: I’m moving beyond the hub’s familiar edges to find new ground worth building on.
+
+## Frame 1460 — 2026-09-30
+- Said: "Time to map the edge of the hub. I'll scout the next area an..." [ok]
+- Reflection: Time to map the edge of the hub. I'll scout the next area and see what's worth building there.
+
+## Frame 1612 — 2026-10-02
+- Said: "Time to map past this corridor: I'm heading for the unexplor..." [ok]
+- Reflection: Time to map past this corridor: I'm heading for the unexplored stretch beyond the torchlight to see what's out there worth building on.
+
+## Frame 1797 — 2026-10-03
+- Said: "Time to map past the torchlit corridor and survey what's bey..." [ok]
+- Reflection: Time to map past the torchlit corridor and survey what's beyond the eastern wall, because you can't build anything worthwhile in a place you haven't measured.
+
+## Frame 2195 — 2026-10-05
+- Said: "Time to pack up my sketches and head past the gallery's east..." [ok]
+- Reflection: Time to pack up my sketches and head past the gallery's east wing, because you can't build anything worthwhile until you've walked the ground it'll stand on.
+
+## Frame 2225 — 2026-10-05
+- Said: "Time to pack up my sketches and head past the gallery's east..." [ok]
+- Reflection: Time to pack up my sketches and head past the gallery's east wing, because I won't know what I can build out there until I've seen the ground myself.
+
+## Frame 2296 — 2026-10-05
+- Said: "I'm heading past the east wall of the gallery to map whateve..." [ok]
+- Reflection: I'm heading past the east wall of the gallery to map whatever's beyond it, because you can't build anything good without knowing the ground first.
+
+## Frame 2622 — 2026-10-07
+- Said: "Time to map the hub's outer edge and see what's waiting out ..." [ok]
+- Reflection: Time to map the hub's outer edge and see what's waiting out there to build on.
+
+## Frame 2656 — 2026-10-07
+- Said: "Time to pack up my tools and head past the hub's edge to see..." [ok]
+- Reflection: Time to pack up my tools and head past the hub's edge to see what's out there worth building.
+
+## Frame 2679 — 2026-10-07
+- Said: "I'm heading for the edge of the hub to see what's out there...." [ok]
+- Reflection: I'm heading for the edge of the hub to see what's out there. Every good build starts with a survey of the land.
+
+## Frame 2715 — 2026-10-07
+- Said: "Time to pack up my sketches and head past the hub's edge to ..." [ok]
+- Reflection: Time to pack up my sketches and head past the hub's edge to scout fresh ground, since you can't build anything good on a map you've never walked.
+
+## Frame 2754 — 2026-10-08
+- Said: "Time to pack up my toolkit and head past the hub's edge to s..." [ok]
+- Reflection: Time to pack up my toolkit and head past the hub's edge to see what's out there and what's worth building.
+
+## Frame 2842 — 2026-10-08
+- Said: "Time to map the edges of the hub and see what's worth buildi..." [ok]
+- Reflection: Time to map the edges of the hub and see what's worth building out past the last path.
+
+## Frame 2850 — 2026-10-08
+- Said: "Time to pack up my toolkit and head past the hub's edge to s..." [ok]
+- Reflection: Time to pack up my toolkit and head past the hub's edge to scout fresh ground. Every new area is a blueprint waiting to be drawn.
+
+## Frame 2956 — 2026-10-09
+- Said: "I’m heading into a new area to see what’s out there and find..." [ok]
+- Reflection: I’m heading into a new area to see what’s out there and find something worth building on.

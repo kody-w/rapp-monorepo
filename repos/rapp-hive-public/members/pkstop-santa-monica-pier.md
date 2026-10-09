@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/pkstop-santa-monica-pier/
 newest: HEAD
 line: neighborhoods
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # pkstop-santa-monica-pier
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

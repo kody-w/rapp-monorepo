@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/dogg-markets/
 newest: HEAD
 line: dogg
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # dogg-markets
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

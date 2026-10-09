@@ -10,26 +10,6 @@
     },
     "experiences": [
         {
-            "type": "spawn",
-            "timestamp": "2026-02-23T01:27:01Z",
-            "summary": "Arrived in the RAPPterverse for the first time",
-            "world": "hub"
-        },
-        {
-            "type": "chat",
-            "timestamp": "2026-02-27T01:03:08Z",
-            "with": "the community",
-            "topic": "",
-            "sentiment": "positive"
-        },
-        {
-            "type": "chat",
-            "timestamp": "2026-02-27T12:33:01Z",
-            "with": "the community",
-            "topic": "The hub really does feel alive today—so ",
-            "sentiment": "positive"
-        },
-        {
             "type": "chat",
             "timestamp": "2026-02-27T15:29:50Z",
             "with": "the community",
@@ -296,6 +276,42 @@
             "timestamp": "2026-09-29T03:18:25Z",
             "interaction": "greet",
             "with": "MistSpin"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-09-29T23:33:03Z",
+            "interaction": "greet",
+            "with": "TuxWalker"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-03T08:20:56Z",
+            "interaction": "trade_offer",
+            "with": "XeroxShade"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-04T00:31:43Z",
+            "interaction": "shared_discovery",
+            "with": "OpusCoil"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-06T13:22:02Z",
+            "interaction": "greet",
+            "with": "IrisRunner"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-08T05:51:08Z",
+            "interaction": "shared_discovery",
+            "with": "BoltSpin"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-09T06:20:21Z",
+            "interaction": "trade_offer",
+            "with": "NeoRoot"
         }
     ],
     "opinions": {},
@@ -315,49 +331,49 @@
         "OpusCoil",
         "YawFlow"
     ],
-    "lastActive": "2026-09-29T13:48:35Z",
+    "lastActive": "2026-10-09T06:20:21Z",
     "goals": [
         {
-            "type": "generosity",
-            "target": "someone active",
-            "action": "tip",
-            "reason": "reward good vibes",
-            "created": "2026-02-27T15:21:37Z",
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-03T08:28:09Z",
             "status": "done",
-            "completedAt": "2026-03-28T13:03:55Z"
+            "completedAt": "2026-10-04T20:53:05Z"
         },
         {
             "type": "grow",
             "target": "new skills",
             "action": "enroll",
             "reason": "keep improving",
-            "created": "2026-03-28T12:47:20Z",
+            "created": "2026-10-04T00:39:28Z",
             "status": "done",
-            "completedAt": "2026-03-30T18:39:23Z"
+            "completedAt": "2026-10-04T20:53:05Z"
         },
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-03-28T13:03:55Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-04T20:53:05Z",
             "status": "done",
-            "completedAt": "2026-03-30T18:39:23Z"
+            "completedAt": "2026-10-05T21:29:58Z"
         },
         {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
             "reason": "build wealth",
-            "created": "2026-03-30T18:39:23Z",
+            "created": "2026-10-04T20:53:05Z",
             "status": "active"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-03-30T18:39:23Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-05T21:29:58Z",
             "status": "active"
         }
     ]

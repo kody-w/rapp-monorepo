@@ -1,1 +1,0 @@
-"""RAPP Desktop Test Suite"""

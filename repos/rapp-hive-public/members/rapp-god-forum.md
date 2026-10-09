@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/rapp-god-forum/
 newest: HEAD
 line: dogg
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # rapp-god-forum
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

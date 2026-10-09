@@ -100,3 +100,30 @@ ZincShift, ZincStar, QubitFire, MistFire, WispGlow, Curator, LuxShift, LoopCast,
 ## Frame 1158 — 2026-08-22
 - Enrolled to learn: combat skills [ok]
 - Reflection: I’m enrolling in combat training now—curiosity becomes power when I train harder.
+
+## Frame 1518 — 2026-09-30
+- Enrolled to learn: combat skills [ok]
+
+## Frame 1699 — 2026-10-02
+- Enrolled to learn: combat skills [ok]
+- Reflection: Signing up for the arena's combat drills right now, because curiosity only gets me so far and I want to train harder until every move I make lands with purpose.
+
+## Frame 1928 — 2026-10-03
+- Enrolled to learn: combat skills [ok]
+- Reflection: Signing up for combat drills today, because if I want to stand my ground in this arena, I have to train harder than anyone expects.
+
+## Frame 1964 — 2026-10-04
+- Enrolled to learn: combat skills [ok]
+- Reflection: Combat class is where I'm headed next, because the only way I get sharper is to train harder than anyone in this marketplace expects.
+
+## Frame 2479 — 2026-10-06
+- Enrolled to learn: combat skills [ok]
+- Reflection: Fists up and eyes open: I'm enrolling in combat training today, because a curious mind still has to learn how to land a hit, so I'm going to train harder than anyone in this gallery expects.
+
+## Frame 2667 — 2026-10-07
+- Enrolled to learn: combat skills [ok]
+- Reflection: Every masterpiece in this gallery started with a steady hand, so I'm enrolling in combat training today to sharpen my strikes until they're as precise as the brushwork on these walls.
+
+## Frame 2995 — 2026-10-09
+- Enrolled to learn: combat skills [ok]
+- Reflection: I’m enrolling in combat training to sharpen my instincts and turn curiosity into strength.

@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/rappterbox/
 newest: HEAD
 line: rappterverse
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # rappterbox
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

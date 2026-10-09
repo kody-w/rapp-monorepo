@@ -7,9 +7,9 @@ line: hive
 also_on:
   - rapp1-core
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # rapp-model-hive
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

@@ -6,7 +6,7 @@ wave: 2
 status: not yet
 verdict: DRIFT
 evidence_commit: 48b6c3854280157fce02987de43febe5de28e35b
-checked: 2026-09-27
+checked: 2026-10-08
 checker: kody-w/rapp-1 rapp_check.py at 591e014
 experimental_mentions: 54
 header: present
@@ -29,7 +29,7 @@ member_card: present
 
 **Version:** `v1.0.0`, from the tag of its latest GitHub release. **LTS:** [`4c8ba6b`](https://github.com/kody-w/rapp-map/tree/4c8ba6bbe73125cc980d0c3b38c59c99e4b231c0) (commit `4c8ba6bbe7`, from the network's built-in known pins, until the estate publishes its LTS pins). **Channel:** `rapp1-lts`: it has a long-term-support pin, so the network builds on that commit; its newer commits are the newest channel.
 
-- Evidence: [`kody-w/rapp-map` at `48b6c38542`](https://github.com/kody-w/rapp-map/tree/48b6c3854280157fce02987de43febe5de28e35b) on `main`, checked 2026-09-27.
+- Evidence: [`kody-w/rapp-map` at `48b6c38542`](https://github.com/kody-w/rapp-map/tree/48b6c3854280157fce02987de43febe5de28e35b) on `main`, checked 2026-10-08.
 - Checker: [`rapp_check.py` at `591e014`](https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp_check.py), verdict **DRIFT**, 1 finding(s), 26 passing artifact(s). The raw output stays in the maintainer's sweep folder, outside the Hive; its SHA-256 is `c37cc9c787beea0c40fc8065b10b80eafa3b55e295cc43a4e9f44f3579f3f8b0`.
 - "experimental" mentions: 54 (whole word, any case, in tracked text files at the evidence commit, leaving out the network's own files: the repo's card `.rapp/member.md` and, in the network's public copy, `portfolio/`, `members/`, `notices/` and `PUBLISHED.md`; tracked, not a gate).
 - Network header: present in `README.md`.

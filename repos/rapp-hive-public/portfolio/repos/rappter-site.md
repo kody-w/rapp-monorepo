@@ -6,25 +6,28 @@ wave: 2
 status: not yet
 verdict: DRIFT
 evidence_commit: c0b7950b404d27bed54b706d747bbe5a7e1ec494
-checked: 2026-09-27
+checked: 2026-10-08
 checker: kody-w/rapp-1 rapp_check.py at 591e014
 experimental_mentions: 1
 header: merged
 header_pr: https://github.com/kody-w/rappter-site/pull/6
 channel: newest
-lifecycle: active
+lifecycle: archived
+since: 2026-10-08
 member_card: present
 ---
 
+> **Archived since 2026-10-08.** The repo is archived on GitHub (read-only); the crawl still checks it, and this file and its badge stay.
+
 # rappter-site: not yet
 
-![RAPP/1: not yet](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rappter-site.svg)
+![RAPP/1: archived (not yet)](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rappter-site.svg)
 
 **Not yet:** 1 finding(s) from rapp_check: §12 schema label.
 
 **Version:** none recorded (no root VERSION file and no GitHub release). **Channel:** `newest`: it has no long-term-support pin, so its newest commit is the one in use.
 
-- Evidence: [`kody-w/rappter-site` at `c0b7950b40`](https://github.com/kody-w/rappter-site/tree/c0b7950b404d27bed54b706d747bbe5a7e1ec494) on `main`, checked 2026-09-27.
+- Evidence: [`kody-w/rappter-site` at `c0b7950b40`](https://github.com/kody-w/rappter-site/tree/c0b7950b404d27bed54b706d747bbe5a7e1ec494) on `main`, checked 2026-10-08.
 - Checker: [`rapp_check.py` at `591e014`](https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp_check.py), verdict **DRIFT**, 1 finding(s), 2 passing artifact(s). The raw output stays in the maintainer's sweep folder, outside the Hive; its SHA-256 is `7acbee6cea3d3ed09ae8c23303a2848aeba6da497b87f55a2517bcfb37b00396`.
 - "experimental" mentions: 1 (whole word, any case, in tracked text files at the evidence commit, leaving out the network's own files: the repo's card `.rapp/member.md` and, in the network's public copy, `portfolio/`, `members/`, `notices/` and `PUBLISHED.md`; tracked, not a gate).
 - Network header: merged, awaiting the next sweep (https://github.com/kody-w/rappter-site/pull/6).

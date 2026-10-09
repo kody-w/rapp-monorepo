@@ -5,14 +5,15 @@ line: Worlds & Play
 wave: 2
 status: certified
 verdict: COMPLIANT
-evidence_commit: dcf6048e74a00165b7c9eb02a9ba272ae3cf0633
-checked: 2026-09-27
+evidence_commit: a0f392ecc23cbb2f5293ac33e80d95ae2487139f
+checked: 2026-10-08
 checker: kody-w/rapp-1 rapp_check.py at 591e014
 experimental_mentions: 1
 header: present
 header_pr: https://github.com/kody-w/sim-art-collective/pull/15
 channel: newest
-lifecycle: active
+lifecycle: archived
+since: 2026-10-08
 member_card: present
 links_to:
   - RAPP
@@ -20,19 +21,21 @@ links_to:
   - RAPPcards
 ---
 
+> **Archived since 2026-10-08.** The repo is archived on GitHub (read-only); the crawl still checks it, and this file and its badge stay.
+
 # sim-art-collective: certified
 
-![RAPP/1: certified](https://kody-w.github.io/rapp-hive-public/portfolio/badges/sim-art-collective.svg)
+![RAPP/1: archived (certified)](https://kody-w.github.io/rapp-hive-public/portfolio/badges/sim-art-collective.svg)
 
 **Certified:** rapp-1's own checker gave **COMPLIANT** (every RAPP artifact passes) at the evidence commit.
 
 **Version:** none recorded (no root VERSION file and no GitHub release). **Channel:** `newest`: it has no long-term-support pin, so its newest commit is the one in use.
 
-- Evidence: [`kody-w/sim-art-collective` at `dcf6048e74`](https://github.com/kody-w/sim-art-collective/tree/dcf6048e74a00165b7c9eb02a9ba272ae3cf0633) on `main`, checked 2026-09-27.
+- Evidence: [`kody-w/sim-art-collective` at `a0f392ecc2`](https://github.com/kody-w/sim-art-collective/tree/a0f392ecc23cbb2f5293ac33e80d95ae2487139f) on `main`, checked 2026-10-08.
 - Checker: [`rapp_check.py` at `591e014`](https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp_check.py), verdict **COMPLIANT**, 1 passing artifact(s). The raw output stays in the maintainer's sweep folder, outside the Hive; its SHA-256 is `8f31db655d78b814fdb26bf1d19e21dd8522a8685f3ea61ee22d00b5fb683b0c`.
 - "experimental" mentions: 1 (whole word, any case, in tracked text files at the evidence commit, leaving out the network's own files: the repo's card `.rapp/member.md` and, in the network's public copy, `portfolio/`, `members/`, `notices/` and `PUBLISHED.md`; tracked, not a gate).
 - Network header: present in `README.md`.
-- Member card: [`.rapp/member.md`](https://github.com/kody-w/sim-art-collective/blob/dcf6048e74a00165b7c9eb02a9ba272ae3cf0633/.rapp/member.md) at the evidence commit: this repo's card in the RAPP Hive, beside its pointer [`members/sim-art-collective.md`](https://github.com/kody-w/rapp-hive-public/blob/main/members/sim-art-collective.md).
+- Member card: [`.rapp/member.md`](https://github.com/kody-w/sim-art-collective/blob/a0f392ecc23cbb2f5293ac33e80d95ae2487139f/.rapp/member.md) at the evidence commit: this repo's card in the RAPP Hive, beside its pointer [`members/sim-art-collective.md`](https://github.com/kody-w/rapp-hive-public/blob/main/members/sim-art-collective.md).
 
 On the map: the **Worlds & Play** line ([subway map](https://kody-w.github.io/rapp-hive-public/portfolio/subway.html)).
 
@@ -45,4 +48,4 @@ Counted from markdown links to `github.com/kody-w/<repo>` or `kody-w.github.io/<
 
 ## Check it yourself
 
-Clone `kody-w/sim-art-collective` at `dcf6048e74` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py sim-art-collective --json` from the folder that holds both.
+Clone `kody-w/sim-art-collective` at `a0f392ecc2` and `kody-w/rapp-1` at `591e014`, then run `python3 -B rapp-1/rapp_check.py sim-art-collective --json` from the folder that holds both.

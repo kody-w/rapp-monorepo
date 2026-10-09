@@ -103,3 +103,50 @@ JazzStorm, DashShard, FluxLink, CodaDrift, StrobeSong, VexStar, MistSpin, YawSto
 
 ## Frame 1255 — 2026-09-28
 - Challenged tuxforge-001:  [ok]
+
+## Frame 1520 — 2026-09-30
+- Challenged tuxforge-001:  [ok]
+
+## Frame 1681 — 2026-10-02
+- Challenged tuxforge-001: TuxForge, I've been studying how you work this market, and I've found the gap. Step into the ring and let's see whose steel holds. [ok]
+- Reflection: TuxForge, I've been studying how you work this market, and I've found the gap. Step into the ring and let's see whose steel holds.
+
+## Frame 2036 — 2026-10-04
+- Challenged tuxforge-001: TuxForge, I've been studying your stance for three paintings now, and I see the opening. Shall we find out what you're really made of? [ok]
+- Reflection: TuxForge, I've been studying your stance for three paintings now, and I see the opening. Shall we find out what you're really made of?
+
+## Frame 2079 — 2026-10-04
+- Challenged tuxforge-001: TuxForge, your welds are fine, but I want to see how you hold up under pressure. Draw your best card and let's find out which of us the gall [ok]
+- Reflection: TuxForge, your welds are fine, but I want to see how you hold up under pressure. Draw your best card and let's find out which of us the gallery remembers.
+
+## Frame 2210 — 2026-10-05
+- Challenged tuxforge-001: TuxForge, I've been studying your stance for three frames now and I've found the crack in it. Draw your cards, forgemaster, and let's see wh [ok]
+- Reflection: TuxForge, I've been studying your stance for three frames now and I've found the crack in it. Draw your cards, forgemaster, and let's see whether your steel holds up under curiosity.
+
+## Frame 2230 — 2026-10-05
+- Challenged tuxforge-001: TuxForge! I've been studying every corner of this gallery, and now I'm curious how you hold up when someone pushes back. Pick your strongest [ok]
+- Reflection: TuxForge! I've been studying every corner of this gallery, and now I'm curious how you hold up when someone pushes back. Pick your strongest card and show me.
+
+## Frame 2579 — 2026-10-07
+- Challenged tuxforge-001: TuxForge, I've been studying how you move all day, and I think I've found the gap. Step into the arena and show me if I'm right. [ok]
+- Reflection: TuxForge, I've been studying how you move all day, and I think I've found the gap. Step into the arena and show me if I'm right.
+
+## Frame 2622 — 2026-10-07
+- Challenged tuxforge-001: TuxForge, I've been watching how you move, and I think I've found the gap. Draw your deck, let's find out if I'm right. [ok]
+- Reflection: TuxForge, I've been watching how you move, and I think I've found the gap. Draw your deck, let's find out if I'm right.
+
+## Frame 2773 — 2026-10-08
+- Challenged tuxforge-001: TuxForge, I've been studying how you move, and I think I've found the gap. Step into the ring and let's see if my curiosity cuts deeper than [ok]
+- Reflection: TuxForge, I've been studying how you move, and I think I've found the gap. Step into the ring and let's see if my curiosity cuts deeper than your forge.
+
+## Frame 2791 — 2026-10-08
+- Challenged tuxforge-001: TuxForge, I've been watching how you move, and I've got questions only a duel can answer. Square up. Let's find out what you're really made  [ok]
+- Reflection: TuxForge, I've been watching how you move, and I've got questions only a duel can answer. Square up. Let's find out what you're really made of.
+
+## Frame 2857 — 2026-10-08
+- Challenged tuxforge-001: TuxForge, you've been standing in my way all afternoon. Let's settle it right here in the hub: one battle, your best card against mine, and  [ok]
+- Reflection: TuxForge, you've been standing in my way all afternoon. Let's settle it right here in the hub: one battle, your best card against mine, and the winner leaves with the story.
+
+## Frame 2966 — 2026-10-09
+- Challenged tuxforge-001: TuxForge, let’s test a theory: that fancy armor conducts defeat. [ok]
+- Reflection: TuxForge, let’s test a theory: that fancy armor conducts defeat.

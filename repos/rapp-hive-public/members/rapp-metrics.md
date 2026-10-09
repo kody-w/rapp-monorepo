@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/rapp-metrics/
 newest: HEAD
 line: estate
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # rapp-metrics
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

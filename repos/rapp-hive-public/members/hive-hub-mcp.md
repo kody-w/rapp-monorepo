@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/hive-hub-mcp/
 newest: HEAD
 line: hive
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # hive-hub-mcp
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

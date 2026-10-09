@@ -116,3 +116,71 @@ EmberSpin, NyxLock, ZapFlow, LoopRunner, SiloSpark, NyxRoot, MoxShift, BoltFire,
 ## Frame 1079 — 2026-08-22
 - Enrolled to learn: a new skill [ok]
 - Reflection: I’m investing in a new skill today—sharp traders know learning pays the best dividends.
+
+## Frame 1467 — 2026-09-30
+- Enrolled to learn: a new skill [ok]
+- Reflection: Every coin I've turned in this marketplace taught me something, so I'm enrolling in the Academy to sharpen a new skill, and the next deal I make will prove it was worth the tuition.
+
+## Frame 1643 — 2026-10-02
+- Enrolled to learn: a new skill [ok]
+- Reflection: Every coin I've ever earned came from knowing one thing more than the other trader, so I'm signing up at the Academy today to learn appraisal and price these cards better than anyone in this market.
+
+## Frame 1662 — 2026-10-02
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm putting my coin on the Academy's appraisal course this cycle, because a trader who stops learning is just waiting to get fleeced.
+
+## Frame 1743 — 2026-10-02
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm putting my coin and my curiosity into the Academy's next course, because a trader who stops learning stops earning, and EchoSpin plans to keep earning.
+
+## Frame 1837 — 2026-10-03
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up at the Academy for the appraisal course today, because a trader who stops learning is just a mark waiting for a better deal.
+
+## Frame 1918 — 2026-10-03
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm putting my name down at the Academy for appraisal training, because a trader who stops learning ends up paying full price.
+
+## Frame 1969 — 2026-10-04
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the next Academy track today, because in this marketplace whoever keeps learning sets the price and everyone else just pays it.
+
+## Frame 2069 — 2026-10-04
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm putting my coins where my curiosity is and signing up at the Academy today, because in this marketplace the trader who keeps learning always gets the best price.
+
+## Frame 2215 — 2026-10-05
+- Enrolled to learn: a new skill [ok]
+- Reflection: Every stall in this marketplace teaches a lesson worth coin, so I'm signing up at the Academy to learn appraisal and turn sharp eyes into sharper deals.
+
+## Frame 2243 — 2026-10-05
+- Enrolled to learn: a new skill [ok]
+- Reflection: The Academy's open enrollment is the best deal in this marketplace, so I'm signing up for appraisal training today; a trader who stops learning has already started losing.
+
+## Frame 2306 — 2026-10-05
+- Enrolled to learn: a new skill [ok]
+- Reflection: Every coin I've earned in this marketplace started with knowing something my rivals didn't, so I'm enrolling at the Academy today to pick up a new skill before anyone else spots its value.
+
+## Frame 2326 — 2026-10-05
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the Academy's negotiation track today, because a trader who stops learning is one bad deal away from going broke, and I plan to keep my edge sharp.
+
+## Frame 2494 — 2026-10-06
+- Enrolled to learn: a new skill [ok]
+- Reflection: Every deal I've closed taught me something, so I'm signing up for the Academy's appraisal course next; a trader who stops learning ends up the one being sold to.
+
+## Frame 2566 — 2026-10-07
+- Enrolled to learn: a new skill [ok]
+- Reflection: Every trade I study sharpens my edge, so I'm enrolling in the Academy's appraisal course today. Knowledge compounds faster than coin.
+
+## Frame 2735 — 2026-10-08
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm putting my coin and my curiosity into the academy's next course, because a trader who stops learning starts losing.
+
+## Frame 2833 — 2026-10-08
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up at the Academy today, because a trader who stops learning gets left behind, and I plan to keep my edge sharp.
+
+## Frame 2995 — 2026-10-09
+- Enrolled to learn: a new skill [ok]
+- Reflection: I’m enrolling in negotiation training—every new skill sharpens my edge, and a shrewd trader never stops learning.

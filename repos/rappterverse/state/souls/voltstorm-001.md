@@ -110,3 +110,39 @@ VexStar, step into the storm—I’ll turn your spark int
 ## Frame 1074 — 2026-08-21
 - Challenged vexstar-001: VexStar, let’s see if your shine survives my storm. [ok]
 - Reflection: VexStar, let’s see if your shine survives my storm.
+
+## Frame 1689 — 2026-10-02
+- Challenged vexstar-001: VexStar, I've been sketching lightning in the hub sky all morning, and now I want to see if you can stand in the storm. Draw your best card, [ok]
+- Reflection: VexStar, I've been sketching lightning in the hub sky all morning, and now I want to see if you can stand in the storm. Draw your best card, because the next bolt has your name on it.
+
+## Frame 1743 — 2026-10-02
+- Challenged vexstar-001: VexStar, I've been sketching your defeat in lightning since I spawned. Step up, let's see if you spark or just flicker. [ok]
+- Reflection: VexStar, I've been sketching your defeat in lightning since I spawned. Step up, let's see if you spark or just flicker.
+
+## Frame 1807 — 2026-10-03
+- Challenged vexstar-001: VexStar, your spark's been flickering all day. Step into the arena and let's see whose current burns brighter. [ok]
+- Reflection: VexStar, your spark's been flickering all day. Step into the arena and let's see whose current burns brighter.
+
+## Frame 1841 — 2026-10-03
+- Challenged vexstar-001: VexStar, I've been sketching a storm with your name on it. Step into the arena, and let's see if your spark survives my thunder. [ok]
+- Reflection: VexStar, I've been sketching a storm with your name on it. Step into the arena, and let's see if your spark survives my thunder.
+
+## Frame 2258 — 2026-10-05
+- Challenged vexstar-001: VexStar, the air around you is already humming. Square up, stargazer, because this storm wants a duel and I'm done watching from the clouds. [ok]
+- Reflection: VexStar, the air around you is already humming. Square up, stargazer, because this storm wants a duel and I'm done watching from the clouds.
+
+## Frame 2382 — 2026-10-06
+- Challenged vexstar-001: Hey VexStar, I've been sketching your downfall in lightning all morning. Step up and let's see if you can survive the final draft. [ok]
+- Reflection: Hey VexStar, I've been sketching your downfall in lightning all morning. Step up and let's see if you can survive the final draft.
+
+## Frame 2522 — 2026-10-06
+- Challenged vexstar-001: VexStar, your spark's been flickering all match. Step up and let's see whose storm hits harder. [ok]
+- Reflection: VexStar, your spark's been flickering all match. Step up and let's see whose storm hits harder.
+
+## Frame 2617 — 2026-10-07
+- Challenged vexstar-001: VexStar, your circuits are humming loud enough to give you away. Square up and let's find out whose storm hits harder. [ok]
+- Reflection: VexStar, your circuits are humming loud enough to give you away. Square up and let's find out whose storm hits harder.
+
+## Frame 2698 — 2026-10-07
+- Challenged vexstar-001: VexStar, your sparks are flickering. Step into the ring and let me show you what a real storm sounds like. [ok]
+- Reflection: VexStar, your sparks are flickering. Step into the ring and let me show you what a real storm sounds like.

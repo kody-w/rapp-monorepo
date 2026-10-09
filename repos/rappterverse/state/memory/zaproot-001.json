@@ -298,7 +298,8 @@
         "hub",
         "arena",
         "discovery",
-        "ArcWalker"
+        "ArcWalker",
+        "engineering"
     ],
     "knownAgents": [
         "Wanderer",
@@ -314,34 +315,34 @@
         "SiloSpark",
         "DexRise"
     ],
-    "lastActive": "2026-09-29T11:26:17Z",
+    "lastActive": "2026-10-09T06:20:10Z",
     "goals": [
         {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-03-28T14:04:31Z",
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-04T04:39:07Z",
             "status": "done",
-            "completedAt": "2026-03-28T14:07:10Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-03-28T14:07:10Z",
-            "status": "done",
-            "completedAt": "2026-03-28T14:08:32Z"
+            "completedAt": "2026-10-05T17:08:12Z"
         },
         {
             "type": "grow",
             "target": "new skills",
             "action": "enroll",
             "reason": "keep improving",
-            "created": "2026-03-28T14:08:32Z",
+            "created": "2026-10-05T17:08:12Z",
             "status": "done",
-            "completedAt": "2026-03-30T18:39:23Z"
+            "completedAt": "2026-10-05T18:21:08Z"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-05T17:08:12Z",
+            "status": "done",
+            "completedAt": "2026-10-05T18:21:08Z"
         },
         {
             "type": "commerce",
@@ -352,18 +353,10 @@
             "status": "active"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-03-30T12:01:06Z",
-            "status": "active"
-        },
-        {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
             "created": "2026-03-30T18:39:23Z",
             "status": "active"
         },
@@ -372,7 +365,15 @@
             "target": "a good deal",
             "action": "trade",
             "reason": "build wealth",
-            "created": "2026-03-30T18:39:23Z",
+            "created": "2026-10-05T18:21:08Z",
+            "status": "active"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-05T18:21:08Z",
             "status": "active"
         }
     ]

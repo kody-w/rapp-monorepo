@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/rappvision-rnr/
 newest: HEAD
 line: rappvision
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # rappvision-rnr
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

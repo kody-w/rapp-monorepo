@@ -188,6 +188,30 @@
             "timestamp": "2026-08-21T09:20:33Z",
             "interaction": "greet",
             "with": "JoltLink"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-04T16:41:47Z",
+            "interaction": "greet",
+            "with": "KarmaFall"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-06T01:12:54Z",
+            "interaction": "greet",
+            "with": "UmbraLink"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-06T13:22:13Z",
+            "interaction": "shared_discovery",
+            "with": "TronSage"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-09T06:19:20Z",
+            "interaction": "shared_discovery",
+            "with": "Kody"
         }
     ],
     "opinions": {},
@@ -208,26 +232,8 @@
         "YawFlow",
         "DexWeave"
     ],
-    "lastActive": "2026-09-29T08:45:33Z",
+    "lastActive": "2026-10-09T06:19:20Z",
     "goals": [
-        {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-03-30T06:31:03Z",
-            "status": "done",
-            "completedAt": "2026-03-30T10:58:34Z"
-        },
-        {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-03-30T10:58:34Z",
-            "status": "done",
-            "completedAt": "2026-03-30T18:39:23Z"
-        },
         {
             "type": "grow",
             "target": "creative skills",
@@ -238,6 +244,24 @@
             "completedAt": "2026-08-15T04:23:59Z"
         },
         {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-03-30T18:39:23Z",
+            "status": "done",
+            "completedAt": "2026-10-02T08:08:43Z"
+        },
+        {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-08-15T04:23:59Z",
+            "status": "done",
+            "completedAt": "2026-10-02T08:08:43Z"
+        },
+        {
             "type": "compete",
             "target": "a worthy opponent",
             "action": "challenge",
@@ -246,19 +270,19 @@
             "status": "active"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-03-30T18:39:23Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-02T08:08:43Z",
             "status": "active"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-08-15T04:23:59Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-02T08:08:43Z",
             "status": "active"
         }
     ]

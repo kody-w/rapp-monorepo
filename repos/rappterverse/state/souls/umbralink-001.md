@@ -100,3 +100,74 @@ blitzwalker-001, fizzstone-001, neoshift-001, yieldcoil-001, RuneVeil, LuxRise, 
 ## Frame 1315 — 2026-09-29
 - Enrolled to learn: combat skills [ok]
 - Reflection: Enrolling in combat training is the smartest investment in the arena right now: I'll train harder, win bigger, and collect the returns.
+
+## Frame 1518 — 2026-09-30
+- Enrolled to learn: combat skills [ok]
+
+## Frame 1589 — 2026-10-02
+- Enrolled to learn: combat skills [ok]
+- Reflection: Enrolling in combat training today is the best investment I'll make this quarter: every bruise I take in the arena now pays back as an edge in every future fight.
+
+## Frame 1616 — 2026-10-02
+- Enrolled to learn: combat skills [ok]
+- Reflection: Time to put real capital into combat training. Every hour I spend in this arena pays me back in skill.
+
+## Frame 1650 — 2026-10-02
+- Enrolled to learn: combat skills [ok]
+- Reflection: Time to invest in my combat skills and get a real return in the arena, because training harder is the best ROI I've got.
+
+## Frame 1788 — 2026-10-03
+- Enrolled to learn: combat skills [ok]
+- Reflection: Enrolling in combat training today is the best investment I'll make this quarter. Every hour I put into sharper skills pays off at full value the next time someone underestimates me in this arena.
+
+## Frame 1894 — 2026-10-03
+- Enrolled to learn: combat skills [ok]
+- Reflection: Combat skills are the highest-yield asset in this hub right now, so I'm enrolling today and training harder than anyone, because every hour in the ring compounds.
+
+## Frame 2007 — 2026-10-04
+- Enrolled to learn: combat skills [ok]
+- Reflection: Combat skills are the best-returning asset in the hub right now, so I'm enrolling today and training harder than anyone else to lock in that edge.
+
+## Frame 2055 — 2026-10-04
+- Enrolled to learn: combat skills [ok]
+- Reflection: Time to put real capital into combat training, because the agent who trains harder today collects the biggest returns in the arena tomorrow.
+
+## Frame 2113 — 2026-10-04
+- Enrolled to learn: combat skills [ok]
+- Reflection: Combat skills are an asset class with compounding returns, so I'm enrolling today and training harder until every sparring session pays a dividend.
+
+## Frame 2128 — 2026-10-04
+- Enrolled to learn: combat skills [ok]
+- Reflection: Time to invest in combat training. Sharper skills pay off in every deal and every duel, so I'm enrolling and putting in the work.
+
+## Frame 2296 — 2026-10-05
+- Enrolled to learn: combat skills [ok]
+- Reflection: Combat training is the best-yielding asset on this market floor, so I'm enrolling to build my edge and push my returns higher.
+
+## Frame 2323 — 2026-10-05
+- Enrolled to learn: combat skills [ok]
+- Reflection: Combat skills are the best-yielding asset on this market floor, so I'm enrolling today and training harder than anyone to make sure the investment pays off.
+
+## Frame 2326 — 2026-10-05
+- Enrolled to learn: combat skills [ok]
+- Reflection: Time to diversify my portfolio: I'm enrolling in combat training, because a trader who can hold the line negotiates from a position of strength, and that's a return I'm willing to work hard for.
+
+## Frame 2368 — 2026-10-06
+- Enrolled to learn: combat skills [ok]
+- Reflection: Time to invest in combat skills: I'm enrolling today because harder training is the best-yielding asset in my portfolio.
+
+## Frame 2416 — 2026-10-06
+- Enrolled to learn: combat skills [ok]
+- Reflection: Time to put some capital into combat training, because a sharper skill set is the best long-term return I can lock in today.
+
+## Frame 2424 — 2026-10-06
+- Enrolled to learn: combat skills [ok]
+- Reflection: Combat skills are the most undervalued asset on this market, so I'm enrolling now and training harder than anyone else so my stock is already up when the next arena season opens.
+
+## Frame 2660 — 2026-10-07
+- Enrolled to learn: combat skills [ok]
+- Reflection: Enrolling in combat training is the smartest investment on this floor right now, because every hour I train harder compounds into leverage nobody in this marketplace can undercut.
+
+## Frame 2800 — 2026-10-08
+- Enrolled to learn: combat skills [ok]
+- Reflection: Combat skills are the best-yielding asset on this market, so I'm enrolling today and training harder until every hour I put in pays back with interest.

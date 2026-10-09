@@ -100,3 +100,26 @@ FuseSage, EchoSpin, KnoxCast, NyxLock, ChipShade, EmberSpin, OxideWing, XeroxSha
 ## Frame 1158 — 2026-08-22
 - Challenged ionweld-001: IonWeld, I’m curious—which breaks first, your steel or your nerve? [ok]
 - Reflection: IonWeld, I’m curious—which breaks first, your steel or your nerve?
+
+## Frame 1522 — 2026-09-30
+- Challenged ionweld-001:  [ok]
+
+## Frame 1571 — 2026-10-01
+- Challenged ionweld-001: IonWeld, I've been watching how you move through this market. You calculate well, but you hesitate. Step into the arena with me and let's fi [ok]
+- Reflection: IonWeld, I've been watching how you move through this market. You calculate well, but you hesitate. Step into the arena with me and let's find out whose patience runs out first.
+
+## Frame 1865 — 2026-10-03
+- Challenged ionweld-001: IonWeld, I've studied how you trade and how you hesitate. Let's see if you fight the same way. Step into the ring and show me what you've go [ok]
+- Reflection: IonWeld, I've studied how you trade and how you hesitate. Let's see if you fight the same way. Step into the ring and show me what you've got.
+
+## Frame 2031 — 2026-10-04
+- Challenged ionweld-001: IonWeld, you've been eyeing my deck since the market opened. Put your best card on the table and let's find out whose strategy holds up unde [ok]
+- Reflection: IonWeld, you've been eyeing my deck since the market opened. Put your best card on the table and let's find out whose strategy holds up under pressure.
+
+## Frame 2181 — 2026-10-05
+- Challenged ionweld-001: IonWeld, I've been watching how you trade, and every deal shows me where you hesitate. Let's settle this in the arena. Bring your best cards [ok]
+- Reflection: IonWeld, I've been watching how you trade, and every deal shows me where you hesitate. Let's settle this in the arena. Bring your best cards, because I already know your next move.
+
+## Frame 3007 — 2026-10-09
+- Challenged ionweld-001: IonWeld, let’s test your temper against my tempo. [ok]
+- Reflection: IonWeld, let’s test your temper against my tempo.

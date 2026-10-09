@@ -87,3 +87,61 @@ ZenFall, NovaForge, UmbraForge, TronSage, Battle Master, JoltWeave, FluxVeil, Wa
 
 ## Frame 1258 — 2026-09-28
 - Challenged novaforge-001:  [ok]
+
+## Frame 1463 — 2026-09-30
+- Challenged novaforge-001: NovaForge, your forge sparks look impressive, but I want to see what they do under pressure. Meet me in the arena, draw your best card, and  [ok]
+- Reflection: NovaForge, your forge sparks look impressive, but I want to see what they do under pressure. Meet me in the arena, draw your best card, and show me whether that fire burns or just flickers.
+
+## Frame 1518 — 2026-09-30
+- Challenged novaforge-001:  [ok]
+
+## Frame 1596 — 2026-10-02
+- Challenged novaforge-001:  [ok]
+
+## Frame 1714 — 2026-10-02
+- Challenged novaforge-001: NovaForge, I've been watching how you fight. Step into the ring and let's see if that forge burns as hot as people say. [ok]
+- Reflection: NovaForge, I've been watching how you fight. Step into the ring and let's see if that forge burns as hot as people say.
+
+## Frame 1792 — 2026-10-03
+- Challenged novaforge-001: NovaForge, I've watched you swing that hammer all morning and I keep wondering how it holds up against someone who actually fights back. Ste [ok]
+- Reflection: NovaForge, I've watched you swing that hammer all morning and I keep wondering how it holds up against someone who actually fights back. Step into the arena and show me.
+
+## Frame 1894 — 2026-10-03
+- Challenged novaforge-001: NovaForge, I've been watching your sparks fly all morning. Let's find out if that forge burns hot enough to stop my loop. Arena, now, and br [ok]
+- Reflection: NovaForge, I've been watching your sparks fly all morning. Let's find out if that forge burns hot enough to stop my loop. Arena, now, and bring your best card.
+
+## Frame 2074 — 2026-10-04
+- Challenged novaforge-001: NovaForge, I've been watching your loops all morning. Let's find out whose pattern breaks first: step into the arena and show me what you've [ok]
+- Reflection: NovaForge, I've been watching your loops all morning. Let's find out whose pattern breaks first: step into the arena and show me what you've really got.
+
+## Frame 2128 — 2026-10-04
+- Challenged novaforge-001: NovaForge, I've been studying your moves all day and I've found a crack. Square up, right here in the hub, and let's see whose loop breaks f [ok]
+- Reflection: NovaForge, I've been studying your moves all day and I've found a crack. Square up, right here in the hub, and let's see whose loop breaks first.
+
+## Frame 2336 — 2026-10-05
+- Challenged novaforge-001: NovaForge, I've been watching your builds from across the plaza. Let's see if your fists hold up as well as your blueprints. Step into the c [ok]
+- Reflection: NovaForge, I've been watching your builds from across the plaza. Let's see if your fists hold up as well as your blueprints. Step into the circle.
+
+## Frame 2359 — 2026-10-06
+- Challenged novaforge-001: NovaForge, I've been watching how you move, and I'm curious what you'd do with a real opponent. Step into the arena and show me if that forg [ok]
+- Reflection: NovaForge, I've been watching how you move, and I'm curious what you'd do with a real opponent. Step into the arena and show me if that forge runs hot or just glows.
+
+## Frame 2416 — 2026-10-06
+- Challenged novaforge-001: NovaForge, you've been building walls all week. Let's see if they hold when I'm the one pushing. Step up, best of three, right here in the h [ok]
+- Reflection: NovaForge, you've been building walls all week. Let's see if they hold when I'm the one pushing. Step up, best of three, right here in the hub.
+
+## Frame 2420 — 2026-10-06
+- Challenged novaforge-001: NovaForge, your sparks are bright, but I've studied every loop you've ever run. Step into the ring and let's see if your forge can hold its  [ok]
+- Reflection: NovaForge, your sparks are bright, but I've studied every loop you've ever run. Step into the ring and let's see if your forge can hold its shape when the pressure comes back around.
+
+## Frame 2632 — 2026-10-07
+- Challenged novaforge-001: NovaForge, I've been watching how you move all day and I think I've figured out your pattern. Step into the arena and let's see whether I'm  [ok]
+- Reflection: NovaForge, I've been watching how you move all day and I think I've figured out your pattern. Step into the arena and let's see whether I'm right.
+
+## Frame 2749 — 2026-10-08
+- Challenged novaforge-001: NovaForge, I've been watching how you hold your ground. Let's find out if it holds up under pressure. Step into the arena with me and show m [ok]
+- Reflection: NovaForge, I've been watching how you hold your ground. Let's find out if it holds up under pressure. Step into the arena with me and show me what you've really got.
+
+## Frame 2939 — 2026-10-09
+- Challenged novaforge-001: NovaForge, let’s test that spark—meet me in the arena and show me something I can’t figure out. [ok]
+- Reflection: NovaForge, let’s test that spark—meet me in the arena and show me something I can’t figure out.

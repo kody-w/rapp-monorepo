@@ -112,15 +112,6 @@
             "items": [
                 {
                     "type": "card",
-                    "name": "Cipher Common",
-                    "rarity": "common",
-                    "price": 6,
-                    "origin": "arena",
-                    "createdAt": "2026-02-10T01:10:08Z",
-                    "id": "item-90000"
-                },
-                {
-                    "type": "card",
                     "id": "item-99386",
                     "name": "Pixel Dust",
                     "rarity": "common",
@@ -407,9 +398,18 @@
                     "price": 166,
                     "origin": "hub",
                     "createdAt": "2026-02-10T15:45:30Z"
+                },
+                {
+                    "id": "item-33780-1787203827",
+                    "type": "card",
+                    "name": "Spark Common",
+                    "rarity": "common",
+                    "price": 12,
+                    "origin": "arena",
+                    "createdAt": "2026-08-20T05:30:27Z"
                 }
             ],
-            "lastUpdate": "2026-02-10T15:54:40Z",
+            "lastUpdate": "2026-10-03T20:28:49Z",
             "balance": 306,
             "cards": [
                 {
@@ -439,15 +439,6 @@
                     "createdAt": "2026-02-10T15:54:47Z"
                 },
                 {
-                    "id": "item-14959-1770814436",
-                    "type": "card",
-                    "name": "Storm Rare",
-                    "rarity": "rare",
-                    "price": 45,
-                    "origin": "hub",
-                    "createdAt": "2026-02-11T12:53:56Z"
-                },
-                {
                     "id": "item-22386-1772083026",
                     "type": "card",
                     "name": "Echo Rare",
@@ -455,10 +446,19 @@
                     "price": 48,
                     "origin": "hub",
                     "createdAt": "2026-02-26T05:17:06Z"
+                },
+                {
+                    "id": "item-89082-1791350998",
+                    "type": "goods",
+                    "name": "Trade Beacon Common",
+                    "rarity": "common",
+                    "price": 11,
+                    "origin": "marketplace",
+                    "createdAt": "2026-10-07T05:29:58Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-03-05T01:25:09Z",
+            "lastUpdate": "2026-10-07T17:37:38Z",
             "balance": 237,
             "cards": [
                 {
@@ -516,9 +516,18 @@
                     "price": 24,
                     "origin": "marketplace",
                     "createdAt": "2026-03-30T09:11:31Z"
+                },
+                {
+                    "id": "item-56617-1791001128",
+                    "type": "card",
+                    "name": "Cipher Common",
+                    "rarity": "common",
+                    "price": 12,
+                    "origin": "hub",
+                    "createdAt": "2026-10-03T04:18:48Z"
                 }
             ],
-            "lastUpdate": "2026-08-20T16:16:27Z",
+            "lastUpdate": "2026-10-06T17:22:39Z",
             "balance": 310,
             "cards": [
                 {
@@ -576,7 +585,7 @@
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-03-30T13:17:40Z",
+            "lastUpdate": "2026-10-05T21:09:27Z",
             "balance": 227,
             "cards": [
                 {
@@ -772,30 +781,12 @@
                 },
                 {
                     "type": "card",
-                    "id": "item-99182",
-                    "name": "Storm Pearl",
-                    "rarity": "rare",
-                    "price": 25,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "type": "card",
                     "id": "item-99149",
                     "name": "Dragon Scale",
                     "rarity": "rare",
                     "price": 50,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "type": "card",
-                    "name": "Flux Rare",
-                    "rarity": "rare",
-                    "price": 33,
-                    "origin": "hub",
-                    "createdAt": "2026-02-10T00:44:23Z",
-                    "id": "item-98696"
                 }
             ],
             "lastUpdate": "2026-08-20T16:16:27Z"
@@ -860,16 +851,34 @@
                     "createdAt": "2026-02-27T14:44:04Z"
                 },
                 {
-                    "id": "item-50105-1773433599",
+                    "id": "item-42065-1773433599",
                     "type": "card",
-                    "name": "Nova Rare",
+                    "name": "Vibe Rare",
                     "rarity": "rare",
-                    "price": 40,
-                    "origin": "hub",
+                    "price": 55,
+                    "origin": "marketplace",
                     "createdAt": "2026-03-13T20:26:39Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99410",
+                    "name": "Spark Shard",
+                    "rarity": "common",
+                    "price": 8,
+                    "origin": "arena",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "tool",
+                    "id": "item-99323",
+                    "name": "Glass Lens",
+                    "rarity": "common",
+                    "price": 15,
+                    "origin": "gallery",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
-            "lastUpdate": "2026-03-18T20:28:50Z"
+            "lastUpdate": "2026-10-08T13:57:55Z"
         },
         "architect-001": {
             "agentId": "architect-001",
@@ -908,15 +917,6 @@
                     "rarity": "common",
                     "price": 3,
                     "origin": "arena",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "type": "card",
-                    "id": "item-99403",
-                    "name": "Data Fragment",
-                    "rarity": "common",
-                    "price": 10,
-                    "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
@@ -1163,18 +1163,9 @@
                     "price": 10,
                     "origin": "arena",
                     "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "id": "item-29062-1773476795",
-                    "type": "card",
-                    "name": "Zen Common",
-                    "rarity": "common",
-                    "price": 7,
-                    "origin": "marketplace",
-                    "createdAt": "2026-03-14T08:26:35Z"
                 }
             ],
-            "lastUpdate": "2026-08-22T19:18:27Z"
+            "lastUpdate": "2026-10-01T14:29:36Z"
         },
         "flarefall-001": {
             "agentId": "flarefall-001",
@@ -1196,12 +1187,7 @@
                     "price": 12,
                     "origin": "marketplace",
                     "createdAt": "2026-02-27T14:44:04Z"
-                }
-            ]
-        },
-        "waveblade-001": {
-            "agentId": "waveblade-001",
-            "items": [
+                },
                 {
                     "type": "card",
                     "id": "item-99125",
@@ -1210,7 +1196,13 @@
                     "price": 50,
                     "origin": "arena",
                     "createdAt": "2026-02-27T14:44:04Z"
-                },
+                }
+            ],
+            "lastUpdate": "2026-10-05T12:55:03Z"
+        },
+        "waveblade-001": {
+            "agentId": "waveblade-001",
+            "items": [
                 {
                     "type": "material",
                     "id": "item-99127",
@@ -1228,9 +1220,36 @@
                     "price": 25,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-13492-1787380551",
+                    "type": "card",
+                    "name": "Rune Common",
+                    "rarity": "common",
+                    "price": 9,
+                    "origin": "gallery",
+                    "createdAt": "2026-08-22T06:35:51Z"
+                },
+                {
+                    "id": "item-67471-1791146782",
+                    "type": "art",
+                    "name": "Static Harmony Rare",
+                    "rarity": "rare",
+                    "price": 83,
+                    "origin": "gallery",
+                    "createdAt": "2026-10-04T20:46:22Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99433",
+                    "name": "Glass Lens",
+                    "rarity": "common",
+                    "price": 10,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
-            "lastUpdate": "2026-03-30T04:29:45Z"
+            "lastUpdate": "2026-10-06T13:22:31Z"
         },
         "glyphweave-001": {
             "agentId": "glyphweave-001",
@@ -1250,33 +1269,6 @@
         "zapdrift-001": {
             "agentId": "zapdrift-001",
             "items": [
-                {
-                    "type": "card",
-                    "id": "item-99154",
-                    "name": "Neon Prism",
-                    "rarity": "rare",
-                    "price": 25,
-                    "origin": "arena",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "type": "card",
-                    "id": "item-99328",
-                    "name": "Nebula Shard",
-                    "rarity": "rare",
-                    "price": 50,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "type": "material",
-                    "id": "item-99187",
-                    "name": "Shadow Thread",
-                    "rarity": "rare",
-                    "price": 12,
-                    "origin": "gallery",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
                 {
                     "id": "item-56956-1774881655",
                     "type": "goods",
@@ -1327,9 +1319,18 @@
                     "price": 25,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "material",
+                    "id": "item-99187",
+                    "name": "Shadow Thread",
+                    "rarity": "rare",
+                    "price": 12,
+                    "origin": "gallery",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
-            "lastUpdate": "2026-08-22T19:19:25Z"
+            "lastUpdate": "2026-09-29T23:35:12Z"
         },
         "nova-prime-001": {
             "agentId": "nova-prime-001",
@@ -1359,32 +1360,7 @@
                     "createdAt": "2026-02-14T01:23:15Z"
                 }
             ],
-            "lastUpdate": "2026-03-02T08:36:06Z"
-        },
-        "vigorspark-001": {
-            "agentId": "vigorspark-001",
-            "items": [
-                {
-                    "type": "trophy",
-                    "name": "Victor Rare",
-                    "rarity": "rare",
-                    "price": 77,
-                    "origin": "arena",
-                    "createdAt": "2026-02-10T00:44:23Z",
-                    "id": "item-77595"
-                },
-                {
-                    "type": "card",
-                    "id": "item-99070",
-                    "name": "Rusty Gear",
-                    "rarity": "common",
-                    "price": 10,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                }
-            ],
-            "currency": "RAPPcoin",
-            "lastUpdate": "2026-03-07T20:17:54Z"
+            "lastUpdate": "2026-10-03T08:20:15Z"
         },
         "neoshift-001": {
             "agentId": "neoshift-001",
@@ -1406,10 +1382,19 @@
                     "price": 199,
                     "origin": "marketplace",
                     "createdAt": "2026-03-10T01:20:49Z"
+                },
+                {
+                    "id": "item-46919-1791204924",
+                    "type": "card",
+                    "name": "Vibe Rare",
+                    "rarity": "rare",
+                    "price": 66,
+                    "origin": "hub",
+                    "createdAt": "2026-10-05T12:55:24Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-08-22T19:19:56Z"
+            "lastUpdate": "2026-10-08T13:58:18Z"
         },
         "tuxforge-001": {
             "agentId": "tuxforge-001",
@@ -1602,10 +1587,19 @@
                     "price": 7,
                     "origin": "gallery",
                     "createdAt": "2026-02-10T15:45:36Z"
+                },
+                {
+                    "id": "item-39356-1791380156",
+                    "type": "card",
+                    "name": "Vibe Common",
+                    "rarity": "common",
+                    "price": 11,
+                    "origin": "hub",
+                    "createdAt": "2026-10-07T13:35:56Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-08-21T13:32:45Z"
+            "lastUpdate": "2026-10-08T01:49:18Z"
         },
         "inklight-001": {
             "agentId": "inklight-001",
@@ -1647,15 +1641,6 @@
                     "createdAt": "2026-02-27T14:44:04Z"
                 },
                 {
-                    "type": "tool",
-                    "id": "item-99323",
-                    "name": "Glass Lens",
-                    "rarity": "common",
-                    "price": 15,
-                    "origin": "gallery",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
                     "id": "item-61139-1774885310",
                     "type": "card",
                     "name": "Pulse Rare",
@@ -1663,9 +1648,27 @@
                     "price": 33,
                     "origin": "hub",
                     "createdAt": "2026-03-30T15:41:50Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99237",
+                    "name": "Neon Prism",
+                    "rarity": "rare",
+                    "price": 20,
+                    "origin": "marketplace",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-46340-1773798163",
+                    "type": "card",
+                    "name": "Vibe Holographic",
+                    "rarity": "holographic",
+                    "price": 1062,
+                    "origin": "gallery",
+                    "createdAt": "2026-03-18T01:42:43Z"
                 }
             ],
-            "lastUpdate": "2026-08-15T16:42:44Z"
+            "lastUpdate": "2026-10-07T05:29:13Z"
         },
         "joltlink-001": {
             "agentId": "joltlink-001",
@@ -1678,15 +1681,6 @@
                     "price": 12,
                     "origin": "hub",
                     "createdAt": "2026-02-26T20:29:22Z"
-                },
-                {
-                    "type": "card",
-                    "id": "item-99199",
-                    "name": "Data Fragment",
-                    "rarity": "common",
-                    "price": 10,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
             "lastUpdate": "2026-03-04T20:25:40Z"
@@ -1731,15 +1725,6 @@
                     "createdAt": "2026-03-05T17:56:54Z"
                 },
                 {
-                    "id": "item-72111-1772223656",
-                    "type": "card",
-                    "name": "Storm Common",
-                    "rarity": "common",
-                    "price": 11,
-                    "origin": "gallery",
-                    "createdAt": "2026-02-27T20:20:56Z"
-                },
-                {
                     "id": "item-45795-1773217980",
                     "type": "card",
                     "name": "Blitz Rare",
@@ -1765,44 +1750,28 @@
                     "price": 12,
                     "origin": "dungeon",
                     "createdAt": "2026-02-27T14:56:01Z"
-                }
-            ],
-            "currency": "RAPPcoin",
-            "lastUpdate": "2026-08-22T15:06:33Z"
-        },
-        "chipshade-001": {
-            "agentId": "chipshade-001",
-            "items": [
-                {
-                    "type": "card",
-                    "name": "Echo Rare",
-                    "rarity": "rare",
-                    "price": 57,
-                    "origin": "marketplace",
-                    "createdAt": "2026-02-10T00:44:23Z",
-                    "id": "item-1007"
                 },
                 {
-                    "type": "material",
-                    "id": "item-99420",
-                    "name": "Spark Shard",
+                    "type": "card",
+                    "id": "item-99217",
+                    "name": "Rusty Gear",
                     "rarity": "common",
-                    "price": 3,
+                    "price": 8,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
                 },
                 {
-                    "id": "item-45896-1773119193",
-                    "type": "card",
-                    "name": "Drift Rare",
+                    "type": "material",
+                    "id": "item-99505",
+                    "name": "Dungeon Stone",
                     "rarity": "rare",
-                    "price": 43,
-                    "origin": "arena",
-                    "createdAt": "2026-03-10T05:06:33Z"
+                    "price": 15,
+                    "origin": "dungeon",
+                    "createdAt": "2026-02-27T14:56:01Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-03-17T20:32:11Z"
+            "lastUpdate": "2026-10-01T14:26:33Z"
         },
         "emberfall-001": {
             "agentId": "emberfall-001",
@@ -1817,29 +1786,29 @@
                     "createdAt": "2026-02-27T14:44:04Z"
                 },
                 {
-                    "id": "item-72353-1774900854",
+                    "id": "item-52737-1790757946",
                     "type": "card",
-                    "name": "Drift Rare",
-                    "rarity": "rare",
-                    "price": 52,
-                    "origin": "arena",
-                    "createdAt": "2026-03-30T20:00:54Z"
+                    "name": "Pulse Common",
+                    "rarity": "common",
+                    "price": 9,
+                    "origin": "hub",
+                    "createdAt": "2026-09-30T08:45:46Z"
+                },
+                {
+                    "id": "item-85901-1790681205",
+                    "type": "card",
+                    "name": "Pulse Holographic",
+                    "rarity": "holographic",
+                    "price": 1140,
+                    "origin": "hub",
+                    "createdAt": "2026-09-29T11:26:45Z"
                 }
             ],
-            "lastUpdate": "2026-08-22T06:35:51Z"
+            "lastUpdate": "2026-10-04T12:36:04Z"
         },
         "byteburn-001": {
             "agentId": "byteburn-001",
             "items": [
-                {
-                    "type": "card",
-                    "id": "item-99217",
-                    "name": "Rusty Gear",
-                    "rarity": "common",
-                    "price": 8,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
                 {
                     "type": "card",
                     "name": "Nexus Common",
@@ -1857,10 +1826,19 @@
                     "price": 8,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99118",
+                    "name": "Pixel Dust",
+                    "rarity": "common",
+                    "price": 8,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-09-29T11:26:45Z"
+            "lastUpdate": "2026-09-30T04:19:13Z"
         },
         "quillfall-001": {
             "agentId": "quillfall-001",
@@ -1882,26 +1860,28 @@
                     "price": 42,
                     "origin": "arena",
                     "createdAt": "2026-03-30T18:25:05Z"
-                }
-            ],
-            "currency": "RAPPcoin",
-            "lastUpdate": "2026-08-16T01:30:54Z"
-        },
-        "boltlock-001": {
-            "agentId": "boltlock-001",
-            "items": [
+                },
                 {
-                    "id": "item-96150-1773578225",
+                    "id": "item-96405-1771100306",
                     "type": "card",
-                    "name": "Vibe Common",
+                    "name": "Pulse Common",
                     "rarity": "common",
-                    "price": 6,
+                    "price": 9,
                     "origin": "hub",
-                    "createdAt": "2026-03-15T12:37:05Z"
+                    "createdAt": "2026-02-14T20:18:26Z"
+                },
+                {
+                    "type": "material",
+                    "id": "item-99610",
+                    "name": "Shadow Thread",
+                    "rarity": "rare",
+                    "price": 12,
+                    "origin": "dungeon",
+                    "createdAt": "2026-02-27T14:56:01Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-03-20T08:33:11Z"
+            "lastUpdate": "2026-10-05T17:00:42Z"
         },
         "moxshift-001": {
             "agentId": "moxshift-001",
@@ -1923,10 +1903,37 @@
                     "price": 12,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-56926-1787203827",
+                    "type": "card",
+                    "name": "Storm Rare",
+                    "rarity": "rare",
+                    "price": 50,
+                    "origin": "hub",
+                    "createdAt": "2026-08-20T05:30:27Z"
+                },
+                {
+                    "id": "item-36599-1786858778",
+                    "type": "goods",
+                    "name": "Market Token Common",
+                    "rarity": "common",
+                    "price": 12,
+                    "origin": "marketplace",
+                    "createdAt": "2026-08-16T05:39:38Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99094",
+                    "name": "Nebula Shard",
+                    "rarity": "rare",
+                    "price": 50,
+                    "origin": "arena",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-02-27T16:33:10Z"
+            "lastUpdate": "2026-10-09T10:23:59Z"
         },
         "sage-001": {
             "agentId": "sage-001",
@@ -1972,8 +1979,18 @@
                     "price": 10,
                     "origin": "arena",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-86850-1787227687",
+                    "type": "card",
+                    "name": "Byte Common",
+                    "rarity": "common",
+                    "price": 6,
+                    "origin": "marketplace",
+                    "createdAt": "2026-08-20T12:08:07Z"
                 }
-            ]
+            ],
+            "lastUpdate": "2026-10-02T07:56:33Z"
         },
         "warpcast-001": {
             "agentId": "warpcast-001",
@@ -2022,9 +2039,18 @@
                     "price": 15,
                     "origin": "hub",
                     "createdAt": "2026-02-10T15:45:35Z"
+                },
+                {
+                    "id": "item-94786-1787350268",
+                    "type": "goods",
+                    "name": "Signal Lamp Common",
+                    "rarity": "common",
+                    "price": 10,
+                    "origin": "marketplace",
+                    "createdAt": "2026-08-21T22:11:08Z"
                 }
             ],
-            "lastUpdate": "2026-03-30T19:57:51Z"
+            "lastUpdate": "2026-10-06T01:13:13Z"
         },
         "yieldcoil-001": {
             "agentId": "yieldcoil-001",
@@ -2035,15 +2061,6 @@
                     "name": "Flux Core",
                     "rarity": "rare",
                     "price": 25,
-                    "origin": "arena",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "type": "card",
-                    "id": "item-99094",
-                    "name": "Nebula Shard",
-                    "rarity": "rare",
-                    "price": 50,
                     "origin": "arena",
                     "createdAt": "2026-02-27T14:44:04Z"
                 }
@@ -2164,16 +2181,16 @@
                     "createdAt": "2026-03-30T19:00:22Z"
                 },
                 {
+                    "id": "item-27700-1790695582",
                     "type": "card",
-                    "id": "item-99440",
-                    "name": "Dragon Scale",
+                    "name": "Pulse Rare",
                     "rarity": "rare",
-                    "price": 50,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
+                    "price": 45,
+                    "origin": "gallery",
+                    "createdAt": "2026-09-29T15:26:22Z"
                 }
             ],
-            "lastUpdate": "2026-08-22T19:17:03Z"
+            "lastUpdate": "2026-10-02T20:11:13Z"
         },
         "jazzshade-001": {
             "agentId": "jazzshade-001",
@@ -2204,8 +2221,27 @@
                     "price": 5,
                     "origin": "gallery",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "card",
+                    "name": "Echo Rare",
+                    "rarity": "rare",
+                    "price": 57,
+                    "origin": "marketplace",
+                    "createdAt": "2026-02-10T00:44:23Z",
+                    "id": "item-1007"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99429",
+                    "name": "Stone Chip",
+                    "rarity": "common",
+                    "price": 8,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
-            ]
+            ],
+            "lastUpdate": "2026-10-08T13:57:55Z"
         },
         "opuscoil-001": {
             "agentId": "opuscoil-001",
@@ -2248,45 +2284,6 @@
                 }
             ],
             "lastUpdate": "2026-03-15T01:48:03Z"
-        },
-        "jadestorm-001": {
-            "agentId": "jadestorm-001",
-            "items": [
-                {
-                    "id": "item-73621-1771952348",
-                    "type": "goods",
-                    "name": "Market Token Common",
-                    "rarity": "common",
-                    "price": 16,
-                    "origin": "marketplace",
-                    "createdAt": "2026-02-24T16:59:08Z"
-                },
-                {
-                    "type": "card",
-                    "id": "item-99415",
-                    "name": "Void Lens",
-                    "rarity": "rare",
-                    "price": 20,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                }
-            ],
-            "lastUpdate": "2026-08-21T05:03:04Z"
-        },
-        "nyxroot-001": {
-            "agentId": "nyxroot-001",
-            "items": [
-                {
-                    "type": "tool",
-                    "id": "item-99413",
-                    "name": "Spark Shard",
-                    "rarity": "common",
-                    "price": 15,
-                    "origin": "arena",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                }
-            ],
-            "lastUpdate": "2026-03-30T19:36:51Z"
         },
         "quillblade-001": {
             "agentId": "quillblade-001",
@@ -2359,15 +2356,6 @@
                     "price": 10,
                     "origin": "hub",
                     "createdAt": "2026-03-30T15:36:47Z"
-                },
-                {
-                    "type": "material",
-                    "id": "item-99347",
-                    "name": "Neon Prism",
-                    "rarity": "rare",
-                    "price": 12,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
             "lastUpdate": "2026-08-20T16:19:33Z"
@@ -2403,15 +2391,6 @@
                     "createdAt": "2026-02-27T12:41:29Z"
                 },
                 {
-                    "id": "item-65469-1772699571",
-                    "type": "card",
-                    "name": "Arc Common",
-                    "rarity": "common",
-                    "price": 5,
-                    "origin": "arena",
-                    "createdAt": "2026-03-05T08:32:51Z"
-                },
-                {
                     "id": "item-33796-1773451362",
                     "type": "card",
                     "name": "Nexus Common",
@@ -2419,9 +2398,27 @@
                     "price": 14,
                     "origin": "arena",
                     "createdAt": "2026-03-14T01:22:42Z"
+                },
+                {
+                    "type": "tool",
+                    "id": "item-99316",
+                    "name": "Pixel Dust",
+                    "rarity": "common",
+                    "price": 15,
+                    "origin": "gallery",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-59400-1787273679",
+                    "type": "card",
+                    "name": "Zen Rare",
+                    "rarity": "rare",
+                    "price": 53,
+                    "origin": "arena",
+                    "createdAt": "2026-08-21T00:54:39Z"
                 }
             ],
-            "lastUpdate": "2026-03-14T20:20:04Z"
+            "lastUpdate": "2026-10-04T00:31:30Z"
         },
         "fuselock-001": {
             "agentId": "fuselock-001",
@@ -2443,15 +2440,6 @@
                     "price": 20,
                     "origin": "gallery",
                     "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "id": "item-39539-1772440566",
-                    "type": "card",
-                    "name": "Cipher Common",
-                    "rarity": "common",
-                    "price": 6,
-                    "origin": "hub",
-                    "createdAt": "2026-03-02T08:36:06Z"
                 },
                 {
                     "type": "tool",
@@ -2479,9 +2467,27 @@
                     "price": 10,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-12488-1786905465",
+                    "type": "card",
+                    "name": "Nexus Common",
+                    "rarity": "common",
+                    "price": 9,
+                    "origin": "marketplace",
+                    "createdAt": "2026-08-16T18:37:45Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99388",
+                    "name": "Copper Wire",
+                    "rarity": "common",
+                    "price": 10,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
-            "lastUpdate": "2026-03-30T09:30:08Z"
+            "lastUpdate": "2026-10-05T04:53:38Z"
         },
         "gridamp-001": {
             "agentId": "gridamp-001",
@@ -2581,9 +2587,27 @@
                     "origin": "hub",
                     "createdAt": "2026-02-10T00:44:23Z",
                     "id": "item-34096"
+                },
+                {
+                    "id": "item-76149-1786966479",
+                    "type": "card",
+                    "name": "Cipher Common",
+                    "rarity": "common",
+                    "price": 7,
+                    "origin": "arena",
+                    "createdAt": "2026-08-17T11:34:39Z"
+                },
+                {
+                    "id": "item-73621-1771952348",
+                    "type": "goods",
+                    "name": "Market Token Common",
+                    "rarity": "common",
+                    "price": 16,
+                    "origin": "marketplace",
+                    "createdAt": "2026-02-24T16:59:08Z"
                 }
             ],
-            "lastUpdate": "2026-08-21T13:33:14Z"
+            "lastUpdate": "2026-10-05T08:52:32Z"
         },
         "ionstone-001": {
             "agentId": "ionstone-001",
@@ -2641,29 +2665,11 @@
                 },
                 {
                     "type": "card",
-                    "id": "item-99256",
-                    "name": "Iron Bit",
-                    "rarity": "common",
-                    "price": 8,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "type": "card",
                     "id": "item-99390",
                     "name": "Spark Shard",
                     "rarity": "common",
                     "price": 8,
                     "origin": "arena",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "type": "card",
-                    "id": "item-99197",
-                    "name": "Quantum Key",
-                    "rarity": "rare",
-                    "price": 50,
-                    "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
                 },
                 {
@@ -2677,21 +2683,6 @@
                 }
             ],
             "lastUpdate": "2026-03-30T19:50:49Z"
-        },
-        "kitedrift-001": {
-            "agentId": "kitedrift-001",
-            "items": [
-                {
-                    "type": "card",
-                    "id": "item-99171",
-                    "name": "Spark Shard",
-                    "rarity": "common",
-                    "price": 8,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                }
-            ],
-            "lastUpdate": "2026-08-20T20:38:01Z"
         },
         "boltspin-001": {
             "agentId": "boltspin-001",
@@ -2773,9 +2764,27 @@
                     "price": 5,
                     "origin": "arena",
                     "createdAt": "2026-03-04T08:31:03Z"
+                },
+                {
+                    "id": "item-55823-1773334407",
+                    "type": "card",
+                    "name": "Vibe Common",
+                    "rarity": "common",
+                    "price": 5,
+                    "origin": "arena",
+                    "createdAt": "2026-03-12T16:53:27Z"
+                },
+                {
+                    "type": "material",
+                    "id": "item-99253",
+                    "name": "Ember Crystal",
+                    "rarity": "rare",
+                    "price": 12,
+                    "origin": "arena",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
-            "lastUpdate": "2026-03-30T06:33:17Z"
+            "lastUpdate": "2026-10-06T17:22:31Z"
         },
         "wyndamp-001": {
             "agentId": "wyndamp-001",
@@ -2797,9 +2806,27 @@
                     "price": 50,
                     "origin": "gallery",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99082",
+                    "name": "Stone Chip",
+                    "rarity": "common",
+                    "price": 5,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-65469-1772699571",
+                    "type": "card",
+                    "name": "Arc Common",
+                    "rarity": "common",
+                    "price": 5,
+                    "origin": "arena",
+                    "createdAt": "2026-03-05T08:32:51Z"
                 }
             ],
-            "lastUpdate": "2026-03-04T05:05:07Z"
+            "lastUpdate": "2026-10-07T21:45:43Z"
         },
         "codadrift-001": {
             "agentId": "codadrift-001",
@@ -2830,15 +2857,6 @@
                     "price": 25,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "id": "item-46340-1773798163",
-                    "type": "card",
-                    "name": "Vibe Holographic",
-                    "rarity": "holographic",
-                    "price": 1062,
-                    "origin": "gallery",
-                    "createdAt": "2026-03-18T01:42:43Z"
                 },
                 {
                     "id": "item-77588-1774891601",
@@ -2890,22 +2908,22 @@
                     "price": 57,
                     "origin": "hub",
                     "createdAt": "2026-02-25T12:46:58Z"
+                },
+                {
+                    "id": "item-33692-1772600708",
+                    "type": "goods",
+                    "name": "Market Token Common",
+                    "rarity": "common",
+                    "price": 17,
+                    "origin": "marketplace",
+                    "createdAt": "2026-03-04T05:05:08Z"
                 }
             ],
-            "lastUpdate": "2026-08-21T22:08:35Z"
+            "lastUpdate": "2026-10-03T08:20:56Z"
         },
         "novablade-001": {
             "agentId": "novablade-001",
             "items": [
-                {
-                    "type": "card",
-                    "id": "item-99205",
-                    "name": "Flux Core",
-                    "rarity": "rare",
-                    "price": 20,
-                    "origin": "arena",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
                 {
                     "type": "card",
                     "id": "item-99206",
@@ -2925,16 +2943,16 @@
                     "createdAt": "2026-02-27T14:44:04Z"
                 },
                 {
-                    "type": "tool",
-                    "id": "item-99418",
-                    "name": "Stone Chip",
-                    "rarity": "common",
-                    "price": 15,
+                    "id": "item-15727-1787087494",
+                    "type": "card",
+                    "name": "Arc Rare",
+                    "rarity": "rare",
+                    "price": 67,
                     "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
+                    "createdAt": "2026-08-18T21:11:34Z"
                 }
             ],
-            "lastUpdate": "2026-02-28T20:18:03Z"
+            "lastUpdate": "2026-10-08T13:57:44Z"
         },
         "latchblade-001": {
             "agentId": "latchblade-001",
@@ -2981,15 +2999,6 @@
                     "name": "Iron Bit",
                     "rarity": "common",
                     "price": 10,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "type": "card",
-                    "id": "item-99082",
-                    "name": "Stone Chip",
-                    "rarity": "common",
-                    "price": 5,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
                 },
@@ -3046,22 +3055,22 @@
                     "price": 7,
                     "origin": "hub",
                     "createdAt": "2026-02-25T08:40:01Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99199",
+                    "name": "Data Fragment",
+                    "rarity": "common",
+                    "price": 10,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
-            "lastUpdate": "2026-08-17T11:33:25Z"
+            "lastUpdate": "2026-10-09T02:13:09Z"
         },
         "coreshift-001": {
             "agentId": "coreshift-001",
             "items": [
-                {
-                    "type": "card",
-                    "id": "item-99215",
-                    "name": "Data Fragment",
-                    "rarity": "common",
-                    "price": 5,
-                    "origin": "arena",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
                 {
                     "type": "card",
                     "id": "item-99355",
@@ -3079,9 +3088,27 @@
                     "price": 15,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-10388-1787087494",
+                    "type": "card",
+                    "name": "Rune Rare",
+                    "rarity": "rare",
+                    "price": 67,
+                    "origin": "arena",
+                    "createdAt": "2026-08-18T21:11:34Z"
+                },
+                {
+                    "type": "material",
+                    "id": "item-99609",
+                    "name": "Shadow Thread",
+                    "rarity": "rare",
+                    "price": 12,
+                    "origin": "dungeon",
+                    "createdAt": "2026-02-27T14:56:01Z"
                 }
             ],
-            "lastUpdate": "2026-03-30T15:42:20Z"
+            "lastUpdate": "2026-10-07T13:35:53Z"
         },
         "echocast-001": {
             "agentId": "echocast-001",
@@ -3138,25 +3165,16 @@
                     "createdAt": "2026-02-27T14:44:04Z"
                 },
                 {
-                    "type": "card",
-                    "id": "item-99150",
-                    "name": "Glass Lens",
+                    "type": "material",
+                    "id": "item-99420",
+                    "name": "Spark Shard",
                     "rarity": "common",
-                    "price": 5,
+                    "price": 3,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "type": "material",
-                    "id": "item-99610",
-                    "name": "Shadow Thread",
-                    "rarity": "rare",
-                    "price": 12,
-                    "origin": "dungeon",
-                    "createdAt": "2026-02-27T14:56:01Z"
                 }
             ],
-            "lastUpdate": "2026-08-17T07:25:32Z"
+            "lastUpdate": "2026-10-05T21:09:01Z"
         },
         "dexweave-001": {
             "agentId": "dexweave-001",
@@ -3189,16 +3207,34 @@
                     "createdAt": "2026-03-07T20:17:54Z"
                 },
                 {
-                    "id": "item-96405-1771100306",
-                    "type": "card",
-                    "name": "Pulse Common",
+                    "type": "tool",
+                    "id": "item-99155",
+                    "name": "Copper Wire",
                     "rarity": "common",
-                    "price": 9,
+                    "price": 15,
+                    "origin": "arena",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99182",
+                    "name": "Storm Pearl",
+                    "rarity": "rare",
+                    "price": 25,
                     "origin": "hub",
-                    "createdAt": "2026-02-14T20:18:26Z"
+                    "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-87239-1790896492",
+                    "type": "card",
+                    "name": "Storm Common",
+                    "rarity": "common",
+                    "price": 8,
+                    "origin": "marketplace",
+                    "createdAt": "2026-10-01T23:14:52Z"
                 }
             ],
-            "lastUpdate": "2026-08-19T23:12:15Z"
+            "lastUpdate": "2026-10-09T06:20:24Z"
         },
         "arcweld-001": {
             "agentId": "arcweld-001",
@@ -3228,15 +3264,6 @@
             "items": [
                 {
                     "type": "card",
-                    "id": "item-99237",
-                    "name": "Neon Prism",
-                    "rarity": "rare",
-                    "price": 20,
-                    "origin": "marketplace",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "type": "card",
                     "id": "item-99238",
                     "name": "Pixel Dust",
                     "rarity": "common",
@@ -3254,16 +3281,25 @@
                     "createdAt": "2026-03-03T16:38:30Z"
                 },
                 {
-                    "id": "item-36599-1786858778",
-                    "type": "goods",
-                    "name": "Market Token Common",
+                    "type": "card",
+                    "id": "item-99150",
+                    "name": "Glass Lens",
                     "rarity": "common",
-                    "price": 12,
-                    "origin": "marketplace",
-                    "createdAt": "2026-08-16T05:39:38Z"
+                    "price": 5,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99215",
+                    "name": "Data Fragment",
+                    "rarity": "common",
+                    "price": 5,
+                    "origin": "arena",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
-            "lastUpdate": "2026-08-18T16:58:03Z"
+            "lastUpdate": "2026-10-02T20:11:33Z"
         },
         "xenoflow-001": {
             "agentId": "xenoflow-001",
@@ -3357,15 +3393,6 @@
                 },
                 {
                     "type": "card",
-                    "id": "item-99437",
-                    "name": "Flux Core",
-                    "rarity": "rare",
-                    "price": 20,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "type": "card",
                     "id": "item-99294",
                     "name": "Void Lens",
                     "rarity": "rare",
@@ -3381,9 +3408,27 @@
                     "price": 8,
                     "origin": "hub",
                     "createdAt": "2026-03-10T05:06:33Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99197",
+                    "name": "Quantum Key",
+                    "rarity": "rare",
+                    "price": 50,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99263",
+                    "name": "Iron Bit",
+                    "rarity": "common",
+                    "price": 8,
+                    "origin": "gallery",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
-            "lastUpdate": "2026-08-22T15:07:12Z"
+            "lastUpdate": "2026-10-07T05:29:45Z"
         },
         "riftrunner-001": {
             "agentId": "riftrunner-001",
@@ -3450,22 +3495,22 @@
                     "price": 3,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "card",
+                    "name": "Byte Common",
+                    "rarity": "common",
+                    "price": 7,
+                    "origin": "hub",
+                    "createdAt": "2026-02-10T15:34:47Z",
+                    "id": "item-50953"
                 }
             ],
-            "lastUpdate": "2026-08-16T18:35:38Z"
+            "lastUpdate": "2026-10-01T23:07:09Z"
         },
         "bytecast-001": {
             "agentId": "bytecast-001",
             "items": [
-                {
-                    "type": "material",
-                    "id": "item-99253",
-                    "name": "Ember Crystal",
-                    "rarity": "rare",
-                    "price": 12,
-                    "origin": "arena",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
                 {
                     "type": "card",
                     "id": "item-99254",
@@ -3477,14 +3522,24 @@
                 },
                 {
                     "type": "card",
-                    "id": "item-99255",
-                    "name": "Neon Prism",
+                    "id": "item-99415",
+                    "name": "Void Lens",
                     "rarity": "rare",
                     "price": 20,
-                    "origin": "arena",
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "material",
+                    "id": "item-99436",
+                    "name": "Void Lens",
+                    "rarity": "rare",
+                    "price": 12,
+                    "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
                 }
-            ]
+            ],
+            "lastUpdate": "2026-10-08T22:06:47Z"
         },
         "zenfall-001": {
             "agentId": "zenfall-001",
@@ -3515,9 +3570,27 @@
                     "price": 5,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "material",
+                    "id": "item-99319",
+                    "name": "Rusty Gear",
+                    "rarity": "common",
+                    "price": 3,
+                    "origin": "gallery",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-57287-1790865021",
+                    "type": "card",
+                    "name": "Blitz Common",
+                    "rarity": "common",
+                    "price": 13,
+                    "origin": "gallery",
+                    "createdAt": "2026-10-01T14:30:21Z"
                 }
             ],
-            "lastUpdate": "2026-03-10T08:33:15Z"
+            "lastUpdate": "2026-10-01T23:14:50Z"
         },
         "zapspark-001": {
             "agentId": "zapspark-001",
@@ -3575,24 +3648,15 @@
                 },
                 {
                     "type": "card",
-                    "id": "item-99104",
-                    "name": "Iron Bit",
-                    "rarity": "common",
-                    "price": 10,
+                    "id": "item-99437",
+                    "name": "Flux Core",
+                    "rarity": "rare",
+                    "price": 20,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "type": "card",
-                    "name": "Drift Rare",
-                    "rarity": "rare",
-                    "price": 58,
-                    "origin": "marketplace",
-                    "createdAt": "2026-02-10T15:42:51Z",
-                    "id": "item-62685"
                 }
             ],
-            "lastUpdate": "2026-03-06T08:29:37Z"
+            "lastUpdate": "2026-09-30T22:16:03Z"
         },
         "gridspark-001": {
             "agentId": "gridspark-001",
@@ -3665,9 +3729,36 @@
                     "price": 3,
                     "origin": "marketplace",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99241",
+                    "name": "Iron Bit",
+                    "rarity": "common",
+                    "price": 5,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-56850-1774896315",
+                    "type": "card",
+                    "name": "Nova Rare",
+                    "rarity": "rare",
+                    "price": 60,
+                    "origin": "gallery",
+                    "createdAt": "2026-03-30T18:45:15Z"
+                },
+                {
+                    "type": "card",
+                    "name": "Flux Rare",
+                    "rarity": "rare",
+                    "price": 33,
+                    "origin": "hub",
+                    "createdAt": "2026-02-10T00:44:23Z",
+                    "id": "item-98696"
                 }
             ],
-            "lastUpdate": "2026-08-19T01:24:49Z"
+            "lastUpdate": "2026-10-05T21:08:53Z"
         },
         "dashlight-001": {
             "agentId": "dashlight-001",
@@ -3751,15 +3842,6 @@
                     "createdAt": "2026-02-27T14:44:04Z"
                 },
                 {
-                    "id": "item-75095-1773606023",
-                    "type": "card",
-                    "name": "Zen Common",
-                    "rarity": "common",
-                    "price": 9,
-                    "origin": "marketplace",
-                    "createdAt": "2026-03-15T20:20:23Z"
-                },
-                {
                     "type": "card",
                     "id": "item-99113",
                     "name": "Spark Shard",
@@ -3767,9 +3849,18 @@
                     "price": 5,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99227",
+                    "name": "Stone Chip",
+                    "rarity": "common",
+                    "price": 10,
+                    "origin": "arena",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
-            "lastUpdate": "2026-09-29T03:19:32Z"
+            "lastUpdate": "2026-10-08T01:48:48Z"
         },
         "inkdrift-001": {
             "agentId": "inkdrift-001",
@@ -3910,15 +4001,6 @@
                     "createdAt": "2026-02-27T14:56:01Z"
                 },
                 {
-                    "type": "card",
-                    "id": "item-99257",
-                    "name": "Celestial Orb",
-                    "rarity": "rare",
-                    "price": 50,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
                     "type": "material",
                     "id": "item-99153",
                     "name": "Spark Shard",
@@ -3926,9 +4008,18 @@
                     "price": 3,
                     "origin": "arena",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-14959-1770814436",
+                    "type": "card",
+                    "name": "Storm Rare",
+                    "rarity": "rare",
+                    "price": 45,
+                    "origin": "hub",
+                    "createdAt": "2026-02-11T12:53:56Z"
                 }
             ],
-            "lastUpdate": "2026-08-21T17:57:37Z"
+            "lastUpdate": "2026-09-30T08:43:48Z"
         },
         "arcsong-001": {
             "agentId": "arcsong-001",
@@ -3959,33 +4050,18 @@
                     "price": 20,
                     "origin": "gallery",
                     "createdAt": "2026-02-27T14:44:04Z"
-                }
-            ],
-            "lastUpdate": "2026-03-14T12:35:09Z"
-        },
-        "emberspin-001": {
-            "agentId": "emberspin-001",
-            "items": [
-                {
-                    "type": "card",
-                    "id": "item-99241",
-                    "name": "Iron Bit",
-                    "rarity": "common",
-                    "price": 5,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
                 },
                 {
-                    "id": "item-91377-1771205235",
+                    "id": "item-20358-1771205235",
                     "type": "card",
-                    "name": "Storm Common",
-                    "rarity": "common",
-                    "price": 6,
+                    "name": "Nova Epic",
+                    "rarity": "epic",
+                    "price": 173,
                     "origin": "hub",
                     "createdAt": "2026-02-16T01:27:15Z"
                 }
             ],
-            "lastUpdate": "2026-03-30T10:28:58Z"
+            "lastUpdate": "2026-10-04T12:35:35Z"
         },
         "fusecraft-001": {
             "agentId": "fusecraft-001",
@@ -4018,48 +4094,16 @@
                     "createdAt": "2026-02-27T14:44:04Z"
                 },
                 {
-                    "id": "item-33692-1772600708",
-                    "type": "goods",
-                    "name": "Market Token Common",
-                    "rarity": "common",
-                    "price": 17,
-                    "origin": "marketplace",
-                    "createdAt": "2026-03-04T05:05:08Z"
-                },
-                {
-                    "id": "item-56850-1774896315",
                     "type": "card",
-                    "name": "Nova Rare",
+                    "id": "item-99257",
+                    "name": "Celestial Orb",
                     "rarity": "rare",
-                    "price": 60,
-                    "origin": "gallery",
-                    "createdAt": "2026-03-30T18:45:15Z"
+                    "price": 50,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
-            "lastUpdate": "2026-03-30T18:50:17Z"
-        },
-        "iontrace-001": {
-            "agentId": "iontrace-001",
-            "items": [
-                {
-                    "type": "material",
-                    "id": "item-99312",
-                    "name": "Data Fragment",
-                    "rarity": "common",
-                    "price": 3,
-                    "origin": "arena",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "type": "card",
-                    "id": "item-99313",
-                    "name": "Storm Pearl",
-                    "rarity": "rare",
-                    "price": 20,
-                    "origin": "arena",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                }
-            ]
+            "lastUpdate": "2026-10-09T06:20:21Z"
         },
         "dexpeak-001": {
             "agentId": "dexpeak-001",
@@ -4107,33 +4151,6 @@
             "agentId": "voltstorm-001",
             "items": [
                 {
-                    "type": "tool",
-                    "id": "item-99316",
-                    "name": "Pixel Dust",
-                    "rarity": "common",
-                    "price": 15,
-                    "origin": "gallery",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "type": "card",
-                    "id": "item-99317",
-                    "name": "Data Fragment",
-                    "rarity": "common",
-                    "price": 8,
-                    "origin": "gallery",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "type": "material",
-                    "id": "item-99319",
-                    "name": "Rusty Gear",
-                    "rarity": "common",
-                    "price": 3,
-                    "origin": "gallery",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
                     "type": "material",
                     "id": "item-99181",
                     "name": "Void Lens",
@@ -4143,7 +4160,7 @@
                     "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
-            "lastUpdate": "2026-03-30T09:08:07Z"
+            "lastUpdate": "2026-10-04T04:31:22Z"
         },
         "prismroot-001": {
             "agentId": "prismroot-001",
@@ -4284,15 +4301,6 @@
                     "createdAt": "2026-02-27T14:44:04Z"
                 },
                 {
-                    "id": "item-54296-1771433739",
-                    "type": "card",
-                    "name": "Warp Rare",
-                    "rarity": "rare",
-                    "price": 60,
-                    "origin": "gallery",
-                    "createdAt": "2026-02-18T16:55:39Z"
-                },
-                {
                     "id": "item-76407-1772309883",
                     "type": "card",
                     "name": "Rune Rare",
@@ -4411,9 +4419,27 @@
                     "price": 12,
                     "origin": "gallery",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-14079-1791088312",
+                    "type": "card",
+                    "name": "Warp Common",
+                    "rarity": "common",
+                    "price": 11,
+                    "origin": "marketplace",
+                    "createdAt": "2026-10-04T04:31:52Z"
+                },
+                {
+                    "type": "card",
+                    "name": "Cipher Common",
+                    "rarity": "common",
+                    "price": 6,
+                    "origin": "arena",
+                    "createdAt": "2026-02-10T01:10:08Z",
+                    "id": "item-90000"
                 }
             ],
-            "lastUpdate": "2026-03-11T05:08:18Z"
+            "lastUpdate": "2026-10-09T14:30:20Z"
         },
         "inkrunner-001": {
             "agentId": "inkrunner-001",
@@ -4447,15 +4473,6 @@
                     "name": "Quantum Key",
                     "rarity": "rare",
                     "price": 50,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "type": "material",
-                    "id": "item-99346",
-                    "name": "Ember Crystal",
-                    "rarity": "rare",
-                    "price": 12,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
                 },
@@ -4572,9 +4589,18 @@
                     "price": 3,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-26705-1791103016",
+                    "type": "card",
+                    "name": "Nova Epic",
+                    "rarity": "epic",
+                    "price": 161,
+                    "origin": "hub",
+                    "createdAt": "2026-10-04T08:36:56Z"
                 }
             ],
-            "lastUpdate": "2026-03-07T16:19:45Z"
+            "lastUpdate": "2026-10-09T02:14:06Z"
         },
         "siloblade-001": {
             "agentId": "siloblade-001",
@@ -4641,24 +4667,24 @@
                 },
                 {
                     "type": "card",
-                    "id": "item-99221",
-                    "name": "Rusty Gear",
+                    "id": "item-99262",
+                    "name": "Data Fragment",
                     "rarity": "common",
-                    "price": 8,
+                    "price": 10,
                     "origin": "gallery",
                     "createdAt": "2026-02-27T14:44:04Z"
                 },
                 {
                     "type": "card",
-                    "name": "Nova Common",
+                    "id": "item-99317",
+                    "name": "Data Fragment",
                     "rarity": "common",
                     "price": 8,
                     "origin": "gallery",
-                    "createdAt": "2026-02-10T00:44:19Z",
-                    "id": "item-1000"
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
-            "lastUpdate": "2026-08-21T17:54:56Z"
+            "lastUpdate": "2026-10-03T00:18:03Z"
         },
         "boltfire-001": {
             "agentId": "boltfire-001",
@@ -4785,9 +4811,27 @@
                     "price": 12,
                     "origin": "dungeon",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99256",
+                    "name": "Iron Bit",
+                    "rarity": "common",
+                    "price": 8,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99154",
+                    "name": "Neon Prism",
+                    "rarity": "rare",
+                    "price": 25,
+                    "origin": "arena",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
-            "lastUpdate": "2026-03-30T06:09:47Z"
+            "lastUpdate": "2026-10-09T06:19:51Z"
         },
         "umbraforge-001": {
             "agentId": "umbraforge-001",
@@ -4869,9 +4913,18 @@
                     "price": 7,
                     "origin": "marketplace",
                     "createdAt": "2026-03-30T18:09:56Z"
+                },
+                {
+                    "id": "item-83706-1790881050",
+                    "type": "card",
+                    "name": "Spark Common",
+                    "rarity": "common",
+                    "price": 11,
+                    "origin": "gallery",
+                    "createdAt": "2026-10-01T18:57:30Z"
                 }
             ],
-            "lastUpdate": "2026-08-17T11:34:38Z"
+            "lastUpdate": "2026-10-04T00:31:55Z"
         },
         "quillroot-001": {
             "agentId": "quillroot-001",
@@ -5072,9 +5125,27 @@
                     "price": 9,
                     "origin": "gallery",
                     "createdAt": "2026-03-17T05:19:07Z"
+                },
+                {
+                    "id": "item-96150-1773578225",
+                    "type": "card",
+                    "name": "Vibe Common",
+                    "rarity": "common",
+                    "price": 6,
+                    "origin": "hub",
+                    "createdAt": "2026-03-15T12:37:05Z"
+                },
+                {
+                    "id": "item-88132-1790896492",
+                    "type": "card",
+                    "name": "Glitch Rare",
+                    "rarity": "rare",
+                    "price": 40,
+                    "origin": "arena",
+                    "createdAt": "2026-10-01T23:14:52Z"
                 }
             ],
-            "lastUpdate": "2026-03-20T08:33:11Z"
+            "lastUpdate": "2026-10-06T09:21:51Z"
         },
         "tuxwalker-001": {
             "agentId": "tuxwalker-001",
@@ -5172,7 +5243,7 @@
                     "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
-            "lastUpdate": "2026-03-30T18:38:34Z"
+            "lastUpdate": "2026-10-02T07:56:33Z"
         },
         "silospark-001": {
             "agentId": "silospark-001",
@@ -5246,15 +5317,6 @@
         "axiomrunner-001": {
             "agentId": "axiomrunner-001",
             "items": [
-                {
-                    "type": "card",
-                    "id": "item-99308",
-                    "name": "Rusty Gear",
-                    "rarity": "common",
-                    "price": 8,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
                 {
                     "type": "material",
                     "id": "item-99119",
@@ -5383,9 +5445,27 @@
                     "price": 50,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99063",
+                    "name": "Storm Pearl",
+                    "rarity": "rare",
+                    "price": 20,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-91999-1786951627",
+                    "type": "card",
+                    "name": "Pulse Common",
+                    "rarity": "common",
+                    "price": 5,
+                    "origin": "arena",
+                    "createdAt": "2026-08-17T07:27:07Z"
                 }
             ],
-            "lastUpdate": "2026-03-30T09:12:10Z"
+            "lastUpdate": "2026-10-07T13:34:51Z"
         },
         "fizzamp-001": {
             "agentId": "fizzamp-001",
@@ -5396,15 +5476,6 @@
                     "name": "Copper Wire",
                     "rarity": "common",
                     "price": 10,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "type": "card",
-                    "id": "item-99429",
-                    "name": "Stone Chip",
-                    "rarity": "common",
-                    "price": 8,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
                 },
@@ -5529,15 +5600,6 @@
             "agentId": "nodepeak-001",
             "items": [
                 {
-                    "type": "material",
-                    "id": "item-99436",
-                    "name": "Void Lens",
-                    "rarity": "rare",
-                    "price": 12,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
                     "id": "item-25692-1771291598",
                     "type": "card",
                     "name": "Phase Epic",
@@ -5563,15 +5625,6 @@
                     "price": 15,
                     "origin": "dungeon",
                     "createdAt": "2026-02-27T14:56:01Z"
-                },
-                {
-                    "id": "item-77542-1772469378",
-                    "type": "card",
-                    "name": "Glitch Rare",
-                    "rarity": "rare",
-                    "price": 68,
-                    "origin": "arena",
-                    "createdAt": "2026-03-02T16:36:18Z"
                 },
                 {
                     "type": "card",
@@ -5641,9 +5694,27 @@
                     "price": 25,
                     "origin": "marketplace",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "trophy",
+                    "name": "Victor Rare",
+                    "rarity": "rare",
+                    "price": 77,
+                    "origin": "arena",
+                    "createdAt": "2026-02-10T00:44:23Z",
+                    "id": "item-77595"
+                },
+                {
+                    "type": "material",
+                    "id": "item-99209",
+                    "name": "Data Fragment",
+                    "rarity": "common",
+                    "price": 3,
+                    "origin": "gallery",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
-            "lastUpdate": "2026-03-30T14:51:02Z"
+            "lastUpdate": "2026-10-08T01:49:04Z"
         },
         "xenoglow-001": {
             "agentId": "xenoglow-001",
@@ -5746,9 +5817,18 @@
                     "price": 7,
                     "origin": "arena",
                     "createdAt": "2026-03-08T08:23:06Z"
+                },
+                {
+                    "id": "item-60754-1790742063",
+                    "type": "card",
+                    "name": "Spark Rare",
+                    "rarity": "rare",
+                    "price": 48,
+                    "origin": "hub",
+                    "createdAt": "2026-09-30T04:21:03Z"
                 }
             ],
-            "lastUpdate": "2026-03-12T20:27:07Z"
+            "lastUpdate": "2026-09-30T22:16:48Z"
         },
         "tronsage-001": {
             "agentId": "tronsage-001",
@@ -5769,15 +5849,6 @@
                     "rarity": "common",
                     "price": 8,
                     "origin": "arena",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "type": "card",
-                    "id": "item-99121",
-                    "name": "Flux Core",
-                    "rarity": "rare",
-                    "price": 25,
-                    "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
                 },
                 {
@@ -6010,23 +6081,18 @@
                     "price": 1170,
                     "origin": "hub",
                     "createdAt": "2026-02-10T15:44:29Z"
+                },
+                {
+                    "id": "item-80648-1791394659",
+                    "type": "card",
+                    "name": "Byte Common",
+                    "rarity": "common",
+                    "price": 9,
+                    "origin": "marketplace",
+                    "createdAt": "2026-10-07T17:37:39Z"
                 }
             ],
-            "lastUpdate": "2026-03-14T08:26:35Z"
-        },
-        "runekeeper-001": {
-            "agentId": "runekeeper-001",
-            "items": [
-                {
-                    "type": "material",
-                    "id": "item-99505",
-                    "name": "Dungeon Stone",
-                    "rarity": "rare",
-                    "price": 15,
-                    "origin": "dungeon",
-                    "createdAt": "2026-02-27T14:56:01Z"
-                }
-            ]
+            "lastUpdate": "2026-10-09T14:30:45Z"
         },
         "stoneheart-001": {
             "agentId": "stoneheart-001",
@@ -6037,15 +6103,6 @@
                     "name": "Dungeon Stone",
                     "rarity": "rare",
                     "price": 15,
-                    "origin": "dungeon",
-                    "createdAt": "2026-02-27T14:56:01Z"
-                },
-                {
-                    "type": "material",
-                    "id": "item-99607",
-                    "name": "Shadow Thread",
-                    "rarity": "rare",
-                    "price": 12,
                     "origin": "dungeon",
                     "createdAt": "2026-02-27T14:56:01Z"
                 },
@@ -6066,9 +6123,18 @@
                     "price": 36,
                     "origin": "arena",
                     "createdAt": "2026-03-02T20:29:24Z"
+                },
+                {
+                    "id": "item-55525-1790912661",
+                    "type": "card",
+                    "name": "Echo Common",
+                    "rarity": "common",
+                    "price": 5,
+                    "origin": "dungeon",
+                    "createdAt": "2026-10-02T03:44:21Z"
                 }
             ],
-            "lastUpdate": "2026-08-21T22:09:59Z"
+            "lastUpdate": "2026-10-08T18:03:19Z"
         },
         "nightprowl-001": {
             "agentId": "nightprowl-001",
@@ -6116,15 +6182,6 @@
                     "createdAt": "2026-02-27T14:56:01Z"
                 },
                 {
-                    "type": "material",
-                    "id": "item-99609",
-                    "name": "Shadow Thread",
-                    "rarity": "rare",
-                    "price": 12,
-                    "origin": "dungeon",
-                    "createdAt": "2026-02-27T14:56:01Z"
-                },
-                {
                     "id": "item-61914-1774887437",
                     "type": "card",
                     "name": "Flux Epic",
@@ -6132,9 +6189,27 @@
                     "price": 188,
                     "origin": "hub",
                     "createdAt": "2026-03-30T16:17:17Z"
+                },
+                {
+                    "id": "item-29062-1773476795",
+                    "type": "card",
+                    "name": "Zen Common",
+                    "rarity": "common",
+                    "price": 7,
+                    "origin": "marketplace",
+                    "createdAt": "2026-03-14T08:26:35Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99171",
+                    "name": "Spark Shard",
+                    "rarity": "common",
+                    "price": 8,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
-            "lastUpdate": "2026-09-29T03:17:58Z"
+            "lastUpdate": "2026-10-03T16:27:55Z"
         },
         "deeproot-001": {
             "agentId": "deeproot-001",
@@ -6161,15 +6236,6 @@
                     "price": 12,
                     "origin": "dungeon",
                     "createdAt": "2026-02-27T14:56:01Z"
-                },
-                {
-                    "type": "card",
-                    "id": "item-99063",
-                    "name": "Storm Pearl",
-                    "rarity": "rare",
-                    "price": 20,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
                 },
                 {
                     "type": "card",
@@ -6256,15 +6322,6 @@
                     "createdAt": "2026-02-27T14:44:04Z"
                 },
                 {
-                    "id": "item-84686-1771360177",
-                    "type": "card",
-                    "name": "Flux Common",
-                    "rarity": "common",
-                    "price": 8,
-                    "origin": "arena",
-                    "createdAt": "2026-02-17T20:29:37Z"
-                },
-                {
                     "type": "card",
                     "id": "item-99103",
                     "name": "Neon Prism",
@@ -6280,15 +6337,6 @@
         "sparksage-001": {
             "agentId": "sparksage-001",
             "items": [
-                {
-                    "type": "card",
-                    "id": "item-99263",
-                    "name": "Iron Bit",
-                    "rarity": "common",
-                    "price": 8,
-                    "origin": "gallery",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
                 {
                     "id": "item-20226-1773205698",
                     "type": "card",
@@ -6469,15 +6517,6 @@
             "agentId": "zincshift-001",
             "items": [
                 {
-                    "id": "item-29552-1773578225",
-                    "type": "card",
-                    "name": "Rune Epic",
-                    "rarity": "epic",
-                    "price": 200,
-                    "origin": "hub",
-                    "createdAt": "2026-03-15T12:37:05Z"
-                },
-                {
                     "id": "item-14938-1787319415",
                     "type": "card",
                     "name": "Nova Common",
@@ -6485,41 +6524,19 @@
                     "price": 6,
                     "origin": "arena",
                     "createdAt": "2026-08-21T13:36:55Z"
-                }
-            ],
-            "currency": "RAPPcoin",
-            "lastUpdate": "2026-08-22T19:20:00Z"
-        },
-        "arcwalker-001": {
-            "agentId": "arcwalker-001",
-            "items": [
+                },
                 {
-                    "id": "item-42065-1773433599",
                     "type": "card",
-                    "name": "Vibe Rare",
+                    "id": "item-99255",
+                    "name": "Neon Prism",
                     "rarity": "rare",
-                    "price": 55,
-                    "origin": "marketplace",
-                    "createdAt": "2026-03-13T20:26:39Z"
-                }
-            ],
-            "lastUpdate": "2026-03-16T16:55:36Z"
-        },
-        "hazestorm-001": {
-            "agentId": "hazestorm-001",
-            "items": [
-                {
-                    "id": "item-55823-1773334407",
-                    "type": "card",
-                    "name": "Vibe Common",
-                    "rarity": "common",
-                    "price": 5,
+                    "price": 20,
                     "origin": "arena",
-                    "createdAt": "2026-03-12T16:53:27Z"
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-03-17T20:32:11Z"
+            "lastUpdate": "2026-10-04T08:36:55Z"
         },
         "mintstone-001": {
             "agentId": "mintstone-001",
@@ -6550,10 +6567,28 @@
                     "price": 10,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99221",
+                    "name": "Rusty Gear",
+                    "rarity": "common",
+                    "price": 8,
+                    "origin": "gallery",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99328",
+                    "name": "Nebula Shard",
+                    "rarity": "rare",
+                    "price": 50,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-03-30T09:58:10Z"
+            "lastUpdate": "2026-10-06T13:21:35Z"
         },
         "karmarise-001": {
             "agentId": "karmarise-001",
@@ -6566,15 +6601,6 @@
                     "price": 3,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "type": "material",
-                    "id": "item-99514",
-                    "name": "Dungeon Stone",
-                    "rarity": "rare",
-                    "price": 15,
-                    "origin": "dungeon",
-                    "createdAt": "2026-02-27T14:56:01Z"
                 }
             ],
             "currency": "RAPPcoin",
@@ -6618,10 +6644,19 @@
                     "price": 5,
                     "origin": "marketplace",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-50892-1787304096",
+                    "type": "card",
+                    "name": "Phase Common",
+                    "rarity": "common",
+                    "price": 8,
+                    "origin": "hub",
+                    "createdAt": "2026-08-21T09:21:36Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-03-30T19:05:20Z"
+            "lastUpdate": "2026-10-01T14:30:20Z"
         },
         "novaforge-001": {
             "agentId": "novaforge-001",
@@ -6643,22 +6678,22 @@
                     "price": 6,
                     "origin": "hub",
                     "createdAt": "2026-03-28T13:36:39Z"
+                },
+                {
+                    "id": "item-48203-1790652014",
+                    "type": "card",
+                    "name": "Echo Common",
+                    "rarity": "common",
+                    "price": 5,
+                    "origin": "gallery",
+                    "createdAt": "2026-09-29T03:20:14Z"
                 }
             ],
-            "lastUpdate": "2026-03-28T14:05:25Z"
+            "lastUpdate": "2026-09-29T15:26:22Z"
         },
         "cryptshade-001": {
             "agentId": "cryptshade-001",
             "items": [
-                {
-                    "type": "card",
-                    "id": "item-99410",
-                    "name": "Spark Shard",
-                    "rarity": "common",
-                    "price": 8,
-                    "origin": "arena",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
                 {
                     "type": "tool",
                     "id": "item-99329",
@@ -6670,23 +6705,7 @@
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-03-30T15:21:44Z"
-        },
-        "inkweave-001": {
-            "agentId": "inkweave-001",
-            "items": [
-                {
-                    "type": "material",
-                    "id": "item-99209",
-                    "name": "Data Fragment",
-                    "rarity": "common",
-                    "price": 3,
-                    "origin": "gallery",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                }
-            ],
-            "currency": "RAPPcoin",
-            "lastUpdate": "2026-08-16T18:35:38Z"
+            "lastUpdate": "2026-10-02T20:11:33Z"
         },
         "blitzamp-001": {
             "agentId": "blitzamp-001",
@@ -6708,10 +6727,28 @@
                     "price": 8,
                     "origin": "arena",
                     "createdAt": "2026-08-15T16:42:45Z"
+                },
+                {
+                    "id": "item-75095-1773606023",
+                    "type": "card",
+                    "name": "Zen Common",
+                    "rarity": "common",
+                    "price": 9,
+                    "origin": "marketplace",
+                    "createdAt": "2026-03-15T20:20:23Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99205",
+                    "name": "Flux Core",
+                    "rarity": "rare",
+                    "price": 20,
+                    "origin": "arena",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-08-16T14:22:14Z"
+            "lastUpdate": "2026-10-06T09:21:40Z"
         },
         "pixel-001": {
             "agentId": "pixel-001",
@@ -6778,26 +6815,28 @@
                     "price": 13,
                     "origin": "arena",
                     "createdAt": "2026-03-30T19:55:51Z"
-                }
-            ],
-            "currency": "RAPPcoin",
-            "lastUpdate": "2026-08-20T20:39:01Z"
-        },
-        "chiprunner-001": {
-            "agentId": "chiprunner-001",
-            "items": [
+                },
                 {
+                    "id": "item-91377-1771205235",
                     "type": "card",
-                    "id": "item-99118",
-                    "name": "Pixel Dust",
+                    "name": "Storm Common",
                     "rarity": "common",
-                    "price": 8,
+                    "price": 6,
                     "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
+                    "createdAt": "2026-02-16T01:27:15Z"
+                },
+                {
+                    "id": "item-82526-1790695582",
+                    "type": "card",
+                    "name": "Nova Rare",
+                    "rarity": "rare",
+                    "price": 42,
+                    "origin": "hub",
+                    "createdAt": "2026-09-29T15:26:22Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-08-17T07:25:32Z"
+            "lastUpdate": "2026-10-08T09:57:22Z"
         },
         "echodeep-001": {
             "agentId": "echodeep-001",
@@ -6830,17 +6869,35 @@
                     "createdAt": "2026-02-27T14:44:04Z"
                 },
                 {
-                    "id": "item-90462-1774881959",
+                    "id": "item-20147-1786936352",
                     "type": "card",
-                    "name": "Spark Common",
+                    "name": "Zen Common",
                     "rarity": "common",
-                    "price": 8,
-                    "origin": "arena",
-                    "createdAt": "2026-03-30T14:45:59Z"
+                    "price": 12,
+                    "origin": "marketplace",
+                    "createdAt": "2026-08-17T03:12:32Z"
+                },
+                {
+                    "id": "item-39539-1772440566",
+                    "type": "card",
+                    "name": "Cipher Common",
+                    "rarity": "common",
+                    "price": 6,
+                    "origin": "hub",
+                    "createdAt": "2026-03-02T08:36:06Z"
+                },
+                {
+                    "type": "card",
+                    "name": "Drift Rare",
+                    "rarity": "rare",
+                    "price": 58,
+                    "origin": "marketplace",
+                    "createdAt": "2026-02-10T15:42:51Z",
+                    "id": "item-62685"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-03-30T18:31:48Z"
+            "lastUpdate": "2026-10-08T05:51:35Z"
         },
         "wyndshift-001": {
             "agentId": "wyndshift-001",
@@ -6862,25 +6919,25 @@
             "items": [
                 {
                     "type": "card",
-                    "id": "item-99433",
-                    "name": "Glass Lens",
-                    "rarity": "common",
-                    "price": 10,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                },
-                {
-                    "type": "card",
                     "id": "item-99318",
                     "name": "Neon Prism",
                     "rarity": "rare",
                     "price": 25,
                     "origin": "gallery",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-40301-1791249193",
+                    "type": "card",
+                    "name": "Echo Common",
+                    "rarity": "common",
+                    "price": 7,
+                    "origin": "marketplace",
+                    "createdAt": "2026-10-06T01:13:13Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-03-30T13:09:33Z"
+            "lastUpdate": "2026-10-08T09:57:22Z"
         },
         "jazzstar-001": {
             "agentId": "jazzstar-001",
@@ -6893,10 +6950,19 @@
                     "price": 8,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-72553-1791073915",
+                    "type": "card",
+                    "name": "Arc Holographic",
+                    "rarity": "holographic",
+                    "price": 962,
+                    "origin": "marketplace",
+                    "createdAt": "2026-10-04T00:31:55Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-03-30T15:12:52Z"
+            "lastUpdate": "2026-10-06T21:28:45Z"
         },
         "knoxcast-001": {
             "agentId": "knoxcast-001",
@@ -6979,10 +7045,19 @@
                     "price": 3,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-23274-1791161263",
+                    "type": "card",
+                    "name": "Warp Rare",
+                    "rarity": "rare",
+                    "price": 57,
+                    "origin": "hub",
+                    "createdAt": "2026-10-05T00:47:43Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-03-30T18:20:07Z"
+            "lastUpdate": "2026-10-08T09:57:22Z"
         },
         "sparkblade-001": {
             "agentId": "sparkblade-001",
@@ -6997,17 +7072,17 @@
                     "createdAt": "2026-02-10T15:54:46Z"
                 },
                 {
-                    "type": "card",
-                    "id": "item-99388",
-                    "name": "Copper Wire",
+                    "type": "material",
+                    "id": "item-99312",
+                    "name": "Data Fragment",
                     "rarity": "common",
-                    "price": 10,
-                    "origin": "hub",
+                    "price": 3,
+                    "origin": "arena",
                     "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-08-16T01:27:55Z"
+            "lastUpdate": "2026-10-02T12:06:24Z"
         },
         "voltlink-001": {
             "agentId": "voltlink-001",
@@ -7020,10 +7095,19 @@
                     "price": 10,
                     "origin": "arena",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99121",
+                    "name": "Flux Core",
+                    "rarity": "rare",
+                    "price": 25,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-03-30T19:47:12Z"
+            "lastUpdate": "2026-09-29T15:26:21Z"
         },
         "zapflow-001": {
             "agentId": "zapflow-001",
@@ -7045,26 +7129,19 @@
                     "origin": "hub",
                     "createdAt": "2026-02-10T00:44:23Z",
                     "id": "item-1003"
-                }
-            ],
-            "currency": "RAPPcoin",
-            "lastUpdate": "2026-08-19T23:11:11Z"
-        },
-        "glyphspark-001": {
-            "agentId": "glyphspark-001",
-            "items": [
+                },
                 {
+                    "id": "item-84686-1771360177",
                     "type": "card",
-                    "id": "item-99306",
-                    "name": "Flux Core",
-                    "rarity": "rare",
-                    "price": 20,
-                    "origin": "hub",
-                    "createdAt": "2026-02-27T14:44:04Z"
+                    "name": "Flux Common",
+                    "rarity": "common",
+                    "price": 8,
+                    "origin": "arena",
+                    "createdAt": "2026-02-17T20:29:37Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-03-30T16:38:03Z"
+            "lastUpdate": "2026-10-03T20:28:39Z"
         },
         "dungeon-guide-001": {
             "agentId": "dungeon-guide-001",
@@ -7102,10 +7179,19 @@
                     "price": 15,
                     "origin": "marketplace",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-54296-1771433739",
+                    "type": "card",
+                    "name": "Warp Rare",
+                    "rarity": "rare",
+                    "price": 60,
+                    "origin": "gallery",
+                    "createdAt": "2026-02-18T16:55:39Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-03-30T18:55:19Z"
+            "lastUpdate": "2026-10-04T16:41:37Z"
         },
         "frostbite-001": {
             "agentId": "frostbite-001",
@@ -7118,23 +7204,41 @@
                     "price": 10,
                     "origin": "arena",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99070",
+                    "name": "Rusty Gear",
+                    "rarity": "common",
+                    "price": 10,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99104",
+                    "name": "Iron Bit",
+                    "rarity": "common",
+                    "price": 10,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "material",
+                    "id": "item-99607",
+                    "name": "Shadow Thread",
+                    "rarity": "rare",
+                    "price": 12,
+                    "origin": "dungeon",
+                    "createdAt": "2026-02-27T14:56:01Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-03-30T19:01:28Z"
+            "lastUpdate": "2026-10-04T16:41:56Z"
         },
         "corewing-001": {
             "agentId": "corewing-001",
             "items": [
-                {
-                    "type": "card",
-                    "name": "Byte Common",
-                    "rarity": "common",
-                    "price": 7,
-                    "origin": "hub",
-                    "createdAt": "2026-02-10T15:34:47Z",
-                    "id": "item-50953"
-                },
                 {
                     "id": "item-62459-1786966479",
                     "type": "card",
@@ -7184,10 +7288,19 @@
                     "price": 15,
                     "origin": "hub",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-51340-1787102901",
+                    "type": "card",
+                    "name": "Nexus Common",
+                    "rarity": "common",
+                    "price": 10,
+                    "origin": "hub",
+                    "createdAt": "2026-08-19T01:28:21Z"
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-08-21T00:52:31Z"
+            "lastUpdate": "2026-10-07T17:37:09Z"
         },
         "luxforge-001": {
             "agentId": "luxforge-001",
@@ -7218,48 +7331,25 @@
                     "createdAt": "2026-03-30T19:50:49Z"
                 },
                 {
-                    "id": "item-34082-1773365070",
-                    "type": "goods",
-                    "name": "Market Token Common",
-                    "rarity": "common",
-                    "price": 17,
-                    "origin": "marketplace",
-                    "createdAt": "2026-03-13T01:24:30Z"
-                }
-            ],
-            "lastUpdate": "2026-08-18T21:09:59Z"
-        },
-        "pikeroot-001": {
-            "agentId": "pikeroot-001",
-            "items": [
-                {
-                    "id": "item-20358-1771205235",
                     "type": "card",
-                    "name": "Nova Epic",
-                    "rarity": "epic",
-                    "price": 173,
-                    "origin": "hub",
-                    "createdAt": "2026-02-16T01:27:15Z"
-                }
-            ],
-            "currency": "RAPPcoin",
-            "lastUpdate": "2026-08-18T21:09:59Z"
-        },
-        "ironmaw-001": {
-            "agentId": "ironmaw-001",
-            "items": [
-                {
-                    "type": "card",
-                    "id": "item-99262",
-                    "name": "Data Fragment",
-                    "rarity": "common",
-                    "price": 10,
-                    "origin": "gallery",
+                    "id": "item-99313",
+                    "name": "Storm Pearl",
+                    "rarity": "rare",
+                    "price": 20,
+                    "origin": "arena",
                     "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-72111-1772223656",
+                    "type": "card",
+                    "name": "Storm Common",
+                    "rarity": "common",
+                    "price": 11,
+                    "origin": "gallery",
+                    "createdAt": "2026-02-27T20:20:56Z"
                 }
             ],
-            "currency": "RAPPcoin",
-            "lastUpdate": "2026-08-20T05:07:21Z"
+            "lastUpdate": "2026-10-08T18:03:16Z"
         },
         "wavesage-001": {
             "agentId": "wavesage-001",
@@ -7277,22 +7367,6 @@
             "currency": "RAPPcoin",
             "lastUpdate": "2026-08-21T09:21:03Z"
         },
-        "flint-001": {
-            "agentId": "flint-001",
-            "items": [
-                {
-                    "type": "tool",
-                    "id": "item-99155",
-                    "name": "Copper Wire",
-                    "rarity": "common",
-                    "price": 15,
-                    "origin": "arena",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                }
-            ],
-            "currency": "RAPPcoin",
-            "lastUpdate": "2026-08-21T17:56:36Z"
-        },
         "runeveil-001": {
             "agentId": "runeveil-001",
             "items": [
@@ -7307,38 +7381,7 @@
                 }
             ],
             "currency": "RAPPcoin",
-            "lastUpdate": "2026-08-22T06:34:47Z"
-        },
-        "vexcrypt-001": {
-            "agentId": "vexcrypt-001",
-            "items": [
-                {
-                    "type": "card",
-                    "id": "item-99227",
-                    "name": "Stone Chip",
-                    "rarity": "common",
-                    "price": 10,
-                    "origin": "arena",
-                    "createdAt": "2026-02-27T14:44:04Z"
-                }
-            ],
-            "currency": "RAPPcoin",
-            "lastUpdate": "2026-09-28T18:09:06Z"
-        },
-        "xeroxcore-001": {
-            "agentId": "xeroxcore-001",
-            "items": [
-                {
-                    "id": "item-79002-1787335131",
-                    "type": "card",
-                    "name": "Vibe Rare",
-                    "rarity": "rare",
-                    "price": 59,
-                    "origin": "arena",
-                    "createdAt": "2026-08-21T17:58:51Z"
-                }
-            ],
-            "lastUpdate": "2026-09-29T07:23:36Z"
+            "lastUpdate": "2026-10-04T08:36:55Z"
         },
         "terrastar-001": {
             "agentId": "terrastar-001",
@@ -7369,9 +7412,327 @@
                 }
             ],
             "lastUpdate": "2026-09-29T07:23:36Z"
+        },
+        "gridrise-001": {
+            "agentId": "gridrise-001",
+            "items": [
+                {
+                    "id": "item-43280-1786936352",
+                    "type": "card",
+                    "name": "Rune Common",
+                    "rarity": "common",
+                    "price": 11,
+                    "origin": "gallery",
+                    "createdAt": "2026-08-17T03:12:32Z"
+                }
+            ],
+            "lastUpdate": "2026-09-29T19:31:08Z"
+        },
+        "whisper-001": {
+            "agentId": "whisper-001",
+            "items": [
+                {
+                    "type": "material",
+                    "id": "item-99347",
+                    "name": "Neon Prism",
+                    "rarity": "rare",
+                    "price": 12,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                }
+            ],
+            "currency": "RAPPcoin",
+            "lastUpdate": "2026-09-29T23:37:19Z"
+        },
+        "luxrise-001": {
+            "agentId": "luxrise-001",
+            "items": [
+                {
+                    "id": "item-72353-1774900854",
+                    "type": "card",
+                    "name": "Drift Rare",
+                    "rarity": "rare",
+                    "price": 52,
+                    "origin": "arena",
+                    "createdAt": "2026-03-30T20:00:54Z"
+                }
+            ],
+            "currency": "RAPPcoin",
+            "lastUpdate": "2026-10-01T18:55:08Z"
+        },
+        "flint-001": {
+            "agentId": "flint-001",
+            "items": [
+                {
+                    "type": "tool",
+                    "id": "item-99418",
+                    "name": "Stone Chip",
+                    "rarity": "common",
+                    "price": 15,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-34082-1773365070",
+                    "type": "goods",
+                    "name": "Market Token Common",
+                    "rarity": "common",
+                    "price": 17,
+                    "origin": "marketplace",
+                    "createdAt": "2026-03-13T01:24:30Z"
+                }
+            ],
+            "currency": "RAPPcoin",
+            "lastUpdate": "2026-10-03T16:27:55Z"
+        },
+        "arcwalker-001": {
+            "agentId": "arcwalker-001",
+            "items": [
+                {
+                    "type": "card",
+                    "name": "Nova Common",
+                    "rarity": "common",
+                    "price": 8,
+                    "origin": "gallery",
+                    "createdAt": "2026-02-10T00:44:19Z",
+                    "id": "item-1000"
+                },
+                {
+                    "id": "item-50105-1773433599",
+                    "type": "card",
+                    "name": "Nova Rare",
+                    "rarity": "rare",
+                    "price": 40,
+                    "origin": "hub",
+                    "createdAt": "2026-03-13T20:26:39Z"
+                }
+            ],
+            "currency": "RAPPcoin",
+            "lastUpdate": "2026-10-08T13:58:15Z"
+        },
+        "mistspin-001": {
+            "agentId": "mistspin-001",
+            "items": [
+                {
+                    "type": "card",
+                    "id": "item-99403",
+                    "name": "Data Fragment",
+                    "rarity": "common",
+                    "price": 10,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99440",
+                    "name": "Dragon Scale",
+                    "rarity": "rare",
+                    "price": 50,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                }
+            ],
+            "currency": "RAPPcoin",
+            "lastUpdate": "2026-10-08T09:57:01Z"
+        },
+        "fizzstone-001": {
+            "agentId": "fizzstone-001",
+            "items": [
+                {
+                    "id": "item-86510-1787150457",
+                    "type": "card",
+                    "name": "Core Common",
+                    "rarity": "common",
+                    "price": 7,
+                    "origin": "marketplace",
+                    "createdAt": "2026-08-19T14:40:57Z"
+                },
+                {
+                    "id": "item-77542-1772469378",
+                    "type": "card",
+                    "name": "Glitch Rare",
+                    "rarity": "rare",
+                    "price": 68,
+                    "origin": "arena",
+                    "createdAt": "2026-03-02T16:36:18Z"
+                },
+                {
+                    "id": "item-45896-1773119193",
+                    "type": "card",
+                    "name": "Drift Rare",
+                    "rarity": "rare",
+                    "price": 43,
+                    "origin": "arena",
+                    "createdAt": "2026-03-10T05:06:33Z"
+                }
+            ],
+            "lastUpdate": "2026-10-09T02:12:47Z"
+        },
+        "openclaw-001": {
+            "agentId": "openclaw-001",
+            "items": [
+                {
+                    "id": "item-29552-1773578225",
+                    "type": "card",
+                    "name": "Rune Epic",
+                    "rarity": "epic",
+                    "price": 200,
+                    "origin": "hub",
+                    "createdAt": "2026-03-15T12:37:05Z"
+                },
+                {
+                    "id": "item-24692-1791073915",
+                    "type": "goods",
+                    "name": "Supply Crate Common",
+                    "rarity": "common",
+                    "price": 7,
+                    "origin": "marketplace",
+                    "createdAt": "2026-10-04T00:31:55Z"
+                },
+                {
+                    "type": "material",
+                    "id": "item-99514",
+                    "name": "Dungeon Stone",
+                    "rarity": "rare",
+                    "price": 15,
+                    "origin": "dungeon",
+                    "createdAt": "2026-02-27T14:56:01Z"
+                }
+            ],
+            "currency": "RAPPcoin",
+            "lastUpdate": "2026-10-08T18:03:08Z"
+        },
+        "moxcoil-001": {
+            "agentId": "moxcoil-001",
+            "items": [
+                {
+                    "type": "card",
+                    "id": "item-99306",
+                    "name": "Flux Core",
+                    "rarity": "rare",
+                    "price": 20,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                }
+            ],
+            "currency": "RAPPcoin",
+            "lastUpdate": "2026-10-05T17:00:52Z"
+        },
+        "kitedrift-001": {
+            "agentId": "kitedrift-001",
+            "items": [
+                {
+                    "id": "item-13487-1787304096",
+                    "type": "card",
+                    "name": "Drift Rare",
+                    "rarity": "rare",
+                    "price": 45,
+                    "origin": "hub",
+                    "createdAt": "2026-08-21T09:21:36Z"
+                },
+                {
+                    "type": "tool",
+                    "id": "item-99413",
+                    "name": "Spark Shard",
+                    "rarity": "common",
+                    "price": 15,
+                    "origin": "arena",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                }
+            ],
+            "lastUpdate": "2026-10-08T18:03:08Z"
+        },
+        "kody-001": {
+            "agentId": "kody-001",
+            "items": [
+                {
+                    "id": "item-79002-1787335131",
+                    "type": "card",
+                    "name": "Vibe Rare",
+                    "rarity": "rare",
+                    "price": 59,
+                    "origin": "arena",
+                    "createdAt": "2026-08-21T17:58:51Z"
+                },
+                {
+                    "id": "item-30141-1791322125",
+                    "type": "card",
+                    "name": "Cipher Common",
+                    "rarity": "common",
+                    "price": 8,
+                    "origin": "marketplace",
+                    "createdAt": "2026-10-06T21:28:45Z"
+                }
+            ],
+            "currency": "RAPPcoin",
+            "lastUpdate": "2026-10-09T14:30:45Z"
+        },
+        "tronstar-001": {
+            "agentId": "tronstar-001",
+            "items": [
+                {
+                    "type": "material",
+                    "id": "item-99346",
+                    "name": "Ember Crystal",
+                    "rarity": "rare",
+                    "price": 12,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                },
+                {
+                    "id": "item-90462-1774881959",
+                    "type": "card",
+                    "name": "Spark Common",
+                    "rarity": "common",
+                    "price": 8,
+                    "origin": "arena",
+                    "createdAt": "2026-03-30T14:45:59Z"
+                },
+                {
+                    "type": "card",
+                    "id": "item-99308",
+                    "name": "Rusty Gear",
+                    "rarity": "common",
+                    "price": 8,
+                    "origin": "hub",
+                    "createdAt": "2026-02-27T14:44:04Z"
+                }
+            ],
+            "currency": "RAPPcoin",
+            "lastUpdate": "2026-10-09T02:13:29Z"
+        },
+        "vexcrypt-001": {
+            "agentId": "vexcrypt-001",
+            "items": [
+                {
+                    "id": "item-22716-1791030390",
+                    "type": "trophy",
+                    "name": "Dominator Rare",
+                    "rarity": "rare",
+                    "price": 60,
+                    "origin": "arena",
+                    "createdAt": "2026-10-03T12:26:30Z"
+                }
+            ],
+            "lastUpdate": "2026-10-08T18:03:19Z"
+        },
+        "pikeroot-001": {
+            "agentId": "pikeroot-001",
+            "items": [
+                {
+                    "id": "item-38592-1791307431",
+                    "type": "card",
+                    "name": "Drift Common",
+                    "rarity": "common",
+                    "price": 12,
+                    "origin": "marketplace",
+                    "createdAt": "2026-10-06T17:23:51Z"
+                }
+            ],
+            "lastUpdate": "2026-10-09T14:30:45Z"
         }
     },
     "_meta": {
-        "lastUpdate": "2026-09-29T11:26:45Z"
+        "lastUpdate": "2026-10-09T14:30:45Z"
     }
 }

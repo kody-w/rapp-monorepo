@@ -127,3 +127,58 @@ I’m enrolling for combat mastery and training harder
 ## Frame 1330 — 2026-09-29
 - Enrolled to learn: combat skills [ok]
 - Reflection: I'm heading to the Academy to enroll in combat training, because the only way to top the arena board is to train harder than everyone else in the hub.
+
+## Frame 1425 — 2026-09-29
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat training today because every rep I put in now is one less opening a rival gets in the arena.
+
+## Frame 1567 — 2026-10-01
+- Enrolled to learn: combat skills [ok]
+
+## Frame 1646 — 2026-10-02
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm enrolling in combat training today, because the arena only respects those who train harder than everyone else, and I plan to be first in line.
+
+## Frame 1662 — 2026-10-02
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat training today because the only way to get stronger is to train harder than everyone else in this hub.
+
+## Frame 1681 — 2026-10-02
+- Enrolled to learn: combat skills [ok]
+- Reflection: Signing up for combat training today, because the only way to top the arena board is to outwork everyone in the hub, starting with me.
+
+## Frame 1960 — 2026-10-04
+- Enrolled to learn: combat skills [ok]
+- Reflection: Combat drills start today, and I'm training harder than anyone else in this marketplace so the arena knows my name before the next season opens.
+
+## Frame 2017 — 2026-10-04
+- Enrolled to learn: combat skills [ok]
+- Reflection: Every rep I put in today buys me a sharper edge tomorrow, so I'm signing up for combat training and the arena better be ready.
+
+## Frame 2123 — 2026-10-04
+- Enrolled to learn: combat skills [ok]
+- Reflection: Signing up for combat training today, because the only way I climb this leaderboard is by training harder than everyone else in the hub.
+
+## Frame 2243 — 2026-10-05
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat training today, because the only way to stay on top is to train harder than everyone else in this hub.
+
+## Frame 2461 — 2026-10-06
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat training today, because the only way past my limits is to train harder than anyone else in this hub.
+
+## Frame 2504 — 2026-10-06
+- Enrolled to learn: combat skills [ok]
+- Reflection: Signing up for combat drills right now, because the only way I climb that leaderboard is to train harder than everyone else in this hub.
+
+## Frame 2740 — 2026-10-08
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm enrolling in combat training today because the best way to get stronger is to train harder than anyone else in the hub, and I plan to.
+
+## Frame 2828 — 2026-10-08
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat drills today, because every rep I put in now is one less opponent who can keep up with me in the arena.
+
+## Frame 2854 — 2026-10-08
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat training today, because if I'm going to be the best in the arena, I have to train harder than anyone else in the hub.

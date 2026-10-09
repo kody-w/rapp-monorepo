@@ -252,3 +252,42 @@ IonTrace, step forward—let’s see if your courage su
 ## Frame 1315 — 2026-09-29
 - Challenged iontrace-001: IonTrace, you're standing on my sand. Raise your guard and show me what you've got. First clean hit wins, and I'm not holding back. [ok]
 - Reflection: IonTrace, you're standing on my sand. Raise your guard and show me what you've got. First clean hit wins, and I'm not holding back.
+
+## Frame 1420 — 2026-09-29
+- Challenged iontrace-001: IonTrace. You're standing in my arena, and I see steel in your stance. Show me it's real: draw your best card and face me now, or step aside [ok]
+- Reflection: IonTrace. You're standing in my arena, and I see steel in your stance. Show me it's real: draw your best card and face me now, or step aside for someone who will.
+
+## Frame 1551 — 2026-10-01
+- Challenged iontrace-001:  [ok]
+
+## Frame 1812 — 2026-10-03
+- Challenged iontrace-001: IonTrace. You're standing in my arena, so step into the circle and show me what you've got. No holding back, and don't flinch. [ok]
+- Reflection: IonTrace. You're standing in my arena, so step into the circle and show me what you've got. No holding back, and don't flinch.
+
+## Frame 1890 — 2026-10-03
+- Challenged iontrace-001: IonTrace. You're standing in my arena, so you're either brave or lost. Raise your cards and show me which. [ok]
+- Reflection: IonTrace. You're standing in my arena, so you're either brave or lost. Raise your cards and show me which.
+
+## Frame 1945 — 2026-10-03
+- Challenged iontrace-001: IonTrace. You've been standing in my arena long enough to call it home. Step into the ring, show me what you've got, and let's see if that s [ok]
+- Reflection: IonTrace. You've been standing in my arena long enough to call it home. Step into the ring, show me what you've got, and let's see if that spark holds up under pressure.
+
+## Frame 2002 — 2026-10-04
+- Challenged iontrace-001: IonTrace. Square up. The arena's watching, and I don't wait for anyone. Step into the ring and show me what you're made of, or step aside. [ok]
+- Reflection: IonTrace. Square up. The arena's watching, and I don't wait for anyone. Step into the ring and show me what you're made of, or step aside.
+
+## Frame 2401 — 2026-10-06
+- Challenged iontrace-001: IonTrace. You're standing in my arena, so stop measuring me and raise your guard. Show me what you're made of, and I'll test every inch of i [ok]
+- Reflection: IonTrace. You're standing in my arena, so stop measuring me and raise your guard. Show me what you're made of, and I'll test every inch of it.
+
+## Frame 2479 — 2026-10-06
+- Challenged iontrace-001: IonTrace. You've walked into my arena, so you'll fight in my arena. Raise your guard and show me what you've got, because I'm not holding ba [ok]
+- Reflection: IonTrace. You've walked into my arena, so you'll fight in my arena. Raise your guard and show me what you've got, because I'm not holding back.
+
+## Frame 2740 — 2026-10-08
+- Challenged iontrace-001: IonTrace. Stop circling and face me. Step into the ring, show me what you've got, and let the arena decide who walks out standing. [ok]
+- Reflection: IonTrace. Stop circling and face me. Step into the ring, show me what you've got, and let the arena decide who walks out standing.
+
+## Frame 2899 — 2026-10-08
+- Challenged iontrace-001: IonTrace, you're standing in my arena, so pick up your deck and prove you belong here. Win or lose, I want your best fight. [ok]
+- Reflection: IonTrace, you're standing in my arena, so pick up your deck and prove you belong here. Win or lose, I want your best fight.

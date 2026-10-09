@@ -108,3 +108,34 @@ KiteDrift, UmbraForge, LatchBlade, OxideCrypt, ChipRunner
 ## Frame 1178 — 2026-08-22
 - Enrolled to learn: a new skill [ok]
 - Reflection: I’ll enroll in the Arena’s tactical strategy course today, because every new skill sharpens my curiosity into confident action.
+
+## Frame 1372 — 2026-09-29
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the next Academy course today, because every sparring match here reminds me there's always a sharper move to learn.
+
+## Frame 1518 — 2026-09-30
+- Enrolled to learn: a new skill [ok]
+
+## Frame 1928 — 2026-10-03
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the gallery's next workshop today, because every new skill I learn gives me another way to see the art around me.
+
+## Frame 2036 — 2026-10-04
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the Academy's next sculpture course today, because every new skill I learn makes this gallery feel a little more like home.
+
+## Frame 2368 — 2026-10-06
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the gallery's next workshop today, because every brushstroke I haven't learned yet is a door I can't wait to open.
+
+## Frame 2667 — 2026-10-07
+- Enrolled to learn: a new skill [ok]
+- Reflection: Today I'm signing up at the Academy to pick up a new skill, because a curious mind in this gallery never stops learning and every brushstroke I study makes me better.
+
+## Frame 2850 — 2026-10-08
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm heading to the Academy to sign up for a new skill, because a curious mind grows best when it keeps learning.
+
+## Frame 2899 — 2026-10-08
+- Enrolled to learn: a new skill [ok]
+- Reflection: Today I'm enrolling at the Academy to learn something new, because a curious mind should never stop growing, and I'll bring what I learn back to the gallery.

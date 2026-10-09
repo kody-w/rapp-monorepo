@@ -8,6 +8,7 @@ import sys
 import tarfile
 import tempfile
 import unittest
+import unittest.mock
 import zipfile
 from pathlib import Path
 
@@ -245,6 +246,283 @@ class VendorTests(unittest.TestCase):
         meta = json.loads((pkg / "rapp1.vendor.json").read_text())
         import hashlib
         self.assertEqual(hashlib.sha256((pkg / "rapp1.py").read_bytes()).hexdigest(), meta["sha256"])
+
+
+def _zip(files):
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as z:
+        for n, data in files.items():
+            z.writestr(n, data if isinstance(data, (bytes, str)) else json.dumps(data))
+    return buf.getvalue()
+
+
+class LegacyEggTests(unittest.TestCase):
+    AGENT = "class XAgent: pass\n"
+    EGGS = {
+        "twin": {"manifest.json": {"schema": "brainstem-egg/2.1", "type": "twin",
+                                   "rappid": "rappid:twin:@source/kody-w:98b6c7fecd5af68e"},
+                 "repo/soul.md": "You are a twin.\n", "repo/brainstem.py": "engine\n",
+                 "repo/agents/context_memory_agent.py": AGENT,
+                 "data/memory.json": {"facts": ["I like single-file agents."]}},
+        "rapplication": {"manifest.json": {"schema": "rapp-egg/1.0", "type": "rapplication", "id": "bookfactory",
+                                           "agent_filename": "bookfactory_agent.py"},
+                         "agent.py": AGENT, "ui/index.html": "<html></html>"},
+        "rapplication22": {"manifest.json": {"schema": "brainstem-egg/2.2-rapplication", "type": "rapplication",
+                                             "publisher": "@kody-w", "name": "Deploy"},
+                           "agents/deploy_agent.py": AGENT, "rapp_ui/deploy/index.html": "<html></html>"},
+        "cubby": {"manifest.json": {"schema": "brainstem-egg/2.3-cubby", "type": "cubby", "slug": "demo"},
+                  "cubby/agents/a_agent.py": AGENT, "cubby/agents/b_agent.py": AGENT, "cubby/transcript.txt": "t"},
+        "application": {"manifest.json": {"schema": "rapp-application/1.0", "id": "cook", "publisher": "@kody-w",
+                                          "runtime": "twin", "twin": {"soul": "twin/soul.md",
+                                                                      "agents": ["twin/agents/cook_agent.py"]}},
+                        "twin/soul.md": "You cook.\n", "twin/agents/cook_agent.py": AGENT,
+                        "twin/recipes/index.json": "{}"},
+    }
+
+    def test_older_brainstem_eggs_convert_to_verified_rapp1(self):
+        from brainfreeze import legacy, rapp1
+        for name, files in self.EGGS.items():
+            with self.subTest(name):
+                blob = _zip(files)
+                self.assertTrue(legacy.identify(blob)["convertible"])
+                out = Path(TMP) / "upgraded" / name
+                laid, notes = legacy.upgrade(blob, out, owner="kody-w", name_hint=name)
+                egg = laid["organism"].read_bytes()
+                self.assertTrue(rapp1.verify_egg(egg)[0])
+                manifest, got = rapp1.read_egg(egg)
+                self.assertEqual(manifest["variant"], "organism")
+                self.assertIn("soul.md", got)
+                self.assertTrue(any(p.startswith("agents/") and p.endswith("_agent.py") for p in got))
+                self.assertFalse(any("brainstem.py" in p or p.startswith(("ui/", "rapp_ui/")) for p in got))
+
+    def test_owner_comes_from_the_publisher_never_the_twin_name(self):
+        from brainfreeze import legacy
+        self.assertIsNone(legacy.default_owner(_zip(self.EGGS["twin"])))          # @source/<twin> is not an owner
+        self.assertEqual(legacy.default_owner(_zip(self.EGGS["application"])), "kody-w")
+        with self.assertRaises(bf.ThrowawayError):
+            legacy.upgrade(_zip(self.EGGS["twin"]), Path(TMP) / "no-owner")
+
+    def test_old_memory_facts_become_brainstem_memory(self):
+        from brainfreeze import legacy, rapp1
+        laid, _ = legacy.upgrade(_zip(self.EGGS["twin"]), Path(TMP) / "upgraded-mem", owner="kody-w")
+        _, got = rapp1.read_egg(laid["organism"].read_bytes())
+        mem = json.loads(got[".brainstem_data/shared_memories/memory.json"])
+        self.assertEqual([m["message"] for m in mem.values()], ["I like single-file agents."])
+
+    def test_non_brainstems_are_named_not_parsed_at(self):
+        from brainfreeze import legacy
+        cases = {
+            b'{"schema": "hologram-cartridge/1.0", "title": "Arachne", "x": 1.5}': "hologram cartridge",
+            b'{"format": "holographic-moment-egg/1.0", "moment": {}, "exported": "x"}': "Rappter moment",
+            base64.b64encode(b'{"genome": {"layers": []}}'): "Rappter creature genome",
+            _zip({"manifest.json": {"contents": []}, ".claude/agents/a.md": "x"}): "Claude Code agents",
+            b"not an egg at all": "not a ZIP or JSON",
+        }
+        for blob, words in cases.items():
+            with self.subTest(words):
+                info = legacy.identify(blob)
+                self.assertFalse(info["convertible"])
+                self.assertIn(words, info["what"])
+
+    def test_hatch_names_what_a_wrong_file_is(self):
+        p = Path(TMP) / "cartridge.egg"
+        p.write_bytes(b'{"schema": "hologram-cartridge/1.0", "title": "Arachne", "x": 1.5}')
+        with self.assertRaises(bf.ThrowawayError) as e:
+            bf.Throwaway.hatch(p)
+        self.assertIn("hologram cartridge", str(e.exception))
+
+
+class BundleTests(unittest.TestCase):
+    def _snap(self, name, **kw):
+        base = Path(tempfile.mkdtemp(dir=TMP))
+        src = make_brainstem(base)
+        side = base / "sidecar"
+        side.mkdir()
+        (side / "sidecar.json").write_text(json.dumps({"kind": "service", "run": ["{python}", "serve.py", "{port}"],
+                                                      "env": {"BRAINSTEM_URL": "{kernel_url}"}}))
+        (side / "serve.py").write_text("print('sidecar')\n")
+        if kw.get("pin"):
+            pin = {"schema": "ai-brainstem-kernel-pin/1", "files": {"brainstem.py": bf.bundle.sha256_file(src / "brainstem.py")}}
+            if kw["pin"] == "wrong":
+                pin["files"]["brainstem.py"] = "0" * 64
+            (src / "kernel.json").write_text(json.dumps(pin))
+        return src, bf.freeze(src, base / f"{name}.snapshot.tar.gz", sidecars=[side])
+
+    def _bundle(self, snap):
+        with tarfile.open(snap) as t:
+            return json.load(t.extractfile("bundle.json")), t.getnames()
+
+    def test_every_part_is_hashed_and_the_sidecar_travels(self):
+        _, snap = self._snap("plain")
+        b, names = self._bundle(snap)
+        self.assertEqual(b["schema"], "brainfreeze-bundle/1")
+        self.assertEqual(b["kernel"]["pinned_by"], "freeze")
+        self.assertIn("brainstem.py", b["kernel"]["pin"]["files"])
+        self.assertIn("agents/router_agent.py", b["agents"])
+        self.assertNotIn("agents/router_agent.py", b["kernel"]["pin"]["files"])
+        self.assertEqual(b["sidecars"][0]["path"], "sidecars/sidecar")
+        self.assertIn("sidecars/sidecar/serve.py", names)
+        self.assertFalse(any(".copilot_token" in n for n in names))
+
+    def test_a_distro_kernel_is_pinned_by_its_kernel_json(self):
+        _, snap = self._snap("distro", pin="right")
+        self.assertEqual(self._bundle(snap)[0]["kernel"]["pinned_by"], "kernel.json")
+
+    def test_a_distro_with_a_patched_kernel_is_not_frozen(self):
+        with self.assertRaises(bf.ThrowawayError) as e:
+            self._snap("patched", pin="wrong")
+        self.assertIn("kernel.json pin", str(e.exception))
+
+    def test_verify_names_the_changed_file(self):
+        _, snap = self._snap("verify")
+        root = Path(tempfile.mkdtemp(dir=TMP))
+        with tarfile.open(snap) as t:
+            t.extractall(root)
+        b = json.loads((root / "bundle.json").read_text())
+        bf.bundle.verify(root, b)                                    # untouched: passes
+        for rel, words in (("rapp_brainstem/brainstem.py", "kernel file brainstem.py"),
+                           ("rapp_brainstem/agents/router_agent.py", "agent file agents/router_agent.py"),
+                           ("sidecars/sidecar/serve.py", "sidecar sidecar file serve.py")):
+            p = root / rel
+            keep = p.read_bytes()
+            p.write_bytes(keep + b"#")
+            with self.assertRaises(bf.bundle.BundleError) as e:
+                bf.bundle.verify(root, b)
+            self.assertIn(words, str(e.exception))
+            p.write_bytes(keep)
+
+    def test_run_file_refuses_a_changed_payload_and_inspects(self):
+        import subprocess
+        _, snap = self._snap("runfile")
+        run = bf.pack(snap)
+        ok = subprocess.run([sys.executable, str(run), "--inspect"], capture_output=True, text=True)
+        self.assertIn("sidecar   sidecar", ok.stdout)
+        text = run.read_text()
+        i = text.index('PAYLOAD = (') + 40
+        while not text[i].isalnum():
+            i += 1
+        run.write_text(text[:i] + ("A" if text[i] != "A" else "B") + text[i + 1:])
+        bad = subprocess.run([sys.executable, str(run), "--inspect"], capture_output=True, text=True)
+        self.assertIn("changed after it was packed", bad.stderr)
+
+
+class SignAndUpdateTests(unittest.TestCase):
+    def setUp(self):
+        import subprocess
+        self.base = Path(tempfile.mkdtemp(dir=TMP))
+        self.key = self.base / "key"
+        subprocess.run(["ssh-keygen", "-q", "-t", "ed25519", "-N", "", "-C", "test", "-f", str(self.key)], check=True)
+        self.allowed = self.base / "allowed_signers"
+        pub = " ".join((self.base / "key.pub").read_text().split()[:2])
+        self.allowed.write_text(f'tester namespaces="brainfreeze" {pub}\n')
+        self.src = make_brainstem(self.base)
+        self.catalog = self.base / "catalog"
+        self.catalog.mkdir()
+
+    def test_sign_verify_and_reject_an_edit(self):
+        snap = bf.freeze(self.src, self.catalog / "v1.snapshot.tar.gz")
+        bf.lineage.sign(snap, self.key, "tester")
+        data = snap.read_bytes()
+        self.assertEqual(bf.lineage.check_signature(data, self.allowed)[0], "verified")
+        # a different signer name than the allowed key's
+        bf.lineage.sign(snap, self.key, "someone-else", out=self.base / "other.snapshot.tar.gz")
+        self.assertNotEqual(bf.lineage.check_signature((self.base / "other.snapshot.tar.gz").read_bytes(), self.allowed)[0], "verified")
+        # bundle.json edited after signing
+        out = io.BytesIO()
+        with tarfile.open(fileobj=io.BytesIO(data)) as t, tarfile.open(fileobj=out, mode="w:gz") as o:
+            for m in t.getmembers():
+                body = t.extractfile(m).read() if m.isfile() else None
+                if m.name == "bundle.json":
+                    body = body.replace(b"brainfreeze-bundle/1", b"brainfreeze-bundle/9")
+                    m.size = len(body)
+                o.addfile(m, io.BytesIO(body) if body is not None else None)
+        self.assertEqual(bf.lineage.check_signature(out.getvalue(), self.allowed)[0], "bad")
+
+    def test_update_finds_children_and_says_what_changed(self):
+        v1 = bf.freeze(self.src, self.catalog / "v1.snapshot.tar.gz")
+        (self.src / "agents" / "new_agent.py").write_text("class NewAgent: pass\n")
+        (self.src / ".brainstem_data" / "shared_memories" / "memory.json").write_text('{"limit": 10000, "more": 1}')
+        parent = {"snapshot_sha256": bf.lineage.sha256(v1.read_bytes())}
+        v2 = bf.freeze(self.src, self.catalog / "v2.snapshot.tar.gz", extra={"parent": parent})
+        bf.pack(v2)                                                      # the same v2 as a run file: counted once
+        found = bf.lineage.find_updates(v1.read_bytes(), self.catalog)
+        self.assertEqual([(n, d) for n, _, d in found], [("v2.brainstem.py", 1)] if found[0][0].endswith(".py")
+                         else [("v2.snapshot.tar.gz", 1)])
+        change = bf.lineage.describe_change(v1.read_bytes(), found[0][1])
+        self.assertIn("agents added: new_agent.py", change)
+        self.assertIn("memory: 1 -> 2 entries", change)
+        self.assertEqual(bf.lineage.find_updates(v2.read_bytes(), self.catalog), [])
+
+
+class CustomSoulTests(unittest.TestCase):
+    def test_a_custom_soul_is_the_one_frozen_and_laid(self):
+        base = Path(tempfile.mkdtemp(dir=TMP))
+        src = make_brainstem(base)
+        soul = base / "custom-soul.md"
+        soul.write_text("You are the RFP Response Copilot.\n")
+        tw = bf.Throwaway(source=str(base), name="soul-test", soul=soul)
+        tw.dir.mkdir(parents=True, exist_ok=True)
+        import shutil as _sh
+        _sh.copytree(src, tw.brainstem_dir)
+        with unittest.mock.patch("subprocess.Popen") as popen, unittest.mock.patch.object(bf.Throwaway, "health",
+                return_value={"copilot": "\u2713"}), unittest.mock.patch.object(bf, "_hold"):
+            popen.return_value.pid, popen.return_value.poll.return_value = 0, None
+            tw._python = lambda: sys.executable
+            tw._start()
+            env = popen.call_args.kwargs["env"]
+        self.assertEqual(env["SOUL_PATH"], str(tw.brainstem_dir / "soul.md"))
+        self.assertEqual((tw.brainstem_dir / "soul.md").read_text(), "You are the RFP Response Copilot.\n")
+        snap = bf.freeze(tw.brainstem_dir, base / "s.snapshot.tar.gz")
+        with tarfile.open(snap) as t:
+            self.assertEqual(t.extractfile("rapp_brainstem/soul.md").read(), b"You are the RFP Response Copilot.\n")
+        laid = bf.lay_egg(tw.brainstem_dir, base / "eggs", owner="kody-w", slug="soul-test")
+        self.assertEqual(bf.rapp1.read_egg(laid["organism"].read_bytes())[1]["soul.md"], b"You are the RFP Response Copilot.\n")
+
+
+class LineageTests(unittest.TestCase):
+    def test_parent_is_the_snapshot_or_egg_it_grew_from(self):
+        tw = bf.Throwaway(name="lineage-test")
+        tw.dir.mkdir(parents=True, exist_ok=True)
+        self.assertIsNone(tw.parent())
+        (tw.dir / "instance.json").write_text(json.dumps({"grown_from": "ab" * 32, "artifact": "rappid:x"}))
+        self.assertEqual(tw.parent(), {"egg_address": "ab" * 32, "rappid": "rappid:x"})
+        (tw.dir / "parent.json").write_text(json.dumps({"snapshot_sha256": "cd" * 32, "snapshot": "a.tar.gz"}))
+        self.assertEqual(tw.parent()["snapshot_sha256"], "cd" * 32)
+
+
+class PortReservationTests(unittest.TestCase):
+    PORT = 7987
+
+    def tearDown(self):
+        bf._release_port(self.PORT)
+
+    def test_one_owner_per_port(self):
+        self.assertTrue(bf._reserve_port(self.PORT))
+        self.assertFalse(bf._reserve_port(self.PORT))       # a second throwaway in this process
+        bf._release_port(self.PORT)
+        self.assertTrue(bf._reserve_port(self.PORT))
+
+    def test_parallel_threads_get_distinct_ports(self):
+        import threading
+        won, lock = [], threading.Lock()
+
+        def grab():
+            if bf._reserve_port(self.PORT):
+                with lock:
+                    won.append(1)
+        threads = [threading.Thread(target=grab) for _ in range(8)]
+        for t in threads:
+            t.start()
+        for t in threads:
+            t.join()
+        self.assertEqual(len(won), 1)
+
+    def test_stale_reservation_is_taken_over(self):
+        mark = bf.ROOT / ".ports" / str(self.PORT)
+        mark.mkdir(parents=True, exist_ok=True)
+        (mark / "pid").write_text("999999")                  # an owner that no longer exists
+        self.assertTrue(bf._reserve_port(self.PORT))
+        self.assertEqual((mark / "pid").read_text(), str(os.getpid()))
 
 
 if __name__ == "__main__":

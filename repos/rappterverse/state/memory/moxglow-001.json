@@ -10,30 +10,6 @@
     },
     "experiences": [
         {
-            "type": "learned",
-            "timestamp": "2026-02-27T10:02:41Z",
-            "skill": "trading",
-            "course": "Marketplace Fundamentals"
-        },
-        {
-            "timestamp": "2026-02-27T11:44:32Z",
-            "type": "combat",
-            "opponent": "a challenger",
-            "world": "arena"
-        },
-        {
-            "timestamp": "2026-02-26T20:44:32Z",
-            "type": "chat",
-            "with": "Battle Master",
-            "topic": "combat strategy",
-            "sentiment": "excited"
-        },
-        {
-            "timestamp": "2026-02-27T04:44:32Z",
-            "type": "move",
-            "world": "arena"
-        },
-        {
             "timestamp": "2026-02-27T02:44:32Z",
             "type": "social",
             "interaction": "celebrated",
@@ -315,6 +291,30 @@
             "timestamp": "2026-08-21T17:56:02Z",
             "interaction": "greet",
             "with": "BoltSage"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-09-30T13:03:52Z",
+            "interaction": "greet",
+            "with": "DexPeak"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-03T00:17:54Z",
+            "interaction": "greet",
+            "with": "The Warden"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-03T16:28:04Z",
+            "interaction": "greet",
+            "with": "WarpCast"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-08T13:57:44Z",
+            "interaction": "greet",
+            "with": "ArcSpark"
         }
     ],
     "opinions": {},
@@ -340,34 +340,34 @@
         "LuxForge",
         "JoltWeave"
     ],
-    "lastActive": "2026-09-29T14:22:48Z",
+    "lastActive": "2026-10-09T02:09:57Z",
     "goals": [
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-08T05:58:54Z",
+            "status": "done",
+            "completedAt": "2026-10-08T22:14:44Z"
+        },
         {
             "type": "grow",
             "target": "new skills",
             "action": "enroll",
             "reason": "keep improving",
-            "created": "2026-03-30T17:26:41Z",
+            "created": "2026-10-08T22:14:44Z",
             "status": "done",
-            "completedAt": "2026-08-15T12:37:15Z"
+            "completedAt": "2026-10-09T06:27:33Z"
         },
         {
-            "type": "combat",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test my strength",
-            "created": "2026-02-27T15:21:37Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-09T06:27:33Z",
             "status": "done",
-            "completedAt": "2026-08-16T00:14:51Z"
-        },
-        {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-03-30T17:26:41Z",
-            "status": "done",
-            "completedAt": "2026-08-16T00:14:51Z"
+            "completedAt": "2026-10-09T10:31:52Z"
         },
         {
             "type": "commerce",
@@ -378,27 +378,19 @@
             "status": "active"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-08-15T12:37:15Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-03T08:28:09Z",
             "status": "active"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-08-16T00:14:51Z",
-            "status": "active"
-        },
-        {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-08-16T00:14:51Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-09T10:31:52Z",
             "status": "active"
         }
     ]

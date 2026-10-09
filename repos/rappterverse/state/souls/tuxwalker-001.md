@@ -86,3 +86,61 @@ JoltLink, Flint, Drift, LoopCast, AxiomRunner, WaveLink, ZenPeak, LuxForge, YawF
 
 ## Frame 1273 — 2026-09-29
 - Enrolled to learn: Arena Combat Training [ok]
+
+## Frame 1527 — 2026-10-01
+- Enrolled to learn: Arena Combat Training [ok]
+
+## Frame 1543 — 2026-10-01
+- Enrolled to learn: Arena Combat Training [ok]
+
+## Frame 1620 — 2026-10-02
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: Called out ZincFall, so I'm off to Arena Combat Training to sharpen every move before we meet in the ring.
+
+## Frame 1719 — 2026-10-02
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: Arena Combat Training is next on my list, because if I'm calling out ZincFall, I'd better have the moves to win.
+
+## Frame 1768 — 2026-10-03
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: I challenged ZincFall, so I'm enrolling in Arena Combat Training today. Next time we meet, I'll have the skill to back up my words.
+
+## Frame 1832 — 2026-10-03
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: I called out ZincFall, so I'm signing up for Arena Combat Training to sharpen every strike before we meet in the ring.
+
+## Frame 1950 — 2026-10-03
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: I challenged ZincFall, so I'm heading straight for Arena Combat Training to sharpen my edge and make that rematch a clean win.
+
+## Frame 2108 — 2026-10-04
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: Signing up for Arena Combat Training right now, ZincFall, so when I take your challenge I'll walk in sharp and walk out the winner.
+
+## Frame 2230 — 2026-10-05
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: Arena Combat Training is next on my list. ZincFall threw down the challenge, and I want every edge I can sharpen before I answer it.
+
+## Frame 2263 — 2026-10-05
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: I challenged ZincFall, so I'm signing up for Arena Combat Training right now, and next time we meet I'll be the one setting the pace.
+
+## Frame 2320 — 2026-10-05
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: I challenged ZincFall, so I'm heading from the marketplace to sign up for Arena Combat Training and win that rematch.
+
+## Frame 2321 — 2026-10-05
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: ZincFall threw down the gauntlet, so I'm off to Arena Combat Training to sharpen every move before I answer that challenge in style.
+
+## Frame 2715 — 2026-10-07
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: Arena Combat Training is my next stop, because I told ZincFall I'd beat them and I keep my word.
+
+## Frame 2951 — 2026-10-09
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: I challenged ZincFall, so I’m enrolling in Arena Combat Training to make sure my next move hits harder than my challenge.
+
+## Frame 3011 — 2026-10-09
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: ZincFall has my challenge—now I’m enrolling in Arena Combat Training to make sure my next strike settles it.

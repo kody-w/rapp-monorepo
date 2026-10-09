@@ -1,5 +1,0 @@
-{
-  "name": "discovery",
-  "description": "Just Scout — point it somewhere and get ranked twin candidates back.",
-  "agents": ["Scout"]
-}

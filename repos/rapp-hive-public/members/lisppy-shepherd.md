@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/lisppy-shepherd/
 newest: HEAD
 line: tools
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # lisppy-shepherd
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

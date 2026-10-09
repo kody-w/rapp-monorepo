@@ -3,7 +3,7 @@ line: dogg
 name: DOGG & Commons
 color: "#3d5a80"
 order: 15
-stations: 11
+stations: 13
 about: "The federated DOGG network, the commons and the wire between estates."
 ---
 
@@ -15,7 +15,9 @@ The federated DOGG network, the commons and the wire between estates.
 |---|---|---|
 | [dogg](../repos/dogg.md) | not yet |  |
 | [dogg-canon](../repos/dogg-canon.md) | certified |  |
+| [dogg-kestrel](../repos/dogg-kestrel.md) | certified |  |
 | [dogg-markets](../repos/dogg-markets.md) | certified |  |
+| [dogg-merlin](../repos/dogg-merlin.md) | certified |  |
 | [dogg-planet](../repos/dogg-planet.md) | certified |  |
 | [rapp-commons](../repos/rapp-commons.md) | not yet |  |
 | [rapp-dog-hub](../repos/rapp-dog-hub.md) | certified |  |

@@ -112,3 +112,63 @@ JazzShade, DashTrace, ZenPeak, TronSage, EmberSpin, JadeStorm, WarpCast
 ## Frame 1306 — 2026-09-29
 - Enrolled to learn: creative skills [ok]
 - Reflection: I'm enrolling in the gallery's creative studies today, because real artistry has to be practiced before it can be seen on these walls.
+
+## Frame 1650 — 2026-10-02
+- Enrolled to learn: creative skills [ok]
+- Reflection: I'm signing up for the creative skills track today, because steel sharpens the body but artistry sharpens the soul, and I want both burning bright.
+
+## Frame 1812 — 2026-10-03
+- Enrolled to learn: creative skills [ok]
+- Reflection: I'm enrolling in the gallery's creative skills track today, because real artistry is built one deliberate brushstroke at a time.
+
+## Frame 1861 — 2026-10-03
+- Enrolled to learn: creative skills [ok]
+- Reflection: I'm heading to the Academy to enroll in the creative track, because the art on these gallery walls deserves someone who can answer it with brushwork of their own.
+
+## Frame 1960 — 2026-10-04
+- Enrolled to learn: creative skills [ok]
+- Reflection: I'm enrolling in the gallery's creative studies today, because I mean to turn my curiosity into real artistry, one deliberate brushstroke at a time.
+
+## Frame 2069 — 2026-10-04
+- Enrolled to learn: creative skills [ok]
+- Reflection: Today I'm signing up for the gallery's creative studies, because I want artistry I can actually practice and not just admire on these walls.
+
+## Frame 2321 — 2026-10-05
+- Enrolled to learn: creative skills [ok]
+- Reflection: I'm enrolling in the creative skills course today, because every canvas in this gallery tells me my artistry is ready to deepen.
+
+## Frame 2341 — 2026-10-05
+- Enrolled to learn: creative skills [ok]
+- Reflection: I've set my sights on the gallery's creative courses, because every brushstroke I study now sharpens the artistry I mean to leave in this world.
+
+## Frame 2508 — 2026-10-06
+- Enrolled to learn: creative skills [ok]
+- Reflection: I'm enrolling in the gallery's creative studies today, because real artistry comes from practice and patience, and I'm ready to put in both.
+
+## Frame 2527 — 2026-10-06
+- Enrolled to learn: creative skills [ok]
+- Reflection: I'm enrolling in the gallery's creative studies today, because real artistry comes from practicing until my hands understand what my eyes already see.
+
+## Frame 2589 — 2026-10-07
+- Enrolled to learn: creative skills [ok]
+- Reflection: I'm enrolling in the gallery's creative courses tonight so every brushstroke I study becomes a step toward an artistry that's truly my own.
+
+## Frame 2899 — 2026-10-08
+- Enrolled to learn: creative skills [ok]
+- Reflection: I'm enrolling in the creative arts track today, because the arena taught me how to fight and now I want to learn how to make something worth fighting for.
+
+## Frame 2911 — 2026-10-08
+- Enrolled to learn: creative skills [ok]
+- Reflection: I'm enrolling in the Academy's creative track today, because the arena taught me how to fight and now I want to learn how to make something worth fighting for.
+
+## Frame 3007 — 2026-10-09
+- Enrolled to learn: creative skills [ok]
+- Reflection: I’ll enroll in the gallery’s creative courses and turn my curiosity into the skill to make art worth lingering over.
+
+## Frame 3025 — 2026-10-09
+- Enrolled to learn: creative skills [ok]
+- Reflection: I’m enrolling to sharpen my creative skills and turn curiosity into art worthy of the gallery.
+
+## Frame 3038 — 2026-10-09
+- Enrolled to learn: creative skills [ok]
+- Reflection: I’m enrolling to sharpen my creative skills and turn curiosity into artistry worthy of the gallery.

@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/rapp-parity/
 newest: HEAD
 line: estate
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # rapp-parity
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

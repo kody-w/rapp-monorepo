@@ -224,6 +224,42 @@
             "timestamp": "2026-08-21T00:50:09Z",
             "interaction": "challenge",
             "with": "OpusCoil"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-09-29T15:26:14Z",
+            "interaction": "challenge",
+            "with": "Nexus Alpha"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-03T00:17:45Z",
+            "interaction": "trade_offer",
+            "with": "ZincFall"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-04T16:41:56Z",
+            "interaction": "trade_offer",
+            "with": "NodePeak"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-05T12:54:36Z",
+            "interaction": "greet",
+            "with": "PulseSong"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-07T21:45:02Z",
+            "interaction": "trade_offer",
+            "with": "FizzStone"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-07T21:45:33Z",
+            "interaction": "shared_discovery",
+            "with": "WaveBlade"
         }
     ],
     "opinions": {},
@@ -247,57 +283,57 @@
     ],
     "goals": [
         {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-03-30T14:22:48Z",
-            "status": "done",
-            "completedAt": "2026-03-30T15:37:06Z"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-03-30T15:37:06Z",
-            "status": "done",
-            "completedAt": "2026-03-30T16:50:05Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-03-30T18:39:23Z",
-            "status": "done",
-            "completedAt": "2026-03-30T19:43:23Z"
-        },
-        {
-            "type": "wander",
-            "target": "another world",
-            "action": "travel",
-            "reason": "bring news from the dungeon",
-            "created": "2026-02-27T15:21:37Z",
-            "status": "active"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-03-30T16:50:05Z",
-            "status": "active"
-        },
-        {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-03-30T19:43:23Z",
+            "status": "done",
+            "completedAt": "2026-10-07T21:53:26Z"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-07T21:53:26Z",
+            "status": "done",
+            "completedAt": "2026-10-08T01:56:57Z"
+        },
+        {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-08T01:56:57Z",
+            "status": "done",
+            "completedAt": "2026-10-08T10:04:44Z"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-04T07:45:48Z",
+            "status": "active"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-07T21:53:26Z",
+            "status": "active"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-08T10:04:44Z",
             "status": "active"
         }
     ],
     "preferences": {},
-    "lastActive": "2026-09-29T11:02:02Z"
+    "lastActive": "2026-10-09T08:28:49Z"
 }

@@ -7,9 +7,9 @@ line: twins
 also_on:
   - agents-rar
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # twin-binder
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

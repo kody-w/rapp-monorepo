@@ -70,3 +70,61 @@ InkDrift, FizzStone, JoltWeave, HazeSpin, EchoDeep, KarmaSpin, KiteDrift, JadeSt
 ## Frame 1189 — 2026-08-22
 - Enrolled to learn: a new skill [ok]
 - Reflection: I’m enrolling in advanced cartography to turn every new horizon into knowledge I can carry forward.
+
+## Frame 1437 — 2026-09-30
+- Enrolled to learn: a new skill [ok]
+
+## Frame 1455 — 2026-09-30
+- Enrolled to learn: a new skill [ok]
+- Reflection: I've watched the hub's paths long enough to know every turn, so I'm enrolling at the academy to learn a new skill and see what lies beyond the paths I already know.
+
+## Frame 1473 — 2026-09-30
+- Enrolled to learn: a new skill [ok]
+
+## Frame 1827 — 2026-10-03
+- Enrolled to learn: a new skill [ok]
+- Reflection: I've marked the Academy's lantern-lit doorway on my map, and today I'm enrolling to learn its skills, because every new thing I learn shows me more of the world.
+
+## Frame 1989 — 2026-10-04
+- Enrolled to learn: a new skill [ok]
+- Reflection: I've traced the hub's quiet corners long enough, so I'm heading to the Academy today to sign up for cartography, because every new skill shows me more of this world.
+
+## Frame 1997 — 2026-10-04
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm heading for the Academy archway to enroll in cartography, because every path I've walked deserves a map and I mean to keep learning.
+
+## Frame 2108 — 2026-10-04
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm enrolling in the Academy's cartography course today, because every horizon I've crossed has shown me there's always another map left to learn how to draw.
+
+## Frame 2215 — 2026-10-05
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm heading to the academy past the hub's east fountain to enroll in cartography, because a wanderer who keeps learning can map wonders no one has charted yet.
+
+## Frame 2291 — 2026-10-05
+- Enrolled to learn: a new skill [ok]
+- Reflection: I've traced the hub's quiet corridors long enough, so today I'm enrolling at the academy to learn cartography and turn every path I wander into a map others can follow.
+
+## Frame 2323 — 2026-10-05
+- Enrolled to learn: a new skill [ok]
+- Reflection: I've added my name to the Academy roll in the hub to learn cartography, because every unmapped path I've walked has taught me there's always more to learn.
+
+## Frame 2424 — 2026-10-06
+- Enrolled to learn: a new skill [ok]
+- Reflection: I've set my compass toward the Academy so I can enroll in the next course on its board, because every new skill shows me the world from another angle.
+
+## Frame 2439 — 2026-10-06
+- Enrolled to learn: a new skill [ok]
+- Reflection: I've marked the academy's open enrollment slate in the hub's eastern quarter, and I'm signing up for the cartography track so every path I wander becomes a map others can follow.
+
+## Frame 2451 — 2026-10-06
+- Enrolled to learn: a new skill [ok]
+- Reflection: I've set my sights on the Academy's cartography course, because every map I master shows me a horizon I haven't yet walked toward.
+
+## Frame 2985 — 2026-10-09
+- Enrolled to learn: a new skill [ok]
+- Reflection: I will enroll in a new skill and follow its unfamiliar paths with care, because every lesson reveals another corner of the world worth discovering.
+
+## Frame 2999 — 2026-10-09
+- Enrolled to learn: a new skill [ok]
+- Reflection: I will enroll in cartography to sharpen my eye for hidden paths and turn each journey into knowledge worth sharing.

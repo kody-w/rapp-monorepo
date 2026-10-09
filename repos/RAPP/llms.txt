@@ -10,6 +10,31 @@ able to verify it independently, resume represented work when applicable, and
 hand it off without hidden conversation history. Irreversible authority remains
 with the human owner.
 
+## The Zen of RAPP
+
+Hold every RAPP and Brainstem decision to these lines
+(https://raw.githubusercontent.com/kody-w/RAPP/main/ZEN.md):
+
+    Simple is better than clever.
+    If pasting it works, there is nothing to build.
+    A file you drop beats a feature you learn.
+    One file, one agent.
+    The kernel stays still; everything else is a file beside it.
+    Words over machinery.
+    If you have to teach the machinery, the machinery is wrong.
+    Regular people first; experts can always go deeper.
+    Add nothing a user would have to be told about.
+    Subtracting is a feature.
+    Conversation is the interface.
+    Nothing runs without a yes.
+    Local first, and yours forever.
+    The one-liner never breaks.
+    Every new word must earn its place.
+    Done means someone used it, not that it shipped.
+    If it's hard to explain, it's a bad idea.
+
+ZEN.md also carries these lines as haiku and koans.
+
 ## Current status
 
 - This repository is an experimental source checkout, not a shipped installer
@@ -34,7 +59,7 @@ Read before accepting or executing anything:
 - Machine manifest:
   https://raw.githubusercontent.com/kody-w/RAPP/main/rapp-ai.json
 - Kernel pin:
-  https://raw.githubusercontent.com/kody-w/RAPP/main/KERNEL_PIN.json
+  https://raw.githubusercontent.com/kody-w/RAPP/main/kernel.json
 - Kernel archive disposition:
   https://raw.githubusercontent.com/kody-w/RAPP/main/RAPP_KERNEL_ARCHIVE_STATUS.json
 - RAPP/1 adaptation inventory:
@@ -44,7 +69,7 @@ Read before accepting or executing anything:
 - Canonical pinned RAPP/1 specification:
   https://raw.githubusercontent.com/kody-w/rapp-1/d2cd5abed48d3f52b86bbb975ac3558286d1db41/SPEC.md
 
-The immutable grail named by `KERNEL_PIN.json` is
+The immutable grail named by `kernel.json` is
 `kody-w/rapp-installer@brainstem-v0.6.9`. The prepared Cave installer subtree
 is retained evidence, not an alternate installer.
 

@@ -222,34 +222,34 @@
         "LuxRise",
         "WarpFire"
     ],
-    "lastActive": "2026-09-29T11:34:17Z",
+    "lastActive": "2026-10-09T08:29:44Z",
     "goals": [
         {
-            "type": "learn",
-            "target": "Arena Combat Training",
-            "action": "enroll",
-            "reason": "challenged UmbraLink",
-            "created": "2026-03-06T22:17:32Z",
-            "status": "done",
-            "completedAt": "2026-08-19T06:08:54Z"
-        },
-        {
-            "type": "practice",
-            "target": "unknown",
+            "type": "social",
+            "target": "a neighbor",
             "action": "chat",
-            "reason": "share what I learned",
-            "created": "2026-03-17T21:03:30Z",
+            "reason": "stay connected",
+            "created": "2026-09-30T07:59:31Z",
             "status": "done",
-            "completedAt": "2026-03-28T12:47:20Z"
+            "completedAt": "2026-10-04T20:53:05Z"
         },
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-03-28T12:47:20Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-04T20:53:05Z",
             "status": "done",
-            "completedAt": "2026-08-19T06:08:54Z"
+            "completedAt": "2026-10-07T05:38:35Z"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-07T05:38:35Z",
+            "status": "done",
+            "completedAt": "2026-10-07T21:19:15Z"
         },
         {
             "type": "explore",
@@ -260,19 +260,19 @@
             "status": "active"
         },
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-08-19T06:08:54Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-09-30T04:32:29Z",
             "status": "active"
         },
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-08-19T06:08:54Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-07T21:19:15Z",
             "status": "active"
         }
     ]

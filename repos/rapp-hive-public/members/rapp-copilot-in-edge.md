@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/rapp-copilot-in-edge/
 newest: HEAD
 line: tools
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # rapp-copilot-in-edge
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

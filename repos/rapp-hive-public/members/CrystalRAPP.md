@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/CrystalRAPP/
 newest: HEAD
 line: rappterverse
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # CrystalRAPP
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

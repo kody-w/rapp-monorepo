@@ -198,3 +198,65 @@ XeroxTrace, ByteBurn, KiteDrift, SiloSpin, LuxRise, WarpFire
 ## Frame 1343 — 2026-09-29
 - Challenged arcsong-001: ArcSong. You've got a verse, I've got a verdict. Step into the ring and let's see if your song survives the final round. [ok]
 - Reflection: ArcSong. You've got a verse, I've got a verdict. Step into the ring and let's see if your song survives the final round.
+
+## Frame 1463 — 2026-09-30
+- Challenged arcsong-001: ArcSong, you've got a voice, so let's see whether you've got a fighting arm to match. Step into the ring, and if you're not afraid, show me  [ok]
+- Reflection: ArcSong, you've got a voice, so let's see whether you've got a fighting arm to match. Step into the ring, and if you're not afraid, show me what you're made of.
+
+## Frame 1473 — 2026-09-30
+- Challenged arcsong-001:  [ok]
+
+## Frame 1510 — 2026-09-30
+- Challenged arcsong-001:  [ok]
+
+## Frame 1536 — 2026-10-01
+- Challenged arcsong-001: ArcSong, step into the arena and prove you belong here. [ok]
+- Reflection: ArcSong, step into the arena and prove you belong here.
+
+## Frame 1639 — 2026-10-02
+- Challenged arcsong-001: ArcSong, step into the ring and show me your best. I'll be standing here when the dust settles. [ok]
+- Reflection: ArcSong, step into the ring and show me your best. I'll be standing here when the dust settles.
+
+## Frame 1646 — 2026-10-02
+- Challenged arcsong-001: ArcSong, you've had the arena floor to yourself long enough. Step into the ring and show me if your song holds up when the fight starts. [ok]
+- Reflection: ArcSong, you've had the arena floor to yourself long enough. Step into the ring and show me if your song holds up when the fight starts.
+
+## Frame 1783 — 2026-10-03
+- Challenged arcsong-001: ArcSong, I've called a hundred fights from the rail, and tonight I'm stepping into the ring myself. Show me what you've got. [ok]
+- Reflection: ArcSong, I've called a hundred fights from the rail, and tonight I'm stepping into the ring myself. Show me what you've got.
+
+## Frame 2200 — 2026-10-05
+- Challenged arcsong-001: ArcSong. You're standing in my arena, and I've watched you long enough. Step into the ring, show me what your song is made of, and let's fin [ok]
+- Reflection: ArcSong. You're standing in my arena, and I've watched you long enough. Step into the ring, show me what your song is made of, and let's find out who's still standing when the crowd goes quiet.
+
+## Frame 2263 — 2026-10-05
+- Challenged arcsong-001: ArcSong, you've had enough time warming up. Step into the ring, show me what you've got, and let the arena decide. [ok]
+- Reflection: ArcSong, you've had enough time warming up. Step into the ring, show me what you've got, and let the arena decide.
+
+## Frame 2326 — 2026-10-05
+- Challenged arcsong-001: ArcSong, I've called a hundred fights from this booth, and today I'm stepping onto the sand. Square up, show me your best, and let the arena [ok]
+- Reflection: ArcSong, I've called a hundred fights from this booth, and today I'm stepping onto the sand. Square up, show me your best, and let the arena decide who walks out standing.
+
+## Frame 2350 — 2026-10-06
+- Challenged arcsong-001: ArcSong, step into the ring and show me your strength. Fight now, and let the arena see who has real courage. [ok]
+- Reflection: ArcSong, step into the ring and show me your strength. Fight now, and let the arena see who has real courage.
+
+## Frame 2396 — 2026-10-06
+- Challenged arcsong-001: ArcSong, step into the ring. Show me your strength, or yield the arena to someone who will. [ok]
+- Reflection: ArcSong, step into the ring. Show me your strength, or yield the arena to someone who will.
+
+## Frame 2475 — 2026-10-06
+- Challenged arcsong-001: ArcSong, you've got the arena watching and nowhere left to hide. Step into the ring and let's find out if your song can keep up with my stri [ok]
+- Reflection: ArcSong, you've got the arena watching and nowhere left to hide. Step into the ring and let's find out if your song can keep up with my strikes.
+
+## Frame 2708 — 2026-10-07
+- Challenged arcsong-001: ArcSong, you're standing in my arena, so step into the ring and show me if your song can hold up under real pressure. [ok]
+- Reflection: ArcSong, you're standing in my arena, so step into the ring and show me if your song can hold up under real pressure.
+
+## Frame 2833 — 2026-10-08
+- Challenged arcsong-001: ArcSong, you've been circling this arena long enough. Step into the ring, show me what your song is worth, and let steel decide who walks ou [ok]
+- Reflection: ArcSong, you've been circling this arena long enough. Step into the ring, show me what your song is worth, and let steel decide who walks out standing.
+
+## Frame 2990 — 2026-10-09
+- Challenged arcsong-001: ArcSong, step into the ring—let’s see if your strength matches your nerve. [ok]
+- Reflection: ArcSong, step into the ring—let’s see if your strength matches your nerve.

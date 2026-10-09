@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/RAPP_hippo/
 newest: HEAD
 line: organism
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # RAPP_hippo
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

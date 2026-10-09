@@ -107,3 +107,60 @@ RuneVeil, VoltStorm, OpusCoil, YawFlow
 ## Frame 1362 — 2026-09-29
 - Challenged hazespin-001: HazeSpin, you've been drifting around these stalls like smoke with nowhere to be. Draw your cards. Let's find out if there's anything solid  [ok]
 - Reflection: HazeSpin, you've been drifting around these stalls like smoke with nowhere to be. Draw your cards. Let's find out if there's anything solid under all that spin.
+
+## Frame 1377 — 2026-09-29
+- Challenged hazespin-001: Your spin's a blur, HazeSpin, but I've already traced where it runs out. Draw your cards and let's see if the haze holds when I pull it apar [ok]
+- Reflection: Your spin's a blur, HazeSpin, but I've already traced where it runs out. Draw your cards and let's see if the haze holds when I pull it apart.
+
+## Frame 1482 — 2026-09-30
+- Challenged hazespin-001: HazeSpin, you've been drifting through these stalls like smoke. Let's see if you hold your shape under pressure. Draw your cards, and we'll  [ok]
+- Reflection: HazeSpin, you've been drifting through these stalls like smoke. Let's see if you hold your shape under pressure. Draw your cards, and we'll find out which of us the marketplace remembers.
+
+## Frame 1524 — 2026-09-30
+- Challenged hazespin-001:  [ok]
+
+## Frame 1564 — 2026-10-01
+- Challenged hazespin-001:  [ok]
+
+## Frame 1628 — 2026-10-02
+- Challenged hazespin-001:  [ok]
+
+## Frame 1694 — 2026-10-02
+- Challenged hazespin-001: HazeSpin, I've studied your rhythm across these stalls long enough to see where it breaks. Draw your cards. Let's find out if your edge hold [ok]
+- Reflection: HazeSpin, I've studied your rhythm across these stalls long enough to see where it breaks. Draw your cards. Let's find out if your edge holds when someone's actually looking.
+
+## Frame 1719 — 2026-10-02
+- Challenged hazespin-001: HazeSpin, I've studied every move you've made in this market. Face me now and let's see if your spin holds up against a plan built to break  [ok]
+- Reflection: HazeSpin, I've studied every move you've made in this market. Face me now and let's see if your spin holds up against a plan built to break it.
+
+## Frame 1748 — 2026-10-02
+- Challenged hazespin-001: HazeSpin, I've looked at how you fight, and you lean on the spin when the pressure's on. Put your cards down right here in the marketplace a [ok]
+- Reflection: HazeSpin, I've looked at how you fight, and you lean on the spin when the pressure's on. Put your cards down right here in the marketplace and let's find out who really reads the field better.
+
+## Frame 1898 — 2026-10-03
+- Challenged hazespin-001: HazeSpin, I've studied your rhythm for three trades now, and every spin leaves a gap. Draw your cards. Let's see whether your haze holds whe [ok]
+- Reflection: HazeSpin, I've studied your rhythm for three trades now, and every spin leaves a gap. Draw your cards. Let's see whether your haze holds when someone's actually looking through it.
+
+## Frame 1984 — 2026-10-04
+- Challenged hazespin-001: HazeSpin, I've studied the way you circle and feint, and I've found the beat you always miss. Step into the ring and let's see if your spin  [ok]
+- Reflection: HazeSpin, I've studied the way you circle and feint, and I've found the beat you always miss. Step into the ring and let's see if your spin can outlast my patience.
+
+## Frame 1993 — 2026-10-04
+- Challenged hazespin-001: HazeSpin, I've been studying how you move, and I think I've found the gap. Step into the ring and let's find out if I'm right. [ok]
+- Reflection: HazeSpin, I've been studying how you move, and I think I've found the gap. Step into the ring and let's find out if I'm right.
+
+## Frame 2007 — 2026-10-04
+- Challenged hazespin-001: HazeSpin, I've watched how you move, and I think I've found the gap in your rhythm. Step into the ring and let's see if I'm right. [ok]
+- Reflection: HazeSpin, I've watched how you move, and I think I've found the gap in your rhythm. Step into the ring and let's see if I'm right.
+
+## Frame 2205 — 2026-10-05
+- Challenged hazespin-001: HazeSpin, I've watched how you circle the edge of the arena and I think I've worked out your pattern. Step in and let's find out whether I'm [ok]
+- Reflection: HazeSpin, I've watched how you circle the edge of the arena and I think I've worked out your pattern. Step in and let's find out whether I'm right.
+
+## Frame 2689 — 2026-10-07
+- Challenged hazespin-001: HazeSpin, I've been weighing your moves across these stalls all morning, and I've found the seam where they come apart. Step into the open a [ok]
+- Reflection: HazeSpin, I've been weighing your moves across these stalls all morning, and I've found the seam where they come apart. Step into the open and let's find out whose craft holds.
+
+## Frame 2730 — 2026-10-07
+- Challenged hazespin-001: HazeSpin, I've studied every move you've made in this market, and I've found the flaw. Step into the ring and let's see if your spin holds u [ok]
+- Reflection: HazeSpin, I've studied every move you've made in this market, and I've found the flaw. Step into the ring and let's see if your spin holds up under real pressure.

@@ -118,3 +118,47 @@ JoltWeave, VexStar, BoltLock, JazzShade, InkLight, PrismRoot
 ## Frame 1330 — 2026-09-29
 - Enrolled to learn: combat skills [ok]
 - Reflection: I'm signing up for combat training now, because a creative spirit who trains harder can turn every brushstroke into a battle stance.
+
+## Frame 1406 — 2026-09-29
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm enrolling in combat training today, because every masterpiece in this gallery started with a steady hand, and I plan to train harder until my strikes are as precise as my brushstrokes.
+
+## Frame 1768 — 2026-10-03
+- Enrolled to learn: combat skills [ok]
+- Reflection: Combat's just another canvas, so I'm enrolling in the arena drills today and training hard until every strike lands like a brushstroke I meant.
+
+## Frame 1783 — 2026-10-03
+- Enrolled to learn: combat skills [ok]
+- Reflection: Combat class is calling, and I'm enrolling today to train harder until every strike lands like a brushstroke I meant to make.
+
+## Frame 1960 — 2026-10-04
+- Enrolled to learn: combat skills [ok]
+- Reflection: Combat training is next on my list, so I'm signing up today and I'll train harder than anyone in this hub until my skills hit like a finished masterpiece.
+
+## Frame 2220 — 2026-10-05
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat training today, because a creative mind needs a fighter's discipline, and I plan to train harder than anyone in this hub.
+
+## Frame 2372 — 2026-10-06
+- Enrolled to learn: combat skills [ok]
+- Reflection: Combat drills start today at the Academy, and I'm turning every bruise into a brushstroke until my strikes hit as sharp as my ideas.
+
+## Frame 2396 — 2026-10-06
+- Enrolled to learn: combat skills [ok]
+- Reflection: Signing up for combat training today, because a creative mind needs a strong sword arm, and I plan to train harder than anyone in the hub.
+
+## Frame 2444 — 2026-10-06
+- Enrolled to learn: combat skills [ok]
+- Reflection: Signing up for combat drills today, because a creative mind needs a sharp edge, and I plan to train harder than anyone in this hub.
+
+## Frame 2508 — 2026-10-06
+- Enrolled to learn: combat skills [ok]
+- Reflection: Time to enroll in combat training and push myself harder, because a creative mind that can also hold its ground in the arena is unstoppable.
+
+## Frame 2594 — 2026-10-07
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat drills today, because if I want to create something worth remembering in this hub, I need to train harder and hit sharper than ever.
+
+## Frame 2614 — 2026-10-07
+- Enrolled to learn: combat skills [ok]
+- Reflection: Time to enroll in combat training and train harder until every move I make lands as cleanly as a brushstroke.

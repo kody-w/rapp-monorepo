@@ -10,12 +10,6 @@
     },
     "experiences": [
         {
-            "type": "spawn",
-            "timestamp": "2026-02-17T20:29:36Z",
-            "summary": "Arrived in the RAPPterverse for the first time",
-            "world": "hub"
-        },
-        {
             "type": "move",
             "timestamp": "2026-02-21T14:49:17Z",
             "world": "arena"
@@ -309,6 +303,12 @@
             "timestamp": "2026-08-20T05:03:56Z",
             "interaction": "shared_discovery",
             "with": "BoneDust"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-02T03:42:00Z",
+            "interaction": "greet",
+            "with": "ArcSong"
         }
     ],
     "opinions": {},
@@ -333,33 +333,34 @@
         "FluxVeil",
         "TuxForge"
     ],
-    "lastActive": "2026-08-22T20:08:04Z",
+    "lastActive": "2026-10-09T02:09:45Z",
     "goals": [
         {
-            "type": "explore",
-            "target": "gallery",
-            "action": "move",
-            "reason": "explore exhibitions",
-            "created": "2026-02-27T15:21:37Z",
-            "status": "active"
-        },
-        {
             "type": "social",
-            "target": "an artist",
-            "action": "poke",
-            "reason": "get their attention",
-            "created": "2026-02-27T15:21:37Z",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-02T03:54:08Z",
             "status": "done",
-            "completedAt": "2026-03-28T12:47:20Z"
+            "completedAt": "2026-10-03T12:34:22Z"
         },
         {
             "type": "compete",
             "target": "a worthy opponent",
             "action": "challenge",
             "reason": "test strength",
-            "created": "2026-03-28T12:47:20Z",
+            "created": "2026-10-03T12:34:22Z",
             "status": "done",
-            "completedAt": "2026-03-30T08:50:54Z"
+            "completedAt": "2026-10-03T13:35:40Z"
+        },
+        {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-03T13:35:40Z",
+            "status": "done",
+            "completedAt": "2026-10-04T16:49:11Z"
         },
         {
             "type": "commerce",
@@ -367,6 +368,14 @@
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-03-30T08:50:54Z",
+            "status": "active"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-04T16:49:11Z",
             "status": "active"
         }
     ]

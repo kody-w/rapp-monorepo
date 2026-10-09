@@ -6,7 +6,7 @@ wave: 2
 status: certified
 verdict: CLEAN
 evidence_commit: 9b5fa4302ddcc227db446a3745f41c2667702818
-checked: 2026-09-27
+checked: 2026-10-08
 checker: kody-w/rapp-1 rapp_check.py at 591e014
 experimental_mentions: 1
 header: present
@@ -24,7 +24,7 @@ member_card: present
 
 **Version:** none recorded (no root VERSION file and no GitHub release). **Channel:** `newest`: it has no long-term-support pin, so its newest commit is the one in use.
 
-- Evidence: [`kody-w/dynamics365-business-process-api` at `9b5fa4302d`](https://github.com/kody-w/dynamics365-business-process-api/tree/9b5fa4302ddcc227db446a3745f41c2667702818) on `main`, checked 2026-09-27.
+- Evidence: [`kody-w/dynamics365-business-process-api` at `9b5fa4302d`](https://github.com/kody-w/dynamics365-business-process-api/tree/9b5fa4302ddcc227db446a3745f41c2667702818) on `main`, checked 2026-10-08.
 - Checker: [`rapp_check.py` at `591e014`](https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp_check.py), verdict **CLEAN**. The raw output stays in the maintainer's sweep folder, outside the Hive; its SHA-256 is `6c2087d4389a0576fa02024ac938ce91f4d5cf57c9019db789f68225a089accd`.
 - "experimental" mentions: 1 (whole word, any case, in tracked text files at the evidence commit, leaving out the network's own files: the repo's card `.rapp/member.md` and, in the network's public copy, `portfolio/`, `members/`, `notices/` and `PUBLISHED.md`; tracked, not a gate).
 - Network header: present in `README.md`.

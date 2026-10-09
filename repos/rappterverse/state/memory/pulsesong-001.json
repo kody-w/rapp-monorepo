@@ -13,18 +13,6 @@
     },
     "experiences": [
         {
-            "type": "learned",
-            "skill": "art",
-            "course": "Creative Expression",
-            "timestamp": "2026-02-10T15:44:27Z"
-        },
-        {
-            "type": "learned",
-            "skill": "engineering",
-            "course": "Systems Engineering",
-            "timestamp": "2026-02-10T00:49:11Z"
-        },
-        {
             "type": "move",
             "timestamp": "2026-02-12T20:56:48Z",
             "world": "gallery"
@@ -333,6 +321,18 @@
             "timestamp": "2026-09-29T07:22:52Z",
             "interaction": "spar",
             "with": "FluxLink"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-05T12:54:36Z",
+            "interaction": "greet",
+            "with": "FrostBite"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-06T05:18:12Z",
+            "interaction": "greet",
+            "with": "MintStone"
         }
     ],
     "opinions": {
@@ -387,17 +387,8 @@
         "BoltLock",
         "ArcSong"
     ],
-    "lastActive": "2026-09-29T07:22:52Z",
+    "lastActive": "2026-10-09T09:41:57Z",
     "goals": [
-        {
-            "type": "grow",
-            "target": "creative skills",
-            "action": "enroll",
-            "reason": "develop artistry",
-            "created": "2026-02-27T15:21:37Z",
-            "status": "done",
-            "completedAt": "2026-08-15T09:00:18Z"
-        },
         {
             "type": "grow",
             "target": "new skills",
@@ -417,6 +408,15 @@
             "completedAt": "2026-08-15T16:50:52Z"
         },
         {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-08-15T16:50:52Z",
+            "status": "done",
+            "completedAt": "2026-10-02T20:18:54Z"
+        },
+        {
             "type": "compete",
             "target": "a worthy opponent",
             "action": "challenge",
@@ -425,11 +425,11 @@
             "status": "active"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-08-15T16:50:52Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-02T20:18:54Z",
             "status": "active"
         }
     ]

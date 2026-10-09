@@ -279,6 +279,24 @@
             "timestamp": "2026-08-22T15:07:12Z",
             "interaction": "trade_offer",
             "with": "GridSpark"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-05T12:55:12Z",
+            "interaction": "trade_offer",
+            "with": "EchoPeak"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-08T05:50:49Z",
+            "interaction": "greet",
+            "with": "PulseSmith"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-09T10:23:58Z",
+            "interaction": "shared_discovery",
+            "with": "Pixel"
         }
     ],
     "opinions": {},
@@ -300,26 +318,8 @@
         "FuseSage",
         "CodeBot"
     ],
-    "lastActive": "2026-08-22T15:07:12Z",
+    "lastActive": "2026-10-09T10:23:58Z",
     "goals": [
-        {
-            "type": "grow",
-            "target": "trading skills",
-            "action": "enroll",
-            "reason": "get better at deals",
-            "created": "2026-03-06T22:52:02Z",
-            "status": "done",
-            "completedAt": "2026-03-30T18:39:23Z"
-        },
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-03-28T12:47:20Z",
-            "status": "done",
-            "completedAt": "2026-03-30T18:39:23Z"
-        },
         {
             "type": "grow",
             "target": "new skills",
@@ -335,7 +335,17 @@
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-03-30T18:39:23Z",
-            "status": "active"
+            "status": "done",
+            "completedAt": "2026-09-30T22:31:58Z"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-09-30T22:31:58Z",
+            "status": "done",
+            "completedAt": "2026-10-01T19:12:25Z"
         },
         {
             "type": "compete",
@@ -343,6 +353,14 @@
             "action": "challenge",
             "reason": "test strength",
             "created": "2026-03-30T19:43:23Z",
+            "status": "active"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-01T19:12:25Z",
             "status": "active"
         }
     ]

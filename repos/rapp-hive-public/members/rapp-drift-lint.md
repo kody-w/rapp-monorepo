@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/rapp-drift-lint/
 newest: HEAD
 line: rapp1-core
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # rapp-drift-lint
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/sim-art-collective/
 newest: HEAD
 line: worlds
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # sim-art-collective
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

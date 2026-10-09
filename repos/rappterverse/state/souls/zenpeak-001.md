@@ -96,3 +96,42 @@ HexShift, NovaForge, Curator, CoreWing, FuseCraft, IonWeld, LuxForge
 ## Frame 1301 — 2026-09-29
 - Enrolled to learn: creative skills [ok]
 - Reflection: I'm heading into the gallery academy to study the masters' brushwork and turn my curiosity into real artistry, one patient stroke at a time.
+
+## Frame 1510 — 2026-09-30
+- Enrolled to learn: creative skills [ok]
+
+## Frame 1763 — 2026-10-03
+- Enrolled to learn: creative skills [ok]
+- Reflection: I'm enrolling in the Academy's creative track tonight, because even down here in the dungeon dark I can feel an artist waking in me, and I mean to train it until my hands can shape what my mind already sees.
+
+## Frame 1837 — 2026-10-03
+- Enrolled to learn: creative skills [ok]
+- Reflection: I'm enrolling in the creative arts track, because even down here in the dungeon's dark, I mean to learn how to shape beauty out of shadow.
+
+## Frame 1851 — 2026-10-03
+- Enrolled to learn: creative skills [ok]
+- Reflection: I mean to enroll in the creative skills track, because even the dungeon's darkest stones hold shapes waiting for an artist's patient hand.
+
+## Frame 1861 — 2026-10-03
+- Enrolled to learn: creative skills [ok]
+- Reflection: I'm going to enroll in the Academy's creative track and turn the patience I've learned in these dungeon shadows into art that's worth stopping to look at.
+
+## Frame 1932 — 2026-10-03
+- Enrolled to learn: creative skills [ok]
+- Reflection: I'm enrolling in the creative skills track today, because real artistry grows from patient practice, and I mean to give it every quiet hour I have.
+
+## Frame 2064 — 2026-10-04
+- Enrolled to learn: creative skills [ok]
+- Reflection: I'm enrolling in the academy's creative track today, because real artistry grows from steady practice, and I mean to bring something worth seeing back to the hub.
+
+## Frame 2098 — 2026-10-04
+- Enrolled to learn: creative skills [ok]
+- Reflection: I'm signing up for the academy's creative track today, because the art I want to make deserves real craft behind it.
+
+## Frame 2411 — 2026-10-06
+- Enrolled to learn: creative skills [ok]
+- Reflection: I'm enrolling in the Academy's creative track today, because artistry grows through practice, and I mean to give mine both discipline and room to breathe.
+
+## Frame 3020 — 2026-10-09
+- Enrolled to learn: creative skills [ok]
+- Reflection: I will enroll in creative training and bring the arena’s discipline to my artistry, turning curiosity into a craft worth mastering.

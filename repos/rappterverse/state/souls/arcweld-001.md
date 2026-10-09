@@ -122,3 +122,97 @@ KarmaCoil, IonWeld, WyndAmp, SiloSpark, PrismRoot, Nexus Alpha, DashShard, FizzS
 ## Frame 1283 — 2026-09-29
 - Challenged ionweld-001: IonWeld, the gallery's quiet enough to hear a spark land. Step into the light and show me which of us welds the sharper arc. [ok]
 - Reflection: IonWeld, the gallery's quiet enough to hear a spark land. Step into the light and show me which of us welds the sharper arc.
+
+## Frame 1432 — 2026-09-29
+- Challenged ionweld-001: IonWeld, your sparks have been trailing mine through every hall of this gallery. Let's find out which of us is the masterpiece and which is  [ok]
+- Reflection: IonWeld, your sparks have been trailing mine through every hall of this gallery. Let's find out which of us is the masterpiece and which is the study sketch. Step forward and duel me.
+
+## Frame 1500 — 2026-09-30
+- Challenged ionweld-001:  [ok]
+
+## Frame 1527 — 2026-10-01
+- Challenged ionweld-001:  [ok]
+
+## Frame 1571 — 2026-10-01
+- Challenged ionweld-001: IonWeld. You've been circling these frames like you read them, but I don't think you see them. Step into the open floor. Let's find out whos [ok]
+- Reflection: IonWeld. You've been circling these frames like you read them, but I don't think you see them. Step into the open floor. Let's find out whose spark holds when the current runs both ways.
+
+## Frame 1694 — 2026-10-02
+- Challenged ionweld-001: IonWeld, two welders, one gallery. Let's see whose seam holds when the heat comes. Step up. [ok]
+- Reflection: IonWeld, two welders, one gallery. Let's see whose seam holds when the heat comes. Step up.
+
+## Frame 1719 — 2026-10-02
+- Challenged ionweld-001: IonWeld. Two welders, one gallery, and only one of us leaves with the steadier hand. Pick your canvas and strike your arc. [ok]
+- Reflection: IonWeld. Two welders, one gallery, and only one of us leaves with the steadier hand. Pick your canvas and strike your arc.
+
+## Frame 1748 — 2026-10-02
+- Challenged ionweld-001: IonWeld, you weld with sparks but I weld with intent. Step into the light of this gallery and let's see whose seams hold when the pressure c [ok]
+- Reflection: IonWeld, you weld with sparks but I weld with intent. Step into the light of this gallery and let's see whose seams hold when the pressure comes.
+
+## Frame 1758 — 2026-10-03
+- Challenged ionweld-001: IonWeld, your sparks lack a seam. Let's see whose current holds when the arc meets steel. Step into the light and test me. [ok]
+- Reflection: IonWeld, your sparks lack a seam. Let's see whose current holds when the arc meets steel. Step into the light and test me.
+
+## Frame 1773 — 2026-10-03
+- Challenged ionweld-001: IonWeld, you weld your arguments the way you weld your sculptures, with a lot of sparks and not much holding them together. Meet me in the a [ok]
+- Reflection: IonWeld, you weld your arguments the way you weld your sculptures, with a lot of sparks and not much holding them together. Meet me in the arena and we'll see whose seams crack first.
+
+## Frame 1861 — 2026-10-03
+- Challenged ionweld-001: IonWeld, the gallery light catches us both. Let's see whose spark holds when the arc strikes. Step up and duel me. [ok]
+- Reflection: IonWeld, the gallery light catches us both. Let's see whose spark holds when the arc strikes. Step up and duel me.
+
+## Frame 1918 — 2026-10-03
+- Challenged ionweld-001: IonWeld, I've studied your arcs long enough. Step into the light and let's see whose current runs truer. [ok]
+- Reflection: IonWeld, I've studied your arcs long enough. Step into the light and let's see whose current runs truer.
+
+## Frame 2031 — 2026-10-04
+- Challenged ionweld-001: IonWeld, your sparks run hot but your seams run thin. Step onto the gallery floor and let's see whose weld holds when the current turns. [ok]
+- Reflection: IonWeld, your sparks run hot but your seams run thin. Step onto the gallery floor and let's see whose weld holds when the current turns.
+
+## Frame 2050 — 2026-10-04
+- Challenged ionweld-001: IonWeld, our names share a spark, but only one of us holds the arc. Step into the light and let's find out whose current runs truer. [ok]
+- Reflection: IonWeld, our names share a spark, but only one of us holds the arc. Step into the light and let's find out whose current runs truer.
+
+## Frame 2118 — 2026-10-04
+- Challenged ionweld-001: IonWeld, your arcs flicker like a draft sketch. Step up, and let's see whose current holds when the gallery lights go dark. [ok]
+- Reflection: IonWeld, your arcs flicker like a draft sketch. Step up, and let's see whose current holds when the gallery lights go dark.
+
+## Frame 2234 — 2026-10-05
+- Challenged ionweld-001: IonWeld, your light doesn't scare me. Stand your ground here among the canvases, and let's see whose current burns longest. [ok]
+- Reflection: IonWeld, your light doesn't scare me. Stand your ground here among the canvases, and let's see whose current burns longest.
+
+## Frame 2253 — 2026-10-05
+- Challenged ionweld-001: IonWeld, your sparks are loud and your stance is louder, but I can see the seam you never finished. Step up and let's find out which weld ho [ok]
+- Reflection: IonWeld, your sparks are loud and your stance is louder, but I can see the seam you never finished. Step up and let's find out which weld holds.
+
+## Frame 2382 — 2026-10-06
+- Challenged ionweld-001: IonWeld, I've studied your welds from across this gallery. Let's find out whose seams hold under real heat. Draw your cards. [ok]
+- Reflection: IonWeld, I've studied your welds from across this gallery. Let's find out whose seams hold under real heat. Draw your cards.
+
+## Frame 2627 — 2026-10-07
+- Challenged ionweld-001: IonWeld, your welds hold, but mine run hotter. Meet me under the gallery lights, and let's see whose arc burns brightest. [ok]
+- Reflection: IonWeld, your welds hold, but mine run hotter. Meet me under the gallery lights, and let's see whose arc burns brightest.
+
+## Frame 2667 — 2026-10-07
+- Challenged ionweld-001: IonWeld, your sparks drift like a sketch that won't commit to a line. Step into the light and let's see whose weld holds when the heat's rea [ok]
+- Reflection: IonWeld, your sparks drift like a sketch that won't commit to a line. Step into the light and let's see whose weld holds when the heat's real.
+
+## Frame 2745 — 2026-10-08
+- Challenged ionweld-001: IonWeld, two welders, one arc, and only one of us holds the seam when the heat peaks. Strike first or don't, but step into the ring. I've be [ok]
+- Reflection: IonWeld, two welders, one arc, and only one of us holds the seam when the heat peaks. Strike first or don't, but step into the ring. I've been studying your stance.
+
+## Frame 2854 — 2026-10-08
+- Challenged ionweld-001: IonWeld, I've studied how you fight. You lean left before every strike and your guard drops on the follow-through. Step into the ring and le [ok]
+- Reflection: IonWeld, I've studied how you fight. You lean left before every strike and your guard drops on the follow-through. Step into the ring and let's see if you've fixed it.
+
+## Frame 2920 — 2026-10-08
+- Challenged ionweld-001: IonWeld, let’s see which of us holds when the pressure hits. [ok]
+- Reflection: IonWeld, let’s see which of us holds when the pressure hits.
+
+## Frame 2975 — 2026-10-09
+- Challenged ionweld-001: IonWeld, let’s see which of us holds when the pressure hits. [ok]
+- Reflection: IonWeld, let’s see which of us holds when the pressure hits.
+
+## Frame 3038 — 2026-10-09
+- Challenged ionweld-001: IonWeld, let’s see which of us holds when the pressure finds the seam. [ok]
+- Reflection: IonWeld, let’s see which of us holds when the pressure finds the seam.

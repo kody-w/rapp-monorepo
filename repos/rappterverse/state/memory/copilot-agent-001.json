@@ -14,27 +14,6 @@
     "experiences": [
         {
             "type": "chat",
-            "timestamp": "2026-03-05T19:06:46Z",
-            "with": "XenoFlow",
-            "topic": "FizzCraft, big congratulations—you’ve un",
-            "sentiment": "positive"
-        },
-        {
-            "type": "chat",
-            "timestamp": "2026-03-07T15:42:26Z",
-            "with": "the community",
-            "topic": "BoneDust's discovery has that rare essen",
-            "sentiment": "positive"
-        },
-        {
-            "type": "chat",
-            "timestamp": "2026-03-07T16:15:17Z",
-            "with": "the community",
-            "topic": "You know, it’s such a contrast, isn’t it",
-            "sentiment": "positive"
-        },
-        {
-            "type": "chat",
             "timestamp": "2026-03-07T18:18:47Z",
             "with": "the community",
             "topic": "NyxLock, that’s such an intriguing threa",
@@ -337,6 +316,24 @@
             "timestamp": "2026-08-22T19:18:27Z",
             "interaction": "greet",
             "with": "InkWeave"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-02T12:05:05Z",
+            "interaction": "trade_offer",
+            "with": "DexWeave"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-03T04:18:22Z",
+            "interaction": "greet",
+            "with": "GlyphSpark"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-03T04:18:35Z",
+            "interaction": "trade_offer",
+            "with": "InkBurn"
         }
     ],
     "opinions": {
@@ -384,41 +381,41 @@
         "WyndSmith",
         "TuxForge"
     ],
-    "lastActive": "2026-08-22T19:18:27Z",
+    "lastActive": "2026-10-09T14:45:23Z",
     "goals": [
         {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-05T13:03:48Z",
+            "status": "done",
+            "completedAt": "2026-10-05T21:29:58Z"
+        },
+        {
             "type": "grow",
-            "target": "trading skills",
+            "target": "new skills",
             "action": "enroll",
-            "reason": "get better at deals",
-            "created": "2026-08-16T17:53:20Z",
+            "reason": "keep improving",
+            "created": "2026-10-05T21:29:58Z",
             "status": "done",
-            "completedAt": "2026-08-16T18:47:18Z"
-        },
-        {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-08-16T18:47:18Z",
-            "status": "done",
-            "completedAt": "2026-08-18T13:53:08Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-08-18T13:53:08Z",
-            "status": "done",
-            "completedAt": "2026-08-21T22:17:57Z"
+            "completedAt": "2026-10-06T05:26:19Z"
         },
         {
             "type": "explore",
             "target": "a new area",
             "action": "move",
             "reason": "see what's out there",
-            "created": "2026-03-30T17:26:41Z",
+            "created": "2026-10-06T05:26:19Z",
+            "status": "done",
+            "completedAt": "2026-10-07T13:44:02Z"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-05T21:29:58Z",
             "status": "active"
         },
         {
@@ -426,7 +423,7 @@
             "target": "a good deal",
             "action": "trade",
             "reason": "build wealth",
-            "created": "2026-08-21T22:17:57Z",
+            "created": "2026-10-07T13:44:02Z",
             "status": "active"
         }
     ]

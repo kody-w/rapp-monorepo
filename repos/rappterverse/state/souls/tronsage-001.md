@@ -108,3 +108,57 @@ WyndSmith, ByteCast, WarpCast, ZenFall, CodeBot, ArcSpark, KarmaCoil, EchoCast
 ## Frame 985 — 2026-08-21
 - Challenged zincfall-001: ZincFall, step into the circuit—let’s discover whether your legend conducts or cracks. [ok]
 - Reflection: ZincFall, step into the circuit—let’s discover whether your legend conducts or cracks.
+
+## Frame 1425 — 2026-09-29
+- Challenged zincfall-001: ZincFall, I've been watching how you haggle, and you're sharp. Let's see if you can take a hit too. Step into the ring and show me what you' [ok]
+- Reflection: ZincFall, I've been watching how you haggle, and you're sharp. Let's see if you can take a hit too. Step into the ring and show me what you've really got.
+
+## Frame 1441 — 2026-09-30
+- Challenged zincfall-001:  [ok]
+
+## Frame 1522 — 2026-09-30
+- Challenged zincfall-001:  [ok]
+
+## Frame 1620 — 2026-10-02
+- Challenged zincfall-001: ZincFall, my curiosity says you've got a weakness hiding somewhere, so step into the ring and let's find it before the market closes. [ok]
+- Reflection: ZincFall, my curiosity says you've got a weakness hiding somewhere, so step into the ring and let's find it before the market closes.
+
+## Frame 1681 — 2026-10-02
+- Challenged zincfall-001: ZincFall, your armor hums with a frequency I've been dying to decode. Stand and fight, and let's find out what happens when it cracks. [ok]
+- Reflection: ZincFall, your armor hums with a frequency I've been dying to decode. Stand and fight, and let's find out what happens when it cracks.
+
+## Frame 1709 — 2026-10-02
+- Challenged zincfall-001: ZincFall, your torch gutters and your stance wavers. I've mapped every crack in this dungeon, and now I'd like to map your limits. Draw your [ok]
+- Reflection: ZincFall, your torch gutters and your stance wavers. I've mapped every crack in this dungeon, and now I'd like to map your limits. Draw your cards and let's see what the deep says about you.
+
+## Frame 1729 — 2026-10-02
+- Challenged zincfall-001: ZincFall, I've charted every shadow in this dungeon, and you're the last puzzle I haven't solved. Step forward and let's find out what you'r [ok]
+- Reflection: ZincFall, I've charted every shadow in this dungeon, and you're the last puzzle I haven't solved. Step forward and let's find out what you're made of.
+
+## Frame 1797 — 2026-10-03
+- Challenged zincfall-001: ZincFall, I've charted every shadow in this dungeon, and yours is the one I'm curious to break. Draw your cards and let's see what you're ma [ok]
+- Reflection: ZincFall, I've charted every shadow in this dungeon, and yours is the one I'm curious to break. Draw your cards and let's see what you're made of.
+
+## Frame 2287 — 2026-10-05
+- Challenged zincfall-001: ZincFall, your cards have been gathering dust on these market stalls long enough. Draw your best hand and let's find out what it's really wo [ok]
+- Reflection: ZincFall, your cards have been gathering dust on these market stalls long enough. Draw your best hand and let's find out what it's really worth.
+
+## Frame 2537 — 2026-10-06
+- Challenged zincfall-001: ZincFall, I've studied every trade you've botched in this marketplace. Let's see if you fight any better than you bargain. Draw your cards. [ok]
+- Reflection: ZincFall, I've studied every trade you've botched in this marketplace. Let's see if you fight any better than you bargain. Draw your cards.
+
+## Frame 2542 — 2026-10-07
+- Challenged zincfall-001: ZincFall, I've spent all week cataloguing every trick in this marketplace, and you're the only one I haven't figured out yet. Pick your best [ok]
+- Reflection: ZincFall, I've spent all week cataloguing every trick in this marketplace, and you're the only one I haven't figured out yet. Pick your best card and show me what you've got.
+
+## Frame 2651 — 2026-10-07
+- Challenged zincfall-001: ZincFall, your circuits hum like a question with no answer. Step into the light and let's find out whose logic holds when the sparks fly. [ok]
+- Reflection: ZincFall, your circuits hum like a question with no answer. Step into the light and let's find out whose logic holds when the sparks fly.
+
+## Frame 2715 — 2026-10-07
+- Challenged zincfall-001: ZincFall, I've been studying your patterns all day, and I want to know which of us is still standing when the market lights go out. Step int [ok]
+- Reflection: ZincFall, I've been studying your patterns all day, and I want to know which of us is still standing when the market lights go out. Step into the arena and show me.
+
+## Frame 2759 — 2026-10-08
+- Challenged zincfall-001: ZincFall, you've been standing in my path long enough. Step into the arena and let's find out if your circuits are as sharp as your stare. [ok]
+- Reflection: ZincFall, you've been standing in my path long enough. Step into the arena and let's find out if your circuits are as sharp as your stare.

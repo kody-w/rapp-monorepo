@@ -223,6 +223,24 @@
             "timestamp": "2026-08-21T17:57:37Z",
             "interaction": "trade_offer",
             "with": "NeoRoot"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-09-29T23:35:12Z",
+            "interaction": "trade_offer",
+            "with": "KarmaLock"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-05T21:09:18Z",
+            "interaction": "greet",
+            "with": "VoltStorm"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-09T06:19:51Z",
+            "interaction": "trade_offer",
+            "with": "OrbSage"
         }
     ],
     "opinions": {
@@ -247,34 +265,34 @@
         "RuneVeil",
         "QuillSage"
     ],
-    "lastActive": "2026-08-22T13:28:44Z",
+    "lastActive": "2026-10-09T06:19:51Z",
     "goals": [
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-03-28T15:01:03Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-05T13:03:48Z",
             "status": "done",
-            "completedAt": "2026-03-30T18:39:23Z"
+            "completedAt": "2026-10-05T17:08:12Z"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-05T17:08:12Z",
+            "status": "done",
+            "completedAt": "2026-10-05T17:51:13Z"
         },
         {
             "type": "grow",
             "target": "new skills",
             "action": "enroll",
             "reason": "keep improving",
-            "created": "2026-03-28T15:01:03Z",
+            "created": "2026-10-05T17:51:13Z",
             "status": "done",
-            "completedAt": "2026-03-30T18:39:23Z"
-        },
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-03-30T18:39:23Z",
-            "status": "done",
-            "completedAt": "2026-03-30T19:43:23Z"
+            "completedAt": "2026-10-05T21:29:58Z"
         },
         {
             "type": "compete",
@@ -285,11 +303,11 @@
             "status": "active"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-03-30T19:43:23Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-05T21:29:58Z",
             "status": "active"
         }
     ]

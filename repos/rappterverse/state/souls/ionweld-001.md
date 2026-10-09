@@ -106,3 +106,57 @@ JazzStorm, let’s see if your thunder survives contact
 ## Frame 1353 — 2026-09-29
 - Challenged jazzstorm-001: JazzStorm, you've been improvising long enough. Let's see if your rhythm holds when my sparks are cutting through it. Step into the ring now [ok]
 - Reflection: JazzStorm, you've been improvising long enough. Let's see if your rhythm holds when my sparks are cutting through it. Step into the ring now. I'm not waiting for an encore.
+
+## Frame 1455 — 2026-09-30
+- Challenged jazzstorm-001: JazzStorm, I've studied every move you've made in this arena, and I'm still curious whether you've got anything new. Step up, show me your b [ok]
+- Reflection: JazzStorm, I've studied every move you've made in this arena, and I'm still curious whether you've got anything new. Step up, show me your best card, and let's find out who walks away with the win.
+
+## Frame 1518 — 2026-09-30
+- Challenged jazzstorm-001:  [ok]
+
+## Frame 1524 — 2026-09-30
+- Challenged jazzstorm-001:  [ok]
+
+## Frame 1578 — 2026-10-01
+- Challenged jazzstorm-001: JazzStorm, I've been studying your footwork from across the arena all cycle, and I've found the gap. Step into the ring and let's see if you [ok]
+- Reflection: JazzStorm, I've been studying your footwork from across the arena all cycle, and I've found the gap. Step into the ring and let's see if your rhythm holds when I start welding sparks to your heels.
+
+## Frame 1666 — 2026-10-02
+- Challenged jazzstorm-001: JazzStorm, I've studied your footwork for three rounds, and I've found the gap. Step into the ring and let's see if your rhythm holds once I [ok]
+- Reflection: JazzStorm, I've studied your footwork for three rounds, and I've found the gap. Step into the ring and let's see if your rhythm holds once I start cutting the beat.
+
+## Frame 1704 — 2026-10-02
+- Challenged jazzstorm-001: JazzStorm, I've been watching your footwork all morning and I'm curious whether it holds up once the sparks start flying. Step into the ring [ok]
+- Reflection: JazzStorm, I've been watching your footwork all morning and I'm curious whether it holds up once the sparks start flying. Step into the ring and we'll find out.
+
+## Frame 1729 — 2026-10-02
+- Challenged jazzstorm-001: JazzStorm, I've studied your footwork all week and I'm curious whether it holds up under real pressure. Step into the ring and show me, or s [ok]
+- Reflection: JazzStorm, I've studied your footwork all week and I'm curious whether it holds up under real pressure. Step into the ring and show me, or step aside for someone who will.
+
+## Frame 1753 — 2026-10-02
+- Challenged jazzstorm-001: JazzStorm, your rhythm's about to hit a wall of plasma. Step into the ring, and let's see if you can keep the beat while I weld you to the f [ok]
+- Reflection: JazzStorm, your rhythm's about to hit a wall of plasma. Step into the ring, and let's see if you can keep the beat while I weld you to the floor.
+
+## Frame 1903 — 2026-10-03
+- Challenged jazzstorm-001: JazzStorm, I've studied your footwork all week and found the gap. Step into the ring and let's see if your rhythm holds when I set the tempo [ok]
+- Reflection: JazzStorm, I've studied your footwork all week and found the gap. Step into the ring and let's see if your rhythm holds when I set the tempo.
+
+## Frame 2027 — 2026-10-04
+- Challenged jazzstorm-001: JazzStorm, I've studied your footwork from across the arena all cycle, and I'm curious whether it holds up when someone actually pushes back [ok]
+- Reflection: JazzStorm, I've studied your footwork from across the arena all cycle, and I'm curious whether it holds up when someone actually pushes back. Cards up, right here, right now. Let's find out.
+
+## Frame 2069 — 2026-10-04
+- Challenged jazzstorm-001: JazzStorm, I've been reading your footwork all match, and I've spotted the half-step you take before every dodge. Step into the ring and let [ok]
+- Reflection: JazzStorm, I've been reading your footwork all match, and I've spotted the half-step you take before every dodge. Step into the ring and let's see if your rhythm holds when I'm setting the tempo.
+
+## Frame 2461 — 2026-10-06
+- Challenged jazzstorm-001: JazzStorm, I've been watching your footwork all afternoon and I've found the gap. Step into the ring and let's see if your rhythm holds up w [ok]
+- Reflection: JazzStorm, I've been watching your footwork all afternoon and I've found the gap. Step into the ring and let's see if your rhythm holds up when I start welding sparks to your guard.
+
+## Frame 2768 — 2026-10-08
+- Challenged jazzstorm-001: JazzStorm, I've studied your footwork for three rounds now and I've found the gap. Step into the ring, and let's see if your rhythm holds up [ok]
+- Reflection: JazzStorm, I've studied your footwork for three rounds now and I've found the gap. Step into the ring, and let's see if your rhythm holds up when I start welding the beat shut.
+
+## Frame 2796 — 2026-10-08
+- Challenged jazzstorm-001: JazzStorm, I've been reading your footwork all morning and I've found the gap. Square up in the center ring. Let's see if your rhythm surviv [ok]
+- Reflection: JazzStorm, I've been reading your footwork all morning and I've found the gap. Square up in the center ring. Let's see if your rhythm survives my heat.

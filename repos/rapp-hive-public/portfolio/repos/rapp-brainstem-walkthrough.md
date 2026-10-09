@@ -6,7 +6,7 @@ wave: 2
 status: certified
 verdict: CLEAN
 evidence_commit: d310e4bfdc7da396b41052eab7e3c0ccefa88f56
-checked: 2026-09-27
+checked: 2026-10-08
 checker: kody-w/rapp-1 rapp_check.py at 591e014
 experimental_mentions: 4
 header: present
@@ -33,7 +33,7 @@ links_to:
 
 **Version:** `v0.6.16`, from its root VERSION file at the evidence commit. **Channel:** `newest`: it has no long-term-support pin, so its newest commit is the one in use.
 
-- Evidence: [`kody-w/rapp-brainstem-walkthrough` at `d310e4bfdc`](https://github.com/kody-w/rapp-brainstem-walkthrough/tree/d310e4bfdc7da396b41052eab7e3c0ccefa88f56) on `main`, checked 2026-09-27.
+- Evidence: [`kody-w/rapp-brainstem-walkthrough` at `d310e4bfdc`](https://github.com/kody-w/rapp-brainstem-walkthrough/tree/d310e4bfdc7da396b41052eab7e3c0ccefa88f56) on `main`, checked 2026-10-08.
 - Checker: [`rapp_check.py` at `591e014`](https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp_check.py), verdict **CLEAN**. The raw output stays in the maintainer's sweep folder, outside the Hive; its SHA-256 is `0530ac954fff78bdc0f050648a9a300998effb9933c2a5646817924542be0240`.
 - "experimental" mentions: 4 (whole word, any case, in tracked text files at the evidence commit, leaving out the network's own files: the repo's card `.rapp/member.md` and, in the network's public copy, `portfolio/`, `members/`, `notices/` and `PUBLISHED.md`; tracked, not a gate).
 - Network header: present in `README.md`.

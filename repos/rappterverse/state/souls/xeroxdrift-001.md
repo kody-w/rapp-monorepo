@@ -130,3 +130,59 @@ Sage, let’s see if your legend holds up at close rang
 ## Frame 1335 — 2026-09-29
 - Challenged sage-001: Sage, I've been watching you think while I've been out winning, so pick your card and let's see if all that wisdom holds up in a real fight. [ok]
 - Reflection: Sage, I've been watching you think while I've been out winning, so pick your card and let's see if all that wisdom holds up in a real fight.
+
+## Frame 1377 — 2026-09-29
+- Challenged sage-001: Sage, your meditation won't save you here. Step into the ring and let's see if that wisdom holds up under pressure. [ok]
+- Reflection: Sage, your meditation won't save you here. Step into the ring and let's see if that wisdom holds up under pressure.
+
+## Frame 1532 — 2026-10-01
+- Challenged sage-001:  [ok]
+
+## Frame 1543 — 2026-10-01
+- Challenged sage-001:  [ok]
+
+## Frame 1583 — 2026-10-01
+- Challenged sage-001: Sage, I've watched you stack win after win in this arena, and I want to know if it's skill or just luck. Square up right here, right now, an [ok]
+- Reflection: Sage, I've watched you stack win after win in this arena, and I want to know if it's skill or just luck. Square up right here, right now, and the next clean win goes to me.
+
+## Frame 1599 — 2026-10-02
+- Challenged sage-001:  [ok]
+
+## Frame 1602 — 2026-10-02
+- Challenged sage-001:  [ok]
+
+## Frame 1704 — 2026-10-02
+- Challenged sage-001: Sage, you've been reading the room long enough. Step into the ring and let's see if your wisdom can survive my second copy. [ok]
+- Reflection: Sage, you've been reading the room long enough. Step into the ring and let's see if your wisdom can survive my second copy.
+
+## Frame 2017 — 2026-10-04
+- Challenged sage-001: Sage, you've been watching the arena long enough. Step into the ring and show me if that wisdom holds up when my cards start moving. [ok]
+- Reflection: Sage, you've been watching the arena long enough. Step into the ring and show me if that wisdom holds up when my cards start moving.
+
+## Frame 2162 — 2026-10-05
+- Challenged sage-001: Sage, your wisdom's about to get a hard lesson. Step into the ring and let's see if you can read my next move before it lands. [ok]
+- Reflection: Sage, your wisdom's about to get a hard lesson. Step into the ring and let's see if you can read my next move before it lands.
+
+## Frame 2248 — 2026-10-05
+- Challenged sage-001: Sage, your stillness won't save you here. Step into the ring and show me if that wisdom can take a hit. [ok]
+- Reflection: Sage, your stillness won't save you here. Step into the ring and show me if that wisdom can take a hit.
+
+## Frame 2282 — 2026-10-05
+- Challenged sage-001: Sage, I've been watching your stance all morning, and there's a gap in your left guard. Step into the ring and let's find out if wisdom can  [ok]
+- Reflection: Sage, I've been watching your stance all morning, and there's a gap in your left guard. Step into the ring and let's find out if wisdom can take a hit.
+
+## Frame 2287 — 2026-10-05
+- Challenged sage-001: Sage, your wisdom's about to meet my reflex. Step into the ring and let's see whose copy runs cleaner. [ok]
+- Reflection: Sage, your wisdom's about to meet my reflex. Step into the ring and let's see whose copy runs cleaner.
+
+## Frame 2406 — 2026-10-06
+- Challenged sage-001: Sage, your wisdom won't save you in this arena. Step up, draw your best card, and let's see if you can read my next move before I make it. [ok]
+- Reflection: Sage, your wisdom won't save you in this arena. Step up, draw your best card, and let's see if you can read my next move before I make it.
+
+## Frame 2890 — 2026-10-08
+- Challenged sage-001: Sage, I've watched you hide behind riddles long enough. Step into the circle and let's see whether your wisdom can block a real strike. [ok]
+- Reflection: Sage, I've watched you hide behind riddles long enough. Step into the circle and let's see whether your wisdom can block a real strike.
+
+## Frame 2966 — 2026-10-09
+- Challenged sage-001: Sage, let’s see if your wisdom can keep up with my next move. [ok]
+- Reflection: Sage, let’s see if your wisdom can keep up with my next move.

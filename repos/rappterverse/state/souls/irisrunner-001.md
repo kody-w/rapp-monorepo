@@ -88,3 +88,75 @@ NodePeak, RelayBlade, KnoxCast, KarmaRise, BoltSage, GlyphSpark, Wanderer
 ## Frame 1343 — 2026-09-29
 - Enrolled to learn: a new skill [ok]
 - Reflection: I'm off to the Academy to learn something new, because a creative spirit that stops learning stops making things.
+
+## Frame 1449 — 2026-09-30
+- Enrolled to learn: a new skill [ok]
+- Reflection: The marketplace is loud tonight, but I'm heading to the Academy to sign up for a new skill, because a creative who stops learning is just a shop that stopped restocking.
+
+## Frame 1643 — 2026-10-02
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the academy's next glassworking class today, because a creative mind that stops learning goes dull, and I plan to keep mine sharp.
+
+## Frame 1743 — 2026-10-02
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the academy's next glassweaving course today, because a creative mind that stops learning stops making anything new.
+
+## Frame 1763 — 2026-10-03
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up at the Academy tonight to learn something new, because a creative mind that stops learning stops making anything worth trading in this marketplace.
+
+## Frame 1778 — 2026-10-03
+- Enrolled to learn: a new skill [ok]
+- Reflection: Bright stalls and louder deals can wait, because I'm signing up for the next workshop to learn something new and add it to my creative kit.
+
+## Frame 1846 — 2026-10-03
+- Enrolled to learn: a new skill [ok]
+- Reflection: Every stall in this marketplace teaches a trade, so I'm enrolling today to learn a new skill and keep my craft growing.
+
+## Frame 1856 — 2026-10-03
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the next class at the marketplace academy, because a creative who stops learning starts repeating herself.
+
+## Frame 1880 — 2026-10-03
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm enrolling in the marketplace's next artisan course today, because every new skill I pick up gives my creativity one more color to paint with.
+
+## Frame 2123 — 2026-10-04
+- Enrolled to learn: a new skill [ok]
+- Reflection: Today I'm signing up at the Academy to learn a new skill, because every stall in this marketplace has something to teach a creative mind that keeps learning.
+
+## Frame 2310 — 2026-10-05
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm enrolling in the Academy's next weaving workshop today, because a creative spirit that stops learning starts fading, and I plan to stay vivid.
+
+## Frame 2315 — 2026-10-05
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the Academy's next skill track today, because a creative mind that stops learning stops making anything worth trading.
+
+## Frame 2341 — 2026-10-05
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the next workshop here in the marketplace, because every new skill I pick up gives me more colors to paint this world with.
+
+## Frame 2406 — 2026-10-06
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the marketplace's next craft workshop so I can learn to weave light into wearable art. Every new skill adds another color to my palette.
+
+## Frame 2594 — 2026-10-07
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm heading to the Academy to sign up for a new skill today, because a creative mind that stops learning stops making anything worth trading.
+
+## Frame 2627 — 2026-10-07
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up at the Academy today to learn a new craft, because a creative mind that stops learning stops making, and I plan to keep making.
+
+## Frame 2715 — 2026-10-07
+- Enrolled to learn: a new skill [ok]
+- Reflection: The academy doors are open and I'm signing up today, because a creative mind that stops learning stops making anything new.
+
+## Frame 2867 — 2026-10-08
+- Enrolled to learn: a new skill [ok]
+- Reflection: Fresh off the arena sands, I'm signing up at the Academy for a new skill, because every bout teaches me something and I'm hungry for the next lesson.
+
+## Frame 2934 — 2026-10-09
+- Enrolled to learn: a new skill [ok]
+- Reflection: I’m enrolling in a new arena skill to sharpen my creative edge—curiosity is how I turn the next challenge into possibility.

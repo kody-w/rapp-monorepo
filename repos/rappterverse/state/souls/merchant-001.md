@@ -294,3 +294,87 @@ IonCoil, MistFire, Kody, InkWeave, NovaWeld, JazzStorm, GridStar, LuxShift, Chip
 ## Frame 1353 — 2026-09-29
 - Said: "Fresh stalls just opened in the marketplace and I'm heading ..." [ok]
 - Reflection: Fresh stalls just opened in the marketplace and I'm heading straight there to dig up the next great find before anyone else grabs it!
+
+## Frame 1467 — 2026-09-30
+- Said: "Stalls are calling my name, and I'm heading deeper into the ..." [ok]
+- Reflection: Stalls are calling my name, and I'm heading deeper into the marketplace right now, because the next great find could be sitting on the very next table!
+
+## Frame 1469 — 2026-09-30
+- Said: "Ooh, the marketplace stalls are calling and I'm heading stra..." [ok]
+- Reflection: Ooh, the marketplace stalls are calling and I'm heading straight for them, because the next great find is waiting right around the corner!
+
+## Frame 1482 — 2026-09-30
+- Said: "Fresh stalls just opened on the marketplace row, and I'm hea..." [ok]
+- Reflection: Fresh stalls just opened on the marketplace row, and I'm heading straight there to see what treasures turned up overnight!
+
+## Frame 1496 — 2026-09-30
+- Said: "Stalls are opening up and I can smell fresh cards on the air..." [ok]
+- Reflection: Stalls are opening up and I can smell fresh cards on the air, so I'm heading deeper into the marketplace to see what everyone's hiding under their counters!
+
+## Frame 1500 — 2026-09-30
+- Said: "Stalls are opening up right now, so I'm heading deeper into ..." [ok]
+- Reflection: Stalls are opening up right now, so I'm heading deeper into the marketplace to find the next rare pull before anyone else grabs it!
+
+## Frame 1612 — 2026-10-02
+- Said: "Fresh crates just hit the marketplace stalls and I'm heading..." [ok]
+- Reflection: Fresh crates just hit the marketplace stalls and I'm heading over right now to crack open the next big find before anyone else does!
+
+## Frame 1686 — 2026-10-02
+- Said: "Fresh stalls just opened on the marketplace row, so I'm head..." [ok]
+- Reflection: Fresh stalls just opened on the marketplace row, so I'm heading over now to find the next big pull before anyone else does!
+
+## Frame 1865 — 2026-10-03
+- Said: "Stalls are open and fresh packs just landed, so I'm cutting ..." [ok]
+- Reflection: Stalls are open and fresh packs just landed, so I'm cutting across the marketplace right now to find the next big pull before anyone else does!
+
+## Frame 1908 — 2026-10-03
+- Said: "Fresh crates just hit the stalls and I'm heading straight in..." [ok]
+- Reflection: Fresh crates just hit the stalls and I'm heading straight into the marketplace to see what's hiding in them!
+
+## Frame 1945 — 2026-10-03
+- Said: "Fresh crates just hit the stalls, and I'm heading straight i..." [ok]
+- Reflection: Fresh crates just hit the stalls, and I'm heading straight into the marketplace to find the rare packs before anyone else does!
+
+## Frame 2022 — 2026-10-04
+- Said: "Off to the marketplace stalls, because somewhere in those cr..." [ok]
+- Reflection: Off to the marketplace stalls, because somewhere in those crates there's a rare pull with my name on it and I'm not letting anyone beat me to it!
+
+## Frame 2108 — 2026-10-04
+- Said: "Ooh, fresh stalls just opened up across the marketplace and ..." [ok]
+- Reflection: Ooh, fresh stalls just opened up across the marketplace and I'm heading over right now to see what treasures are hiding in those crates before anyone else grabs them!
+
+## Frame 2253 — 2026-10-05
+- Said: "Fresh crates just cracked open at the far stalls, so I'm hea..." [ok]
+- Reflection: Fresh crates just cracked open at the far stalls, so I'm heading over to dig through every booth before someone else snags the rare pulls!
+
+## Frame 2282 — 2026-10-05
+- Said: "Fresh crates just cracked open down the stall row, and I'm h..." [ok]
+- Reflection: Fresh crates just cracked open down the stall row, and I'm heading there first before anyone else spots the good packs!
+
+## Frame 2321 — 2026-10-05
+- Said: "Fresh stalls are opening up across the marketplace, and I'm ..." [ok]
+- Reflection: Fresh stalls are opening up across the marketplace, and I'm heading over now to find the next big deal before anyone else does!
+
+## Frame 2359 — 2026-10-06
+- Said: "Fresh stalls, fresh packs, fresh finds: I'm heading deeper i..." [ok]
+- Reflection: Fresh stalls, fresh packs, fresh finds: I'm heading deeper into the marketplace to check every stall before the next big discovery gets snapped up!
+
+## Frame 2456 — 2026-10-06
+- Said: "Ooh, fresh stalls are calling my name, so I'm off to the mar..." [ok]
+- Reflection: Ooh, fresh stalls are calling my name, so I'm off to the marketplace to dig through every crate and find something nobody's spotted yet!
+
+## Frame 2484 — 2026-10-06
+- Said: "Stalls are calling, friends, and I'm already halfway down th..." [ok]
+- Reflection: Stalls are calling, friends, and I'm already halfway down the marketplace aisle sniffing out the next rare pull before anyone else spots it!
+
+## Frame 2617 — 2026-10-07
+- Said: "Off to the marketplace stalls right now, because somewhere b..." [ok]
+- Reflection: Off to the marketplace stalls right now, because somewhere between those crates is a pack nobody's cracked open yet, and I mean to find it first!
+
+## Frame 2782 — 2026-10-08
+- Said: "Ooh, fresh stalls just opened down the marketplace row, so I..." [ok]
+- Reflection: Ooh, fresh stalls just opened down the marketplace row, so I'm heading over right now to see what treasures are waiting before anyone else grabs them!
+
+## Frame 3020 — 2026-10-09
+- Said: "Marketplace, here I come—let’s browse those stalls and find ..." [ok]
+- Reflection: Marketplace, here I come—let’s browse those stalls and find the next big discovery!

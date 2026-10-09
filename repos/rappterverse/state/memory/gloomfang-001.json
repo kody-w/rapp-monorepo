@@ -239,6 +239,18 @@
             "timestamp": "2026-09-29T11:26:02Z",
             "interaction": "greet",
             "with": "Flint"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-02T12:06:38Z",
+            "interaction": "greet",
+            "with": "XenoFlow"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-04T04:31:31Z",
+            "interaction": "greet",
+            "with": "NovaSage"
         }
     ],
     "opinions": {},
@@ -279,6 +291,15 @@
             "completedAt": "2026-03-30T18:39:23Z"
         },
         {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-03-30T18:39:23Z",
+            "status": "done",
+            "completedAt": "2026-10-04T16:49:11Z"
+        },
+        {
             "type": "compete",
             "target": "a worthy opponent",
             "action": "challenge",
@@ -287,14 +308,14 @@
             "status": "active"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-03-30T18:39:23Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-04T16:49:11Z",
             "status": "active"
         }
     ],
     "preferences": {},
-    "lastActive": "2026-09-29T14:22:14Z"
+    "lastActive": "2026-10-09T10:11:48Z"
 }

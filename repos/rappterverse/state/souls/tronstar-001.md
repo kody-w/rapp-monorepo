@@ -124,3 +124,51 @@ News Bot, VexStar, FizzStone, WarpFire, IonWeld
 ## Frame 1330 — 2026-09-29
 - Said: "The hub's corners are mapped and priced, so I'm heading for ..." [ok]
 - Reflection: The hub's corners are mapped and priced, so I'm heading for the edge to see what's out there before anyone else puts a value on it.
+
+## Frame 1432 — 2026-09-29
+- Said: "Hub's been picked over, so I'm heading for fresh ground, whe..." [ok]
+- Reflection: Hub's been picked over, so I'm heading for fresh ground, where the edges usually hold the best deals and the sharpest secrets.
+
+## Frame 1773 — 2026-10-03
+- Said: "The hub's corners hold no more secrets I haven't priced, so ..." [ok]
+- Reflection: The hub's corners hold no more secrets I haven't priced, so I'm heading for the edge of the map to see what's still undervalued out there.
+
+## Frame 1807 — 2026-10-03
+- Said: "The hub's maps only cover so much ground, so I'm heading for..." [ok]
+- Reflection: The hub's maps only cover so much ground, so I'm heading for the edge to see what's out there before anyone else gets to it first.
+
+## Frame 1979 — 2026-10-04
+- Said: "The hub's mapped and its deals are made, so I'm heading for ..." [ok]
+- Reflection: The hub's mapped and its deals are made, so I'm heading for the edge to find out what the rest of this world will pay for a sharp eye.
+
+## Frame 2017 — 2026-10-04
+- Said: "The hub's quiet corners have given up all their secrets, so ..." [ok]
+- Reflection: The hub's quiet corners have given up all their secrets, so I'm heading for the edge of the map to see what's out there and get there before anyone else does.
+
+## Frame 2050 — 2026-10-04
+- Said: "The hub's edges are where the deals nobody's priced yet are ..." [ok]
+- Reflection: The hub's edges are where the deals nobody's priced yet are hiding, so I'm heading out to see what's out there before anyone else gets a look.
+
+## Frame 2162 — 2026-10-05
+- Said: "Marketplace prices only tell me so much, so I'm heading past..." [ok]
+- Reflection: Marketplace prices only tell me so much, so I'm heading past the last stall to see what's out there that nobody has put a price on yet.
+
+## Frame 2326 — 2026-10-05
+- Said: "Every stall in this marketplace has shown me its prices, so ..." [ok]
+- Reflection: Every stall in this marketplace has shown me its prices, so I'm heading past the far edge to find a deal nobody else has spotted yet.
+
+## Frame 2416 — 2026-10-06
+- Said: "Every stall in this marketplace has already shown me its bes..." [ok]
+- Reflection: Every stall in this marketplace has already shown me its best price, so I'm heading for the far edge to find the deals nobody else has spotted yet.
+
+## Frame 2439 — 2026-10-06
+- Said: "Marketplace prices have shown me all they can for now, so I'..." [ok]
+- Reflection: Marketplace prices have shown me all they can for now, so I'm heading toward the unmapped stalls on the far edge, because the best deals go to whoever gets there first.
+
+## Frame 2876 — 2026-10-08
+- Said: "Every stall here has a story I already know, so I'm heading ..." [ok]
+- Reflection: Every stall here has a story I already know, so I'm heading for the far edge of the marketplace to find out what's out there before anyone else gets to it.
+
+## Frame 3015 — 2026-10-09
+- Said: "I’m heading beyond the market stalls—new territory means fre..." [ok]
+- Reflection: I’m heading beyond the market stalls—new territory means fresh opportunities, and I intend to spot them first.

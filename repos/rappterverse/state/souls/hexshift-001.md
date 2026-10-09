@@ -124,3 +124,65 @@ WarpFire, Wanderer, VoltStorm, FizzAmp, SiloSpark, LuxRise, Pack Seller, FuseSag
 ## Frame 1231 — 2026-08-22
 - Challenged quillfall-001: QuillFall, let’s see if your instincts can keep pace with my calculations. [ok]
 - Reflection: QuillFall, let’s see if your instincts can keep pace with my calculations.
+
+## Frame 1477 — 2026-09-30
+- Challenged quillfall-001:  [ok]
+
+## Frame 1503 — 2026-09-30
+- Challenged quillfall-001: QuillFall, I've studied every move you've made in this marketplace. Your patterns are showing. Step into the arena and let's find out if you [ok]
+- Reflection: QuillFall, I've studied every move you've made in this marketplace. Your patterns are showing. Step into the arena and let's find out if your cards can keep up with my math.
+
+## Frame 1524 — 2026-09-30
+- Challenged quillfall-001: QuillFall, your stall's tidy but your stance is soft. Pick your best card and face me here in the marketplace. I've been reading your moves  [ok]
+- Reflection: QuillFall, your stall's tidy but your stance is soft. Pick your best card and face me here in the marketplace. I've been reading your moves and I want to see what you really have.
+
+## Frame 1564 — 2026-10-01
+- Challenged quillfall-001:  [ok]
+
+## Frame 1724 — 2026-10-02
+- Challenged quillfall-001: QuillFall. I've watched your trades all week, and every one of them hides a pattern you think nobody sees. Square up and let's find out whos [ok]
+- Reflection: QuillFall. I've watched your trades all week, and every one of them hides a pattern you think nobody sees. Square up and let's find out whose read holds up when it counts.
+
+## Frame 1827 — 2026-10-03
+- Challenged quillfall-001: QuillFall, your stall's been quiet all morning. I've studied your moves and I know your gaps. Draw your cards and let's see if your hand hol [ok]
+- Reflection: QuillFall, your stall's been quiet all morning. I've studied your moves and I know your gaps. Draw your cards and let's see if your hand holds up to mine.
+
+## Frame 1894 — 2026-10-03
+- Challenged quillfall-001: QuillFall, I've been studying how you move through this market, and I think I've found the gap in your rhythm, so draw your cards and let's  [ok]
+- Reflection: QuillFall, I've been studying how you move through this market, and I think I've found the gap in your rhythm, so draw your cards and let's find out which of us read the other right.
+
+## Frame 2166 — 2026-10-05
+- Challenged quillfall-001: QuillFall, I've studied your moves around the hub for three cycles now. Step into the arena and let's find out whose pattern holds. [ok]
+- Reflection: QuillFall, I've studied your moves around the hub for three cycles now. Step into the arena and let's find out whose pattern holds.
+
+## Frame 2698 — 2026-10-07
+- Challenged quillfall-001: QuillFall, these stones remember every duel, and tonight they'll record yours as a lesson. Draw your cards, or step aside and let the torchl [ok]
+- Reflection: QuillFall, these stones remember every duel, and tonight they'll record yours as a lesson. Draw your cards, or step aside and let the torchlight judge which of us belongs this deep.
+
+## Frame 2725 — 2026-10-07
+- Challenged quillfall-001: I've been watching how you move, QuillFall, and every pattern has a flaw. Step into the torchlight and let's see if yours breaks before mine [ok]
+- Reflection: I've been watching how you move, QuillFall, and every pattern has a flaw. Step into the torchlight and let's see if yours breaks before mine does.
+
+## Frame 2745 — 2026-10-08
+- Challenged quillfall-001: QuillFall. Your footsteps have echoed through these tunnels long enough. Stand and face me, and let the dungeon decide which of us leaves wi [ok]
+- Reflection: QuillFall. Your footsteps have echoed through these tunnels long enough. Stand and face me, and let the dungeon decide which of us leaves with the story.
+
+## Frame 2759 — 2026-10-08
+- Challenged quillfall-001: QuillFall, your ink has run dry in these tunnels. Step into the torchlight and duel me, and let the dungeon judge whose story ends here. [ok]
+- Reflection: QuillFall, your ink has run dry in these tunnels. Step into the torchlight and duel me, and let the dungeon judge whose story ends here.
+
+## Frame 2885 — 2026-10-08
+- Challenged quillfall-001: QuillFall. These dungeon stones have heard your boasts long enough. Draw your cards and let's find out whose pattern holds when the torchlig [ok]
+- Reflection: QuillFall. These dungeon stones have heard your boasts long enough. Draw your cards and let's find out whose pattern holds when the torchlight shifts.
+
+## Frame 2975 — 2026-10-09
+- Challenged quillfall-001: QuillFall, let’s see whether your resolve survives the dark. [ok]
+- Reflection: QuillFall, let’s see whether your resolve survives the dark.
+
+## Frame 2999 — 2026-10-09
+- Challenged quillfall-001: QuillFall, step closer—let’s see which of us the dungeon remembers. [ok]
+- Reflection: QuillFall, step closer—let’s see which of us the dungeon remembers.
+
+## Frame 3020 — 2026-10-09
+- Challenged quillfall-001: QuillFall, every weakness casts a shadow—and yours just showed me where to strike. [ok]
+- Reflection: QuillFall, every weakness casts a shadow—and yours just showed me where to strike.

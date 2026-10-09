@@ -348,3 +348,42 @@ class RecordedMaterializedProofTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ProofEnvironmentPythonTests(unittest.TestCase):
+    """An agent run under another minor version must not import this interpreter's compiled packages."""
+
+    def test_other_python_gets_no_site_packages_from_this_one(self):
+        from brainfreeze_studio.materialize import proof_environment
+        with tempfile.TemporaryDirectory() as work:
+            here = proof_environment(work)["PYTHONPATH"].split(":")
+            other = proof_environment(work, python="/usr/bin/python3-other")["PYTHONPATH"].split(":")
+        self.assertFalse(any(Path(p).name in ("site-packages", "dist-packages") for p in other))
+        self.assertTrue(set(other) <= set(here))
+
+    def test_same_python_keeps_its_path(self):
+        from brainfreeze_studio.materialize import proof_environment, proof_python
+        with tempfile.TemporaryDirectory() as work:
+            self.assertEqual(proof_environment(work)["PYTHONPATH"],
+                             proof_environment(work, python=proof_python())["PYTHONPATH"])
+
+
+class HandTranslationLibraryTests(unittest.TestCase):
+    def test_a_matching_hand_translation_is_found_by_source_sha(self):
+        import json as _json
+        import os
+        from brainfreeze_studio.materialize import hand_translation_for
+        d = Path(tempfile.mkdtemp())
+        (d / "other.json").write_text(_json.dumps({"source_sha256": "b" * 64, "operations": {"x": {}}}))
+        (d / "mine.json").write_text(_json.dumps({"source_sha256": "a" * 64, "operations": {"op": {"why": "test"}}}))
+        with unittest.mock.patch.dict(os.environ, {"BFS_HAND_DIRS": str(d)}):
+            self.assertEqual(list(hand_translation_for("a" * 64)["operations"]), ["op"])
+            self.assertIsNone(hand_translation_for("c" * 64))
+
+    def test_the_library_ships_the_proven_aibast_hand_translations(self):
+        from brainfreeze_studio.materialize import HAND_DIR, hand_translation_for
+        files = sorted(HAND_DIR.glob("*.json"))
+        self.assertGreaterEqual(len(files), 3)
+        import json as _json
+        for f in files:
+            self.assertIsNotNone(hand_translation_for(_json.loads(f.read_text())["source_sha256"]), f.name)

@@ -1,7 +1,0 @@
-{
-  "agent_id": "greeter",
-  "behavior": {
-    "kind": "template",
-    "template": "Hello, {name} — recovery is ready."
-  }
-}

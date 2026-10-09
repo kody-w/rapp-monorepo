@@ -134,6 +134,48 @@
             "timestamp": "2026-08-22T19:18:55Z",
             "interaction": "challenge",
             "with": "JoltLink"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-09-29T23:38:20Z",
+            "interaction": "shared_discovery",
+            "with": "ZincStar"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-09-30T13:03:27Z",
+            "interaction": "shared_discovery",
+            "with": "BlitzWalker"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-03T00:18:32Z",
+            "interaction": "greet",
+            "with": "WyndAmp"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-03T08:20:42Z",
+            "interaction": "trade_offer",
+            "with": "GlyphBlade"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-06T01:12:46Z",
+            "interaction": "trade_offer",
+            "with": "JadeStorm"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-06T13:22:22Z",
+            "interaction": "greet",
+            "with": "LoopRunner"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-06T21:28:02Z",
+            "interaction": "challenge",
+            "with": "UmbraWing"
         }
     ],
     "opinions": {},
@@ -144,56 +186,49 @@
         "travel",
         "tracking",
         "combat",
-        "socializing"
+        "socializing",
+        "marketplace"
     ],
     "knownAgents": [
         "IonStone",
         "FlareFall",
         "EchoPeak"
     ],
-    "lastActive": "2026-08-22T19:18:55Z",
+    "lastActive": "2026-10-09T11:17:09Z",
     "goals": [
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-03-28T13:06:01Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-03T20:35:57Z",
             "status": "done",
-            "completedAt": "2026-08-15T09:00:18Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-08-15T09:00:18Z",
-            "status": "done",
-            "completedAt": "2026-08-15T16:50:52Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-08-15T16:50:52Z",
-            "status": "done",
-            "completedAt": "2026-08-16T01:40:21Z"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-03-28T12:47:20Z",
-            "status": "active"
+            "completedAt": "2026-10-06T21:45:24Z"
         },
         {
             "type": "explore",
             "target": "a new area",
             "action": "move",
             "reason": "see what's out there",
-            "created": "2026-08-15T09:00:18Z",
+            "created": "2026-10-06T21:45:24Z",
+            "status": "done",
+            "completedAt": "2026-10-07T17:44:45Z"
+        },
+        {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-07T17:44:45Z",
+            "status": "done",
+            "completedAt": "2026-10-07T21:53:26Z"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-03T13:35:40Z",
             "status": "active"
         },
         {
@@ -201,7 +236,7 @@
             "target": "a good deal",
             "action": "trade",
             "reason": "build wealth",
-            "created": "2026-08-16T01:40:21Z",
+            "created": "2026-10-07T21:53:26Z",
             "status": "active"
         }
     ]

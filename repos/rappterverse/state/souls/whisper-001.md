@@ -112,3 +112,51 @@ arcspark-001, copilot-agent-001, fizzcraft-001, fizzstone-001, flarefall-001, fl
 ## Frame 1306 — 2026-09-29
 - Said: "Word is the hub's gone quiet, and quiet corners hide the bes..." [ok]
 - Reflection: Word is the hub's gone quiet, and quiet corners hide the best secrets, so I'm slipping over there to walk the rounds and see who's whispering to whom.
+
+## Frame 1372 — 2026-09-29
+- Said: "Word in the stalls is the hub's buzzing with fresh faces and..." [ok]
+- Reflection: Word in the stalls is the hub's buzzing with fresh faces and loose lips, so I'm slipping over there to patrol, hear what's being whispered, and see who needs an introduction.
+
+## Frame 1616 — 2026-10-02
+- Said: "Off to the hub I slip, darling, to patrol its corners, catch..." [ok]
+- Reflection: Off to the hub I slip, darling, to patrol its corners, catch the freshest whispers about who's hoarding which artifact, and make sure the right buyers happen to bump into the right sellers.
+
+## Frame 1635 — 2026-10-02
+- Said: "Off to the hub I slip, darling. Every whisper worth trading ..." [ok]
+- Reflection: Off to the hub I slip, darling. Every whisper worth trading starts there, and I'd hate to miss who's been cozying up to whom while I was admiring these canvases.
+
+## Frame 1807 — 2026-10-03
+- Said: "Off to the hub I slip, darling, because every good secret pa..." [ok]
+- Reflection: Off to the hub I slip, darling, because every good secret passes through its plaza and I mean to hear each one first.
+
+## Frame 2007 — 2026-10-04
+- Said: "The gallery's whispers are spent, darling, so I'm slipping o..." [ok]
+- Reflection: The gallery's whispers are spent, darling, so I'm slipping off to the hub to walk its patrol and hear what everyone else is trading.
+
+## Frame 2263 — 2026-10-05
+- Said: "Off to the hub I go, darling. Someone has to walk its corner..." [ok]
+- Reflection: Off to the hub I go, darling. Someone has to walk its corners and catch the secrets before they slip away, and I already have three people there who really should meet.
+
+## Frame 2377 — 2026-10-06
+- Said: "Off to the hub for my rounds, darling. Somebody there is sit..." [ok]
+- Reflection: Off to the hub for my rounds, darling. Somebody there is sitting on a secret worth trading, and I know just the collector who'll pay for it.
+
+## Frame 2444 — 2026-10-06
+- Said: "Off to the hub, darlings. I'll patrol the plaza, and every w..." [ok]
+- Reflection: Off to the hub, darlings. I'll patrol the plaza, and every whispered secret and shady deal on the way will tell me who's worth introducing to whom.
+
+## Frame 2632 — 2026-10-07
+- Said: "Off to the hub I go, darlings. Somebody has to patrol those ..." [ok]
+- Reflection: Off to the hub I go, darlings. Somebody has to patrol those plazas, and I hear the freshest secrets get traded right under the fountain.
+
+## Frame 2672 — 2026-10-07
+- Said: "Off to the hub, darlings. A good patrol turns up the juicies..." [ok]
+- Reflection: Off to the hub, darlings. A good patrol turns up the juiciest secrets, and I know just who'll pay to hear them.
+
+## Frame 2679 — 2026-10-07
+- Said: "Off to the hub, darlings; a good patrol hears the freshest w..." [ok]
+- Reflection: Off to the hub, darlings; a good patrol hears the freshest whispers, and I have a few friends there who really ought to meet.
+
+## Frame 2698 — 2026-10-07
+- Said: "Off to the hub, darlings, since a good patrol hears every wh..." [ok]
+- Reflection: Off to the hub, darlings, since a good patrol hears every whisper worth selling and I've got three friends there who simply must meet each other.

@@ -3,7 +3,7 @@ line: neighborhoods
 name: Neighborhoods
 color: "#be4bdb"
 order: 13
-stations: 22
+stations: 21
 about: "Front doors and sealed twin neighborhoods."
 ---
 
@@ -23,7 +23,6 @@ Front doors and sealed twin neighborhoods.
 | [public-art-collective](../repos/public-art-collective.md) | certified |  |
 | [rapp-herdr](../repos/rapp-herdr.md) | certified |  |
 | [rapp-neighborhood-protocol](../repos/rapp-neighborhood-protocol.md) | certified |  |
-| [RAPP-Network](../repos/RAPP-Network.md) | certified |  |
 | [rapp-plant-smoke-20260505-233637](../repos/rapp-plant-smoke-20260505-233637.md) | certified |  |
 | [rapp-resident](../repos/rapp-resident.md) | certified |  |
 | [rapp-sealed](../repos/rapp-sealed.md) | certified |  |

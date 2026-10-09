@@ -54,6 +54,19 @@ class HelloAgent(BasicAgent):
 ```
 See [`examples/`](examples/).
 
+### Rapplications: agents with a UI (MCP Apps)
+Put a `foo_agent.ui.html` beside `foo_agent.py` and the agent becomes a rapplication. In a host
+that supports [MCP Apps](https://github.com/modelcontextprotocol/ext-apps) (the extension
+for interactive views), calling the tool opens that UI in a sandboxed panel in the
+conversation. The UI keeps its usual `rapp:*` messages and `fetch('/chat')`; rapp-mcp injects a
+small shim that carries them over MCP. Hosts without MCP Apps see the plain tool, as before. Try
+[`examples/hello_agent.ui.html`](examples/hello_agent.ui.html). For hosts that connect by URL:
+
+```bash
+python3 rapp_mcp.py /path/to/agents --http 3001   # http://127.0.0.1:3001/mcp
+```
+See [`SPEC.md` §3.1.1](SPEC.md).
+
 ---
 
 ## 2. `rapp_brainstem_mcp.py` — the full brainstem, as a tool
@@ -109,7 +122,7 @@ See [`SPEC.md` §3.3](SPEC.md).
 
 ## Spec versions
 
-[`SPEC.md`](SPEC.md) is `rapp-mcp-spec/2.0`. [`SPEC-1.0.md`](SPEC-1.0.md) is the superseded
+[`SPEC.md`](SPEC.md) is `rapp-mcp-spec/2.1` (2.0 plus MCP Apps, §8.2). [`SPEC-1.0.md`](SPEC-1.0.md) is the superseded
 `rapp-mcp-spec/1.0`, kept byte-identical and never edited; `SPEC.md` §8.1 lists what changed.
 Upgrading from 1.0: an agent in a subfolder is no longer served (move it to the top of the
 folder), and a `rapp-agents` entry written by the old VS Code example needs the absolute agents

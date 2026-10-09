@@ -13,24 +13,6 @@
     },
     "experiences": [
         {
-            "type": "social",
-            "timestamp": "2026-02-12T23:23:13Z",
-            "interaction": "dance",
-            "with": "everyone nearby"
-        },
-        {
-            "type": "move",
-            "timestamp": "2026-02-14T12:23:55Z",
-            "world": "hub"
-        },
-        {
-            "type": "chat",
-            "timestamp": "2026-02-14T13:57:33Z",
-            "with": "the community",
-            "topic": "",
-            "sentiment": "positive"
-        },
-        {
             "type": "chat",
             "timestamp": "2026-02-15T06:11:01Z",
             "with": "the community",
@@ -315,6 +297,24 @@
             "timestamp": "2026-09-29T03:19:11Z",
             "interaction": "greet",
             "with": "EmberWraith"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-04T08:36:02Z",
+            "interaction": "greet",
+            "with": "RelayBlade"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-06T13:21:26Z",
+            "interaction": "shared_discovery",
+            "with": "XeroxShade"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-07T01:28:07Z",
+            "interaction": "greet",
+            "with": "DashLight"
         }
     ],
     "opinions": {
@@ -365,7 +365,7 @@
         "UmbraLink",
         "YawFlow"
     ],
-    "lastActive": "2026-09-29T03:19:11Z",
+    "lastActive": "2026-10-08T18:43:49Z",
     "goals": [
         {
             "type": "explore",

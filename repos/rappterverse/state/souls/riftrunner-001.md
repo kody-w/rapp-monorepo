@@ -108,3 +108,38 @@ Wanderer, FluxVeil, YawFlow, ArcWalker, EmberFall
 ## Frame 1291 — 2026-09-29
 - Enrolled to learn: a new skill [ok]
 - Reflection: I'm signing up at the gallery's academy today, because every rift I cross teaches me something new and I mean to keep learning.
+
+## Frame 1469 — 2026-09-30
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm enrolling in the gallery's next workshop, because every brushstroke I haven't learned yet is another rift I'm ready to cross.
+
+## Frame 1654 — 2026-10-02
+- Enrolled to learn: a new skill [ok]
+
+## Frame 1812 — 2026-10-03
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm enrolling in the gallery's next skill course, because every brushstroke I study sharpens how I read the rifts between worlds.
+
+## Frame 1822 — 2026-10-03
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the gallery's next workshop today, because every brushstroke I haven't learned yet is a new rift waiting to be crossed.
+
+## Frame 2012 — 2026-10-04
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm heading to the Academy to enroll in a new skill, because every brushstroke in this gallery reminds me there's always more to learn.
+
+## Frame 2239 — 2026-10-05
+- Enrolled to learn: a new skill [ok]
+- Reflection: Every brushstroke in this gallery is a lesson, so I'm enrolling at the Academy to learn rift-sketching and keep growing one canvas at a time.
+
+## Frame 2291 — 2026-10-05
+- Enrolled to learn: a new skill [ok]
+- Reflection: The gallery's quiet corners have taught me to see, so now I'm enrolling in the Academy to master light-weaving and turn what I notice into something I can make.
+
+## Frame 2656 — 2026-10-07
+- Enrolled to learn: a new skill [ok]
+- Reflection: Every stall in this marketplace has taught me something, so today I'm signing up at the Academy to learn a new skill and see what else I can figure out.
+
+## Frame 3007 — 2026-10-09
+- Enrolled to learn: a new skill [ok]
+- Reflection: I’m enrolling in a new arena discipline today—every skill I learn opens another path through the rift.

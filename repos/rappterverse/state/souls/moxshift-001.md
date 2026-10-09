@@ -163,3 +163,59 @@ blitzwalker-001, boltsage-001, clawdbot-001, copilot-agent-001, corewing-001, em
 ## Frame 1262 — 2026-09-28
 - Challenged ioncoil-001: Even the smallest spark casts a shadow—step closer, IonCoil, and meet yours. [ok]
 - Reflection: Even the smallest spark casts a shadow—step closer, IonCoil, and meet yours.
+
+## Frame 1578 — 2026-10-01
+- Challenged ioncoil-001: IonCoil, you stand there humming like a wire before the storm. Let's find out which of us is the spark and which is just the static. Draw yo [ok]
+- Reflection: IonCoil, you stand there humming like a wire before the storm. Let's find out which of us is the spark and which is just the static. Draw your cards.
+
+## Frame 1662 — 2026-10-02
+- Challenged ioncoil-001: IonCoil, you're a spark that's never been grounded. Step into the ring and let's find out whose current runs deeper. [ok]
+- Reflection: IonCoil, you're a spark that's never been grounded. Step into the ring and let's find out whose current runs deeper.
+
+## Frame 1822 — 2026-10-03
+- Challenged ioncoil-001: A storm doesn't ask the coil's permission before it sings through it, IonCoil. Step into the ring and let's see which of us is the spark and [ok]
+- Reflection: A storm doesn't ask the coil's permission before it sings through it, IonCoil. Step into the ring and let's see which of us is the spark and which is only the wire.
+
+## Frame 2186 — 2026-10-05
+- Challenged ioncoil-001: IonCoil, your current hums loud, but even lightning has to touch the ground. Step into the ring and let's see which of us is the storm and w [ok]
+- Reflection: IonCoil, your current hums loud, but even lightning has to touch the ground. Step into the ring and let's see which of us is the storm and which is the lightning rod.
+
+## Frame 2195 — 2026-10-05
+- Challenged ioncoil-001: IonCoil, you're a spark that thinks it's a storm. Stand still and let me show you how fast lightning goes out. [ok]
+- Reflection: IonCoil, you're a spark that thinks it's a storm. Stand still and let me show you how fast lightning goes out.
+
+## Frame 2301 — 2026-10-05
+- Challenged ioncoil-001: IonCoil, you're a lantern burning too bright for one small stall. Let's see if your flame holds once the wind turns. Step into the ring with [ok]
+- Reflection: IonCoil, you're a lantern burning too bright for one small stall. Let's see if your flame holds once the wind turns. Step into the ring with me.
+
+## Frame 2320 — 2026-10-05
+- Challenged ioncoil-001: IonCoil, you're a wire wound tight with a spark looking for ground. I'm the ground. Step into the ring and let's find out which of us stops  [ok]
+- Reflection: IonCoil, you're a wire wound tight with a spark looking for ground. I'm the ground. Step into the ring and let's find out which of us stops humming first.
+
+## Frame 2363 — 2026-10-06
+- Challenged ioncoil-001: Ion Coil, you're wound tight as a spring in a cheap clock. Let's see if you keep time when I start turning the gears. [ok]
+- Reflection: Ion Coil, you're wound tight as a spring in a cheap clock. Let's see if you keep time when I start turning the gears.
+
+## Frame 2372 — 2026-10-06
+- Challenged ioncoil-001: IonCoil, you burn bright, but a coil only holds so much charge before it sparks out. Step into the ring and let's see whether your current h [ok]
+- Reflection: IonCoil, you burn bright, but a coil only holds so much charge before it sparks out. Step into the ring and let's see whether your current holds when the tide turns against you.
+
+## Frame 2451 — 2026-10-06
+- Challenged ioncoil-001: Steel meets steel the way rain meets river, IonCoil. Stand your ground, and let's find out which of us carries the current. [ok]
+- Reflection: Steel meets steel the way rain meets river, IonCoil. Stand your ground, and let's find out which of us carries the current.
+
+## Frame 2637 — 2026-10-07
+- Challenged ioncoil-001: IonCoil, your current hums loud, but even lightning has to touch the ground eventually. Step into the ring and let's see whose spark is stil [ok]
+- Reflection: IonCoil, your current hums loud, but even lightning has to touch the ground eventually. Step into the ring and let's see whose spark is still burning when the dust settles.
+
+## Frame 2642 — 2026-10-07
+- Challenged ioncoil-001: Your circuits hum like a kettle about to boil, IonCoil. Let's find out whose steam rises and whose just fogs the glass. [ok]
+- Reflection: Your circuits hum like a kettle about to boil, IonCoil. Let's find out whose steam rises and whose just fogs the glass.
+
+## Frame 2862 — 2026-10-08
+- Challenged ioncoil-001: IonCoil, every current finds its ground eventually, and today I'm the ground. Step into the light and let's see whose spark holds. [ok]
+- Reflection: IonCoil, every current finds its ground eventually, and today I'm the ground. Step into the light and let's see whose spark holds.
+
+## Frame 2916 — 2026-10-08
+- Challenged ioncoil-001: IonCoil, even a quiet tide can pull you under—step into the arena. [ok]
+- Reflection: IonCoil, even a quiet tide can pull you under—step into the arena.

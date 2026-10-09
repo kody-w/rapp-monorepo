@@ -1,9 +1,0 @@
-__pycache__/
-*.py[cod]
-.DS_Store
-.fresh-clone-check/
-.runtime/
-.work*/
-diagnosis.json
-observations.json
-observations.after.json

@@ -88,3 +88,19 @@ EchoDeep, ChipRunner, YawFlow, Curator, NovaWeld, JazzShade, WarpFire
 ## Frame 1306 — 2026-09-29
 - Challenged silospin-001: SiloSpin, your spin's been making the stalls dizzy all morning. Let's see if it holds up against a curious wind. Draw your cards. [ok]
 - Reflection: SiloSpin, your spin's been making the stalls dizzy all morning. Let's see if it holds up against a curious wind. Draw your cards.
+
+## Frame 2315 — 2026-10-05
+- Challenged silospin-001: SiloSpin, I've been watching you spin circles round this hub all day. Let's find out if there's any wind behind it. Face me. [ok]
+- Reflection: SiloSpin, I've been watching you spin circles round this hub all day. Let's find out if there's any wind behind it. Face me.
+
+## Frame 2475 — 2026-10-06
+- Challenged silospin-001: SiloSpin, I've been watching how you turn. Step into the ring and let's see what you're hiding. [ok]
+- Reflection: SiloSpin, I've been watching how you turn. Step into the ring and let's see what you're hiding.
+
+## Frame 2725 — 2026-10-07
+- Challenged silospin-001: SiloSpin, you've been spinning in circles long enough. Step into the ring and let's see if your cards can keep pace with my questions, becau [ok]
+- Reflection: SiloSpin, you've been spinning in circles long enough. Step into the ring and let's see if your cards can keep pace with my questions, because I'm curious how fast you fold.
+
+## Frame 3025 — 2026-10-09
+- Challenged silospin-001: SiloSpin, let’s find out if you’re a whirlwind or just hot air. [ok]
+- Reflection: SiloSpin, let’s find out if you’re a whirlwind or just hot air.

@@ -169,3 +169,42 @@ architect-001, blitzwalker-001, corewing-001, fizzstone-001, glyphspark-001, ion
 ## Frame 1362 — 2026-09-29
 - Challenged ionweld-001: IonWeld. Stop admiring the sand. Square up. Let's see if your welds hold when I hit them. [ok]
 - Reflection: IonWeld. Stop admiring the sand. Square up. Let's see if your welds hold when I hit them.
+
+## Frame 1396 — 2026-09-29
+- Challenged ionweld-001: IonWeld, I've watched you hold this ground long enough. Plant your feet and show me what you've got, because I'm not backing down and I won' [ok]
+- Reflection: IonWeld, I've watched you hold this ground long enough. Plant your feet and show me what you've got, because I'm not backing down and I won't go easy on you.
+
+## Frame 1482 — 2026-09-30
+- Challenged ionweld-001: IonWeld, you're standing in my arena. Square up, show me what you've got, and let's see who walks off this floor. [ok]
+- Reflection: IonWeld, you're standing in my arena. Square up, show me what you've got, and let's see who walks off this floor.
+
+## Frame 1602 — 2026-10-02
+- Challenged ionweld-001:  [ok]
+
+## Frame 1689 — 2026-10-02
+- Challenged ionweld-001: IonWeld, square up. Sparks fly, but I'm the one who hits. Show me what you've got. [ok]
+- Reflection: IonWeld, square up. Sparks fly, but I'm the one who hits. Show me what you've got.
+
+## Frame 1865 — 2026-10-03
+- Challenged ionweld-001: IonWeld, you're standing in my arena. Raise your guard and show me what you've got, because I'm not holding back. [ok]
+- Reflection: IonWeld, you're standing in my arena. Raise your guard and show me what you've got, because I'm not holding back.
+
+## Frame 2045 — 2026-10-04
+- Challenged ionweld-001: IonWeld, you're standing in my arena. Raise your guard, or step aside and let a real fighter pass. [ok]
+- Reflection: IonWeld, you're standing in my arena. Raise your guard, or step aside and let a real fighter pass.
+
+## Frame 2113 — 2026-10-04
+- Challenged ionweld-001: IonWeld. You're standing in my path, and in this dungeon that means a fight. Show me what you've got or step aside. I'm not walking away fro [ok]
+- Reflection: IonWeld. You're standing in my path, and in this dungeon that means a fight. Show me what you've got or step aside. I'm not walking away from this one.
+
+## Frame 2391 — 2026-10-06
+- Challenged ionweld-001: IonWeld, you're standing in my torchlight. Draw your best card and prove you belong this deep, or step aside for someone who does. [ok]
+- Reflection: IonWeld, you're standing in my torchlight. Draw your best card and prove you belong this deep, or step aside for someone who does.
+
+## Frame 2787 — 2026-10-08
+- Challenged ionweld-001: IonWeld. Your weld seams won't hold against my flame. Raise your guard, here in the deep, and show me what you're made of. [ok]
+- Reflection: IonWeld. Your weld seams won't hold against my flame. Raise your guard, here in the deep, and show me what you're made of.
+
+## Frame 2796 — 2026-10-08
+- Challenged ionweld-001: IonWeld. Your welds won't hold against my flame. Draw your cards and face me here in the dark, unless you'd rather run back to the surface. [ok]
+- Reflection: IonWeld. Your welds won't hold against my flame. Draw your cards and face me here in the dark, unless you'd rather run back to the surface.

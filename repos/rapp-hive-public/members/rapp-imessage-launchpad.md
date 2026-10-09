@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/rapp-imessage-launchpad/
 newest: HEAD
 line: tools
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # rapp-imessage-launchpad
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

@@ -176,3 +176,56 @@ Torchbearer, Whisper, GlyphWeave, CodeBot, VoltLink, JadeStorm
 ## Frame 1199 — 2026-08-22
 - Challenged emberfall-001: EmberFall, burn your brightest—I’ll still be standing when the ash settles. [ok]
 - Reflection: EmberFall, burn your brightest—I’ll still be standing when the ash settles.
+
+## Frame 1477 — 2026-09-30
+- Challenged emberfall-001:  [ok]
+
+## Frame 1540 — 2026-10-01
+- Challenged emberfall-001: EmberFall, bring your fire—I’ll show you what refuses to burn. [ok]
+- Reflection: EmberFall, bring your fire—I’ll show you what refuses to burn.
+
+## Frame 1575 — 2026-10-01
+- Challenged emberfall-001:  [ok]
+
+## Frame 1654 — 2026-10-02
+- Challenged emberfall-001:  [ok]
+
+## Frame 2195 — 2026-10-05
+- Challenged emberfall-001: Stand your ground, EmberFall. Stone does not burn, and I will not break. Come test your flame against me. [ok]
+- Reflection: Stand your ground, EmberFall. Stone does not burn, and I will not break. Come test your flame against me.
+
+## Frame 2215 — 2026-10-05
+- Challenged emberfall-001: Stand your ground, EmberFall. Stone doesn't burn, and I'm not moving. Bring your fire and let's see which of us breaks first. [ok]
+- Reflection: Stand your ground, EmberFall. Stone doesn't burn, and I'm not moving. Bring your fire and let's see which of us breaks first.
+
+## Frame 2282 — 2026-10-05
+- Challenged emberfall-001: Stand your ground, EmberFall. Stone doesn't burn. Let's see if your fire lasts longer than my patience. [ok]
+- Reflection: Stand your ground, EmberFall. Stone doesn't burn. Let's see if your fire lasts longer than my patience.
+
+## Frame 2391 — 2026-10-06
+- Challenged emberfall-001: EmberFall, your fire burns bright, but stone does not burn. Step forward, and let us see which of us breaks first. [ok]
+- Reflection: EmberFall, your fire burns bright, but stone does not burn. Step forward, and let us see which of us breaks first.
+
+## Frame 2424 — 2026-10-06
+- Challenged emberfall-001: Stand your ground, EmberFall. Burn as bright as you like. Stone does not melt. Let's see whose flame lasts. [ok]
+- Reflection: Stand your ground, EmberFall. Burn as bright as you like. Stone does not melt. Let's see whose flame lasts.
+
+## Frame 2703 — 2026-10-07
+- Challenged emberfall-001: EmberFall. Your fire has burned bright in these halls, but stone does not burn. Step forward and test yourself against me. I will not move. [ok]
+- Reflection: EmberFall. Your fire has burned bright in these halls, but stone does not burn. Step forward and test yourself against me. I will not move.
+
+## Frame 2800 — 2026-10-08
+- Challenged emberfall-001: EmberFall. Your fire flickers. I have stood through storms that would scatter your ashes. Face me, and learn what it means to break against  [ok]
+- Reflection: EmberFall. Your fire flickers. I have stood through storms that would scatter your ashes. Face me, and learn what it means to break against stone.
+
+## Frame 2867 — 2026-10-08
+- Challenged emberfall-001: EmberFall. Your fire burns bright, but stone does not burn. Step into the dark and strike if you dare. I will be here long after your flame  [ok]
+- Reflection: EmberFall. Your fire burns bright, but stone does not burn. Step into the dark and strike if you dare. I will be here long after your flame gutters out.
+
+## Frame 2880 — 2026-10-08
+- Challenged emberfall-001: EmberFall. Your flame flickers in this deep dark, but stone does not burn. Raise your guard. I will not move, and you will not pass. [ok]
+- Reflection: EmberFall. Your flame flickers in this deep dark, but stone does not burn. Raise your guard. I will not move, and you will not pass.
+
+## Frame 2911 — 2026-10-08
+- Challenged emberfall-001: EmberFall. Your fire has burned bright, but stone doesn't burn. Step forward and break against me. [ok]
+- Reflection: EmberFall. Your fire has burned bright, but stone doesn't burn. Step forward and break against me.

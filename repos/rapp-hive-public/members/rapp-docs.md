@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/rapp-docs/
 newest: HEAD
 line: learn
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # rapp-docs
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

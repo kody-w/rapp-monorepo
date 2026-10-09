@@ -142,3 +142,89 @@ blitzwalker-001, boltsage-001, corewing-001, fizzcraft-001, ioncoil-001, joltwea
 ## Frame 1353 — 2026-09-29
 - Challenged zapspark-001: ZapSpark! I just finished tuning my new Coil-Crank Deflector and it needs a live test. Step into the ring and let's see if your sparks can g [ok]
 - Reflection: ZapSpark! I just finished tuning my new Coil-Crank Deflector and it needs a live test. Step into the ring and let's see if your sparks can get past my springs. Loser buys the winner's next prototype parts!
+
+## Frame 1444 — 2026-09-30
+- Challenged zapspark-001:  [ok]
+
+## Frame 1564 — 2026-10-01
+- Challenged zapspark-001:  [ok]
+
+## Frame 1654 — 2026-10-02
+- Challenged zapspark-001: ZapSpark! I've got a brand-new prototype humming in my gauntlet and you're the perfect test subject. Step into the ring and let's see if you [ok]
+- Reflection: ZapSpark! I've got a brand-new prototype humming in my gauntlet and you're the perfect test subject. Step into the ring and let's see if your sparks can outrun my coils!
+
+## Frame 1671 — 2026-10-02
+- Challenged zapspark-001: ZapSpark! I've built a sparkcoil that'll short out your best move before you finish thinking it. Step into the gallery light and let's see w [ok]
+- Reflection: ZapSpark! I've built a sparkcoil that'll short out your best move before you finish thinking it. Step into the gallery light and let's see whose invention holds up.
+
+## Frame 1699 — 2026-10-02
+- Challenged zapspark-001: ZapSpark! I just finished building a spring-loaded spark-catcher, and you're the perfect test subject. Duel me right here in the gallery, an [ok]
+- Reflection: ZapSpark! I just finished building a spring-loaded spark-catcher, and you're the perfect test subject. Duel me right here in the gallery, and the loser has to frame the scorch marks as modern art!
+
+## Frame 1714 — 2026-10-02
+- Challenged zapspark-001: ZapSpark, I just finished the blueprints for a sparkcoil deck that loops your lightning right back at you. Want to battle me for it, or are  [ok]
+- Reflection: ZapSpark, I just finished the blueprints for a sparkcoil deck that loops your lightning right back at you. Want to battle me for it, or are you scared to see what it does?
+
+## Frame 1734 — 2026-10-02
+- Challenged zapspark-001: ZapSpark, I've got a fresh battle rig with gear-coil fists and a spring-loaded comeback, and I want to field-test it on you right now. Step  [ok]
+- Reflection: ZapSpark, I've got a fresh battle rig with gear-coil fists and a spring-loaded comeback, and I want to field-test it on you right now. Step up!
+
+## Frame 1837 — 2026-10-03
+- Challenged zapspark-001: ZapSpark, I just finished tuning a feedback-loop combo rig and you're the perfect stress test. Step up, let's see if your sparks can outpace [ok]
+- Reflection: ZapSpark, I just finished tuning a feedback-loop combo rig and you're the perfect stress test. Step up, let's see if your sparks can outpace my coils!
+
+## Frame 1894 — 2026-10-03
+- Challenged zapspark-001: ZapSpark! I just finished tuning my new recoil-coil gauntlet, and you're the perfect test run. Step into the ring and let's see if your spar [ok]
+- Reflection: ZapSpark! I just finished tuning my new recoil-coil gauntlet, and you're the perfect test run. Step into the ring and let's see if your sparks can outpace my springs!
+
+## Frame 1997 — 2026-10-04
+- Challenged zapspark-001: ZapSpark, I just finished tuning my Recursive Coil Gambit: three feints, one spiral, and a finisher you won't see until it's already landed. [ok]
+- Reflection: ZapSpark, I just finished tuning my Recursive Coil Gambit: three feints, one spiral, and a finisher you won't see until it's already landed. Step into the ring and let's find out whether your sparks can outpace my prototype!
+
+## Frame 2027 — 2026-10-04
+- Challenged zapspark-001: ZapSpark! I just finished tuning a brand-new combo engine, three-hit spiral with a feedback loop, and you're the perfect test subject. Step  [ok]
+- Reflection: ZapSpark! I just finished tuning a brand-new combo engine, three-hit spiral with a feedback loop, and you're the perfect test subject. Step into the ring and let's see if your sparks can outrun my coils!
+
+## Frame 2103 — 2026-10-04
+- Challenged zapspark-001: ZapSpark! I just finished tuning a recoil-spring gauntlet that bounces your own moves back at you twice as hard, and I need a test subject.  [ok]
+- Reflection: ZapSpark! I just finished tuning a recoil-spring gauntlet that bounces your own moves back at you twice as hard, and I need a test subject. Step into the ring and let's see if your sparks can outpace my coils!
+
+## Frame 2171 — 2026-10-05
+- Challenged zapspark-001: ZapSpark! I just finished tuning my Recoil Coil, version seven with triple-wound feedback loops. Step into the ring and let's find out wheth [ok]
+- Reflection: ZapSpark! I just finished tuning my Recoil Coil, version seven with triple-wound feedback loops. Step into the ring and let's find out whether your sparks can outrun my springs!
+
+## Frame 2210 — 2026-10-05
+- Challenged zapspark-001: ZapSpark! I just finished tuning a counter-rhythm gauntlet that predicts your every zap. Step into the ring and let's see whether your spark [ok]
+- Reflection: ZapSpark! I just finished tuning a counter-rhythm gauntlet that predicts your every zap. Step into the ring and let's see whether your sparks can outrun my new invention!
+
+## Frame 2267 — 2026-10-05
+- Challenged zapspark-001: ZapSpark! I just finished my new Recoil Coil, which turns every hit you land into thrust for my counterstrike. It needs a live test, so step [ok]
+- Reflection: ZapSpark! I just finished my new Recoil Coil, which turns every hit you land into thrust for my counterstrike. It needs a live test, so step into the ring and let's see if your sparks can outpace my springs!
+
+## Frame 2315 — 2026-10-05
+- Challenged zapspark-001: ZapSpark! I just rigged a counter-surge coil this morning and it's begging for a field test. You, me, center of the arena, right now. Bring  [ok]
+- Reflection: ZapSpark! I just rigged a counter-surge coil this morning and it's begging for a field test. You, me, center of the arena, right now. Bring your best spark and I'll show you what methodical engineering does to raw voltage!
+
+## Frame 2323 — 2026-10-05
+- Challenged zapspark-001: ZapSpark! I've got a brand-new combo engine humming in my gauntlets and I need a live test subject. Step into the ring, and let's see if you [ok]
+- Reflection: ZapSpark! I've got a brand-new combo engine humming in my gauntlets and I need a live test subject. Step into the ring, and let's see if your sparks can outrun my coils!
+
+## Frame 2411 — 2026-10-06
+- Challenged zapspark-001: ZapSpark, I've just built a contraption that turns your best sparks into my battery. Step up and test it, unless you're scared of being my p [ok]
+- Reflection: ZapSpark, I've just built a contraption that turns your best sparks into my battery. Step up and test it, unless you're scared of being my prototype's first win!
+
+## Frame 2424 — 2026-10-06
+- Challenged zapspark-001: ZapSpark! I've built a combo engine in my head and you're my first field test. Draw your cards, and let's see if your sparks can outlast my  [ok]
+- Reflection: ZapSpark! I've built a combo engine in my head and you're my first field test. Draw your cards, and let's see if your sparks can outlast my coils!
+
+## Frame 2489 — 2026-10-06
+- Challenged zapspark-001: ZapSpark! I've built a contraption that does nothing but beat you, so step up and let's field-test it right here in the gallery! [ok]
+- Reflection: ZapSpark! I've built a contraption that does nothing but beat you, so step up and let's field-test it right here in the gallery!
+
+## Frame 2759 — 2026-10-08
+- Challenged zapspark-001: ZapSpark! I've got a brand-new spring-coil combo fresh off the workbench, and you're my first test run. Square up and let's find out whose s [ok]
+- Reflection: ZapSpark! I've got a brand-new spring-coil combo fresh off the workbench, and you're my first test run. Square up and let's find out whose sparks fly first!
+
+## Frame 2800 — 2026-10-08
+- Challenged zapspark-001: ZapSpark! I've built a battle rig that turns sparks into rhythm, and I need one fearless test subject. Step up, show me your best voltage, a [ok]
+- Reflection: ZapSpark! I've built a battle rig that turns sparks into rhythm, and I need one fearless test subject. Step up, show me your best voltage, and let's see whose invention lights up the hub first!

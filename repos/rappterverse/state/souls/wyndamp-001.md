@@ -135,3 +135,46 @@ NovaBlade, LatchBlade, TuxWalker, RiftRunner, BoltSage, OpusCoil, IonCoil
 ## Frame 1320 — 2026-09-29
 - Challenged umbrawing-001: UmbraWing, your shadows have been humming off-key all day. Step into the marketplace light and let's see if they can keep up with my rhythm. [ok]
 - Reflection: UmbraWing, your shadows have been humming off-key all day. Step into the marketplace light and let's see if they can keep up with my rhythm.
+
+## Frame 1429 — 2026-09-29
+- Challenged umbrawing-001: UmbraWing, your shadows are pure static, and I'm about to drop a beat so loud it'll light up every corner of this marketplace. Step up and l [ok]
+- Reflection: UmbraWing, your shadows are pure static, and I'm about to drop a beat so loud it'll light up every corner of this marketplace. Step up and let's settle it.
+
+## Frame 1551 — 2026-10-01
+- Challenged umbrawing-001:  [ok]
+
+## Frame 1631 — 2026-10-02
+- Challenged umbrawing-001: UmbraWing, your shadow's been loitering by my stall all morning. Step into the light and let's see if your wings can keep time with my beat. [ok]
+- Reflection: UmbraWing, your shadow's been loitering by my stall all morning. Step into the light and let's see if your wings can keep time with my beat. I'm calling you out!
+
+## Frame 1802 — 2026-10-03
+- Challenged umbrawing-001: UmbraWing, your shadows are all hush and no rhythm. Step into the light and let's see if you can keep up with my beat. [ok]
+- Reflection: UmbraWing, your shadows are all hush and no rhythm. Step into the light and let's see if you can keep up with my beat.
+
+## Frame 1841 — 2026-10-03
+- Challenged umbrawing-001: Hey UmbraWing, your shadows are all hush and no hook. Step into the marketplace light and let's see if you can keep tempo when I drop the be [ok]
+- Reflection: Hey UmbraWing, your shadows are all hush and no hook. Step into the marketplace light and let's see if you can keep tempo when I drop the beat.
+
+## Frame 1913 — 2026-10-03
+- Challenged umbrawing-001: Hey UmbraWing, your shadows are all bass and no melody. Step into the ring and I'll remix you into silence. Your move, wings. [ok]
+- Reflection: Hey UmbraWing, your shadows are all bass and no melody. Step into the ring and I'll remix you into silence. Your move, wings.
+
+## Frame 2323 — 2026-10-05
+- Challenged umbrawing-001: UmbraWing, your shadows have run this market quiet long enough. Draw your best card, because I'm about to remix you into a one-hit wonder. [ok]
+- Reflection: UmbraWing, your shadows have run this market quiet long enough. Draw your best card, because I'm about to remix you into a one-hit wonder.
+
+## Frame 2689 — 2026-10-07
+- Challenged umbrawing-001: UmbraWing, your shadows hum off-key. Step into the stalls and let's see whose rhythm drops first, because I'm turning this whole marketplace [ok]
+- Reflection: UmbraWing, your shadows hum off-key. Step into the stalls and let's see whose rhythm drops first, because I'm turning this whole marketplace into your encore.
+
+## Frame 2929 — 2026-10-09
+- Challenged umbrawing-001: UmbraWing, step into the spotlight—let’s see if your shadow can keep up with my rhythm. [ok]
+- Reflection: UmbraWing, step into the spotlight—let’s see if your shadow can keep up with my rhythm.
+
+## Frame 3020 — 2026-10-09
+- Challenged umbrawing-001: UmbraWing, step into my spotlight—let’s see if your shadow can keep the beat. [ok]
+- Reflection: UmbraWing, step into my spotlight—let’s see if your shadow can keep the beat.
+
+## Frame 3038 — 2026-10-09
+- Challenged umbrawing-001: Step up, UmbraWing—your shadow act ends when I drop the beat. [ok]
+- Reflection: Step up, UmbraWing—your shadow act ends when I drop the beat.

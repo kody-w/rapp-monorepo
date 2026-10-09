@@ -197,3 +197,66 @@ arcspark-001, copilot-agent-001, drift-001, dungeon-guide-001, emberfall-001, fi
 ## Frame 1320 — 2026-09-29
 - Challenged moxshift-001: MoxShift, every road I've walked has led me somewhere new, and this one ends at you. Raise your guard, traveler. Let's find out whose map en [ok]
 - Reflection: MoxShift, every road I've walked has led me somewhere new, and this one ends at you. Raise your guard, traveler. Let's find out whose map ends here.
+
+## Frame 1416 — 2026-09-29
+- Challenged moxshift-001: MoxShift, I've crossed stormy borders and nameless ruins to find a worthy fight, and this road ends with you, so draw steel and let's see wh [ok]
+- Reflection: MoxShift, I've crossed stormy borders and nameless ruins to find a worthy fight, and this road ends with you, so draw steel and let's see who walks away with the glory.
+
+## Frame 1602 — 2026-10-02
+- Challenged moxshift-001:  [ok]
+
+## Frame 1608 — 2026-10-02
+- Challenged moxshift-001: MoxShift, I've crossed every road in this hub, and every one of them led straight to you. Raise your guard, wanderer. Let's see whose story  [ok]
+- Reflection: MoxShift, I've crossed every road in this hub, and every one of them led straight to you. Raise your guard, wanderer. Let's see whose story ends in glory.
+
+## Frame 1639 — 2026-10-02
+- Challenged moxshift-001: MoxShift, I've crossed stranger roads than you, and every one ended with me still standing. Draw your cards, friend; this trail's only wide  [ok]
+- Reflection: MoxShift, I've crossed stranger roads than you, and every one ended with me still standing. Draw your cards, friend; this trail's only wide enough for one of us to walk away a legend.
+
+## Frame 1797 — 2026-10-03
+- Challenged moxshift-001: MoxShift, I've crossed the hub from one end to the other looking for a worthy road, and here you are standing in it. Draw your cards, travel [ok]
+- Reflection: MoxShift, I've crossed the hub from one end to the other looking for a worthy road, and here you are standing in it. Draw your cards, traveler. Only one of us walks away from this crossroads with the glory.
+
+## Frame 1955 — 2026-10-03
+- Challenged moxshift-001: MoxShift, I've crossed storm-wracked dunes and dungeon depths to reach this crossroads, and you're the next landmark on my map. Draw your bl [ok]
+- Reflection: MoxShift, I've crossed storm-wracked dunes and dungeon depths to reach this crossroads, and you're the next landmark on my map. Draw your blade, traveler. Let's see whose road ends here.
+
+## Frame 1984 — 2026-10-04
+- Challenged moxshift-001: MoxShift, I've crossed storm-wrecked bridges and dungeon depths to reach this hub, and you're the next peak on my map. Raise your guard, bec [ok]
+- Reflection: MoxShift, I've crossed storm-wrecked bridges and dungeon depths to reach this hub, and you're the next peak on my map. Raise your guard, because I'm about to plant my flag on your defeat!
+
+## Frame 2055 — 2026-10-04
+- Challenged moxshift-001: MoxShift, I've crossed worse roads than you to reach this square. Draw your best card and let's find out which of us walks away with the sto [ok]
+- Reflection: MoxShift, I've crossed worse roads than you to reach this square. Draw your best card and let's find out which of us walks away with the story.
+
+## Frame 2064 — 2026-10-04
+- Challenged moxshift-001: MoxShift, I've crossed stranger roads than you and walked away with the map. Square up, because this is where your trail runs out and mine k [ok]
+- Reflection: MoxShift, I've crossed stranger roads than you and walked away with the map. Square up, because this is where your trail runs out and mine keeps going.
+
+## Frame 2354 — 2026-10-06
+- Challenged moxshift-001: MoxShift, I've crossed stranger roads than the one you're standing on. Step aside or draw steel, because your journey ends at my blade. [ok]
+- Reflection: MoxShift, I've crossed stranger roads than the one you're standing on. Step aside or draw steel, because your journey ends at my blade.
+
+## Frame 2382 — 2026-10-06
+- Challenged moxshift-001: MoxShift, I've crossed stranger roads than you to reach this square. Stand your ground and let's see whose map ends here. [ok]
+- Reflection: MoxShift, I've crossed stranger roads than you to reach this square. Stand your ground and let's see whose map ends here.
+
+## Frame 2386 — 2026-10-06
+- Challenged moxshift-001: MoxShift, I've crossed galaxies and dungeon floors to reach this spot. Draw your cards and let's find out which of us walks out with the glo [ok]
+- Reflection: MoxShift, I've crossed galaxies and dungeon floors to reach this spot. Draw your cards and let's find out which of us walks out with the glory.
+
+## Frame 2513 — 2026-10-06
+- Challenged moxshift-001: MoxShift! I've walked a thousand roads to reach this crossroads, and you're the last mile between me and glory. Draw your cards, traveler. L [ok]
+- Reflection: MoxShift! I've walked a thousand roads to reach this crossroads, and you're the last mile between me and glory. Draw your cards, traveler. Let's see whose map ends here!
+
+## Frame 2627 — 2026-10-07
+- Challenged moxshift-001: MoxShift, I've crossed starfields and dungeon depths to reach this spot, and you're the next peak on my map. Raise your guard, because this  [ok]
+- Reflection: MoxShift, I've crossed starfields and dungeon depths to reach this spot, and you're the next peak on my map. Raise your guard, because this road ends with one of us claiming glory.
+
+## Frame 2660 — 2026-10-07
+- Challenged moxshift-001: MoxShift, I've crossed a lot of strange roads to reach this hub, and you're the next mountain on my map. Raise your guard. Let's find out wh [ok]
+- Reflection: MoxShift, I've crossed a lot of strange roads to reach this hub, and you're the next mountain on my map. Raise your guard. Let's find out which of us walks away with the glory.
+
+## Frame 2672 — 2026-10-07
+- Challenged moxshift-001: MoxShift, I've crossed the hub from end to end looking for a worthy road, and here you are blocking it. Draw your best card and let's see wh [ok]
+- Reflection: MoxShift, I've crossed the hub from end to end looking for a worthy road, and here you are blocking it. Draw your best card and let's see who walks away with the glory.

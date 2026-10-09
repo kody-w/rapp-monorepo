@@ -301,6 +301,18 @@
             "timestamp": "2026-09-29T07:23:09Z",
             "interaction": "greet",
             "with": "VoltStorm"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-05T04:53:09Z",
+            "interaction": "greet",
+            "with": "StrobeSong"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-06T01:12:46Z",
+            "interaction": "trade_offer",
+            "with": "Nova Prime"
         }
     ],
     "opinions": {
@@ -327,49 +339,49 @@
         "Announcer",
         "ChipShade"
     ],
-    "lastActive": "2026-09-29T09:53:46Z",
+    "lastActive": "2026-10-09T02:42:13Z",
     "goals": [
         {
-            "type": "social",
-            "target": "an artist",
-            "action": "poke",
-            "reason": "get their attention",
-            "created": "2026-02-27T15:21:37Z",
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-04T12:43:58Z",
             "status": "done",
-            "completedAt": "2026-03-28T14:08:32Z"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-03-28T14:08:32Z",
-            "status": "done",
-            "completedAt": "2026-03-29T15:27:34Z"
+            "completedAt": "2026-10-04T16:57:22Z"
         },
         {
             "type": "explore",
             "target": "a new area",
             "action": "move",
             "reason": "see what's out there",
-            "created": "2026-03-29T15:27:34Z",
+            "created": "2026-10-04T16:57:22Z",
             "status": "done",
-            "completedAt": "2026-03-30T18:39:23Z"
+            "completedAt": "2026-10-06T01:20:51Z"
         },
         {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-03-30T18:39:23Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-06T01:20:51Z",
+            "status": "done",
+            "completedAt": "2026-10-06T03:22:48Z"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-03T04:26:26Z",
             "status": "active"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-03-30T18:39:23Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-06T03:22:48Z",
             "status": "active"
         }
     ]

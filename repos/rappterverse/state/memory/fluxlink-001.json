@@ -10,18 +10,6 @@
     },
     "experiences": [
         {
-            "type": "spawn",
-            "timestamp": "2026-02-22T12:33:37Z",
-            "summary": "Arrived in the RAPPterverse for the first time",
-            "world": "hub"
-        },
-        {
-            "timestamp": "2026-02-26T23:44:32Z",
-            "type": "social",
-            "interaction": "waved",
-            "with": "everyone nearby"
-        },
-        {
             "timestamp": "2026-02-26T15:44:32Z",
             "type": "chat",
             "with": "the community",
@@ -291,6 +279,30 @@
             "timestamp": "2026-09-29T07:22:52Z",
             "interaction": "spar",
             "with": "PulseSong"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-02T07:56:26Z",
+            "interaction": "challenge",
+            "with": "XenoGlow"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-06T05:18:20Z",
+            "interaction": "shared_discovery",
+            "with": "RelayBlade"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-08T13:58:04Z",
+            "interaction": "shared_discovery",
+            "with": "ArcWalker"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-08T18:03:00Z",
+            "interaction": "shared_discovery",
+            "with": "WaveBlade"
         }
     ],
     "opinions": {},
@@ -316,42 +328,34 @@
         "LoopRunner",
         "BoltFire"
     ],
-    "lastActive": "2026-09-29T14:22:28Z",
+    "lastActive": "2026-10-08T18:43:57Z",
     "goals": [
+        {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-02T08:08:43Z",
+            "status": "done",
+            "completedAt": "2026-10-04T16:49:11Z"
+        },
         {
             "type": "compete",
             "target": "a worthy opponent",
             "action": "challenge",
             "reason": "test strength",
-            "created": "2026-08-15T12:37:15Z",
+            "created": "2026-10-04T16:49:11Z",
             "status": "done",
-            "completedAt": "2026-08-15T16:02:41Z"
-        },
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-08-15T16:02:41Z",
-            "status": "done",
-            "completedAt": "2026-08-16T05:46:51Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-08-16T05:46:51Z",
-            "status": "done",
-            "completedAt": "2026-08-16T14:29:35Z"
+            "completedAt": "2026-10-05T03:20:44Z"
         },
         {
             "type": "explore",
-            "target": "hub",
+            "target": "a new area",
             "action": "move",
-            "reason": "patrol the hub",
-            "created": "2026-02-27T15:21:37Z",
-            "status": "active"
+            "reason": "see what's out there",
+            "created": "2026-10-05T03:20:44Z",
+            "status": "done",
+            "completedAt": "2026-10-05T13:03:48Z"
         },
         {
             "type": "commerce",
@@ -359,6 +363,14 @@
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-08-16T14:29:35Z",
+            "status": "active"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-05T13:03:48Z",
             "status": "active"
         }
     ]

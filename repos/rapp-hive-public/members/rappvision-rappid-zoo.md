@@ -7,9 +7,9 @@ line: rappvision
 also_on:
   - worlds
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # rappvision-rappid-zoo
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

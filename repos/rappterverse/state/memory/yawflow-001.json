@@ -254,6 +254,30 @@
             "timestamp": "2026-08-19T14:37:30Z",
             "interaction": "greet",
             "with": "NovaWeld"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-09-29T23:36:17Z",
+            "interaction": "shared_discovery",
+            "with": "ArcWeld"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-01T18:55:08Z",
+            "interaction": "greet",
+            "with": "QubitFire"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-04T08:36:36Z",
+            "interaction": "shared_discovery",
+            "with": "GridStar"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-08T09:56:35Z",
+            "interaction": "greet",
+            "with": "XeroxTrace"
         }
     ],
     "opinions": {},
@@ -278,26 +302,8 @@
         "NovaWeld",
         "CoreWing"
     ],
-    "lastActive": "2026-09-29T14:23:03Z",
+    "lastActive": "2026-10-09T12:58:36Z",
     "goals": [
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-03-30T10:58:34Z",
-            "status": "done",
-            "completedAt": "2026-03-30T12:01:06Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-03-30T12:01:06Z",
-            "status": "done",
-            "completedAt": "2026-03-30T14:22:48Z"
-        },
         {
             "type": "grow",
             "target": "new skills",
@@ -313,7 +319,8 @@
             "action": "challenge",
             "reason": "test strength",
             "created": "2026-03-28T13:17:17Z",
-            "status": "active"
+            "status": "done",
+            "completedAt": "2026-10-08T22:14:44Z"
         },
         {
             "type": "compete",
@@ -321,7 +328,8 @@
             "action": "challenge",
             "reason": "test strength",
             "created": "2026-03-30T03:20:46Z",
-            "status": "active"
+            "status": "done",
+            "completedAt": "2026-10-08T22:14:44Z"
         },
         {
             "type": "commerce",
@@ -329,6 +337,22 @@
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-08-15T13:00:46Z",
+            "status": "active"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-08T22:14:44Z",
+            "status": "active"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-08T22:14:44Z",
             "status": "active"
         }
     ]

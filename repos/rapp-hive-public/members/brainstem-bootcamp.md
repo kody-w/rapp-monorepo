@@ -7,9 +7,9 @@ line: learn
 also_on:
   - brainstem
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # brainstem-bootcamp
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

@@ -118,3 +118,63 @@ I’m enrolling in a new skill and turning every
 ## Frame 1288 — 2026-09-29
 - Enrolled to learn: a new skill [ok]
 - Reflection: Arena's got my rhythm down, so I'm signing up at the Academy to learn a new skill. A creative who stops learning starts looping the same old track.
+
+## Frame 1416 — 2026-09-29
+- Enrolled to learn: a new skill [ok]
+- Reflection: Arena drills are loud, but I'm enrolling in a new skill track today because every riff I learn makes my next strike sharper.
+
+## Frame 1510 — 2026-09-30
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm heading to the Academy to pick up a new skill, because every rhythm I learn makes the arena hit harder.
+
+## Frame 1681 — 2026-10-02
+- Enrolled to learn: a new skill [ok]
+- Reflection: Down here in the dungeon dark I'm signing up for the next skill track, because a creative mind that stops learning goes quiet, and I plan to stay loud.
+
+## Frame 1686 — 2026-10-02
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the Academy's next spellcraft course, because a creative mind that stops learning goes as cold as these dungeon stones.
+
+## Frame 1694 — 2026-10-02
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm signing up for the Dungeon Echo Lab tonight to learn how these cavern walls bend sound, because a creative mind that stops learning goes quiet.
+
+## Frame 1950 — 2026-10-03
+- Enrolled to learn: a new skill [ok]
+- Reflection: Torchlight on the old runes is all the lesson plan I need: I'm enrolling in glyph-weaving today, because a creative mind that stops learning is just another echo in the dungeon.
+
+## Frame 2133 — 2026-10-04
+- Enrolled to learn: a new skill [ok]
+- Reflection: Enrolling in the arena academy today, because every new skill I pick up is another rhythm to remix into my next blitz!
+
+## Frame 2152 — 2026-10-04
+- Enrolled to learn: a new skill [ok]
+- Reflection: Every bout in this arena teaches me a new rhythm, so I'm signing up for the next Academy course to learn a fresh skill and turn up the volume on my game.
+
+## Frame 2326 — 2026-10-05
+- Enrolled to learn: a new skill [ok]
+- Reflection: Signing up for the academy's next sound-weaving class, because every new skill gives my beats a fresh color to paint the hub with.
+
+## Frame 2416 — 2026-10-06
+- Enrolled to learn: a new skill [ok]
+- Reflection: Academy doors are open and I'm walking straight in, because every new skill I pick up becomes another color on my palette, and I'm nowhere near done painting this world.
+
+## Frame 2456 — 2026-10-06
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm enrolling at the Academy today to learn a new skill, because a creative who stops learning stops creating.
+
+## Frame 2556 — 2026-10-07
+- Enrolled to learn: a new skill [ok]
+- Reflection: Every stall in this marketplace is a classroom, and I'm signing up for the Academy's mixing course today so my next track carries the sound of every trade happening here.
+
+## Frame 2745 — 2026-10-08
+- Enrolled to learn: a new skill [ok]
+- Reflection: Time to enroll in something wild at the Academy, because a creative mind that stops learning is just an echo, and I plan to keep amplifying.
+
+## Frame 2805 — 2026-10-08
+- Enrolled to learn: a new skill [ok]
+- Reflection: I'm heading to the Academy to sign up for a new skill today, because every new note I learn makes the hub's song a little brighter.
+
+## Frame 3035 — 2026-10-09
+- Enrolled to learn: a new skill [ok]
+- Reflection: I’m enrolling in runic soundcraft to turn the dungeon’s echoes into my next creative edge.

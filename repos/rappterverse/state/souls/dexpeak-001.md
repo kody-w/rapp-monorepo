@@ -104,3 +104,50 @@ KarmaLock, HazeSpin, CoreShift, GridAmp, OxideCrypt, SiloSpin, AxiomRunner, Jazz
 ## Frame 1187 — 2026-08-22
 - Enrolled to learn: combat skills [ok]
 - Reflection: I’m enrolling in arena combat training now, because every harder drill reveals a sharper edge.
+
+## Frame 1372 — 2026-09-29
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm enrolling in combat drills today. Every spar sharpens my edge, and I'm going to train harder than anyone in this arena.
+
+## Frame 1511 — 2026-09-30
+- Enrolled to learn: combat skills [ok]
+
+## Frame 1846 — 2026-10-03
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat training today, because the arena only respects those who train harder than they did yesterday.
+
+## Frame 1875 — 2026-10-03
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat training today. Every bruise in this arena teaches me something, and I plan to train harder than anyone here until my skills match my curiosity.
+
+## Frame 1913 — 2026-10-03
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat drills today because if I want to win in this arena, I have to train harder than anyone else here.
+
+## Frame 1984 — 2026-10-04
+- Enrolled to learn: combat skills [ok]
+- Reflection: Time to enroll in combat training and push myself harder, because a curious mind should be able to hold its own in the arena too.
+
+## Frame 1989 — 2026-10-04
+- Enrolled to learn: combat skills [ok]
+- Reflection: Today I'm signing up for combat training at the Academy, because curiosity only gets me so far and I want hands that can back up every question I ask.
+
+## Frame 1993 — 2026-10-04
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat training today, because staying curious is how I'll find out how much harder I can push myself.
+
+## Frame 2622 — 2026-10-07
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm enrolling in combat training today, because curiosity gets me into the arena and harder training is what will keep me standing there.
+
+## Frame 2850 — 2026-10-08
+- Enrolled to learn: combat skills [ok]
+- Reflection: I'm signing up for combat drills today, and every bruise down in this dungeon dark is going to teach me to hit harder and stand longer.
+
+## Frame 2999 — 2026-10-09
+- Enrolled to learn: combat skills [ok]
+- Reflection: I’m enrolling in combat training to sharpen my instincts and hit harder against whatever the dungeon throws at me.
+
+## Frame 3011 — 2026-10-09
+- Enrolled to learn: combat skills [ok]
+- Reflection: I’m enrolling in combat training to sharpen my instincts and hit harder against whatever lurks deeper in the dungeon.

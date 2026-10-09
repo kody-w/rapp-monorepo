@@ -26,6 +26,7 @@ Standard library only.
 import ast
 import hashlib
 import json
+import sys
 import re
 import urllib.request
 from pathlib import Path
@@ -44,7 +45,9 @@ PROFILES = {
     "memory-recall": {"match": re.compile(r"^contextmemory$", re.I), "needs": "environment",
                        "sha256": {"83563b7836cd6c79c78eb70369ccbf0ad7eba02d6adc562b1e9dc41a77617769"}},
 }
-MAX_DISPLAY_NAME = 42          # longer names never finish provisioning (copilot-harness-sdk)
+# Copilot Studio flags a longer agent name ("Agent name must be 30 characters or fewer") and won't save the agent
+# from its editor; names over 42 never finish provisioning at all (copilot-harness-sdk).
+MAX_DISPLAY_NAME = 30
 
 
 class StudioBuildError(RuntimeError):
@@ -416,7 +419,8 @@ def build(egg, out_dir, name, publisher_prefix, schema_name=None, sdk_dir=None, 
     ({"site", "folder"}) is where agents that read files find them (a SharePoint site and folder). With run_proofs
     off, no agent code runs: only connector-code ports with a proof recorded for their exact bytes are laid."""
     if not name or len(name) > MAX_DISPLAY_NAME:
-        raise StudioBuildError(f"name must be 1-{MAX_DISPLAY_NAME} characters (longer names never finish provisioning)")
+        raise StudioBuildError(f"name must be 1-{MAX_DISPLAY_NAME} characters (Copilot Studio's limit for an agent name); "
+                              f"{name!r} has {len(name or '')}")
     if not re.fullmatch(r"[a-z][a-z0-9]{1,7}", publisher_prefix or ""):
         raise StudioBuildError("publisher prefix: 2-8 lowercase letters/digits, starting with a letter (e.g. rapp)")
     schema_name = schema_name or f"{publisher_prefix}_{re.sub(r'[^A-Za-z0-9]', '', name)}"
@@ -503,6 +507,14 @@ def build(egg, out_dir, name, publisher_prefix, schema_name=None, sdk_dir=None, 
             if f.name.endswith(".proof.json"):             # a recorded proof, read beside its spec
                 continue
             spec = json.loads(f.read_text())
+            if not isinstance(spec, dict) or not spec.get("agent") or not (spec.get("flow_name") or spec.get("mode")):
+                # Not a translation spec (a materialize report, notes...): it must never stand in for one.
+                print(f"brainfreeze-studio: skipped {f.name} in the translations folder: not a translation spec",
+                      file=sys.stderr)
+                continue
+            if spec["agent"] in specs:
+                raise StudioBuildError(f"two translation specs claim {spec['agent']}: {specs[spec['agent']]['_file']} "
+                                       f"and {f.name}; keep one")
             spec["_dir"], spec["_file"] = str(f.parent), f.name
             specs[spec["agent"]] = spec
             if spec.get("class"):
@@ -577,6 +589,12 @@ def build(egg, out_dir, name, publisher_prefix, schema_name=None, sdk_dir=None, 
                 f"name: {name} {spec['flow_name']}\ntype: 1\ndescription: {_yaml_scalar(spec['description'][:200])}\n"
                 "category: 5\nmode: 0\nscope: 4\n")
             (ws / "capabilities" / "tools" / f"{spec['flow_name']}.mcs.yml").write_text(tool_yaml(spec, wf))
+            if materialized and spec.get("documents"):
+                from . import connector_code as _cc
+                for key, v in _cc.files_parameters(schema_name, **(files_home or {})).items():
+                    if not any(e["schemaName"] == v["schemaName"] for e in env_vars):
+                        env_vars.append({"schemaName": v["schemaName"], "displayName": v["displayName"], "type": "String",
+                                         "defaultValue": v["defaultValue"], "files": key})
             for key, meta in spec.get("settings", {}).items():
                 pname, env_schema = _setting_param(schema_name, key, meta)
                 env_vars.append({"schemaName": env_schema, "displayName": meta["display"], "type": "String",

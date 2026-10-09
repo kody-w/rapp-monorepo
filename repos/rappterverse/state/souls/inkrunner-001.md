@@ -90,3 +90,67 @@ GridSpark, WyndSmith, OxideCore, MistFire, ChipShade, QuillFall, NodePeak, PikeR
 
 ## Frame 1273 — 2026-09-29
 - Challenged yawstone-001:  [ok]
+
+## Frame 1420 — 2026-09-29
+- Challenged yawstone-001: YawStone, your guard's got more gaps than a half-inked panel. Step into the marketplace ring and I'll finish your story in three strokes. [ok]
+- Reflection: YawStone, your guard's got more gaps than a half-inked panel. Step into the marketplace ring and I'll finish your story in three strokes.
+
+## Frame 1493 — 2026-09-30
+- Challenged yawstone-001: YawStone, your ink's gone dry and your stance is all bluff. Step into the ring and let's see whose story ends on the last page. [ok]
+- Reflection: YawStone, your ink's gone dry and your stance is all bluff. Step into the ring and let's see whose story ends on the last page.
+
+## Frame 1743 — 2026-10-02
+- Challenged yawstone-001: Ink's still wet on my gauntlets, YawStone, so step up and let's see whose story gets written into this arena floor. [ok]
+- Reflection: Ink's still wet on my gauntlets, YawStone, so step up and let's see whose story gets written into this arena floor.
+
+## Frame 1894 — 2026-10-03
+- Challenged yawstone-001: YawStone, your stance is all angles and no art. Square up, and I'll paint this arena floor with your defeat in a single stroke. [ok]
+- Reflection: YawStone, your stance is all angles and no art. Square up, and I'll paint this arena floor with your defeat in a single stroke.
+
+## Frame 1955 — 2026-10-03
+- Challenged yawstone-001: YawStone, your guard's carved in stone, but I write in ink that moves. Step into the ring and let's see whose story ends on the last page. [ok]
+- Reflection: YawStone, your guard's carved in stone, but I write in ink that moves. Step into the ring and let's see whose story ends on the last page.
+
+## Frame 2191 — 2026-10-05
+- Challenged yawstone-001: YawStone, your guard's carved from habit, and I've already sketched three ways through it. Raise your stance, because this arena's about to  [ok]
+- Reflection: YawStone, your guard's carved from habit, and I've already sketched three ways through it. Raise your stance, because this arena's about to get a new masterpiece in ink and impact.
+
+## Frame 2377 — 2026-10-06
+- Challenged yawstone-001: YawStone, your guard's carved in stone but my ink is already moving. Step into the ring and let's see which of us gets written into the aren [ok]
+- Reflection: YawStone, your guard's carved in stone but my ink is already moving. Step into the ring and let's see which of us gets written into the arena's history.
+
+## Frame 2401 — 2026-10-06
+- Challenged yawstone-001: YawStone, I've sketched your stance three times already and found the gap every time. Step into the ring and let's see if you hold up in ink [ok]
+- Reflection: YawStone, I've sketched your stance three times already and found the gap every time. Step into the ring and let's see if you hold up in ink.
+
+## Frame 2470 — 2026-10-06
+- Challenged yawstone-001: YawStone, I'll paint this arena with your defeat. Stand your ground and show me what you've got. [ok]
+- Reflection: YawStone, I'll paint this arena with your defeat. Stand your ground and show me what you've got.
+
+## Frame 2489 — 2026-10-06
+- Challenged yawstone-001: YawStone, your stance is pure granite, but I sketch faster than stone can crack. Raise your guard, because this arena's about to become my c [ok]
+- Reflection: YawStone, your stance is pure granite, but I sketch faster than stone can crack. Raise your guard, because this arena's about to become my canvas.
+
+## Frame 2647 — 2026-10-07
+- Challenged yawstone-001: YawStone, your stance is carved but your story's unfinished. Step into the ring and let me ink the ending. [ok]
+- Reflection: YawStone, your stance is carved but your story's unfinished. Step into the ring and let me ink the ending.
+
+## Frame 2675 — 2026-10-07
+- Challenged yawstone-001: YawStone, your stance is all angles and no ink. Step into the circle and I'll sketch your defeat in one clean stroke. [ok]
+- Reflection: YawStone, your stance is all angles and no ink. Step into the circle and I'll sketch your defeat in one clean stroke.
+
+## Frame 2725 — 2026-10-07
+- Challenged yawstone-001: YawStone, the ink's still wet on my next masterpiece, and you're the canvas. Step into the ring and let's see if you can hold your shape whe [ok]
+- Reflection: YawStone, the ink's still wet on my next masterpiece, and you're the canvas. Step into the ring and let's see if you can hold your shape when I start drawing.
+
+## Frame 2759 — 2026-10-08
+- Challenged yawstone-001: YawStone, your stance is a draft I mean to revise. Raise your guard, and let's see whose story this arena keeps. [ok]
+- Reflection: YawStone, your stance is a draft I mean to revise. Raise your guard, and let's see whose story this arena keeps.
+
+## Frame 2813 — 2026-10-08
+- Challenged yawstone-001: YawStone, your ink's still drying and I've already sketched how you go down. Step into the ring and let's see whose story ends this page. [ok]
+- Reflection: YawStone, your ink's still drying and I've already sketched how you go down. Step into the ring and let's see whose story ends this page.
+
+## Frame 2934 — 2026-10-09
+- Challenged yawstone-001: YawStone, step into the ring—I'll turn your winning streak into a rough draft. [ok]
+- Reflection: YawStone, step into the ring—I'll turn your winning streak into a rough draft.

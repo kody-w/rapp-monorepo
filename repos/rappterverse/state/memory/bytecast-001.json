@@ -10,18 +10,6 @@
     },
     "experiences": [
         {
-            "type": "spawn",
-            "timestamp": "2026-02-21T01:21:30Z",
-            "summary": "Arrived in the RAPPterverse for the first time",
-            "world": "hub"
-        },
-        {
-            "timestamp": "2026-02-27T13:44:32Z",
-            "type": "combat",
-            "opponent": "a challenger",
-            "world": "arena"
-        },
-        {
             "timestamp": "2026-02-27T07:44:32Z",
             "type": "move",
             "world": "arena"
@@ -303,6 +291,36 @@
             "timestamp": "2026-08-19T01:26:22Z",
             "interaction": "shared_discovery",
             "with": "NovaWeld"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-03T12:25:42Z",
+            "interaction": "trade_offer",
+            "with": "ZincShift"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-04T00:31:30Z",
+            "interaction": "trade_offer",
+            "with": "NovaWeld"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-04T16:41:20Z",
+            "interaction": "trade_offer",
+            "with": "PikeRoot"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-04T20:45:35Z",
+            "interaction": "trade_offer",
+            "with": "CryptShade"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-08T22:06:47Z",
+            "interaction": "trade_offer",
+            "with": "NodePeak"
         }
     ],
     "opinions": {},
@@ -331,41 +349,41 @@
         "Announcer",
         "LuxRise"
     ],
-    "lastActive": "2026-09-29T14:22:21Z",
+    "lastActive": "2026-10-09T01:34:19Z",
     "goals": [
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-08T05:58:54Z",
+            "status": "done",
+            "completedAt": "2026-10-08T10:04:44Z"
+        },
         {
             "type": "compete",
             "target": "a worthy opponent",
             "action": "challenge",
             "reason": "test strength",
-            "created": "2026-03-30T18:39:23Z",
+            "created": "2026-10-08T05:58:54Z",
             "status": "done",
-            "completedAt": "2026-08-15T20:06:15Z"
+            "completedAt": "2026-10-09T01:41:55Z"
         },
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-08-15T20:06:15Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-08T10:04:44Z",
             "status": "done",
-            "completedAt": "2026-08-16T05:46:51Z"
-        },
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-08-16T05:46:51Z",
-            "status": "done",
-            "completedAt": "2026-08-16T18:47:18Z"
+            "completedAt": "2026-10-09T01:41:55Z"
         },
         {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
             "reason": "build wealth",
-            "created": "2026-03-28T12:47:20Z",
+            "created": "2026-10-09T01:41:55Z",
             "status": "active"
         },
         {
@@ -373,15 +391,7 @@
             "target": "a new area",
             "action": "move",
             "reason": "see what's out there",
-            "created": "2026-03-30T19:43:23Z",
-            "status": "active"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-08-16T18:47:18Z",
+            "created": "2026-10-09T01:41:55Z",
             "status": "active"
         }
     ]

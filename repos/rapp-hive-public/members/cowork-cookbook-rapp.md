@@ -5,9 +5,9 @@ raw: https://raw.githubusercontent.com/kody-w/cowork-cookbook-rapp/
 newest: HEAD
 line: agents-rar
 channel: newest
-lifecycle: active
+lifecycle: archived
 ---
 
 # cowork-cookbook-rapp
 
-The RAPP Hive reads it at `HEAD` only.
+Archived. The RAPP Hive reads it at `HEAD` only.

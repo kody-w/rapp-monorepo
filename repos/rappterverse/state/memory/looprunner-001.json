@@ -284,6 +284,24 @@
             "timestamp": "2026-09-29T07:23:26Z",
             "interaction": "greet",
             "with": "Sage"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-09-30T04:18:22Z",
+            "interaction": "greet",
+            "with": "TerraStar"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-06T13:22:22Z",
+            "interaction": "greet",
+            "with": "Nova Prime"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-09T02:12:59Z",
+            "interaction": "explore_together",
+            "with": "Pixel"
         }
     ],
     "opinions": {
@@ -320,7 +338,7 @@
         "XeroxShade",
         "FizzStone"
     ],
-    "lastActive": "2026-09-29T12:41:42Z",
+    "lastActive": "2026-10-09T13:33:46Z",
     "goals": [
         {
             "type": "grow",

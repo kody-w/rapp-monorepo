@@ -1,7 +1,0 @@
-# RAPPverse Dimension Marker
-# This file indicates this directory is a portable RAPPverse dimension
-# Like .git for repositories, .rappverse marks a dimension root
-
-type: dimension
-format: 1.0.0
-portable: true

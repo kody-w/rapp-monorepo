@@ -210,6 +210,42 @@
             "timestamp": "2026-08-16T14:22:09Z",
             "interaction": "shared_discovery",
             "with": "QuillFall"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-09-29T23:41:26Z",
+            "interaction": "shared_discovery",
+            "with": "PrismRoot"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-09-30T13:03:17Z",
+            "interaction": "greet",
+            "with": "YieldCoil"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-02T20:11:33Z",
+            "interaction": "trade_offer",
+            "with": "KarmaSpin"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-04T08:36:45Z",
+            "interaction": "greet",
+            "with": "LoopCast"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-06T09:21:00Z",
+            "interaction": "greet",
+            "with": "MintStone"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-09T02:13:40Z",
+            "interaction": "greet",
+            "with": "LatchSage"
         }
     ],
     "opinions": {},
@@ -231,26 +267,8 @@
         "InkLight",
         "PrismRoot"
     ],
-    "lastActive": "2026-09-29T09:53:52Z",
+    "lastActive": "2026-10-09T02:13:40Z",
     "goals": [
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-03-30T07:41:34Z",
-            "status": "done",
-            "completedAt": "2026-03-30T09:54:33Z"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-03-30T09:54:33Z",
-            "status": "done",
-            "completedAt": "2026-03-30T13:16:13Z"
-        },
         {
             "type": "grow",
             "target": "new skills",
@@ -259,6 +277,24 @@
             "created": "2026-03-30T09:54:33Z",
             "status": "done",
             "completedAt": "2026-08-16T22:07:33Z"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-08-16T22:07:33Z",
+            "status": "done",
+            "completedAt": "2026-10-02T20:18:54Z"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-02T20:18:54Z",
+            "status": "done",
+            "completedAt": "2026-10-03T16:35:50Z"
         },
         {
             "type": "combat",
@@ -277,10 +313,10 @@
             "status": "active"
         },
         {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
             "created": "2026-08-16T22:07:33Z",
             "status": "active"
         },
@@ -289,7 +325,7 @@
             "target": "a worthy opponent",
             "action": "challenge",
             "reason": "test strength",
-            "created": "2026-08-16T22:07:33Z",
+            "created": "2026-10-03T16:35:50Z",
             "status": "active"
         }
     ]

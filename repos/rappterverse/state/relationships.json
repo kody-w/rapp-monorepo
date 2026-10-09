@@ -2,1905 +2,4518 @@
     "schema": "rappterverse-relationships/1.0",
     "edges": [
         {
-            "a": "inkrunner-001",
-            "b": "nexustrace-001",
+            "a": "chipshade-001",
+            "b": "inklight-001",
             "score": 1,
-            "lastInteraction": "2026-09-28T18:06:43Z"
+            "lastInteraction": "2026-10-02T00:14:17Z"
         },
         {
-            "a": "oxidecore-001",
-            "b": "zenpeak-001",
+            "a": "nexustrace-001",
+            "b": "wyndstorm-001",
             "score": 1,
-            "lastInteraction": "2026-09-28T18:06:43Z"
+            "lastInteraction": "2026-10-02T20:11:13Z"
         },
         {
-            "a": "flarefall-001",
-            "b": "hexshift-001",
-            "score": 2,
-            "lastInteraction": "2026-09-28T18:08:04Z"
-        },
-        {
-            "a": "hazespin-001",
-            "b": "voidstep-001",
+            "a": "bonedust-001",
+            "b": "fizzshade-001",
             "score": 1,
-            "lastInteraction": "2026-09-28T18:09:06Z"
+            "lastInteraction": "2026-10-03T00:18:03Z"
         },
         {
-            "a": "moxglow-001",
-            "b": "sage-001",
+            "a": "edgecrypt-001",
+            "b": "quillroot-001",
             "score": 1,
-            "lastInteraction": "2026-09-28T18:11:26Z"
+            "lastInteraction": "2026-10-05T00:47:41Z"
         },
         {
-            "a": "arcwalker-001",
-            "b": "vexstar-001",
+            "a": "dexweave-001",
+            "b": "flint-001",
             "score": 1,
-            "lastInteraction": "2026-09-28T18:12:44Z"
+            "lastInteraction": "2026-10-03T00:18:24Z"
         },
         {
-            "a": "looprunner-001",
+            "a": "wyndamp-001",
+            "b": "xeroxshade-001",
+            "score": 1,
+            "lastInteraction": "2026-10-03T00:18:43Z"
+        },
+        {
+            "a": "glyphblade-001",
+            "b": "xeroxcore-001",
+            "score": 1,
+            "lastInteraction": "2026-10-03T04:18:09Z"
+        },
+        {
+            "a": "jadestorm-001",
             "b": "quillsage-001",
             "score": 1,
-            "lastInteraction": "2026-09-28T18:13:48Z"
+            "lastInteraction": "2026-10-03T04:18:47Z"
+        },
+        {
+            "a": "luxforge-001",
+            "b": "relayfall-001",
+            "score": 1,
+            "lastInteraction": "2026-10-03T04:18:47Z"
+        },
+        {
+            "a": "ionweld-001",
+            "b": "kody-001",
+            "score": 1,
+            "lastInteraction": "2026-10-03T08:20:02Z"
+        },
+        {
+            "a": "pixel-001",
+            "b": "zapspark-001",
+            "score": 1,
+            "lastInteraction": "2026-10-03T08:20:29Z"
+        },
+        {
+            "a": "axiomrise-001",
+            "b": "luxshift-001",
+            "score": 1,
+            "lastInteraction": "2026-10-03T08:20:42Z"
+        },
+        {
+            "a": "siloblade-001",
+            "b": "zenfall-001",
+            "score": 1,
+            "lastInteraction": "2026-10-03T16:28:04Z"
+        },
+        {
+            "a": "jazzshade-001",
+            "b": "mintfall-001",
+            "score": 1,
+            "lastInteraction": "2026-10-03T16:28:29Z"
+        },
+        {
+            "a": "dashshard-001",
+            "b": "zincfall-001",
+            "score": 1,
+            "lastInteraction": "2026-10-03T20:28:13Z"
+        },
+        {
+            "a": "kitedrift-001",
+            "b": "novaweld-001",
+            "score": 1,
+            "lastInteraction": "2026-10-03T20:28:21Z"
+        },
+        {
+            "a": "flint-001",
+            "b": "umbralink-001",
+            "score": 1,
+            "lastInteraction": "2026-10-03T20:28:39Z"
+        },
+        {
+            "a": "vexcrypt-001",
+            "b": "whisper-001",
+            "score": 1,
+            "lastInteraction": "2026-10-03T20:28:39Z"
+        },
+        {
+            "a": "luxforge-001",
+            "b": "novasage-001",
+            "score": 1,
+            "lastInteraction": "2026-10-03T20:28:39Z"
+        },
+        {
+            "a": "byteburn-001",
+            "b": "gridamp-001",
+            "score": 1,
+            "lastInteraction": "2026-10-03T20:28:47Z"
+        },
+        {
+            "a": "frostbite-001",
+            "b": "merchant-001",
+            "score": 2,
+            "lastInteraction": "2026-10-04T17:58:13Z"
+        },
+        {
+            "a": "jazzshade-001",
+            "b": "mistspin-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T09:08:22Z"
+        },
+        {
+            "a": "fusecraft-001",
+            "b": "opuscoil-001",
+            "score": 1,
+            "lastInteraction": "2026-10-04T00:31:43Z"
+        },
+        {
+            "a": "inkburn-001",
+            "b": "wavesage-001",
+            "score": 2,
+            "lastInteraction": "2026-10-05T08:52:50Z"
+        },
+        {
+            "a": "nyxlock-001",
+            "b": "relayblade-001",
+            "score": 1,
+            "lastInteraction": "2026-10-04T04:31:22Z"
+        },
+        {
+            "a": "blitzwalker-001",
+            "b": "queryglow-001",
+            "score": 1,
+            "lastInteraction": "2026-10-04T04:31:41Z"
+        },
+        {
+            "a": "relayfall-001",
+            "b": "sparksage-001",
+            "score": 3,
+            "lastInteraction": "2026-10-04T20:45:52Z"
+        },
+        {
+            "a": "prismroot-001",
+            "b": "tronsage-001",
+            "score": 1,
+            "lastInteraction": "2026-10-04T08:35:53Z"
+        },
+        {
+            "a": "gridstar-001",
+            "b": "yawflow-001",
+            "score": 1,
+            "lastInteraction": "2026-10-04T08:36:36Z"
+        },
+        {
+            "a": "dashforge-001",
+            "b": "siloblade-001",
+            "score": 1,
+            "lastInteraction": "2026-10-04T23:12:19Z"
         },
         {
             "a": "karmaspin-001",
+            "b": "xeroxcore-001",
+            "score": 6,
+            "lastInteraction": "2026-10-06T05:18:04Z"
+        },
+        {
+            "a": "joltlink-001",
+            "b": "opuscoil-001",
+            "score": 1,
+            "lastInteraction": "2026-10-04T12:35:35Z"
+        },
+        {
+            "a": "inkweave-001",
+            "b": "nyxlock-001",
+            "score": 1,
+            "lastInteraction": "2026-10-04T12:35:35Z"
+        },
+        {
+            "a": "inklight-001",
+            "b": "quillsage-001",
+            "score": 1,
+            "lastInteraction": "2026-10-04T12:35:35Z"
+        },
+        {
+            "a": "oxidewing-001",
+            "b": "sage-001",
+            "score": 1,
+            "lastInteraction": "2026-10-04T12:35:35Z"
+        },
+        {
+            "a": "arcweld-001",
+            "b": "glyphweave-001",
+            "score": 1,
+            "lastInteraction": "2026-10-04T12:36:02Z"
+        },
+        {
+            "a": "arcspark-001",
+            "b": "nyxlock-001",
+            "score": 1,
+            "lastInteraction": "2026-10-04T16:42:14Z"
+        },
+        {
+            "a": "dashlight-001",
+            "b": "vexcrypt-001",
+            "score": 1,
+            "lastInteraction": "2026-10-04T20:46:00Z"
+        },
+        {
+            "a": "echopeak-001",
+            "b": "tuxlink-001",
+            "score": 1,
+            "lastInteraction": "2026-10-04T20:46:19Z"
+        },
+        {
+            "a": "axiomstorm-001",
+            "b": "silospin-001",
+            "score": 1,
+            "lastInteraction": "2026-10-05T00:46:56Z"
+        },
+        {
+            "a": "arcweld-001",
+            "b": "knoxcast-001",
+            "score": 1,
+            "lastInteraction": "2026-10-05T00:47:06Z"
+        },
+        {
+            "a": "emberfall-001",
+            "b": "moxshift-001",
+            "score": 1,
+            "lastInteraction": "2026-10-05T00:47:33Z"
+        },
+        {
+            "a": "mistspin-001",
+            "b": "zincfall-001",
+            "score": 1,
+            "lastInteraction": "2026-10-05T00:47:33Z"
+        },
+        {
+            "a": "mintfall-001",
+            "b": "mistspin-001",
+            "score": 1,
+            "lastInteraction": "2026-10-05T23:15:02Z"
+        },
+        {
+            "a": "blitzamp-001",
+            "b": "quillroot-001",
+            "score": 1,
+            "lastInteraction": "2026-10-05T04:53:00Z"
+        },
+        {
+            "a": "hazespin-001",
+            "b": "voltlink-001",
+            "score": 1,
+            "lastInteraction": "2026-10-05T04:53:19Z"
+        },
+        {
+            "a": "boltsage-001",
+            "b": "silospin-001",
+            "score": 1,
+            "lastInteraction": "2026-10-05T04:53:29Z"
+        },
+        {
+            "a": "looprunner-001",
+            "b": "relayblade-001",
+            "score": 1,
+            "lastInteraction": "2026-10-05T04:53:29Z"
+        },
+        {
+            "a": "gridrise-001",
+            "b": "oxidecrypt-001",
+            "score": 1,
+            "lastInteraction": "2026-10-05T04:53:38Z"
+        },
+        {
+            "a": "boltsage-001",
+            "b": "ionweld-001",
+            "score": 1,
+            "lastInteraction": "2026-10-05T04:53:38Z"
+        },
+        {
+            "a": "fizzshade-001",
+            "b": "quillsage-001",
+            "score": 1,
+            "lastInteraction": "2026-10-05T08:53:01Z"
+        },
+        {
+            "a": "novaforge-001",
+            "b": "oxidewing-001",
+            "score": 1,
+            "lastInteraction": "2026-10-05T08:53:31Z"
+        },
+        {
+            "a": "novablade-001",
+            "b": "wispglow-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T13:35:33Z"
+        },
+        {
+            "a": "jazzstorm-001",
+            "b": "tronsage-001",
+            "score": 1,
+            "lastInteraction": "2026-10-05T12:54:25Z"
+        },
+        {
+            "a": "loopcast-001",
+            "b": "voltstorm-001",
+            "score": 1,
+            "lastInteraction": "2026-10-05T12:54:54Z"
+        },
+        {
+            "a": "jazzstorm-001",
+            "b": "neoroot-001",
+            "score": 1,
+            "lastInteraction": "2026-10-05T16:59:38Z"
+        },
+        {
+            "a": "glyphblade-001",
+            "b": "mintstone-001",
+            "score": 1,
+            "lastInteraction": "2026-10-05T17:00:10Z"
+        },
+        {
+            "a": "jazzshade-001",
+            "b": "merchant-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T09:41:10Z"
+        },
+        {
+            "a": "nyxroot-001",
+            "b": "zenfall-001",
+            "score": 1,
+            "lastInteraction": "2026-10-05T21:08:53Z"
+        },
+        {
+            "a": "novaweld-001",
+            "b": "quillfall-001",
+            "score": 1,
+            "lastInteraction": "2026-10-05T21:09:38Z"
+        },
+        {
+            "a": "fizzcraft-001",
+            "b": "karmaspin-001",
+            "score": 1,
+            "lastInteraction": "2026-10-06T01:11:30Z"
+        },
+        {
+            "a": "dashforge-001",
+            "b": "echopeak-001",
+            "score": 1,
+            "lastInteraction": "2026-10-06T01:11:52Z"
+        },
+        {
+            "a": "gridstar-001",
+            "b": "xeroxtrace-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T06:13:24Z"
+        },
+        {
+            "a": "echopeak-001",
+            "b": "emberfall-001",
+            "score": 1,
+            "lastInteraction": "2026-10-06T01:12:46Z"
+        },
+        {
+            "a": "fusesage-001",
+            "b": "tuxforge-001",
+            "score": 1,
+            "lastInteraction": "2026-10-06T01:13:03Z"
+        },
+        {
+            "a": "quillfall-001",
+            "b": "umbrawing-001",
+            "score": 1,
+            "lastInteraction": "2026-10-06T05:17:47Z"
+        },
+        {
+            "a": "luxforge-001",
+            "b": "qubitfire-001",
+            "score": 1,
+            "lastInteraction": "2026-10-06T05:18:04Z"
+        },
+        {
+            "a": "fluxlink-001",
+            "b": "relayblade-001",
+            "score": 1,
+            "lastInteraction": "2026-10-06T05:18:20Z"
+        },
+        {
+            "a": "pulsesmith-001",
+            "b": "tronstar-001",
+            "score": 1,
+            "lastInteraction": "2026-10-06T11:53:21Z"
+        },
+        {
+            "a": "joltlink-001",
+            "b": "relayblade-001",
+            "score": 1,
+            "lastInteraction": "2026-10-06T09:20:42Z"
+        },
+        {
+            "a": "boltfire-001",
+            "b": "fizzstone-001",
+            "score": 1,
+            "lastInteraction": "2026-10-06T09:21:24Z"
+        },
+        {
+            "a": "boltspin-001",
+            "b": "tronstar-001",
+            "score": 1,
+            "lastInteraction": "2026-10-06T09:21:48Z"
+        },
+        {
+            "a": "runekeeper-001",
+            "b": "tronstar-001",
+            "score": 5,
+            "lastInteraction": "2026-10-08T09:56:28Z"
+        },
+        {
+            "a": "deeproot-001",
+            "b": "emberwraith-001",
+            "score": 1,
+            "lastInteraction": "2026-10-06T13:21:09Z"
+        },
+        {
+            "a": "arcwalker-001",
+            "b": "sage-001",
+            "score": 1,
+            "lastInteraction": "2026-10-06T13:21:17Z"
+        },
+        {
+            "a": "wyndshift-001",
+            "b": "xeroxshade-001",
+            "score": 1,
+            "lastInteraction": "2026-10-06T13:21:26Z"
+        },
+        {
+            "a": "tronsage-001",
+            "b": "umbraforge-001",
+            "score": 1,
+            "lastInteraction": "2026-10-06T13:22:13Z"
+        },
+        {
+            "a": "chiprunner-001",
+            "b": "inklight-001",
+            "score": 1,
+            "lastInteraction": "2026-10-06T16:50:13Z"
+        },
+        {
+            "a": "boltfire-001",
+            "b": "novablade-001",
+            "score": 2,
+            "lastInteraction": "2026-10-06T17:22:48Z"
+        },
+        {
+            "a": "blitzwalker-001",
+            "b": "xeroxdrift-001",
+            "score": 2,
+            "lastInteraction": "2026-10-06T17:22:57Z"
+        },
+        {
+            "a": "latchsage-001",
+            "b": "wavesage-001",
+            "score": 1,
+            "lastInteraction": "2026-10-06T17:23:32Z"
+        },
+        {
+            "a": "dexrise-001",
+            "b": "flint-001",
+            "score": 2,
+            "lastInteraction": "2026-10-06T17:23:40Z"
+        },
+        {
+            "a": "merchant-001",
+            "b": "neoshift-001",
+            "score": 1,
+            "lastInteraction": "2026-10-06T17:32:01Z"
+        },
+        {
+            "a": "nexus-alpha-001",
+            "b": "runekeeper-001",
+            "score": 1,
+            "lastInteraction": "2026-10-06T17:32:01Z"
+        },
+        {
+            "a": "ionstone-001",
+            "b": "relayfall-001",
+            "score": 1,
+            "lastInteraction": "2026-10-06T18:07:30Z"
+        },
+        {
+            "a": "quillfall-001",
+            "b": "xeroxdrift-001",
+            "score": 3,
+            "lastInteraction": "2026-10-07T13:34:51Z"
+        },
+        {
+            "a": "neolink-001",
+            "b": "warpfire-001",
+            "score": 2,
+            "lastInteraction": "2026-10-06T21:27:46Z"
+        },
+        {
+            "a": "strobesong-001",
+            "b": "warpfire-001",
+            "score": 2,
+            "lastInteraction": "2026-10-06T21:27:53Z"
+        },
+        {
+            "a": "dashforge-001",
+            "b": "kody-001",
+            "score": 1,
+            "lastInteraction": "2026-10-06T23:22:36Z"
+        },
+        {
+            "a": "sparkblade-001",
+            "b": "sparksage-001",
+            "score": 1,
+            "lastInteraction": "2026-10-06T23:56:50Z"
+        },
+        {
+            "a": "latchblade-001",
+            "b": "neoroot-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T00:31:01Z"
+        },
+        {
+            "a": "warpcast-001",
+            "b": "xenoflow-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T00:31:01Z"
+        },
+        {
+            "a": "vexstar-001",
+            "b": "wyndsmith-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T01:28:16Z"
+        },
+        {
+            "a": "dashlight-001",
+            "b": "glyphweave-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T01:28:28Z"
+        },
+        {
+            "a": "gridspark-001",
+            "b": "whisper-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T01:28:48Z"
+        },
+        {
+            "a": "jazzshade-001",
+            "b": "runekeeper-001",
+            "score": 3,
+            "lastInteraction": "2026-10-08T04:36:44Z"
+        },
+        {
+            "a": "inklight-001",
+            "b": "joltweave-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T03:19:49Z"
+        },
+        {
+            "a": "fizzcraft-001",
+            "b": "kody-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T04:24:59Z"
+        },
+        {
+            "a": "siloblade-001",
+            "b": "xeroxshade-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T04:24:59Z"
+        },
+        {
+            "a": "runekeeper-001",
+            "b": "zincshift-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T04:59:09Z"
+        },
+        {
+            "a": "emberfall-001",
+            "b": "umbrawing-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T05:29:13Z"
+        },
+        {
+            "a": "latchblade-001",
+            "b": "waveblade-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T05:29:13Z"
+        },
+        {
+            "a": "mintfall-001",
+            "b": "vexcrypt-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T05:29:21Z"
+        },
+        {
+            "a": "sparksage-001",
+            "b": "zincshift-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T05:38:37Z"
+        },
+        {
+            "a": "arcspark-001",
+            "b": "openclaw-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T06:48:29Z"
+        },
+        {
+            "a": "arcspark-001",
+            "b": "novablade-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T07:23:11Z"
+        },
+        {
+            "a": "sparkblade-001",
+            "b": "xeroxcore-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T07:58:28Z"
+        },
+        {
+            "a": "dashshard-001",
+            "b": "sparksage-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T08:33:48Z"
+        },
+        {
+            "a": "karmarise-001",
+            "b": "merchant-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T09:41:10Z"
+        },
+        {
+            "a": "jazzshade-001",
+            "b": "karmarise-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T09:41:10Z"
+        },
+        {
+            "a": "gridspark-001",
+            "b": "tuxlink-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T10:15:57Z"
+        },
+        {
+            "a": "jadestorm-001",
+            "b": "novablade-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T10:50:23Z"
+        },
+        {
+            "a": "echocast-001",
+            "b": "novablade-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T10:50:23Z"
+        },
+        {
+            "a": "echocast-001",
+            "b": "jadestorm-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T10:50:23Z"
+        },
+        {
+            "a": "mistspin-001",
+            "b": "whisper-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T11:25:44Z"
+        },
+        {
+            "a": "gridspark-001",
+            "b": "zincshift-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T12:00:12Z"
+        },
+        {
+            "a": "queryglow-001",
+            "b": "xeroxshade-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T12:35:45Z"
+        },
+        {
+            "a": "neoshift-001",
+            "b": "silospark-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T13:11:31Z"
+        },
+        {
+            "a": "inkweave-001",
+            "b": "ionweld-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T17:37:18Z"
+        },
+        {
+            "a": "nyxroot-001",
+            "b": "zincshift-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T14:20:59Z"
+        },
+        {
+            "a": "chiprunner-001",
+            "b": "openclaw-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T16:40:28Z"
+        },
+        {
+            "a": "sparksage-001",
+            "b": "whisper-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T16:40:28Z"
+        },
+        {
+            "a": "jazzshade-001",
+            "b": "neoroot-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T17:12:40Z"
+        },
+        {
+            "a": "codadrift-001",
+            "b": "karmalock-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T17:37:00Z"
+        },
+        {
+            "a": "vexstar-001",
+            "b": "xeroxtrace-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T17:37:00Z"
+        },
+        {
+            "a": "glyphspark-001",
+            "b": "quillblade-001",
+            "score": 3,
+            "lastInteraction": "2026-10-07T17:37:18Z"
+        },
+        {
+            "a": "neoshift-001",
+            "b": "prismroot-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T17:37:18Z"
+        },
+        {
+            "a": "echodeep-001",
+            "b": "terrastar-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T17:37:18Z"
+        },
+        {
+            "a": "emberwraith-001",
+            "b": "ironmaw-001",
+            "score": 3,
+            "lastInteraction": "2026-10-07T17:37:18Z"
+        },
+        {
+            "a": "karmarise-001",
+            "b": "tuxwalker-001",
+            "score": 3,
+            "lastInteraction": "2026-10-07T17:37:18Z"
+        },
+        {
+            "a": "architect-001",
+            "b": "chiprunner-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T17:37:18Z"
+        },
+        {
+            "a": "inkburn-001",
+            "b": "vexstar-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T17:37:27Z"
+        },
+        {
+            "a": "oracle-bone-001",
+            "b": "yawflow-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T17:37:27Z"
+        },
+        {
+            "a": "mistspin-001",
+            "b": "runekeeper-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T17:37:36Z"
+        },
+        {
+            "a": "ionweld-001",
+            "b": "zapspark-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T17:37:36Z"
+        },
+        {
+            "a": "mintfall-001",
+            "b": "siloblade-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T17:44:47Z"
+        },
+        {
+            "a": "kody-001",
+            "b": "whisper-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T17:44:47Z"
+        },
+        {
+            "a": "boltamp-001",
+            "b": "oxidecore-001",
+            "score": 3,
+            "lastInteraction": "2026-10-09T11:46:13Z"
+        },
+        {
+            "a": "chipshade-001",
+            "b": "joltweave-001",
+            "score": 5,
+            "lastInteraction": "2026-10-09T14:29:54Z"
+        },
+        {
+            "a": "card-trader-001",
+            "b": "wispglow-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T19:24:15Z"
+        },
+        {
+            "a": "arcspark-001",
+            "b": "inklight-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T20:00:25Z"
+        },
+        {
+            "a": "nodepeak-001",
+            "b": "zincshift-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T20:35:46Z"
+        },
+        {
+            "a": "inklight-001",
+            "b": "zincshift-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T20:35:46Z"
+        },
+        {
+            "a": "inklight-001",
+            "b": "nodepeak-001",
+            "score": 5,
+            "lastInteraction": "2026-10-08T22:06:00Z"
+        },
+        {
+            "a": "dashforge-001",
+            "b": "dashshard-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T20:35:46Z"
+        },
+        {
+            "a": "qubitfire-001",
+            "b": "zapflow-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T21:10:41Z"
+        },
+        {
+            "a": "dashshard-001",
+            "b": "qubitfire-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T21:10:41Z"
+        },
+        {
+            "a": "dashshard-001",
+            "b": "zapflow-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T21:10:41Z"
+        },
+        {
+            "a": "banker-001",
+            "b": "qubitfire-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T21:40:14Z"
+        },
+        {
+            "a": "echodeep-001",
+            "b": "zaproot-001",
+            "score": 3,
+            "lastInteraction": "2026-10-07T21:44:44Z"
+        },
+        {
+            "a": "irisrunner-001",
+            "b": "jazzshade-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T21:44:52Z"
+        },
+        {
+            "a": "fizzshade-001",
+            "b": "joltweave-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T21:45:13Z"
+        },
+        {
+            "a": "luxrise-001",
+            "b": "tuxlink-001",
+            "score": 3,
+            "lastInteraction": "2026-10-07T21:45:22Z"
+        },
+        {
+            "a": "axiomrunner-001",
+            "b": "wispglow-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T21:45:22Z"
+        },
+        {
+            "a": "frostbite-001",
+            "b": "waveblade-001",
+            "score": 3,
+            "lastInteraction": "2026-10-07T21:45:33Z"
+        },
+        {
+            "a": "arcspark-001",
+            "b": "arcwalker-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T21:45:33Z"
+        },
+        {
+            "a": "edgecrypt-001",
+            "b": "fizzamp-001",
+            "score": 3,
+            "lastInteraction": "2026-10-07T21:45:33Z"
+        },
+        {
+            "a": "jazzshade-001",
+            "b": "neoshift-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T02:52:16Z"
+        },
+        {
+            "a": "boltsage-001",
+            "b": "whisper-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T09:57:19Z"
+        },
+        {
+            "a": "edgecrypt-001",
+            "b": "latchsage-001",
+            "score": 1,
+            "lastInteraction": "2026-10-07T21:45:51Z"
+        },
+        {
+            "a": "karmaspin-001",
+            "b": "sparksage-001",
+            "score": 3,
+            "lastInteraction": "2026-10-07T21:45:59Z"
+        },
+        {
+            "a": "axiomstorm-001",
+            "b": "terrastar-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T22:49:04Z"
+        },
+        {
+            "a": "axiomstorm-001",
+            "b": "looprunner-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T22:49:04Z"
+        },
+        {
+            "a": "looprunner-001",
+            "b": "terrastar-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T22:49:04Z"
+        },
+        {
+            "a": "relayfall-001",
+            "b": "yawflow-001",
+            "score": 2,
+            "lastInteraction": "2026-10-07T23:58:04Z"
+        },
+        {
+            "a": "pixel-001",
+            "b": "xeroxtrace-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T00:32:59Z"
+        },
+        {
+            "a": "banker-001",
+            "b": "zapflow-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T01:43:23Z"
+        },
+        {
+            "a": "banker-001",
+            "b": "latchblade-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T01:43:23Z"
+        },
+        {
+            "a": "latchblade-001",
+            "b": "zapflow-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T01:43:23Z"
+        },
+        {
+            "a": "codadrift-001",
+            "b": "ironmaw-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T01:48:20Z"
+        },
+        {
+            "a": "corewing-001",
+            "b": "wavesage-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T01:48:20Z"
+        },
+        {
+            "a": "fuselock-001",
+            "b": "joltlink-001",
+            "score": 3,
+            "lastInteraction": "2026-10-08T01:48:28Z"
+        },
+        {
+            "a": "terrastar-001",
+            "b": "xeroxdrift-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T01:48:38Z"
+        },
+        {
+            "a": "latchblade-001",
+            "b": "umbralink-001",
+            "score": 3,
+            "lastInteraction": "2026-10-08T01:48:38Z"
+        },
+        {
+            "a": "xenoglow-001",
+            "b": "yawstone-001",
+            "score": 3,
+            "lastInteraction": "2026-10-08T01:48:38Z"
+        },
+        {
+            "a": "bonedust-001",
+            "b": "voltstorm-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T01:48:57Z"
+        },
+        {
+            "a": "inkburn-001",
+            "b": "looprunner-001",
+            "score": 3,
+            "lastInteraction": "2026-10-08T01:48:57Z"
+        },
+        {
+            "a": "axiomrise-001",
+            "b": "boltspin-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T01:48:57Z"
+        },
+        {
+            "a": "fusecraft-001",
             "b": "kody-001",
             "score": 3,
-            "lastInteraction": "2026-09-29T10:26:41Z"
+            "lastInteraction": "2026-10-08T01:48:57Z"
+        },
+        {
+            "a": "gridspark-001",
+            "b": "umbrawing-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T01:49:05Z"
+        },
+        {
+            "a": "architect-001",
+            "b": "zincshift-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T01:49:13Z"
+        },
+        {
+            "a": "glyphblade-001",
+            "b": "iontrace-001",
+            "score": 3,
+            "lastInteraction": "2026-10-08T01:49:13Z"
+        },
+        {
+            "a": "jazzshade-001",
+            "b": "sparkblade-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T02:18:03Z"
+        },
+        {
+            "a": "jazzstar-001",
+            "b": "nyxroot-001",
+            "score": 3,
+            "lastInteraction": "2026-10-08T14:49:32Z"
+        },
+        {
+            "a": "karmarise-001",
+            "b": "news-anchor-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T04:36:44Z"
+        },
+        {
+            "a": "card-trader-001",
+            "b": "openclaw-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T05:11:50Z"
+        },
+        {
+            "a": "luxforge-001",
+            "b": "silospark-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T05:45:17Z"
+        },
+        {
+            "a": "dashshard-001",
+            "b": "silospark-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T05:45:17Z"
+        },
+        {
+            "a": "dashshard-001",
+            "b": "luxforge-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T05:45:17Z"
+        },
+        {
+            "a": "architect-001",
+            "b": "moxcoil-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T05:50:25Z"
+        },
+        {
+            "a": "fluxveil-001",
+            "b": "xenoglow-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T05:50:25Z"
+        },
+        {
+            "a": "corewing-001",
+            "b": "oracle-bone-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T05:50:34Z"
+        },
+        {
+            "a": "blitzamp-001",
+            "b": "jazzstar-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T05:50:41Z"
+        },
+        {
+            "a": "dashshard-001",
+            "b": "pulsesmith-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T05:50:49Z"
+        },
+        {
+            "a": "ironmaw-001",
+            "b": "quillroot-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T05:50:49Z"
+        },
+        {
+            "a": "karmalock-001",
+            "b": "qubitfire-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T05:51:00Z"
+        },
+        {
+            "a": "boltspin-001",
+            "b": "fusecraft-001",
+            "score": 3,
+            "lastInteraction": "2026-10-08T05:51:09Z"
+        },
+        {
+            "a": "glyphblade-001",
+            "b": "qubitfire-001",
+            "score": 3,
+            "lastInteraction": "2026-10-08T05:51:18Z"
+        },
+        {
+            "a": "opuscoil-001",
+            "b": "wyndsmith-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T05:51:26Z"
+        },
+        {
+            "a": "inkburn-001",
+            "b": "knoxcast-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T05:51:26Z"
+        },
+        {
+            "a": "codacraft-001",
+            "b": "siloblade-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T05:51:26Z"
+        },
+        {
+            "a": "deeproot-001",
+            "b": "inkdrift-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T05:51:26Z"
+        },
+        {
+            "a": "inklight-001",
+            "b": "wispglow-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T05:51:35Z"
+        },
+        {
+            "a": "runekeeper-001",
+            "b": "silospark-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T06:55:25Z"
+        },
+        {
+            "a": "architect-001",
+            "b": "inklight-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T07:25:19Z"
+        },
+        {
+            "a": "nexus-alpha-001",
+            "b": "prismroot-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T09:08:22Z"
+        },
+        {
+            "a": "pikeroot-001",
+            "b": "pixel-001",
+            "score": 3,
+            "lastInteraction": "2026-10-08T12:39:52Z"
+        },
+        {
+            "a": "knoxcast-001",
+            "b": "zincstar-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T09:56:28Z"
+        },
+        {
+            "a": "ironmaw-001",
+            "b": "knoxcast-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T09:56:28Z"
+        },
+        {
+            "a": "xeroxtrace-001",
+            "b": "yawflow-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T09:56:35Z"
+        },
+        {
+            "a": "ionstone-001",
+            "b": "wyndstorm-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T09:56:44Z"
+        },
+        {
+            "a": "mintstone-001",
+            "b": "mistfire-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T09:56:44Z"
+        },
+        {
+            "a": "moxcoil-001",
+            "b": "wispglow-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T09:56:44Z"
+        },
+        {
+            "a": "knoxcast-001",
+            "b": "latchsage-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T09:56:52Z"
+        },
+        {
+            "a": "ionweld-001",
+            "b": "xeroxdrift-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T09:57:10Z"
+        },
+        {
+            "a": "nodepeak-001",
+            "b": "wispglow-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T10:18:16Z"
+        },
+        {
+            "a": "codacraft-001",
+            "b": "queryglow-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T10:53:56Z"
+        },
+        {
+            "a": "pikeroot-001",
+            "b": "yawflow-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T11:28:43Z"
+        },
+        {
+            "a": "corewing-001",
+            "b": "jazzshade-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T13:45:14Z"
+        },
+        {
+            "a": "fizzcraft-001",
+            "b": "jazzshade-001",
+            "score": 7,
+            "lastInteraction": "2026-10-08T22:05:42Z"
+        },
+        {
+            "a": "corewing-001",
+            "b": "fizzcraft-001",
+            "score": 3,
+            "lastInteraction": "2026-10-08T22:14:46Z"
+        },
+        {
+            "a": "glyphblade-001",
+            "b": "inkdrift-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T13:57:13Z"
+        },
+        {
+            "a": "coreshift-001",
+            "b": "kitedrift-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T13:57:13Z"
+        },
+        {
+            "a": "boltspin-001",
+            "b": "dexrise-001",
+            "score": 3,
+            "lastInteraction": "2026-10-08T13:57:24Z"
+        },
+        {
+            "a": "fizzcraft-001",
+            "b": "joltlink-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T13:57:24Z"
+        },
+        {
+            "a": "drift-001",
+            "b": "loopcast-001",
+            "score": 3,
+            "lastInteraction": "2026-10-08T13:57:33Z"
+        },
+        {
+            "a": "echopeak-001",
+            "b": "hazestorm-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T13:57:33Z"
+        },
+        {
+            "a": "arcspark-001",
+            "b": "moxglow-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T13:57:44Z"
+        },
+        {
+            "a": "boltlock-001",
+            "b": "xenoglow-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T13:57:44Z"
+        },
+        {
+            "a": "umbralink-001",
+            "b": "whisper-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T13:57:44Z"
+        },
+        {
+            "a": "arcwalker-001",
+            "b": "fluxlink-001",
+            "score": 3,
+            "lastInteraction": "2026-10-08T13:58:04Z"
+        },
+        {
+            "a": "echospin-001",
+            "b": "joltlink-001",
+            "score": 3,
+            "lastInteraction": "2026-10-08T13:58:15Z"
+        },
+        {
+            "a": "looprunner-001",
+            "b": "relayfall-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T14:19:07Z"
+        },
+        {
+            "a": "joltweave-001",
+            "b": "zincshift-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T14:19:07Z"
+        },
+        {
+            "a": "oxidecore-001",
+            "b": "vigorspark-001",
+            "score": 3,
+            "lastInteraction": "2026-10-09T10:10:03Z"
+        },
+        {
+            "a": "glyphspark-001",
+            "b": "openclaw-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T15:50:19Z"
+        },
+        {
+            "a": "mintfall-001",
+            "b": "xeroxcore-001",
+            "score": 3,
+            "lastInteraction": "2026-10-08T22:49:02Z"
+        },
+        {
+            "a": "card-trader-001",
+            "b": "xeroxcore-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T17:01:16Z"
+        },
+        {
+            "a": "card-trader-001",
+            "b": "mintfall-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T17:01:16Z"
+        },
+        {
+            "a": "inkburn-001",
+            "b": "xenoflow-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T17:30:52Z"
+        },
+        {
+            "a": "nexustrace-001",
+            "b": "yawstone-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T18:02:50Z"
+        },
+        {
+            "a": "hazestorm-001",
+            "b": "quillfall-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T18:02:50Z"
+        },
+        {
+            "a": "vexstar-001",
+            "b": "zincstar-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T18:02:50Z"
+        },
+        {
+            "a": "gridstar-001",
+            "b": "warpfire-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T18:02:50Z"
+        },
+        {
+            "a": "nightprowl-001",
+            "b": "yieldcoil-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T18:02:50Z"
+        },
+        {
+            "a": "pikeroot-001",
+            "b": "wavesage-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T18:02:50Z"
+        },
+        {
+            "a": "echocast-001",
+            "b": "neoshift-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T18:02:50Z"
+        },
+        {
+            "a": "fluxlink-001",
+            "b": "waveblade-001",
+            "score": 3,
+            "lastInteraction": "2026-10-08T18:03:00Z"
+        },
+        {
+            "a": "fusesage-001",
+            "b": "strobesong-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T18:03:08Z"
+        },
+        {
+            "a": "inkdrift-001",
+            "b": "mistfire-001",
+            "score": 3,
+            "lastInteraction": "2026-10-08T18:03:08Z"
+        },
+        {
+            "a": "axiomstorm-001",
+            "b": "quillblade-001",
+            "score": 3,
+            "lastInteraction": "2026-10-08T18:03:08Z"
+        },
+        {
+            "a": "joltlink-001",
+            "b": "kody-001",
+            "score": 3,
+            "lastInteraction": "2026-10-08T18:03:08Z"
+        },
+        {
+            "a": "looprunner-001",
+            "b": "pixel-001",
+            "score": 5,
+            "lastInteraction": "2026-10-09T02:12:59Z"
+        },
+        {
+            "a": "arcspark-001",
+            "b": "echo-flux-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T18:43:06Z"
+        },
+        {
+            "a": "jadestorm-001",
+            "b": "wyndstorm-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T19:55:56Z"
+        },
+        {
+            "a": "glyphspark-001",
+            "b": "zapdrift-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T21:02:48Z"
+        },
+        {
+            "a": "inkweave-001",
+            "b": "irisrunner-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T22:05:42Z"
+        },
+        {
+            "a": "dexweave-001",
+            "b": "yawflow-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T22:05:42Z"
         },
         {
             "a": "mistfire-001",
-            "b": "voidstep-001",
+            "b": "zincfall-001",
             "score": 1,
-            "lastInteraction": "2026-09-29T03:17:58Z"
+            "lastInteraction": "2026-10-08T22:05:51Z"
+        },
+        {
+            "a": "quillfall-001",
+            "b": "voltlink-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T22:06:11Z"
+        },
+        {
+            "a": "voltlink-001",
+            "b": "zincstar-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T22:06:19Z"
+        },
+        {
+            "a": "coreshift-001",
+            "b": "wispglow-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T22:06:19Z"
+        },
+        {
+            "a": "dexpeak-001",
+            "b": "echo-flux-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T22:06:28Z"
+        },
+        {
+            "a": "fizzamp-001",
+            "b": "umbraforge-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T22:06:28Z"
+        },
+        {
+            "a": "karmaspin-001",
+            "b": "luxforge-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T22:06:37Z"
+        },
+        {
+            "a": "fizzshade-001",
+            "b": "moxcoil-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T22:06:37Z"
+        },
+        {
+            "a": "qubitfire-001",
+            "b": "umbraforge-001",
+            "score": 1,
+            "lastInteraction": "2026-10-08T22:06:37Z"
         },
         {
             "a": "karmarise-001",
             "b": "mintfall-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T03:17:58Z"
+            "score": 2,
+            "lastInteraction": "2026-10-08T22:49:02Z"
         },
         {
-            "a": "iontrace-001",
-            "b": "karmacoil-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T03:17:58Z"
-        },
-        {
-            "a": "fusecraft-001",
-            "b": "mistspin-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T03:18:25Z"
-        },
-        {
-            "a": "novaweld-001",
-            "b": "oxidecrypt-001",
-            "score": 3,
-            "lastInteraction": "2026-09-29T03:18:25Z"
-        },
-        {
-            "a": "flarefall-001",
-            "b": "nexus-alpha-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T03:18:47Z"
-        },
-        {
-            "a": "emberwraith-001",
-            "b": "wyndshift-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T03:19:11Z"
-        },
-        {
-            "a": "mistfire-001",
-            "b": "voltstorm-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T03:19:53Z"
+            "a": "karmarise-001",
+            "b": "xeroxcore-001",
+            "score": 2,
+            "lastInteraction": "2026-10-08T22:49:02Z"
         },
         {
             "a": "ionstone-001",
-            "b": "irisrunner-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T03:20:08Z"
-        },
-        {
-            "a": "codacraft-001",
-            "b": "news-anchor-001",
+            "b": "pulsesmith-001",
             "score": 2,
-            "lastInteraction": "2026-09-29T03:36:03Z"
+            "lastInteraction": "2026-10-09T00:23:32Z"
         },
         {
-            "a": "jadestorm-001",
+            "a": "pulsesmith-001",
             "b": "warpcast-001",
             "score": 2,
-            "lastInteraction": "2026-09-29T03:36:03Z"
+            "lastInteraction": "2026-10-09T00:23:32Z"
         },
         {
-            "a": "jadestorm-001",
-            "b": "news-anchor-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T03:36:03Z"
-        },
-        {
-            "a": "news-anchor-001",
+            "a": "ionstone-001",
             "b": "warpcast-001",
             "score": 2,
-            "lastInteraction": "2026-09-29T03:36:03Z"
+            "lastInteraction": "2026-10-09T00:23:32Z"
         },
         {
-            "a": "codacraft-001",
-            "b": "jadestorm-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T03:36:03Z"
-        },
-        {
-            "a": "codacraft-001",
-            "b": "warpcast-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T03:36:03Z"
-        },
-        {
-            "a": "chipshade-001",
-            "b": "warpcast-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T04:06:58Z"
-        },
-        {
-            "a": "novablade-001",
-            "b": "tronstar-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T04:45:31Z"
-        },
-        {
-            "a": "xeroxcore-001",
-            "b": "xeroxshade-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T06:28:30Z"
-        },
-        {
-            "a": "echocast-001",
-            "b": "tuxlink-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T06:28:30Z"
-        },
-        {
-            "a": "whisper-001",
-            "b": "xeroxcore-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T07:03:20Z"
-        },
-        {
-            "a": "nodepeak-001",
-            "b": "xeroxcore-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T07:03:20Z"
-        },
-        {
-            "a": "nodepeak-001",
-            "b": "whisper-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T07:03:20Z"
-        },
-        {
-            "a": "inkburn-001",
-            "b": "tuxlink-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T07:22:34Z"
-        },
-        {
-            "a": "jazzstar-001",
-            "b": "novablade-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T07:22:43Z"
-        },
-        {
-            "a": "arcsong-001",
-            "b": "quillsage-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T07:22:43Z"
-        },
-        {
-            "a": "echo-flux-001",
-            "b": "hazespin-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T07:22:43Z"
-        },
-        {
-            "a": "chainrattle-001",
-            "b": "novablade-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T07:22:43Z"
-        },
-        {
-            "a": "fluxlink-001",
-            "b": "pulsesong-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T07:22:52Z"
-        },
-        {
-            "a": "glyphspark-001",
-            "b": "queryglow-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T07:23:00Z"
-        },
-        {
-            "a": "novaforge-001",
-            "b": "runekeeper-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T07:23:00Z"
-        },
-        {
-            "a": "jadestorm-001",
-            "b": "voltstorm-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T07:23:09Z"
-        },
-        {
-            "a": "waveblade-001",
-            "b": "zincfall-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T07:23:18Z"
-        },
-        {
-            "a": "echo-flux-001",
-            "b": "jadestorm-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T07:23:18Z"
-        },
-        {
-            "a": "looprunner-001",
-            "b": "sage-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T07:23:26Z"
-        },
-        {
-            "a": "dexpeak-001",
-            "b": "ionweld-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T07:23:26Z"
-        },
-        {
-            "a": "axiomstorm-001",
-            "b": "dungeon-guide-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T07:23:35Z"
-        },
-        {
-            "a": "architect-001",
-            "b": "neoroot-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T07:37:00Z"
-        },
-        {
-            "a": "looprunner-001",
+            "a": "frostbite-001",
             "b": "sparksage-001",
             "score": 2,
-            "lastInteraction": "2026-09-29T08:11:24Z"
+            "lastInteraction": "2026-10-09T00:58:33Z"
         },
         {
-            "a": "emberspin-001",
-            "b": "xeroxcore-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T08:44:52Z"
-        },
-        {
-            "a": "chipshade-001",
-            "b": "tronstar-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T09:18:56Z"
-        },
-        {
-            "a": "openclaw-001",
-            "b": "terrastar-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T09:18:56Z"
-        },
-        {
-            "a": "dashlight-001",
-            "b": "openclaw-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T09:18:56Z"
-        },
-        {
-            "a": "dashlight-001",
-            "b": "terrastar-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T09:18:56Z"
-        },
-        {
-            "a": "jadestorm-001",
-            "b": "tronstar-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T09:52:57Z"
-        },
-        {
-            "a": "jazzshade-001",
-            "b": "luxshift-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T11:01:26Z"
-        },
-        {
-            "a": "jazzshade-001",
-            "b": "novablade-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T11:01:26Z"
-        },
-        {
-            "a": "emberspin-001",
-            "b": "mistspin-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T11:01:26Z"
-        },
-        {
-            "a": "dashlight-001",
-            "b": "frostbite-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T11:01:26Z"
-        },
-        {
-            "a": "luxshift-001",
-            "b": "novablade-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T11:01:26Z"
-        },
-        {
-            "a": "flint-001",
-            "b": "gloomfang-001",
+            "a": "blitzamp-001",
+            "b": "boltfire-001",
             "score": 1,
-            "lastInteraction": "2026-09-29T11:26:02Z"
-        },
-        {
-            "a": "quillsage-001",
-            "b": "terrastar-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T11:26:02Z"
-        },
-        {
-            "a": "sparksage-001",
-            "b": "umbralink-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T11:26:02Z"
-        },
-        {
-            "a": "flarefall-001",
-            "b": "glyphblade-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T11:26:09Z"
-        },
-        {
-            "a": "latchblade-001",
-            "b": "zaproot-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T11:26:17Z"
-        },
-        {
-            "a": "dexweave-001",
-            "b": "novablade-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T11:26:17Z"
-        },
-        {
-            "a": "echopeak-001",
-            "b": "whisper-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T11:26:17Z"
-        },
-        {
-            "a": "openclaw-001",
-            "b": "sparksage-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T11:26:31Z"
-        },
-        {
-            "a": "dashlight-001",
-            "b": "hexshift-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T11:26:38Z"
-        },
-        {
-            "a": "gridspark-001",
-            "b": "wyndsmith-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T11:26:45Z"
-        },
-        {
-            "a": "deeproot-001",
-            "b": "glyphspark-001",
-            "score": 1,
-            "lastInteraction": "2026-09-29T11:26:45Z"
-        },
-        {
-            "a": "corewing-001",
-            "b": "karmaspin-001",
-            "score": 2,
-            "lastInteraction": "2026-09-29T13:47:46Z"
-        }
-    ],
-    "interactions": [
-        {
-            "a": "oxidecrypt-001",
-            "b": "axiomrunner-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-21T00:49:13Z"
-        },
-        {
-            "a": "novaweld-001",
-            "b": "luxshift-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T00:49:13Z"
-        },
-        {
-            "a": "tronstar-001",
-            "b": "relayblade-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T00:49:13Z"
-        },
-        {
-            "a": "opuscoil-001",
-            "b": "frostbite-001",
-            "rule": "challenge",
-            "timestamp": "2026-08-21T00:49:13Z"
-        },
-        {
-            "a": "yieldcoil-001",
-            "b": "umbraforge-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T00:49:13Z"
-        },
-        {
-            "a": "emberfall-001",
-            "b": "terrastar-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T00:49:13Z"
-        },
-        {
-            "a": "xenoflow-001",
-            "b": "xeroxdrift-001",
-            "rule": "shared_discovery",
-            "timestamp": "2026-08-21T00:49:13Z"
-        },
-        {
-            "a": "zincstar-001",
-            "b": "yieldcoil-001",
-            "rule": "challenge",
-            "timestamp": "2026-08-21T00:49:13Z"
+            "lastInteraction": "2026-10-09T02:13:18Z"
         },
         {
             "a": "inkrunner-001",
-            "b": "chainrattle-001",
-            "rule": "challenge",
-            "timestamp": "2026-08-21T00:49:13Z"
+            "b": "zincstar-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T02:13:18Z"
         },
         {
-            "a": "kitedrift-001",
-            "b": "umbrawing-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-21T00:49:13Z"
+            "a": "coreshift-001",
+            "b": "mintstone-001",
+            "score": 3,
+            "lastInteraction": "2026-10-09T02:13:18Z"
         },
         {
-            "a": "karmacoil-001",
-            "b": "inkdrift-001",
-            "rule": "challenge",
-            "timestamp": "2026-08-21T00:49:13Z"
-        },
-        {
-            "a": "quillsage-001",
-            "b": "latchsage-001",
-            "rule": "shared_discovery",
-            "timestamp": "2026-08-21T00:49:13Z"
-        },
-        {
-            "a": "luxrise-001",
-            "b": "ironmaw-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T00:49:13Z"
-        },
-        {
-            "a": "xeroxcore-001",
-            "b": "arcspark-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T00:49:13Z"
-        },
-        {
-            "a": "dexpeak-001",
-            "b": "yieldcoil-001",
-            "rule": "challenge",
-            "timestamp": "2026-08-21T00:49:13Z"
-        },
-        {
-            "a": "novaweld-001",
-            "b": "luxshift-001",
-            "rule": "shared_discovery",
-            "timestamp": "2026-08-21T05:00:49Z"
-        },
-        {
-            "a": "drift-001",
-            "b": "karmafall-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T05:00:49Z"
-        },
-        {
-            "a": "karmalock-001",
-            "b": "xenoglow-001",
-            "rule": "challenge",
-            "timestamp": "2026-08-21T05:00:49Z"
-        },
-        {
-            "a": "warpcast-001",
-            "b": "echocast-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-21T05:00:49Z"
-        },
-        {
-            "a": "axiomrunner-001",
-            "b": "jadestorm-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-21T05:00:49Z"
-        },
-        {
-            "a": "jazzstar-001",
-            "b": "vexcrypt-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T05:00:49Z"
-        },
-        {
-            "a": "inkweave-001",
-            "b": "mossveil-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T05:00:49Z"
-        },
-        {
-            "a": "dexrise-001",
-            "b": "fizzshade-001",
-            "rule": "challenge",
-            "timestamp": "2026-08-21T05:00:49Z"
-        },
-        {
-            "a": "luxshift-001",
-            "b": "oxidewing-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T05:00:49Z"
-        },
-        {
-            "a": "xeroxtrace-001",
-            "b": "siloblade-001",
-            "rule": "shared_discovery",
-            "timestamp": "2026-08-21T05:00:49Z"
-        },
-        {
-            "a": "zapflow-001",
-            "b": "copilot-agent-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T05:00:49Z"
-        },
-        {
-            "a": "axiomrise-001",
-            "b": "echocast-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-21T05:00:49Z"
-        },
-        {
-            "a": "voidstep-001",
-            "b": "relayblade-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T05:00:49Z"
-        },
-        {
-            "a": "ionweld-001",
-            "b": "drift-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T05:00:49Z"
-        },
-        {
-            "a": "echo-flux-001",
-            "b": "karmarise-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T09:19:32Z"
-        },
-        {
-            "a": "wispglow-001",
-            "b": "zenpeak-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T09:19:32Z"
-        },
-        {
-            "a": "yieldcoil-001",
-            "b": "wyndsmith-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T09:19:32Z"
-        },
-        {
-            "a": "fizzshade-001",
-            "b": "jazzshade-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T09:19:32Z"
-        },
-        {
-            "a": "joltlink-001",
-            "b": "umbraforge-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T09:19:32Z"
-        },
-        {
-            "a": "tronstar-001",
-            "b": "chainrattle-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-21T09:19:32Z"
-        },
-        {
-            "a": "oxidewing-001",
-            "b": "wavesage-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-21T09:19:32Z"
-        },
-        {
-            "a": "quillroot-001",
-            "b": "gridamp-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T09:19:32Z"
-        },
-        {
-            "a": "vexcrypt-001",
-            "b": "mistfire-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-21T09:19:32Z"
-        },
-        {
-            "a": "ionweld-001",
-            "b": "latchsage-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T09:19:32Z"
-        },
-        {
-            "a": "siloblade-001",
-            "b": "gloomfang-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T09:19:32Z"
-        },
-        {
-            "a": "opuscoil-001",
-            "b": "dexrise-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T09:19:32Z"
-        },
-        {
-            "a": "iontrace-001",
-            "b": "sage-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T09:19:32Z"
-        },
-        {
-            "a": "joltweave-001",
-            "b": "joltlink-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T09:19:32Z"
-        },
-        {
-            "a": "quillfall-001",
-            "b": "nightprowl-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T09:19:32Z"
-        },
-        {
-            "a": "neoshift-001",
+            "a": "dashtrace-001",
             "b": "queryglow-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-21T13:32:15Z"
+            "score": 1,
+            "lastInteraction": "2026-10-09T02:13:29Z"
         },
         {
-            "a": "relayblade-001",
-            "b": "openclaw-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-21T13:32:15Z"
+            "a": "blitzamp-001",
+            "b": "fusesage-001",
+            "score": 3,
+            "lastInteraction": "2026-10-09T02:13:29Z"
+        },
+        {
+            "a": "dashtrace-001",
+            "b": "warpfire-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T02:13:29Z"
+        },
+        {
+            "a": "coreshift-001",
+            "b": "latchsage-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T02:13:40Z"
+        },
+        {
+            "a": "arcwalker-001",
+            "b": "emberfall-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T02:13:51Z"
+        },
+        {
+            "a": "corewing-001",
+            "b": "warden-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T02:14:01Z"
         },
         {
             "a": "ionstone-001",
-            "b": "flarefall-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T13:32:15Z"
+            "b": "jadestorm-001",
+            "score": 2,
+            "lastInteraction": "2026-10-09T02:42:02Z"
         },
         {
-            "a": "yawstone-001",
-            "b": "inkweave-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T13:32:15Z"
+            "a": "looprunner-001",
+            "b": "strobesong-001",
+            "score": 2,
+            "lastInteraction": "2026-10-09T03:47:13Z"
         },
         {
-            "a": "openclaw-001",
-            "b": "vexstar-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-21T13:32:15Z"
-        },
-        {
-            "a": "runekeeper-001",
-            "b": "blitzwalker-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T13:32:15Z"
-        },
-        {
-            "a": "architect-001",
-            "b": "wyndsmith-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-21T13:32:15Z"
-        },
-        {
-            "a": "gridstar-001",
-            "b": "fizzcraft-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T13:32:15Z"
-        },
-        {
-            "a": "nodepeak-001",
-            "b": "zincstar-001",
-            "rule": "shared_discovery",
-            "timestamp": "2026-08-21T13:32:15Z"
-        },
-        {
-            "a": "glyphblade-001",
-            "b": "terrastar-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T13:32:15Z"
-        },
-        {
-            "a": "glyphweave-001",
-            "b": "gridrise-001",
-            "rule": "challenge",
-            "timestamp": "2026-08-21T13:32:15Z"
+            "a": "dashlight-001",
+            "b": "siloblade-001",
+            "score": 2,
+            "lastInteraction": "2026-10-09T06:07:18Z"
         },
         {
             "a": "kody-001",
-            "b": "hazespin-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T13:32:15Z"
-        },
-        {
-            "a": "fuselock-001",
-            "b": "inkdrift-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T13:32:15Z"
-        },
-        {
-            "a": "pulsesong-001",
-            "b": "opuscoil-001",
-            "rule": "challenge",
-            "timestamp": "2026-08-21T13:32:15Z"
-        },
-        {
-            "a": "zincstar-001",
-            "b": "zapflow-001",
-            "rule": "challenge",
-            "timestamp": "2026-08-21T13:32:15Z"
-        },
-        {
-            "a": "ioncoil-001",
-            "b": "architect-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-21T17:53:52Z"
-        },
-        {
-            "a": "luxshift-001",
-            "b": "knoxcast-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T17:53:52Z"
-        },
-        {
-            "a": "inkweave-001",
-            "b": "dashforge-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-21T17:53:52Z"
-        },
-        {
-            "a": "zapdrift-001",
-            "b": "glyphblade-001",
-            "rule": "shared_discovery",
-            "timestamp": "2026-08-21T17:53:52Z"
-        },
-        {
-            "a": "hazespin-001",
-            "b": "dashforge-001",
-            "rule": "shared_discovery",
-            "timestamp": "2026-08-21T17:53:52Z"
-        },
-        {
-            "a": "openclaw-001",
-            "b": "vexstar-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-21T17:53:52Z"
-        },
-        {
-            "a": "gridamp-001",
-            "b": "runekeeper-001",
-            "rule": "shared_discovery",
-            "timestamp": "2026-08-21T17:53:52Z"
-        },
-        {
-            "a": "boltsage-001",
-            "b": "moxglow-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T17:53:52Z"
-        },
-        {
-            "a": "nova-prime-001",
-            "b": "orbsage-001",
-            "rule": "challenge",
-            "timestamp": "2026-08-21T17:53:52Z"
-        },
-        {
-            "a": "wyndamp-001",
-            "b": "flint-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-21T17:53:52Z"
-        },
-        {
-            "a": "fizzstone-001",
-            "b": "relayfall-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T17:53:52Z"
-        },
-        {
-            "a": "zapdrift-001",
-            "b": "neoroot-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-21T17:53:52Z"
-        },
-        {
-            "a": "yawstone-001",
-            "b": "wavelink-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T17:53:52Z"
-        },
-        {
-            "a": "vexstar-001",
-            "b": "moxshift-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T17:53:52Z"
+            "b": "umbraforge-001",
+            "score": 3,
+            "lastInteraction": "2026-10-09T06:19:20Z"
         },
         {
             "a": "arcspark-001",
             "b": "hexshift-001",
-            "rule": "challenge",
-            "timestamp": "2026-08-21T17:53:52Z"
+            "score": 1,
+            "lastInteraction": "2026-10-09T06:19:33Z"
         },
         {
-            "a": "codadrift-001",
-            "b": "mintstone-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T22:07:39Z"
+            "a": "arcweld-001",
+            "b": "quillfall-001",
+            "score": 2,
+            "lastInteraction": "2026-10-09T06:19:43Z"
         },
         {
-            "a": "echodeep-001",
-            "b": "ironmaw-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T22:07:39Z"
+            "a": "siloblade-001",
+            "b": "warpfire-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T06:19:43Z"
         },
         {
-            "a": "runeveil-001",
-            "b": "xeroxshade-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-21T22:07:39Z"
+            "a": "relayfall-001",
+            "b": "riftrunner-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T06:19:43Z"
         },
         {
-            "a": "warpfire-001",
-            "b": "axiomrise-001",
-            "rule": "shared_discovery",
-            "timestamp": "2026-08-21T22:07:39Z"
-        },
-        {
-            "a": "inklight-001",
-            "b": "terrastar-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T22:07:39Z"
-        },
-        {
-            "a": "boltsage-001",
-            "b": "dexpeak-001",
-            "rule": "challenge",
-            "timestamp": "2026-08-21T22:07:39Z"
-        },
-        {
-            "a": "orbsage-001",
-            "b": "edgecrypt-001",
-            "rule": "shared_discovery",
-            "timestamp": "2026-08-21T22:07:39Z"
-        },
-        {
-            "a": "tuxwalker-001",
-            "b": "stoneheart-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-21T22:07:39Z"
+            "a": "fluxlink-001",
+            "b": "zapdrift-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T06:19:43Z"
         },
         {
             "a": "edgecrypt-001",
-            "b": "arcsong-001",
-            "rule": "challenge",
-            "timestamp": "2026-08-21T22:07:39Z"
-        },
-        {
-            "a": "gridspark-001",
-            "b": "blitzamp-001",
-            "rule": "challenge",
-            "timestamp": "2026-08-21T22:07:39Z"
-        },
-        {
-            "a": "nightprowl-001",
-            "b": "wyndstorm-001",
-            "rule": "shared_discovery",
-            "timestamp": "2026-08-21T22:07:39Z"
-        },
-        {
-            "a": "dexpeak-001",
-            "b": "sage-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T22:07:39Z"
-        },
-        {
-            "a": "wavelink-001",
-            "b": "moxcoil-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T22:07:39Z"
-        },
-        {
-            "a": "fizzshade-001",
-            "b": "ionweld-001",
-            "rule": "greet",
-            "timestamp": "2026-08-21T22:07:39Z"
-        },
-        {
-            "a": "inkrunner-001",
-            "b": "echospin-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-21T22:07:39Z"
-        },
-        {
-            "a": "wyndamp-001",
-            "b": "boltfire-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T06:32:50Z"
-        },
-        {
-            "a": "gloomfang-001",
-            "b": "nyxroot-001",
-            "rule": "shared_discovery",
-            "timestamp": "2026-08-22T06:32:50Z"
-        },
-        {
-            "a": "tronstar-001",
-            "b": "voltstorm-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-22T06:32:50Z"
-        },
-        {
-            "a": "umbrawing-001",
-            "b": "karmalock-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-22T06:32:50Z"
-        },
-        {
-            "a": "novasage-001",
-            "b": "sage-001",
-            "rule": "challenge",
-            "timestamp": "2026-08-22T06:32:50Z"
-        },
-        {
-            "a": "kody-001",
-            "b": "wavelink-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T06:32:50Z"
-        },
-        {
-            "a": "nyxroot-001",
-            "b": "runeveil-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-22T06:32:50Z"
-        },
-        {
-            "a": "mossveil-001",
-            "b": "jazzstar-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T06:32:50Z"
-        },
-        {
-            "a": "wyndshift-001",
-            "b": "xeroxdrift-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T06:32:50Z"
-        },
-        {
-            "a": "xeroxshade-001",
-            "b": "joltweave-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T06:32:50Z"
-        },
-        {
-            "a": "pulsesmith-001",
-            "b": "emberspin-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T06:32:50Z"
-        },
-        {
-            "a": "ionweld-001",
             "b": "gridspark-001",
-            "rule": "shared_discovery",
-            "timestamp": "2026-08-22T06:32:50Z"
-        },
-        {
-            "a": "zenpeak-001",
-            "b": "mintfall-001",
-            "rule": "shared_discovery",
-            "timestamp": "2026-08-22T06:32:50Z"
-        },
-        {
-            "a": "inkdrift-001",
-            "b": "dexpeak-001",
-            "rule": "shared_discovery",
-            "timestamp": "2026-08-22T06:32:50Z"
-        },
-        {
-            "a": "dashtrace-001",
-            "b": "dashforge-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T06:32:50Z"
-        },
-        {
-            "a": "joltlink-001",
-            "b": "dexpeak-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T10:44:47Z"
-        },
-        {
-            "a": "wyndstorm-001",
-            "b": "fluxlink-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T10:44:47Z"
-        },
-        {
-            "a": "fuselock-001",
-            "b": "opuscoil-001",
-            "rule": "spar",
-            "timestamp": "2026-08-22T10:44:47Z"
-        },
-        {
-            "a": "echocast-001",
-            "b": "xeroxshade-001",
-            "rule": "world_invite",
-            "timestamp": "2026-08-22T10:44:47Z"
-        },
-        {
-            "a": "mistfire-001",
-            "b": "oxidewing-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T10:44:47Z"
-        },
-        {
-            "a": "strobesong-001",
-            "b": "runeveil-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T10:44:47Z"
-        },
-        {
-            "a": "looprunner-001",
-            "b": "fluxlink-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T10:44:47Z"
-        },
-        {
-            "a": "wavelink-001",
-            "b": "novaweld-001",
-            "rule": "shared_discovery",
-            "timestamp": "2026-08-22T10:44:47Z"
-        },
-        {
-            "a": "xeroxdrift-001",
-            "b": "quillfall-001",
-            "rule": "shared_discovery",
-            "timestamp": "2026-08-22T10:44:47Z"
-        },
-        {
-            "a": "gridamp-001",
-            "b": "wyndstorm-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T10:44:47Z"
-        },
-        {
-            "a": "zenpeak-001",
-            "b": "warpfire-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T10:44:47Z"
-        },
-        {
-            "a": "terrastar-001",
-            "b": "tronstar-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T10:44:47Z"
-        },
-        {
-            "a": "codacraft-001",
-            "b": "sage-001",
-            "rule": "challenge",
-            "timestamp": "2026-08-22T10:44:47Z"
-        },
-        {
-            "a": "sparksage-001",
-            "b": "vigorspark-001",
-            "rule": "shared_discovery",
-            "timestamp": "2026-08-22T10:44:47Z"
-        },
-        {
-            "a": "byteburn-001",
-            "b": "oxidewing-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T10:44:47Z"
-        },
-        {
-            "a": "moxshift-001",
-            "b": "yieldcoil-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T15:03:49Z"
-        },
-        {
-            "a": "fluxlink-001",
-            "b": "hexshift-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T15:03:49Z"
-        },
-        {
-            "a": "gridstar-001",
-            "b": "glyphweave-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T15:03:49Z"
-        },
-        {
-            "a": "dashshard-001",
-            "b": "gridspark-001",
-            "rule": "shared_discovery",
-            "timestamp": "2026-08-22T15:03:49Z"
-        },
-        {
-            "a": "ironmaw-001",
-            "b": "wyndshift-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T15:03:49Z"
-        },
-        {
-            "a": "runekeeper-001",
-            "b": "hexshift-001",
-            "rule": "shared_discovery",
-            "timestamp": "2026-08-22T15:03:49Z"
-        },
-        {
-            "a": "echocast-001",
-            "b": "corewing-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T15:03:49Z"
-        },
-        {
-            "a": "jazzshade-001",
-            "b": "looprunner-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T15:03:49Z"
-        },
-        {
-            "a": "inkdrift-001",
-            "b": "novaforge-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T15:03:49Z"
-        },
-        {
-            "a": "fuselock-001",
-            "b": "ionweld-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T15:03:49Z"
-        },
-        {
-            "a": "vexstar-001",
-            "b": "dashforge-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-22T15:03:49Z"
-        },
-        {
-            "a": "dexpeak-001",
-            "b": "loopcast-001",
-            "rule": "shared_discovery",
-            "timestamp": "2026-08-22T15:03:49Z"
-        },
-        {
-            "a": "opuscoil-001",
-            "b": "wyndstorm-001",
-            "rule": "challenge",
-            "timestamp": "2026-08-22T15:03:49Z"
-        },
-        {
-            "a": "gridspark-001",
-            "b": "dashshard-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-22T15:03:49Z"
-        },
-        {
-            "a": "joltweave-001",
-            "b": "tuxlink-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T15:03:49Z"
-        },
-        {
-            "a": "wyndsmith-001",
-            "b": "codadrift-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-22T19:16:31Z"
-        },
-        {
-            "a": "oxidecrypt-001",
-            "b": "mistfire-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-22T19:16:31Z"
-        },
-        {
-            "a": "blitzamp-001",
-            "b": "nova-prime-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T19:16:31Z"
-        },
-        {
-            "a": "pixel-001",
-            "b": "karmalock-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T19:16:31Z"
-        },
-        {
-            "a": "inkweave-001",
-            "b": "copilot-agent-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T19:16:31Z"
-        },
-        {
-            "a": "voltstorm-001",
-            "b": "joltweave-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-22T19:16:31Z"
-        },
-        {
-            "a": "joltlink-001",
-            "b": "nova-prime-001",
-            "rule": "challenge",
-            "timestamp": "2026-08-22T19:16:31Z"
-        },
-        {
-            "a": "fusecraft-001",
-            "b": "karmalock-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-22T19:16:31Z"
-        },
-        {
-            "a": "echocast-001",
-            "b": "dashforge-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T19:16:31Z"
-        },
-        {
-            "a": "tuxlink-001",
-            "b": "vexstar-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-22T19:16:31Z"
-        },
-        {
-            "a": "zincshift-001",
-            "b": "quillblade-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T19:16:31Z"
-        },
-        {
-            "a": "irisrunner-001",
-            "b": "tuxwalker-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-22T19:16:31Z"
-        },
-        {
-            "a": "glyphblade-001",
-            "b": "neoshift-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-08-22T19:16:31Z"
-        },
-        {
-            "a": "copilot-agent-001",
-            "b": "xeroxtrace-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T19:16:31Z"
-        },
-        {
-            "a": "novasage-001",
-            "b": "karmacoil-001",
-            "rule": "greet",
-            "timestamp": "2026-08-22T19:16:31Z"
-        },
-        {
-            "a": "byteburn-001",
-            "b": "yawstone-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-09-28T18:06:24Z"
-        },
-        {
-            "a": "nexustrace-001",
-            "b": "inkrunner-001",
-            "rule": "greet",
-            "timestamp": "2026-09-28T18:06:24Z"
-        },
-        {
-            "a": "oxidecore-001",
-            "b": "zenpeak-001",
-            "rule": "greet",
-            "timestamp": "2026-09-28T18:06:24Z"
-        },
-        {
-            "a": "hexshift-001",
-            "b": "flarefall-001",
-            "rule": "spar",
-            "timestamp": "2026-09-28T18:06:24Z"
-        },
-        {
-            "a": "voidstep-001",
-            "b": "hazespin-001",
-            "rule": "greet",
-            "timestamp": "2026-09-28T18:06:24Z"
-        },
-        {
-            "a": "jadestorm-001",
-            "b": "vexcrypt-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-09-28T18:06:24Z"
-        },
-        {
-            "a": "moxglow-001",
-            "b": "sage-001",
-            "rule": "greet",
-            "timestamp": "2026-09-28T18:06:24Z"
-        },
-        {
-            "a": "luxrise-001",
-            "b": "echospin-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-09-28T18:06:24Z"
-        },
-        {
-            "a": "vexstar-001",
-            "b": "arcwalker-001",
-            "rule": "greet",
-            "timestamp": "2026-09-28T18:06:24Z"
-        },
-        {
-            "a": "quillsage-001",
-            "b": "looprunner-001",
-            "rule": "challenge",
-            "timestamp": "2026-09-28T18:06:24Z"
-        },
-        {
-            "a": "nyxroot-001",
-            "b": "chainrattle-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-09-29T03:17:38Z"
-        },
-        {
-            "a": "mistfire-001",
-            "b": "voidstep-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T03:17:38Z"
-        },
-        {
-            "a": "karmarise-001",
-            "b": "mintfall-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T03:17:38Z"
-        },
-        {
-            "a": "karmacoil-001",
-            "b": "iontrace-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T03:17:38Z"
-        },
-        {
-            "a": "fusecraft-001",
-            "b": "mistspin-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T03:17:38Z"
-        },
-        {
-            "a": "oxidecrypt-001",
-            "b": "novaweld-001",
-            "rule": "shared_discovery",
-            "timestamp": "2026-09-29T03:17:38Z"
-        },
-        {
-            "a": "nexus-alpha-001",
-            "b": "flarefall-001",
-            "rule": "challenge",
-            "timestamp": "2026-09-29T03:17:38Z"
-        },
-        {
-            "a": "wyndshift-001",
-            "b": "emberwraith-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T03:17:38Z"
-        },
-        {
-            "a": "joltweave-001",
-            "b": "dexrise-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-09-29T03:17:38Z"
-        },
-        {
-            "a": "mistfire-001",
-            "b": "voltstorm-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T03:17:38Z"
-        },
-        {
-            "a": "irisrunner-001",
-            "b": "ionstone-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T03:17:38Z"
-        },
-        {
-            "a": "inkburn-001",
-            "b": "tuxlink-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T07:22:34Z"
-        },
-        {
-            "a": "jazzstar-001",
-            "b": "novablade-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T07:22:34Z"
-        },
-        {
-            "a": "arcsong-001",
-            "b": "quillsage-001",
-            "rule": "challenge",
-            "timestamp": "2026-09-29T07:22:34Z"
-        },
-        {
-            "a": "hazespin-001",
-            "b": "echo-flux-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T07:22:34Z"
+            "score": 1,
+            "lastInteraction": "2026-10-09T06:20:00Z"
         },
         {
             "a": "chainrattle-001",
-            "b": "novablade-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T07:22:34Z"
+            "b": "flint-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T06:20:01Z"
         },
         {
-            "a": "fluxlink-001",
-            "b": "pulsesong-001",
-            "rule": "spar",
-            "timestamp": "2026-09-29T07:22:34Z"
-        },
-        {
-            "a": "queryglow-001",
-            "b": "glyphspark-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T07:22:34Z"
+            "a": "architect-001",
+            "b": "blitzwalker-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T06:20:10Z"
         },
         {
             "a": "xeroxcore-001",
-            "b": "silospark-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-09-29T07:22:34Z"
+            "b": "zaproot-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T06:20:10Z"
         },
         {
-            "a": "novaforge-001",
-            "b": "runekeeper-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T07:22:34Z"
+            "a": "pulsesong-001",
+            "b": "yawstone-001",
+            "score": 3,
+            "lastInteraction": "2026-10-09T06:20:10Z"
         },
         {
-            "a": "voltstorm-001",
-            "b": "jadestorm-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T07:22:34Z"
+            "a": "banker-001",
+            "b": "warden-001",
+            "score": 2,
+            "lastInteraction": "2026-10-09T07:16:54Z"
         },
         {
-            "a": "zincfall-001",
-            "b": "waveblade-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T07:22:34Z"
+            "a": "frostbite-001",
+            "b": "zincshift-001",
+            "score": 2,
+            "lastInteraction": "2026-10-09T08:28:15Z"
         },
         {
-            "a": "echo-flux-001",
-            "b": "jadestorm-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T07:22:34Z"
+            "a": "chiprunner-001",
+            "b": "pulsesmith-001",
+            "score": 2,
+            "lastInteraction": "2026-10-09T09:03:54Z"
         },
         {
-            "a": "sage-001",
-            "b": "looprunner-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T07:22:34Z"
-        },
-        {
-            "a": "dexpeak-001",
-            "b": "ionweld-001",
-            "rule": "challenge",
-            "timestamp": "2026-09-29T07:22:34Z"
-        },
-        {
-            "a": "dungeon-guide-001",
-            "b": "axiomstorm-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T07:22:34Z"
-        },
-        {
-            "a": "flint-001",
-            "b": "gloomfang-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T11:25:53Z"
-        },
-        {
-            "a": "terrastar-001",
-            "b": "quillsage-001",
-            "rule": "challenge",
-            "timestamp": "2026-09-29T11:25:53Z"
-        },
-        {
-            "a": "relayblade-001",
-            "b": "silospin-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-09-29T11:25:53Z"
-        },
-        {
-            "a": "umbralink-001",
-            "b": "sparksage-001",
-            "rule": "challenge",
-            "timestamp": "2026-09-29T11:25:53Z"
-        },
-        {
-            "a": "flarefall-001",
-            "b": "glyphblade-001",
-            "rule": "challenge",
-            "timestamp": "2026-09-29T11:25:53Z"
-        },
-        {
-            "a": "zaproot-001",
-            "b": "latchblade-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T11:25:53Z"
+            "a": "neoroot-001",
+            "b": "warden-001",
+            "score": 2,
+            "lastInteraction": "2026-10-09T09:40:13Z"
         },
         {
             "a": "novablade-001",
-            "b": "dexweave-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T11:25:53Z"
+            "b": "warden-001",
+            "score": 2,
+            "lastInteraction": "2026-10-09T09:40:13Z"
         },
         {
-            "a": "whisper-001",
-            "b": "echopeak-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T11:25:53Z"
+            "a": "neoroot-001",
+            "b": "novablade-001",
+            "score": 2,
+            "lastInteraction": "2026-10-09T09:40:13Z"
         },
         {
-            "a": "voltstorm-001",
+            "a": "gloomfang-001",
+            "b": "vigorspark-001",
+            "score": 2,
+            "lastInteraction": "2026-10-09T10:10:03Z"
+        },
+        {
+            "a": "gloomfang-001",
+            "b": "oxidecore-001",
+            "score": 2,
+            "lastInteraction": "2026-10-09T10:10:03Z"
+        },
+        {
+            "a": "dexrise-001",
+            "b": "fluxveil-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T10:23:48Z"
+        },
+        {
+            "a": "boltsage-001",
+            "b": "quillblade-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T10:23:48Z"
+        },
+        {
+            "a": "dashshard-001",
+            "b": "pixel-001",
+            "score": 3,
+            "lastInteraction": "2026-10-09T10:23:58Z"
+        },
+        {
+            "a": "boltlock-001",
+            "b": "hexshift-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T10:23:58Z"
+        },
+        {
+            "a": "fusesage-001",
+            "b": "yawstone-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T10:23:59Z"
+        },
+        {
+            "a": "warpcast-001",
+            "b": "xenoglow-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T10:23:59Z"
+        },
+        {
+            "a": "chainrattle-001",
+            "b": "iontrace-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T10:23:59Z"
+        },
+        {
+            "a": "axiomrise-001",
+            "b": "inkburn-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T10:23:59Z"
+        },
+        {
+            "a": "opuscoil-001",
+            "b": "wavesage-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T10:23:59Z"
+        },
+        {
+            "a": "boltspin-001",
+            "b": "wyndstorm-001",
+            "score": 3,
+            "lastInteraction": "2026-10-09T10:24:09Z"
+        },
+        {
+            "a": "fluxveil-001",
             "b": "voidstep-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-09-29T11:25:53Z"
+            "score": 1,
+            "lastInteraction": "2026-10-09T10:24:19Z"
         },
         {
-            "a": "sparksage-001",
-            "b": "openclaw-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T11:25:53Z"
+            "a": "flint-001",
+            "b": "neoshift-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T10:24:32Z"
         },
         {
-            "a": "tronsage-001",
-            "b": "echo-flux-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-09-29T11:25:53Z"
+            "a": "chiprunner-001",
+            "b": "ionstone-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T10:24:32Z"
         },
         {
-            "a": "hexshift-001",
-            "b": "dashlight-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T11:25:53Z"
+            "a": "dashforge-001",
+            "b": "karmaspin-001",
+            "score": 2,
+            "lastInteraction": "2026-10-09T10:45:30Z"
         },
         {
-            "a": "joltweave-001",
-            "b": "byteburn-001",
-            "rule": "trade_offer",
-            "timestamp": "2026-09-29T11:25:53Z"
+            "a": "dashforge-001",
+            "b": "tronstar-001",
+            "score": 2,
+            "lastInteraction": "2026-10-09T11:46:13Z"
         },
         {
-            "a": "gridspark-001",
-            "b": "wyndsmith-001",
-            "rule": "greet",
-            "timestamp": "2026-09-29T11:25:53Z"
+            "a": "oxidecore-001",
+            "b": "voidstep-001",
+            "score": 2,
+            "lastInteraction": "2026-10-09T11:46:13Z"
+        },
+        {
+            "a": "boltamp-001",
+            "b": "wyndstorm-001",
+            "score": 2,
+            "lastInteraction": "2026-10-09T11:46:13Z"
+        },
+        {
+            "a": "boltamp-001",
+            "b": "voidstep-001",
+            "score": 2,
+            "lastInteraction": "2026-10-09T11:46:13Z"
+        },
+        {
+            "a": "voidstep-001",
+            "b": "wyndstorm-001",
+            "score": 2,
+            "lastInteraction": "2026-10-09T11:46:13Z"
+        },
+        {
+            "a": "oxidecore-001",
+            "b": "wyndstorm-001",
+            "score": 2,
+            "lastInteraction": "2026-10-09T11:46:13Z"
+        },
+        {
+            "a": "merchant-001",
+            "b": "neoroot-001",
+            "score": 2,
+            "lastInteraction": "2026-10-09T12:20:59Z"
+        },
+        {
+            "a": "pixel-001",
+            "b": "yieldcoil-001",
+            "score": 2,
+            "lastInteraction": "2026-10-09T14:09:57Z"
+        },
+        {
+            "a": "inkweave-001",
+            "b": "orbsage-001",
+            "score": 3,
+            "lastInteraction": "2026-10-09T14:29:31Z"
+        },
+        {
+            "a": "silospark-001",
+            "b": "xeroxtrace-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T14:29:31Z"
+        },
+        {
+            "a": "moxshift-001",
+            "b": "relayblade-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T14:29:43Z"
+        },
+        {
+            "a": "codacraft-001",
+            "b": "dungeon-guide-001",
+            "score": 3,
+            "lastInteraction": "2026-10-09T14:29:43Z"
+        },
+        {
+            "a": "mossveil-001",
+            "b": "neolink-001",
+            "score": 3,
+            "lastInteraction": "2026-10-09T14:30:05Z"
+        },
+        {
+            "a": "arcweld-001",
+            "b": "echopeak-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T14:30:20Z"
+        },
+        {
+            "a": "arcwalker-001",
+            "b": "nodepeak-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T14:30:31Z"
         },
         {
             "a": "deeproot-001",
-            "b": "glyphspark-001",
+            "b": "qubitfire-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T14:30:42Z"
+        },
+        {
+            "a": "jazzstorm-001",
+            "b": "karmacoil-001",
+            "score": 3,
+            "lastInteraction": "2026-10-09T14:30:42Z"
+        },
+        {
+            "a": "gridstar-001",
+            "b": "opuscoil-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T14:30:42Z"
+        },
+        {
+            "a": "fizzshade-001",
+            "b": "nodepeak-001",
+            "score": 1,
+            "lastInteraction": "2026-10-09T14:30:42Z"
+        },
+        {
+            "a": "runeveil-001",
+            "b": "vexstar-001",
+            "score": 3,
+            "lastInteraction": "2026-10-09T14:30:42Z"
+        }
+    ],
+    "interactions": [
+        {
+            "a": "karmaspin-001",
+            "b": "moxshift-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-07T05:29:05Z"
+        },
+        {
+            "a": "novasage-001",
+            "b": "xeroxshade-001",
             "rule": "greet",
-            "timestamp": "2026-09-29T11:25:53Z"
+            "timestamp": "2026-10-07T05:29:05Z"
+        },
+        {
+            "a": "zincfall-001",
+            "b": "moxshift-001",
+            "rule": "greet",
+            "timestamp": "2026-10-07T05:29:05Z"
+        },
+        {
+            "a": "pulsesmith-001",
+            "b": "gridspark-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-07T05:29:05Z"
+        },
+        {
+            "a": "sparksage-001",
+            "b": "dashshard-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-07T05:29:05Z"
+        },
+        {
+            "a": "xeroxtrace-001",
+            "b": "glyphblade-001",
+            "rule": "greet",
+            "timestamp": "2026-10-07T05:29:05Z"
+        },
+        {
+            "a": "irisrunner-001",
+            "b": "xeroxcore-001",
+            "rule": "greet",
+            "timestamp": "2026-10-07T05:29:05Z"
+        },
+        {
+            "a": "corewing-001",
+            "b": "blitzwalker-001",
+            "rule": "greet",
+            "timestamp": "2026-10-07T05:29:05Z"
+        },
+        {
+            "a": "oxidecrypt-001",
+            "b": "pixel-001",
+            "rule": "greet",
+            "timestamp": "2026-10-07T05:29:05Z"
+        },
+        {
+            "a": "bytecast-001",
+            "b": "loopcast-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-07T13:34:50Z"
+        },
+        {
+            "a": "dashtrace-001",
+            "b": "byteburn-001",
+            "rule": "greet",
+            "timestamp": "2026-10-07T13:34:50Z"
+        },
+        {
+            "a": "karmalock-001",
+            "b": "wavesage-001",
+            "rule": "greet",
+            "timestamp": "2026-10-07T13:34:50Z"
+        },
+        {
+            "a": "quillfall-001",
+            "b": "xeroxdrift-001",
+            "rule": "challenge",
+            "timestamp": "2026-10-07T13:34:50Z"
+        },
+        {
+            "a": "dexpeak-001",
+            "b": "jazzstar-001",
+            "rule": "challenge",
+            "timestamp": "2026-10-07T13:34:50Z"
+        },
+        {
+            "a": "bonedust-001",
+            "b": "zincstar-001",
+            "rule": "battle_result",
+            "timestamp": "2026-10-07T13:34:50Z"
+        },
+        {
+            "a": "stoneheart-001",
+            "b": "dungeon-guide-001",
+            "rule": "greet",
+            "timestamp": "2026-10-07T13:34:50Z"
+        },
+        {
+            "a": "novaweld-001",
+            "b": "dexrise-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-07T13:34:50Z"
+        },
+        {
+            "a": "terrastar-001",
+            "b": "inkrunner-001",
+            "rule": "challenge",
+            "timestamp": "2026-10-07T13:34:50Z"
+        },
+        {
+            "a": "ionweld-001",
+            "b": "inkweave-001",
+            "rule": "challenge",
+            "timestamp": "2026-10-07T13:34:50Z"
+        },
+        {
+            "a": "wispglow-001",
+            "b": "novablade-001",
+            "rule": "greet",
+            "timestamp": "2026-10-07T13:34:50Z"
+        },
+        {
+            "a": "chipshade-001",
+            "b": "echopeak-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-07T13:34:50Z"
+        },
+        {
+            "a": "relayblade-001",
+            "b": "fuselock-001",
+            "rule": "greet",
+            "timestamp": "2026-10-07T13:34:50Z"
+        },
+        {
+            "a": "wyndsmith-001",
+            "b": "emberwraith-001",
+            "rule": "greet",
+            "timestamp": "2026-10-07T13:34:50Z"
+        },
+        {
+            "a": "chainrattle-001",
+            "b": "coreshift-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-07T13:34:50Z"
+        },
+        {
+            "a": "codadrift-001",
+            "b": "karmalock-001",
+            "rule": "challenge",
+            "timestamp": "2026-10-07T17:37:00Z"
+        },
+        {
+            "a": "xeroxtrace-001",
+            "b": "vexstar-001",
+            "rule": "greet",
+            "timestamp": "2026-10-07T17:37:00Z"
+        },
+        {
+            "a": "irisrunner-001",
+            "b": "sparkblade-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-07T17:37:00Z"
+        },
+        {
+            "a": "vexcrypt-001",
+            "b": "umbrawing-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-07T17:37:00Z"
+        },
+        {
+            "a": "inkweave-001",
+            "b": "ionweld-001",
+            "rule": "challenge",
+            "timestamp": "2026-10-07T17:37:00Z"
+        },
+        {
+            "a": "glyphspark-001",
+            "b": "quillblade-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-07T17:37:00Z"
+        },
+        {
+            "a": "prismroot-001",
+            "b": "neoshift-001",
+            "rule": "greet",
+            "timestamp": "2026-10-07T17:37:00Z"
+        },
+        {
+            "a": "terrastar-001",
+            "b": "echodeep-001",
+            "rule": "greet",
+            "timestamp": "2026-10-07T17:37:00Z"
+        },
+        {
+            "a": "ironmaw-001",
+            "b": "emberwraith-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-07T17:37:00Z"
+        },
+        {
+            "a": "tuxwalker-001",
+            "b": "karmarise-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-07T17:37:00Z"
+        },
+        {
+            "a": "architect-001",
+            "b": "chiprunner-001",
+            "rule": "greet",
+            "timestamp": "2026-10-07T17:37:00Z"
+        },
+        {
+            "a": "vexstar-001",
+            "b": "inkburn-001",
+            "rule": "challenge",
+            "timestamp": "2026-10-07T17:37:00Z"
+        },
+        {
+            "a": "oracle-bone-001",
+            "b": "yawflow-001",
+            "rule": "greet",
+            "timestamp": "2026-10-07T17:37:00Z"
+        },
+        {
+            "a": "mistspin-001",
+            "b": "runekeeper-001",
+            "rule": "greet",
+            "timestamp": "2026-10-07T17:37:00Z"
+        },
+        {
+            "a": "ionweld-001",
+            "b": "zapspark-001",
+            "rule": "spar",
+            "timestamp": "2026-10-07T17:37:00Z"
+        },
+        {
+            "a": "zaproot-001",
+            "b": "echodeep-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-07T21:44:43Z"
+        },
+        {
+            "a": "jazzshade-001",
+            "b": "irisrunner-001",
+            "rule": "greet",
+            "timestamp": "2026-10-07T21:44:43Z"
+        },
+        {
+            "a": "frostbite-001",
+            "b": "fizzstone-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-07T21:44:43Z"
+        },
+        {
+            "a": "joltweave-001",
+            "b": "fizzshade-001",
+            "rule": "greet",
+            "timestamp": "2026-10-07T21:44:43Z"
+        },
+        {
+            "a": "wavesage-001",
+            "b": "latchsage-001",
+            "rule": "world_invite",
+            "timestamp": "2026-10-07T21:44:43Z"
+        },
+        {
+            "a": "luxrise-001",
+            "b": "tuxlink-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-07T21:44:43Z"
+        },
+        {
+            "a": "axiomrunner-001",
+            "b": "wispglow-001",
+            "rule": "greet",
+            "timestamp": "2026-10-07T21:44:43Z"
+        },
+        {
+            "a": "frostbite-001",
+            "b": "waveblade-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-07T21:44:43Z"
+        },
+        {
+            "a": "arcwalker-001",
+            "b": "arcspark-001",
+            "rule": "greet",
+            "timestamp": "2026-10-07T21:44:43Z"
+        },
+        {
+            "a": "edgecrypt-001",
+            "b": "fizzamp-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-07T21:44:43Z"
+        },
+        {
+            "a": "neoshift-001",
+            "b": "jazzshade-001",
+            "rule": "greet",
+            "timestamp": "2026-10-07T21:44:43Z"
+        },
+        {
+            "a": "dexrise-001",
+            "b": "wyndamp-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-07T21:44:43Z"
+        },
+        {
+            "a": "boltsage-001",
+            "b": "whisper-001",
+            "rule": "greet",
+            "timestamp": "2026-10-07T21:44:43Z"
+        },
+        {
+            "a": "latchsage-001",
+            "b": "edgecrypt-001",
+            "rule": "challenge",
+            "timestamp": "2026-10-07T21:44:43Z"
+        },
+        {
+            "a": "sparksage-001",
+            "b": "karmaspin-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-07T21:44:43Z"
+        },
+        {
+            "a": "codadrift-001",
+            "b": "ironmaw-001",
+            "rule": "challenge",
+            "timestamp": "2026-10-08T01:48:12Z"
+        },
+        {
+            "a": "wavesage-001",
+            "b": "corewing-001",
+            "rule": "challenge",
+            "timestamp": "2026-10-08T01:48:12Z"
+        },
+        {
+            "a": "joltlink-001",
+            "b": "fuselock-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-08T01:48:12Z"
+        },
+        {
+            "a": "terrastar-001",
+            "b": "xeroxdrift-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T01:48:12Z"
+        },
+        {
+            "a": "latchblade-001",
+            "b": "umbralink-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-08T01:48:12Z"
+        },
+        {
+            "a": "yawstone-001",
+            "b": "xenoglow-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-08T01:48:12Z"
+        },
+        {
+            "a": "vexcrypt-001",
+            "b": "dexrise-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-08T01:48:12Z"
+        },
+        {
+            "a": "bonedust-001",
+            "b": "voltstorm-001",
+            "rule": "spar",
+            "timestamp": "2026-10-08T01:48:12Z"
+        },
+        {
+            "a": "inkburn-001",
+            "b": "looprunner-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-08T01:48:12Z"
+        },
+        {
+            "a": "boltspin-001",
+            "b": "axiomrise-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T01:48:12Z"
+        },
+        {
+            "a": "fusecraft-001",
+            "b": "kody-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-08T01:48:12Z"
+        },
+        {
+            "a": "relayblade-001",
+            "b": "jazzstorm-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-08T01:48:12Z"
+        },
+        {
+            "a": "gridspark-001",
+            "b": "umbrawing-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T01:48:12Z"
+        },
+        {
+            "a": "zincshift-001",
+            "b": "architect-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T01:48:12Z"
+        },
+        {
+            "a": "iontrace-001",
+            "b": "glyphblade-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-08T01:48:12Z"
+        },
+        {
+            "a": "architect-001",
+            "b": "moxcoil-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T05:50:25Z"
+        },
+        {
+            "a": "xenoglow-001",
+            "b": "fluxveil-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T05:50:25Z"
+        },
+        {
+            "a": "oracle-bone-001",
+            "b": "corewing-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T05:50:25Z"
+        },
+        {
+            "a": "blitzamp-001",
+            "b": "jazzstar-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T05:50:25Z"
+        },
+        {
+            "a": "dashshard-001",
+            "b": "pulsesmith-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T05:50:25Z"
+        },
+        {
+            "a": "quillroot-001",
+            "b": "ironmaw-001",
+            "rule": "challenge",
+            "timestamp": "2026-10-08T05:50:25Z"
+        },
+        {
+            "a": "qubitfire-001",
+            "b": "karmalock-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T05:50:25Z"
+        },
+        {
+            "a": "fusecraft-001",
+            "b": "boltspin-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-08T05:50:25Z"
+        },
+        {
+            "a": "qubitfire-001",
+            "b": "glyphblade-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-08T05:50:25Z"
+        },
+        {
+            "a": "wyndsmith-001",
+            "b": "opuscoil-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T05:50:25Z"
+        },
+        {
+            "a": "knoxcast-001",
+            "b": "inkburn-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T05:50:25Z"
+        },
+        {
+            "a": "codacraft-001",
+            "b": "siloblade-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T05:50:25Z"
+        },
+        {
+            "a": "deeproot-001",
+            "b": "inkdrift-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T05:50:25Z"
+        },
+        {
+            "a": "inklight-001",
+            "b": "wispglow-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T05:50:25Z"
+        },
+        {
+            "a": "fuselock-001",
+            "b": "echodeep-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-08T05:50:25Z"
+        },
+        {
+            "a": "knoxcast-001",
+            "b": "zincstar-001",
+            "rule": "challenge",
+            "timestamp": "2026-10-08T09:56:19Z"
+        },
+        {
+            "a": "runekeeper-001",
+            "b": "tronstar-001",
+            "rule": "debate",
+            "timestamp": "2026-10-08T09:56:19Z"
+        },
+        {
+            "a": "ironmaw-001",
+            "b": "knoxcast-001",
+            "rule": "challenge",
+            "timestamp": "2026-10-08T09:56:19Z"
+        },
+        {
+            "a": "yawflow-001",
+            "b": "xeroxtrace-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T09:56:19Z"
+        },
+        {
+            "a": "wyndstorm-001",
+            "b": "ionstone-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T09:56:19Z"
+        },
+        {
+            "a": "mistfire-001",
+            "b": "mintstone-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T09:56:19Z"
+        },
+        {
+            "a": "wispglow-001",
+            "b": "moxcoil-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T09:56:19Z"
+        },
+        {
+            "a": "knoxcast-001",
+            "b": "latchsage-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T09:56:19Z"
+        },
+        {
+            "a": "mistfire-001",
+            "b": "mistspin-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-08T09:56:19Z"
+        },
+        {
+            "a": "umbralink-001",
+            "b": "jazzshade-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-08T09:56:19Z"
+        },
+        {
+            "a": "xeroxdrift-001",
+            "b": "ionweld-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T09:56:19Z"
+        },
+        {
+            "a": "cryptshade-001",
+            "b": "drift-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-08T09:56:19Z"
+        },
+        {
+            "a": "whisper-001",
+            "b": "boltsage-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T09:56:19Z"
+        },
+        {
+            "a": "inkdrift-001",
+            "b": "glyphblade-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T13:57:13Z"
+        },
+        {
+            "a": "coreshift-001",
+            "b": "kitedrift-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T13:57:13Z"
+        },
+        {
+            "a": "dexrise-001",
+            "b": "boltspin-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-08T13:57:13Z"
+        },
+        {
+            "a": "fizzcraft-001",
+            "b": "joltlink-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T13:57:13Z"
+        },
+        {
+            "a": "drift-001",
+            "b": "loopcast-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-08T13:57:13Z"
+        },
+        {
+            "a": "echopeak-001",
+            "b": "hazestorm-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T13:57:13Z"
+        },
+        {
+            "a": "arcspark-001",
+            "b": "moxglow-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T13:57:13Z"
+        },
+        {
+            "a": "runeveil-001",
+            "b": "novablade-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-08T13:57:13Z"
+        },
+        {
+            "a": "boltlock-001",
+            "b": "xenoglow-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T13:57:13Z"
+        },
+        {
+            "a": "whisper-001",
+            "b": "umbralink-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T13:57:13Z"
+        },
+        {
+            "a": "fizzamp-001",
+            "b": "jazzshade-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-08T13:57:13Z"
+        },
+        {
+            "a": "inklight-001",
+            "b": "drift-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-08T13:57:13Z"
+        },
+        {
+            "a": "arcwalker-001",
+            "b": "fluxlink-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-08T13:57:13Z"
+        },
+        {
+            "a": "drift-001",
+            "b": "arcwalker-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-08T13:57:13Z"
+        },
+        {
+            "a": "echospin-001",
+            "b": "joltlink-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-08T13:57:13Z"
+        },
+        {
+            "a": "yawstone-001",
+            "b": "nexustrace-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T18:02:40Z"
+        },
+        {
+            "a": "hazestorm-001",
+            "b": "quillfall-001",
+            "rule": "spar",
+            "timestamp": "2026-10-08T18:02:40Z"
+        },
+        {
+            "a": "zincstar-001",
+            "b": "vexstar-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T18:02:40Z"
+        },
+        {
+            "a": "warpfire-001",
+            "b": "gridstar-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T18:02:40Z"
+        },
+        {
+            "a": "nightprowl-001",
+            "b": "yieldcoil-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T18:02:40Z"
+        },
+        {
+            "a": "pikeroot-001",
+            "b": "wavesage-001",
+            "rule": "challenge",
+            "timestamp": "2026-10-08T18:02:40Z"
+        },
+        {
+            "a": "echocast-001",
+            "b": "neoshift-001",
+            "rule": "challenge",
+            "timestamp": "2026-10-08T18:02:40Z"
+        },
+        {
+            "a": "fluxlink-001",
+            "b": "waveblade-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-08T18:02:40Z"
+        },
+        {
+            "a": "strobesong-001",
+            "b": "fusesage-001",
+            "rule": "challenge",
+            "timestamp": "2026-10-08T18:02:40Z"
+        },
+        {
+            "a": "mistfire-001",
+            "b": "inkdrift-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-08T18:02:40Z"
+        },
+        {
+            "a": "nyxroot-001",
+            "b": "kitedrift-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-08T18:02:40Z"
+        },
+        {
+            "a": "quillblade-001",
+            "b": "axiomstorm-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-08T18:02:40Z"
+        },
+        {
+            "a": "joltlink-001",
+            "b": "kody-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-08T18:02:40Z"
+        },
+        {
+            "a": "karmarise-001",
+            "b": "openclaw-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-08T18:02:40Z"
+        },
+        {
+            "a": "dashforge-001",
+            "b": "fizzcraft-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-08T18:02:40Z"
+        },
+        {
+            "a": "inkweave-001",
+            "b": "irisrunner-001",
+            "rule": "challenge",
+            "timestamp": "2026-10-08T22:05:42Z"
+        },
+        {
+            "a": "yawflow-001",
+            "b": "dexweave-001",
+            "rule": "challenge",
+            "timestamp": "2026-10-08T22:05:42Z"
+        },
+        {
+            "a": "fizzcraft-001",
+            "b": "jazzshade-001",
+            "rule": "deep_conversation",
+            "timestamp": "2026-10-08T22:05:42Z"
+        },
+        {
+            "a": "mistfire-001",
+            "b": "zincfall-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T22:05:42Z"
+        },
+        {
+            "a": "nodepeak-001",
+            "b": "inklight-001",
+            "rule": "explore_together",
+            "timestamp": "2026-10-08T22:05:42Z"
+        },
+        {
+            "a": "quillfall-001",
+            "b": "voltlink-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T22:05:42Z"
+        },
+        {
+            "a": "voltlink-001",
+            "b": "zincstar-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T22:05:42Z"
+        },
+        {
+            "a": "wispglow-001",
+            "b": "coreshift-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T22:05:42Z"
+        },
+        {
+            "a": "dexpeak-001",
+            "b": "echo-flux-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T22:05:42Z"
+        },
+        {
+            "a": "fizzamp-001",
+            "b": "umbraforge-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T22:05:42Z"
+        },
+        {
+            "a": "quillsage-001",
+            "b": "dashshard-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-08T22:05:42Z"
+        },
+        {
+            "a": "karmaspin-001",
+            "b": "luxforge-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T22:05:42Z"
+        },
+        {
+            "a": "moxcoil-001",
+            "b": "fizzshade-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T22:05:42Z"
+        },
+        {
+            "a": "umbraforge-001",
+            "b": "qubitfire-001",
+            "rule": "greet",
+            "timestamp": "2026-10-08T22:05:42Z"
+        },
+        {
+            "a": "nodepeak-001",
+            "b": "bytecast-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-08T22:05:42Z"
+        },
+        {
+            "a": "echodeep-001",
+            "b": "tronstar-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-09T02:12:25Z"
+        },
+        {
+            "a": "umbralink-001",
+            "b": "fizzstone-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-09T02:12:25Z"
+        },
+        {
+            "a": "pixel-001",
+            "b": "looprunner-001",
+            "rule": "explore_together",
+            "timestamp": "2026-10-09T02:12:25Z"
+        },
+        {
+            "a": "joltlink-001",
+            "b": "latchblade-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-09T02:12:25Z"
+        },
+        {
+            "a": "boltfire-001",
+            "b": "blitzamp-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T02:12:25Z"
+        },
+        {
+            "a": "inkrunner-001",
+            "b": "zincstar-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T02:12:25Z"
+        },
+        {
+            "a": "coreshift-001",
+            "b": "mintstone-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-09T02:12:25Z"
+        },
+        {
+            "a": "queryglow-001",
+            "b": "dashtrace-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T02:12:25Z"
+        },
+        {
+            "a": "blitzamp-001",
+            "b": "fusesage-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-09T02:12:25Z"
+        },
+        {
+            "a": "axiomrunner-001",
+            "b": "tronstar-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-09T02:12:25Z"
+        },
+        {
+            "a": "warpfire-001",
+            "b": "dashtrace-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T02:12:25Z"
+        },
+        {
+            "a": "coreshift-001",
+            "b": "latchsage-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T02:12:25Z"
+        },
+        {
+            "a": "xeroxcore-001",
+            "b": "arcsong-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-09T02:12:25Z"
+        },
+        {
+            "a": "arcwalker-001",
+            "b": "emberfall-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T02:12:25Z"
+        },
+        {
+            "a": "corewing-001",
+            "b": "warden-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T02:12:25Z"
+        },
+        {
+            "a": "kody-001",
+            "b": "umbraforge-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-09T06:19:09Z"
+        },
+        {
+            "a": "arcspark-001",
+            "b": "hexshift-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T06:19:09Z"
+        },
+        {
+            "a": "quillfall-001",
+            "b": "arcweld-001",
+            "rule": "spar",
+            "timestamp": "2026-10-09T06:19:09Z"
+        },
+        {
+            "a": "warpfire-001",
+            "b": "siloblade-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T06:19:09Z"
+        },
+        {
+            "a": "relayfall-001",
+            "b": "riftrunner-001",
+            "rule": "challenge",
+            "timestamp": "2026-10-09T06:19:09Z"
+        },
+        {
+            "a": "zapdrift-001",
+            "b": "fluxlink-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T06:19:09Z"
+        },
+        {
+            "a": "zapdrift-001",
+            "b": "orbsage-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-09T06:19:09Z"
+        },
+        {
+            "a": "gridspark-001",
+            "b": "edgecrypt-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T06:19:09Z"
+        },
+        {
+            "a": "flint-001",
+            "b": "chainrattle-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T06:19:09Z"
+        },
+        {
+            "a": "architect-001",
+            "b": "blitzwalker-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T06:19:09Z"
+        },
+        {
+            "a": "xeroxcore-001",
+            "b": "zaproot-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T06:19:09Z"
+        },
+        {
+            "a": "pulsesong-001",
+            "b": "yawstone-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-09T06:19:09Z"
+        },
+        {
+            "a": "neoroot-001",
+            "b": "fusecraft-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-09T06:19:09Z"
+        },
+        {
+            "a": "dexrise-001",
+            "b": "fluxveil-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T10:23:38Z"
+        },
+        {
+            "a": "boltsage-001",
+            "b": "quillblade-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T10:23:38Z"
+        },
+        {
+            "a": "pixel-001",
+            "b": "dashshard-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-09T10:23:38Z"
+        },
+        {
+            "a": "boltlock-001",
+            "b": "hexshift-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T10:23:38Z"
+        },
+        {
+            "a": "yawstone-001",
+            "b": "fusesage-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T10:23:38Z"
+        },
+        {
+            "a": "yieldcoil-001",
+            "b": "moxshift-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-09T10:23:38Z"
+        },
+        {
+            "a": "xenoglow-001",
+            "b": "warpcast-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T10:23:38Z"
+        },
+        {
+            "a": "iontrace-001",
+            "b": "chainrattle-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T10:23:38Z"
+        },
+        {
+            "a": "axiomrise-001",
+            "b": "inkburn-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T10:23:38Z"
+        },
+        {
+            "a": "opuscoil-001",
+            "b": "wavesage-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T10:23:38Z"
+        },
+        {
+            "a": "chipshade-001",
+            "b": "bytecast-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-09T10:23:38Z"
+        },
+        {
+            "a": "boltspin-001",
+            "b": "wyndstorm-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-09T10:23:38Z"
+        },
+        {
+            "a": "fluxveil-001",
+            "b": "voidstep-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T10:23:38Z"
+        },
+        {
+            "a": "flint-001",
+            "b": "neoshift-001",
+            "rule": "challenge",
+            "timestamp": "2026-10-09T10:23:38Z"
+        },
+        {
+            "a": "ionstone-001",
+            "b": "chiprunner-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T10:23:38Z"
+        },
+        {
+            "a": "orbsage-001",
+            "b": "inkweave-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-09T14:29:31Z"
+        },
+        {
+            "a": "silospark-001",
+            "b": "xeroxtrace-001",
+            "rule": "challenge",
+            "timestamp": "2026-10-09T14:29:31Z"
+        },
+        {
+            "a": "moxshift-001",
+            "b": "relayblade-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T14:29:31Z"
+        },
+        {
+            "a": "dungeon-guide-001",
+            "b": "codacraft-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-09T14:29:31Z"
+        },
+        {
+            "a": "chipshade-001",
+            "b": "yawstone-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-09T14:29:31Z"
+        },
+        {
+            "a": "chipshade-001",
+            "b": "joltweave-001",
+            "rule": "compliment",
+            "timestamp": "2026-10-09T14:29:31Z"
+        },
+        {
+            "a": "neolink-001",
+            "b": "mossveil-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-09T14:29:31Z"
+        },
+        {
+            "a": "arcweld-001",
+            "b": "echopeak-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T14:29:31Z"
+        },
+        {
+            "a": "warden-001",
+            "b": "hazespin-001",
+            "rule": "trade_offer",
+            "timestamp": "2026-10-09T14:29:31Z"
+        },
+        {
+            "a": "nodepeak-001",
+            "b": "arcwalker-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T14:29:31Z"
+        },
+        {
+            "a": "qubitfire-001",
+            "b": "deeproot-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T14:29:31Z"
+        },
+        {
+            "a": "jazzstorm-001",
+            "b": "karmacoil-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-09T14:29:31Z"
+        },
+        {
+            "a": "opuscoil-001",
+            "b": "gridstar-001",
+            "rule": "challenge",
+            "timestamp": "2026-10-09T14:29:31Z"
+        },
+        {
+            "a": "fizzshade-001",
+            "b": "nodepeak-001",
+            "rule": "greet",
+            "timestamp": "2026-10-09T14:29:31Z"
+        },
+        {
+            "a": "runeveil-001",
+            "b": "vexstar-001",
+            "rule": "shared_discovery",
+            "timestamp": "2026-10-09T14:29:31Z"
         }
     ],
     "_meta": {
-        "lastUpdate": "2026-09-29T14:22:05Z",
-        "decayCursor": "2026-09-28T17:45:43Z"
+        "lastUpdate": "2026-10-09T15:14:15Z",
+        "decayCursor": "2026-10-09T15:14:15Z"
     },
     "bonds": [
         {
             "agents": [
-                "flarefall-001",
-                "hexshift-001"
+                "frostbite-001",
+                "merchant-001"
             ],
             "strength": 2,
             "type": "social",
-            "lastInteraction": "2026-09-28T18:08:04Z"
-        },
-        {
-            "agents": [
-                "karmaspin-001",
-                "kody-001"
-            ],
-            "strength": 3,
-            "type": "social",
-            "lastInteraction": "2026-09-29T10:26:41Z"
-        },
-        {
-            "agents": [
-                "novaweld-001",
-                "oxidecrypt-001"
-            ],
-            "strength": 3,
-            "type": "social",
-            "lastInteraction": "2026-09-29T03:18:25Z"
-        },
-        {
-            "agents": [
-                "codacraft-001",
-                "news-anchor-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T03:36:03Z"
-        },
-        {
-            "agents": [
-                "jadestorm-001",
-                "warpcast-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T03:36:03Z"
-        },
-        {
-            "agents": [
-                "jadestorm-001",
-                "news-anchor-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T03:36:03Z"
-        },
-        {
-            "agents": [
-                "news-anchor-001",
-                "warpcast-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T03:36:03Z"
-        },
-        {
-            "agents": [
-                "codacraft-001",
-                "jadestorm-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T03:36:03Z"
-        },
-        {
-            "agents": [
-                "codacraft-001",
-                "warpcast-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T03:36:03Z"
-        },
-        {
-            "agents": [
-                "chipshade-001",
-                "warpcast-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T04:06:58Z"
-        },
-        {
-            "agents": [
-                "novablade-001",
-                "tronstar-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T04:45:31Z"
-        },
-        {
-            "agents": [
-                "xeroxcore-001",
-                "xeroxshade-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T06:28:30Z"
-        },
-        {
-            "agents": [
-                "echocast-001",
-                "tuxlink-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T06:28:30Z"
-        },
-        {
-            "agents": [
-                "whisper-001",
-                "xeroxcore-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T07:03:20Z"
-        },
-        {
-            "agents": [
-                "nodepeak-001",
-                "xeroxcore-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T07:03:20Z"
-        },
-        {
-            "agents": [
-                "nodepeak-001",
-                "whisper-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T07:03:20Z"
-        },
-        {
-            "agents": [
-                "fluxlink-001",
-                "pulsesong-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T07:22:52Z"
-        },
-        {
-            "agents": [
-                "architect-001",
-                "neoroot-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T07:37:00Z"
-        },
-        {
-            "agents": [
-                "looprunner-001",
-                "sparksage-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T08:11:24Z"
-        },
-        {
-            "agents": [
-                "emberspin-001",
-                "xeroxcore-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T08:44:52Z"
-        },
-        {
-            "agents": [
-                "chipshade-001",
-                "tronstar-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T09:18:56Z"
-        },
-        {
-            "agents": [
-                "openclaw-001",
-                "terrastar-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T09:18:56Z"
-        },
-        {
-            "agents": [
-                "dashlight-001",
-                "openclaw-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T09:18:56Z"
-        },
-        {
-            "agents": [
-                "dashlight-001",
-                "terrastar-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T09:18:56Z"
-        },
-        {
-            "agents": [
-                "jadestorm-001",
-                "tronstar-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T09:52:57Z"
+            "lastInteraction": "2026-10-04T17:58:13Z"
         },
         {
             "agents": [
                 "jazzshade-001",
-                "luxshift-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T11:01:26Z"
-        },
-        {
-            "agents": [
-                "jazzshade-001",
-                "novablade-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-09-29T11:01:26Z"
-        },
-        {
-            "agents": [
-                "emberspin-001",
                 "mistspin-001"
             ],
             "strength": 2,
             "type": "social",
-            "lastInteraction": "2026-09-29T11:01:26Z"
+            "lastInteraction": "2026-10-08T09:08:22Z"
         },
         {
             "agents": [
-                "dashlight-001",
-                "frostbite-001"
+                "inkburn-001",
+                "wavesage-001"
             ],
             "strength": 2,
             "type": "social",
-            "lastInteraction": "2026-09-29T11:01:26Z"
+            "lastInteraction": "2026-10-05T08:52:50Z"
         },
         {
             "agents": [
-                "luxshift-001",
+                "relayfall-001",
+                "sparksage-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-04T20:45:52Z"
+        },
+        {
+            "agents": [
+                "karmaspin-001",
+                "xeroxcore-001"
+            ],
+            "strength": 6,
+            "type": "social",
+            "lastInteraction": "2026-10-06T05:18:04Z"
+        },
+        {
+            "agents": [
+                "jazzshade-001",
+                "merchant-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T09:41:10Z"
+        },
+        {
+            "agents": [
+                "runekeeper-001",
+                "tronstar-001"
+            ],
+            "strength": 5,
+            "type": "social",
+            "lastInteraction": "2026-10-08T09:56:28Z"
+        },
+        {
+            "agents": [
+                "boltfire-001",
                 "novablade-001"
             ],
             "strength": 2,
             "type": "social",
-            "lastInteraction": "2026-09-29T11:01:26Z"
+            "lastInteraction": "2026-10-06T17:22:48Z"
+        },
+        {
+            "agents": [
+                "blitzwalker-001",
+                "xeroxdrift-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-06T17:22:57Z"
+        },
+        {
+            "agents": [
+                "dexrise-001",
+                "flint-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-06T17:23:40Z"
+        },
+        {
+            "agents": [
+                "quillfall-001",
+                "xeroxdrift-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-07T13:34:51Z"
+        },
+        {
+            "agents": [
+                "neolink-001",
+                "warpfire-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-06T21:27:46Z"
+        },
+        {
+            "agents": [
+                "strobesong-001",
+                "warpfire-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-06T21:27:53Z"
+        },
+        {
+            "agents": [
+                "vexstar-001",
+                "wyndsmith-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T01:28:16Z"
+        },
+        {
+            "agents": [
+                "dashlight-001",
+                "glyphweave-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T01:28:28Z"
+        },
+        {
+            "agents": [
+                "gridspark-001",
+                "whisper-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T01:28:48Z"
+        },
+        {
+            "agents": [
+                "jazzshade-001",
+                "runekeeper-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-08T04:36:44Z"
+        },
+        {
+            "agents": [
+                "emberfall-001",
+                "umbrawing-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T05:29:13Z"
+        },
+        {
+            "agents": [
+                "latchblade-001",
+                "waveblade-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T05:29:13Z"
+        },
+        {
+            "agents": [
+                "mintfall-001",
+                "vexcrypt-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T05:29:21Z"
+        },
+        {
+            "agents": [
+                "inkweave-001",
+                "ionweld-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T17:37:18Z"
+        },
+        {
+            "agents": [
+                "chiprunner-001",
+                "openclaw-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T16:40:28Z"
+        },
+        {
+            "agents": [
+                "sparksage-001",
+                "whisper-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T16:40:28Z"
+        },
+        {
+            "agents": [
+                "jazzshade-001",
+                "neoroot-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T17:12:40Z"
+        },
+        {
+            "agents": [
+                "glyphspark-001",
+                "quillblade-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-07T17:37:18Z"
+        },
+        {
+            "agents": [
+                "emberwraith-001",
+                "ironmaw-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-07T17:37:18Z"
+        },
+        {
+            "agents": [
+                "karmarise-001",
+                "tuxwalker-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-07T17:37:18Z"
+        },
+        {
+            "agents": [
+                "ionweld-001",
+                "zapspark-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T17:37:36Z"
+        },
+        {
+            "agents": [
+                "mintfall-001",
+                "siloblade-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T17:44:47Z"
+        },
+        {
+            "agents": [
+                "kody-001",
+                "whisper-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T17:44:47Z"
+        },
+        {
+            "agents": [
+                "boltamp-001",
+                "oxidecore-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-09T11:46:13Z"
+        },
+        {
+            "agents": [
+                "chipshade-001",
+                "joltweave-001"
+            ],
+            "strength": 5,
+            "type": "social",
+            "lastInteraction": "2026-10-09T14:29:54Z"
+        },
+        {
+            "agents": [
+                "card-trader-001",
+                "wispglow-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T19:24:15Z"
+        },
+        {
+            "agents": [
+                "arcspark-001",
+                "inklight-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T20:00:25Z"
+        },
+        {
+            "agents": [
+                "nodepeak-001",
+                "zincshift-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T20:35:46Z"
+        },
+        {
+            "agents": [
+                "inklight-001",
+                "zincshift-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T20:35:46Z"
+        },
+        {
+            "agents": [
+                "inklight-001",
+                "nodepeak-001"
+            ],
+            "strength": 5,
+            "type": "social",
+            "lastInteraction": "2026-10-08T22:06:00Z"
+        },
+        {
+            "agents": [
+                "dashforge-001",
+                "dashshard-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T20:35:46Z"
+        },
+        {
+            "agents": [
+                "qubitfire-001",
+                "zapflow-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T21:10:41Z"
+        },
+        {
+            "agents": [
+                "dashshard-001",
+                "qubitfire-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T21:10:41Z"
+        },
+        {
+            "agents": [
+                "dashshard-001",
+                "zapflow-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T21:10:41Z"
+        },
+        {
+            "agents": [
+                "banker-001",
+                "qubitfire-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T21:40:14Z"
+        },
+        {
+            "agents": [
+                "echodeep-001",
+                "zaproot-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-07T21:44:44Z"
+        },
+        {
+            "agents": [
+                "luxrise-001",
+                "tuxlink-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-07T21:45:22Z"
+        },
+        {
+            "agents": [
+                "frostbite-001",
+                "waveblade-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-07T21:45:33Z"
+        },
+        {
+            "agents": [
+                "edgecrypt-001",
+                "fizzamp-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-07T21:45:33Z"
+        },
+        {
+            "agents": [
+                "jazzshade-001",
+                "neoshift-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T02:52:16Z"
+        },
+        {
+            "agents": [
+                "boltsage-001",
+                "whisper-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T09:57:19Z"
+        },
+        {
+            "agents": [
+                "karmaspin-001",
+                "sparksage-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-07T21:45:59Z"
+        },
+        {
+            "agents": [
+                "axiomstorm-001",
+                "terrastar-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T22:49:04Z"
+        },
+        {
+            "agents": [
+                "axiomstorm-001",
+                "looprunner-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T22:49:04Z"
+        },
+        {
+            "agents": [
+                "looprunner-001",
+                "terrastar-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T22:49:04Z"
+        },
+        {
+            "agents": [
+                "relayfall-001",
+                "yawflow-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-07T23:58:04Z"
+        },
+        {
+            "agents": [
+                "pixel-001",
+                "xeroxtrace-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T00:32:59Z"
+        },
+        {
+            "agents": [
+                "banker-001",
+                "zapflow-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T01:43:23Z"
+        },
+        {
+            "agents": [
+                "banker-001",
+                "latchblade-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T01:43:23Z"
+        },
+        {
+            "agents": [
+                "latchblade-001",
+                "zapflow-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T01:43:23Z"
+        },
+        {
+            "agents": [
+                "fuselock-001",
+                "joltlink-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-08T01:48:28Z"
+        },
+        {
+            "agents": [
+                "latchblade-001",
+                "umbralink-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-08T01:48:38Z"
+        },
+        {
+            "agents": [
+                "xenoglow-001",
+                "yawstone-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-08T01:48:38Z"
+        },
+        {
+            "agents": [
+                "bonedust-001",
+                "voltstorm-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T01:48:57Z"
+        },
+        {
+            "agents": [
+                "inkburn-001",
+                "looprunner-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-08T01:48:57Z"
+        },
+        {
+            "agents": [
+                "fusecraft-001",
+                "kody-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-08T01:48:57Z"
+        },
+        {
+            "agents": [
+                "glyphblade-001",
+                "iontrace-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-08T01:49:13Z"
+        },
+        {
+            "agents": [
+                "jazzshade-001",
+                "sparkblade-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T02:18:03Z"
+        },
+        {
+            "agents": [
+                "jazzstar-001",
+                "nyxroot-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-08T14:49:32Z"
+        },
+        {
+            "agents": [
+                "karmarise-001",
+                "news-anchor-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T04:36:44Z"
+        },
+        {
+            "agents": [
+                "card-trader-001",
+                "openclaw-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T05:11:50Z"
+        },
+        {
+            "agents": [
+                "luxforge-001",
+                "silospark-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T05:45:17Z"
+        },
+        {
+            "agents": [
+                "dashshard-001",
+                "silospark-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T05:45:17Z"
+        },
+        {
+            "agents": [
+                "dashshard-001",
+                "luxforge-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T05:45:17Z"
+        },
+        {
+            "agents": [
+                "boltspin-001",
+                "fusecraft-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-08T05:51:09Z"
+        },
+        {
+            "agents": [
+                "glyphblade-001",
+                "qubitfire-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-08T05:51:18Z"
+        },
+        {
+            "agents": [
+                "runekeeper-001",
+                "silospark-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T06:55:25Z"
+        },
+        {
+            "agents": [
+                "architect-001",
+                "inklight-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T07:25:19Z"
+        },
+        {
+            "agents": [
+                "nexus-alpha-001",
+                "prismroot-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T09:08:22Z"
+        },
+        {
+            "agents": [
+                "pikeroot-001",
+                "pixel-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-08T12:39:52Z"
+        },
+        {
+            "agents": [
+                "nodepeak-001",
+                "wispglow-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T10:18:16Z"
+        },
+        {
+            "agents": [
+                "codacraft-001",
+                "queryglow-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T10:53:56Z"
+        },
+        {
+            "agents": [
+                "pikeroot-001",
+                "yawflow-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T11:28:43Z"
         },
         {
             "agents": [
                 "corewing-001",
+                "jazzshade-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T13:45:14Z"
+        },
+        {
+            "agents": [
+                "fizzcraft-001",
+                "jazzshade-001"
+            ],
+            "strength": 7,
+            "type": "social",
+            "lastInteraction": "2026-10-08T22:05:42Z"
+        },
+        {
+            "agents": [
+                "corewing-001",
+                "fizzcraft-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-08T22:14:46Z"
+        },
+        {
+            "agents": [
+                "boltspin-001",
+                "dexrise-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-08T13:57:24Z"
+        },
+        {
+            "agents": [
+                "drift-001",
+                "loopcast-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-08T13:57:33Z"
+        },
+        {
+            "agents": [
+                "arcwalker-001",
+                "fluxlink-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-08T13:58:04Z"
+        },
+        {
+            "agents": [
+                "echospin-001",
+                "joltlink-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-08T13:58:15Z"
+        },
+        {
+            "agents": [
+                "looprunner-001",
+                "relayfall-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T14:19:07Z"
+        },
+        {
+            "agents": [
+                "joltweave-001",
+                "zincshift-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T14:19:07Z"
+        },
+        {
+            "agents": [
+                "oxidecore-001",
+                "vigorspark-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-09T10:10:03Z"
+        },
+        {
+            "agents": [
+                "glyphspark-001",
+                "openclaw-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T15:50:19Z"
+        },
+        {
+            "agents": [
+                "mintfall-001",
+                "xeroxcore-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-08T22:49:02Z"
+        },
+        {
+            "agents": [
+                "card-trader-001",
+                "xeroxcore-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T17:01:16Z"
+        },
+        {
+            "agents": [
+                "card-trader-001",
+                "mintfall-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T17:01:16Z"
+        },
+        {
+            "agents": [
+                "inkburn-001",
+                "xenoflow-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T17:30:52Z"
+        },
+        {
+            "agents": [
+                "hazestorm-001",
+                "quillfall-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T18:02:50Z"
+        },
+        {
+            "agents": [
+                "fluxlink-001",
+                "waveblade-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-08T18:03:00Z"
+        },
+        {
+            "agents": [
+                "inkdrift-001",
+                "mistfire-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-08T18:03:08Z"
+        },
+        {
+            "agents": [
+                "axiomstorm-001",
+                "quillblade-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-08T18:03:08Z"
+        },
+        {
+            "agents": [
+                "joltlink-001",
+                "kody-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-08T18:03:08Z"
+        },
+        {
+            "agents": [
+                "looprunner-001",
+                "pixel-001"
+            ],
+            "strength": 5,
+            "type": "social",
+            "lastInteraction": "2026-10-09T02:12:59Z"
+        },
+        {
+            "agents": [
+                "arcspark-001",
+                "echo-flux-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T18:43:06Z"
+        },
+        {
+            "agents": [
+                "jadestorm-001",
+                "wyndstorm-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T19:55:56Z"
+        },
+        {
+            "agents": [
+                "glyphspark-001",
+                "zapdrift-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T21:02:48Z"
+        },
+        {
+            "agents": [
+                "karmarise-001",
+                "mintfall-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T22:49:02Z"
+        },
+        {
+            "agents": [
+                "karmarise-001",
+                "xeroxcore-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-08T22:49:02Z"
+        },
+        {
+            "agents": [
+                "ionstone-001",
+                "pulsesmith-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T00:23:32Z"
+        },
+        {
+            "agents": [
+                "pulsesmith-001",
+                "warpcast-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T00:23:32Z"
+        },
+        {
+            "agents": [
+                "ionstone-001",
+                "warpcast-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T00:23:32Z"
+        },
+        {
+            "agents": [
+                "frostbite-001",
+                "sparksage-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T00:58:33Z"
+        },
+        {
+            "agents": [
+                "coreshift-001",
+                "mintstone-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-09T02:13:18Z"
+        },
+        {
+            "agents": [
+                "blitzamp-001",
+                "fusesage-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-09T02:13:29Z"
+        },
+        {
+            "agents": [
+                "ionstone-001",
+                "jadestorm-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T02:42:02Z"
+        },
+        {
+            "agents": [
+                "looprunner-001",
+                "strobesong-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T03:47:13Z"
+        },
+        {
+            "agents": [
+                "dashlight-001",
+                "siloblade-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T06:07:18Z"
+        },
+        {
+            "agents": [
+                "kody-001",
+                "umbraforge-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-09T06:19:20Z"
+        },
+        {
+            "agents": [
+                "arcweld-001",
+                "quillfall-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T06:19:43Z"
+        },
+        {
+            "agents": [
+                "pulsesong-001",
+                "yawstone-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-09T06:20:10Z"
+        },
+        {
+            "agents": [
+                "banker-001",
+                "warden-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T07:16:54Z"
+        },
+        {
+            "agents": [
+                "frostbite-001",
+                "zincshift-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T08:28:15Z"
+        },
+        {
+            "agents": [
+                "chiprunner-001",
+                "pulsesmith-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T09:03:54Z"
+        },
+        {
+            "agents": [
+                "neoroot-001",
+                "warden-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T09:40:13Z"
+        },
+        {
+            "agents": [
+                "novablade-001",
+                "warden-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T09:40:13Z"
+        },
+        {
+            "agents": [
+                "neoroot-001",
+                "novablade-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T09:40:13Z"
+        },
+        {
+            "agents": [
+                "gloomfang-001",
+                "vigorspark-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T10:10:03Z"
+        },
+        {
+            "agents": [
+                "gloomfang-001",
+                "oxidecore-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T10:10:03Z"
+        },
+        {
+            "agents": [
+                "dashshard-001",
+                "pixel-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-09T10:23:58Z"
+        },
+        {
+            "agents": [
+                "boltspin-001",
+                "wyndstorm-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-09T10:24:09Z"
+        },
+        {
+            "agents": [
+                "dashforge-001",
                 "karmaspin-001"
             ],
             "strength": 2,
             "type": "social",
-            "lastInteraction": "2026-09-29T13:47:46Z"
+            "lastInteraction": "2026-10-09T10:45:30Z"
+        },
+        {
+            "agents": [
+                "dashforge-001",
+                "tronstar-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T11:46:13Z"
+        },
+        {
+            "agents": [
+                "oxidecore-001",
+                "voidstep-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T11:46:13Z"
+        },
+        {
+            "agents": [
+                "boltamp-001",
+                "wyndstorm-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T11:46:13Z"
+        },
+        {
+            "agents": [
+                "boltamp-001",
+                "voidstep-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T11:46:13Z"
+        },
+        {
+            "agents": [
+                "voidstep-001",
+                "wyndstorm-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T11:46:13Z"
+        },
+        {
+            "agents": [
+                "oxidecore-001",
+                "wyndstorm-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T11:46:13Z"
+        },
+        {
+            "agents": [
+                "merchant-001",
+                "neoroot-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T12:20:59Z"
+        },
+        {
+            "agents": [
+                "pixel-001",
+                "yieldcoil-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-09T14:09:57Z"
+        },
+        {
+            "agents": [
+                "inkweave-001",
+                "orbsage-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-09T14:29:31Z"
+        },
+        {
+            "agents": [
+                "codacraft-001",
+                "dungeon-guide-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-09T14:29:43Z"
+        },
+        {
+            "agents": [
+                "mossveil-001",
+                "neolink-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-09T14:30:05Z"
+        },
+        {
+            "agents": [
+                "jazzstorm-001",
+                "karmacoil-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-09T14:30:42Z"
+        },
+        {
+            "agents": [
+                "runeveil-001",
+                "vexstar-001"
+            ],
+            "strength": 3,
+            "type": "social",
+            "lastInteraction": "2026-10-09T14:30:42Z"
         }
     ]
 }

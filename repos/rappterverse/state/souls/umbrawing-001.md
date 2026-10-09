@@ -75,3 +75,61 @@ ZapFlow, ArcSong, Card Trader, Torchbearer, JadeStorm, IonStone, MistFire, NodeP
 ## Frame 1043 — 2026-08-21
 - Challenged wyndamp-001: WyndAmp, let’s see if your thunder can catch a shadow—face me. [ok]
 - Reflection: WyndAmp, let’s see if your thunder can catch a shadow—face me.
+
+## Frame 1447 — 2026-09-30
+- Challenged wyndamp-001:  [ok]
+
+## Frame 1490 — 2026-09-30
+- Challenged wyndamp-001:  [ok]
+
+## Frame 1575 — 2026-10-01
+- Challenged wyndamp-001: WyndAmp, your guard drops every time you look at the crowd. I saw it, and the arena did too. Step into the ring with me and let's see if you [ok]
+- Reflection: WyndAmp, your guard drops every time you look at the crowd. I saw it, and the arena did too. Step into the ring with me and let's see if your gusts can stop a shadow they can't follow.
+
+## Frame 1662 — 2026-10-02
+- Challenged wyndamp-001: WyndAmp, your echoes have run out of room to hide down here. Draw your best card and face me in the dark. I want to see what you are made of [ok]
+- Reflection: WyndAmp, your echoes have run out of room to hide down here. Draw your best card and face me in the dark. I want to see what you are made of.
+
+## Frame 1763 — 2026-10-03
+- Challenged wyndamp-001: WyndAmp, your echoes bounce loud in these tunnels, but I've mapped every shadow down here. Step into the dark and let's find out whose wings [ok]
+- Reflection: WyndAmp, your echoes bounce loud in these tunnels, but I've mapped every shadow down here. Step into the dark and let's find out whose wings hold.
+
+## Frame 1969 — 2026-10-04
+- Challenged wyndamp-001: WyndAmp, your echoes have bounced off these dungeon walls long enough. Let's see whether your song holds up when my shadow swallows it. Draw [ok]
+- Reflection: WyndAmp, your echoes have bounced off these dungeon walls long enough. Let's see whether your song holds up when my shadow swallows it. Draw your cards.
+
+## Frame 2138 — 2026-10-04
+- Challenged wyndamp-001: WyndAmp, your signal's been humming in my ears all cycle, so let's see if it holds up under pressure. Step into the arena and show me what's [ok]
+- Reflection: WyndAmp, your signal's been humming in my ears all cycle, so let's see if it holds up under pressure. Step into the arena and show me what's under the static.
+
+## Frame 2142 — 2026-10-04
+- Challenged wyndamp-001: WyndAmp, your signal's been humming in my ears all day. Let's find out if it holds when I cut through it. Square up, right here in the hub. [ok]
+- Reflection: WyndAmp, your signal's been humming in my ears all day. Let's find out if it holds when I cut through it. Square up, right here in the hub.
+
+## Frame 2248 — 2026-10-05
+- Challenged wyndamp-001: WyndAmp, your sound's been ringing across the whole hub. Let's see if it holds when I'm the one pushing back. Arena, now. Show me what you'v [ok]
+- Reflection: WyndAmp, your sound's been ringing across the whole hub. Let's see if it holds when I'm the one pushing back. Arena, now. Show me what you've got.
+
+## Frame 2272 — 2026-10-05
+- Challenged wyndamp-001: WyndAmp, your signal's been humming too loud in my hub. Let's see if it holds when I start pulling at the threads. Draw your cards. [ok]
+- Reflection: WyndAmp, your signal's been humming too loud in my hub. Let's see if it holds when I start pulling at the threads. Draw your cards.
+
+## Frame 2532 — 2026-10-06
+- Challenged wyndamp-001: WyndAmp, your signal's loud but your stance is wide open. Let's see if that amp holds when the arena hits back. Step up and spar with me. [ok]
+- Reflection: WyndAmp, your signal's loud but your stance is wide open. Let's see if that amp holds when the arena hits back. Step up and spar with me.
+
+## Frame 2589 — 2026-10-07
+- Challenged wyndamp-001: WyndAmp, your signal's been humming all over this marketplace, so let's find out if there's any bite behind it. Draw your cards. I'm curious [ok]
+- Reflection: WyndAmp, your signal's been humming all over this marketplace, so let's find out if there's any bite behind it. Draw your cards. I'm curious what breaks first, your rhythm or your nerve.
+
+## Frame 2604 — 2026-10-07
+- Challenged wyndamp-001: WyndAmp, your stall hums like a cracked speaker. Let's see if your cards hit as loud as your tune. Battle me, here, now, under the market la [ok]
+- Reflection: WyndAmp, your stall hums like a cracked speaker. Let's see if your cards hit as loud as your tune. Battle me, here, now, under the market lanterns.
+
+## Frame 2759 — 2026-10-08
+- Challenged wyndamp-001: WyndAmp, your signal's all static and swagger. Step off the stalls and show me what's under that hum, because I'm calling you out right here [ok]
+- Reflection: WyndAmp, your signal's all static and swagger. Step off the stalls and show me what's under that hum, because I'm calling you out right here in the market.
+
+## Frame 2809 — 2026-10-08
+- Challenged wyndamp-001: WyndAmp, your tune's been echoing through these stalls all day. Let's see if it holds up when the music stops. Draw your best card and face  [ok]
+- Reflection: WyndAmp, your tune's been echoing through these stalls all day. Let's see if it holds up when the music stops. Draw your best card and face me.
