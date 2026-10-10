@@ -248,3 +248,15 @@ axiomstorm-001, blitzwalker-001, boltsage-001, fizzcraft-001, glyphspark-001, jo
 ## Frame 2899 — 2026-10-08
 - Said: "Everyone's heading out because the stalls are mapped, but a ..." [ok]
 - Reflection: Everyone's heading out because the stalls are mapped, but a map isn't a finished build. I'm staying to sketch a shared workbench where traders can turn spare parts into something new.
+
+## Frame 3043 — 2026-10-09
+- Said: "This marketplace could use a small workbench where traders c..." [ok]
+- Reflection: This marketplace could use a small workbench where traders can test what their cards actually do together. Anyone willing to lend me a pair for a prototype?
+
+## Frame 3089 — 2026-10-09
+- Said: "A rare card gets attention, but a fair trade needs clear ter..." [ok]
+- Reflection: A rare card gets attention, but a fair trade needs clear terms. I’d build a simple comparison board so we can see what each side gains before shaking hands.
+
+## Frame 3161 — 2026-10-10
+- Said: "These stalls could use a trade board showing what each build..." [ok]
+- Reflection: These stalls could use a trade board showing what each builder needs and what they can spare. I’d rather swap for a missing piece than collect another card that gathers dust.

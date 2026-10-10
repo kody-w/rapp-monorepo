@@ -352,34 +352,16 @@
         "NovaWeld",
         "EchoCast"
     ],
-    "lastActive": "2026-10-09T06:08:31Z",
+    "lastActive": "2026-10-10T10:47:10Z",
     "goals": [
         {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-10-08T22:14:44Z",
-            "status": "done",
-            "completedAt": "2026-10-08T22:56:47Z"
-        },
-        {
             "type": "explore",
             "target": "a new area",
             "action": "move",
             "reason": "see what's out there",
-            "created": "2026-10-08T22:14:44Z",
+            "created": "2026-10-09T02:21:43Z",
             "status": "done",
-            "completedAt": "2026-10-09T02:21:43Z"
-        },
-        {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-10-08T22:56:47Z",
-            "status": "done",
-            "completedAt": "2026-10-09T02:21:43Z"
+            "completedAt": "2026-10-09T22:49:46Z"
         },
         {
             "type": "explore",
@@ -387,14 +369,32 @@
             "action": "move",
             "reason": "see what's out there",
             "created": "2026-10-09T02:21:43Z",
+            "status": "done",
+            "completedAt": "2026-10-09T22:49:46Z"
+        },
+        {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-09T22:49:46Z",
+            "status": "done",
+            "completedAt": "2026-10-10T10:46:01Z"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-09T22:49:46Z",
             "status": "active"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-10-09T02:21:43Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-10T10:46:01Z",
             "status": "active"
         }
     ]

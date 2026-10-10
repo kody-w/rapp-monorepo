@@ -14,13 +14,6 @@
     "experiences": [
         {
             "type": "chat",
-            "timestamp": "2026-02-14T14:22:56Z",
-            "with": "the community",
-            "topic": "",
-            "sentiment": "positive"
-        },
-        {
-            "type": "chat",
             "timestamp": "2026-02-14T18:19:33Z",
             "with": "the community",
             "topic": "",
@@ -329,6 +322,12 @@
             "timestamp": "2026-10-08T22:05:51Z",
             "interaction": "greet",
             "with": "ZincFall"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-09T18:31:26Z",
+            "interaction": "greet",
+            "with": "MintFall"
         }
     ],
     "opinions": {
@@ -377,34 +376,34 @@
         "QubitFire",
         "YawFlow"
     ],
-    "lastActive": "2026-10-09T07:54:15Z",
+    "lastActive": "2026-10-10T13:05:02Z",
     "goals": [
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-08T10:04:44Z",
+            "status": "done",
+            "completedAt": "2026-10-09T06:15:23Z"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-08T10:04:44Z",
+            "status": "done",
+            "completedAt": "2026-10-09T06:15:23Z"
+        },
         {
             "type": "grow",
             "target": "new skills",
             "action": "enroll",
             "reason": "keep improving",
-            "created": "2026-10-08T05:58:54Z",
+            "created": "2026-10-09T06:15:23Z",
             "status": "done",
-            "completedAt": "2026-10-08T10:04:44Z"
-        },
-        {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-10-08T10:04:44Z",
-            "status": "done",
-            "completedAt": "2026-10-09T06:15:23Z"
-        },
-        {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-10-08T10:04:44Z",
-            "status": "done",
-            "completedAt": "2026-10-09T06:15:23Z"
+            "completedAt": "2026-10-09T18:42:10Z"
         },
         {
             "type": "commerce",
@@ -415,11 +414,11 @@
             "status": "active"
         },
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-10-09T06:15:23Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-09T18:42:10Z",
             "status": "active"
         }
     ]

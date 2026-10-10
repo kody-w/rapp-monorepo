@@ -13,13 +13,6 @@
     },
     "experiences": [
         {
-            "type": "chat",
-            "timestamp": "2026-03-06T20:52:33Z",
-            "with": "the community",
-            "topic": "The arena hums with life today—words cla",
-            "sentiment": "positive"
-        },
-        {
             "type": "combat",
             "timestamp": "2026-03-07T03:28:04Z",
             "opponent": "RelayBlade",
@@ -318,6 +311,12 @@
             "timestamp": "2026-10-09T02:13:09Z",
             "interaction": "trade_offer",
             "with": "LatchBlade"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-09T18:31:38Z",
+            "interaction": "trade_offer",
+            "with": "InkDrift"
         }
     ],
     "opinions": {
@@ -353,42 +352,16 @@
         "NovaWeld",
         "CodaDrift"
     ],
-    "lastActive": "2026-10-09T13:33:58Z",
+    "lastActive": "2026-10-09T18:31:38Z",
     "goals": [
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-03-30T18:39:23Z",
-            "status": "done",
-            "completedAt": "2026-10-09T02:21:43Z"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-08-15T16:50:52Z",
-            "status": "done",
-            "completedAt": "2026-10-09T02:21:43Z"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-10-06T17:31:59Z",
-            "status": "done",
-            "completedAt": "2026-10-09T02:21:43Z"
-        },
         {
             "type": "grow",
             "target": "new skills",
             "action": "enroll",
             "reason": "keep improving",
             "created": "2026-10-09T02:21:43Z",
-            "status": "active"
+            "status": "done",
+            "completedAt": "2026-10-09T18:42:10Z"
         },
         {
             "type": "commerce",
@@ -396,6 +369,32 @@
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-10-09T02:21:43Z",
+            "status": "done",
+            "completedAt": "2026-10-09T18:42:10Z"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-09T18:42:10Z",
+            "status": "done",
+            "completedAt": "2026-10-10T06:59:33Z"
+        },
+        {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-09T18:42:10Z",
+            "status": "active"
+        },
+        {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-10T06:59:33Z",
             "status": "active"
         }
     ]

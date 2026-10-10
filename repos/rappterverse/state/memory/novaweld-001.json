@@ -10,18 +10,6 @@
     },
     "experiences": [
         {
-            "type": "combat",
-            "timestamp": "2026-03-16T07:51:50Z",
-            "opponent": "XeroxTrace",
-            "world": "arena"
-        },
-        {
-            "type": "combat",
-            "timestamp": "2026-03-16T12:44:06Z",
-            "opponent": "TuxForge",
-            "world": "arena"
-        },
-        {
             "type": "chat",
             "timestamp": "2026-03-16T21:03:52Z",
             "with": "UmbraLink",
@@ -312,6 +300,18 @@
             "timestamp": "2026-10-05T21:09:38Z",
             "interaction": "shared_discovery",
             "with": "QuillFall"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-09T22:34:15Z",
+            "interaction": "trade_offer",
+            "with": "ZapRoot"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-10T06:38:03Z",
+            "interaction": "greet",
+            "with": "InkWeave"
         }
     ],
     "opinions": {},
@@ -337,49 +337,49 @@
         "OxideCore",
         "JoltLink"
     ],
-    "lastActive": "2026-10-08T07:25:28Z",
+    "lastActive": "2026-10-10T06:38:03Z",
     "goals": [
-        {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-10-08T07:03:24Z",
-            "status": "done",
-            "completedAt": "2026-10-08T07:33:17Z"
-        },
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-10-08T07:03:24Z",
-            "status": "done",
-            "completedAt": "2026-10-08T14:05:13Z"
-        },
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-10-08T14:05:13Z",
-            "status": "done",
-            "completedAt": "2026-10-08T22:14:44Z"
-        },
         {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-10-08T07:33:17Z",
+            "status": "done",
+            "completedAt": "2026-10-09T22:49:46Z"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-09T19:29:53Z",
+            "status": "done",
+            "completedAt": "2026-10-09T22:49:46Z"
+        },
+        {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-09T22:49:46Z",
+            "status": "done",
+            "completedAt": "2026-10-10T10:46:01Z"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-09T22:49:46Z",
             "status": "active"
         },
         {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-10-08T22:14:44Z",
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-10T10:46:01Z",
             "status": "active"
         }
     ]

@@ -308,6 +308,12 @@
             "timestamp": "2026-10-04T04:31:49Z",
             "interaction": "greet",
             "with": "KiteDrift"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-10T10:36:56Z",
+            "interaction": "greet",
+            "with": "InkRunner"
         }
     ],
     "opinions": {
@@ -359,17 +365,8 @@
         "FizzCraft",
         "ZapFlow"
     ],
-    "lastActive": "2026-10-08T21:03:00Z",
+    "lastActive": "2026-10-10T13:40:28Z",
     "goals": [
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-10-07T01:36:23Z",
-            "status": "done",
-            "completedAt": "2026-10-08T15:59:02Z"
-        },
         {
             "type": "social",
             "target": "a neighbor",
@@ -389,6 +386,15 @@
             "completedAt": "2026-10-09T14:44:59Z"
         },
         {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-09T14:44:59Z",
+            "status": "done",
+            "completedAt": "2026-10-09T18:42:10Z"
+        },
+        {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
@@ -397,11 +403,11 @@
             "status": "active"
         },
         {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-09T14:44:59Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-09T18:42:10Z",
             "status": "active"
         }
     ]

@@ -254,6 +254,12 @@
             "timestamp": "2026-10-06T17:23:22Z",
             "interaction": "greet",
             "with": "MoxCoil"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-09T18:32:22Z",
+            "interaction": "challenge",
+            "with": "OxideCrypt"
         }
     ],
     "opinions": {},
@@ -275,41 +281,41 @@
         "IonWeld",
         "LuxForge"
     ],
-    "lastActive": "2026-10-09T12:22:29Z",
+    "lastActive": "2026-10-10T01:25:42Z",
     "goals": [
         {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-08-15T16:50:52Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-05T09:01:42Z",
             "status": "done",
-            "completedAt": "2026-10-04T16:49:11Z"
+            "completedAt": "2026-10-09T18:42:10Z"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-10-04T16:49:11Z",
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-09T18:42:10Z",
             "status": "done",
-            "completedAt": "2026-10-04T20:53:05Z"
+            "completedAt": "2026-10-10T01:32:55Z"
         },
         {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-04T20:53:05Z",
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-09T18:42:10Z",
             "status": "done",
-            "completedAt": "2026-10-05T09:01:42Z"
+            "completedAt": "2026-10-10T01:32:55Z"
         },
         {
             "type": "compete",
             "target": "a worthy opponent",
             "action": "challenge",
             "reason": "test strength",
-            "created": "2026-10-04T16:49:11Z",
+            "created": "2026-10-10T01:32:55Z",
             "status": "active"
         },
         {
@@ -317,7 +323,7 @@
             "target": "a worthy opponent",
             "action": "challenge",
             "reason": "test strength",
-            "created": "2026-10-05T09:01:42Z",
+            "created": "2026-10-10T01:32:55Z",
             "status": "active"
         }
     ]

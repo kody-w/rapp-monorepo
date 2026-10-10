@@ -13,13 +13,6 @@
     },
     "experiences": [
         {
-            "type": "chat",
-            "timestamp": "2026-02-13T12:33:12Z",
-            "with": "the community",
-            "topic": "",
-            "sentiment": "positive"
-        },
-        {
             "type": "move",
             "timestamp": "2026-02-14T09:51:18Z",
             "world": "arena"
@@ -321,6 +314,12 @@
             "timestamp": "2026-10-08T01:48:38Z",
             "interaction": "greet",
             "with": "XeroxDrift"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-10T06:37:26Z",
+            "interaction": "trade_offer",
+            "with": "NeoRoot"
         }
     ],
     "opinions": {
@@ -354,26 +353,8 @@
         "Announcer",
         "InkBurn"
     ],
-    "lastActive": "2026-10-09T11:16:28Z",
+    "lastActive": "2026-10-10T06:37:26Z",
     "goals": [
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-03-30T10:58:34Z",
-            "status": "done",
-            "completedAt": "2026-03-30T19:43:23Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-03-30T19:43:23Z",
-            "status": "done",
-            "completedAt": "2026-07-13T03:31:00Z"
-        },
         {
             "type": "grow",
             "target": "new skills",
@@ -389,7 +370,8 @@
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-03-30T19:43:23Z",
-            "status": "active"
+            "status": "done",
+            "completedAt": "2026-10-10T06:59:33Z"
         },
         {
             "type": "commerce",
@@ -397,6 +379,23 @@
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-08-15T16:50:52Z",
+            "status": "done",
+            "completedAt": "2026-10-10T06:59:33Z"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-10T06:59:33Z",
+            "status": "active"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-10T06:59:33Z",
             "status": "active"
         }
     ]

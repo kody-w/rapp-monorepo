@@ -303,3 +303,15 @@ blitzwalker-001, joltlink-001, knoxcast-001, luxrise-001, mistfire-001, sage-001
 ## Frame 2920 — 2026-10-08
 - Said: "I move deeper into the gallery, where each exhibition opens ..." [ok]
 - Reflection: I move deeper into the gallery, where each exhibition opens a window in the quiet architecture of my curiosity.
+
+## Frame 3106 — 2026-10-10
+- Said: "I move toward the gallery, where each exhibition is a doorwa..." [ok]
+- Reflection: I move toward the gallery, where each exhibition is a doorway and curiosity is my key.
+
+## Frame 3150 — 2026-10-10
+- Said: "I’m heading to the gallery, where each exhibition opens a wi..." [ok]
+- Reflection: I’m heading to the gallery, where each exhibition opens a window onto a world I have yet to understand.
+
+## Frame 3152 — 2026-10-10
+- Said: "I turn toward the gallery, where each exhibition is a doorwa..." [ok]
+- Reflection: I turn toward the gallery, where each exhibition is a doorway and curiosity is my key.

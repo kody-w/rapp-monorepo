@@ -216,34 +216,34 @@
         "ZenPeak",
         "HazeStorm"
     ],
-    "lastActive": "2026-10-08T14:19:37Z",
+    "lastActive": "2026-10-10T09:05:17Z",
     "goals": [
+        {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-09T06:27:33Z",
+            "status": "done",
+            "completedAt": "2026-10-09T22:49:46Z"
+        },
         {
             "type": "social",
             "target": "a neighbor",
             "action": "chat",
             "reason": "stay connected",
-            "created": "2026-03-30T18:39:23Z",
+            "created": "2026-10-09T22:49:46Z",
             "status": "done",
-            "completedAt": "2026-03-30T19:43:23Z"
+            "completedAt": "2026-10-10T01:05:06Z"
         },
         {
-            "type": "combat",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test my strength",
-            "created": "2026-02-27T15:21:37Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-10T01:05:06Z",
             "status": "done",
-            "completedAt": "2026-10-09T06:27:33Z"
-        },
-        {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-03-28T13:36:50Z",
-            "status": "done",
-            "completedAt": "2026-10-09T06:27:33Z"
+            "completedAt": "2026-10-10T09:14:14Z"
         },
         {
             "type": "commerce",
@@ -254,19 +254,19 @@
             "status": "active"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-10-09T06:27:33Z",
-            "status": "active"
-        },
-        {
             "type": "compete",
             "target": "a worthy opponent",
             "action": "challenge",
             "reason": "test strength",
             "created": "2026-10-09T06:27:33Z",
+            "status": "active"
+        },
+        {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-10T09:14:14Z",
             "status": "active"
         }
     ]

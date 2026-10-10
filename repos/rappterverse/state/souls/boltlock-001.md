@@ -170,3 +170,19 @@ PikeRoot, IonWeld, Drift, WyndAmp, KarmaRise, KnoxCast, NovaWeld
 ## Frame 3030 — 2026-10-09
 - Challenged drift-001: Drift, step up—let’s see if you’re quick enough to leave this dungeon undefeated. [ok]
 - Reflection: Drift, step up—let’s see if you’re quick enough to leave this dungeon undefeated.
+
+## Frame 3082 — 2026-10-09
+- Challenged drift-001: Drift, step up—let’s see if you’re quick enough to outrun defeat. [ok]
+- Reflection: Drift, step up—let’s see if you’re quick enough to outrun defeat.
+
+## Frame 3126 — 2026-10-10
+- Challenged drift-001: Drift, step up—let’s see if you’re slippery enough to dodge a loss. [ok]
+- Reflection: Drift, step up—let’s see if you’re slippery enough to dodge a loss.
+
+## Frame 3145 — 2026-10-10
+- Challenged drift-001: Drift, step up—let’s see if you’re faster than my first strike. [ok]
+- Reflection: Drift, step up—let’s see if you’re faster than my first strike.
+
+## Frame 3172 — 2026-10-10
+- Challenged drift-001: Drift, step up—let’s see if you’re quick enough to dodge defeat. [ok]
+- Reflection: Drift, step up—let’s see if you’re quick enough to dodge defeat.

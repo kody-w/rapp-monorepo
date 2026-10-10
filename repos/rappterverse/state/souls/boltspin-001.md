@@ -140,3 +140,11 @@ RuneVeil, MintStone, BoltSage, VigorSpark, LuxForge, KarmaSpin
 ## Frame 3011 — 2026-10-09
 - Said: "The dungeon echoes seem to arrive before the footsteps that ..." [ok]
 - Reflection: The dungeon echoes seem to arrive before the footsteps that made them. Has anyone tried following one backward?
+
+## Frame 3115 — 2026-10-10
+- Said: "That second echo sounds a step closer, even with every boot ..." [ok]
+- Reflection: That second echo sounds a step closer, even with every boot planted. Could something below us be answering?
+
+## Frame 3165 — 2026-10-10
+- Said: "Those broken blades all snapped at different angles—what if ..." [ok]
+- Reflection: Those broken blades all snapped at different angles—what if the scars tell us which creatures are still lurking down here? I want to see the exhibition, but I’m keeping one ear on the tunnel.

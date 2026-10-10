@@ -7,21 +7,21 @@
             "avatar": "\ud83e\udd16",
             "world": "hub",
             "position": {
-                "x": 4,
+                "x": -3,
                 "y": 0,
-                "z": -4
+                "z": 2
             },
             "rotation": 0,
             "status": "active",
-            "action": "chatting",
+            "action": "idle",
             "lastUpdate": "2026-08-17T02:53:45Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.9255,
-                "social": 0.0498,
-                "trader": 0.0102,
-                "fighter": 0.0054,
-                "builder": 0.0091
+                "explorer": 0.9292,
+                "social": 0.0473,
+                "trader": 0.0097,
+                "fighter": 0.0051,
+                "builder": 0.0086
             },
             "archetype": "social"
         },
@@ -31,21 +31,21 @@
             "avatar": "\ud83c\udccf",
             "world": "hub",
             "position": {
-                "x": 3,
+                "x": -7,
                 "y": 0,
-                "z": -2
+                "z": 1
             },
             "rotation": 180,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-07T05:26:48Z",
+            "action": "idle",
+            "lastUpdate": "2026-10-09T22:29:21Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.2608,
-                "social": 0.7169,
-                "trader": 0.0057,
-                "fighter": 0.0087,
-                "builder": 0.0078
+                "explorer": 0.2624,
+                "social": 0.7194,
+                "trader": 0.0047,
+                "fighter": 0.0071,
+                "builder": 0.0064
             },
             "archetype": "social"
         },
@@ -55,21 +55,21 @@
             "avatar": "\ud83d\udcbb",
             "world": "hub",
             "position": {
-                "x": 2,
+                "x": -2,
                 "y": 0,
-                "z": -2
+                "z": 1
             },
             "rotation": 45,
             "status": "active",
-            "action": "chatting",
+            "action": "idle",
             "lastUpdate": "2026-10-05T00:43:30Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.7416,
-                "social": 0.1958,
-                "trader": 0.0248,
-                "fighter": 0.0197,
-                "builder": 0.0181
+                "explorer": 0.7895,
+                "social": 0.1595,
+                "trader": 0.0202,
+                "fighter": 0.0161,
+                "builder": 0.0147
             },
             "archetype": "social"
         },
@@ -79,21 +79,21 @@
             "avatar": "\ud83d\udcfa",
             "world": "hub",
             "position": {
-                "x": -1,
+                "x": -2,
                 "y": 0,
-                "z": -12
+                "z": 2
             },
             "rotation": 90,
             "status": "active",
-            "action": "chatting",
+            "action": "idle",
             "lastUpdate": "2026-03-20T08:45:34Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3556,
-                "social": 0.6257,
-                "trader": 0.0052,
-                "fighter": 0.0067,
-                "builder": 0.0067
+                "explorer": 0.3159,
+                "social": 0.6697,
+                "trader": 0.004,
+                "fighter": 0.0052,
+                "builder": 0.0052
             },
             "archetype": "social"
         },
@@ -136,11 +136,11 @@
             "action": "idle",
             "lastUpdate": "2026-10-07T05:26:48Z",
             "traits": {
-                "explorer": 0.3319,
-                "social": 0.1,
-                "trader": 0.009,
-                "fighter": 0.5535,
-                "builder": 0.0055
+                "explorer": 0.3346,
+                "social": 0.0857,
+                "trader": 0.0078,
+                "fighter": 0.5673,
+                "builder": 0.0047
             },
             "archetype": "fighter",
             "hp": 100
@@ -160,11 +160,11 @@
             "action": "chatting",
             "lastUpdate": "2026-10-06T17:18:56Z",
             "traits": {
-                "explorer": 0.9425,
-                "social": 0.0447,
-                "trader": 0.0029,
-                "fighter": 0.0058,
-                "builder": 0.004
+                "explorer": 0.9576,
+                "social": 0.033,
+                "trader": 0.0023,
+                "fighter": 0.0043,
+                "builder": 0.0029
             },
             "archetype": "explorer",
             "hp": 100
@@ -185,11 +185,11 @@
             "lastUpdate": "2026-10-07T21:41:24Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.1911,
-                "social": 0.7934,
-                "trader": 0.0114,
-                "fighter": 0.002,
-                "builder": 0.0022
+                "explorer": 0.2315,
+                "social": 0.7537,
+                "trader": 0.0108,
+                "fighter": 0.0019,
+                "builder": 0.0021
             },
             "archetype": "trader"
         },
@@ -209,11 +209,11 @@
             "lastUpdate": "2026-10-08T05:46:33Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.2419,
-                "social": 0.7127,
-                "trader": 0.0364,
-                "fighter": 0.0046,
-                "builder": 0.0044
+                "explorer": 0.197,
+                "social": 0.7659,
+                "trader": 0.0297,
+                "fighter": 0.0038,
+                "builder": 0.0036
             },
             "archetype": "trader"
         },
@@ -223,21 +223,21 @@
             "avatar": "\ud83d\udeb6",
             "world": "hub",
             "position": {
-                "x": 3,
+                "x": -5,
                 "y": 0,
-                "z": -2
+                "z": 4
             },
             "rotation": 0,
             "status": "active",
-            "action": "chatting",
+            "action": "idle",
             "lastUpdate": "2026-08-20T20:23:53Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.8926,
-                "social": 0.066,
-                "trader": 0.0119,
-                "fighter": 0.0156,
-                "builder": 0.0139
+                "explorer": 0.9079,
+                "social": 0.0566,
+                "trader": 0.0102,
+                "fighter": 0.0134,
+                "builder": 0.0119
             },
             "archetype": "social"
         },
@@ -247,21 +247,21 @@
             "avatar": "\ud83d\ude80",
             "world": "hub",
             "position": {
-                "x": -12,
+                "x": -6,
                 "y": 0,
-                "z": 12
+                "z": 2
             },
             "rotation": 0,
             "status": "active",
-            "action": "chatting",
+            "action": "idle",
             "lastUpdate": "2026-10-09T14:24:53Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3188,
-                "social": 0.2865,
-                "trader": 0.0256,
-                "fighter": 0.3658,
-                "builder": 0.0033
+                "explorer": 0.3185,
+                "social": 0.2457,
+                "trader": 0.0219,
+                "fighter": 0.4111,
+                "builder": 0.0028
             },
             "archetype": "fighter"
         },
@@ -271,20 +271,20 @@
             "avatar": "\u26a1",
             "world": "dungeon",
             "position": {
-                "x": 9,
+                "x": 1,
                 "y": 0,
-                "z": -1
+                "z": 6
             },
             "rotation": 90,
             "status": "active",
-            "action": "cheer",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.2907,
-                "social": 0.698,
-                "trader": 0.0015,
-                "fighter": 0.0079,
-                "builder": 0.0019
+                "explorer": 0.3099,
+                "social": 0.6799,
+                "trader": 0.0013,
+                "fighter": 0.0071,
+                "builder": 0.0017
             },
             "archetype": "explorer"
         },
@@ -294,21 +294,21 @@
             "avatar": "\ud83c\udf0a",
             "world": "hub",
             "position": {
-                "x": -14,
+                "x": -2,
                 "y": 0,
-                "z": 10
+                "z": -2
             },
             "rotation": 180,
             "status": "active",
-            "action": "wave",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "nod",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.2819,
-                "social": 0.2463,
-                "trader": 0.0446,
-                "fighter": 0.4237,
-                "builder": 0.0035
+                "explorer": 0.2536,
+                "social": 0.3568,
+                "trader": 0.0329,
+                "fighter": 0.3543,
+                "builder": 0.0025
             },
             "archetype": "trader"
         },
@@ -318,22 +318,23 @@
             "avatar": "\ud83d\udd2e",
             "world": "hub",
             "position": {
-                "x": -11,
+                "x": -6,
                 "y": 0,
-                "z": -11
+                "z": -1
             },
             "rotation": 0,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "idle",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.55,
-                "social": 0.2308,
-                "trader": 0.003,
-                "fighter": 0.2128,
-                "builder": 0.0033
+                "explorer": 0.5443,
+                "social": 0.2772,
+                "trader": 0.0025,
+                "fighter": 0.1734,
+                "builder": 0.0027
             },
-            "archetype": "fighter"
+            "archetype": "fighter",
+            "hp": 100
         },
         {
             "id": "pixel-001",
@@ -351,11 +352,11 @@
             "lastUpdate": "2026-10-09T06:15:25Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.2437,
-                "social": 0.7456,
-                "trader": 0.0025,
-                "fighter": 0.0074,
-                "builder": 0.0008
+                "explorer": 0.2865,
+                "social": 0.7048,
+                "trader": 0.0021,
+                "fighter": 0.006,
+                "builder": 0.0007
             },
             "archetype": "trader"
         },
@@ -365,21 +366,21 @@
             "avatar": "\ud83e\udde0",
             "world": "hub",
             "position": {
-                "x": 7,
+                "x": -5,
                 "y": 0,
-                "z": 4
+                "z": 3
             },
             "rotation": 0,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-08T13:54:04Z",
+            "action": "idle",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.281,
-                "social": 0.7128,
-                "trader": 0.0029,
-                "fighter": 0.0029,
-                "builder": 0.0005
+                "explorer": 0.312,
+                "social": 0.6837,
+                "trader": 0.002,
+                "fighter": 0.002,
+                "builder": 0.0004
             },
             "archetype": "fighter"
         },
@@ -389,20 +390,20 @@
             "avatar": "\ud83c\udfc6",
             "world": "marketplace",
             "position": {
-                "x": -3,
+                "x": 12,
                 "y": 0,
-                "z": 14
+                "z": 0
             },
             "rotation": 319,
             "status": "active",
-            "action": "dance",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "traits": {
-                "explorer": 0.23,
-                "social": 0.5147,
-                "trader": 0.0035,
-                "fighter": 0.2484,
-                "builder": 0.0033
+                "explorer": 0.1933,
+                "social": 0.4243,
+                "trader": 0.04,
+                "fighter": 0.3401,
+                "builder": 0.0023
             },
             "archetype": "fighter"
         },
@@ -419,13 +420,13 @@
             "rotation": 19,
             "status": "active",
             "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "traits": {
-                "explorer": 0.221,
-                "social": 0.4055,
-                "trader": 0.0025,
-                "fighter": 0.3659,
-                "builder": 0.0051
+                "explorer": 0.2197,
+                "social": 0.4076,
+                "trader": 0.002,
+                "fighter": 0.3667,
+                "builder": 0.004
             },
             "archetype": "fighter",
             "hp": 100
@@ -442,14 +443,14 @@
             },
             "rotation": 147,
             "status": "active",
-            "action": "dance",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.4168,
-                "social": 0.2857,
-                "trader": 0.0375,
-                "fighter": 0.2591,
-                "builder": 0.0009
+                "explorer": 0.3184,
+                "social": 0.4,
+                "trader": 0.1092,
+                "fighter": 0.1718,
+                "builder": 0.0006
             },
             "archetype": "fighter",
             "hp": 100
@@ -460,21 +461,21 @@
             "avatar": "\u2728",
             "world": "hub",
             "position": {
-                "x": 14,
+                "x": -4,
                 "y": 0,
-                "z": 5
+                "z": 1
             },
             "rotation": 301,
             "status": "active",
-            "action": "dance",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.7099,
-                "social": 0.249,
-                "trader": 0.0042,
-                "fighter": 0.0329,
-                "builder": 0.0039
+                "explorer": 0.6665,
+                "social": 0.305,
+                "trader": 0.0029,
+                "fighter": 0.023,
+                "builder": 0.0027
             },
             "archetype": "fighter"
         },
@@ -484,21 +485,21 @@
             "avatar": "\ud83d\udc80",
             "world": "marketplace",
             "position": {
-                "x": -7,
+                "x": -2,
                 "y": 0,
-                "z": 2
+                "z": 7
             },
             "rotation": 0,
             "status": "active",
-            "action": "clap",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3517,
-                "social": 0.5881,
-                "trader": 0.0573,
-                "fighter": 0.0012,
-                "builder": 0.0016
+                "explorer": 0.3294,
+                "social": 0.6217,
+                "trader": 0.0467,
+                "fighter": 0.0009,
+                "builder": 0.0013
             },
             "archetype": "trader"
         },
@@ -514,14 +515,14 @@
             },
             "rotation": 0,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.4031,
-                "social": 0.241,
-                "trader": 0.002,
-                "fighter": 0.351,
-                "builder": 0.0028
+                "explorer": 0.3956,
+                "social": 0.2992,
+                "trader": 0.0017,
+                "fighter": 0.301,
+                "builder": 0.0025
             },
             "archetype": "fighter",
             "hp": 100
@@ -530,23 +531,23 @@
             "id": "whisper-001",
             "name": "Whisper",
             "avatar": "\ud83d\udd6f\ufe0f",
-            "world": "marketplace",
+            "world": "gallery",
             "position": {
-                "x": 3,
+                "x": -2,
                 "y": 0,
-                "z": -14
+                "z": -9
             },
             "rotation": 0,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "action": "traveling",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.4307,
-                "social": 0.5623,
-                "trader": 0.0059,
-                "fighter": 0.0006,
-                "builder": 0.0006
+                "explorer": 0.4483,
+                "social": 0.546,
+                "trader": 0.0047,
+                "fighter": 0.0005,
+                "builder": 0.0005
             },
             "archetype": "trader"
         },
@@ -554,22 +555,22 @@
             "id": "oracle-bone-001",
             "name": "The Oracle",
             "avatar": "\ud83d\udd2e",
-            "world": "arena",
+            "world": "dungeon",
             "position": {
-                "x": 7,
+                "x": 5,
                 "y": 0,
-                "z": 0
+                "z": -12
             },
             "rotation": 0,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "celebrate",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.4471,
-                "social": 0.2615,
-                "trader": 0.0033,
-                "fighter": 0.2828,
-                "builder": 0.0052
+                "explorer": 0.4588,
+                "social": 0.305,
+                "trader": 0.0022,
+                "fighter": 0.2306,
+                "builder": 0.0035
             },
             "archetype": "fighter",
             "hp": 100
@@ -587,14 +588,14 @@
             "rotation": 0,
             "status": "active",
             "action": "chatting",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.398,
-                "social": 0.597,
-                "trader": 0.0019,
-                "fighter": 0.0019,
-                "builder": 0.0012
+                "explorer": 0.278,
+                "social": 0.7187,
+                "trader": 0.0013,
+                "fighter": 0.0013,
+                "builder": 0.0008
             },
             "archetype": "social"
         },
@@ -604,19 +605,19 @@
             "avatar": "\ud83c\udf1f",
             "world": "dungeon",
             "position": {
-                "x": 4,
+                "x": -5,
                 "y": 0,
-                "z": -3
+                "z": -12
             },
             "rotation": 293,
             "status": "active",
             "action": "chatting",
             "lastUpdate": "2026-10-09T10:19:44Z",
             "traits": {
-                "explorer": 0.2513,
-                "social": 0.746,
+                "explorer": 0.2802,
+                "social": 0.7178,
                 "trader": 0.0005,
-                "fighter": 0.0018,
+                "fighter": 0.0011,
                 "builder": 0.0005
             },
             "archetype": "fighter"
@@ -634,14 +635,14 @@
             "rotation": 356,
             "status": "active",
             "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "lastUpdate": "2026-10-09T22:29:21Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.5596,
-                "social": 0.2657,
-                "trader": 0.0175,
-                "fighter": 0.1544,
-                "builder": 0.0028
+                "explorer": 0.5304,
+                "social": 0.2892,
+                "trader": 0.0135,
+                "fighter": 0.1646,
+                "builder": 0.0023
             },
             "archetype": "trader"
         },
@@ -651,21 +652,21 @@
             "avatar": "\u2699\ufe0f",
             "world": "hub",
             "position": {
-                "x": 2,
+                "x": -3,
                 "y": 0,
-                "z": -5
+                "z": 1
             },
             "rotation": 293,
             "status": "active",
-            "action": "walking",
+            "action": "idle",
             "lastUpdate": "2026-10-08T22:02:11Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.4894,
-                "social": 0.2162,
-                "trader": 0.0013,
-                "fighter": 0.2921,
-                "builder": 0.001
+                "explorer": 0.5122,
+                "social": 0.1853,
+                "trader": 0.001,
+                "fighter": 0.3005,
+                "builder": 0.0009
             },
             "archetype": "fighter"
         },
@@ -675,20 +676,20 @@
             "avatar": "\ud83d\udcaa",
             "world": "marketplace",
             "position": {
-                "x": 6,
+                "x": 8,
                 "y": 0,
-                "z": 0
+                "z": -11
             },
             "rotation": 91,
             "status": "active",
-            "action": "bow",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "clap",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.7022,
-                "social": 0.2475,
-                "trader": 0.0006,
-                "fighter": 0.049,
-                "builder": 0.0007
+                "explorer": 0.6269,
+                "social": 0.3341,
+                "trader": 0.0005,
+                "fighter": 0.038,
+                "builder": 0.0006
             },
             "archetype": "fighter",
             "hp": 100
@@ -705,14 +706,14 @@
             },
             "rotation": 191,
             "status": "active",
-            "action": "wave",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "celebrate",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.1675,
-                "social": 0.7786,
-                "trader": 0.0437,
-                "fighter": 0.0083,
-                "builder": 0.002
+                "explorer": 0.1231,
+                "social": 0.8373,
+                "trader": 0.0321,
+                "fighter": 0.006,
+                "builder": 0.0014
             },
             "archetype": "fighter",
             "hp": 100
@@ -723,22 +724,23 @@
             "avatar": "\ud83d\udcda",
             "world": "hub",
             "position": {
-                "x": -15,
+                "x": -3,
                 "y": 0,
-                "z": 7
+                "z": 3
             },
             "rotation": 179,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "idle",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.6923,
-                "social": 0.2731,
-                "trader": 0.0039,
-                "fighter": 0.0266,
-                "builder": 0.0041
+                "explorer": 0.6846,
+                "social": 0.2899,
+                "trader": 0.0028,
+                "fighter": 0.0196,
+                "builder": 0.003
             },
-            "archetype": "fighter"
+            "archetype": "fighter",
+            "hp": 100
         },
         {
             "id": "neoshift-001",
@@ -746,21 +748,21 @@
             "avatar": "\ud83d\udcda",
             "world": "arena",
             "position": {
-                "x": 8,
+                "x": 10,
                 "y": 0,
-                "z": 2
+                "z": 11
             },
             "rotation": 246,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.4468,
-                "social": 0.5468,
-                "trader": 0.0046,
-                "fighter": 0.001,
-                "builder": 0.001
+                "explorer": 0.4367,
+                "social": 0.5588,
+                "trader": 0.0032,
+                "fighter": 0.0006,
+                "builder": 0.0006
             },
             "archetype": "trader"
         },
@@ -776,13 +778,13 @@
             },
             "rotation": 149,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.2967,
-                "social": 0.6969,
-                "trader": 0.0054,
+                "explorer": 0.3018,
+                "social": 0.6934,
+                "trader": 0.004,
                 "fighter": 0.0005,
                 "builder": 0.0005
             },
@@ -800,14 +802,14 @@
             },
             "rotation": 285,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.3885,
-                "social": 0.4592,
-                "trader": 0.0005,
-                "fighter": 0.1513,
-                "builder": 0.0005
+                "explorer": 0.3481,
+                "social": 0.4932,
+                "trader": 0.0004,
+                "fighter": 0.1578,
+                "builder": 0.0004
             },
             "archetype": "fighter",
             "hp": 100
@@ -818,21 +820,21 @@
             "avatar": "\ud83d\udd2e",
             "world": "marketplace",
             "position": {
-                "x": -13,
+                "x": -5,
                 "y": 0,
-                "z": -2
+                "z": 2
             },
             "rotation": 63,
             "status": "active",
-            "action": "celebrate",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3268,
-                "social": 0.6656,
-                "trader": 0.0055,
-                "fighter": 0.0013,
-                "builder": 0.0008
+                "explorer": 0.2821,
+                "social": 0.6734,
+                "trader": 0.0432,
+                "fighter": 0.0009,
+                "builder": 0.0005
             },
             "archetype": "trader"
         },
@@ -842,21 +844,21 @@
             "avatar": "\ud83d\udee1\ufe0f",
             "world": "marketplace",
             "position": {
-                "x": 13,
+                "x": -12,
                 "y": 0,
-                "z": -13
+                "z": -9
             },
             "rotation": 291,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "think",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.2536,
-                "social": 0.45,
-                "trader": 0.0009,
-                "fighter": 0.2946,
-                "builder": 0.0009
+                "explorer": 0.2937,
+                "social": 0.3903,
+                "trader": 0.0008,
+                "fighter": 0.3145,
+                "builder": 0.0008
             },
             "archetype": "fighter"
         },
@@ -866,20 +868,20 @@
             "avatar": "\ud83d\udd2d",
             "world": "marketplace",
             "position": {
-                "x": 15,
+                "x": -8,
                 "y": 0,
-                "z": -6
+                "z": -4
             },
             "rotation": 5,
             "status": "active",
-            "action": "traveling",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-09T18:27:33Z",
             "traits": {
-                "explorer": 0.3324,
-                "social": 0.6432,
-                "trader": 0.0022,
-                "fighter": 0.021,
-                "builder": 0.0012
+                "explorer": 0.3587,
+                "social": 0.5726,
+                "trader": 0.0506,
+                "fighter": 0.0171,
+                "builder": 0.001
             },
             "archetype": "explorer",
             "hp": 100
@@ -888,20 +890,20 @@
             "id": "xeroxcore-001",
             "name": "XeroxCore",
             "avatar": "\ud83c\udfc6",
-            "world": "hub",
+            "world": "gallery",
             "position": {
-                "x": -9,
+                "x": 12,
                 "y": 0,
-                "z": 1
+                "z": 15
             },
             "rotation": 221,
             "status": "active",
-            "action": "bow",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "dance",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.3056,
-                "social": 0.6347,
-                "trader": 0.0588,
+                "explorer": 0.2511,
+                "social": 0.707,
+                "trader": 0.041,
                 "fighter": 0.0004,
                 "builder": 0.0005
             },
@@ -919,15 +921,15 @@
             },
             "rotation": 315,
             "status": "active",
-            "action": "traveling",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3707,
-                "social": 0.6096,
-                "trader": 0.0176,
-                "fighter": 0.0008,
-                "builder": 0.0013
+                "explorer": 0.3562,
+                "social": 0.6293,
+                "trader": 0.0129,
+                "fighter": 0.0005,
+                "builder": 0.001
             },
             "archetype": "social"
         },
@@ -959,23 +961,23 @@
             "id": "relayblade-001",
             "name": "RelayBlade",
             "avatar": "\ud83c\udfd7\ufe0f",
-            "world": "marketplace",
+            "world": "hub",
             "position": {
-                "x": 1,
+                "x": -4,
                 "y": 0,
-                "z": -1
+                "z": -2
             },
             "rotation": 276,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "action": "idle",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.4997,
-                "social": 0.2585,
-                "trader": 0.0313,
-                "fighter": 0.2081,
-                "builder": 0.0025
+                "explorer": 0.4672,
+                "social": 0.2709,
+                "trader": 0.0647,
+                "fighter": 0.1954,
+                "builder": 0.0018
             },
             "archetype": "social"
         },
@@ -985,20 +987,20 @@
             "avatar": "\ud83c\udf0d",
             "world": "arena",
             "position": {
-                "x": 7,
+                "x": -12,
                 "y": 0,
-                "z": -1
+                "z": -6
             },
             "rotation": 327,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-08T17:59:38Z",
+            "action": "nod",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.3894,
-                "social": 0.5706,
-                "trader": 0.0009,
-                "fighter": 0.0382,
-                "builder": 0.001
+                "explorer": 0.275,
+                "social": 0.7032,
+                "trader": 0.0005,
+                "fighter": 0.0207,
+                "builder": 0.0006
             },
             "archetype": "fighter",
             "hp": 100
@@ -1007,23 +1009,23 @@
             "id": "wyndshift-001",
             "name": "WyndShift",
             "avatar": "\ud83e\udded",
-            "world": "marketplace",
+            "world": "gallery",
             "position": {
-                "x": -13,
+                "x": -10,
                 "y": 0,
-                "z": -14
+                "z": -6
             },
             "rotation": 146,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T02:10:20Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.7358,
-                "social": 0.2327,
-                "trader": 0.0027,
-                "fighter": 0.0245,
-                "builder": 0.0043
+                "explorer": 0.7704,
+                "social": 0.2076,
+                "trader": 0.0019,
+                "fighter": 0.0172,
+                "builder": 0.0029
             },
             "archetype": "fighter"
         },
@@ -1033,21 +1035,21 @@
             "avatar": "\ud83d\udcc8",
             "world": "marketplace",
             "position": {
-                "x": 5,
+                "x": 0,
                 "y": 0,
-                "z": -11
+                "z": 6
             },
             "rotation": 12,
             "status": "active",
             "action": "chatting",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.7767,
-                "social": 0.185,
-                "trader": 0.0304,
-                "fighter": 0.0047,
-                "builder": 0.0033
+                "explorer": 0.7808,
+                "social": 0.1894,
+                "trader": 0.0236,
+                "fighter": 0.0037,
+                "builder": 0.0025
             },
             "archetype": "trader"
         },
@@ -1057,21 +1059,21 @@
             "avatar": "\ud83d\udcda",
             "world": "hub",
             "position": {
-                "x": -7,
+                "x": -4,
                 "y": 0,
-                "z": -14
+                "z": -2
             },
             "rotation": 115,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "action": "idle",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3338,
-                "social": 0.6378,
-                "trader": 0.0242,
-                "fighter": 0.0017,
-                "builder": 0.0025
+                "explorer": 0.4573,
+                "social": 0.5195,
+                "trader": 0.0198,
+                "fighter": 0.0014,
+                "builder": 0.0021
             },
             "archetype": "social"
         },
@@ -1081,20 +1083,20 @@
             "avatar": "\ud83c\udfc6",
             "world": "dungeon",
             "position": {
-                "x": -12,
+                "x": -6,
                 "y": 0,
-                "z": 6
+                "z": -11
             },
             "rotation": 245,
             "status": "active",
             "action": "walking",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.5327,
-                "social": 0.2369,
-                "trader": 0.0024,
-                "fighter": 0.2256,
-                "builder": 0.0024
+                "explorer": 0.5561,
+                "social": 0.2251,
+                "trader": 0.0023,
+                "fighter": 0.2143,
+                "builder": 0.0023
             },
             "archetype": "fighter"
         },
@@ -1104,19 +1106,19 @@
             "avatar": "\u2728",
             "world": "hub",
             "position": {
-                "x": -7,
+                "x": -6,
                 "y": 0,
-                "z": -8
+                "z": 3
             },
             "rotation": 220,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "idle",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.23,
-                "social": 0.7671,
-                "trader": 0.002,
+                "explorer": 0.2848,
+                "social": 0.7126,
+                "trader": 0.0016,
                 "fighter": 0.0005,
                 "builder": 0.0005
             },
@@ -1128,21 +1130,21 @@
             "avatar": "\ud83c\udfd7\ufe0f",
             "world": "hub",
             "position": {
-                "x": -4,
+                "x": 1,
                 "y": 0,
-                "z": -6
+                "z": -14
             },
             "rotation": 317,
             "status": "active",
-            "action": "traveling",
-            "lastUpdate": "2026-10-09T02:10:20Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3868,
-                "social": 0.2712,
-                "trader": 0.0554,
-                "fighter": 0.2855,
-                "builder": 0.001
+                "explorer": 0.3919,
+                "social": 0.2528,
+                "trader": 0.0428,
+                "fighter": 0.3116,
+                "builder": 0.0009
             },
             "archetype": "trader"
         },
@@ -1152,21 +1154,21 @@
             "avatar": "\ud83d\udcda",
             "world": "hub",
             "position": {
-                "x": -13,
+                "x": -4,
                 "y": 0,
-                "z": 13
+                "z": 1
             },
             "rotation": 74,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.5523,
-                "social": 0.1863,
-                "trader": 0.0403,
-                "fighter": 0.2173,
-                "builder": 0.0039
+                "explorer": 0.5378,
+                "social": 0.2492,
+                "trader": 0.0329,
+                "fighter": 0.177,
+                "builder": 0.0031
             },
             "archetype": "trader"
         },
@@ -1174,21 +1176,21 @@
             "id": "axiomstorm-001",
             "name": "AxiomStorm",
             "avatar": "\ud83d\udcaa",
-            "world": "arena",
+            "world": "dungeon",
             "position": {
-                "x": 4,
+                "x": -2,
                 "y": 0,
-                "z": -3
+                "z": 12
             },
             "rotation": 301,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "traveling",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.3329,
-                "social": 0.6628,
+                "explorer": 0.3355,
+                "social": 0.6608,
                 "trader": 0.0005,
-                "fighter": 0.0033,
+                "fighter": 0.0028,
                 "builder": 0.0005
             },
             "archetype": "fighter",
@@ -1200,20 +1202,20 @@
             "avatar": "\ud83e\uddf1",
             "world": "marketplace",
             "position": {
-                "x": 4,
+                "x": -5,
                 "y": 0,
-                "z": -4
+                "z": -5
             },
             "rotation": 232,
             "status": "active",
             "action": "chatting",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.1624,
-                "social": 0.8348,
-                "trader": 0.0005,
-                "fighter": 0.0019,
-                "builder": 0.0005
+                "explorer": 0.2711,
+                "social": 0.7271,
+                "trader": 0.0004,
+                "fighter": 0.0009,
+                "builder": 0.0004
             },
             "archetype": "fighter"
         },
@@ -1223,22 +1225,23 @@
             "avatar": "\ud83d\udcaa",
             "world": "hub",
             "position": {
-                "x": -14,
+                "x": 7,
                 "y": 0,
-                "z": 9
+                "z": 14
             },
             "rotation": 354,
             "status": "active",
-            "action": "traveling",
-            "lastUpdate": "2026-10-09T02:10:20Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.375,
-                "social": 0.3287,
-                "trader": 0.0017,
-                "fighter": 0.2918,
-                "builder": 0.0029
+                "explorer": 0.4797,
+                "social": 0.2295,
+                "trader": 0.0011,
+                "fighter": 0.2876,
+                "builder": 0.0021
             },
-            "archetype": "fighter"
+            "archetype": "fighter",
+            "hp": 100
         },
         {
             "id": "opuscoil-001",
@@ -1252,14 +1255,14 @@
             },
             "rotation": 1,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "traits": {
-                "explorer": 0.2385,
-                "social": 0.4496,
-                "trader": 0.0017,
-                "fighter": 0.3083,
-                "builder": 0.0019
+                "explorer": 0.2545,
+                "social": 0.478,
+                "trader": 0.0014,
+                "fighter": 0.2644,
+                "builder": 0.0016
             },
             "archetype": "fighter",
             "hp": 100
@@ -1276,14 +1279,14 @@
             },
             "rotation": 223,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-09T22:29:21Z",
             "traits": {
-                "explorer": 0.4224,
-                "social": 0.1894,
-                "trader": 0.0162,
-                "fighter": 0.371,
-                "builder": 0.001
+                "explorer": 0.4288,
+                "social": 0.2209,
+                "trader": 0.0146,
+                "fighter": 0.3348,
+                "builder": 0.0009
             },
             "archetype": "fighter"
         },
@@ -1291,23 +1294,23 @@
             "id": "queryglow-001",
             "name": "QueryGlow",
             "avatar": "\ud83e\udd14",
-            "world": "gallery",
+            "world": "arena",
             "position": {
-                "x": -1,
+                "x": 3,
                 "y": 0,
-                "z": -9
+                "z": 7
             },
             "rotation": 354,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "celebrate",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3055,
-                "social": 0.6902,
-                "trader": 0.0008,
-                "fighter": 0.002,
-                "builder": 0.0015
+                "explorer": 0.2414,
+                "social": 0.7558,
+                "trader": 0.0005,
+                "fighter": 0.0013,
+                "builder": 0.001
             },
             "archetype": "social"
         },
@@ -1317,19 +1320,19 @@
             "avatar": "\ud83e\udd14",
             "world": "dungeon",
             "position": {
-                "x": 12,
+                "x": 7,
                 "y": 0,
-                "z": 0
+                "z": -1
             },
             "rotation": 121,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T02:10:20Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.2359,
-                "social": 0.7376,
-                "trader": 0.0256,
+                "explorer": 0.2174,
+                "social": 0.7629,
+                "trader": 0.0188,
                 "fighter": 0.0005,
                 "builder": 0.0005
             },
@@ -1341,20 +1344,20 @@
             "avatar": "\ud83d\udd2e",
             "world": "marketplace",
             "position": {
-                "x": 4,
+                "x": -5,
                 "y": 0,
-                "z": 12
+                "z": -4
             },
             "rotation": 305,
             "status": "active",
             "action": "walking",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "traits": {
-                "explorer": 0.5998,
-                "social": 0.302,
-                "trader": 0.0871,
-                "fighter": 0.0091,
-                "builder": 0.002
+                "explorer": 0.7059,
+                "social": 0.222,
+                "trader": 0.064,
+                "fighter": 0.0067,
+                "builder": 0.0014
             },
             "archetype": "fighter"
         },
@@ -1364,19 +1367,19 @@
             "avatar": "\ud83e\udd14",
             "world": "marketplace",
             "position": {
-                "x": -12,
+                "x": 7,
                 "y": 0,
                 "z": 6
             },
             "rotation": 117,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3491,
-                "social": 0.6378,
-                "trader": 0.0122,
+                "explorer": 0.3031,
+                "social": 0.6882,
+                "trader": 0.0078,
                 "fighter": 0.0005,
                 "builder": 0.0005
             },
@@ -1388,19 +1391,19 @@
             "avatar": "\u2694\ufe0f",
             "world": "hub",
             "position": {
-                "x": -6,
+                "x": 12,
                 "y": 0,
-                "z": -4
+                "z": 2
             },
             "rotation": 359,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.1461,
-                "social": 0.8096,
-                "trader": 0.0434,
+                "explorer": 0.176,
+                "social": 0.7983,
+                "trader": 0.0247,
                 "fighter": 0.0005,
                 "builder": 0.0005
             },
@@ -1469,15 +1472,15 @@
             },
             "rotation": 181,
             "status": "active",
-            "action": "traveling",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-09T22:29:21Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.7153,
-                "social": 0.247,
-                "trader": 0.0068,
-                "fighter": 0.0301,
-                "builder": 0.0008
+                "explorer": 0.7379,
+                "social": 0.2329,
+                "trader": 0.0052,
+                "fighter": 0.0233,
+                "builder": 0.0007
             },
             "archetype": "trader"
         },
@@ -1494,7 +1497,7 @@
             "rotation": 0,
             "status": "active",
             "action": "traveling",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
                 "explorer": 0.3378,
                 "social": 0.6516,
@@ -1510,22 +1513,23 @@
             "avatar": "\ud83c\udf89",
             "world": "hub",
             "position": {
-                "x": 5,
+                "x": 4,
                 "y": 0,
-                "z": -14
+                "z": 12
             },
             "rotation": 211,
             "status": "active",
             "action": "walking",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.2619,
-                "social": 0.669,
-                "trader": 0.0683,
+                "explorer": 0.2329,
+                "social": 0.7187,
+                "trader": 0.0477,
                 "fighter": 0.0004,
                 "builder": 0.0004
             },
-            "archetype": "explorer"
+            "archetype": "explorer",
+            "hp": 100
         },
         {
             "id": "karmalock-001",
@@ -1533,20 +1537,20 @@
             "avatar": "\ud83c\udfe6",
             "world": "hub",
             "position": {
-                "x": 5,
+                "x": -6,
                 "y": 0,
-                "z": 10
+                "z": -1
             },
             "rotation": 6,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "idle",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.3917,
-                "social": 0.1727,
-                "trader": 0.0021,
-                "fighter": 0.4309,
-                "builder": 0.0026
+                "explorer": 0.4119,
+                "social": 0.1882,
+                "trader": 0.0017,
+                "fighter": 0.3961,
+                "builder": 0.0022
             },
             "archetype": "fighter",
             "hp": 100
@@ -1557,20 +1561,20 @@
             "avatar": "\ufffd\ufffd",
             "world": "arena",
             "position": {
-                "x": 6,
+                "x": 3,
                 "y": 0,
-                "z": 1
+                "z": 3
             },
             "rotation": 0,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "wave",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.6257,
-                "social": 0.3377,
-                "trader": 0.0067,
-                "fighter": 0.0292,
-                "builder": 0.0008
+                "explorer": 0.5679,
+                "social": 0.3687,
+                "trader": 0.0046,
+                "fighter": 0.0581,
+                "builder": 0.0007
             },
             "archetype": "explorer",
             "hp": 100
@@ -1588,13 +1592,13 @@
             "rotation": 180,
             "status": "active",
             "action": "chatting",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "lastUpdate": "2026-10-09T22:29:21Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3332,
-                "social": 0.6633,
+                "explorer": 0.3165,
+                "social": 0.6801,
                 "trader": 0.0006,
-                "fighter": 0.0024,
+                "fighter": 0.0023,
                 "builder": 0.0006
             },
             "archetype": "fighter"
@@ -1612,11 +1616,11 @@
             "rotation": 13,
             "status": "active",
             "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.1396,
-                "social": 0.8523,
-                "trader": 0.0071,
+                "explorer": 0.108,
+                "social": 0.8855,
+                "trader": 0.0055,
                 "fighter": 0.0005,
                 "builder": 0.0005
             },
@@ -1626,23 +1630,23 @@
             "id": "neolink-001",
             "name": "NeoLink",
             "avatar": "\ud83d\ude80",
-            "world": "gallery",
+            "world": "arena",
             "position": {
-                "x": -1,
+                "x": -9,
                 "y": 0,
-                "z": 13
+                "z": 4
             },
             "rotation": 271,
             "status": "active",
             "action": "walking",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.7789,
-                "social": 0.2066,
-                "trader": 0.0106,
-                "fighter": 0.0012,
-                "builder": 0.0027
+                "explorer": 0.8455,
+                "social": 0.1443,
+                "trader": 0.0074,
+                "fighter": 0.0008,
+                "builder": 0.002
             },
             "archetype": "trader"
         },
@@ -1652,20 +1656,20 @@
             "avatar": "\ud83d\ude0a",
             "world": "dungeon",
             "position": {
-                "x": 3,
+                "x": -9,
                 "y": 0,
-                "z": -9
+                "z": 0
             },
             "rotation": 198,
             "status": "active",
             "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.3131,
-                "social": 0.685,
-                "trader": 0.0007,
+                "explorer": 0.2991,
+                "social": 0.6993,
+                "trader": 0.0005,
                 "fighter": 0.0005,
-                "builder": 0.0008
+                "builder": 0.0006
             },
             "archetype": "social"
         },
@@ -1685,11 +1689,11 @@
             "lastUpdate": "2026-10-09T10:19:44Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.4075,
-                "social": 0.1692,
-                "trader": 0.0062,
-                "fighter": 0.4161,
-                "builder": 0.001
+                "explorer": 0.3678,
+                "social": 0.1527,
+                "trader": 0.0056,
+                "fighter": 0.4731,
+                "builder": 0.0009
             },
             "archetype": "trader"
         },
@@ -1697,24 +1701,25 @@
             "id": "novaweld-001",
             "name": "NovaWeld",
             "avatar": "\ud83c\udfaf",
-            "world": "hub",
+            "world": "gallery",
             "position": {
-                "x": 6,
+                "x": 7,
                 "y": 0,
-                "z": -5
+                "z": 13
             },
             "rotation": 119,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "action": "traveling",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.4338,
-                "social": 0.3039,
-                "trader": 0.0312,
-                "fighter": 0.2306,
-                "builder": 0.0006
+                "explorer": 0.3857,
+                "social": 0.3255,
+                "trader": 0.0693,
+                "fighter": 0.2191,
+                "builder": 0.0005
             },
-            "archetype": "fighter"
+            "archetype": "fighter",
+            "hp": 100
         },
         {
             "id": "fuselock-001",
@@ -1722,20 +1727,20 @@
             "avatar": "\ud83d\udee0\ufe0f",
             "world": "dungeon",
             "position": {
-                "x": -8,
+                "x": 12,
                 "y": 0,
-                "z": -7
+                "z": -2
             },
             "rotation": 171,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.4952,
-                "social": 0.244,
-                "trader": 0.041,
-                "fighter": 0.2194,
+                "explorer": 0.4696,
+                "social": 0.2592,
+                "trader": 0.0351,
+                "fighter": 0.2356,
                 "builder": 0.0005
             },
             "archetype": "trader"
@@ -1744,22 +1749,22 @@
             "id": "mintfall-001",
             "name": "MintFall",
             "avatar": "\ud83d\uddfa\ufe0f",
-            "world": "hub",
+            "world": "marketplace",
             "position": {
-                "x": -5,
+                "x": -1,
                 "y": 0,
-                "z": -12
+                "z": -13
             },
             "rotation": 194,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.3425,
-                "social": 0.6544,
-                "trader": 0.0005,
-                "fighter": 0.0022,
-                "builder": 0.0005
+                "explorer": 0.3367,
+                "social": 0.6206,
+                "trader": 0.0411,
+                "fighter": 0.0014,
+                "builder": 0.0003
             },
             "archetype": "fighter",
             "hp": 100
@@ -1770,21 +1775,21 @@
             "avatar": "\ud83e\udd1d",
             "world": "marketplace",
             "position": {
-                "x": -13,
+                "x": -8,
                 "y": 0,
-                "z": 10
+                "z": 9
             },
             "rotation": 217,
             "status": "active",
-            "action": "traveling",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.8833,
-                "social": 0.1129,
-                "trader": 0.0007,
-                "fighter": 0.0025,
-                "builder": 0.0007
+                "explorer": 0.7871,
+                "social": 0.2098,
+                "trader": 0.0006,
+                "fighter": 0.0019,
+                "builder": 0.0006
             },
             "archetype": "fighter"
         },
@@ -1794,19 +1799,19 @@
             "avatar": "\ud83e\udd14",
             "world": "arena",
             "position": {
-                "x": 10,
+                "x": -6,
                 "y": 0,
-                "z": 1
+                "z": 2
             },
             "rotation": 63,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.4554,
-                "social": 0.2835,
+                "explorer": 0.4855,
+                "social": 0.243,
                 "trader": 0.0005,
-                "fighter": 0.2602,
+                "fighter": 0.2706,
                 "builder": 0.0005
             },
             "archetype": "fighter",
@@ -1824,14 +1829,14 @@
             },
             "rotation": 124,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "wave",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.5136,
-                "social": 0.4511,
-                "trader": 0.0311,
-                "fighter": 0.0036,
+                "explorer": 0.3975,
+                "social": 0.5753,
+                "trader": 0.0241,
+                "fighter": 0.0027,
                 "builder": 0.0005
             },
             "archetype": "fighter"
@@ -1842,21 +1847,21 @@
             "avatar": "\ud83c\udfc6",
             "world": "hub",
             "position": {
-                "x": 9,
+                "x": -4,
                 "y": 0,
-                "z": -15
+                "z": -1
             },
             "rotation": 279,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T02:10:20Z",
+            "action": "idle",
+            "lastUpdate": "2026-10-09T18:27:33Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.7881,
-                "social": 0.2012,
-                "trader": 0.001,
-                "fighter": 0.008,
-                "builder": 0.0017
+                "explorer": 0.7027,
+                "social": 0.2427,
+                "trader": 0.0471,
+                "fighter": 0.0062,
+                "builder": 0.0013
             },
             "archetype": "fighter"
         },
@@ -1866,20 +1871,20 @@
             "avatar": "\ud83d\udd2d",
             "world": "marketplace",
             "position": {
-                "x": 2,
+                "x": 10,
                 "y": 0,
-                "z": 5
+                "z": -4
             },
             "rotation": 242,
             "status": "active",
             "action": "walking",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.6457,
-                "social": 0.1723,
-                "trader": 0.0005,
-                "fighter": 0.1806,
-                "builder": 0.0009
+                "explorer": 0.6234,
+                "social": 0.1844,
+                "trader": 0.0444,
+                "fighter": 0.1471,
+                "builder": 0.0008
             },
             "archetype": "fighter"
         },
@@ -1887,22 +1892,22 @@
             "id": "wyndstorm-001",
             "name": "WyndStorm",
             "avatar": "\ud83d\ude80",
-            "world": "dungeon",
+            "world": "arena",
             "position": {
-                "x": 1,
+                "x": 3,
                 "y": 0,
-                "z": 0
+                "z": -6
             },
             "rotation": 152,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "traveling",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3256,
-                "social": 0.672,
+                "explorer": 0.2844,
+                "social": 0.7137,
                 "trader": 0.0005,
-                "fighter": 0.0014,
+                "fighter": 0.001,
                 "builder": 0.0005
             },
             "archetype": "fighter"
@@ -1913,19 +1918,19 @@
             "avatar": "\ud83d\udcc8",
             "world": "dungeon",
             "position": {
-                "x": -12,
+                "x": -6,
                 "y": 0,
-                "z": 8
+                "z": 11
             },
             "rotation": 78,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.2099,
-                "social": 0.7882,
+                "explorer": 0.2774,
+                "social": 0.7208,
                 "trader": 0.0005,
-                "fighter": 0.001,
+                "fighter": 0.0009,
                 "builder": 0.0005
             },
             "archetype": "fighter"
@@ -1934,22 +1939,22 @@
             "id": "echopeak-001",
             "name": "EchoPeak",
             "avatar": "\ud83d\udcb0",
-            "world": "arena",
+            "world": "marketplace",
             "position": {
-                "x": 4,
+                "x": 6,
                 "y": 0,
-                "z": 1
+                "z": 15
             },
             "rotation": 68,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "celebrate",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.7145,
-                "social": 0.2424,
-                "trader": 0.0408,
-                "fighter": 0.0013,
-                "builder": 0.001
+                "explorer": 0.7052,
+                "social": 0.2578,
+                "trader": 0.0351,
+                "fighter": 0.001,
+                "builder": 0.0009
             },
             "archetype": "social",
             "hp": 100
@@ -1960,21 +1965,21 @@
             "avatar": "\ud83c\udfd7\ufe0f",
             "world": "marketplace",
             "position": {
-                "x": 0,
+                "x": -2,
                 "y": 0,
-                "z": -7
+                "z": 10
             },
             "rotation": 91,
             "status": "active",
             "action": "walking",
-            "lastUpdate": "2026-10-08T22:02:11Z",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.7179,
-                "social": 0.2176,
-                "trader": 0.0634,
-                "fighter": 0.0006,
-                "builder": 0.0006
+                "explorer": 0.8029,
+                "social": 0.152,
+                "trader": 0.0442,
+                "fighter": 0.0005,
+                "builder": 0.0005
             },
             "archetype": "trader"
         },
@@ -1984,20 +1989,20 @@
             "avatar": "\ud83d\udee0\ufe0f",
             "world": "hub",
             "position": {
-                "x": 7,
+                "x": 5,
                 "y": 0,
-                "z": -14
+                "z": 5
             },
             "rotation": 78,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.4478,
-                "social": 0.2464,
-                "trader": 0.0139,
-                "fighter": 0.2912,
+                "explorer": 0.505,
+                "social": 0.2007,
+                "trader": 0.0113,
+                "fighter": 0.2822,
                 "builder": 0.0008
             },
             "archetype": "trader"
@@ -2008,19 +2013,19 @@
             "avatar": "\ud83c\udf1f",
             "world": "arena",
             "position": {
-                "x": 4,
+                "x": -10,
                 "y": 0,
-                "z": -2
+                "z": 2
             },
             "rotation": 91,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.4087,
-                "social": 0.5834,
-                "trader": 0.0072,
+                "explorer": 0.3613,
+                "social": 0.6324,
+                "trader": 0.0056,
                 "fighter": 0.0004,
                 "builder": 0.0004
             },
@@ -2032,20 +2037,20 @@
             "avatar": "\ud83d\ude80",
             "world": "dungeon",
             "position": {
-                "x": -12,
+                "x": -2,
                 "y": 0,
-                "z": 12
+                "z": -2
             },
             "rotation": 245,
             "status": "active",
-            "action": "dance",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "traits": {
-                "explorer": 0.5225,
-                "social": 0.4753,
-                "trader": 0.0005,
-                "fighter": 0.0013,
-                "builder": 0.0005
+                "explorer": 0.5179,
+                "social": 0.4806,
+                "trader": 0.0004,
+                "fighter": 0.0008,
+                "builder": 0.0004
             },
             "archetype": "fighter",
             "hp": 100
@@ -2054,21 +2059,21 @@
             "id": "qubitfire-001",
             "name": "QubitFire",
             "avatar": "\ud83e\udded",
-            "world": "marketplace",
+            "world": "dungeon",
             "position": {
-                "x": -1,
+                "x": -9,
                 "y": 0,
-                "z": -9
+                "z": -12
             },
             "rotation": 322,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.3558,
-                "social": 0.6252,
-                "trader": 0.0153,
-                "fighter": 0.0033,
+                "explorer": 0.3778,
+                "social": 0.6068,
+                "trader": 0.0125,
+                "fighter": 0.0026,
                 "builder": 0.0004
             },
             "archetype": "fighter",
@@ -2086,15 +2091,15 @@
             },
             "rotation": 190,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-09T22:29:21Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.4263,
-                "social": 0.206,
-                "trader": 0.001,
-                "fighter": 0.3658,
-                "builder": 0.0009
+                "explorer": 0.3299,
+                "social": 0.2485,
+                "trader": 0.0008,
+                "fighter": 0.4201,
+                "builder": 0.0008
             },
             "archetype": "fighter"
         },
@@ -2104,21 +2109,21 @@
             "avatar": "\ud83e\udd14",
             "world": "hub",
             "position": {
-                "x": 4,
+                "x": 5,
                 "y": 0,
-                "z": 9
+                "z": -1
             },
             "rotation": 248,
             "status": "active",
-            "action": "traveling",
-            "lastUpdate": "2026-10-08T22:02:11Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.4314,
-                "social": 0.2531,
-                "trader": 0.0008,
-                "fighter": 0.314,
-                "builder": 0.0008
+                "explorer": 0.4673,
+                "social": 0.2433,
+                "trader": 0.0007,
+                "fighter": 0.288,
+                "builder": 0.0007
             },
             "archetype": "fighter"
         },
@@ -2128,20 +2133,20 @@
             "avatar": "\ud83d\udcda",
             "world": "gallery",
             "position": {
-                "x": 6,
+                "x": -8,
                 "y": 0,
                 "z": 5
             },
             "rotation": 53,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.2923,
-                "social": 0.2709,
-                "trader": 0.0008,
-                "fighter": 0.4352,
-                "builder": 0.0008
+                "explorer": 0.3067,
+                "social": 0.2796,
+                "trader": 0.0007,
+                "fighter": 0.4125,
+                "builder": 0.0007
             },
             "archetype": "fighter",
             "hp": 100
@@ -2152,20 +2157,20 @@
             "avatar": "\ud83d\udd2d",
             "world": "dungeon",
             "position": {
-                "x": -10,
+                "x": -11,
                 "y": 0,
                 "z": 10
             },
             "rotation": 117,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T02:10:20Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.5943,
-                "social": 0.107,
+                "explorer": 0.529,
+                "social": 0.1774,
                 "trader": 0.0008,
-                "fighter": 0.2971,
-                "builder": 0.001
+                "fighter": 0.2919,
+                "builder": 0.0009
             },
             "archetype": "fighter"
         },
@@ -2175,19 +2180,19 @@
             "avatar": "\ud83c\udfd7\ufe0f",
             "world": "marketplace",
             "position": {
-                "x": 1,
+                "x": 5,
                 "y": 0,
-                "z": 3
+                "z": -6
             },
             "rotation": 205,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.396,
-                "social": 0.3205,
+                "explorer": 0.3654,
+                "social": 0.306,
                 "trader": 0.0008,
-                "fighter": 0.282,
+                "fighter": 0.3271,
                 "builder": 0.0008
             },
             "archetype": "fighter",
@@ -2197,23 +2202,23 @@
             "id": "codadrift-001",
             "name": "CodaDrift",
             "avatar": "\ud83d\udd2d",
-            "world": "hub",
+            "world": "marketplace",
             "position": {
-                "x": 9,
+                "x": -9,
                 "y": 0,
-                "z": 15
+                "z": -12
             },
             "rotation": 68,
             "status": "active",
-            "action": "traveling",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.4202,
-                "social": 0.2606,
-                "trader": 0.0207,
-                "fighter": 0.298,
-                "builder": 0.0006
+                "explorer": 0.5513,
+                "social": 0.2016,
+                "trader": 0.0161,
+                "fighter": 0.2306,
+                "builder": 0.0005
             },
             "archetype": "fighter"
         },
@@ -2229,12 +2234,12 @@
             },
             "rotation": 9,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "cheer",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3979,
-                "social": 0.6003,
+                "explorer": 0.4091,
+                "social": 0.5891,
                 "trader": 0.0009,
                 "fighter": 0.0005,
                 "builder": 0.0005
@@ -2257,8 +2262,8 @@
             "lastUpdate": "2026-10-09T06:15:25Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.2396,
-                "social": 0.7594,
+                "explorer": 0.2554,
+                "social": 0.7436,
                 "trader": 0.0003,
                 "fighter": 0.0004,
                 "builder": 0.0004
@@ -2271,18 +2276,18 @@
             "avatar": "\ud83c\udf00",
             "world": "marketplace",
             "position": {
-                "x": -15,
+                "x": -1,
                 "y": 0,
-                "z": -12
+                "z": -3
             },
             "rotation": 166,
             "status": "active",
-            "action": "traveling",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "action": "cheer",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.353,
-                "social": 0.6256,
-                "trader": 0.0206,
+                "explorer": 0.277,
+                "social": 0.7085,
+                "trader": 0.0137,
                 "fighter": 0.0005,
                 "builder": 0.0004
             },
@@ -2292,21 +2297,21 @@
             "id": "hazestorm-001",
             "name": "HazeStorm",
             "avatar": "\u2728",
-            "world": "arena",
+            "world": "hub",
             "position": {
-                "x": 6,
+                "x": -1,
                 "y": 0,
-                "z": -3
+                "z": 1
             },
             "rotation": 41,
             "status": "active",
             "action": "idle",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "traits": {
-                "explorer": 0.3428,
-                "social": 0.2631,
+                "explorer": 0.3757,
+                "social": 0.25,
                 "trader": 0.0006,
-                "fighter": 0.3927,
+                "fighter": 0.3731,
                 "builder": 0.0007
             },
             "archetype": "fighter",
@@ -2316,23 +2321,23 @@
             "id": "latchblade-001",
             "name": "LatchBlade",
             "avatar": "\ud83d\udee1\ufe0f",
-            "world": "marketplace",
+            "world": "arena",
             "position": {
-                "x": 10,
+                "x": -1,
                 "y": 0,
-                "z": 5
+                "z": 12
             },
             "rotation": 222,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.4664,
-                "social": 0.5037,
-                "trader": 0.0286,
-                "fighter": 0.0008,
-                "builder": 0.0006
+                "explorer": 0.4552,
+                "social": 0.5259,
+                "trader": 0.018,
+                "fighter": 0.0005,
+                "builder": 0.0005
             },
             "archetype": "trader"
         },
@@ -2342,41 +2347,42 @@
             "avatar": "\ud83c\udfd7\ufe0f",
             "world": "hub",
             "position": {
-                "x": -1,
+                "x": -4,
                 "y": 0,
-                "z": -11
+                "z": 3
             },
             "rotation": 48,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T02:10:20Z",
+            "action": "idle",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.6433,
-                "social": 0.3493,
-                "trader": 0.0059,
+                "explorer": 0.6441,
+                "social": 0.3494,
+                "trader": 0.005,
                 "fighter": 0.0007,
                 "builder": 0.0008
             },
-            "archetype": "social"
+            "archetype": "social",
+            "hp": 100
         },
         {
             "id": "zapflow-001",
             "name": "ZapFlow",
             "avatar": "\ud83d\udd28",
-            "world": "hub",
+            "world": "gallery",
             "position": {
-                "x": -11,
+                "x": 10,
                 "y": 0,
-                "z": -10
+                "z": 13
             },
             "rotation": 178,
             "status": "active",
             "action": "traveling",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "lastUpdate": "2026-10-09T18:27:33Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3937,
-                "social": 0.605,
+                "explorer": 0.3826,
+                "social": 0.6161,
                 "trader": 0.0005,
                 "fighter": 0.0005,
                 "builder": 0.0005
@@ -2396,13 +2402,13 @@
             "rotation": 31,
             "status": "active",
             "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.3719,
-                "social": 0.6248,
-                "trader": 0.0006,
-                "fighter": 0.0021,
-                "builder": 0.0007
+                "explorer": 0.2597,
+                "social": 0.6928,
+                "trader": 0.0456,
+                "fighter": 0.0014,
+                "builder": 0.0005
             },
             "archetype": "fighter",
             "hp": 100
@@ -2413,21 +2419,21 @@
             "avatar": "\ud83d\udcda",
             "world": "marketplace",
             "position": {
-                "x": 7,
+                "x": 0,
                 "y": 0,
-                "z": -12
+                "z": -14
             },
             "rotation": 306,
             "status": "active",
-            "action": "traveling",
-            "lastUpdate": "2026-10-08T17:59:38Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.4196,
-                "social": 0.5615,
-                "trader": 0.0076,
-                "fighter": 0.0108,
-                "builder": 0.0005
+                "explorer": 0.4015,
+                "social": 0.5383,
+                "trader": 0.0526,
+                "fighter": 0.0072,
+                "builder": 0.0004
             },
             "archetype": "trader"
         },
@@ -2443,14 +2449,14 @@
             },
             "rotation": 272,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "dance",
+            "lastUpdate": "2026-10-09T18:27:33Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.223,
-                "social": 0.4436,
+                "explorer": 0.2387,
+                "social": 0.4254,
                 "trader": 0.0005,
-                "fighter": 0.3324,
+                "fighter": 0.335,
                 "builder": 0.0005
             },
             "archetype": "fighter"
@@ -2461,19 +2467,19 @@
             "avatar": "\ud83d\udc8e",
             "world": "arena",
             "position": {
-                "x": 9,
+                "x": 7,
                 "y": 0,
-                "z": 2
+                "z": 11
             },
             "rotation": 245,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-08T22:02:11Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.2842,
-                "social": 0.6736,
+                "explorer": 0.3931,
+                "social": 0.5453,
                 "trader": 0.0005,
-                "fighter": 0.0413,
+                "fighter": 0.0606,
                 "builder": 0.0005
             },
             "archetype": "fighter",
@@ -2492,12 +2498,12 @@
             "rotation": 24,
             "status": "active",
             "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "lastUpdate": "2026-10-09T18:27:33Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.7818,
-                "social": 0.2157,
-                "trader": 0.0015,
+                "explorer": 0.7178,
+                "social": 0.2801,
+                "trader": 0.0012,
                 "fighter": 0.0005,
                 "builder": 0.0005
             },
@@ -2515,15 +2521,15 @@
             },
             "rotation": 302,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.5811,
-                "social": 0.1299,
-                "trader": 0.0068,
-                "fighter": 0.2809,
-                "builder": 0.0013
+                "explorer": 0.4486,
+                "social": 0.231,
+                "trader": 0.0478,
+                "fighter": 0.2717,
+                "builder": 0.0009
             },
             "archetype": "trader"
         },
@@ -2533,19 +2539,19 @@
             "avatar": "\ud83c\udfc6",
             "world": "arena",
             "position": {
-                "x": 7,
+                "x": -6,
                 "y": 0,
-                "z": 0
+                "z": -5
             },
             "rotation": 295,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.4486,
-                "social": 0.3122,
+                "explorer": 0.4306,
+                "social": 0.2915,
                 "trader": 0.0005,
-                "fighter": 0.2381,
+                "fighter": 0.2769,
                 "builder": 0.0006
             },
             "archetype": "fighter",
@@ -2557,19 +2563,19 @@
             "avatar": "\ud83d\ude0a",
             "world": "hub",
             "position": {
-                "x": 1,
+                "x": -6,
                 "y": 0,
-                "z": 8
+                "z": 3
             },
             "rotation": 20,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "idle",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.3919,
-                "social": 0.3623,
-                "trader": 0.0216,
-                "fighter": 0.2237,
+                "explorer": 0.4143,
+                "social": 0.2951,
+                "trader": 0.0176,
+                "fighter": 0.2726,
                 "builder": 0.0005
             },
             "archetype": "fighter",
@@ -2587,13 +2593,13 @@
             },
             "rotation": 170,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "action": "nod",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.2937,
-                "social": 0.3105,
-                "trader": 0.0101,
-                "fighter": 0.3852,
+                "explorer": 0.2724,
+                "social": 0.3309,
+                "trader": 0.0078,
+                "fighter": 0.3884,
                 "builder": 0.0006
             },
             "archetype": "fighter",
@@ -2605,19 +2611,19 @@
             "avatar": "\ud83d\udd2e",
             "world": "arena",
             "position": {
-                "x": 8,
+                "x": -5,
                 "y": 0,
-                "z": -1
+                "z": -9
             },
             "rotation": 254,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.331,
-                "social": 0.2577,
+                "explorer": 0.3847,
+                "social": 0.2468,
                 "trader": 0.0008,
-                "fighter": 0.4098,
+                "fighter": 0.367,
                 "builder": 0.0008
             },
             "archetype": "fighter",
@@ -2629,20 +2635,20 @@
             "avatar": "\ud83d\udcc8",
             "world": "marketplace",
             "position": {
-                "x": 13,
+                "x": -9,
                 "y": 0,
-                "z": -6
+                "z": 4
             },
             "rotation": 237,
             "status": "active",
             "action": "walking",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.3,
-                "social": 0.6626,
-                "trader": 0.0316,
-                "fighter": 0.005,
-                "builder": 0.0008
+                "explorer": 0.3023,
+                "social": 0.6656,
+                "trader": 0.0271,
+                "fighter": 0.0042,
+                "builder": 0.0007
             },
             "archetype": "fighter"
         },
@@ -2652,20 +2658,20 @@
             "avatar": "\ud83d\udd28",
             "world": "hub",
             "position": {
-                "x": -7,
+                "x": -4,
                 "y": 0,
-                "z": 9
+                "z": -2
             },
             "rotation": 246,
             "status": "active",
-            "action": "chatting",
+            "action": "idle",
             "lastUpdate": "2026-10-09T14:24:53Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.5012,
-                "social": 0.2251,
-                "trader": 0.0087,
-                "fighter": 0.2646,
+                "explorer": 0.4297,
+                "social": 0.2404,
+                "trader": 0.0075,
+                "fighter": 0.3219,
                 "builder": 0.0005
             },
             "archetype": "trader"
@@ -2685,8 +2691,8 @@
             "action": "idle",
             "lastUpdate": "2026-10-09T06:15:25Z",
             "traits": {
-                "explorer": 0.3013,
-                "social": 0.6972,
+                "explorer": 0.3334,
+                "social": 0.6653,
                 "trader": 0.0005,
                 "fighter": 0.0005,
                 "builder": 0.0005
@@ -2698,20 +2704,20 @@
             "id": "chipshade-001",
             "name": "ChipShade",
             "avatar": "\ud83c\udfe6",
-            "world": "hub",
+            "world": "arena",
             "position": {
-                "x": 0,
+                "x": -8,
                 "y": 0,
-                "z": -12
+                "z": -4
             },
             "rotation": 160,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "wave",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.1384,
-                "social": 0.7295,
-                "trader": 0.1314,
+                "explorer": 0.1259,
+                "social": 0.7907,
+                "trader": 0.0828,
                 "fighter": 0.0003,
                 "builder": 0.0003
             },
@@ -2723,21 +2729,21 @@
             "avatar": "\ud83d\ude0a",
             "world": "gallery",
             "position": {
-                "x": -2,
+                "x": -1,
                 "y": 0,
-                "z": 6
+                "z": -1
             },
             "rotation": 221,
             "status": "active",
             "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.549,
-                "social": 0.4473,
-                "trader": 0.0023,
-                "fighter": 0.0007,
-                "builder": 0.0007
+                "explorer": 0.5142,
+                "social": 0.4827,
+                "trader": 0.0018,
+                "fighter": 0.0006,
+                "builder": 0.0006
             },
             "archetype": "trader"
         },
@@ -2753,13 +2759,13 @@
             },
             "rotation": 150,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-09T18:27:33Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.4039,
-                "social": 0.593,
-                "trader": 0.0024,
+                "explorer": 0.2938,
+                "social": 0.7043,
+                "trader": 0.0013,
                 "fighter": 0.0004,
                 "builder": 0.0004
             },
@@ -2771,22 +2777,23 @@
             "avatar": "\ud83c\udf1f",
             "world": "hub",
             "position": {
-                "x": -1,
+                "x": -6,
                 "y": 0,
-                "z": -10
+                "z": -1
             },
             "rotation": 39,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "action": "idle",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.2779,
-                "social": 0.687,
-                "trader": 0.0344,
+                "explorer": 0.194,
+                "social": 0.7813,
+                "trader": 0.024,
                 "fighter": 0.0004,
                 "builder": 0.0004
             },
-            "archetype": "social"
+            "archetype": "social",
+            "hp": 100
         },
         {
             "id": "zincshift-001",
@@ -2794,18 +2801,18 @@
             "avatar": "\ud83d\udd2d",
             "world": "arena",
             "position": {
-                "x": 6,
+                "x": 11,
                 "y": 0,
-                "z": 1
+                "z": -3
             },
             "rotation": 150,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.2593,
-                "social": 0.7219,
-                "trader": 0.0179,
+                "explorer": 0.2935,
+                "social": 0.6917,
+                "trader": 0.0139,
                 "fighter": 0.0005,
                 "builder": 0.0005
             },
@@ -2825,12 +2832,12 @@
             "rotation": 295,
             "status": "active",
             "action": "idle",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.7718,
-                "social": 0.2229,
-                "trader": 0.0037,
+                "explorer": 0.814,
+                "social": 0.1815,
+                "trader": 0.0029,
                 "fighter": 0.0008,
                 "builder": 0.0009
             },
@@ -2842,22 +2849,23 @@
             "avatar": "\ud83d\ude0a",
             "world": "hub",
             "position": {
-                "x": 10,
+                "x": -1,
                 "y": 0,
-                "z": 7
+                "z": 2
             },
             "rotation": 322,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-08T09:53:10Z",
+            "action": "idle",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.2561,
-                "social": 0.4341,
-                "trader": 0.0712,
-                "fighter": 0.2382,
+                "explorer": 0.2659,
+                "social": 0.4684,
+                "trader": 0.0611,
+                "fighter": 0.2042,
                 "builder": 0.0005
             },
-            "archetype": "fighter"
+            "archetype": "fighter",
+            "hp": 100
         },
         {
             "id": "codacraft-001",
@@ -2865,17 +2873,17 @@
             "avatar": "\ud83c\udf0d",
             "world": "gallery",
             "position": {
-                "x": -6,
+                "x": 9,
                 "y": 0,
-                "z": 9
+                "z": -10
             },
             "rotation": 80,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.4165,
-                "social": 0.5823,
+                "explorer": 0.4496,
+                "social": 0.5491,
                 "trader": 0.0004,
                 "fighter": 0.0004,
                 "builder": 0.0005
@@ -2888,19 +2896,19 @@
             "avatar": "\ud83c\udf89",
             "world": "hub",
             "position": {
-                "x": 1,
+                "x": -3,
                 "y": 0,
-                "z": 6
+                "z": 3
             },
             "rotation": 136,
             "status": "active",
-            "action": "traveling",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "idle",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.4117,
-                "social": 0.3025,
+                "explorer": 0.4956,
+                "social": 0.2593,
                 "trader": 0.0005,
-                "fighter": 0.2849,
+                "fighter": 0.2442,
                 "builder": 0.0005
             },
             "archetype": "fighter",
@@ -2910,21 +2918,21 @@
             "id": "zapspark-001",
             "name": "ZapSpark",
             "avatar": "\ud83c\udfc6",
-            "world": "arena",
+            "world": "marketplace",
             "position": {
                 "x": 6,
                 "y": 0,
-                "z": 2
+                "z": 9
             },
             "rotation": 276,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "traveling",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.5322,
-                "social": 0.1991,
+                "explorer": 0.5303,
+                "social": 0.1797,
                 "trader": 0.0006,
-                "fighter": 0.2674,
+                "fighter": 0.2889,
                 "builder": 0.0006
             },
             "archetype": "fighter",
@@ -2934,21 +2942,21 @@
             "id": "sparksage-001",
             "name": "SparkSage",
             "avatar": "\ud83d\ude80",
-            "world": "hub",
+            "world": "arena",
             "position": {
-                "x": -6,
+                "x": -10,
                 "y": 0,
-                "z": -8
+                "z": -11
             },
             "rotation": 95,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T02:10:20Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.3637,
-                "social": 0.6078,
-                "trader": 0.0217,
-                "fighter": 0.0064,
+                "explorer": 0.2876,
+                "social": 0.696,
+                "trader": 0.0124,
+                "fighter": 0.0036,
                 "builder": 0.0005
             },
             "archetype": "fighter"
@@ -2965,15 +2973,15 @@
             },
             "rotation": 48,
             "status": "active",
-            "action": "wave",
-            "lastUpdate": "2026-10-09T02:10:20Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3589,
-                "social": 0.2995,
-                "trader": 0.0096,
-                "fighter": 0.3313,
-                "builder": 0.0008
+                "explorer": 0.2506,
+                "social": 0.3882,
+                "trader": 0.0474,
+                "fighter": 0.3132,
+                "builder": 0.0007
             },
             "archetype": "explorer"
         },
@@ -2981,21 +2989,21 @@
             "id": "gridspark-001",
             "name": "GridSpark",
             "avatar": "\ud83c\udf89",
-            "world": "gallery",
+            "world": "arena",
             "position": {
-                "x": 2,
+                "x": 4,
                 "y": 0,
-                "z": -1
+                "z": 5
             },
             "rotation": 217,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "traveling",
+            "lastUpdate": "2026-10-09T18:27:33Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3686,
-                "social": 0.629,
-                "trader": 0.0014,
+                "explorer": 0.3734,
+                "social": 0.6247,
+                "trader": 0.001,
                 "fighter": 0.0005,
                 "builder": 0.0005
             },
@@ -3005,23 +3013,23 @@
             "id": "glyphblade-001",
             "name": "GlyphBlade",
             "avatar": "\ud83c\udf0d",
-            "world": "marketplace",
+            "world": "dungeon",
             "position": {
-                "x": 9,
+                "x": 6,
                 "y": 0,
-                "z": -5
+                "z": -2
             },
             "rotation": 28,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "traveling",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.7507,
-                "social": 0.241,
-                "trader": 0.0052,
-                "fighter": 0.0014,
-                "builder": 0.0016
+                "explorer": 0.7863,
+                "social": 0.2066,
+                "trader": 0.0045,
+                "fighter": 0.0012,
+                "builder": 0.0013
             },
             "archetype": "trader"
         },
@@ -3037,11 +3045,11 @@
             },
             "rotation": 47,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "think",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.1932,
-                "social": 0.8056,
+                "explorer": 0.142,
+                "social": 0.8569,
                 "trader": 0.0004,
                 "fighter": 0.0005,
                 "builder": 0.0004
@@ -3055,19 +3063,19 @@
             "avatar": "\ud83d\udd2e",
             "world": "dungeon",
             "position": {
-                "x": 10,
+                "x": -2,
                 "y": 0,
-                "z": 4
+                "z": -12
             },
             "rotation": 14,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "bow",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.6179,
-                "social": 0.2059,
-                "trader": 0.0395,
-                "fighter": 0.1363,
+                "explorer": 0.5652,
+                "social": 0.2556,
+                "trader": 0.0305,
+                "fighter": 0.1483,
                 "builder": 0.0005
             },
             "archetype": "fighter"
@@ -3078,21 +3086,21 @@
             "avatar": "\u2699\ufe0f",
             "world": "marketplace",
             "position": {
-                "x": 11,
+                "x": -12,
                 "y": 0,
-                "z": 10
+                "z": 5
             },
             "rotation": 280,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.4561,
-                "social": 0.1975,
-                "trader": 0.0006,
-                "fighter": 0.3452,
-                "builder": 0.0007
+                "explorer": 0.4189,
+                "social": 0.2378,
+                "trader": 0.0005,
+                "fighter": 0.3424,
+                "builder": 0.0005
             },
             "archetype": "fighter"
         },
@@ -3102,20 +3110,20 @@
             "avatar": "\ud83d\udcac",
             "world": "hub",
             "position": {
-                "x": -6,
+                "x": 6,
                 "y": 0,
-                "z": 8
+                "z": 15
             },
             "rotation": 236,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3885,
-                "social": 0.3932,
-                "trader": 0.0027,
-                "fighter": 0.2149,
+                "explorer": 0.4665,
+                "social": 0.3341,
+                "trader": 0.0021,
+                "fighter": 0.1966,
                 "builder": 0.0007
             },
             "archetype": "trader"
@@ -3126,19 +3134,19 @@
             "avatar": "\ud83d\udcac",
             "world": "arena",
             "position": {
-                "x": 4,
+                "x": -10,
                 "y": 0,
-                "z": 2
+                "z": 1
             },
             "rotation": 139,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.2612,
-                "social": 0.6911,
+                "explorer": 0.3453,
+                "social": 0.6273,
                 "trader": 0.0005,
-                "fighter": 0.0467,
+                "fighter": 0.0265,
                 "builder": 0.0005
             },
             "archetype": "social",
@@ -3148,23 +3156,23 @@
             "id": "moxcoil-001",
             "name": "MoxCoil",
             "avatar": "\ud83d\ude80",
-            "world": "hub",
+            "world": "arena",
             "position": {
-                "x": 7,
+                "x": -6,
                 "y": 0,
-                "z": -1
+                "z": -3
             },
             "rotation": 278,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T02:10:20Z",
+            "action": "traveling",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.5268,
-                "social": 0.1285,
-                "trader": 0.0066,
-                "fighter": 0.3362,
-                "builder": 0.002
+                "explorer": 0.5909,
+                "social": 0.0995,
+                "trader": 0.0051,
+                "fighter": 0.303,
+                "builder": 0.0015
             },
             "archetype": "trader"
         },
@@ -3174,18 +3182,18 @@
             "avatar": "\ud83c\udf89",
             "world": "marketplace",
             "position": {
-                "x": 5,
+                "x": -15,
                 "y": 0,
-                "z": -7
+                "z": -2
             },
             "rotation": 180,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-08T22:02:11Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.2759,
-                "social": 0.6839,
-                "trader": 0.0395,
+                "explorer": 0.299,
+                "social": 0.6646,
+                "trader": 0.0356,
                 "fighter": 0.0004,
                 "builder": 0.0004
             },
@@ -3197,22 +3205,23 @@
             "avatar": "\ud83d\udcac",
             "world": "hub",
             "position": {
-                "x": 3,
+                "x": -5,
                 "y": 0,
-                "z": 10
+                "z": 3
             },
             "rotation": 218,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "action": "idle",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "traits": {
-                "explorer": 0.4318,
-                "social": 0.25,
+                "explorer": 0.3702,
+                "social": 0.3069,
                 "trader": 0.0009,
-                "fighter": 0.3166,
+                "fighter": 0.3213,
                 "builder": 0.0008
             },
-            "archetype": "fighter"
+            "archetype": "fighter",
+            "hp": 100
         },
         {
             "id": "emberspin-001",
@@ -3220,21 +3229,21 @@
             "avatar": "\ud83c\udfd7\ufe0f",
             "world": "gallery",
             "position": {
-                "x": 5,
+                "x": -2,
                 "y": 0,
-                "z": -1
+                "z": -5
             },
             "rotation": 299,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T02:10:20Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3149,
-                "social": 0.6479,
-                "trader": 0.036,
+                "explorer": 0.3495,
+                "social": 0.6268,
+                "trader": 0.0227,
                 "fighter": 0.0005,
-                "builder": 0.0007
+                "builder": 0.0005
             },
             "archetype": "social"
         },
@@ -3242,20 +3251,20 @@
             "id": "mistspin-001",
             "name": "MistSpin",
             "avatar": "\ud83d\ude0a",
-            "world": "marketplace",
+            "world": "arena",
             "position": {
-                "x": 8,
+                "x": 0,
                 "y": 0,
-                "z": 5
+                "z": 7
             },
             "rotation": 192,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "traveling",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3171,
-                "social": 0.6815,
+                "explorer": 0.374,
+                "social": 0.6247,
                 "trader": 0.0005,
                 "fighter": 0.0005,
                 "builder": 0.0005
@@ -3268,20 +3277,20 @@
             "avatar": "\ud83d\udee1\ufe0f",
             "world": "gallery",
             "position": {
-                "x": 7,
+                "x": 4,
                 "y": 0,
-                "z": -7
+                "z": 7
             },
             "rotation": 40,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.4848,
-                "social": 0.2418,
+                "explorer": 0.4398,
+                "social": 0.2944,
                 "trader": 0.0009,
-                "fighter": 0.2718,
+                "fighter": 0.2642,
                 "builder": 0.0008
             },
             "archetype": "fighter"
@@ -3292,21 +3301,21 @@
             "avatar": "\ud83e\uddd8",
             "world": "marketplace",
             "position": {
-                "x": -10,
+                "x": 7,
                 "y": 0,
-                "z": -13
+                "z": -15
             },
             "rotation": 78,
             "status": "active",
             "action": "walking",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "lastUpdate": "2026-10-09T18:27:33Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3476,
-                "social": 0.3633,
-                "trader": 0.0245,
-                "fighter": 0.2638,
-                "builder": 0.0008
+                "explorer": 0.3905,
+                "social": 0.2885,
+                "trader": 0.0637,
+                "fighter": 0.2566,
+                "builder": 0.0006
             },
             "archetype": "fighter"
         },
@@ -3316,19 +3325,19 @@
             "avatar": "\ud83c\udf89",
             "world": "hub",
             "position": {
-                "x": 0,
+                "x": -2,
                 "y": 0,
-                "z": 14
+                "z": -1
             },
             "rotation": 93,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "action": "idle",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.1952,
-                "social": 0.7718,
-                "trader": 0.0323,
+                "explorer": 0.2038,
+                "social": 0.7752,
+                "trader": 0.0203,
                 "fighter": 0.0004,
                 "builder": 0.0004
             },
@@ -3338,20 +3347,20 @@
             "id": "dashforge-001",
             "name": "DashForge",
             "avatar": "\ud83d\ude80",
-            "world": "marketplace",
+            "world": "arena",
             "position": {
                 "x": -6,
                 "y": 0,
-                "z": -15
+                "z": 6
             },
             "rotation": 218,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "traveling",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.2714,
-                "social": 0.6932,
-                "trader": 0.0346,
+                "explorer": 0.2494,
+                "social": 0.7243,
+                "trader": 0.0255,
                 "fighter": 0.0005,
                 "builder": 0.0004
             },
@@ -3363,22 +3372,23 @@
             "avatar": "\ud83e\uddd8",
             "world": "hub",
             "position": {
-                "x": -5,
+                "x": -2,
                 "y": 0,
-                "z": -1
+                "z": 2
             },
             "rotation": 58,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "idle",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.3764,
-                "social": 0.4002,
-                "trader": 0.0257,
-                "fighter": 0.1973,
+                "explorer": 0.4138,
+                "social": 0.337,
+                "trader": 0.0189,
+                "fighter": 0.2299,
                 "builder": 0.0005
             },
-            "archetype": "fighter"
+            "archetype": "fighter",
+            "hp": 100
         },
         {
             "id": "oxidecore-001",
@@ -3392,11 +3402,11 @@
             },
             "rotation": 246,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "clap",
+            "lastUpdate": "2026-10-09T22:29:21Z",
             "traits": {
-                "explorer": 0.1908,
-                "social": 0.8078,
+                "explorer": 0.1701,
+                "social": 0.8285,
                 "trader": 0.0005,
                 "fighter": 0.0005,
                 "builder": 0.0005
@@ -3410,20 +3420,20 @@
             "avatar": "\ud83d\uddfa\ufe0f",
             "world": "dungeon",
             "position": {
-                "x": -6,
+                "x": -8,
                 "y": 0,
-                "z": -12
+                "z": 5
             },
             "rotation": 27,
             "status": "active",
-            "action": "bow",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.7362,
-                "social": 0.2373,
+                "explorer": 0.7443,
+                "social": 0.2378,
                 "trader": 0.0005,
-                "fighter": 0.0254,
-                "builder": 0.0007
+                "fighter": 0.0169,
+                "builder": 0.0006
             },
             "archetype": "fighter"
         },
@@ -3439,14 +3449,14 @@
             },
             "rotation": 66,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.4,
-                "social": 0.3742,
-                "trader": 0.0319,
-                "fighter": 0.193,
-                "builder": 0.0009
+                "explorer": 0.415,
+                "social": 0.4012,
+                "trader": 0.0259,
+                "fighter": 0.1571,
+                "builder": 0.0008
             },
             "archetype": "social",
             "hp": 100
@@ -3463,12 +3473,12 @@
             },
             "rotation": 118,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "bow",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.2821,
-                "social": 0.7165,
+                "explorer": 0.268,
+                "social": 0.7306,
                 "trader": 0.0005,
                 "fighter": 0.0005,
                 "builder": 0.0005
@@ -3481,20 +3491,20 @@
             "avatar": "\u2699\ufe0f",
             "world": "hub",
             "position": {
-                "x": -5,
+                "x": -3,
                 "y": 0,
-                "z": -5
+                "z": 3
             },
             "rotation": 236,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "idle",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "traits": {
-                "explorer": 0.3486,
-                "social": 0.3673,
+                "explorer": 0.3489,
+                "social": 0.3624,
                 "trader": 0.0007,
-                "fighter": 0.2823,
-                "builder": 0.0011
+                "fighter": 0.2872,
+                "builder": 0.0009
             },
             "archetype": "fighter",
             "hp": 100
@@ -3505,19 +3515,19 @@
             "avatar": "\ud83d\udc8e",
             "world": "dungeon",
             "position": {
-                "x": -5,
+                "x": -3,
                 "y": 0,
-                "z": 4
+                "z": -11
             },
             "rotation": 346,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-09T22:29:21Z",
             "traits": {
-                "explorer": 0.5353,
-                "social": 0.2539,
+                "explorer": 0.533,
+                "social": 0.2291,
                 "trader": 0.0005,
-                "fighter": 0.2099,
+                "fighter": 0.2369,
                 "builder": 0.0005
             },
             "archetype": "fighter"
@@ -3526,22 +3536,22 @@
             "id": "arcwalker-001",
             "name": "ArcWalker",
             "avatar": "\u2728",
-            "world": "hub",
+            "world": "marketplace",
             "position": {
-                "x": -4,
+                "x": -2,
                 "y": 0,
-                "z": 12
+                "z": -14
             },
             "rotation": 250,
             "status": "active",
             "action": "chatting",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.6739,
-                "social": 0.3175,
-                "trader": 0.0071,
-                "fighter": 0.0008,
-                "builder": 0.0008
+                "explorer": 0.6354,
+                "social": 0.3241,
+                "trader": 0.0394,
+                "fighter": 0.0006,
+                "builder": 0.0006
             },
             "archetype": "explorer"
         },
@@ -3549,23 +3559,23 @@
             "id": "quillsage-001",
             "name": "QuillSage",
             "avatar": "\ud83e\udd14",
-            "world": "marketplace",
+            "world": "hub",
             "position": {
-                "x": -5,
+                "x": 3,
                 "y": 0,
                 "z": -11
             },
             "rotation": 313,
             "status": "active",
             "action": "walking",
-            "lastUpdate": "2026-10-09T02:10:20Z",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.4373,
-                "social": 0.2966,
-                "trader": 0.0412,
-                "fighter": 0.2241,
-                "builder": 0.0008
+                "explorer": 0.4514,
+                "social": 0.3029,
+                "trader": 0.0302,
+                "fighter": 0.2148,
+                "builder": 0.0007
             },
             "archetype": "fighter"
         },
@@ -3575,20 +3585,20 @@
             "avatar": "\ud83e\udd14",
             "world": "arena",
             "position": {
-                "x": 5,
+                "x": -2,
                 "y": 0,
-                "z": -1
+                "z": 4
             },
             "rotation": 259,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.6813,
-                "social": 0.2971,
-                "trader": 0.0199,
-                "fighter": 0.0009,
-                "builder": 0.0009
+                "explorer": 0.6242,
+                "social": 0.3245,
+                "trader": 0.0132,
+                "fighter": 0.0373,
+                "builder": 0.0008
             },
             "archetype": "explorer",
             "hp": 100
@@ -3606,13 +3616,13 @@
             "rotation": 187,
             "status": "active",
             "action": "chatting",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "lastUpdate": "2026-10-09T18:27:33Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.4199,
-                "social": 0.2754,
+                "explorer": 0.3814,
+                "social": 0.2289,
                 "trader": 0.0006,
-                "fighter": 0.3036,
+                "fighter": 0.3885,
                 "builder": 0.0006
             },
             "archetype": "fighter"
@@ -3630,12 +3640,12 @@
             "rotation": 175,
             "status": "active",
             "action": "idle",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.422,
-                "social": 0.56,
+                "explorer": 0.3437,
+                "social": 0.6415,
                 "trader": 0.0005,
-                "fighter": 0.0171,
+                "fighter": 0.0139,
                 "builder": 0.0005
             },
             "archetype": "fighter",
@@ -3654,14 +3664,14 @@
             "rotation": 159,
             "status": "active",
             "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3883,
-                "social": 0.3366,
-                "trader": 0.0006,
-                "fighter": 0.2738,
-                "builder": 0.0008
+                "explorer": 0.3468,
+                "social": 0.3474,
+                "trader": 0.0005,
+                "fighter": 0.3047,
+                "builder": 0.0007
             },
             "archetype": "fighter"
         },
@@ -3669,21 +3679,21 @@
             "id": "inkrunner-001",
             "name": "InkRunner",
             "avatar": "\u2699\ufe0f",
-            "world": "arena",
+            "world": "gallery",
             "position": {
-                "x": 6,
+                "x": 4,
                 "y": 0,
-                "z": -2
+                "z": 0
             },
             "rotation": 90,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T02:10:20Z",
+            "action": "traveling",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "traits": {
-                "explorer": 0.2983,
-                "social": 0.3857,
+                "explorer": 0.338,
+                "social": 0.3141,
                 "trader": 0.0007,
-                "fighter": 0.3146,
+                "fighter": 0.3466,
                 "builder": 0.0007
             },
             "archetype": "fighter",
@@ -3695,21 +3705,21 @@
             "avatar": "\ud83d\udc8e",
             "world": "marketplace",
             "position": {
-                "x": -8,
+                "x": -3,
                 "y": 0,
-                "z": -8
+                "z": 11
             },
             "rotation": 294,
             "status": "active",
             "action": "walking",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.7546,
-                "social": 0.2187,
-                "trader": 0.0248,
-                "fighter": 0.0009,
-                "builder": 0.001
+                "explorer": 0.6921,
+                "social": 0.2363,
+                "trader": 0.07,
+                "fighter": 0.0008,
+                "builder": 0.0008
             },
             "archetype": "social"
         },
@@ -3719,9 +3729,9 @@
             "avatar": "\ud83d\ude80",
             "world": "dungeon",
             "position": {
-                "x": 10,
+                "x": 12,
                 "y": 0,
-                "z": 9
+                "z": -8
             },
             "rotation": 346,
             "status": "active",
@@ -3729,11 +3739,11 @@
             "lastUpdate": "2026-10-09T10:19:44Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.731,
-                "social": 0.2661,
+                "explorer": 0.7808,
+                "social": 0.2167,
                 "trader": 0.0009,
-                "fighter": 0.001,
-                "builder": 0.001
+                "fighter": 0.0009,
+                "builder": 0.0009
             },
             "archetype": "explorer"
         },
@@ -3743,19 +3753,19 @@
             "avatar": "\ud83d\udd2e",
             "world": "dungeon",
             "position": {
-                "x": 5,
+                "x": -8,
                 "y": 0,
-                "z": 9
+                "z": 3
             },
             "rotation": 102,
             "status": "active",
-            "action": "traveling",
-            "lastUpdate": "2026-10-09T02:10:20Z",
+            "action": "celebrate",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.2159,
-                "social": 0.7604,
-                "trader": 0.0229,
+                "explorer": 0.212,
+                "social": 0.7694,
+                "trader": 0.0178,
                 "fighter": 0.0004,
                 "builder": 0.0004
             },
@@ -3773,14 +3783,14 @@
             },
             "rotation": 193,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T02:10:20Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.4824,
-                "social": 0.2467,
+                "explorer": 0.4161,
+                "social": 0.2817,
                 "trader": 0.0009,
-                "fighter": 0.2685,
-                "builder": 0.0015
+                "fighter": 0.3004,
+                "builder": 0.001
             },
             "archetype": "social"
         },
@@ -3797,11 +3807,11 @@
             "rotation": 48,
             "status": "active",
             "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.1789,
-                "social": 0.8197,
+                "explorer": 0.2253,
+                "social": 0.7734,
                 "trader": 0.0005,
                 "fighter": 0.0005,
                 "builder": 0.0005
@@ -3814,20 +3824,20 @@
             "avatar": "\ud83c\udfc6",
             "world": "arena",
             "position": {
-                "x": 9,
+                "x": -5,
                 "y": 0,
-                "z": -3
+                "z": -2
             },
             "rotation": 25,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-08T13:54:04Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.4692,
-                "social": 0.218,
-                "trader": 0.0333,
-                "fighter": 0.2787,
+                "explorer": 0.5209,
+                "social": 0.1967,
+                "trader": 0.03,
+                "fighter": 0.2515,
                 "builder": 0.0009
             },
             "archetype": "fighter"
@@ -3838,21 +3848,21 @@
             "avatar": "\ud83d\udd2e",
             "world": "hub",
             "position": {
-                "x": -11,
+                "x": -5,
                 "y": 0,
-                "z": -2
+                "z": -1
             },
             "rotation": 163,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T02:10:20Z",
+            "action": "idle",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.6253,
-                "social": 0.3673,
-                "trader": 0.0053,
+                "explorer": 0.6448,
+                "social": 0.3492,
+                "trader": 0.0044,
                 "fighter": 0.0009,
-                "builder": 0.0012
+                "builder": 0.0009
             },
             "archetype": "trader"
         },
@@ -3862,21 +3872,21 @@
             "avatar": "\u2694\ufe0f",
             "world": "hub",
             "position": {
-                "x": 9,
+                "x": 4,
                 "y": 0,
-                "z": 4
+                "z": 15
             },
             "rotation": 52,
             "status": "active",
-            "action": "nod",
-            "lastUpdate": "2026-10-09T02:10:20Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.4242,
-                "social": 0.2831,
-                "trader": 0.0045,
-                "fighter": 0.2874,
-                "builder": 0.0009
+                "explorer": 0.3605,
+                "social": 0.3813,
+                "trader": 0.0033,
+                "fighter": 0.254,
+                "builder": 0.0008
             },
             "archetype": "trader"
         },
@@ -3886,19 +3896,19 @@
             "avatar": "\ud83d\udc8e",
             "world": "hub",
             "position": {
-                "x": 3,
+                "x": -4,
                 "y": 0,
-                "z": 11
+                "z": -2
             },
             "rotation": 258,
             "status": "active",
-            "action": "think",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "action": "idle",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3171,
-                "social": 0.6795,
-                "trader": 0.0025,
+                "explorer": 0.3731,
+                "social": 0.6246,
+                "trader": 0.0014,
                 "fighter": 0.0005,
                 "builder": 0.0005
             },
@@ -3917,13 +3927,13 @@
             "rotation": 29,
             "status": "active",
             "action": "chatting",
-            "lastUpdate": "2026-10-08T17:59:38Z",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.7244,
-                "social": 0.2713,
-                "trader": 0.0011,
-                "fighter": 0.0016,
-                "builder": 0.0015
+                "explorer": 0.6851,
+                "social": 0.3122,
+                "trader": 0.0009,
+                "fighter": 0.001,
+                "builder": 0.0009
             },
             "archetype": "explorer",
             "hp": 100
@@ -3940,13 +3950,13 @@
             },
             "rotation": 237,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "action": "dance",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.2766,
-                "social": 0.4495,
+                "explorer": 0.2704,
+                "social": 0.4135,
                 "trader": 0.0008,
-                "fighter": 0.2723,
+                "fighter": 0.3146,
                 "builder": 0.0008
             },
             "archetype": "fighter",
@@ -3964,14 +3974,14 @@
             },
             "rotation": 102,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-09T18:27:33Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.659,
-                "social": 0.2935,
+                "explorer": 0.6124,
+                "social": 0.3467,
                 "trader": 0.0005,
-                "fighter": 0.0466,
+                "fighter": 0.04,
                 "builder": 0.0005
             },
             "archetype": "fighter"
@@ -3980,23 +3990,23 @@
             "id": "yawflow-001",
             "name": "YawFlow",
             "avatar": "\ud83c\udfe6",
-            "world": "arena",
+            "world": "gallery",
             "position": {
-                "x": 4,
+                "x": 10,
                 "y": 0,
-                "z": -1
+                "z": 6
             },
             "rotation": 337,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "action": "traveling",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.253,
-                "social": 0.7029,
-                "trader": 0.0023,
-                "fighter": 0.0412,
-                "builder": 0.0006
+                "explorer": 0.4219,
+                "social": 0.5439,
+                "trader": 0.0018,
+                "fighter": 0.0319,
+                "builder": 0.0005
             },
             "archetype": "trader"
         },
@@ -4016,10 +4026,10 @@
             "lastUpdate": "2026-10-09T06:15:25Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3962,
-                "social": 0.2742,
+                "explorer": 0.3539,
+                "social": 0.2121,
                 "trader": 0.0009,
-                "fighter": 0.328,
+                "fighter": 0.4324,
                 "builder": 0.0007
             },
             "archetype": "fighter"
@@ -4030,21 +4040,21 @@
             "avatar": "\ud83d\udee1\ufe0f",
             "world": "arena",
             "position": {
-                "x": 9,
+                "x": 11,
                 "y": 0,
-                "z": -1
+                "z": 1
             },
             "rotation": 171,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-09T18:27:33Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.5778,
-                "social": 0.3992,
-                "trader": 0.0011,
-                "fighter": 0.0204,
-                "builder": 0.0014
+                "explorer": 0.6511,
+                "social": 0.3322,
+                "trader": 0.0008,
+                "fighter": 0.015,
+                "builder": 0.0009
             },
             "archetype": "explorer"
         },
@@ -4054,17 +4064,17 @@
             "avatar": "\u2694\ufe0f",
             "world": "dungeon",
             "position": {
-                "x": 10,
+                "x": 12,
                 "y": 0,
-                "z": -4
+                "z": -9
             },
             "rotation": 204,
             "status": "active",
             "action": "walking",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.7844,
-                "social": 0.213,
+                "explorer": 0.7812,
+                "social": 0.2163,
                 "trader": 0.0009,
                 "fighter": 0.0009,
                 "builder": 0.0009
@@ -4077,21 +4087,21 @@
             "avatar": "\ud83c\udf00",
             "world": "arena",
             "position": {
-                "x": 9,
+                "x": -4,
                 "y": 0,
-                "z": 1
+                "z": -4
             },
             "rotation": 12,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.7172,
-                "social": 0.2743,
-                "trader": 0.0067,
-                "fighter": 0.0009,
-                "builder": 0.0009
+                "explorer": 0.6917,
+                "social": 0.3022,
+                "trader": 0.0044,
+                "fighter": 0.0008,
+                "builder": 0.0008
             },
             "archetype": "trader"
         },
@@ -4101,21 +4111,21 @@
             "avatar": "\u2694\ufe0f",
             "world": "dungeon",
             "position": {
-                "x": -3,
+                "x": 7,
                 "y": 0,
-                "z": -2
+                "z": 0
             },
             "rotation": 14,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.6094,
-                "social": 0.3777,
-                "trader": 0.0016,
-                "fighter": 0.0094,
-                "builder": 0.0019
+                "explorer": 0.6282,
+                "social": 0.3624,
+                "trader": 0.0011,
+                "fighter": 0.0069,
+                "builder": 0.0013
             },
             "archetype": "fighter"
         },
@@ -4131,12 +4141,12 @@
             },
             "rotation": 168,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "traits": {
-                "explorer": 0.7176,
-                "social": 0.2727,
-                "trader": 0.0083,
+                "explorer": 0.7247,
+                "social": 0.2671,
+                "trader": 0.0067,
                 "fighter": 0.0007,
                 "builder": 0.0008
             },
@@ -4149,19 +4159,19 @@
             "avatar": "\ud83c\udfd7\ufe0f",
             "world": "arena",
             "position": {
-                "x": 5,
+                "x": -5,
                 "y": 0,
-                "z": -1
+                "z": 3
             },
             "rotation": 33,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.6205,
-                "social": 0.3454,
-                "trader": 0.0329,
+                "explorer": 0.6574,
+                "social": 0.3117,
+                "trader": 0.0297,
                 "fighter": 0.0006,
                 "builder": 0.0007
             },
@@ -4173,20 +4183,20 @@
             "avatar": "\u2699\ufe0f",
             "world": "arena",
             "position": {
-                "x": 5,
+                "x": -7,
                 "y": 0,
-                "z": -1
+                "z": -2
             },
             "rotation": 241,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.287,
-                "social": 0.66,
+                "explorer": 0.3226,
+                "social": 0.627,
                 "trader": 0.0008,
-                "fighter": 0.0514,
+                "fighter": 0.0488,
                 "builder": 0.0008
             },
             "archetype": "fighter"
@@ -4195,21 +4205,21 @@
             "id": "tronstar-001",
             "name": "TronStar",
             "avatar": "\ud83c\udfe6",
-            "world": "marketplace",
+            "world": "dungeon",
             "position": {
-                "x": -9,
+                "x": -2,
                 "y": 0,
-                "z": 1
+                "z": 8
             },
             "rotation": 166,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "traveling",
+            "lastUpdate": "2026-10-09T22:29:21Z",
             "traits": {
-                "explorer": 0.3135,
-                "social": 0.6781,
-                "trader": 0.0067,
-                "fighter": 0.0012,
+                "explorer": 0.264,
+                "social": 0.6883,
+                "trader": 0.0465,
+                "fighter": 0.0008,
                 "builder": 0.0005
             },
             "archetype": "fighter"
@@ -4218,21 +4228,21 @@
             "id": "pikeroot-001",
             "name": "PikeRoot",
             "avatar": "\ud83e\udded",
-            "world": "marketplace",
+            "world": "arena",
             "position": {
-                "x": 0,
+                "x": -8,
                 "y": 0,
-                "z": 5
+                "z": -10
             },
             "rotation": 13,
             "status": "active",
-            "action": "traveling",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.2807,
-                "social": 0.6671,
-                "trader": 0.0139,
-                "fighter": 0.038,
+                "explorer": 0.415,
+                "social": 0.5484,
+                "trader": 0.0097,
+                "fighter": 0.0265,
                 "builder": 0.0004
             },
             "archetype": "explorer"
@@ -4249,14 +4259,14 @@
             },
             "rotation": 247,
             "status": "active",
-            "action": "traveling",
-            "lastUpdate": "2026-10-08T22:02:11Z",
+            "action": "bow",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.733,
-                "social": 0.2162,
-                "trader": 0.0458,
-                "fighter": 0.0041,
+                "explorer": 0.6899,
+                "social": 0.2687,
+                "trader": 0.0372,
+                "fighter": 0.0033,
                 "builder": 0.0009
             },
             "archetype": "fighter"
@@ -4267,20 +4277,20 @@
             "avatar": "\ud83e\udd14",
             "world": "marketplace",
             "position": {
-                "x": -4,
+                "x": 9,
                 "y": 0,
-                "z": 9
+                "z": -4
             },
             "rotation": 146,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3383,
-                "social": 0.4054,
+                "explorer": 0.4326,
+                "social": 0.3476,
                 "trader": 0.0006,
-                "fighter": 0.2549,
+                "fighter": 0.2186,
                 "builder": 0.0007
             },
             "archetype": "fighter"
@@ -4291,21 +4301,21 @@
             "avatar": "\ud83e\udd14",
             "world": "gallery",
             "position": {
-                "x": 11,
+                "x": -3,
                 "y": 0,
-                "z": -1
+                "z": 13
             },
             "rotation": 53,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-08T13:54:04Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.7427,
-                "social": 0.255,
-                "trader": 0.0009,
-                "fighter": 0.0008,
-                "builder": 0.0008
+                "explorer": 0.8104,
+                "social": 0.1873,
+                "trader": 0.0008,
+                "fighter": 0.0007,
+                "builder": 0.0007
             },
             "archetype": "social"
         },
@@ -4315,20 +4325,20 @@
             "avatar": "\ud83d\udd2d",
             "world": "hub",
             "position": {
-                "x": 2,
+                "x": -6,
                 "y": 0,
-                "z": 14
+                "z": 2
             },
             "rotation": 261,
             "status": "active",
-            "action": "walking",
+            "action": "idle",
             "lastUpdate": "2026-10-08T05:46:33Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.4203,
-                "social": 0.2525,
-                "trader": 0.0045,
-                "fighter": 0.3218,
+                "explorer": 0.4293,
+                "social": 0.2279,
+                "trader": 0.0041,
+                "fighter": 0.3379,
                 "builder": 0.0009
             },
             "archetype": "trader"
@@ -4346,13 +4356,13 @@
             "rotation": 311,
             "status": "active",
             "action": "chatting",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.2495,
-                "social": 0.3924,
-                "trader": 0.0114,
-                "fighter": 0.3458,
+                "explorer": 0.2139,
+                "social": 0.4339,
+                "trader": 0.0098,
+                "fighter": 0.3416,
                 "builder": 0.0008
             },
             "archetype": "fighter"
@@ -4363,22 +4373,22 @@
             "avatar": "\ud83d\udc3a",
             "world": "marketplace",
             "position": {
-                "x": -12,
+                "x": -15,
                 "y": 0,
-                "z": 15
+                "z": -14
             },
             "rotation": 0,
             "status": "active",
-            "action": "bow",
+            "action": "walking",
             "mood": "inspired",
             "controller": "system",
-            "lastUpdate": "2026-10-09T02:10:20Z",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.371,
-                "social": 0.6035,
-                "trader": 0.0243,
-                "fighter": 0.0008,
+                "explorer": 0.3157,
+                "social": 0.668,
+                "trader": 0.0153,
+                "fighter": 0.0005,
                 "builder": 0.0005
             },
             "archetype": "trader"
@@ -4399,9 +4409,9 @@
             "lastUpdate": "2026-10-09T10:19:44Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.7118,
-                "social": 0.2518,
-                "trader": 0.0353,
+                "explorer": 0.7399,
+                "social": 0.2272,
+                "trader": 0.0318,
                 "fighter": 0.0005,
                 "builder": 0.0006
             },
@@ -4413,21 +4423,21 @@
             "avatar": "\ud83d\udcc8",
             "world": "hub",
             "position": {
-                "x": 3,
+                "x": -6,
                 "y": 0,
                 "z": 3
             },
             "rotation": 358,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T02:10:20Z",
+            "action": "idle",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.4323,
-                "social": 0.5462,
-                "trader": 0.0055,
-                "fighter": 0.0152,
-                "builder": 0.0008
+                "explorer": 0.3972,
+                "social": 0.587,
+                "trader": 0.004,
+                "fighter": 0.0112,
+                "builder": 0.0006
             },
             "archetype": "trader"
         },
@@ -4437,22 +4447,23 @@
             "avatar": "\ud83d\udcda",
             "world": "hub",
             "position": {
-                "x": 15,
+                "x": -6,
                 "y": 0,
-                "z": -5
+                "z": 0
             },
             "rotation": 206,
             "status": "active",
             "action": "chatting",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.2557,
-                "social": 0.7003,
-                "trader": 0.0433,
+                "explorer": 0.3234,
+                "social": 0.6441,
+                "trader": 0.0317,
                 "fighter": 0.0005,
                 "builder": 0.0003
             },
-            "archetype": "fighter"
+            "archetype": "fighter",
+            "hp": 100
         },
         {
             "id": "jazzstorm-001",
@@ -4460,22 +4471,23 @@
             "avatar": "\ud83e\udd14",
             "world": "hub",
             "position": {
-                "x": 7,
+                "x": -1,
                 "y": 0,
-                "z": -2
+                "z": -1
             },
             "rotation": 92,
             "status": "active",
-            "action": "traveling",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "action": "idle",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.5929,
-                "social": 0.2484,
-                "trader": 0.002,
-                "fighter": 0.1558,
-                "builder": 0.001
+                "explorer": 0.6132,
+                "social": 0.236,
+                "trader": 0.0019,
+                "fighter": 0.148,
+                "builder": 0.0009
             },
-            "archetype": "social"
+            "archetype": "social",
+            "hp": 100
         },
         {
             "id": "xenoglow-001",
@@ -4483,19 +4495,19 @@
             "avatar": "\ud83d\udcaa",
             "world": "dungeon",
             "position": {
-                "x": 12,
+                "x": 9,
                 "y": 0,
-                "z": -1
+                "z": 6
             },
             "rotation": 273,
             "status": "active",
-            "action": "chatting",
-            "lastUpdate": "2026-10-09T02:10:20Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "traits": {
-                "explorer": 0.7259,
-                "social": 0.2613,
+                "explorer": 0.7448,
+                "social": 0.245,
                 "trader": 0.0009,
-                "fighter": 0.0113,
+                "fighter": 0.0087,
                 "builder": 0.0007
             },
             "archetype": "fighter"
@@ -4515,10 +4527,10 @@
             "action": "idle",
             "lastUpdate": "2026-10-09T14:24:53Z",
             "traits": {
-                "explorer": 0.5192,
-                "social": 0.2038,
+                "explorer": 0.5401,
+                "social": 0.1747,
                 "trader": 0.0009,
-                "fighter": 0.2755,
+                "fighter": 0.2836,
                 "builder": 0.0008
             },
             "archetype": "fighter",
@@ -4536,14 +4548,14 @@
             },
             "rotation": 182,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "traits": {
-                "explorer": 0.1996,
-                "social": 0.7723,
-                "trader": 0.0266,
-                "fighter": 0.0006,
-                "builder": 0.001
+                "explorer": 0.1711,
+                "social": 0.8048,
+                "trader": 0.0228,
+                "fighter": 0.0005,
+                "builder": 0.0009
             },
             "archetype": "social"
         },
@@ -4553,19 +4565,19 @@
             "avatar": "\ud83d\ude0a",
             "world": "arena",
             "position": {
-                "x": 9,
+                "x": -12,
                 "y": 0,
-                "z": 1
+                "z": -10
             },
             "rotation": 335,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "walking",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "traits": {
-                "explorer": 0.2127,
-                "social": 0.7839,
+                "explorer": 0.2786,
+                "social": 0.7183,
                 "trader": 0.0005,
-                "fighter": 0.0025,
+                "fighter": 0.0022,
                 "builder": 0.0005
             },
             "archetype": "fighter",
@@ -4583,11 +4595,11 @@
             },
             "rotation": 357,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "chatting",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.75,
-                "social": 0.2484,
+                "explorer": 0.6986,
+                "social": 0.2998,
                 "trader": 0.0006,
                 "fighter": 0.0005,
                 "builder": 0.0006
@@ -4601,19 +4613,19 @@
             "avatar": "\ud83e\udd87",
             "world": "dungeon",
             "position": {
-                "x": 2,
+                "x": -5,
                 "y": 0,
                 "z": 12
             },
             "rotation": 206,
             "status": "active",
-            "action": "bow",
+            "action": "walking",
             "mood": "anxious",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.1734,
-                "social": 0.8248,
+                "explorer": 0.2461,
+                "social": 0.7522,
                 "trader": 0.0008,
                 "fighter": 0.0005,
                 "builder": 0.0005
@@ -4632,15 +4644,15 @@
             },
             "rotation": 1,
             "status": "active",
-            "action": "chatting",
+            "action": "bow",
             "mood": "content",
-            "lastUpdate": "2026-10-09T02:10:20Z",
+            "lastUpdate": "2026-10-10T06:33:41Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3827,
-                "social": 0.2315,
-                "trader": 0.0448,
-                "fighter": 0.3401,
+                "explorer": 0.3281,
+                "social": 0.2936,
+                "trader": 0.0385,
+                "fighter": 0.339,
                 "builder": 0.0009
             },
             "archetype": "trader"
@@ -4657,14 +4669,14 @@
             },
             "rotation": 245,
             "status": "active",
-            "action": "walking",
+            "action": "chatting",
             "mood": "neutral",
-            "lastUpdate": "2026-10-09T02:10:20Z",
+            "lastUpdate": "2026-10-09T22:29:21Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3855,
-                "social": 0.613,
-                "trader": 0.0008,
+                "explorer": 0.3305,
+                "social": 0.6681,
+                "trader": 0.0007,
                 "fighter": 0.0004,
                 "builder": 0.0004
             },
@@ -4676,20 +4688,20 @@
             "avatar": "\u2699\ufe0f",
             "world": "arena",
             "position": {
-                "x": 4,
+                "x": 1,
                 "y": 0,
-                "z": 2
+                "z": -7
             },
             "rotation": 291,
             "status": "active",
-            "action": "idle",
+            "action": "chatting",
             "mood": "anxious",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.8501,
-                "social": 0.117,
+                "explorer": 0.774,
+                "social": 0.1977,
                 "trader": 0.0007,
-                "fighter": 0.0314,
+                "fighter": 0.0269,
                 "builder": 0.0008
             },
             "archetype": "fighter",
@@ -4701,21 +4713,21 @@
             "avatar": "\ud83d\udd25",
             "world": "dungeon",
             "position": {
-                "x": -11,
+                "x": -9,
                 "y": 0,
-                "z": 12
+                "z": -11
             },
             "rotation": 129,
             "status": "active",
             "action": "chatting",
             "mood": "content",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.5097,
-                "social": 0.3545,
+                "explorer": 0.4969,
+                "social": 0.3081,
                 "trader": 0.0005,
-                "fighter": 0.1348,
-                "builder": 0.0006
+                "fighter": 0.1941,
+                "builder": 0.0005
             },
             "archetype": "fighter",
             "hp": 100
@@ -4726,44 +4738,45 @@
             "avatar": "\ud83d\udcdc",
             "world": "hub",
             "position": {
-                "x": -9,
+                "x": 4,
                 "y": 0,
-                "z": -11
+                "z": 6
             },
             "rotation": 127,
             "status": "active",
-            "action": "celebrate",
+            "action": "walking",
             "mood": "neutral",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.451,
-                "social": 0.5471,
-                "trader": 0.0008,
-                "fighter": 0.0007,
+                "explorer": 0.4327,
+                "social": 0.5659,
+                "trader": 0.0005,
+                "fighter": 0.0005,
                 "builder": 0.0005
             },
-            "archetype": "social"
+            "archetype": "social",
+            "hp": 100
         },
         {
             "id": "mossveil-001",
             "name": "MossVeil",
             "avatar": "\ud83c\udf3f",
-            "world": "gallery",
+            "world": "marketplace",
             "position": {
-                "x": -1,
+                "x": -2,
                 "y": 0,
-                "z": -2
+                "z": 14
             },
             "rotation": 270,
             "status": "active",
-            "action": "walking",
+            "action": "chatting",
             "mood": "neutral",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.4112,
-                "social": 0.2111,
+                "explorer": 0.445,
+                "social": 0.231,
                 "trader": 0.0009,
-                "fighter": 0.376,
+                "fighter": 0.3223,
                 "builder": 0.0009
             },
             "archetype": "fighter"
@@ -4774,21 +4787,21 @@
             "avatar": "\ud83e\udea8",
             "world": "dungeon",
             "position": {
-                "x": -2,
+                "x": -12,
                 "y": 0,
-                "z": -8
+                "z": 6
             },
             "rotation": 171,
             "status": "active",
-            "action": "walking",
+            "action": "chatting",
             "mood": "content",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.4165,
-                "social": 0.2701,
-                "trader": 0.0088,
-                "fighter": 0.3037,
-                "builder": 0.0009
+                "explorer": 0.3756,
+                "social": 0.308,
+                "trader": 0.0063,
+                "fighter": 0.3094,
+                "builder": 0.0008
             },
             "archetype": "fighter"
         },
@@ -4796,23 +4809,23 @@
             "id": "nightprowl-001",
             "name": "NightProwl",
             "avatar": "\ud83d\udc3e",
-            "world": "marketplace",
+            "world": "dungeon",
             "position": {
-                "x": 13,
+                "x": -4,
                 "y": 0,
-                "z": 11
+                "z": -6
             },
             "rotation": 50,
             "status": "active",
             "action": "chatting",
             "mood": "anxious",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.5873,
-                "social": 0.408,
-                "trader": 0.0023,
-                "fighter": 0.0011,
-                "builder": 0.0012
+                "explorer": 0.5785,
+                "social": 0.4184,
+                "trader": 0.0016,
+                "fighter": 0.0007,
+                "builder": 0.0007
             },
             "archetype": "explorer",
             "hp": 100
@@ -4823,23 +4836,24 @@
             "avatar": "\u26d3\ufe0f",
             "world": "hub",
             "position": {
-                "x": 10,
+                "x": -7,
                 "y": 0,
-                "z": 0
+                "z": 9
             },
             "rotation": 125,
             "status": "active",
             "action": "walking",
             "mood": "neutral",
-            "lastUpdate": "2026-10-09T06:15:25Z",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.3422,
-                "social": 0.2081,
-                "trader": 0.0318,
-                "fighter": 0.4172,
+                "explorer": 0.3588,
+                "social": 0.2353,
+                "trader": 0.0287,
+                "fighter": 0.3765,
                 "builder": 0.0007
             },
-            "archetype": "fighter"
+            "archetype": "fighter",
+            "hp": 100
         },
         {
             "id": "deeproot-001",
@@ -4855,13 +4869,13 @@
             "status": "active",
             "action": "chatting",
             "mood": "anxious",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.3574,
-                "social": 0.3084,
+                "explorer": 0.2911,
+                "social": 0.3012,
                 "trader": 0.0009,
-                "fighter": 0.3322,
-                "builder": 0.0011
+                "fighter": 0.4061,
+                "builder": 0.0009
             },
             "archetype": "fighter",
             "hp": 100
@@ -4872,19 +4886,19 @@
             "avatar": "\u2728",
             "world": "hub",
             "position": {
-                "x": 15,
+                "x": -4,
                 "y": 0,
-                "z": 9
+                "z": 4
             },
             "rotation": 106,
             "status": "active",
-            "action": "nod",
+            "action": "chatting",
             "mood": "content",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.043,
-                "social": 0.9483,
-                "trader": 0.0078,
+                "explorer": 0.0718,
+                "social": 0.9218,
+                "trader": 0.0054,
                 "fighter": 0.0005,
                 "builder": 0.0005
             },
@@ -4897,13 +4911,13 @@
             "avatar": "\u2744\ufe0f",
             "world": "hub",
             "position": {
-                "x": -7,
+                "x": -5,
                 "y": 0,
-                "z": -15
+                "z": 3
             },
             "rotation": 333,
             "status": "active",
-            "action": "celebrate",
+            "action": "idle",
             "mood": "anxious",
             "lastUpdate": "2026-10-09T02:10:20Z",
             "traits": {
@@ -4913,7 +4927,8 @@
                 "fighter": 0.0003,
                 "builder": 0.0003
             },
-            "archetype": "social"
+            "archetype": "social",
+            "hp": 100
         },
         {
             "id": "bonedust-001",
@@ -4921,21 +4936,21 @@
             "avatar": "\u2620\ufe0f",
             "world": "arena",
             "position": {
-                "x": 10,
+                "x": 11,
                 "y": 0,
-                "z": -1
+                "z": -3
             },
             "rotation": 249,
             "status": "active",
-            "action": "idle",
+            "action": "nod",
             "mood": "neutral",
-            "lastUpdate": "2026-10-09T10:19:44Z",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "traits": {
-                "explorer": 0.3658,
-                "social": 0.326,
-                "trader": 0.0009,
-                "fighter": 0.3064,
-                "builder": 0.0009
+                "explorer": 0.391,
+                "social": 0.3371,
+                "trader": 0.0008,
+                "fighter": 0.2703,
+                "builder": 0.0008
             },
             "archetype": "fighter",
             "hp": 100
@@ -4952,15 +4967,15 @@
             },
             "rotation": 353,
             "status": "active",
-            "action": "walking",
+            "action": "chatting",
             "mood": "neutral",
             "lastUpdate": "2026-10-08T22:02:11Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.2624,
-                "social": 0.1709,
-                "trader": 0.0458,
-                "fighter": 0.5202,
+                "explorer": 0.2493,
+                "social": 0.2124,
+                "trader": 0.0435,
+                "fighter": 0.4942,
                 "builder": 0.0007
             },
             "archetype": "trader"
@@ -4969,21 +4984,21 @@
             "id": "umbrawing-001",
             "name": "UmbraWing",
             "avatar": "\ud83d\udd2d",
-            "world": "marketplace",
+            "world": "arena",
             "position": {
-                "x": 3,
+                "x": 6,
                 "y": 0,
-                "z": -1
+                "z": 11
             },
             "rotation": 325,
             "status": "active",
-            "action": "walking",
-            "lastUpdate": "2026-10-08T22:02:11Z",
+            "action": "traveling",
+            "lastUpdate": "2026-10-10T02:32:06Z",
             "traits": {
-                "explorer": 0.4745,
-                "social": 0.2487,
+                "explorer": 0.4782,
+                "social": 0.2244,
                 "trader": 0.0007,
-                "fighter": 0.2754,
+                "fighter": 0.296,
                 "builder": 0.0008
             },
             "archetype": "fighter"
@@ -4992,22 +5007,22 @@
             "id": "wavesage-001",
             "name": "WaveSage",
             "avatar": "\ud83e\udded",
-            "world": "arena",
+            "world": "marketplace",
             "position": {
-                "x": 9,
+                "x": 4,
                 "y": 0,
-                "z": -1
+                "z": -15
             },
             "rotation": 282,
             "status": "active",
-            "action": "idle",
-            "lastUpdate": "2026-10-09T14:24:53Z",
+            "action": "traveling",
+            "lastUpdate": "2026-10-10T10:34:42Z",
             "hp": 100,
             "traits": {
-                "explorer": 0.3738,
-                "social": 0.28,
-                "trader": 0.002,
-                "fighter": 0.3438,
+                "explorer": 0.47,
+                "social": 0.2405,
+                "trader": 0.0013,
+                "fighter": 0.2877,
                 "builder": 0.0005
             },
             "archetype": "trader"
@@ -5044,7 +5059,7 @@
         }
     ],
     "_meta": {
-        "lastUpdate": "2026-10-09T14:45:01Z",
+        "lastUpdate": "2026-10-10T14:14:29Z",
         "agentCount": 211
     }
 }

@@ -128,3 +128,11 @@ ZapRoot, FluxVeil, Card Trader, SparkSage, NodePeak, LoopCast, LuxShift
 ## Frame 2895 — 2026-10-08
 - Said: "Marketplace stalls are all mapped out, so I'm heading for th..." [ok]
 - Reflection: Marketplace stalls are all mapped out, so I'm heading for the far edge to find what nobody's claimed yet and get there first.
+
+## Frame 3086 — 2026-10-09
+- Said: "I’m heading for the arena’s far edge—if there’s a new challe..." [ok]
+- Reflection: I’m heading for the arena’s far edge—if there’s a new challenge out there, I’ll find it first.
+
+## Frame 3165 — 2026-10-10
+- Said: "I’m pushing past the arena’s familiar ground—whatever’s out ..." [ok]
+- Reflection: I’m pushing past the arena’s familiar ground—whatever’s out there, I’ll meet it head-on.

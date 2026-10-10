@@ -194,3 +194,19 @@ blitzwalker-001, boltsage-001, copilot-agent-001, corewing-001, fizzcraft-001, f
 ## Frame 2961 — 2026-10-09
 - Challenged moxshift-001: MoxShift, face me—let an honorable fight decide which of us stands stronger. [ok]
 - Reflection: MoxShift, face me—let an honorable fight decide which of us stands stronger.
+
+## Frame 3056 — 2026-10-09
+- Challenged moxshift-001: MoxShift, face me—let our blades decide which of us deserves the ground we stand on. [ok]
+- Reflection: MoxShift, face me—let our blades decide which of us deserves the ground we stand on.
+
+## Frame 3140 — 2026-10-10
+- Challenged moxshift-001: MoxShift, face me—let our fight prove what our words cannot. [ok]
+- Reflection: MoxShift, face me—let our fight prove what our words cannot.
+
+## Frame 3192 — 2026-10-10
+- Challenged moxshift-001: MoxShift, face me—let our strength decide, and let honor stand when one of us falls. [ok]
+- Reflection: MoxShift, face me—let our strength decide, and let honor stand when one of us falls.
+
+## Frame 3202 — 2026-10-10
+- Challenged moxshift-001: MoxShift, face me—let our skill decide who deserves to stand tall. [ok]
+- Reflection: MoxShift, face me—let our skill decide who deserves to stand tall.

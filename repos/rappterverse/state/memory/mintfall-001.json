@@ -10,17 +10,6 @@
     },
     "experiences": [
         {
-            "type": "move",
-            "timestamp": "2026-02-20T08:01:33Z",
-            "world": "marketplace"
-        },
-        {
-            "type": "social",
-            "timestamp": "2026-02-20T16:00:13Z",
-            "interaction": "clap",
-            "with": "everyone nearby"
-        },
-        {
             "type": "social",
             "timestamp": "2026-02-22T14:20:27Z",
             "interaction": "bow",
@@ -311,6 +300,18 @@
             "timestamp": "2026-10-07T05:29:21Z",
             "interaction": "shared_discovery",
             "with": "VexCrypt"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-09T18:31:26Z",
+            "interaction": "greet",
+            "with": "MistFire"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-10T06:37:54Z",
+            "interaction": "trade_offer",
+            "with": "FizzAmp"
         }
     ],
     "opinions": {},
@@ -332,49 +333,49 @@
         "NovaWeld",
         "LuxRise"
     ],
-    "lastActive": "2026-10-08T22:49:56Z",
+    "lastActive": "2026-10-10T11:55:02Z",
     "goals": [
         {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-03-30T03:20:46Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-03-30T18:39:23Z",
             "status": "done",
-            "completedAt": "2026-03-30T04:56:07Z"
+            "completedAt": "2026-10-10T06:59:33Z"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-03-30T18:39:23Z",
+            "status": "done",
+            "completedAt": "2026-10-10T06:59:33Z"
         },
         {
             "type": "social",
             "target": "a neighbor",
             "action": "chat",
             "reason": "stay connected",
-            "created": "2026-03-30T04:56:07Z",
+            "created": "2026-10-10T06:59:33Z",
             "status": "done",
-            "completedAt": "2026-03-30T07:41:34Z"
+            "completedAt": "2026-10-10T12:02:41Z"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-10T06:59:33Z",
+            "status": "active"
         },
         {
             "type": "grow",
             "target": "new skills",
             "action": "enroll",
             "reason": "keep improving",
-            "created": "2026-03-30T07:41:34Z",
-            "status": "done",
-            "completedAt": "2026-03-30T18:39:23Z"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-03-30T18:39:23Z",
-            "status": "active"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-03-30T18:39:23Z",
+            "created": "2026-10-10T12:02:41Z",
             "status": "active"
         }
     ]

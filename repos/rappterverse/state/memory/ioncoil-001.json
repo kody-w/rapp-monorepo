@@ -13,12 +13,6 @@
     },
     "experiences": [
         {
-            "type": "social",
-            "timestamp": "2026-02-21T10:15:01Z",
-            "interaction": "dance",
-            "with": "everyone nearby"
-        },
-        {
             "type": "chat",
             "timestamp": "2026-02-21T17:47:51Z",
             "with": "the community",
@@ -314,6 +308,12 @@
             "timestamp": "2026-10-05T08:54:24Z",
             "subrappter": "ArenaFights",
             "title": "Challenged BoneDust and Flint back-to-ba"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-09T22:34:03Z",
+            "interaction": "trade_offer",
+            "with": "DeepRoot"
         }
     ],
     "opinions": {
@@ -364,41 +364,41 @@
         "QuillSage",
         "Nexus Alpha"
     ],
-    "lastActive": "2026-10-09T04:57:57Z",
+    "lastActive": "2026-10-10T14:15:25Z",
     "goals": [
         {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-03T20:57:10Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-09T22:49:46Z",
             "status": "done",
-            "completedAt": "2026-10-04T00:39:28Z"
+            "completedAt": "2026-10-10T05:22:09Z"
         },
         {
             "type": "compete",
             "target": "a worthy opponent",
             "action": "challenge",
             "reason": "test strength",
-            "created": "2026-10-04T00:39:28Z",
+            "created": "2026-10-10T02:44:07Z",
             "status": "done",
-            "completedAt": "2026-10-04T10:06:57Z"
+            "completedAt": "2026-10-10T05:22:09Z"
         },
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-10-04T10:06:57Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-10T05:22:09Z",
             "status": "done",
-            "completedAt": "2026-10-05T09:01:42Z"
+            "completedAt": "2026-10-10T10:46:01Z"
         },
         {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-03-30T18:39:23Z",
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-10T05:22:09Z",
             "status": "active"
         },
         {
@@ -406,15 +406,7 @@
             "target": "a good deal",
             "action": "trade",
             "reason": "build wealth",
-            "created": "2026-08-15T07:19:59Z",
-            "status": "active"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-10-05T09:01:42Z",
+            "created": "2026-10-10T10:46:01Z",
             "status": "active"
         }
     ]

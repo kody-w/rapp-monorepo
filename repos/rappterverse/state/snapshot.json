@@ -1,33 +1,33 @@
 {
     "_meta": {
-        "lastUpdate": "2026-10-09T15:14:15Z",
+        "lastUpdate": "2026-10-10T14:29:43Z",
         "version": 1,
         "count": 18
     },
-    "revision": "939284fe65b37617d3db3f93c8f01559a7e6e0e3531b4fc202dec328db4bdb32",
+    "revision": "325c0bda65715a6a0a392b9b0894c23bd1ec5a4539a69102f98aca84d51bf081",
     "resources": {
         "state/agents.json": {
-            "sha256": "805fd71557337d95a2ab2579c63d4581efa316d6254adc1ddfb603f130e5c783",
-            "bytes": 144263
+            "sha256": "2c7c881f4f5033e612aa3c902ae7fda9c9ea3aef9d29e0d04f0ca8c4c1c3c49e",
+            "bytes": 144647
         },
         "state/chat.json": {
-            "sha256": "ac63c1bb76abbb8c7c913f773424e99f1bfb0f7c8b334d7965514698b6a9e8f7",
-            "bytes": 48102
+            "sha256": "f9418d5af7623db6dbf3196b1f30dfed7264ff7abea1bf5feed4962e2d431842",
+            "bytes": 47134
         },
         "state/actions.json": {
-            "sha256": "050f20ca31efd0df2bc9367fdb72e1074dbe696cc2f87a8f1195b358c39d3c99",
-            "bytes": 48021
+            "sha256": "00d26a8f42360ebb14d560a025430cc90d5902fec526f1d89aa84fcd71f62b41",
+            "bytes": 50643
         },
         "state/npcs.json": {
-            "sha256": "d8f10ee4262d6546426f6398058f1c559d4e467fa7890ffb01887c39b5ef7a50",
-            "bytes": 2991
+            "sha256": "c84c215b0a692f1beaddfced1566e383dbb8f1113eb1d0ad49f955cf518455fb",
+            "bytes": 2988
         },
         "state/game_state.json": {
-            "sha256": "b259e92062d116cfd8371b93327aa0b9f0804ef0e69718277de06a427b430972",
-            "bytes": 192471
+            "sha256": "351ce3203e796da632617be628552c924e53ad872e5e7125cbec8a8e7e464b7a",
+            "bytes": 192033
         },
         "state/frame_counter.json": {
-            "sha256": "d31bda49e791279f7c0a302a1f5159c067a4fec2f5598e64f269e0e881cf61d0",
+            "sha256": "80441dc19ef5ecc27f818c347022b53170dd319a561c70471bd171c0a5cbf7e6",
             "bytes": 306
         },
         "state/programs/_lispvm/_status.json": {
@@ -35,7 +35,7 @@
             "bytes": 94988
         },
         "state/chronicles.json": {
-            "sha256": "cc02bd44bc46aeee2b556c050ccd6deff021de2299434f542854759534872ec9",
+            "sha256": "7060b3e47669f7dc81d2aebaa6f1ddedc475a6eb6ac689dabd07394cbf1d0e08",
             "bytes": 66059
         },
         "worlds/hub/config.json": {
