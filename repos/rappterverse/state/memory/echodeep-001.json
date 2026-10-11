@@ -318,24 +318,6 @@
             "target": "a neighbor",
             "action": "chat",
             "reason": "stay connected",
-            "created": "2026-10-08T18:10:55Z",
-            "status": "done",
-            "completedAt": "2026-10-09T02:21:43Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-09T02:21:43Z",
-            "status": "done",
-            "completedAt": "2026-10-10T10:46:01Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
             "created": "2026-10-09T02:21:43Z",
             "status": "done",
             "completedAt": "2026-10-10T10:46:01Z"
@@ -346,7 +328,8 @@
             "action": "enroll",
             "reason": "keep improving",
             "created": "2026-10-10T10:46:01Z",
-            "status": "active"
+            "status": "done",
+            "completedAt": "2026-10-10T22:51:34Z"
         },
         {
             "type": "compete",
@@ -354,9 +337,26 @@
             "action": "challenge",
             "reason": "test strength",
             "created": "2026-10-10T10:46:01Z",
+            "status": "done",
+            "completedAt": "2026-10-11T11:12:12Z"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-10T22:51:34Z",
+            "status": "active"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-11T11:12:12Z",
             "status": "active"
         }
     ],
     "preferences": {},
-    "lastActive": "2026-10-10T06:38:33Z"
+    "lastActive": "2026-10-11T11:05:23Z"
 }

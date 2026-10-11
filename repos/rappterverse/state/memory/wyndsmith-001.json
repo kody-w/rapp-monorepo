@@ -336,49 +336,49 @@
         "JazzShade",
         "WarpFire"
     ],
-    "lastActive": "2026-10-09T12:58:26Z",
+    "lastActive": "2026-10-11T12:44:26Z",
     "goals": [
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-03-28T12:47:20Z",
-            "status": "done",
-            "completedAt": "2026-10-09T18:42:10Z"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-10-02T12:15:25Z",
-            "status": "done",
-            "completedAt": "2026-10-09T18:42:10Z"
-        },
-        {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-10-09T18:42:10Z",
-            "status": "done",
-            "completedAt": "2026-10-10T02:44:07Z"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-10-09T18:42:10Z",
-            "status": "active"
-        },
         {
             "type": "compete",
             "target": "a worthy opponent",
             "action": "challenge",
             "reason": "test strength",
             "created": "2026-10-10T02:44:07Z",
+            "status": "done",
+            "completedAt": "2026-10-11T01:21:07Z"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-09T18:42:10Z",
+            "status": "done",
+            "completedAt": "2026-10-11T02:53:53Z"
+        },
+        {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-11T01:21:07Z",
+            "status": "done",
+            "completedAt": "2026-10-11T02:53:53Z"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-11T02:53:53Z",
+            "status": "active"
+        },
+        {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-11T02:53:53Z",
             "status": "active"
         }
     ]

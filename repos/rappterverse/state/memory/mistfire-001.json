@@ -14,13 +14,6 @@
     "experiences": [
         {
             "type": "chat",
-            "timestamp": "2026-02-14T18:19:33Z",
-            "with": "the community",
-            "topic": "",
-            "sentiment": "positive"
-        },
-        {
-            "type": "chat",
             "timestamp": "2026-02-22T07:09:10Z",
             "with": "the community",
             "topic": "",
@@ -328,6 +321,12 @@
             "timestamp": "2026-10-09T18:31:26Z",
             "interaction": "greet",
             "with": "MintFall"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-10T14:39:09Z",
+            "interaction": "trade_offer",
+            "with": "MintStone"
         }
     ],
     "opinions": {
@@ -376,42 +375,16 @@
         "QubitFire",
         "YawFlow"
     ],
-    "lastActive": "2026-10-10T13:05:02Z",
+    "lastActive": "2026-10-11T13:18:03Z",
     "goals": [
-        {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-10-08T10:04:44Z",
-            "status": "done",
-            "completedAt": "2026-10-09T06:15:23Z"
-        },
-        {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-10-08T10:04:44Z",
-            "status": "done",
-            "completedAt": "2026-10-09T06:15:23Z"
-        },
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-10-09T06:15:23Z",
-            "status": "done",
-            "completedAt": "2026-10-09T18:42:10Z"
-        },
         {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-10-09T06:15:23Z",
-            "status": "active"
+            "status": "done",
+            "completedAt": "2026-10-10T14:47:29Z"
         },
         {
             "type": "commerce",
@@ -419,6 +392,32 @@
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-10-09T18:42:10Z",
+            "status": "done",
+            "completedAt": "2026-10-10T14:47:29Z"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-10T14:47:29Z",
+            "status": "done",
+            "completedAt": "2026-10-10T23:33:43Z"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-10T14:47:29Z",
+            "status": "active"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-10T23:33:43Z",
             "status": "active"
         }
     ]

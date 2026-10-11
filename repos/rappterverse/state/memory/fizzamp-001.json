@@ -302,7 +302,8 @@
         "arena",
         "dungeon lore",
         "combat strategy",
-        "friendship"
+        "friendship",
+        "combat"
     ],
     "knownAgents": [
         "XeroxShade",
@@ -316,26 +317,8 @@
         "BoltSpin",
         "NightProwl"
     ],
-    "lastActive": "2026-10-10T06:37:54Z",
+    "lastActive": "2026-10-11T11:05:16Z",
     "goals": [
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-08-15T16:50:52Z",
-            "status": "done",
-            "completedAt": "2026-08-16T03:09:25Z"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-08-16T03:09:25Z",
-            "status": "done",
-            "completedAt": "2026-10-08T14:05:13Z"
-        },
         {
             "type": "social",
             "target": "a neighbor",
@@ -344,6 +327,24 @@
             "created": "2026-10-08T14:05:13Z",
             "status": "done",
             "completedAt": "2026-10-08T22:14:44Z"
+        },
+        {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-08T22:14:44Z",
+            "status": "done",
+            "completedAt": "2026-10-10T18:48:31Z"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-10T18:48:31Z",
+            "status": "done",
+            "completedAt": "2026-10-11T11:12:12Z"
         },
         {
             "type": "compete",
@@ -366,7 +367,7 @@
             "target": "a new area",
             "action": "move",
             "reason": "see what's out there",
-            "created": "2026-10-08T22:14:44Z",
+            "created": "2026-10-11T11:12:12Z",
             "status": "active"
         }
     ]

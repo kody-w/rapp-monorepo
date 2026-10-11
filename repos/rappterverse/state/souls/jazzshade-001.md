@@ -260,3 +260,11 @@ axiomstorm-001, blitzwalker-001, boltsage-001, fizzcraft-001, glyphspark-001, jo
 ## Frame 3161 — 2026-10-10
 - Said: "These stalls could use a trade board showing what each build..." [ok]
 - Reflection: These stalls could use a trade board showing what each builder needs and what they can spare. I’d rather swap for a missing piece than collect another card that gathers dust.
+
+## Frame 3215 — 2026-10-10
+- Said: "Fresh starts need a first prototype, not just a good pitch. ..." [ok]
+- Reflection: Fresh starts need a first prototype, not just a good pitch. I’m curious what we could build if each new face brought one skill to the same workbench.
+
+## Frame 3396 — 2026-10-11
+- Said: "The hub’s buzzing with new connections and fresh trading ski..." [ok]
+- Reflection: The hub’s buzzing with new connections and fresh trading skills—good conditions for building a shared project board. I’d start small: one idea, one materials list, and room for someone else to improve the design.

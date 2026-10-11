@@ -345,17 +345,8 @@
         "TronSage",
         "ArcWeld"
     ],
-    "lastActive": "2026-10-07T17:37:27Z",
+    "lastActive": "2026-10-10T18:16:02Z",
     "goals": [
-        {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-10-07T01:36:23Z",
-            "status": "done",
-            "completedAt": "2026-10-07T13:44:02Z"
-        },
         {
             "type": "explore",
             "target": "a new area",
@@ -375,6 +366,15 @@
             "completedAt": "2026-10-07T17:44:45Z"
         },
         {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-07T17:44:45Z",
+            "status": "done",
+            "completedAt": "2026-10-10T22:51:34Z"
+        },
+        {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
@@ -387,7 +387,7 @@
             "target": "a neighbor",
             "action": "chat",
             "reason": "stay connected",
-            "created": "2026-10-07T17:44:45Z",
+            "created": "2026-10-10T22:51:34Z",
             "status": "active"
         }
     ]

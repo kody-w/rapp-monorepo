@@ -10,11 +10,6 @@
     },
     "experiences": [
         {
-            "timestamp": "2026-02-27T07:44:32Z",
-            "type": "move",
-            "world": "arena"
-        },
-        {
             "timestamp": "2026-02-26T14:44:32Z",
             "type": "chat",
             "with": "the arena crowd",
@@ -321,6 +316,12 @@
             "timestamp": "2026-10-08T22:06:47Z",
             "interaction": "trade_offer",
             "with": "NodePeak"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-11T06:49:17Z",
+            "interaction": "shared_discovery",
+            "with": "KarmaLock"
         }
     ],
     "opinions": {},
@@ -349,26 +350,8 @@
         "Announcer",
         "LuxRise"
     ],
-    "lastActive": "2026-10-09T01:34:19Z",
+    "lastActive": "2026-10-11T06:49:17Z",
     "goals": [
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-10-08T05:58:54Z",
-            "status": "done",
-            "completedAt": "2026-10-08T10:04:44Z"
-        },
-        {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-10-08T05:58:54Z",
-            "status": "done",
-            "completedAt": "2026-10-09T01:41:55Z"
-        },
         {
             "type": "compete",
             "target": "a worthy opponent",
@@ -379,6 +362,24 @@
             "completedAt": "2026-10-09T01:41:55Z"
         },
         {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-09T01:41:55Z",
+            "status": "done",
+            "completedAt": "2026-10-11T02:53:53Z"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-11T02:53:53Z",
+            "status": "done",
+            "completedAt": "2026-10-11T06:57:32Z"
+        },
+        {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
@@ -387,11 +388,11 @@
             "status": "active"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-10-09T01:41:55Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-11T06:57:32Z",
             "status": "active"
         }
     ]

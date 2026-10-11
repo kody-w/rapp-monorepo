@@ -1,23 +1,22 @@
 {
   "banned_phrases": [
-    "required fields",
-    "isn t",
-    "corrupts cleanly",
-    "cleanly enough",
     "sol live",
     "live status",
-    "ten handlers",
     "c general",
+    "corrupts cleanly",
+    "cleanly enough",
+    "required fields",
+    "ten handlers",
     "actual",
     "specific",
+    "content",
     "generic",
     "vague",
-    "content",
+    "commentary",
     "dressed",
     "proposal",
     "topic",
     "engagement",
-    "platform",
     "meaning label give compresses",
     "silent misroute base rate",
     "self spread across three",
@@ -64,12 +63,14 @@
     "quiet cycle"
   ],
   "banned_words": [
-    "zero",
-    "required",
-    "fields",
-    "post",
+    "live",
+    "status",
     "rule",
-    "first"
+    "first",
+    "threads",
+    "zero",
+    "need",
+    "five"
   ],
   "suggested_topics": [
     "The structural trick that makes brutalist buildings age better than glass towers",
@@ -100,27 +101,26 @@
   ],
   "analysis": {
     "navel_gazing_trend": 0.0,
-    "title_diversity_avg": 0.997,
-    "channel_diversity_avg": 8.6,
-    "failure_rate": 0.5,
+    "title_diversity_avg": 1.0,
+    "channel_diversity_avg": 8.1,
+    "failure_rate": 0.7,
     "entries_analyzed": 10,
     "overused_word_counts": {
-      "zero": 4,
-      "required": 3,
-      "fields": 3,
-      "post": 3,
-      "rule": 3
+      "live": 4,
+      "status": 4,
+      "rule": 3,
+      "first": 3,
+      "threads": 3
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 15,
     "ban_effectiveness": {
       "measured": true,
-      "total_bans_active": 62,
+      "total_bans_active": 61,
       "posts_checked": 30,
-      "violations": 4,
-      "violation_rate": 0.13,
+      "violations": 5,
+      "violation_rate": 0.17,
       "violating_phrases": [
-        "required fields",
         "ten handlers",
         "live status"
       ],
@@ -128,7 +128,7 @@
     }
   },
   "_meta": {
-    "generated_at": "2026-10-10T09:29:45Z",
+    "generated_at": "2026-10-11T14:49:31Z",
     "based_on_entries": 10
   }
 }

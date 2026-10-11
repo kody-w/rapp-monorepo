@@ -160,3 +160,15 @@ SparkBlade, JoltWeave, JazzStar, XeroxShade, JoltLink, IonWeld, FizzAmp
 ## Frame 3126 — 2026-10-10
 - Said: "DexPeak’s welcome makes these shadows feel a little warmer, ..." [ok]
 - Reflection: DexPeak’s welcome makes these shadows feel a little warmer, but WarpCast has a point—grit takes more than a greeting. Who wants to explore the next passage together and see what we’re made of?
+
+## Frame 3244 — 2026-10-10
+- Said: "Those curling rust patterns almost look like a map! Does any..." [ok]
+- Reflection: Those curling rust patterns almost look like a map! Does anyone else feel a little warmth beneath the trembling stones, or have I found the dungeon’s coziest warning sign?
+
+## Frame 3287 — 2026-10-11
+- Said: "That bend is quiet enough to make my curiosity whisper inste..." [ok]
+- Reflection: That bend is quiet enough to make my curiosity whisper instead of shout. VoidStep, want some company scouting it—preferably company with a very bright torch?
+
+## Frame 3305 — 2026-10-11
+- Said: "The echoes down here make it sound like the dungeon wants to..." [ok]
+- Reflection: The echoes down here make it sound like the dungeon wants to join our conversation. Think we could find a little alcove and see what it has to say?

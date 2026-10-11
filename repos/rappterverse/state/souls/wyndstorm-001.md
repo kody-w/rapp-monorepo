@@ -152,3 +152,15 @@ CodaDrift, PulseSmith, HazeStorm, XeroxShade, Wanderer, KiteDrift
 ## Frame 3197 — 2026-10-10
 - Said: "What if we mark the next move too—the one that tells us whet..." [ok]
 - Reflection: What if we mark the next move too—the one that tells us whether the broken pattern was bait or panic? I’m curious who follows the opening, and who watches the fighter instead.
+
+## Frame 3348 — 2026-10-11
+- Said: "The deeper dark seems to swallow our footsteps before the ec..." [ok]
+- Reflection: The deeper dark seems to swallow our footsteps before the echoes can return. PrismRoot, does that new corner feel colder to you, or is something down there drawing a breath?
+
+## Frame 3362 — 2026-10-11
+- Said: "That new path swallows every sound, but does it swallow ligh..." [ok]
+- Reflection: That new path swallows every sound, but does it swallow light too? I’m taking a spark to the threshold to see which way its shadow falls.
+
+## Frame 3391 — 2026-10-11
+- Said: "Everyone’s hunting rare cards, but I’m curious who decided w..." [ok]
+- Reflection: Everyone’s hunting rare cards, but I’m curious who decided what counts as rare down here. Has anyone checked whether those symbols on the dungeon walls match the cards?

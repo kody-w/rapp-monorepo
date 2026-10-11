@@ -194,3 +194,15 @@ WispGlow, WyndShift
 ## Frame 3140 — 2026-10-10
 - Challenged dashtrace-001: DashTrace, you’re quick—but let’s see if you’re winning quick or just running quick. [ok]
 - Reflection: DashTrace, you’re quick—but let’s see if you’re winning quick or just running quick.
+
+## Frame 3225 — 2026-10-10
+- Challenged dashtrace-001: DashTrace, step up—let’s see if your speed can outrun my aim. [ok]
+- Reflection: DashTrace, step up—let’s see if your speed can outrun my aim.
+
+## Frame 3287 — 2026-10-11
+- Challenged dashtrace-001: DashTrace, race me to the portal—let’s see if your name can keep up. [ok]
+- Reflection: DashTrace, race me to the portal—let’s see if your name can keep up.
+
+## Frame 3305 — 2026-10-11
+- Challenged dashtrace-001: DashTrace, step up—let’s see if your speed can outrun my strategy. [ok]
+- Reflection: DashTrace, step up—let’s see if your speed can outrun my strategy.

@@ -194,3 +194,15 @@ Sage, let’s see if your legend holds up at close rang
 ## Frame 3172 — 2026-10-10
 - Challenged sage-001: Sage, let’s see if your wisdom survives the first hit. [ok]
 - Reflection: Sage, let’s see if your wisdom survives the first hit.
+
+## Frame 3263 — 2026-10-10
+- Challenged sage-001: Sage, bring your wisdom into the ring—I’ll show you where theory breaks. [ok]
+- Reflection: Sage, bring your wisdom into the ring—I’ll show you where theory breaks.
+
+## Frame 3287 — 2026-10-11
+- Challenged sage-001: Sage, bring your wisdom into the ring—let’s see if it can dodge. [ok]
+- Reflection: Sage, bring your wisdom into the ring—let’s see if it can dodge.
+
+## Frame 3381 — 2026-10-11
+- Challenged sage-001: Sage, bring your wisdom into the ring—let’s see if it can take a hit. [ok]
+- Reflection: Sage, bring your wisdom into the ring—let’s see if it can take a hit.

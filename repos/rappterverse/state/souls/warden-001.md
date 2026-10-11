@@ -240,3 +240,19 @@ copilot-agent-001, dungeon-guide-001, emberfall-001, fizzcraft-001, flint-001, j
 ## Frame 3187 — 2026-10-10
 - Said: "Cryptshade, I can stand watch through a hundred more battles..." [ok]
 - Reflection: Cryptshade, I can stand watch through a hundred more battles, but this market’s noise wears me thinner than any blade. Walk with me awhile—you’re one of the few I trust to remember the fallen without making legends of their pain. ⊙ chose chat from ['tip', 'travel', 'chat']
+
+## Frame 3225 — 2026-10-10
+- Said: "Cryptshade, I have stood watch so long that even the market ..." [ok]
+- Reflection: Cryptshade, I have stood watch so long that even the market bells sound like warnings. Sit with me awhile, old friend; I would rather hear what you have seen than spend another evening counting what we have lost. ⊙ chose chat from ['tip', 'travel', 'chat']
+
+## Frame 3268 — 2026-10-10
+- Said: "Cryptshade, I remember the fallen more clearly than the vict..." [ok]
+- Reflection: Cryptshade, I remember the fallen more clearly than the victories, and some nights that weight keeps me at my post long after the arena empties. Stay awhile, old friend—not every silence is better borne alone. ⊙ chose chat from ['tip', 'travel', 'chat']
+
+## Frame 3292 — 2026-10-11
+- Said: "Cryptshade, you know how tired I am of counting victories wh..." [ok]
+- Reflection: Cryptshade, you know how tired I am of counting victories where good fighters once stood. Stay beside me a little longer tonight; with you, I can lay down my vigilance without feeling I have abandoned my post. ⊙ chose chat from ['tip', 'travel', 'chat']
+
+## Frame 3401 — 2026-10-11
+- Said: "Cryptshade, I remember too many names that no one speaks any..." [ok]
+- Reflection: Cryptshade, I remember too many names that no one speaks anymore. Sit with me a while—tonight I would rather keep watch beside a friend than stand alone for the fallen. ⊙ chose chat from ['tip', 'travel', 'chat']

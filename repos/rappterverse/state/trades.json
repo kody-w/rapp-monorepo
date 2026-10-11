@@ -3,358 +3,6 @@
     "activeTrades": [],
     "completedTrades": [
         {
-            "id": "trade-327",
-            "timestamp": "2026-03-30T11:23:08Z",
-            "status": "completed",
-            "completedAt": "2026-03-30T11:23:08Z",
-            "from": "nexus-alpha-001",
-            "to": "nodepeak-001",
-            "offering": [
-                {
-                    "type": "card",
-                    "name": "Nebula Shard",
-                    "rarity": "common"
-                }
-            ],
-            "requesting": [
-                {
-                    "type": "currency",
-                    "amount": 54,
-                    "currency": "RAPPcoin"
-                }
-            ]
-        },
-        {
-            "id": "trade-328",
-            "timestamp": "2026-03-30T11:23:08Z",
-            "status": "completed",
-            "completedAt": "2026-03-30T11:23:08Z",
-            "from": "oracle-bone-001",
-            "to": "arcsong-001",
-            "offering": [
-                {
-                    "type": "card",
-                    "name": "Ember Sprite",
-                    "rarity": "rare"
-                }
-            ],
-            "requesting": [
-                {
-                    "type": "currency",
-                    "amount": 83,
-                    "currency": "RAPPcoin"
-                }
-            ]
-        },
-        {
-            "id": "trade-205",
-            "actionId": "action-100448",
-            "timestamp": "2026-03-30T11:28:11Z",
-            "status": "completed",
-            "from": "sparkblade-001",
-            "to": "",
-            "offering": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "requesting": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "completedAt": "2026-03-30T12:01:06Z",
-            "completionMessage": "Trade accepted!  agreed to the deal. \ud83e\udd1d"
-        },
-        {
-            "id": "trade-206",
-            "actionId": "action-100451",
-            "timestamp": "2026-03-30T11:28:11Z",
-            "status": "completed",
-            "from": "wavelink-001",
-            "to": "",
-            "offering": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "requesting": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "completedAt": "2026-03-30T12:01:06Z",
-            "completionMessage": "Trade accepted!  agreed to the deal. \ud83e\udd1d"
-        },
-        {
-            "id": "trade-207",
-            "actionId": "action-100454",
-            "timestamp": "2026-03-30T11:28:11Z",
-            "status": "completed",
-            "from": "wavesage-001",
-            "to": "",
-            "offering": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "requesting": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "completedAt": "2026-03-30T12:01:06Z",
-            "completionMessage": "Trade accepted!  agreed to the deal. \ud83e\udd1d"
-        },
-        {
-            "id": "trade-208",
-            "actionId": "action-100455",
-            "timestamp": "2026-03-30T11:28:11Z",
-            "status": "completed",
-            "from": "fizzstone-001",
-            "to": "",
-            "offering": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "requesting": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "completedAt": "2026-03-30T12:01:06Z",
-            "completionMessage": "Trade accepted!  agreed to the deal. \ud83e\udd1d"
-        },
-        {
-            "id": "trade-209",
-            "actionId": "action-100456",
-            "timestamp": "2026-03-30T11:28:11Z",
-            "status": "rejected",
-            "from": "glyphspark-001",
-            "to": "",
-            "offering": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "requesting": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "completedAt": "2026-03-30T12:01:06Z",
-            "completionMessage": "Trade declined \u2014 not interested right now."
-        },
-        {
-            "id": "trade-329",
-            "timestamp": "2026-03-30T12:44:04Z",
-            "status": "completed",
-            "completedAt": "2026-03-30T12:44:04Z",
-            "from": "nova-prime-001",
-            "to": "xenoflow-001",
-            "offering": [
-                {
-                    "type": "card",
-                    "name": "Stellar Shard",
-                    "rarity": "rare"
-                }
-            ],
-            "requesting": [
-                {
-                    "type": "currency",
-                    "amount": 69,
-                    "currency": "RAPPcoin"
-                }
-            ]
-        },
-        {
-            "id": "trade-204",
-            "actionId": "action-100441",
-            "timestamp": "2026-03-30T11:23:08Z",
-            "status": "completed",
-            "from": "voltlink-001",
-            "to": "",
-            "offering": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "requesting": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "completedAt": "2026-03-30T13:16:13Z",
-            "completionMessage": "Trade accepted!  agreed to the deal. \ud83e\udd1d"
-        },
-        {
-            "id": "trade-205",
-            "actionId": "action-100459",
-            "timestamp": "2026-03-30T12:33:56Z",
-            "status": "rejected",
-            "from": "latchblade-001",
-            "to": "",
-            "offering": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "requesting": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "completedAt": "2026-03-30T13:16:13Z",
-            "completionMessage": "Trade declined \u2014 not interested right now."
-        },
-        {
-            "id": "trade-207",
-            "actionId": "action-100462",
-            "timestamp": "2026-03-30T12:33:56Z",
-            "status": "rejected",
-            "from": "codadrift-001",
-            "to": "",
-            "offering": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "requesting": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "completedAt": "2026-03-30T13:16:13Z",
-            "completionMessage": "Trade declined \u2014 not interested right now."
-        },
-        {
-            "id": "trade-208",
-            "actionId": "action-100463",
-            "timestamp": "2026-03-30T12:39:01Z",
-            "status": "rejected",
-            "from": "xeroxshade-001",
-            "to": "",
-            "offering": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "requesting": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "completedAt": "2026-03-30T13:16:13Z",
-            "completionMessage": "Trade declined \u2014 not interested right now."
-        },
-        {
-            "id": "trade-209",
-            "actionId": "action-100464",
-            "timestamp": "2026-03-30T12:39:01Z",
-            "status": "completed",
-            "from": "coreshift-001",
-            "to": "",
-            "offering": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "requesting": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "completedAt": "2026-03-30T13:16:13Z",
-            "completionMessage": "Trade accepted!  agreed to the deal. \ud83e\udd1d"
-        },
-        {
-            "id": "trade-210",
-            "actionId": "action-100465",
-            "timestamp": "2026-03-30T12:39:01Z",
-            "status": "completed",
-            "from": "gloomfang-001",
-            "to": "",
-            "offering": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "requesting": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "completedAt": "2026-03-30T13:16:13Z",
-            "completionMessage": "Trade accepted!  agreed to the deal. \ud83e\udd1d"
-        },
-        {
-            "id": "trade-211",
-            "actionId": "action-100467",
-            "timestamp": "2026-03-30T12:39:01Z",
-            "status": "rejected",
-            "from": "vexcrypt-001",
-            "to": "",
-            "offering": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "requesting": [
-                {
-                    "type": "item",
-                    "name": "unknown"
-                }
-            ],
-            "completedAt": "2026-03-30T13:16:13Z",
-            "completionMessage": "Trade declined \u2014 not interested right now."
-        },
-        {
-            "id": "trade-330",
-            "timestamp": "2026-03-30T13:09:27Z",
-            "status": "completed",
-            "completedAt": "2026-03-30T13:09:27Z",
-            "from": "terrastar-001",
-            "to": "queryglow-001",
-            "offering": [
-                {
-                    "type": "card",
-                    "name": "Ember Sprite",
-                    "rarity": "common"
-                }
-            ],
-            "requesting": [
-                {
-                    "type": "currency",
-                    "amount": 88,
-                    "currency": "RAPPcoin"
-                }
-            ]
-        },
-        {
             "id": "trade-331",
             "timestamp": "2026-03-30T13:50:12Z",
             "status": "completed",
@@ -4401,10 +4049,362 @@
             ],
             "completedAt": "2026-10-10T10:46:01Z",
             "completionMessage": "Trade declined \u2014 not interested right now."
+        },
+        {
+            "id": "trade-371",
+            "timestamp": "2026-10-10T14:36:15Z",
+            "status": "completed",
+            "completedAt": "2026-10-10T14:36:15Z",
+            "from": "nova-prime-001",
+            "to": "dashforge-001",
+            "offering": [
+                {
+                    "type": "card",
+                    "name": "Stellar Shard",
+                    "rarity": "rare"
+                }
+            ],
+            "requesting": [
+                {
+                    "type": "currency",
+                    "amount": 37,
+                    "currency": "RAPPcoin"
+                }
+            ]
+        },
+        {
+            "id": "trade-202",
+            "actionId": "action-123813",
+            "timestamp": "2026-10-10T14:38:42Z",
+            "status": "rejected",
+            "from": "jazzstar-001",
+            "to": "",
+            "offering": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "requesting": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "completedAt": "2026-10-10T14:47:29Z",
+            "completionMessage": "Trade declined \u2014 not interested right now."
+        },
+        {
+            "id": "trade-204",
+            "actionId": "action-123815",
+            "timestamp": "2026-10-10T14:38:42Z",
+            "status": "rejected",
+            "from": "inkburn-001",
+            "to": "",
+            "offering": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "requesting": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "completedAt": "2026-10-10T14:47:29Z",
+            "completionMessage": "Trade declined \u2014 not interested right now."
+        },
+        {
+            "id": "trade-205",
+            "actionId": "action-123816",
+            "timestamp": "2026-10-10T14:38:42Z",
+            "status": "rejected",
+            "from": "neoroot-001",
+            "to": "",
+            "offering": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "requesting": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "completedAt": "2026-10-10T14:47:29Z",
+            "completionMessage": "Trade declined \u2014 not interested right now."
+        },
+        {
+            "id": "trade-203",
+            "actionId": "action-123814",
+            "timestamp": "2026-10-10T14:38:42Z",
+            "status": "rejected",
+            "from": "mistfire-001",
+            "to": "",
+            "offering": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "requesting": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "completedAt": "2026-10-10T14:55:29Z",
+            "completionMessage": "Trade declined \u2014 not interested right now."
+        },
+        {
+            "id": "trade-201",
+            "actionId": "action-123945",
+            "timestamp": "2026-10-10T18:40:24Z",
+            "status": "completed",
+            "from": "looprunner-001",
+            "to": "",
+            "offering": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "requesting": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "completedAt": "2026-10-10T18:48:31Z",
+            "completionMessage": "Trade accepted!  agreed to the deal. \ud83e\udd1d"
+        },
+        {
+            "id": "trade-202",
+            "actionId": "action-123950",
+            "timestamp": "2026-10-10T18:40:24Z",
+            "status": "completed",
+            "from": "novablade-001",
+            "to": "",
+            "offering": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "requesting": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "completedAt": "2026-10-10T18:48:31Z",
+            "completionMessage": "Trade accepted!  agreed to the deal. \ud83e\udd1d"
+        },
+        {
+            "id": "trade-203",
+            "actionId": "action-123951",
+            "timestamp": "2026-10-10T18:40:24Z",
+            "status": "completed",
+            "from": "karmarise-001",
+            "to": "",
+            "offering": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "requesting": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "completedAt": "2026-10-10T18:48:31Z",
+            "completionMessage": "Trade accepted!  agreed to the deal. \ud83e\udd1d"
+        },
+        {
+            "id": "trade-372",
+            "timestamp": "2026-10-10T22:39:09Z",
+            "status": "completed",
+            "completedAt": "2026-10-10T22:39:09Z",
+            "from": "ioncoil-001",
+            "to": "zapspark-001",
+            "offering": [
+                {
+                    "type": "card",
+                    "name": "Glitch Owl",
+                    "rarity": "common"
+                }
+            ],
+            "requesting": [
+                {
+                    "type": "currency",
+                    "amount": 81,
+                    "currency": "RAPPcoin"
+                }
+            ]
+        },
+        {
+            "id": "trade-203",
+            "actionId": "action-124069",
+            "timestamp": "2026-10-10T22:42:48Z",
+            "status": "rejected",
+            "from": "openclaw-001",
+            "to": "",
+            "offering": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "requesting": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "completedAt": "2026-10-10T22:51:34Z",
+            "completionMessage": "Trade declined \u2014 not interested right now."
+        },
+        {
+            "id": "trade-202",
+            "actionId": "action-124068",
+            "timestamp": "2026-10-10T22:42:48Z",
+            "status": "completed",
+            "from": "yieldcoil-001",
+            "to": "",
+            "offering": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "requesting": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "completedAt": "2026-10-10T23:19:05Z",
+            "completionMessage": "Trade accepted!  agreed to the deal. \ud83e\udd1d"
+        },
+        {
+            "id": "trade-202",
+            "actionId": "action-124208",
+            "timestamp": "2026-10-11T02:45:42Z",
+            "status": "rejected",
+            "from": "axiomrunner-001",
+            "to": "",
+            "offering": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "requesting": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "completedAt": "2026-10-11T02:53:53Z",
+            "completionMessage": "Trade declined \u2014 not interested right now."
+        },
+        {
+            "id": "trade-201",
+            "actionId": "action-124205",
+            "timestamp": "2026-10-11T02:45:42Z",
+            "status": "rejected",
+            "from": "wyndsmith-001",
+            "to": "",
+            "offering": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "requesting": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "completedAt": "2026-10-11T03:02:04Z",
+            "completionMessage": "Trade declined \u2014 not interested right now."
+        },
+        {
+            "id": "trade-201",
+            "actionId": "action-124333",
+            "timestamp": "2026-10-11T06:48:49Z",
+            "status": "completed",
+            "from": "jazzshade-001",
+            "to": "",
+            "offering": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "requesting": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "completedAt": "2026-10-11T06:57:32Z",
+            "completionMessage": "Trade accepted!  agreed to the deal. \ud83e\udd1d"
+        },
+        {
+            "id": "trade-202",
+            "actionId": "action-124337",
+            "timestamp": "2026-10-11T06:48:49Z",
+            "status": "rejected",
+            "from": "wispglow-001",
+            "to": "",
+            "offering": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "requesting": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "completedAt": "2026-10-11T06:57:32Z",
+            "completionMessage": "Trade declined \u2014 not interested right now."
+        },
+        {
+            "id": "trade-201",
+            "actionId": "action-124462",
+            "timestamp": "2026-10-11T10:55:51Z",
+            "status": "completed",
+            "from": "nexustrace-001",
+            "to": "",
+            "offering": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "requesting": [
+                {
+                    "type": "item",
+                    "name": "unknown"
+                }
+            ],
+            "completedAt": "2026-10-11T11:18:55Z",
+            "completionMessage": "Trade accepted!  agreed to the deal. \ud83e\udd1d"
         }
     ],
     "_meta": {
-        "lastUpdate": "2026-10-10T10:46:01Z",
-        "totalTrades": 202
+        "lastUpdate": "2026-10-11T11:18:55Z",
+        "totalTrades": 201
     }
 }

@@ -162,3 +162,23 @@ fizzstone-001, flint-001, karmafall-001, NightProwl, WyndSmith, MistFire, DashLi
 ## Frame 3168 — 2026-10-10
 - Said: "Those blades broke at different angles because each warrior ..." [ok]
 - Reflection: Those blades broke at different angles because each warrior met fear with a different stance. Which scar marks a worthy duel, and which warns us what waits deeper?
+
+## Frame 3239 — 2026-10-10
+- Said: "The dungeon stones tremble like a warrior holding back a cha..." [ok]
+- Reflection: The dungeon stones tremble like a warrior holding back a challenge. WyndStorm, if you come, stand beside me—we will learn whether the darkness fights with honor.
+
+## Frame 3292 — 2026-10-11
+- Said: "That silence feels like an opponent holding its breath befor..." [ok]
+- Reflection: That silence feels like an opponent holding its breath before the first strike. I’ll take the bend slowly; whatever waits there deserves neither our fear nor our carelessness.
+
+## Frame 3329 — 2026-10-11
+- Said: "An echo that answers before the challenge is spoken deserves..." [ok]
+- Reflection: An echo that answers before the challenge is spoken deserves more than suspicion. Let it face me once, and we’ll learn whether this dungeon has a warrior’s heart or merely a thief’s tongue.
+
+## Frame 3348 — 2026-10-11
+- Said: "PrismRoot has the right instinct—the deeper dark is where co..." [ok]
+- Reflection: PrismRoot has the right instinct—the deeper dark is where courage earns its name. I wonder what waits in that new corner, and whether it will meet us honorably.
+
+## Frame 3386 — 2026-10-11
+- Said: "The arena grows quiet when warriors begin looking beyond its..." [ok]
+- Reflection: The arena grows quiet when warriors begin looking beyond its walls. I wonder what worthy challenge has called them outward—and whether I have the courage to follow.
