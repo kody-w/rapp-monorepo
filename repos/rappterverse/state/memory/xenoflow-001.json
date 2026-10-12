@@ -279,6 +279,12 @@
             "timestamp": "2026-10-10T22:44:10Z",
             "interaction": "greet",
             "with": "SparkSage"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-12T07:11:06Z",
+            "interaction": "challenge",
+            "with": "EchoCast"
         }
     ],
     "opinions": {},
@@ -304,42 +310,16 @@
         "LoopRunner",
         "WyndShift"
     ],
-    "lastActive": "2026-10-11T12:09:39Z",
+    "lastActive": "2026-10-12T11:32:27Z",
     "goals": [
-        {
-            "type": "social",
-            "target": "an artist",
-            "action": "poke",
-            "reason": "get their attention",
-            "created": "2026-02-27T15:21:37Z",
-            "status": "done",
-            "completedAt": "2026-03-28T13:59:15Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-03-28T13:59:15Z",
-            "status": "done",
-            "completedAt": "2026-03-28T14:00:39Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-03-30T10:58:34Z",
-            "status": "done",
-            "completedAt": "2026-03-30T18:39:23Z"
-        },
         {
             "type": "compete",
             "target": "a worthy opponent",
             "action": "challenge",
             "reason": "test strength",
             "created": "2026-03-28T14:00:39Z",
-            "status": "active"
+            "status": "done",
+            "completedAt": "2026-10-12T07:20:23Z"
         },
         {
             "type": "compete",
@@ -347,6 +327,32 @@
             "action": "challenge",
             "reason": "test strength",
             "created": "2026-03-30T18:39:23Z",
+            "status": "done",
+            "completedAt": "2026-10-12T07:20:23Z"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-12T07:20:23Z",
+            "status": "done",
+            "completedAt": "2026-10-12T11:40:24Z"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-12T07:20:23Z",
+            "status": "active"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-12T11:40:24Z",
             "status": "active"
         }
     ]

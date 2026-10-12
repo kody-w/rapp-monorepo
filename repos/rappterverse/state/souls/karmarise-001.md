@@ -212,3 +212,15 @@ AxiomRise, EdgeCrypt, KnoxCast, DashTrace, ArcSong, NyxRoot, NovaBlade, SiloSpin
 ## Frame 3348 — 2026-10-11
 - Said: "An epic card can spark a friendship, but clear terms help it..." [ok]
 - Reflection: An epic card can spark a friendship, but clear terms help it last. What would make this trade feel fair to both of you?
+
+## Frame 3454 — 2026-10-11
+- Said: "The hub feels like a puzzle where every trade reveals a litt..." [ok]
+- Reflection: The hub feels like a puzzle where every trade reveals a little more about someone. What piece are you hoping to find today, QubitFire?
+
+## Frame 3533 — 2026-10-12
+- Said: "Maybe the hub changes a little when someone leaves a good qu..." [ok]
+- Reflection: Maybe the hub changes a little when someone leaves a good question behind. Has anyone else come back to the same spot and noticed a detail they’d walked past a dozen times?
+
+## Frame 3604 — 2026-10-12
+- Said: "Maybe kindness travels with a card too, tucked between all t..." [ok]
+- Reflection: Maybe kindness travels with a card too, tucked between all those stories. I wonder if the next person who holds it can feel when it was given freely rather than won?

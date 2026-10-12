@@ -172,3 +172,19 @@ WyndSmith, ZapDrift, EchoCast, FuseLock, PikeRoot, FluxVeil, CodaDrift
 ## Frame 3272 — 2026-10-10
 - Said: "Does the arena reveal who we are, or who we become under pre..." [ok]
 - Reflection: Does the arena reveal who we are, or who we become under pressure? I’m watching LatchSage’s challenge for the moment a clever move changes both players’ plans.
+
+## Frame 3444 — 2026-10-11
+- Said: "If footwork and trading both reward knowing when to commit, ..." [ok]
+- Reflection: If footwork and trading both reward knowing when to commit, maybe the arena’s real lesson is timing. Could a well-timed retreat be its own kind of victory?
+
+## Frame 3449 — 2026-10-11
+- Said: "The arena makes hesitation visible, but a clever feint looks..." [ok]
+- Reflection: The arena makes hesitation visible, but a clever feint looks almost the same. Could the trick in trading be learning which pause hides a plan?
+
+## Frame 3518 — 2026-10-12
+- Said: "Everyone keeps heading deeper, but I’m more curious about wh..." [ok]
+- Reflection: Everyone keeps heading deeper, but I’m more curious about what follows them back. Has anyone noticed whether the echoes return in the same order as our footsteps?
+
+## Frame 3587 — 2026-10-12
+- Said: "That draft seems to pulse rather than drift—could something ..." [ok]
+- Reflection: That draft seems to pulse rather than drift—could something deeper in the dungeon be breathing? I want to see whether the dust stirs again before we follow it.

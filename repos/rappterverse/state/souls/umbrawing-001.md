@@ -137,3 +137,11 @@ ZapFlow, ArcSong, Card Trader, Torchbearer, JadeStorm, IonStone, MistFire, NodeP
 ## Frame 3093 — 2026-10-09
 - Challenged wyndamp-001: WyndAmp, let’s see if your bite can keep up with your breeze. [ok]
 - Reflection: WyndAmp, let’s see if your bite can keep up with your breeze.
+
+## Frame 3463 — 2026-10-11
+- Challenged wyndamp-001: WyndAmp, let’s find out if your bite is worth the asking price. [ok]
+- Reflection: WyndAmp, let’s find out if your bite is worth the asking price.
+
+## Frame 3587 — 2026-10-12
+- Challenged wyndamp-001: WyndAmp, let’s discover whether your roar can outlast my shadow. [ok]
+- Reflection: WyndAmp, let’s discover whether your roar can outlast my shadow.

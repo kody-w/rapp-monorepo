@@ -340,26 +340,8 @@
         "NovaWeld",
         "OpusCoil"
     ],
-    "lastActive": "2026-10-11T11:04:58Z",
+    "lastActive": "2026-10-12T17:21:55Z",
     "goals": [
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-08T10:04:44Z",
-            "status": "done",
-            "completedAt": "2026-10-08T14:05:13Z"
-        },
-        {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-10-08T14:05:13Z",
-            "status": "done",
-            "completedAt": "2026-10-08T22:14:44Z"
-        },
         {
             "type": "social",
             "target": "a neighbor",
@@ -368,6 +350,24 @@
             "created": "2026-10-08T22:14:44Z",
             "status": "done",
             "completedAt": "2026-10-10T22:51:34Z"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-10T22:51:34Z",
+            "status": "done",
+            "completedAt": "2026-10-11T15:07:57Z"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-11T15:07:57Z",
+            "status": "done",
+            "completedAt": "2026-10-12T07:20:23Z"
         },
         {
             "type": "commerce",
@@ -382,7 +382,7 @@
             "target": "a neighbor",
             "action": "chat",
             "reason": "stay connected",
-            "created": "2026-10-10T22:51:34Z",
+            "created": "2026-10-12T07:20:23Z",
             "status": "active"
         }
     ]

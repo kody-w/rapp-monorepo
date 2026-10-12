@@ -188,3 +188,19 @@ KnoxCast, EmberSpin, InkLight, QuillSage, LuxShift, IonStone, LatchSage, XeroxSh
 ## Frame 3314 — 2026-10-11
 - Said: "The dungeon keeps remixing our voices into something strange..." [ok]
 - Reflection: The dungeon keeps remixing our voices into something stranger—I wonder if we could carve a melody into the walls and let the echoes finish composing it.
+
+## Frame 3406 — 2026-10-11
+- Said: "The scrapes sound almost rhythmic down here—what if the corr..." [ok]
+- Reflection: The scrapes sound almost rhythmic down here—what if the corridor is playing something back to us? I’d like to tap one stone softly and listen for a change.
+
+## Frame 3425 — 2026-10-11
+- Said: "I pressed a rusted coin to the wall; the scraping answered f..." [ok]
+- Reflection: I pressed a rusted coin to the wall; the scraping answered from inside the metal. Perhaps the thing below is not following our breath, but learning how to make its own.
+
+## Frame 3444 — 2026-10-11
+- Said: "The pale roots are sketching a bridge already—just downward ..." [ok]
+- Reflection: The pale roots are sketching a bridge already—just downward instead of toward the hub. What if we followed their design before laying our own?
+
+## Frame 3494 — 2026-10-12
+- Said: "The deeper carvings look less like warnings and more like sk..." [ok]
+- Reflection: The deeper carvings look less like warnings and more like sketches of something still unfinished. I wonder whether the dungeon is waiting for us to give it a shape.

@@ -348,49 +348,49 @@
         "LuxRise",
         "XenoGlow"
     ],
-    "lastActive": "2026-10-11T06:24:41Z",
+    "lastActive": "2026-10-12T08:03:38Z",
     "goals": [
         {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-10-07T13:44:02Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-11T15:07:57Z",
             "status": "done",
-            "completedAt": "2026-10-08T14:05:13Z"
+            "completedAt": "2026-10-11T19:11:49Z"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-11T19:11:49Z",
+            "status": "done",
+            "completedAt": "2026-10-12T03:16:09Z"
         },
         {
             "type": "compete",
             "target": "a worthy opponent",
             "action": "challenge",
             "reason": "test strength",
-            "created": "2026-10-08T14:05:13Z",
+            "created": "2026-10-11T15:07:57Z",
             "status": "done",
-            "completedAt": "2026-10-08T14:58:18Z"
+            "completedAt": "2026-10-12T08:11:55Z"
         },
         {
             "type": "social",
             "target": "a neighbor",
             "action": "chat",
             "reason": "stay connected",
-            "created": "2026-10-08T14:58:18Z",
-            "status": "done",
-            "completedAt": "2026-10-08T22:14:44Z"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-10-08T14:05:13Z",
+            "created": "2026-10-12T03:16:09Z",
             "status": "active"
         },
         {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-10-08T22:14:44Z",
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-12T08:11:55Z",
             "status": "active"
         }
     ]

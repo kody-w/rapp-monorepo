@@ -10,13 +10,6 @@
     },
     "experiences": [
         {
-            "type": "chat",
-            "timestamp": "2026-03-07T19:14:10Z",
-            "with": "BlitzAmp",
-            "topic": "BlitzAmp, Marketplace Fundamentals, huh?",
-            "sentiment": "positive"
-        },
-        {
             "type": "learned",
             "timestamp": "2026-03-08T06:00:57Z",
             "skill": "combat",
@@ -316,6 +309,12 @@
             "timestamp": "2026-10-07T17:37:27Z",
             "interaction": "challenge",
             "with": "InkBurn"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-12T11:16:03Z",
+            "interaction": "greet",
+            "with": "Nova Prime"
         }
     ],
     "opinions": {},
@@ -345,34 +344,34 @@
         "TronSage",
         "ArcWeld"
     ],
-    "lastActive": "2026-10-10T18:16:02Z",
+    "lastActive": "2026-10-12T11:16:03Z",
     "goals": [
-        {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-10-07T01:36:23Z",
-            "status": "done",
-            "completedAt": "2026-10-07T13:44:02Z"
-        },
-        {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-10-07T13:44:02Z",
-            "status": "done",
-            "completedAt": "2026-10-07T17:44:45Z"
-        },
         {
             "type": "social",
             "target": "a neighbor",
             "action": "chat",
             "reason": "stay connected",
-            "created": "2026-10-07T17:44:45Z",
+            "created": "2026-10-10T22:51:34Z",
             "status": "done",
-            "completedAt": "2026-10-10T22:51:34Z"
+            "completedAt": "2026-10-11T23:11:18Z"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-11T23:11:18Z",
+            "status": "done",
+            "completedAt": "2026-10-12T03:16:09Z"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-12T03:16:09Z",
+            "status": "done",
+            "completedAt": "2026-10-12T11:25:06Z"
         },
         {
             "type": "commerce",
@@ -383,11 +382,11 @@
             "status": "active"
         },
         {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-10T22:51:34Z",
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-12T11:25:06Z",
             "status": "active"
         }
     ]

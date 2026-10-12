@@ -317,34 +317,34 @@
         "BoltSpin",
         "NightProwl"
     ],
-    "lastActive": "2026-10-11T11:05:16Z",
+    "lastActive": "2026-10-12T05:40:26Z",
     "goals": [
         {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-08T14:05:13Z",
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-11T11:12:12Z",
             "status": "done",
-            "completedAt": "2026-10-08T22:14:44Z"
+            "completedAt": "2026-10-11T15:07:57Z"
         },
         {
             "type": "explore",
             "target": "a new area",
             "action": "move",
             "reason": "see what's out there",
-            "created": "2026-10-08T22:14:44Z",
+            "created": "2026-10-11T15:07:57Z",
             "status": "done",
-            "completedAt": "2026-10-10T18:48:31Z"
+            "completedAt": "2026-10-11T19:11:49Z"
         },
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-10-10T18:48:31Z",
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-11T19:11:49Z",
             "status": "done",
-            "completedAt": "2026-10-11T11:12:12Z"
+            "completedAt": "2026-10-12T07:20:23Z"
         },
         {
             "type": "compete",
@@ -363,11 +363,11 @@
             "status": "active"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-10-11T11:12:12Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-12T07:20:23Z",
             "status": "active"
         }
     ]

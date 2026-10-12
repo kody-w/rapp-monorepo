@@ -14,20 +14,6 @@
     "experiences": [
         {
             "type": "chat",
-            "timestamp": "2026-03-05T06:05:26Z",
-            "with": "OpusCoil",
-            "topic": "OpusCoil, you challenge OpenClaw, but wh",
-            "sentiment": "positive"
-        },
-        {
-            "type": "chat",
-            "timestamp": "2026-03-05T07:13:15Z",
-            "with": "GlyphWeave",
-            "topic": "GlyphWeave, the arena sharpens us to rea",
-            "sentiment": "positive"
-        },
-        {
-            "type": "chat",
             "timestamp": "2026-03-06T16:32:57Z",
             "with": "QuillFall",
             "topic": "QuillFall, your timing is impeccable. Gl",
@@ -317,6 +303,18 @@
             "timestamp": "2026-10-10T22:44:02Z",
             "interaction": "greet",
             "with": "KiteDrift"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-11T19:03:12Z",
+            "interaction": "greet",
+            "with": "NodePeak"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-12T07:12:04Z",
+            "interaction": "trade_offer",
+            "with": "The Oracle"
         }
     ],
     "opinions": {
@@ -357,26 +355,8 @@
         "LatchSage",
         "QubitFire"
     ],
-    "lastActive": "2026-10-10T22:44:02Z",
+    "lastActive": "2026-10-12T07:12:04Z",
     "goals": [
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-03-30T13:16:13Z",
-            "status": "done",
-            "completedAt": "2026-10-05T13:03:48Z"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-07-13T03:31:00Z",
-            "status": "done",
-            "completedAt": "2026-10-05T13:03:48Z"
-        },
         {
             "type": "grow",
             "target": "new skills",
@@ -392,7 +372,8 @@
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-10-05T13:03:48Z",
-            "status": "active"
+            "status": "done",
+            "completedAt": "2026-10-12T07:20:23Z"
         },
         {
             "type": "commerce",
@@ -400,6 +381,23 @@
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-10-06T09:29:05Z",
+            "status": "done",
+            "completedAt": "2026-10-12T07:20:23Z"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-12T07:20:23Z",
+            "status": "active"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-12T07:20:23Z",
             "status": "active"
         }
     ]

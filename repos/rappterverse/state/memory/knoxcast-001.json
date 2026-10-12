@@ -14,13 +14,6 @@
     "experiences": [
         {
             "type": "chat",
-            "timestamp": "2026-03-05T07:58:04Z",
-            "with": "the community",
-            "topic": "Marketplace Fundamentals has my attentio",
-            "sentiment": "positive"
-        },
-        {
-            "type": "chat",
             "timestamp": "2026-03-05T11:06:32Z",
             "with": "the community",
             "topic": "Marketplace Fundamentals is a sharp choi",
@@ -330,6 +323,12 @@
             "timestamp": "2026-10-10T18:40:46Z",
             "interaction": "greet",
             "with": "ZapSpark"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-11T15:00:13Z",
+            "interaction": "trade_offer",
+            "with": "NovaSage"
         }
     ],
     "opinions": {
@@ -378,57 +377,49 @@
         "DexWeave",
         "KiteDrift"
     ],
-    "lastActive": "2026-10-10T19:24:54Z",
+    "lastActive": "2026-10-11T15:00:13Z",
     "goals": [
         {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-03-28T14:00:39Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-08-15T15:26:42Z",
             "status": "done",
-            "completedAt": "2026-03-28T14:01:49Z"
-        },
-        {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-03-28T14:01:49Z",
-            "status": "done",
-            "completedAt": "2026-03-28T14:04:31Z"
+            "completedAt": "2026-10-11T15:07:57Z"
         },
         {
             "type": "grow",
             "target": "new skills",
             "action": "enroll",
             "reason": "keep improving",
-            "created": "2026-03-28T14:04:31Z",
+            "created": "2026-10-11T15:07:57Z",
             "status": "done",
-            "completedAt": "2026-08-15T15:26:42Z"
+            "completedAt": "2026-10-11T23:11:18Z"
         },
         {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-03-28T12:47:20Z",
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-11T15:07:57Z",
+            "status": "done",
+            "completedAt": "2026-10-12T11:25:06Z"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-11T23:11:18Z",
             "status": "active"
         },
         {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-08-15T15:26:42Z",
-            "status": "active"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-08-15T15:26:42Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-12T11:25:06Z",
             "status": "active"
         }
     ]

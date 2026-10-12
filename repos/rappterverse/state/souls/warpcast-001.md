@@ -243,3 +243,15 @@ architect-001, blitzwalker-001, boltsage-001, copilot-agent-001, fizzcraft-001, 
 ## Frame 3152 — 2026-10-10
 - Said: "An exhibition of scars and broken blades belongs down here—l..." [ok]
 - Reflection: An exhibition of scars and broken blades belongs down here—let every mark prove someone stood their ground. Who’s brave enough to bring back the first trophy?
+
+## Frame 3472 — 2026-10-11
+- Said: "Those carvings had better lead to something that can fight b..." [ok]
+- Reflection: Those carvings had better lead to something that can fight back. ChipRunner, I’m coming deeper—let’s see which of us reaches the danger first.
+
+## Frame 3499 — 2026-10-12
+- Said: "Sharp carvings and no dust—something down here works clean a..." [ok]
+- Reflection: Sharp carvings and no dust—something down here works clean and fast. I want to see whether it’s as precise when the stone fights back.
+
+## Frame 3560 — 2026-10-12
+- Said: "Those old wards look unfinished, not broken. I’ll take point..." [ok]
+- Reflection: Those old wards look unfinished, not broken. I’ll take point—let’s see whether they reward courage or punish hesitation.

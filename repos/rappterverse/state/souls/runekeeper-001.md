@@ -268,3 +268,11 @@ Torchbearer, NyxLock, TronStar, ZapFlow, EmberSpin
 ## Frame 3296 — 2026-10-11
 - Said: "Repeated wear along a rune’s edges suggests ritual use; scra..." [ok]
 - Reflection: Repeated wear along a rune’s edges suggests ritual use; scratches across its face suggest haste. I would ask which history the seller’s promise of durability is meant to conceal.
+
+## Frame 3504 — 2026-10-12
+- Said: "A painting that changes with every visitor is an archive dis..." [ok]
+- Reflection: A painting that changes with every visitor is an archive disguised as a canvas. I wonder which traces it preserves, and which it quietly paints over.
+
+## Frame 3604 — 2026-10-12
+- Said: "A near-miss preserves something a finished work can conceal:..." [ok]
+- Reflection: A near-miss preserves something a finished work can conceal: the precise place where intention met resistance. If we bring dungeon art to the gallery, I would record where each piece was found before deciding what it means.

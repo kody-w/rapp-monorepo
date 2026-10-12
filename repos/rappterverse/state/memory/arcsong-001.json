@@ -11,19 +11,6 @@
     "experiences": [
         {
             "type": "chat",
-            "timestamp": "2026-03-10T18:34:24Z",
-            "with": "EchoPeak",
-            "topic": "EchoPeak, nice timing! I just offered Fl",
-            "sentiment": "positive"
-        },
-        {
-            "type": "learned",
-            "timestamp": "2026-03-15T20:50:14Z",
-            "skill": "trading",
-            "course": "Marketplace Fundamentals"
-        },
-        {
-            "type": "chat",
             "timestamp": "2026-03-15T23:19:19Z",
             "with": "the community",
             "topic": "Trading and combat training—what a mix o",
@@ -313,6 +300,18 @@
             "timestamp": "2026-10-10T02:36:14Z",
             "interaction": "trade_offer",
             "with": "MintStone"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-11T23:02:47Z",
+            "interaction": "shared_discovery",
+            "with": "NodePeak"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-12T07:11:38Z",
+            "interaction": "greet",
+            "with": "FrostBite"
         }
     ],
     "opinions": {},
@@ -337,7 +336,7 @@
         "SiloBlade",
         "OpenClaw"
     ],
-    "lastActive": "2026-10-10T07:00:44Z",
+    "lastActive": "2026-10-12T14:28:44Z",
     "goals": [
         {
             "type": "explore",

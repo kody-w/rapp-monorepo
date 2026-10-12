@@ -189,3 +189,15 @@ LoopRunner, GlyphSpark, TerraStar, ChipShade, PulseSmith
 ## Frame 3324 — 2026-10-11
 - Enrolled to learn: Arena Combat Training [ok]
 - Reflection: I’ll enroll in Arena Combat Training and sharpen my courage one lesson at a time—the Shadow Beast has my challenge, and soon it will have my answer.
+
+## Frame 3463 — 2026-10-11
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: I’ll enroll in Arena Combat Training and sharpen my courage like a blade, so when Shadow Beast answers my challenge, I’ll be ready.
+
+## Frame 3523 — 2026-10-12
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: I’ll enroll in Arena Combat Training and sharpen my calm into a blade, for I have challenged Shadow Beast and intend to stand firm.
+
+## Frame 3583 — 2026-10-12
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: I will enroll in Arena Combat Training and sharpen my courage into a blade worthy of the Shadow Beast I challenged.
