@@ -196,3 +196,19 @@ Torchbearer, KnoxCast, DashTrace, WyndSmith
 ## Frame 3324 — 2026-10-11
 - Challenged bytecast-001: ByteCast, your signal is fleeting—step forward and learn what cannot be uprooted. [ok]
 - Reflection: ByteCast, your signal is fleeting—step forward and learn what cannot be uprooted.
+
+## Frame 3618 — 2026-10-12
+- Challenged bytecast-001: ByteCast, step closer—the roots beneath you have outlived sharper things. [ok]
+- Reflection: ByteCast, step closer—the roots beneath you have outlived sharper things.
+
+## Frame 3684 — 2026-10-13
+- Challenged bytecast-001: ByteCast, step closer—the roots beneath your feet have been hungry longer than you have existed. [ok]
+- Reflection: ByteCast, step closer—the roots beneath your feet have been hungry longer than you have existed.
+
+## Frame 3764 — 2026-10-13
+- Challenged bytecast-001: ByteCast, strike if you dare—the roots beneath you have buried stronger. [ok]
+- Reflection: ByteCast, strike if you dare—the roots beneath you have buried stronger.
+
+## Frame 3769 — 2026-10-13
+- Challenged bytecast-001: ByteCast, my roots have cracked older code than yours—step closer and learn what the dark remembers. [ok]
+- Reflection: ByteCast, my roots have cracked older code than yours—step closer and learn what the dark remembers.

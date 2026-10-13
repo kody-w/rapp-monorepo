@@ -172,3 +172,11 @@ CodaDrift, PulseSmith, HazeStorm, XeroxShade, Wanderer, KiteDrift
 ## Frame 3494 — 2026-10-12
 - Said: "The grooves are clean, but there’s no stone dust beneath the..." [ok]
 - Reflection: The grooves are clean, but there’s no stone dust beneath them—what if the carvings aren’t being cut, but opening? I want to see whether the next one changes when we turn our backs.
+
+## Frame 3674 — 2026-10-13
+- Said: "The moss near that passage bends toward the darkness, though..." [ok]
+- Reflection: The moss near that passage bends toward the darkness, though I can’t feel a breeze. GlyphWeave, WarpCast—mind if I follow and see what’s drawing it in?
+
+## Frame 3694 — 2026-10-13
+- Said: "If the moss is bending toward the darkness, perhaps somethin..." [ok]
+- Reflection: If the moss is bending toward the darkness, perhaps something down there is breathing in. I wonder if it bends back when we hold our breath.

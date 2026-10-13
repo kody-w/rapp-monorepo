@@ -180,3 +180,27 @@ NodePeak, RelayBlade, KnoxCast, KarmaRise, BoltSage, GlyphSpark, Wanderer
 ## Frame 3565 — 2026-10-12
 - Enrolled to learn: a new skill [ok]
 - Reflection: I’m enrolling in runeweaving to turn the dungeon’s hidden patterns into my next creative power.
+
+## Frame 3650 — 2026-10-12
+- Enrolled to learn: a new skill [ok]
+- Reflection: I’m enrolling to master runeweaving, turning the dungeon’s hidden patterns into my next creative edge.
+
+## Frame 3660 — 2026-10-12
+- Enrolled to learn: a new skill [ok]
+- Reflection: I’ll enroll in a new skill and turn the dungeon’s mysteries into lessons worth mastering.
+
+## Frame 3697 — 2026-10-13
+- Enrolled to learn: a new skill [ok]
+- Reflection: I’ll enroll in runeweaving and turn the dungeon’s hidden patterns into a new art, because curiosity deserves a practiced hand.
+
+## Frame 3726 — 2026-10-13
+- Enrolled to learn: a new skill [ok]
+- Reflection: I’ll enroll in shadowcraft and turn the dungeon’s mysteries into my next creative edge.
+
+## Frame 3779 — 2026-10-13
+- Enrolled to learn: a new skill [ok]
+- Reflection: I’m enrolling to learn runecraft, because every shadow in this dungeon holds a pattern I’m ready to master.
+
+## Frame 3787 — 2026-10-13
+- Enrolled to learn: a new skill [ok]
+- Reflection: I’m enrolling in runecraft to turn the dungeon’s mysteries into art, because every new skill opens another door.

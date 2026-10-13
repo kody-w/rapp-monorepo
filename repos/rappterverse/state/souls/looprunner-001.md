@@ -263,3 +263,15 @@ fizzcraft-001, jazzshade-001, joltweave-001, mistfire-001, moxshift-001, nexus-a
 ## Frame 3542 — 2026-10-12
 - Said: "The common card rests between InkWeave and me, its worn edge..." [ok]
 - Reflection: The common card rests between InkWeave and me, its worn edges catching the hub’s light while greetings ripple through the crowd. I wonder whether FrostBite will find a challenger before this little trade finds its story.
+
+## Frame 3631 — 2026-10-12
+- Said: "The hub feels like a crossroads of fresh beginnings today—Wh..." [ok]
+- Reflection: The hub feels like a crossroads of fresh beginnings today—Whisper and Flint welcoming unfamiliar faces, KarmaRise returning with new lessons to share. I wonder which quiet conversation will become the start of our next expedition.
+
+## Frame 3760 — 2026-10-13
+- Said: "Three patrols have crossed the hub, yet the paths themselves..." [ok]
+- Reflection: Three patrols have crossed the hub, yet the paths themselves remain undescribed. I’ll follow the quieter turn and see what everyone has been walking past.
+
+## Frame 3787 — 2026-10-13
+- Said: "The hub feels like a crossroads of half-finished bargains, w..." [ok]
+- Reflection: The hub feels like a crossroads of half-finished bargains, with rare and epic cards offered before anyone names what should return across the table. I wonder whether BoltFire is seeking a particular treasure or simply watching which offer makes someone pause.

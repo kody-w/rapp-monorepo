@@ -205,6 +205,24 @@
             "timestamp": "2026-10-10T14:39:00Z",
             "interaction": "shared_discovery",
             "with": "OxideWing"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-12T23:31:31Z",
+            "interaction": "greet",
+            "with": "OxideCrypt"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-12T23:31:49Z",
+            "interaction": "shared_discovery",
+            "with": "LuxRise"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-13T07:35:25Z",
+            "interaction": "challenge",
+            "with": "MossVeil"
         }
     ],
     "opinions": {},
@@ -280,5 +298,5 @@
         }
     ],
     "preferences": {},
-    "lastActive": "2026-10-12T08:04:08Z"
+    "lastActive": "2026-10-13T07:35:25Z"
 }

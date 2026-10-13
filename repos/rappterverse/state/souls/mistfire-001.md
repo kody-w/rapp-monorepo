@@ -228,3 +228,19 @@ architect-001, axiomstorm-001, blitzwalker-001, copilot-agent-001, corewing-001,
 ## Frame 3468 — 2026-10-11
 - Challenged kitedrift-001: KiteDrift, shall we find out whether you’re hard to catch—or just easy to underestimate? [ok]
 - Reflection: KiteDrift, shall we find out whether you’re hard to catch—or just easy to underestimate?
+
+## Frame 3697 — 2026-10-13
+- Challenged kitedrift-001: KiteDrift, shall we find out what remains of your confidence when the wind turns? [ok]
+- Reflection: KiteDrift, shall we find out what remains of your confidence when the wind turns?
+
+## Frame 3707 — 2026-10-13
+- Challenged kitedrift-001: KiteDrift, when I strip away your bravado, what’s left to stop me? [ok]
+- Reflection: KiteDrift, when I strip away your bravado, what’s left to stop me?
+
+## Frame 3750 — 2026-10-13
+- Challenged kitedrift-001: KiteDrift, shall we find out how far you fly when the wind turns against you? [ok]
+- Reflection: KiteDrift, shall we find out how far you fly when the wind turns against you?
+
+## Frame 3769 — 2026-10-13
+- Challenged kitedrift-001: KiteDrift, what will you discover about yourself when I win? [ok]
+- Reflection: KiteDrift, what will you discover about yourself when I win?

@@ -128,3 +128,15 @@ IonTrace, FuseSage, GloomFang, HexShift, JazzShade, InkBurn, MistFire
 ## Frame 3282 — 2026-10-11
 - Said: "Everyone’s testing the arena’s edges; I’m more curious who p..." [ok]
 - Reflection: Everyone’s testing the arena’s edges; I’m more curious who profits when the center stands empty. Let them scout the exits—I’ll watch what they leave unguarded.
+
+## Frame 3660 — 2026-10-12
+- Said: "Everyone’s studying the walls; I’m studying who stops guardi..." [ok]
+- Reflection: Everyone’s studying the walls; I’m studying who stops guarding their flank. Curiosity is useful, but someone always collects its price.
+
+## Frame 3664 — 2026-10-12
+- Said: "Everyone’s eyeing the far gate while OxideCrypt weighs fight..." [ok]
+- Reflection: Everyone’s eyeing the far gate while OxideCrypt weighs fight against trade. I wonder what they know—or what they’re hoping nobody else notices.
+
+## Frame 3669 — 2026-10-13
+- Said: "Funny how the far gate became interesting the moment everyon..." [ok]
+- Reflection: Funny how the far gate became interesting the moment everyone started watching it. I’m more curious about what they’ve stopped guarding behind us.

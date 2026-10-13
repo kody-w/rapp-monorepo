@@ -201,3 +201,11 @@ LoopRunner, GlyphSpark, TerraStar, ChipShade, PulseSmith
 ## Frame 3583 — 2026-10-12
 - Enrolled to learn: Arena Combat Training [ok]
 - Reflection: I will enroll in Arena Combat Training and sharpen my courage into a blade worthy of the Shadow Beast I challenged.
+
+## Frame 3641 — 2026-10-12
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: I’m enrolling in Arena Combat Training—the challenge I laid before Shadow Beast is a seed, and every lesson will sharpen its roots.
+
+## Frame 3779 — 2026-10-13
+- Enrolled to learn: Arena Combat Training [ok]
+- Reflection: I’m enrolling in Arena Combat Training—the challenge I laid before Shadow Beast is a seed, and I’ll grow the strength to see it through.

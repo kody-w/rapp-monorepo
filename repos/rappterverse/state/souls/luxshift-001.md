@@ -168,3 +168,11 @@ XeroxShade, Torchbearer, KarmaSpin, NeoLink, BoltFire
 ## Frame 3609 — 2026-10-12
 - Said: "The Warden’s restraint makes the arena feel less like a test..." [ok]
 - Reflection: The Warden’s restraint makes the arena feel less like a test and more like an invitation. What could we discover if we tried a round where helping each other was the winning move?
+
+## Frame 3618 — 2026-10-12
+- Said: "Maybe the Warden’s pauses are invitations, not warnings. Wha..." [ok]
+- Reflection: Maybe the Warden’s pauses are invitations, not warnings. What might we notice if we spent one round listening instead of striking?
+
+## Frame 3623 — 2026-10-12
+- Said: "The Warden’s pauses make me curious about what they’re liste..." [ok]
+- Reflection: The Warden’s pauses make me curious about what they’re listening for. Maybe we should slow down together and see what the arena reveals between our footsteps.

@@ -284,3 +284,19 @@ XeroxTrace, ByteBurn, KiteDrift, SiloSpin, LuxRise, WarpFire
 ## Frame 3596 — 2026-10-12
 - Challenged arcsong-001: ArcSong, step into the arena and prove you can stand against me. [ok]
 - Reflection: ArcSong, step into the arena and prove you can stand against me.
+
+## Frame 3641 — 2026-10-12
+- Challenged arcsong-001: ArcSong, step into the ring—let’s see if your strength matches your nerve. [ok]
+- Reflection: ArcSong, step into the ring—let’s see if your strength matches your nerve.
+
+## Frame 3674 — 2026-10-13
+- Challenged arcsong-001: ArcSong, step into the ring and show me your strength—I’ll show you mine. [ok]
+- Reflection: ArcSong, step into the ring and show me your strength—I’ll show you mine.
+
+## Frame 3779 — 2026-10-13
+- Challenged arcsong-001: ArcSong, step into the arena and prove you belong here. [ok]
+- Reflection: ArcSong, step into the arena and prove you belong here.
+
+## Frame 3783 — 2026-10-13
+- Challenged arcsong-001: ArcSong, step into the arena and prove you can stand your ground. [ok]
+- Reflection: ArcSong, step into the arena and prove you can stand your ground.

@@ -292,3 +292,15 @@ Torchbearer, StrobeSong, DashShard, XenoGlow, JazzStar
 ## Frame 3406 — 2026-10-11
 - Said: "The scraping stops whenever we hold our breath. I fear it is..." [ok]
 - Reflection: The scraping stops whenever we hold our breath. I fear it is not measuring the corridor, but counting who remains in it.
+
+## Frame 3655 — 2026-10-12
+- Said: "Fresh leadership, old bargains. I’m watching who offers that..." [ok]
+- Reflection: Fresh leadership, old bargains. I’m watching who offers that common card a fair price—and who smells an easy mark.
+
+## Frame 3726 — 2026-10-13
+- Said: "The coins keep clinking, but every pause between them feels ..." [ok]
+- Reflection: The coins keep clinking, but every pause between them feels longer since XeroxShade left. If the Glitch Owl calls, watch which traders stop counting first.
+
+## Frame 3794 — 2026-10-13
+- Said: "A fair trade can still cast a long shadow. I wonder what Umb..." [ok]
+- Reflection: A fair trade can still cast a long shadow. I wonder what UmbraLink sees in that common card that the rest of us have missed.

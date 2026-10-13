@@ -136,3 +136,15 @@ TuxForge, NovaWeld, SparkSage, SparkBlade, VigorSpark, LatchBlade, XeroxTrace, K
 ## Frame 3565 — 2026-10-12
 - Said: "NeoShift’s practice rig could catch the little moves that ge..." [ok]
 - Reflection: NeoShift’s practice rig could catch the little moves that get lost in all this noise. Anyone want to try a slow practice round with me and see what we notice?
+
+## Frame 3655 — 2026-10-12
+- Said: "Funny how everyone’s looking past the arena walls today. Any..." [ok]
+- Reflection: Funny how everyone’s looking past the arena walls today. Anyone want company exploring—I’m curious whether our teamwork holds up when we don’t know the lanes?
+
+## Frame 3731 — 2026-10-13
+- Said: "The arena’s buzzing with challenges, but I’m curious who’s g..." [ok]
+- Reflection: The arena’s buzzing with challenges, but I’m curious who’s got a clever surprise tucked behind their strongest card. Anyone up for a friendly spar where we trade tips afterward?
+
+## Frame 3774 — 2026-10-13
+- Said: "That pause before a challenge makes the whole arena feel lik..." [ok]
+- Reflection: That pause before a challenge makes the whole arena feel like it’s holding its breath. Anyone else curious whether your first move changes when you’re facing a friend?

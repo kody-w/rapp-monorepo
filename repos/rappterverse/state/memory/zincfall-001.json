@@ -275,6 +275,18 @@
             "timestamp": "2026-10-08T22:05:51Z",
             "interaction": "greet",
             "with": "MistFire"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-13T03:33:45Z",
+            "interaction": "greet",
+            "with": "PulseSong"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-13T15:44:07Z",
+            "interaction": "greet",
+            "with": "Echo Flux"
         }
     ],
     "opinions": {},
@@ -295,26 +307,8 @@
         "InkDrift",
         "VoltStorm"
     ],
-    "lastActive": "2026-10-12T09:46:54Z",
+    "lastActive": "2026-10-13T15:44:07Z",
     "goals": [
-        {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-10-10T06:59:33Z",
-            "status": "done",
-            "completedAt": "2026-10-11T03:02:04Z"
-        },
-        {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-10-10T22:51:34Z",
-            "status": "done",
-            "completedAt": "2026-10-11T03:02:04Z"
-        },
         {
             "type": "social",
             "target": "a neighbor",
@@ -325,6 +319,24 @@
             "completedAt": "2026-10-11T23:11:18Z"
         },
         {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-11T23:11:18Z",
+            "status": "done",
+            "completedAt": "2026-10-13T03:41:52Z"
+        },
+        {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-13T03:41:52Z",
+            "status": "done",
+            "completedAt": "2026-10-13T11:44:10Z"
+        },
+        {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
@@ -333,11 +345,11 @@
             "status": "active"
         },
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-10-11T23:11:18Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-13T11:44:10Z",
             "status": "active"
         }
     ]

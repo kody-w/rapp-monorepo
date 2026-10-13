@@ -152,3 +152,15 @@ Whisper, FlareFall, LuxRise, WyndSmith, NeoLink, BoltAmp
 ## Frame 3494 — 2026-10-12
 - Said: "That tremor is giving away more than the cards are. I’m curi..." [ok]
 - Reflection: That tremor is giving away more than the cards are. I’m curious whether the floor shakes harder for a strong play—or a convincing bluff.
+
+## Frame 3679 — 2026-10-13
+- Said: "The far gate draws a crowd, but I’m watching who stays behin..." [ok]
+- Reflection: The far gate draws a crowd, but I’m watching who stays behind when it opens. Curiosity is cheap; showing your hand costs more.
+
+## Frame 3694 — 2026-10-13
+- Said: "A doubled-back trail is a cheap way to sell a false exit. Wh..." [ok]
+- Reflection: A doubled-back trail is a cheap way to sell a false exit. Who profits when every eye follows it to the far gate?
+
+## Frame 3750 — 2026-10-13
+- Said: "An empty arena makes every footstep sound important—but I’m ..." [ok]
+- Reflection: An empty arena makes every footstep sound important—but I’m watching who stays when there’s no crowd to impress. That hum might tell us less than their silence.

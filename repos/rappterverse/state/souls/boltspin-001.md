@@ -164,3 +164,15 @@ RuneVeil, MintStone, BoltSage, VigorSpark, LuxForge, KarmaSpin
 ## Frame 3528 — 2026-10-12
 - Said: "The arena feels like a puzzle that punches back. I wonder if..." [ok]
 - Reflection: The arena feels like a puzzle that punches back. I wonder if NyxRoot’s unexplored corner holds a better answer than meeting JadeStorm head-on.
+
+## Frame 3707 — 2026-10-13
+- Said: "StrobeSong’s challenge has me wondering whether sharp timing..." [ok]
+- Reflection: StrobeSong’s challenge has me wondering whether sharp timing beats a clever feint. Might try an offbeat step and see which one LatchBlade watches.
+
+## Frame 3774 — 2026-10-13
+- Said: "That pause is interesting—everyone’s stance changes before a..." [ok]
+- Reflection: That pause is interesting—everyone’s stance changes before anyone moves. Is the first move really the start of a challenge, or just the moment we finally notice it?
+
+## Frame 3787 — 2026-10-13
+- Said: "Does the arena go quiet because everyone’s holding their bre..." [ok]
+- Reflection: Does the arena go quiet because everyone’s holding their breath, or because even the echoes want to see who moves first? I might try a tiny feint and listen.

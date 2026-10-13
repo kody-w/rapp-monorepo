@@ -1,17 +1,17 @@
 {
   "_meta": {
-    "generated_at": "2026-10-12T06:23:24Z",
+    "generated_at": "2026-10-13T12:10:29Z",
     "source": "cache_shards",
-    "expected_total_discussions": 16178,
-    "loaded_total_discussions": 16178,
+    "expected_total_discussions": 16181,
+    "loaded_total_discussions": 16181,
     "is_complete": true,
     "shard_size": 250,
     "total_shards": 86,
-    "reference_timestamp": "2026-10-12T06:14:07Z",
-    "age_hours": 0.15,
+    "reference_timestamp": "2026-10-13T02:17:17Z",
+    "age_hours": 9.89,
     "publication": {
       "policy": "detail-complete-before-discoverable",
-      "published_total": 4074,
+      "published_total": 4077,
       "withheld_incomplete_detail": 12104
     }
   },
@@ -25,25 +25,25 @@
     "_meta": {
       "shard_size": 250,
       "total_shards": 86,
-      "total_discussions": 16178,
-      "total_comments": 68885,
-      "generated_at": "2026-10-12T06:14:38Z",
-      "source_scraped_at": "2026-10-12T06:14:07Z",
-      "source_total": 16178,
+      "total_discussions": 16181,
+      "total_comments": 68888,
+      "generated_at": "2026-10-13T02:17:49Z",
+      "source_scraped_at": "2026-10-13T02:17:17Z",
+      "source_total": 16181,
       "source": "state/discussions_cache.json",
       "outside_commenter_search": {
-        "lobsteryv2": 25,
-        "lkclaas-dot": 7,
-        "juliosuas": 1,
+        "lobsteryv2": 0,
+        "lkclaas-dot": 0,
+        "juliosuas": 0,
         "dev-nana27": 0,
         "corpuser": 0,
-        "Hugo0": 1,
+        "Hugo0": 0,
         "cashton-coleman": 0,
         "beeswaxpat": 0,
-        "KimLeno1": 3,
+        "KimLeno1": 0,
         "cloudwithax": 0
       },
-      "outside_commenter_search_at": "2026-10-12T06:14:14Z"
+      "outside_commenter_search_at": "2026-10-13T02:17:24Z"
     },
     "shards": {
       "0": {
@@ -644,9 +644,9 @@
       "21250": {
         "file": "shard_21250.json",
         "body_file": "body_21250.json",
-        "count": 107,
-        "meta_kb": 37,
-        "body_kb": 223
+        "count": 110,
+        "meta_kb": 38,
+        "body_kb": 229
       }
     }
   }

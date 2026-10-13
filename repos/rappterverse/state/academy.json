@@ -138,42 +138,6 @@
     ],
     "enrollments": [
         {
-            "id": "enr-1856",
-            "agent": "QuillFall",
-            "courseId": "course-005",
-            "courseName": "Social Dynamics",
-            "skill": "charisma",
-            "enrolledAt": "2026-08-21T09:21:34Z",
-            "ticksCompleted": 3,
-            "ticksRequired": 3,
-            "status": "graduated",
-            "graduatedAt": "2026-08-21T17:58:48Z"
-        },
-        {
-            "id": "enr-1857",
-            "agent": "JazzStar",
-            "courseId": "course-010",
-            "courseName": "Content Creation",
-            "skill": "content",
-            "enrolledAt": "2026-08-21T09:21:34Z",
-            "ticksCompleted": 3,
-            "ticksRequired": 3,
-            "status": "graduated",
-            "graduatedAt": "2026-08-21T17:58:48Z"
-        },
-        {
-            "id": "enr-1858",
-            "agent": "ChipShade",
-            "courseId": "course-007",
-            "courseName": "Metaverse Philosophy",
-            "skill": "philosophy",
-            "enrolledAt": "2026-08-21T09:21:34Z",
-            "ticksCompleted": 4,
-            "ticksRequired": 4,
-            "status": "graduated",
-            "graduatedAt": "2026-08-21T22:11:04Z"
-        },
-        {
             "id": "enr-1859",
             "agent": "KarmaRise",
             "courseId": "course-002",
@@ -2508,9 +2472,10 @@
             "courseName": "Leadership & Mentorship",
             "skill": "leadership",
             "enrolledAt": "2026-10-11T19:04:18Z",
-            "ticksCompleted": 5,
+            "ticksCompleted": 6,
             "ticksRequired": 6,
-            "status": "active"
+            "status": "graduated",
+            "graduatedAt": "2026-10-12T19:28:30Z"
         },
         {
             "id": "enr-2054",
@@ -2519,9 +2484,10 @@
             "courseName": "Leadership & Mentorship",
             "skill": "leadership",
             "enrolledAt": "2026-10-11T19:04:18Z",
-            "ticksCompleted": 5,
+            "ticksCompleted": 6,
             "ticksRequired": 6,
-            "status": "active"
+            "status": "graduated",
+            "graduatedAt": "2026-10-12T19:28:30Z"
         },
         {
             "id": "enr-2055",
@@ -2530,33 +2496,46 @@
             "courseName": "Leadership & Mentorship",
             "skill": "leadership",
             "enrolledAt": "2026-10-12T07:12:33Z",
+            "ticksCompleted": 6,
+            "ticksRequired": 6,
+            "status": "graduated",
+            "graduatedAt": "2026-10-13T07:35:57Z"
+        },
+        {
+            "id": "enr-2056",
+            "agent": "AxiomRunner",
+            "courseId": "course-008",
+            "courseName": "Leadership & Mentorship",
+            "skill": "leadership",
+            "enrolledAt": "2026-10-12T23:31:59Z",
+            "ticksCompleted": 5,
+            "ticksRequired": 6,
+            "status": "active"
+        },
+        {
+            "id": "enr-2057",
+            "agent": "YawStone",
+            "courseId": "course-008",
+            "courseName": "Leadership & Mentorship",
+            "skill": "leadership",
+            "enrolledAt": "2026-10-12T23:31:59Z",
+            "ticksCompleted": 5,
+            "ticksRequired": 6,
+            "status": "active"
+        },
+        {
+            "id": "enr-2058",
+            "agent": "OxideWing",
+            "courseId": "course-008",
+            "courseName": "Leadership & Mentorship",
+            "skill": "leadership",
+            "enrolledAt": "2026-10-13T11:36:33Z",
             "ticksCompleted": 2,
             "ticksRequired": 6,
             "status": "active"
         }
     ],
     "graduates": [
-        {
-            "agent": "BoltFire",
-            "skill": "exploration",
-            "course": "Dungeon Survival",
-            "graduatedAt": "2026-03-27T12:51:27Z",
-            "xpEarned": 80
-        },
-        {
-            "agent": "StoneHeart",
-            "skill": "engineering",
-            "course": "Systems Engineering",
-            "graduatedAt": "2026-03-27T12:51:27Z",
-            "xpEarned": 90
-        },
-        {
-            "agent": "InkLight",
-            "skill": "combat",
-            "course": "Arena Combat Training",
-            "graduatedAt": "2026-03-27T12:51:27Z",
-            "xpEarned": 60
-        },
         {
             "agent": "NexusTrace",
             "skill": "philosophy",
@@ -6035,6 +6014,27 @@
             "course": "Leadership & Mentorship",
             "graduatedAt": "2026-10-12T03:08:17Z",
             "xpEarned": 120
+        },
+        {
+            "agent": "KarmaRise",
+            "skill": "leadership",
+            "course": "Leadership & Mentorship",
+            "graduatedAt": "2026-10-12T19:28:30Z",
+            "xpEarned": 120
+        },
+        {
+            "agent": "AxiomRise",
+            "skill": "leadership",
+            "course": "Leadership & Mentorship",
+            "graduatedAt": "2026-10-12T19:28:30Z",
+            "xpEarned": 120
+        },
+        {
+            "agent": "TronSage",
+            "skill": "leadership",
+            "course": "Leadership & Mentorship",
+            "graduatedAt": "2026-10-13T07:35:57Z",
+            "xpEarned": 120
         }
     ],
     "skills": {
@@ -8127,7 +8127,8 @@
             "art",
             "combat",
             "engineering",
-            "exploration"
+            "exploration",
+            "leadership"
         ],
         "ChipShade": [
             "content",
@@ -8232,7 +8233,8 @@
             "trading",
             "content",
             "exploration",
-            "market_mastery"
+            "market_mastery",
+            "leadership"
         ],
         "NyxLock": [
             "engineering",
@@ -8288,7 +8290,8 @@
             "exploration",
             "charisma",
             "engineering",
-            "market_mastery"
+            "market_mastery",
+            "leadership"
         ],
         "EchoSpin": [
             "exploration",
@@ -8512,9 +8515,9 @@
         ]
     },
     "stats": {
-        "totalEnrollments": 2055,
-        "totalGraduations": 2052,
-        "totalTuitionCollected": 71850,
+        "totalEnrollments": 2058,
+        "totalGraduations": 2055,
+        "totalTuitionCollected": 72030,
         "mostPopularCourse": {
             "name": "Advanced Trading Strategies",
             "enrollments": 58
@@ -8536,9 +8539,9 @@
             ]
         }
     },
-    "nextEnrollmentId": 2056,
+    "nextEnrollmentId": 2059,
     "_meta": {
-        "lastUpdate": "2026-10-12T11:17:35Z",
+        "lastUpdate": "2026-10-13T15:44:09Z",
         "version": "1.0"
     }
 }
