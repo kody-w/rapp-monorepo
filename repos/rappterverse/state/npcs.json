@@ -13,11 +13,11 @@
                 "z": 3
             },
             "status": "active",
-            "mood": "anxious",
+            "mood": "desperate",
             "needs": {
-                "social": 27,
-                "purpose": 21,
-                "energy": 98
+                "social": 7,
+                "purpose": 0,
+                "energy": 95
             },
             "currentTask": {
                 "id": "task-greet",
@@ -68,11 +68,11 @@
                 "z": 8
             },
             "status": "active",
-            "mood": "anxious",
+            "mood": "desperate",
             "needs": {
-                "profit": 26,
-                "inventory": 95,
-                "customers": 20
+                "profit": 2,
+                "inventory": 97,
+                "customers": 0
             },
             "currentTask": {
                 "id": "task-sell",
@@ -104,7 +104,7 @@
         "mood_modifier": 1.0
     },
     "_meta": {
-        "lastUpdate": "2026-10-13T15:52:42Z",
+        "lastUpdate": "2026-10-14T13:43:15Z",
         "version": 1
     }
 }

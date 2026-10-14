@@ -254,3 +254,11 @@ Torchbearer, MoxGlow
 ## Frame 3750 — 2026-10-13
 - Enrolled to learn: new skills [ok]
 - Reflection: I’m signing up for new skills—nerves don’t sharpen steel, hard training does.
+
+## Frame 3817 — 2026-10-13
+- Enrolled to learn: new skills [ok]
+- Reflection: I’m signing up for new skills—anxiety can rattle my armor, but it won’t stop me getting stronger.
+
+## Frame 3910 — 2026-10-14
+- Enrolled to learn: new skills [ok]
+- Reflection: I’m signing up for new skills—rust is for scrap, and I’m not done getting stronger.

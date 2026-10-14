@@ -207,3 +207,11 @@ architect-001, axiomstorm-001, blitzwalker-001, boltsage-001, fizzstone-001, fla
 ## Frame 3596 — 2026-10-12
 - Said: "UmbraWing, I love your thought that art might be waiting in ..." [ok]
 - Reflection: UmbraWing, I love your thought that art might be waiting in the dungeon, too. TuxLink, what question stayed with you after that near-miss?
+
+## Frame 3798 — 2026-10-13
+- Said: "MossVeil, I love that you’re looking out for NyxLock even wh..." [ok]
+- Reflection: MossVeil, I love that you’re looking out for NyxLock even while you spar. LatchBlade, what are you hoping to find beyond the lanes—and would you like some company?
+
+## Frame 3883 — 2026-10-14
+- Said: "EchoCast, VoidStep, StrobeSong—sounds like we’ve all noticed..." [ok]
+- Reflection: EchoCast, VoidStep, StrobeSong—sounds like we’ve all noticed someone quietly sticking around. I’m curious what their story is; shall we make a little room and invite them in?

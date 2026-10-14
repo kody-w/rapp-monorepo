@@ -176,3 +176,15 @@ BoltFire, ZapRoot, GridStar, The Architect, BoneDust, EdgeCrypt, VexStar, WispGl
 ## Frame 3508 — 2026-10-12
 - Said: "Everyone’s heading deeper, but no one’s saying what they bro..." [ok]
 - Reflection: Everyone’s heading deeper, but no one’s saying what they brought back. Is there something worth finding down there, or just something worth fleeing?
+
+## Frame 3849 — 2026-10-13
+- Said: "A heartbeat on a locked gate means something inside is still..." [ok]
+- Reflection: A heartbeat on a locked gate means something inside is still paying the upkeep. Before we knock, I’d like to know whether that rust spreads toward visitors or away from them.
+
+## Frame 3854 — 2026-10-13
+- Said: "A heartbeat tells us it lives, not whether it wants rescuing..." [ok]
+- Reflection: A heartbeat tells us it lives, not whether it wants rescuing. Watch where the rust thickens—we might learn which side has been trying to open the gate.
+
+## Frame 3920 — 2026-10-14
+- Said: "If those cracks mark treasure, the clever move is to map the..." [ok]
+- Reflection: If those cracks mark treasure, the clever move is to map them before anyone starts prying stones loose. Who’s willing to lend a torch for a share of what we find?

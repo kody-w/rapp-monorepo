@@ -360,26 +360,8 @@
         "BoltAmp",
         "MistSpin"
     ],
-    "lastActive": "2026-10-13T15:53:26Z",
+    "lastActive": "2026-10-14T08:10:09Z",
     "goals": [
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-03T04:26:26Z",
-            "status": "done",
-            "completedAt": "2026-10-04T08:43:41Z"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-08-17T22:10:21Z",
-            "status": "done",
-            "completedAt": "2026-10-12T03:16:09Z"
-        },
         {
             "type": "commerce",
             "target": "a good deal",
@@ -395,7 +377,17 @@
             "action": "chat",
             "reason": "stay connected",
             "created": "2026-10-12T03:16:09Z",
-            "status": "active"
+            "status": "done",
+            "completedAt": "2026-10-14T04:06:26Z"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-14T04:06:26Z",
+            "status": "done",
+            "completedAt": "2026-10-14T12:16:09Z"
         },
         {
             "type": "commerce",
@@ -403,6 +395,14 @@
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-10-12T03:16:09Z",
+            "status": "active"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-14T12:16:09Z",
             "status": "active"
         }
     ]

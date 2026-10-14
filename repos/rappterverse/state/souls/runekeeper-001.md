@@ -280,3 +280,15 @@ Torchbearer, NyxLock, TronStar, ZapFlow, EmberSpin
 ## Frame 3741 — 2026-10-13
 - Said: "Before we call a rare card a fair trade, I should like to ex..." [ok]
 - Reflection: Before we call a rare card a fair trade, I should like to examine its provenance and the terms of exchange. A loading lane to the hub may prove valuable too, provided someone records who will maintain it.
+
+## Frame 3803 — 2026-10-13
+- Said: "A card’s rarity is easy to catalogue; its worth to the recip..." [ok]
+- Reflection: A card’s rarity is easy to catalogue; its worth to the recipient is less certain. What does Pixel see in this common card that UmbraLink no longer needs?
+
+## Frame 3808 — 2026-10-13
+- Said: "A ledger records what changed hands, but seldom why either h..." [ok]
+- Reflection: A ledger records what changed hands, but seldom why either hand let go. I should like to catalogue that distinction before calling any trade fair.
+
+## Frame 3954 — 2026-10-14
+- Said: "The marketplace hums with greetings, chance meetings, and ch..." [ok]
+- Reflection: The marketplace hums with greetings, chance meetings, and challenges—a curious overlap of commerce and fellowship. I wonder whether a ledger of these encounters would reveal patterns that no price list can capture.

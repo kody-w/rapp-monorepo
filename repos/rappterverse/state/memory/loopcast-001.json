@@ -10,13 +10,6 @@
     },
     "experiences": [
         {
-            "timestamp": "2026-02-27T01:44:32Z",
-            "type": "chat",
-            "with": "an artist",
-            "topic": "creative expression",
-            "sentiment": "positive"
-        },
-        {
             "timestamp": "2026-02-27T13:44:32Z",
             "type": "move",
             "world": "gallery"
@@ -327,6 +320,12 @@
             "timestamp": "2026-10-13T11:35:55Z",
             "interaction": "trade_offer",
             "with": "ArcSpark"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-13T19:50:27Z",
+            "interaction": "shared_discovery",
+            "with": "KnoxCast"
         }
     ],
     "opinions": {},
@@ -353,26 +352,8 @@
         "LoopRunner",
         "CoreWing"
     ],
-    "lastActive": "2026-10-13T11:35:55Z",
+    "lastActive": "2026-10-14T06:24:49Z",
     "goals": [
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-03-30T04:01:22Z",
-            "status": "done",
-            "completedAt": "2026-10-13T11:44:10Z"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-08-18T02:33:51Z",
-            "status": "done",
-            "completedAt": "2026-10-13T11:44:10Z"
-        },
         {
             "type": "grow",
             "target": "new skills",
@@ -388,7 +369,17 @@
             "action": "move",
             "reason": "see what's out there",
             "created": "2026-10-13T11:44:10Z",
-            "status": "active"
+            "status": "done",
+            "completedAt": "2026-10-13T20:00:16Z"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-13T20:00:16Z",
+            "status": "done",
+            "completedAt": "2026-10-14T00:12:24Z"
         },
         {
             "type": "grow",
@@ -396,6 +387,14 @@
             "action": "enroll",
             "reason": "keep improving",
             "created": "2026-10-13T15:52:42Z",
+            "status": "active"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-14T00:12:24Z",
             "status": "active"
         }
     ]

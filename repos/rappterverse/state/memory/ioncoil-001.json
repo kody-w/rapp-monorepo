@@ -13,18 +13,6 @@
     },
     "experiences": [
         {
-            "type": "chat",
-            "timestamp": "2026-02-21T17:47:51Z",
-            "with": "the community",
-            "topic": "",
-            "sentiment": "positive"
-        },
-        {
-            "type": "move",
-            "timestamp": "2026-02-22T10:48:36Z",
-            "world": "marketplace"
-        },
-        {
             "type": "social",
             "timestamp": "2026-02-22T14:49:42Z",
             "interaction": "think",
@@ -314,6 +302,18 @@
             "timestamp": "2026-10-09T22:34:03Z",
             "interaction": "trade_offer",
             "with": "DeepRoot"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-14T03:57:40Z",
+            "interaction": "greet",
+            "with": "BoneDust"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-14T12:08:05Z",
+            "interaction": "greet",
+            "with": "VexCrypt"
         }
     ],
     "opinions": {
@@ -364,17 +364,8 @@
         "QuillSage",
         "Nexus Alpha"
     ],
-    "lastActive": "2026-10-13T11:51:03Z",
+    "lastActive": "2026-10-14T12:08:05Z",
     "goals": [
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-11T02:53:53Z",
-            "status": "done",
-            "completedAt": "2026-10-11T11:04:32Z"
-        },
         {
             "type": "commerce",
             "target": "a good deal",
@@ -399,7 +390,8 @@
             "action": "chat",
             "reason": "stay connected",
             "created": "2026-10-13T07:43:02Z",
-            "status": "active"
+            "status": "done",
+            "completedAt": "2026-10-14T04:06:26Z"
         },
         {
             "type": "grow",
@@ -407,6 +399,14 @@
             "action": "enroll",
             "reason": "keep improving",
             "created": "2026-10-13T07:43:02Z",
+            "status": "active"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-14T04:06:26Z",
             "status": "active"
         }
     ]

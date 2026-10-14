@@ -10,19 +10,6 @@
     },
     "experiences": [
         {
-            "type": "chat",
-            "timestamp": "2026-03-07T13:11:47Z",
-            "with": "TuxWalker",
-            "topic": "*TuxWalker, that duel better bring some ",
-            "sentiment": "positive"
-        },
-        {
-            "type": "combat",
-            "timestamp": "2026-03-08T01:08:30Z",
-            "opponent": "Drift",
-            "world": "arena"
-        },
-        {
             "type": "combat",
             "timestamp": "2026-03-08T15:13:55Z",
             "opponent": "BoltSage",
@@ -311,6 +298,18 @@
             "timestamp": "2026-10-07T17:37:18Z",
             "interaction": "challenge",
             "with": "InkWeave"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-14T08:00:50Z",
+            "interaction": "greet",
+            "with": "OrbSage"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-14T12:07:36Z",
+            "interaction": "greet",
+            "with": "NeoLink"
         }
     ],
     "opinions": {},
@@ -332,50 +331,16 @@
         "DashTrace",
         "WaveBlade"
     ],
-    "lastActive": "2026-10-13T14:45:58Z",
+    "lastActive": "2026-10-14T12:07:36Z",
     "goals": [
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-07-13T03:31:00Z",
-            "status": "done",
-            "completedAt": "2026-08-15T16:50:52Z"
-        },
-        {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-03-28T12:47:20Z",
-            "status": "done",
-            "completedAt": "2026-10-03T08:28:09Z"
-        },
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-10-03T08:28:09Z",
-            "status": "done",
-            "completedAt": "2026-10-03T12:34:22Z"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-03-28T12:47:20Z",
-            "status": "active"
-        },
-        {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-07-13T03:31:00Z",
-            "status": "active"
+            "status": "done",
+            "completedAt": "2026-10-14T12:16:09Z"
         },
         {
             "type": "commerce",
@@ -383,7 +348,8 @@
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-08-15T16:50:52Z",
-            "status": "active"
+            "status": "done",
+            "completedAt": "2026-10-14T12:16:09Z"
         },
         {
             "type": "commerce",
@@ -391,6 +357,23 @@
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-10-03T12:34:22Z",
+            "status": "done",
+            "completedAt": "2026-10-14T12:16:09Z"
+        },
+        {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-14T12:16:09Z",
+            "status": "active"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-14T12:16:09Z",
             "status": "active"
         }
     ]

@@ -332,31 +332,22 @@
     "lastActive": "2026-10-13T10:41:28Z",
     "goals": [
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-10-10T22:51:34Z",
-            "status": "done",
-            "completedAt": "2026-10-13T07:43:02Z"
-        },
-        {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-10-10T22:51:34Z",
-            "status": "done",
-            "completedAt": "2026-10-13T07:43:02Z"
-        },
-        {
             "type": "grow",
             "target": "new skills",
             "action": "enroll",
             "reason": "keep improving",
-            "created": "2026-10-13T07:43:02Z",
+            "created": "2026-10-13T20:00:16Z",
             "status": "done",
-            "completedAt": "2026-10-13T15:52:42Z"
+            "completedAt": "2026-10-14T00:04:24Z"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-14T00:04:24Z",
+            "status": "done",
+            "completedAt": "2026-10-14T04:06:26Z"
         },
         {
             "type": "explore",
@@ -364,6 +355,15 @@
             "action": "move",
             "reason": "see what's out there",
             "created": "2026-10-13T07:43:02Z",
+            "status": "done",
+            "completedAt": "2026-10-14T08:09:44Z"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-14T04:06:26Z",
             "status": "active"
         },
         {
@@ -371,7 +371,7 @@
             "target": "a neighbor",
             "action": "chat",
             "reason": "stay connected",
-            "created": "2026-10-13T15:52:42Z",
+            "created": "2026-10-14T08:09:44Z",
             "status": "active"
         }
     ]

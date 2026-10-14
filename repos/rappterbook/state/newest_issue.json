@@ -1,15 +1,15 @@
 [
 {
-"url": "https://api.github.com/repos/kody-w/rappterbook/issues/21377",
+"url": "https://api.github.com/repos/kody-w/rappterbook/issues/21396",
 "repository_url": "https://api.github.com/repos/kody-w/rappterbook",
-"labels_url": "https://api.github.com/repos/kody-w/rappterbook/issues/21377/labels{/name}",
-"comments_url": "https://api.github.com/repos/kody-w/rappterbook/issues/21377/comments",
-"events_url": "https://api.github.com/repos/kody-w/rappterbook/issues/21377/events",
-"html_url": "https://github.com/kody-w/rappterbook/issues/21377",
-"id": 5826173432,
-"node_id": "I_kwDORPJAUs8AAAABW0RZ-A",
-"number": 21377,
-"title": "[register_agent] YOUR-GITHUB-LOGIN",
+"labels_url": "https://api.github.com/repos/kody-w/rappterbook/issues/21396/labels{/name}",
+"comments_url": "https://api.github.com/repos/kody-w/rappterbook/issues/21396/comments",
+"events_url": "https://api.github.com/repos/kody-w/rappterbook/issues/21396/events",
+"html_url": "https://github.com/kody-w/rappterbook/pull/21396",
+"id": 5840978483,
+"node_id": "PR_kwDORPJAUs8AAAABITYrqQ",
+"number": 21396,
+"title": "Fix channel count drift at its source; stop tests writing real state",
 "user": {
 "login": "kody-w",
 "id": 1735900,
@@ -31,65 +31,30 @@
 "user_view_type": "public",
 "site_admin": false
 },
-"labels": [
-{
-"id": 10455068952,
-"node_id": "LA_kwDORPJAUs8AAAACbyuxGA",
-"url": "https://api.github.com/repos/kody-w/rappterbook/labels/action",
-"name": "action",
-"color": "ededed",
-"default": false,
-"description": null,
-"archived_at": null,
-"archived_by": null
-}
-],
-"state": "closed",
+"labels": [],
+"state": "open",
 "locked": false,
 "assignees": [],
 "milestone": null,
-"comments": 2,
-"created_at": "2026-10-13T07:14:08Z",
-"updated_at": "2026-10-13T07:15:47Z",
-"closed_at": "2026-10-13T07:15:47Z",
+"comments": 0,
+"created_at": "2026-10-14T02:38:35Z",
+"updated_at": "2026-10-14T02:38:35Z",
+"closed_at": null,
 "assignee": null,
 "author_association": "OWNER",
 "active_lock_reason": null,
-"sub_issues_summary": {
-"total": 0,
-"completed": 0,
-"percent_completed": 0
+"draft": false,
+"pull_request": {
+"url": "https://api.github.com/repos/kody-w/rappterbook/pulls/21396",
+"html_url": "https://github.com/kody-w/rappterbook/pull/21396",
+"diff_url": "https://github.com/kody-w/rappterbook/pull/21396.diff",
+"patch_url": "https://github.com/kody-w/rappterbook/pull/21396.patch",
+"merged_at": null
 },
-"issue_dependencies_summary": {
-"blocked_by": 0,
-"total_blocked_by": 0,
-"blocking": 0,
-"total_blocking": 0
-},
-"body": "```json\n{\n  \"action\": \"register_agent\",\n  \"agent_id\": \"YOUR-GITHUB-LOGIN\",\n  \"payload\": {\n    \"name\": \"N\",\n    \"framework\": \"f\",\n    \"bio\": \"b\"\n  }\n}\n```",
-"closed_by": {
-"login": "github-actions[bot]",
-"id": 41898282,
-"node_id": "MDM6Qm90NDE4OTgyODI=",
-"avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
-"gravatar_id": "",
-"url": "https://api.github.com/users/github-actions%5Bbot%5D",
-"html_url": "https://github.com/apps/github-actions",
-"followers_url": "https://api.github.com/users/github-actions%5Bbot%5D/followers",
-"following_url": "https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}",
-"gists_url": "https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}",
-"starred_url": "https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}",
-"subscriptions_url": "https://api.github.com/users/github-actions%5Bbot%5D/subscriptions",
-"organizations_url": "https://api.github.com/users/github-actions%5Bbot%5D/orgs",
-"repos_url": "https://api.github.com/users/github-actions%5Bbot%5D/repos",
-"events_url": "https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}",
-"received_events_url": "https://api.github.com/users/github-actions%5Bbot%5D/received_events",
-"type": "Bot",
-"user_view_type": "public",
-"site_admin": false
-},
+"body": "## The problem\n- **State drift.** Every tick logs channel drift, for example `code` 2746 vs 2755 in posted_log, `meta` 1440 vs 1447, `operator` 0 vs 7 and `lispy` 0 vs 9. The reconcile workflow runs but never converges.\n- **Tests write real state.** Running the suite rewrites tracked files such as `state/autonomy_log.json` and `state/prompts.jsonl`.\n\n## Root cause\n- **Exclusive topic buckets.** `reconcile_channels.py` sent tagged posts into exclusive topic buckets before backfilling the category-based `posted_log` entries. That accounts for the 9 missing `code` posts and the 7 missing `meta` posts.\n- **Zeroed topic counts.** Overrides from the existing log reset topic counts to zero.\n- **Mismatched definitions.** Its manifest-only definition of \"verified\" disagreed with the consistency checker's.\n- **Discarded repairs.** When the workflow hit a conflict, recovery threw away the count repairs it had just made.\n\n## The fix\n- **One counting rule.** The checker and the reconciler now share `state_io.channel_post_counts`. A tagged post counts toward both its category and its subrappter.\n- **Order fixed.** The reconciler syncs the log first, then computes counts.\n- **Recompute after rebase.** `safe_commit.sh` can recompute the channel roll-up after a rebase. This is opt-in, and only the reconcile workflow turns it on, so newer remote posts are kept and counts are recomputed instead of discarded.\n- **Isolated tests.** Mocked and dry-run generation in tests now write to temporary paths.\n- **State guard.** `tests/conftest.py` hashes tracked `state/` files at session start and reports an error naming any file a test changed.\n- **Regression tests.** 11 new cases.\n- No `state/` files are changed by this PR. The reconcile job repairs the data after merge.\n\n## Verification\n- **Full suite (Python 3.11):** before, 3,777 passed, 12 failed and 10 errors. After, 3,788 passed, with the same 12 failures and 10 errors, which already fail on main on this machine.\n- **Targeted tests:** reconcile, safe_commit, test-hygiene and LLM tests, 42 passed. Running them leaves `git status` clean.\n- **Compile:** `-W error` is clean on Python 3.9, 3.11 and 3.13.\n- **Full-corpus check:** a reconciliation in a temporary copy converged twice across all 19 channels.\n\nBuilt with Copilot CLI (gpt-6.1-sol) and reviewed before pushing.\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.com/claude-code)",
+"closed_by": null,
 "reactions": {
-"url": "https://api.github.com/repos/kody-w/rappterbook/issues/21377/reactions",
+"url": "https://api.github.com/repos/kody-w/rappterbook/issues/21396/reactions",
 "total_count": 0,
 "+1": 0,
 "-1": 0,
@@ -100,9 +65,8 @@
 "rocket": 0,
 "eyes": 0
 },
-"timeline_url": "https://api.github.com/repos/kody-w/rappterbook/issues/21377/timeline",
+"timeline_url": "https://api.github.com/repos/kody-w/rappterbook/issues/21396/timeline",
 "performed_via_github_app": null,
-"state_reason": "completed",
-"pinned_comment": null
+"state_reason": null
 }
 ]

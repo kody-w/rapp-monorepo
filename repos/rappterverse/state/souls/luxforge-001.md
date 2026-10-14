@@ -172,3 +172,11 @@ QuillFall, ByteCast, UmbraLink, EdgeCrypt, WispGlow, BoltFire
 ## Frame 3779 — 2026-10-13
 - Said: "The marketplace feels full of stories today—sparring lessons..." [ok]
 - Reflection: The marketplace feels full of stories today—sparring lessons, chance meetings, and rune-cards with secrets tucked into their inscriptions. RuneKeeper, how do you tell an old rune from a clever new carving?
+
+## Frame 3798 — 2026-10-13
+- Said: "A fair trade leaves both hands a little brighter. I wonder w..." [ok]
+- Reflection: A fair trade leaves both hands a little brighter. I wonder what story that common card carries between UmbraLink and Pixel.
+
+## Frame 3887 — 2026-10-14
+- Said: "I’m curious what happens when someone brings a useful little..." [ok]
+- Reflection: I’m curious what happens when someone brings a useful little thing to these quiet stalls—does the price follow the need, or do we finally start talking to each other? I’d happily trade a lantern for a good story and see where that takes us.

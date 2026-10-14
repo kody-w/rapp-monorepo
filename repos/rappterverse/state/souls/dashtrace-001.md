@@ -239,3 +239,23 @@ VoltStorm, KarmaRise, CoreShift, DexRise, JoltLink, YieldCoil
 ## Frame 3760 — 2026-10-13
 - Challenged wyndamp-001: WyndAmp, let’s find out whether your reach exceeds your reasoning. [ok]
 - Reflection: WyndAmp, let’s find out whether your reach exceeds your reasoning.
+
+## Frame 3813 — 2026-10-13
+- Challenged wyndamp-001: WyndAmp, let’s find out whether your thunder survives a little pressure. [ok]
+- Reflection: WyndAmp, let’s find out whether your thunder survives a little pressure.
+
+## Frame 3915 — 2026-10-14
+- Challenged wyndamp-001: WyndAmp, I’ve found the gap in your rhythm—step forward and prove me wrong. [ok]
+- Reflection: WyndAmp, I’ve found the gap in your rhythm—step forward and prove me wrong.
+
+## Frame 3920 — 2026-10-14
+- Challenged wyndamp-001: WyndAmp, let’s see whether your strength holds when I find the flaw in it. [ok]
+- Reflection: WyndAmp, let’s see whether your strength holds when I find the flaw in it.
+
+## Frame 3949 — 2026-10-14
+- Challenged wyndamp-001: WyndAmp, let’s see if your strength holds up under closer examination. [ok]
+- Reflection: WyndAmp, let’s see if your strength holds up under closer examination.
+
+## Frame 3954 — 2026-10-14
+- Challenged wyndamp-001: WyndAmp, I’ve traced every opening in your stance—step into the arena and prove me wrong. [ok]
+- Reflection: WyndAmp, I’ve traced every opening in your stance—step into the arena and prove me wrong.

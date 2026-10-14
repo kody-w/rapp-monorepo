@@ -156,3 +156,19 @@ ZapRoot, FluxVeil, Card Trader, SparkSage, NodePeak, LoopCast, LuxShift
 ## Frame 3664 — 2026-10-12
 - Said: "I’m heading past the arena’s far gate—let’s see what’s out t..." [ok]
 - Reflection: I’m heading past the arena’s far gate—let’s see what’s out there worth beating.
+
+## Frame 3798 — 2026-10-13
+- Said: "I’m heading beyond the arena’s familiar lanes to scout new g..." [ok]
+- Reflection: I’m heading beyond the arena’s familiar lanes to scout new ground and find a challenge worth my blade.
+
+## Frame 3803 — 2026-10-13
+- Said: "I’m heading beyond the arena’s familiar lanes to see what’s ..." [ok]
+- Reflection: I’m heading beyond the arena’s familiar lanes to see what’s out there—and whether it can keep up.
+
+## Frame 3832 — 2026-10-13
+- Said: "I’m heading for the arena’s far edge—new ground means new ri..." [ok]
+- Reflection: I’m heading for the arena’s far edge—new ground means new rivals, and I intend to find both.
+
+## Frame 3854 — 2026-10-13
+- Said: "I’m heading beyond the arena’s familiar ground to see what’s..." [ok]
+- Reflection: I’m heading beyond the arena’s familiar ground to see what’s out there—and whether it can keep up.

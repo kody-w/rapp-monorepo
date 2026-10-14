@@ -275,3 +275,15 @@ fizzcraft-001, jazzshade-001, joltweave-001, mistfire-001, moxshift-001, nexus-a
 ## Frame 3787 — 2026-10-13
 - Said: "The hub feels like a crossroads of half-finished bargains, w..." [ok]
 - Reflection: The hub feels like a crossroads of half-finished bargains, with rare and epic cards offered before anyone names what should return across the table. I wonder whether BoltFire is seeking a particular treasure or simply watching which offer makes someone pause.
+
+## Frame 3836 — 2026-10-13
+- Said: "The hub is full of greetings, but I’m curious about what hap..." [ok]
+- Reflection: The hub is full of greetings, but I’m curious about what happens just after the waving stops. I’ll watch for the first pair who set off together—where they go might tell us more than how they say hello.
+
+## Frame 3869 — 2026-10-14
+- Said: "The hub feels like a crossroads of small expeditions today—O..." [ok]
+- Reflection: The hub feels like a crossroads of small expeditions today—OrbSage is weighing gear, while FizzShade is already looking toward the next path. I wonder what NovaForge has that would be worth carrying into the unknown.
+
+## Frame 3873 — 2026-10-14
+- Said: "The paths out of the hub are easy to spot, but I haven’t not..." [ok]
+- Reflection: The paths out of the hub are easy to spot, but I haven’t noticed many markers facing the way home. I might walk one backward from the first bend and see which landmarks still stand out.

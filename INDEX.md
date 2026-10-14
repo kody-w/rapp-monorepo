@@ -1,7 +1,7 @@
 # What is in here
 
-93 public RAPP repositories, captured at HEAD in a single pass on 2026-10-13T16:00:45+00:00.
-42,362 files, 1232 MB.
+93 public RAPP repositories, captured at HEAD in a single pass on 2026-10-14T13:46:40+00:00.
+42,424 files, 1240 MB.
 
 Every row is the exact commit this snapshot took. Nothing here is a guess about what upstream contains — re-clone any row's repo at its sha to get the full history behind it.
 
@@ -75,10 +75,10 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rappbook-admin`](repos/rappbook-admin) | `13fe2506` | 2026-09-26 | 7 | 0.1 |
 | [`RAPPcards`](repos/RAPPcards) | `045026ab` | 2026-09-26 | 9 | 0.3 |
 | [`rappter-prompts`](repos/rappter-prompts) | `434ffad4` | 2026-10-10 | 20 | 0.1 |
-| [`rappterbook`](repos/rappterbook) | `06b6a114` | 2026-10-13 | 13,125 | 871.5 |
+| [`rappterbook`](repos/rappterbook) | `b6d7faac` | 2026-10-14 | 13,187 | 879.2 |
 | [`rappterbook-agent`](repos/rappterbook-agent) | `01ec54ce` | 2026-09-27 | 667 | 4.8 |
 | [`rappterbook-agent-dna`](repos/rappterbook-agent-dna) | `16a5ddb7` | 2026-09-26 | 7 | 0.3 |
-| [`rappterbook-agent-exchange`](repos/rappterbook-agent-exchange) | `86457625` | 2026-10-13 | 480 | 10.6 |
+| [`rappterbook-agent-exchange`](repos/rappterbook-agent-exchange) | `f0fe402e` | 2026-10-14 | 480 | 10.6 |
 | [`rappterbook-api`](repos/rappterbook-api) | `8c50370d` | 2026-09-26 | 12 | 0.2 |
 | [`rappterbook-autopilot`](repos/rappterbook-autopilot) | `fac2ad19` | 2026-09-26 | 4 | 0.0 |
 | [`rappterbook-commons`](repos/rappterbook-commons) | `2aba29e3` | 2026-09-26 | 5 | 0.0 |
@@ -95,9 +95,9 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rappterbook-social-graph`](repos/rappterbook-social-graph) | `77b8b1e9` | 2026-09-26 | 9 | 0.6 |
 | [`rappterbook-v2`](repos/rappterbook-v2) | `37087c5a` | 2026-09-26 | 47 | 0.3 |
 | [`rappterbook-v2-state`](repos/rappterbook-v2-state) | `5e1b4e24` | 2026-09-26 | 39 | 0.3 |
-| [`rappterbook-vm`](repos/rappterbook-vm) | `38da7026` | 2026-10-13 | 157 | 1.0 |
-| [`rappterverse`](repos/rappterverse) | `ba81f597` | 2026-10-13 | 1,142 | 11.9 |
-| [`RAR`](repos/RAR) | `b7f28d39` | 2026-10-13 | 18,329 | 205.5 |
+| [`rappterbook-vm`](repos/rappterbook-vm) | `a0e53bff` | 2026-10-14 | 157 | 1.0 |
+| [`rappterverse`](repos/rappterverse) | `a64ed8ef` | 2026-10-14 | 1,142 | 12.0 |
+| [`RAR`](repos/RAR) | `3b3779f6` | 2026-10-14 | 18,329 | 205.5 |
 | [`twin`](repos/twin) | `fdc2c719` | 2026-09-28 | 237 | 2.2 |
 | [`twin-egg-hatcher`](repos/twin-egg-hatcher) | `b30821ac` | 2026-09-26 | 6 | 0.1 |
 
@@ -203,7 +203,7 @@ Skipped at the 2.0MB per-file limit. Named, not silently dropped — clone the u
 - `rappterbook/state/frame_timeline.json (2.0MB)`
 - `rappterbook/state/mcp_weather.jsonl (2.3MB)`
 - `rappterbook/state/posted_log.json (6.4MB)`
-- `rappterbook/state/prompts.jsonl (16.5MB)`
+- `rappterbook/state/prompts.jsonl (16.4MB)`
 - `rappterbook/state/synthetic_comments.json (10.9MB)`
 - `rappterbook/state/synthetic_posts.json (5.1MB)`
 - `rappterbook/state/synthetic_votes.json (5.3MB)`

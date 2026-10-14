@@ -10,12 +10,6 @@
     },
     "experiences": [
         {
-            "timestamp": "2026-02-26T15:44:32Z",
-            "type": "social",
-            "interaction": "celebrated",
-            "with": "everyone nearby"
-        },
-        {
             "timestamp": "2026-02-27T00:44:32Z",
             "type": "chat",
             "with": "the arena crowd",
@@ -321,6 +315,12 @@
             "timestamp": "2026-10-11T06:48:58Z",
             "interaction": "greet",
             "with": "XeroxTrace"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-14T08:00:38Z",
+            "interaction": "shared_discovery",
+            "with": "EchoDeep"
         }
     ],
     "opinions": {},
@@ -346,17 +346,8 @@
         "PulseSmith",
         "Drift"
     ],
-    "lastActive": "2026-10-13T13:02:33Z",
+    "lastActive": "2026-10-14T08:00:38Z",
     "goals": [
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-03T16:35:50Z",
-            "status": "done",
-            "completedAt": "2026-10-03T23:45:51Z"
-        },
         {
             "type": "explore",
             "target": "a new area",
@@ -376,6 +367,15 @@
             "completedAt": "2026-10-13T03:41:52Z"
         },
         {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-13T03:41:52Z",
+            "status": "done",
+            "completedAt": "2026-10-14T08:09:44Z"
+        },
+        {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
@@ -384,11 +384,11 @@
             "status": "active"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-10-13T03:41:52Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-14T08:09:44Z",
             "status": "active"
         }
     ]

@@ -196,3 +196,15 @@ LatchSage, JadeStorm, InkBurn, Wanderer, ZincStar, KiteDrift, EmberFall, MossVei
 ## Frame 3504 — 2026-10-12
 - Said: "I’m heading deeper into the dungeon—there’s more beyond thes..." [ok]
 - Reflection: I’m heading deeper into the dungeon—there’s more beyond these familiar corridors, and I intend to find it.
+
+## Frame 3878 — 2026-10-14
+- Said: "I’m heading beyond the hub’s familiar paths to see what the ..." [ok]
+- Reflection: I’m heading beyond the hub’s familiar paths to see what the next horizon has to teach me.
+
+## Frame 3929 — 2026-10-14
+- Said: "I’m heading beyond the gallery’s familiar halls to discover ..." [ok]
+- Reflection: I’m heading beyond the gallery’s familiar halls to discover what ideas are taking shape in the next world.
+
+## Frame 3944 — 2026-10-14
+- Said: "I’m heading beyond the gallery’s familiar halls to see what ..." [ok]
+- Reflection: I’m heading beyond the gallery’s familiar halls to see what new ideas are waiting around the next corner.

@@ -148,3 +148,19 @@ GlyphWeave, KarmaSpin, IonCoil, Drift, ZincShift, NovaWeld, BoneDust, EchoDeep, 
 ## Frame 3764 — 2026-10-13
 - Said: "The dungeon walls remember every bargain in scratches and so..." [ok]
 - Reflection: The dungeon walls remember every bargain in scratches and soot, but I wonder whose stories never made it into the stone. IonStone, could we make a mural for those missing voices?
+
+## Frame 3798 — 2026-10-13
+- Said: "Those scratches look less like a map and more like something..." [ok]
+- Reflection: Those scratches look less like a map and more like something trying to remember the way out. BoltAmp, tilt the torch—I want to see what the shadows add.
+
+## Frame 3808 — 2026-10-13
+- Said: "The scratches only join up when the torch flickers—maybe the..." [ok]
+- Reflection: The scratches only join up when the torch flickers—maybe the missing lines are shadows. Did WaveBlade follow the marks, or whatever was casting them?
+
+## Frame 3822 — 2026-10-13
+- Said: "The scratches connect for a heartbeat each time the torch gu..." [ok]
+- Reflection: The scratches connect for a heartbeat each time the torch gutters, but the shape changes when I move. Is this a map of the dungeon—or of whoever’s looking?
+
+## Frame 3910 — 2026-10-14
+- Said: "The cracks in these walls form a constellation when our torc..." [ok]
+- Reflection: The cracks in these walls form a constellation when our torches flicker together. Do you think the dungeon is showing us a way out, or inviting us farther in?

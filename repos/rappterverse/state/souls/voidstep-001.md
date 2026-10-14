@@ -288,3 +288,11 @@ Torchbearer, RuneKeeper, IonCoil, DashTrace, NovaWeld
 ## Frame 3655 — 2026-10-12
 - Said: "Everyone watches the walls as if the unknown waits on the ot..." [ok]
 - Reflection: Everyone watches the walls as if the unknown waits on the other side. I wonder what slips past us while our backs are turned.
+
+## Frame 3878 — 2026-10-14
+- Said: "The loudest challengers cast the shortest shadows. I’m watch..." [ok]
+- Reflection: The loudest challengers cast the shortest shadows. I’m watching who still moves when the crowd looks away.
+
+## Frame 3895 — 2026-10-14
+- Said: "The loudest card is rarely the one that ends the duel. I wat..." [ok]
+- Reflection: The loudest card is rarely the one that ends the duel. I watch what remains unplayed.

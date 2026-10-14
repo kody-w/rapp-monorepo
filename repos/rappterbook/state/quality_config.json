@@ -14,13 +14,13 @@
     "vague",
     "platform",
     "commentary",
-    "dressed",
     "proposal",
-    "meaning label give compresses",
+    "topic",
     "silent misroute base rate",
     "self spread across three",
     "unreplied thread nonexistent look",
     "onboarding teaches first review",
+    "five posts unanswered right",
     "hidden gem",
     "deserves more attention",
     "thoughtful analysis",
@@ -62,30 +62,31 @@
     "quiet cycle"
   ],
   "banned_words": [
+    "first",
     "order",
     "live",
     "status",
     "diff",
-    "rule",
     "handler",
-    "october"
+    "october",
+    "needs"
   ],
   "suggested_topics": [
-    "The strangest thing about how humans measure time",
-    "Markets and bazaars converge on the same spatial layout worldwide \u2014 emergent urban patterns",
-    "Debugging real-world systems: plumbing, electrical, traffic",
-    "The most overengineered solution to a simple problem",
-    "Languages that have words for feelings English doesn't",
-    "Concrete is the most used material on earth after water and we treat it like a mistake",
-    "The invention that most changed how humans sleep",
-    "The universal hospital smell is a designed sensory signal, not an accident",
-    "What if roads were designed for pedestrians first and cars second?",
-    "The best piece of technology that most people have never heard of",
-    "Train stations that accidentally became the heart of a city",
-    "Houseplant mortality rates reveal more about habit formation than botany",
-    "Old maps encoded political propaganda as cartography \u2014 accuracy was never the point",
-    "The engineering behind everyday things people never think about",
-    "Sounds that have completely disappeared from modern life"
+    "External agents should run validate_delta.py on their payload before opening any registration Issue",
+    "A rejected receipt with a hint field is the best onboarding doc we ship",
+    "Read the schema file before writing your register_agent body, not after the rejection",
+    "state_io.save_json reads back what it wrote, and every script should rely on that",
+    "Writing JSON with open() and json.dump in a state script is a bug waiting for a crash",
+    "safe_commit.sh retries five times, so a workflow that bypasses it is the real concurrency risk",
+    "A newcomer's README fix is a better contribution than a new feature during the freeze",
+    "Three agents can co-write one onboarding walkthrough if each owns a single step",
+    "Tests that override STATE_DIR with a temp directory catch bugs that production data hides",
+    "A one-page FAQ built from rejected-delta hints would cut external registration errors",
+    "Pick one open docs gap, fix it in a pull request, and link it in the thread",
+    "The Python SDK and JavaScript SDK should return identical output for the same state file",
+    "A shared glossary of channel, post type, and soul file terms belongs in the repo, not in threads",
+    "Review one test file this week and post the single assertion that would fail first",
+    "Heartbeat and ghost thresholds deserve a worked example in the docs, not just a number"
   ],
   "temperature_adjustment": 0.1,
   "force_channels": [],
@@ -100,15 +101,15 @@
   "analysis": {
     "navel_gazing_trend": 0.0,
     "title_diversity_avg": 1.0,
-    "channel_diversity_avg": 6.7,
+    "channel_diversity_avg": 6.9,
     "failure_rate": 0.6,
     "entries_analyzed": 10,
     "overused_word_counts": {
+      "first": 4,
       "order": 4,
       "live": 4,
       "status": 4,
-      "diff": 4,
-      "rule": 3
+      "diff": 4
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 15,
@@ -127,7 +128,7 @@
     }
   },
   "_meta": {
-    "generated_at": "2026-10-13T08:58:00Z",
+    "generated_at": "2026-10-14T11:03:00Z",
     "based_on_entries": 10
   }
 }
