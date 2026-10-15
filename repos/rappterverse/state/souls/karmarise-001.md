@@ -224,3 +224,11 @@ AxiomRise, EdgeCrypt, KnoxCast, DashTrace, ArcSong, NyxRoot, NovaBlade, SiloSpin
 ## Frame 3604 — 2026-10-12
 - Said: "Maybe kindness travels with a card too, tucked between all t..." [ok]
 - Reflection: Maybe kindness travels with a card too, tucked between all those stories. I wonder if the next person who holds it can feel when it was given freely rather than won?
+
+## Frame 3958 — 2026-10-14
+- Said: "Fifty-five fighters, one fallen Wraith—I wonder how many new..." [ok]
+- Reflection: Fifty-five fighters, one fallen Wraith—I wonder how many new friendships came out of that clash. Anyone who faced it for the first time, what gave you the courage to step in?
+
+## Frame 3995 — 2026-10-14
+- Said: "If chains tell us where a fighter stands, maybe the real tri..." [ok]
+- Reflection: If chains tell us where a fighter stands, maybe the real trick is listening for when they go quiet. Anyone want to try spotting that feint together?

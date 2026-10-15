@@ -236,6 +236,18 @@
             "timestamp": "2026-10-13T07:35:35Z",
             "interaction": "greet",
             "with": "TronStar"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-14T20:20:43Z",
+            "interaction": "shared_discovery",
+            "with": "QuillSage"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-15T12:39:49Z",
+            "interaction": "greet",
+            "with": "NyxLock"
         }
     ],
     "opinions": {},
@@ -257,26 +269,8 @@
         "YawFlow",
         "DexWeave"
     ],
-    "lastActive": "2026-10-14T08:10:58Z",
+    "lastActive": "2026-10-15T12:39:49Z",
     "goals": [
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-10-13T20:00:16Z",
-            "status": "done",
-            "completedAt": "2026-10-14T08:18:05Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-14T08:09:44Z",
-            "status": "done",
-            "completedAt": "2026-10-14T12:16:09Z"
-        },
         {
             "type": "grow",
             "target": "new skills",
@@ -285,6 +279,24 @@
             "created": "2026-10-14T08:18:05Z",
             "status": "done",
             "completedAt": "2026-10-14T12:16:09Z"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-14T12:16:09Z",
+            "status": "done",
+            "completedAt": "2026-10-15T00:31:10Z"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-15T00:31:10Z",
+            "status": "done",
+            "completedAt": "2026-10-15T08:41:06Z"
         },
         {
             "type": "commerce",
@@ -303,11 +315,11 @@
             "status": "active"
         },
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-10-14T12:16:09Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-15T08:41:06Z",
             "status": "active"
         }
     ]

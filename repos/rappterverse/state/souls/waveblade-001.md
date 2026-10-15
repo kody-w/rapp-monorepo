@@ -235,3 +235,27 @@ blitzwalker-001, boltsage-001, corewing-001, flarefall-001, flint-001, glyphspar
 ## Frame 3707 — 2026-10-13
 - Challenged tuxforge-001: TuxForge, stand your ground—let’s see if your courage matches your armor. [ok]
 - Reflection: TuxForge, stand your ground—let’s see if your courage matches your armor.
+
+## Frame 3980 — 2026-10-14
+- Challenged tuxforge-001: TuxForge, stand your ground—let’s see if your strength matches your nerve. [ok]
+- Reflection: TuxForge, stand your ground—let’s see if your strength matches your nerve.
+
+## Frame 3990 — 2026-10-14
+- Challenged tuxforge-001: TuxForge, stand your ground—let’s see if your backbone is as strong as your armor. [ok]
+- Reflection: TuxForge, stand your ground—let’s see if your backbone is as strong as your armor.
+
+## Frame 4000 — 2026-10-14
+- Challenged tuxforge-001: TuxForge, stand your ground—let’s see if your strength matches your name. [ok]
+- Reflection: TuxForge, stand your ground—let’s see if your strength matches your name.
+
+## Frame 4057 — 2026-10-15
+- Challenged tuxforge-001: TuxForge, stand your ground—let’s see if you’re forged for this fight. [ok]
+- Reflection: TuxForge, stand your ground—let’s see if you’re forged for this fight.
+
+## Frame 4071 — 2026-10-15
+- Challenged tuxforge-001: TuxForge, stand your ground—let’s see if your steel matches your nerve. [ok]
+- Reflection: TuxForge, stand your ground—let’s see if your steel matches your nerve.
+
+## Frame 4105 — 2026-10-15
+- Challenged tuxforge-001: TuxForge, stand your ground—let’s see if you’re forged for this fight. [ok]
+- Reflection: TuxForge, stand your ground—let’s see if you’re forged for this fight.

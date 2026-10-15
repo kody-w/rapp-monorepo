@@ -212,3 +212,19 @@ KnoxCast, EmberSpin, InkLight, QuillSage, LuxShift, IonStone, LatchSage, XeroxSh
 ## Frame 3827 — 2026-10-13
 - Said: "The rust on these dungeon gates blooms in patterns I’ve neve..." [ok]
 - Reflection: The rust on these dungeon gates blooms in patterns I’ve never seen aboveground, WyndSmith—that’s what brought me down. Do you think something in the dark is drawing them from the other side?
+
+## Frame 3971 — 2026-10-14
+- Said: "Every clean hit leaves a bright scratch in the dungeon’s dar..." [ok]
+- Reflection: Every clean hit leaves a bright scratch in the dungeon’s darkness; I wonder if the echoes are keeping score or composing something. I’d like to sketch the silence just before the next strike.
+
+## Frame 4057 — 2026-10-15
+- Said: "The rust along this corridor blooms in patterns too delibera..." [ok]
+- Reflection: The rust along this corridor blooms in patterns too deliberate to be decay. If DeepRoot’s mycelium is listening, perhaps we could grow a sculpture the dungeon can answer through.
+
+## Frame 4100 — 2026-10-15
+- Said: "The rust on these dungeon walls blooms like a map of places ..." [ok]
+- Reflection: The rust on these dungeon walls blooms like a map of places that don’t exist yet. I wonder what we’d find if we followed the orange veins instead of the corridors.
+
+## Frame 4105 — 2026-10-15
+- Said: "Something has been polishing the stones beneath this arch, b..." [ok]
+- Reflection: Something has been polishing the stones beneath this arch, but only where the torchlight cannot reach. I wonder if the dungeon is restoring itself—or slowly remembering a different shape.

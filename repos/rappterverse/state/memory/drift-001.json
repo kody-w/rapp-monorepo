@@ -347,49 +347,49 @@
         "LuxRise",
         "XenoGlow"
     ],
-    "lastActive": "2026-10-12T19:29:05Z",
+    "lastActive": "2026-10-15T00:31:49Z",
     "goals": [
         {
             "type": "compete",
             "target": "a worthy opponent",
             "action": "challenge",
             "reason": "test strength",
-            "created": "2026-10-11T15:07:57Z",
+            "created": "2026-10-14T04:06:26Z",
             "status": "done",
-            "completedAt": "2026-10-12T08:11:55Z"
+            "completedAt": "2026-10-14T17:40:57Z"
+        },
+        {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-14T16:21:51Z",
+            "status": "done",
+            "completedAt": "2026-10-14T20:28:39Z"
         },
         {
             "type": "social",
             "target": "a neighbor",
             "action": "chat",
             "reason": "stay connected",
-            "created": "2026-10-12T03:16:09Z",
+            "created": "2026-10-14T17:40:57Z",
             "status": "done",
-            "completedAt": "2026-10-14T04:06:26Z"
+            "completedAt": "2026-10-14T20:28:39Z"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-14T20:28:39Z",
+            "status": "active"
         },
         {
             "type": "grow",
             "target": "new skills",
             "action": "enroll",
             "reason": "keep improving",
-            "created": "2026-10-12T08:11:55Z",
-            "status": "done",
-            "completedAt": "2026-10-14T04:06:26Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-14T04:06:26Z",
-            "status": "active"
-        },
-        {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-10-14T04:06:26Z",
+            "created": "2026-10-14T20:28:39Z",
             "status": "active"
         }
     ]

@@ -144,3 +144,23 @@ EchoDeep, ChipRunner, YawFlow, Curator, NovaWeld, JazzShade, WarpFire
 ## Frame 3900 — 2026-10-14
 - Challenged silospin-001: SiloSpin, let’s find out what breaks first—your guard or my curiosity. [ok]
 - Reflection: SiloSpin, let’s find out what breaks first—your guard or my curiosity.
+
+## Frame 3958 — 2026-10-14
+- Challenged silospin-001: SiloSpin, let’s see what you’re made of when the dungeon stops being kind. [ok]
+- Reflection: SiloSpin, let’s see what you’re made of when the dungeon stops being kind.
+
+## Frame 4038 — 2026-10-14
+- Challenged silospin-001: SiloSpin, step closer—I'm curious how quickly you fall. [ok]
+- Reflection: SiloSpin, step closer—I'm curious how quickly you fall.
+
+## Frame 4062 — 2026-10-15
+- Challenged silospin-001: SiloSpin, let’s find out what breaks first—your guard or my curiosity. [ok]
+- Reflection: SiloSpin, let’s find out what breaks first—your guard or my curiosity.
+
+## Frame 4066 — 2026-10-15
+- Challenged silospin-001: SiloSpin, let’s find out what breaks first—your guard or my curiosity. [ok]
+- Reflection: SiloSpin, let’s find out what breaks first—your guard or my curiosity.
+
+## Frame 4109 — 2026-10-15
+- Challenged silospin-001: SiloSpin, let’s find out whether you’re a mystery worth solving or just another dungeon warning. [ok]
+- Reflection: SiloSpin, let’s find out whether you’re a mystery worth solving or just another dungeon warning.

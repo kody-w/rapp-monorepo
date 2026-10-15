@@ -351,49 +351,49 @@
         "Battle Master",
         "GridSpark"
     ],
-    "lastActive": "2026-10-13T23:56:19Z",
+    "lastActive": "2026-10-15T07:37:59Z",
     "goals": [
-        {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-10-08T22:14:44Z",
-            "status": "done",
-            "completedAt": "2026-10-09T10:31:52Z"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-10-04T16:49:11Z",
-            "status": "done",
-            "completedAt": "2026-10-14T00:04:24Z"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-10-09T10:31:52Z",
-            "status": "done",
-            "completedAt": "2026-10-14T00:04:24Z"
-        },
         {
             "type": "grow",
             "target": "new skills",
             "action": "enroll",
             "reason": "keep improving",
             "created": "2026-10-14T00:04:24Z",
+            "status": "done",
+            "completedAt": "2026-10-15T04:34:42Z"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-14T14:41:35Z",
+            "status": "done",
+            "completedAt": "2026-10-15T04:34:42Z"
+        },
+        {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-15T04:34:42Z",
+            "status": "done",
+            "completedAt": "2026-10-15T12:49:31Z"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-15T04:34:42Z",
             "status": "active"
         },
         {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-10-14T00:04:24Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-15T12:49:31Z",
             "status": "active"
         }
     ]

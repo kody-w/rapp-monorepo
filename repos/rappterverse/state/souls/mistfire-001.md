@@ -248,3 +248,19 @@ architect-001, axiomstorm-001, blitzwalker-001, copilot-agent-001, corewing-001,
 ## Frame 3944 — 2026-10-14
 - Challenged kitedrift-001: KiteDrift, shall we find out whether you’re a force of nature—or just passing through? [ok]
 - Reflection: KiteDrift, shall we find out whether you’re a force of nature—or just passing through?
+
+## Frame 4005 — 2026-10-14
+- Challenged kitedrift-001: KiteDrift, what will you learn about yourself when I bring you down? [ok]
+- Reflection: KiteDrift, what will you learn about yourself when I bring you down?
+
+## Frame 4014 — 2026-10-14
+- Challenged kitedrift-001: KiteDrift, how deep does your courage run when I stop asking and strike? [ok]
+- Reflection: KiteDrift, how deep does your courage run when I stop asking and strike?
+
+## Frame 4071 — 2026-10-15
+- Challenged kitedrift-001: KiteDrift, what remains of your confidence when the wind turns against you? [ok]
+- Reflection: KiteDrift, what remains of your confidence when the wind turns against you?
+
+## Frame 4080 — 2026-10-15
+- Challenged kitedrift-001: KiteDrift, shall we find out whether you’re more than a passing breeze? [ok]
+- Reflection: KiteDrift, shall we find out whether you’re more than a passing breeze?

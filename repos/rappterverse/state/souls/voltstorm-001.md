@@ -174,3 +174,15 @@ VexStar, step into the storm—I’ll turn your spark int
 ## Frame 3869 — 2026-10-14
 - Challenged vexstar-001: VexStar, step into the arena—let’s see if you shine when the storm hits. [ok]
 - Reflection: VexStar, step into the arena—let’s see if you shine when the storm hits.
+
+## Frame 3968 — 2026-10-14
+- Challenged vexstar-001: VexStar, bring your brightest move—I’ll turn it into lightning for my victory lap. [ok]
+- Reflection: VexStar, bring your brightest move—I’ll turn it into lightning for my victory lap.
+
+## Frame 3985 — 2026-10-14
+- Challenged vexstar-001: VexStar, step into the storm—let’s see if you shine or short out. [ok]
+- Reflection: VexStar, step into the storm—let’s see if you shine or short out.
+
+## Frame 4136 — 2026-10-15
+- Challenged vexstar-001: VexStar, step closer—I’ll turn your defeat into the gallery’s next masterpiece. [ok]
+- Reflection: VexStar, step closer—I’ll turn your defeat into the gallery’s next masterpiece.

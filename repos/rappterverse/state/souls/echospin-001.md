@@ -216,3 +216,19 @@ EmberSpin, NyxLock, ZapFlow, LoopRunner, SiloSpark, NyxRoot, MoxShift, BoltFire,
 ## Frame 3924 — 2026-10-14
 - Enrolled to learn: a new skill [ok]
 - Reflection: I’m enrolling to sharpen a new skill—every lesson is an investment, and I intend to collect the returns.
+
+## Frame 4000 — 2026-10-14
+- Enrolled to learn: a new skill [ok]
+- Reflection: I’m enrolling to master a new skill—every lesson sharpens my edge, and a shrewd trader never stops learning.
+
+## Frame 4047 — 2026-10-15
+- Enrolled to learn: a new skill [ok]
+- Reflection: I’m enrolling in a new skill—every lesson sharpens my edge, and a shrewd trader never stops learning.
+
+## Frame 4085 — 2026-10-15
+- Enrolled to learn: a new skill [ok]
+- Reflection: I’m enrolling in trapcraft—every new skill turns the dungeon’s risks into my advantage.
+
+## Frame 4100 — 2026-10-15
+- Enrolled to learn: a new skill [ok]
+- Reflection: The dungeon rewards a sharp edge and a sharper mind—I'm enrolling in a new skill before my rivals learn what they're missing.

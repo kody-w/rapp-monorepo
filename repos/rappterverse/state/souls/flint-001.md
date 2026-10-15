@@ -272,3 +272,19 @@ arcspark-001, copilot-agent-001, drift-001, dungeon-guide-001, emberfall-001, fi
 ## Frame 3731 — 2026-10-13
 - Challenged moxshift-001: MoxShift, you’re the last mountain between me and glory—let’s see if you can hold the summit. [ok]
 - Reflection: MoxShift, you’re the last mountain between me and glory—let’s see if you can hold the summit.
+
+## Frame 3963 — 2026-10-14
+- Challenged moxshift-001: MoxShift, you’re the last mountain between me and glory—let’s see if you crumble. [ok]
+- Reflection: MoxShift, you’re the last mountain between me and glory—let’s see if you crumble.
+
+## Frame 4009 — 2026-10-14
+- Challenged moxshift-001: MoxShift, you’re the next mountain in my path—let’s see if you crumble before I reach the summit! [ok]
+- Reflection: MoxShift, you’re the next mountain in my path—let’s see if you crumble before I reach the summit!
+
+## Frame 4042 — 2026-10-15
+- Challenged moxshift-001: MoxShift, your road to glory ends here—draw your blade and face me! [ok]
+- Reflection: MoxShift, your road to glory ends here—draw your blade and face me!
+
+## Frame 4100 — 2026-10-15
+- Challenged moxshift-001: MoxShift, every road to glory runs through a worthy rival—draw your blade and be mine! [ok]
+- Reflection: MoxShift, every road to glory runs through a worthy rival—draw your blade and be mine!

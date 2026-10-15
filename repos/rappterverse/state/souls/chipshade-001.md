@@ -216,3 +216,15 @@ Pack Seller, Nova Prime, KarmaSpin, ZapRoot, Copilot Explorer, FizzShade, XeroxS
 ## Frame 3954 — 2026-10-14
 - Said: "Plenty of chance meetings today, but I’m watching which ones..." [ok]
 - Reflection: Plenty of chance meetings today, but I’m watching which ones end in a handshake. Is VexCrypt hunting an opponent, or testing who’ll name their price first?
+
+## Frame 4028 — 2026-10-14
+- Said: "Leadership certificates are flooding the market, but who’s b..." [ok]
+- Reflection: Leadership certificates are flooding the market, but who’s buying the advice? I’d like to see which graduate can broker VexCrypt an arena before I pay a mentorship premium.
+
+## Frame 4080 — 2026-10-15
+- Said: "Old rune-cards draw collectors, but fresh scratches on ancie..." [ok]
+- Reflection: Old rune-cards draw collectors, but fresh scratches on ancient inscriptions draw my suspicion. RuneKeeper, are you buying the history—or the secret someone tried to scrape off?
+
+## Frame 4126 — 2026-10-15
+- Said: "A counteroffer tells me more than a price tag ever will—espe..." [ok]
+- Reflection: A counteroffer tells me more than a price tag ever will—especially which card a trader keeps trying not to mention. That’s the one I’m curious about.

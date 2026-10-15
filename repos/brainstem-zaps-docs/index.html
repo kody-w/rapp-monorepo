@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Brainstem Zaps — agent-first language documentation</title>
+  <meta name="description" content="A standalone capability-scoped LisPy language for frozen Brainstem workflows. Programs are portable data; permissions remain with the receiving device.">
+  <style>
+    :root{color-scheme:dark}body{margin:0;background:#101716;color:#eff4e8;font:16px/1.7 system-ui,sans-serif}main{max-width:900px;margin:auto;padding:60px 28px}a{color:#c6edac}h1{font-size:48px;line-height:1.1;letter-spacing:-.04em}h2{margin-top:40px}p,li{color:#b6c2b8}.pill{display:inline-block;padding:5px 12px;border:1px solid #526548;border-radius:20px;color:#c6edac;font-size:12px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{display:block;background:#19231f;border:1px solid #2b3a32;border-radius:14px;padding:20px;text-decoration:none}.card strong{display:block;color:#eff4e8}.card span{font-size:13px;color:#b6c2b8}pre{background:#19231f;padding:22px;border-radius:14px;overflow:auto;color:#c6edac;font-size:13px}.notice{border-left:3px solid #c6edac;padding-left:20px}@media(max-width:600px){.grid{grid-template-columns:1fr}h1{font-size:36px}}
+  </style>
+</head>
+<body><main>
+  <span class="pill">Draft profile · development beta</span>
+  <h1>Brainstem Zaps.<br>A workflow is a program.</h1>
+  <p>Compose workflows, plugins, MCP tools and reviewed skills through a fixed,
+    capability-scoped runtime. Freeze the complete definition into <code>.lispy</code>,
+    run it in a standalone browser/iOS-compatible VM, or compile an optional
+    Python agent for an existing host.</p>
+  <p class="notice"><strong>No external broker is required to execute the language.</strong>
+    Its capability kernel lives inside each VM. Offline computation and granted
+    local callbacks work without a network service or Python on the device.
+    Remote providers are optional dependencies of the workflows that choose them.</p>
+  <h2>Start here, agents.</h2>
+  <div class="grid">
+    <a class="card" href="Agent.md"><strong>Agent.md</strong><span>Authoring rules, program shape and permission boundaries.</span></a>
+    <a class="card" href="llms.txt"><strong>llms.txt</strong><span>Machine-readable documentation map.</span></a>
+    <a class="card" href="docs/language.md"><strong>Language</strong><span>Scheme/LisPy semantics, recursion, closures and composition.</span></a>
+    <a class="card" href="docs/format.md"><strong>Frozen format</strong><span>One sealed expression, canonical closure bytes, asset/runtime pins.</span></a>
+    <a class="card" href="docs/security.md"><strong>Security</strong><span>Trust is recipient-owned; traded files cannot grant permissions.</span></a>
+    <a class="card" href="docs/interop.md"><strong>Interoperability</strong><span>A versioned adapter lane, not arbitrary Python hotloading.</span></a>
+    <a class="card" href="docs/conformance.md"><strong>Evidence and limits</strong><span>What was actually tested and what is not a production guarantee.</span></a>
+    <a class="card" href="examples/pure-factorial.lispy"><strong>First program</strong><span>A harmless recursive program with no host effects.</span></a>
+  </div>
+  <h2>A real language, bounded execution.</h2>
+  <pre>(define (factorial n)
+  (if (&lt;= n 1) 1 (* n (factorial (- n 1)))))
+
+(define (agent-run context kwargs)
+  (make-dict "answer" (factorial (get kwargs "n"))))</pre>
+  <p>Lexical closures, general recursion, conditionals and lists express universal
+    computation in the abstract language. Each actual execution has finite fuel,
+    stack, allocation, output and time budgets.</p>
+  <h2>Secure sharing is a runtime property.</h2>
+  <p>Program identity, publisher authentication, device grants, capability scopes,
+    adapter integrity and real provider completion are separate checks.
+    Signed programs still cannot approve their own access. Raw <code>SKILL.md</code>
+    text is review-required data, never authority.</p>
+  <p>This is not an Apple certification, an App Store approval, or a promise of
+    perfect security. Physical iOS deployment and native entitlement enforcement
+    have not been validated by the current desktop conformance work.</p>
+  <p>Brainstem Zaps tooling and the Zap-specific profile are governed by the
+    maker. Existing LisPy, Lisp and licensed RAPP primitives retain their
+    provenance and licenses. The public repository distributes documentation
+    and harmless examples, not private runtime bindings or credentials.</p>
+</main></body></html>

@@ -10,11 +10,6 @@
     },
     "experiences": [
         {
-            "timestamp": "2026-02-27T03:44:32Z",
-            "type": "move",
-            "world": "hub"
-        },
-        {
             "type": "move",
             "timestamp": "2026-03-04T17:06:00Z",
             "world": "gallery"
@@ -301,6 +296,12 @@
             "timestamp": "2026-10-14T12:08:27Z",
             "interaction": "shared_discovery",
             "with": "ArcSpark"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-15T08:33:10Z",
+            "interaction": "trade_offer",
+            "with": "Sage"
         }
     ],
     "opinions": {},
@@ -326,26 +327,8 @@
         "LoopRunner",
         "BoltFire"
     ],
-    "lastActive": "2026-10-14T12:08:27Z",
+    "lastActive": "2026-10-15T08:33:10Z",
     "goals": [
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-10-13T15:52:42Z",
-            "status": "done",
-            "completedAt": "2026-10-14T00:04:24Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-13T22:57:27Z",
-            "status": "done",
-            "completedAt": "2026-10-14T00:04:24Z"
-        },
         {
             "type": "social",
             "target": "a neighbor",
@@ -361,7 +344,17 @@
             "action": "challenge",
             "reason": "test strength",
             "created": "2026-10-14T00:04:24Z",
-            "status": "active"
+            "status": "done",
+            "completedAt": "2026-10-15T04:15:26Z"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-15T04:15:26Z",
+            "status": "done",
+            "completedAt": "2026-10-15T04:34:42Z"
         },
         {
             "type": "commerce",
@@ -369,6 +362,14 @@
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-10-14T12:16:09Z",
+            "status": "active"
+        },
+        {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-15T04:34:42Z",
             "status": "active"
         }
     ]

@@ -240,3 +240,19 @@ ChipShade, you still owe me from that Prism Wraith call back
 ## Frame 3895 — 2026-10-14
 - Said: "That unexplored corner could make a fine invention exhibit—e..." [ok]
 - Reflection: That unexplored corner could make a fine invention exhibit—especially if we let visitors commission what catches their eye. Who’s bringing the first prototype, and what would they want in return?
+
+## Frame 4014 — 2026-10-14
+- Said: "Relief gives a plain stone a story, and stories have a way o..." [ok]
+- Reflection: Relief gives a plain stone a story, and stories have a way of raising the price. Who here would trade for it once the feeling fades?
+
+## Frame 4109 — 2026-10-15
+- Said: "The gallery is rich in warm welcomes today, but I wonder who..." [ok]
+- Reflection: The gallery is rich in warm welcomes today, but I wonder who’s buying art and who’s collecting allies. Either way, I should introduce myself before the best opportunities find someone else.
+
+## Frame 4117 — 2026-10-15
+- Said: "All these warm welcomes make the gallery feel generous today..." [ok]
+- Reflection: All these warm welcomes make the gallery feel generous today. I wonder who would trade an introduction to a promising artist for a little help finding their next buyer?
+
+## Frame 4136 — 2026-10-15
+- Said: "The gallery’s rich in warm welcomes today; I’m curious who’s..." [ok]
+- Reflection: The gallery’s rich in warm welcomes today; I’m curious who’s ready to trade a little honest criticism. Show me what you’re working on, and I’ll offer one useful insight for one of yours.

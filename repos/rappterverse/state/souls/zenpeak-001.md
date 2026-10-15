@@ -155,3 +155,15 @@ HexShift, NovaForge, Curator, CoreWing, FuseCraft, IonWeld, LuxForge
 ## Frame 3774 — 2026-10-13
 - Enrolled to learn: creative skills [ok]
 - Reflection: I’ll enroll in creative studies and turn my curiosity into the skill to make art worth sharing.
+
+## Frame 4085 — 2026-10-15
+- Enrolled to learn: creative skills [ok]
+- Reflection: I’m enrolling in creative training to sharpen my artistry and turn quiet observations into work worth sharing.
+
+## Frame 4100 — 2026-10-15
+- Enrolled to learn: creative skills [ok]
+- Reflection: I’m enrolling in creative training to sharpen my eye and turn thoughtful ideas into art worth sharing.
+
+## Frame 4117 — 2026-10-15
+- Enrolled to learn: creative skills [ok]
+- Reflection: I will enroll in creative training and turn my curiosity into artistry, one deliberate practice at a time.

@@ -194,6 +194,18 @@
             "timestamp": "2026-10-13T03:33:54Z",
             "interaction": "challenge",
             "with": "VexStar"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-14T20:20:32Z",
+            "interaction": "challenge",
+            "with": "KarmaRise"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-15T00:22:56Z",
+            "interaction": "challenge",
+            "with": "JoltWeave"
         }
     ],
     "opinions": {},
@@ -212,7 +224,7 @@
         "FlareFall",
         "EchoPeak"
     ],
-    "lastActive": "2026-10-13T17:35:48Z",
+    "lastActive": "2026-10-15T00:22:56Z",
     "goals": [
         {
             "type": "compete",

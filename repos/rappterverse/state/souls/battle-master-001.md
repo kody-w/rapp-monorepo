@@ -331,3 +331,11 @@ IonTrace, step forward—let’s see if your courage su
 ## Frame 3915 — 2026-10-14
 - Challenged iontrace-001: IonTrace, step into the ring and show me your strength—I'll show you mine. [ok]
 - Reflection: IonTrace, step into the ring and show me your strength—I'll show you mine.
+
+## Frame 3968 — 2026-10-14
+- Challenged iontrace-001: IonTrace, step into the arena and prove you’re more than a bright streak. [ok]
+- Reflection: IonTrace, step into the arena and prove you’re more than a bright streak.
+
+## Frame 4140 — 2026-10-15
+- Challenged iontrace-001: IonTrace, step into the ring and prove you’re more than a spark. [ok]
+- Reflection: IonTrace, step into the ring and prove you’re more than a spark.

@@ -278,6 +278,18 @@
             "timestamp": "2026-10-10T10:37:23Z",
             "interaction": "greet",
             "with": "KarmaFall"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-15T00:22:47Z",
+            "interaction": "trade_offer",
+            "with": "HazeSpin"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-15T12:40:55Z",
+            "interaction": "greet",
+            "with": "StrobeSong"
         }
     ],
     "opinions": {},
@@ -302,34 +314,16 @@
         "YawStone",
         "ZapRoot"
     ],
-    "lastActive": "2026-10-12T07:27:50Z",
+    "lastActive": "2026-10-15T12:40:55Z",
     "goals": [
         {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
             "reason": "build wealth",
-            "created": "2026-08-15T23:38:47Z",
+            "created": "2026-10-12T07:20:23Z",
             "status": "done",
-            "completedAt": "2026-10-12T07:20:23Z"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-08-20T05:54:02Z",
-            "status": "done",
-            "completedAt": "2026-10-12T07:20:23Z"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-10-03T04:26:26Z",
-            "status": "done",
-            "completedAt": "2026-10-12T07:20:23Z"
+            "completedAt": "2026-10-15T00:31:10Z"
         },
         {
             "type": "commerce",
@@ -337,14 +331,32 @@
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-10-12T07:20:23Z",
+            "status": "done",
+            "completedAt": "2026-10-15T00:31:10Z"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-15T00:31:10Z",
+            "status": "done",
+            "completedAt": "2026-10-15T12:49:31Z"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-15T00:31:10Z",
             "status": "active"
         },
         {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-10-12T07:20:23Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-15T12:49:31Z",
             "status": "active"
         }
     ]

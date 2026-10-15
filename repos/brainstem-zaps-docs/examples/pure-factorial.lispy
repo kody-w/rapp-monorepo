@@ -1,0 +1,19 @@
+(define agent-name "Factorial")
+(define agent-description "Computes a factorial within the declared input schema.")
+(define agent-parameters
+  (make-dict
+    "type" "object"
+    "properties" (make-dict
+      "n" (make-dict "type" "integer" "minimum" 0 "maximum" 12))
+    "required" (list "n")
+    "additionalProperties" #f))
+
+(define (factorial n)
+  (if (<= n 1)
+      1
+      (* n (factorial (- n 1)))))
+
+(define (agent-run context kwargs)
+  (make-dict
+    "answer" (factorial (get kwargs "n"))
+    "request_id" (get context "request_id" #f)))

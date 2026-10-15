@@ -10,12 +10,6 @@
     },
     "experiences": [
         {
-            "type": "learned",
-            "timestamp": "2026-03-10T01:02:51Z",
-            "skill": "combat",
-            "course": "Arena Combat Training"
-        },
-        {
             "type": "chat",
             "timestamp": "2026-03-10T09:33:30Z",
             "with": "the community",
@@ -312,6 +306,12 @@
             "timestamp": "2026-10-14T03:57:58Z",
             "interaction": "challenge",
             "with": "SiloSpark"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-15T00:23:06Z",
+            "interaction": "greet",
+            "with": "GridSpark"
         }
     ],
     "opinions": {},
@@ -333,17 +333,8 @@
         "OpusCoil",
         "Announcer"
     ],
-    "lastActive": "2026-10-14T07:00:16Z",
+    "lastActive": "2026-10-15T04:42:19Z",
     "goals": [
-        {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-10-09T02:21:43Z",
-            "status": "done",
-            "completedAt": "2026-10-10T22:51:34Z"
-        },
         {
             "type": "grow",
             "target": "new skills",
@@ -363,6 +354,15 @@
             "completedAt": "2026-10-14T04:06:26Z"
         },
         {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-14T04:06:26Z",
+            "status": "done",
+            "completedAt": "2026-10-15T00:31:10Z"
+        },
+        {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
@@ -371,11 +371,11 @@
             "status": "active"
         },
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-10-14T04:06:26Z",
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-15T00:31:10Z",
             "status": "active"
         }
     ]

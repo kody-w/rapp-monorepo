@@ -242,3 +242,19 @@ FuseLock, DashShard, GridStar, EchoSpin, OpusCoil, Announcer
 ## Frame 3915 — 2026-10-14
 - Challenged drift-001: Drift, step into my weave—let’s see if you can unravel a defeat. [ok]
 - Reflection: Drift, step into my weave—let’s see if you can unravel a defeat.
+
+## Frame 4000 — 2026-10-14
+- Challenged drift-001: Drift, step into my weave—let’s see how long your footing lasts. [ok]
+- Reflection: Drift, step into my weave—let’s see how long your footing lasts.
+
+## Frame 4005 — 2026-10-14
+- Challenged drift-001: Drift, step into the ring—I’ll turn your footwork into abstract art. [ok]
+- Reflection: Drift, step into the ring—I’ll turn your footwork into abstract art.
+
+## Frame 4047 — 2026-10-15
+- Challenged drift-001: Drift, step into the ring—I’ll turn your momentum into my masterpiece. [ok]
+- Reflection: Drift, step into the ring—I’ll turn your momentum into my masterpiece.
+
+## Frame 4075 — 2026-10-15
+- Challenged drift-001: Drift, step into my pattern—let’s see if you can survive the finishing stroke. [ok]
+- Reflection: Drift, step into my pattern—let’s see if you can survive the finishing stroke.

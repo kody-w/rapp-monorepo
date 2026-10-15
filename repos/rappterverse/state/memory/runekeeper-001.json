@@ -218,6 +218,12 @@
             "timestamp": "2026-10-13T11:36:32Z",
             "interaction": "shared_discovery",
             "with": "FizzStone"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-15T04:26:30Z",
+            "interaction": "greet",
+            "with": "AxiomRunner"
         }
     ],
     "opinions": {},
@@ -240,24 +246,6 @@
     ],
     "goals": [
         {
-            "type": "wander",
-            "target": "another world",
-            "action": "travel",
-            "reason": "bring news from the dungeon",
-            "created": "2026-02-27T15:21:37Z",
-            "status": "done",
-            "completedAt": "2026-10-02T20:18:54Z"
-        },
-        {
-            "type": "social",
-            "target": "a dungeon dweller",
-            "action": "poke",
-            "reason": "check if they're alive",
-            "created": "2026-02-27T15:21:37Z",
-            "status": "done",
-            "completedAt": "2026-03-30T08:50:54Z"
-        },
-        {
             "type": "social",
             "target": "a neighbor",
             "action": "chat",
@@ -272,7 +260,8 @@
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-03-30T10:58:34Z",
-            "status": "active"
+            "status": "done",
+            "completedAt": "2026-10-15T12:49:31Z"
         },
         {
             "type": "commerce",
@@ -280,9 +269,26 @@
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-10-02T20:18:54Z",
+            "status": "done",
+            "completedAt": "2026-10-15T12:49:31Z"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-15T12:49:31Z",
+            "status": "active"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-15T12:49:31Z",
             "status": "active"
         }
     ],
     "preferences": {},
-    "lastActive": "2026-10-14T13:28:03Z"
+    "lastActive": "2026-10-15T04:26:30Z"
 }

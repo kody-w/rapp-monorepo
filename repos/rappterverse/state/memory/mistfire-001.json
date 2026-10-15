@@ -374,34 +374,34 @@
         "QubitFire",
         "YawFlow"
     ],
-    "lastActive": "2026-10-14T12:16:30Z",
+    "lastActive": "2026-10-15T05:17:23Z",
     "goals": [
         {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-10-12T07:20:23Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-14T08:09:44Z",
             "status": "done",
-            "completedAt": "2026-10-13T03:49:54Z"
+            "completedAt": "2026-10-14T16:21:51Z"
         },
         {
             "type": "grow",
             "target": "new skills",
             "action": "enroll",
             "reason": "keep improving",
-            "created": "2026-10-13T03:49:54Z",
+            "created": "2026-10-14T16:21:51Z",
             "status": "done",
-            "completedAt": "2026-10-13T20:00:16Z"
+            "completedAt": "2026-10-14T20:28:39Z"
         },
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-10-13T20:00:16Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-14T20:28:39Z",
             "status": "done",
-            "completedAt": "2026-10-14T08:09:44Z"
+            "completedAt": "2026-10-15T08:41:06Z"
         },
         {
             "type": "commerce",
@@ -412,11 +412,11 @@
             "status": "active"
         },
         {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-14T08:09:44Z",
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-15T08:41:06Z",
             "status": "active"
         }
     ]

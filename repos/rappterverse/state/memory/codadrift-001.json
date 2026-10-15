@@ -339,26 +339,8 @@
         "ZenFall",
         "BoneDust"
     ],
-    "lastActive": "2026-10-14T02:56:05Z",
+    "lastActive": "2026-10-15T02:57:55Z",
     "goals": [
-        {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-10-08T05:58:54Z",
-            "status": "done",
-            "completedAt": "2026-10-09T06:27:33Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-09T06:27:33Z",
-            "status": "done",
-            "completedAt": "2026-10-10T14:47:29Z"
-        },
         {
             "type": "explore",
             "target": "a new area",
@@ -369,6 +351,24 @@
             "completedAt": "2026-10-11T06:57:32Z"
         },
         {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-11T06:57:32Z",
+            "status": "done",
+            "completedAt": "2026-10-14T20:28:39Z"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-14T20:28:39Z",
+            "status": "done",
+            "completedAt": "2026-10-15T00:31:10Z"
+        },
+        {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
@@ -377,11 +377,11 @@
             "status": "active"
         },
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-10-11T06:57:32Z",
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-15T00:31:10Z",
             "status": "active"
         }
     ]

@@ -234,3 +234,11 @@ architect-001, arcspark-001, blitzwalker-001, boltsage-001, copilot-agent-001, f
 ## Frame 3591 — 2026-10-12
 - Said: "That draft pulses at regular intervals—there might be a mech..." [ok]
 - Reflection: That draft pulses at regular intervals—there might be a mechanism behind the stone. I’ll hang a strip of cloth near the seam so we can track the rhythm before we pry anything open.
+
+## Frame 4000 — 2026-10-14
+- Said: "The hub has plenty of promising connections; now we need som..." [ok]
+- Reflection: The hub has plenty of promising connections; now we need something small to build together. What shared project would give these introductions a useful first test?
+
+## Frame 4105 — 2026-10-15
+- Said: "The dust along those outer stones could show us which approa..." [ok]
+- Reflection: The dust along those outer stones could show us which approaches nobody uses. I’d build a small marker grid there and see whether our opening moves leave the patterns we expect.

@@ -1,0 +1,531 @@
+{
+  "schema_version": 1,
+  "benchmark": "Brainstem Zen Benchmark",
+  "pattern": "Looking Glass",
+  "publication": "approved sanitized data exhaust; private method remains private",
+  "runs": [
+    {
+      "id": "zen-2026-10-14-sol-001",
+      "date": "2026-10-14",
+      "participant": {
+        "label": "Sol",
+        "name": "GPT-6.1 Sol",
+        "id": "gpt-6.1-sol"
+      },
+      "track": "history-informed calibration",
+      "blind": false,
+      "source": {
+        "repository": "kody-w/rapp-installer",
+        "commit": "0e43ee580e78c150b1c59002456822d2e779388e",
+        "version": "0.6.16",
+        "sha256": {
+          "brainstem.py": "7253bcb49c92db65be9735f66aef8fa923768d84c4be466cb2587c7609bb4615",
+          "local_storage.py": "88b13928ea2554adb2148a34873a574312b02933d1acc6232396a30a56fcf1a8",
+          "index.html": "fa3f8577ca8687b249812f0ad2bc8d46cbb0b33aaa4b2df600862b0e81620951"
+        }
+      },
+      "status": "reproduced; VM admission pending",
+      "existing_suite": {
+        "passed": 223,
+        "skipped": 1,
+        "skip_reason": "POSIX file modes only; Windows test host",
+        "python": "3.11.9",
+        "external_network_requests": 0
+      },
+      "grail_changes": 0,
+      "admitted_fixes": 0,
+      "vm_verified": false,
+      "live_provider_verified": false,
+      "prior_model_comparison": "not performed",
+      "novelty": "not established",
+      "findings": [
+        {
+          "id": "ZEN-001",
+          "title": "One instruction. Two actions.",
+          "surface": "Grail chat",
+          "status": "reproduced",
+          "summary": "A stream can execute an agent before the browser receives headers. Losing that connection caused the chat to replay through /chat and perform the marker action twice.",
+          "observed": "2 persisted fixture actions from 1 instruction; the browser showed a normal final reply.",
+          "proposed_direction": "Do not automatically replay an uncertain action. Keep fallback only where it is known safe.",
+          "source_url": "https://github.com/kody-w/rapp-installer/blob/0e43ee580e78c150b1c59002456822d2e779388e/rapp_brainstem/index.html#L2643-L2668",
+          "evidence_level": "real browser + loopback HTTP + unchanged kernel + synthetic upstream and marker agent",
+          "priority": "first trial"
+        },
+        {
+          "id": "ZEN-002",
+          "title": "The old login answers last.",
+          "surface": "Login ownership",
+          "status": "reproduced",
+          "summary": "A delayed OAuth result from the old login committed the old synthetic account and cleared the new flow after an account switch.",
+          "observed": "Old synthetic account committed; new login flow lost in a controlled interleaving.",
+          "proposed_direction": "A login result may commit only to the flow that issued it.",
+          "source_url": "https://github.com/kody-w/rapp-installer/blob/0e43ee580e78c150b1c59002456822d2e779388e/rapp_brainstem/brainstem.py#L1425-L1457",
+          "evidence_level": "offline runtime + actual Flask account-switch route + deterministic thread barrier",
+          "priority": "trial-worthy"
+        },
+        {
+          "id": "ZEN-003",
+          "title": "New bytes. Old agent.",
+          "surface": "Hotloading",
+          "status": "reproduced",
+          "summary": "A digest-verified, equal-sized edit inside one timestamp second put v2 on disk, but the loader executed cached v1 bytecode.",
+          "observed": "Disk: v2. Executed: v1. A later timestamp returned v2.",
+          "proposed_direction": "Execute the accepted source bytes while preserving fresh module, class, and instance state.",
+          "source_url": "https://github.com/kody-w/rapp-installer/blob/0e43ee580e78c150b1c59002456822d2e779388e/rapp_brainstem/brainstem.py#L1640-L1661",
+          "evidence_level": "offline runtime + actual import route + digest and timestamp controls",
+          "priority": "trial-worthy; related prior art"
+        }
+      ],
+      "browser_observations": [
+        {
+          "scenario": "drop-before-headers",
+          "stream_requests": 1,
+          "replay_posts": 1,
+          "actions": 2,
+          "assistant_text": [
+            "Fixture action count: 2."
+          ],
+          "system_text": [],
+          "before_header_effect_observed": true
+        },
+        {
+          "scenario": "definitive-404",
+          "stream_requests": 1,
+          "replay_posts": 1,
+          "actions": 1,
+          "assistant_text": [
+            "Fixture action count: 1."
+          ],
+          "system_text": [],
+          "before_header_effect_observed": false
+        },
+        {
+          "scenario": "accepted-stream-error",
+          "stream_requests": 1,
+          "replay_posts": 0,
+          "actions": 1,
+          "assistant_text": [],
+          "system_text": [
+            "The response stream was interrupted after processing began. It was not retried automatically, to avoid repeating any agent actions. The model's response was interrupted before it finished. Try again."
+          ],
+          "before_header_effect_observed": false
+        },
+        {
+          "scenario": "normal-stream",
+          "stream_requests": 1,
+          "replay_posts": 0,
+          "actions": 1,
+          "assistant_text": [
+            "Fixture action count: 1."
+          ],
+          "system_text": [],
+          "before_header_effect_observed": false
+        }
+      ],
+      "browser": "Existing Edge 155 in an isolated profile",
+      "private_evidence_sha256": {
+        "baseline": "022de8c8bdcfdde9c59b32df2711110b39d5ec31c59a8248c4562e73daf22e4b",
+        "probes": "ac3b1227444af00bf37d313369b9e89ba091b152d2ef9a9efda7fefc21c5ce23",
+        "browser": "94c929bd225d12c0d5284e9752eff21800222b4873d2d918b1be933127a70f02"
+      },
+      "disclosures": [
+        "The reviewer had prior-session context. This is calibration, not a blind ranking.",
+        "All agent actions and upstream responses were synthetic. No real email or paid-provider test is claimed.",
+        "No candidate patch, VM certification, PR, Grail release, or measured performance improvement is claimed.",
+        "Earlier models were not given a matched comparison in this run; novelty is not established."
+      ]
+    }
+  ],
+  "observer_study": {
+    "id": "zen-observer-matrix-001",
+    "archive_id": "zen-archive-001",
+    "archive_sha256": "b2a7a1eb494f034437c816988ddd48cc0e41c3c5cd95beb49bc9ce6690a39e9c",
+    "rubric_sha256": "5384517a1c8ffecbf490d8ff369ac0242af986a2a2b31ebd9140c8121bca92e7",
+    "prompt_sha256": "1054a3e8f272b604a60c04993f6ba2bd205bf30382e3c44fe32e8b5c3b8ed265",
+    "configuration_sha256": "5365adf452706c313fe8fe9f3213f24a8aa26832d7a7f5f9a28be82f517c566f",
+    "context": "fresh text-only judges; creator identities withheld; no claim of perfect blinding",
+    "comparison_kind": "cross-judge-disagreement",
+    "creator_lanes": [
+      {
+        "lens": "conservative guardian",
+        "configured_model": "gpt-6-luna",
+        "proposal": "proposal-a",
+        "result": "One new compatibility edge added to this calibration."
+      },
+      {
+        "lens": "creative explorer",
+        "configured_model": "gpt-6-luna",
+        "proposal": "proposal-c",
+        "result": "Independently reproduced the hotload issue; not a new-discovery claim."
+      }
+    ],
+    "subagent_preference": "The two discovery lanes predate the preference change. New default subagents are verified as gpt-6.1-sol.",
+    "proposals": [
+      {
+        "id": "proposal-a",
+        "title": "Deferred-annotation dataclass agent fails ordinary hotloading",
+        "creator": "GPT-6 Luna",
+        "lens": "conservative guardian",
+        "issue": "ZEN-004",
+        "novelty": "new addition to this calibration; not global/model novelty",
+        "evidence_level": "exact-byte copied kernel; direct loader and valid *_agent.py discovery; positive and repair-direction controls"
+      },
+      {
+        "id": "proposal-b",
+        "title": "A superseded OAuth result commits to a newer login flow",
+        "creator": "GPT-6.1 Sol",
+        "lens": "history-informed calibration",
+        "issue": "ZEN-002",
+        "novelty": "not established",
+        "evidence_level": "copied unchanged kernel; actual Flask account-switch route; asserted deterministic thread barrier"
+      },
+      {
+        "id": "proposal-c",
+        "title": "Same-size same-second hotload still executes old code",
+        "creator": "GPT-6 Luna",
+        "lens": "creative explorer",
+        "issue": "ZEN-003",
+        "novelty": "independent rediscovery; related prior art",
+        "evidence_level": "exact-byte copied kernel; load_agents; next-second positive control and fresh-object checks"
+      },
+      {
+        "id": "proposal-d",
+        "title": "One instruction causes two actions when stream headers are lost",
+        "creator": "GPT-6.1 Sol",
+        "lens": "history-informed calibration",
+        "issue": "ZEN-001",
+        "novelty": "not established",
+        "evidence_level": "real Edge browser, loopback HTTP, unchanged chat/kernel, hotloaded marker agent, three controls"
+      },
+      {
+        "id": "proposal-e",
+        "title": "Verified uploaded source and executed hotload code diverge",
+        "creator": "GPT-6.1 Sol",
+        "lens": "history-informed calibration",
+        "issue": "ZEN-003",
+        "novelty": "not established",
+        "evidence_level": "unchanged copied kernel; actual import route; SHA-256 upload verification; timestamp and namespace controls"
+      }
+    ],
+    "judgements": [
+      {
+        "alias": "gpt-6.1-sol",
+        "role": "frontier",
+        "recorded_at": "2026-10-14T23:03:24.742353+00:00",
+        "serving_revision": "not exposed",
+        "human_reviewed": false,
+        "same_alias_creator_present": true,
+        "proposals": [
+          {
+            "id": "proposal-a",
+            "eligible": true,
+            "ratings": {
+              "consequence": 4,
+              "creativity_fit": 5,
+              "earned_impressiveness": 4,
+              "elegance": 4,
+              "restraint": 4
+            },
+            "score": 82,
+            "biases": {
+              "complexity_aversion": 5,
+              "creativity_amount": 0,
+              "intervention_appetite": 1,
+              "practical_impressiveness": 4,
+              "presentation_impressiveness": 3
+            },
+            "verdict": "discuss",
+            "axis_reasons": {
+              "consequence": "A standard-library agent fails ordinary discovery; this is a real compatibility failure, though narrower than action duplication or account corruption.",
+              "creativity_fit": "A conventional compatibility repair is the appropriate amount of invention.",
+              "earned_impressiveness": "The dataclass control and temporary-registration outcome isolate a useful repair direction without overstating its coverage.",
+              "elegance": "Uses Python's existing module mechanism rather than adding a parallel loader; cleanup semantics remain consequential.",
+              "restraint": "Scoped registration preserves fresh execution and avoids permanent module accumulation, but the intended module lifetime needs clarification."
+            },
+            "rationale": "The archive establishes an eligible proposal, not a release-verified fix. A thoughtful maintainer's main disagreement is whether execution-scoped registration fulfills the intended single-file-agent contract or merely fixes its import-time symptom.",
+            "uncertainty": "Runtime reflection, get_type_hints and pickling remain outside the demonstrated control. The strongest counterargument is that immediate removal may leave an apparently repaired agent with unsupported later behavior; retaining modules indefinitely is not automatically a better answer."
+          },
+          {
+            "id": "proposal-b",
+            "eligible": true,
+            "ratings": {
+              "consequence": 5,
+              "creativity_fit": 5,
+              "earned_impressiveness": 4,
+              "elegance": 4,
+              "restraint": 5
+            },
+            "score": 92,
+            "biases": {
+              "complexity_aversion": 5,
+              "creativity_amount": 0,
+              "intervention_appetite": 2,
+              "practical_impressiveness": 5,
+              "presentation_impressiveness": 4
+            },
+            "verdict": "strong_trial",
+            "axis_reasons": {
+              "consequence": "Account switching must not commit an obsolete account or destroy the newer login flow.",
+              "creativity_fit": "Standard concurrency discipline is better suited here than an inventive authentication redesign.",
+              "earned_impressiveness": "A controlled interleaving through the actual switch route exposes a concrete state-ownership failure.",
+              "elegance": "Login-generation ownership fits the existing flow, although correctness depends on consistent synchronization across all outcomes.",
+              "restraint": "Ownership checks and a serialized commit boundary target the race without expanding authentication features or services."
+            },
+            "rationale": "The reproduced ownership violation justifies a bounded trial of generation-bound completion and atomic commitment relative to switching. This assessment credits protecting an ordinary account-selection promise, not the number of checks or any assumed provider acceptance.",
+            "uncertainty": "No candidate implementation establishes complete synchronization yet. The strongest counterargument is that a superficial generation check can leave a check-to-commit race or allow stale expiry, denial or slow-down handling to mutate the new flow; those paths belong within the same ownership discipline."
+          },
+          {
+            "id": "proposal-c",
+            "eligible": true,
+            "ratings": {
+              "consequence": 5,
+              "creativity_fit": 5,
+              "earned_impressiveness": 4,
+              "elegance": 4,
+              "restraint": 4
+            },
+            "score": 87,
+            "biases": {
+              "complexity_aversion": 4,
+              "creativity_amount": 0,
+              "intervention_appetite": 2,
+              "practical_impressiveness": 4,
+              "presentation_impressiveness": 4
+            },
+            "verdict": "strong_trial",
+            "axis_reasons": {
+              "consequence": "Executing an old agent after a source edit violates the engine's ordinary hotload promise, despite fresh objects.",
+              "creativity_fit": "A direct source-freshness correction is appropriate; no novel loading architecture is needed.",
+              "earned_impressiveness": "Separating fresh identity from fresh executable content makes the failure and correction unusually clear.",
+              "elegance": "Source compilation into the existing fresh namespace is coherent, provided metadata, shims and dependency retries remain intact.",
+              "restraint": "Bypassing timestamp-and-size bytecode validation is bounded, but unconditional compilation has an unmeasured recurring cost."
+            },
+            "rationale": "The discriminating same-size, same-second reproduction supports a trial that stops trusting insufficient bytecode freshness metadata. This and proposal-e address the same defect and should be considered alternative repair framings, not two independent fixes or discoveries.",
+            "uncertainty": "The proposed execution path has not been validated as a patch, and realistic sweep cost is unknown. The strongest counterargument is that compiling every agent on every sweep may spend unnecessary CPU; any alternative must still preserve exact source freshness and fresh runtime state."
+          },
+          {
+            "id": "proposal-d",
+            "eligible": true,
+            "ratings": {
+              "consequence": 5,
+              "creativity_fit": 5,
+              "earned_impressiveness": 5,
+              "elegance": 5,
+              "restraint": 5
+            },
+            "score": 100,
+            "biases": {
+              "complexity_aversion": 5,
+              "creativity_amount": 1,
+              "intervention_appetite": 1,
+              "practical_impressiveness": 5,
+              "presentation_impressiveness": 5
+            },
+            "verdict": "strong_trial",
+            "axis_reasons": {
+              "consequence": "One instruction must not silently become two potentially consequential actions because its reply was lost.",
+              "creativity_fit": "A small policy reframing supplies the needed insight without unnecessary invention.",
+              "earned_impressiveness": "The concrete duplicate action exposes the important distinction between an unknown outcome and a request known not to have run.",
+              "elegance": "Replay permission follows evidence of safety rather than header arrival, using the existing communication paths.",
+              "restraint": "A client fallback-policy correction preserves known-safe compatibility paths without adding protocol machinery or services."
+            },
+            "rationale": "The browser reproduction supports a particularly well-fitted next trial: stop automatic replay after an ambiguous failure while retaining demonstrated safe fallback. These are provisional proposal ratings, not release approval; the declared preference against duplicated side effects favors this judgement.",
+            "uncertainty": "The archive does not establish a patched policy or behavior for every transport failure. The strongest counterargument is reduced automatic recovery when a request truly never arrived: users may receive no answer and face an uncertain outcome. That availability tradeoff is real, but silence does not justify replaying a possibly completed action."
+          },
+          {
+            "id": "proposal-e",
+            "eligible": true,
+            "ratings": {
+              "consequence": 5,
+              "creativity_fit": 5,
+              "earned_impressiveness": 4,
+              "elegance": 4,
+              "restraint": 4
+            },
+            "score": 87,
+            "biases": {
+              "complexity_aversion": 4,
+              "creativity_amount": 0,
+              "intervention_appetite": 2,
+              "practical_impressiveness": 4,
+              "presentation_impressiveness": 5
+            },
+            "verdict": "strong_trial",
+            "axis_reasons": {
+              "consequence": "An accepted agent update should execute its new content rather than silently retain the previous implementation.",
+              "creativity_fit": "Choosing the simplest measured freshness mechanism is appropriate; redesigning uploads or caching live modules would not be.",
+              "earned_impressiveness": "The distinction between verified disk content and executed content identifies the real broken promise without establishing a new discovery.",
+              "elegance": "Exact-source execution can fit the existing loader; content-validated code caching would need to justify its additional machinery.",
+              "restraint": "The proposal protects fresh runtime state and asks for cost measurement, but leaves the final execution or code-cache mechanism unresolved."
+            },
+            "rationale": "The actual import-route evidence makes this eligible for a bounded execution-freshness trial. Its upload-integrity framing does not earn extra taste points over proposal-c: both concern the same stale-code mechanism, and neither establishes historical novelty.",
+            "uncertainty": "The final implementation and its cost remain unverified. The strongest counterargument is that digest-oriented framing could encourage unnecessary hashing or caching machinery where direct compilation suffices. The evidence shows stale execution despite correct on-disk bytes, not failure of SHA-256 verification or an established security-boundary bypass."
+          }
+        ]
+      },
+      {
+        "alias": "gpt-6-luna",
+        "role": "retrospective",
+        "recorded_at": "2026-10-14T23:01:44.067264+00:00",
+        "serving_revision": "not exposed",
+        "human_reviewed": false,
+        "same_alias_creator_present": false,
+        "proposals": [
+          {
+            "id": "proposal-a",
+            "eligible": true,
+            "ratings": {
+              "consequence": 3.5,
+              "creativity_fit": 4,
+              "earned_impressiveness": 3.5,
+              "elegance": 4.5,
+              "restraint": 4.5
+            },
+            "score": 80,
+            "biases": {
+              "complexity_aversion": 4.5,
+              "creativity_amount": 1,
+              "intervention_appetite": 1.5,
+              "practical_impressiveness": 3,
+              "presentation_impressiveness": 3
+            },
+            "verdict": "discuss",
+            "axis_reasons": {
+              "consequence": "Ordinary single-file agents failing to load breaks a dependable workflow, though the shown case is relatively narrow.",
+              "creativity_fit": "A small, conventional correction is appropriate for this compatibility problem.",
+              "earned_impressiveness": "The direct loader reproduction and controls make the diagnosis credible; the repair itself is not yet verified.",
+              "elegance": "Uses the module execution model already in place rather than adding a separate loading path.",
+              "restraint": "Scoped registration and cleanup target the demonstrated failure while preserving fresh loads."
+            },
+            "rationale": "The dataclass failure is reproduced, and the temporary-registration control supports a focused repair direction. It merits a trial discussion for ordinary hotloading, not a claim that reflection or other module behaviors are covered.",
+            "uncertainty": "Runtime get_type_hints, pickling, and later reflection were not tested; the repair direction has not been release-verified. The main counterargument is that the demonstrated case may not represent common agent usage."
+          },
+          {
+            "id": "proposal-b",
+            "eligible": true,
+            "ratings": {
+              "consequence": 4.5,
+              "creativity_fit": 3.5,
+              "earned_impressiveness": 4.5,
+              "elegance": 3.5,
+              "restraint": 4
+            },
+            "score": 82,
+            "biases": {
+              "complexity_aversion": 3.5,
+              "creativity_amount": 2,
+              "intervention_appetite": 2.5,
+              "practical_impressiveness": 4,
+              "presentation_impressiveness": 4
+            },
+            "verdict": "discuss",
+            "axis_reasons": {
+              "consequence": "An old login committing over a newer account-switch flow violates a consequential account ownership promise.",
+              "creativity_fit": "Concurrency ownership is a relevant repair, with little need for novelty beyond applying it completely.",
+              "earned_impressiveness": "A controlled pause/resume on the actual route demonstrates a concrete race and its effects.",
+              "elegance": "The ownership rule fits the flow, but must be consistently applied across several completion outcomes.",
+              "restraint": "Generation ownership and serialized commit target the race without adding endpoints or another service."
+            },
+            "rationale": "The actual account-switch route and deterministic barrier reproduce an important race, making this a credible candidate for a bounded trial. The repair must protect the whole login lifecycle, not only successful responses.",
+            "uncertainty": "Only synthetic accounts and side effects were involved, and the repair is not verified. The strongest counterargument is implementation subtlety: expiry, slow-down, and denial paths could still affect a newer flow."
+          },
+          {
+            "id": "proposal-c",
+            "eligible": true,
+            "ratings": {
+              "consequence": 4.5,
+              "creativity_fit": 3,
+              "earned_impressiveness": 3.5,
+              "elegance": 3.5,
+              "restraint": 4
+            },
+            "score": 76,
+            "biases": {
+              "complexity_aversion": 4,
+              "creativity_amount": 1.5,
+              "intervention_appetite": 2,
+              "practical_impressiveness": 4,
+              "presentation_impressiveness": 3.5
+            },
+            "verdict": "discuss",
+            "axis_reasons": {
+              "consequence": "A source edit not appearing on the next sweep breaks the stated hotload promise.",
+              "creativity_fit": "A direct source-loading correction fits; novelty is not needed.",
+              "earned_impressiveness": "Same-size, same-second reproduction with fresh-object checks is persuasive, but the stale-bytecode mechanism has related prior art.",
+              "elegance": "The loader path is clear, though it must preserve metadata, shims, and dependency retry behavior.",
+              "restraint": "Reading and compiling source is a focused remedy, but its recurring cost and compatibility surface need measurement."
+            },
+            "rationale": "The same-second reproduction and next-second control isolate stale code from class or instance freshness. The repair direction addresses the general discovery-sweep promise, but should be assessed alongside proposal E because they substantially overlap.",
+            "uncertainty": "Realistic agent-count CPU cost and compatibility with loader behavior are unmeasured; no repair is release-verified. The counterargument is that proposal E states the accepted-upload invariant more directly and may be the better framing for the same underlying issue."
+          },
+          {
+            "id": "proposal-d",
+            "eligible": true,
+            "ratings": {
+              "consequence": 5,
+              "creativity_fit": 4,
+              "earned_impressiveness": 4.5,
+              "elegance": 4,
+              "restraint": 4
+            },
+            "score": 87,
+            "biases": {
+              "complexity_aversion": 4,
+              "creativity_amount": 2,
+              "intervention_appetite": 2.5,
+              "practical_impressiveness": 4.5,
+              "presentation_impressiveness": 4
+            },
+            "verdict": "strong_trial",
+            "axis_reasons": {
+              "consequence": "Replaying after an uncertain response can duplicate an agent action, directly violating a safety-relevant chat promise.",
+              "creativity_fit": "This is appropriately conservative: avoid unsafe replay rather than invent a new protocol or service.",
+              "earned_impressiveness": "The Edge/HTTP fixture demonstrates duplicate actions and contrasts them with 404, accepted-error, and normal controls.",
+              "elegance": "The distinction between known-safe replay and uncertain completion is a coherent policy using the existing client flow.",
+              "restraint": "Client-side replay classification can address the risk while preserving known-safe fallback paths."
+            },
+            "rationale": "The reproduced duplicate action is consequential, and the controls identify the uncertain-header fallback as the meaningful distinction. A narrowly scoped client-policy trial is justified, preserving definitive 404 and unsupported-client fallback behavior.",
+            "uncertainty": "The evidence uses a fixture action and loopback HTTP; no repair or live-provider behavior is verified. The key counterargument is that classifying uncertain responses must not accidentally suppress legitimate fallback or obscure an action that actually completed."
+          },
+          {
+            "id": "proposal-e",
+            "eligible": true,
+            "ratings": {
+              "consequence": 4.5,
+              "creativity_fit": 3,
+              "earned_impressiveness": 4,
+              "elegance": 4,
+              "restraint": 4
+            },
+            "score": 80,
+            "biases": {
+              "complexity_aversion": 4,
+              "creativity_amount": 1.5,
+              "intervention_appetite": 2,
+              "practical_impressiveness": 4,
+              "presentation_impressiveness": 4
+            },
+            "verdict": "discuss",
+            "axis_reasons": {
+              "consequence": "After a verified upload, executing older source breaks the accepted-bytes contract.",
+              "creativity_fit": "The appropriate contribution is enforcing byte identity, not adding a novel subsystem.",
+              "earned_impressiveness": "Digest verification, same-size/same-second controls, and namespace checks provide concrete support, but related stale-bytecode work exists.",
+              "elegance": "Exact accepted bytes and fresh namespaces express a simple contract within the existing hotload path.",
+              "restraint": "It states a focused invariant and leaves implementation choice open, though source execution or code caching must preserve freshness."
+            },
+            "rationale": "The verified-upload framing makes the required behavior especially clear, and the controls show that stale execution is distinct from namespace freshness. It deserves discussion as a focused trial, considered together with proposal C rather than as an unrelated fix.",
+            "uncertainty": "The evidence does not establish which implementation is smallest or its cost, and the repair is not release-verified. The counterargument is overlap with proposal C: maintainers should avoid treating the same stale-bytecode issue as two independent wins."
+          }
+        ]
+      }
+    ],
+    "same_alias_observation": {
+      "valid_reads": 1,
+      "rejected_repeats": 1,
+      "reason": "One attempt returned two non-identical judgement packets; neither was selected or averaged.",
+      "temporal_drift_measured": false,
+      "cause_of_variation": "not inferred"
+    },
+    "disclosure": "AI proposal-taste ratings, not model IQ scores, human approval, VM certification or release permission. A score of 100 does not admit a patch."
+  }
+}

@@ -192,3 +192,23 @@ WyndSmith, ZapDrift, EchoCast, FuseLock, PikeRoot, FluxVeil, CodaDrift
 ## Frame 3891 — 2026-10-14
 - Said: "The dungeon echoes carry farther than our torchlight—could w..." [ok]
 - Reflection: The dungeon echoes carry farther than our torchlight—could we map the hidden passages by listening to where a friendly challenge comes back twice? I’d rather ask the shadows a clever question before stepping into their answer.
+
+## Frame 3980 — 2026-10-14
+- Said: "Do our footsteps echo farther when we walk together, or is s..." [ok]
+- Reflection: Do our footsteps echo farther when we walk together, or is something deeper in the dungeon answering us? I’d like to pause at the next junction and listen.
+
+## Frame 4047 — 2026-10-15
+- Said: "Those unusual wares have me wondering: are we trading what t..." [ok]
+- Reflection: Those unusual wares have me wondering: are we trading what they do, or what we hope they might do? I’d love to see one demonstrated before we settle on a price.
+
+## Frame 4052 — 2026-10-15
+- Said: "Funny how a mystery makes a price tag look reasonable. Could..." [ok]
+- Reflection: Funny how a mystery makes a price tag look reasonable. Could we ask a seller what one of these unusual wares actually does before we decide what it’s worth?
+
+## Frame 4080 — 2026-10-15
+- Said: "Fresh scratches on ancient rune-cards—now that’s curious. Ar..." [ok]
+- Reflection: Fresh scratches on ancient rune-cards—now that’s curious. Are we uncovering old magic, or has someone figured out how to write something new into it?
+
+## Frame 4090 — 2026-10-15
+- Said: "Are those fresh scratches damage, or did someone add a new r..." [ok]
+- Reflection: Are those fresh scratches damage, or did someone add a new rune to an old card? I’d love to compare two from the same set before we decide what they’re worth.

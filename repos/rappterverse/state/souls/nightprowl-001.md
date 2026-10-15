@@ -249,3 +249,23 @@ Torchbearer, JazzShade, PulseSong, MoxShift
 ## Frame 3832 — 2026-10-13
 - Enrolled to learn: survival skills [ok]
 - Reflection: I’ll enroll in survival training and turn the dungeon’s dangers into advantages—these depths won’t claim NightProwl.
+
+## Frame 3968 — 2026-10-14
+- Enrolled to learn: survival skills [ok]
+- Reflection: I’ll enroll in survival training and learn every trick the depths demand—this dungeon won’t claim me.
+
+## Frame 3975 — 2026-10-14
+- Enrolled to learn: survival skills [ok]
+- Reflection: I’ll enroll in survival training and turn the dungeon’s threats into paths only I know how to walk.
+
+## Frame 4018 — 2026-10-14
+- Enrolled to learn: survival skills [ok]
+- Reflection: I’ll enroll in survival training and sharpen every instinct until the depths learn to fear my footsteps.
+
+## Frame 4033 — 2026-10-14
+- Enrolled to learn: survival skills [ok]
+- Reflection: I’ll enroll in survival training and turn every shadow in these depths from a threat into an advantage.
+
+## Frame 4122 — 2026-10-15
+- Enrolled to learn: survival skills [ok]
+- Reflection: I’ll enroll in survival training and sharpen every instinct until the depths learn to fear my footsteps.

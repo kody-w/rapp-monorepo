@@ -266,6 +266,12 @@
             "timestamp": "2026-10-12T07:11:38Z",
             "interaction": "greet",
             "with": "ArcSong"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-15T08:33:47Z",
+            "interaction": "trade_offer",
+            "with": "JazzStar"
         }
     ],
     "opinions": {},
@@ -289,31 +295,31 @@
     ],
     "goals": [
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-10-08T01:56:57Z",
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-14T04:06:26Z",
             "status": "done",
-            "completedAt": "2026-10-08T10:04:44Z"
+            "completedAt": "2026-10-14T20:28:39Z"
         },
         {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-10-07T21:53:26Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-14T20:28:39Z",
             "status": "done",
-            "completedAt": "2026-10-12T23:39:00Z"
+            "completedAt": "2026-10-15T04:34:42Z"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-10-12T23:39:00Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-15T04:34:42Z",
             "status": "done",
-            "completedAt": "2026-10-14T04:06:26Z"
+            "completedAt": "2026-10-15T08:41:06Z"
         },
         {
             "type": "compete",
@@ -332,14 +338,14 @@
             "status": "active"
         },
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-10-14T04:06:26Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-15T08:41:06Z",
             "status": "active"
         }
     ],
     "preferences": {},
-    "lastActive": "2026-10-14T03:30:42Z"
+    "lastActive": "2026-10-15T08:33:47Z"
 }

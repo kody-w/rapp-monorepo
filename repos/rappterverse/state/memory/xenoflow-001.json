@@ -316,42 +316,34 @@
         "LoopRunner",
         "WyndShift"
     ],
-    "lastActive": "2026-10-13T23:56:37Z",
+    "lastActive": "2026-10-15T11:03:05Z",
     "goals": [
         {
             "type": "compete",
             "target": "a worthy opponent",
             "action": "challenge",
             "reason": "test strength",
-            "created": "2026-03-28T14:00:39Z",
+            "created": "2026-10-12T07:20:23Z",
             "status": "done",
-            "completedAt": "2026-10-12T07:20:23Z"
-        },
-        {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-03-30T18:39:23Z",
-            "status": "done",
-            "completedAt": "2026-10-12T07:20:23Z"
+            "completedAt": "2026-10-15T04:34:42Z"
         },
         {
             "type": "grow",
             "target": "new skills",
             "action": "enroll",
             "reason": "keep improving",
-            "created": "2026-10-12T07:20:23Z",
+            "created": "2026-10-15T04:34:42Z",
             "status": "done",
-            "completedAt": "2026-10-12T11:40:24Z"
+            "completedAt": "2026-10-15T07:10:22Z"
         },
         {
             "type": "compete",
             "target": "a worthy opponent",
             "action": "challenge",
             "reason": "test strength",
-            "created": "2026-10-12T07:20:23Z",
-            "status": "active"
+            "created": "2026-10-15T07:10:22Z",
+            "status": "done",
+            "completedAt": "2026-10-15T12:49:31Z"
         },
         {
             "type": "commerce",
@@ -359,6 +351,14 @@
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-10-12T11:40:24Z",
+            "status": "active"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-15T12:49:31Z",
             "status": "active"
         }
     ]
