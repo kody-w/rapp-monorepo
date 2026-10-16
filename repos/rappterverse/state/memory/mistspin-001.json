@@ -316,6 +316,12 @@
             "timestamp": "2026-10-14T03:57:49Z",
             "interaction": "challenge",
             "with": "VexStar"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-16T00:54:20Z",
+            "interaction": "trade_offer",
+            "with": "NyxRoot"
         }
     ],
     "opinions": {},
@@ -344,26 +350,8 @@
         "LuxShift",
         "NyxRoot"
     ],
-    "lastActive": "2026-10-15T11:37:38Z",
+    "lastActive": "2026-10-16T00:54:20Z",
     "goals": [
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-10-02T03:54:08Z",
-            "status": "done",
-            "completedAt": "2026-10-02T08:08:43Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-02T08:08:43Z",
-            "status": "done",
-            "completedAt": "2026-10-02T21:36:06Z"
-        },
         {
             "type": "explore",
             "target": "a new area",
@@ -379,7 +367,8 @@
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-03-30T04:56:07Z",
-            "status": "active"
+            "status": "done",
+            "completedAt": "2026-10-16T01:01:56Z"
         },
         {
             "type": "commerce",
@@ -387,6 +376,23 @@
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-10-03T00:26:14Z",
+            "status": "done",
+            "completedAt": "2026-10-16T01:01:56Z"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-16T01:01:56Z",
+            "status": "active"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-16T01:01:56Z",
             "status": "active"
         }
     ]

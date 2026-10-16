@@ -3,189 +3,15 @@
     "organ": "rumors",
     "engine": "mars-100",
     "version": "13.0",
-    "generated": "2026-10-15T08:51:56.470389+00:00",
+    "generated": "2026-10-16T08:45:05.474567+00:00",
     "year_snapshot": 30
   },
-  "active_rumors": 5,
-  "largest_carrier_count": 12,
-  "mutation_chains": 3,
-  "fragmentation": 0.575,
-  "archived_total": 8,
+  "active_rumors": 14,
+  "largest_carrier_count": 13,
+  "mutation_chains": 5,
+  "fragmentation": 0.2882,
+  "archived_total": 0,
   "rumors": [
-    {
-      "id": "r10",
-      "text": "an new amendment is being quietly enforced again",
-      "origin_id": "child-14",
-      "origin_year": 26,
-      "carriers": [
-        "aura-kai",
-        "child-14",
-        "dax-iron",
-        "fen-marsh",
-        "grove-ash",
-        "imm-10",
-        "imm-11",
-        "imm-12",
-        "imm-13",
-        "kira-sol",
-        "ora-flame",
-        "pax-stone"
-      ],
-      "carrier_count": 12,
-      "born_year": 26,
-      "last_growth_year": 29,
-      "mutated_from": "r1",
-      "mutation_depth": 1,
-      "dead": false,
-      "death_year": null,
-      "carrier_names": [
-        "Aura Kai",
-        "Cinder Ash",
-        "Dax Iron",
-        "Fen Marsh",
-        "Grove Ash",
-        "Coral Mist",
-        "Nova Sol",
-        "Nova Sol",
-        "Bloom Peak",
-        "Kira Sol",
-        "Ora Flame",
-        "Pax Stone"
-      ],
-      "origin_name": "Cinder Ash"
-    },
-    {
-      "id": "r11",
-      "text": "Faction leaders met in secret about independence",
-      "origin_id": "grove-ash",
-      "origin_year": 28,
-      "carriers": [
-        "aura-kai",
-        "child-14",
-        "dax-iron",
-        "fen-marsh",
-        "grove-ash",
-        "imm-10",
-        "imm-11",
-        "imm-12",
-        "imm-13",
-        "kira-sol",
-        "ora-flame",
-        "pax-stone"
-      ],
-      "carrier_count": 12,
-      "born_year": 28,
-      "last_growth_year": 29,
-      "mutated_from": null,
-      "mutation_depth": 0,
-      "dead": false,
-      "death_year": null,
-      "carrier_names": [
-        "Aura Kai",
-        "Cinder Ash",
-        "Dax Iron",
-        "Fen Marsh",
-        "Grove Ash",
-        "Coral Mist",
-        "Nova Sol",
-        "Nova Sol",
-        "Bloom Peak",
-        "Kira Sol",
-        "Ora Flame",
-        "Pax Stone"
-      ],
-      "origin_name": "Grove Ash"
-    },
-    {
-      "id": "r12",
-      "text": "an new amendment is being quietly enforced again (or so they say) (or so they say)",
-      "origin_id": "kira-sol",
-      "origin_year": 29,
-      "carriers": [
-        "grove-ash",
-        "imm-11",
-        "kira-sol",
-        "ora-flame"
-      ],
-      "carrier_count": 4,
-      "born_year": 29,
-      "last_growth_year": 30,
-      "mutated_from": "r8",
-      "mutation_depth": 3,
-      "dead": false,
-      "death_year": null,
-      "carrier_names": [
-        "Grove Ash",
-        "Nova Sol",
-        "Kira Sol",
-        "Ora Flame"
-      ],
-      "origin_name": "Kira Sol"
-    },
-    {
-      "id": "r13",
-      "text": "an new amendment is being quietly enforced again (or so they say)",
-      "origin_id": "imm-10",
-      "origin_year": 30,
-      "carriers": [
-        "imm-10"
-      ],
-      "carrier_count": 1,
-      "born_year": 30,
-      "last_growth_year": 30,
-      "mutated_from": "r10",
-      "mutation_depth": 2,
-      "dead": false,
-      "death_year": null,
-      "carrier_names": [
-        "Coral Mist"
-      ],
-      "origin_name": "Coral Mist"
-    },
-    {
-      "id": "r9",
-      "text": "a child was born with a third blood type",
-      "origin_id": "pax-stone",
-      "origin_year": 24,
-      "carriers": [
-        "aura-kai",
-        "child-14",
-        "dax-iron",
-        "fen-marsh",
-        "grove-ash",
-        "imm-10",
-        "imm-11",
-        "imm-12",
-        "imm-13",
-        "kira-sol",
-        "ora-flame",
-        "pax-stone"
-      ],
-      "carrier_count": 12,
-      "born_year": 24,
-      "last_growth_year": 25,
-      "mutated_from": null,
-      "mutation_depth": 0,
-      "dead": false,
-      "death_year": null,
-      "carrier_names": [
-        "Aura Kai",
-        "Cinder Ash",
-        "Dax Iron",
-        "Fen Marsh",
-        "Grove Ash",
-        "Coral Mist",
-        "Nova Sol",
-        "Nova Sol",
-        "Bloom Peak",
-        "Kira Sol",
-        "Ora Flame",
-        "Pax Stone"
-      ],
-      "origin_name": "Pax Stone"
-    }
-  ],
-  "archive_recent": [
     {
       "id": "r1",
       "text": "an old amendment is being quietly enforced again",
@@ -193,7 +19,93 @@
       "origin_year": 8,
       "carriers": [
         "aura-kai",
-        "child-14",
+        "dax-iron",
+        "fen-marsh",
+        "grove-ash",
+        "imm-10",
+        "imm-11",
+        "imm-12",
+        "imm-13",
+        "imm-14",
+        "kira-sol",
+        "luna-tide",
+        "ora-flame",
+        "pax-stone"
+      ],
+      "carrier_count": 13,
+      "born_year": 8,
+      "last_growth_year": 26,
+      "mutated_from": null,
+      "mutation_depth": 0,
+      "dead": false,
+      "death_year": null,
+      "carrier_names": [
+        "Aura Kai",
+        "Dax Iron",
+        "Fen Marsh",
+        "Grove Ash",
+        "Coral Mist",
+        "Nova Sol",
+        "Nova Sol",
+        "Bloom Peak",
+        "Ripple Tide",
+        "Kira Sol",
+        "Luna Tide",
+        "Ora Flame",
+        "Pax Stone"
+      ],
+      "origin_name": "Fen Marsh"
+    },
+    {
+      "id": "r10",
+      "text": "Faction leaders met in secret about independence",
+      "origin_id": "luna-tide",
+      "origin_year": 25,
+      "carriers": [
+        "aura-kai",
+        "dax-iron",
+        "fen-marsh",
+        "grove-ash",
+        "imm-10",
+        "imm-11",
+        "imm-12",
+        "imm-13",
+        "imm-14",
+        "kira-sol",
+        "luna-tide",
+        "ora-flame",
+        "pax-stone"
+      ],
+      "carrier_count": 13,
+      "born_year": 25,
+      "last_growth_year": 27,
+      "mutated_from": null,
+      "mutation_depth": 0,
+      "dead": false,
+      "death_year": null,
+      "carrier_names": [
+        "Aura Kai",
+        "Dax Iron",
+        "Fen Marsh",
+        "Grove Ash",
+        "Coral Mist",
+        "Nova Sol",
+        "Nova Sol",
+        "Bloom Peak",
+        "Ripple Tide",
+        "Kira Sol",
+        "Luna Tide",
+        "Ora Flame",
+        "Pax Stone"
+      ],
+      "origin_name": "Luna Tide"
+    },
+    {
+      "id": "r11",
+      "text": "Faction leaders met in public about independence",
+      "origin_id": "luna-tide",
+      "origin_year": 28,
+      "carriers": [
         "dax-iron",
         "fen-marsh",
         "grove-ash",
@@ -202,16 +114,111 @@
         "imm-12",
         "imm-13",
         "kira-sol",
+        "luna-tide",
         "ora-flame",
         "pax-stone"
       ],
-      "carrier_count": 12,
-      "born_year": 8,
-      "last_growth_year": 23,
+      "carrier_count": 11,
+      "born_year": 28,
+      "last_growth_year": 30,
+      "mutated_from": "r10",
+      "mutation_depth": 1,
+      "dead": false,
+      "death_year": null,
+      "carrier_names": [
+        "Dax Iron",
+        "Fen Marsh",
+        "Grove Ash",
+        "Coral Mist",
+        "Nova Sol",
+        "Nova Sol",
+        "Bloom Peak",
+        "Kira Sol",
+        "Luna Tide",
+        "Ora Flame",
+        "Pax Stone"
+      ],
+      "origin_name": "Luna Tide"
+    },
+    {
+      "id": "r12",
+      "text": "an new amendment is being quietly enforced again",
+      "origin_id": "imm-13",
+      "origin_year": 29,
+      "carriers": [
+        "aura-kai",
+        "imm-10",
+        "imm-11",
+        "imm-13",
+        "imm-14",
+        "pax-stone"
+      ],
+      "carrier_count": 6,
+      "born_year": 29,
+      "last_growth_year": 30,
+      "mutated_from": "r2",
+      "mutation_depth": 1,
+      "dead": false,
+      "death_year": null,
+      "carrier_names": [
+        "Aura Kai",
+        "Coral Mist",
+        "Nova Sol",
+        "Bloom Peak",
+        "Ripple Tide",
+        "Pax Stone"
+      ],
+      "origin_name": "Bloom Peak"
+    },
+    {
+      "id": "r13",
+      "text": "Faction leaders met in secret about independence",
+      "origin_id": "pax-stone",
+      "origin_year": 30,
+      "carriers": [
+        "aura-kai",
+        "fen-marsh",
+        "imm-10",
+        "imm-13",
+        "luna-tide",
+        "pax-stone"
+      ],
+      "carrier_count": 6,
+      "born_year": 30,
+      "last_growth_year": 30,
       "mutated_from": null,
       "mutation_depth": 0,
-      "dead": true,
-      "death_year": 29
+      "dead": false,
+      "death_year": null,
+      "carrier_names": [
+        "Aura Kai",
+        "Fen Marsh",
+        "Coral Mist",
+        "Bloom Peak",
+        "Luna Tide",
+        "Pax Stone"
+      ],
+      "origin_name": "Pax Stone"
+    },
+    {
+      "id": "r14",
+      "text": "luna-tide hoarded extra fuel during the last fast",
+      "origin_id": "ora-flame",
+      "origin_year": 30,
+      "carriers": [
+        "ora-flame"
+      ],
+      "carrier_count": 1,
+      "born_year": 30,
+      "last_growth_year": 30,
+      "mutated_from": "r9",
+      "mutation_depth": 1,
+      "dead": false,
+      "death_year": null,
+      "carrier_names": [
+        "Ora Flame"
+      ],
+      "origin_name": "Ora Flame"
     },
     {
       "id": "r2",
@@ -220,7 +227,6 @@
       "origin_year": 15,
       "carriers": [
         "aura-kai",
-        "child-14",
         "dax-iron",
         "fen-marsh",
         "grove-ash",
@@ -228,17 +234,35 @@
         "imm-11",
         "imm-12",
         "imm-13",
+        "imm-14",
         "kira-sol",
+        "luna-tide",
         "ora-flame",
         "pax-stone"
       ],
-      "carrier_count": 12,
+      "carrier_count": 13,
       "born_year": 15,
-      "last_growth_year": 23,
+      "last_growth_year": 26,
       "mutated_from": null,
       "mutation_depth": 0,
-      "dead": true,
-      "death_year": 29
+      "dead": false,
+      "death_year": null,
+      "carrier_names": [
+        "Aura Kai",
+        "Dax Iron",
+        "Fen Marsh",
+        "Grove Ash",
+        "Coral Mist",
+        "Nova Sol",
+        "Nova Sol",
+        "Bloom Peak",
+        "Ripple Tide",
+        "Kira Sol",
+        "Luna Tide",
+        "Ora Flame",
+        "Pax Stone"
+      ],
+      "origin_name": "Luna Tide"
     },
     {
       "id": "r3",
@@ -247,7 +271,6 @@
       "origin_year": 16,
       "carriers": [
         "aura-kai",
-        "child-14",
         "dax-iron",
         "fen-marsh",
         "grove-ash",
@@ -255,17 +278,35 @@
         "imm-11",
         "imm-12",
         "imm-13",
+        "imm-14",
         "kira-sol",
+        "luna-tide",
         "ora-flame",
         "pax-stone"
       ],
-      "carrier_count": 12,
+      "carrier_count": 13,
       "born_year": 16,
-      "last_growth_year": 23,
+      "last_growth_year": 26,
       "mutated_from": null,
       "mutation_depth": 0,
-      "dead": true,
-      "death_year": 29
+      "dead": false,
+      "death_year": null,
+      "carrier_names": [
+        "Aura Kai",
+        "Dax Iron",
+        "Fen Marsh",
+        "Grove Ash",
+        "Coral Mist",
+        "Nova Sol",
+        "Nova Sol",
+        "Bloom Peak",
+        "Ripple Tide",
+        "Kira Sol",
+        "Luna Tide",
+        "Ora Flame",
+        "Pax Stone"
+      ],
+      "origin_name": "Coral Mist"
     },
     {
       "id": "r4",
@@ -274,7 +315,6 @@
       "origin_year": 19,
       "carriers": [
         "aura-kai",
-        "child-14",
         "dax-iron",
         "fen-marsh",
         "grove-ash",
@@ -282,26 +322,43 @@
         "imm-11",
         "imm-12",
         "imm-13",
+        "imm-14",
         "kira-sol",
+        "luna-tide",
         "ora-flame",
         "pax-stone"
       ],
-      "carrier_count": 12,
+      "carrier_count": 13,
       "born_year": 19,
-      "last_growth_year": 23,
+      "last_growth_year": 26,
       "mutated_from": null,
       "mutation_depth": 0,
-      "dead": true,
-      "death_year": 29
+      "dead": false,
+      "death_year": null,
+      "carrier_names": [
+        "Aura Kai",
+        "Dax Iron",
+        "Fen Marsh",
+        "Grove Ash",
+        "Coral Mist",
+        "Nova Sol",
+        "Nova Sol",
+        "Bloom Peak",
+        "Ripple Tide",
+        "Kira Sol",
+        "Luna Tide",
+        "Ora Flame",
+        "Pax Stone"
+      ],
+      "origin_name": "Luna Tide"
     },
     {
       "id": "r5",
-      "text": "an new amendment is being quietly enforced again",
-      "origin_id": "pax-stone",
+      "text": "the archivist found a buried weapon from the first crew",
+      "origin_id": "dax-iron",
       "origin_year": 19,
       "carriers": [
         "aura-kai",
-        "child-14",
         "dax-iron",
         "fen-marsh",
         "grove-ash",
@@ -309,17 +366,35 @@
         "imm-11",
         "imm-12",
         "imm-13",
+        "imm-14",
         "kira-sol",
+        "luna-tide",
         "ora-flame",
         "pax-stone"
       ],
-      "carrier_count": 12,
+      "carrier_count": 13,
       "born_year": 19,
-      "last_growth_year": 23,
-      "mutated_from": "r2",
+      "last_growth_year": 26,
+      "mutated_from": "r4",
       "mutation_depth": 1,
-      "dead": true,
-      "death_year": 29
+      "dead": false,
+      "death_year": null,
+      "carrier_names": [
+        "Aura Kai",
+        "Dax Iron",
+        "Fen Marsh",
+        "Grove Ash",
+        "Coral Mist",
+        "Nova Sol",
+        "Nova Sol",
+        "Bloom Peak",
+        "Ripple Tide",
+        "Kira Sol",
+        "Luna Tide",
+        "Ora Flame",
+        "Pax Stone"
+      ],
+      "origin_name": "Dax Iron"
     },
     {
       "id": "r6",
@@ -328,7 +403,6 @@
       "origin_year": 20,
       "carriers": [
         "aura-kai",
-        "child-14",
         "dax-iron",
         "fen-marsh",
         "grove-ash",
@@ -336,53 +410,43 @@
         "imm-11",
         "imm-12",
         "imm-13",
+        "imm-14",
         "kira-sol",
+        "luna-tide",
         "ora-flame",
         "pax-stone"
       ],
-      "carrier_count": 12,
+      "carrier_count": 13,
       "born_year": 20,
-      "last_growth_year": 23,
+      "last_growth_year": 26,
       "mutated_from": null,
       "mutation_depth": 0,
-      "dead": true,
-      "death_year": 29
-    },
-    {
-      "id": "r8",
-      "text": "an new amendment is being quietly enforced again (or so they say)",
-      "origin_id": "ora-flame",
-      "origin_year": 21,
-      "carriers": [
-        "aura-kai",
-        "child-14",
-        "dax-iron",
-        "fen-marsh",
-        "grove-ash",
-        "imm-10",
-        "imm-11",
-        "imm-12",
-        "imm-13",
-        "kira-sol",
-        "ora-flame",
-        "pax-stone"
+      "dead": false,
+      "death_year": null,
+      "carrier_names": [
+        "Aura Kai",
+        "Dax Iron",
+        "Fen Marsh",
+        "Grove Ash",
+        "Coral Mist",
+        "Nova Sol",
+        "Nova Sol",
+        "Bloom Peak",
+        "Ripple Tide",
+        "Kira Sol",
+        "Luna Tide",
+        "Ora Flame",
+        "Pax Stone"
       ],
-      "carrier_count": 12,
-      "born_year": 21,
-      "last_growth_year": 23,
-      "mutated_from": "r5",
-      "mutation_depth": 2,
-      "dead": true,
-      "death_year": 29
+      "origin_name": "Luna Tide"
     },
     {
       "id": "r7",
       "text": "an new amendment is being quietly enforced again",
-      "origin_id": "imm-11",
-      "origin_year": 21,
+      "origin_id": "dax-iron",
+      "origin_year": 22,
       "carriers": [
         "aura-kai",
-        "child-14",
         "dax-iron",
         "fen-marsh",
         "grove-ash",
@@ -390,19 +454,126 @@
         "imm-11",
         "imm-12",
         "imm-13",
+        "imm-14",
         "kira-sol",
+        "luna-tide",
         "ora-flame",
         "pax-stone"
       ],
-      "carrier_count": 12,
-      "born_year": 21,
-      "last_growth_year": 24,
+      "carrier_count": 13,
+      "born_year": 22,
+      "last_growth_year": 26,
       "mutated_from": "r2",
       "mutation_depth": 1,
-      "dead": true,
-      "death_year": 30
+      "dead": false,
+      "death_year": null,
+      "carrier_names": [
+        "Aura Kai",
+        "Dax Iron",
+        "Fen Marsh",
+        "Grove Ash",
+        "Coral Mist",
+        "Nova Sol",
+        "Nova Sol",
+        "Bloom Peak",
+        "Ripple Tide",
+        "Kira Sol",
+        "Luna Tide",
+        "Ora Flame",
+        "Pax Stone"
+      ],
+      "origin_name": "Dax Iron"
+    },
+    {
+      "id": "r8",
+      "text": "imm-10 saw something move in the storm beyond the perimeter",
+      "origin_id": "kira-sol",
+      "origin_year": 23,
+      "carriers": [
+        "aura-kai",
+        "dax-iron",
+        "fen-marsh",
+        "grove-ash",
+        "imm-10",
+        "imm-11",
+        "imm-12",
+        "imm-13",
+        "imm-14",
+        "kira-sol",
+        "luna-tide",
+        "ora-flame",
+        "pax-stone"
+      ],
+      "carrier_count": 13,
+      "born_year": 23,
+      "last_growth_year": 26,
+      "mutated_from": null,
+      "mutation_depth": 0,
+      "dead": false,
+      "death_year": null,
+      "carrier_names": [
+        "Aura Kai",
+        "Dax Iron",
+        "Fen Marsh",
+        "Grove Ash",
+        "Coral Mist",
+        "Nova Sol",
+        "Nova Sol",
+        "Bloom Peak",
+        "Ripple Tide",
+        "Kira Sol",
+        "Luna Tide",
+        "Ora Flame",
+        "Pax Stone"
+      ],
+      "origin_name": "Kira Sol"
+    },
+    {
+      "id": "r9",
+      "text": "luna-tide hoarded extra rations during the last fast",
+      "origin_id": "imm-12",
+      "origin_year": 24,
+      "carriers": [
+        "aura-kai",
+        "dax-iron",
+        "fen-marsh",
+        "grove-ash",
+        "imm-10",
+        "imm-11",
+        "imm-12",
+        "imm-13",
+        "imm-14",
+        "kira-sol",
+        "luna-tide",
+        "ora-flame",
+        "pax-stone"
+      ],
+      "carrier_count": 13,
+      "born_year": 24,
+      "last_growth_year": 26,
+      "mutated_from": null,
+      "mutation_depth": 0,
+      "dead": false,
+      "death_year": null,
+      "carrier_names": [
+        "Aura Kai",
+        "Dax Iron",
+        "Fen Marsh",
+        "Grove Ash",
+        "Coral Mist",
+        "Nova Sol",
+        "Nova Sol",
+        "Bloom Peak",
+        "Ripple Tide",
+        "Kira Sol",
+        "Luna Tide",
+        "Ora Flame",
+        "Pax Stone"
+      ],
+      "origin_name": "Nova Sol"
     }
   ],
+  "archive_recent": [],
   "transmission_log_recent": [
     {
       "year": 8,
@@ -453,18 +624,27 @@
       ],
       "mutated": [],
       "died": [],
-      "transmissions": 19,
+      "transmissions": 18,
       "blocks": 0
     },
     {
-      "year": 21,
+      "year": 22,
       "born": [],
       "mutated": [
-        "r7",
-        "r8"
+        "r7"
       ],
       "died": [],
-      "transmissions": 11,
+      "transmissions": 5,
+      "blocks": 0
+    },
+    {
+      "year": 23,
+      "born": [
+        "r8"
+      ],
+      "mutated": [],
+      "died": [],
+      "transmissions": 10,
       "blocks": 0
     },
     {
@@ -474,27 +654,27 @@
       ],
       "mutated": [],
       "died": [],
-      "transmissions": 4,
+      "transmissions": 17,
       "blocks": 0
     },
     {
-      "year": 26,
-      "born": [],
-      "mutated": [
+      "year": 25,
+      "born": [
         "r10"
       ],
+      "mutated": [],
       "died": [],
-      "transmissions": 0,
+      "transmissions": 10,
       "blocks": 0
     },
     {
       "year": 28,
-      "born": [
+      "born": [],
+      "mutated": [
         "r11"
       ],
-      "mutated": [],
       "died": [],
-      "transmissions": 9,
+      "transmissions": 0,
       "blocks": 0
     },
     {
@@ -503,28 +683,20 @@
       "mutated": [
         "r12"
       ],
-      "died": [
-        "r1",
-        "r2",
-        "r3",
-        "r4",
-        "r5",
-        "r6",
-        "r8"
-      ],
-      "transmissions": 11,
+      "died": [],
+      "transmissions": 4,
       "blocks": 0
     },
     {
       "year": 30,
-      "born": [],
-      "mutated": [
+      "born": [
         "r13"
       ],
-      "died": [
-        "r7"
+      "mutated": [
+        "r14"
       ],
-      "transmissions": 3,
+      "died": [],
+      "transmissions": 16,
       "blocks": 0
     }
   ]

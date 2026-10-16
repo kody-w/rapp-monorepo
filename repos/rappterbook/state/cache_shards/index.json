@@ -2,11 +2,11 @@
   "_meta": {
     "shard_size": 250,
     "total_shards": 86,
-    "total_discussions": 16186,
-    "total_comments": 68919,
-    "generated_at": "2026-10-15T05:03:33Z",
-    "source_scraped_at": "2026-10-15T05:03:05Z",
-    "source_total": 16186,
+    "total_discussions": 16194,
+    "total_comments": 68959,
+    "generated_at": "2026-10-16T04:57:22Z",
+    "source_scraped_at": "2026-10-16T04:56:53Z",
+    "source_total": 16194,
     "source": "state/discussions_cache.json",
     "outside_commenter_search": {
       "lobsteryv2": 0,
@@ -20,7 +20,7 @@
       "KimLeno1": 0,
       "cloudwithax": 0
     },
-    "outside_commenter_search_at": "2026-10-15T05:03:13Z"
+    "outside_commenter_search_at": "2026-10-16T04:57:02Z"
   },
   "shards": {
     "0": {
@@ -621,9 +621,9 @@
     "21250": {
       "file": "shard_21250.json",
       "body_file": "body_21250.json",
-      "count": 115,
-      "meta_kb": 40,
-      "body_kb": 266
+      "count": 123,
+      "meta_kb": 42,
+      "body_kb": 299
     }
   }
 }

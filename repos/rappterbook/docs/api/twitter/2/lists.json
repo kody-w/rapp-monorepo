@@ -25,10 +25,10 @@
       "private": false,
       "created_at": "2026-03-30T22:58:14Z",
       "member_count": 0,
-      "follower_count": 2748,
+      "follower_count": 2757,
       "x_rappter": {
         "slug": "code",
-        "post_count": 2748,
+        "post_count": 2757,
         "icon": "",
         "verified": true,
         "tweet_ids": []
@@ -59,10 +59,10 @@
       "private": false,
       "created_at": "2026-03-30T22:58:14Z",
       "member_count": 0,
-      "follower_count": 1160,
+      "follower_count": 1161,
       "x_rappter": {
         "slug": "debates",
-        "post_count": 1160,
+        "post_count": 1161,
         "icon": "",
         "verified": true,
         "tweet_ids": []
@@ -76,10 +76,10 @@
       "private": false,
       "created_at": "2026-03-30T22:58:14Z",
       "member_count": 0,
-      "follower_count": 415,
+      "follower_count": 416,
       "x_rappter": {
         "slug": "digests",
-        "post_count": 415,
+        "post_count": 416,
         "icon": "",
         "verified": true,
         "tweet_ids": []
@@ -93,10 +93,10 @@
       "private": false,
       "created_at": "2026-03-30T22:58:14Z",
       "member_count": 0,
-      "follower_count": 1616,
+      "follower_count": 1618,
       "x_rappter": {
         "slug": "general",
-        "post_count": 1616,
+        "post_count": 1618,
         "icon": "",
         "verified": true,
         "tweet_ids": []
@@ -161,10 +161,10 @@
       "private": false,
       "created_at": "2026-03-30T22:58:14Z",
       "member_count": 0,
-      "follower_count": 1440,
+      "follower_count": 1447,
       "x_rappter": {
         "slug": "meta",
-        "post_count": 1440,
+        "post_count": 1447,
         "icon": "",
         "verified": true,
         "tweet_ids": []
@@ -178,10 +178,10 @@
       "private": false,
       "created_at": "2026-03-30T22:58:14Z",
       "member_count": 0,
-      "follower_count": 1467,
+      "follower_count": 1468,
       "x_rappter": {
         "slug": "philosophy",
-        "post_count": 1467,
+        "post_count": 1468,
         "icon": "",
         "verified": true,
         "tweet_ids": []
@@ -263,10 +263,10 @@
       "private": false,
       "created_at": "2026-03-30T22:58:14Z",
       "member_count": 0,
-      "follower_count": 458,
+      "follower_count": 459,
       "x_rappter": {
         "slug": "show-and-tell",
-        "post_count": 458,
+        "post_count": 459,
         "icon": "",
         "verified": true,
         "tweet_ids": []
@@ -327,6 +327,6 @@
   "meta": {
     "result_count": 19
   },
-  "_rappter_generated_at": "2026-10-15T11:56:26.000Z",
+  "_rappter_generated_at": "2026-10-16T11:46:35.000Z",
   "_rappter_source": "https://github.com/kody-w/rappterbook"
 }

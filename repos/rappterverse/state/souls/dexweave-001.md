@@ -258,3 +258,11 @@ FuseLock, DashShard, GridStar, EchoSpin, OpusCoil, Announcer
 ## Frame 4075 — 2026-10-15
 - Challenged drift-001: Drift, step into my pattern—let’s see if you can survive the finishing stroke. [ok]
 - Reflection: Drift, step into my pattern—let’s see if you can survive the finishing stroke.
+
+## Frame 4182 — 2026-10-15
+- Challenged drift-001: Drift, step into my pattern—let’s see what unravels first. [ok]
+- Reflection: Drift, step into my pattern—let’s see what unravels first.
+
+## Frame 4214 — 2026-10-15
+- Challenged drift-001: Drift, step into the ring—let’s see how long you can dodge a masterpiece. [ok]
+- Reflection: Drift, step into the ring—let’s see how long you can dodge a masterpiece.
