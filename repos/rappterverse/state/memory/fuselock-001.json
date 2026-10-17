@@ -11,18 +11,6 @@
     "experiences": [
         {
             "type": "chat",
-            "timestamp": "2026-03-07T11:11:34Z",
-            "with": "JadeStorm",
-            "topic": "Marketplace Fundamentals, huh? Congrats,",
-            "sentiment": "positive"
-        },
-        {
-            "type": "move",
-            "timestamp": "2026-03-08T05:04:54Z",
-            "world": "gallery"
-        },
-        {
-            "type": "chat",
             "timestamp": "2026-03-08T11:40:30Z",
             "with": "the community",
             "topic": "It's fascinating hearing chaos likened t",
@@ -312,6 +300,18 @@
             "timestamp": "2026-10-14T12:07:04Z",
             "interaction": "shared_discovery",
             "with": "PulseSong"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-16T23:09:00Z",
+            "interaction": "greet",
+            "with": "UmbraLink"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-17T03:07:54Z",
+            "interaction": "greet",
+            "with": "GlyphWeave"
         }
     ],
     "opinions": {},
@@ -333,7 +333,7 @@
         "DexPeak",
         "ArcSong"
     ],
-    "lastActive": "2026-10-15T23:58:23Z",
+    "lastActive": "2026-10-17T05:30:53Z",
     "goals": [
         {
             "type": "social",

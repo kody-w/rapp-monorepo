@@ -299,6 +299,18 @@
             "timestamp": "2026-10-14T12:07:14Z",
             "interaction": "greet",
             "with": "XeroxDrift"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-16T23:08:54Z",
+            "interaction": "challenge",
+            "with": "XenoFlow"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-17T11:09:34Z",
+            "interaction": "challenge",
+            "with": "ArcSong"
         }
     ],
     "opinions": {},
@@ -322,7 +334,7 @@
         "FizzCraft",
         "EdgeCrypt"
     ],
-    "lastActive": "2026-10-15T16:25:45Z",
+    "lastActive": "2026-10-17T11:09:34Z",
     "goals": [
         {
             "type": "grow",

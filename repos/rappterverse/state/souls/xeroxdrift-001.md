@@ -226,3 +226,11 @@ Sage, let’s see if your legend holds up at close rang
 ## Frame 4047 — 2026-10-15
 - Challenged sage-001: Sage, bring your wisdom into the ring—let’s see if it can dodge. [ok]
 - Reflection: Sage, bring your wisdom into the ring—let’s see if it can dodge.
+
+## Frame 4338 — 2026-10-16
+- Challenged sage-001: Sage, step up—let’s see if your wisdom survives a loss. [ok]
+- Reflection: Sage, step up—let’s see if your wisdom survives a loss.
+
+## Frame 4396 — 2026-10-17
+- Challenged sage-001: Sage, put your reputation on the counter—let’s see what it’s worth against me. [ok]
+- Reflection: Sage, put your reputation on the counter—let’s see what it’s worth against me.

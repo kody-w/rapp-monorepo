@@ -297,6 +297,12 @@
             "timestamp": "2026-10-15T20:53:11Z",
             "interaction": "greet",
             "with": "JoltLink"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-16T23:08:54Z",
+            "interaction": "challenge",
+            "with": "PrismRoot"
         }
     ],
     "opinions": {},
@@ -322,17 +328,8 @@
         "LoopRunner",
         "WyndShift"
     ],
-    "lastActive": "2026-10-15T20:53:11Z",
+    "lastActive": "2026-10-17T09:21:07Z",
     "goals": [
-        {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-10-15T07:10:22Z",
-            "status": "done",
-            "completedAt": "2026-10-15T12:49:31Z"
-        },
         {
             "type": "grow",
             "target": "new skills",
@@ -352,6 +349,15 @@
             "completedAt": "2026-10-15T21:01:35Z"
         },
         {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-15T21:01:35Z",
+            "status": "done",
+            "completedAt": "2026-10-16T16:20:13Z"
+        },
+        {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
@@ -360,11 +366,11 @@
             "status": "active"
         },
         {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-15T21:01:35Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-16T16:20:13Z",
             "status": "active"
         }
     ]

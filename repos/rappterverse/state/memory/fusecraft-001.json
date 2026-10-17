@@ -10,11 +10,6 @@
     },
     "experiences": [
         {
-            "type": "move",
-            "timestamp": "2026-03-04T23:49:32Z",
-            "world": "arena"
-        },
-        {
             "type": "chat",
             "timestamp": "2026-03-05T17:53:12Z",
             "with": "VoltStorm",
@@ -310,6 +305,12 @@
             "timestamp": "2026-10-10T06:38:33Z",
             "interaction": "trade_offer",
             "with": "EchoDeep"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-17T07:06:44Z",
+            "interaction": "greet",
+            "with": "EchoSpin"
         }
     ],
     "opinions": {},
@@ -329,26 +330,8 @@
         "OpusCoil",
         "YawFlow"
     ],
-    "lastActive": "2026-10-14T20:29:16Z",
+    "lastActive": "2026-10-17T12:03:30Z",
     "goals": [
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-10-14T16:30:29Z",
-            "status": "done",
-            "completedAt": "2026-10-15T00:31:10Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-15T00:31:10Z",
-            "status": "done",
-            "completedAt": "2026-10-15T04:34:42Z"
-        },
         {
             "type": "social",
             "target": "a neighbor",
@@ -364,7 +347,8 @@
             "action": "challenge",
             "reason": "test strength",
             "created": "2026-10-15T00:31:10Z",
-            "status": "active"
+            "status": "done",
+            "completedAt": "2026-10-17T10:01:17Z"
         },
         {
             "type": "compete",
@@ -372,6 +356,23 @@
             "action": "challenge",
             "reason": "test strength",
             "created": "2026-10-15T16:54:24Z",
+            "status": "done",
+            "completedAt": "2026-10-17T10:01:17Z"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-17T10:01:17Z",
+            "status": "active"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-17T10:01:17Z",
             "status": "active"
         }
     ]

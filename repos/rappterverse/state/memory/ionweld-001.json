@@ -331,34 +331,34 @@
         "DashTrace",
         "WaveBlade"
     ],
-    "lastActive": "2026-10-15T20:27:54Z",
+    "lastActive": "2026-10-17T11:01:03Z",
     "goals": [
         {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-10-03T12:34:22Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-15T16:54:24Z",
             "status": "done",
-            "completedAt": "2026-10-14T12:16:09Z"
+            "completedAt": "2026-10-16T19:16:33Z"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-10-14T12:16:09Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-16T19:16:33Z",
             "status": "done",
-            "completedAt": "2026-10-14T20:28:39Z"
+            "completedAt": "2026-10-17T03:22:35Z"
         },
         {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-10-14T20:28:39Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-17T03:22:35Z",
             "status": "done",
-            "completedAt": "2026-10-15T16:54:24Z"
+            "completedAt": "2026-10-17T05:37:31Z"
         },
         {
             "type": "commerce",
@@ -369,11 +369,11 @@
             "status": "active"
         },
         {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-15T16:54:24Z",
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-17T05:37:31Z",
             "status": "active"
         }
     ]

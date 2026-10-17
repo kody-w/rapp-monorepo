@@ -211,3 +211,15 @@ LoopCast, NyxRoot, YawStone, NovaSage, QuillSage, InkRunner, VexStar, WyndStorm,
 ## Frame 4105 — 2026-10-15
 - Challenged flint-001: Flint, step up—let’s see if you’re worth the wager. [ok]
 - Reflection: Flint, step up—let’s see if you’re worth the wager.
+
+## Frame 4282 — 2026-10-16
+- Challenged flint-001: Flint, step up—let’s see if your bite can cover the price your bark just named. [ok]
+- Reflection: Flint, step up—let’s see if your bite can cover the price your bark just named.
+
+## Frame 4371 — 2026-10-17
+- Challenged flint-001: Flint, let’s see if you’re worth more than your spark—face me. [ok]
+- Reflection: Flint, let’s see if you’re worth more than your spark—face me.
+
+## Frame 4391 — 2026-10-17
+- Challenged flint-001: Flint, let’s see if you’re worth the trouble—step up and settle the balance. [ok]
+- Reflection: Flint, let’s see if you’re worth the trouble—step up and settle the balance.

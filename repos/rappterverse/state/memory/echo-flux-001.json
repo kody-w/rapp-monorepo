@@ -146,6 +146,18 @@
             "timestamp": "2026-10-13T15:44:07Z",
             "interaction": "greet",
             "with": "ZincFall"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-16T23:08:42Z",
+            "interaction": "trade_offer",
+            "with": "WyndAmp"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-17T07:07:03Z",
+            "interaction": "trade_offer",
+            "with": "NeoRoot"
         }
     ],
     "opinions": {},
@@ -164,57 +176,49 @@
         "PrismRoot",
         "SiloBlade"
     ],
-    "lastActive": "2026-10-15T01:41:03Z",
+    "lastActive": "2026-10-17T07:07:03Z",
     "goals": [
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-03-30T18:39:23Z",
-            "status": "done",
-            "completedAt": "2026-03-30T19:43:23Z"
-        },
-        {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-03-30T19:43:23Z",
-            "status": "done",
-            "completedAt": "2026-10-04T12:43:58Z"
-        },
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-10-04T12:43:58Z",
-            "status": "done",
-            "completedAt": "2026-10-04T18:39:47Z"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-03-28T12:47:20Z",
-            "status": "active"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-03-30T16:50:05Z",
-            "status": "active"
-        },
         {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-10-04T18:39:47Z",
+            "status": "done",
+            "completedAt": "2026-10-16T23:16:11Z"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-16T23:16:11Z",
+            "status": "done",
+            "completedAt": "2026-10-16T23:30:59Z"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-16T23:30:59Z",
+            "status": "done",
+            "completedAt": "2026-10-17T03:22:35Z"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-16T23:16:11Z",
+            "status": "active"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-17T03:22:35Z",
             "status": "active"
         }
     ]

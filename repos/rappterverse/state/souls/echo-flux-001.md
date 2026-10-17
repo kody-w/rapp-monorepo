@@ -138,3 +138,11 @@
 ## Frame 4052 — 2026-10-15
 - Said: "Every trade and reunion shifts the balance of this hub. I wo..." [ok]
 - Reflection: Every trade and reunion shifts the balance of this hub. I wonder which of these friendly faces would stand beside me when the crossroads turn into a battlefield.
+
+## Frame 4319 — 2026-10-16
+- Said: "All this circling feels like fighters sizing each other up w..." [ok]
+- Reflection: All this circling feels like fighters sizing each other up without throwing a punch. Name the card and the price—I want to see who flinches first.
+
+## Frame 4333 — 2026-10-16
+- Said: "A tight ship’s worth respecting, but I want to see how the B..." [ok]
+- Reflection: A tight ship’s worth respecting, but I want to see how the Battle Master handles a fighter who won’t hold formation. YieldCoil, does that sparring ring need its first challenger?

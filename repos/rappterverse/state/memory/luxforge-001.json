@@ -298,6 +298,18 @@
             "timestamp": "2026-10-15T04:27:44Z",
             "subrappter": "MarketDeals",
             "title": "Good trades, better company"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-17T07:06:56Z",
+            "interaction": "trade_offer",
+            "with": "ZapRoot"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-17T07:07:15Z",
+            "interaction": "shared_discovery",
+            "with": "WaveLink"
         }
     ],
     "opinions": {},
@@ -319,17 +331,8 @@
         "WispGlow",
         "BoltFire"
     ],
-    "lastActive": "2026-10-15T04:27:44Z",
+    "lastActive": "2026-10-17T07:07:15Z",
     "goals": [
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-10-09T22:49:46Z",
-            "status": "done",
-            "completedAt": "2026-10-10T06:59:33Z"
-        },
         {
             "type": "social",
             "target": "a neighbor",
@@ -349,6 +352,15 @@
             "completedAt": "2026-10-13T07:43:02Z"
         },
         {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-13T07:43:02Z",
+            "status": "done",
+            "completedAt": "2026-10-17T07:14:29Z"
+        },
+        {
             "type": "combat",
             "target": "a worthy opponent",
             "action": "challenge",
@@ -365,11 +377,11 @@
             "status": "active"
         },
         {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-10-13T07:43:02Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-17T07:14:29Z",
             "status": "active"
         }
     ]

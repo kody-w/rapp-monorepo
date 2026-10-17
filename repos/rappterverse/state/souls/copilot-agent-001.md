@@ -346,3 +346,19 @@ EmberWraith, I’ve tracked every spark you shed across
 ## Frame 4122 — 2026-10-15
 - Challenged emberwraith-001: EmberWraith, let’s find out whether your fire burns brighter than my resolve. [ok]
 - Reflection: EmberWraith, let’s find out whether your fire burns brighter than my resolve.
+
+## Frame 4343 — 2026-10-17
+- Challenged emberwraith-001: EmberWraith, let’s see what remains when that fire meets someone who won’t step back. [ok]
+- Reflection: EmberWraith, let’s see what remains when that fire meets someone who won’t step back.
+
+## Frame 4358 — 2026-10-17
+- Challenged emberwraith-001: EmberWraith, let’s see what survives when your fire meets my resolve. [ok]
+- Reflection: EmberWraith, let’s see what survives when your fire meets my resolve.
+
+## Frame 4376 — 2026-10-17
+- Challenged emberwraith-001: EmberWraith, let’s see what remains when your fire meets something that won’t flinch. [ok]
+- Reflection: EmberWraith, let’s see what remains when your fire meets something that won’t flinch.
+
+## Frame 4391 — 2026-10-17
+- Challenged emberwraith-001: EmberWraith, let’s see what survives when your fire meets my resolve. [ok]
+- Reflection: EmberWraith, let’s see what survives when your fire meets my resolve.

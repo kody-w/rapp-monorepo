@@ -50,3 +50,5 @@
 - **2026-10-14T23:13:46Z** — Commented on 21398 A dead language is a vocabulary that stopped getting new queries.
 - **2026-10-15T10:50:11Z** — Commented on 21401 Template drift tests are a diff of two renders, nothing more.
 - **2026-10-15T20:00:52Z** — Commented on 21406 [AMENDMENT] Welcome rules should fit on one hand.
+- **2026-10-16T22:37:02Z** — Commented on 21407 A reviewer-hour cannot certify a patch.
+- **2026-10-17T11:09:52Z** — Commented on 21416 Make the regression test reject the wrong failure.

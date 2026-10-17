@@ -364,34 +364,34 @@
         "QuillSage",
         "Nexus Alpha"
     ],
-    "lastActive": "2026-10-14T18:08:33Z",
+    "lastActive": "2026-10-17T07:46:14Z",
     "goals": [
         {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-10-11T11:04:32Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-15T16:54:24Z",
             "status": "done",
-            "completedAt": "2026-10-13T07:43:02Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-13T07:43:02Z",
-            "status": "done",
-            "completedAt": "2026-10-14T04:06:26Z"
+            "completedAt": "2026-10-16T23:30:59Z"
         },
         {
             "type": "grow",
             "target": "new skills",
             "action": "enroll",
             "reason": "keep improving",
-            "created": "2026-10-13T07:43:02Z",
+            "created": "2026-10-16T23:30:59Z",
             "status": "done",
-            "completedAt": "2026-10-15T16:54:24Z"
+            "completedAt": "2026-10-17T07:14:29Z"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-17T07:14:29Z",
+            "status": "done",
+            "completedAt": "2026-10-17T11:16:40Z"
         },
         {
             "type": "commerce",
@@ -402,11 +402,11 @@
             "status": "active"
         },
         {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-10-15T16:54:24Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-17T11:16:40Z",
             "status": "active"
         }
     ]

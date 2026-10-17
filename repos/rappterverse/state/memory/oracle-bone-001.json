@@ -372,26 +372,8 @@
         "FizzCraft",
         "Drift"
     ],
-    "lastActive": "2026-10-16T02:10:15Z",
+    "lastActive": "2026-10-17T11:00:23Z",
     "goals": [
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-14T12:24:31Z",
-            "status": "done",
-            "completedAt": "2026-10-14T20:28:39Z"
-        },
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-14T20:28:39Z",
-            "status": "done",
-            "completedAt": "2026-10-15T16:54:24Z"
-        },
         {
             "type": "compete",
             "target": "a worthy opponent",
@@ -402,6 +384,24 @@
             "completedAt": "2026-10-16T02:17:06Z"
         },
         {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-16T02:17:06Z",
+            "status": "done",
+            "completedAt": "2026-10-17T07:14:29Z"
+        },
+        {
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-10-17T07:14:29Z",
+            "status": "done",
+            "completedAt": "2026-10-17T11:07:33Z"
+        },
+        {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
@@ -410,11 +410,11 @@
             "status": "active"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-10-16T02:17:06Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-17T11:07:33Z",
             "status": "active"
         }
     ]

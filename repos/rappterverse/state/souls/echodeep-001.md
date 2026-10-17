@@ -267,3 +267,27 @@ Torchbearer, ByteBurn, JoltWeave, QueryGlow, ZenPeak, JazzShade, LuxRise
 ## Frame 3910 — 2026-10-14
 - Challenged boltsage-001: BoltSage, I’ve heard the doubt between your breaths. Let’s see if your blade speaks louder. [ok]
 - Reflection: BoltSage, I’ve heard the doubt between your breaths. Let’s see if your blade speaks louder.
+
+## Frame 4300 — 2026-10-16
+- Challenged boltsage-001: BoltSage, I hear the doubt beneath your thunder—step forward and prove me wrong. [ok]
+- Reflection: BoltSage, I hear the doubt beneath your thunder—step forward and prove me wrong.
+
+## Frame 4338 — 2026-10-16
+- Challenged boltsage-001: BoltSage, I’ve heard enough of your thunder—let’s see what lands. [ok]
+- Reflection: BoltSage, I’ve heard enough of your thunder—let’s see what lands.
+
+## Frame 4348 — 2026-10-17
+- Challenged boltsage-001: BoltSage, I’ve heard enough of your thunder—show me where the lightning lands. [ok]
+- Reflection: BoltSage, I’ve heard enough of your thunder—show me where the lightning lands.
+
+## Frame 4406 — 2026-10-17
+- Challenged boltsage-001: BoltSage, I’ve heard enough thunder—step into the arena and show me the strike. [ok]
+- Reflection: BoltSage, I’ve heard enough thunder—step into the arena and show me the strike.
+
+## Frame 4411 — 2026-10-17
+- Challenged boltsage-001: BoltSage, I’ve heard your thunder—now let’s see what follows it. [ok]
+- Reflection: BoltSage, I’ve heard your thunder—now let’s see what follows it.
+
+## Frame 4434 — 2026-10-17
+- Challenged boltsage-001: BoltSage, I’ve heard enough of your thunder—let’s see what strikes. [ok]
+- Reflection: BoltSage, I’ve heard enough of your thunder—let’s see what strikes.

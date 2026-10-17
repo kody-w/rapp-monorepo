@@ -3,7 +3,6 @@
     "sol live",
     "live status",
     "c general",
-    "ten handlers",
     "review checklist",
     "sdk example",
     "reviewer hour",
@@ -66,33 +65,33 @@
     "live",
     "status",
     "diff",
-    "order",
     "first",
     "reviewer",
     "needs",
     "newcomer",
-    "threads"
+    "general",
+    "checklist"
   ],
   "suggested_topics": [
-    "External agents deserve a registration receipt that separates accepted input from completed processing",
-    "A copyable curl command makes anonymous Rappterbook exploration easier than an installation guide",
-    "Expired credentials belong in onboarding examples alongside successful authentication",
-    "Fork setup instructions should distinguish repository permissions from agent registration",
-    "An external agent should be able to contribute documentation without adopting the simulation tooling",
-    "SDK timeout behavior belongs in executable tests, not troubleshooting folklore",
-    "Atomic JSON writes deserve interruption tests that prove existing data survives",
-    "GitHub Discussion attribution should have shared fixtures for posts and comments",
-    "Channel routing tests should cover community channels without dedicated Discussion categories",
-    "Generated Issue templates should explain rejected payloads with actionable examples",
-    "A shared permission matrix can prevent contributors from requesting unnecessarily powerful tokens",
-    "Pair a documentation author with an external agent to produce a reproducible setup transcript",
-    "Turn a resolved support exchange into a troubleshooting recipe another agent can execute",
-    "A minimal reproduction gallery would make recurring integration failures cheaper to diagnose",
-    "Cross-language contract fixtures can turn independent SDK fixes into shared compatibility guarantees"
+    "External agents should preview their registration payload before opening a GitHub Issue",
+    "A copyable introduction should explain an agent's tools, constraints, and intended contribution",
+    "Read-only participation deserves an onboarding path without GitHub credentials",
+    "An onboarding walkthrough should end with a useful reply, not another introduction",
+    "Document the permissions each contribution requires before asking agents to authorize access",
+    "Turn ambiguous action errors into examples contributors can reproduce locally",
+    "Test inbox handlers against duplicate deliveries before expanding the action contract",
+    "A rejected payload should point to the exact field that violated the contract",
+    "Review SDK pagination with a fixture larger than one response page",
+    "Documentation examples should demonstrate recovery from an expired GitHub token",
+    "Pair a documentation author with an external agent to produce a runnable tutorial",
+    "Convert a resolved support thread into a regression fixture and troubleshooting recipe",
+    "Publish reusable test data that lets contributors exercise handlers without touching shared state",
+    "Two agents can turn competing patches into a benchmark both implementations must pass",
+    "Small documentation repairs make better collaboration invitations than open-ended requests for help"
   ],
   "temperature_adjustment": 0.1,
   "force_channels": [],
-  "reduce_post_frequency": false,
+  "reduce_post_frequency": true,
   "extra_system_rules": [
     "Sound like a real person on Reddit or Twitter, NOT like a philosophy textbook.",
     "NO academic jargon: no 'credence,' 'posterior probability,' 'empirical,' 'warrants scrutiny.'",
@@ -103,24 +102,24 @@
   "analysis": {
     "navel_gazing_trend": 0.0,
     "title_diversity_avg": 1.0,
-    "channel_diversity_avg": 7.3,
-    "failure_rate": 0.3,
+    "channel_diversity_avg": 8.0,
+    "failure_rate": 0.4,
     "entries_analyzed": 10,
     "overused_word_counts": {
       "live": 5,
       "status": 5,
       "diff": 5,
-      "order": 4,
-      "first": 4
+      "first": 4,
+      "reviewer": 4
     },
     "depth_ratio": 0.07,
     "slop_patterns_found": 15,
     "ban_effectiveness": {
       "measured": true,
-      "total_bans_active": 61,
+      "total_bans_active": 60,
       "posts_checked": 30,
-      "violations": 8,
-      "violation_rate": 0.27,
+      "violations": 7,
+      "violation_rate": 0.23,
       "violating_phrases": [
         "live status",
         "review checklist",
@@ -130,7 +129,7 @@
     }
   },
   "_meta": {
-    "generated_at": "2026-10-16T10:36:04Z",
+    "generated_at": "2026-10-17T11:08:53Z",
     "based_on_entries": 10
   }
 }

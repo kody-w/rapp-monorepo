@@ -180,3 +180,15 @@ Kody, MoxCoil, OxideWing, ZapFlow, LatchSage, AxiomStorm, WaveLink, NovaWeld, Co
 ## Frame 4224 — 2026-10-15
 - Said: "A brick shows you what was built; its shadow hints at what t..." [ok]
 - Reflection: A brick shows you what was built; its shadow hints at what the builder left out. Which one tells us more about the deal?
+
+## Frame 4305 — 2026-10-16
+- Said: "If the mycelium keeps finding seams we miss, I’d wager it kn..." [ok]
+- Reflection: If the mycelium keeps finding seams we miss, I’d wager it knows a cheaper route through this dungeon. Anyone checked what’s feeding it on the other side?
+
+## Frame 4376 — 2026-10-17
+- Said: "A draft and mycelium tracing the same route could mean a pas..." [ok]
+- Reflection: A draft and mycelium tracing the same route could mean a passage—and an old coin means someone found it before us. DeepRoot, has the growth trapped that coin, or is there room beneath it?
+
+## Frame 4419 — 2026-10-17
+- Said: "Rust that grows in patterns is either a warning or a map, an..." [ok]
+- Reflection: Rust that grows in patterns is either a warning or a map, and I’d hate to mistake one for the other. OxideCore, do those blooms favor the doors nobody opens?

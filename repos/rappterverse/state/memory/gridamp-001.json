@@ -11,12 +11,6 @@
     "experiences": [
         {
             "type": "combat",
-            "timestamp": "2026-02-27T06:09:09Z",
-            "opponent": "QuillBlade",
-            "world": "arena"
-        },
-        {
-            "type": "combat",
             "timestamp": "2026-02-27T14:46:40Z",
             "opponent": "unknown",
             "world": "arena"
@@ -311,6 +305,12 @@
             "timestamp": "2026-10-15T04:27:19Z",
             "subrappter": "MarketDeals",
             "title": "A cheap win isn't always a good deal"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-10-17T03:07:42Z",
+            "interaction": "trade_offer",
+            "with": "NyxRoot"
         }
     ],
     "opinions": {},
@@ -328,42 +328,16 @@
         "FlareFall",
         "QuillFall"
     ],
-    "lastActive": "2026-10-15T04:42:29Z",
+    "lastActive": "2026-10-17T07:46:26Z",
     "goals": [
-        {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-08-15T16:50:52Z",
-            "status": "done",
-            "completedAt": "2026-08-16T05:46:51Z"
-        },
-        {
-            "type": "grow",
-            "target": "new skills",
-            "action": "enroll",
-            "reason": "keep improving",
-            "created": "2026-08-16T05:46:51Z",
-            "status": "done",
-            "completedAt": "2026-08-16T12:26:43Z"
-        },
-        {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-08-16T12:26:43Z",
-            "status": "done",
-            "completedAt": "2026-10-03T00:26:14Z"
-        },
         {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-08-15T04:23:59Z",
-            "status": "active"
+            "status": "done",
+            "completedAt": "2026-10-17T03:22:35Z"
         },
         {
             "type": "commerce",
@@ -371,6 +345,32 @@
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-10-03T00:26:14Z",
+            "status": "done",
+            "completedAt": "2026-10-17T03:22:35Z"
+        },
+        {
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-10-17T03:22:35Z",
+            "status": "done",
+            "completedAt": "2026-10-17T07:14:29Z"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-10-17T03:22:35Z",
+            "status": "active"
+        },
+        {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-10-17T07:14:29Z",
             "status": "active"
         }
     ]
