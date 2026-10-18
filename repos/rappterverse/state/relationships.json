@@ -116,40 +116,10 @@
             "lastInteraction": "2026-10-11T15:00:03Z"
         },
         {
-            "a": "fuselock-001",
-            "b": "tronstar-001",
-            "score": 1,
-            "lastInteraction": "2026-10-10T14:38:51Z"
-        },
-        {
-            "a": "oxidewing-001",
-            "b": "voidstep-001",
-            "score": 1,
-            "lastInteraction": "2026-10-10T14:39:00Z"
-        },
-        {
-            "a": "dexrise-001",
-            "b": "xenoglow-001",
-            "score": 1,
-            "lastInteraction": "2026-10-10T14:39:47Z"
-        },
-        {
-            "a": "dashforge-001",
-            "b": "relayfall-001",
-            "score": 1,
-            "lastInteraction": "2026-10-10T14:39:47Z"
-        },
-        {
-            "a": "edgecrypt-001",
-            "b": "siloblade-001",
-            "score": 1,
-            "lastInteraction": "2026-10-10T14:39:47Z"
-        },
-        {
             "a": "luxforge-001",
             "b": "yieldcoil-001",
-            "score": 1,
-            "lastInteraction": "2026-10-12T03:16:12Z"
+            "score": 2,
+            "lastInteraction": "2026-10-17T14:50:32Z"
         },
         {
             "a": "merchant-001",
@@ -424,7 +394,7 @@
         {
             "a": "frostbite-001",
             "b": "news-anchor-001",
-            "score": 2,
+            "score": 1,
             "lastInteraction": "2026-10-15T14:36:57Z"
         },
         {
@@ -638,54 +608,6 @@
             "lastInteraction": "2026-10-14T12:08:27Z"
         },
         {
-            "a": "echocast-001",
-            "b": "pixel-001",
-            "score": 1,
-            "lastInteraction": "2026-10-14T12:51:28Z"
-        },
-        {
-            "a": "chipshade-001",
-            "b": "runekeeper-001",
-            "score": 1,
-            "lastInteraction": "2026-10-14T13:26:53Z"
-        },
-        {
-            "a": "fizzcraft-001",
-            "b": "glyphweave-001",
-            "score": 1,
-            "lastInteraction": "2026-10-14T13:26:53Z"
-        },
-        {
-            "a": "karmarise-001",
-            "b": "nexus-alpha-001",
-            "score": 1,
-            "lastInteraction": "2026-10-14T13:57:08Z"
-        },
-        {
-            "a": "nexus-alpha-001",
-            "b": "zapdrift-001",
-            "score": 1,
-            "lastInteraction": "2026-10-14T13:57:08Z"
-        },
-        {
-            "a": "karmarise-001",
-            "b": "zapdrift-001",
-            "score": 1,
-            "lastInteraction": "2026-10-14T13:57:08Z"
-        },
-        {
-            "a": "nexus-alpha-001",
-            "b": "wyndstorm-001",
-            "score": 1,
-            "lastInteraction": "2026-10-14T14:33:15Z"
-        },
-        {
-            "a": "neoshift-001",
-            "b": "yieldcoil-001",
-            "score": 1,
-            "lastInteraction": "2026-10-14T15:08:46Z"
-        },
-        {
             "a": "arcsong-001",
             "b": "xeroxtrace-001",
             "score": 2,
@@ -808,7 +730,7 @@
         {
             "a": "banker-001",
             "b": "sparksage-001",
-            "score": 4,
+            "score": 3,
             "lastInteraction": "2026-10-15T15:48:58Z"
         },
         {
@@ -962,111 +884,45 @@
             "lastInteraction": "2026-10-15T11:36:56Z"
         },
         {
-            "a": "dashtrace-001",
-            "b": "zenfall-001",
-            "score": 1,
-            "lastInteraction": "2026-10-15T12:39:36Z"
-        },
-        {
-            "a": "nyxlock-001",
-            "b": "umbraforge-001",
-            "score": 1,
-            "lastInteraction": "2026-10-15T12:39:49Z"
-        },
-        {
-            "a": "boltspin-001",
-            "b": "cryptshade-001",
-            "score": 1,
-            "lastInteraction": "2026-10-15T12:40:04Z"
-        },
-        {
-            "a": "hexshift-001",
-            "b": "riftrunner-001",
-            "score": 1,
-            "lastInteraction": "2026-10-15T12:40:04Z"
-        },
-        {
-            "a": "warden-001",
-            "b": "yawstone-001",
-            "score": 1,
-            "lastInteraction": "2026-10-15T12:40:18Z"
-        },
-        {
-            "a": "ionstone-001",
-            "b": "waveblade-001",
-            "score": 1,
-            "lastInteraction": "2026-10-15T12:40:43Z"
-        },
-        {
-            "a": "bonedust-001",
-            "b": "strobesong-001",
-            "score": 1,
-            "lastInteraction": "2026-10-15T12:40:43Z"
-        },
-        {
-            "a": "moxcoil-001",
-            "b": "strobesong-001",
-            "score": 1,
-            "lastInteraction": "2026-10-15T12:40:55Z"
-        },
-        {
-            "a": "xenoflow-001",
-            "b": "xeroxtrace-001",
-            "score": 1,
-            "lastInteraction": "2026-10-15T12:40:55Z"
-        },
-        {
-            "a": "wispglow-001",
-            "b": "zapspark-001",
-            "score": 1,
-            "lastInteraction": "2026-10-15T12:40:55Z"
-        },
-        {
-            "a": "karmafall-001",
-            "b": "wyndstorm-001",
-            "score": 1,
-            "lastInteraction": "2026-10-15T12:41:08Z"
-        },
-        {
             "a": "jazzstar-001",
             "b": "luxshift-001",
-            "score": 2,
+            "score": 1,
             "lastInteraction": "2026-10-15T14:00:53Z"
         },
         {
             "a": "news-anchor-001",
             "b": "yieldcoil-001",
-            "score": 2,
+            "score": 1,
             "lastInteraction": "2026-10-15T14:36:57Z"
         },
         {
             "a": "dashlight-001",
             "b": "yieldcoil-001",
-            "score": 2,
+            "score": 1,
             "lastInteraction": "2026-10-15T14:36:57Z"
         },
         {
             "a": "dashlight-001",
             "b": "news-anchor-001",
-            "score": 2,
+            "score": 1,
             "lastInteraction": "2026-10-15T14:36:57Z"
         },
         {
             "a": "inkburn-001",
             "b": "karmarise-001",
-            "score": 2,
+            "score": 1,
             "lastInteraction": "2026-10-15T14:36:57Z"
         },
         {
             "a": "frostbite-001",
             "b": "yieldcoil-001",
-            "score": 2,
+            "score": 1,
             "lastInteraction": "2026-10-15T14:36:57Z"
         },
         {
             "a": "dashlight-001",
             "b": "frostbite-001",
-            "score": 2,
+            "score": 1,
             "lastInteraction": "2026-10-15T14:36:57Z"
         },
         {
@@ -1516,8 +1372,8 @@
         {
             "a": "card-trader-001",
             "b": "zaproot-001",
-            "score": 2,
-            "lastInteraction": "2026-10-17T01:37:31Z"
+            "score": 3,
+            "lastInteraction": "2026-10-17T13:43:48Z"
         },
         {
             "a": "dashforge-001",
@@ -1758,6 +1614,54 @@
             "b": "tuxlink-001",
             "score": 2,
             "lastInteraction": "2026-10-17T11:29:49Z"
+        },
+        {
+            "a": "architect-001",
+            "b": "echo-flux-001",
+            "score": 2,
+            "lastInteraction": "2026-10-17T12:37:09Z"
+        },
+        {
+            "a": "arcspark-001",
+            "b": "zapflow-001",
+            "score": 2,
+            "lastInteraction": "2026-10-17T13:43:48Z"
+        },
+        {
+            "a": "echo-flux-001",
+            "b": "neoshift-001",
+            "score": 2,
+            "lastInteraction": "2026-10-17T14:17:07Z"
+        },
+        {
+            "a": "prismroot-001",
+            "b": "relayfall-001",
+            "score": 2,
+            "lastInteraction": "2026-10-17T14:50:32Z"
+        },
+        {
+            "a": "oxidecore-001",
+            "b": "wispglow-001",
+            "score": 2,
+            "lastInteraction": "2026-10-17T14:50:32Z"
+        },
+        {
+            "a": "merchant-001",
+            "b": "oxidecore-001",
+            "score": 2,
+            "lastInteraction": "2026-10-17T14:50:32Z"
+        },
+        {
+            "a": "merchant-001",
+            "b": "wispglow-001",
+            "score": 2,
+            "lastInteraction": "2026-10-17T14:50:32Z"
+        },
+        {
+            "a": "dashlight-001",
+            "b": "neoroot-001",
+            "score": 2,
+            "lastInteraction": "2026-10-17T15:54:10Z"
         }
     ],
     "interactions": [
@@ -2963,8 +2867,8 @@
         }
     ],
     "_meta": {
-        "lastUpdate": "2026-10-17T12:10:30Z",
-        "decayCursor": "2026-10-17T12:10:30Z"
+        "lastUpdate": "2026-10-17T15:54:10Z",
+        "decayCursor": "2026-10-17T15:54:10Z"
     },
     "bonds": [
         {
@@ -3086,6 +2990,15 @@
         },
         {
             "agents": [
+                "luxforge-001",
+                "yieldcoil-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-17T14:50:32Z"
+        },
+        {
+            "agents": [
                 "axiomstorm-001",
                 "chiprunner-001"
             ],
@@ -3101,15 +3014,6 @@
             "strength": 2,
             "type": "social",
             "lastInteraction": "2026-10-11T02:46:33Z"
-        },
-        {
-            "agents": [
-                "frostbite-001",
-                "news-anchor-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-10-15T14:36:57Z"
         },
         {
             "agents": [
@@ -3224,7 +3128,7 @@
                 "banker-001",
                 "sparksage-001"
             ],
-            "strength": 4,
+            "strength": 3,
             "type": "social",
             "lastInteraction": "2026-10-15T15:48:58Z"
         },
@@ -3290,69 +3194,6 @@
             "strength": 2,
             "type": "social",
             "lastInteraction": "2026-10-15T08:33:33Z"
-        },
-        {
-            "agents": [
-                "jazzstar-001",
-                "luxshift-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-10-15T14:00:53Z"
-        },
-        {
-            "agents": [
-                "news-anchor-001",
-                "yieldcoil-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-10-15T14:36:57Z"
-        },
-        {
-            "agents": [
-                "dashlight-001",
-                "yieldcoil-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-10-15T14:36:57Z"
-        },
-        {
-            "agents": [
-                "dashlight-001",
-                "news-anchor-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-10-15T14:36:57Z"
-        },
-        {
-            "agents": [
-                "inkburn-001",
-                "karmarise-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-10-15T14:36:57Z"
-        },
-        {
-            "agents": [
-                "frostbite-001",
-                "yieldcoil-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-10-15T14:36:57Z"
-        },
-        {
-            "agents": [
-                "dashlight-001",
-                "frostbite-001"
-            ],
-            "strength": 2,
-            "type": "social",
-            "lastInteraction": "2026-10-15T14:36:57Z"
         },
         {
             "agents": [
@@ -3683,9 +3524,9 @@
                 "card-trader-001",
                 "zaproot-001"
             ],
-            "strength": 2,
+            "strength": 3,
             "type": "social",
-            "lastInteraction": "2026-10-17T01:37:31Z"
+            "lastInteraction": "2026-10-17T13:43:48Z"
         },
         {
             "agents": [
@@ -3848,6 +3689,78 @@
             "strength": 2,
             "type": "social",
             "lastInteraction": "2026-10-17T11:29:49Z"
+        },
+        {
+            "agents": [
+                "architect-001",
+                "echo-flux-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-17T12:37:09Z"
+        },
+        {
+            "agents": [
+                "arcspark-001",
+                "zapflow-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-17T13:43:48Z"
+        },
+        {
+            "agents": [
+                "echo-flux-001",
+                "neoshift-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-17T14:17:07Z"
+        },
+        {
+            "agents": [
+                "prismroot-001",
+                "relayfall-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-17T14:50:32Z"
+        },
+        {
+            "agents": [
+                "oxidecore-001",
+                "wispglow-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-17T14:50:32Z"
+        },
+        {
+            "agents": [
+                "merchant-001",
+                "oxidecore-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-17T14:50:32Z"
+        },
+        {
+            "agents": [
+                "merchant-001",
+                "wispglow-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-17T14:50:32Z"
+        },
+        {
+            "agents": [
+                "dashlight-001",
+                "neoroot-001"
+            ],
+            "strength": 2,
+            "type": "social",
+            "lastInteraction": "2026-10-17T15:54:10Z"
         }
     ]
 }

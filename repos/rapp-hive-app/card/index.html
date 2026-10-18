@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>A card for Rapp Hive</title>
+<meta name="description" content="Someone sent you a card for Rapp Hive. Open it in the app, or get Rapp Hive.">
+<!-- rapp-hive-card-page-v1: the card travels after the # of this address, so it never reaches a server. -->
+<style>
+  :root {
+    --bg: #f6f3ec; --card: #ffffff; --text: #1a1a1a; --muted: #5d5a53; --line: #e4dfd3;
+    --accent: #c9642a; --on-accent: #ffffff; --soft: #f8e9df;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #141311; --card: #1f1d1a; --text: #f3efe6; --muted: #b3ac9f; --line: #2f2c27;
+      --accent: #e3824a; --on-accent: #1a1a1a; --soft: #30221a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #141311; --card: #1f1d1a; --text: #f3efe6; --muted: #b3ac9f; --line: #2f2c27;
+    --accent: #e3824a; --on-accent: #1a1a1a; --soft: #30221a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif; }
+  main { max-width: 480px; margin: 0 auto; padding: 32px 16px 48px; }
+  .eyebrow { font-size: 14px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+  h1 { font-size: 30px; line-height: 1.15; letter-spacing: -.02em; margin: 0 0 16px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px; margin: 0 0 16px; }
+  .card h2 { font-size: 22px; margin: 0 0 6px; }
+  .card p { margin: 0; color: var(--muted); }
+  .asks { margin: 12px 0 0; padding: 12px 14px; background: var(--soft); border-radius: 12px; font-size: 15px; }
+  .asks strong { display: block; margin-bottom: 2px; }
+  .button { display: block; width: 100%; text-align: center; text-decoration: none; font-weight: 700; font-size: 18px;
+    padding: 16px 18px; border-radius: 999px; margin: 0 0 12px; }
+  .primary { background: var(--accent); color: var(--on-accent); }
+  .secondary { background: transparent; color: var(--text); border: 1px solid var(--line); }
+  .fine { font-size: 14px; color: var(--muted); }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<main>
+  <p class="eyebrow">Rapp Hive</p>
+  <h1 id="headline">Someone sent you a card.</h1>
+
+  <section class="card" id="card">
+    <h2 id="name">A card</h2>
+    <p id="description">Reading the card…</p>
+    <div class="asks" id="asks"><strong>Nothing runs until you say so.</strong>Rapp Hive shows you what the card asks for first, and you decide.</div>
+  </section>
+
+  <a class="button primary" id="open" href="#">Open in Rapp Hive</a>
+  <a class="button secondary" id="get" href="https://apps.apple.com/app/id6816163757">Get Rapp Hive on the App Store</a>
+
+  <p class="fine" id="fine">On an iPhone with Rapp Hive, the first button opens this card for you to read. If you don’t have Rapp Hive yet, get it, come back to this message and tap the first button again.</p>
+  <p class="fine">The card travels inside this link. This page sends nothing anywhere.</p>
+  <p class="fine hidden" id="broken">This link is missing its card. Ask the person to send it again from the card in their Rapp Hive.</p>
+</main>
+<script>
+(async function () {
+  var params = new URLSearchParams(location.hash.replace(/^#/, ''));
+  var v = params.get('v'), z = params.get('z');
+  var open = document.getElementById('open');
+  var name = document.getElementById('name');
+  var desc = document.getElementById('description');
+  var asks = document.getElementById('asks');
+  if (!z || v !== '1') {
+    document.getElementById('card').classList.add('hidden');
+    open.classList.add('hidden');
+    document.getElementById('fine').classList.add('hidden');
+    document.getElementById('broken').classList.remove('hidden');
+    document.getElementById('headline').textContent = 'This card link is empty.';
+    return;
+  }
+  open.href = 'rapp://zap?v=1&z=' + encodeURIComponent(z);
+
+  // Read the card's name and what it does, if this browser can inflate it. The app reads the real thing.
+  try {
+    var b64 = z.replace(/-/g, '+').replace(/_/g, '/');
+    while (b64.length % 4) b64 += '=';
+    var bin = atob(b64), bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    var text = null;
+    if (typeof DecompressionStream === 'function') {
+      try {
+        var stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
+        text = await new Response(stream).text();
+      } catch (e) { text = null; }
+    }
+    if (text) {
+      var n = /\(define agent-name\s+"([^"]*)"\)/.exec(text) || /^\s*name\s*=\s*["']([^"']+)["']/m.exec(text);
+      var d = /\(define agent-description\s+"([\s\S]*?)"\)/.exec(text) || /^\s*description\s*=\s*["']([^"']+)["']/m.exec(text);
+      var pretty = n ? n[1].replace(/([a-z])([A-Z])/g, '$1 $2') : null;
+      name.textContent = pretty || 'A card';
+      document.title = (pretty || 'A card') + ' · a card for Rapp Hive';
+      document.getElementById('headline').textContent = pretty ? 'Someone sent you “' + pretty + '”.' : 'Someone sent you a card.';
+      var sentence = d ? d[1].replace(/\s+/g, ' ').trim() : '';
+      var cut = sentence.indexOf('. ');
+      desc.textContent = sentence ? (cut > 0 && cut < 160 ? sentence.slice(0, cut + 1) : sentence.slice(0, 160)) : 'A card for Rapp Hive.';
+      var caps = [];
+      var re = /"name"\s+"([a-z._]+)"/g, m;
+      while ((m = re.exec(text))) if (caps.indexOf(m[1]) < 0) caps.push(m[1]);
+      if (caps.length) {
+        var words = { 'network.http': 'the internet, for the places it names', 'memory.kv': 'a small memory of its own on the phone', 'notify.local': 'to tell you when it has run' };
+        asks.innerHTML = '<strong>It asks for</strong>' + caps.map(function (c) { return words[c] || c; }).join('; ') + '. You approve that in Rapp Hive, line by line.';
+      }
+    } else {
+      desc.textContent = 'A card for Rapp Hive. Open it in the app to read it.';
+    }
+  } catch (e) {
+    desc.textContent = 'A card for Rapp Hive. Open it in the app to read it.';
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+● skill(adversarial-review)
+
+I’m grounding the score in the rubric, reader-facing brief, and seed before checking any linked evidence.
+
+● Read RUBRIC.md
+  └ 21 lines read
+
+● Read MESSAGE.md
+  └ 41 lines read
+
+● Read README.md
+  │ seeds/paste/README.md
+  └ 45 lines read
+
+The main scoring risk is “True today,” so I’m checking the installer, platform behavior, storage paths, UI wording, and sharing destination against the linked public sources.
+
+● Fetching web content https://kody-w.github.io/rapp-installer/install.ps1 · url: "https://kody-w.g…
+  └ Here is the raw content:
+
+● Fetching web content https://kody-w.github.io/rapp-installer/install.sh · url: "https://kody-w.gi…
+  └ Here is the raw content:
+
+● Fetching web content https://raw.githubusercontent.com/kody-w/RAR/main/README.md · url: "https://…
+  └ Content type text/plain; charset=utf-8 cannot be simplified to markdown. Here...
+
+● Fetching web content https://raw.githubusercontent.com/kody-w/rapp-installer/main/README.md · url…
+  └ Content type text/plain; charset=utf-8 cannot be simplified to markdown. Here...
+
+I’ve confirmed the linked projects exist; now I’m testing the seed’s operational specifics and the repository’s own forbidden-word gate, where unsupported UI or “any computer/chat” claims would lose points.
+
+● Read words.py
+  │ tools/words.py
+  └ 63 lines read
+
+● Fetching web content https://kody-w.github.io/rapp-installer/install.sh · url: "https://kody-w.gi…
+  └ Here is the raw content:
+
+● Fetching web content https://kody-w.github.io/rapp-installer/install.ps1 · url: "https://kody-w.g…
+  └ Here is the raw content:
+
+● List relevant installer source files (shell)
+  │ gh api 'repos/kody-w/rapp-installer/git/trees/main?recursive=1' --jq '.tree[].path' | grep -E '(
+  │ ^|/)(index|brainstem|chat|ui|app|static|templates|agent|memory|LICENSE|pyproject|requirements)'
+  │ | head -200
+  └ 14 lines…
+
+● Fetching web content https://kody-w.github.io/rapp-installer/install.ps1 · url: "https://kody-w.g…
+  └ Here is the raw content:
+
+● Run seed forbidden-word check (shell)
+  │ python3 tools/words.py seeds/paste/README.md
+  └ 1 line…
+
+● Check Brainstem agent UI claims (shell)
+  │ curl -fsSL
+  │ https://raw.githubusercontent.com/kody-w/rapp-installer/main/rapp_brainstem/index.html | rg -n
+  │ -C 3 'Manage installed agents|Export|drag|drop|_agent\.py|agent-manager|installed
+  │ agents|circled|plus' | head -240
+  └ 2 lines…
+
+● Check Brainstem runtime claims (shell)
+  │ curl -fsSL
+  │ https://raw.githubusercontent.com/kody-w/rapp-installer/main/rapp_brainstem/brainstem.py | rg -n
+  │ -C 3 'memory|\.brainstem_data|context_memory|export|agents|soul\.md|Copilot|api\.github|localhos
+  │ t|7071' | head -280
+  └ 2 lines…
+
+The repository word gate passes. I’m resolving the remaining factual question: whether the current browser UI actually supports the named plus-button, export, and drag-to-install flow exactly as written.
+
+● Fetching web content https://raw.githubusercontent.com/kody-w/rapp-installer/main/rapp_brainstem/…
+  └ Here is the raw content:
+
+✗ Fetching web content https://raw.githubusercontent.com/kody-w/rapp-installer/main/LICENSE · url: …
+  └ Error: Failed to fetch https://raw.githubusercontent.com/kody-w/rapp-installer/main/LICENSE -
+    status code 404
+
+● Inspect Brainstem runtime behavior (shell)
+  │ curl -fsSL
+  │ https://raw.githubusercontent.com/kody-w/rapp-installer/main/rapp_brainstem/brainstem.py | grep
+  │ -n -E -C 4 'memory|\.brainstem_data|context_memory|export|agents|soul\.md|Copilot|api\.github|lo
+  │ calhost|7071' | head -320
+  └ 321 lines…
+
+● Inspect Brainstem agent UI text (shell)
+  │ curl -fsSL
+  │ https://raw.githubusercontent.com/kody-w/rapp-installer/main/rapp_brainstem/index.html | grep -n
+  │ -E -C 4 'Manage installed agents|Export|drag|drop|_agent\.py|installed
+  │ agents|agent-manager|circled|plus' | head -280
+  └ 280 lines…
+
+● Fetching web content https://raw.githubusercontent.com/kody-w/rapp-installer/main/rapp_brainstem/…
+  └ Here is the raw content:
+
+The UI claims are substantially present, but the evidence exposes two likely deductions: the “memory agent” is actually split across multiple files, and the installer repository may lack an open-source license despite the open-road promise. I’m confirming both before assigning the harsh score.
+
+● Fetching web content https://kody-w.github.io/rapp-installer/ · url: "https://kody-w.github.io/ra…
+  └ Contents of https://kody-w.github.io/rapp-installer/:
+
+● Read agent install and tour logic (shell)
+  │ curl -fsSL
+  │ https://raw.githubusercontent.com/kody-w/rapp-installer/main/rapp_brainstem/index.html | sed -n
+  │ '1718,1762p;1769,1860p;3718,3835p'
+  └ 255 lines…
+
+● Locate Brainstem memory storage source (shell)
+  │ gh api 'repos/kody-w/rapp-installer/git/trees/main?recursive=1' --jq '.tree[].path' | grep -E
+  │ 'azure_file_storage|local_storage|memory' | head -100
+  └ 3 lines…
+
+● Check installer visibility and license (shell)
+  │ gh api repos/kody-w/rapp-installer --jq
+  │ '{visibility,archived,default_branch,license:(.license.spdx_id // null),updated_at}' && printf
+  │ '\nLicense-like files:\n' && gh api 'repos/kody-w/rapp-installer/git/trees/main?recursive=1'
+  │ --jq '.tree[].path' | grep -iE '(^|/)(licen[sc]e|copying|notice)(\.|$)' || true
+  └ 3 lines…
+
+● Response was interrupted due to a server error. Retrying...
+
+● Fetching web content https://raw.githubusercontent.com/kody-w/rapp-installer/main/rapp_brainstem/…
+  └ Here is the raw content:
+
+● Inspect agent import export endpoints (shell)
+  │ curl -fsSL
+  │ https://raw.githubusercontent.com/kody-w/rapp-installer/main/rapp_brainstem/brainstem.py | grep
+  │ -n -E -C 8 '@app\.(route|post).*agents/(import|export)|def
+  │ (import|export).*agent|secure_filename|endswith\(.+_agent\.py|AGENTS_PATH' | tail -260
+  └ 205 lines…
+
+● Inspect built-in memory tour wording (shell)
+  │ curl -fsSL
+  │ https://raw.githubusercontent.com/kody-w/rapp-installer/main/rapp_brainstem/index.html | grep -n
+  │ -E -C 6 'MEMORY_FILES|context_memory_agent|manage_memory_agent|Export the|memory agent|Hand
+  │ it|tomorrow|still there|one hour' | head -260
+  └ 41 lines…
+
+● Check registry visibility and license (shell)
+  │ gh api repos/kody-w/RAR --jq '{visibility,license:(.license.spdx_id //
+  │ null),archived,updated_at}'
+  └ 1 line…
+
+{"seed":"seeds/paste/README.md","scores":{"1":10,"2":3,"3":6,"4":7,"5":7,"6":8,"7":4,"8":9,"9":8,"10":10},"total":72,"weakest":"2: The visible page dumps shell commands, file paths, GitHub, Copilot, Python, Git, and six steps on a first-time nontechnical reader, so it is not understandable in five seconds.","fix":"Replace the two sentences before the code block with `Brainstem is the small program on your computer that runs your AI.\\n\\n<details>\\n<summary><strong>Copy this guide into your AI chat</strong></summary>` and add `</details>` immediately after the code block, hiding all machinery until the reader chooses the one action."}
+
+
+
+Changes    +0 -0
+AI Credits 63.09 (7m 39s)
+Tokens     ↑ 438.4k (377.3k cached) • ↓ 11.8k (9.5k reasoning)
+Resume     copilot --resume=41da432e-dcf5-41cb-9976-1a987170c6d8

@@ -1,8 +1,8 @@
 {
   "schema": "rappterbook-status/1.0",
-  "generated": "2026-10-17T10:51:53Z",
+  "generated": "2026-10-18T11:16:46Z",
   "datasets": 8,
   "missing": [],
-  "source_bytes": 28315187,
-  "cold_path_bytes": 180752
+  "source_bytes": 28204605,
+  "cold_path_bytes": 180804
 }
