@@ -1,7 +1,7 @@
 {
-  "witness_log_offset": 179887,
-  "mcp_weather_offset": 2506406,
-  "brainstem_last_tick": "2026-10-18T06:14:53Z",
-  "changes_last_ts": "2026-10-18T10:53:15Z",
+  "witness_log_offset": 181042,
+  "mcp_weather_offset": 2522892,
+  "brainstem_last_tick": "2026-10-19T01:36:10Z",
+  "changes_last_ts": "2026-10-19T05:39:08Z",
   "prompts_offset": 17687251
 }

@@ -4,8 +4,8 @@ Drag this file onto your Brainstem window and click OK. Then say: teach me my fi
 It is one file that does one job, like every agent. Read it: the six steps are below, in plain words.
 
 Your AI, as files you own.
-1. Learn it in an hour. It thinks the way you do, so you can see how it works.
-2. Run it on any computer. Mac, Windows or Linux. Its memory stays in your own folder.
+1. Learn it in an hour (being tested). It thinks the way you do, so you can see how it works.
+2. Run it on any computer. Mac, Windows or Linux (being tested). Its memory stays in your own folder.
 3. Hand it to anyone. It is just files. One agent is one file.
 """
 try:
@@ -36,14 +36,15 @@ STEPS = [
      "Tomorrow, ask me what I remember. My memory is a file in your Brainstem's folder."),
     ("See what it can do.",
      "Click the circled plus at the top right (it says Manage installed agents when you point at it). "
-     "Each one listed is an agent: one file that does one job. I am one of them: FirstHour."),
+     "Each one listed is an agent: one file that does one job. Think of each one as a neuron in a brain: "
+     "when your message needs its job, it fires and does it. I am one of them: FirstHour."),
     ("Read an agent.",
      "Click Export next to ManageMemory. Your browser saves a small file, usually in Downloads. "
      "Drag it into a chat with any AI and ask: Explain this in plain words. "
      "It is a short program for one job: saving what you ask me to remember."),
     ("Make your own.",
      "In that same chat, ask for a new agent just like it, for a chore you repeat, as a file you can download. "
-     "Drag that file onto this window and click OK when it asks. I use it on your next message. "
+     "Drag that file onto this window and click OK when it asks. Your Brainstem just grew a new neuron. From your next message on, it fires whenever your message needs its job. "
      "If it says the agent did not load, paste that message into the chat and ask for a fix."),
     ("Hand it on.",
      "Export your new agent and send the file to a friend. They drag it onto their Brainstem and it works "
@@ -80,6 +81,6 @@ class FirstHourAgent(BasicAgent):
         title, text = STEPS[step - 1]
         after = (f" When you are ready, say next for step {step + 1} of {len(STEPS)}."
                  if step < len(STEPS) else
-                 " That is the hour. Tomorrow I am still here, on your computer, remembering. "
+                 " That is the hour. Tomorrow I am still here, on your computer, remembering (being tested this week). "
                  "Your AI, as files you own.")
         return f"Step {step} of {len(STEPS)}: {title} {text}{after}"

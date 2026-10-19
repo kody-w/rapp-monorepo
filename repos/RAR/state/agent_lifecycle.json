@@ -19636,15 +19636,15 @@
       "version": "1.0.0"
     },
     "@rapp/learn_new": {
-      "canonical_path": "agents/@rapp/learn_new_agent.py",
-      "latest_receipt": "rar_cc3830f8c6800a05f05a96ba96603d46ffd592a044b6c1de92cf886e0ca78dde",
+      "status": "active",
+      "version": "3.3.0",
+      "quality_tier": "official",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
-      "quality_tier": "official",
-      "sha256": "9104535d15333d9a30543d94483df7bad958a61c4b4c00e492fc627fe3b21741",
-      "status": "active",
-      "updated_at": "2026-08-28T04:46:14.306171+00:00",
-      "version": "3.0.1"
+      "canonical_path": "agents/@rapp/learn_new_agent.py",
+      "sha256": "c610a51c8958901dd8bf40f74de2ee4a6fd3f0d36bd52df6252da6c523ae8418",
+      "latest_receipt": "rar_6bc31d2d092132904074868b24fb06a0a87c67951d56995b058187e48faef269",
+      "updated_at": "2026-10-19T00:52:13.982480+00:00"
     },
     "@rapp/moment_factory_agent": {
       "canonical_path": "agents/@rapp/moment_factory_agent.py",
@@ -20107,8 +20107,19 @@
       "status": "active",
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.2"
+    },
+    "@kody-w/first_hour_agent": {
+      "status": "active",
+      "version": "1.0.0",
+      "quality_tier": "community",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@kody-w/first_hour_agent.py",
+      "sha256": "61dd52033a67e19c2c88909a379cfd2a855a1c18f76065ecde2bb330a3681997",
+      "latest_receipt": "rar_1bbfa0b36a331bdb2054b1f5c46be0dfbad97a5bd229af14972f862486365ddd",
+      "updated_at": "2026-10-18T12:45:14.497616+00:00"
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-09-08T20:27:06.555078+00:00"
+  "updated_at": "2026-10-19T00:52:13.982480+00:00"
 }

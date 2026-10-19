@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Room tally card</title>
+<meta name="description" content="One card per room: numbers only, no names.">
+<style>
+:root{--bg:#f7f5f0;--ink:#1c1f23;--muted:#5b636b;--line:#cfc9bb;--accent:#0f766e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111416;--ink:#eceae4;--muted:#9aa3aa;--line:#3a4045;--accent:#2dd4bf}}
+:root[data-theme="dark"]{--bg:#111416;--ink:#eceae4;--muted:#9aa3aa;--line:#3a4045;--accent:#2dd4bf}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:720px;margin:0 auto;padding:40px 16px}
+h1{font-size:30px;margin:0 0 4px}
+.sub{color:var(--muted);margin:0 0 20px}
+table{width:100%;border-collapse:collapse}
+td{border-bottom:1px solid var(--line);padding:12px 0;vertical-align:bottom}
+td.box{width:110px;border-bottom:2px solid var(--ink)}
+.note{color:var(--muted);font-size:15px;margin-top:18px}
+b{color:var(--accent)}
+@media print{:root{--bg:#fff;--ink:#000;--muted:#333;--line:#999;--accent:#000}body{font-size:13px}main{padding:0}h1{font-size:22px}td{padding:9px 0}}
+</style>
+</head>
+<body>
+<main>
+<h1>Room tally card</h1>
+<p class="sub">Your AI, as files you own. Learn it in an hour (being tested). Run it on any computer (being tested). Hand it to anyone. One card per room. Numbers only, never names.</p>
+<table>
+<tr><td>Date and place</td><td class="box"></td></tr>
+<tr><td>1. How many arrived</td><td class="box"></td></tr>
+<tr><td>2. How many were taking the hour for the first time</td><td class="box"></td></tr>
+<tr><td>2b. Of those who arrived, how many had never written code</td><td class="box"></td></tr>
+<tr><td>3. How many had Copilot ready when they arrived</td><td class="box"></td></tr>
+<tr><td><b>4. Finished:</b> at the start everyone told their Brainstem one fact. How many finished all six steps within 60 minutes, then closed it, opened it again and got the fact back?</td><td class="box"></td></tr>
+<tr><td>5. Of those who finished, how many were first-timers</td><td class="box"></td></tr>
+<tr><td>6. Of those who finished, how many had never written code</td><td class="box"></td></tr>
+<tr><td>7. How many said they want to host a room (give them this card's link and the room guide)</td><td class="box"></td></tr>
+<tr><td>8. You: is this the first room you have hosted?</td><td class="box"></td></tr>
+<tr><td>9. You: what brought you here? Someone who made the hour, another host, a room you took, a friend who took the hour, or you found it</td><td class="box"></td></tr>
+<tr><td>The hardest step today (one or two words)</td><td class="box"></td></tr>
+</table>
+<p class="note">Post the numbers at <a href="https://github.com/kody-w/rapp-seeds/issues/new?template=room-tally.yml">github.com/kody-w/rapp-seeds, Room tally</a>, the same day. Only the host posts, once, with the room's totals; nobody in the room posts or is named. That is all we count. Run the room with the <a href="../room/">room guide</a>.</p>
+</main>
+</body>
+</html>

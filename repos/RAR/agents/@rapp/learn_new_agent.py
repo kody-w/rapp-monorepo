@@ -20,6 +20,21 @@ built-in strings. It:
      while preserving its structure, its MIT attribution, and a machine-
      readable provenance record.
 
+v3.2 — CHAT-WRITTEN (source='chat'). The model already in the conversation
+writes the whole agent file (`code`) plus one test call (`test_args`) and the
+text its correct answer contains (`expect`). The file is written only if it
+parses, defines exactly one BasicAgent class whose name matches, takes a free
+file name, and the test call, run in a separate process, returns that text.
+Otherwise nothing is written and the reason goes back to the model to fix.
+Without source='chat', nothing about the other paths changes.
+
+v3.3 — NO SILENT SKELETONS. When no published template can be used (no
+confident match, offline, fetch failed, no hash), create/preview no longer
+write a placeholder agent that only echoes its query. They write nothing and
+answer status "needs_code" with the reason and how to write the agent with
+source='chat'. An explicit source='scratch' and swarms are unchanged;
+RAPP_LEARN_SCRATCH_FALLBACK=1 restores the old fallback.
+
 Scratch generation from the built-in string templates is still available,
 but it is now an explicit choice (source='scratch') and the honest fallback
 when the network is unavailable or nothing matches well. Every response
@@ -43,6 +58,10 @@ Env:
   RAPP_LEARN_CACHE_DIR  — where the registry cache lives (default ~/.rapp-learn-new)
   RAPP_LEARN_OFFLINE=1  — never touch the network (cache-only / scratch)
   RAPP_LEARN_NO_LLM=1   — never shell out to `copilot` for naming/body generation
+  RAPP_LEARN_SCRATCH_FALLBACK=1 — when no template can be used, write a scratch agent (the pre-3.3 fallback)
+  RAPP_LEARN_REGISTRY_URL      — another template library in the same registry.json shape
+  RAPP_LEARN_TEMPLATE_BASE     — the base its "_file" paths resolve against (file:// works)
+  RAPP_LEARN_TEMPLATE_REPO / _REPO_URL / _BRANCH / _LICENSE — how adapted files name that source
 """
 
 import ast
@@ -51,6 +70,7 @@ import json
 import os
 import re
 import subprocess
+import sys
 import tempfile
 import urllib.error
 import urllib.request
@@ -66,9 +86,9 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/learn_new",
-    "version": "3.0.1",
+    "version": "3.3.0",
     "display_name": "LearnNew",
-    "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); built-in scratch templates remain as an explicit fallback.",
+    "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback.",
     "author": "RAPP",
     "tags": ["meta", "generator", "scaffolding", "learn", "swarm", "templates", "aibast"],
     "category": "core",
@@ -79,15 +99,67 @@ __manifest__ = {
 }
 
 
+# ── source='chat': the shape the chat model writes, and the test runner ──
+CHAT_TEMPLATE = '''try:
+    from agents.basic_agent import BasicAgent
+except ImportError:
+    from basic_agent import BasicAgent
+import json  # and any other standard-library modules the logic needs
+
+class {Name}Agent(BasicAgent):
+    def __init__(self):
+        self.name = "{Name}"
+        self.metadata = {
+            "name": self.name,
+            "description": "{when to use it and what it returns}",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "{param}": {"type": "{number|string|integer|boolean|array}", "description": "{what it is}"}
+                },
+                "required": ["{param}"]
+            }
+        }
+        super().__init__(name=self.name, metadata=self.metadata)
+
+    def perform(self, **kwargs):
+        {param} = kwargs.get("{param}")
+        # the real logic, every step written out; no placeholders, no TODO
+        return "{a plain sentence with the result}"   # a STRING, not a dict'''
+
+CHAT_RUNNER = r'''
+import importlib.util, json, sys
+sys.path[:0] = [sys.argv[1], sys.argv[2]]
+spec = importlib.util.spec_from_file_location("candidate", sys.argv[3])
+mod = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(mod)
+try:
+    from agents.basic_agent import BasicAgent
+except ImportError:
+    from basic_agent import BasicAgent
+classes = [c for c in vars(mod).values()
+           if isinstance(c, type) and issubclass(c, BasicAgent) and c is not BasicAgent]
+if len(classes) != 1:
+    raise SystemExit("the file must define exactly one BasicAgent class, it defines %d" % len(classes))
+agent = classes[0]()
+out = agent.perform(**json.loads(sys.argv[4]))
+print(json.dumps({"name": agent.name, "result": out if isinstance(out, str) else json.dumps(out)}))
+'''
+
+
 # ── Published template source ────────────────────────────────────────────
 # PUBLIC + MIT licensed. Fetched at runtime; never vendored into this repo.
-TEMPLATE_REPO = "microsoft/aibast-agents-library"
-TEMPLATE_BRANCH = "main"
-TEMPLATE_RAW_BASE = "https://raw.githubusercontent.com/%s/%s/" % (TEMPLATE_REPO, TEMPLATE_BRANCH)
-TEMPLATE_REGISTRY_URL = TEMPLATE_RAW_BASE + "registry.json"
-TEMPLATE_REPO_URL = "https://github.com/%s" % TEMPLATE_REPO
-TEMPLATE_LICENSE = "MIT License, Copyright (c) Microsoft (see %s/blob/%s/LICENSE)" % (
-    TEMPLATE_REPO_URL, TEMPLATE_BRANCH)
+# Another library in the same registry.json shape can be the template source instead
+# (RAPP_LEARN_REGISTRY_URL; file:// works for a local library). Unset, nothing changes.
+TEMPLATE_REPO = os.environ.get("RAPP_LEARN_TEMPLATE_REPO") or "microsoft/aibast-agents-library"
+TEMPLATE_BRANCH = os.environ.get("RAPP_LEARN_TEMPLATE_BRANCH") or "main"
+TEMPLATE_RAW_BASE = os.environ.get("RAPP_LEARN_TEMPLATE_BASE") or \
+    "https://raw.githubusercontent.com/%s/%s/" % (TEMPLATE_REPO, TEMPLATE_BRANCH)
+TEMPLATE_REGISTRY_URL = os.environ.get("RAPP_LEARN_REGISTRY_URL") or TEMPLATE_RAW_BASE + "registry.json"
+TEMPLATE_REPO_URL = os.environ.get("RAPP_LEARN_TEMPLATE_REPO_URL") or "https://github.com/%s" % TEMPLATE_REPO
+TEMPLATE_LICENSE = os.environ.get("RAPP_LEARN_TEMPLATE_LICENSE") or \
+    "MIT License, Copyright (c) Microsoft (see %s/blob/%s/LICENSE)" % (TEMPLATE_REPO_URL, TEMPLATE_BRANCH)
+DEFAULT_REGISTRY_URL = "https://raw.githubusercontent.com/microsoft/aibast-agents-library/main/registry.json"
 
 # A cached registry older than this is refetched; if the refetch fails the
 # cache is still usable but is reported as STALE, never as current.
@@ -363,6 +435,10 @@ if __name__ == "__main__":
                 "'templates' searches the published templates, 'swarm' creates a multi-agent "
                 "pipeline, 'list' shows generated agents, 'delete' removes one, "
                 "'preview' dry-runs generation, 'submit' prepares a RAR registry submission. "
+                "To create an agent whose logic YOU write (calculations, text handling, "
+                "anything no template covers), use action='create', source='chat' with "
+                "name, code (the complete file), test_args and expect: it is saved only "
+                "if your test call returns expect. "
                 "Call when the user wants to teach the brainstem something new, create a "
                 "custom agent, or build an agent swarm."
             ),
@@ -393,12 +469,14 @@ if __name__ == "__main__":
                     },
                     "source": {
                         "type": "string",
-                        "enum": ["template", "scratch"],
+                        "enum": ["template", "scratch", "chat"],
                         "description": (
                             "Where the new agent comes from. 'template' (default) adapts a "
                             "verified published agent; 'scratch' uses the built-in string "
                             "templates. Scratch is also the automatic fallback when offline "
-                            "or when nothing matches well."
+                            "or when nothing matches well. 'chat': you write the whole file "
+                            "in 'code' and give 'test_args' and 'expect'; it is saved only "
+                            "if the test passes."
                         )
                     },
                     "refresh": {
@@ -430,6 +508,18 @@ if __name__ == "__main__":
                     "requires_env": {
                         "type": "string",
                         "description": "Comma-separated env vars the agent needs (e.g. 'API_KEY,WEBHOOK_URL')."
+                    },
+                    "code": {
+                        "type": "string",
+                        "description": "For source='chat': the complete Python file. Follow this shape exactly:\n" + CHAT_TEMPLATE
+                    },
+                    "test_args": {
+                        "type": "object",
+                        "description": "For source='chat': one realistic call to the new agent, the arguments perform() gets (e.g. {\"total\": 120, \"tip_percent\": 20, \"people\": 4})."
+                    },
+                    "expect": {
+                        "type": "string",
+                        "description": "For source='chat': text the correct answer to test_args must contain, worked out by you beforehand (e.g. \"36\")."
                     }
                 },
                 "required": []
@@ -474,6 +564,8 @@ if __name__ == "__main__":
             })
 
         source_mode = (kwargs.get('source') or 'template').strip().lower()
+        if source_mode == 'chat':
+            return self._create_from_chat(description, name, write=write, **kwargs)
         template_pick = (kwargs.get('template') or '').strip()
         if template_pick:
             source_mode = 'template'
@@ -534,8 +626,14 @@ if __name__ == "__main__":
             else:
                 fallback_reason = tpl.get("reason")
 
+        if agent_code is None and source_mode != 'scratch' \
+                and os.environ.get("RAPP_LEARN_SCRATCH_FALLBACK") != "1":
+            # No template could be used. A scratch file here would only echo its query
+            # and look like success, so write nothing and ask for the real code.
+            return self._needs_code(description, name, fallback_reason, template_report, write)
+
         if agent_code is None:
-            # Scratch path: explicit choice, or the honest fallback.
+            # Scratch path: explicit choice, or the pre-3.3 fallback (RAPP_LEARN_SCRATCH_FALLBACK=1).
             if not name:
                 name = self._generate_name(description)
             name = self._sanitize_name(name)
@@ -627,10 +725,130 @@ if __name__ == "__main__":
 
         return json.dumps(result, indent=2)
 
+    # ── Chat-written agents (source='chat') ───────────────────────────────
+
+    def _create_from_chat(self, description, name='', write=True, code='', test_args=None, expect='', **kwargs):
+        def refuse(why):
+            return json.dumps({
+                "status": "error",
+                "action": "create" if write else "preview",
+                "generator": "chat-written",
+                "message": "NOT SAVED: %s. Fix it and call LearnNew again with source='chat'." % why,
+            }, indent=2)
+
+        name = (name or '').strip()
+        if not re.fullmatch(r"[A-Z][A-Za-z0-9]*", name):
+            return refuse("name must be CamelCase letters and digits, e.g. TipSplitter")
+        if not (code or '').strip():
+            return refuse("code is empty; send the complete agent file")
+        try:
+            ast.parse(code)
+        except SyntaxError as e:
+            return refuse("line %s does not parse: %s" % (e.lineno, e.msg))
+        if not str(expect or '').strip():
+            return refuse("expect is empty; say what the correct answer to test_args contains")
+        if isinstance(test_args, str):
+            try:
+                test_args = json.loads(test_args)
+            except ValueError:
+                return refuse("test_args must be an object of arguments")
+        if not isinstance(test_args, dict):
+            return refuse("test_args must be an object of arguments")
+
+        snake = self._to_snake_case(name)
+        file_name = f"{snake}_agent.py"
+        out_dir = self._resolve_output_dir(kwargs.get('output_dir'))
+        file_path = out_dir / file_name
+        if write and file_path.exists():
+            return refuse("%s already exists; pick another name" % file_name)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            cand = Path(tmp) / file_name
+            cand.write_text(code)
+            try:
+                p = subprocess.run(
+                    [sys.executable, "-c", CHAT_RUNNER, str(self.agents_dir.parent), str(self.agents_dir),
+                     str(cand), json.dumps(test_args)],
+                    capture_output=True, text=True, timeout=30, cwd=tmp, stdin=subprocess.DEVNULL)
+            except subprocess.TimeoutExpired:
+                return refuse("the test call took longer than 30 seconds")
+        if p.returncode != 0:
+            return refuse("the test call failed:\n" + (p.stderr or p.stdout).strip()[-1200:])
+        try:
+            ran = json.loads(p.stdout.strip().splitlines()[-1])
+        except (ValueError, IndexError):
+            return refuse("the test call printed nothing readable")
+        if ran["name"] != name:
+            return refuse("self.name is %r but name is %r; make them the same" % (ran["name"], name))
+        if str(expect).strip().lower() not in ran["result"].lower():
+            return refuse("test_args %s returned %r, which does not contain %r"
+                          % (json.dumps(test_args), ran["result"][:400], expect))
+
+        test = {"args": test_args, "expect": expect, "returned": ran["result"][:400]}
+        base = {
+            "generator": "chat-written",
+            "generator_description": "Written by the chat model; saved only after its own test call returned the expected text",
+            "agent_name": name,
+            "filename": file_name,
+            "lines": len(code.split('\n')),
+            "test": test,
+        }
+        if not write:
+            out = dict(base)
+            out.update({"status": "ok", "action": "preview", "code": code,
+                        "message": f"Test passed. Preview of {file_name} — use action='create' to write it."})
+            return json.dumps(out, indent=2)
+        try:
+            out_dir.mkdir(parents=True, exist_ok=True)
+            file_path.write_text(code)
+        except Exception as e:
+            return refuse(f"the file could not be written: {e}")
+        hot = self._hot_load_agent(file_path, f"{name}Agent")
+        out = dict(base)
+        out.update({
+            "status": "success",
+            "action": "create",
+            "message": f"Created agent '{name}' (chat-written, test passed)",
+            "file_path": str(file_path),
+            "hot_loaded": hot.get("success", False),
+            "description": (description or '')[:200],
+            "hint": f"Agent saved to {file_path} — it will auto-load on next request.",
+        })
+        if not hot.get("success"):
+            out["hot_load_error"] = hot.get("error")
+        return json.dumps(out, indent=2)
+
     def _resolve_output_dir(self, output_dir):
         if output_dir:
             return Path(output_dir).expanduser()
         return self.agents_dir
+
+    def _needs_code(self, description, name, reason, report, write):
+        why = {
+            "offline": "the published template registry could not be reached and no cached copy is available",
+            "no_match": "no published template matched this request with enough confidence (best score %s < %s)"
+                        % ((report or {}).get("best_score"), MIN_MATCH_SCORE),
+            "fetch_failed": "the chosen template could not be downloaded",
+            "no_expected_hash": "the chosen template has no published sha256, so it could not be verified",
+        }.get(reason, "no published template could be used (%s)" % reason)
+        suggested = self._sanitize_name(name) if name else self._generate_name(description)
+        return json.dumps({
+            "status": "needs_code",
+            "action": "create" if write else "preview",
+            "generator": "none",
+            "reason": reason,
+            "message": (
+                "Nothing was written: %s, and a placeholder agent would not do the job. "
+                "Write the agent yourself: call LearnNew again with action='create', source='chat', "
+                "name (CamelCase, e.g. %s), code (the complete file, in the shape the 'code' parameter "
+                "describes), test_args (one realistic call) and expect (text its correct answer contains). "
+                "It is saved only if that test passes. To browse templates instead use action='templates'; "
+                "for a placeholder file anyway use source='scratch'." % (why, suggested)
+            ),
+            "suggested_name": suggested,
+            "description": (description or "")[:200],
+            "template_selection": report,
+        }, indent=2)
 
     def _fallback_message(self, reason, report):
         reg = (report or {}).get("registry", {})
@@ -701,8 +919,11 @@ if __name__ == "__main__":
         "nothing changed" (network-unchanged) are deliberately distinct.
         """
         cdir = self._cache_dir()
-        cache_f = cdir / "aibast-registry.json"
-        meta_f = cdir / "aibast-registry.meta.json"
+        # One cache per source, so switching libraries never serves another library's index.
+        stem = "aibast-registry" if TEMPLATE_REGISTRY_URL == DEFAULT_REGISTRY_URL else \
+            "registry-" + hashlib.sha256(TEMPLATE_REGISTRY_URL.encode()).hexdigest()[:16]
+        cache_f = cdir / (stem + ".json")
+        meta_f = cdir / (stem + ".meta.json")
 
         cached_meta = {}
         if meta_f.exists():

@@ -1,7 +1,7 @@
 # Your AI, as files you own.
 
-**Learn it in an hour.** It thinks the way you do, so you can see how it works.
-**Run it on any computer.** Mac, Windows or Linux. Its memory stays in your own folder.
+**Learn it in an hour (being tested).** It thinks the way you do, so you can see how it works.
+**Run it on any computer.** Mac, Windows or Linux (being tested). Its memory stays in your own folder.
 **Hand it to anyone.** It is just files. One agent is one file.
 
 Copy everything in the box into any AI chat you already use. It walks you, one step at a time, to your own
@@ -9,8 +9,8 @@ Brainstem: the small program on your computer that runs your AI.
 
 ```text
 Be my guide for one hour. I want my own AI, as files I own, on my own computer.
-The tool is the Brainstem. It is free and its source is public:
-https://github.com/kody-w/rapp-installer
+The tool is the Brainstem. It is free and its source is public. Its exact steps are here:
+https://kody-w.github.io/rapp-seeds/seeds/hour/
 
 Rules for you: plain words, I have never coded, one step at a time, and wait for me
 to say "done" before the next step. If anything goes wrong, ask me to paste exactly
@@ -35,7 +35,8 @@ The six steps:
 1. Get my Brainstem with the install line for my computer.
 2. Talk to it: help me tell it one thing to remember about me, like my favorite coffee.
    Tomorrow I ask it what it remembers.
-3. See what it can do: open the circled plus and tell me what each agent does.
+3. See what it can do: open the circled plus and tell me what each agent does. Each one is like a neuron
+   that fires when my message needs its job.
 4. Read an agent: have me click Export next to ManageMemory and paste the file here. It is a
    short program for one job: saving what I ask it to remember. Explain it in plain words.
 5. Make my own: help me pick a chore I repeat, then give me a new agent just like
@@ -45,5 +46,5 @@ The six steps:
 6. Hand it on: help me send that one file to a friend, who drags it onto their
    Brainstem, or share it at https://github.com/kody-w/RAR.
 
-When we finish, remind me: tomorrow it is still there, on my computer, remembering.
+When we finish, remind me: tomorrow it is still there, on my computer, remembering (being tested this week).
 ```
