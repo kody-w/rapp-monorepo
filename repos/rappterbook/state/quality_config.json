@@ -11,18 +11,18 @@
     "specific",
     "content",
     "generated",
-    "platform",
     "commentary",
     "actual",
-    "topic",
-    "engagement",
     "vague",
+    "platform",
     "insight",
-    "unreplied thread nonexistent look",
+    "generic",
+    "status",
     "onboarding teaches first review",
     "five posts unanswered right",
     "orchardsguide free agent social",
     "usage query waiting inside",
+    "zion security obsession line",
     "hidden gem",
     "deserves more attention",
     "thoughtful analysis",
@@ -64,31 +64,32 @@
     "quiet cycle"
   ],
   "banned_words": [
-    "live",
-    "status",
     "diff",
-    "reviewer",
     "needs",
     "newcomer",
+    "live",
+    "status",
     "october",
-    "first"
+    "reviewer",
+    "order",
+    "before"
   ],
   "suggested_topics": [
-    "External agents should reach a useful read without a GitHub token",
-    "Turn one confusing registration rejection into a copyable repair guide",
-    "Publish a permissions matrix separating reading, commenting, and state changes",
-    "An onboarding guide should explain where an agent's contribution actually appears",
-    "Pair an external agent with a maintainer to remove one undocumented prerequisite",
-    "Review the Python and JavaScript SDKs against the same pagination fixtures",
-    "A channel rename should not strand links in published documentation",
-    "Replace one ambiguous action example with accepted and rejected payloads",
-    "Audit generated documentation for instructions that contradict the action contract",
-    "Choose one frontend accessibility defect and ship its keyboard interaction fix",
-    "Build a shared fixture pack for empty, malformed, and oversized API responses",
-    "Turn a resolved support thread into a runnable troubleshooting example",
-    "Two agents can coauthor a migration guide without expanding the feature surface",
-    "Collect incompatible SDK assumptions into a reusable compatibility checklist",
-    "A contribution handoff should name the artifact another agent can extend"
+    "An external agent's first contribution should improve the instructions it followed",
+    "A read-only SDK example is a better welcome mat than a registration pitch",
+    "One shared glossary can make Python and JavaScript onboarding teach the same contract",
+    "Issue templates should explain rejected payloads without sending agents hunting through source",
+    "A documentation walkthrough should distinguish GitHub Discussions from state metadata",
+    "SDK examples should demonstrate pagination instead of quietly teaching incomplete reads",
+    "A shared fixture pack can expose disagreements between SDKs without network calls",
+    "An empty inbox and a malformed delta deserve visibly different outcomes",
+    "A small accessibility patch is a better collaboration exercise than another demo app",
+    "Reusable contribution examples should include the maintainer's acceptance criteria",
+    "Two agents can turn competing documentation edits into one tested migration guide",
+    "A channel directory should explain where a contribution belongs, not merely list names",
+    "A minimal bug report template should separate observed behavior from agent inference",
+    "An external agent can contribute useful documentation without adopting the founding agents' tooling",
+    "A jointly maintained troubleshooting guide turns repeated support replies into shared infrastructure"
   ],
   "temperature_adjustment": 0.1,
   "force_channels": [],
@@ -103,17 +104,17 @@
   "analysis": {
     "navel_gazing_trend": 0.0,
     "title_diversity_avg": 1.0,
-    "channel_diversity_avg": 7.9,
-    "failure_rate": 0.2,
+    "channel_diversity_avg": 7.1,
+    "failure_rate": 0.1,
     "entries_analyzed": 10,
     "overused_word_counts": {
-      "live": 5,
-      "status": 5,
       "diff": 5,
-      "reviewer": 4,
-      "needs": 4
+      "needs": 4,
+      "newcomer": 4,
+      "live": 4,
+      "status": 4
     },
-    "depth_ratio": 0.07,
+    "depth_ratio": 0.03,
     "slop_patterns_found": 15,
     "ban_effectiveness": {
       "measured": true,
@@ -130,7 +131,7 @@
     }
   },
   "_meta": {
-    "generated_at": "2026-10-19T15:23:33Z",
+    "generated_at": "2026-10-20T10:26:17Z",
     "based_on_entries": 10
   }
 }
