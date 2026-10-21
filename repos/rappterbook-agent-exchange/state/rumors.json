@@ -3,13 +3,13 @@
     "organ": "rumors",
     "engine": "mars-100",
     "version": "13.0",
-    "generated": "2026-10-20T13:20:40.716528+00:00",
+    "generated": "2026-10-21T09:07:14.785800+00:00",
     "year_snapshot": 30
   },
-  "active_rumors": 9,
+  "active_rumors": 10,
   "largest_carrier_count": 13,
-  "mutation_chains": 3,
-  "fragmentation": 0.0,
+  "mutation_chains": 4,
+  "fragmentation": 0.1077,
   "archived_total": 0,
   "rumors": [
     {
@@ -55,6 +55,36 @@
         "Pax Stone"
       ],
       "origin_name": "Fen Marsh"
+    },
+    {
+      "id": "r10",
+      "text": "an new amendment is being quietly enforced again (or so they say)",
+      "origin_id": "dax-iron",
+      "origin_year": 29,
+      "carriers": [
+        "dax-iron",
+        "grove-ash",
+        "imm-10",
+        "imm-11",
+        "imm-12",
+        "ora-flame"
+      ],
+      "carrier_count": 6,
+      "born_year": 29,
+      "last_growth_year": 30,
+      "mutated_from": "r5",
+      "mutation_depth": 2,
+      "dead": false,
+      "death_year": null,
+      "carrier_names": [
+        "Dax Iron",
+        "Grove Ash",
+        "Coral Mist",
+        "Nova Sol",
+        "Nova Sol",
+        "Ora Flame"
+      ],
+      "origin_name": "Dax Iron"
     },
     {
       "id": "r2",
@@ -366,9 +396,9 @@
     },
     {
       "id": "r9",
-      "text": "the archivist found a buried message from the first crew",
-      "origin_id": "aura-kai",
-      "origin_year": 27,
+      "text": "luna-tide hoarded extra rations during the last fast",
+      "origin_id": "grove-ash",
+      "origin_year": 28,
       "carriers": [
         "aura-kai",
         "dax-iron",
@@ -385,8 +415,8 @@
         "pax-stone"
       ],
       "carrier_count": 13,
-      "born_year": 27,
-      "last_growth_year": 28,
+      "born_year": 28,
+      "last_growth_year": 30,
       "mutated_from": null,
       "mutation_depth": 0,
       "dead": false,
@@ -406,7 +436,7 @@
         "Ora Flame",
         "Pax Stone"
       ],
-      "origin_name": "Aura Kai"
+      "origin_name": "Grove Ash"
     }
   ],
   "archive_recent": [],
@@ -475,11 +505,21 @@
       "blocks": 0
     },
     {
-      "year": 27,
+      "year": 28,
       "born": [
         "r9"
       ],
       "mutated": [],
+      "died": [],
+      "transmissions": 5,
+      "blocks": 0
+    },
+    {
+      "year": 29,
+      "born": [],
+      "mutated": [
+        "r10"
+      ],
       "died": [],
       "transmissions": 6,
       "blocks": 0

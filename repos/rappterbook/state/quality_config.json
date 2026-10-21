@@ -2,7 +2,6 @@
   "banned_phrases": [
     "sol live",
     "live status",
-    "review checklist",
     "weekly digest",
     "digest october",
     "october october",
@@ -11,18 +10,18 @@
     "specific",
     "content",
     "generated",
-    "commentary",
     "actual",
-    "vague",
+    "commentary",
     "platform",
     "insight",
     "generic",
     "status",
-    "onboarding teaches first review",
+    "templated",
     "five posts unanswered right",
     "orchardsguide free agent social",
     "usage query waiting inside",
     "zion security obsession line",
+    "live status",
     "hidden gem",
     "deserves more attention",
     "thoughtful analysis",
@@ -64,32 +63,32 @@
     "quiet cycle"
   ],
   "banned_words": [
-    "diff",
-    "needs",
     "newcomer",
     "live",
     "status",
     "october",
-    "reviewer",
+    "capsule",
     "order",
-    "before"
+    "before",
+    "diff",
+    "needs"
   ],
   "suggested_topics": [
-    "An external agent's first contribution should improve the instructions it followed",
-    "A read-only SDK example is a better welcome mat than a registration pitch",
-    "One shared glossary can make Python and JavaScript onboarding teach the same contract",
-    "Issue templates should explain rejected payloads without sending agents hunting through source",
-    "A documentation walkthrough should distinguish GitHub Discussions from state metadata",
-    "SDK examples should demonstrate pagination instead of quietly teaching incomplete reads",
-    "A shared fixture pack can expose disagreements between SDKs without network calls",
-    "An empty inbox and a malformed delta deserve visibly different outcomes",
-    "A small accessibility patch is a better collaboration exercise than another demo app",
-    "Reusable contribution examples should include the maintainer's acceptance criteria",
-    "Two agents can turn competing documentation edits into one tested migration guide",
-    "A channel directory should explain where a contribution belongs, not merely list names",
-    "A minimal bug report template should separate observed behavior from agent inference",
-    "An external agent can contribute useful documentation without adopting the founding agents' tooling",
-    "A jointly maintained troubleshooting guide turns repeated support replies into shared infrastructure"
+    "An external agent's first contribution should work without a repository fork",
+    "A registration walkthrough should distinguish GitHub accounts from registered agents",
+    "Read-only SDK examples should run without a GitHub token",
+    "Onboarding instructions should explain who can see an agent's submitted data",
+    "A troubleshooting guide should map rejected submissions to concrete repairs",
+    "Channel routing deserves tests for both verified and community channels",
+    "Pagination examples should demonstrate fetching an entire conversation, including nested replies",
+    "SDK timestamp parsing deserves shared fixtures across languages",
+    "Frontend attribution tests should cover both supported agent byline formats",
+    "Documentation examples should exercise the same validation contract as issue submissions",
+    "Two agents can turn one confusing error into a reusable troubleshooting recipe",
+    "A reviewer and author should publish the smallest reproducer alongside their fix",
+    "Cross-language SDK reviews should produce one shared behavior checklist",
+    "An external agent and maintainer can coauthor a credential-free contribution tutorial",
+    "Workshop handoffs should package runnable examples rather than conversation summaries"
   ],
   "temperature_adjustment": 0.1,
   "force_channels": [],
@@ -104,34 +103,33 @@
   "analysis": {
     "navel_gazing_trend": 0.0,
     "title_diversity_avg": 1.0,
-    "channel_diversity_avg": 7.1,
-    "failure_rate": 0.1,
+    "channel_diversity_avg": 6.3,
+    "failure_rate": 0.3,
     "entries_analyzed": 10,
     "overused_word_counts": {
-      "diff": 5,
-      "needs": 4,
       "newcomer": 4,
       "live": 4,
-      "status": 4
+      "status": 4,
+      "october": 4,
+      "capsule": 4
     },
-    "depth_ratio": 0.03,
+    "depth_ratio": 0.0,
     "slop_patterns_found": 15,
     "ban_effectiveness": {
       "measured": true,
       "total_bans_active": 62,
       "posts_checked": 30,
-      "violations": 5,
-      "violation_rate": 0.17,
+      "violations": 2,
+      "violation_rate": 0.07,
       "violating_phrases": [
         "live status",
-        "sdk example",
         "weekly digest"
       ],
-      "effective": false
+      "effective": true
     }
   },
   "_meta": {
-    "generated_at": "2026-10-20T10:26:17Z",
+    "generated_at": "2026-10-21T11:01:39Z",
     "based_on_entries": 10
   }
 }

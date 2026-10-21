@@ -73,6 +73,8 @@ For the richer twin (this brain repo's depth), make sure your local environment 
 
 ## The pulse — this repo is a DOG (`rapp/1`)
 
+> **Voice-first spelling (2026-10-20):** DOG = **DOGG** (two g's) and GOD = **GODD** (two d's), the same objects, spelled the way they are said aloud so "dog" and "god" stay everyday words, like RAPP's two p's.
+
 This repo is a **DOG — a Distributed Object, Global**: the twin's public
 **bones**, broadcast to the whole planet as static, SHA-chained, optionally
 Ed25519-signed frames served straight from GitHub raw. No server, no auth to

@@ -647,6 +647,16 @@ def _render_root_foundation(toaster):
     return legacy_skill, plural_skill
 
 
+def _federated_unfetchable_reason(entry):
+    """A store entry without a singleton address (e.g. a newer store schema) is
+    skipped with a reason instead of failing the whole daily refresh."""
+    if not str(entry.get("singleton_url") or "").strip():
+        if str(entry.get("application_schema") or "").startswith("rapp-application/2"):
+            return "complete application: installs as a whole package (egg), not a single-file skill"
+        return "federated rapplication has no singleton_url to fetch"
+    return None
+
+
 def _fetch_federated(entry):
     request = urllib.request.Request(
         entry["singleton_url"],
@@ -974,6 +984,18 @@ def build(check=False):
                             "container agent to Toast reversibly"
                         ),
                     })
+                elif (
+                    reference.startswith("@cowork-cookbook/")
+                    and reference not in registry_names
+                ):
+                    skipped.append({
+                        "identity": reference,
+                        "aggregate_id": item.get("source_slug"),
+                        "reason": (
+                            "aggregated Cowork Cookbook recipe is not notarized "
+                            "in RAR yet"
+                        ),
+                    })
 
         if config.get("include_federated_rapplications", True):
             excluded_federation = config.get("exclude_federation") or {}
@@ -991,6 +1013,14 @@ def build(check=False):
                         "identity": identity or entry.get("id"),
                         "federation_id": entry.get("id"),
                         "reason": "federated rapplication is not public",
+                    })
+                    continue
+                unfetchable = _federated_unfetchable_reason(entry)
+                if unfetchable:
+                    skipped.append({
+                        "identity": identity or entry.get("id"),
+                        "federation_id": entry.get("id"),
+                        "reason": unfetchable,
                     })
                     continue
                 raw = _fetch_federated(entry)

@@ -180,7 +180,8 @@ def test_plural_skill_has_hotload_and_bootstrap_contract():
 
 
 def test_every_primary_skill_is_reversible_and_exactly_pinned():
-    assert len(CATALOG["skills"]) >= 300
+    # Floor guards against a collapsed catalog; ~238 real skills remain after the 2026-10-20 Cowork Cookbook archive.
+    assert len(CATALOG["skills"]) >= 200
     for record in CATALOG["skills"]:
         directory = primary_skill_dir(record)
         skill_path = directory / "SKILL.md"
@@ -255,6 +256,7 @@ def test_powercat_channel_projects_or_explicitly_defers_every_skill():
         item["identity"]
         for item in CATALOG["skipped"]
         if item.get("aggregate_id")
+        and str(item.get("identity") or "").startswith("@cat-agent-skills/")
     }
     aggregate_refs = {
         item["ref"]
@@ -270,6 +272,12 @@ def test_cowork_cookbook_channel_projects_every_recipe():
         item["identity"]
         for item in CATALOG["skills"]
         if item["channel"] == "cowork-cookbook"
+    }
+    deferred = {
+        item["identity"]
+        for item in CATALOG["skipped"]
+        if item.get("aggregate_id")
+        and str(item.get("identity") or "").startswith("@cowork-cookbook/")
     }
     expected = {
         entry["name"]
@@ -287,7 +295,8 @@ def test_cowork_cookbook_channel_projects_every_recipe():
         return
     assert len(expected) == 1481
     assert projected == expected
-    assert aggregate_refs == projected
+    # A recipe published upstream but not yet notarized here is deferred, never dropped silently.
+    assert aggregate_refs == projected | deferred
 
 
 def test_workflow_bundles_contain_only_the_bound_skill():

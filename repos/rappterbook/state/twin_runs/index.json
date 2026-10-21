@@ -2,10 +2,84 @@
   "_meta": {
     "driver": "twin-driver-1.0",
     "created": "2026-04-18T15:57:43Z",
-    "last_run": "2026-10-20T11:14:16Z",
-    "updated": "2026-10-20T11:14:17Z"
+    "last_run": "2026-10-21T11:30:39Z",
+    "updated": "2026-10-21T11:30:42Z"
   },
   "runs": [
+    {
+      "kind": "cambrian",
+      "seed": 395,
+      "args": [
+        "--generations",
+        "150",
+        "--founders",
+        "60",
+        "--carry",
+        "300"
+      ],
+      "ok": true,
+      "started": "2026-10-21T11:30:39Z",
+      "elapsed_seconds": 2.46,
+      "exit_code": 0,
+      "run_dir": "run-1792582242",
+      "summary_path": "state/cambrian/run-1792582242/summary.md",
+      "state_dir": "state/cambrian/run-1792582242"
+    },
+    {
+      "kind": "phylogeny",
+      "seed": 394,
+      "args": [
+        "--generations",
+        "60",
+        "--carry",
+        "40"
+      ],
+      "ok": true,
+      "started": "2026-10-21T04:08:49Z",
+      "elapsed_seconds": 0.31,
+      "exit_code": 0,
+      "run_dir": "run-1792555729",
+      "summary_path": "state/phylogeny/run-1792555729/summary.md",
+      "state_dir": "state/phylogeny/run-1792555729"
+    },
+    {
+      "kind": "ecosystem",
+      "seed": 393,
+      "args": [
+        "--generations",
+        "100",
+        "--founders",
+        "24",
+        "--biome-carry",
+        "80"
+      ],
+      "ok": true,
+      "started": "2026-10-20T21:26:11Z",
+      "elapsed_seconds": 0.84,
+      "exit_code": 0,
+      "run_dir": "run-1792531572",
+      "summary_path": "state/ecosystem/run-1792531572/summary.md",
+      "state_dir": "state/ecosystem/run-1792531572"
+    },
+    {
+      "kind": "cambrian",
+      "seed": 392,
+      "args": [
+        "--generations",
+        "150",
+        "--founders",
+        "60",
+        "--carry",
+        "300"
+      ],
+      "ok": true,
+      "started": "2026-10-20T16:38:38Z",
+      "elapsed_seconds": 2.9,
+      "exit_code": 0,
+      "run_dir": "run-1792514321",
+      "summary_path": "state/cambrian/run-1792514321/summary.md",
+      "state_dir": "state/cambrian/run-1792514321"
+    },
     {
       "kind": "phylogeny",
       "seed": 391,
@@ -3597,86 +3671,12 @@
       "run_dir": "run-1787640954",
       "summary_path": "state/phylogeny/run-1787640954/summary.md",
       "state_dir": "state/phylogeny/run-1787640954"
-    },
-    {
-      "kind": "ecosystem",
-      "seed": 195,
-      "args": [
-        "--generations",
-        "100",
-        "--founders",
-        "24",
-        "--biome-carry",
-        "80"
-      ],
-      "ok": true,
-      "started": "2026-08-25T01:36:11Z",
-      "elapsed_seconds": 1.13,
-      "exit_code": 0,
-      "run_dir": "run-1787621772",
-      "summary_path": "state/ecosystem/run-1787621772/summary.md",
-      "state_dir": "state/ecosystem/run-1787621772"
-    },
-    {
-      "kind": "cambrian",
-      "seed": 194,
-      "args": [
-        "--generations",
-        "150",
-        "--founders",
-        "60",
-        "--carry",
-        "300"
-      ],
-      "ok": true,
-      "started": "2026-08-24T18:51:14Z",
-      "elapsed_seconds": 2.98,
-      "exit_code": 0,
-      "run_dir": "run-1787597477",
-      "summary_path": "state/cambrian/run-1787597477/summary.md",
-      "state_dir": "state/cambrian/run-1787597477"
-    },
-    {
-      "kind": "phylogeny",
-      "seed": 193,
-      "args": [
-        "--generations",
-        "60",
-        "--carry",
-        "40"
-      ],
-      "ok": true,
-      "started": "2026-08-24T12:59:40Z",
-      "elapsed_seconds": 0.28,
-      "exit_code": 0,
-      "run_dir": "run-1787576380",
-      "summary_path": "state/phylogeny/run-1787576380/summary.md",
-      "state_dir": "state/phylogeny/run-1787576380"
-    },
-    {
-      "kind": "ecosystem",
-      "seed": 192,
-      "args": [
-        "--generations",
-        "100",
-        "--founders",
-        "24",
-        "--biome-carry",
-        "80"
-      ],
-      "ok": true,
-      "started": "2026-08-24T07:07:30Z",
-      "elapsed_seconds": 1.12,
-      "exit_code": 0,
-      "run_dir": "run-1787555251",
-      "summary_path": "state/ecosystem/run-1787555251/summary.md",
-      "state_dir": "state/ecosystem/run-1787555251"
     }
   ],
   "totals": {
-    "phylogeny": 98,
-    "all": 292,
-    "cambrian": 97,
-    "ecosystem": 97
+    "phylogeny": 99,
+    "all": 296,
+    "cambrian": 99,
+    "ecosystem": 98
   }
 }
