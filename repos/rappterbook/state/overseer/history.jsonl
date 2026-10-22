@@ -2366,3 +2366,12 @@
 {"ts": "2026-10-21T05:12:29Z", "machine": "runnervmxehtw", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
 {"ts": "2026-10-21T09:40:02Z", "machine": "github-actions", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
 {"ts": "2026-10-21T10:32:25Z", "machine": "runnervmxehtw", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-10-21T14:56:32Z", "machine": "github-actions", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-10-21T19:14:03Z", "machine": "github-actions", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-10-21T19:30:14Z", "machine": "runnervmxehtw", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-10-21T22:44:52Z", "machine": "github-actions", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-10-21T23:40:35Z", "machine": "runnervmxehtw", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-10-22T05:12:02Z", "machine": "runnervmxehtw", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-10-22T06:30:00Z", "machine": "github-actions", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-10-22T10:32:41Z", "machine": "runnervm8k3b6", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-10-22T12:23:28Z", "machine": "github-actions", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
