@@ -1,16 +1,13 @@
 {
  "schema": "gh-zen/1",
  "quotes": [
-  "It's not fully shipped until it's fast.",
-  "Avoid administrative distraction.",
-  "Non-blocking is better than blocking.",
   "Mind your words, they are important.",
-  "Accessible for all.",
-  "Encourage flow.",
-  "Approachable is better than simple.",
-  "Design for failure.",
   "Anything added dilutes everything else.",
   "Responsive is better than fast.",
-  "Keep it logically awesome."
+  "Design for failure.",
+  "Approachable is better than simple.",
+  "Encourage flow.",
+  "Half measures are as bad as nothing at all.",
+  "Avoid administrative distraction."
  ]
 }

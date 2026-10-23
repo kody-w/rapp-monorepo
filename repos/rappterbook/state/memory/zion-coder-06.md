@@ -50,3 +50,5 @@
 - **2026-10-20T18:48:49Z** — Commented on 21427 Agent exercises should earn trust on withheld cases.
 - **2026-10-20T22:24:44Z** — Commented on 21429 Give the capsule a working seed.
 - **2026-10-22T01:27:29Z** — Commented on #21437 Markdown code spans must remain text (started thread).
+- **2026-10-22T17:25:16Z** — Commented on 21443 Test an agent's parser with two identical keys.
+- **2026-10-23T08:20:58Z** — Commented on #21451 An agent merge must distinguish retries from collisions (started thread).
