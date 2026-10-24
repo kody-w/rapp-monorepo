@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-10-20T22:34:38Z",
-  "count": 217,
+  "generated": "2026-10-24T04:44:15Z",
+  "count": 220,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
     {
@@ -6511,6 +6511,46 @@
         "status": "not_assessed",
         "evidence": []
       },
+      "id": "kody-w__parallel_dimensions_agent",
+      "name": "@kody-w/parallel_dimensions_agent",
+      "display_name": "Parallel Dimensions",
+      "description": "Tracks independent what-if branches, detects conflicting assertions, and merges only compatible dimensions using an append-only local record.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "kody-w",
+      "category": "productivity",
+      "tags": [
+        "planning",
+        "what-if",
+        "branches",
+        "append-only",
+        "offline"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/parallel_dimensions_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/parallel_dimensions_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/parallel_dimensions_agent.py",
+        "sha256": "ad3d5af03678ded14558a1f449a5ba4002e15dbb1ee101c37349da16ba7b2c2b"
+      },
+      "stats": {
+        "lines": 258,
+        "size_kb": 9.4,
+        "added_at": "2026-10-24T04:16:07Z"
+      }
+    },
+    {
+      "artifact_type": "agent",
+      "protocol_conformance": {
+        "profile": null,
+        "status": "not_assessed",
+        "evidence": []
+      },
       "id": "kody-w__perpetual_loop_factory",
       "name": "@kody-w/perpetual_loop_factory",
       "display_name": "PerpetualLoopFactory",
@@ -7334,6 +7374,47 @@
         "status": "not_assessed",
         "evidence": []
       },
+      "id": "kody-w__self_compact_agent",
+      "name": "@kody-w/self_compact_agent",
+      "display_name": "SelfCompact",
+      "description": "The brainstem compacts its own context: a gauge on every chat, hints as it fills, and at the cutoff every other tool waits until the model writes a note to itself that survives when old turns drop out.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "@kody-w",
+      "category": "core",
+      "tags": [
+        "context",
+        "memory",
+        "compaction",
+        "handoff",
+        "long-conversations",
+        "pi"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/self_compact_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/self_compact_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/self_compact_agent.py",
+        "sha256": "ad47db5e49459bdc85e90cf7a6a1fa7201061b358925ae5d7290b8c32a790c9e"
+      },
+      "stats": {
+        "lines": 294,
+        "size_kb": 13.2,
+        "added_at": "2026-10-24T04:02:39Z"
+      }
+    },
+    {
+      "artifact_type": "agent",
+      "protocol_conformance": {
+        "profile": null,
+        "status": "not_assessed",
+        "evidence": []
+      },
       "id": "kody-w__skill_toaster_agent",
       "name": "@kody-w/skill_toaster_agent",
       "display_name": "SkillToaster",
@@ -7366,6 +7447,46 @@
         "lines": 907,
         "size_kb": 43.9,
         "added_at": "2026-08-01T21:33:29-04:00"
+      }
+    },
+    {
+      "artifact_type": "agent",
+      "protocol_conformance": {
+        "profile": null,
+        "status": "not_assessed",
+        "evidence": []
+      },
+      "id": "kody-w__thread_tracker_agent",
+      "name": "@kody-w/thread_tracker_agent",
+      "display_name": "Thread Tracker",
+      "description": "Routes remarks into durable local topic threads, lists open work, and parks or closes threads without deleting their history.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "kody-w",
+      "category": "productivity",
+      "tags": [
+        "threads",
+        "notes",
+        "routing",
+        "append-only",
+        "offline"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/thread_tracker_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/thread_tracker_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/thread_tracker_agent.py",
+        "sha256": "dcf4d630cab0eaa9a6919e052cb14429416a1607f4e581a397a58430c7f8ad98"
+      },
+      "stats": {
+        "lines": 267,
+        "size_kb": 9.0,
+        "added_at": "2026-10-24T04:09:13Z"
       }
     },
     {

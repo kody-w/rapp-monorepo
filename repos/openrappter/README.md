@@ -1,169 +1,65 @@
-# RAPP Work
+<div align="center">
 
-Serious local AI for real business work.
+# OpenRappter
 
-RAPP Work is a desktop workspace for persistent agents, assigned work,
-reviewable approvals, and evidence-backed results. It supports **macOS on Apple
-Silicon**. Node.js 22.12 or newer is required for source development.
+### A creature that lives in your Mac's notch. Hold a key and talk.
 
-The host is conversation-first and supports multiple business workspaces. A
-human describes intent; the Work Twin fills out a complete structured draft or
-asks a necessary follow-up. The human reviews, makes small edits, and accepts
-or dismisses it. Blank forms are not the normal workflow. Workspace creation
-starts in the owner's concierge; each business has its own Twin conversation,
-catalog, agents, work and routines. See the [host RPC contract](apps/host/README.md)
-for integration. The three-column UI keeps workspace context on the left,
-conversation and complete reviews in the center, and the shared agent computer
-on the right. Paste full instruction documents without re-entering their fields.
+It thinks through the GitHub Copilot sign-in you already have. No new API keys, no new accounts, no new monthly bill. What you say stays on your Mac.
 
-Workspaces are recursive: every agent owns one mint-once child workspace with
-the same conversation, work, routines, evidence and computer panel. Drill into
-an agent to work there, use breadcrumbs to return, and create sub-agents through
-reviewed Twin intent. Lineage is bounded to depth four and 32 agents per
-workspace. Safe internal organization can evolve from a conversation; external
-actions and approval decisions remain gated.
+[![License: MIT](https://img.shields.io/badge/License-MIT-22c55e.svg)](LICENSE)
+[![macOS 14+](https://img.shields.io/badge/macOS-14%2B-3b82f6.svg)](https://github.com/kody-w/openrappter/releases)
 
-## The product
+**[Download for Mac](https://github.com/kody-w/openrappter/releases/latest)** · [Website](https://kody-w.github.io/openrappter/) · [How it works](#how-it-works) · [v1 (the gateway)](#v1)
 
-- **Work** — tasks, runs, approvals, results, and their evidence.
-- **Agents** — persistent worker definitions with private agent workspaces.
-- **Automations** — agent-owned scheduled work with explicit policy.
-- **Settings** — provider setup, computer status, and diagnostics.
+<img src="docs/evidence/v2-phase1/speaking.png" width="560" alt="OpenRappter answering in the notch">
 
-Each agent owns its durable state. RAPP/1 frames are the event authority;
-projections and caches are rebuildable. Resource IDs locate data but do not grant
-permission. Business tools run only in the shared, host-owned Omarchy guest.
-The host controls that computer through fixed application-owned operations,
-not a general-purpose shell for agents.
+</div>
 
-An unavailable provider or computer is shown as unavailable. Missing
-persistence or an unverified write-ahead intent prevents execution. An uncertain
-outcome remains unresolved and is never automatically replayed.
+## What it does
 
-## Source workspace
+| Hold | It |
+|---|---|
+| **⌥ Space** | listens, thinks, answers out loud |
+| **⌃⌥ Space** | types what you said into whatever app you are in |
+| **⇧⌥ Space** | reads the window in front of you and answers about it |
 
-```text
-apps/desktop             Electron desktop and packaging
-apps/host                authenticated local composition and RPC
-apps/ui                  Work, Agents, Automations, Settings
-packages/rapp1           canonical authority, frames, scanning and evidence
-packages/rapp1/fixtures  canonical checkpoint and wire fixtures
-packages/workspace-store private per-agent state and atomic committed writes
-packages/security        capabilities, approvals and scoped execution permits
-packages/domain          domain records and reducers
-packages/work-service    verified command and projection orchestration
-packages/agent-runtime   persistent workers and bounded execution
-packages/model-provider provider boundary
-packages/computer-broker shared Omarchy computer and guest-only tools
-packages/diagnostics     redacted operational evidence
-packages/migration       explicit reviewed data import
-packages/release         provenance, artifact verification and safe installation
-contracts               machine-readable release and migration requirements
-tests/acceptance         cross-package release acceptance
+When something needs you, the creature changes posture and waits in the notch. Claude Code's permission prompts can show there too, with **Allow once · No · Always** buttons, so you answer from the notch instead of hunting for the terminal.
+
+No needs are invented. It never speaks first. One action per card.
+
+## Install
+
+1. Download the `.dmg` from [Releases](https://github.com/kody-w/openrappter/releases/latest), drag **OpenRappter** to Applications, launch it.
+2. Hold **⌥ Space** and talk. The first time, allow the microphone and speech recognition.
+3. The first time it needs to think, it sets up its mind (about a minute) and asks you to sign in with GitHub once.
+
+Or: `brew tap kody-w/tap && brew trust kody-w/tap && brew install --cask openrappter`
+
+Signed with Apple Developer ID and notarized. macOS 14 or later, Apple Silicon and Intel.
+
+## How it works
+
+OpenRappter is a thin native face over an unchanged [RAPP Brainstem](https://github.com/kody-w/rapp-installer) kernel, pinned by commit in [`app/kernel/kernel.json`](app/kernel/kernel.json). The app only ever talks to it through `GET /health` and `POST /chat`. If you already run a Brainstem on `:7071`, OpenRappter uses it. Otherwise it runs its own copy as a login service on `127.0.0.1:18790`, in `~/.openrappter/kernel`, and that kernel keeps working after you quit the app.
+
+- **Speech** is recognised on the device (Apple's on-device recognizer) and spoken with the system voice.
+- **Typing for you** needs Accessibility; **reading your screen** needs Screen Recording. Both are asked once, both are off until you say yes.
+- **Needs** are JSON files in `~/.openrappter/needs/`. Anything can drop one: the included Claude Code hook, a cron job, a script. Answers land next to them as `<id>.answer.json`.
+- **Nothing phones home.** The only network calls are from the kernel to GitHub Copilot with your own sign-in.
+
+### Connect Claude Code
+
+Menu bar → **Connect Claude Code**. It adds one hook to `~/.claude/settings.json`. Permission prompts, idle waits and finished turns then show in the notch. Unanswered cards fall back to the normal terminal prompt after 55 seconds.
+
+### Build it yourself
+
+```bash
+cd app && swift test && VERSION=2.0.0 bash scripts/build-app.sh   # dist/OpenRappter.app, ad-hoc signed
 ```
 
-```sh
-npm ci
-npm run check
-node scripts/check-legacy-absence.mjs
-node scripts/check-release-constitution.mjs
-node scripts/run-acceptance.mjs
-```
+## v1
 
-See [the clean architecture](docs/CLEAN_ARCHITECTURE.md) and
-[the Release Constitution](contracts/RELEASE_CONSTITUTION.md).
-The host now composes real canonical persistence, per-agent runtimes, the
-model-only Copilot SDK adapter and the pinned Tart/SSH computer broker.
-Follow [local production setup](docs/LOCAL_PRODUCTION.md) for authentication
-and an existing Omarchy image. Missing services remain explicitly unavailable.
-
-## Build an explicit unsigned development DMG
-
-Build the clean workspace first. Packaging reads only the new desktop output.
-It does not modify the source app, install the app, or publish a release.
-
-```sh
-npm run build
-CSC_IDENTITY_AUTO_DISCOVERY=false npm run package:dir --workspace @rapp-work/desktop -- --config.directories.output=dist/package
-node scripts/release-macos.mjs \
-  --development-unsigned \
-  --app "apps/desktop/dist/package/mac-arm64/RAPP Work.app" \
-  --output packages/release/dist/artifacts \
-  --version 2.0.0
-```
-
-The result is visibly named `UNSIGNED-DEVELOPMENT`. Its manifest and sealed
-application receipt record that mode; it cannot pass production verification.
-Development installation uses **RAPP Work Development.app**, not the production
-application name.
-Use unsigned development mode only for artifacts you built and trust.
-
-## Verify and install production
-
-A production release consists of a DMG and its `.dmg.provenance.json` sidecar.
-Obtain the release public key and Apple Team ID from a separately trusted
-publisher source. Never trust a public key merely because it accompanies a
-download.
-
-```sh
-node scripts/verify-release.mjs \
-  --dmg RAPP-Work-2.0.0-macos-arm64.dmg \
-  --manifest RAPP-Work-2.0.0-macos-arm64.dmg.provenance.json \
-  --trusted-key publisher-public.pem \
-  --team-id YOURTEAMID
-
-node scripts/install-macos.mjs \
-  --dmg RAPP-Work-2.0.0-macos-arm64.dmg \
-  --manifest RAPP-Work-2.0.0-macos-arm64.dmg.provenance.json \
-  --trusted-key publisher-public.pem \
-  --team-id YOURTEAMID \
-  --applications-directory /Applications
-```
-
-Use the exact trusted release commit with `--expected-commit` when available.
-Quit RAPP Work before replacing it. The chosen applications directory must
-already exist, be writable by the installer, and not be symlinked or
-world-writable. Installation does not elevate privileges.
-
-Verification checks the signature, complete source and lock inventories,
-canonical RAPP/1 identity, arm64 native code, complete packaged-module allowlist,
-DMG checksum, sealed app receipt, Developer ID team, hardened runtime,
-Gatekeeper assessment, notarization and stapling. Passing metadata or a
-successful unit test is not a substitute for these checks on the final binary.
-
-Replacement is staged, verified again, then atomically swapped. The prior app
-and a synced installation journal are retained. To restore it, pass the printed
-journal path to `scripts/install-macos.mjs --rollback`, with the same applications
-directory and independent trust inputs. Recovery never deletes user data,
-steals a stale install lock, or guesses after an unexpected filesystem change.
-
-## Data import
-
-Normal startup ignores prior home directories and never loads their executable
-attachments. `packages/migration` explicitly inventories selected data and
-produces **review-only** plans, rereading source hashes before planning. It does
-not automatically apply those plans or delete the original source.
-
-The [migration contract](contracts/migration.schema.json) validates those same
-plans before import: agents remain disabled pending policy review, tasks remain
-drafts, and memories remain untrusted. It rejects executable destinations,
-traversal, unredacted credentials and unknown authority-bearing fields. Applying
-a reviewed plan still requires a separately authenticated destination capability,
-inert copies under `imports/`, and verified canonical import receipts. Target IDs
-in a plan are locators, never ownership grants.
-
-## Production release administration
-
-The protected `production` environment supplies an Apple Developer ID
-certificate, notarization credentials, an Ed25519 provenance signing key, and
-an independently configured public verification key and Apple Team ID.
-`release-macos.yml` accepts only an exact version tag, runs the clean acceptance
-gates, signs and notarizes the application and DMG, independently remounts the
-artifact, and publishes only verified production files.
-
-Local unsigned builds do not establish production readiness. No production
-signature, notarization or live-computer execution is claimed by a fixture test.
+OpenRappter 1.x was a TypeScript and Python agent gateway with twenty chat channels. It still works and its install URLs still resolve, but it is **retiring**: v2 keeps the `/chat` contract and the creature, and leaves channels to [Hermes Agent](https://github.com/NousResearch/hermes-agent) in front of a Brainstem. The v1 docs are in [`docs/v1/README-v1.md`](docs/v1/README-v1.md), the code at tag [`legacy-v1`](https://github.com/kody-w/openrappter/tree/legacy-v1), and the old web dashboard at [`dashboard.html`](https://kody-w.github.io/openrappter/dashboard.html).
 
 ## License
 
-Apache-2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
+MIT.

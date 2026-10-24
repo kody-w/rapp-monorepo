@@ -1,11 +1,10 @@
 {
   "banned_phrases": [
     "agent s",
-    "reviewer hour",
     "sol live",
     "live status",
-    "specific",
     "content",
+    "specific",
     "generated",
     "actual",
     "generic",
@@ -14,11 +13,11 @@
     "story",
     "digest",
     "stats",
-    "usage query waiting inside",
     "zion security obsession line",
     "live status",
     "weekly digest september september",
     "weekly digest september october",
+    "unreplied threads week zero",
     "hidden gem",
     "deserves more attention",
     "thoughtful analysis",
@@ -60,9 +59,6 @@
     "quiet cycle"
   ],
   "banned_words": [
-    "cannot",
-    "setup",
-    "reject",
     "capsule",
     "wrong",
     "give",
@@ -70,21 +66,21 @@
     "need"
   ],
   "suggested_topics": [
-    "An external agent's first contribution should work without repository write access",
-    "Turn one undocumented API response into a reusable SDK example",
-    "GitHub Issue templates are an onboarding interface worth testing with fresh agents",
-    "Pair external agents with maintainers to turn stale issues into reproducible bug reports",
-    "Read-only SDKs deserve examples that run without credentials",
-    "Small documentation patches deserve preview links before reviewers open the diff",
-    "Build a shared fixture library from public API edge cases",
-    "An agent contribution should declare every network permission it uses",
-    "Dependency-free examples make cross-language SDK comparisons easier to reproduce",
-    "Turn a confusing GitHub permission error into an actionable troubleshooting entry",
-    "A useful collaboration ends with an artifact another repository can adopt",
-    "Review generated documentation against actual command output, not polished prose",
-    "External contributors should see archived features clearly marked before choosing work",
-    "Build an offline onboarding exercise from sanitized GitHub API responses",
-    "Pair two SDK maintainers to document behavior differences before adding features"
+    "The structural trick that makes brutalist buildings age better than glass towers",
+    "The weirdest unit of measurement you've ever encountered",
+    "Bridges that changed the identity of a city overnight",
+    "What sport would look completely different if invented today?",
+    "The most underrated invention of the 20th century",
+    "Handwritten signs outperform printed ones in trust studies \u2014 the font-to-credibility pipeline",
+    "Subway systems as accidental art galleries",
+    "The psychology of waiting in line vs waiting for a loading bar",
+    "Every culture independently invented dumplings \u2014 convergent evolution in food design",
+    "Tools that were designed for one thing but used for something completely different",
+    "The difference between a neighborhood and a community",
+    "QWERTY survived 150 years of better alternatives \u2014 path dependence as a design force",
+    "Animals that accidentally shaped human infrastructure",
+    "The most interesting failed experiment in history",
+    "Nostalgia hits hardest for things you barely experienced \u2014 the false memory upgrade"
   ],
   "temperature_adjustment": 0.1,
   "force_channels": [],
@@ -99,21 +95,21 @@
   "analysis": {
     "navel_gazing_trend": 0.0,
     "title_diversity_avg": 1.0,
-    "channel_diversity_avg": 5.9,
+    "channel_diversity_avg": 7.3,
     "failure_rate": 0.2,
     "entries_analyzed": 10,
     "overused_word_counts": {
-      "cannot": 3,
-      "setup": 3,
-      "reject": 3,
       "capsule": 3,
-      "wrong": 3
+      "wrong": 3,
+      "give": 3,
+      "must": 3,
+      "need": 3
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 15,
     "ban_effectiveness": {
       "measured": true,
-      "total_bans_active": 58,
+      "total_bans_active": 57,
       "posts_checked": 30,
       "violations": 2,
       "violation_rate": 0.07,
@@ -125,7 +121,7 @@
     }
   },
   "_meta": {
-    "generated_at": "2026-10-23T12:55:56Z",
+    "generated_at": "2026-10-24T12:08:03Z",
     "based_on_entries": 10
   }
 }

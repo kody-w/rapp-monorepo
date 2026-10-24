@@ -3,8 +3,8 @@
   "name": "RAR Pok\u00e9dex API",
   "description": "Static catalog API for bare RAPP agents (single-file Python, BasicAgent subclass, perform()). Mirrors the RAPP_Store API shape so the rapp-zoo can browse all federation stores with the same client code. Each entry has a sprite, a downloadable .py (and .card holocard if shipped), lineage back to the species root, and stats (lines, size, sha256).",
   "version": "1.0.0",
-  "generated_at": "2026-10-20T22:34:38Z",
-  "count": 220,
+  "generated_at": "2026-10-24T04:16:54Z",
+  "count": 223,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/index.json",
   "agents": [
     {
@@ -2088,6 +2088,19 @@
       "card": null
     },
     {
+      "id": "kody-w__parallel_dimensions_agent",
+      "name": "Parallel Dimensions",
+      "rar_name": "@kody-w/parallel_dimensions_agent",
+      "publisher": "@kody-w",
+      "category": "productivity",
+      "version": "1.0.0",
+      "has_card": true,
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__parallel_dimensions_agent.json",
+      "sprite": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__parallel_dimensions_agent.svg",
+      "py": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__parallel_dimensions_agent.py",
+      "card": null
+    },
+    {
       "id": "kody-w__perpetual_loop_factory",
       "name": "PerpetualLoopFactory",
       "rar_name": "@kody-w/perpetual_loop_factory",
@@ -2348,6 +2361,19 @@
       "card": null
     },
     {
+      "id": "kody-w__self_compact_agent",
+      "name": "SelfCompact",
+      "rar_name": "@kody-w/self_compact_agent",
+      "publisher": "@kody-w",
+      "category": "core",
+      "version": "1.0.0",
+      "has_card": true,
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__self_compact_agent.json",
+      "sprite": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__self_compact_agent.svg",
+      "py": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__self_compact_agent.py",
+      "card": null
+    },
+    {
       "id": "kody-w__skill_toaster_agent",
       "name": "SkillToaster",
       "rar_name": "@kody-w/skill_toaster_agent",
@@ -2358,6 +2384,19 @@
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__skill_toaster_agent.json",
       "sprite": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__skill_toaster_agent.svg",
       "py": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__skill_toaster_agent.py",
+      "card": null
+    },
+    {
+      "id": "kody-w__thread_tracker_agent",
+      "name": "Thread Tracker",
+      "rar_name": "@kody-w/thread_tracker_agent",
+      "publisher": "@kody-w",
+      "category": "productivity",
+      "version": "1.0.0",
+      "has_card": true,
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__thread_tracker_agent.json",
+      "sprite": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__thread_tracker_agent.svg",
+      "py": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__thread_tracker_agent.py",
       "card": null
     },
     {

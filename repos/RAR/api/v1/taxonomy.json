@@ -1,10 +1,10 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-10-20T22:34:38Z",
+  "generated": "2026-10-24T04:44:15Z",
   "categories": [
     {
       "name": "productivity",
-      "count": 45
+      "count": 47
     },
     {
       "name": "general",
@@ -12,7 +12,7 @@
     },
     {
       "name": "core",
-      "count": 34
+      "count": 35
     },
     {
       "name": "devtools",
@@ -62,7 +62,7 @@
     },
     {
       "name": "@kody-w",
-      "count": 69
+      "count": 72
     },
     {
       "name": "@rapp",
@@ -104,7 +104,7 @@
     },
     {
       "name": "community",
-      "count": 67
+      "count": 70
     },
     {
       "name": "official",
@@ -249,6 +249,10 @@
       "count": 6
     },
     {
+      "name": "memory",
+      "count": 5
+    },
+    {
       "name": "core",
       "count": 5
     },
@@ -282,6 +286,10 @@
     },
     {
       "name": "knowledge",
+      "count": 5
+    },
+    {
+      "name": "planning",
       "count": 5
     },
     {
@@ -323,10 +331,6 @@
     {
       "name": "egg",
       "count": 5
-    },
-    {
-      "name": "memory",
-      "count": 4
     },
     {
       "name": "knowledge-base",
@@ -377,7 +381,7 @@
       "count": 4
     },
     {
-      "name": "planning",
+      "name": "routing",
       "count": 4
     },
     {
@@ -489,11 +493,11 @@
       "count": 3
     },
     {
-      "name": "documentation",
+      "name": "handoff",
       "count": 3
     },
     {
-      "name": "routing",
+      "name": "documentation",
       "count": 3
     },
     {
@@ -717,10 +721,6 @@
       "count": 2
     },
     {
-      "name": "handoff",
-      "count": 2
-    },
-    {
       "name": "leadership",
       "count": 2
     },
@@ -873,6 +873,10 @@
       "count": 2
     },
     {
+      "name": "context",
+      "count": 2
+    },
+    {
       "name": "pac",
       "count": 2
     },
@@ -942,6 +946,14 @@
     },
     {
       "name": "multi-agent",
+      "count": 2
+    },
+    {
+      "name": "append-only",
+      "count": 2
+    },
+    {
+      "name": "offline",
       "count": 2
     },
     {
@@ -1306,18 +1318,6 @@
     },
     {
       "name": "office",
-      "count": 1
-    },
-    {
-      "name": "design_review",
-      "count": 1
-    },
-    {
-      "name": "eu_regulation",
-      "count": 1
-    },
-    {
-      "name": "marketing_review",
       "count": 1
     }
   ]

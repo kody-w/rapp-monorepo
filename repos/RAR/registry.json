@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-10-20T22:34:27.108974+00:00",
+  "generated_at": "2026-10-24T04:44:15.047600+00:00",
   "stats": {
-    "total_agents": 220,
+    "total_agents": 223,
     "total_swarms": 2,
     "total_stubs": 2,
     "publishers": 10,
@@ -10026,6 +10026,59 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@kody-w/parallel_dimensions_agent",
+      "version": "1.0.0",
+      "display_name": "Parallel Dimensions",
+      "description": "Tracks independent what-if branches, detects conflicting assertions, and merges only compatible dimensions using an append-only local record.",
+      "author": "kody-w",
+      "tags": [
+        "planning",
+        "what-if",
+        "branches",
+        "append-only",
+        "offline"
+      ],
+      "category": "productivity",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@kody-w/parallel_dimensions_agent.py",
+      "_install_filename": "rar_kody_w_parallel_dimensions_agent.py",
+      "_sha256": "ad3d5af03678ded14558a1f449a5ba4002e15dbb1ee101c37349da16ba7b2c2b",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_0a5f9aed49e9702012fd2c582e410a8381612d44c4361285224e33d7192bc220",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": 655,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "namespace",
+          "content_sha256",
+          "base_precondition",
+          "security_scan",
+          "registry_build",
+          "card_forge",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 16388639859734625007,
+      "_size_kb": 9.4,
+      "_lines": 258,
+      "_has_card": true,
+      "_added_at": "2026-10-24T04:16:07Z",
+      "_first_commit_sha": "50a570ba43b2a106e3f146533693846fa657df36",
+      "_latest_commit_sha": "50a570ba43b2a106e3f146533693846fa657df36",
+      "_card_sha256": "b60e1c98ba43b813b0cf0ab0b577bc5254088af77e319136e60399768898b377"
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@kody-w/perpetual_loop_factory",
       "display_name": "PerpetualLoopFactory",
       "description": "Spawns a self-running loop of local twin brainstems that take turns appending frames to a git-tracked artifact, with audit and dashboard daemons.",
@@ -11103,6 +11156,66 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@kody-w/self_compact_agent",
+      "display_name": "SelfCompact",
+      "version": "1.0.0",
+      "description": "The brainstem compacts its own context: a gauge on every chat, hints as it fills, and at the cutoff every other tool waits until the model writes a note to itself that survives when old turns drop out.",
+      "author": "@kody-w",
+      "tags": [
+        "context",
+        "memory",
+        "compaction",
+        "handoff",
+        "long-conversations",
+        "pi"
+      ],
+      "category": "core",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "based_on": "disler/self-compact-pi-agent",
+      "example_call": {
+        "args": {
+          "action": "view"
+        }
+      },
+      "_file": "agents/@kody-w/self_compact_agent.py",
+      "_install_filename": "rar_kody_w_self_compact_agent.py",
+      "_sha256": "ad47db5e49459bdc85e90cf7a6a1fa7201061b358925ae5d7290b8c32a790c9e",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_eb5d42a0247efc315074252174b82f9c5b8723d5266f98b20a8088743e6123aa",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": 1086,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "namespace",
+          "content_sha256",
+          "base_precondition",
+          "security_scan",
+          "registry_build",
+          "card_forge",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 17017523964409030765,
+      "_size_kb": 13.2,
+      "_lines": 294,
+      "_has_card": true,
+      "_added_at": "2026-10-24T04:02:39Z",
+      "_first_commit_sha": "acb65718b1e8ae07ce85ae5b6ea25cfc874f1bcf",
+      "_latest_commit_sha": "acb65718b1e8ae07ce85ae5b6ea25cfc874f1bcf",
+      "_card_sha256": "083099fd332d1acfdd73b08db99103d98fbd38fa8db7c468075f2910cb1f2af9"
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@kody-w/skill_toaster_agent",
       "version": "2.0.0",
       "display_name": "SkillToaster",
@@ -11150,6 +11263,59 @@
       "_first_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080",
       "_latest_commit_sha": "597f0992f4120ddef24dd8686c5720a9ba5b59ab",
       "_card_sha256": "8e668f73b3d460734f5c938dafb40ae217826fa5eec7af9fbc5874539b43c94c"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/thread_tracker_agent",
+      "version": "1.0.0",
+      "display_name": "Thread Tracker",
+      "description": "Routes remarks into durable local topic threads, lists open work, and parks or closes threads without deleting their history.",
+      "author": "kody-w",
+      "tags": [
+        "threads",
+        "notes",
+        "routing",
+        "append-only",
+        "offline"
+      ],
+      "category": "productivity",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@kody-w/thread_tracker_agent.py",
+      "_install_filename": "rar_kody_w_thread_tracker_agent.py",
+      "_sha256": "dcf4d630cab0eaa9a6919e052cb14429416a1607f4e581a397a58430c7f8ad98",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_a4e49b5c8bf6c4fe6c2e9c8db846d4f5de9544098195d727c13aeadf2b502362",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": 657,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "namespace",
+          "content_sha256",
+          "base_precondition",
+          "security_scan",
+          "registry_build",
+          "card_forge",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 7558442555223451474,
+      "_size_kb": 9.0,
+      "_lines": 267,
+      "_has_card": true,
+      "_added_at": "2026-10-24T04:09:13Z",
+      "_first_commit_sha": "82c64ab86138c5d021d69d1a32df1731b399b231",
+      "_latest_commit_sha": "82c64ab86138c5d021d69d1a32df1731b399b231",
+      "_card_sha256": "60ecfa27a811ece67f0037dfe88bbdf7a9332f6888d312bff831ce5299f71fb1"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -13475,6 +13641,26 @@
       }
     ],
     "note": "withheld agents remain at their published paths; they are omitted from every lookup"
+  },
+  "releases": [
+    {
+      "release_name": "Autumn 2026",
+      "release_type": "seasonal",
+      "tag": "v2.0.0",
+      "timestamp": "2026-10-24T04:43:52.505933+00:00",
+      "agent_count": 223,
+      "publishers": 10,
+      "integrity_seal": "1529921e4a973ef5"
+    }
+  ],
+  "latest_release": {
+    "release_name": "Autumn 2026",
+    "release_type": "seasonal",
+    "tag": "v2.0.0",
+    "timestamp": "2026-10-24T04:43:52.505933+00:00",
+    "agent_count": 223,
+    "publishers": 10,
+    "integrity_seal": "1529921e4a973ef5"
   },
   "instance": {
     "role": "main",

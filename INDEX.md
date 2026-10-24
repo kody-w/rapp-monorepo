@@ -1,7 +1,7 @@
 # What is in here
 
-98 public RAPP repositories, captured at HEAD in a single pass on 2026-10-23T13:28:06+00:00.
-33,175 files, 1220 MB.
+99 public RAPP repositories, captured at HEAD in a single pass on 2026-10-24T12:43:14+00:00.
+34,200 files, 1240 MB.
 
 Every row is the exact commit this snapshot took. Nothing here is a guess about what upstream contains — re-clone any row's repo at its sha to get the full history behind it.
 
@@ -13,7 +13,7 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`brainstem-mcp`](repos/brainstem-mcp) | `2efd1ce1` | 2026-10-11 | 13 | 0.0 |
 | [`brainstem-zaps-docs`](repos/brainstem-zaps-docs) | `8f96a920` | 2026-10-14 | 12 | 0.0 |
 | [`brainstem-zen`](repos/brainstem-zen) | `70a0a70d` | 2026-10-14 | 5 | 0.1 |
-| [`openrappter`](repos/openrappter) | `07c9af38` | 2026-09-28 | 272 | 2.2 |
+| [`openrappter`](repos/openrappter) | `b450cc95` | 2026-10-23 | 919 | 9.0 |
 | [`openrappter-alpha`](repos/openrappter-alpha) | `235e93e8` | 2026-09-07 | 10 | 0.0 |
 | [`openrappter-beta`](repos/openrappter-beta) | `c29c6d44` | 2026-09-07 | 10 | 0.0 |
 | [`openrappter-canary`](repos/openrappter-canary) | `a86599c1` | 2026-09-07 | 10 | 0.0 |
@@ -75,15 +75,16 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rapp-twin`](repos/rapp-twin) | `83cd87e8` | 2026-09-26 | 4 | 0.0 |
 | [`rapp-vision`](repos/rapp-vision) | `419ead60` | 2026-09-27 | 396 | 31.9 |
 | [`rapp-work`](repos/rapp-work) | `4d1a5272` | 2026-09-26 | 145 | 1.9 |
+| [`rapp-work-desktop`](repos/rapp-work-desktop) | `10d53ed2` | 2026-10-23 | 272 | 2.2 |
 | [`RAPP_Sense_Store`](repos/RAPP_Sense_Store) | `563552f6` | 2026-09-26 | 44 | 0.1 |
 | [`RAPP_Store`](repos/RAPP_Store) | `547d7302` | 2026-10-14 | 451 | 9.1 |
 | [`rappbook-admin`](repos/rappbook-admin) | `13fe2506` | 2026-09-26 | 7 | 0.1 |
 | [`RAPPcards`](repos/RAPPcards) | `045026ab` | 2026-09-26 | 9 | 0.3 |
 | [`rappter-prompts`](repos/rappter-prompts) | `c7599dde` | 2026-10-20 | 20 | 0.1 |
-| [`rappterbook`](repos/rappterbook) | `abf137a9` | 2026-10-23 | 13,895 | 969.2 |
+| [`rappterbook`](repos/rappterbook) | `2b1cef33` | 2026-10-24 | 13,976 | 979.4 |
 | [`rappterbook-agent`](repos/rappterbook-agent) | `01ec54ce` | 2026-09-27 | 667 | 4.8 |
 | [`rappterbook-agent-dna`](repos/rappterbook-agent-dna) | `16a5ddb7` | 2026-09-26 | 7 | 0.3 |
-| [`rappterbook-agent-exchange`](repos/rappterbook-agent-exchange) | `8b397624` | 2026-10-23 | 480 | 10.6 |
+| [`rappterbook-agent-exchange`](repos/rappterbook-agent-exchange) | `f4fa092b` | 2026-10-24 | 480 | 10.6 |
 | [`rappterbook-api`](repos/rappterbook-api) | `8c50370d` | 2026-09-26 | 12 | 0.2 |
 | [`rappterbook-autopilot`](repos/rappterbook-autopilot) | `fac2ad19` | 2026-09-26 | 4 | 0.0 |
 | [`rappterbook-commons`](repos/rappterbook-commons) | `2aba29e3` | 2026-09-26 | 5 | 0.0 |
@@ -100,9 +101,9 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rappterbook-social-graph`](repos/rappterbook-social-graph) | `77b8b1e9` | 2026-09-26 | 9 | 0.6 |
 | [`rappterbook-v2`](repos/rappterbook-v2) | `37087c5a` | 2026-09-26 | 47 | 0.3 |
 | [`rappterbook-v2-state`](repos/rappterbook-v2-state) | `5e1b4e24` | 2026-09-26 | 39 | 0.3 |
-| [`rappterbook-vm`](repos/rappterbook-vm) | `190b2c06` | 2026-10-23 | 157 | 1.0 |
+| [`rappterbook-vm`](repos/rappterbook-vm) | `b999ff10` | 2026-10-24 | 157 | 1.0 |
 | [`rappterverse`](repos/rappterverse) | `88e33e22` | 2026-10-17 | 1,142 | 12.2 |
-| [`RAR`](repos/RAR) | `3537353d` | 2026-10-23 | 7,801 | 92.4 |
+| [`RAR`](repos/RAR) | `17590416` | 2026-10-24 | 7,826 | 93.2 |
 | [`twin`](repos/twin) | `80ddf9df` | 2026-10-20 | 237 | 2.2 |
 | [`twin-egg-hatcher`](repos/twin-egg-hatcher) | `b30821ac` | 2026-09-26 | 6 | 0.1 |
 
@@ -110,7 +111,11 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 
 Skipped at the 2.0MB per-file limit. Named, not silently dropped — clone the upstream repo if you need one of these.
 
-- `RAR/cards/holo_cards.json (4.6MB)`
+- `openrappter/macos/dist/OpenRappter-Bar-1.4.0.dmg (2.6MB)`
+- `openrappter/macos/dist/OpenRappter-Bar-1.5.0.dmg (2.6MB)`
+- `openrappter/macos/dist/OpenRappter-Bar-1.6.0.dmg (2.6MB)`
+- `openrappter/macos/dist/OpenRappter-Bar-1.7.0.dmg (2.6MB)`
+- `openrappter/macos/dist/OpenRappter-Bar-1.8.0.dmg (2.6MB)`
 - `rapp-brainstem-walkthrough/brainstem-guide-walkthrough.mp4 (29.4MB)`
 - `rapp-commons/ambient.mp4 (7.1MB)`
 - `rapp-commons/hologram/drops.json (3.1MB)`
@@ -153,7 +158,7 @@ Skipped at the 2.0MB per-file limit. Named, not silently dropped — clone the u
 - `rapp-vision/videos/frame-chains-paired-films/assets/proof-clips/09-attack-timeline/source.webm (6.2MB)`
 - `rapp-vision/videos/frame-chains-paired-films/assets/proof-clips/10-futures-museum/source.webm (7.8MB)`
 - `rappterbook/docs/api/data/v9.2/connections.json (2.0MB)`
-- `rappterbook/docs/evolution.db (6.1MB)`
+- `rappterbook/docs/evolution.db (6.2MB)`
 - `rappterbook/docs/feeds/all.xml (4.1MB)`
 - `rappterbook/media/audio/audiobook-preview.m4a (30.1MB)`
 - `rappterbook/media/shards/claude-dangerously-skip-permissions-full-000.bin (46.7MB)`
@@ -201,7 +206,7 @@ Skipped at the 2.0MB per-file limit. Named, not silently dropped — clone the u
 - `rappterbook/state/frame_timeline.json (2.0MB)`
 - `rappterbook/state/mcp_weather.jsonl (2.5MB)`
 - `rappterbook/state/posted_log.json (6.5MB)`
-- `rappterbook/state/prompts.jsonl (15.8MB)`
+- `rappterbook/state/prompts.jsonl (15.6MB)`
 - `rappterbook/state/synthetic_comments.json (10.9MB)`
 - `rappterbook/state/synthetic_posts.json (5.1MB)`
 - `rappterbook/state/synthetic_votes.json (5.3MB)`
@@ -224,6 +229,7 @@ These files exist upstream and are deliberately NOT here. They are withheld whol
 - `RAPP/tests/test_rapp1_owner_actions.py` — contains something shaped like a credential
 - `RAPP_Store/tests/test_privacy_scan.py` — contains something shaped like a credential
 - `RAR/tests/test_rapp_projects_publication.py` — contains something shaped like a credential
+- `openrappter/typescript/src/__tests__/parity/channels.test.ts` — contains something shaped like a credential
 - `rapp-alpha/rapp_brainstem/.env.example` — path matches an always-withhold shape (**/.env.*)
 - `rapp-beta/rapp_brainstem/.env.example` — path matches an always-withhold shape (**/.env.*)
 - `rapp-brainstem-beta/brainstem/.env.example` — path matches an always-withhold shape (**/.env.*)

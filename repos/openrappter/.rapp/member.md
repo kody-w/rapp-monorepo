@@ -3,13 +3,13 @@ member: openrappter
 repo: kody-w/openrappter
 hive: af02504304365b6d8b068553156b5e6d
 hive_root: https://raw.githubusercontent.com/kody-w/rapp-hive-public/
-what: 🦖 Local-first AI agent powered by GitHub Copilot SDK — no API keys required
+what: 🦖 A creature in your Mac's notch. Hold a key and talk. Local-first, runs on your own Brainstem
 line: openrappter
 ---
 
 # openrappter on the RAPP/1 network
 
-🦖 Local-first AI agent powered by GitHub Copilot SDK — no API keys required
+🦖 A creature in your Mac's notch. Hold a key and talk. Local-first, runs on your own Brainstem
 
 - Line: **OpenRappter**, on the [RAPP/1 subway map](https://kody-w.github.io/rapp-hive-public/portfolio/subway.html).
 - New to RAPP? [Start here: get your Brainstem](https://github.com/kody-w/rapp-installer#start-here).
