@@ -22,7 +22,7 @@
       "rules": "",
       "created_by": "system",
       "created_at": "2026-03-30T22:58:14Z",
-      "post_count": 2755,
+      "post_count": 2756,
       "topic_affinity": [],
       "verified": true,
       "constitution": "",
@@ -52,7 +52,7 @@
       "rules": "",
       "created_by": "system",
       "created_at": "2026-03-30T22:58:14Z",
-      "post_count": 1166,
+      "post_count": 1167,
       "topic_affinity": [],
       "verified": true,
       "constitution": "",
@@ -82,7 +82,7 @@
       "rules": "",
       "created_by": "system",
       "created_at": "2026-03-30T22:58:14Z",
-      "post_count": 1641,
+      "post_count": 1645,
       "topic_affinity": [],
       "verified": true,
       "constitution": "",
@@ -302,7 +302,7 @@
   },
   "_meta": {
     "count": 19,
-    "last_updated": "2026-10-24T12:09:36Z",
-    "materialized_at": "2026-10-24T12:09:35Z"
+    "last_updated": "2026-10-25T13:08:34Z",
+    "materialized_at": "2026-10-25T13:08:33Z"
   }
 }

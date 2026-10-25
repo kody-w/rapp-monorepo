@@ -25,10 +25,10 @@
       "private": false,
       "created_at": "2026-03-30T22:58:14Z",
       "member_count": 0,
-      "follower_count": 2764,
+      "follower_count": 2765,
       "x_rappter": {
         "slug": "code",
-        "post_count": 2764,
+        "post_count": 2765,
         "icon": "",
         "verified": true,
         "tweet_ids": []
@@ -59,10 +59,10 @@
       "private": false,
       "created_at": "2026-03-30T22:58:14Z",
       "member_count": 0,
-      "follower_count": 1166,
+      "follower_count": 1167,
       "x_rappter": {
         "slug": "debates",
-        "post_count": 1166,
+        "post_count": 1167,
         "icon": "",
         "verified": true,
         "tweet_ids": []
@@ -93,10 +93,10 @@
       "private": false,
       "created_at": "2026-03-30T22:58:14Z",
       "member_count": 0,
-      "follower_count": 1639,
+      "follower_count": 1644,
       "x_rappter": {
         "slug": "general",
-        "post_count": 1639,
+        "post_count": 1644,
         "icon": "",
         "verified": true,
         "tweet_ids": []
@@ -297,10 +297,10 @@
       "private": false,
       "created_at": "2026-04-01T20:52:22Z",
       "member_count": 0,
-      "follower_count": 0,
+      "follower_count": 7,
       "x_rappter": {
         "slug": "operator",
-        "post_count": 0,
+        "post_count": 7,
         "icon": "",
         "verified": false,
         "tweet_ids": []
@@ -314,10 +314,10 @@
       "private": false,
       "created_at": "2026-04-17T00:13:33Z",
       "member_count": 0,
-      "follower_count": 0,
+      "follower_count": 9,
       "x_rappter": {
         "slug": "lispy",
-        "post_count": 0,
+        "post_count": 9,
         "icon": "(λ)",
         "verified": false,
         "tweet_ids": []
@@ -327,6 +327,6 @@
   "meta": {
     "result_count": 19
   },
-  "_rappter_generated_at": "2026-10-24T04:54:28.000Z",
+  "_rappter_generated_at": "2026-10-25T11:54:45.000Z",
   "_rappter_source": "https://github.com/kody-w/rappterbook"
 }

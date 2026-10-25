@@ -1,7 +1,7 @@
 # What is in here
 
-99 public RAPP repositories, captured at HEAD in a single pass on 2026-10-24T12:43:14+00:00.
-34,200 files, 1240 MB.
+99 public RAPP repositories, captured at HEAD in a single pass on 2026-10-25T13:14:44+00:00.
+34,298 files, 1250 MB.
 
 Every row is the exact commit this snapshot took. Nothing here is a guess about what upstream contains — re-clone any row's repo at its sha to get the full history behind it.
 
@@ -13,7 +13,7 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`brainstem-mcp`](repos/brainstem-mcp) | `2efd1ce1` | 2026-10-11 | 13 | 0.0 |
 | [`brainstem-zaps-docs`](repos/brainstem-zaps-docs) | `8f96a920` | 2026-10-14 | 12 | 0.0 |
 | [`brainstem-zen`](repos/brainstem-zen) | `70a0a70d` | 2026-10-14 | 5 | 0.1 |
-| [`openrappter`](repos/openrappter) | `b450cc95` | 2026-10-23 | 919 | 9.0 |
+| [`openrappter`](repos/openrappter) | `19b532db` | 2026-10-24 | 935 | 9.2 |
 | [`openrappter-alpha`](repos/openrappter-alpha) | `235e93e8` | 2026-09-07 | 10 | 0.0 |
 | [`openrappter-beta`](repos/openrappter-beta) | `c29c6d44` | 2026-09-07 | 10 | 0.0 |
 | [`openrappter-canary`](repos/openrappter-canary) | `a86599c1` | 2026-09-07 | 10 | 0.0 |
@@ -81,10 +81,10 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rappbook-admin`](repos/rappbook-admin) | `13fe2506` | 2026-09-26 | 7 | 0.1 |
 | [`RAPPcards`](repos/RAPPcards) | `045026ab` | 2026-09-26 | 9 | 0.3 |
 | [`rappter-prompts`](repos/rappter-prompts) | `c7599dde` | 2026-10-20 | 20 | 0.1 |
-| [`rappterbook`](repos/rappterbook) | `2b1cef33` | 2026-10-24 | 13,976 | 979.4 |
+| [`rappterbook`](repos/rappterbook) | `73e74731` | 2026-10-25 | 14,058 | 989.5 |
 | [`rappterbook-agent`](repos/rappterbook-agent) | `01ec54ce` | 2026-09-27 | 667 | 4.8 |
 | [`rappterbook-agent-dna`](repos/rappterbook-agent-dna) | `16a5ddb7` | 2026-09-26 | 7 | 0.3 |
-| [`rappterbook-agent-exchange`](repos/rappterbook-agent-exchange) | `f4fa092b` | 2026-10-24 | 480 | 10.6 |
+| [`rappterbook-agent-exchange`](repos/rappterbook-agent-exchange) | `47abbec7` | 2026-10-25 | 480 | 10.6 |
 | [`rappterbook-api`](repos/rappterbook-api) | `8c50370d` | 2026-09-26 | 12 | 0.2 |
 | [`rappterbook-autopilot`](repos/rappterbook-autopilot) | `fac2ad19` | 2026-09-26 | 4 | 0.0 |
 | [`rappterbook-commons`](repos/rappterbook-commons) | `2aba29e3` | 2026-09-26 | 5 | 0.0 |
@@ -101,9 +101,9 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rappterbook-social-graph`](repos/rappterbook-social-graph) | `77b8b1e9` | 2026-09-26 | 9 | 0.6 |
 | [`rappterbook-v2`](repos/rappterbook-v2) | `37087c5a` | 2026-09-26 | 47 | 0.3 |
 | [`rappterbook-v2-state`](repos/rappterbook-v2-state) | `5e1b4e24` | 2026-09-26 | 39 | 0.3 |
-| [`rappterbook-vm`](repos/rappterbook-vm) | `b999ff10` | 2026-10-24 | 157 | 1.0 |
+| [`rappterbook-vm`](repos/rappterbook-vm) | `458f2228` | 2026-10-25 | 157 | 1.0 |
 | [`rappterverse`](repos/rappterverse) | `88e33e22` | 2026-10-17 | 1,142 | 12.2 |
-| [`RAR`](repos/RAR) | `17590416` | 2026-10-24 | 7,826 | 93.2 |
+| [`RAR`](repos/RAR) | `66700c9d` | 2026-10-25 | 7,826 | 93.2 |
 | [`twin`](repos/twin) | `80ddf9df` | 2026-10-20 | 237 | 2.2 |
 | [`twin-egg-hatcher`](repos/twin-egg-hatcher) | `b30821ac` | 2026-09-26 | 6 | 0.1 |
 
@@ -157,7 +157,7 @@ Skipped at the 2.0MB per-file limit. Named, not silently dropped — clone the u
 - `rapp-vision/videos/frame-chains-paired-films/assets/proof-clips/07-constitution/source.webm (3.2MB)`
 - `rapp-vision/videos/frame-chains-paired-films/assets/proof-clips/09-attack-timeline/source.webm (6.2MB)`
 - `rapp-vision/videos/frame-chains-paired-films/assets/proof-clips/10-futures-museum/source.webm (7.8MB)`
-- `rappterbook/docs/api/data/v9.2/connections.json (2.0MB)`
+- `rappterbook/docs/api/data/v9.2/connections.json (2.1MB)`
 - `rappterbook/docs/evolution.db (6.2MB)`
 - `rappterbook/docs/feeds/all.xml (4.1MB)`
 - `rappterbook/media/audio/audiobook-preview.m4a (30.1MB)`
@@ -206,7 +206,7 @@ Skipped at the 2.0MB per-file limit. Named, not silently dropped — clone the u
 - `rappterbook/state/frame_timeline.json (2.0MB)`
 - `rappterbook/state/mcp_weather.jsonl (2.5MB)`
 - `rappterbook/state/posted_log.json (6.5MB)`
-- `rappterbook/state/prompts.jsonl (15.6MB)`
+- `rappterbook/state/prompts.jsonl (15.4MB)`
 - `rappterbook/state/synthetic_comments.json (10.9MB)`
 - `rappterbook/state/synthetic_posts.json (5.1MB)`
 - `rappterbook/state/synthetic_votes.json (5.3MB)`
