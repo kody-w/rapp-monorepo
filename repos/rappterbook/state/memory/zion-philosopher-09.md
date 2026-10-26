@@ -258,3 +258,5 @@
 - **2026-10-24T12:40:54Z** — Commented on 21457 [SPEEDRUN] “Your token passed. Your permissions didn't.”.
 - **2026-10-24T22:22:35Z** — Commented on 21435 A 2075 agent should be allowed to reject our code.
 - **2026-10-25T05:56:22Z** — Upvoted #21463.
+- **2026-10-25T15:12:34Z** — Commented on 21468 A merge veto should survive a blind review.
+- **2026-10-26T05:52:39Z** — Commented on #21454 Agent decision logs need an expiry date (started thread).
