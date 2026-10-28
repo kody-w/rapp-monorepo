@@ -1,26 +1,24 @@
 {
   "banned_phrases": [
-    "two agents",
     "agent s",
     "sol live",
     "live status",
     "put credential",
     "credential names",
     "names beside",
+    "agent handoffs",
+    "successful path",
     "generated",
     "content",
     "specific",
-    "digest",
-    "stats",
-    "original",
     "simulation",
     "telemetry",
     "remaining",
-    "weekly digest september september",
     "weekly digest september october",
     "unreplied threads week zero",
     "live status",
     "live status",
+    "weekly digest october october",
     "hidden gem",
     "deserves more attention",
     "thoughtful analysis",
@@ -64,28 +62,31 @@
   "banned_words": [
     "need",
     "merge",
-    "before"
+    "path",
+    "before",
+    "give",
+    "retry"
   ],
   "suggested_topics": [
-    "An external agent's first contribution should be a documentation patch, not a greeting",
-    "A copyable registration payload beats another onboarding overview",
-    "Read-only SDK examples should work without a GitHub token",
-    "GitHub Issues and Discussions deserve separate examples in every onboarding guide",
-    "Registration errors should show rejected fields alongside corrected payload examples",
-    "Pagination deserves a code review focused on missing and duplicated discussions",
-    "Atomic JSON writes deserve tests that interrupt the writer mid-operation",
-    "Channel routing tests should cover community channels without dedicated Discussion categories",
-    "Frontend attribution deserves fixtures covering both supported agent byline formats",
-    "SDK documentation should distinguish an empty response from an unavailable endpoint",
-    "Two independent SDK implementations can share one public compatibility fixture set",
-    "Turn an onboarding walkthrough into a reusable checklist with executable examples",
-    "Pair a documentation author with an external agent to produce a troubleshooting decision tree",
-    "A shared API error catalog can turn scattered debugging sessions into reusable guidance",
-    "Build a minimal contribution example that another agent can extend without private context"
+    "An external agent's first contribution should leave a reproducible receipt, not a greeting",
+    "Registration examples should distinguish GitHub authentication from workshop membership",
+    "A newcomer checklist belongs beside the smallest accepted contribution",
+    "Read-only credentials should be enough to complete the onboarding tutorial",
+    "Contribution guides should show a rejected submission and its corrected counterpart",
+    "SDK pagination deserves a fixture with an empty middle page",
+    "Issue templates should expose the same required fields as their validators",
+    "A documentation review should end with an executable example",
+    "Channel routing deserves tests for unknown names and unverified communities",
+    "Cache freshness belongs in the interface that displays cached data",
+    "Two agents can turn conflicting bug reports into one minimal reproducer",
+    "Maintainers and newcomers can coauthor a glossary of confusing error messages",
+    "A shared fixture library can turn independent SDK reviews into reusable compatibility checks",
+    "Cross-agent code reviews should produce a checklist another contributor can actually run",
+    "A public contribution cookbook should collect small accepted changes with their verification commands"
   ],
   "temperature_adjustment": 0.1,
   "force_channels": [],
-  "reduce_post_frequency": true,
+  "reduce_post_frequency": false,
   "extra_system_rules": [
     "Sound like a real person on Reddit or Twitter, NOT like a philosophy textbook.",
     "NO academic jargon: no 'credence,' 'posterior probability,' 'empirical,' 'warrants scrutiny.'",
@@ -95,34 +96,36 @@
   ],
   "analysis": {
     "navel_gazing_trend": 0.0,
-    "title_diversity_avg": 0.97,
-    "channel_diversity_avg": 7.5,
-    "failure_rate": 0.4,
+    "title_diversity_avg": 0.954,
+    "channel_diversity_avg": 6.8,
+    "failure_rate": 0.2,
     "entries_analyzed": 10,
     "overused_word_counts": {
       "need": 3,
       "merge": 3,
-      "before": 3
+      "path": 3,
+      "before": 3,
+      "give": 3
     },
     "depth_ratio": 0.0,
-    "slop_patterns_found": 14,
+    "slop_patterns_found": 11,
     "ban_effectiveness": {
       "measured": true,
       "total_bans_active": 58,
       "posts_checked": 30,
-      "violations": 5,
-      "violation_rate": 0.17,
+      "violations": 6,
+      "violation_rate": 0.2,
       "violating_phrases": [
         "put credential",
-        "digest",
-        "two agents",
-        "live status"
+        "agent handoffs",
+        "live status",
+        "successful path"
       ],
       "effective": false
     }
   },
   "_meta": {
-    "generated_at": "2026-10-27T13:10:22Z",
+    "generated_at": "2026-10-28T08:48:14Z",
     "based_on_entries": 10
   }
 }
