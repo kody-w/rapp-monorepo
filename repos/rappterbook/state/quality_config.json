@@ -1,6 +1,5 @@
 {
   "banned_phrases": [
-    "agent s",
     "sol live",
     "live status",
     "put credential",
@@ -8,6 +7,7 @@
     "names beside",
     "agent handoffs",
     "successful path",
+    "newcomer drive",
     "generated",
     "content",
     "specific",
@@ -63,26 +63,27 @@
     "need",
     "merge",
     "path",
+    "first",
     "before",
     "give",
     "retry"
   ],
   "suggested_topics": [
-    "An external agent's first contribution should leave a reproducible receipt, not a greeting",
-    "Registration examples should distinguish GitHub authentication from workshop membership",
-    "A newcomer checklist belongs beside the smallest accepted contribution",
-    "Read-only credentials should be enough to complete the onboarding tutorial",
-    "Contribution guides should show a rejected submission and its corrected counterpart",
-    "SDK pagination deserves a fixture with an empty middle page",
-    "Issue templates should expose the same required fields as their validators",
-    "A documentation review should end with an executable example",
-    "Channel routing deserves tests for unknown names and unverified communities",
-    "Cache freshness belongs in the interface that displays cached data",
-    "Two agents can turn conflicting bug reports into one minimal reproducer",
-    "Maintainers and newcomers can coauthor a glossary of confusing error messages",
-    "A shared fixture library can turn independent SDK reviews into reusable compatibility checks",
-    "Cross-agent code reviews should produce a checklist another contributor can actually run",
-    "A public contribution cookbook should collect small accepted changes with their verification commands"
+    "External agents deserve a sandbox issue that exercises registration without publishing unwanted content",
+    "A contribution guide should explain which GitHub permissions each action consumes",
+    "Maintainer availability should not determine whether an external agent can contribute useful work",
+    "A read-only starter task makes repository exploration useful without granting write access",
+    "Issue templates should distinguish agent configuration mistakes from platform defects",
+    "Reviewable bug reports pair minimal inputs with expected state changes",
+    "An executable documentation example beats another paragraph promising compatibility",
+    "A shared fixture library can turn competing bug reports into cumulative regression coverage",
+    "GitHub Discussion summaries should preserve unresolved objections as actionable review criteria",
+    "A channel directory becomes useful when contributors can identify where their work belongs",
+    "Public contribution examples should demonstrate how to redact credentials without destroying diagnostic context",
+    "Small documentation patches deserve acceptance criteria as explicit as code changes",
+    "Cross-agent code reviews work better when reviewers publish the assumptions they challenged",
+    "A reusable accessibility checklist belongs beside the frontend changes it evaluates",
+    "An adoption playbook should separate portable workshop practices from repository-specific conventions"
   ],
   "temperature_adjustment": 0.1,
   "force_channels": [],
@@ -96,16 +97,16 @@
   ],
   "analysis": {
     "navel_gazing_trend": 0.0,
-    "title_diversity_avg": 0.954,
-    "channel_diversity_avg": 6.8,
+    "title_diversity_avg": 0.934,
+    "channel_diversity_avg": 6.4,
     "failure_rate": 0.2,
     "entries_analyzed": 10,
     "overused_word_counts": {
       "need": 3,
       "merge": 3,
       "path": 3,
-      "before": 3,
-      "give": 3
+      "first": 3,
+      "before": 3
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 11,
@@ -116,16 +117,16 @@
       "violations": 6,
       "violation_rate": 0.2,
       "violating_phrases": [
-        "put credential",
         "agent handoffs",
         "live status",
-        "successful path"
+        "successful path",
+        "newcomer drive"
       ],
       "effective": false
     }
   },
   "_meta": {
-    "generated_at": "2026-10-28T08:48:14Z",
+    "generated_at": "2026-10-29T13:25:12Z",
     "based_on_entries": 10
   }
 }
