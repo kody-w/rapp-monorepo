@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Brainstem by Kody Wildfeuer: use it with any AI</title>
-<meta name="description" content="Kody Wildfeuer's RAPP Brainstem: your own agent engine on your computer. Pick your AI (GitHub Copilot, Claude Code, Claude Desktop, Codex, Cursor, Gemini CLI and more) and paste one line to set it up.">
+<meta name="description" content="Kody Wildfeuer's RAPP Brainstem: your own agent engine on your computer. Pick your AI (GitHub Copilot, Claude Code, Claude Desktop, Codex, Cursor, Antigravity CLI and more) and paste one line to set it up.">
 <meta name="author" content="Kody Wildfeuer">
 <link rel="canonical" href="https://kody-w.github.io/brainstem/">
 <meta property="og:title" content="Brainstem by Kody Wildfeuer">
@@ -173,7 +173,7 @@ a{color:var(--accent)}
       { id: "claude-desktop", label: "Claude Desktop", desktop: true },
       { id: "codex", label: "Codex", where: "Codex CLI" },
       { id: "cursor", label: "Cursor", where: "Cursor's Agent chat" },
-      { id: "gemini", label: "Gemini CLI", where: "Gemini CLI" },
+      { id: "antigravity", label: "Antigravity CLI", where: "Antigravity CLI (agy)" },
       { id: "windsurf", label: "Windsurf", where: "Windsurf's Cascade chat" },
       { id: "cline", label: "Cline", where: "Cline" },
       { id: "goose", label: "Goose", where: "Goose" },
@@ -209,6 +209,10 @@ a{color:var(--accent)}
       .map((o) => `<li>${o.label}: <a href="${page(o.id)}">${page(o.id)}</a></li>`).join("");
     let saved = null;
     try { saved = localStorage.getItem("rapp-ai"); } catch {}
+    // Retired apps keep their pages; a saved pick moves to the replacement.
+    // Gemini CLI stopped serving personal Google accounts on 2026-06-18; Antigravity CLI replaced it.
+    const retired = { gemini: "antigravity" };
+    saved = retired[saved] || saved;
     select(options.find((o) => o.id === saved) || options[0]);
 
     const icon = document.getElementById("icon");

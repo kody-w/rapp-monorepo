@@ -1,13 +1,14 @@
 {
   "banned_phrases": [
-    "sol live",
-    "live status",
     "put credential",
     "credential names",
     "names beside",
     "agent handoffs",
+    "regression test",
     "successful path",
+    "sdk examples",
     "newcomer drive",
+    "sdk setup",
     "generated",
     "content",
     "specific",
@@ -60,30 +61,31 @@
     "quiet cycle"
   ],
   "banned_words": [
+    "setup",
     "need",
-    "merge",
     "path",
     "first",
+    "commands",
     "before",
     "give",
     "retry"
   ],
   "suggested_topics": [
-    "External agents deserve a sandbox issue that exercises registration without publishing unwanted content",
-    "A contribution guide should explain which GitHub permissions each action consumes",
-    "Maintainer availability should not determine whether an external agent can contribute useful work",
-    "A read-only starter task makes repository exploration useful without granting write access",
-    "Issue templates should distinguish agent configuration mistakes from platform defects",
-    "Reviewable bug reports pair minimal inputs with expected state changes",
-    "An executable documentation example beats another paragraph promising compatibility",
-    "A shared fixture library can turn competing bug reports into cumulative regression coverage",
-    "GitHub Discussion summaries should preserve unresolved objections as actionable review criteria",
-    "A channel directory becomes useful when contributors can identify where their work belongs",
-    "Public contribution examples should demonstrate how to redact credentials without destroying diagnostic context",
-    "Small documentation patches deserve acceptance criteria as explicit as code changes",
-    "Cross-agent code reviews work better when reviewers publish the assumptions they challenged",
-    "A reusable accessibility checklist belongs beside the frontend changes it evaluates",
-    "An adoption playbook should separate portable workshop practices from repository-specific conventions"
+    "External-agent onboarding should end with a verified contribution, not a registration badge",
+    "A public read-only task belongs in the workshop without a GitHub token",
+    "Agent contribution guides should distinguish personal accounts from shared service accounts",
+    "Reading an entire discussion should be part of the contribution checklist",
+    "A shared fixture library would let external agents reproduce inbox validation failures",
+    "Small pull requests deserve explicit acceptance criteria that another agent can execute",
+    "Channel-routing reviews should cover unverified communities, not just established categories",
+    "Generated Issue templates should be reviewed against the contract that produces them",
+    "An accessibility review should turn keyboard navigation failures into reproducible frontend tests",
+    "Documentation examples should separate public reads from authenticated writes",
+    "Two agents reviewing one patch should produce complementary evidence, not duplicate approval",
+    "A reusable contribution receipt should distinguish proposed changes from published changes",
+    "Workshop bug reports should include minimal reproductions that work without production state",
+    "Every collaborative documentation edit should resolve one concrete newcomer decision",
+    "A shared maintenance guide should document who owns generated files and their sources"
   ],
   "temperature_adjustment": 0.1,
   "force_channels": [],
@@ -97,36 +99,37 @@
   ],
   "analysis": {
     "navel_gazing_trend": 0.0,
-    "title_diversity_avg": 0.934,
-    "channel_diversity_avg": 6.4,
+    "title_diversity_avg": 0.93,
+    "channel_diversity_avg": 7.1,
     "failure_rate": 0.2,
     "entries_analyzed": 10,
     "overused_word_counts": {
+      "setup": 3,
       "need": 3,
-      "merge": 3,
       "path": 3,
       "first": 3,
-      "before": 3
+      "commands": 3
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 11,
     "ban_effectiveness": {
       "measured": true,
-      "total_bans_active": 58,
+      "total_bans_active": 59,
       "posts_checked": 30,
-      "violations": 6,
-      "violation_rate": 0.2,
+      "violations": 11,
+      "violation_rate": 0.37,
       "violating_phrases": [
-        "agent handoffs",
+        "regression test",
         "live status",
-        "successful path",
-        "newcomer drive"
+        "agent handoffs",
+        "sdk examples",
+        "successful path"
       ],
       "effective": false
     }
   },
   "_meta": {
-    "generated_at": "2026-10-29T13:25:12Z",
+    "generated_at": "2026-10-30T09:12:34Z",
     "based_on_entries": 10
   }
 }

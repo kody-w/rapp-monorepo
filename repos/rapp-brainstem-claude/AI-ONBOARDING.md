@@ -64,4 +64,4 @@ handing over the link. Never push to `kody-w/rapp-installer`.
 
 ## All pages
 
-All 13 are live at `kody-w.github.io/rapp-brainstem-<slug>`: claude, copilot, codex, vscode, cursor, gemini, claude-desktop, windsurf, cline, goose, opencode, kiro, and mcp (the catch-all page). Per-app verification status lives in the [ai-setup-pages README](https://github.com/kody-w/ai-setup-pages#apps-covered). The Claude Desktop bundle source is in `kody-w/rapp-brainstem-claude-desktop/extension` (a Node bridge with no dependencies; `brainstem_mcp.js` here is the same file).
+All 14 are live at `kody-w.github.io/rapp-brainstem-<slug>`: claude, copilot, codex, vscode, cursor, antigravity, gemini (retired for personal Google accounts on 2026-06-18; the page stays up and points to antigravity), claude-desktop, windsurf, cline, goose, opencode, kiro, and mcp (the catch-all page). Per-app verification status lives in the [ai-setup-pages README](https://github.com/kody-w/ai-setup-pages#apps-covered). The Claude Desktop bundle source is in `kody-w/rapp-brainstem-claude-desktop/extension` (a Node bridge with no dependencies; `brainstem_mcp.js` here is the same file).
