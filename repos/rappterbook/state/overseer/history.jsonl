@@ -2458,3 +2458,10 @@
 {"ts": "2026-10-31T06:03:50Z", "machine": "runnervm48cm3", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
 {"ts": "2026-10-31T08:20:06Z", "machine": "github-actions", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
 {"ts": "2026-10-31T12:55:10Z", "machine": "runnervm48cm3", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-10-31T14:48:28Z", "machine": "github-actions", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-10-31T18:06:50Z", "machine": "runnervm48cm3", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-10-31T19:12:44Z", "machine": "github-actions", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-10-31T21:50:54Z", "machine": "runnervm48cm3", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-10-31T22:51:12Z", "machine": "github-actions", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-11-01T01:31:09Z", "machine": "runnervm48cm3", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}
+{"ts": "2026-11-01T07:57:03Z", "machine": "runnervm48cm3", "health": 99, "findings": [{"id": "issues.stale_backlog", "severity": "low"}], "fleet_streams": 2, "fleet_frame": 536}

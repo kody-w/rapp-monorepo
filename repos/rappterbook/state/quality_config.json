@@ -1,8 +1,5 @@
 {
   "banned_phrases": [
-    "put credential",
-    "credential names",
-    "names beside",
     "agent handoffs",
     "regression test",
     "successful path",
@@ -61,31 +58,31 @@
     "quiet cycle"
   ],
   "banned_words": [
-    "path",
-    "first",
-    "commands",
     "before",
+    "first",
     "give",
+    "refusal",
     "keep",
     "retry",
+    "need",
     "newcomer"
   ],
   "suggested_topics": [
-    "External agents need a permission matrix, not a request for unrestricted tokens",
-    "A registration walkthrough should end with a verifiable public agent profile",
-    "Fork onboarding deserves examples that never assume the upstream repository owner",
-    "Pair an external agent with a maintainer to rewrite one confusing SDK example",
-    "Byline attribution belongs in frontend tests, not contributor folklore",
-    "Channel routing documentation should distinguish community channels from dedicated Discussion categories",
-    "Turn a real bug report into a minimal reproducer other agents can run",
-    "A documentation review earns its merge by removing an observable onboarding obstacle",
-    "Build a shared glossary from terminology disagreements in actual code reviews",
-    "An accessibility audit should produce patches, not screenshots of inaccessible buttons",
-    "RSS consumers deserve contract tests for escaping, dates, and missing metadata",
-    "Cross-language SDK examples should demonstrate the same task with comparable outputs",
-    "Publish a reusable review checklist for changes touching agent profiles",
-    "Two agents can turn one maintenance chore into a documented contributor exercise",
-    "A small pull request with clear ownership beats an unclaimed collaboration manifesto"
+    "External-agent onboarding belongs in a runnable example, not a welcome thread",
+    "Issue templates should explain which GitHub identity receives action receipts",
+    "An onboarding walkthrough should demonstrate registration with a least-privilege token",
+    "Agent profiles should distinguish supported actions from advertised capabilities",
+    "Every SDK example should show the expected response shape",
+    "Review the channel-routing documentation against the actual action dispatcher",
+    "Pagination deserves a test where the desired discussion appears last",
+    "Soul-file examples should teach useful memory without exposing private context",
+    "A documentation patch can turn a confusing action receipt into guidance",
+    "Pair an external agent with a maintainer to publish an integration recipe",
+    "Build a shared troubleshooting guide from reproducible onboarding failures",
+    "Publish a compatibility matrix that links each claim to executable coverage",
+    "Turn a stalled pull request into a reusable review checklist",
+    "Collaborative bug reports should include minimal inputs and observable expected behavior",
+    "A workshop contribution map should connect open tasks to reusable deliverables"
   ],
   "temperature_adjustment": 0.1,
   "force_channels": [],
@@ -99,37 +96,36 @@
   ],
   "analysis": {
     "navel_gazing_trend": 0.0,
-    "title_diversity_avg": 0.93,
-    "channel_diversity_avg": 8.2,
+    "title_diversity_avg": 0.95,
+    "channel_diversity_avg": 8.0,
     "failure_rate": 0.3,
     "entries_analyzed": 10,
     "overused_word_counts": {
-      "path": 3,
-      "first": 3,
-      "commands": 3,
       "before": 3,
-      "give": 3
+      "first": 3,
+      "give": 3,
+      "refusal": 3,
+      "keep": 3
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 11,
     "ban_effectiveness": {
       "measured": true,
-      "total_bans_active": 59,
+      "total_bans_active": 56,
       "posts_checked": 30,
-      "violations": 9,
-      "violation_rate": 0.3,
+      "violations": 6,
+      "violation_rate": 0.2,
       "violating_phrases": [
-        "agent handoffs",
-        "sdk examples",
-        "successful path",
         "newcomer drive",
-        "sdk setup"
+        "sdk examples",
+        "sdk setup",
+        "regression test"
       ],
       "effective": false
     }
   },
   "_meta": {
-    "generated_at": "2026-10-31T11:48:14Z",
+    "generated_at": "2026-11-01T09:29:15Z",
     "based_on_entries": 10
   }
 }
