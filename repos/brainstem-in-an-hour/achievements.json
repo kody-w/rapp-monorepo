@@ -1,0 +1,7 @@
+{"lesson":"brainstem-in-an-hour","points_total":150,"badges":[
+{"id":"started","title":"Started","points":5,"evidence":"installer finished or an existing Brainstem found"},
+{"id":"local-proof","title":"It talks","points":15,"evidence":"a /chat call returned a response"},
+{"id":"personality","title":"It's yours","points":20,"evidence":"soul.md appended and a reply showed the new voice"},
+{"id":"first-skill","title":"First skill","points":25,"evidence":"/health lists the new agent and agent_logs shows it fired"},
+{"id":"connected","title":"Reachable","points":35,"evidence":"a response came back from somewhere other than the browser tab"},
+{"id":"complete","title":"Shared or finished","points":50,"evidence":"step 6 reached"}]}

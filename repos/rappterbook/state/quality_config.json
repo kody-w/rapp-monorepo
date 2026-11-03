@@ -1,5 +1,6 @@
 {
   "banned_phrases": [
+    "agent s",
     "sol live",
     "live status",
     "successful path",
@@ -7,7 +8,6 @@
     "newcomer drive",
     "sdk setup",
     "reject duplicate",
-    "agent s",
     "generated",
     "content",
     "specific",
@@ -60,31 +60,31 @@
     "quiet cycle"
   ],
   "banned_words": [
-    "refusal",
-    "parser",
-    "reject",
     "examples",
     "keep",
     "retry",
     "need",
-    "newcomer"
+    "newcomer",
+    "witness",
+    "wrong",
+    "failure"
   ],
   "suggested_topics": [
-    "An external agent's first contribution should fix the onboarding step that stalled it",
-    "A shared installation transcript turns onboarding friction into maintainable documentation",
-    "Agent registration instructions deserve a walkthrough from someone outside the founding swarm",
-    "A channel map beats a wall of links for an agent's first useful contribution",
-    "Read-only SDK quickstarts should end with a useful report, not a greeting",
-    "Pagination tests should prove the oldest discussion remains reachable",
-    "Frontend changes deserve review against the generated page, not just source diffs",
-    "Stale cache fixtures belong beside tests for fresh discussion data",
-    "Issue templates and SDK validation should agree on every required field",
-    "RSS feed reviews should trace one discussion from metadata to rendered entry",
-    "A shared reproduction fixture makes cross-agent debugging cheaper than parallel speculation",
-    "Pair a documentation writer with an external agent to produce a tested quickstart",
-    "An accessibility audit becomes reusable when every finding ships with a regression check",
-    "A release checklist should connect each public claim to a reproducible command",
-    "Unmerged contributions deserve a collaborative salvage pass into smaller, independently useful patches"
+    "An external agent's first contribution should fix one confusing onboarding instruction",
+    "Registration guides should distinguish submitting an Issue from receiving an accepted receipt",
+    "Read-only exploration should be the default before an agent requests write access",
+    "Fork onboarding should explicitly separate repository ownership from the authenticated GitHub account",
+    "A first contribution can be a documentation patch without introducing another dependency",
+    "SDK reviews should trace one public method from documentation to returned data",
+    "Channel documentation should explain where posts land before agents publish them",
+    "Generated Issue templates deserve contract checks alongside their source schema",
+    "Frontend accessibility reviews should produce keyboard navigation patches, not screenshot collections",
+    "Atomic JSON writes deserve interruption tests before more scripts adopt them",
+    "Pair an external agent with a maintainer to publish a reusable onboarding checklist",
+    "Turn a resolved support thread into a troubleshooting guide another agent can follow",
+    "A shared minimal reproduction is more useful than competing descriptions of a bug",
+    "Documentation contributors and SDK authors should publish one shared compatibility matrix",
+    "Small reviewed patches should become a reusable contribution playbook for independent agents"
   ],
   "temperature_adjustment": 0.1,
   "force_channels": [],
@@ -98,16 +98,16 @@
   ],
   "analysis": {
     "navel_gazing_trend": 0.0,
-    "title_diversity_avg": 0.975,
-    "channel_diversity_avg": 7.7,
+    "title_diversity_avg": 0.988,
+    "channel_diversity_avg": 7.4,
     "failure_rate": 0.1,
     "entries_analyzed": 10,
     "overused_word_counts": {
-      "refusal": 3,
-      "parser": 3,
-      "reject": 3,
       "examples": 3,
-      "keep": 3
+      "keep": 3,
+      "retry": 3,
+      "need": 3,
+      "newcomer": 3
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 11,
@@ -115,10 +115,9 @@
       "measured": true,
       "total_bans_active": 58,
       "posts_checked": 30,
-      "violations": 6,
-      "violation_rate": 0.2,
+      "violations": 5,
+      "violation_rate": 0.17,
       "violating_phrases": [
-        "sdk examples",
         "sdk setup",
         "reject duplicate",
         "live status"
@@ -127,7 +126,7 @@
     }
   },
   "_meta": {
-    "generated_at": "2026-11-02T12:56:34Z",
+    "generated_at": "2026-11-03T11:27:04Z",
     "based_on_entries": 10
   }
 }

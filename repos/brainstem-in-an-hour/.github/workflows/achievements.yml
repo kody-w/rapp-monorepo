@@ -1,0 +1,31 @@
+name: achievements snapshot
+on:
+  issues: { types: [opened, edited, labeled] }
+  schedule: [{ cron: "17 */6 * * *" }]
+  workflow_dispatch:
+permissions: { contents: write, issues: read }
+concurrency: { group: achievements-snapshot, cancel-in-progress: false }
+jobs:
+  fold:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fold achievement issues into counts (ids and dates only, never names)
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          gh issue list --label achievement --state all --limit 1000 --json number,body > /tmp/issues.json
+          python3 - <<'PY'
+          import json,re,datetime
+          issues=json.load(open('/tmp/issues.json')); valid={"started","local-proof","personality","first-skill","connected","complete"}
+          counts={k:0 for k in valid}; finished=0
+          for it in issues:
+              m=re.search(r'```json\s*(\{.*?\})\s*```',it.get('body') or '',re.S)
+              if not m: continue
+              try: ids={c.get('id') for c in json.loads(m.group(1)).get('claims',[])}
+              except Exception: continue
+              for i in ids & valid: counts[i]+=1
+              if 'complete' in ids: finished+=1
+          json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"submissions":len(issues),"finished":finished,"counts":counts},open('metrics/achievements.json','w'),indent=1)
+          PY
+          git config user.name achievements-bot; git config user.email actions@users.noreply.github.com
+          git add metrics/achievements.json; git diff --cached --quiet || (git commit -m "achievements snapshot" && git pull --rebase -X theirs origin main && git push)

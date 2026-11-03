@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-10-24T04:44:15.047600+00:00",
+  "generated_at": "2026-11-03T15:45:07.423042+00:00",
   "stats": {
     "total_agents": 223,
     "total_swarms": 2,
@@ -11380,9 +11380,12 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/twin_egg_hatcher",
-      "version": "1.0.2",
+      "version": "1.1.0",
+      "distinct_from": {
+        "@rapp/egg_hatcher": "egg_hatcher routes any .egg to a handler by its manifest type; this hatcher materializes a twin workspace from a checkout, repo or egg at every scale"
+      },
       "display_name": "HatchTwinEgg",
-      "description": "Hatches any RAPP twin from a cwd checkout, GitHub repo, or .egg zip into ~/.rapp/twins/ so the brainstem's Twin agent can boot it.",
+      "description": "Generic single-file hatcher for any RAPP digital-organism twin. Loads identity from cwd auto-detect, --source REPO (raw GitHub), or --egg PATH (zip), then materializes ~/.rapp/twins/<hash>/. The global brainstem's built-in Twin agent boots/chats with it immediately.",
       "author": "Kody Wildfeuer",
       "tags": [
         "twin",
@@ -11401,9 +11404,9 @@
       ],
       "_file": "agents/@kody-w/twin_egg_hatcher_agent.py",
       "_install_filename": "rar_kody_w_twin_egg_hatcher_agent.py",
-      "_sha256": "0e307e62ab319665cfa3e6f534abaf47cc71d7bfbc2f1637e940ef2407c33c78",
+      "_sha256": "2b59ec448480ebb09d910683e37b1e5925edcf7aa26b3695da6f2a6aa882ca9f",
       "_lifecycle": "notarized",
-      "_receipt": "rar_609cd9c2a8e5a778cf94e01ffccda6fd1cc5a70a2008f0c2a664b60993eaac00",
+      "_receipt": "rar_c126d44415abbcc2778c5490bed045c34aa7394b831c74ce1a8f400656a4d596",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -11420,12 +11423,12 @@
         ]
       },
       "_seed": 8075652905997056003,
-      "_size_kb": 32.2,
-      "_lines": 895,
+      "_size_kb": 43.3,
+      "_lines": 1167,
       "_has_card": true,
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
-      "_latest_commit_sha": "026f18b4093e3ec07c2f359dd9618438e020a0be",
+      "_latest_commit_sha": "959f7f2524e8a2565c026d7e7e8f6a7fac3e95e2",
       "_card_sha256": "bf63c0e3cb32e5d24ac4209832fce67b70f9618d0221582723b9f66afee04265"
     },
     {
@@ -12205,9 +12208,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@rapp/learn_new",
-      "version": "3.3.0",
+      "version": "3.4.0",
       "display_name": "LearnNew",
-      "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback.",
+      "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback; action='workflow' assembles a Claude multi-agent workflow template for ClaudeWorkflows.",
       "author": "RAPP",
       "tags": [
         "meta",
@@ -12232,35 +12235,31 @@
       },
       "_file": "agents/@rapp/learn_new_agent.py",
       "_install_filename": "rar_rapp_learn_new_agent.py",
-      "_sha256": "c610a51c8958901dd8bf40f74de2ee4a6fd3f0d36bd52df6252da6c523ae8418",
+      "_sha256": "6f4de801d377e00f083b42ce4ae9ee8776ff52430d82b2c6cbe8445ffaa063ea",
       "_lifecycle": "notarized",
-      "_receipt": "rar_6bc31d2d092132904074868b24fb06a0a87c67951d56995b058187e48faef269",
+      "_receipt": "rar_a087c80d52cc482671ab9375814890e869c418934ad70f94b19b01fefd2d8e94",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
       },
       "_provenance": {
-        "issue": 1493,
+        "issue": null,
         "submitted_by": "kody-w",
         "accepted_by": "kody-w",
         "checks": [
           "manifest",
-          "namespace",
           "content_sha256",
-          "base_precondition",
-          "security_scan",
           "registry_build",
-          "card_forge",
           "full_test_suite"
         ]
       },
       "_seed": 2538772095262668015,
-      "_size_kb": 92.3,
-      "_lines": 2184,
+      "_size_kb": 104.3,
+      "_lines": 2361,
       "_has_card": true,
       "_added_at": "2026-04-20T12:38:45-04:00",
       "_first_commit_sha": "1e4054692e4a9b1edc6ff96245ef02af9bb4f9b3",
-      "_latest_commit_sha": "100291a4fa04c3446c132a053d8af64bde3cc6d6",
+      "_latest_commit_sha": "959f7f2524e8a2565c026d7e7e8f6a7fac3e95e2",
       "_card_sha256": "088b81f4015adaacfa6c7eacd5e53a71222a4626b7648d1a4d80d39771737124",
       "_seed_aliases": [
         2538772095262403840
@@ -13642,6 +13641,189 @@
     ],
     "note": "withheld agents remain at their published paths; they are omitted from every lookup"
   },
+  "stack_packs": [
+    {
+      "name": "claude-workflows",
+      "display_name": "Claude Workflows",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.1",
+      "path": "stacks/claude-workflows",
+      "purpose": "Run Claude Managed Agents with dynamic multi-agent workflows from Brainstem chat: start a job from a template with a hard spending cap, watch its phases, collect its output files. Pairs with @rapp/learn_new action='workflow'.",
+      "files": {
+        "claude_workflow_agent.py": {
+          "sha256": "9bfa76855567a7f740cbbf36aa01ef5972542c02801d4e5e6c5758292ddd893e",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "072706ae7e455c8e6e736ff7c4c3454bbf461ec08a81ae8cfe72731e8f50e1e6",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "_seed": 7100592804908244992,
+      "_incantation": "FORGE CHISEL PANTHER BEREFT MARCH CREED TEMPER"
+    },
+    {
+      "name": "fleet-management",
+      "display_name": "Fleet Management",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.0",
+      "path": "stacks/fleet-management",
+      "purpose": "Drop-in pack that turns one brainstem into a fleet controller for a network of Mac-mini brainstems. Two files: fleet_agent.py (the SSH-driven fleet adapter \u2014 discover, authorize, exec, read, write, tail, chat any twin on any peer, mesh-exec, mesh-chat, plus brainstem-aware actions like provision_bra",
+      "files": {
+        "fleet_agent.py": {
+          "sha256": "abf5f9d78da5fa58e804f8770fb4eb8462fcf67bdd5e1ec49c107e898e07a9fa",
+          "verified": true
+        },
+        "twin_egg_hatcher_agent.py": {
+          "sha256": "2b59ec448480ebb09d910683e37b1e5925edcf7aa26b3695da6f2a6aa882ca9f",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "_seed": 17440304482002819656,
+      "_incantation": "PLUME DOMINION LUSTER DINT JADE OMEN BIND"
+    },
+    {
+      "name": "judge",
+      "display_name": "Regression Judge",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.1",
+      "path": "stacks/judge",
+      "purpose": "Catches regressions: record questions and answers once, then after any change replay them on the live Brainstem and a teacher grades each new answer against the original (same, better, worse, broken), with a side-by-side report.",
+      "files": {
+        "regression_judge_agent.py": {
+          "sha256": "bd66af0633b21b789e4c9281aff1a10113a7e06dd6ae885f92a7ac41987d96de",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "8358ea234c1069be0ff189220594a45c72beac90678338f46a047ed64137279a",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "_seed": 17889783379558146048,
+      "_incantation": "FORGE CHISEL PANTHER BULWARK WISE PACK BIND"
+    },
+    {
+      "name": "microsoft-365-team",
+      "display_name": "Microsoft 365 Team Starter",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.0",
+      "path": "stacks/microsoft-365-team",
+      "purpose": "Drop-in pack for Microsoft Solution Engineers. Two files: factory_agent.py (plants new MS-themed neighborhoods under your GitHub handle in 4 modes: local/private/public/egg) + microsoft-365-team.egg (the canonical content \u2014 11 agents including WorkIQ for M365 access, MS-stack-shaped Twin with field ",
+      "files": {
+        "factory_agent.py": {
+          "sha256": "79010b3038bca259d6e584da4e494eee71ae5b9f9140a1d8c470e6b0c36c6980",
+          "verified": true
+        },
+        "microsoft-365-team.egg": {
+          "sha256": "bd5dc14d7892800bce72ae1f8b3ff303ffd5e693f9d4da1632e9867a26d6531d",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "_seed": 18165375178786217984,
+      "_incantation": "FORGE CHISEL PANTHER JOIST DEN SQUIRE BIND"
+    },
+    {
+      "name": "neighborhood-starter",
+      "display_name": "Neighborhood Starter Stack",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.0",
+      "path": "stacks/neighborhood-starter",
+      "purpose": "The canonical starter pack for planting a new RAPP neighborhood. Two files: factory_agent.py (drops into your local brainstem; the meta-agent that plants neighborhoods) + neighborhood-starter.egg (the template content, parameterized for the user's choices). Supports four modes: local-only on-device,",
+      "files": {
+        "factory_agent.py": {
+          "sha256": "79010b3038bca259d6e584da4e494eee71ae5b9f9140a1d8c470e6b0c36c6980",
+          "verified": true
+        },
+        "neighborhood-starter.egg": {
+          "sha256": "749b1caeb56e5c94b3428fc65a66dda46512694267cdaec1d311290307233851",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "_seed": 6633108683007991808,
+      "_incantation": "FORGE CHISEL PANTHER KEEP ION CONSUL SMELT"
+    },
+    {
+      "name": "organism-lifecycle",
+      "display_name": "Organism Lifecycle",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.0",
+      "path": "stacks/organism-lifecycle",
+      "purpose": "Two agents that turn a vanilla brainstem into a full organism host: Twin (summon/hatch/boot/stop/list/inspect \u2014 full digital-twin lifecycle) + EggHatcher (universal .egg cartridge router that introspects manifest.schema/type and dispatches to organism / rapplication / session / neighborhood / estate",
+      "files": {
+        "twin_agent.py": {
+          "sha256": "878729c7a59ce520c487d02e6986845a79babce12a6e10ecbbe5e9eec1b71dda",
+          "verified": true
+        },
+        "egg_hatcher_agent.py": {
+          "sha256": "bba2848c59de6883ad0f3d190ff0fe4e9f44f595016c95f4453d2764d3f4e78f",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "_seed": 14843056862517018624,
+      "_incantation": "FORGE FUSE PANTHER GROOM CLANG ARISE STAMP"
+    },
+    {
+      "name": "rooms",
+      "display_name": "Rooms (test)",
+      "version": "0.1.0",
+      "schema": "rapp-rar-stack/1.1",
+      "path": "stacks/rooms",
+      "purpose": "Test distro: group chat of AI seats on one Brainstem, each with its own personality and private memory; turn budgets, pick-up-where-it-stopped and hand-back to the owner.",
+      "files": {
+        "rooms_agent.py": {
+          "sha256": "cddfc6c10aec505072bcc72fa34c964874ee4cb579f3f6446500dcd8f4f00ec0",
+          "verified": true
+        },
+        "seat_notes_agent.py": {
+          "sha256": "caf790f5a9f9a0004d453d467e373ea41d12e15122b0a120e4c56276fa164e10",
+          "verified": true
+        },
+        "soul.md": {
+          "sha256": "ba97a0b788f107ba5b9af71fb8467443c8ef284f18decf7ab66e66e82796af50",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "075b4db40462e30d74c0b6256a1b1511120e52785d9140db34dc96552c14eecc",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "kernel": {
+        "sha256": "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+        "file": "brainstem.py",
+        "version": "0.6.16"
+      },
+      "_seed": 17920793872363962368,
+      "_incantation": "FORGE FUSE PANTHER BLOOM EFFACE DROIT BIND"
+    },
+    {
+      "name": "summon",
+      "display_name": "Summon (scan to install)",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.0",
+      "path": "stacks/summon",
+      "purpose": "Scan a RAR card's QR code with your phone and it installs into your own Brainstem. One agent starts a small sidecar beside the unchanged kernel; it listens only on this Mac and its Tailscale address, and installs through the Brainstem's own /agents/import, which checks every fingerprint.",
+      "files": {
+        "summon_agent.py": {
+          "sha256": "a57e473a727ec5407e23f9692e7cc1e4423bd7650b5fdb15ec4670f07b126e64",
+          "verified": true
+        },
+        "summond.py": {
+          "sha256": "b45d7c0d5ee439660e2ac2f70a65bd26828e65f7e5de1a20e9fefebfba570836",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "_seed": 2288792079516053954,
+      "_incantation": "KNOLL SECT RAY ABYSS RAVAGE SAFFRON ANVIL"
+    }
+  ],
   "releases": [
     {
       "release_name": "Autumn 2026",

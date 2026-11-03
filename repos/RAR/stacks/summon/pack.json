@@ -1,0 +1,33 @@
+{
+  "schema": "rapp-rar-stack/1.0",
+  "name": "summon",
+  "display_name": "Summon (scan to install)",
+  "version": "1.0.0",
+  "purpose": "Scan a RAR card's QR code with your phone and it installs into your own Brainstem. One agent starts a small sidecar beside the unchanged kernel; it listens only on this Mac and its Tailscale address, and installs through the Brainstem's own /agents/import, which checks every fingerprint.",
+  "files": {
+    "summon_agent.py": {
+      "purpose": "Drop into (or summon into) a Brainstem's agents/. Say 'start summon' to turn scan-to-summon on.",
+      "size": 7043,
+      "sha256": "a57e473a727ec5407e23f9692e7cc1e4423bd7650b5fdb15ec4670f07b126e64"
+    },
+    "summond.py": {
+      "purpose": "The sidecar. Fetched and sha256-checked by summon_agent.py from RAR; never run unverified.",
+      "size": 23447,
+      "sha256": "b45d7c0d5ee439660e2ac2f70a65bd26828e65f7e5de1a20e9fefebfba570836"
+    }
+  },
+  "capabilities": [
+    "summon",
+    "pair",
+    "qr",
+    "tailscale"
+  ],
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "stacks/summon/summon_agent.py"
+    ],
+    "destination": "agents/",
+    "notes": "Drop summon_agent.py into agents/, then say 'start summon'. Requires Tailscale for phones; qrencode for the pairing QR (otherwise a link is shown)."
+  }
+}
