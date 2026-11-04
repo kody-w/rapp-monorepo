@@ -19052,6 +19052,17 @@
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.1"
     },
+    "@kody-w/fragments_agent": {
+      "canonical_path": "agents/@kody-w/fragments_agent.py",
+      "latest_receipt": "rar_11ea298d4421d75d0fe926feea3a57d5d93efb100da87ac01491bf19f4f50684",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "community",
+      "sha256": "88e1749ee4ace1f506b6ee9c2c4fa2ce38e33107315f2b35f5919a489956be13",
+      "status": "active",
+      "updated_at": "2026-11-04T02:42:10.717250+00:00",
+      "version": "1.0.0"
+    },
     "@kody-w/full_rapp_leviathan": {
       "canonical_path": "agents/@kody-w/full_rapp_leviathan_agent.py",
       "latest_receipt": "rar_4ed7782f3454ec64bc31c704562b27359d71344cf3e4366e4e87d8e3a046c6a2",
@@ -19128,6 +19139,17 @@
       "status": "active",
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.2"
+    },
+    "@kody-w/journal_recall_agent": {
+      "canonical_path": "agents/@kody-w/journal_recall_agent.py",
+      "latest_receipt": "rar_fd8e99d8a34c587e6c6b830a6162a7164fadcd282d07494fc2dd813b46be61c6",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "community",
+      "sha256": "f97b91e25360b4feb4cd29957e5615339d25394198093d859eaa5e8e45977fac",
+      "status": "active",
+      "updated_at": "2026-11-03T22:20:15.845357+00:00",
+      "version": "1.0.0"
     },
     "@kody-w/kody2day_agent": {
       "canonical_path": "agents/@kody-w/kody2day_agent.py",
@@ -19681,14 +19703,14 @@
     },
     "@rapp/learn_new": {
       "canonical_path": "agents/@rapp/learn_new_agent.py",
-      "latest_receipt": "rar_a087c80d52cc482671ab9375814890e869c418934ad70f94b19b01fefd2d8e94",
+      "latest_receipt": "rar_5355e08f720538fecb5f00db1db5b14e82b3502d6b91e253cc477ca877d3692f",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "quality_tier": "official",
-      "sha256": "6f4de801d377e00f083b42ce4ae9ee8776ff52430d82b2c6cbe8445ffaa063ea",
+      "sha256": "0d3df4dbd6ee8f7d9786cc7cbd2c35616fb61bd0813cd85150b6c339fe6618e2",
       "status": "active",
-      "updated_at": "2026-11-03T15:31:06.693904+00:00",
-      "version": "3.4.0"
+      "updated_at": "2026-11-03T15:45:30.451374+00:00",
+      "version": "3.4.1"
     },
     "@rapp/moment_factory_agent": {
       "canonical_path": "agents/@rapp/moment_factory_agent.py",
@@ -20151,8 +20173,19 @@
       "status": "active",
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.2"
+    },
+    "@kody-w/source_capture_agent": {
+      "status": "active",
+      "version": "0.1.0",
+      "quality_tier": "community",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@kody-w/source_capture_agent.py",
+      "sha256": "d91eaa6092fa5f3b81f17de21926b3bfa1268370609ec9208e312d8a6d036971",
+      "latest_receipt": "rar_02d118347b8a4b50515de40593edfddb70a4ac60948b4d561be705f6ea1a36b1",
+      "updated_at": "2026-11-04T14:12:01.088263+00:00"
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-11-03T15:36:37.017338+00:00"
+  "updated_at": "2026-11-04T14:12:01.088263+00:00"
 }

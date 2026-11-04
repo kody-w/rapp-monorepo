@@ -2,7 +2,7 @@
   "schema": "rapp-rar-stack/1.1",
   "name": "rooms",
   "display_name": "Rooms (test)",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "purpose": "Test distro: group chat of AI seats on one Brainstem, each with its own personality and private memory; turn budgets, pick-up-where-it-stopped and hand-back to the owner.",
   "kernel": {
     "sha256": "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",

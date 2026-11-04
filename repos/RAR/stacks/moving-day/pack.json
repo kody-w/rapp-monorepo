@@ -1,0 +1,35 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "moving-day",
+  "display_name": "Moving Day",
+  "version": "1.2.0",
+  "purpose": "Your new computer becomes your old one, and another Mac can cover for this one. Pack once or keep a nightly standby copy in iCloud Drive; unpack or take over on the other Mac in one sentence. Agents, soul, memory, model, private topics and packs come along as a verified rapp/1 egg; sign-in and secrets never do.",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "moving_day_agent.py"
+    ],
+    "pages": [
+      "moving_page.py"
+    ],
+    "destination": "agents/",
+    "includes": [
+      "grail-layers"
+    ],
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- moving-day"
+  },
+  "files": {
+    "moving_day_agent.py": {
+      "size": 14200,
+      "sha256": "41c60f298b0fad8b73a935463ab78786606e6b068ec63fed97c550d148b15a3b"
+    },
+    "moving_page.py": {
+      "size": 990,
+      "sha256": "1dfdac38b1e79337fbacf1cfec5a46d8acd843d44522f27caeaec2cb8706a4fe"
+    },
+    "README.md": {
+      "size": 352,
+      "sha256": "8fb55107d1706b5b4f08668f28d404c789a742163c17e19d36ced95dd1b7adea"
+    }
+  }
+}

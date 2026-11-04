@@ -1,0 +1,25 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "night-watch",
+  "display_name": "Night Watch",
+  "version": "1.1.0",
+  "purpose": "Your Brainstem looks after its own computer (disk, its services, nightly drills) and your premium-model use against a monthly limit you set (Spend Guard; a warning, nothing is blocked). It tells you once, in one sentence, only when something needs you.",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "night_watch_agent.py"
+    ],
+    "destination": "agents/",
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- night-watch"
+  },
+  "files": {
+    "night_watch_agent.py": {
+      "size": 8952,
+      "sha256": "3125dd6817072fc74e0373dc034cdbf37096de53b0a57215b6475a4fbf79645a"
+    },
+    "README.md": {
+      "size": 381,
+      "sha256": "708ef4e975628ca342d564d8373b605d7ffcb0c1e05edd7ed6391131fc4e5fe5"
+    }
+  }
+}

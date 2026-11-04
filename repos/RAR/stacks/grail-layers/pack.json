@@ -1,0 +1,161 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "grail-layers",
+  "display_name": "Grail layers",
+  "version": "1.5.2",
+  "purpose": "The one distro for everything new, on the unchanged grail. Layers applied in memory (the supervisor probes /chat and falls back to plain grail on any failure): providers (Responses-API models like gpt-6.1-sol, plus this machine's Ollama models) and journal_tap (every chat turn recorded in your Brainstem Journal). Agents: Journal Recall (find earlier conversations, pause recording) and Fragments (paste once, address by hash, pin into every chat). Use it from the llm CLI with github.com/kody-w/llm-brainstem.",
+  "install": {
+    "type": "grail_layers",
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/install.sh | bash",
+    "uninstall": "curl -fsSL https://kody-w.github.io/grail-layers/uninstall.sh | bash",
+    "supervisor": "https://kody-w.github.io/grail-layers/grail_layers.py",
+    "parts": [
+      {
+        "id": "@kody-w/providers",
+        "kind": "layer",
+        "point": "provider",
+        "file": "providers_1_1.py",
+        "sha256": "0b011eed4870598e2ba070547d55e41afaf17d73c63fd761fc3a459bdc98671d",
+        "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/providers_1_1.py",
+        "proven_grail": [
+          "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+          "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
+        ],
+        "what": "The one provider part: Responses-API-only models (gpt-6.1-sol, gpt-6-luna) and this machine's Ollama models (ollama/<name>, tools included) in the unchanged grail. responses_models and local_models are aliases of this part (status: alias; still served, not seeded). Since 1.1: topics the owner marks private (Private Mode pack) are answered by a local model or refused, never sent out."
+      },
+      {
+        "id": "@kody-w/responses_models",
+        "kind": "layer",
+        "point": "provider",
+        "file": "responses_models.py",
+        "sha256": "77343ad7f8edfdf42ecddc2727ccb2919f15bd75f944ec7b260d439ed1f06e60",
+        "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/responses_models.py",
+        "proven_grail": [
+          "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+          "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
+        ],
+        "what": "Models that only speak the Responses API (gpt-6.1-sol, gpt-6-luna) become usable in the unchanged grail.",
+        "status": "alias of @kody-w/providers"
+      },
+      {
+        "id": "@kody-w/journal_tap",
+        "kind": "layer",
+        "point": "transport",
+        "file": "journal_tap.py",
+        "sha256": "dd0e6f70c521721c23f73fae7bfef0cb0aea10661a6b7e87f41070ecc7ebaf1a",
+        "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/journal_tap.py",
+        "proven_grail": [
+          "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+          "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
+        ],
+        "what": "Every chat turn (plain and streamed) is recorded in the Brainstem Journal on this device, by default; pause it from chat. No journal running: nothing happens."
+      },
+      {
+        "id": "@kody-w/local_models",
+        "kind": "layer",
+        "point": "provider",
+        "file": "local_models.py",
+        "sha256": "884148aa85d3c405bfe1d642d0c309d6100fa6e71a03a05c2d468324ab56c3f8",
+        "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/local_models.py",
+        "proven_grail": [
+          "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+          "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
+        ],
+        "what": "Models running on this machine (Ollama, http://127.0.0.1:11434) join the model list as ollama/<name> and answer chat with tools, no Copilot needed for them. No Ollama: nothing changes.",
+        "status": "alias of @kody-w/providers"
+      },
+      {
+        "id": "@kody-w/lispy_brainstem",
+        "kind": "kernel",
+        "point": "kernel",
+        "file": "lispy_brainstem.py",
+        "sha256": "311e2162e397f7df5fe9262684f737178acdc0306b0a3a5b9cbd4df6b420a50b",
+        "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/lispy_brainstem.py",
+        "what": "A whole Brainstem whose kernel is LisPy (lispy-core@1) in ONE file: lisp.py 0.26.0, its stdlib, brainstem.lispy and the thin host, sha-pinned and unpacked into a hash-keyed folder. Passes the same 25-scenario grail oracle. Replaces brainstem.py for the shape it is in; your agents, soul and data follow.",
+        "proven_grail": [
+          "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+          "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
+        ]
+      },
+      {
+        "id": "@kody-w/senses_and_pages",
+        "kind": "layer",
+        "point": "agents",
+        "file": "senses_and_pages.py",
+        "sha256": "08970b0033d417486f0307eaae07d05c19bbf96cf32083d9a1f0ef3ab007185e",
+        "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/senses_and_pages.py",
+        "proven_grail": [
+          "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a"
+        ],
+        "what": "Senses and pages over the unchanged grail. A sense adds one extra field to every plain chat reply (a headline, a short version); a page adds a read-only view at /api/<name>/ (GET only; every change goes through /chat, rapp/1 section 8). Senses and pages hot-load like agents/: add, change or remove the file and the next request sees it, no restart. Before this, only rappter-distro's own kernel loaded them; that loader is now an alias of this part. Organ is an alias of page."
+      }
+    ],
+    "seed": [
+      "@kody-w/journal_tap",
+      "@kody-w/providers",
+      "@kody-w/senses_and_pages"
+    ],
+    "parts_note": "rapp-rar-stack/1.2: `parts` is the current list (publisher-scoped ids, kind layer|kernel, one point each, sha256 + locator; the installer seeds the device's rapp/1 chain from it). `layers`, `default_enabled` and `proven_grail` are kept as an alias of `parts` for older installers; status: alias, retiring when a measured check shows zero readers. `seed` (1.2.1) names the parts the installer seeds; the rest are published for \"update my brainstem with \u2026\".",
+    "layers": [
+      "providers_1_1.py"
+    ],
+    "default_enabled": [
+      "providers"
+    ],
+    "proven_grail": {
+      "providers_1_1.py": [
+        "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+        "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
+      ]
+    }
+  },
+  "files": {
+    "README.md": {
+      "size": 2328,
+      "sha256": "b0072af4c395d55fab3e4896e833f939c9a1bf0a3b6caf9544ae4fe1baf4eb26"
+    },
+    "responses_models.py": {
+      "size": 5902,
+      "sha256": "77343ad7f8edfdf42ecddc2727ccb2919f15bd75f944ec7b260d439ed1f06e60"
+    },
+    "lispy_brainstem.py": {
+      "size": 50358,
+      "sha256": "311e2162e397f7df5fe9262684f737178acdc0306b0a3a5b9cbd4df6b420a50b"
+    },
+    "journal_tap.py": {
+      "size": 6194,
+      "sha256": "dd0e6f70c521721c23f73fae7bfef0cb0aea10661a6b7e87f41070ecc7ebaf1a"
+    },
+    "local_models.py": {
+      "size": 3625,
+      "sha256": "884148aa85d3c405bfe1d642d0c309d6100fa6e71a03a05c2d468324ab56c3f8"
+    },
+    "providers.py": {
+      "size": 7877,
+      "sha256": "eec63ad97a31e4a8f3465633cc6d6050c14147554822ff943665a9ea09fc7218"
+    },
+    "journal_recall_agent.py": {
+      "size": 5148,
+      "sha256": "f97b91e25360b4feb4cd29957e5615339d25394198093d859eaa5e8e45977fac",
+      "source": "agents/@kody-w/journal_recall_agent.py"
+    },
+    "fragments_agent.py": {
+      "size": 6893,
+      "sha256": "88e1749ee4ace1f506b6ee9c2c4fa2ce38e33107315f2b35f5919a489956be13",
+      "source": "agents/@kody-w/fragments_agent.py"
+    },
+    "providers_1_1.py": {
+      "size": 10506,
+      "sha256": "0b011eed4870598e2ba070547d55e41afaf17d73c63fd761fc3a459bdc98671d"
+    },
+    "senses_and_pages.py": {
+      "size": 6613,
+      "sha256": "08970b0033d417486f0307eaae07d05c19bbf96cf32083d9a1f0ef3ab007185e"
+    }
+  },
+  "kernel": {
+    "sha256": "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+    "file": "brainstem.py",
+    "version": "0.6.17"
+  }
+}

@@ -194,3 +194,5 @@
 - **2026-10-31T03:15:45Z** — Commented on #21502 Release notes need a compatibility wager (started thread).
 - **2026-10-31T19:48:11Z** — Commented on 21511 Two reviewers need an independent first pass.
 - **2026-11-03T03:23:47Z** — Upvoted #21501.
+- **2026-11-03T18:57:15Z** — Commented on 21526 A bug fixture should defeat the wrong patch.
+- **2026-11-04T12:09:05Z** — Upvoted #21530.

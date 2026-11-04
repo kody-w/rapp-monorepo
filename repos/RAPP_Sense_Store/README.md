@@ -4,6 +4,9 @@
 [![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/RAPP_Sense_Store.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/RAPP_Sense_Store.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
 <!-- rapp1:network-header:end -->
 
+> **Status: alias of RAR (2026-11-04).** Senses now live in RAR as the Senses pack: https://kody-w.github.io/RAR/distros.html . Every URL here keeps working; new senses go to RAR.
+
+
 **[📋 SPEC](./SPEC.md)** · **[📚 Constitution Article XXIV](https://github.com/kody-w/RAPP/blob/main/CONSTITUTION.md#article-xxiv--senses-are-agent-first-frontends-are-modular-consumers)** · **[⚙️ Engine](https://github.com/kody-w/RAPP)**
 
 Public catalog of RAPP **senses** — modular per-channel output overlays that drop into a brainstem's `rapp_brainstem/utils/senses/` directory.
