@@ -4,14 +4,14 @@ build_static_api.py — the headless RAR API.
 
 RAR is consumed by applications, not by people browsing a repo. AIdeate, the
 vBrainstem and the global grail brainstem all ingest RAR the same way: plain
-GETs against raw.githubusercontent.com. No backend, no auth, no SDK, no
+GETs against GitHub Pages, with raw.githubusercontent.com as a fallback. No backend, no auth, no SDK, no
 GitHub account, no GitHub UI. A business user never sees a repository.
 
 That constraint drives every choice here:
 
   * Every endpoint is a static JSON file committed to main, so it is
     CORS-open, CDN-cached, pinnable to a SHA, and free to serve.
-  * Endpoints are additive. This script never writes to an existing path.
+  * Endpoints are additive. This script updates only its explicitly owned paths.
     api/v1/index.json, api/v1/agent/** and api/v1/sprite/** belong to
     build_pokedex_api.py and are left strictly alone.
   * The catalog is curated before it is served. A host application asking
@@ -20,12 +20,12 @@ That constraint drives every choice here:
     agent back" has to work against a static file, so the ranking index
     ships with the data.
 
-Written surface (all new paths):
+Written surface (existing URLs are retained):
 
-    manifest.json                  rapp-static-api/1.0 descriptor
+    manifest.json                  rapp-static-api/1.1 descriptor
     api/v1/status.json             counts + content hashes
     api/v1/badge.json              shields.io endpoint
-    api/v1/catalog.json            every agent, lean records
+    api/v1/catalog.json            every agent, lean records, plus stack packs (including retired)
     api/v1/taxonomy.json           categories, publishers, tags
     api/v1/match.json              use-case → ranked agents + term index
     api/v1/marketplaces.json       ratified rapp@x plugin identities
@@ -35,7 +35,7 @@ Written surface (all new paths):
 
 Usage:
     python scripts/build_static_api.py
-    python scripts/build_static_api.py --check   # verify, write nothing
+    python scripts/build_static_api.py --check   # byte-compare owned outputs; write nothing
 """
 
 from __future__ import annotations
@@ -46,10 +46,13 @@ import json
 import re
 import sys
 from collections import Counter, defaultdict
-from datetime import datetime, timezone
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))
+from scripts.static_api import commit_timestamp, json_bytes, publish_frame, stable_document, write_json
+
 REGISTRY = REPO_ROOT / "registry.json"
 API_DIR = REPO_ROOT / "api" / "v1"
 AUDIENCE_DIR = API_DIR / "audience"
@@ -293,6 +296,8 @@ def lean_record(agent: dict, audience: str) -> dict:
             "raw": f"{RAW_BASE}/{rel}",
             "cdn": f"{CDN_BASE}/{rel}",
             "sha256": agent.get("_sha256", ""),
+            "pages": f"{PAGES_BASE}/{rel}",
+            "version": agent.get("_version"),
         },
         "stats": {
             "lines": agent.get("_lines", 0),
@@ -477,27 +482,20 @@ def build_match(records: list[dict]) -> dict:
 
 
 def now() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return commit_timestamp()
 
 
 def sha8(payload: dict) -> str:
-    blob = json.dumps(payload, sort_keys=True, separators=(",", ":"))
-    return hashlib.sha256(blob.encode("utf-8")).hexdigest()[:12]
+    return hashlib.sha256(json_bytes(payload)).hexdigest()[:12]
 
 
-def write(path: Path, payload: dict, dry: bool) -> int:
+def write(path: Path, payload: dict) -> int:
     resolved = path.resolve()
     if resolved in FOREIGN_PATHS:
         raise RuntimeError(
             f"refusing to write {path} — it is owned by build_pokedex_api.py"
         )
-    if dry:
-        return len(json.dumps(payload))
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as fh:
-        json.dump(payload, fh, indent=2, ensure_ascii=False)
-        fh.write("\n")
-    return path.stat().st_size
+    return write_json(path, payload)
 
 
 # ── build ───────────────────────────────────────────────────────────────────
@@ -506,8 +504,17 @@ def write(path: Path, payload: dict, dry: bool) -> int:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Build the headless RAR static API.")
     parser.add_argument("--check", action="store_true",
-                        help="compute everything but write nothing")
+                        help="compare owned outputs byte-for-byte; exit 1 on drift, write nothing")
     args = parser.parse_args()
+
+    def stable_output(path: Path, payload: dict) -> dict:
+        try:
+            return stable_document(path, payload)
+        except (ValueError, TypeError, AttributeError):
+            if not args.check:
+                raise
+            # A corrupt output has no reusable timestamp; report it as drift below.
+            return payload
 
     if not REGISTRY.exists():
         print("registry.json not found — run build_registry.py first", file=sys.stderr)
@@ -579,12 +586,14 @@ def main() -> int:
         "description": (
             "Every agent in RAR as a lean record. Fetch this one file to render a "
             "complete browsable catalog with no further requests, no backend, no "
-            "authentication and no GitHub account."
+            "authentication and no GitHub account. stack_packs lists every installable "
+            "pack, including retired packs with status and retirement metadata."
         ),
         "generated": now(),
         "count": len(records),
         "self_url": f"{RAW_BASE}/api/v1/catalog.json",
         "agents": records,
+        "stack_packs": registry.get("stack_packs", []),
     }
 
     # ── audience slices
@@ -659,6 +668,14 @@ def main() -> int:
         "count": len(marketplaces_source["marketplaces"]),
     }
 
+    # Finalize timestamps before hashing so status describes the served bytes.
+    catalog = stable_output(API_DIR / "catalog.json", catalog)
+    taxonomy = stable_output(API_DIR / "taxonomy.json", taxonomy)
+    match = stable_output(API_DIR / "match.json", match)
+    business_doc = stable_output(AUDIENCE_DIR / "business.json", business_doc)
+    consumer_doc = stable_output(AUDIENCE_DIR / "consumer.json", consumer_doc)
+    audience_map = stable_output(AUDIENCE_DIR / "map.json", audience_map)
+
     # ── status + badge
     status = {
         "schema": "rar-static-api-status/1.0",
@@ -688,19 +705,26 @@ def main() -> int:
     }
 
     badge = {
+        "schema": "rar-static-api-badge/1.0",
         "schemaVersion": 1,
         "label": "RAR",
         "message": f"{len(records)} agents · {len(pubs)} publishers",
         "color": "brightgreen",
     }
+    for endpoint in status["endpoints"]:
+        endpoint["version_path"] = (
+            f"versions/api/v1/{endpoint['name']}/{endpoint['sha8']}.json"
+        )
+        endpoint["pages_url"] = f"{PAGES_BASE}/api/v1/{endpoint['name']}.json"
 
     # ── manifest (rapp-static-apis descriptor)
     manifest = {
-        "schema": "rapp-static-api/1.0",
+        "schema": "rapp-static-api/1.1",
         "name": "rar",
         "title": "RAPP Agent Registry — headless static API",
         "description": (
-            "Read-only agent registry served entirely from GitHub raw. No backend, "
+            "Read-only agent registry served primarily from same-origin GitHub Pages "
+            "with GitHub raw as a fallback. No backend, "
             "no authentication, no SDK and no GitHub account. Host applications "
             "such as AIdeate and the vBrainstem fetch these endpoints directly and "
             "render their own experience, so an end user never sees a repository."
@@ -815,6 +839,23 @@ def main() -> int:
         },
     }
 
+    for endpoint in manifest["endpoints"].values():
+        endpoint["pages_url"] = endpoint["url"].replace(RAW_BASE, PAGES_BASE)
+    manifest["content_store"] = {
+        "prefix": "versions/",
+        "hash": "sha256",
+        "sha8_length": 12,
+        "append_only": True,
+    }
+    manifest["conformance"] = {
+        "target": "rapp-static-api/1.1",
+        "status": "pending",
+        "needs_kody": [
+            "Existing browser GitHub API calls and cache bypasses are preserved.",
+            "Existing workflow concurrency and notarization policy are preserved.",
+        ],
+    }
+
     # ── write
     outputs = [
         (MANIFEST, manifest),
@@ -836,13 +877,33 @@ def main() -> int:
     print(f"  slices     : business={len(business)}  consumer={len(consumer)}")
     print(f"  use cases  : {len(match['use_cases'])}, index terms {len(match['index'])}")
     print()
-    for path, payload in outputs:
-        size = write(path, payload, args.check)
-        print(f"  {'would write' if args.check else 'wrote'} "
-              f"{path.relative_to(REPO_ROOT).as_posix():<34} {size/1024:7.1f} KB")
+    drift = []
+    with TemporaryDirectory(prefix="rar-static-api-") as directory:
+        for path, payload in outputs:
+            relative = path.relative_to(REPO_ROOT)
+            if args.check:
+                destination = Path(directory) / relative
+                size = write(destination, stable_output(path, payload))
+                if not path.is_file():
+                    drift.append(f"missing: {relative.as_posix()}")
+                elif path.read_bytes() != destination.read_bytes():
+                    drift.append(f"different: {relative.as_posix()}")
+            else:
+                size = write(path, payload)
+                publish_frame(
+                    relative.with_suffix("").as_posix(),
+                    path.suffix, path.read_bytes(),
+                )
+            print(f"  {'checked' if args.check else 'wrote'} "
+                  f"{relative.as_posix():<34} {size/1024:7.1f} KB")
 
     print()
     print("  untouched: api/v1/index.json, api/v1/agent/**, api/v1/sprite/**")
+    if drift:
+        print("Static API drift detected:", file=sys.stderr)
+        for difference in drift:
+            print(f"  {difference}", file=sys.stderr)
+        return 1
     return 0
 
 

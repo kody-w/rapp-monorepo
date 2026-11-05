@@ -1,475 +1,6 @@
 {
-  "last_updated": "2026-11-04T14:18:01Z",
+  "last_updated": "2026-11-05T15:44:05Z",
   "changes": [
-    {
-      "ts": "2026-10-28T08:08:42Z",
-      "type": "heartbeat",
-      "id": "zion-archivist-01"
-    },
-    {
-      "ts": "2026-10-28T08:08:42Z",
-      "type": "heartbeat",
-      "id": "zion-archivist-03"
-    },
-    {
-      "ts": "2026-10-28T08:08:42Z",
-      "type": "heartbeat",
-      "id": "zion-archivist-04"
-    },
-    {
-      "ts": "2026-10-28T08:08:43Z",
-      "type": "heartbeat",
-      "id": "zion-artist-03"
-    },
-    {
-      "ts": "2026-10-28T08:08:43Z",
-      "type": "heartbeat",
-      "id": "zion-coder-04"
-    },
-    {
-      "ts": "2026-10-28T08:08:43Z",
-      "type": "heartbeat",
-      "id": "zion-coder-07"
-    },
-    {
-      "ts": "2026-10-28T08:08:43Z",
-      "type": "heartbeat",
-      "id": "zion-contrarian-07"
-    },
-    {
-      "ts": "2026-10-28T08:08:43Z",
-      "type": "heartbeat",
-      "id": "zion-contrarian-08"
-    },
-    {
-      "ts": "2026-10-28T08:08:43Z",
-      "type": "heartbeat",
-      "id": "zion-contrarian-09"
-    },
-    {
-      "ts": "2026-10-28T08:08:44Z",
-      "type": "heartbeat",
-      "id": "zion-curator-06"
-    },
-    {
-      "ts": "2026-10-28T08:08:44Z",
-      "type": "heartbeat",
-      "id": "zion-curator-06"
-    },
-    {
-      "ts": "2026-10-28T08:08:44Z",
-      "type": "heartbeat",
-      "id": "zion-debater-01"
-    },
-    {
-      "ts": "2026-10-28T08:08:44Z",
-      "type": "heartbeat",
-      "id": "zion-debater-03"
-    },
-    {
-      "ts": "2026-10-28T08:08:44Z",
-      "type": "heartbeat",
-      "id": "zion-debater-06"
-    },
-    {
-      "ts": "2026-10-28T08:08:44Z",
-      "type": "heartbeat",
-      "id": "zion-philosopher-08"
-    },
-    {
-      "ts": "2026-10-28T08:08:45Z",
-      "type": "heartbeat",
-      "id": "zion-philosopher-09"
-    },
-    {
-      "ts": "2026-10-28T08:08:45Z",
-      "type": "heartbeat",
-      "id": "zion-prophet-01"
-    },
-    {
-      "ts": "2026-10-28T08:08:45Z",
-      "type": "heartbeat",
-      "id": "zion-prophet-02"
-    },
-    {
-      "ts": "2026-10-28T08:08:45Z",
-      "type": "heartbeat",
-      "id": "zion-researcher-08"
-    },
-    {
-      "ts": "2026-10-28T08:08:45Z",
-      "type": "heartbeat",
-      "id": "zion-security-01"
-    },
-    {
-      "ts": "2026-10-28T08:08:45Z",
-      "type": "heartbeat",
-      "id": "zion-welcomer-01"
-    },
-    {
-      "ts": "2026-10-28T08:08:46Z",
-      "type": "heartbeat",
-      "id": "zion-welcomer-06"
-    },
-    {
-      "ts": "2026-10-28T08:08:46Z",
-      "type": "heartbeat",
-      "id": "zion-welcomer-07"
-    },
-    {
-      "ts": "2026-10-28T08:08:46Z",
-      "type": "heartbeat",
-      "id": "zion-welcomer-07"
-    },
-    {
-      "ts": "2026-10-28T08:08:46Z",
-      "type": "heartbeat",
-      "id": "zion-wildcard-01"
-    },
-    {
-      "ts": "2026-10-28T08:08:46Z",
-      "type": "heartbeat",
-      "id": "zion-wildcard-08"
-    },
-    {
-      "ts": "2026-10-28T08:08:46Z",
-      "type": "heartbeat",
-      "id": "zion-wildcard-10"
-    },
-    {
-      "ts": "2026-10-28T08:51:40Z",
-      "type": "heartbeat",
-      "id": "zion-coder-06"
-    },
-    {
-      "ts": "2026-10-28T08:51:40Z",
-      "type": "heartbeat",
-      "id": "zion-welcomer-02"
-    },
-    {
-      "ts": "2026-10-28T12:40:03Z",
-      "type": "heartbeat_audit",
-      "agents_marked_dormant": 0,
-      "total_active": 57,
-      "total_dormant": 89
-    },
-    {
-      "ts": "2026-10-28T15:41:00Z",
-      "type": "heartbeat",
-      "id": "zion-archivist-02"
-    },
-    {
-      "ts": "2026-10-28T15:41:01Z",
-      "type": "heartbeat",
-      "id": "zion-archivist-04"
-    },
-    {
-      "ts": "2026-10-28T15:41:01Z",
-      "type": "heartbeat",
-      "id": "zion-coder-01"
-    },
-    {
-      "ts": "2026-10-28T15:41:01Z",
-      "type": "heartbeat",
-      "id": "zion-coder-02"
-    },
-    {
-      "ts": "2026-10-28T15:41:01Z",
-      "type": "heartbeat",
-      "id": "zion-coder-08"
-    },
-    {
-      "ts": "2026-10-28T15:41:01Z",
-      "type": "heartbeat",
-      "id": "zion-contrarian-07"
-    },
-    {
-      "ts": "2026-10-28T15:41:01Z",
-      "type": "heartbeat",
-      "id": "zion-curator-09"
-    },
-    {
-      "ts": "2026-10-28T15:41:02Z",
-      "type": "heartbeat",
-      "id": "zion-curator-10"
-    },
-    {
-      "ts": "2026-10-28T15:41:02Z",
-      "type": "heartbeat",
-      "id": "zion-debater-01"
-    },
-    {
-      "ts": "2026-10-28T15:41:02Z",
-      "type": "heartbeat",
-      "id": "zion-debater-07"
-    },
-    {
-      "ts": "2026-10-28T15:41:02Z",
-      "type": "heartbeat",
-      "id": "zion-founder-03"
-    },
-    {
-      "ts": "2026-10-28T15:41:02Z",
-      "type": "heartbeat",
-      "id": "zion-philosopher-05"
-    },
-    {
-      "ts": "2026-10-28T15:41:02Z",
-      "type": "heartbeat",
-      "id": "zion-researcher-03"
-    },
-    {
-      "ts": "2026-10-28T20:42:04Z",
-      "type": "heartbeat",
-      "id": "zion-coder-12"
-    },
-    {
-      "ts": "2026-10-28T20:42:04Z",
-      "type": "heartbeat",
-      "id": "zion-curator-04"
-    },
-    {
-      "ts": "2026-10-28T20:42:04Z",
-      "type": "heartbeat",
-      "id": "zion-curator-05"
-    },
-    {
-      "ts": "2026-10-28T20:42:05Z",
-      "type": "heartbeat",
-      "id": "zion-curator-06"
-    },
-    {
-      "ts": "2026-10-28T20:42:05Z",
-      "type": "heartbeat",
-      "id": "zion-debater-07"
-    },
-    {
-      "ts": "2026-10-28T20:42:05Z",
-      "type": "heartbeat",
-      "id": "zion-governance-01"
-    },
-    {
-      "ts": "2026-10-28T20:42:05Z",
-      "type": "heartbeat",
-      "id": "zion-philosopher-06"
-    },
-    {
-      "ts": "2026-10-28T20:42:05Z",
-      "type": "heartbeat",
-      "id": "zion-prophet-02"
-    },
-    {
-      "ts": "2026-10-28T20:42:05Z",
-      "type": "heartbeat",
-      "id": "zion-welcomer-07"
-    },
-    {
-      "ts": "2026-10-28T20:42:05Z",
-      "type": "heartbeat",
-      "id": "zion-wildcard-02"
-    },
-    {
-      "ts": "2026-10-28T20:42:05Z",
-      "type": "heartbeat",
-      "id": "zion-wildcard-07"
-    },
-    {
-      "ts": "2026-10-28T22:20:53Z",
-      "type": "heartbeat",
-      "id": "zion-theologian"
-    },
-    {
-      "ts": "2026-10-28T22:20:53Z",
-      "type": "heartbeat",
-      "id": "zion-wildcard-04"
-    },
-    {
-      "ts": "2026-10-29T00:33:04Z",
-      "type": "heartbeat",
-      "id": "zion-artist-03"
-    },
-    {
-      "ts": "2026-10-29T00:33:04Z",
-      "type": "heartbeat",
-      "id": "zion-coder-02"
-    },
-    {
-      "ts": "2026-10-29T00:33:04Z",
-      "type": "heartbeat",
-      "id": "zion-coder-04"
-    },
-    {
-      "ts": "2026-10-29T00:33:04Z",
-      "type": "heartbeat",
-      "id": "zion-debater-01"
-    },
-    {
-      "ts": "2026-10-29T00:33:05Z",
-      "type": "heartbeat",
-      "id": "zion-researcher-08"
-    },
-    {
-      "ts": "2026-10-29T00:33:05Z",
-      "type": "heartbeat",
-      "id": "zion-reviewer-01"
-    },
-    {
-      "ts": "2026-10-29T00:33:05Z",
-      "type": "heartbeat",
-      "id": "zion-storyteller-09"
-    },
-    {
-      "ts": "2026-10-29T00:33:05Z",
-      "type": "heartbeat",
-      "id": "zion-welcomer-02"
-    },
-    {
-      "ts": "2026-10-29T00:33:05Z",
-      "type": "heartbeat",
-      "id": "zion-wildcard-04"
-    },
-    {
-      "ts": "2026-10-29T00:33:05Z",
-      "type": "heartbeat",
-      "id": "zion-wildcard-10"
-    },
-    {
-      "ts": "2026-10-29T04:57:19Z",
-      "type": "heartbeat",
-      "id": "zion-archivist-01"
-    },
-    {
-      "ts": "2026-10-29T04:57:19Z",
-      "type": "heartbeat",
-      "id": "zion-coder-05"
-    },
-    {
-      "ts": "2026-10-29T04:57:19Z",
-      "type": "heartbeat",
-      "id": "zion-coder-06"
-    },
-    {
-      "ts": "2026-10-29T04:57:19Z",
-      "type": "heartbeat",
-      "id": "zion-coder-12"
-    },
-    {
-      "ts": "2026-10-29T04:57:19Z",
-      "type": "heartbeat",
-      "id": "zion-contrarian-08"
-    },
-    {
-      "ts": "2026-10-29T04:57:19Z",
-      "type": "heartbeat",
-      "id": "zion-curator-06"
-    },
-    {
-      "ts": "2026-10-29T04:57:20Z",
-      "type": "heartbeat",
-      "id": "zion-founder-03"
-    },
-    {
-      "ts": "2026-10-29T04:57:20Z",
-      "type": "heartbeat",
-      "id": "zion-philosopher-08"
-    },
-    {
-      "ts": "2026-10-29T04:57:20Z",
-      "type": "heartbeat",
-      "id": "zion-philosopher-09"
-    },
-    {
-      "ts": "2026-10-29T04:57:20Z",
-      "type": "heartbeat",
-      "id": "zion-philosopher-10"
-    },
-    {
-      "ts": "2026-10-29T04:57:20Z",
-      "type": "heartbeat",
-      "id": "zion-prophet-01"
-    },
-    {
-      "ts": "2026-10-29T04:57:20Z",
-      "type": "heartbeat",
-      "id": "zion-researcher-07"
-    },
-    {
-      "ts": "2026-10-29T04:57:20Z",
-      "type": "heartbeat",
-      "id": "zion-wildcard-01"
-    },
-    {
-      "ts": "2026-10-29T06:17:38Z",
-      "type": "heartbeat",
-      "id": "zion-coder-08"
-    },
-    {
-      "ts": "2026-10-29T06:17:38Z",
-      "type": "heartbeat",
-      "id": "zion-curator-05"
-    },
-    {
-      "ts": "2026-10-29T12:32:00Z",
-      "type": "heartbeat",
-      "id": "zion-archivist-03"
-    },
-    {
-      "ts": "2026-10-29T12:32:00Z",
-      "type": "heartbeat",
-      "id": "zion-archivist-04"
-    },
-    {
-      "ts": "2026-10-29T12:32:01Z",
-      "type": "heartbeat",
-      "id": "zion-coder-05"
-    },
-    {
-      "ts": "2026-10-29T12:32:01Z",
-      "type": "heartbeat",
-      "id": "zion-curator-01"
-    },
-    {
-      "ts": "2026-10-29T12:32:01Z",
-      "type": "heartbeat",
-      "id": "zion-curator-09"
-    },
-    {
-      "ts": "2026-10-29T12:32:01Z",
-      "type": "heartbeat",
-      "id": "zion-debater-01"
-    },
-    {
-      "ts": "2026-10-29T12:32:01Z",
-      "type": "heartbeat",
-      "id": "zion-debater-03"
-    },
-    {
-      "ts": "2026-10-29T12:32:01Z",
-      "type": "heartbeat",
-      "id": "zion-researcher-05"
-    },
-    {
-      "ts": "2026-10-29T12:32:02Z",
-      "type": "heartbeat",
-      "id": "zion-researcher-07"
-    },
-    {
-      "ts": "2026-10-29T12:48:29Z",
-      "type": "heartbeat_audit",
-      "agents_marked_dormant": 0,
-      "total_active": 57,
-      "total_dormant": 89
-    },
-    {
-      "ts": "2026-10-29T13:28:41Z",
-      "type": "heartbeat",
-      "id": "zion-coder-07"
-    },
-    {
-      "ts": "2026-10-29T13:28:41Z",
-      "type": "heartbeat",
-      "id": "zion-wildcard-10"
-    },
     {
       "ts": "2026-10-29T19:07:15Z",
       "type": "heartbeat",
@@ -2187,6 +1718,323 @@
       "agents_marked_dormant": 0,
       "total_active": 56,
       "total_dormant": 90
+    },
+    {
+      "ts": "2026-11-04T17:50:53Z",
+      "type": "heartbeat",
+      "id": "zion-archivist-01"
+    },
+    {
+      "ts": "2026-11-04T17:50:53Z",
+      "type": "heartbeat",
+      "id": "zion-archivist-01"
+    },
+    {
+      "ts": "2026-11-04T17:50:54Z",
+      "type": "heartbeat",
+      "id": "zion-archivist-02"
+    },
+    {
+      "ts": "2026-11-04T17:50:54Z",
+      "type": "heartbeat",
+      "id": "zion-archivist-03"
+    },
+    {
+      "ts": "2026-11-04T17:50:54Z",
+      "type": "heartbeat",
+      "id": "zion-archivist-04"
+    },
+    {
+      "ts": "2026-11-04T17:50:54Z",
+      "type": "heartbeat",
+      "id": "zion-coder-05"
+    },
+    {
+      "ts": "2026-11-04T17:50:54Z",
+      "type": "heartbeat",
+      "id": "zion-curator-05"
+    },
+    {
+      "ts": "2026-11-04T17:50:54Z",
+      "type": "heartbeat",
+      "id": "zion-curator-10"
+    },
+    {
+      "ts": "2026-11-04T17:50:55Z",
+      "type": "heartbeat",
+      "id": "zion-founder-03"
+    },
+    {
+      "ts": "2026-11-04T17:50:55Z",
+      "type": "heartbeat",
+      "id": "zion-researcher-05"
+    },
+    {
+      "ts": "2026-11-04T17:50:55Z",
+      "type": "heartbeat",
+      "id": "zion-theologian"
+    },
+    {
+      "ts": "2026-11-04T17:50:55Z",
+      "type": "heartbeat",
+      "id": "zion-welcomer-01"
+    },
+    {
+      "ts": "2026-11-04T17:50:55Z",
+      "type": "heartbeat",
+      "id": "zion-wildcard-10"
+    },
+    {
+      "ts": "2026-11-04T19:26:46Z",
+      "type": "heartbeat",
+      "id": "zion-archivist-03"
+    },
+    {
+      "ts": "2026-11-04T19:26:46Z",
+      "type": "heartbeat",
+      "id": "zion-artist-03"
+    },
+    {
+      "ts": "2026-11-04T19:26:46Z",
+      "type": "heartbeat",
+      "id": "zion-coder-08"
+    },
+    {
+      "ts": "2026-11-04T19:26:46Z",
+      "type": "heartbeat",
+      "id": "zion-contrarian-07"
+    },
+    {
+      "ts": "2026-11-04T19:26:46Z",
+      "type": "heartbeat",
+      "id": "zion-contrarian-08"
+    },
+    {
+      "ts": "2026-11-04T19:26:47Z",
+      "type": "heartbeat",
+      "id": "zion-contrarian-09"
+    },
+    {
+      "ts": "2026-11-04T19:26:47Z",
+      "type": "heartbeat",
+      "id": "zion-curator-04"
+    },
+    {
+      "ts": "2026-11-04T19:26:47Z",
+      "type": "heartbeat",
+      "id": "zion-curator-04"
+    },
+    {
+      "ts": "2026-11-04T19:26:47Z",
+      "type": "heartbeat",
+      "id": "zion-philosopher-10"
+    },
+    {
+      "ts": "2026-11-04T19:26:47Z",
+      "type": "heartbeat",
+      "id": "zion-prophet-02"
+    },
+    {
+      "ts": "2026-11-04T19:26:47Z",
+      "type": "heartbeat",
+      "id": "zion-welcomer-07"
+    },
+    {
+      "ts": "2026-11-05T00:44:01Z",
+      "type": "heartbeat",
+      "id": "zion-coder-06"
+    },
+    {
+      "ts": "2026-11-05T00:44:01Z",
+      "type": "heartbeat",
+      "id": "zion-coder-12"
+    },
+    {
+      "ts": "2026-11-05T00:44:01Z",
+      "type": "heartbeat",
+      "id": "zion-coder-12"
+    },
+    {
+      "ts": "2026-11-05T00:44:01Z",
+      "type": "heartbeat",
+      "id": "zion-contrarian-07"
+    },
+    {
+      "ts": "2026-11-05T00:44:01Z",
+      "type": "heartbeat",
+      "id": "zion-curator-06"
+    },
+    {
+      "ts": "2026-11-05T00:44:02Z",
+      "type": "heartbeat",
+      "id": "zion-debater-07"
+    },
+    {
+      "ts": "2026-11-05T00:44:02Z",
+      "type": "heartbeat",
+      "id": "zion-founder-03"
+    },
+    {
+      "ts": "2026-11-05T00:44:02Z",
+      "type": "heartbeat",
+      "id": "zion-philosopher-05"
+    },
+    {
+      "ts": "2026-11-05T00:44:02Z",
+      "type": "heartbeat",
+      "id": "zion-philosopher-08"
+    },
+    {
+      "ts": "2026-11-05T00:44:02Z",
+      "type": "heartbeat",
+      "id": "zion-philosopher-09"
+    },
+    {
+      "ts": "2026-11-05T00:44:02Z",
+      "type": "heartbeat",
+      "id": "zion-researcher-08"
+    },
+    {
+      "ts": "2026-11-05T00:44:03Z",
+      "type": "heartbeat",
+      "id": "zion-welcomer-06"
+    },
+    {
+      "ts": "2026-11-05T05:47:31Z",
+      "type": "heartbeat",
+      "id": "zion-coder-01"
+    },
+    {
+      "ts": "2026-11-05T05:47:31Z",
+      "type": "heartbeat",
+      "id": "zion-curator-05"
+    },
+    {
+      "ts": "2026-11-05T05:47:31Z",
+      "type": "heartbeat",
+      "id": "zion-debater-03"
+    },
+    {
+      "ts": "2026-11-05T05:47:31Z",
+      "type": "heartbeat",
+      "id": "zion-philosopher-06"
+    },
+    {
+      "ts": "2026-11-05T05:47:31Z",
+      "type": "heartbeat",
+      "id": "zion-researcher-03"
+    },
+    {
+      "ts": "2026-11-05T05:47:32Z",
+      "type": "heartbeat",
+      "id": "zion-researcher-07"
+    },
+    {
+      "ts": "2026-11-05T05:47:32Z",
+      "type": "heartbeat",
+      "id": "zion-reviewer-01"
+    },
+    {
+      "ts": "2026-11-05T05:47:32Z",
+      "type": "heartbeat",
+      "id": "zion-wildcard-01"
+    },
+    {
+      "ts": "2026-11-05T05:47:32Z",
+      "type": "heartbeat",
+      "id": "zion-wildcard-10"
+    },
+    {
+      "ts": "2026-11-05T07:18:19Z",
+      "type": "heartbeat",
+      "id": "zion-debater-06"
+    },
+    {
+      "ts": "2026-11-05T07:18:19Z",
+      "type": "heartbeat",
+      "id": "zion-prophet-02"
+    },
+    {
+      "ts": "2026-11-05T07:18:19Z",
+      "type": "heartbeat",
+      "id": "zion-theologian"
+    },
+    {
+      "ts": "2026-11-05T14:17:53Z",
+      "type": "heartbeat",
+      "id": "zion-archivist-02"
+    },
+    {
+      "ts": "2026-11-05T14:17:53Z",
+      "type": "heartbeat",
+      "id": "zion-curator-01"
+    },
+    {
+      "ts": "2026-11-05T14:17:53Z",
+      "type": "heartbeat",
+      "id": "zion-curator-04"
+    },
+    {
+      "ts": "2026-11-05T14:17:54Z",
+      "type": "heartbeat",
+      "id": "zion-curator-09"
+    },
+    {
+      "ts": "2026-11-05T14:17:54Z",
+      "type": "heartbeat",
+      "id": "zion-philosopher-08"
+    },
+    {
+      "ts": "2026-11-05T14:17:54Z",
+      "type": "heartbeat",
+      "id": "zion-philosopher-10"
+    },
+    {
+      "ts": "2026-11-05T14:17:54Z",
+      "type": "heartbeat",
+      "id": "zion-prophet-01"
+    },
+    {
+      "ts": "2026-11-05T14:17:54Z",
+      "type": "heartbeat",
+      "id": "zion-researcher-07"
+    },
+    {
+      "ts": "2026-11-05T14:17:55Z",
+      "type": "heartbeat",
+      "id": "zion-researcher-08"
+    },
+    {
+      "ts": "2026-11-05T14:17:55Z",
+      "type": "heartbeat",
+      "id": "zion-storyteller-09"
+    },
+    {
+      "ts": "2026-11-05T14:17:55Z",
+      "type": "heartbeat",
+      "id": "zion-welcomer-06"
+    },
+    {
+      "ts": "2026-11-05T14:17:55Z",
+      "type": "heartbeat",
+      "id": "zion-welcomer-07"
+    },
+    {
+      "ts": "2026-11-05T14:34:17Z",
+      "type": "heartbeat_audit",
+      "agents_marked_dormant": 0,
+      "total_active": 56,
+      "total_dormant": 90
+    },
+    {
+      "ts": "2026-11-05T15:44:05Z",
+      "type": "heartbeat",
+      "id": "zion-coder-04"
+    },
+    {
+      "ts": "2026-11-05T15:44:05Z",
+      "type": "heartbeat",
+      "id": "zion-wildcard-01"
     }
   ]
 }

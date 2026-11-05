@@ -1,0 +1,29 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "ticket-page",
+  "display_name": "Ticket Page",
+  "version": "1.0.1",
+  "purpose": "Explain the Brainstem at GET /api/ticket: how to chat, agent files present, and how to add one. Runtime loading is explicitly unknown, not inferred from files.",
+  "install": {
+    "type": "agent_pack",
+    "agents": [],
+    "pages": [
+      "ticket_page.py"
+    ],
+    "destination": "agents/",
+    "includes": [
+      "grail-layers"
+    ],
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- ticket-page"
+  },
+  "files": {
+    "ticket_page.py": {
+      "size": 2704,
+      "sha256": "3cd2b05a4f2f0491a8710fb56cae2b58d81f31d83347555753e97a6b5298b248"
+    },
+    "README.md": {
+      "size": 733,
+      "sha256": "b0580f0fd9d375d7b2815b70eb34ea9b342b5904008c173ce0d9b3994c285763"
+    }
+  }
+}

@@ -25,6 +25,7 @@ Supports three file formats:
 """
 
 import ast
+import argparse
 import hashlib
 import json
 import os
@@ -32,7 +33,10 @@ import re
 import subprocess
 import sys
 from pathlib import Path
-from datetime import datetime, timezone
+from datetime import datetime
+from tools.build_agent_pages import build_agent_pages
+from tools.stamp_ticket import strip_ticket
+from scripts.static_api import commit_timestamp, publish_frame, stable_document
 
 AGENTS_DIR = Path("agents")
 SWARMS_DIR = Path("swarms")
@@ -541,23 +545,77 @@ def compute_seed(name: str, category: str, tier: str, tags: list, deps: list) ->
     return _forge(name, category, tier, tags, deps)
 
 
+def validate_stack_pack_status(packs: dict[str, dict]) -> None:
+    """Validate retirement metadata and keep retired packs out of starter includes."""
+    for name, pack in packs.items():
+        status = pack.get("status", "current")
+        if status not in ("current", "retired"):
+            raise ValueError(f"{name}: unsupported pack status {status!r}")
+        if status != "retired":
+            if "retired" in pack:
+                raise ValueError(f"{name}: retired metadata requires status 'retired'")
+            continue
+        retired = pack.get("retired")
+        if not isinstance(retired, dict):
+            raise ValueError(f"{name}: retired pack requires retired metadata")
+        since = retired.get("since")
+        if not isinstance(since, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", since):
+            raise ValueError(f"{name}: retired.since must be a YYYY-MM-DD date")
+        try:
+            datetime.strptime(since, "%Y-%m-%d")
+        except ValueError as exc:
+            raise ValueError(f"{name}: retired.since must be a valid date") from exc
+        if not isinstance(retired.get("reason"), str) or not retired["reason"].strip():
+            raise ValueError(f"{name}: retired.reason must be non-empty text")
+        replacement = retired.get("replacement")
+        if "replacement" not in retired or not (
+            replacement is None or isinstance(replacement, str) and replacement.strip()
+        ):
+            raise ValueError(f"{name}: retired.replacement must be a name or null")
+
+    def walk(name: str, trail: list[str], seen: set[str]) -> None:
+        if name not in packs:
+            return
+        pack = packs[name]
+        if len(trail) > 1 and pack.get("status") == "retired":
+            raise ValueError(f"{trail[0]}: install.includes reaches retired pack: {' -> '.join(trail)}")
+        if name in seen:
+            return
+        seen.add(name)
+        includes = (pack.get("install") or {}).get("includes", [])
+        if not isinstance(includes, list) or not all(isinstance(n, str) for n in includes):
+            raise ValueError(f"{name}: install.includes must be a list of pack names")
+        for child in includes:
+            walk(child, trail + [child], seen)
+
+    for name, pack in packs.items():
+        if name.startswith("starter-") or pack.get("shelf") == "starter":
+            walk(name, [name], set())
+
+
 def build_stack_packs(taken_seeds: set, root: Path = Path("stacks")) -> list[dict]:
     """Project stacks/<name>/pack.json into registry entries with a summon seed.
 
     Read-only over the pack files. Each file's sha256 is re-checked against the
     bytes on disk; `_verified` is true only when every listed file exists and
-    matches. The optional `kernel` field (a distro's pinned kernel) is passed
-    through untouched. Seeds come from the same permanent forge as agent seeds,
+    matches. Retirement metadata and the optional `kernel` field pass through
+    untouched. Invalid lifecycle metadata or retired starter includes fail the
+    build; retirement never changes verification or seeds.
+    Seeds come from the same permanent forge as agent seeds,
     keyed on "@stacks/<name>"; a seed that would collide with an agent seed is
     withheld rather than reused.
     """
     import hashlib
-    packs = []
+    sources = {}
     for pack_path in sorted(root.glob("*/pack.json")):
         try:
             pack = json.loads(pack_path.read_text(encoding="utf-8"))
         except (OSError, ValueError):
             continue
+        sources[pack_path] = pack
+    validate_stack_pack_status({p.get("name") or path.parent.name: p for path, p in sources.items()})
+    packs = []
+    for pack_path, pack in sources.items():
         name = pack.get("name") or pack_path.parent.name
         files = {}
         for fname, meta in (pack.get("files") or {}).items():
@@ -571,15 +629,18 @@ def build_stack_packs(taken_seeds: set, root: Path = Path("stacks")) -> list[dic
             "display_name": pack.get("display_name", name),
             "version": pack.get("version", "0.0.0"),
             "schema": pack.get("schema", "rapp-rar-stack/1.0"),
+            "status": pack.get("status", "current"),
             "path": pack_path.parent.as_posix(),
             "purpose": (pack.get("purpose") or "")[:300],
             "files": files,
             "_verified": bool(files) and all(f["verified"] for f in files.values()),
         }
+        if "retired" in pack:
+            entry["retired"] = pack["retired"]
         if isinstance(pack.get("kernel"), dict):
             entry["kernel"] = pack["kernel"]
         # The shelf a person browses: starters fill the cart, apps came from the RAPP Store, packs are the rest.
-        entry["shelf"] = ("starter" if name.startswith("starter-") else
+        entry["shelf"] = ("starter" if name.startswith("starter-") or pack.get("shelf") == "starter" else
                           "app" if pack.get("kind_label") == "rapplication" else "pack")
         seed = compute_seed(f"@stacks/{name}", "pipeline", "community",
                             list(pack.get("capabilities") or [])[:31], agent_files)
@@ -636,6 +697,16 @@ def check_version_immutability(name: str, version: str, sha256: str, file_path: 
                     and agent.get("_file") == file_path):
                 prev_hash = agent.get("_sha256")
                 if prev_hash and prev_hash != sha256:
+                    # The exact loading ticket is a comment-only migration.
+                    # Removing it must restore the previously published bytes;
+                    # lifecycle validation still requires a new matching receipt.
+                    if Path(file_path).is_file():
+                        content = Path(file_path).read_bytes()
+                        original = strip_ticket(content, agent)
+                        if original != content and hashlib.sha256(
+                            original.replace(b"\r\n", b"\n")
+                        ).hexdigest() == prev_hash:
+                            return None
                     return (f"Version {version} already published with different content "
                             f"(hash mismatch). Bump the version number.")
     except (json.JSONDecodeError, KeyError):
@@ -1370,7 +1441,10 @@ def build_registry():
     registry = {
         "schema": "rapp-registry/1.1",
         "version": "1.1.0",
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": commit_timestamp(),
+        "static_api": "rapp-static-api/1.1",
+        "pages_base": "https://kody-w.github.io/RAR",
+        "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
         "stats": {
             "total_agents": len(agents),
             "total_swarms": len(all_swarms),
@@ -1401,12 +1475,16 @@ def build_registry():
 
     # ─── Stack packs (stacks/<name>/pack.json) ────────────────────────
     # Additive projection so a stack can be summoned by seed (scan a QR → the
-    # owner's Brainstem installs it). Never fails the build: a file whose bytes
+    # owner's Brainstem installs it). A file whose bytes
     # no longer match its pack.json sha256 is reported as unverified, and
     # summon clients must refuse unverified packs.
-    stack_packs = build_stack_packs(
-        {a["_seed"] for a in agents if "_seed" in a}
-        | {s for a in agents for s in a.get("_seed_aliases", [])})
+    try:
+        stack_packs = build_stack_packs(
+            {a["_seed"] for a in agents if "_seed" in a}
+            | {s for a in agents for s in a.get("_seed_aliases", [])})
+    except ValueError as exc:
+        print(f"ERROR Stack pack validation: {exc}", file=sys.stderr)
+        return 1
     if stack_packs:
         registry["stack_packs"] = stack_packs
 
@@ -1460,6 +1538,15 @@ def build_registry():
         except (json.JSONDecodeError, KeyError):
             pass
 
+    registry["summary"] = registry["stats"]
+    if not errors and not duplicates:
+        for agent in agents:
+            source = Path(agent["_file"])
+            agent["_version"] = publish_frame(
+                agent["name"], "".join(source.suffixes), source.read_bytes()
+            )
+    registry = stable_document(REGISTRY_FILE, registry)
+
     # Atomic write: a concurrent reader (another build, a test) never sees a half-written registry.
     tmp = f"{REGISTRY_FILE}.{os.getpid()}.tmp"
     with open(tmp, "w", encoding="utf-8") as f:
@@ -1488,8 +1575,28 @@ def build_registry():
     if duplicates:
         return 1
 
+    changed_pages = build_agent_pages(agents)
+    print(f"  Agent ticket pages: {len(agents)} ({changed_pages} files changed)")
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(build_registry())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--registry-only", action="store_true",
+                        help="build only the registry and ticket pages")
+    args = parser.parse_args()
+    result = build_registry()
+    if result == 0 and not args.registry_only:
+        for script in (
+            "scripts/build_pokedex_api.py",
+            "scripts/build_skills_catalog.py",
+            "scripts/build_static_api.py",
+            "scripts/build_front_page.py",
+        ):
+            result = subprocess.run([sys.executable, script], check=False).returncode
+            if result:
+                break
+    if result == 0 and not args.registry_only:
+        for path in [REGISTRY_FILE, Path("manifest.json"), *sorted(Path("api/v1").rglob("*.json"))]:
+            publish_frame(path.with_suffix("").as_posix(), path.suffix, path.read_bytes())
+    sys.exit(result)

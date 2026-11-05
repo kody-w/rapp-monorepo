@@ -2454,14 +2454,37 @@
   .quiz-result .score-big { font-size: 3rem; font-weight: 900; color: var(--accent); }
   .quiz-result p { color: var(--text-dim); margin-top: 8px; }
 </style>
+<link rel="stylesheet" href="nav.css">
+<script src="nav.js" defer></script>
 </head>
 <body>
+<nav id="rar-nav" aria-label="Primary">
+<a class="rar-brand" href="index.html"><span class="rar-brand-mark">R</span>RAPP Agent Repository</a>
+<span class="rar-primary"><noscript><span class="rar-nav-fallback">
+  <a href="index.html">Browse</a><a href="distros.html">Distros</a><a href="skills.html">Skills</a><a href="install.html">Install</a><a href="front.html">Front page</a><a href="store.html">Advanced</a><a href="llms.txt">For AIs</a>
+</span></noscript></span>
+<details class="rar-more"><summary>More</summary><div class="rar-more-content">
+  <a href="metrics.html">Metrics</a>
+  <a href="rappterpedia/">Wiki</a>
+  <button class="nav-btn" onclick="startTour()">Tour</button>
+  <button class="nav-btn" onclick="switchTab('leaderboard')">Leaderboard</button>
+  <button class="nav-btn" onclick="switchTab('cards')">Cards</button>
+  <button class="nav-btn" onclick="switchTab('packs')">Packs</button>
+  <button class="nav-btn" onclick="switchTab('stream')">Stream</button>
+  <button class="nav-btn" onclick="switchTab('swarms')">Swarms</button>
+  <button class="nav-btn" onclick="switchTab('ecosystem')">Ecosystem</button>
+  <button class="nav-btn" onclick="switchTab('market')">Market</button>
+  <button class="nav-btn" onclick="switchTab('workbench')">Workbench</button>
+  <button class="nav-btn" onclick="switchTab('submit')">Submit</button>
+</div></details>
+</nav>
 
-<header>
+<header class="rar-page-header">
   <div class="logo" onclick="switchTab('browse')">
     <div class="logo-mark">R</div><span id="logo-text">RAPP Agent Repository</span>
   </div>
-  <nav id="main-nav">
+  </header>
+  <nav id="main-nav" aria-label="Store tabs">
     <button class="nav-btn active" data-tab="browse" onclick="switchTab('browse')">Browse</button>
     <button class="nav-btn" data-tab="leaderboard" onclick="switchTab('leaderboard')">Leaderboard</button>
     <button class="nav-btn" data-tab="cards" onclick="switchTab('cards')">Cards</button>
@@ -2476,6 +2499,7 @@
     <button class="nav-btn" data-tab="submit" onclick="switchTab('submit')">Submit</button>
     <a class="nav-btn" href="rappterpedia/" style="text-decoration:none">Wiki</a>
   </nav>
+<div hidden>
   <div class="header-actions" id="header-actions">
     <a href="index.html" style="background:var(--surface2);border:1px solid var(--border);color:var(--text-dim);padding:5px 12px;border-radius:6px;cursor:pointer;font-size:.78rem;margin-right:4px;text-decoration:none;display:inline-block" title="Switch to simple browse view">Simple</a>
     <a href="metrics.html" style="background:var(--surface2);border:1px solid var(--border);color:var(--text-dim);padding:5px 12px;border-radius:6px;cursor:pointer;font-size:.78rem;margin-right:4px;text-decoration:none;display:inline-block" title="Public registry metrics">Metrics</a>
@@ -2489,7 +2513,7 @@
       Sign in
     </button>
   </div>
-</header>
+</div>
 
 <div class="hero" id="hero">
   <h1 id="hero-title">RAPP <span class="gradient">Agent</span> Repository</h1>
@@ -2948,7 +2972,12 @@
       <p style="color:var(--text-dim);font-size:.88rem;max-width:540px;margin:8px auto 0">Open packs to mint unique, graded agent cards. Every card has a serial number, visual variations, and a condition score that changes over time.</p>
     </div>
 
-    <h3 style="font-size:.9rem;font-weight:700;margin-bottom:12px;color:var(--text-dim)">Available Packs</h3>
+    <h3 style="font-size:.9rem;font-weight:700;margin-bottom:12px;color:var(--text-dim)">Installable Packs</h3>
+    <label id="store-retired-toggle" hidden style="font-size:.78rem;color:var(--text-dim)">
+      <input id="store-show-retired" type="checkbox" onchange="renderInstallablePacks()"> Show retired (<span id="store-retired-count">0</span>)
+    </label>
+    <div id="installable-packs" style="display:flex;flex-wrap:wrap;gap:12px;margin:12px 0 24px"></div>
+    <h3 style="font-size:.9rem;font-weight:700;margin-bottom:12px;color:var(--text-dim)">Available Booster Packs</h3>
     <div class="pack-shelf" id="pack-shelf"></div>
 
     <div style="margin-top:32px">
@@ -3708,6 +3737,8 @@ async function init() {
     syncStackDecks(reg);
     // Build vertical packs — each vertical = a pack bundling its decks
     buildVerticalPacks(reg);
+    installablePacks = reg.stack_packs || [];
+    renderInstallablePacks();
   }
   if (v) votes = v;
   if (r) reviews = r;
@@ -6072,7 +6103,7 @@ function loadSharedCart() {
 function esc(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = String(s); return d.innerHTML; }
 function copyEl(id) { navigator.clipboard.writeText(document.getElementById(id)?.value || document.getElementById(id)?.textContent?.trim()); showToast('Copied!', 'success'); }
 function shareAgent(name) {
-  const url = `${window.location.origin}${window.location.pathname}#agent/${encodeURIComponent(name)}`;
+  const url = new URL('a/' + name + '/', window.location.href).href;
   navigator.clipboard.writeText(url);
   showToast('Agent link copied!', 'success');
 }
@@ -8586,6 +8617,20 @@ const VERTICAL_PACK_COLORS = {
   slg_government:        { bg1: '#0a1a2a', bg2: '#0a2a3a', border: '#0284c7', accent: '#7dd3fc' },
   software_dp:           { bg1: '#0a2a1a', bg2: '#0a3a2a', border: '#22c55e', accent: '#86efac' },
 };
+
+let installablePacks = [];
+function renderInstallablePacks() {
+  const el = document.getElementById('installable-packs');
+  const retiredCount = installablePacks.filter(p => p.status === 'retired').length;
+  document.getElementById('store-retired-toggle').hidden = !retiredCount;
+  document.getElementById('store-retired-count').textContent = retiredCount;
+  const showRetired = document.getElementById('store-show-retired').checked;
+  el.innerHTML = installablePacks.filter(p => showRetired || p.status !== 'retired').map(p => {
+    const retired = p.status === 'retired';
+    const note = retired ? `Retired ${p.retired.since}: ${p.retired.reason}${p.retired.replacement ? ` Use ${p.retired.replacement} instead.` : ''}` : p.purpose;
+    return `<a href="s.html#stack=${encodeURIComponent(p.name)}" title="${esc(note).replace(/"/g, '&quot;')}">${esc(p.display_name)}${retired ? ' (retired)' : ''}</a>`;
+  }).join('');
+}
 
 function buildVerticalPacks(reg) {
   if (!reg || !reg.stacks) return;

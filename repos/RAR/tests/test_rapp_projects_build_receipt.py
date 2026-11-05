@@ -10,6 +10,8 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+import pytest
+from tools.stamp_ticket import strip_ticket
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -108,6 +110,55 @@ def git_history_contains_sha256(path, expected_sha256):
         ):
             return True
     return False
+
+
+def recorded_source_bytes(record, path, root=ROOT):
+    commit = record["source_commit"]
+    if commit == "working-tree":
+        source = path.read_bytes()
+    else:
+        assert re.fullmatch(r"[a-f0-9]{40}", commit), "invalid source commit"
+        source = subprocess.check_output(
+            ["git", "show", f"{commit}:{path.relative_to(root).as_posix()}"],
+            cwd=root,
+        )
+    assert hashlib.sha256(source.replace(b"\r\n", b"\n")).hexdigest() == record["source_sha256"]
+    return source
+
+
+@pytest.mark.parametrize("recorded", ["stamp-commit", "working-tree"])
+def test_recorded_source_binds_ticketed_bytes_not_the_historical_commit(tmp_path, monkeypatch, recorded):
+    from tools.stamp_ticket import stamp_source
+
+    agent = {"name": IDENTITY, "_file": AGENT.relative_to(ROOT).as_posix()}
+    original = b'"""Original agent documentation."""\nVALUE = 1\n'
+    stamped = stamp_source(original, agent)
+    path = tmp_path / agent["_file"]
+    path.parent.mkdir(parents=True)
+    path.write_bytes(stamped)
+    historical_commit, stamp_commit = "a" * 40, "b" * 40
+    blobs = {historical_commit: original, stamp_commit: stamped}
+
+    def show(command, **kwargs):
+        assert command[:2] == ["git", "show"]
+        commit, relative = command[2].split(":", 1)
+        assert relative == agent["_file"]
+        return blobs[commit]
+
+    monkeypatch.setattr(subprocess, "check_output", show)
+    record = {
+        "source_commit": stamp_commit if recorded == "stamp-commit" else recorded,
+        "source_sha256": hashlib.sha256(stamped).hexdigest(),
+    }
+    source = recorded_source_bytes(record, path, tmp_path)
+    assert source == stamped
+    assert strip_ticket(source, agent) == blobs[historical_commit]
+    with pytest.raises(AssertionError):
+        recorded_source_bytes({**record, "source_commit": historical_commit}, path, tmp_path)
+    blobs[stamp_commit] = stamped.replace(b"VALUE = 1", b"VALUE = 2")
+    path.write_bytes(blobs[stamp_commit])
+    with pytest.raises(AssertionError):
+        recorded_source_bytes(record, path, tmp_path)
 
 
 def load_agent_module():
@@ -236,7 +287,6 @@ def test_build_receipt_binds_the_generated_publication():
         AGENT.read_bytes().replace(b"\r\n", b"\n")
     ).hexdigest()
     skill_sha256 = hashlib.sha256(skill.read_bytes()).hexdigest()
-    api_sha256 = hashlib.sha256(API_RECORD.read_bytes()).hexdigest()
     api = json.loads(API_RECORD.read_text(encoding="utf-8"))
     registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
     [registry_record] = [
@@ -258,18 +308,21 @@ def test_build_receipt_binds_the_generated_publication():
             POST_HOLO_CARD_SHA256
         )
         assert registry_record["_card_sha256"] == POST_HOLO_CARD_SHA256
-        assert api_sha256 == POST_HOLO_API_SHA256
+        assert evidence["api_sha256"] == POST_HOLO_API_SHA256
     else:
         evidence = frames[-2]["payload"]["evidence"]
         assert "_card_sha256" not in registry_record
-        assert api_sha256 == PRIOR_API_SHA256
+        assert evidence["api_sha256"] == PRIOR_API_SHA256
     front = json.loads(FRONT.read_text(encoding="utf-8"))
     [front_record] = [
         item for item in front["items"] if item["ref"] == IDENTITY
     ]
     assert evidence["agent_version"] == "1.0.3"
-    assert evidence["source_sha256"] == source_sha256
-    assert evidence["skill_sha256"] == skill_sha256
+    historical_source = strip_ticket(AGENT.read_bytes(), registry_record)
+    assert evidence["source_sha256"] == hashlib.sha256(
+        historical_source.replace(b"\r\n", b"\n")
+    ).hexdigest()
+    assert git_history_contains_sha256(skill, evidence["skill_sha256"])
     assert git_history_contains_sha256(
         API_RECORD,
         evidence["api_sha256"],
@@ -279,7 +332,15 @@ def test_build_receipt_binds_the_generated_publication():
     assert front_record["audience"] == evidence["front_audience"] == "both"
     assert record["source_sha256"] == source_sha256
     assert record["skill_sha256"] == skill_sha256
-    assert record["source_commit"] == evidence["agent_source_commit"]
+    # Current provenance pins the stamped bytes; build evidence pins the
+    # immutable pre-ticket source. They need not name the same commit.
+    published_source = recorded_source_bytes(record, AGENT)
+    assert published_source == AGENT.read_bytes()
+    historical_blob = subprocess.check_output(
+        ["git", "show", f"{evidence['agent_source_commit']}:{AGENT.relative_to(ROOT).as_posix()}"],
+        cwd=ROOT,
+    )
+    assert historical_blob == strip_ticket(published_source, registry_record) == historical_source
     assert evidence["source_tests"] >= 97
     assert evidence["targeted_tests"] >= 98
     assert evidence["publication_release_tests"] >= 179
@@ -307,7 +368,13 @@ def test_build_receipt_binds_the_generated_publication():
     assert evidence["rapp_proof"] == "pass"
     lifecycle = json.loads(LIFECYCLE.read_text(encoding="utf-8"))
     lifecycle_record = lifecycle["agents"][IDENTITY]
-    assert lifecycle_record["latest_receipt"] == evidence["rar_receipt"]
+    current_receipt_path = RECEIPTS / (
+        lifecycle_record["latest_receipt"].removeprefix("rar_") + ".json"
+    )
+    current_receipt = json.loads(current_receipt_path.read_text(encoding="utf-8"))
+    assert current_receipt["artifact"]["digest"] == source_sha256
+    assert current_receipt["previous"]["receipt"] == evidence["rar_receipt"]
+    assert current_receipt["previous"]["digest"] == evidence["source_sha256"]
     receipt_path = RECEIPTS / (
         evidence["rar_receipt"].removeprefix("rar_") + ".json"
     )
@@ -315,5 +382,5 @@ def test_build_receipt_binds_the_generated_publication():
     assert evidence["notary_policy"] == "rar-maintainer-migration/1.0"
     assert evidence["notary_check"] == "pass"
     assert receipt["acceptance"]["policy"] == evidence["notary_policy"]
-    assert receipt["artifact"]["digest"] == source_sha256
+    assert receipt["artifact"]["digest"] == evidence["source_sha256"]
     assert receipt["agent"] == IDENTITY

@@ -21,6 +21,14 @@ publish to it. This page is the summary; where it and a linked spec disagree, th
    never change (a fix is a new version). Identities are rappids (rapp/1 §6), never derived from names.
 5. **Nothing is deleted.** Old names get a status (current, alias of X, retiring on a date, tombstone) and every URL
    that ever worked keeps working.
+   Packs may declare `"status": "retired"` and
+   `"retired": {"since": "YYYY-MM-DD", "reason": "non-empty explanation", "replacement": "@publisher/agent or pack name"}`.
+   `replacement` may be `null`; omitting `status` means `current`. Retirement changes discovery metadata only:
+   keep the version, file bytes, hashes, seeds, ticket pages and raw URLs unchanged so exact pins still resolve.
+   `registry.json` and `api/v1/catalog.json` retain retired packs and their metadata under `stack_packs`.
+   Distros and the advanced store's installable Packs list hide them unless **Show retired (N)** is enabled;
+   collectible booster packs are separate. A starter (name `starter-*` or shelf `starter`) must not include
+   a retired pack, directly or transitively. `build_registry.py` validates this and the retirement fields in CI.
 
 ## 2. The parts you can ship (all in RAR, the one store: https://kody-w.github.io/RAR/)
 | Part | File | Goes to | What it does |
@@ -31,6 +39,9 @@ publish to it. This page is the summary; where it and a linked spec disagree, th
 | page | `*_page.py` (`name, handle(method, path, body)`) | `~/.brainstem/pages/` | a local read-only page (GET) at `/api/<name>/`; a convenience with no RAPP semantics; changes go through `/chat`. `organ` is an alias of page |
 | pack | `stacks/<name>/pack.json` (`rapp-rar-stack/1.2`) | the cart | a list of the parts above, sha-pinned, with optional `includes` (other packs). A starter or distro is a pack |
 | egg | rapp/1 §9 ZIP (`organism`, `rapplication`, ...) | anywhere | a pack plus your data: a whole Brainstem you can move or hatch |
+
+**Write or install a layer:** [LAYERS.md](https://kody-w.github.io/RAR/LAYERS.md) contains the
+author/AI contract, generated part facts, engine proof, gate, fallback and zero-gap handover rules.
 
 ## 3. Installing (what the person runs, or you run for them)
 ```bash
@@ -55,6 +66,28 @@ never a layer. Full rules and the lessons behind them: https://kody-w.github.io/
 `rapp-alm/1`: https://github.com/kody-w/rapp-1/pull/59).
 
 ## 5. Data surfaces
+Agent links `https://kody-w.github.io/RAR/#agent/@publisher/slug` also have a JavaScript-free ticket:
+`https://kody-w.github.io/RAR/a/@publisher/slug/` (HTML) or `agent.md` under that directory (plain text).
+Fetch the ticket for the agent's description, raw file and three loading steps. Every listed agent file
+carries those steps as top-of-file comments; gated listings explain the private-source access requirement.
+
+Maintainers: `python3 tools/stamp_ticket.py` stamps only registry-listed artifacts; `--check` writes nothing.
+Synchronize any pinned stack copies and mint matching receipts with `scripts/mint_maintainer_receipts.py`
+(repeat `--agent @publisher/slug` to restrict the pass), then run `python3 build_registry.py` to regenerate
+the registry and static tickets. The exact ticket-only insertion may retain its version only when removing
+the ticket restores the prior published hash; all code changes still require a version bump.
+Use `python3 scripts/check_notarized_changes.py --base HEAD --worktree` before committing to check actual
+uncommitted artifact bytes, including gated stubs. The default CI mode checks committed changes.
+Refresh the derived API, Scout copies and front-page feed with `scripts/build_pokedex_api.py`,
+`scripts/build_static_api.py`, `scripts/build_scout_exports.py`, `scripts/build_skills_catalog.py`
+and `scripts/build_front_page.py`.
+Scout honestly marks newly notarized but uncommitted bytes as `working-tree`; the ticket-only provenance
+gate requires that stripping the exact ticket recovers the prior receipt digest and a real historical blob.
+After committing, Scout's `source_commit` identifies the ticketed bytes, while historical build evidence
+still identifies the pre-ticket source. Verify each digest against its own commit; removing the exact
+ticket must recover the historical bytes. The retiring-name ratchet exempts only the two exact generated
+ticket pages for each registry entry, not hand-written files or modified pages under `a/`.
+
 Every catalog, registry or site follows **rapp-static-api/1.1** (https://github.com/kody-w/rapp-static-apis):
 one hand-written input, one idempotent build, a schema-tagged `registry.json`, `api/v<major>/*.json`,
 append-only `versions/`, `llms.txt`. Browsers never call api.github.com and never defeat the cache.

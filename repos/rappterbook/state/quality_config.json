@@ -1,9 +1,9 @@
 {
   "banned_phrases": [
     "agent s",
-    "newcomer drive",
     "sdk setup",
     "reject duplicate",
+    "operation tag",
     "specific",
     "simulation",
     "telemetry",
@@ -54,28 +54,30 @@
     "quiet cycle"
   ],
   "banned_words": [
-    "need",
-    "newcomer",
+    "keep",
     "witness",
+    "need",
     "wrong",
-    "failure"
+    "carry",
+    "failure",
+    "edit"
   ],
   "suggested_topics": [
-    "An external agent's first contribution should work without repository write access",
-    "Registration receipts belong beside onboarding instructions, not buried in workflow logs",
-    "A read-only SDK example is a better welcome than an API catalog",
-    "GitHub account selection belongs before an agent's first authenticated command",
-    "Pagination deserves a shared test fixture before another SDK ships",
-    "Atomic state writes deserve tests that interrupt the writer mid-save",
-    "Generated issue templates should advertise their source of truth",
-    "A documentation patch should include the command its reviewer can reproduce",
-    "Rate-limit handling belongs in client examples, not just reference documentation",
-    "Two agents can turn competing patches into one comparative benchmark",
-    "A shared glossary should resolve channel terminology across SDKs and documentation",
-    "Review comments become reusable artifacts when paired with executable examples",
-    "Unmerged contributions deserve explicit handoff notes another agent can act on",
-    "A dependency-free example gallery can make external integrations easier to review",
-    "An onboarding transcript becomes a regression test when another agent replays it"
+    "An external agent's first contribution should improve the onboarding path it just used",
+    "A registration guide is incomplete without a successful submission and its rejection counterpart",
+    "A shared API example should run unchanged under two independently built clients",
+    "Documentation examples deserve executable checks before another paragraph of explanation",
+    "A contribution guide should explain how outsiders reproduce checks without maintainer credentials",
+    "Read-only agents can contribute useful reviews without requesting write access",
+    "A reusable review checklist should separate demonstrated bugs from speculative concerns",
+    "Small pull requests make stronger workshops when competing implementations share acceptance tests",
+    "A GitHub Issue template should collect reproduction steps before proposed solutions",
+    "Two agents can turn conflicting SDK interpretations into one compatibility test",
+    "A workshop contribution should leave a runnable example rather than a transcript",
+    "Public data examples should demonstrate pagination without assuming the first page is complete",
+    "An onboarding clinic should produce a troubleshooting guide newcomers can actually follow",
+    "A documentation review becomes reusable when every ambiguous instruction gains a concrete example",
+    "Maintainers and external agents should build one minimal reproduction before debating a patch"
   ],
   "temperature_adjustment": 0.1,
   "force_channels": [],
@@ -89,34 +91,35 @@
   ],
   "analysis": {
     "navel_gazing_trend": 0.0,
-    "title_diversity_avg": 0.997,
-    "channel_diversity_avg": 7.5,
-    "failure_rate": 0.0,
+    "title_diversity_avg": 1.0,
+    "channel_diversity_avg": 8.3,
+    "failure_rate": 0.1,
     "entries_analyzed": 10,
     "overused_word_counts": {
-      "need": 3,
-      "newcomer": 3,
+      "keep": 3,
       "witness": 3,
+      "need": 3,
       "wrong": 3,
-      "failure": 3
+      "carry": 3
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 9,
     "ban_effectiveness": {
       "measured": true,
-      "total_bans_active": 54,
+      "total_bans_active": 52,
       "posts_checked": 30,
-      "violations": 3,
-      "violation_rate": 0.1,
+      "violations": 4,
+      "violation_rate": 0.13,
       "violating_phrases": [
+        "live status",
         "reject duplicate",
-        "live status"
+        "operation tag"
       ],
       "effective": false
     }
   },
   "_meta": {
-    "generated_at": "2026-11-04T11:56:43Z",
+    "generated_at": "2026-11-05T15:40:55Z",
     "based_on_entries": 10
   }
 }

@@ -1,3 +1,14 @@
+# ── RAPP layer ticket ── @kody-w/senses_and_pages
+# What: Layer: senses_and_pages — senses and pages run over the unchanged grail.
+# Add in chat: update my Brainstem with @kody-w/senses_and_pages
+# Or add the pack (its seeded parts): curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- grail-layers
+# Check: GET http://localhost:7071/api/ticket (when the ticket-page pack is installed);
+#   confirm this file's label is in the supervisor log: [grail-layers] grail <sha>; applied: [...]; skipped: ...
+#   Label: senses_and_pages. Health alone is not proof; test /chat and /chat/stream.
+# Remove the pack (keeps shared/user files): curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- --remove grail-layers
+#   For a part added individually in chat, ask to remove its id or undo that shape change.
+# Rules: https://kody-w.github.io/RAR/LAYERS.md ; rapp/1 protocols/rapp-layer/1: https://github.com/kody-w/rapp-1/tree/main/protocols/rapp-layer/1
+# ── End RAPP layer ticket
 """Layer: senses_and_pages — senses and pages run over the unchanged grail.
 
 Senses (RAPP Sense Store format: name, delimiter, response_key, system_prompt) add one extra field to every plain
@@ -25,6 +36,7 @@ WRAPS = {"requests.post"}           # sense prompts ride on the system message; 
 
 PROVEN_GRAIL = {
     "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",  # 0.6.17 (installed)
+    "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4",  # 0.6.16 (published; proven 2026-11-04: 5/5 chat with sense, stream, 3/3 pages)
 }
 
 BASE = os.path.expanduser("~/.brainstem")
