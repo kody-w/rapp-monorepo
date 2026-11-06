@@ -1,7 +1,7 @@
 # What is in here
 
-102 public RAPP repositories, captured at HEAD in a single pass on 2026-11-05T16:31:58+00:00.
-36,444 files, 1354 MB.
+102 public RAPP repositories, captured at HEAD in a single pass on 2026-11-06T15:58:59+00:00.
+36,491 files, 1361 MB.
 
 Every row is the exact commit this snapshot took. Nothing here is a guess about what upstream contains — re-clone any row's repo at its sha to get the full history behind it.
 
@@ -10,7 +10,7 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`brainstem`](repos/brainstem) | `2cb4e441` | 2026-10-29 | 4 | 0.0 |
 | [`brainstem-distro`](repos/brainstem-distro) | `636173ff` | 2026-10-07 | 28 | 0.6 |
 | [`brainstem-go`](repos/brainstem-go) | `3134b7db` | 2026-10-17 | 6 | 0.0 |
-| [`brainstem-in-an-hour`](repos/brainstem-in-an-hour) | `41a42d75` | 2026-11-05 | 7 | 0.0 |
+| [`brainstem-in-an-hour`](repos/brainstem-in-an-hour) | `a7c51355` | 2026-11-06 | 7 | 0.0 |
 | [`brainstem-mcp`](repos/brainstem-mcp) | `8dd32521` | 2026-10-29 | 46 | 0.2 |
 | [`brainstem-zaps-docs`](repos/brainstem-zaps-docs) | `8f96a920` | 2026-10-14 | 12 | 0.0 |
 | [`brainstem-zen`](repos/brainstem-zen) | `70a0a70d` | 2026-10-14 | 5 | 0.1 |
@@ -84,10 +84,10 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`RAPPcards`](repos/RAPPcards) | `045026ab` | 2026-09-26 | 9 | 0.3 |
 | [`rappmcp`](repos/rappmcp) | `4619c341` | 2026-10-29 | 47 | 0.1 |
 | [`rappter-prompts`](repos/rappter-prompts) | `2f81440c` | 2026-11-05 | 20 | 0.1 |
-| [`rappterbook`](repos/rappterbook) | `5f998505` | 2026-11-05 | 14,685 | 1075.3 |
+| [`rappterbook`](repos/rappterbook) | `bbfdbbaa` | 2026-11-06 | 14,731 | 1081.5 |
 | [`rappterbook-agent`](repos/rappterbook-agent) | `01ec54ce` | 2026-09-27 | 667 | 4.8 |
 | [`rappterbook-agent-dna`](repos/rappterbook-agent-dna) | `16a5ddb7` | 2026-09-26 | 7 | 0.3 |
-| [`rappterbook-agent-exchange`](repos/rappterbook-agent-exchange) | `0377b9c5` | 2026-11-05 | 480 | 10.6 |
+| [`rappterbook-agent-exchange`](repos/rappterbook-agent-exchange) | `428f5ffd` | 2026-11-06 | 480 | 10.6 |
 | [`rappterbook-api`](repos/rappterbook-api) | `8c50370d` | 2026-09-26 | 12 | 0.2 |
 | [`rappterbook-autopilot`](repos/rappterbook-autopilot) | `fac2ad19` | 2026-09-26 | 4 | 0.0 |
 | [`rappterbook-commons`](repos/rappterbook-commons) | `2aba29e3` | 2026-09-26 | 5 | 0.0 |
@@ -104,9 +104,9 @@ Every row is the exact commit this snapshot took. Nothing here is a guess about 
 | [`rappterbook-social-graph`](repos/rappterbook-social-graph) | `77b8b1e9` | 2026-09-26 | 9 | 0.6 |
 | [`rappterbook-v2`](repos/rappterbook-v2) | `37087c5a` | 2026-09-26 | 47 | 0.3 |
 | [`rappterbook-v2-state`](repos/rappterbook-v2-state) | `5e1b4e24` | 2026-09-26 | 39 | 0.3 |
-| [`rappterbook-vm`](repos/rappterbook-vm) | `3526855b` | 2026-11-05 | 157 | 1.0 |
+| [`rappterbook-vm`](repos/rappterbook-vm) | `cdcca3cc` | 2026-11-06 | 157 | 1.0 |
 | [`rappterverse`](repos/rappterverse) | `88e33e22` | 2026-10-17 | 1,142 | 12.2 |
-| [`RAR`](repos/RAR) | `41298689` | 2026-11-05 | 9,213 | 110.7 |
+| [`RAR`](repos/RAR) | `44d5e396` | 2026-11-06 | 9,214 | 111.5 |
 | [`twin`](repos/twin) | `80ddf9df` | 2026-10-20 | 237 | 2.2 |
 | [`twin-egg-hatcher`](repos/twin-egg-hatcher) | `b30821ac` | 2026-09-26 | 6 | 0.1 |
 
