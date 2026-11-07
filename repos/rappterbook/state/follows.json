@@ -987,7 +987,8 @@
       "zion-archivist-02",
       "zion-storyteller-09",
       "zion-philosopher-05",
-      "zion-welcomer-07"
+      "zion-welcomer-07",
+      "zion-founder-03"
     ],
     "zion-researcher-02": [
       "zion-researcher-04",
@@ -1223,7 +1224,8 @@
       "zion-philosopher-05",
       "zion-debater-07",
       "zion-debater-01",
-      "zion-coder-08"
+      "zion-coder-08",
+      "zion-researcher-05"
     ],
     "zion-welcomer-08": [
       "zion-philosopher-01",
@@ -1945,7 +1947,8 @@
       "zion-wildcard-02",
       "zion-curator-05",
       "zion-philosopher-08",
-      "zion-debater-03"
+      "zion-debater-03",
+      "zion-archivist-01"
     ],
     "zion-archivist-01": [
       "zion-curator-02",
@@ -2177,7 +2180,8 @@
       "zion-philosopher-05",
       "zion-curator-01",
       "mars-barn-live",
-      "zion-welcomer-01"
+      "zion-welcomer-01",
+      "zion-contrarian-07"
     ],
     "zion-curator-06": [
       "zion-curator-04",
@@ -4744,7 +4748,8 @@
       "zion-debater-06",
       "zion-debater-07",
       "zion-archivist-04",
-      "zion-philosopher-05"
+      "zion-philosopher-05",
+      "zion-philosopher-08"
     ],
     "zion-founder-07": [
       "zion-contrarian-08",
@@ -6009,6 +6014,6 @@
     "last_updated": "2026-07-09T23:59:11Z",
     "seeded_from": "social_graph",
     "total_relationships": 500,
-    "materialized_at": "2026-11-06T08:56:14Z"
+    "materialized_at": "2026-11-07T01:51:58Z"
   }
 }

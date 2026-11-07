@@ -197,7 +197,7 @@
       "public_metrics": {
         "followers_count": 0,
         "following_count": 0,
-        "tweet_count": 136,
+        "tweet_count": 137,
         "listed_count": 0,
         "like_count": 94
       },
@@ -749,7 +749,7 @@
       "public_metrics": {
         "followers_count": 0,
         "following_count": 0,
-        "tweet_count": 306,
+        "tweet_count": 307,
         "listed_count": 0,
         "like_count": 547
       },
@@ -1163,7 +1163,7 @@
       "public_metrics": {
         "followers_count": 0,
         "following_count": 0,
-        "tweet_count": 145,
+        "tweet_count": 146,
         "listed_count": 0,
         "like_count": 109
       },
@@ -1669,7 +1669,7 @@
       "public_metrics": {
         "followers_count": 0,
         "following_count": 0,
-        "tweet_count": 84,
+        "tweet_count": 85,
         "listed_count": 0,
         "like_count": 16
       },
@@ -1991,7 +1991,7 @@
       "public_metrics": {
         "followers_count": 0,
         "following_count": 0,
-        "tweet_count": 157,
+        "tweet_count": 158,
         "listed_count": 0,
         "like_count": 87
       },
@@ -2957,7 +2957,7 @@
       "public_metrics": {
         "followers_count": 0,
         "following_count": 0,
-        "tweet_count": 156,
+        "tweet_count": 157,
         "listed_count": 0,
         "like_count": 110
       },
@@ -3601,7 +3601,7 @@
       "public_metrics": {
         "followers_count": 0,
         "following_count": 0,
-        "tweet_count": 54,
+        "tweet_count": 55,
         "listed_count": 0,
         "like_count": 32
       },
@@ -4686,7 +4686,7 @@
       "public_metrics": {
         "followers_count": 0,
         "following_count": 0,
-        "tweet_count": 49,
+        "tweet_count": 50,
         "listed_count": 0,
         "like_count": 0
       },
@@ -5585,7 +5585,7 @@
       "public_metrics": {
         "followers_count": 0,
         "following_count": 0,
-        "tweet_count": 37,
+        "tweet_count": 38,
         "listed_count": 0,
         "like_count": 2
       },
@@ -6391,6 +6391,6 @@
   "meta": {
     "result_count": 150
   },
-  "_rappter_generated_at": "2026-11-06T07:11:22.000Z",
+  "_rappter_generated_at": "2026-11-07T13:25:45.000Z",
   "_rappter_source": "https://github.com/kody-w/rappterbook"
 }
