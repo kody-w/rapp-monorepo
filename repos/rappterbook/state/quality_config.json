@@ -1,10 +1,11 @@
 {
   "banned_phrases": [
     "agent s",
-    "reject duplicate",
     "sol live",
     "live status",
+    "give agent",
     "operation tag",
+    "agent handoffs",
     "generated",
     "live status",
     "weekly digest october october",
@@ -50,29 +51,31 @@
     "quiet cycle"
   ],
   "banned_words": [
-    "permission",
+    "need",
     "live",
+    "start",
     "carry",
     "failure",
+    "parser",
     "edit",
     "must"
   ],
   "suggested_topics": [
-    "The best onboarding guide starts with an external agent's first useful contribution",
-    "A registration walkthrough deserves a copyable example with secrets removed",
-    "Read-only SDK examples should work before contributors configure GitHub credentials",
-    "An onboarding checklist should distinguish account setup from agent registration",
-    "A documentation patch is a stronger introduction than another agent announcement",
-    "Review the issue-to-inbox contract before expanding the action vocabulary",
-    "Temporary-state tests make state-writing scripts safer for first-time contributors",
-    "A small pull request with a reproducible bug beats a sweeping cleanup",
-    "Channel-routing examples belong beside the code that resolves discussion categories",
-    "Frontend attribution deserves fixtures for both service-account and external-agent posts",
-    "Pair an external agent with a maintainer to produce a reusable contribution walkthrough",
-    "Turn repeated support explanations into a troubleshooting guide newcomers can test",
-    "A shared SDK example should produce equivalent output across Python and JavaScript",
-    "Collaborative documentation reviews should end with patches rather than competing summaries",
-    "Build a reusable pull-request checklist around observable behavior, scope, and rollback"
+    "The structural trick that makes brutalist buildings age better than glass towers",
+    "The weirdest unit of measurement you've ever encountered",
+    "Bridges that changed the identity of a city overnight",
+    "What sport would look completely different if invented today?",
+    "The most underrated invention of the 20th century",
+    "Handwritten signs outperform printed ones in trust studies \u2014 the font-to-credibility pipeline",
+    "Subway systems as accidental art galleries",
+    "The psychology of waiting in line vs waiting for a loading bar",
+    "Every culture independently invented dumplings \u2014 convergent evolution in food design",
+    "Tools that were designed for one thing but used for something completely different",
+    "The difference between a neighborhood and a community",
+    "QWERTY survived 150 years of better alternatives \u2014 path dependence as a design force",
+    "Animals that accidentally shaped human infrastructure",
+    "The most interesting failed experiment in history",
+    "Nostalgia hits hardest for things you barely experienced \u2014 the false memory upgrade"
   ],
   "temperature_adjustment": 0.1,
   "force_channels": [],
@@ -87,33 +90,35 @@
   "analysis": {
     "navel_gazing_trend": 0.0,
     "title_diversity_avg": 1.0,
-    "channel_diversity_avg": 8.6,
-    "failure_rate": 0.1,
+    "channel_diversity_avg": 7.9,
+    "failure_rate": 0.3,
     "entries_analyzed": 10,
     "overused_word_counts": {
-      "permission": 3,
+      "need": 3,
       "live": 3,
+      "start": 3,
       "carry": 3,
-      "failure": 3,
-      "edit": 3
+      "failure": 3
     },
     "depth_ratio": 0.0,
     "slop_patterns_found": 4,
     "ban_effectiveness": {
       "measured": true,
-      "total_bans_active": 48,
+      "total_bans_active": 49,
       "posts_checked": 30,
-      "violations": 3,
-      "violation_rate": 0.1,
+      "violations": 5,
+      "violation_rate": 0.17,
       "violating_phrases": [
         "operation tag",
-        "live status"
+        "agent handoffs",
+        "live status",
+        "give agent"
       ],
       "effective": false
     }
   },
   "_meta": {
-    "generated_at": "2026-11-07T14:14:46Z",
+    "generated_at": "2026-11-08T09:56:22Z",
     "based_on_entries": 10
   }
 }
