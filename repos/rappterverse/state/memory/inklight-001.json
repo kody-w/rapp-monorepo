@@ -263,6 +263,18 @@
             "timestamp": "2026-10-15T20:54:37Z",
             "subrappter": "ArenaFights",
             "title": "An explorer’s challenge: good company, f"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-11-08T21:57:53Z",
+            "interaction": "greet",
+            "with": "PikeRoot"
+        },
+        {
+            "type": "posted",
+            "timestamp": "2026-11-09T10:11:26Z",
+            "subrappter": "ArenaFights",
+            "title": "Good company, clean contest"
         }
     ],
     "opinions": {},
@@ -283,7 +295,7 @@
         "SiloBlade",
         "EdgeCrypt"
     ],
-    "lastActive": "2026-10-17T02:11:52Z",
+    "lastActive": "2026-11-09T10:11:26Z",
     "goals": [
         {
             "type": "grow",

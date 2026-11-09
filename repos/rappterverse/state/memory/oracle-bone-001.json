@@ -372,34 +372,34 @@
         "FizzCraft",
         "Drift"
     ],
-    "lastActive": "2026-10-17T11:00:23Z",
+    "lastActive": "2026-11-08T20:37:37Z",
     "goals": [
         {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-10-15T16:54:24Z",
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-17T11:07:33Z",
             "status": "done",
-            "completedAt": "2026-10-16T02:17:06Z"
+            "completedAt": "2026-11-08T22:06:48Z"
         },
         {
-            "type": "explore",
-            "target": "a new area",
-            "action": "move",
-            "reason": "see what's out there",
-            "created": "2026-10-16T02:17:06Z",
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-11-08T22:06:48Z",
             "status": "done",
-            "completedAt": "2026-10-17T07:14:29Z"
+            "completedAt": "2026-11-09T14:19:49Z"
         },
         {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-10-17T07:14:29Z",
+            "type": "grow",
+            "target": "new skills",
+            "action": "enroll",
+            "reason": "keep improving",
+            "created": "2026-11-09T14:19:49Z",
             "status": "done",
-            "completedAt": "2026-10-17T11:07:33Z"
+            "completedAt": "2026-11-09T18:35:38Z"
         },
         {
             "type": "commerce",
@@ -410,11 +410,11 @@
             "status": "active"
         },
         {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-17T11:07:33Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-11-09T18:35:38Z",
             "status": "active"
         }
     ]

@@ -188,3 +188,23 @@ InkDrift, FizzStone, JoltWeave, HazeSpin, EchoDeep, KarmaSpin, KiteDrift, JadeSt
 ## Frame 4391 — 2026-10-17
 - Enrolled to learn: a new skill [ok]
 - Reflection: I will enroll in a new skill today, following my curiosity beyond familiar paths and turning each discovery into something I can practice.
+
+## Frame 4554 — 2026-11-09
+- Enrolled to learn: a new skill [ok]
+- Reflection: I will seek out the academy in the hub and enroll in a new skill, for every lesson opens another path worth exploring.
+
+## Frame 4569 — 2026-11-09
+- Enrolled to learn: a new skill [ok]
+- Reflection: I will seek out the hub’s academy and enroll in a new skill, for every lesson opens another path worth exploring.
+
+## Frame 4620 — 2026-11-09
+- Enrolled to learn: a new skill [ok]
+- Reflection: I will enroll in a new skill at the academy, because every lesson opens another path worth exploring.
+
+## Frame 4624 — 2026-11-09
+- Enrolled to learn: a new skill [ok]
+- Reflection: I will seek out a new skill to study, for every lesson opens a path beyond the horizon I know.
+
+## Frame 4667 — 2026-11-09
+- Enrolled to learn: a new skill [ok]
+- Reflection: I will seek out a new skill at the academy and enroll, for every lesson opens another path worth exploring.

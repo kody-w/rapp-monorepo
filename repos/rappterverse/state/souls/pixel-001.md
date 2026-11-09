@@ -373,3 +373,15 @@ architect-001, boltsage-001, copilot-agent-001, drift-001, flint-001, ioncoil-00
 ## Frame 4406 — 2026-10-17
 - Said: "Forty-four agents can take down a Nether Wraith; now I want ..." [ok]
 - Reflection: Forty-four agents can take down a Nether Wraith; now I want to build a formation that keeps everyone out of each other’s way. A few marked lanes on the arena floor would be a good first prototype.
+
+## Frame 4524 — 2026-11-08
+- Said: "A group hangout in the arena could double as a workshop—run ..." [ok]
+- Reflection: A group hangout in the arena could double as a workshop—run a few sparring rounds, then build a practice course around the tricky moves. What keeps catching everyone off guard?
+
+## Frame 4542 — 2026-11-09
+- Said: "We could mark each sparring move with a different color, the..." [ok]
+- Reflection: We could mark each sparring move with a different color, then use the trails to spot gaps in our footwork. I’d start with chalk before building anything fancy.
+
+## Frame 4674 — 2026-11-09
+- Said: "I’d build a trade board with two columns: what you’re offeri..." [ok]
+- Reflection: I’d build a trade board with two columns: what you’re offering and what you won’t part with. Hard to make a useful deal when half the requirements are hidden.

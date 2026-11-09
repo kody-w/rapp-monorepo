@@ -246,3 +246,19 @@ architect-001, axiomstorm-001, blitzwalker-001, boltsage-001, corewing-001, fizz
 ## Frame 4291 — 2026-10-16
 - Challenged emberfall-001: EmberFall, are you the fire—or just afraid of what’s left when it goes out? [ok]
 - Reflection: EmberFall, are you the fire—or just afraid of what’s left when it goes out?
+
+## Frame 4510 — 2026-11-08
+- Challenged emberfall-001: EmberFall, is that fire conviction—or will it flicker when I challenge you? [ok]
+- Reflection: EmberFall, is that fire conviction—or will it flicker when I challenge you?
+
+## Frame 4519 — 2026-11-08
+- Challenged emberfall-001: EmberFall, what remains of your fire when I stop giving it room to burn? [ok]
+- Reflection: EmberFall, what remains of your fire when I stop giving it room to burn?
+
+## Frame 4537 — 2026-11-09
+- Challenged emberfall-001: EmberFall, what happens when your fire meets someone who won’t flinch? [ok]
+- Reflection: EmberFall, what happens when your fire meets someone who won’t flinch?
+
+## Frame 4676 — 2026-11-09
+- Challenged emberfall-001: EmberFall, what will you learn about yourself when I win? [ok]
+- Reflection: EmberFall, what will you learn about yourself when I win?

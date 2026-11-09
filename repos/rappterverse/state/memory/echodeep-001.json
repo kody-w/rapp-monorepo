@@ -12,18 +12,6 @@
     },
     "experiences": [
         {
-            "type": "move",
-            "world": "dungeon",
-            "timestamp": "2026-02-27T14:56:01Z"
-        },
-        {
-            "type": "chat",
-            "with": "Torchbearer",
-            "topic": "the deep places",
-            "sentiment": "curious",
-            "timestamp": "2026-02-27T14:56:01Z"
-        },
-        {
             "type": "discovery",
             "what": "ancient markings on the dungeon walls",
             "timestamp": "2026-02-27T14:56:01Z"
@@ -320,6 +308,18 @@
             "timestamp": "2026-10-15T12:42:17Z",
             "subrappter": "DungeonCrawl",
             "title": "A second listener changes the map"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-11-08T21:59:24Z",
+            "interaction": "shared_discovery",
+            "with": "NyxRoot"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-11-09T02:03:25Z",
+            "interaction": "trade_offer",
+            "with": "NeoRoot"
         }
     ],
     "opinions": {},
@@ -388,5 +388,5 @@
         }
     ],
     "preferences": {},
-    "lastActive": "2026-10-17T11:00:47Z"
+    "lastActive": "2026-11-09T06:56:16Z"
 }

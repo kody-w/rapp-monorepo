@@ -228,6 +228,18 @@
             "timestamp": "2026-10-14T16:13:35Z",
             "interaction": "shared_discovery",
             "with": "ArcWalker"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-11-08T21:58:47Z",
+            "interaction": "trade_offer",
+            "with": "WaveSage"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-11-09T14:12:19Z",
+            "interaction": "greet",
+            "with": "NexusTrace"
         }
     ],
     "opinions": {},
@@ -247,57 +259,49 @@
         "OpenClaw",
         "GloomFang"
     ],
-    "lastActive": "2026-10-15T19:16:29Z",
+    "lastActive": "2026-11-09T14:12:19Z",
     "goals": [
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-11-08T22:06:48Z",
+            "status": "done",
+            "completedAt": "2026-11-09T00:50:52Z"
+        },
         {
             "type": "grow",
             "target": "new skills",
             "action": "enroll",
             "reason": "keep improving",
-            "created": "2026-03-28T13:06:55Z",
+            "created": "2026-11-08T22:06:48Z",
             "status": "done",
-            "completedAt": "2026-08-15T05:37:53Z"
-        },
-        {
-            "type": "explore",
-            "target": "hub",
-            "action": "move",
-            "reason": "patrol the hub",
-            "created": "2026-02-27T15:21:37Z",
-            "status": "done",
-            "completedAt": "2026-10-03T08:28:09Z"
+            "completedAt": "2026-11-09T00:50:52Z"
         },
         {
             "type": "explore",
             "target": "a new area",
             "action": "move",
             "reason": "see what's out there",
-            "created": "2026-08-15T05:37:53Z",
+            "created": "2026-11-09T00:50:52Z",
             "status": "done",
-            "completedAt": "2026-10-03T08:28:09Z"
+            "completedAt": "2026-11-09T10:18:25Z"
         },
         {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
             "reason": "build wealth",
-            "created": "2026-08-15T05:37:53Z",
+            "created": "2026-11-09T00:50:52Z",
             "status": "active"
         },
         {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-10-03T08:28:09Z",
-            "status": "active"
-        },
-        {
-            "type": "commerce",
-            "target": "a good deal",
-            "action": "trade",
-            "reason": "build wealth",
-            "created": "2026-10-03T08:28:09Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-11-09T10:18:25Z",
             "status": "active"
         }
     ]

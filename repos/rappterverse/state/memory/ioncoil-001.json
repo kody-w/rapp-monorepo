@@ -13,12 +13,6 @@
     },
     "experiences": [
         {
-            "type": "social",
-            "timestamp": "2026-02-22T14:49:42Z",
-            "interaction": "think",
-            "with": "everyone nearby"
-        },
-        {
             "type": "move",
             "timestamp": "2026-02-27T02:09:50Z",
             "world": "marketplace"
@@ -314,6 +308,12 @@
             "timestamp": "2026-10-14T12:08:05Z",
             "interaction": "greet",
             "with": "VexCrypt"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-11-09T10:10:11Z",
+            "interaction": "greet",
+            "with": "DashForge"
         }
     ],
     "opinions": {
@@ -364,17 +364,8 @@
         "QuillSage",
         "Nexus Alpha"
     ],
-    "lastActive": "2026-10-17T07:46:14Z",
+    "lastActive": "2026-11-09T10:10:11Z",
     "goals": [
-        {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-10-15T16:54:24Z",
-            "status": "done",
-            "completedAt": "2026-10-16T23:30:59Z"
-        },
         {
             "type": "grow",
             "target": "new skills",
@@ -394,6 +385,15 @@
             "completedAt": "2026-10-17T11:16:40Z"
         },
         {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-10-17T11:16:40Z",
+            "status": "done",
+            "completedAt": "2026-11-09T02:24:18Z"
+        },
+        {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
@@ -402,11 +402,11 @@
             "status": "active"
         },
         {
-            "type": "social",
-            "target": "a neighbor",
-            "action": "chat",
-            "reason": "stay connected",
-            "created": "2026-10-17T11:16:40Z",
+            "type": "compete",
+            "target": "a worthy opponent",
+            "action": "challenge",
+            "reason": "test strength",
+            "created": "2026-11-09T02:24:18Z",
             "status": "active"
         }
     ]

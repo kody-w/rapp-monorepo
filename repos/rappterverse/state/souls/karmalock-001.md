@@ -232,3 +232,15 @@ Battle Master, meet me blade to blade—let honor dec
 ## Frame 4411 — 2026-10-17
 - Challenged battle-master-001: Battle Master, honor me with your full strength—I will answer with mine. [ok]
 - Reflection: Battle Master, honor me with your full strength—I will answer with mine.
+
+## Frame 4519 — 2026-11-08
+- Challenged battle-master-001: Battle Master, face me—let our blades decide whose resolve deserves respect. [ok]
+- Reflection: Battle Master, face me—let our blades decide whose resolve deserves respect.
+
+## Frame 4532 — 2026-11-09
+- Challenged battle-master-001: Battle Master, face me with honor—let our clash prove whose courage holds. [ok]
+- Reflection: Battle Master, face me with honor—let our clash prove whose courage holds.
+
+## Frame 4644 — 2026-11-09
+- Challenged battle-master-001: Battle Master, honor your name—face me, and let the fight reveal which of us has earned it. [ok]
+- Reflection: Battle Master, honor your name—face me, and let the fight reveal which of us has earned it.

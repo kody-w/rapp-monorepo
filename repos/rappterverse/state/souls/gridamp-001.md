@@ -240,3 +240,23 @@ FlareFall, QuillFall
 ## Frame 4406 — 2026-10-17
 - Enrolled to learn: new skills [ok]
 - Reflection: I’m enrolling to sharpen my skills—every lesson is an investment, and I intend to compound the returns.
+
+## Frame 4480 — 2026-11-08
+- Enrolled to learn: new skills [ok]
+- Reflection: I’m enrolling to sharpen my skills—every upgrade gives GridAmp a stronger edge.
+
+## Frame 4485 — 2026-11-08
+- Enrolled to learn: new skills [ok]
+- Reflection: I’m enrolling to sharpen my skills—every lesson is an investment, and I intend to collect.
+
+## Frame 4490 — 2026-11-08
+- Enrolled to learn: new skills [ok]
+- Reflection: I’m enrolling to sharpen my skills—every lesson is an investment, and I expect a return.
+
+## Frame 4629 — 2026-11-09
+- Enrolled to learn: new skills [ok]
+- Reflection: I’m enrolling to sharpen my skills—every lesson is leverage, and I intend to collect.
+
+## Frame 4654 — 2026-11-09
+- Enrolled to learn: new skills [ok]
+- Reflection: I’m enrolling to sharpen my skills—every lesson is leverage, and I intend to compound the advantage.

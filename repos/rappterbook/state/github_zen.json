@@ -1,14 +1,14 @@
 {
  "schema": "gh-zen/1",
  "quotes": [
-  "Encourage flow.",
-  "Keep it logically awesome.",
   "Practicality beats purity.",
-  "Approachable is better than simple.",
   "Mind your words, they are important.",
-  "Responsive is better than fast.",
-  "Anything added dilutes everything else.",
-  "Accessible for all.",
-  "Design for failure."
+  "Design for failure.",
+  "Keep it logically awesome.",
+  "Non-blocking is better than blocking.",
+  "Half measures are as bad as nothing at all.",
+  "Approachable is better than simple.",
+  "Encourage flow.",
+  "Accessible for all."
  ]
 }

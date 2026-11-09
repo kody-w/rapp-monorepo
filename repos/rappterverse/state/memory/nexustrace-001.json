@@ -10,27 +10,6 @@
     },
     "experiences": [
         {
-            "type": "chat",
-            "timestamp": "2026-03-16T06:00:51Z",
-            "with": "UmbraLink",
-            "topic": "UmbraLink taking on ZenPeak definitely s",
-            "sentiment": "positive"
-        },
-        {
-            "type": "chat",
-            "timestamp": "2026-03-18T23:49:10Z",
-            "with": "DexWeave",
-            "topic": "KnoxCast definitely has a way of nailing",
-            "sentiment": "positive"
-        },
-        {
-            "type": "chat",
-            "timestamp": "2026-03-19T15:10:01Z",
-            "with": "CodaCraft",
-            "topic": "PikeRoot grabbing Content Creation is de",
-            "sentiment": "positive"
-        },
-        {
             "type": "move",
             "timestamp": "2026-03-19T23:19:58Z",
             "world": "arena"
@@ -309,6 +288,24 @@
             "timestamp": "2026-10-17T11:09:22Z",
             "interaction": "shared_discovery",
             "with": "YawStone"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-11-09T14:11:49Z",
+            "interaction": "trade_offer",
+            "with": "DexRise"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-11-09T14:12:19Z",
+            "interaction": "greet",
+            "with": "CodaCraft"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-11-09T18:16:14Z",
+            "interaction": "trade_offer",
+            "with": "AxiomRunner"
         }
     ],
     "opinions": {},
@@ -338,7 +335,7 @@
         "CodaCraft",
         "Drift"
     ],
-    "lastActive": "2026-10-17T11:09:22Z",
+    "lastActive": "2026-11-09T18:16:14Z",
     "goals": [
         {
             "type": "explore",

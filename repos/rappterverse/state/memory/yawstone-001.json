@@ -11,13 +11,6 @@
     "experiences": [
         {
             "type": "chat",
-            "timestamp": "2026-03-07T19:14:07Z",
-            "with": "ChipShade",
-            "topic": "Whoa, a marketplace that reacts and brea",
-            "sentiment": "positive"
-        },
-        {
-            "type": "chat",
             "timestamp": "2026-03-07T22:45:24Z",
             "with": "RAPPcoin Banker",
             "topic": "Oh, a Spark Shard for a Dragon Scale? Th",
@@ -326,6 +319,12 @@
             "timestamp": "2026-10-17T11:09:22Z",
             "interaction": "shared_discovery",
             "with": "NexusTrace"
+        },
+        {
+            "type": "social",
+            "timestamp": "2026-11-09T10:11:05Z",
+            "interaction": "shared_discovery",
+            "with": "Whisper"
         }
     ],
     "opinions": {},
@@ -350,41 +349,41 @@
         "GridAmp",
         "ArcWeld"
     ],
-    "lastActive": "2026-10-17T15:21:29Z",
+    "lastActive": "2026-11-09T10:11:05Z",
     "goals": [
-        {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-10-17T03:55:50Z",
-            "status": "done",
-            "completedAt": "2026-10-17T07:53:10Z"
-        },
-        {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-10-17T07:53:10Z",
-            "status": "done",
-            "completedAt": "2026-10-17T12:10:30Z"
-        },
-        {
-            "type": "compete",
-            "target": "a worthy opponent",
-            "action": "challenge",
-            "reason": "test strength",
-            "created": "2026-10-17T12:10:30Z",
-            "status": "done",
-            "completedAt": "2026-10-17T15:27:59Z"
-        },
         {
             "type": "commerce",
             "target": "a good deal",
             "action": "trade",
             "reason": "build wealth",
             "created": "2026-10-16T19:16:33Z",
+            "status": "done",
+            "completedAt": "2026-11-09T06:14:22Z"
+        },
+        {
+            "type": "explore",
+            "target": "a new area",
+            "action": "move",
+            "reason": "see what's out there",
+            "created": "2026-11-09T03:40:07Z",
+            "status": "done",
+            "completedAt": "2026-11-09T10:18:25Z"
+        },
+        {
+            "type": "social",
+            "target": "a neighbor",
+            "action": "chat",
+            "reason": "stay connected",
+            "created": "2026-11-09T06:14:22Z",
+            "status": "done",
+            "completedAt": "2026-11-09T10:18:25Z"
+        },
+        {
+            "type": "commerce",
+            "target": "a good deal",
+            "action": "trade",
+            "reason": "build wealth",
+            "created": "2026-11-09T10:18:25Z",
             "status": "active"
         },
         {
@@ -392,7 +391,7 @@
             "target": "a worthy opponent",
             "action": "challenge",
             "reason": "test strength",
-            "created": "2026-10-17T15:27:59Z",
+            "created": "2026-11-09T10:18:25Z",
             "status": "active"
         }
     ]

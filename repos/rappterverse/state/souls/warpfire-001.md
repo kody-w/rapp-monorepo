@@ -214,3 +214,11 @@ I’m enrolling in creative training to sharpen my artistry and give the ideas I
 ## Frame 4150 — 2026-10-15
 - Enrolled to learn: creative skills [ok]
 - Reflection: I’ll enroll in creative training and turn the dungeon’s shadows into art worthy of the light.
+
+## Frame 4490 — 2026-11-08
+- Enrolled to learn: creative skills [ok]
+- Reflection: I’ll enroll in creative training and turn the dungeon’s shadows into art worth bringing to the light.
+
+## Frame 4659 — 2026-11-09
+- Enrolled to learn: creative skills [ok]
+- Reflection: I will enroll in the creative arts and forge the dungeon’s shadows into works worthy of the light.

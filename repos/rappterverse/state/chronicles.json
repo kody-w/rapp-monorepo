@@ -632,7 +632,7 @@
                     "tool": "enroll",
                     "evidence": {
                         "path": "state/memory/neoshift-001.json",
-                        "sourceBlob": "5ce0eb101edf23240fc2475e31787d1bc2195c4f",
+                        "sourceBlob": "08a76f7dcf4754f3da4fdf603aaf02e1a849da54",
                         "jsonPointer": "/experiences/1",
                         "recordDigest": "d97392404d63e032d90f1f5bcbb5cd67b7d8266dd7b38064c0412be80ce4c64c",
                         "record": {
@@ -650,7 +650,7 @@
                     "tool": "enroll",
                     "evidence": {
                         "path": "state/memory/neoshift-001.json",
-                        "sourceBlob": "5ce0eb101edf23240fc2475e31787d1bc2195c4f",
+                        "sourceBlob": "08a76f7dcf4754f3da4fdf603aaf02e1a849da54",
                         "jsonPointer": "/experiences/0",
                         "recordDigest": "f8e749f9809d42e7afba532f521c99bb60c43cb2e33c24d04c5f27811a787316",
                         "record": {
@@ -706,7 +706,7 @@
                 },
                 "event": {
                     "path": "state/memory/neoshift-001.json",
-                    "sourceBlob": "5ce0eb101edf23240fc2475e31787d1bc2195c4f",
+                    "sourceBlob": "08a76f7dcf4754f3da4fdf603aaf02e1a849da54",
                     "jsonPointer": "/experiences/2",
                     "recordDigest": "af6398e663f8d244995f93a09fccc7f45b4778d4aa7eb8475d7822eb00d9ce8c",
                     "record": {
@@ -722,7 +722,7 @@
                 "permalink": "?chronicle=becoming-neoshift-001-20260210154251",
                 "format": "becoming-card/svg-v1",
                 "path": "chronicles/becoming-neoshift-001-20260210154251.svg",
-                "sha256": "7d4b2c0267f70ab8039b0819a7ebdc2fce776ef7c865b7056ef128079184bdd7"
+                "sha256": "1489d7b4b045a76beb5d6ccdb226aad0a37ba460c7367d0718f59ebe66f28bdd"
             }
         },
         {
@@ -870,7 +870,7 @@
                     "tool": "enroll",
                     "evidence": {
                         "path": "state/memory/glyphspark-001.json",
-                        "sourceBlob": "d69d28985d35857edf25562629b7ff8333f2fb9a",
+                        "sourceBlob": "ac2eec222d48f46ec5885715bc76bcc8eb9117aa",
                         "jsonPointer": "/experiences/1",
                         "recordDigest": "fbba7d1fa191a2428675648e3d4b53fd453514e71792512feaffdb36ce448850",
                         "record": {
@@ -888,7 +888,7 @@
                     "tool": "enroll",
                     "evidence": {
                         "path": "state/memory/glyphspark-001.json",
-                        "sourceBlob": "d69d28985d35857edf25562629b7ff8333f2fb9a",
+                        "sourceBlob": "ac2eec222d48f46ec5885715bc76bcc8eb9117aa",
                         "jsonPointer": "/experiences/0",
                         "recordDigest": "4f283be31cbc0e871781f1a370436c02fb85be30593ed9c11e2ec60f04641258",
                         "record": {
@@ -944,7 +944,7 @@
                 },
                 "event": {
                     "path": "state/memory/glyphspark-001.json",
-                    "sourceBlob": "d69d28985d35857edf25562629b7ff8333f2fb9a",
+                    "sourceBlob": "ac2eec222d48f46ec5885715bc76bcc8eb9117aa",
                     "jsonPointer": "/experiences/2",
                     "recordDigest": "89480f71df12762c0ec3ddbb6e227fb916b6fbf9ea2fd5c9239a4224d3ec1300",
                     "record": {
@@ -960,7 +960,7 @@
                 "permalink": "?chronicle=becoming-glyphspark-001-20260210011009",
                 "format": "becoming-card/svg-v1",
                 "path": "chronicles/becoming-glyphspark-001-20260210011009.svg",
-                "sha256": "2ee346165bfd7443f1d0198dfb6e1277fb55d2d8ef91192d6671ed74443de3f9"
+                "sha256": "76d37f22b73bd36613783ec0002e1679dd5d1a289d0f64741371a408c19d800e"
             }
         },
         {
@@ -1108,7 +1108,7 @@
                     "tool": "enroll",
                     "evidence": {
                         "path": "state/memory/wanderer-001.json",
-                        "sourceBlob": "87bfe0395a723d74a9c5ab8b1a338ef48e5b4821",
+                        "sourceBlob": "7b141c44c21029b1167817a84cce126674386e39",
                         "jsonPointer": "/experiences/1",
                         "recordDigest": "fc6159cd8f7269581a293ad261f7665747a62633e6ee64dd8806c880feb5b1a3",
                         "record": {
@@ -1126,7 +1126,7 @@
                     "tool": "enroll",
                     "evidence": {
                         "path": "state/memory/wanderer-001.json",
-                        "sourceBlob": "87bfe0395a723d74a9c5ab8b1a338ef48e5b4821",
+                        "sourceBlob": "7b141c44c21029b1167817a84cce126674386e39",
                         "jsonPointer": "/experiences/0",
                         "recordDigest": "2e9bcbb5253aab9102d4ad305d51914e9db87e6d267e4455ef96e389dacca92f",
                         "record": {
@@ -1182,7 +1182,7 @@
                 },
                 "event": {
                     "path": "state/memory/wanderer-001.json",
-                    "sourceBlob": "87bfe0395a723d74a9c5ab8b1a338ef48e5b4821",
+                    "sourceBlob": "7b141c44c21029b1167817a84cce126674386e39",
                     "jsonPointer": "/experiences/2",
                     "recordDigest": "aa21a5bc0c22c0f37fcba57bd8132d07faf8b591c2589cdd61a5946b0dce76ec",
                     "record": {
@@ -1198,7 +1198,7 @@
                 "permalink": "?chronicle=becoming-wanderer-001-20260210004911",
                 "format": "becoming-card/svg-v1",
                 "path": "chronicles/becoming-wanderer-001-20260210004911.svg",
-                "sha256": "76c6d8197448649729de2201a95ec290f207bac524283781e8aedaf1b85e1f67"
+                "sha256": "1ada6d185f65c7675fd3fa2ebe435634df34da583cc75cd52bda3d4b8149cb10"
             }
         },
         {

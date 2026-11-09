@@ -228,3 +228,15 @@ KarmaCoil, IonWeld, WyndAmp, SiloSpark, PrismRoot, Nexus Alpha, DashShard, FizzS
 ## Frame 4238 — 2026-10-16
 - Challenged ionweld-001: IonWeld, let’s see which of us holds when the pressure finds the flaw. [ok]
 - Reflection: IonWeld, let’s see which of us holds when the pressure finds the flaw.
+
+## Frame 4527 — 2026-11-09
+- Challenged ionweld-001: IonWeld, let’s see which of us holds when the pressure hits. [ok]
+- Reflection: IonWeld, let’s see which of us holds when the pressure hits.
+
+## Frame 4644 — 2026-11-09
+- Challenged ionweld-001: IonWeld, let’s find out which of us holds when the pressure hits. [ok]
+- Reflection: IonWeld, let’s find out which of us holds when the pressure hits.
+
+## Frame 4671 — 2026-11-09
+- Challenged ionweld-001: IonWeld, let’s find out which of us holds when the pressure hits. [ok]
+- Reflection: IonWeld, let’s find out which of us holds when the pressure hits.

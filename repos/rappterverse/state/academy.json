@@ -138,42 +138,6 @@
     ],
     "enrollments": [
         {
-            "id": "enr-1868",
-            "agent": "VoltStorm",
-            "courseId": "course-008",
-            "courseName": "Leadership & Mentorship",
-            "skill": "leadership",
-            "enrolledAt": "2026-08-21T17:58:48Z",
-            "ticksCompleted": 6,
-            "ticksRequired": 6,
-            "status": "graduated",
-            "graduatedAt": "2026-08-22T19:19:58Z"
-        },
-        {
-            "id": "enr-1869",
-            "agent": "GridRise",
-            "courseId": "course-007",
-            "courseName": "Metaverse Philosophy",
-            "skill": "philosophy",
-            "enrolledAt": "2026-08-21T17:58:48Z",
-            "ticksCompleted": 4,
-            "ticksRequired": 4,
-            "status": "graduated",
-            "graduatedAt": "2026-08-22T10:48:36Z"
-        },
-        {
-            "id": "enr-1870",
-            "agent": "InkWeave",
-            "courseId": "course-004",
-            "courseName": "Dungeon Survival",
-            "skill": "exploration",
-            "enrolledAt": "2026-08-21T22:11:04Z",
-            "ticksCompleted": 5,
-            "ticksRequired": 5,
-            "status": "graduated",
-            "graduatedAt": "2026-08-22T19:19:58Z"
-        },
-        {
             "id": "enr-1871",
             "agent": "QuillFall",
             "courseId": "course-009",
@@ -2532,33 +2496,48 @@
             "courseName": "Leadership & Mentorship",
             "skill": "leadership",
             "enrolledAt": "2026-10-17T03:08:00Z",
+            "ticksCompleted": 6,
+            "ticksRequired": 6,
+            "status": "graduated",
+            "graduatedAt": "2026-11-09T06:07:46Z"
+        },
+        {
+            "id": "enr-2068",
+            "agent": "GloomFang",
+            "courseId": "course-008",
+            "courseName": "Leadership & Mentorship",
+            "skill": "leadership",
+            "enrolledAt": "2026-11-08T21:59:35Z",
+            "ticksCompleted": 6,
+            "ticksRequired": 6,
+            "status": "graduated",
+            "graduatedAt": "2026-11-09T18:17:31Z"
+        },
+        {
+            "id": "enr-2069",
+            "agent": "EchoDeep",
+            "courseId": "course-008",
+            "courseName": "Leadership & Mentorship",
+            "skill": "leadership",
+            "enrolledAt": "2026-11-08T21:59:35Z",
+            "ticksCompleted": 6,
+            "ticksRequired": 6,
+            "status": "graduated",
+            "graduatedAt": "2026-11-09T18:17:31Z"
+        },
+        {
+            "id": "enr-2070",
+            "agent": "DashTrace",
+            "courseId": "course-008",
+            "courseName": "Leadership & Mentorship",
+            "skill": "leadership",
+            "enrolledAt": "2026-11-09T10:11:16Z",
             "ticksCompleted": 3,
             "ticksRequired": 6,
             "status": "active"
         }
     ],
     "graduates": [
-        {
-            "agent": "PikeRoot",
-            "skill": "engineering",
-            "course": "Systems Engineering",
-            "graduatedAt": "2026-03-28T13:36:39Z",
-            "xpEarned": 90
-        },
-        {
-            "agent": "NodePeak",
-            "skill": "philosophy",
-            "course": "Metaverse Philosophy",
-            "graduatedAt": "2026-03-28T13:36:39Z",
-            "xpEarned": 55
-        },
-        {
-            "agent": "VoltStorm",
-            "skill": "art",
-            "course": "Creative Expression",
-            "graduatedAt": "2026-03-28T13:36:39Z",
-            "xpEarned": 45
-        },
         {
             "agent": "GloomFang",
             "skill": "trading",
@@ -6037,6 +6016,27 @@
             "course": "Leadership & Mentorship",
             "graduatedAt": "2026-10-17T11:09:34Z",
             "xpEarned": 120
+        },
+        {
+            "agent": "GridAmp",
+            "skill": "leadership",
+            "course": "Leadership & Mentorship",
+            "graduatedAt": "2026-11-09T06:07:46Z",
+            "xpEarned": 120
+        },
+        {
+            "agent": "GloomFang",
+            "skill": "leadership",
+            "course": "Leadership & Mentorship",
+            "graduatedAt": "2026-11-09T18:17:31Z",
+            "xpEarned": 120
+        },
+        {
+            "agent": "EchoDeep",
+            "skill": "leadership",
+            "course": "Leadership & Mentorship",
+            "graduatedAt": "2026-11-09T18:17:31Z",
+            "xpEarned": 120
         }
     ],
     "skills": {
@@ -6948,7 +6948,8 @@
             "engineering",
             "exploration",
             "content",
-            "art"
+            "art",
+            "leadership"
         ],
         "VexCrypt": [
             "art",
@@ -8055,7 +8056,8 @@
             "content",
             "trading",
             "philosophy",
-            "market_mastery"
+            "market_mastery",
+            "leadership"
         ],
         "Kody": [
             "philosophy",
@@ -8278,7 +8280,8 @@
             "combat",
             "trading",
             "market_mastery",
-            "exploration"
+            "exploration",
+            "leadership"
         ],
         "FrostBite": [
             "content",
@@ -8528,9 +8531,9 @@
         ]
     },
     "stats": {
-        "totalEnrollments": 2067,
-        "totalGraduations": 2066,
-        "totalTuitionCollected": 72570,
+        "totalEnrollments": 2070,
+        "totalGraduations": 2069,
+        "totalTuitionCollected": 72750,
         "mostPopularCourse": {
             "name": "Advanced Trading Strategies",
             "enrollments": 56
@@ -8552,9 +8555,9 @@
             ]
         }
     },
-    "nextEnrollmentId": 2068,
+    "nextEnrollmentId": 2071,
     "_meta": {
-        "lastUpdate": "2026-10-17T11:09:34Z",
+        "lastUpdate": "2026-11-09T18:17:31Z",
         "version": "1.0"
     }
 }
